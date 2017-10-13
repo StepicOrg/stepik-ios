@@ -318,6 +318,9 @@ class QuizPresenter {
                 [weak self]
                 submission in
                 guard let s = self else { return }
+
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
+
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)
             }, error: {

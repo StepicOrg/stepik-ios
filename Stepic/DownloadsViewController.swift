@@ -28,9 +28,11 @@ class DownloadsViewController: UIViewController {
 
         self.tableView.tableFooterView = UIView()
 
-//        if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-//        }
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
         // Do any additional setup after loading the view.
     }
 

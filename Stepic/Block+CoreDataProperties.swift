@@ -32,7 +32,7 @@ extension Block {
 
     var name: String {
         get {
-            return managedName ?? "no name"
+            return managedName ?? "undefined"
         }
         set(value) {
             managedName = value

@@ -36,6 +36,10 @@ class Progress: NSManagedObject, JSONInitializable {
         return id == json["id"].stringValue
     }
 
+    var percentPassed: Float {
+        return numberOfSteps != 0 ? Float(numberOfStepsPassed) / Float(numberOfSteps) * 100 : 100.0
+    }
+
     static func deleteAllStoredProgresses() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Progress")
 

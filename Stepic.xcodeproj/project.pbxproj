@@ -141,7 +141,6 @@
 		081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
-		081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		082348391ECA264100D2CB40 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -371,6 +370,41 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		086442B51F764F67000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B81F764F69000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BC1F764F90000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BD1F764F91000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BE1F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C01F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C11F764F93000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C21F764F93000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C31F764FED000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C41F764FEE000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C51F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C61F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C71F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442CA1F765004000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CB1F765005000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CC1F765006000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CD1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CE1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CF1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442D01F765008000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442D11F765011000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D21F765012000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D31F765013000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D41F765013000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D51F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D61F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D71F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */; };
 		0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */; };
 		0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */; };
@@ -851,7 +885,6 @@
 		08D120F61C937B2200A54ABC /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
 		08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
-		08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		08D120FC1C937B2200A54ABC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -888,6 +921,30 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F56E1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F56F1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5701F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5721F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5731F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5741F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57A1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5811F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5831F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -1017,6 +1074,62 @@
 		08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08ECC4481DB8D3D60005D401 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		08ECC4491DB8D56E0005D401 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
+		08EDB8B11F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B21F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8BB1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BC1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BD1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BF1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C01F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C11F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C21F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C51F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C71F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C81F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C91F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8CF1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D01F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D21F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD6191F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6211F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6221F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6231F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6251F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62B1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62C1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62D1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62E1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62F1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD6301F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD6311F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -1224,7 +1337,6 @@
 		2C1B61441F4C4AEF00236804 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C1B61451F4C4AEF00236804 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C1B61461F4C4AEF00236804 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C1B61471F4C4AEF00236804 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C1B61481F4C4AEF00236804 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C1B61491F4C4AEF00236804 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -1682,7 +1794,6 @@
 		2C1B63551F4C590700236804 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C1B63561F4C590700236804 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C1B63571F4C590700236804 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C1B63581F4C590700236804 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C1B63591F4C590700236804 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C1B635A1F4C590700236804 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -2235,7 +2346,6 @@
 		2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C8652F51F4B33DE00D51654 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C8652F71F4B33DE00D51654 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -2630,7 +2740,6 @@
 		2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
 		2C89A99A1F4C289900227C3B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
-		2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -2693,7 +2802,6 @@
 		2C89A9D81F4C289900227C3B /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C89A9D91F4C289900227C3B /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C89A9DB1F4C289900227C3B /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -3156,7 +3264,6 @@
 		2C97318C1F4C38F600AC9301 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C97318D1F4C38F600AC9301 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C97318E1F4C38F600AC9301 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C97318F1F4C38F600AC9301 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C9731901F4C38F600AC9301 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C9731911F4C38F600AC9301 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -3839,7 +3946,6 @@
 		864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
 		864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
-		864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		864D67AA1E83E08E001E8D9E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */; };
@@ -4127,7 +4233,6 @@
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
-		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerViewController.swift; sourceTree = "<group>"; };
 		082348381ECA264000D2CB40 /* ShareableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
@@ -4442,6 +4547,9 @@
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
+		08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummary.swift; sourceTree = "<group>"; };
+		08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummariesAPI.swift; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
@@ -4492,6 +4600,14 @@
 		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
 		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetView.xib; sourceTree = "<group>"; };
+		08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetView.swift; sourceTree = "<group>"; };
+		08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseStatCollectionViewCell.swift; sourceTree = "<group>"; };
+		08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseStatCollectionViewCell.xib; sourceTree = "<group>"; };
+		08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetTableViewCell.swift; sourceTree = "<group>"; };
+		08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetTableViewCell.xib; sourceTree = "<group>"; };
+		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
+		08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_info_v18.xcdatamodel; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -5143,6 +5259,7 @@
 				0846B0FF1EDDECE100D64D77 /* User */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
 				080C5E7E1EFC13F30036EB3D /* CodeSample */,
+				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -5503,6 +5620,7 @@
 				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
+				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -5692,6 +5810,7 @@
 				083F11761E54DB09006EF4F1 /* Picker View Controller */,
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
 				089700951F6B2A820041C24E /* NibInitializableView.swift */,
+				08EDB8B91F7C3D100028A9AE /* CourseWidgetView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -5780,8 +5899,8 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
-				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
-				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+				08EDD6151F7C6054005203E4 /* New Widgets */,
+				08EDD6281F7C6084005203E4 /* old cells */,
 				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 				0801BE1B1C37123900E4F046 /* CoursesViewController.swift */,
@@ -5954,10 +6073,6 @@
 			children = (
 				08FB30D81DC384AD00E4684F /* old */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
-				08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */,
-				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
-				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
-				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
 				08C02DBB1F53202600F848F5 /* new */,
 			);
@@ -6155,6 +6270,15 @@
 			name = Quizzes;
 			sourceTree = "<group>";
 		};
+		08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */ = {
+			isa = PBXGroup;
+			children = (
+				08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */,
+				08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */,
+			);
+			name = CourseReviewSummary;
+			sourceTree = "<group>";
+		};
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
@@ -6290,6 +6414,7 @@
 				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
 				081566231F69C39A0082B359 /* Search Bar */,
 				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
+				08EDD6291F7C6785005203E4 /* StepikButton.swift */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -6349,6 +6474,35 @@
 				08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */,
 			);
 			name = "SearchQueries View";
+			sourceTree = "<group>";
+		};
+		08EDB8B91F7C3D100028A9AE /* CourseWidgetView */ = {
+			isa = PBXGroup;
+			children = (
+				08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */,
+				08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */,
+				08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */,
+				08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */,
+			);
+			name = CourseWidgetView;
+			sourceTree = "<group>";
+		};
+		08EDD6151F7C6054005203E4 /* New Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */,
+				08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */,
+			);
+			name = "New Widgets";
+			sourceTree = "<group>";
+		};
+		08EDD6281F7C6084005203E4 /* old cells */ = {
+			isa = PBXGroup;
+			children = (
+				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
+				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+			);
+			name = "old cells";
 			sourceTree = "<group>";
 		};
 		08EF9A0B1C91D12700433E4A /* Video Player */ = {
@@ -6531,7 +6685,10 @@
 		08FB30D81DC384AD00E4684F /* old */ = {
 			isa = PBXGroup;
 			children = (
-				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
+				08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */,
+				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
+				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
+				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 			);
 			name = old;
 			sourceTree = "<group>";
@@ -7618,7 +7775,7 @@
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -7627,7 +7784,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0800;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -7708,12 +7865,12 @@
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -7795,6 +7952,7 @@
 				083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
 				083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
+				08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				0815661C1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
@@ -7803,6 +7961,7 @@
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
+				08EDB8B21F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */,
 				0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
@@ -7810,6 +7969,7 @@
 				08D121151C937B2200A54ABC /* Images.xcassets in Resources */,
 				083F2B271E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */,
+				08EDD6211F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				0860D91C1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				08D121161C937B2200A54ABC /* Scripts.plist in Resources */,
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
@@ -7889,6 +8049,8 @@
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
@@ -7914,6 +8076,7 @@
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
+				08EDB8B11F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
@@ -7962,6 +8125,7 @@
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
 				08CBA3641F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
@@ -7985,6 +8149,7 @@
 				08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566211F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C1B62871F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
@@ -8014,6 +8179,7 @@
 				2C35C4F61F4DB8AC002F3BF4 /* step1.html in Resources */,
 				2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C1B62CC1F4C517D00236804 /* GoogleService-Info.plist in Resources */,
+				08EDB8D31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C1B62C81F4C516D00236804 /* Icons.xcassets in Resources */,
 				2C1B62A31F4C4AEF00236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B62A41F4C4AEF00236804 /* AdaptiveMain.storyboard in Resources */,
@@ -8057,6 +8223,7 @@
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
 				08CBA3651F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
@@ -8080,6 +8247,7 @@
 				08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B64961F4C590700236804 /* step5.html in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566221F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */,
@@ -8109,6 +8277,7 @@
 				2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
 				2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
+				08EDB8D41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C1B64BC1F4C590700236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */,
@@ -8134,6 +8303,8 @@
 				2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */,
 				2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */,
 				2C8654081F4B33DE00D51654 /* overlay_hard.png in Resources */,
+				08EDB8D01F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6231F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C8654091F4B33DE00D51654 /* RateAppViewController.xib in Resources */,
 				2C86540B1F4B33DE00D51654 /* overlay_simple.png in Resources */,
 				2C86540D1F4B33DE00D51654 /* CurrentBestStreakViewController.xib in Resources */,
@@ -8200,6 +8371,7 @@
 				2C86543F1F4B33DE00D51654 /* SectionTableViewCell.xib in Resources */,
 				2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */,
 				2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */,
+				08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */,
 				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
@@ -8230,6 +8402,8 @@
 				2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */,
 				2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */,
 				2C89AB441F4C290800227C3B /* Tokens.plist in Resources */,
+				08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */,
 				2C89AAEC1F4C289900227C3B /* overlay_hard.png in Resources */,
 				2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */,
@@ -8296,6 +8470,7 @@
 				2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */,
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
+				08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */,
 				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
@@ -8344,6 +8519,7 @@
 				2C9732AE1F4C38F600AC9301 /* CongratulationViewController.xib in Resources */,
 				2C9732AF1F4C38F600AC9301 /* PickerViewController.xib in Resources */,
 				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
+				08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08CBA3631F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
@@ -8367,6 +8543,7 @@
 				08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C9732C61F4C38F600AC9301 /* step5.html in Resources */,
 				08CBA3221F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6251F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566201F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */,
@@ -8396,6 +8573,7 @@
 				2C35C4FB1F4DB8D4002F3BF4 /* step1.html in Resources */,
 				2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */,
 				2C9732E11F4C38F600AC9301 /* AdaptiveLaunchScreen.storyboard in Resources */,
+				08EDB8D21F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C9732E21F4C38F600AC9301 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C9732E31F4C38F600AC9301 /* AdaptiveAssets.xcassets in Resources */,
 				2C9732E41F4C38F600AC9301 /* AdaptiveMain.storyboard in Resources */,
@@ -8487,6 +8665,7 @@
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				08CBA3601F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
@@ -8510,6 +8689,7 @@
 				08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA31F1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6221F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				0815661D1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
@@ -8539,6 +8719,7 @@
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
+				08EDB8CF1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
 				2C35C4E11F4DA486002F3BF4 /* nouns_f.plist in Resources */,
@@ -10174,6 +10355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */,
+				086442CA1F765004000CC53D /* AuthButton.swift in Sources */,
 				08D120751C937B2200A54ABC /* Course.swift in Sources */,
 				0890560E1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -10189,6 +10371,7 @@
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
+				086442D11F765011000CC53D /* AuthTextField.swift in Sources */,
 				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -10200,6 +10383,7 @@
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
+				08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
@@ -10230,6 +10414,7 @@
 				081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				08D5F56E1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
@@ -10242,6 +10427,7 @@
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				2CD8464C1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
+				08EDB8BC1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08DF789F1F5DE64300AEEA85 /* ArtView.swift in Sources */,
@@ -10270,6 +10456,7 @@
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
+				08EDD6191F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
@@ -10343,6 +10530,7 @@
 				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
+				086442B51F764F67000CC53D /* AuthNavigationViewController.swift in Sources */,
 				08E3B9681EEA16DC0072995B /* CodeReply.swift in Sources */,
 				08F261221E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				08CBA2F91F573F6900302154 /* MenuViewController.swift in Sources */,
@@ -10400,6 +10588,7 @@
 				083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				08D120D01C937B2200A54ABC /* WKWebViewPanelManager.m in Sources */,
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
+				08D5F5811F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				0860D91A1F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */,
@@ -10432,10 +10621,12 @@
 				083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0846B1081EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08E8F96D1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
+				086442C41F764FEE000CC53D /* EmailAuthPresenter.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
 				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
 				083540681CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				087039311CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
+				08EDD62B1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08C1FC341F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				08D120E01C937B2200A54ABC /* CoursePreviewViewController.swift in Sources */,
 				08D120E11C937B2200A54ABC /* SortingReply.swift in Sources */,
@@ -10463,6 +10654,7 @@
 				0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
@@ -10493,7 +10685,6 @@
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
-				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08CBA3021F57459800302154 /* MenuUIManager.swift in Sources */,
 				08E6BB6C1DC8EB45006622EC /* UserActivity.swift in Sources */,
@@ -10509,6 +10700,7 @@
 				08DF788E1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
+				086442BD1F764F91000CC53D /* EmailAuthViewController.swift in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
 				082E5E0F1F46379100F41426 /* ReplyCache.swift in Sources */,
@@ -10595,6 +10787,7 @@
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
+				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
@@ -10621,6 +10814,7 @@
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
+				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
@@ -10800,6 +10994,7 @@
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
+				08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
@@ -10840,6 +11035,7 @@
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
@@ -10856,6 +11052,7 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
+				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -10882,7 +11079,6 @@
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
-				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -10913,8 +11109,10 @@
 				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
+				08EDB8BB1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
+				08EDB8C51F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
@@ -10942,10 +11140,12 @@
 				2C1B60C71F4C4AEF00236804 /* Tokens.swift in Sources */,
 				2C1B60C81F4C4AEF00236804 /* LoadingPaginationView.swift in Sources */,
 				2C1B60C91F4C4AEF00236804 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C11F764F93000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C1B60CA1F4C4AEF00236804 /* CertificatesViewTestMock.swift in Sources */,
 				2C1B60CB1F4C4AEF00236804 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C1B60CC1F4C4AEF00236804 /* CertificatesViewController.swift in Sources */,
 				2C1B60CD1F4C4AEF00236804 /* CertificatesView.swift in Sources */,
+				086442D61F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C1B60CE1F4C4AEF00236804 /* CertificatesPresenter.swift in Sources */,
 				2C1B60CF1F4C4AEF00236804 /* CertificateViewData.swift in Sources */,
 				2C1B60D01F4C4AEF00236804 /* CertificateTableViewCell.swift in Sources */,
@@ -10968,6 +11168,7 @@
 				2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */,
 				2C1B60E01F4C4AEF00236804 /* CoursesAPI.swift in Sources */,
+				086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B60E11F4C4AEF00236804 /* SectionsAPI.swift in Sources */,
 				2C1B60E21F4C4AEF00236804 /* LessonsAPI.swift in Sources */,
 				2C1B60E31F4C4AEF00236804 /* UsersAPI.swift in Sources */,
@@ -11043,6 +11244,7 @@
 				2C1B61261F4C4AEF00236804 /* SortingQuizViewController.swift in Sources */,
 				2C1B61271F4C4AEF00236804 /* SortingQuizTableViewCell.swift in Sources */,
 				2C1B61281F4C4AEF00236804 /* MatchingQuizViewController.swift in Sources */,
+				086442CF1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C1B61291F4C4AEF00236804 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C1B612A1F4C4AEF00236804 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C1B612B1F4C4AEF00236804 /* FillBlanksQuizViewController.swift in Sources */,
@@ -11050,6 +11252,7 @@
 				2C1B612D1F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C1B612E1F4C4AEF00236804 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */,
 				2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */,
 				2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */,
@@ -11064,6 +11267,7 @@
 				2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */,
 				2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B613E1F4C4AEF00236804 /* StatsManager.swift in Sources */,
 				2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B61401F4C4AEF00236804 /* StepsViewController.swift in Sources */,
@@ -11073,11 +11277,11 @@
 				2C1B61441F4C4AEF00236804 /* TitleTextTableViewCell.swift in Sources */,
 				2C1B61451F4C4AEF00236804 /* CoursePreviewViewController.swift in Sources */,
 				2C1B61461F4C4AEF00236804 /* Profile.swift in Sources */,
-				2C1B61471F4C4AEF00236804 /* UserPreferencesTableViewController.swift in Sources */,
 				2C1B61481F4C4AEF00236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B61491F4C4AEF00236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */,
 				2C1B614B1F4C4AEF00236804 /* PreferencesViewController.swift in Sources */,
+				08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B614C1F4C4AEF00236804 /* FullHeightWebView.swift in Sources */,
 				2C1B614D1F4C4AEF00236804 /* ProfileViewController.swift in Sources */,
 				2C1B614E1F4C4AEF00236804 /* NotificationTimePickerViewController.swift in Sources */,
@@ -11110,6 +11314,7 @@
 				2C1B61701F4C4AEF00236804 /* TCBlobDownloadManager.swift in Sources */,
 				2C1B61711F4C4AEF00236804 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C1B61721F4C4AEF00236804 /* JSQWebViewController.swift in Sources */,
+				08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C1B61731F4C4AEF00236804 /* WatchSessionManager.swift in Sources */,
 				2C1B61741F4C4AEF00236804 /* StepReversedCardView.swift in Sources */,
 				2C1B61751F4C4AEF00236804 /* WatchSessionDataObserver.swift in Sources */,
@@ -11240,6 +11445,7 @@
 				2C1B61EA1F4C4AEF00236804 /* Video+CoreDataProperties.swift in Sources */,
 				2C1B61EB1F4C4AEF00236804 /* Video.swift in Sources */,
 				2C1B61EC1F4C4AEF00236804 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C11F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B61ED1F4C4AEF00236804 /* AchievementTableViewCell.swift in Sources */,
 				2C1B61EE1F4C4AEF00236804 /* VideoURL.swift in Sources */,
 				2C1B61EF1F4C4AEF00236804 /* Block+CoreDataProperties.swift in Sources */,
@@ -11250,6 +11456,7 @@
 				2C1B61F41F4C4AEF00236804 /* Lesson.swift in Sources */,
 				2C1B61F51F4C4AEF00236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B61F61F4C4AEF00236804 /* Unit.swift in Sources */,
+				08EDD6301F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C1B61F71F4C4AEF00236804 /* Section+CoreDataProperties.swift in Sources */,
 				2C1B61F81F4C4AEF00236804 /* Section.swift in Sources */,
 				2C1B61F91F4C4AEF00236804 /* Course+CoreDataProperties.swift in Sources */,
@@ -11307,11 +11514,13 @@
 				2C1B62281F4C4AEF00236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C1B62291F4C4AEF00236804 /* UserActivity.swift in Sources */,
 				2C1B622A1F4C4AEF00236804 /* Alerts.swift in Sources */,
+				08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C1B622B1F4C4AEF00236804 /* StreaksAlertManager.swift in Sources */,
 				2C1B622C1F4C4AEF00236804 /* QuizPresenter.swift in Sources */,
 				2C1B622D1F4C4AEF00236804 /* StreaksStepikAlertManager.swift in Sources */,
 				2C1B622E1F4C4AEF00236804 /* InputAccessoryBuilder.swift in Sources */,
 				2C1B622F1F4C4AEF00236804 /* AlertManager.swift in Sources */,
+				08D5F5731F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217891F55B1B200186245 /* Menu.swift in Sources */,
 				2C1B62301F4C4AEF00236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B62311F4C4AEF00236804 /* PreferencesContainer.swift in Sources */,
@@ -11358,10 +11567,12 @@
 				2C1B62D81F4C590700236804 /* Tokens.swift in Sources */,
 				2C1B62D91F4C590700236804 /* LoadingPaginationView.swift in Sources */,
 				2C1B62DA1F4C590700236804 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C21F764F93000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C1B62DB1F4C590700236804 /* CertificatesViewTestMock.swift in Sources */,
 				2C1B62DC1F4C590700236804 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C1B62DD1F4C590700236804 /* CertificatesViewController.swift in Sources */,
 				2C1B62DE1F4C590700236804 /* CertificatesView.swift in Sources */,
+				086442D71F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C1B62DF1F4C590700236804 /* CertificatesPresenter.swift in Sources */,
 				2C1B62E01F4C590700236804 /* CertificateViewData.swift in Sources */,
 				2C1B62E11F4C590700236804 /* CertificateTableViewCell.swift in Sources */,
@@ -11384,6 +11595,7 @@
 				2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */,
 				2C1B62F11F4C590700236804 /* CoursesAPI.swift in Sources */,
+				086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B62F21F4C590700236804 /* SectionsAPI.swift in Sources */,
 				2C1B62F31F4C590700236804 /* LessonsAPI.swift in Sources */,
 				2C1B62F41F4C590700236804 /* UsersAPI.swift in Sources */,
@@ -11459,6 +11671,7 @@
 				2C1B63371F4C590700236804 /* SortingQuizViewController.swift in Sources */,
 				2C1B63381F4C590700236804 /* SortingQuizTableViewCell.swift in Sources */,
 				2C1B63391F4C590700236804 /* MatchingQuizViewController.swift in Sources */,
+				086442D01F765008000CC53D /* AuthButton.swift in Sources */,
 				2C1B633A1F4C590700236804 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C1B633B1F4C590700236804 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C1B633C1F4C590700236804 /* FillBlanksQuizViewController.swift in Sources */,
@@ -11466,6 +11679,7 @@
 				2C1B633E1F4C590700236804 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C1B633F1F4C590700236804 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */,
 				2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */,
 				2C1B63431F4C590700236804 /* RGTabView.swift in Sources */,
@@ -11480,6 +11694,7 @@
 				2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */,
 				2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B634F1F4C590700236804 /* StatsManager.swift in Sources */,
 				2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B63511F4C590700236804 /* StepsViewController.swift in Sources */,
@@ -11489,11 +11704,11 @@
 				2C1B63551F4C590700236804 /* TitleTextTableViewCell.swift in Sources */,
 				2C1B63561F4C590700236804 /* CoursePreviewViewController.swift in Sources */,
 				2C1B63571F4C590700236804 /* Profile.swift in Sources */,
-				2C1B63581F4C590700236804 /* UserPreferencesTableViewController.swift in Sources */,
 				2C1B63591F4C590700236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B635A1F4C590700236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */,
 				2C1B635C1F4C590700236804 /* PreferencesViewController.swift in Sources */,
+				08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B635D1F4C590700236804 /* FullHeightWebView.swift in Sources */,
 				2C1B635E1F4C590700236804 /* ProfileViewController.swift in Sources */,
 				2C1B635F1F4C590700236804 /* NotificationTimePickerViewController.swift in Sources */,
@@ -11526,6 +11741,7 @@
 				2C1B63811F4C590700236804 /* TCBlobDownloadManager.swift in Sources */,
 				2C1B63821F4C590700236804 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C1B63831F4C590700236804 /* JSQWebViewController.swift in Sources */,
+				08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C1B63841F4C590700236804 /* WatchSessionManager.swift in Sources */,
 				2C1B63851F4C590700236804 /* StepReversedCardView.swift in Sources */,
 				2C1B63861F4C590700236804 /* WatchSessionDataObserver.swift in Sources */,
@@ -11656,6 +11872,7 @@
 				2C1B63FB1F4C590700236804 /* Video+CoreDataProperties.swift in Sources */,
 				2C1B63FC1F4C590700236804 /* Video.swift in Sources */,
 				2C1B63FD1F4C590700236804 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C21F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B63FE1F4C590700236804 /* AchievementTableViewCell.swift in Sources */,
 				2C1B63FF1F4C590700236804 /* VideoURL.swift in Sources */,
 				2C1B64001F4C590700236804 /* Block+CoreDataProperties.swift in Sources */,
@@ -11666,6 +11883,7 @@
 				2C1B64051F4C590700236804 /* Lesson.swift in Sources */,
 				2C1B64061F4C590700236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B64071F4C590700236804 /* Unit.swift in Sources */,
+				08EDD6311F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C1B64081F4C590700236804 /* Section+CoreDataProperties.swift in Sources */,
 				2C1B64091F4C590700236804 /* Section.swift in Sources */,
 				2C1B640A1F4C590700236804 /* Course+CoreDataProperties.swift in Sources */,
@@ -11723,11 +11941,13 @@
 				2C1B64391F4C590700236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C1B643A1F4C590700236804 /* UserActivity.swift in Sources */,
 				2C1B643B1F4C590700236804 /* Alerts.swift in Sources */,
+				08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C1B643C1F4C590700236804 /* StreaksAlertManager.swift in Sources */,
 				2C1B643D1F4C590700236804 /* QuizPresenter.swift in Sources */,
 				2C1B643E1F4C590700236804 /* StreaksStepikAlertManager.swift in Sources */,
 				2C1B643F1F4C590700236804 /* InputAccessoryBuilder.swift in Sources */,
 				2C1B64401F4C590700236804 /* AlertManager.swift in Sources */,
+				08D5F5741F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				0802178A1F55B1B200186245 /* Menu.swift in Sources */,
 				2C1B64411F4C590700236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B64421F4C590700236804 /* PreferencesContainer.swift in Sources */,
@@ -11774,10 +11994,12 @@
 				2C8652751F4B33DE00D51654 /* Tokens.swift in Sources */,
 				2C8652761F4B33DE00D51654 /* LoadingPaginationView.swift in Sources */,
 				2C8652771F4B33DE00D51654 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442BE1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C8652781F4B33DE00D51654 /* CertificatesViewTestMock.swift in Sources */,
 				2C8652791F4B33DE00D51654 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C86527A1F4B33DE00D51654 /* CertificatesViewController.swift in Sources */,
 				2C86527B1F4B33DE00D51654 /* CertificatesView.swift in Sources */,
+				086442D31F765013000CC53D /* AuthTextField.swift in Sources */,
 				2C86527C1F4B33DE00D51654 /* CertificatesPresenter.swift in Sources */,
 				2C86527D1F4B33DE00D51654 /* CertificateViewData.swift in Sources */,
 				2C86527E1F4B33DE00D51654 /* CertificateTableViewCell.swift in Sources */,
@@ -11800,6 +12022,7 @@
 				2C86528C1F4B33DE00D51654 /* LaunchDefaultsContainer.swift in Sources */,
 				2C86528D1F4B33DE00D51654 /* DefaultsContainer.swift in Sources */,
 				2C86528E1F4B33DE00D51654 /* CoursesAPI.swift in Sources */,
+				086442C51F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C86528F1F4B33DE00D51654 /* SectionsAPI.swift in Sources */,
 				2C8652901F4B33DE00D51654 /* LessonsAPI.swift in Sources */,
 				2C8652911F4B33DE00D51654 /* UsersAPI.swift in Sources */,
@@ -11875,6 +12098,7 @@
 				2C8652D41F4B33DE00D51654 /* SortingQuizViewController.swift in Sources */,
 				2C8652D51F4B33DE00D51654 /* SortingQuizTableViewCell.swift in Sources */,
 				2C8652D61F4B33DE00D51654 /* MatchingQuizViewController.swift in Sources */,
+				086442CC1F765006000CC53D /* AuthButton.swift in Sources */,
 				2C8652D71F4B33DE00D51654 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C8652D81F4B33DE00D51654 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C8652D91F4B33DE00D51654 /* FillBlanksQuizViewController.swift in Sources */,
@@ -11882,6 +12106,7 @@
 				2C8652DB1F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C8652DC1F4B33DE00D51654 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C8652DD1F4B33DE00D51654 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C8652DE1F4B33DE00D51654 /* RGPageViewController.swift in Sources */,
 				2C8652DF1F4B33DE00D51654 /* RGTabBarItem.swift in Sources */,
 				2C8652E01F4B33DE00D51654 /* RGTabView.swift in Sources */,
@@ -11896,6 +12121,7 @@
 				2C8652E91F4B33DE00D51654 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */,
 				2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C8652EC1F4B33DE00D51654 /* StatsManager.swift in Sources */,
 				2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C8652EE1F4B33DE00D51654 /* StepsViewController.swift in Sources */,
@@ -11905,11 +12131,11 @@
 				2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */,
 				2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */,
 				2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */,
-				2C8652F51F4B33DE00D51654 /* UserPreferencesTableViewController.swift in Sources */,
 				2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */,
 				2C8652F71F4B33DE00D51654 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */,
 				2C8652F91F4B33DE00D51654 /* PreferencesViewController.swift in Sources */,
+				08D5F57A1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C8652FA1F4B33DE00D51654 /* FullHeightWebView.swift in Sources */,
 				2C8652FB1F4B33DE00D51654 /* ProfileViewController.swift in Sources */,
 				2C8652FC1F4B33DE00D51654 /* NotificationTimePickerViewController.swift in Sources */,
@@ -11942,6 +12168,7 @@
 				2C86531E1F4B33DE00D51654 /* TCBlobDownloadManager.swift in Sources */,
 				2C86531F1F4B33DE00D51654 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C8653201F4B33DE00D51654 /* JSQWebViewController.swift in Sources */,
+				08D5F5831F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C8653211F4B33DE00D51654 /* WatchSessionManager.swift in Sources */,
 				2C8653221F4B33DE00D51654 /* StepReversedCardView.swift in Sources */,
 				2C8653231F4B33DE00D51654 /* WatchSessionDataObserver.swift in Sources */,
@@ -12072,6 +12299,7 @@
 				2C8653981F4B33DE00D51654 /* Video+CoreDataProperties.swift in Sources */,
 				2C8653991F4B33DE00D51654 /* Video.swift in Sources */,
 				2C86539A1F4B33DE00D51654 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C86539B1F4B33DE00D51654 /* AchievementTableViewCell.swift in Sources */,
 				2C86539C1F4B33DE00D51654 /* VideoURL.swift in Sources */,
 				2C86539D1F4B33DE00D51654 /* Block+CoreDataProperties.swift in Sources */,
@@ -12082,6 +12310,7 @@
 				2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */,
 				2C8653A31F4B33DE00D51654 /* Unit+CoreDataProperties.swift in Sources */,
 				2C8653A41F4B33DE00D51654 /* Unit.swift in Sources */,
+				08EDD62D1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C8653A51F4B33DE00D51654 /* Section+CoreDataProperties.swift in Sources */,
 				2C8653A61F4B33DE00D51654 /* Section.swift in Sources */,
 				2C8653A71F4B33DE00D51654 /* Course+CoreDataProperties.swift in Sources */,
@@ -12139,11 +12368,13 @@
 				2C8653D61F4B33DE00D51654 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C8653D71F4B33DE00D51654 /* UserActivity.swift in Sources */,
 				2C8653D81F4B33DE00D51654 /* Alerts.swift in Sources */,
+				08EDB8C81F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C8653D91F4B33DE00D51654 /* StreaksAlertManager.swift in Sources */,
 				2C8653DA1F4B33DE00D51654 /* QuizPresenter.swift in Sources */,
 				2C8653DB1F4B33DE00D51654 /* StreaksStepikAlertManager.swift in Sources */,
 				2C8653DC1F4B33DE00D51654 /* InputAccessoryBuilder.swift in Sources */,
 				2C8653DD1F4B33DE00D51654 /* AlertManager.swift in Sources */,
+				08D5F5701F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217861F55B1B200186245 /* Menu.swift in Sources */,
 				2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */,
@@ -12257,7 +12488,6 @@
 				2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */,
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
-				2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */,
 				2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */,
 				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,
@@ -12312,6 +12542,7 @@
 				2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */,
 				2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C89A9D21F4C289900227C3B /* StatsManager.swift in Sources */,
 				2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */,
 				2C89A9D41F4C289900227C3B /* StepsViewController.swift in Sources */,
@@ -12321,11 +12552,11 @@
 				2C89A9D81F4C289900227C3B /* TitleTextTableViewCell.swift in Sources */,
 				2C89A9D91F4C289900227C3B /* CoursePreviewViewController.swift in Sources */,
 				2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */,
-				2C89A9DB1F4C289900227C3B /* UserPreferencesTableViewController.swift in Sources */,
 				2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */,
 				2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */,
 				2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */,
 				2C89A9DF1F4C289900227C3B /* PreferencesViewController.swift in Sources */,
+				08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C89A9E01F4C289900227C3B /* FullHeightWebView.swift in Sources */,
 				2C89A9E11F4C289900227C3B /* ProfileViewController.swift in Sources */,
 				2C89A9E21F4C289900227C3B /* NotificationTimePickerViewController.swift in Sources */,
@@ -12337,6 +12568,7 @@
 				2C89A9F01F4C289900227C3B /* CourseTableViewCell.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				2C89A9F21F4C289900227C3B /* FindCoursesViewController.swift in Sources */,
+				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C89A9F31F4C289900227C3B /* MyCoursesViewController.swift in Sources */,
 				2C89A9F41F4C289900227C3B /* CoursesViewController.swift in Sources */,
 				2C89A9F51F4C289900227C3B /* DefaultsStorageManager.swift in Sources */,
@@ -12358,6 +12590,7 @@
 				2C89AA041F4C289900227C3B /* TCBlobDownloadManager.swift in Sources */,
 				2C89AA051F4C289900227C3B /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C89AA061F4C289900227C3B /* JSQWebViewController.swift in Sources */,
+				08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C89AA071F4C289900227C3B /* WatchSessionManager.swift in Sources */,
 				2C89AA081F4C289900227C3B /* StepReversedCardView.swift in Sources */,
 				2C89AA091F4C289900227C3B /* WatchSessionDataObserver.swift in Sources */,
@@ -12372,6 +12605,7 @@
 				2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */,
 				2C89AA121F4C289900227C3B /* AdaptiveStatsPresenter.swift in Sources */,
 				2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */,
+				086442D41F765013000CC53D /* AuthTextField.swift in Sources */,
 				2C89AA141F4C289900227C3B /* ConnectionHelper.swift in Sources */,
 				2C89AA151F4C289900227C3B /* Sorter.swift in Sources */,
 				2C89AA161F4C289900227C3B /* Messages.swift in Sources */,
@@ -12398,6 +12632,7 @@
 				2C89AA281F4C289900227C3B /* WatchDataHelper.swift in Sources */,
 				2C89AA291F4C289900227C3B /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
+				086442CD1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C89AA2A1F4C289900227C3B /* HTMLParsingUtil.swift in Sources */,
 				2C89AA2B1F4C289900227C3B /* TagDetectionUtil.swift in Sources */,
 				2C89AA2C1F4C289900227C3B /* UIImageView+SVGDownload.swift in Sources */,
@@ -12463,6 +12698,7 @@
 				2C89AA671F4C289900227C3B /* SortingDataset.swift in Sources */,
 				2C89AA681F4C289900227C3B /* FreeAnswerDataset.swift in Sources */,
 				2C89AA691F4C289900227C3B /* MatchingDataset.swift in Sources */,
+				086442B81F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C89AA6A1F4C289900227C3B /* FillBlanksDataset.swift in Sources */,
 				2C89AA6B1F4C289900227C3B /* Submission.swift in Sources */,
 				2C89AA6C1F4C289900227C3B /* SearchQueriesPersistentManager.swift in Sources */,
@@ -12488,6 +12724,7 @@
 				2C89AA7E1F4C289900227C3B /* Video+CoreDataProperties.swift in Sources */,
 				2C89AA7F1F4C289900227C3B /* Video.swift in Sources */,
 				2C89AA801F4C289900227C3B /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BF1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C89AA811F4C289900227C3B /* AchievementTableViewCell.swift in Sources */,
 				2C89AA821F4C289900227C3B /* VideoURL.swift in Sources */,
 				2C89AA831F4C289900227C3B /* Block+CoreDataProperties.swift in Sources */,
@@ -12498,6 +12735,7 @@
 				2C89AA881F4C289900227C3B /* Lesson.swift in Sources */,
 				2C89AA891F4C289900227C3B /* Unit+CoreDataProperties.swift in Sources */,
 				2C89AA8A1F4C289900227C3B /* Unit.swift in Sources */,
+				08EDD62E1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C89AA8B1F4C289900227C3B /* Section+CoreDataProperties.swift in Sources */,
 				2C89AA8C1F4C289900227C3B /* Section.swift in Sources */,
 				2C89AA8D1F4C289900227C3B /* Course+CoreDataProperties.swift in Sources */,
@@ -12530,6 +12768,7 @@
 				2C89AAA71F4C289900227C3B /* AdaptiveOnboardingPresenter.swift in Sources */,
 				2C35C4AC1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				08CBA2FC1F573F6900302154 /* MenuViewController.swift in Sources */,
+				086442C61F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C89AAA81F4C289900227C3B /* DiscussionProxiesAPI.swift in Sources */,
 				2C89AAA91F4C289900227C3B /* SearchQueriesView.swift in Sources */,
 				2C89AAAA1F4C289900227C3B /* LastStepsAPI.swift in Sources */,
@@ -12555,11 +12794,13 @@
 				2C89AABC1F4C289900227C3B /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C89AABD1F4C289900227C3B /* UserActivity.swift in Sources */,
 				2C89AABE1F4C289900227C3B /* Alerts.swift in Sources */,
+				08EDB8C91F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C89AABF1F4C289900227C3B /* StreaksAlertManager.swift in Sources */,
 				2C89AAC01F4C289900227C3B /* QuizPresenter.swift in Sources */,
 				2C89AAC11F4C289900227C3B /* StreaksStepikAlertManager.swift in Sources */,
 				2C89AAC21F4C289900227C3B /* InputAccessoryBuilder.swift in Sources */,
 				2C89AAC31F4C289900227C3B /* AlertManager.swift in Sources */,
+				08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217871F55B1B200186245 /* Menu.swift in Sources */,
 				2C89AAC41F4C289900227C3B /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C89AAC51F4C289900227C3B /* PreferencesContainer.swift in Sources */,
@@ -12606,10 +12847,12 @@
 				2C97310F1F4C38F600AC9301 /* Tokens.swift in Sources */,
 				2C9731101F4C38F600AC9301 /* LoadingPaginationView.swift in Sources */,
 				2C9731111F4C38F600AC9301 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C01F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C9731121F4C38F600AC9301 /* CertificatesViewTestMock.swift in Sources */,
 				2C9731131F4C38F600AC9301 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C9731141F4C38F600AC9301 /* CertificatesViewController.swift in Sources */,
 				2C9731151F4C38F600AC9301 /* CertificatesView.swift in Sources */,
+				086442D51F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C9731161F4C38F600AC9301 /* CertificatesPresenter.swift in Sources */,
 				2C9731171F4C38F600AC9301 /* CertificateViewData.swift in Sources */,
 				2C9731181F4C38F600AC9301 /* CertificateTableViewCell.swift in Sources */,
@@ -12632,6 +12875,7 @@
 				2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */,
 				2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */,
 				2C9731281F4C38F600AC9301 /* CoursesAPI.swift in Sources */,
+				086442C71F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C9731291F4C38F600AC9301 /* SectionsAPI.swift in Sources */,
 				2C97312A1F4C38F600AC9301 /* LessonsAPI.swift in Sources */,
 				2C97312B1F4C38F600AC9301 /* UsersAPI.swift in Sources */,
@@ -12707,6 +12951,7 @@
 				2C97316E1F4C38F600AC9301 /* SortingQuizViewController.swift in Sources */,
 				2C97316F1F4C38F600AC9301 /* SortingQuizTableViewCell.swift in Sources */,
 				2C9731701F4C38F600AC9301 /* MatchingQuizViewController.swift in Sources */,
+				086442CE1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C9731711F4C38F600AC9301 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C9731721F4C38F600AC9301 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C9731731F4C38F600AC9301 /* FillBlanksQuizViewController.swift in Sources */,
@@ -12714,6 +12959,7 @@
 				2C9731751F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C9731761F4C38F600AC9301 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */,
 				2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */,
 				2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */,
@@ -12728,6 +12974,7 @@
 				2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
 				2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C9731861F4C38F600AC9301 /* StatsManager.swift in Sources */,
 				2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C9731881F4C38F600AC9301 /* StepsViewController.swift in Sources */,
@@ -12737,11 +12984,11 @@
 				2C97318C1F4C38F600AC9301 /* TitleTextTableViewCell.swift in Sources */,
 				2C97318D1F4C38F600AC9301 /* CoursePreviewViewController.swift in Sources */,
 				2C97318E1F4C38F600AC9301 /* Profile.swift in Sources */,
-				2C97318F1F4C38F600AC9301 /* UserPreferencesTableViewController.swift in Sources */,
 				2C9731901F4C38F600AC9301 /* VideoQualityTableViewController.swift in Sources */,
 				2C9731911F4C38F600AC9301 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */,
 				2C9731931F4C38F600AC9301 /* PreferencesViewController.swift in Sources */,
+				08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C9731941F4C38F600AC9301 /* FullHeightWebView.swift in Sources */,
 				2C9731951F4C38F600AC9301 /* ProfileViewController.swift in Sources */,
 				2C9731961F4C38F600AC9301 /* NotificationTimePickerViewController.swift in Sources */,
@@ -12774,6 +13021,7 @@
 				2C9731B81F4C38F600AC9301 /* TCBlobDownloadManager.swift in Sources */,
 				2C9731B91F4C38F600AC9301 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C9731BA1F4C38F600AC9301 /* JSQWebViewController.swift in Sources */,
+				08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C9731BB1F4C38F600AC9301 /* WatchSessionManager.swift in Sources */,
 				2C9731BC1F4C38F600AC9301 /* StepReversedCardView.swift in Sources */,
 				2C9731BD1F4C38F600AC9301 /* WatchSessionDataObserver.swift in Sources */,
@@ -12904,6 +13152,7 @@
 				2C9732321F4C38F600AC9301 /* Video+CoreDataProperties.swift in Sources */,
 				2C9732331F4C38F600AC9301 /* Video.swift in Sources */,
 				2C9732341F4C38F600AC9301 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C01F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C9732351F4C38F600AC9301 /* AchievementTableViewCell.swift in Sources */,
 				2C9732361F4C38F600AC9301 /* VideoURL.swift in Sources */,
 				2C9732371F4C38F600AC9301 /* Block+CoreDataProperties.swift in Sources */,
@@ -12914,6 +13163,7 @@
 				2C97323C1F4C38F600AC9301 /* Lesson.swift in Sources */,
 				2C97323D1F4C38F600AC9301 /* Unit+CoreDataProperties.swift in Sources */,
 				2C97323E1F4C38F600AC9301 /* Unit.swift in Sources */,
+				08EDD62F1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C97323F1F4C38F600AC9301 /* Section+CoreDataProperties.swift in Sources */,
 				2C9732401F4C38F600AC9301 /* Section.swift in Sources */,
 				2C9732411F4C38F600AC9301 /* Course+CoreDataProperties.swift in Sources */,
@@ -12971,11 +13221,13 @@
 				2C9732701F4C38F600AC9301 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C9732711F4C38F600AC9301 /* UserActivity.swift in Sources */,
 				2C9732721F4C38F600AC9301 /* Alerts.swift in Sources */,
+				08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C9732731F4C38F600AC9301 /* StreaksAlertManager.swift in Sources */,
 				2C9732741F4C38F600AC9301 /* QuizPresenter.swift in Sources */,
 				2C9732751F4C38F600AC9301 /* StreaksStepikAlertManager.swift in Sources */,
 				2C9732761F4C38F600AC9301 /* InputAccessoryBuilder.swift in Sources */,
 				2C9732771F4C38F600AC9301 /* AlertManager.swift in Sources */,
+				08D5F5721F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217881F55B1B200186245 /* Menu.swift in Sources */,
 				2C9732781F4C38F600AC9301 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C9732791F4C38F600AC9301 /* PreferencesContainer.swift in Sources */,
@@ -13076,10 +13328,12 @@
 				86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */,
 				860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */,
 				860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442BC1F764F90000CC53D /* EmailAuthViewController.swift in Sources */,
 				860BC33A1EAA1E520058F440 /* CertificatesViewTestMock.swift in Sources */,
 				860BC33B1EAA1E520058F440 /* CoursesAPIPaginatedMock.swift in Sources */,
 				860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */,
 				860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */,
+				086442D21F765012000CC53D /* AuthTextField.swift in Sources */,
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
 				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
@@ -13102,6 +13356,7 @@
 				864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */,
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
+				086442C31F764FED000CC53D /* EmailAuthPresenter.swift in Sources */,
 				864514EA1E9FD4F6007F73BE /* SectionsAPI.swift in Sources */,
 				864514EB1E9FD4F6007F73BE /* LessonsAPI.swift in Sources */,
 				864514EC1E9FD4F6007F73BE /* UsersAPI.swift in Sources */,
@@ -13177,6 +13432,7 @@
 				864D67831E83E08E001E8D9E /* SortingQuizViewController.swift in Sources */,
 				864D67841E83E08E001E8D9E /* SortingQuizTableViewCell.swift in Sources */,
 				864D67861E83E08E001E8D9E /* MatchingQuizViewController.swift in Sources */,
+				086442CB1F765005000CC53D /* AuthButton.swift in Sources */,
 				864D67891E83E08E001E8D9E /* FillBlanksTextTableViewCell.swift in Sources */,
 				864D678B1E83E08E001E8D9E /* FillBlanksInputTableViewCell.swift in Sources */,
 				864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */,
@@ -13184,6 +13440,7 @@
 				864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0846B1121EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
@@ -13198,6 +13455,7 @@
 				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
@@ -13207,11 +13465,11 @@
 				864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */,
 				864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */,
 				2CD846411F25F7F300E8153C /* Profile.swift in Sources */,
-				864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
 				864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */,
 				864D67AA1E83E08E001E8D9E /* PreferencesViewController.swift in Sources */,
+				08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				08A500521F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				864D67AB1E83E08E001E8D9E /* ProfileViewController.swift in Sources */,
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
@@ -13244,6 +13502,7 @@
 				864D673E1E83DE8A001E8D9E /* TCBlobDownloadManager.swift in Sources */,
 				864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */,
 				864D67401E83DE8A001E8D9E /* JSQWebViewController.swift in Sources */,
+				08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				864D67351E83DE76001E8D9E /* WatchSessionManager.swift in Sources */,
 				8618E3E41EA0063D00FB3D0F /* StepReversedCardView.swift in Sources */,
 				864D67361E83DE76001E8D9E /* WatchSessionDataObserver.swift in Sources */,
@@ -13374,6 +13633,7 @@
 				864D66EC1E83DE03001E8D9E /* Video+CoreDataProperties.swift in Sources */,
 				864D66ED1E83DE03001E8D9E /* Video.swift in Sources */,
 				864D66EE1E83DE03001E8D9E /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BD1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */,
 				864D66EF1E83DE03001E8D9E /* VideoURL.swift in Sources */,
 				864D66F01E83DE03001E8D9E /* Block+CoreDataProperties.swift in Sources */,
@@ -13384,6 +13644,7 @@
 				864D66F51E83DE03001E8D9E /* Lesson.swift in Sources */,
 				864D66F61E83DE03001E8D9E /* Unit+CoreDataProperties.swift in Sources */,
 				864D66F71E83DE03001E8D9E /* Unit.swift in Sources */,
+				08EDD62C1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				864D66F81E83DE03001E8D9E /* Section+CoreDataProperties.swift in Sources */,
 				864D66F91E83DE03001E8D9E /* Section.swift in Sources */,
 				864D66FA1E83DE03001E8D9E /* Course+CoreDataProperties.swift in Sources */,
@@ -13441,11 +13702,13 @@
 				864D671D1E83DE03001E8D9E /* StepsControllerDeepLinkRouter.swift in Sources */,
 				864D671E1E83DE03001E8D9E /* UserActivity.swift in Sources */,
 				864D671F1E83DE03001E8D9E /* Alerts.swift in Sources */,
+				08EDB8C71F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				864D67201E83DE03001E8D9E /* StreaksAlertManager.swift in Sources */,
 				08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				864D67211E83DE03001E8D9E /* StreaksStepikAlertManager.swift in Sources */,
 				085E9E6C1F138C1D00D6A4BC /* InputAccessoryBuilder.swift in Sources */,
 				864D67221E83DE03001E8D9E /* AlertManager.swift in Sources */,
+				08D5F56F1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217851F55B1B200186245 /* Menu.swift in Sources */,
 				085E9E6F1F138C3800D6A4BC /* CodeSuggestionTableViewCell.swift in Sources */,
 				864D67231E83DE03001E8D9E /* PreferencesContainer.swift in Sources */,
@@ -13859,13 +14122,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "e4ffd88b-0d82-4ffc-a100-038610d13f4e";
-                PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "e4ffd88b-0d82-4ffc-a100-038610d13f4e";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -13878,14 +14141,14 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "8d461bf0-4d8b-48dd-9291-4fc352da17db";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "8d461bf0-4d8b-48dd-9291-4fc352da17db";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -14041,8 +14304,8 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 49;
-                DEVELOPMENT_TEAM = E9KER42773;
+				CURRENT_PROJECT_VERSION = 52;
+				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -14050,8 +14313,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "e92b48f8-5d47-4919-88a2-409e06f0a3ae";
-                PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "0996e1fc-1468-45f5-84ce-81d487044f14";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -14068,9 +14331,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 49;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 52;
+				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -14078,8 +14341,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "862c1017-dd11-4267-a0fc-4c993149253c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "862c1017-dd11-4267-a0fc-4c993149253c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -14615,7 +14878,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5a8396c-307e-488c-bc7a-284c62e250b2";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.stepik.ios.adaptive.1838";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
@@ -14657,13 +14920,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "b62ae191-e85b-491a-9e90-b9d87a0de1f0";
-                PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "7f86d49e-e376-464e-a55a-784b580d7f5a";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -14682,14 +14945,14 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "d2c0dcd4-e378-4ce3-9500-9ccf714da89c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "d2c0dcd4-e378-4ce3-9500-9ccf714da89c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -14705,14 +14968,15 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "1ba3f223-24ec-43ca-bbc1-e8f7da921f31";
-                PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "be156a83-9c09-40f8-950f-ddc632440396";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -14728,14 +14992,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "a7c69b0a-28a4-4db6-8c61-221a8a910d80";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "2feb75ee-779e-4f8f-abf4-930837632697";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -14925,6 +15190,7 @@
 			isa = XCVersionGroup;
 			children = (
 				2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */,
+				08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */,
 				08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */,
 				080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */,
 				0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */,
