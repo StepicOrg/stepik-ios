@@ -18,6 +18,8 @@ class CourseWidgetView: NibInitializableView {
 
     @IBOutlet weak var courseStatsCollectionViewFlowLayout: UICollectionViewFlowLayout!
 
+    @IBOutlet weak var loadingWidgetView: LoadingCourseWidgetView!
+
     enum ButtonState {
         case join, continueLearning
     }
@@ -58,6 +60,17 @@ class CourseWidgetView: NibInitializableView {
     var progress: Float? {
         didSet {
             updateStats()
+        }
+    }
+
+    var isLoading: Bool = false {
+        didSet {
+            loadingWidgetView.isHidden = !isLoading
+            if isLoading {
+                loadingWidgetView.animateGradient()
+            } else {
+                loadingWidgetView.stopAnimating()
+            }
         }
     }
 

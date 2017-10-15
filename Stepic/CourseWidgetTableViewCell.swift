@@ -12,6 +12,12 @@ class CourseWidgetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var widgetView: CourseWidgetView!
 
+    var isLoading: Bool = false {
+        didSet {
+            widgetView.isLoading = isLoading
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,6 +37,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.rating = course.reviewSummary?.average
         widgetView.learners = course.learnersCount
         widgetView.progress = course.enrolled ? course.progress?.percentPassed : nil
+        isLoading = false
     }
 
     func setup(courseViewData course: CourseViewData) {
@@ -41,5 +48,6 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.rating = course.rating
         widgetView.learners = course.learners
         widgetView.progress = course.progress
+        isLoading = false
     }
 }

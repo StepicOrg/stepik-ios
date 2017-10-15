@@ -455,6 +455,22 @@
 		086BE28A1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
 		086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
 		086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE2A91F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AA1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AB1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AD1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AE1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2AF1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2B01F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */; };
+		086BE2B21F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B31F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B41F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B51F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B61F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B71F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B81F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086BE2B91F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
@@ -4424,6 +4440,8 @@
 		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastStepRouter.swift; sourceTree = "<group>"; };
+		086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCourseWidgetView.xib; sourceTree = "<group>"; };
+		086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCourseWidgetView.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
@@ -6517,6 +6535,8 @@
 				08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */,
 				08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */,
 				08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */,
+				086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */,
+				086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */,
 			);
 			name = CourseWidgetView;
 			sourceTree = "<group>";
@@ -7940,6 +7960,7 @@
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				089056141E98021000B8FE6A /* RateAppViewController.xib in Resources */,
+				086BE2AA1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
@@ -8012,6 +8033,7 @@
 				0815661B1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
+				086BE2A91F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				0859AEAA1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
@@ -8109,6 +8131,7 @@
 				2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */,
 				2C1B62681F4C4AEF00236804 /* DiscussionCountView.xib in Resources */,
 				2C1B62691F4C4AEF00236804 /* CongratulationViewController.xib in Resources */,
+				086BE2AF1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C1B626A1F4C4AEF00236804 /* PickerViewController.xib in Resources */,
 				2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -8207,6 +8230,7 @@
 				2C1B64781F4C590700236804 /* StepTabView.xib in Resources */,
 				2C1B64791F4C590700236804 /* DiscussionCountView.xib in Resources */,
 				2C1B647A1F4C590700236804 /* CongratulationViewController.xib in Resources */,
+				086BE2B01F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C1B647B1F4C590700236804 /* PickerViewController.xib in Resources */,
 				2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -8364,6 +8388,7 @@
 				2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */,
 				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
+				086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */,
@@ -8463,6 +8488,7 @@
 				2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */,
 				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
+				086BE2AD1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C89AB2F1F4C289900227C3B /* AdaptiveAssets.xcassets in Resources */,
@@ -8503,6 +8529,7 @@
 				2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */,
 				2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */,
 				2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */,
+				086BE2AE1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */,
 				2C9732AD1F4C38F600AC9301 /* DiscussionCountView.xib in Resources */,
 				2C9732AE1F4C38F600AC9301 /* CongratulationViewController.xib in Resources */,
@@ -8649,6 +8676,7 @@
 				86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */,
 				2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */,
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
+				086BE2AB1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
@@ -10381,6 +10409,7 @@
 				086442D11F765011000CC53D /* AuthTextField.swift in Sources */,
 				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
+				086BE2B31F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08407EC81DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
@@ -10830,6 +10859,7 @@
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
+				086BE2B21F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
@@ -11361,6 +11391,7 @@
 				0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B618E1F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B618F1F4C4AEF00236804 /* ImageTapHelper.swift in Sources */,
+				086BE2B81F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C1B61901F4C4AEF00236804 /* DeepLinkRouter.swift in Sources */,
 				2C1B61911F4C4AEF00236804 /* SharingHelper.swift in Sources */,
 				2C1B61921F4C4AEF00236804 /* AnalyticsEvents.swift in Sources */,
@@ -11793,6 +11824,7 @@
 				0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B639F1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B63A01F4C590700236804 /* ImageTapHelper.swift in Sources */,
+				086BE2B91F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C1B63A11F4C590700236804 /* DeepLinkRouter.swift in Sources */,
 				2C1B63A21F4C590700236804 /* SharingHelper.swift in Sources */,
 				2C1B63A31F4C590700236804 /* AnalyticsEvents.swift in Sources */,
@@ -12225,6 +12257,7 @@
 				089700991F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C86533D1F4B33DE00D51654 /* ImageTapHelper.swift in Sources */,
+				086BE2B51F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C86533E1F4B33DE00D51654 /* DeepLinkRouter.swift in Sources */,
 				2C86533F1F4B33DE00D51654 /* SharingHelper.swift in Sources */,
 				2C8653401F4B33DE00D51654 /* AnalyticsEvents.swift in Sources */,
@@ -12597,6 +12630,7 @@
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C89A9F31F4C289900227C3B /* MyCoursesViewController.swift in Sources */,
 				2C89A9F41F4C289900227C3B /* CoursesViewController.swift in Sources */,
+				086BE2B61F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C89A9F51F4C289900227C3B /* DefaultsStorageManager.swift in Sources */,
 				2C89A9F61F4C289900227C3B /* SearchQueriesViewController.swift in Sources */,
 				2C89A9F71F4C289900227C3B /* SearchResultsCoursesViewController.swift in Sources */,
@@ -13088,6 +13122,7 @@
 				0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C9731D61F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C9731D71F4C38F600AC9301 /* ImageTapHelper.swift in Sources */,
+				086BE2B71F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C9731D81F4C38F600AC9301 /* DeepLinkRouter.swift in Sources */,
 				2C9731D91F4C38F600AC9301 /* SharingHelper.swift in Sources */,
 				2C9731DA1F4C38F600AC9301 /* AnalyticsEvents.swift in Sources */,
@@ -13574,6 +13609,7 @@
 				089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
+				086BE2B41F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				864D669F1E83DE03001E8D9E /* DeepLinkRouter.swift in Sources */,
 				864D66A01E83DE03001E8D9E /* SharingHelper.swift in Sources */,
 				864D66A11E83DE03001E8D9E /* AnalyticsEvents.swift in Sources */,

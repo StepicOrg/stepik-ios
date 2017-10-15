@@ -395,6 +395,16 @@ struct CourseViewData {
     }
 }
 
+//enum CourseListRefreshState {
+//    case widgets, standard
+//}
+//
+//enum CourseListState {
+//    case refreshing(state: CourseListRefreshState)
+//    case empty
+//    case displaying
+//}
+
 enum PaginationStatus {
     case loading, error, none
 }

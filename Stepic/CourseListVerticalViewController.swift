@@ -91,13 +91,24 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         }
     }
 
-    func setDelegateRefreshing(isRefreshing: Bool) {
+    func updateRefreshing() {
         if isRefreshing {
-            if refreshControl?.isRefreshing == false {
-                refreshControl?.beginRefreshing()
+            if courses.isEmpty {
+                tableView.reloadData()
+                tableView.isUserInteractionEnabled = false
+            } else {
+                if refreshControl?.isRefreshing == false {
+                    refreshControl?.beginRefreshing()
+                }
             }
         } else {
-            refreshControl?.endRefreshing()
+            tableView.isUserInteractionEnabled = true
+            if courses.isEmpty {
+                refreshControl?.endRefreshing()
+                tableView.reloadData()
+            } else {
+                refreshControl?.endRefreshing()
+            }
         }
     }
 
@@ -110,7 +121,13 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     }
 
     func addElements(atIndexPaths indexPaths: [IndexPath]) {
+        let offsetBefore = tableView.contentOffset
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
         tableView.insertRows(at: indexPaths, with: .none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+        tableView.setContentOffset(offsetBefore, animated: false)
     }
 
     func updateCell(atIndexPath indexPath: IndexPath) {
@@ -159,11 +176,15 @@ extension CourseListVerticalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+        if shouldShowLoadingWidgets {
+            return Int(tableView.frame.height) / 100
+        } else {
+            return courses.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row < courses.count else {
+        guard indexPath.row < courses.count || shouldShowLoadingWidgets else {
             return UITableViewCell()
         }
 
@@ -173,7 +194,11 @@ extension CourseListVerticalViewController: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
 
-        cell.setup(courseViewData: courses[indexPath.row])
+        if shouldShowLoadingWidgets {
+            cell.isLoading = true
+        } else {
+            cell.setup(courseViewData: courses[indexPath.row])
+        }
         return cell
     }
 }

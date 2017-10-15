@@ -34,7 +34,13 @@ class APIEndpoint {
         return ""
     }
 
-    var manager: SessionManager = SessionManager.default
+    let manager: Alamofire.SessionManager
+
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 5
+        manager = Alamofire.SessionManager(configuration: configuration)
+    }
 
     func cancelAllTasks() {
         manager.session.getAllTasks(completionHandler: {
