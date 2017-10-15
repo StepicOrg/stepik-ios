@@ -4,19 +4,26 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-def all_pods
+def apple_tv_pods
     pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
+    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    pod 'Fabric'
+    pod 'Crashlytics'
+
+end
+
+def all_pods
+    
+    apple_tv_pods
+    
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'Fabric'
-    pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
-    
     pod 'YandexMobileMetrica/Dynamic'
     
     pod 'Firebase/Core', '3.16.0'
@@ -26,7 +33,6 @@ def all_pods
     
     pod 'Mixpanel-swift'
     
-    pod "MagicalRecord"
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
@@ -36,8 +42,6 @@ def all_pods
     pod "VK-ios-sdk"
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
-    
-    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     
     pod 'Presentr'
     
@@ -64,6 +68,16 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        testing_pods
+    end
+end
+
+target 'StepikTV' do
+    platform :tvos, '10.1'
+    apple_tv_pods
+    target 'StepikTVTests' do
+        inherit! :search_paths
+        apple_tv_pods
         testing_pods
     end
 end
