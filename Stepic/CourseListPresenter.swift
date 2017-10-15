@@ -21,6 +21,8 @@ protocol CourseListView: class {
 
     func present(controller: UIViewController)
     func show(controller: UIViewController)
+
+    func getNavigationController() -> UINavigationController?
 }
 
 class CourseListPresenter {
@@ -73,6 +75,28 @@ class CourseListPresenter {
         self.listType = listType
     }
 
+    func getData(from courses: [Course]) -> [CourseViewData] {
+        return courses.map {
+            course in
+            CourseViewData(course: course, action: {
+                [weak self] in
+                self?.buttonPressed(course: course)
+            })
+        }
+    }
+
+    private func buttonPressed(course: Course) {
+        if course.enrolled {
+            if let navigation = view?.getNavigationController() {
+                LastStepRouter.continueLearning(for: course, using: navigation)
+            }
+        } else {
+            if let controller = getCoursePreviewController(for: course) {
+                self.view?.show(controller: controller)
+            }
+        }
+    }
+
     func refresh() {
         view?.setRefreshing(isRefreshing: true)
         if courses.isEmpty {
@@ -94,7 +118,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.courses += courses
-            strongSelf.view?.add(addedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.displayingCourses))
+            strongSelf.view?.add(addedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
             strongSelf.updateReviewSummaries(for: courses)
             strongSelf.updateProgresses(for: courses)
             strongSelf.currentPage = meta.page
@@ -134,7 +158,7 @@ class CourseListPresenter {
 
             CoursesJoinManager.sharedManager.clean()
 
-            view?.update(deletingCourses: CourseViewData.getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: CourseViewData.getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: CourseViewData.getData(from: courses))
+            view?.update(deletingCourses: getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: getData(from: courses))
         default:
             return
         }
@@ -143,7 +167,7 @@ class CourseListPresenter {
     private func displayCached(ids: [Int]) {
         let recoveredCourses = try! Course.getCourses(ids)
         courses = Sorter.sort(recoveredCourses, byIds: ids)
-        self.view?.display(courses: CourseViewData.getData(from: self.displayingCourses))
+        self.view?.display(courses: getData(from: self.displayingCourses))
     }
 
     private func refreshCourses() {
@@ -160,7 +184,7 @@ class CourseListPresenter {
                     return
                 }
                 strongSelf.courses = courses
-                strongSelf.view?.display(courses: CourseViewData.getData(from: strongSelf.displayingCourses))
+                strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = 1
@@ -184,7 +208,7 @@ class CourseListPresenter {
                     return
                 }
                 strongSelf.courses = courses
-                strongSelf.view?.display(courses: CourseViewData.getData(from: strongSelf.displayingCourses))
+                strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = meta.page
@@ -272,7 +296,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.displayingCourses))
+            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
         }.catch {
             _ in
             print("Error while loading progresses")
@@ -321,7 +345,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchReviewSummaries(newReviewSummaries: newReviews, ids: reviewIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.courses) )
+            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.courses) )
         }.catch {
             _ in
             print("error while loading review summaries")
@@ -359,7 +383,7 @@ struct CourseViewData {
     var progress: Float?
     var action: (() -> Void)?
 
-    init(course: Course) {
+    init(course: Course, action: (() -> Void)?) {
         self.id = course.id
         self.title = course.title
         self.isEnrolled = course.enrolled
@@ -367,10 +391,7 @@ struct CourseViewData {
         self.rating = course.reviewSummary?.average
         self.learners = course.learnersCount
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
-    }
-
-    static func getData(from courses: [Course]) -> [CourseViewData] {
-        return courses.map { CourseViewData(course: $0) }
+        self.action = action
     }
 }
 

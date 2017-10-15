@@ -126,6 +126,10 @@ class CourseListViewController: UIViewController, CourseListView {
         let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
         delegate?.updateCells(deletingIndexPaths: deletingIndexPaths, insertingIndexPaths: insertingIndexPaths)
     }
+
+    func getNavigationController() -> UINavigationController? {
+        return self.navigationController
+    }
 }
 
 extension CourseListViewController: UIViewControllerPreviewingDelegate {

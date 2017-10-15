@@ -447,6 +447,14 @@
 		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
 		086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
+		086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE2861F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE2871F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE2881F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE2891F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE28A1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
+		086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
@@ -4415,6 +4423,7 @@
 		086A8B271D21796800F45C45 /* VotesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesAPI.swift; sourceTree = "<group>"; };
 		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
+		086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastStepRouter.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
@@ -5918,6 +5927,7 @@
 				08A9BD721F8CA02A0085EAF6 /* CourseListPresenter.swift */,
 				088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */,
 				088EDB581F8F5A48009B736E /* CourseListViewController.swift */,
+				086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -10387,6 +10397,7 @@
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
 				088E58BE1DE33B410009B9CE /* AuthAPI.swift in Sources */,
 				08E59AC01E433057008EEECE /* FillBlanksDataset.swift in Sources */,
+				086BE2861F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08D120821C937B2200A54ABC /* VideoURL+CoreDataProperties.swift in Sources */,
 				083F2B2B1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
@@ -11025,6 +11036,7 @@
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
+				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
@@ -11211,6 +11223,7 @@
 				2C1B61081F4C4AEF00236804 /* DownloadsViewController.swift in Sources */,
 				2C1B61091F4C4AEF00236804 /* DownloadTableViewCell.swift in Sources */,
 				2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */,
+				086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C1B610C1F4C4AEF00236804 /* HTMLContentView.swift in Sources */,
 				2C1B610D1F4C4AEF00236804 /* HTMLStringWrapperUtil.swift in Sources */,
@@ -11642,6 +11655,7 @@
 				2C1B63191F4C590700236804 /* DownloadsViewController.swift in Sources */,
 				2C1B631A1F4C590700236804 /* DownloadTableViewCell.swift in Sources */,
 				2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */,
+				086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C1B631D1F4C590700236804 /* HTMLContentView.swift in Sources */,
 				2C1B631E1F4C590700236804 /* HTMLStringWrapperUtil.swift in Sources */,
@@ -12073,6 +12087,7 @@
 				2C8652B61F4B33DE00D51654 /* DownloadsViewController.swift in Sources */,
 				2C8652B71F4B33DE00D51654 /* DownloadTableViewCell.swift in Sources */,
 				2C8652B81F4B33DE00D51654 /* DiscussionWebTableViewCell.swift in Sources */,
+				086BE2881F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C8652B91F4B33DE00D51654 /* DiscussionTableViewCell.swift in Sources */,
 				2C8652BA1F4B33DE00D51654 /* HTMLContentView.swift in Sources */,
 				2C8652BB1F4B33DE00D51654 /* HTMLStringWrapperUtil.swift in Sources */,
@@ -12532,6 +12547,7 @@
 				2C89A9BB1F4C289900227C3B /* SortingQuizTableViewCell.swift in Sources */,
 				2C89A9BC1F4C289900227C3B /* MatchingQuizViewController.swift in Sources */,
 				2C89A9BD1F4C289900227C3B /* FillBlanksTextTableViewCell.swift in Sources */,
+				086BE2891F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C89A9BE1F4C289900227C3B /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C89A9BF1F4C289900227C3B /* FillBlanksQuizViewController.swift in Sources */,
 				2C89A9C01F4C289900227C3B /* LastStepGlobalContext.swift in Sources */,
@@ -12934,6 +12950,7 @@
 				2C9731501F4C38F600AC9301 /* DownloadsViewController.swift in Sources */,
 				2C9731511F4C38F600AC9301 /* DownloadTableViewCell.swift in Sources */,
 				2C9731521F4C38F600AC9301 /* DiscussionWebTableViewCell.swift in Sources */,
+				086BE28A1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C9731531F4C38F600AC9301 /* DiscussionTableViewCell.swift in Sources */,
 				2C9731541F4C38F600AC9301 /* HTMLContentView.swift in Sources */,
 				2C9731551F4C38F600AC9301 /* HTMLStringWrapperUtil.swift in Sources */,
@@ -13419,6 +13436,7 @@
 				864D675D1E83E08E001E8D9E /* DownloadsViewController.swift in Sources */,
 				864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */,
 				864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */,
+				086BE2871F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */,
 				864D67641E83E08E001E8D9E /* HTMLContentView.swift in Sources */,
 				864D67651E83E08E001E8D9E /* HTMLStringWrapperUtil.swift in Sources */,
