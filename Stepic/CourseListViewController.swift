@@ -27,7 +27,7 @@ protocol CourseListViewControllerDelegate: class {
 
 class CourseListViewController: UIViewController, CourseListView {
     var presenter: CourseListPresenter?
-    var listType: CourseListType! = CourseListType.enrolled
+    var listType: CourseListType!
     var limit: Int?
     var isRefreshing: Bool = false
     var refreshEnabled: Bool = true

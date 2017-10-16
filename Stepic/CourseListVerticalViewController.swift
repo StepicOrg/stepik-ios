@@ -192,7 +192,9 @@ extension CourseListVerticalViewController: UITableViewDataSource {
             presenter?.loadNextPage()
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as? CourseWidgetTableViewCell else {
+            return UITableViewCell()
+        }
 
         if shouldShowLoadingWidgets {
             cell.isLoading = true

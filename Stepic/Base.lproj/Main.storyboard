@@ -863,10 +863,10 @@
             </objects>
             <point key="canvasLocation" x="916" y="4304"/>
         </scene>
-        <!--Course List Vertical View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="s6h-OY-0bS">
             <objects>
-                <viewController id="d0o-Sj-8DK" customClass="CourseListVerticalViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d0o-Sj-8DK" customClass="HomeViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NTB-Ke-5RJ"/>
                         <viewControllerLayoutGuide type="bottom" id="F3D-5i-SQS"/>
@@ -874,13 +874,59 @@
                     <view key="view" contentMode="scaleToFill" id="Myu-Hj-kcu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWP-KR-cSl">
+                                <rect key="frame" x="0.0" y="115" width="375" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="hXQ-fN-RkX"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="pyi-5x-TNr" kind="embed" identifier="enrolledEmbed" id="F1v-Zg-6Fj"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enrolled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDj-hh-tS7">
+                                <rect key="frame" x="16" y="80" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2Q-Y5-zt7">
+                                <rect key="frame" x="16" y="331" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kp5-Oo-jbD">
+                                <rect key="frame" x="0.0" y="365" width="375" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="yfX-u0-CHP"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="wbc-iz-F9S" kind="embed" identifier="popularEmbed" id="dUK-Jq-Krn"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EDj-hh-tS7" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" constant="16" id="6HP-0c-aDO"/>
+                            <constraint firstItem="cWP-KR-cSl" firstAttribute="top" secondItem="EDj-hh-tS7" secondAttribute="bottom" constant="14" id="87X-ff-YJE"/>
+                            <constraint firstItem="r2Q-Y5-zt7" firstAttribute="top" secondItem="cWP-KR-cSl" secondAttribute="bottom" constant="8" id="98k-o7-rkC"/>
+                            <constraint firstItem="r2Q-Y5-zt7" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" constant="16" id="9gO-7M-gcp"/>
+                            <constraint firstAttribute="trailing" secondItem="EDj-hh-tS7" secondAttribute="trailing" constant="16" id="LrS-Uh-6HT"/>
+                            <constraint firstItem="EDj-hh-tS7" firstAttribute="top" secondItem="NTB-Ke-5RJ" secondAttribute="bottom" constant="16" id="S4j-5g-Ikv"/>
+                            <constraint firstItem="cWP-KR-cSl" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" id="S5r-0F-4dN"/>
+                            <constraint firstAttribute="trailing" secondItem="cWP-KR-cSl" secondAttribute="trailing" id="cfW-S9-D1j"/>
+                            <constraint firstItem="Kp5-Oo-jbD" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" id="cvb-rj-lXW"/>
+                            <constraint firstAttribute="trailing" secondItem="Kp5-Oo-jbD" secondAttribute="trailing" id="fYr-b1-TUI"/>
+                            <constraint firstAttribute="trailing" secondItem="r2Q-Y5-zt7" secondAttribute="trailing" constant="16" id="h15-ip-vAT"/>
+                            <constraint firstItem="Kp5-Oo-jbD" firstAttribute="top" secondItem="r2Q-Y5-zt7" secondAttribute="bottom" constant="13" id="tyj-eg-fS3"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LKs-0X-N5O"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3xn-qW-TVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="4304"/>
+            <point key="canvasLocation" x="1685.5999999999999" y="4303.8980509745134"/>
         </scene>
         <!--Profile-->
         <scene sceneID="eaY-rL-sMF">
@@ -899,6 +945,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgf-Uu-lLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2378" y="856"/>
+        </scene>
+        <!--Course List Horizontal View Controller-->
+        <scene sceneID="paf-Tf-bfn">
+            <objects>
+                <viewController id="pyi-5x-TNr" customClass="CourseListHorizontalViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mKo-kb-msn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ck7-dM-7og" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2414" y="4133"/>
+        </scene>
+        <!--Course List Horizontal View Controller-->
+        <scene sceneID="Xh7-Wd-vF4">
+            <objects>
+                <viewController id="wbc-iz-F9S" customClass="CourseListHorizontalViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZuC-c2-HHQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDh-Df-fS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2414" y="4326"/>
         </scene>
     </scenes>
     <resources>
