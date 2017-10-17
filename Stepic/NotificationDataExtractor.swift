@@ -28,8 +28,38 @@ class NotificationDataExtractor {
         return nil
     }()
 
+    // Extract course id
+    lazy var courseId: Int? = {
+        guard self.type == .learn else {
+            return nil
+        }
+
+        if let courseLink = HTMLParsingUtil.getLink(self.text, index: 0) {
+            if let courseIdStartIndex = courseLink.lastIndexOf("-") {
+                let start = courseLink.characters.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
+                let end = courseLink.characters.index(courseLink.startIndex, offsetBy: courseLink.characters.count - 1)
+                let courseIdString = courseLink.substring(with: start..<end)
+                return Int(courseIdString)
+            }
+        }
+        return nil
+    }()
+
+    // Extract comments URL
+    lazy var commentsURL: URL? = {
+        guard self.type == .comments else {
+            return nil
+        }
+
+        if let commentsLink = HTMLParsingUtil.getLink(self.text, index: 2) {
+            let urlString = StepicApplicationsInfo.stepicURL + commentsLink
+            return URL(string: urlString)
+        } else {
+            return nil
+        }
+    }()
+
     // Remove spaces and new lines
-    // For Comments add new line after name
     lazy var preparedText: String? = {
         let pText = self.text.trimmingCharacters(in: .whitespacesAndNewlines)
         return pText.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }.joined(separator: " ")
@@ -40,46 +70,3 @@ class NotificationDataExtractor {
         self.type = type
     }
 }
-
-/*
-
- //gets course id if it is available for the given notification type
- func getCourseId() -> Int? {
- return nil
- // FIXME: old notification
-
- //        if notification.type != .Learn {
- //            return nil
- //        } else {
- //            if let courseLink = HTMLParsingUtil.getLink(notification.htmlText, index: 0) {
- //                if let courseIdStartIndex = courseLink.lastIndexOf("-") {
- //                    let start = courseLink.characters.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
- //                    let end = courseLink.characters.index(courseLink.startIndex, offsetBy: courseLink.characters.count - 1)
- //                    let courseIdString = courseLink.substring(with: start ..< end )
- //                    return Int(courseIdString)
- //                }
- //            }
- //            return nil
- //        }
- }
-
- //gets the comments URL if it is available for the given notification type
- func getCommentsURL() -> URL? {
- return nil
- // FIXME: old notification
-
- //        if notification.type != .Comments {
- //            return nil
- //        } else {
- //            if let commentsLink = HTMLParsingUtil.getLink(notification.htmlText, index: 2) {
- //                print("\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
- //                let urlString = StepicApplicationsInfo.stepicURL + commentsLink
- //                let u = URL(string: urlString)
- //                print(u ?? "")
- //                return u
- //            } else {
- //                return nil
- //            }
- //        }
- }
- }*/
