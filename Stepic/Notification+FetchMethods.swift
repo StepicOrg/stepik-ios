@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 extension Notification {
+    // FIXME: CREATE GENERIC CLASS
+
     static func fetch(_ ids: [Int]) -> [Notification] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
 
@@ -49,6 +51,18 @@ extension Notification {
             return results
         } catch {
             return nil
+        }
+    }
+
+    static func deleteAll() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification]
+            for obj in results ?? [] {
+                CoreDataHelper.instance.deleteFromStore(obj)
+            }
+        } catch {
+            print("notification: couldn't delete all notifications!")
         }
     }
 }
