@@ -40,7 +40,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
     lazy var paginationView: LoadingPaginationView = {
         let paginationView = LoadingPaginationView()
         paginationView.refreshAction = { [weak self] in
-            self?.presenter?.load()
+            self?.presenter?.loadNextPage()
         }
 
         paginationView.setLoading()
@@ -83,7 +83,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.load()
+        presenter?.loadInitial()
     }
 
     func refreshNotifications() {
@@ -98,6 +98,20 @@ class NotificationsViewController: UIViewController, NotificationsView {
         self.data = notifications
         tableView.reloadData()
         setNeedsScrollViewInsetUpdate()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if state == .loading || state == .refreshing {
+            return
+        }
+
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        let deltaOffset = maximumOffset - currentOffset
+
+        if deltaOffset <= 0 {
+            presenter?.loadNextPage()
+        }
     }
 }
 
@@ -127,14 +141,6 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             }
 
             cell.delegate = self
-        }
-
-        // Load next page
-        let isLastCell = indexPath.section == data.count - 1 && indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1
-        let hasNextPage = presenter?.hasNextPage ?? false
-        let isLoading = state == .loading || state == .refreshing
-        if isLastCell && hasNextPage && !isLoading {
-            presenter?.load()
         }
 
         return cell!

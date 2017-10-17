@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PromiseKit
 
 protocol NotificationsView: class {
     var state: NotificationsViewState { get set }
@@ -18,22 +19,6 @@ protocol NotificationsView: class {
 
 enum NotificationsViewState {
     case normal, refreshing, loading, empty
-}
-
-enum NotificationsSection {
-    var localizedName: String {
-        let localizedNames: [NotificationsSection: String] = [
-            .all: NSLocalizedString("NotificationsAll", comment: ""),
-            .learning: NSLocalizedString("NotificationsLearning", comment: ""),
-            .comments: NSLocalizedString("NotificationsComments", comment: ""),
-            .reviews: NSLocalizedString("NotificationsReviews", comment: ""),
-            .teaching: NSLocalizedString("NotificationsTeaching", comment: ""),
-            .other: NSLocalizedString("NotificationsOther", comment: "")
-        ]
-        return localizedNames[self] ?? "Unknown"
-    }
-
-    case all, learning, comments, reviews, teaching, other
 }
 
 typealias NotificationViewDataStruct = [(date: Date, notifications: [NotificationViewData])]
@@ -68,66 +53,110 @@ class NotificationsPresenter {
 
     func refresh() {
         view?.state = .refreshing
-
         page = 1
         hasNextPage = true
         displayedNotifications = []
-        loadData(page: page) { hasNext, notifications in
-            self.hasNextPage = hasNext
 
+        loadCached().then { result -> Promise<(Bool, NotificationViewDataStruct)> in
+            self.view?.state = .loading
+            self.updateDisplayedNotifications(result)
+
+            return self.loadData(page: 1, in: self.section)
+        }.then { hasNextPage, result -> Void in
+            self.hasNextPage = hasNextPage
+
+            self.updateDisplayedNotifications(result)
+        }.catch { error in
+            print("notifications: refresh error = \(error)")
+        }.always {
             self.view?.state = .normal
-            self.view?.set(notifications: notifications)
         }
     }
 
-    func load() {
-        if displayedNotifications.isEmpty && hasNextPage {
-            // First loading, notifications not loaded yet -> load part from Core Data
-            let notifications = Notification.fetch(type: sectionToType(section), offset: 0, limit: 50)
-            merge(old: displayedNotifications, new: notifications ?? [], success: { result in
-                self.displayedNotifications = result
-                self.view?.set(notifications: self.displayedNotifications)
-            }, failure: { err in
-                // FIXME: handle error
-                print(err)
-            })
+    func loadInitial() {
+        view?.state = .refreshing
+
+        loadCached().then { result -> Promise<(Bool, NotificationViewDataStruct)> in
+            self.view?.state = .loading
+            self.updateDisplayedNotifications(result)
+
+            return self.loadData(page: 1, in: self.section)
+        }.then { hasNextPage, result -> Void in
+            self.hasNextPage = hasNextPage
+            self.page += 1
+
+            self.updateDisplayedNotifications(result)
+        }.catch { error in
+            print("notifications: load initial error = \(error)")
+        }.always {
+            self.view?.state = .normal
+        }
+    }
+
+    func loadNextPage() {
+        guard hasNextPage else {
+            return
         }
 
         view?.state = .loading
 
-        if hasNextPage || page == 1 {
-            loadData(page: page) { hasNext, notifications in
-                self.hasNextPage = hasNext
+        loadData(page: page, in: section).then { hasNextPage, result -> Void in
+            self.hasNextPage = hasNextPage
+            self.page += 1
 
-                self.view?.state = .normal
-                self.view?.set(notifications: notifications)
-            }
-        } else {
+            self.updateDisplayedNotifications(result)
+        }.always {
             self.view?.state = .normal
+        }.catch { error in
+            print("notifications: load next page error = \(error)")
         }
     }
 
-    fileprivate func loadData(page: Int, success: @escaping (Bool, NotificationViewDataStruct) -> Void) {
-        fetchNotifications(success: { meta, notifications in
-            self.merge(old: self.displayedNotifications, new: notifications, success: { result in
-                self.displayedNotifications = result
-                self.page += 1
-                success(meta.hasNext, self.displayedNotifications)
-            }, failure: { err in
-                // FIXME: handle error here
-                print(err)
-            })
-        }, failure: { error in
-            // FIXME: handle error here
-            print(error)
-        })
+    fileprivate func updateDisplayedNotifications(_ notifications: NotificationViewDataStruct) {
+        self.displayedNotifications = notifications
+        self.view?.set(notifications: self.displayedNotifications)
     }
 
-    fileprivate func merge(old: NotificationViewDataStruct, new: [Notification], success: @escaping (NotificationViewDataStruct) -> Void, failure: @escaping (String) -> Void) {
+    fileprivate func loadCached() -> Promise<NotificationViewDataStruct> {
+        let notifications = Notification.fetch(type: section.notificationType, offset: 0, limit: 50)
+        return merge(old: self.displayedNotifications, new: notifications ?? [])
+    }
+
+    fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
+        // FIXME: temporary wrapper
+        func retrieve(page: Int, notificationType: NotificationType?) -> Promise<(Meta, [Notification])> {
+            return Promise { fulfill, reject in
+                self.notificationsAPI.retrieve(page: page, notificationType: notificationType, success: { fulfill(($0, $1)) }, error: { reject($0) })
+            }
+        }
+
+        return Promise { fulfill, reject in
+            var hasNext: Bool = false
+            firstly {
+                retrieve(page: page, notificationType: section.notificationType)
+            }.then { meta, result -> Promise<NotificationViewDataStruct> in
+                hasNext = meta.hasNext
+
+                return self.merge(old: self.displayedNotifications, new: result)
+            }.then { results -> Void in
+                fulfill((hasNext, results))
+            }.catch { reject($0) }
+        }
+    }
+
+    fileprivate func merge(old: NotificationViewDataStruct, new: [Notification]) -> Promise<NotificationViewDataStruct> {
+        // FIXME: temporary wrapper
+        func retrieve(ids: [Int], existing: [User], refreshMode: RefreshMode) -> Promise<[User]> {
+            return Promise { fulfill, reject in
+                self.usersAPI.retrieve(ids: ids, existing: existing, refreshMode: refreshMode, success: { fulfill($0) }, error: { reject($0) })
+            }
+        }
+
         // id -> url
         var userAvatars: [Int: URL] = [:]
         var usersQuery: Set<Int> = Set()
 
+        // Extract all user id and cache data extractors
         var notificationsWExtractor: [(Notification, NotificationDataExtractor)] = []
         for notification in new {
             let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
@@ -137,10 +166,12 @@ class NotificationsPresenter {
             notificationsWExtractor.append((notification, extractor))
         }
 
-        func groupNotifications() -> NotificationViewDataStruct {
-            // Group by date
+        // Group notifications by date
+        // Return dict: date -> notifications
+        func groupNotificationsByDate() -> NotificationViewDataStruct {
             var dateToNotifications: [Date: [NotificationViewData]] = [:]
 
+            // Add avatator URL to view data
             notificationsWExtractor.forEach { notification, extractor in
                 let notificationVD: NotificationViewData!
                 if let userId = extractor.userId, let userAvatar = userAvatars[userId] {
@@ -149,7 +180,8 @@ class NotificationsPresenter {
                     notificationVD = NotificationViewData(id: notification.id, type: notification.type, status: notification.status, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
                 }
 
-                let timestampDropHours = Int(notificationVD.time.timeIntervalSince1970 / (24 * 60 * 60)) * 24 * 60 * 60
+                let secondsInDay = 24 * 60 * 60
+                let timestampDropHours = Int(notificationVD.time.timeIntervalSince1970 / Double(secondsInDay)) * secondsInDay
                 let day = Date(timeIntervalSince1970: Double(timestampDropHours))
                 if !dateToNotifications.keys.contains(day) {
                     dateToNotifications[day] = []
@@ -157,7 +189,7 @@ class NotificationsPresenter {
                 dateToNotifications[day]?.append(notificationVD)
             }
 
-            // Get already displayed notifications from view and merge
+            // Get already displayed notifications from view and merge with new
             for val in old {
                 if dateToNotifications[val.date] != nil {
                     dateToNotifications[val.date]?.append(contentsOf: val.notifications)
@@ -166,6 +198,7 @@ class NotificationsPresenter {
                 }
             }
 
+            // Remove duplicates
             var notificationsOut: NotificationViewDataStruct = []
             var isUnique: [Int: Bool] = [:]
             for (key, value) in dateToNotifications {
@@ -175,18 +208,22 @@ class NotificationsPresenter {
                 notificationsOut.append((date: key, notifications: uniqueValue))
             }
 
+            // Sort by date
             notificationsOut.sort { $0.date > $1.date }
             return notificationsOut
         }
 
-        self.usersAPI.retrieve(ids: Array(usersQuery), existing: [], refreshMode: .update, success: { users in
-            users.forEach { user in
-                userAvatars[user.id] = URL(string: user.avatarURL)
+        // Try to load user avatars and group notifications
+        return Promise { fulfill, _ in
+            _ = retrieve(ids: Array(usersQuery), existing: [], refreshMode: .update).then { users -> Void in
+                users.forEach { user in
+                    userAvatars[user.id] = URL(string: user.avatarURL)
+                }
+                fulfill(groupNotificationsByDate())
+            }.catch { _ in
+                fulfill(groupNotificationsByDate())
             }
-            success(groupNotifications())
-        }, error: { err in
-            success(groupNotifications())
-        })
+        }
     }
 
     func updateNotification(with id: Int, status: NotificationStatus) {
@@ -206,6 +243,7 @@ class NotificationsPresenter {
 
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
+
         notificationsAPI.markAllAsRead(success: {
             self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
                 let (date, notifications) = arg
@@ -222,28 +260,5 @@ class NotificationsPresenter {
             print("notifications: unable to mark all as read, error = \(err)")
             self.view?.updateMarkAllAsReadButton(with: .error)
         })
-    }
-
-    fileprivate func sectionToType(_ section: NotificationsSection) -> NotificationType? {
-        switch section {
-        case .comments:
-            return .comments
-        case .teaching:
-            return .teach
-        case .reviews:
-            return .review
-        case .learning:
-            return .learn
-        case .other:
-            return .`default`
-        default:
-            return nil
-        }
-
-    }
-
-    fileprivate func fetchNotifications(success: @escaping (Meta, [Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {
-        let type: NotificationType? = sectionToType(section)
-        notificationsAPI.retrieve(page: page, notificationType: type, success: { success($0, $1) }, error: { failure($0) })
     }
 }

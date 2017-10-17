@@ -39,7 +39,7 @@ def all_pods
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     
-    pod 'Presentr'
+    pod 'Presentr', '1.2.3'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
     pod 'Highlightr'
@@ -48,6 +48,7 @@ def all_pods
     pod 'Tabman', '1.0.2'
     pod 'TTTAttributedLabel'
     pod 'Atributika', '~> 3.0'
+    pod 'PromiseKit', '~> 4.4'
 end
 
 def testing_pods
