@@ -57,12 +57,7 @@ class NotificationsPresenter {
         hasNextPage = true
         displayedNotifications = []
 
-        loadCached().then { result -> Promise<(Bool, NotificationViewDataStruct)> in
-            self.view?.state = .loading
-            self.updateDisplayedNotifications(result)
-
-            return self.loadData(page: 1, in: self.section)
-        }.then { hasNextPage, result -> Void in
+        loadData(page: 1, in: self.section).then { hasNextPage, result -> Void in
             self.hasNextPage = hasNextPage
 
             self.updateDisplayedNotifications(result)
@@ -126,7 +121,10 @@ class NotificationsPresenter {
         // FIXME: temporary wrapper
         func retrieve(page: Int, notificationType: NotificationType?) -> Promise<(Meta, [Notification])> {
             return Promise { fulfill, reject in
-                self.notificationsAPI.retrieve(page: page, notificationType: notificationType, success: { fulfill(($0, $1)) }, error: { reject($0) })
+                // TODO: ugly performRequest() call
+                performRequest({
+                    self.notificationsAPI.retrieve(page: page, notificationType: notificationType, success: { fulfill(($0, $1)) }, error: { reject($0) })
+                })
             }
         }
 
@@ -148,7 +146,10 @@ class NotificationsPresenter {
         // FIXME: temporary wrapper
         func retrieve(ids: [Int], existing: [User], refreshMode: RefreshMode) -> Promise<[User]> {
             return Promise { fulfill, reject in
-                self.usersAPI.retrieve(ids: ids, existing: existing, refreshMode: refreshMode, success: { fulfill($0) }, error: { reject($0) })
+                // TODO: ugly performRequest() call
+                performRequest({
+                    self.usersAPI.retrieve(ids: ids, existing: existing, refreshMode: refreshMode, success: { fulfill($0) }, error: { reject($0) })
+                })
             }
         }
 
@@ -234,8 +235,11 @@ class NotificationsPresenter {
 
         notification.status = status
         if status == .opened {
-            notificationsAPI.update(notification, success: { _ in }, error: { err in
-                print("notifications: unable to update notification with id = \(id), error = \(err)")
+            // TODO: ugly performRequest() call
+            performRequest({
+                self.notificationsAPI.update(notification, success: { _ in }, error: { err in
+                    print("notifications: unable to update notification with id = \(id), error = \(err)")
+                })
             })
         }
         CoreDataHelper.instance.save()
@@ -244,21 +248,24 @@ class NotificationsPresenter {
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        notificationsAPI.markAllAsRead(success: {
-            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
-                let (date, notifications) = arg
-                return (date: date, notifications: notifications.map { notification in
-                    var openedNotification = notification
-                    openedNotification.status = .opened
-                    return openedNotification
-                })
-            }
+        // TODO: ugly performRequest() call
+        performRequest({
+            self.notificationsAPI.markAllAsRead(success: {
+                self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+                    let (date, notifications) = arg
+                    return (date: date, notifications: notifications.map { notification in
+                        var openedNotification = notification
+                        openedNotification.status = .opened
+                        return openedNotification
+                    })
+                }
 
-            self.view?.set(notifications: self.displayedNotifications)
-            self.view?.updateMarkAllAsReadButton(with: .normal)
-        }, error: { err in
-            print("notifications: unable to mark all as read, error = \(err)")
-            self.view?.updateMarkAllAsReadButton(with: .error)
+                self.view?.set(notifications: self.displayedNotifications)
+                self.view?.updateMarkAllAsReadButton(with: .normal)
+            }, error: { err in
+                print("notifications: unable to mark all as read, error = \(err)")
+                self.view?.updateMarkAllAsReadButton(with: .error)
+            })
         })
     }
 }
