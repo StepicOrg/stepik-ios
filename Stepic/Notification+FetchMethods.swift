@@ -10,22 +10,37 @@ import Foundation
 import CoreData
 
 extension Notification {
-    static func fetch(_ id: Int) -> Notification? {
+    static func fetch(_ ids: [Int]) -> [Notification] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
-        request.predicate = NSPredicate(format: "managedId == %@", id as NSNumber)
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         do {
             guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification] else {
-                return nil
+                return []
             }
-            return results.first
+            return results
         } catch {
-            return nil
+            return []
         }
     }
 
-    static func fetch(type: NotificationType) -> [Notification]? {
+    static func fetch(id: Int) -> Notification? {
+        return fetch([id]).first
+    }
+
+    static func fetch(type: NotificationType?, offset: Int = 0, limit: Int = 10) -> [Notification]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
-        request.predicate = NSPredicate(format: "managedType == %@", type.rawValue as NSString)
+        request.fetchLimit = limit
+        request.fetchOffset = offset
+
+        if let type = type {
+            request.predicate = NSPredicate(format: "managedType == %@", type.rawValue as NSString)
+        } else {
+            request.predicate = NSPredicate(value: true)
+        }
 
         do {
             guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification] else {

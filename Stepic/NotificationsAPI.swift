@@ -54,9 +54,25 @@ class NotificationsAPI {
                 return
             }
 
+            let savedNotifications = Notification.fetch(json["notifications"].arrayValue.map { $0["id"].intValue })
+            var newNotifications: [Notification] = []
+            for objectJSON in json["notifications"].arrayValue {
+                let existing = savedNotifications.filter {obj in obj.hasEqualId(json: objectJSON) }
+
+                switch existing.count {
+                case 0:
+                    newNotifications += [Notification(json: objectJSON)]
+                default:
+                    let obj = existing[0]
+                    obj.update(json: objectJSON)
+                    newNotifications += [obj]
+                }
+            }
+
+            CoreDataHelper.instance.save()
+
             let meta = Meta(json: json["meta"])
-            let notifications = json["notifications"].arrayValue.map { Notification(json: $0) }
-            success(meta, notifications)
+            success(meta, newNotifications)
         })
     }
 
