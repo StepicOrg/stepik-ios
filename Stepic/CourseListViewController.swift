@@ -14,7 +14,7 @@ protocol CourseListViewControllerDelegate: class {
     func reloadData()
 
     func updatePagination()
-    func updateRefreshing()
+    func updateState(from: CourseListState)
 
     func indexPathsForVisibleCells() -> [IndexPath]
     func indexPathForIndex(index: Int) -> IndexPath
@@ -29,7 +29,6 @@ class CourseListViewController: UIViewController, CourseListView {
     var presenter: CourseListPresenter?
     var listType: CourseListType!
     var limit: Int?
-    var isRefreshing: Bool = false
     var refreshEnabled: Bool = true
     var paginationStatus: PaginationStatus = .none
 
@@ -38,8 +37,10 @@ class CourseListViewController: UIViewController, CourseListView {
     var courses: [CourseViewData] = []
 
     var shouldShowLoadingWidgets: Bool {
-        return isRefreshing && courses.isEmpty
+        return state == .emptyRefreshing
     }
+
+    var state: CourseListState = .empty
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,9 +108,15 @@ class CourseListViewController: UIViewController, CourseListView {
         }
     }
 
-    func setRefreshing(isRefreshing: Bool) {
-        self.isRefreshing = isRefreshing
-        delegate?.updateRefreshing()
+//    func setRefreshing(isRefreshing: Bool) {
+//        self.isRefreshing = isRefreshing
+//        delegate?.updateRefreshing()
+//    }
+
+    func setState(state: CourseListState) {
+        let prevState: CourseListState = self.state
+        self.state = state
+        delegate?.updateState(from: prevState)
     }
 
     func setPaginationStatus(status: PaginationStatus) {

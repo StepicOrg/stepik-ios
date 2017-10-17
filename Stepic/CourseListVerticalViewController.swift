@@ -91,26 +91,45 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         }
     }
 
-    func updateRefreshing() {
-        if isRefreshing {
-            if courses.isEmpty {
-                tableView.reloadData()
-                tableView.isUserInteractionEnabled = false
-            } else {
-                if refreshControl?.isRefreshing == false {
-                    refreshControl?.beginRefreshing()
-                }
-            }
-        } else {
-            tableView.isUserInteractionEnabled = true
-            if courses.isEmpty {
-                refreshControl?.endRefreshing()
-                tableView.reloadData()
-            } else {
-                refreshControl?.endRefreshing()
-            }
-        }
+    func updateState(from: CourseListState) {
+//        switch state {
+//        case .displaying:
+//            break
+//        case .displayingError:
+//            break
+//        case .displayingRefreshing:
+//            break
+//        case .empty:
+//            break
+//        case .emptyError:
+//            break
+//        case .emptyRefreshing:
+//            break
+//        case .emptyAnonymous:
+//            break
+//        }
     }
+
+//    func updateRefreshing() {
+//        if isRefreshing {
+//            if courses.isEmpty {
+//                tableView.reloadData()
+//                tableView.isUserInteractionEnabled = false
+//            } else {
+//                if refreshControl?.isRefreshing == false {
+//                    refreshControl?.beginRefreshing()
+//                }
+//            }
+//        } else {
+//            tableView.isUserInteractionEnabled = true
+//            if courses.isEmpty {
+//                refreshControl?.endRefreshing()
+//                tableView.reloadData()
+//            } else {
+//                refreshControl?.endRefreshing()
+//            }
+//        }
+//    }
 
     func indexPathsForVisibleCells() -> [IndexPath] {
         return tableView.indexPathsForVisibleRows ?? []

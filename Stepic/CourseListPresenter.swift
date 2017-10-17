@@ -16,7 +16,9 @@ protocol CourseListView: class {
     func update(updatedCourses: [CourseViewData], courses: [CourseViewData])
     func update(deletingCourses: [CourseViewData], deletingIds: [Int], insertingCourses: [CourseViewData], insertingIds: [Int], courses: [CourseViewData])
 
-    func setRefreshing(isRefreshing: Bool)
+    func setState(state: CourseListState)
+
+//    func setRefreshing(isRefreshing: Bool)
     func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
@@ -37,6 +39,16 @@ class CourseListPresenter {
     private var currentPage: Int = 1
     private var hasNextPage: Bool = false
 
+    private var lastUser: User?
+
+    private var state: CourseListState = .empty {
+        didSet {
+            if state != oldValue {
+                view?.setState(state: state)
+            }
+        }
+    }
+
     private var shouldLoadNextPage: Bool {
         if let limit = limit {
             return hasNextPage && courses.count < limit
@@ -55,6 +67,7 @@ class CourseListPresenter {
             }
         }
     }
+
     private var displayingCourses: [Course] = []
     private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
         var result: [Course] = []
@@ -98,7 +111,6 @@ class CourseListPresenter {
     }
 
     func refresh() {
-        view?.setRefreshing(isRefreshing: true)
         if courses.isEmpty {
             displayCached(ids: listType.cachedListCourseIds)
         }
@@ -133,10 +145,31 @@ class CourseListPresenter {
     }
 
     func willAppear() {
-        handleCourseSubscriptionUpdates()
+        if lastUser != AuthInfo.shared.user {
+            refresh()
+            return
+        } else {
+            handleCourseSubscriptionUpdates()
+        }
+
+//        switch listType {
+//        case .enrolled:
+//            if !AuthInfo.shared.isAuthorized {
+//                if !courses.isEmpty {
+//                    courses = []
+//                    view?.display(courses: [])
+//                }
+//                view?.setState(state: .emptyAnonymous)
+//            } else {
+//                handleCourseSubscriptionUpdates()
+//            }
+//        default:
+//            break
+//        }
     }
 
     func handleCourseSubscriptionUpdates() {
+        //TODO: Add subscription updates for other types of courses (change button types & remove/add progress)
         switch listType {
         case .enrolled:
             guard CoursesJoinManager.sharedManager.hasUpdates else {
@@ -158,7 +191,7 @@ class CourseListPresenter {
 
             CoursesJoinManager.sharedManager.clean()
 
-            view?.update(deletingCourses: getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: getData(from: courses))
+            view?.update(deletingCourses: getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: getData(from: getDisplayingFrom(newCourses: courses)))
         default:
             return
         }
@@ -170,13 +203,57 @@ class CourseListPresenter {
         self.view?.display(courses: getData(from: self.displayingCourses))
     }
 
-    private func refreshCourses() {
-        if courses.isEmpty {
-            self.view?.setRefreshing(isRefreshing: true)
+    private func handleRefreshError(error: Error) {
+        print("Error while refreshing collection")
+        if let error = error as? RetrieveError {
+            switch error {
+            case .badStatus:
+                guard !AuthInfo.shared.isAuthorized else {
+                    break
+                }
+                if !self.courses.isEmpty {
+                    self.view?.display(courses: [])
+                }
+                self.state = .emptyAnonymous
+            default:
+                break
+            }
         }
+        self.state = self.courses.isEmpty ? .emptyError : .displayingWithError
+    }
+
+    private func requestNonCollection() {
+        listType.request(page: 1, withAPI: coursesAPI)?.then {
+            [weak self]
+            (courses, meta) -> Void in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.courses = courses
+            strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
+            strongSelf.updateReviewSummaries(for: courses)
+            strongSelf.updateProgresses(for: courses)
+            strongSelf.currentPage = meta.page
+            strongSelf.hasNextPage = meta.hasNext
+            strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
+            strongSelf.state = courses.isEmpty ? .empty: .displaying
+            }.catch {
+                [weak self]
+                _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                print("Error while refreshing collection")
+                strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
+        }
+    }
+
+    private func refreshCourses() {
         coursesAPI.cancelAllTasks()
+        lastUser = AuthInfo.shared.user
         switch listType {
         case let .collection(ids: ids):
+            state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then {
                 [weak self]
                 courses -> Void in
@@ -190,40 +267,26 @@ class CourseListPresenter {
                 strongSelf.currentPage = 1
                 strongSelf.hasNextPage = false
                 strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-            }.always {
-                [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.view?.setRefreshing(isRefreshing: false)
+                strongSelf.state = courses.isEmpty ? .empty: .displaying
             }.catch {
-                _ in
-                print("Error while refreshing collection")
-            }
-        default:
-            listType.request(page: 1, withAPI: coursesAPI)?.then {
                 [weak self]
-                (courses, meta) -> Void in
+                _ in
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.courses = courses
-                strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                strongSelf.updateReviewSummaries(for: courses)
-                strongSelf.updateProgresses(for: courses)
-                strongSelf.currentPage = meta.page
-                strongSelf.hasNextPage = meta.hasNext
-                strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-                }.always {
-                    [weak self] in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    strongSelf.view?.setRefreshing(isRefreshing: false)
-                }.catch {
-                    _ in
-                    print("error while refreshing course collection")
+                print("Error while refreshing collection")
+                strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
             }
+        case .enrolled:
+            if !AuthInfo.shared.isAuthorized {
+                self.state = .emptyAnonymous
+            } else {
+                state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
+            }
+            requestNonCollection()
+        default:
+            state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
+            requestNonCollection()
         }
 
     }
@@ -395,15 +458,15 @@ struct CourseViewData {
     }
 }
 
-//enum CourseListRefreshState {
-//    case widgets, standard
-//}
-//
-//enum CourseListState {
-//    case refreshing(state: CourseListRefreshState)
-//    case empty
-//    case displaying
-//}
+enum CourseListState {
+    case emptyRefreshing
+    case empty
+    case emptyAnonymous
+    case emptyError
+    case displayingWithRefreshing
+    case displaying
+    case displayingWithError
+}
 
 enum PaginationStatus {
     case loading, error, none
