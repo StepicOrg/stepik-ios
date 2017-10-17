@@ -45,7 +45,6 @@ class ProfilePresenter {
     private let notificationsSwitchBlockId = "notifications_switch"
     private let notificationsTimeSelectionBlockId = "notifications_time_selection"
     private let infoBlockId = "info"
-    private let notificationsBlockId = "notifications"
     private let settingsBlockId = "settings"
     private let downloadsBlockId = "downloads"
     private let logoutBlockId = "logout"
@@ -56,7 +55,6 @@ class ProfilePresenter {
             buildNotificationsSwitchBlock(),
             buildNotificationsTimeSelectionBlock(),
             buildInfoExpandableBlock(user: user),
-            buildNotificationsTransitionBlock(),
             buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
             buildLogoutBlock()
@@ -143,16 +141,6 @@ class ProfilePresenter {
             block.isExpanded = isExpanded
             self?.menu.update(block: block)
         }
-        return block
-    }
-
-    private func buildNotificationsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsBlockId, title: "Notifications")
-
-        block.onTouch = { [weak self] in
-            self?.view?.navigateToNotifications()
-        }
-
         return block
     }
 

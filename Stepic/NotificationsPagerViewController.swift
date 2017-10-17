@@ -79,6 +79,6 @@ extension NotificationsPagerViewController: UINavigationControllerDelegate {
             return
         }
 
-        navigation.animateShadowChange(for: self)
+        navigation.changeShadowAlpha(0)
     }
 }
