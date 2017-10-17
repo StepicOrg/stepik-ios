@@ -83,6 +83,18 @@ class DeepLinkRouter {
                 return
             }
 
+            if link.query?.contains("discussion") ?? false {
+                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems {
+                    if let discussion = queryItems.filter({ item in item.name == "discussion" }).first?.value! {
+                        if let discussionInt = Int(discussion) {
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.discussion, parameters: ["lesson": lessonId, "step": stepId, "discussion": discussionInt])
+                            routeToDiscussionWithId(lessonId, stepId: stepId, discussionId: discussionInt, completion: completion)
+                            return
+                        }
+                    }
+                }
+            }
+            
             AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId as NSObject, "step": stepId as NSObject])
             routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
             return
@@ -212,5 +224,41 @@ class DeepLinkRouter {
             }
         )
 
+    }
+    
+    static func routeToDiscussionWithId(_ lessonId: Int, stepId: Int, discussionId: Int, completion: @escaping ([UIViewController]) -> Void) {
+        DeepLinkRouter.routeToStepWithId(stepId, lessonId: lessonId) { viewControllers in
+            guard let lessonVC = viewControllers.first as? LessonViewController else {
+                completion([])
+                return
+            }
+            
+            guard let stepInLessonId = lessonVC.initObjects?.lesson.stepsArray[stepId - 1] else {
+                completion([])
+                return
+            }
+            
+            performRequest({
+                ApiDataDownloader.steps.retrieve(ids: [stepInLessonId], existing: [], refreshMode: .update, success: { steps in
+                    print(stepInLessonId)
+                    guard let step = steps.first else {
+                        completion([])
+                        return
+                    }
+
+                    if let discussionProxyId = step.discussionProxyId {
+                        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+                        vc.discussionProxyId = discussionProxyId
+                        vc.target = step.id
+                        vc.step = step
+                        completion([lessonVC, vc])
+                    } else {
+                        completion([])
+                    }
+                }, error: { error in
+                    completion([])
+                })
+            })
+        }
     }
 }
