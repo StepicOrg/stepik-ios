@@ -129,6 +129,11 @@ class NotificationsTableViewCell: UITableViewCell {
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if url.absoluteString.starts(with: "/users/") {
+            // Unsupported url, ignore
+            return
+        }
+        
         let deepLinkingUrlString = "stepic://stepik.org" + url.absoluteString
         if let deepLinkingUrl = URL(string: deepLinkingUrlString) {
             UIApplication.shared.openURL(deepLinkingUrl)
