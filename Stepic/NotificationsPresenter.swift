@@ -203,9 +203,10 @@ class NotificationsPresenter {
             var notificationsOut: NotificationViewDataStruct = []
             var isUnique: [Int: Bool] = [:]
             for (key, value) in dateToNotifications {
-                let uniqueValue = value.filter {
+                var uniqueValue = value.filter {
                     isUnique.updateValue(false, forKey: $0.id) ?? true
                 }
+                uniqueValue.sort { $0.time > $1.time }
                 notificationsOut.append((date: key, notifications: uniqueValue))
             }
 
