@@ -63,7 +63,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         if section != .all {
             markAllAsReadButton.isHidden = true
             markAllAsReadButtonBottomConstraint.constant = 0
-            markAllAsReadButtonTopConstraint.constant = 0
+            markAllAsReadButtonTopConstraint.constant = 21
             markAllAsReadHeightConstraint.constant = 0
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
@@ -73,6 +73,12 @@ class NotificationsViewController: UIViewController, NotificationsView {
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
 
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
+        
         refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -97,7 +103,6 @@ class NotificationsViewController: UIViewController, NotificationsView {
     func set(notifications: NotificationViewDataStruct) {
         self.data = notifications
         tableView.reloadData()
-        setNeedsScrollViewInsetUpdate()
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

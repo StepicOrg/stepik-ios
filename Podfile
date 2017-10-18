@@ -45,7 +45,6 @@ def all_pods
     pod 'Highlightr'
     pod "RFKeyboardToolbar", "~> 1.3"
 
-    pod 'Tabman', '1.0.2'
     pod 'TTTAttributedLabel'
     pod 'Atributika', '~> 3.0'
     pod 'PromiseKit', '~> 4.4'

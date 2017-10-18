@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="mz2-Zd-qEU"/>
+                        <viewLayoutGuide key="safeArea" id="6Dz-EX-Ev7"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
@@ -30,12 +30,12 @@
         <scene sceneID="OCT-sI-xvn">
             <objects>
                 <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DFQ-d9-gIu">
+                    <view key="view" contentMode="scaleToFill" id="DFQ-d9-gIu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY">
-                                <rect key="frame" x="0.0" y="88" width="375" height="579"/>
+                                <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="zmb-v1-FSp" id="adO-MK-ZT4"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nd0-dE-vdS" customClass="NotificationsMarkAsReadButton" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="10" y="30" width="355" height="48"/>
+                                <rect key="frame" x="10" y="51" width="355" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="cYo-Zr-kqo"/>
                                 </constraints>
@@ -61,17 +61,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Q2T-AE-dOT" firstAttribute="trailing" secondItem="nd0-dE-vdS" secondAttribute="trailing" constant="10" id="35m-KW-Uez"/>
+                            <constraint firstItem="5Hj-pJ-thl" firstAttribute="trailing" secondItem="nd0-dE-vdS" secondAttribute="trailing" constant="10" id="35m-KW-Uez"/>
                             <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="nd0-dE-vdS" secondAttribute="bottom" constant="10" id="94x-X8-Ha2"/>
-                            <constraint firstItem="nd0-dE-vdS" firstAttribute="top" secondItem="Q2T-AE-dOT" secondAttribute="top" constant="10" id="BKH-8T-X7X"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="Q2T-AE-dOT" secondAttribute="trailing" id="Fa7-pV-PV6"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="Q2T-AE-dOT" secondAttribute="leading" id="JFJ-83-J5T"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="bottom" secondItem="Q2T-AE-dOT" secondAttribute="bottom" id="LhB-Oz-lUz"/>
-                            <constraint firstItem="nd0-dE-vdS" firstAttribute="leading" secondItem="Q2T-AE-dOT" secondAttribute="leading" constant="10" id="iJc-NQ-ZAp"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="top" secondItem="5Hj-pJ-thl" secondAttribute="top" constant="31" id="BKH-8T-X7X"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="5Hj-pJ-thl" secondAttribute="trailing" id="Fa7-pV-PV6"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="5Hj-pJ-thl" secondAttribute="leading" id="JFJ-83-J5T"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="bottom" secondItem="DFQ-d9-gIu" secondAttribute="bottom" id="LhB-Oz-lUz"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="leading" secondItem="5Hj-pJ-thl" secondAttribute="leading" constant="10" id="iJc-NQ-ZAp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Q2T-AE-dOT"/>
+                        <viewLayoutGuide key="safeArea" id="5Hj-pJ-thl"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="markAllAsReadButton" destination="nd0-dE-vdS" id="YQu-Pe-Xr8"/>
                         <outlet property="markAllAsReadButtonBottomConstraint" destination="94x-X8-Ha2" id="RLz-ss-Skz"/>
