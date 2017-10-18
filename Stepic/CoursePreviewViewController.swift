@@ -173,7 +173,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                     button.isEnabled = true
                     c.enrolled = false
                     CoreDataHelper.instance.save()
-                    CoursesJoinManager.sharedManager.deletedCourses += [c]
+                    CourseSubscriptionManager.sharedManager.unsubscribedFrom(course: c)
                     WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
                     self?.initBarButtonItems(dropAvailable: c.enrolled)
                     _ = self?.navigationController?.popToRootViewController(animated: true)
@@ -405,7 +405,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                     sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
                     self?.course?.enrolled = true
                     CoreDataHelper.instance.save()
-                    CoursesJoinManager.sharedManager.addedCourses += [c]
+                    CourseSubscriptionManager.sharedManager.subscribedTo(course: c)
                     WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
                     self?.performSegue(withIdentifier: "showSections", sender: nil)
                     self?.initBarButtonItems(dropAvailable: c.enrolled)

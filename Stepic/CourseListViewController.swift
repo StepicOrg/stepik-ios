@@ -132,7 +132,7 @@ class CourseListViewController: UIViewController, CourseListView {
         show(controller, sender: self)
     }
 
-    func update(deletingCourses: [CourseViewData], deletingIds: [Int], insertingCourses: [CourseViewData], insertingIds: [Int], courses: [CourseViewData]) {
+    func update(deletingIds: [Int], insertingIds: [Int], courses: [CourseViewData]) {
         self.courses = courses
         let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
         let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })

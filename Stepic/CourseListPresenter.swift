@@ -14,7 +14,7 @@ protocol CourseListView: class {
     func display(courses: [CourseViewData])
     func add(addedCourses: [CourseViewData], courses: [CourseViewData])
     func update(updatedCourses: [CourseViewData], courses: [CourseViewData])
-    func update(deletingCourses: [CourseViewData], deletingIds: [Int], insertingCourses: [CourseViewData], insertingIds: [Int], courses: [CourseViewData])
+    func update(deletingIds: [Int], insertingIds: [Int], courses: [CourseViewData])
 
     func setState(state: CourseListState)
 
@@ -40,6 +40,8 @@ class CourseListPresenter {
     private var hasNextPage: Bool = false
 
     private var lastUser: User?
+
+    private var subscriptionManager = CourseSubscriptionManager()
 
     private var state: CourseListState = .empty {
         didSet {
@@ -69,7 +71,7 @@ class CourseListPresenter {
     }
 
     private var displayingCourses: [Course] = []
-    private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
+    private func getDisplaying(from newCourses: [Course]) -> [Course] {
         var result: [Course] = []
         for course in displayingCourses {
             if newCourses.index(of: course) != nil {
@@ -86,6 +88,11 @@ class CourseListPresenter {
         self.reviewSummariesAPI = reviewSummariesAPI
         self.limit = limit
         self.listType = listType
+        subscriptionManager.startObservingOtherSubscriptionmanagers()
+        subscriptionManager.handleUpdatesBlock = {
+            [weak self] in
+            self?.handleCourseSubscriptionUpdates()
+        }
     }
 
     func getData(from courses: [Course]) -> [CourseViewData] {
@@ -130,7 +137,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.courses += courses
-            strongSelf.view?.add(addedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
+            strongSelf.view?.add(addedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
             strongSelf.updateReviewSummaries(for: courses)
             strongSelf.updateProgresses(for: courses)
             strongSelf.currentPage = meta.page
@@ -151,48 +158,56 @@ class CourseListPresenter {
         } else {
             handleCourseSubscriptionUpdates()
         }
-
-//        switch listType {
-//        case .enrolled:
-//            if !AuthInfo.shared.isAuthorized {
-//                if !courses.isEmpty {
-//                    courses = []
-//                    view?.display(courses: [])
-//                }
-//                view?.setState(state: .emptyAnonymous)
-//            } else {
-//                handleCourseSubscriptionUpdates()
-//            }
-//        default:
-//            break
-//        }
     }
 
     func handleCourseSubscriptionUpdates() {
         //TODO: Add subscription updates for other types of courses (change button types & remove/add progress)
+        guard subscriptionManager.hasUpdates else {
+            return
+        }
+
         switch listType {
         case .enrolled:
-            guard CoursesJoinManager.sharedManager.hasUpdates else {
-                return
-            }
+            let oldDisplayedCourses = getDisplaying(from: courses)
 
-            let deletedCourses = CoursesJoinManager.sharedManager.deletedCourses
+            let deletedCourses = subscriptionManager.deletedCourses
             var deletedIds: [Int] = []
+            var addedIds: [Int] = []
             for deletedCourse in deletedCourses {
                 if let index = courses.index(where: { deletedCourse.id == $0.id }) {
                     courses.remove(at: index)
-                    deletedIds += [index]
                 }
             }
 
-            let addedCourses = CoursesJoinManager.sharedManager.addedCourses
+            let addedCourses = subscriptionManager.addedCourses
             courses = addedCourses + courses
-            let addedIds = Array(0 ..< addedCourses.count)
 
-            CoursesJoinManager.sharedManager.clean()
+            subscriptionManager.clean()
 
-            view?.update(deletingCourses: getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: getData(from: getDisplayingFrom(newCourses: courses)))
+            let newDisplayedCourses = getDisplaying(from: courses)
+            let deletedDisplayedCourses = oldDisplayedCourses.filter({
+                !newDisplayedCourses.contains($0)
+            })
+            let addedDisplayedCourses = newDisplayedCourses.filter({
+                !oldDisplayedCourses.contains($0)
+            })
+            oldDisplayedCourses.enumerated().forEach({
+                index, oldDisplayedCourse in
+                if deletedDisplayedCourses.contains(oldDisplayedCourse) {
+                    deletedIds += [index]
+                }
+            })
+            newDisplayedCourses.enumerated().forEach({
+                index, newDisplayedCourse in
+                if addedDisplayedCourses.contains(newDisplayedCourse) {
+                    addedIds += [index]
+                }
+            })
+
+            view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
         default:
+            let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
+            self.view?.update(updatedCourses: getData(from: getDisplaying(from: updatedCourses)), courses: getData(from: getDisplaying(from: courses)))
             return
         }
     }
@@ -359,7 +374,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
+            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
         }.catch {
             _ in
             print("Error while loading progresses")
@@ -408,7 +423,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchReviewSummaries(newReviewSummaries: newReviews, ids: reviewIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: strongSelf.getData(from: strongSelf.courses) )
+            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.courses) )
         }.catch {
             _ in
             print("error while loading review summaries")

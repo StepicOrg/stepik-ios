@@ -34,8 +34,8 @@ class HomeViewController: UIViewController {
         }
         if segue.identifier == "popularEmbed" {
             let dvc = segue.destination as? CourseListHorizontalViewController
-            dvc?.listType = CourseListType.popular
-            dvc?.limit = 6
+            dvc?.listType = CourseListType.enrolled
+            dvc?.limit = 7
         }
     }
 
