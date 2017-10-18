@@ -17,11 +17,11 @@ class NotificationsViewController: UIViewController, NotificationsView {
             switch state {
             case .normal:
                 self.refreshControl.endRefreshing()
-                self.tableView.tableFooterView?.isHidden = true
+                self.tableView.tableFooterView = UIView()
             case .refreshing:
                 self.refreshControl.beginRefreshing()
             case .loading:
-                self.tableView.tableFooterView?.isHidden = false
+                self.tableView.tableFooterView = paginationView
             default: break
             }
         }
@@ -38,7 +38,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
     let refreshControl = UIRefreshControl()
 
     lazy var paginationView: LoadingPaginationView = {
-        let paginationView = LoadingPaginationView()
+        let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         paginationView.refreshAction = { [weak self] in
             self?.presenter?.loadNextPage()
         }
@@ -161,18 +161,6 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let isLastSection = section == data.count - 1
-        let hasNextPage = presenter?.hasNextPage ?? false
-        return isLastSection && hasNextPage ? paginationView : UIView()
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let isLastSection = section == data.count - 1
-        let hasNextPage = presenter?.hasNextPage ?? false
-        return isLastSection && hasNextPage ? 60 : 0
     }
 }
 
