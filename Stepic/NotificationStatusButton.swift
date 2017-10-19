@@ -67,6 +67,9 @@ class NotificationStatusButton: UIButton {
         case .opened:
             self.setImage(#imageLiteral(resourceName: "readSign"), for: .normal)
             self.isEnabled = false
+            if status == .unread {
+                unreadMarkAnimation()
+            }
         }
 
         status = newStatus
@@ -74,6 +77,7 @@ class NotificationStatusButton: UIButton {
 
     func reset() {
         status = .read
+        isEnabled = true
         unreadMark?.removeFromSuperview()
         unreadMark = nil
     }

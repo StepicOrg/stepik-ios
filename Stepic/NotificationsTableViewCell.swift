@@ -12,6 +12,7 @@ import Atributika
 
 protocol NotificationsTableViewCellDelegate: class {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int)
+    func linkClicked(inCell cell: NotificationsTableViewCell, url: URL, withNotificationId id: Int)
 }
 
 class NotificationsTableViewCell: UITableViewCell {
@@ -31,7 +32,7 @@ class NotificationsTableViewCell: UITableViewCell {
 
     weak var delegate: NotificationsTableViewCellDelegate?
 
-    private var displayedNotification: NotificationViewData?
+    fileprivate var displayedNotification: NotificationViewData?
 
     var status: NotificationStatus = .unread {
         didSet {
@@ -130,9 +131,9 @@ class NotificationsTableViewCell: UITableViewCell {
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let deepLinkingUrlString = "https://stepik.org" + url.absoluteString
-        if let deepLinkingUrl = URL(string: deepLinkingUrlString) {
-            DeepLinkRouter.routeFromDeepLink(url: deepLinkingUrl, showAlertForUnsupported: false)
+        guard let notification = displayedNotification else {
+            return
         }
+        delegate?.linkClicked(inCell: self, url: url, withNotificationId: notification.id)
     }
 }
