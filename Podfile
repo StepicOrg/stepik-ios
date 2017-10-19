@@ -26,7 +26,6 @@ def all_pods
     
     pod 'Mixpanel-swift'
     
-    pod "MagicalRecord"
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
