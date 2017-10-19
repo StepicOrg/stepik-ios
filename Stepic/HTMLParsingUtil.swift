@@ -95,4 +95,14 @@ class HTMLParsingUtil {
             return []
         }
     }
+    
+    static func getAllHTMLTags(_ htmlString: String) -> [String] {
+        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+            let nodes = doc.css("*")
+            // Drop 2 first tags: html & body added by Kanna
+            return Array(nodes.flatMap { $0.tagName }.dropFirst(2))
+        } else {
+            return []
+        }
+    }
 }

@@ -8,26 +8,27 @@
 
 import Foundation
 
-/*
- Utility class for detecting tags in html string
- */
 class TagDetectionUtil {
-    fileprivate init() {}
-
+    static let supportedHtmlTagsForLabel = ["b", "strong", "i", "em", "strike"]
+    
     static func isWebViewSupportNeeded(_ htmlString: String) -> Bool {
-        return detectLaTeX(htmlString) || detectImage(htmlString) || detectCode(htmlString)
+        return detectLaTeX(htmlString) || detectUnsupportedTags(htmlString)
     }
 
-    //POSSIBLY detects LaTeX in html string
+    // POSSIBLY detects LaTeX in html string
     static func detectLaTeX(_ htmlString: String) -> Bool {
         return htmlString.characters.filter({$0 == "$"}).count >= 2 || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil)
     }
 
     static func detectImage(_ htmlString: String) -> Bool {
-        return  HTMLParsingUtil.getImageSrcLinks(htmlString).count > 0
+        return HTMLParsingUtil.getImageSrcLinks(htmlString).count > 0
     }
 
     static func detectCode(_ htmlString: String) -> Bool {
         return HTMLParsingUtil.getCodeStrings(htmlString).count > 0
+    }
+    
+    static func detectUnsupportedTags(_ htmlString: String) -> Bool {
+        return HTMLParsingUtil.getAllHTMLTags(htmlString).filter { !supportedHtmlTagsForLabel.contains($0) }.count > 0
     }
 }
