@@ -98,7 +98,10 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.loadInitial()
+        
+        if data.isEmpty {
+            presenter?.loadInitial()
+        }
     }
 
     func refreshNotifications() {
