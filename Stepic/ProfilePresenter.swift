@@ -24,7 +24,6 @@ protocol ProfileView: class {
     func logout(onBack:(() -> Void)?)
     func navigateToSettings()
     func navigateToDownloads()
-    func navigateToNotifications()
 }
 
 class ProfilePresenter {

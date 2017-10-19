@@ -65,14 +65,13 @@ enum NotificationStatus: String {
 
 enum NotificationType: String {
     var localizedName: String {
-        let localizedNames: [NotificationType: String] = [
-            .comments: NSLocalizedString("NotificationsComments", comment: ""),
-            .review: NSLocalizedString("NotificationsReviews", comment: ""),
-            .teach: NSLocalizedString("NotificationsTeaching", comment: ""),
-            .`default`: NSLocalizedString("NotificationsOther", comment: ""),
-            .learn: NSLocalizedString("NotificationsLearning", comment: "")
-        ]
-        return localizedNames[self] ?? "Unknown"
+        switch self {
+        case .comments: return NSLocalizedString("NotificationsComments", comment: "")
+        case .review: return NSLocalizedString("NotificationsReviews", comment: "")
+        case .teach: return NSLocalizedString("NotificationsTeaching", comment: "")
+        case .`default`: return NSLocalizedString("NotificationsOther", comment: "")
+        case .learn: return NSLocalizedString("NotificationsLearning", comment: "")
+        }
     }
 
     case comments = "comments"

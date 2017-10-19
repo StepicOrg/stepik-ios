@@ -27,15 +27,14 @@ enum NotificationsSection {
     }
 
     var localizedName: String {
-        let localizedNames: [NotificationsSection: String] = [
-            .all: NSLocalizedString("NotificationsAll", comment: ""),
-            .learning: NSLocalizedString("NotificationsLearning", comment: ""),
-            .comments: NSLocalizedString("NotificationsComments", comment: ""),
-            .reviews: NSLocalizedString("NotificationsReviews", comment: ""),
-            .teaching: NSLocalizedString("NotificationsTeaching", comment: ""),
-            .other: NSLocalizedString("NotificationsOther", comment: "")
-        ]
-        return localizedNames[self] ?? "Unknown"
+        switch self {
+        case .all: return NSLocalizedString("NotificationsAll", comment: "")
+        case .learning: return NSLocalizedString("NotificationsLearning", comment: "")
+        case .comments: return NSLocalizedString("NotificationsComments", comment: "")
+        case .reviews: return NSLocalizedString("NotificationsReviews", comment: "")
+        case .teaching: return NSLocalizedString("NotificationsTeaching", comment: "")
+        case .other: return NSLocalizedString("NotificationsOther", comment: "")
+        }
     }
 
     case all, learning, comments, reviews, teaching, other

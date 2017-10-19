@@ -157,11 +157,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    func navigateToNotifications() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsPagerViewController", storyboardName: "Notifications")
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.presenter?.updateProfile()
