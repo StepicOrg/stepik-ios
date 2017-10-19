@@ -39,7 +39,7 @@ def all_pods
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     
-    pod 'Presentr'
+    pod 'Presentr', '1.2.3'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
     pod 'Highlightr'
