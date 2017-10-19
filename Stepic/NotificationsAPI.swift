@@ -57,15 +57,23 @@ class NotificationsAPI {
             let savedNotifications = Notification.fetch(json["notifications"].arrayValue.map { $0["id"].intValue })
             var newNotifications: [Notification] = []
             for objectJSON in json["notifications"].arrayValue {
-                let existing = savedNotifications.filter {obj in obj.hasEqualId(json: objectJSON) }
+                let existing = savedNotifications.filter { obj in obj.hasEqualId(json: objectJSON) }
 
                 switch existing.count {
                 case 0:
-                    newNotifications += [Notification(json: objectJSON)]
+                    newNotifications.append(Notification(json: objectJSON))
                 default:
                     let obj = existing[0]
+
+                    let oldStatus = obj.status
+                    let isUnreadFetched = objectJSON["is_unread"].boolValue
                     obj.update(json: objectJSON)
-                    newNotifications += [obj]
+
+                    // Save read status
+                    if oldStatus == .read && isUnreadFetched {
+                        obj.status = .read
+                    }
+                    newNotifications.append(obj)
                 }
             }
 
@@ -103,6 +111,7 @@ class NotificationsAPI {
                 return
             }
 
+            // Update notification, but save read status
             notification.update(json: json["notifications"].arrayValue[0])
             success(notification)
 
