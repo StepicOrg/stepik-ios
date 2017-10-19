@@ -355,6 +355,27 @@
 		085E9E781F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		085E9E791F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
+		085EDCB21F9945CC00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB31F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB41F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB51F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB61F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB71F9945CF00AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB81F9945D100AB3278 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		085EDCB91F9945D900AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBA1F9945DA00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBB1F9945DA00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBC1F9945DB00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBD1F9945DB00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBE1F9945DC00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCBF1F9945DD00AB3278 /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		085EDCC01F99462B00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC11F99462C00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC21F99462C00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC31F99462C00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC41F99462D00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC51F99462D00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		085EDCC61F99462E00AB3278 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
 		0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9131F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
@@ -7977,6 +7998,7 @@
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				0815661C1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
+				085EDCC01F99462B00AB3278 /* Notifications.storyboard in Resources */,
 				08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -8143,6 +8165,7 @@
 				2C1B626A1F4C4AEF00236804 /* PickerViewController.xib in Resources */,
 				2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
+				085EDCC41F99462D00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
@@ -8241,6 +8264,7 @@
 				2C1B647B1F4C590700236804 /* PickerViewController.xib in Resources */,
 				2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
+				085EDCC61F99462E00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
@@ -8397,6 +8421,7 @@
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
 				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
+				085EDCC21F99462C00AB3278 /* Notifications.storyboard in Resources */,
 				2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */,
 				2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */,
 				08CBA3571F5A2D9400302154 /* Profile.storyboard in Resources */,
@@ -8496,6 +8521,7 @@
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
 				2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
+				085EDCC31F99462C00AB3278 /* Notifications.storyboard in Resources */,
 				2C89AB2F1F4C289900227C3B /* AdaptiveAssets.xcassets in Resources */,
 				2C89AB301F4C289900227C3B /* AdaptiveMain.storyboard in Resources */,
 				08CBA3581F5A2D9400302154 /* Profile.storyboard in Resources */,
@@ -8537,6 +8563,7 @@
 				2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */,
 				2C9732AD1F4C38F600AC9301 /* DiscussionCountView.xib in Resources */,
 				2C9732AE1F4C38F600AC9301 /* CongratulationViewController.xib in Resources */,
+				085EDCC51F99462D00AB3278 /* Notifications.storyboard in Resources */,
 				2C9732AF1F4C38F600AC9301 /* PickerViewController.xib in Resources */,
 				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
 				08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
@@ -8683,6 +8710,7 @@
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
+				085EDCC11F99462C00AB3278 /* Notifications.storyboard in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
@@ -10486,6 +10514,7 @@
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
+				085EDCB81F9945D100AB3278 /* Notification+FetchMethods.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08D5F56E1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
@@ -10747,6 +10776,7 @@
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				080217841F55B1B200186245 /* Menu.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
+				085EDCBF1F9945DD00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				085E9E6D1F138C2800D6A4BC /* CodeLanguagePickerViewController.swift in Sources */,
 				082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				08DF78D31F64059900AEEA85 /* StepikLabel.swift in Sources */,
@@ -11464,6 +11494,7 @@
 				2C1B61B21F4C4AEF00236804 /* Executable.swift in Sources */,
 				2C1B61B31F4C4AEF00236804 /* ExecutionQueue.swift in Sources */,
 				2C1B61B41F4C4AEF00236804 /* PersistentQueueRecoveryManager.swift in Sources */,
+				085EDCBD1F9945DB00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				2C1B61B51F4C4AEF00236804 /* Queues.plist in Sources */,
 				2C1B61B61F4C4AEF00236804 /* ExecutionQueues.swift in Sources */,
 				2C1B61B71F4C4AEF00236804 /* CongratsView.swift in Sources */,
@@ -11530,6 +11561,7 @@
 				2C1B61F11F4C4AEF00236804 /* Step+CoreDataProperties.swift in Sources */,
 				2C1B61F21F4C4AEF00236804 /* Step.swift in Sources */,
 				2C1B61F31F4C4AEF00236804 /* Lesson+CoreDataProperties.swift in Sources */,
+				085EDCB61F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C1B61F41F4C4AEF00236804 /* Lesson.swift in Sources */,
 				2C1B61F51F4C4AEF00236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B61F61F4C4AEF00236804 /* Unit.swift in Sources */,
@@ -11890,6 +11922,7 @@
 				2C1B63C31F4C590700236804 /* Executable.swift in Sources */,
 				2C1B63C41F4C590700236804 /* ExecutionQueue.swift in Sources */,
 				2C1B63C51F4C590700236804 /* PersistentQueueRecoveryManager.swift in Sources */,
+				085EDCBE1F9945DC00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				2C1B63C61F4C590700236804 /* Queues.plist in Sources */,
 				2C1B63C71F4C590700236804 /* ExecutionQueues.swift in Sources */,
 				2C1B63C81F4C590700236804 /* CongratsView.swift in Sources */,
@@ -11956,6 +11989,7 @@
 				2C1B64021F4C590700236804 /* Step+CoreDataProperties.swift in Sources */,
 				2C1B64031F4C590700236804 /* Step.swift in Sources */,
 				2C1B64041F4C590700236804 /* Lesson+CoreDataProperties.swift in Sources */,
+				085EDCB71F9945CF00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C1B64051F4C590700236804 /* Lesson.swift in Sources */,
 				2C1B64061F4C590700236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B64071F4C590700236804 /* Unit.swift in Sources */,
@@ -12316,6 +12350,7 @@
 				2C8653601F4B33DE00D51654 /* Executable.swift in Sources */,
 				2C8653611F4B33DE00D51654 /* ExecutionQueue.swift in Sources */,
 				2C8653621F4B33DE00D51654 /* PersistentQueueRecoveryManager.swift in Sources */,
+				085EDCBA1F9945DA00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				2C8653631F4B33DE00D51654 /* Queues.plist in Sources */,
 				2C8653641F4B33DE00D51654 /* ExecutionQueues.swift in Sources */,
 				2C8653651F4B33DE00D51654 /* CongratsView.swift in Sources */,
@@ -12382,6 +12417,7 @@
 				2C86539F1F4B33DE00D51654 /* Step+CoreDataProperties.swift in Sources */,
 				2C8653A01F4B33DE00D51654 /* Step.swift in Sources */,
 				2C8653A11F4B33DE00D51654 /* Lesson+CoreDataProperties.swift in Sources */,
+				085EDCB31F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */,
 				2C8653A31F4B33DE00D51654 /* Unit+CoreDataProperties.swift in Sources */,
 				2C8653A41F4B33DE00D51654 /* Unit.swift in Sources */,
@@ -12488,6 +12524,7 @@
 			files = (
 				2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */,
 				2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */,
+				085EDCBB1F9945DA00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				2C89A9561F4C289900227C3B /* LessonPresenter.swift in Sources */,
 				2C89A9571F4C289900227C3B /* LessonView.swift in Sources */,
 				2C89A9581F4C289900227C3B /* PagerController.swift in Sources */,
@@ -12716,6 +12753,7 @@
 				2C89AA2F1F4C289900227C3B /* Vote.swift in Sources */,
 				2C89AA301F4C289900227C3B /* CodePlaygroundManager.swift in Sources */,
 				2C89AA311F4C289900227C3B /* Scripts.swift in Sources */,
+				085EDCB41F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C89AA321F4C289900227C3B /* Scripts.plist in Sources */,
 				2C89AA331F4C289900227C3B /* LocalNotificationsHelper.swift in Sources */,
 				2C89AA341F4C289900227C3B /* Constants.swift in Sources */,
@@ -13167,6 +13205,7 @@
 				2C9731FA1F4C38F600AC9301 /* Executable.swift in Sources */,
 				2C9731FB1F4C38F600AC9301 /* ExecutionQueue.swift in Sources */,
 				2C9731FC1F4C38F600AC9301 /* PersistentQueueRecoveryManager.swift in Sources */,
+				085EDCBC1F9945DB00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				2C9731FD1F4C38F600AC9301 /* Queues.plist in Sources */,
 				2C9731FE1F4C38F600AC9301 /* ExecutionQueues.swift in Sources */,
 				2C9731FF1F4C38F600AC9301 /* CongratsView.swift in Sources */,
@@ -13233,6 +13272,7 @@
 				2C9732391F4C38F600AC9301 /* Step+CoreDataProperties.swift in Sources */,
 				2C97323A1F4C38F600AC9301 /* Step.swift in Sources */,
 				2C97323B1F4C38F600AC9301 /* Lesson+CoreDataProperties.swift in Sources */,
+				085EDCB51F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C97323C1F4C38F600AC9301 /* Lesson.swift in Sources */,
 				2C97323D1F4C38F600AC9301 /* Unit+CoreDataProperties.swift in Sources */,
 				2C97323E1F4C38F600AC9301 /* Unit.swift in Sources */,
@@ -13647,6 +13687,7 @@
 				864D66BE1E83DE03001E8D9E /* QuizDataManager.swift in Sources */,
 				864D66BF1E83DE03001E8D9E /* Executable.swift in Sources */,
 				864D66C01E83DE03001E8D9E /* ExecutionQueue.swift in Sources */,
+				085EDCB91F9945D900AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				864D66C11E83DE03001E8D9E /* PersistentQueueRecoveryManager.swift in Sources */,
 				864D66C21E83DE03001E8D9E /* Queues.plist in Sources */,
 				864D66C31E83DE03001E8D9E /* ExecutionQueues.swift in Sources */,
@@ -13713,6 +13754,7 @@
 				864D66F21E83DE03001E8D9E /* Step+CoreDataProperties.swift in Sources */,
 				864D66F31E83DE03001E8D9E /* Step.swift in Sources */,
 				864D66F41E83DE03001E8D9E /* Lesson+CoreDataProperties.swift in Sources */,
+				085EDCB21F9945CC00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				864D66F51E83DE03001E8D9E /* Lesson.swift in Sources */,
 				864D66F61E83DE03001E8D9E /* Unit+CoreDataProperties.swift in Sources */,
 				864D66F71E83DE03001E8D9E /* Unit.swift in Sources */,
