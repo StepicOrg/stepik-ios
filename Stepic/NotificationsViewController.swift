@@ -154,7 +154,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
                     cell.updateLeftView(.avatar(url: url))
                 }
             default:
-                cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.first ?? "A"))
+                cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.characters.first ?? "A"))
             }
 
             cell.delegate = self

@@ -10,6 +10,60 @@ import Foundation
 
 class DeepLinkRouter {
 
+    private class var window: UIWindow? {
+        return (UIApplication.shared.delegate as? AppDelegate)?.window
+    }
+
+    private class var currentNavigation: UINavigationController? {
+        if let tabController = window?.rootViewController as? UITabBarController {
+            let cnt = tabController.viewControllers?.count ?? 0
+            let index = tabController.selectedIndex
+            if index < cnt {
+                return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
+            } else {
+                return tabController.viewControllers?[0] as? UINavigationController
+            }
+        }
+        return nil
+    }
+
+    static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool) {
+        DeepLinkRouter.routeFromDeepLink(url, completion: {
+            controllers in
+            if controllers.count > 0 {
+                if let topController = currentNavigation?.topViewController {
+                    delay(0.5, closure: {
+                        for (index, vc) in controllers.enumerated() {
+                            if index == controllers.count - 1 {
+                                topController.navigationController?.pushViewController(vc, animated: true)
+                            } else {
+                                topController.navigationController?.pushViewController(vc, animated: false)
+                            }
+                        }
+                    })
+                }
+            } else {
+                guard showAlertForUnsupported else {
+                    if let topController = currentNavigation?.topViewController {
+                        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: topController, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+                    }
+                    return
+                }
+                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
+                    _ in
+                    UIApplication.shared.openURL(url)
+                }))
+
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+
+                UIThread.performUI {
+                    window?.rootViewController?.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
+    }
+
     static func routeFromDeepLink(_ link: URL, completion: @escaping ([UIViewController]) -> Void) {
 
         func getID(_ stringId: String, reversed: Bool) -> Int? {
