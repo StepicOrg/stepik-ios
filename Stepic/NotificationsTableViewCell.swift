@@ -133,7 +133,7 @@ extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
             // Unsupported url, ignore
             return
         }
-        
+
         let deepLinkingUrlString = "stepic://stepik.org" + url.absoluteString
         if let deepLinkingUrl = URL(string: deepLinkingUrlString) {
             UIApplication.shared.openURL(deepLinkingUrl)

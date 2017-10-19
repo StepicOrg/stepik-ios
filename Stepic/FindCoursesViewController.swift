@@ -219,7 +219,7 @@ extension FindCoursesViewController : CustomSearchBarDelegate {
             self?.darkOverlayView.alpha = 0.4
         })
     }
-    
+
     func returnPressed(in searchBar: CustomSearchBar) {
         guard let results = searchResultsVC else {
             return

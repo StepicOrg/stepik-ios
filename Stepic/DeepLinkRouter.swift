@@ -94,7 +94,7 @@ class DeepLinkRouter {
                     }
                 }
             }
-            
+
             AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId as NSObject, "step": stepId as NSObject])
             routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
             return
@@ -225,19 +225,19 @@ class DeepLinkRouter {
         )
 
     }
-    
+
     static func routeToDiscussionWithId(_ lessonId: Int, stepId: Int, discussionId: Int, completion: @escaping ([UIViewController]) -> Void) {
         DeepLinkRouter.routeToStepWithId(stepId, lessonId: lessonId) { viewControllers in
             guard let lessonVC = viewControllers.first as? LessonViewController else {
                 completion([])
                 return
             }
-            
+
             guard let stepInLessonId = lessonVC.initObjects?.lesson.stepsArray[stepId - 1] else {
                 completion([])
                 return
             }
-            
+
             performRequest({
                 ApiDataDownloader.steps.retrieve(ids: [stepInLessonId], existing: [], refreshMode: .update, success: { steps in
                     print(stepInLessonId)
@@ -255,7 +255,7 @@ class DeepLinkRouter {
                     } else {
                         completion([])
                     }
-                }, error: { error in
+                }, error: { _ in
                     completion([])
                 })
             })

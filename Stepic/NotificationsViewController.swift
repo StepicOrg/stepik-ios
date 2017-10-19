@@ -85,20 +85,20 @@ class NotificationsViewController: UIViewController, NotificationsView {
                 tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
-        
+
         refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
             tableView.addSubview(refreshControl)
         }
-        
+
         self.tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if data.isEmpty {
             presenter?.loadInitial()
         }
@@ -189,15 +189,15 @@ extension NotificationsViewController: DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return #imageLiteral(resourceName: "white_pixel")
     }
-    
+
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text: String = NSLocalizedString("NoNotifications", comment: "")
-        
+
         let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFontWeightLight))
             .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
         return text.styleAll(style).attributedString
     }
-    
+
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return .white
     }
