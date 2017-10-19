@@ -53,7 +53,7 @@ def testing_pods
 end
 
 def adaptive_pods
-    pod 'Koloda', '4.0'
+    pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
     pod 'Charts', '3.0.2'
     pod 'NotificationBannerSwift', '1.4.1' 
