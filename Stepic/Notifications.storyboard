@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-145" y="83"/>
         </scene>
-        <!--Notifications View Controller-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="OCT-sI-xvn">
             <objects>
                 <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,9 +37,12 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY">
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="zmb-v1-FSp" id="adO-MK-ZT4"/>
                                     <outlet property="delegate" destination="zmb-v1-FSp" id="qMf-fd-Uxs"/>
+                                    <outlet property="emptyDataSetDelegate" destination="zmb-v1-FSp" id="TcX-8b-BN1"/>
+                                    <outlet property="emptyDataSetSource" destination="zmb-v1-FSp" id="rVU-KG-mzn"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nd0-dE-vdS" customClass="NotificationsMarkAsReadButton" customModule="Stepic" customModuleProvider="target">

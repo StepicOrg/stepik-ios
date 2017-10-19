@@ -71,8 +71,8 @@ class NotificationsPresenter {
     func loadInitial() {
         view?.state = .refreshing
 
+        var isNotificationsEmpty = false
         loadCached().then { result -> Promise<(Bool, NotificationViewDataStruct)> in
-            self.view?.state = .loading
             self.updateDisplayedNotifications(result)
 
             return self.loadData(page: 1, in: self.section)
@@ -80,11 +80,16 @@ class NotificationsPresenter {
             self.hasNextPage = hasNextPage
             self.page += 1
 
+            isNotificationsEmpty = result.isEmpty
             self.updateDisplayedNotifications(result)
         }.catch { error in
             print("notifications: load initial error = \(error)")
         }.always {
-            self.view?.state = .normal
+            if isNotificationsEmpty {
+                self.view?.state = .empty
+            } else {
+                self.view?.state = .normal
+            }
         }
     }
 

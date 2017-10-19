@@ -327,6 +327,7 @@ NotificationsOther = "Other";
 NotificationsAll = "All";
 MarkAllAsRead = "Mark all as read";
 MarkAllAsReadSuccess = "All marked as read!";
+NoNotifications = "No notifications";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

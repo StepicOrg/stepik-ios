@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+import Atributika
 
 class NotificationsViewController: UIViewController, NotificationsView {
     var presenter: NotificationsPresenter?
 
     var section: NotificationsSection!
-    var state: NotificationsViewState = .normal {
+    var state: NotificationsViewState = .empty {
         didSet {
             switch state {
             case .normal:
@@ -20,9 +22,14 @@ class NotificationsViewController: UIViewController, NotificationsView {
                 self.tableView.tableFooterView = UIView()
             case .refreshing:
                 self.refreshControl.beginRefreshing()
+                self.tableView.tableFooterView = UIView()
             case .loading:
+                self.refreshControl.endRefreshing()
                 self.tableView.tableFooterView = paginationView
-            default: break
+            case .empty:
+                self.refreshControl.endRefreshing()
+                self.tableView.tableFooterView = UIView()
+                self.tableView.reloadEmptyDataSet()
             }
         }
     }
@@ -85,6 +92,8 @@ class NotificationsViewController: UIViewController, NotificationsView {
         } else {
             tableView.addSubview(refreshControl)
         }
+        
+        self.tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -170,5 +179,29 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
             presenter?.updateNotification(with: id, status: .read)
             cell.status = .read
         }
+    }
+}
+
+extension NotificationsViewController: DZNEmptyDataSetSource {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return #imageLiteral(resourceName: "white_pixel")
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text: String = NSLocalizedString("NoNotifications", comment: "")
+        
+        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFontWeightLight))
+            .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
+        return text.styleAll(style).attributedString
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return .white
+    }
+}
+
+extension NotificationsViewController: DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }
