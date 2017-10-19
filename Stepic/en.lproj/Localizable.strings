@@ -328,6 +328,8 @@ NotificationsAll = "All";
 MarkAllAsRead = "Mark all as read";
 MarkAllAsReadSuccess = "All marked as read!";
 NoNotifications = "No notifications";
+AnonymousNotificationsTitle = "Anonymous users can't receive notifications";
+SignInToHaveNotifications = "Sign in to be able to receive notifications";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

@@ -13,13 +13,33 @@ class NotificationsPagerViewController: PagerController {
         .all, .learning, .comments, .reviews, .teaching, .other
     ]
 
+    lazy var placeholderView: UIView = {
+        let v = PlaceholderView()
+        self.view.addSubview(v)
+        v.align(toView: self.view)
+        v.delegate = self
+        v.datasource = self
+        v.backgroundColor = UIColor.groupTableViewBackground
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = NSLocalizedString("Notifications", comment: "")
-
+        
         self.dataSource = self
         setUpTabs()
+        
+        if !AuthInfo.shared.isAuthorized {
+            placeholderView.isHidden = false
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        placeholderView.isHidden = AuthInfo.shared.isAuthorized
+        updateNavigationControllerShadow(show: !AuthInfo.shared.isAuthorized)
     }
     
     fileprivate func setUpTabs() {
@@ -68,11 +88,50 @@ extension NotificationsPagerViewController: PagerDataSource {
 }
 
 extension NotificationsPagerViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    fileprivate func updateNavigationControllerShadow(show: Bool) {
         guard let navigation = self.navigationController as? StyledNavigationViewController else {
             return
         }
 
-        navigation.changeShadowAlpha(0)
+        navigation.changeShadowAlpha(!show ? 0 : 1)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if AuthInfo.shared.isAuthorized {
+            // When user is not authorized we will use placeholder
+            updateNavigationControllerShadow(show: false)
+        }
+    }
+}
+
+extension NotificationsPagerViewController: PlaceholderViewDataSource {
+    func placeholderImage() -> UIImage? {
+        return Images.placeholders.anonymous
+    }
+    
+    func placeholderButtonTitle() -> String? {
+        return NSLocalizedString("SignIn", comment: "")
+    }
+    
+    func placeholderDescription() -> String? {
+        return NSLocalizedString("SignInToHaveNotifications", comment: "")
+    }
+    
+    func placeholderStyle() -> PlaceholderStyle {
+        var style = stepicPlaceholderStyle
+        style.button.backgroundColor = .clear
+        style.title.textColor = UIColor.darkGray
+        return style
+    }
+    
+    func placeholderTitle() -> String? {
+        return NSLocalizedString("AnonymousNotificationsTitle", comment: "")
+    }
+}
+
+extension NotificationsPagerViewController: PlaceholderViewDelegate {
+    func placeholderButtonDidPress() {
+        let vc = ControllerHelper.getAuthController()
+        self.present(vc, animated: true, completion: nil)
     }
 }
