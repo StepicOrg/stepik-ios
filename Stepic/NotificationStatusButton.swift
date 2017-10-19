@@ -50,16 +50,15 @@ class NotificationStatusButton: UIButton {
         switch newStatus {
         case .unread:
             self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
-            if status == .read {
-                // read -> unread: add mark
-                let markView = unreadMarkView
-                markView.alpha = 0.0
-                unreadMark = markView
-                addSubview(markView)
-                UIView.animate(withDuration: 0.45, animations: {
-                    self.unreadMark?.alpha = 1.0
-                })
-            }
+            // read -> unread: add mark
+            let markView = unreadMarkView
+            markView.alpha = 0.0
+            markView.transform = .identity
+            unreadMark = markView
+            addSubview(markView)
+            UIView.animate(withDuration: 0.45, animations: {
+                self.unreadMark?.alpha = 1.0
+            })
         case .read:
             self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
             if status == .unread {

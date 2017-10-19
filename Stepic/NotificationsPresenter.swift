@@ -239,39 +239,39 @@ class NotificationsPresenter {
             return
         }
 
-        notification.status = status
         if status == .opened {
             // TODO: ugly performRequest() call
             performRequest({
-                self.notificationsAPI.update(notification, success: { _ in }, error: { err in
+                self.notificationsAPI.update(notification, success: { _ in
+                    notification.status = status
+                    CoreDataHelper.instance.save()
+                }, error: { err in
                     print("notifications: unable to update notification with id = \(id), error = \(err)")
                 })
             })
+        } else {
+            notification.status = status
+            CoreDataHelper.instance.save()
         }
-        CoreDataHelper.instance.save()
     }
 
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        // TODO: ugly performRequest() call
-        performRequest({
-            self.notificationsAPI.markAllAsRead(success: {
-                self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
-                    let (date, notifications) = arg
-                    return (date: date, notifications: notifications.map { notification in
-                        var openedNotification = notification
-                        openedNotification.status = .opened
-                        return openedNotification
-                    })
-                }
-
+        DispatchQueue.global().async {
+            Notification.markAllAsRead()
+            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+                let (date, notifications) = arg
+                return (date: date, notifications: notifications.map { notification in
+                    var openedNotification = notification
+                    openedNotification.status = .opened
+                    return openedNotification
+                })
+            }
+            DispatchQueue.main.async {
                 self.view?.set(notifications: self.displayedNotifications)
                 self.view?.updateMarkAllAsReadButton(with: .normal)
-            }, error: { err in
-                print("notifications: unable to mark all as read, error = \(err)")
-                self.view?.updateMarkAllAsReadButton(with: .error)
-            })
-        })
+            }
+        }
     }
 }

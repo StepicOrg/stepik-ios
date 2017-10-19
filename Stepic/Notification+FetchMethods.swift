@@ -67,4 +67,16 @@ extension Notification {
             print("notification: couldn't delete all notifications!")
         }
     }
+
+    static func markAllAsRead() {
+        let request = NSBatchUpdateRequest(entityName: "Notification")
+        request.predicate = NSPredicate(value: true)
+        request.propertiesToUpdate = ["managedStatus": "read"]
+
+        do {
+            let _ = try CoreDataHelper.instance.context.execute(request)
+        } catch {
+            print("notification: couldn't update all notifications!")
+        }
+    }
 }
