@@ -33,6 +33,8 @@ class NotificationStatusButton: UIButton {
         setTitle("", for: .normal)
         backgroundColor = .clear
         clipsToBounds = false
+
+        adjustsImageWhenDisabled = false
     }
 
     private func unreadMarkAnimation() {
@@ -47,7 +49,7 @@ class NotificationStatusButton: UIButton {
     func update(with newStatus: Status) {
         switch newStatus {
         case .unread:
-            self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
+            self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
             if status == .read {
                 // read -> unread: add mark
                 let markView = unreadMarkView
@@ -59,13 +61,13 @@ class NotificationStatusButton: UIButton {
                 })
             }
         case .read:
-            self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
+            self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
             if status == .unread {
                 // unread -> read: hide mark
                 unreadMarkAnimation()
             }
         case .opened:
-            self.setImage(#imageLiteral(resourceName: "readSign"), for: .normal)
+            self.setImage(#imageLiteral(resourceName: "notifications-check-sign"), for: .normal)
             self.isEnabled = false
             if status == .unread {
                 unreadMarkAnimation()
