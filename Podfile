@@ -46,8 +46,8 @@ def all_pods
     pod "RFKeyboardToolbar", "~> 1.3"
 
     pod 'TTTAttributedLabel'
-    pod 'Atributika', '~> 3.0'
     pod 'PromiseKit', '~> 4.4'
+    pod 'Atributika', '~> 3.0' # update after migration to Swift 4
 end
 
 def testing_pods
