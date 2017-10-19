@@ -9,28 +9,13 @@
 import UIKit
 
 class NotificationStatusButton: UIButton {
-    var unreadMark: UIView? {
-        willSet {
-            if let view = newValue {
-                self.addSubview(view)
-            }
-        }
-    }
+    var unreadMark: UIView?
 
     enum Status {
         case unread, opened, read
     }
 
-    var status: Status = .unread {
-        willSet {
-            if status == .unread && newValue != .unread {
-                self.unreadMarkAnimation()
-            }
-        }
-        didSet {
-            self.update()
-        }
-    }
+    var status: Status = .read
 
     lazy var unreadMarkView: UIView = {
         let mark = UIView()
@@ -48,7 +33,6 @@ class NotificationStatusButton: UIButton {
         setTitle("", for: .normal)
         backgroundColor = .clear
         clipsToBounds = false
-        status = .unread
     }
 
     private func unreadMarkAnimation() {
@@ -60,19 +44,38 @@ class NotificationStatusButton: UIButton {
         })
     }
 
-    private func update() {
-        switch status {
+    func update(with newStatus: Status) {
+        switch newStatus {
         case .unread:
-            self.unreadMark = unreadMarkView
             self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
+            if status == .read {
+                // read -> unread: add mark
+                let markView = unreadMarkView
+                markView.alpha = 0.0
+                unreadMark = markView
+                addSubview(markView)
+                UIView.animate(withDuration: 0.45, animations: {
+                    self.unreadMark?.alpha = 1.0
+                })
+            }
         case .read:
-            self.unreadMark = nil
             self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
+            if status == .unread {
+                // unread -> read: hide mark
+                unreadMarkAnimation()
+            }
         case .opened:
-            self.isEnabled = false
-            self.unreadMark = nil
             self.setImage(#imageLiteral(resourceName: "readSign"), for: .normal)
+            self.isEnabled = false
         }
+
+        status = newStatus
+    }
+
+    func reset() {
+        status = .read
+        unreadMark?.removeFromSuperview()
+        unreadMark = nil
     }
 
     override var isHighlighted: Bool {

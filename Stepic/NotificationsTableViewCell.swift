@@ -37,11 +37,11 @@ class NotificationsTableViewCell: UITableViewCell {
         didSet {
             switch status {
             case .read:
-                statusButton.status = .read
+                statusButton.update(with: .read)
             case .opened:
-                statusButton.status = .opened
+                statusButton.update(with: .opened)
             case .unread:
-                statusButton.status = .unread
+                statusButton.update(with: .unread)
             }
         }
     }
@@ -101,6 +101,7 @@ class NotificationsTableViewCell: UITableViewCell {
         super.prepareForReuse()
 
         notificationTextLabel.attributedText = nil
+        statusButton.reset()
         timeLabel.text = nil
 
         updateLeftView(.category(firstLetter: " "))
