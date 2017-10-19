@@ -35,8 +35,10 @@ extension Notification {
 
     static func fetch(type: NotificationType?, offset: Int = 0, limit: Int = 10) -> [Notification]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
+        let sort = NSSortDescriptor(key: "managedTime", ascending: false)
         request.fetchLimit = limit
         request.fetchOffset = offset
+        request.sortDescriptors = [sort]
 
         if let type = type {
             request.predicate = NSPredicate(format: "managedType == %@", type.rawValue as NSString)
