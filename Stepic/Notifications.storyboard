@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="r7S-ZU-07R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r7S-ZU-07R">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,11 +14,14 @@
         <scene sceneID="aIX-R2-CCi">
             <objects>
                 <viewController storyboardIdentifier="NotificationsPagerViewController" title="Notifications" automaticallyAdjustsScrollViewInsets="NO" id="r7S-ZU-07R" customClass="NotificationsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mOc-Tr-Ano"/>
+                        <viewControllerLayoutGuide type="bottom" id="WLI-Q2-fBO"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xK5-fH-mMS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="6Dz-EX-Ev7"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
@@ -30,6 +33,10 @@
         <scene sceneID="OCT-sI-xvn">
             <objects>
                 <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZQR-7Z-dQ3"/>
+                        <viewControllerLayoutGuide type="bottom" id="8ep-P3-qqu"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DFQ-d9-gIu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,15 +71,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5Hj-pJ-thl" firstAttribute="trailing" secondItem="nd0-dE-vdS" secondAttribute="trailing" constant="10" id="35m-KW-Uez"/>
+                            <constraint firstAttribute="trailing" secondItem="nd0-dE-vdS" secondAttribute="trailing" constant="10" id="35m-KW-Uez"/>
                             <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="nd0-dE-vdS" secondAttribute="bottom" constant="10" id="94x-X8-Ha2"/>
-                            <constraint firstItem="nd0-dE-vdS" firstAttribute="top" secondItem="5Hj-pJ-thl" secondAttribute="top" constant="31" id="BKH-8T-X7X"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="5Hj-pJ-thl" secondAttribute="trailing" id="Fa7-pV-PV6"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="5Hj-pJ-thl" secondAttribute="leading" id="JFJ-83-J5T"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="top" secondItem="ZQR-7Z-dQ3" secondAttribute="bottom" constant="31" id="BKH-8T-X7X"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="DFQ-d9-gIu" secondAttribute="trailing" id="Fa7-pV-PV6"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="DFQ-d9-gIu" secondAttribute="leading" id="JFJ-83-J5T"/>
                             <constraint firstItem="hSs-8g-1vY" firstAttribute="bottom" secondItem="DFQ-d9-gIu" secondAttribute="bottom" id="LhB-Oz-lUz"/>
-                            <constraint firstItem="nd0-dE-vdS" firstAttribute="leading" secondItem="5Hj-pJ-thl" secondAttribute="leading" constant="10" id="iJc-NQ-ZAp"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="leading" secondItem="DFQ-d9-gIu" secondAttribute="leading" constant="10" id="iJc-NQ-ZAp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5Hj-pJ-thl"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
