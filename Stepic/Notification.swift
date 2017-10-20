@@ -25,7 +25,7 @@ class Notification: NSManagedObject, JSONInitializable {
         isMuted = json["is_muted"].boolValue
         isFavorite = json["is_favorite"].boolValue
 
-        managedStatus = json["is_unread"].boolValue ? NotificationStatus.unread.rawValue : NotificationStatus.opened.rawValue
+        managedStatus = json["is_unread"].boolValue ? NotificationStatus.unread.rawValue : NotificationStatus.read.rawValue
         managedType = json["type"].stringValue
         managedAction = json["action"].stringValue
 
@@ -60,7 +60,6 @@ class Notification: NSManagedObject, JSONInitializable {
 enum NotificationStatus: String {
     case unread = "unread"
     case read = "read"
-    case opened = "opened"
 }
 
 enum NotificationType: String {

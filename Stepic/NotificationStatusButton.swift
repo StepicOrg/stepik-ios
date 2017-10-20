@@ -12,7 +12,7 @@ class NotificationStatusButton: UIButton {
     var unreadMark: UIView?
 
     enum Status {
-        case unread, opened, read
+        case unread, read
     }
 
     var status: Status = .read
@@ -60,15 +60,10 @@ class NotificationStatusButton: UIButton {
                 self.unreadMark?.alpha = 1.0
             })
         case .read:
-            self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
-            if status == .unread {
-                // unread -> read: hide mark
-                unreadMarkAnimation()
-            }
-        case .opened:
             self.setImage(#imageLiteral(resourceName: "notifications-check-sign"), for: .normal)
             self.isEnabled = false
             if status == .unread {
+                // unread -> read: hide mark
                 unreadMarkAnimation()
             }
         }
