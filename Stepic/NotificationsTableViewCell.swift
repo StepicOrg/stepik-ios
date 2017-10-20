@@ -39,8 +39,6 @@ class NotificationsTableViewCell: UITableViewCell {
             switch status {
             case .read:
                 statusButton.update(with: .read)
-            case .opened:
-                statusButton.update(with: .opened)
             case .unread:
                 statusButton.update(with: .unread)
             }

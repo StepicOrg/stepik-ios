@@ -64,15 +64,7 @@ class NotificationsAPI {
                     newNotifications.append(Notification(json: objectJSON))
                 default:
                     let obj = existing[0]
-
-                    let oldStatus = obj.status
-                    let isUnreadFetched = objectJSON["is_unread"].boolValue
                     obj.update(json: objectJSON)
-
-                    // Save read status
-                    if oldStatus == .read && isUnreadFetched {
-                        obj.status = .read
-                    }
                     newNotifications.append(obj)
                 }
             }
@@ -111,7 +103,6 @@ class NotificationsAPI {
                 return
             }
 
-            // Update notification, but save read status
             notification.update(json: json["notifications"].arrayValue[0])
             success(notification)
 
