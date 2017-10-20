@@ -95,7 +95,7 @@ class HTMLParsingUtil {
             return []
         }
     }
-    
+
     static func getAllHTMLTags(_ htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: "<html><body>\(htmlString)</body></html>", encoding: String.Encoding.utf8) {
             let nodes = doc.css("*")

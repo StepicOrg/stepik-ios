@@ -10,7 +10,7 @@ import Foundation
 
 class TagDetectionUtil {
     static let supportedHtmlTagsForLabel = ["b", "strong", "i", "em", "strike"]
-    
+
     static func isWebViewSupportNeeded(_ htmlString: String) -> Bool {
         return detectLaTeX(htmlString) || detectUnsupportedTags(htmlString)
     }
@@ -27,7 +27,7 @@ class TagDetectionUtil {
     static func detectCode(_ htmlString: String) -> Bool {
         return HTMLParsingUtil.getCodeStrings(htmlString).count > 0
     }
-    
+
     static func detectUnsupportedTags(_ htmlString: String) -> Bool {
         return HTMLParsingUtil.getAllHTMLTags(htmlString).filter { !supportedHtmlTagsForLabel.contains($0) }.count > 0
     }
