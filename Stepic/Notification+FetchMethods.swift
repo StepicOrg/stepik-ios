@@ -74,7 +74,7 @@ extension Notification {
         request.propertiesToUpdate = ["managedStatus": "read"]
 
         do {
-            let _ = try CoreDataHelper.instance.context.execute(request)
+            _ = try CoreDataHelper.instance.context.execute(request)
         } catch {
             print("notification: couldn't update all notifications!")
         }
