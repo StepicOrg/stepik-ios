@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r7S-ZU-07R">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notifications-->
+        <scene sceneID="aIX-R2-CCi">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsPagerViewController" title="Notifications" automaticallyAdjustsScrollViewInsets="NO" id="r7S-ZU-07R" customClass="NotificationsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mOc-Tr-Ano"/>
+                        <viewControllerLayoutGuide type="bottom" id="WLI-Q2-fBO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xK5-fH-mMS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5r-Kj-9iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-145" y="83"/>
+        </scene>
+        <!--Empty Data Set Delegate-->
+        <scene sceneID="OCT-sI-xvn">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZQR-7Z-dQ3"/>
+                        <viewControllerLayoutGuide type="bottom" id="8ep-P3-qqu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DFQ-d9-gIu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY">
+                                <rect key="frame" x="0.0" y="109" width="375" height="558"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zmb-v1-FSp" id="adO-MK-ZT4"/>
+                                    <outlet property="delegate" destination="zmb-v1-FSp" id="qMf-fd-Uxs"/>
+                                    <outlet property="emptyDataSetDelegate" destination="zmb-v1-FSp" id="TcX-8b-BN1"/>
+                                    <outlet property="emptyDataSetSource" destination="zmb-v1-FSp" id="rVU-KG-mzn"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nd0-dE-vdS" customClass="NotificationsMarkAsReadButton" customModule="Stepic" customModuleProvider="target">
+                                <rect key="frame" x="10" y="51" width="355" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="cYo-Zr-kqo"/>
+                                </constraints>
+                                <state key="normal" title="Mark all as read"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isGray" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onMarkAllAsReadButtonClick:" destination="zmb-v1-FSp" eventType="touchUpInside" id="pkl-3x-nGu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nd0-dE-vdS" secondAttribute="trailing" constant="10" id="35m-KW-Uez"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="nd0-dE-vdS" secondAttribute="bottom" constant="10" id="94x-X8-Ha2"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="top" secondItem="ZQR-7Z-dQ3" secondAttribute="bottom" constant="31" id="BKH-8T-X7X"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="DFQ-d9-gIu" secondAttribute="trailing" id="Fa7-pV-PV6"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="DFQ-d9-gIu" secondAttribute="leading" id="JFJ-83-J5T"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="bottom" secondItem="DFQ-d9-gIu" secondAttribute="bottom" id="LhB-Oz-lUz"/>
+                            <constraint firstItem="nd0-dE-vdS" firstAttribute="leading" secondItem="DFQ-d9-gIu" secondAttribute="leading" constant="10" id="iJc-NQ-ZAp"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="markAllAsReadButton" destination="nd0-dE-vdS" id="YQu-Pe-Xr8"/>
+                        <outlet property="markAllAsReadButtonBottomConstraint" destination="94x-X8-Ha2" id="RLz-ss-Skz"/>
+                        <outlet property="markAllAsReadButtonTopConstraint" destination="BKH-8T-X7X" id="UMI-Ao-Tac"/>
+                        <outlet property="markAllAsReadHeightConstraint" destination="cYo-Zr-kqo" id="nbB-RU-zdI"/>
+                        <outlet property="tableView" destination="hSs-8g-1vY" id="7fF-eg-fZJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pqP-NP-e04" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653.60000000000002" y="81.409295352323838"/>
+        </scene>
+    </scenes>
+</document>

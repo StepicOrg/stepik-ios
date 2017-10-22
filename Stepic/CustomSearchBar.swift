@@ -160,7 +160,7 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         }
         delegate?.startedEditing(in: self)
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         delegate?.returnPressed(in: self)

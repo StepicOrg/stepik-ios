@@ -7,20 +7,21 @@
 //
 
 import UIKit
+import Atributika
 
 extension UILabel {
     func setTextWithHTMLString(_ htmlText: String) {
-        guard let encodedData = htmlText.data(using: .unicode) else {
-            self.text = ""
-            return
-        }
+        let currentFontSize = self.font.pointSize
 
-        guard let attributedDescription = try? NSMutableAttributedString(data: encodedData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) else {
-            self.text = ""
-            return
-        }
+        let attributedString = htmlText.style(tags: [
+            Style("b").font(.boldSystemFont(ofSize: currentFontSize)),
+            Style("strong").font(.boldSystemFont(ofSize: currentFontSize)),
+            Style("i").font(.italicSystemFont(ofSize: currentFontSize)),
+            Style("em").font(.italicSystemFont(ofSize: currentFontSize)),
+            Style("strike").strikethroughStyle(.styleSingle)
+        ]).attributedString
 
-        self.text = attributedDescription.string
+        self.attributedText = attributedString
     }
 
     class func heightForLabelWithText(_ text: String, lines: Int, fontName: String, fontSize: CGFloat, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
