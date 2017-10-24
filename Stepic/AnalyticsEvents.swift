@@ -142,7 +142,7 @@ struct AnalyticsEvents {
 
         struct LocalNotification {
             static let shown = "streak_local_notification_shown"
-            static let clicked = "streak_local_notification_clicked"
+            static let opened = "streak_local_notification_opened"
         }
         struct ImproveAlert {
             static let notificationOffered = "streak_improve_alert_notifications_offered"
