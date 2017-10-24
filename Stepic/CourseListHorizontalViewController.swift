@@ -15,6 +15,8 @@ class CourseListHorizontalViewController: CourseListViewController {
     override func viewDidLoad() {
         delegate = self
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.clear
+        collectionView.backgroundColor = UIColor.clear
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,29 +32,6 @@ class CourseListHorizontalViewController: CourseListViewController {
     }
 
     var currentColumn: Int = 0
-
-    lazy var placeholderLabel: UILabel = {
-        let l = UILabel()
-        l.numberOfLines = 0
-        l.textAlignment = NSTextAlignment.center
-        return l
-    }()
-
-    var placeholderText: String? {
-        didSet {
-            placeholderLabel.text = placeholderText
-        }
-    }
-
-    lazy var emptyPlaceholder: UIView = {
-        let placeholder = UIView()
-        self.view.addSubview(placeholder)
-        placeholder.align(toView: self.view)
-        placeholder.isHidden = true
-        placeholder.addSubview(self.placeholderLabel)
-        self.placeholderLabel.align(toView: placeholder)
-        return placeholder
-    }()
 }
 
 extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
@@ -86,60 +65,9 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         //TODO: Add this when pagination is supported by this layout
     }
 
-    private func setPlaceholder(visible: Bool) {
-        emptyPlaceholder.isHidden = !visible
-        collectionView.isUserInteractionEnabled = !visible
+    func setUserInteraction(enabled: Bool) {
+        collectionView.isUserInteractionEnabled = enabled
     }
-
-    func updateState(from: CourseListState) {
-        switch state {
-        case .displaying:
-            setPlaceholder(visible: false)
-            break
-        case .displayingWithError:
-            setPlaceholder(visible: false)
-            // Show some error indicator here
-            break
-        case .displayingWithRefreshing:
-            setPlaceholder(visible: false)
-            collectionView.isUserInteractionEnabled = false
-            // Show some activity indicator here
-            break
-        case .empty:
-            // Show empty placeholder
-            placeholderText = "Empty"
-            setPlaceholder(visible: true)
-            break
-        case .emptyError:
-            placeholderText = "Error"
-            setPlaceholder(visible: true)
-            // Show error placeholder
-            break
-        case .emptyRefreshing:
-            collectionView.reloadData()
-            setPlaceholder(visible: false)
-            break
-        case .emptyAnonymous:
-            placeholderText = "Anonymous"
-            setPlaceholder(visible: true)
-            break
-        }
-    }
-
-//    func updateRefreshing() {
-//        if isRefreshing {
-//            if courses.isEmpty {
-//                collectionView.reloadData()
-//                collectionView.isUserInteractionEnabled = false
-//            }
-//        } else {
-//            collectionView.isUserInteractionEnabled = true
-//            if courses.isEmpty {
-//                collectionView.reloadData()
-//            }
-//        }
-//
-//    }
 
     func indexPathsForVisibleCells() -> [IndexPath] {
         return collectionView.indexPathsForVisibleItems
@@ -247,7 +175,7 @@ extension CourseListHorizontalViewController: UICollectionViewDataSource {
         if shouldShowLoadingWidgets {
             cell.isLoading = true
         } else {
-            cell.setup(courseViewData: courses[indexPath.row])
+            cell.setup(courseViewData: courses[indexPath.row], colorMode: colorMode)
         }
         return cell
     }

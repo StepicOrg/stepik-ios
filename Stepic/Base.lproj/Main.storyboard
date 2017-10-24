@@ -875,6 +875,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-UM-iao">
+                                <rect key="frame" x="0.0" y="64" width="375" height="259"/>
+                                <color key="backgroundColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWP-KR-cSl">
                                 <rect key="frame" x="0.0" y="115" width="375" height="208"/>
                                 <constraints>
@@ -887,7 +891,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enrolled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDj-hh-tS7">
                                 <rect key="frame" x="16" y="80" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2Q-Y5-zt7">
@@ -912,13 +916,17 @@
                             <constraint firstItem="cWP-KR-cSl" firstAttribute="top" secondItem="EDj-hh-tS7" secondAttribute="bottom" constant="14" id="87X-ff-YJE"/>
                             <constraint firstItem="r2Q-Y5-zt7" firstAttribute="top" secondItem="cWP-KR-cSl" secondAttribute="bottom" constant="8" id="98k-o7-rkC"/>
                             <constraint firstItem="r2Q-Y5-zt7" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" constant="16" id="9gO-7M-gcp"/>
+                            <constraint firstItem="Tu7-UM-iao" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" id="FS2-Eb-Lx4"/>
+                            <constraint firstAttribute="trailing" secondItem="Tu7-UM-iao" secondAttribute="trailing" id="JxQ-Xb-gb6"/>
                             <constraint firstAttribute="trailing" secondItem="EDj-hh-tS7" secondAttribute="trailing" constant="16" id="LrS-Uh-6HT"/>
+                            <constraint firstItem="Tu7-UM-iao" firstAttribute="top" secondItem="NTB-Ke-5RJ" secondAttribute="bottom" id="QQT-MM-IXb"/>
                             <constraint firstItem="EDj-hh-tS7" firstAttribute="top" secondItem="NTB-Ke-5RJ" secondAttribute="bottom" constant="16" id="S4j-5g-Ikv"/>
                             <constraint firstItem="cWP-KR-cSl" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" id="S5r-0F-4dN"/>
                             <constraint firstAttribute="trailing" secondItem="cWP-KR-cSl" secondAttribute="trailing" id="cfW-S9-D1j"/>
                             <constraint firstItem="Kp5-Oo-jbD" firstAttribute="leading" secondItem="Myu-Hj-kcu" secondAttribute="leading" id="cvb-rj-lXW"/>
                             <constraint firstAttribute="trailing" secondItem="Kp5-Oo-jbD" secondAttribute="trailing" id="fYr-b1-TUI"/>
                             <constraint firstAttribute="trailing" secondItem="r2Q-Y5-zt7" secondAttribute="trailing" constant="16" id="h15-ip-vAT"/>
+                            <constraint firstItem="r2Q-Y5-zt7" firstAttribute="top" secondItem="Tu7-UM-iao" secondAttribute="bottom" constant="8" id="pI4-VM-1dN"/>
                             <constraint firstItem="Kp5-Oo-jbD" firstAttribute="top" secondItem="r2Q-Y5-zt7" secondAttribute="bottom" constant="13" id="tyj-eg-fS3"/>
                         </constraints>
                     </view>
@@ -950,6 +958,10 @@
         <scene sceneID="paf-Tf-bfn">
             <objects>
                 <viewController id="pyi-5x-TNr" customClass="CourseListHorizontalViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cVP-Vh-nzc"/>
+                        <viewControllerLayoutGuide type="bottom" id="zoX-dx-Iix"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mKo-kb-msn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -964,6 +976,10 @@
         <scene sceneID="Xh7-Wd-vF4">
             <objects>
                 <viewController id="wbc-iz-F9S" customClass="CourseListHorizontalViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jc5-aP-SjK"/>
+                        <viewControllerLayoutGuide type="bottom" id="1jY-De-HlH"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZuC-c2-HHQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

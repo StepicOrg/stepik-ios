@@ -25,6 +25,19 @@ class CourseWidgetView: NibInitializableView {
     }
 
     var action: (() -> Void)?
+    var colorMode: CourseListColorMode = .light {
+        didSet {
+            switch colorMode {
+            case .dark:
+                courseTitleLabel.colorMode = .light
+                actionButton.isLightBackground = false
+            case .light:
+                courseTitleLabel.colorMode = .dark
+                actionButton.isLightBackground = true
+            }
+            updateStats()
+        }
+    }
 
     fileprivate var stats: [CourseStatData] = []
 
@@ -100,11 +113,11 @@ class CourseWidgetView: NibInitializableView {
         return circle
     }
 
-    private func getProgressImage(progress: Float) -> UIImage {
+    private func getProgressImage(progress: Float, colorMode: CourseListColorMode) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
         let progressView = UIView(frame: rect)
         progressView.backgroundColor = UIColor.clear
-        let circle = getCircleLayer(color: UIColor.mainDark, progress: 100, inRect: rect)
+        let circle = getCircleLayer(color: colorMode == .light ? UIColor.mainDark : UIColor.white, progress: 100, inRect: rect)
         let progressCircle = getCircleLayer(color: UIColor.stepicGreen, progress: progress, inRect: rect)
         progressView.layer.insertSublayer(circle, at: 1)
         progressView.layer.insertSublayer(progressCircle, at: 2)
@@ -119,16 +132,16 @@ class CourseWidgetView: NibInitializableView {
         var newStats: [CourseStatData] = []
         if let learners = learners {
             if learners > 0 {
-                newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon_dark"), text: "\(learners)")]
+                newStats += [CourseStatData(image: colorMode == .light ? #imageLiteral(resourceName: "learners_widget_icon_dark") : #imageLiteral(resourceName: "learners_widget_icon_light"), text: "\(learners)", colorMode: colorMode)]
             }
         }
         if let rating = rating {
             if rating > 0 {
-                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon_dark"), text: String(format: "%.1f", rating))]
+                newStats += [CourseStatData(image: colorMode == .light ? #imageLiteral(resourceName: "rating_widget_icon_dark") : #imageLiteral(resourceName: "rating_widget_icon_light"), text: String(format: "%.1f", rating), colorMode: colorMode)]
             }
         }
         if let progress = progress {
-            newStats += [CourseStatData(image: getProgressImage(progress: progress), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero))) %")]
+            newStats += [CourseStatData(image: getProgressImage(progress: progress, colorMode: colorMode), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero))) %", colorMode: colorMode)]
         }
         self.stats = newStats
         courseStatsCollectionView.reloadData()
@@ -142,6 +155,7 @@ class CourseWidgetView: NibInitializableView {
         courseStatsCollectionViewFlowLayout.estimatedItemSize = CGSize(width: 1.0, height: 1.0)
         courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
         courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
+        view.backgroundColor = UIColor.clear
     }
 
     @IBAction func actionButtonPressed(_ sender: Any) {
@@ -175,9 +189,11 @@ extension CourseWidgetView: UICollectionViewDataSource {
 struct CourseStatData {
     var image: UIImage
     var text: String
+    var colorMode: CourseListColorMode
 
-    init(image: UIImage, text: String) {
+    init(image: UIImage, text: String, colorMode: CourseListColorMode) {
         self.image = image
         self.text = text
+        self.colorMode = colorMode
     }
 }

@@ -28,14 +28,16 @@ class HomeViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "enrolledEmbed" {
-            let dvc = segue.destination as? CourseListHorizontalViewController
-            dvc?.listType = CourseListType.enrolled
-            dvc?.limit = 6
+            guard let dvc = segue.destination as? CourseListHorizontalViewController else {
+                return
+            }
+            dvc.presenter = CourseListPresenter(view: dvc, limit: 6, listType: CourseListType.enrolled, colorMode: .dark, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         }
         if segue.identifier == "popularEmbed" {
-            let dvc = segue.destination as? CourseListHorizontalViewController
-            dvc?.listType = CourseListType.enrolled
-            dvc?.limit = 7
+            guard let dvc = segue.destination as? CourseListHorizontalViewController else {
+                return
+            }
+            dvc.presenter = CourseListPresenter(view: dvc, limit: 6, listType: CourseListType.popular, colorMode: .light, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         }
     }
 

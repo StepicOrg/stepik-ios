@@ -12,9 +12,10 @@ protocol CourseListViewControllerDelegate: class {
     func setupContentView()
     func setupRefresh()
     func reloadData()
+    func setUserInteraction(enabled: Bool)
 
     func updatePagination()
-    func updateState(from: CourseListState)
+//    func updateState(from: CourseListState)
 
     func indexPathsForVisibleCells() -> [IndexPath]
     func indexPathForIndex(index: Int) -> IndexPath
@@ -27,14 +28,14 @@ protocol CourseListViewControllerDelegate: class {
 
 class CourseListViewController: UIViewController, CourseListView {
     var presenter: CourseListPresenter?
-    var listType: CourseListType!
-    var limit: Int?
     var refreshEnabled: Bool = true
     var paginationStatus: PaginationStatus = .none
 
     weak var delegate: CourseListViewControllerDelegate?
 
     var courses: [CourseViewData] = []
+
+    var colorMode: CourseListColorMode!
 
     var shouldShowLoadingWidgets: Bool {
         return state == .emptyRefreshing
@@ -45,7 +46,6 @@ class CourseListViewController: UIViewController, CourseListView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter = CourseListPresenter(view: self, limit: limit, listType: listType, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         delegate?.setupContentView()
         setup3dTouch()
         if refreshEnabled {
@@ -113,10 +113,48 @@ class CourseListViewController: UIViewController, CourseListView {
 //        delegate?.updateRefreshing()
 //    }
 
+    private func setPlaceholder(visible: Bool) {
+        emptyPlaceholder.isHidden = !visible
+        delegate?.setUserInteraction(enabled: !visible)
+    }
+
     func setState(state: CourseListState) {
         let prevState: CourseListState = self.state
         self.state = state
-        delegate?.updateState(from: prevState)
+        switch state {
+        case .displaying:
+            setPlaceholder(visible: false)
+            break
+        case .displayingWithError:
+            setPlaceholder(visible: false)
+            // Show some error indicator here
+            break
+        case .displayingWithRefreshing:
+            setPlaceholder(visible: false)
+            delegate?.setUserInteraction(enabled: false)
+            // Show some activity indicator here
+            break
+        case .empty:
+            // Show empty placeholder
+            placeholderText = "Empty"
+            setPlaceholder(visible: true)
+            break
+        case .emptyError:
+            placeholderText = "Error"
+            setPlaceholder(visible: true)
+            // Show error placeholder
+            break
+        case .emptyRefreshing:
+            delegate?.reloadData()
+            setPlaceholder(visible: false)
+            break
+        case .emptyAnonymous:
+            placeholderText = "Anonymous"
+            setPlaceholder(visible: true)
+            break
+        }
+
+//        delegate?.updateState(from: prevState)
     }
 
     func setPaginationStatus(status: PaginationStatus) {
@@ -142,6 +180,29 @@ class CourseListViewController: UIViewController, CourseListView {
     func getNavigationController() -> UINavigationController? {
         return self.navigationController
     }
+
+    lazy var placeholderLabel: UILabel = {
+        let l = UILabel()
+        l.numberOfLines = 0
+        l.textAlignment = NSTextAlignment.center
+        return l
+    }()
+
+    var placeholderText: String? {
+        didSet {
+            placeholderLabel.text = placeholderText
+        }
+    }
+
+    lazy var emptyPlaceholder: UIView = {
+        let placeholder = UIView()
+        self.view.addSubview(placeholder)
+        placeholder.align(toView: self.view)
+        placeholder.isHidden = true
+        placeholder.addSubview(self.placeholderLabel)
+        self.placeholderLabel.align(toView: placeholder)
+        return placeholder
+    }()
 }
 
 extension CourseListViewController: UIViewControllerPreviewingDelegate {

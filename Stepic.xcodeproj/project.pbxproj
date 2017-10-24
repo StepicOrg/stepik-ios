@@ -5677,6 +5677,13 @@
 			name = CodeTemplates;
 			sourceTree = "<group>";
 		};
+		084896931F9E8A1E00CFA273 /* Continue Learning Widget */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Continue Learning Widget";
+			sourceTree = "<group>";
+		};
 		084F7AAF1E775A410088368A /* API Endpoints */ = {
 			isa = PBXGroup;
 			children = (
@@ -5975,6 +5982,7 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				084896931F9E8A1E00CFA273 /* Continue Learning Widget */,
 				088EDCAE1F949A2C0098DEC7 /* New Widgets Collection View Cell */,
 				08EDD6151F7C6054005203E4 /* New Widgets Table View Cell */,
 				08A9BD711F8CA00A0085EAF6 /* old */,

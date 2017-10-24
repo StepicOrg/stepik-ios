@@ -24,6 +24,8 @@ protocol CourseListView: class {
     func present(controller: UIViewController)
     func show(controller: UIViewController)
 
+    var colorMode: CourseListColorMode! { get set }
+
     func getNavigationController() -> UINavigationController?
 }
 
@@ -31,6 +33,8 @@ class CourseListPresenter {
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
     private var reviewSummariesAPI: CourseReviewSummariesAPI
+
+    private var colorMode: CourseListColorMode
 
     private weak var view: CourseListView?
     private var limit: Int?
@@ -81,18 +85,20 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, limit: Int?, listType: CourseListType, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
         self.reviewSummariesAPI = reviewSummariesAPI
         self.limit = limit
         self.listType = listType
+        self.colorMode = colorMode
         subscriptionManager.startObservingOtherSubscriptionmanagers()
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
         }
+        view.colorMode = colorMode
     }
 
     func getData(from courses: [Course]) -> [CourseViewData] {
@@ -471,6 +477,11 @@ struct CourseViewData {
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
         self.action = action
     }
+}
+
+enum CourseListColorMode {
+    case light
+    case dark
 }
 
 enum CourseListState {

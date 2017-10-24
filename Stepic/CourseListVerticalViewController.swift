@@ -17,6 +17,8 @@ class CourseListVerticalViewController: CourseListViewController {
     override func viewDidLoad() {
         delegate = self
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.clear
+        tableView.backgroundColor = UIColor.clear
     }
 
     lazy var paginationView: LoadingPaginationView = {
@@ -91,7 +93,11 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         }
     }
 
-    func updateState(from: CourseListState) {
+    func setUserInteraction(enabled: Bool) {
+        tableView.isUserInteractionEnabled = enabled
+    }
+
+//    func updateState(from: CourseListState) {
 //        switch state {
 //        case .displaying:
 //            break
@@ -108,7 +114,7 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
 //        case .emptyAnonymous:
 //            break
 //        }
-    }
+//    }
 
 //    func updateRefreshing() {
 //        if isRefreshing {
@@ -218,7 +224,7 @@ extension CourseListVerticalViewController: UITableViewDataSource {
         if shouldShowLoadingWidgets {
             cell.isLoading = true
         } else {
-            cell.setup(courseViewData: courses[indexPath.row])
+            cell.setup(courseViewData: courses[indexPath.row], colorMode: colorMode)
         }
         return cell
     }

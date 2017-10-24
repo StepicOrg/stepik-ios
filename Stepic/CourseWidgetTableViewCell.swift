@@ -40,7 +40,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
         isLoading = false
     }
 
-    func setup(courseViewData course: CourseViewData) {
+    func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
         widgetView.title = course.title
         widgetView.action = course.action
         widgetView.buttonState = course.isEnrolled ? .continueLearning : .join
@@ -48,6 +48,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.rating = course.rating
         widgetView.learners = course.learners
         widgetView.progress = course.progress
+        widgetView.colorMode = colorMode
         isLoading = false
     }
 }
