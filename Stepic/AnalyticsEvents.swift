@@ -80,6 +80,10 @@ struct AnalyticsEvents {
             static let anonymous = "join_course_anonymous"
             static let signed = "join_course_signed"
         }
+        struct Video {
+            static let clicked = "course_detail_video_clicked"
+            static let shown = "course_detail_video_shown"
+        }
     }
 
     struct Step {
