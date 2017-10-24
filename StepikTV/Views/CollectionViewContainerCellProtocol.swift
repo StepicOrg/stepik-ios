@@ -10,6 +10,6 @@ import UIKit
 
 protocol CollectionViewContainerCellProtocol {
     
-    func configure(with data: [UIImage], title: String?)
+    func configure(with data: [Course], title: String?)
     
 }

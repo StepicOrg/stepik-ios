@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SmallItemCell: UICollectionViewCell, CollectionViewCellProtocol {
+class SmallItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
     
     static var nibName: String { get { return "SmallItemCell" } }
     
@@ -28,5 +28,8 @@ class SmallItemCell: UICollectionViewCell, CollectionViewCellProtocol {
         imageView.clipsToBounds = false
     }
     
+    func configure(with data: Course) {
+        titleLabel.text = data.name
+    }
     
 }

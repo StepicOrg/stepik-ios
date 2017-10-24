@@ -19,11 +19,11 @@ class RegularCollectionViewContainerCell: UICollectionViewCell, CollectionViewCe
     
     @IBOutlet var collectionView: UICollectionView!
     
-    fileprivate var source: [UIImage] = [UIImage]()
+    fileprivate var source: [Course] = [Course]()
     
     fileprivate let itemsType = type(of: MediumItemCell.self())
     
-    func configure(with data: [UIImage], title: String? = nil) {
+    func configure(with data: [Course], title: String? = nil) {
         source = data
         titleLabel?.text = title
         collectionView.reloadData()
@@ -37,6 +37,16 @@ class RegularCollectionViewContainerCell: UICollectionViewCell, CollectionViewCe
         let nib = UINib(nibName: itemsType.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: itemsType.reuseIdentifier)
     }
+}
+
+extension RegularCollectionViewContainerCell: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let cell = cell as? ItemCellProtocol
+        cell?.configure(with: source[indexPath.row])
+    }
+    
 }
 
 extension RegularCollectionViewContainerCell: UICollectionViewDataSource {

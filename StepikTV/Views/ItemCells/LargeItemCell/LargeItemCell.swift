@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LargeItemCell: UICollectionViewCell, CollectionViewCellProtocol {
+class LargeItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
     
     static var nibName: String { get { return "LargeItemCell" } }
     
@@ -28,6 +28,11 @@ class LargeItemCell: UICollectionViewCell, CollectionViewCellProtocol {
         
         imageView.adjustsImageWhenAncestorFocused = true
         imageView.clipsToBounds = false
+    }
+    
+    func configure(with data: Course) {
+        titleLabel.text = data.name
+        subtitleLabel.text = data.host
     }
     
 }

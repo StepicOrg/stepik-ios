@@ -22,11 +22,11 @@ class MajorCollectionViewContainerCell: UICollectionViewCell, CollectionViewCell
     
     @IBOutlet var collectionView: UICollectionView!
     
-    fileprivate var source: [UIImage] = [UIImage]()
+    fileprivate var source: [Course] = [Course]()
     
     fileprivate let itemsType = type(of: LargeItemCell.self())
     
-    func configure(with data: [UIImage], title: String? = nil) {
+    func configure(with data: [Course], title: String? = nil) {
         source = data
         collectionView.reloadData()
     }
@@ -50,6 +50,12 @@ extension MajorCollectionViewContainerCell: UICollectionViewDelegate {
         if ((context.nextFocusedIndexPath != nil) && !collectionView.isScrollEnabled) {
             collectionView.scrollToItem(at: context.nextFocusedIndexPath!, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let cell = cell as? ItemCellProtocol
+        cell?.configure(with: source[indexPath.row])
     }
 }
 

@@ -9,8 +9,6 @@ import UIKit
 
 class CompilationViewController: UICollectionViewController {
     
-    private let model = Model()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +33,7 @@ class CompilationViewController: UICollectionViewController {
     //MARK: UICollectionViewDataSource methods
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return model.getOuter().count
+        return Model.sharedReference.getOuter().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,8 +50,8 @@ class CompilationViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let sectionData = model.getInner(at: indexPath.section)
-        let sectionTitle = model.getTitles(at: indexPath.section)
+        let sectionData = Model.sharedReference.getInner(at: indexPath.section)
+        let sectionTitle = Model.sharedReference.getTitles(at: indexPath.section)
         
         if let cell = cell as? CollectionViewContainerCellProtocol {
             cell.configure(with: sectionData, title: sectionTitle)

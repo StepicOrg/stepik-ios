@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MediumItemCell: UICollectionViewCell, CollectionViewCellProtocol {
+class MediumItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
     
     static var nibName: String { get { return "MediumItemCell" } }
     
@@ -26,6 +26,10 @@ class MediumItemCell: UICollectionViewCell, CollectionViewCellProtocol {
         
         imageView.adjustsImageWhenAncestorFocused = true
         imageView.clipsToBounds = false
+    }
+    
+    func configure(with data: Course) {
+        titleLabel.text = data.name
     }
     
 }
