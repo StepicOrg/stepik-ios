@@ -15,9 +15,9 @@ def apple_tv_pods
 end
 
 def all_pods
-    
+
     apple_tv_pods
-    
+
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
@@ -32,7 +32,7 @@ def all_pods
     pod 'Firebase/Analytics', '3.16.0'
     
     pod 'Mixpanel-swift'
-    
+
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
@@ -43,11 +43,15 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'Presentr'
+    pod 'Presentr', '1.2.3'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
     pod 'Highlightr'
     pod "RFKeyboardToolbar", "~> 1.3"
+
+    pod 'TTTAttributedLabel'
+    pod 'PromiseKit', '~> 4.4'
+    pod 'Atributika', '~> 3.0' # update after migration to Swift 4
 end
 
 def testing_pods
@@ -56,7 +60,7 @@ def testing_pods
 end
 
 def adaptive_pods
-    pod 'Koloda', '4.0'
+    pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
     pod 'Charts', '3.0.2'
     pod 'NotificationBannerSwift', '1.4.1' 

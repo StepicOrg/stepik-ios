@@ -320,6 +320,17 @@ TooManyAttemptsSignIn = "Слишком много попыток. Повтор�
 ValidationEmailAndPasswordError = "Указан неверный email или пароль.";
 SocialSignupWithExistingEmailError = "Этот email привязан к другому аккаунту. Войдите, используя пароль.";
 SearchCourses = "Поиск курсов";
+NotificationsLearning = "Обучение";
+NotificationsReviews = "Рецензии";
+NotificationsComments = "Комментарии";
+NotificationsTeaching = "Преподавание";
+NotificationsOther = "Другое";
+NotificationsAll = "Все";
+MarkAllAsRead = "Отметить все как прочитанные";
+MarkAllAsReadSuccess = "Все уведомления прочитаны!";
+NoNotifications = "Нет уведомлений";
+AnonymousNotificationsTitle = "Анонимные пользователи не могут получать уведомления";
+SignInToHaveNotifications = "Войдите, чтобы получать уведомления";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
