@@ -7589,6 +7589,7 @@
 				1BAE12EB1F93F67700482251 /* Sources */,
 				1BAE12EC1F93F67700482251 /* Frameworks */,
 				1BAE12ED1F93F67700482251 /* Resources */,
+				1B6F294F1FA138EF004A5D4B /* Swift Lint */,
 				1FE28DC9859C6ECF6BDC42EA /* [CP] Embed Pods Frameworks */,
 				460C9F00C548446D1C967E75 /* [CP] Copy Pods Resources */,
 			);
@@ -9117,6 +9118,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		1B6F294F1FA138EF004A5D4B /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config .swiftlint.yml\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		1FE28DC9859C6ECF6BDC42EA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

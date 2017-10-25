@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-def apple_tv_pods
+def shared_pods
     pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
@@ -16,7 +16,7 @@ end
 
 def all_pods
 
-    apple_tv_pods
+    shared_pods
 
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -78,10 +78,10 @@ end
 
 target 'StepikTV' do
     platform :tvos, '10.1'
-    apple_tv_pods
+    shared_pods
     target 'StepikTVTests' do
         inherit! :search_paths
-        apple_tv_pods
+        shared_pods
         testing_pods
     end
 end
