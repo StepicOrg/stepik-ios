@@ -274,9 +274,18 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 let isUnitFirstInSection = index == 0
                 let isUnitLastInSection = index == section.units.count - 1
                 if let course = section.course {
-                    let isSectionFirstInCourse = course.sectionsArray.count == 0 || course.sectionsArray.index(of: section.id) == course.sectionsArray.startIndex
-                    let isSectionLastInCourse = course.sectionsArray.count == 0 || course.sectionsArray.index(of: section.id) == course.sectionsArray.endIndex.advanced(by: -1)
-                    dvc.navigationRules = (prev: !isSectionFirstInCourse || !isUnitFirstInSection, next: !isSectionLastInCourse || !isUnitLastInSection)
+                    let sectionBefore = course.getSection(before: section)
+                    let sectionAfter = course.getSection(after: section)
+
+                    let isSectionFirstInCourse = course.sectionsArray.count == 0 || sectionBefore == nil
+                    let isSectionLastInCourse = course.sectionsArray.count == 0 || sectionAfter == nil
+
+                    let isPrevSectionReachable = sectionBefore?.isReachable ?? false
+                    let isNextSectionReachable = sectionAfter?.isReachable ?? false
+
+                    let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable) || !isUnitFirstInSection
+                    let canNext = (!isSectionLastInCourse && isNextSectionReachable) || !isUnitLastInSection
+                    dvc.navigationRules = (prev: canPrev, next: canNext)
                 } else {
                     dvc.navigationRules = (prev: !isUnitFirstInSection, next: !isUnitLastInSection)
                 }
@@ -298,18 +307,14 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
 
         // Find next section id
-        guard let nextSectionIndex = course.sectionsArray.index(of: section.id)?.advanced(by: 1),
-              nextSectionIndex < course.sectionsArray.endIndex else {
+        guard let nextSection = course.getSection(after: section) else {
             // Current section is last section in the course
             return
         }
 
-        let nextSectionId = course.sectionsArray[nextSectionIndex]
-        if let nextSection = course.sections.filter({ $0.id == nextSectionId }).first {
-            self.section = nextSection
-            self.refreshUnits {
-                self.selectUnitAtIndex(0, replace: true)
-            }
+        self.section = nextSection
+        self.refreshUnits {
+            self.selectUnitAtIndex(0, replace: true)
         }
     }
 
@@ -319,18 +324,14 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
 
         // Find prev section id
-        guard let prevSectionIndex = course.sectionsArray.index(of: section.id)?.advanced(by: -1),
-              prevSectionIndex >= course.sectionsArray.startIndex else {
+        guard let prevSection = course.getSection(before: section) else {
             // Current section is first section in the course
             return
         }
 
-        let prevSectionId = course.sectionsArray[prevSectionIndex]
-        if let prevSection = course.sections.filter({ $0.id == prevSectionId }).first {
-            self.section = prevSection
-            self.refreshUnits {
-                self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
-            }
+        self.section = prevSection
+        self.refreshUnits {
+            self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
         }
     }
 
