@@ -54,7 +54,7 @@ class CourseWidgetView: NibInitializableView {
 
     var imageURL: URL? {
         didSet {
-            courseImageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "stepic_logo_black_and_white"))
+            courseImageView.setImageWithURL(url: imageURL, placeholder: Images.lessonPlaceholderImage.size50x50)
         }
     }
 
@@ -149,6 +149,7 @@ class CourseWidgetView: NibInitializableView {
 
     override func setupSubviews() {
         courseImageView.setRoundedCorners(cornerRadius: 8)
+        courseImageView.backgroundColor = UIColor.white
         self.courseStatsCollectionView.register(UINib(nibName: "CourseStatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseStatCollectionViewCell")
         courseStatsCollectionView.delegate = self
         courseStatsCollectionView.dataSource = self

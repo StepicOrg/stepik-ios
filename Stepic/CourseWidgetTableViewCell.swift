@@ -20,6 +20,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 
@@ -50,5 +51,9 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.progress = course.progress
         widgetView.colorMode = colorMode
         isLoading = false
+        widgetView.layoutSubviews()
+        self.layoutSubviews()
+
+        widgetView.backgroundColor = UIColor.clear
     }
 }

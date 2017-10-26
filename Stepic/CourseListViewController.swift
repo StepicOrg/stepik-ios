@@ -35,7 +35,16 @@ class CourseListViewController: UIViewController, CourseListView {
 
     var courses: [CourseViewData] = []
 
-    var colorMode: CourseListColorMode!
+    var colorMode: CourseListColorMode! {
+        didSet {
+            switch colorMode! {
+            case .dark:
+                self.view.backgroundColor = UIColor.mainDark
+            case .light:
+                self.view.backgroundColor = UIColor.white
+            }
+        }
+    }
 
     var shouldShowLoadingWidgets: Bool {
         return state == .emptyRefreshing

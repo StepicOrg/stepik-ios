@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" rowHeight="47" id="KGk-i7-Jjw" customClass="CourseWidgetTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="46.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -25,11 +25,12 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="gCl-tM-rCu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FnM-5K-29T"/>
-                    <constraint firstAttribute="trailing" secondItem="gCl-tM-rCu" secondAttribute="trailing" constant="8" id="KuG-KL-mdO"/>
+                    <constraint firstAttribute="trailing" secondItem="gCl-tM-rCu" secondAttribute="trailing" priority="999" constant="8" id="KuG-KL-mdO"/>
                     <constraint firstItem="gCl-tM-rCu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="LBx-om-g3r"/>
-                    <constraint firstAttribute="bottom" secondItem="gCl-tM-rCu" secondAttribute="bottom" constant="8" id="gfK-ul-aqg"/>
+                    <constraint firstAttribute="bottom" secondItem="gCl-tM-rCu" secondAttribute="bottom" priority="999" constant="8" id="gfK-ul-aqg"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="widgetView" destination="gCl-tM-rCu" id="5ic-JX-pR9"/>
             </connections>

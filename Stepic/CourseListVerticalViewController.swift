@@ -12,12 +12,11 @@ import FLKAutoLayout
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
 
-    var refreshControl: UIRefreshControl? = UIRefreshControl()
+//    var refreshControl: UIRefreshControl? = UIRefreshControl()
 
     override func viewDidLoad() {
         delegate = self
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.clear
         tableView.backgroundColor = UIColor.clear
     }
 
@@ -30,7 +29,7 @@ class CourseListVerticalViewController: CourseListViewController {
             }
             presenter.loadNextPage()
         }
-
+        paginationView.backgroundColor = UIColor.clear
         return paginationView
     }()
 
@@ -63,13 +62,13 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     }
 
     func setupRefresh() {
-        refreshControl?.addTarget(self, action: #selector(CourseListViewController.refresh), for: .valueChanged)
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl ?? UIView())
-        }
-        refreshControl?.layoutIfNeeded()
+//        refreshControl?.addTarget(self, action: #selector(CourseListViewController.refresh), for: .valueChanged)
+//        if #available(iOS 10.0, *) {
+//            tableView.refreshControl = refreshControl
+//        } else {
+//            tableView.addSubview(refreshControl ?? UIView())
+//        }
+//        refreshControl?.layoutIfNeeded()
     }
 
     func reloadData() {
@@ -84,6 +83,12 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
             if tableView.tableFooterView != paginationView {
                 tableView.tableFooterView = paginationView
             }
+            switch (colorMode ?? .light) {
+            case .light:
+                paginationView.activityIndicator.color = UIColor.mainDark
+            case .dark:
+                paginationView.activityIndicator.color = UIColor.white
+            }
             paginationView.setLoading()
         case .error:
             if tableView.tableFooterView != paginationView {
@@ -96,46 +101,6 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     func setUserInteraction(enabled: Bool) {
         tableView.isUserInteractionEnabled = enabled
     }
-
-//    func updateState(from: CourseListState) {
-//        switch state {
-//        case .displaying:
-//            break
-//        case .displayingError:
-//            break
-//        case .displayingRefreshing:
-//            break
-//        case .empty:
-//            break
-//        case .emptyError:
-//            break
-//        case .emptyRefreshing:
-//            break
-//        case .emptyAnonymous:
-//            break
-//        }
-//    }
-
-//    func updateRefreshing() {
-//        if isRefreshing {
-//            if courses.isEmpty {
-//                tableView.reloadData()
-//                tableView.isUserInteractionEnabled = false
-//            } else {
-//                if refreshControl?.isRefreshing == false {
-//                    refreshControl?.beginRefreshing()
-//                }
-//            }
-//        } else {
-//            tableView.isUserInteractionEnabled = true
-//            if courses.isEmpty {
-//                refreshControl?.endRefreshing()
-//                tableView.reloadData()
-//            } else {
-//                refreshControl?.endRefreshing()
-//            }
-//        }
-//    }
 
     func indexPathsForVisibleCells() -> [IndexPath] {
         return tableView.indexPathsForVisibleRows ?? []
@@ -221,6 +186,7 @@ extension CourseListVerticalViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        cell.selectionStyle = .none
         if shouldShowLoadingWidgets {
             cell.isLoading = true
         } else {
