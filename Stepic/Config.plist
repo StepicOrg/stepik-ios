@@ -8,8 +8,8 @@
 		<array>
 			<string>MyCourses</string>
 			<string>FindCourses</string>
-			<string>Certificates</string>
 			<string>Profile</string>
+			<string>Certificates</string>
 			<string>Notifications</string>
 		</array>
 	</dict>
