@@ -45,14 +45,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     private func reload() {
         for block in blocks {
             let courseListView: HorizontalCoursesView = HorizontalCoursesView(frame: CGRect.zero)
-            guard let horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as? CourseListHorizontalViewController else {
-                return
-            }
-            self.addChildViewController(horizontalController)
-            courseListView.setup(block: block, controller: horizontalController, showControllerBlock: {
+            self.addChildViewController(block.horizontalController)
+            courseListView.setup(block: block, showVerticalBlock: {
                 [weak self]
-                vc in
-                self?.show(vc, sender: nil)
+                _ in
+                self?.show(block.verticalController, sender: nil)
             })
             stackView.addArrangedSubview(courseListView)
             courseListView.alignLeading("0", trailing: "0", toView: self.view)

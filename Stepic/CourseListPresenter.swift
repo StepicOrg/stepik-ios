@@ -249,7 +249,7 @@ class CourseListPresenter {
         self.state = self.courses.isEmpty ? .emptyError : .displayingWithError
     }
 
-    private func requestNonCollection() {
+    private func requestNonCollection(updateProgresses: Bool, completion: (() -> Void)? = nil) {
         listType.request(page: 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
@@ -259,11 +259,14 @@ class CourseListPresenter {
             strongSelf.courses = courses
             strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
             strongSelf.updateReviewSummaries(for: courses)
-            strongSelf.updateProgresses(for: courses)
+            if updateProgresses {
+                strongSelf.updateProgresses(for: courses)
+            }
             strongSelf.currentPage = meta.page
             strongSelf.hasNextPage = meta.hasNext
             strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
             strongSelf.state = courses.isEmpty ? .empty: .displaying
+            completion?()
             }.catch {
                 [weak self]
                 _ in
@@ -272,6 +275,7 @@ class CourseListPresenter {
                 }
                 print("Error while refreshing collection")
                 strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
+                completion?()
         }
     }
 
@@ -310,10 +314,16 @@ class CourseListPresenter {
             } else {
                 state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             }
-            requestNonCollection()
+            requestNonCollection(updateProgresses: false, completion: {
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.lastStepDataSource?.didLoadWithProgresses(courses: strongSelf.courses)
+            })
         default:
             state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-            requestNonCollection()
+            requestNonCollection(updateProgresses: true)
         }
 
     }

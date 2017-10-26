@@ -29,15 +29,19 @@ class HomeScreenPresenter {
 }
 
 struct CourseListBlock {
-    let listType: CourseListType
-    let horizontalLimit: Int
     let title: String
     let colorMode: CourseListColorMode
 
+    let horizontalController: CourseListHorizontalViewController
+    let verticalController: CourseListVerticalViewController
+
     init(listType: CourseListType, horizontalLimit: Int, title: String, colorMode: CourseListColorMode) {
-        self.listType = listType
-        self.horizontalLimit = horizontalLimit
         self.title = title
         self.colorMode = colorMode
+
+        self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
+        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
+        self.verticalController.presenter = CourseListPresenter(view: verticalController, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
     }
 }

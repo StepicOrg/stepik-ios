@@ -18,31 +18,22 @@ class HorizontalCoursesView: NibInitializableView {
 
     @IBOutlet weak internal var courseListContainerView: UIView!
 
-    private var showControllerBlock: ((CourseListViewController) -> Void)?
-    private var block: CourseListBlock?
-    private var controller: CourseListHorizontalViewController?
+    private var showVerticalBlock: (() -> Void)?
 
     override var nibName: String {
         return "HorizontalCoursesView"
     }
 
     @IBAction func showAllPressed(_ sender: Any) {
-        guard let block = block, let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController else {
-            return
-        }
-        verticalController.presenter = CourseListPresenter(view: verticalController, limit: nil, listType: block.listType, colorMode: block.colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
-        showControllerBlock?(verticalController)
+        showVerticalBlock?()
     }
 
-    func setup(block: CourseListBlock, controller: CourseListHorizontalViewController, showControllerBlock: @escaping (CourseListViewController) -> Void) {
-        self.block = block
-        self.controller = controller
-        self.showControllerBlock = showControllerBlock
+    func setup(block: CourseListBlock, showVerticalBlock: @escaping () -> Void) {
+        self.showVerticalBlock = showVerticalBlock
 
         titleLabel.text = block.title
-        courseListContainerView.addSubview(controller.view)
-        controller.view.align(toView: courseListContainerView)
-        controller.presenter = CourseListPresenter(view: controller, limit: block.horizontalLimit, listType: block.listType, colorMode: block.colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        courseListContainerView.addSubview(block.horizontalController.view)
+        block.horizontalController.view.align(toView: courseListContainerView)
         showAllButton.setTitleColor(UIColor.lightGray, for: .normal)
         courseCountLabel.colorMode = .gray
         switch block.colorMode {

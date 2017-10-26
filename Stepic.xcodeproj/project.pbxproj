@@ -153,22 +153,6 @@
 		081959EF1FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */; };
 		081959F01FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */; };
 		081959F11FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */; };
-		081959F41FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959F51FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959F61FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959F71FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959F81FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959F91FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959FA1FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959FB1FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */; };
-		081959FC1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		081959FD1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		081959FE1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		081959FF1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		08195A001FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		08195A011FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		08195A021FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
-		08195A031FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */; };
 		08195A061FA00FF400E6D6CD /* CourseLists.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08195A051FA00FF400E6D6CD /* CourseLists.storyboard */; };
 		08195A071FA00FF400E6D6CD /* CourseLists.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08195A051FA00FF400E6D6CD /* CourseLists.storyboard */; };
 		08195A081FA00FF400E6D6CD /* CourseLists.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08195A051FA00FF400E6D6CD /* CourseLists.storyboard */; };
@@ -4393,8 +4377,6 @@
 		081566241F69C3AD0082B359 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
-		081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListTableViewCell.swift; sourceTree = "<group>"; };
-		081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseListTableViewCell.xib; sourceTree = "<group>"; };
 		08195A051FA00FF400E6D6CD /* CourseLists.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseLists.storyboard; sourceTree = "<group>"; };
 		08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCoursesView.swift; sourceTree = "<group>"; };
 		08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCoursesView.xib; sourceTree = "<group>"; };
@@ -5427,8 +5409,6 @@
 			children = (
 				081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */,
 				081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */,
-				081959F21FA0084900E6D6CD /* CourseListTableViewCell.swift */,
-				081959F31FA0084900E6D6CD /* CourseListTableViewCell.xib */,
 				08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */,
 				08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */,
 			);
@@ -8205,7 +8185,6 @@
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				0859AE9C1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
-				081959FD1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				08CBA3551F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08263D731DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
@@ -8341,7 +8320,6 @@
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
-				081959FC1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -8385,7 +8363,6 @@
 				2C1B625E1F4C4AEF00236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
 				2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */,
-				08195A021FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				2C1B62611F4C4AEF00236804 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */,
@@ -8489,7 +8466,6 @@
 				2C1B646F1F4C590700236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
 				2C1B64711F4C590700236804 /* StepCardView.xib in Resources */,
-				08195A031FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				2C1B64721F4C590700236804 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */,
@@ -8670,7 +8646,6 @@
 				2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */,
 				2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */,
 				08CBA3571F5A2D9400302154 /* Profile.storyboard in Resources */,
-				081959FF1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				2C86544B1F4B33DE00D51654 /* arrow_right.svg in Resources */,
 				2C86544C1F4B33DE00D51654 /* loading_robot.gif in Resources */,
 			);
@@ -8775,7 +8750,6 @@
 				2C89AB2F1F4C289900227C3B /* AdaptiveAssets.xcassets in Resources */,
 				2C89AB301F4C289900227C3B /* AdaptiveMain.storyboard in Resources */,
 				08CBA3581F5A2D9400302154 /* Profile.storyboard in Resources */,
-				08195A001FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				2C89AB311F4C289900227C3B /* arrow_right.svg in Resources */,
 				2C89AB321F4C289900227C3B /* loading_robot.gif in Resources */,
 			);
@@ -8803,7 +8777,6 @@
 				2C9732A01F4C38F600AC9301 /* overlay_hard.png in Resources */,
 				2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */,
 				2C9732A21F4C38F600AC9301 /* overlay_simple.png in Resources */,
-				08195A011FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				2C9732A31F4C38F600AC9301 /* CurrentBestStreakViewController.xib in Resources */,
 				2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */,
 				2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */,
@@ -8955,7 +8928,6 @@
 				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				860DB78F1EB8DC13001E3E42 /* StepCardView.xib in Resources */,
-				081959FE1FA0084900E6D6CD /* CourseListTableViewCell.xib in Resources */,
 				085E9E711F138C3F00D6A4BC /* CodeSuggestionsTableViewController.xib in Resources */,
 				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
 				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
@@ -10878,7 +10850,6 @@
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				08CBA3281F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				080C5E7C1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
-				081959F51FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -11229,7 +11200,6 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
-				081959F41FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
@@ -11857,7 +11827,6 @@
 				2C1B61F01F4C4AEF00236804 /* Block.swift in Sources */,
 				2C1B61F11F4C4AEF00236804 /* Step+CoreDataProperties.swift in Sources */,
 				2C1B61F21F4C4AEF00236804 /* Step.swift in Sources */,
-				081959FA1FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				2C1B61F31F4C4AEF00236804 /* Lesson+CoreDataProperties.swift in Sources */,
 				085EDCB61F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C1B61F41F4C4AEF00236804 /* Lesson.swift in Sources */,
@@ -12298,7 +12267,6 @@
 				2C1B64011F4C590700236804 /* Block.swift in Sources */,
 				2C1B64021F4C590700236804 /* Step+CoreDataProperties.swift in Sources */,
 				2C1B64031F4C590700236804 /* Step.swift in Sources */,
-				081959FB1FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				2C1B64041F4C590700236804 /* Lesson+CoreDataProperties.swift in Sources */,
 				085EDCB71F9945CF00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C1B64051F4C590700236804 /* Lesson.swift in Sources */,
@@ -12739,7 +12707,6 @@
 				2C86539E1F4B33DE00D51654 /* Block.swift in Sources */,
 				2C86539F1F4B33DE00D51654 /* Step+CoreDataProperties.swift in Sources */,
 				2C8653A01F4B33DE00D51654 /* Step.swift in Sources */,
-				081959F71FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				2C8653A11F4B33DE00D51654 /* Lesson+CoreDataProperties.swift in Sources */,
 				085EDCB31F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */,
@@ -12969,7 +12936,6 @@
 				2C89A9C21F4C289900227C3B /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C89A9C31F4C289900227C3B /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				2C89A9C41F4C289900227C3B /* RGPageViewController.swift in Sources */,
-				081959F81FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				2C89A9C51F4C289900227C3B /* RGTabBarItem.swift in Sources */,
 				2C89A9C61F4C289900227C3B /* RGTabView.swift in Sources */,
 				2C89A9C71F4C289900227C3B /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -13620,7 +13586,6 @@
 				2C9732381F4C38F600AC9301 /* Block.swift in Sources */,
 				2C9732391F4C38F600AC9301 /* Step+CoreDataProperties.swift in Sources */,
 				2C97323A1F4C38F600AC9301 /* Step.swift in Sources */,
-				081959F91FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				2C97323B1F4C38F600AC9301 /* Lesson+CoreDataProperties.swift in Sources */,
 				085EDCB51F9945CE00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				2C97323C1F4C38F600AC9301 /* Lesson.swift in Sources */,
@@ -14115,7 +14080,6 @@
 				864D66F11E83DE03001E8D9E /* Block.swift in Sources */,
 				864D66F21E83DE03001E8D9E /* Step+CoreDataProperties.swift in Sources */,
 				864D66F31E83DE03001E8D9E /* Step.swift in Sources */,
-				081959F61FA0084900E6D6CD /* CourseListTableViewCell.swift in Sources */,
 				864D66F41E83DE03001E8D9E /* Lesson+CoreDataProperties.swift in Sources */,
 				085EDCB21F9945CC00AB3278 /* Notification+FetchMethods.swift in Sources */,
 				864D66F51E83DE03001E8D9E /* Lesson.swift in Sources */,
