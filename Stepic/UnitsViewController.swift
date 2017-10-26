@@ -205,7 +205,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
     }
 
-    func refreshUnits() {
+    func refreshUnits(success: (() -> Void)? = nil) {
 
         guard section != nil else {
             if let id = unitId {
@@ -226,6 +226,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 self.emptyDatasetState = EmptyDatasetState.empty
             })
             self.didRefresh = true
+            success?()
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
@@ -269,7 +270,16 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
                 dvc.sectionNavigationDelegate = self
                 currentlyDisplayingUnitIndex = index
-                dvc.navigationRules = (prev: index != 0, next: index < section.units.count - 1)
+
+                let isUnitFirstInSection = index == 0
+                let isUnitLastInSection = index == section.units.count - 1
+                if let course = section.course {
+                    let isSectionFirstInCourse = course.sectionsArray.count == 0 || course.sectionsArray.index(of: section.id) == course.sectionsArray.startIndex
+                    let isSectionLastInCourse = course.sectionsArray.count == 0 || course.sectionsArray.index(of: section.id) == course.sectionsArray.endIndex.advanced(by: -1)
+                    dvc.navigationRules = (prev: !isSectionFirstInCourse || !isUnitFirstInSection, next: !isSectionLastInCourse || !isUnitLastInSection)
+                } else {
+                    dvc.navigationRules = (prev: !isUnitFirstInSection, next: !isUnitLastInSection)
+                }
             }
         }
         // Get the new view controller using segue.destinationViewController.
@@ -280,6 +290,48 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     func selectUnitAtIndex(_ index: Int, isLastStep: Bool = false, replace: Bool = false) {
         performSegue(withIdentifier: replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))
+    }
+
+    func goToNextSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find next section id
+        guard let nextSectionIndex = course.sectionsArray.index(of: section.id)?.advanced(by: 1),
+              nextSectionIndex < course.sectionsArray.endIndex else {
+            // Current section is last section in the course
+            return
+        }
+
+        let nextSectionId = course.sectionsArray[nextSectionIndex]
+        if let nextSection = course.sections.filter({ $0.id == nextSectionId }).first {
+            self.section = nextSection
+            self.refreshUnits {
+                self.selectUnitAtIndex(0, replace: true)
+            }
+        }
+    }
+
+    func goToPrevSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find prev section id
+        guard let prevSectionIndex = course.sectionsArray.index(of: section.id)?.advanced(by: -1),
+              prevSectionIndex >= course.sectionsArray.startIndex else {
+            // Current section is first section in the course
+            return
+        }
+
+        let prevSectionId = course.sectionsArray[prevSectionIndex]
+        if let prevSection = course.sections.filter({ $0.id == prevSectionId }).first {
+            self.section = prevSection
+            self.refreshUnits {
+                self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
+            }
+        }
     }
 
     func clearAllSelection() {
@@ -355,6 +407,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
                 selectUnitAtIndex(uIndex + 1, replace: true)
+            } else if uIndex + 1 == section.units.count {
+                goToNextSection()
             }
         }
     }
@@ -363,6 +417,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex - 1 >= 0 {
                 selectUnitAtIndex(uIndex - 1, isLastStep: true, replace: true)
+            } else if uIndex - 1 == -1 {
+                goToPrevSection()
             }
         }
     }
