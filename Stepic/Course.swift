@@ -45,6 +45,7 @@ class Course: NSManagedObject, JSONInitializable {
         slug = json["slug"].string
         progressId = json["progress"].string
         lastStepId = json["last_step"].string
+        scheduleType = json["schedule_type"].string
         learnersCount = json["learners_count"].int
         reviewSummaryId = json["review_summary"].int
         sectionsArray = json["sections"].arrayObject as! [Int]

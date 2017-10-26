@@ -19,7 +19,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         super.viewDidLoad()
         self.presenter = HomeScreenPresenter(view: self)
         setupStackView()
-        presenter?.getBlocks()
+        presenter?.initBlocks()
         #if swift(>=3.2)
             if #available(iOS 11.0, *) {
                 scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
