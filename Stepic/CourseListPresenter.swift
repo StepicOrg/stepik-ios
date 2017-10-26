@@ -29,6 +29,10 @@ protocol CourseListView: class {
     func getNavigationController() -> UINavigationController?
 }
 
+protocol LastStepWidgetDataSource: class {
+    func didLoadWithProgresses(courses: [Course])
+}
+
 class CourseListPresenter {
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
@@ -46,6 +50,8 @@ class CourseListPresenter {
     private var lastUser: User?
 
     private var subscriptionManager = CourseSubscriptionManager()
+
+    weak var lastStepDataSource: LastStepWidgetDataSource?
 
     private var state: CourseListState = .empty {
         didSet {
@@ -136,7 +142,7 @@ class CourseListPresenter {
         }
         self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
-        listType.request(page: currentPage + 1, withAPI: coursesAPI)?.then {
+        listType.request(page: currentPage + 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -244,7 +250,7 @@ class CourseListPresenter {
     }
 
     private func requestNonCollection() {
-        listType.request(page: 1, withAPI: coursesAPI)?.then {
+        listType.request(page: 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -361,7 +367,7 @@ class CourseListPresenter {
 
     // Progresses
 
-    private func updateProgresses(for courses: [Course]) {
+    @discardableResult private func updateProgresses(for courses: [Course]) -> Promise<[Course]> {
         var progressIds: [String] = []
         var progresses: [Progress] = []
         for course in courses {
@@ -373,17 +379,22 @@ class CourseListPresenter {
             }
         }
 
-        progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).then {
-            [weak self]
-            newProgresses -> Void in
-            guard let strongSelf = self else {
-                return
+        return Promise {
+            fulfill, reject in
+            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).then {
+                [weak self]
+                newProgresses -> Void in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
+                strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
+                fulfill(strongSelf.courses)
+            }.catch {
+                error in
+                print("Error while loading progresses")
+                reject(error)
             }
-            strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
-        }.catch {
-            _ in
-            print("Error while loading progresses")
         }
     }
 
@@ -503,12 +514,79 @@ enum CourseListType {
     case popular
     case collection(ids: [Int])
 
-    func request(page: Int, withAPI coursesAPI: CoursesAPI) -> Promise<([Course], Meta)>? {
+    private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
+        return Promise {
+            fulfill, reject in
+            loadPageWithProgresses(loadedCourses: [], page: 1, coursesAPI: coursesAPI, progressesAPI: progressesAPI, success: {
+                courses, meta in
+                courses.sort(by: {
+                    return $0.progress
+                })
+                fulfill((courses, meta))
+            }, error: {
+                error in
+                reject(error)
+            })
+        }
+    }
+
+    private func loadPageWithProgresses(loadedCourses: [Course], page: Int, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, success: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) {
+
+        coursesAPI.retrieve(enrolled: true, order: "-activity", page: page).then {
+            courses, meta -> Void in
+            var progressIds: [String] = []
+            var progresses: [Progress] = []
+            for course in courses {
+                if let progressId = course.progressId {
+                    progressIds += [progressId]
+                }
+                if let progress = course.progress {
+                    progresses += [progress]
+                }
+            }
+
+            //Not calling this in next "then" because courses values are needed to proceed further
+            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).then {
+                newProgresses -> Void in
+                let progresses = Sorter.sort(newProgresses, byIds: progressIds)
+
+                if progresses.count == 0 {
+                    CoreDataHelper.instance.save()
+                    return
+                }
+
+                var progressCnt = 0
+                for i in 0 ..< courses.count {
+                    if courses[i].progressId == progresses[progressCnt].id {
+                        courses[i].progress = progresses[progressCnt]
+                        progressCnt += 1
+                    }
+                    if progressCnt == progresses.count {
+                        break
+                    }
+                }
+                CoreDataHelper.instance.save()
+                if meta.hasNext {
+                    self.loadPageWithProgresses(loadedCourses: loadedCourses + courses, page: page + 1, coursesAPI: coursesAPI, progressesAPI: progressesAPI, success: success, error: errorHandler)
+                } else {
+                    success(loadedCourses + courses, meta)
+                }
+            }.catch {
+                error in
+                errorHandler(error)
+            }
+        }.catch {
+            error in
+            errorHandler(error)
+        }
+    }
+
+    func request(page: Int, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         switch self {
         case .popular:
             return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
         case .enrolled:
-            return coursesAPI.retrieve(enrolled: true, order: "-activity", page: page)
+            return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
         default:
             return nil
         }
