@@ -29,23 +29,7 @@ class StyledTabBarViewController: UITabBarController {
         if !AuthInfo.shared.isAuthorized {
             selectedIndex = 1
         }
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     func getEventNameForTabIndex(index: Int) -> String? {
         guard index < items.count else {
@@ -79,6 +63,7 @@ enum TabController: String {
     case certificates = "Certificates"
     case profile = "Profile"
     case home = "Home"
+    case notifications = "Notifications"
 
     var itemInfo: TabBarItemInfo {
         switch self {
@@ -93,6 +78,8 @@ enum TabController: String {
         case .home:
             return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"))
 
+        case .notifications:
+            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "notifications"))
         }
     }
 }

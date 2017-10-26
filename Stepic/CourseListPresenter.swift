@@ -519,9 +519,9 @@ enum CourseListType {
             fulfill, reject in
             loadPageWithProgresses(loadedCourses: [], page: 1, coursesAPI: coursesAPI, progressesAPI: progressesAPI, success: {
                 courses, meta in
-                courses.sort(by: {
-                    return $0.progress
-                })
+//                courses.sort(by: {
+//                    return $0.progres
+//                })
                 fulfill((courses, meta))
             }, error: {
                 error in

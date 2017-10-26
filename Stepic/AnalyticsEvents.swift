@@ -111,6 +111,7 @@ struct AnalyticsEvents {
         static let syllabus = "deeplink_syllabus"
         static let course = "deeplink_course"
         static let section = "deeplink_section"
+        static let discussion = "deeplink_discussion"
     }
 
     struct Tabs {
@@ -119,6 +120,7 @@ struct AnalyticsEvents {
         static let downloadsClicked = "main_choice_downloads"
         static let certificatesClicked = "main_choice_certificates"
         static let profileClicked = "main_choice_profile"
+        static let notificationsClicked = "main_choice_notifications"
     }
 
     struct Streaks {

@@ -178,6 +178,10 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
 }
 
 extension AdaptiveStepsViewController: KolodaViewDataSource {
+    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
+        return .`default`
+    }
+
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return 2
     }
