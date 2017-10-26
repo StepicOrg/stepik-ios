@@ -519,10 +519,13 @@ enum CourseListType {
             fulfill, reject in
             loadPageWithProgresses(loadedCourses: [], page: 1, coursesAPI: coursesAPI, progressesAPI: progressesAPI, success: {
                 courses, meta in
-//                courses.sort(by: {
-//                    return $0.progres
-//                })
-                fulfill((courses, meta))
+                let res = courses.sorted(by: {
+                    guard let lastViewed1 = $0.progress?.lastViewed, let lastViewed2 = $1.progress?.lastViewed else {
+                        return false
+                    }
+                    return lastViewed1 > lastViewed2
+                })
+                fulfill((res, meta))
             }, error: {
                 error in
                 reject(error)
