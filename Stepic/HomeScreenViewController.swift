@@ -53,12 +53,16 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
             stackView.addArrangedSubview(courseListView)
             courseListView.alignLeading("0", trailing: "0", toView: self.view)
         }
-        self.view.layoutSubviews()
+//        self.view.layoutSubviews()
     }
 
     func presentBlocks(blocks: [CourseListBlock]) {
         self.blocks = blocks
         reload()
+    }
+
+    func getNavigation() -> UINavigationController? {
+        return self.navigationController
     }
 
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
@@ -68,9 +72,13 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
         widget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
         widget.setRoundedCorners(cornerRadius: 8)
+        widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
-        widgetBackgroundView.constrainHeight("220")
-        self.view.layoutSubviews()
+//        widgetBackgroundView.constrainAspectRatio(">=*\(16 / 9)@1000")
+
+        UIView.animate(withDuration: 0.15) {
+            widgetBackgroundView.isHidden = false
+        }
     }
 }

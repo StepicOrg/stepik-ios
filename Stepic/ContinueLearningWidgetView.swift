@@ -16,6 +16,8 @@ class ContinueLearningWidgetView: NibInitializableView {
     @IBOutlet weak var courseProgressLabel: StepikLabel!
     @IBOutlet weak var courseProgressProgressView: UIProgressView!
 
+    private var continueLearningAction: (() -> Void)?
+
     override var nibName: String {
         return "ContinueLearningWidgetView"
     }
@@ -37,6 +39,11 @@ class ContinueLearningWidgetView: NibInitializableView {
             self.courseProgressProgressView.progress = progress / 100
             self.courseProgressLabel.text = "Your current progress is \(Int(progress))%"
         }
+        continueLearningAction = widgetData.continueLearningAction
+    }
+
+    @IBAction func continueLearningPressed(_ sender: UIButton) {
+        continueLearningAction?()
     }
 
 }

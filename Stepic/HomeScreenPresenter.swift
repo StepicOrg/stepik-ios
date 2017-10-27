@@ -11,6 +11,7 @@ import Foundation
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
+    func getNavigation() -> UINavigationController?
 }
 
 class HomeScreenPresenter: LastStepWidgetDataSource {
@@ -29,8 +30,11 @@ class HomeScreenPresenter: LastStepWidgetDataSource {
     }
 
     private func initLastStep(for course: Course) {
+        guard let widgetData = ContinueLearningWidgetData(course: course, navigation: view?.getNavigation()) else {
+            return
+        }
         let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
-        continueLearningWidget.setup(widgetData: ContinueLearningWidgetData(course: course))
+        continueLearningWidget.setup(widgetData: widgetData)
         view?.presentContinueLearningWidget(widget: continueLearningWidget)
     }
 
@@ -52,11 +56,19 @@ struct ContinueLearningWidgetData {
     let title: String
     let progress: Float?
     let imageURL: String
+    let continueLearningAction: (() -> Void)?
 
-    init(course: Course) {
+    init?(course: Course, navigation: UINavigationController?) {
         title = course.title
         progress = course.progress?.percentPassed
         imageURL = course.coverURLString
+        if let navigation = navigation {
+            continueLearningAction = {
+                LastStepRouter.continueLearning(for: course, using: navigation)
+            }
+        } else {
+            return nil
+        }
     }
 }
 
