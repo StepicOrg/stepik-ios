@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ItemConfigurableProtocol {
-    
-    func configure(with data: Course)
-    
+
+    func configure(with data: CourseMock)
+
 }

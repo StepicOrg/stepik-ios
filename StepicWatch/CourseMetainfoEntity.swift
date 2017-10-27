@@ -8,13 +8,15 @@
 
 import Foundation
 
-@available(iOS 9.0, *)
-extension WatchSessionSender.Name {
-  static let Metainfo = WatchSessionSender.Name("Metainfo")
-  static func Metainfo(courseId: Int) -> WatchSessionSender.Name {
-    return WatchSessionSender.Name(Metainfo.rawValue + "-\(courseId)")
-  }
-}
+#if os(iOS) || os(watchOS)
+    @available(iOS 9.0, *)
+    extension WatchSessionSender.Name {
+        static let Metainfo = WatchSessionSender.Name("Metainfo")
+        static func Metainfo(courseId: Int) -> WatchSessionSender.Name {
+            return WatchSessionSender.Name(Metainfo.rawValue + "-\(courseId)")
+        }
+    }
+#endif
 
 struct CourseMetainfoContainer: DataConvertable {
   var courseId: Int

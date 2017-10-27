@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ContainerConfigurableProtocol {
-    
-    func configure(with data: [Course], title: String?)
-    
+
+    func configure(with data: [CourseMock], title: String?)
+
 }

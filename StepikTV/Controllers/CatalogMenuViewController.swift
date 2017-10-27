@@ -9,7 +9,7 @@
 import UIKit
 
 class CatalogMenuViewController: MenuTableViewController {
-    
+
     override var segueIdentifierMap: [[String]] {
         return [
             [
@@ -18,14 +18,14 @@ class CatalogMenuViewController: MenuTableViewController {
             ]
         ]
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as? RectangularCollectionViewController
-        
+
         if segue.identifier == "ShowUndoneCourses" {
             vc?.content = .Undone
         }
-        
+
         if segue.identifier == "ShowDoneCourses" {
             vc?.content = .Done
         }

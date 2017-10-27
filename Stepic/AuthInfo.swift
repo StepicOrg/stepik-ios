@@ -56,30 +56,37 @@ class AuthInfo: NSObject {
         defaults.synchronize()
     }
 
+    fileprivate func deleteEnrolledInfo() {
+        TabsInfo.myCoursesIds = []
+        let c = Course.getAllCourses(enrolled: true)
+        for course in c {
+            course.enrolled = false
+        }
+
+        Progress.deleteAllStoredProgresses()
+        Notification.deleteAll()
+        CoreDataHelper.instance.save()
+
+        AuthInfo.shared.user = nil
+
+        self.setTokenValue(nil)
+    }
+
     var token: StepicToken? {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                //Unregister from notifications
-                NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
-                    UIThread.performUI {
-                        //Delete enrolled information
-                        TabsInfo.myCoursesIds = []
-                        let c = Course.getAllCourses(enrolled: true)
-                        for course in c {
-                            course.enrolled = false
+                #if os(iOS)
+                    //Unregister from notifications
+                    NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
+                        UIThread.performUI {
+                            self.deleteEnrolledInfo()
                         }
-
-                        Progress.deleteAllStoredProgresses()
-                        Notification.deleteAll()
-                        CoreDataHelper.instance.save()
-
-                        AuthInfo.shared.user = nil
-
-                        self.setTokenValue(nil)
-                    }
-                })
+                    })
+                #else
+                    self.deleteEnrolledInfo()
+                #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true

@@ -7,20 +7,24 @@
 //
 
 import Foundation
-import Firebase
-import Mixpanel
-import YandexMobileMetrica
+#if os(iOS)
+    import Firebase
+    import Mixpanel
+    import YandexMobileMetrica
+#endif
 
 class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
+        #if os(iOS)
+            let params = parameters as? [String: NSObject]
 
-        let params = parameters as? [String: NSObject]
-
-        reportFirebaseEvent(event, parameters: params)
-        reportAppMetricaEvent(event, parameters: params)
-        reportMixpanelEvent(event, parameters: parameters)
+            reportFirebaseEvent(event, parameters: params)
+            reportAppMetricaEvent(event, parameters: params)
+            reportMixpanelEvent(event, parameters: parameters)
+        #endif
     }
 
+    #if os(iOS)
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {
         FIRAnalytics.logEvent(withName: event, parameters: parameters)
     }
@@ -40,4 +44,5 @@ class AnalyticsReporter {
         }
         Mixpanel.mainInstance().track(event: event, properties: transformedParameters)
     }
+    #endif
 }
