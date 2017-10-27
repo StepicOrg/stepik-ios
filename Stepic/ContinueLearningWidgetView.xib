@@ -39,12 +39,18 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-Im-Xk0" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                     <rect key="frame" x="74" y="257" width="364" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="0kY-IM-YEh"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2p1-Rz-jUd" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                     <rect key="frame" x="74" y="286" width="364" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="QpG-Ad-y3q"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -85,10 +91,10 @@
                 <constraint firstAttribute="trailing" secondItem="2p1-Rz-jUd" secondAttribute="trailing" constant="16" id="cse-Lr-O85"/>
                 <constraint firstItem="sMe-fG-ImZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e2t-pA-GuC"/>
                 <constraint firstItem="sMe-fG-ImZ" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="gdm-vw-tFb"/>
-                <constraint firstItem="eKS-wb-rwJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="999" id="lfy-DP-2eh"/>
+                <constraint firstItem="eKS-wb-rwJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="998" id="lfy-DP-2eh"/>
                 <constraint firstItem="Ysj-iu-KvI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="qat-By-n3A"/>
                 <constraint firstAttribute="bottom" secondItem="2p1-Rz-jUd" secondAttribute="bottom" constant="16" id="wFu-z2-TQN"/>
-                <constraint firstItem="ypo-Im-Xk0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKS-wb-rwJ" secondAttribute="bottom" constant="40" id="x7L-aY-XAg"/>
+                <constraint firstItem="ypo-Im-Xk0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKS-wb-rwJ" secondAttribute="bottom" priority="999" constant="40" id="x7L-aY-XAg"/>
                 <constraint firstAttribute="trailing" secondItem="ypo-Im-Xk0" secondAttribute="trailing" constant="16" id="zQU-zJ-zCX"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
