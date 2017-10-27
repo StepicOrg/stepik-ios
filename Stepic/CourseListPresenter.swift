@@ -27,6 +27,7 @@ protocol CourseListView: class {
     var colorMode: CourseListColorMode! { get set }
 
     func getNavigationController() -> UINavigationController?
+    func getController() -> UIViewController?
 }
 
 protocol LastStepWidgetDataSource: class {
@@ -133,7 +134,20 @@ class CourseListPresenter {
         if courses.isEmpty {
             displayCached(ids: listType.cachedListCourseIds)
         }
-        refreshCourses()
+        state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
+        checkToken().then {
+            [weak self] in
+            self?.refreshCourses()
+        }.catch {
+            [weak self]
+            error in
+            guard let strongSelf = self, let vc = self?.view?.getController(), (error as? PerformRequestError) == PerformRequestError.noAccessToRefreshToken else {
+                return
+            }
+            strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
+            AuthInfo.shared.token = nil
+            RoutingManager.auth.routeFrom(controller: vc, success: nil, cancel: nil)
+        }
     }
 
     func loadNextPage() {
@@ -173,7 +187,6 @@ class CourseListPresenter {
     }
 
     func handleCourseSubscriptionUpdates() {
-        //TODO: Add subscription updates for other types of courses (change button types & remove/add progress)
         guard subscriptionManager.hasUpdates else {
             return
         }
@@ -284,7 +297,6 @@ class CourseListPresenter {
         lastUser = AuthInfo.shared.user
         switch listType {
         case let .collection(ids: ids):
-            state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then {
                 [weak self]
                 courses -> Void in
@@ -311,8 +323,6 @@ class CourseListPresenter {
         case .enrolled:
             if !AuthInfo.shared.isAuthorized {
                 self.state = .emptyAnonymous
-            } else {
-                state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             }
             requestNonCollection(updateProgresses: false, completion: {
                 [weak self] in
@@ -325,7 +335,6 @@ class CourseListPresenter {
             state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             requestNonCollection(updateProgresses: true)
         }
-
     }
 
     private func getSectionsController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {

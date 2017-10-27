@@ -8,9 +8,22 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 enum PerformRequestError: Error {
     case noAccessToRefreshToken, other
+}
+
+func checkToken() -> Promise<()> {
+    return Promise {
+        fulfill, reject in
+        ApiRequestPerformer.performAPIRequest({
+            fulfill()
+        }, error: {
+            error in
+            reject(error)
+        })
+    }
 }
 
 //Should preferrably be called from a UIViewController subclass

@@ -15,7 +15,6 @@ protocol CourseListViewControllerDelegate: class {
     func setUserInteraction(enabled: Bool)
 
     func updatePagination()
-//    func updateState(from: CourseListState)
 
     func indexPathsForVisibleCells() -> [IndexPath]
     func indexPathForIndex(index: Int) -> IndexPath
@@ -117,18 +116,13 @@ class CourseListViewController: UIViewController, CourseListView {
         }
     }
 
-//    func setRefreshing(isRefreshing: Bool) {
-//        self.isRefreshing = isRefreshing
-//        delegate?.updateRefreshing()
-//    }
-
     private func setPlaceholder(visible: Bool) {
         emptyPlaceholder.isHidden = !visible
         delegate?.setUserInteraction(enabled: !visible)
     }
 
     func setState(state: CourseListState) {
-        let prevState: CourseListState = self.state
+//        let prevState: CourseListState = self.state
         self.state = state
         switch state {
         case .displaying:
@@ -140,7 +134,6 @@ class CourseListViewController: UIViewController, CourseListView {
             break
         case .displayingWithRefreshing:
             setPlaceholder(visible: false)
-            delegate?.setUserInteraction(enabled: false)
             // Show some activity indicator here
             break
         case .empty:
@@ -156,6 +149,7 @@ class CourseListViewController: UIViewController, CourseListView {
         case .emptyRefreshing:
             delegate?.reloadData()
             setPlaceholder(visible: false)
+            delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
             placeholderText = "Anonymous"
@@ -188,6 +182,10 @@ class CourseListViewController: UIViewController, CourseListView {
 
     func getNavigationController() -> UINavigationController? {
         return self.navigationController
+    }
+
+    func getController() -> UIViewController? {
+        return self
     }
 
     lazy var placeholderLabel: UILabel = {
