@@ -38,14 +38,7 @@ class LoadingCourseWidgetView: NibInitializableView {
         self.gradientImageView?.frame = CGRect(x: 0, y: 0, width: self.gradientWidth, height: self.view.frame.height)
         UIView.animate(withDuration: 3.0, delay: 0, options: UIViewAnimationOptions.repeat, animations: {
             self.gradientImageView?.frame = CGRect(x: self.view.frame.width, y: 0, width: self.gradientWidth, height: self.view.frame.height)
-        }, completion: {
-            _ in
-
         })
-    }
-
-    func stopAnimating() {
-//        isAnimating = false
     }
 
     override func setupSubviews() {

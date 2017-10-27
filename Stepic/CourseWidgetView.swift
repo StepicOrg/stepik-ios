@@ -81,8 +81,6 @@ class CourseWidgetView: NibInitializableView {
             loadingWidgetView.isHidden = !isLoading
             if isLoading {
                 loadingWidgetView.animateGradient()
-            } else {
-                loadingWidgetView.stopAnimating()
             }
         }
     }
