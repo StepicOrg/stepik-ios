@@ -330,6 +330,7 @@ MarkAllAsReadSuccess = "All marked as read!";
 NoNotifications = "No notifications";
 AnonymousNotificationsTitle = "Anonymous users can't receive notifications";
 SignInToHaveNotifications = "Sign in to be able to receive notifications";
+BadConnectionAuth = "Check your internet connection";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

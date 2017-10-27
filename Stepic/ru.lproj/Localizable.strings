@@ -331,6 +331,7 @@ MarkAllAsReadSuccess = "Все уведомления прочитаны!";
 NoNotifications = "Нет уведомлений";
 AnonymousNotificationsTitle = "Анонимные пользователи не могут получать уведомления";
 SignInToHaveNotifications = "Войдите, чтобы получать уведомления";
+BadConnectionAuth = "Проверьте ваше интернет-соединение";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

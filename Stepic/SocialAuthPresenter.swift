@@ -25,7 +25,7 @@ protocol SocialAuthView: class {
 }
 
 enum SocialAuthResult {
-    case success, error, existingEmail(email: String)
+    case success, error, existingEmail(email: String), badConnection
 }
 
 enum SocialAuthState {
@@ -130,8 +130,13 @@ class SocialAuthPresenter {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
             })
-        }, failure: { _ in
-            self.view?.update(with: .error)
+        }, failure: { e in
+            switch e {
+            case .badConnection:
+                self.view?.update(with: .badConnection)
+            default:
+                self.view?.update(with: .error)
+            }
         })
     }
 }
