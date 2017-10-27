@@ -21,7 +21,22 @@ class ContinueLearningWidgetView: NibInitializableView {
     }
 
     override func setupSubviews() {
+        courseImageImageView.setRoundedCorners(cornerRadius: 4)
+        continueLearningButton.setTitleColor(UIColor.mainDark, for: .normal)
+        continueLearningButton.backgroundColor = UIColor.mainLight
+        continueLearningButton.setRoundedCorners(cornerRadius: continueLearningButton.frame.height / 2)
+        courseProgressLabel.colorMode = .light
+        courseTitleLabel.colorMode = .light
+    }
 
+    func setup(widgetData: ContinueLearningWidgetData) {
+        let url = URL(string: widgetData.imageURL)
+        self.courseImageImageView.setImageWithURL(url: url, placeholder: Images.lessonPlaceholderImage.size50x50)
+        self.courseTitleLabel.text = widgetData.title
+        if let progress = widgetData.progress {
+            self.courseProgressProgressView.progress = progress / 100
+            self.courseProgressLabel.text = "Your current progress is \(Int(progress))%"
+        }
     }
 
 }

@@ -25,7 +25,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
                 scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
-
     }
 
     private func setupStackView() {
@@ -60,5 +59,18 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     func presentBlocks(blocks: [CourseListBlock]) {
         self.blocks = blocks
         reload()
+    }
+
+    func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
+        let widgetBackgroundView = UIView()
+        widgetBackgroundView.backgroundColor = UIColor.white
+        widgetBackgroundView.addSubview(widget)
+        widget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        widget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        widget.setRoundedCorners(cornerRadius: 8)
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
+        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+        widgetBackgroundView.constrainHeight("220")
+        self.view.layoutSubviews()
     }
 }

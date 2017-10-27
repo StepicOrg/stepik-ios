@@ -25,25 +25,26 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNn-0b-eUo">
                     <rect key="frame" x="0.0" y="0.0" width="454" height="313"/>
                 </imageView>
-                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMe-fG-ImZ">
+                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMe-fG-ImZ">
                     <rect key="frame" x="0.0" y="0.0" width="454" height="313"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysj-iu-KvI">
                     <rect key="frame" x="16" y="247" width="50" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="93v-w3-k5W"/>
                         <constraint firstAttribute="height" constant="50" id="Aca-Yg-E3S"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-Im-Xk0" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="74" y="250" width="86.5" height="21"/>
+                    <rect key="frame" x="74" y="250" width="364" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2p1-Rz-jUd" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="74" y="279" width="112.5" height="18"/>
+                    <rect key="frame" x="74" y="279" width="364" height="18"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -57,7 +58,11 @@
                     <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </progressView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKS-wb-rwJ">
-                    <rect key="frame" x="164" y="141" width="126" height="30"/>
+                    <rect key="frame" x="147" y="136" width="160" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="3MA-Td-N0f"/>
+                        <constraint firstAttribute="height" constant="40" id="5Cq-Af-QGq"/>
+                    </constraints>
                     <state key="normal" title="Continue Learning"/>
                 </button>
             </subviews>
@@ -77,11 +82,13 @@
                 <constraint firstItem="uNn-0b-eUo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RK1-d0-dSe"/>
                 <constraint firstItem="uNn-0b-eUo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="S6P-Bi-c39"/>
                 <constraint firstItem="uNn-0b-eUo" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="Uyz-n4-68q"/>
+                <constraint firstAttribute="trailing" secondItem="2p1-Rz-jUd" secondAttribute="trailing" constant="16" id="cse-Lr-O85"/>
                 <constraint firstItem="sMe-fG-ImZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e2t-pA-GuC"/>
                 <constraint firstItem="sMe-fG-ImZ" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="gdm-vw-tFb"/>
                 <constraint firstItem="eKS-wb-rwJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="lfy-DP-2eh"/>
                 <constraint firstItem="Ysj-iu-KvI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="qat-By-n3A"/>
                 <constraint firstAttribute="bottom" secondItem="2p1-Rz-jUd" secondAttribute="bottom" constant="16" id="wFu-z2-TQN"/>
+                <constraint firstAttribute="trailing" secondItem="ypo-Im-Xk0" secondAttribute="trailing" constant="16" id="zQU-zJ-zCX"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

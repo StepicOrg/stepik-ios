@@ -10,6 +10,7 @@ import Foundation
 
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
+    func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
 }
 
 class HomeScreenPresenter: LastStepWidgetDataSource {
@@ -20,15 +21,17 @@ class HomeScreenPresenter: LastStepWidgetDataSource {
 
     func initBlocks() {
         let blocks = [
-            CourseListBlock(listType: .enrolled, horizontalLimit: 6, title: "Enrolled", colorMode: .dark, lastStepWidgetDataSource: self),
-            CourseListBlock(listType: .popular, horizontalLimit: 6, title: "Popular", colorMode: .light)
+            CourseListBlock(listType: .enrolled, horizontalLimit: 6, title: "Enrolled", colorMode: .light, lastStepWidgetDataSource: self),
+            CourseListBlock(listType: .popular, horizontalLimit: 6, title: "Popular", colorMode: .dark)
         ]
 
         view?.presentBlocks(blocks: blocks)
     }
 
     private func initLastStep(for course: Course) {
-        print("will show last step for course \(course.title)")
+        let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+        continueLearningWidget.setup(widgetData: ContinueLearningWidgetData(course: course))
+        view?.presentContinueLearningWidget(widget: continueLearningWidget)
     }
 
     private func checkIsGoodForLastStep(course: Course) -> Bool {
@@ -42,6 +45,18 @@ class HomeScreenPresenter: LastStepWidgetDataSource {
                 return
             }
         }
+    }
+}
+
+struct ContinueLearningWidgetData {
+    let title: String
+    let progress: Float?
+    let imageURL: String
+
+    init(course: Course) {
+        title = course.title
+        progress = course.progress?.percentPassed
+        imageURL = course.coverURLString
     }
 }
 
