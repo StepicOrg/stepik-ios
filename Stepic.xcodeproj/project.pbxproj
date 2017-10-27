@@ -349,6 +349,22 @@
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
 		084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
+		084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9D61FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9D71FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9D81FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9D91FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9DA1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9DB1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9DC1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
+		084DB9DE1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9DF1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E01FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E11FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E21FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E31FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E41FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
+		084DB9E51FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */; };
 		084F7AA71E76EF690088368A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
 		084F7AA81E76EF690088368A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
 		084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
@@ -4481,6 +4497,8 @@
 		084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_steps_restrictions_v14.xcdatamodel; sourceTree = "<group>"; };
 		084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_progress_activities_v20.xcdatamodel; sourceTree = "<group>"; };
+		084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContinueLearningWidgetView.xib; sourceTree = "<group>"; };
+		084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueLearningWidgetView.swift; sourceTree = "<group>"; };
 		084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_last_step_v13.xcdatamodel; sourceTree = "<group>"; };
 		084F7AA61E76EF690088368A /* LastStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStep.swift; sourceTree = "<group>"; };
 		084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -5791,6 +5809,8 @@
 		084896931F9E8A1E00CFA273 /* Continue Learning Widget */ = {
 			isa = PBXGroup;
 			children = (
+				084DB9DD1FA2A1B00074B11E /* ContinueLearningWidgetView.swift */,
+				084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */,
 				08479D081F9FEE8200046780 /* ContinueLearningWidgetPresenter.swift */,
 			);
 			name = "Continue Learning Widget";
@@ -8188,6 +8208,7 @@
 				08CBA3551F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08263D731DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
+				084DB9D61FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				089056141E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				086BE2AA1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
@@ -8260,6 +8281,7 @@
 				2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */,
 				0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08CBA32F1F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
+				084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
@@ -8351,6 +8373,7 @@
 				2C35C4D91F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
 				08DF78AE1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C1B62531F4C4AEF00236804 /* Localizable.strings in Resources */,
+				084DB9DB1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C1B62541F4C4AEF00236804 /* arrow_left.svg in Resources */,
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */,
@@ -8454,6 +8477,7 @@
 				2C35C4DA1F4DA47A002F3BF4 /* adjectives_f.plist in Resources */,
 				08DF78AF1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C1B64641F4C590700236804 /* Localizable.strings in Resources */,
+				084DB9DC1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C1B64651F4C590700236804 /* arrow_left.svg in Resources */,
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */,
@@ -8588,6 +8612,7 @@
 				2C8654181F4B33DE00D51654 /* StepikAlertViewController.xib in Resources */,
 				2C8654191F4B33DE00D51654 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C86541B1F4B33DE00D51654 /* AchievementTableViewCell.xib in Resources */,
+				084DB9D81FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C86541C1F4B33DE00D51654 /* StreakAlertViewController.xib in Resources */,
 				2C86541D1F4B33DE00D51654 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C8654871F4B3A5000D51654 /* Config.plist in Resources */,
@@ -8692,6 +8717,7 @@
 				2C89AAFB1F4C289900227C3B /* PickerViewController.xib in Resources */,
 				2C89AAFC1F4C289900227C3B /* StepikAlertViewController.xib in Resources */,
 				2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */,
+				084DB9D91FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C89AAFE1F4C289900227C3B /* AchievementTableViewCell.xib in Resources */,
 				2C89AAFF1F4C289900227C3B /* StreakAlertViewController.xib in Resources */,
 				2C89AB011F4C289900227C3B /* StepicVideoPlayerViewController.xib in Resources */,
@@ -8765,6 +8791,7 @@
 				2C35C4D81F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
 				08DF78AD1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C9732991F4C38F600AC9301 /* wysiwyg.css in Resources */,
+				084DB9DA1FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C97329A1F4C38F600AC9301 /* Localizable.strings in Resources */,
 				2C97329B1F4C38F600AC9301 /* arrow_left.svg in Resources */,
 				2C97330A1F4C394A00AC9301 /* Auth.plist in Resources */,
@@ -8916,6 +8943,7 @@
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
 				08DF78AA1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
+				084DB9D71FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
@@ -11057,6 +11085,7 @@
 				083F2B1E1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				084070811D64847400308FC1 /* SharingHelper.swift in Sources */,
+				084DB9DF1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				08CBA3161F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				0888D0FE1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
@@ -11107,6 +11136,7 @@
 				08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */,
 				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
+				084DB9DE1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				08CBA34B1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
@@ -11585,6 +11615,7 @@
 				2C1B610D1F4C4AEF00236804 /* HTMLStringWrapperUtil.swift in Sources */,
 				2C1B610E1F4C4AEF00236804 /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C1B610F1F4C4AEF00236804 /* AdaptiveStepsPresenter.swift in Sources */,
+				084DB9E41FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */,
 				2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */,
@@ -12025,6 +12056,7 @@
 				2C1B631E1F4C590700236804 /* HTMLStringWrapperUtil.swift in Sources */,
 				2C1B631F1F4C590700236804 /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C1B63201F4C590700236804 /* AdaptiveStepsPresenter.swift in Sources */,
+				084DB9E51FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */,
 				2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */,
@@ -12465,6 +12497,7 @@
 				2C8652BB1F4B33DE00D51654 /* HTMLStringWrapperUtil.swift in Sources */,
 				2C8652BC1F4B33DE00D51654 /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C8652BD1F4B33DE00D51654 /* AdaptiveStepsPresenter.swift in Sources */,
+				084DB9E11FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C8652BE1F4B33DE00D51654 /* DiscussionsViewController.swift in Sources */,
 				2C8652BF1F4B33DE00D51654 /* LoadMoreTableViewCell.swift in Sources */,
 				2C8652C01F4B33DE00D51654 /* DiscussionUpdateDelegate.swift in Sources */,
@@ -12829,6 +12862,7 @@
 				2C89A95E1F4C289900227C3B /* CertificatesViewTestMock.swift in Sources */,
 				2C89A95F1F4C289900227C3B /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C89A9601F4C289900227C3B /* CertificatesViewController.swift in Sources */,
+				084DB9E21FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C89A9611F4C289900227C3B /* CertificatesView.swift in Sources */,
 				2C89A9621F4C289900227C3B /* CertificatesPresenter.swift in Sources */,
 				2C89A9631F4C289900227C3B /* CertificateViewData.swift in Sources */,
@@ -13344,6 +13378,7 @@
 				2C9731551F4C38F600AC9301 /* HTMLStringWrapperUtil.swift in Sources */,
 				2C9731561F4C38F600AC9301 /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C9731571F4C38F600AC9301 /* AdaptiveStepsPresenter.swift in Sources */,
+				084DB9E31FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */,
 				2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */,
 				2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */,
@@ -13838,6 +13873,7 @@
 				864D67651E83E08E001E8D9E /* HTMLStringWrapperUtil.swift in Sources */,
 				864D67661E83E08E001E8D9E /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */,
+				084DB9E01FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */,
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
 				864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */,

@@ -8,17 +8,17 @@
 
 import Foundation
 
-protocol ContinueLearningWidgetView: class {
-
-}
-
-class ContinueLearningWidgetPresenter {
-    weak var view: ContinueLearningWidgetView?
-    init(view: ContinueLearningWidgetView) {
-        self.view = view
-    }
-
-    func getContinueLearningContent() {
-
-    }
-}
+//protocol ContinueLearningWidgetView: class {
+//
+//}
+//
+//class ContinueLearningWidgetPresenter {
+//    weak var view: ContinueLearningWidgetView?
+//    init(view: ContinueLearningWidgetView) {
+//        self.view = view
+//    }
+//
+//    func getContinueLearningContent() {
+//
+//    }
+//}
