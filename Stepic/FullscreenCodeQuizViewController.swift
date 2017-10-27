@@ -161,7 +161,7 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     @objc fileprivate func keyboardWasShown(aNotification: NSNotification) {
         let info = aNotification.userInfo
-        let infoNSValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let infoNSValue = info![UIKeyboardFrameEndUserInfoKey] as! NSValue
         let kbSize = infoNSValue.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
         codeTextView.contentInset = contentInsets
