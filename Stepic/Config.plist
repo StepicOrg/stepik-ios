@@ -7,7 +7,6 @@
 		<key>tabs</key>
 		<array>
 			<string>Home</string>
-			<string>MyCourses</string>
 			<string>FindCourses</string>
 			<string>Profile</string>
 			<string>Certificates</string>

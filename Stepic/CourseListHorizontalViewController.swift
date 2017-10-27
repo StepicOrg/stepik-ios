@@ -21,12 +21,12 @@ class CourseListHorizontalViewController: CourseListViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        presenter?.refresh()
     }
 
     let horizontalSpacing: CGFloat = 8
     let verticalSpacing: CGFloat = 8
     let nextWidgetVisibleWidth: CGFloat = 16
+
     var widgetWidth: CGFloat {
         return view.frame.width - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
     }
@@ -113,9 +113,24 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
 
         return (view: cell, index: indexPath.item)
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: {
+            [weak self]
+            _ in
+            self?.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
+    }
+}
+
+extension CourseListHorizontalViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: widgetWidth, height: 100)
+    }
 }
 
 extension CourseListHorizontalViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectCourse(at: indexPath.item)
         collectionView.deselectItem(at: indexPath, animated: true)

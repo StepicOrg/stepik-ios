@@ -4,35 +4,95 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Adaptive 1838 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>69</integer>
+		</dict>
+		<key>Adaptive 1838.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>68</integer>
+		</dict>
 		<key>Adaptive 1838.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Adaptive 1906 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>71</integer>
+		</dict>
+		<key>Adaptive 1906.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>70</integer>
+		</dict>
 		<key>Adaptive 1906.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>79</integer>
+			<integer>60</integer>
+		</dict>
+		<key>Adaptive 3067 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>73</integer>
+		</dict>
+		<key>Adaptive 3067.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>72</integer>
 		</dict>
 		<key>Adaptive 3067.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>80</integer>
+			<integer>62</integer>
+		</dict>
+		<key>Adaptive 3124 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>75</integer>
+		</dict>
+		<key>Adaptive 3124.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>74</integer>
 		</dict>
 		<key>Adaptive 3124.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>83</integer>
+			<integer>67</integer>
+		</dict>
+		<key>Adaptive 3149 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>77</integer>
+		</dict>
+		<key>Adaptive 3149.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>76</integer>
 		</dict>
 		<key>Adaptive 3149.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>82</integer>
+			<integer>66</integer>
+		</dict>
+		<key>Adaptive 3150 Screenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>79</integer>
+		</dict>
+		<key>Adaptive 3150.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>78</integer>
 		</dict>
 		<key>Adaptive 3150.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>81</integer>
+			<integer>64</integer>
 		</dict>
 		<key>SberbankUniversity.xcscheme</key>
 		<dict>
@@ -48,6 +108,21 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>34</integer>
+		</dict>
+		<key>StepicWatch Extension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>81</integer>
+		</dict>
+		<key>StepicWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>80</integer>
+		</dict>
+		<key>StepikTV.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>82</integer>
 		</dict>
 		<key>StickerPackExtension.xcscheme</key>
 		<dict>
