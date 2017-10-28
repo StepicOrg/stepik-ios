@@ -19,7 +19,7 @@ class CompilationViewController: UICollectionViewController {
         collectionView.contentInset.bottom = minimumEdgePadding - layout.sectionInset.bottom
     }
     
-    fileprivate func itemType(for indexPath: IndexPath) -> CollectionViewCellProtocol.Type {
+    fileprivate func itemType(for indexPath: IndexPath) -> DynamicallyCreatedProtocol.Type {
         switch indexPath.section {
         case 0:
             return type(of: MajorCollectionViewContainerCell.self())
@@ -53,7 +53,7 @@ class CompilationViewController: UICollectionViewController {
         let sectionData = Model.sharedReference.getInner(at: indexPath.section)
         let sectionTitle = Model.sharedReference.getTitles(at: indexPath.section)
         
-        if let cell = cell as? CollectionViewContainerCellProtocol {
+        if let cell = cell as? ContainerConfigurableProtocol {
             cell.configure(with: sectionData, title: sectionTitle)
         }
         

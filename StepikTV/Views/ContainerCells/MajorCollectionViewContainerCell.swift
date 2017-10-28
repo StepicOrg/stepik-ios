@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MajorCollectionViewContainerCell: UICollectionViewCell, CollectionViewCellProtocol, CollectionViewContainerCellProtocol {
+class MajorCollectionViewContainerCell: UICollectionViewCell, DynamicallyCreatedProtocol, ContainerConfigurableProtocol {
     
     static var reuseIdentifier: String { get { return "MajorCollectionViewContainerCell" } }
     
@@ -54,7 +54,7 @@ extension MajorCollectionViewContainerCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let cell = cell as? ItemCellProtocol
+        let cell = cell as? ItemConfigurableProtocol
         cell?.configure(with: source[indexPath.row])
     }
 }

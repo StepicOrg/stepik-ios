@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MediumItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
+class MediumItemCell: UICollectionViewCell, DynamicallyCreatedProtocol, ItemConfigurableProtocol {
     
     static var nibName: String { get { return "MediumItemCell" } }
     
@@ -17,9 +17,9 @@ class MediumItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCell
     
     static var size: CGSize { get { return CGSize(width: 548.0, height: 308.0) } }
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

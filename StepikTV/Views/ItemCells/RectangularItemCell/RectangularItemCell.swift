@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RectangularItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
+class RectangularItemCell: UICollectionViewCell, DynamicallyCreatedProtocol, ItemConfigurableProtocol {
     
     static var nibName: String { get { return "RectangularItemCell" } }
     
@@ -16,9 +16,9 @@ class RectangularItemCell: UICollectionViewCell, CollectionViewCellProtocol, Ite
     
     static var size: CGSize { get { return CGSize(width: 310.0, height: 350.0) } }
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

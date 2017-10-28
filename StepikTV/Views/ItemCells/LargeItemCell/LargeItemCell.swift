@@ -6,10 +6,9 @@
 //  Copyright © 2017 Base team. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class LargeItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellProtocol {
+class LargeItemCell: UICollectionViewCell, DynamicallyCreatedProtocol, ItemConfigurableProtocol {
     
     static var nibName: String { get { return "LargeItemCell" } }
     
@@ -17,11 +16,11 @@ class LargeItemCell: UICollectionViewCell, CollectionViewCellProtocol, ItemCellP
     
     static var size: CGSize { get { return CGSize(width: 860.0 , height: 390.0) } }
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

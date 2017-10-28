@@ -359,7 +359,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="UIKitCatalog" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -420,7 +420,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="UIKitCatalog" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

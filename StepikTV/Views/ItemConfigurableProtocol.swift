@@ -1,14 +1,14 @@
 //
-//  ItemCellProtocol.swift
+//  ItemConfigurableProtocol.swift
 //  StepikTV
 //
-//  Created by Александр Пономарев on 25.10.17.
+//  Created by Александр Пономарев on 27.10.17.
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-protocol ItemCellProtocol {
+protocol ItemConfigurableProtocol {
     
     func configure(with data: Course)
     

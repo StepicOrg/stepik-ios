@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class RegularCollectionViewContainerCell: UICollectionViewCell, CollectionViewCellProtocol, CollectionViewContainerCellProtocol  {
+class RegularCollectionViewContainerCell: UICollectionViewCell, DynamicallyCreatedProtocol, ContainerConfigurableProtocol {
     
     static var reuseIdentifier: String { get { return "RegularCollectionViewContainerCell" } }
     
     static var size: CGSize { get { return CGSize(width: UIScreen.main.bounds.width, height: 428.0) } }
     
-    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet var titleLabel: UILabel?
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -43,7 +43,7 @@ extension RegularCollectionViewContainerCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let cell = cell as? ItemCellProtocol
+        let cell = cell as? ItemConfigurableProtocol
         cell?.configure(with: source[indexPath.row])
     }
     

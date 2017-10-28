@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Orj-vq-fVC">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Course Info Table View Controller-->
+        <scene sceneID="gyM-Tp-j5J">
+            <objects>
+                <collectionViewController id="Orj-vq-fVC" customClass="CourseInfoTableViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="h75-bj-NUM">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EBm-ql-dnR">
+                            <size key="itemSize" width="1920" height="834"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MainCourseInfoCell" id="DeO-uf-BFX" customClass="MainCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="YPf-pZ-tPP">
+                                            <rect key="frame" x="1296" y="160" width="400" height="400"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="400" id="AnP-PP-utn"/>
+                                                <constraint firstAttribute="height" constant="400" id="p3g-QK-B4h"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course short about " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-P7-DUH">
+                                            <rect key="frame" x="112" y="335" width="964" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="295" id="rUY-Oi-lX9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Host" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOa-IA-trp">
+                                            <rect key="frame" x="112" y="239" width="964" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTE-HU-sBz">
+                                            <rect key="frame" x="112" y="136" width="964" height="69"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-hr-8AD">
+                                            <rect key="frame" x="112" y="420" width="308" height="114"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-Ff-VzA" customClass="IconButton" customModule="StepikTV" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="142" height="114"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vb-5F-jWJ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="142" id="9gt-1V-niP"/>
+                                                                <constraint firstAttribute="height" constant="80" id="jYH-Co-acV"/>
+                                                            </constraints>
+                                                            <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Трейлер" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Y-17-mXI">
+                                                            <rect key="frame" x="24" y="84" width="94" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="hWS-cL-XY8"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="x9Y-17-mXI" firstAttribute="centerX" secondItem="8Vb-5F-jWJ" secondAttribute="centerX" id="6nN-Tc-Qwb"/>
+                                                        <constraint firstItem="x9Y-17-mXI" firstAttribute="top" secondItem="8Vb-5F-jWJ" secondAttribute="bottom" constant="4" id="Dlx-jN-bMf"/>
+                                                        <constraint firstItem="8Vb-5F-jWJ" firstAttribute="centerX" secondItem="Gc9-Ff-VzA" secondAttribute="centerX" id="HA5-oP-3be"/>
+                                                        <constraint firstAttribute="height" constant="114" id="adN-S5-9J1"/>
+                                                        <constraint firstItem="8Vb-5F-jWJ" firstAttribute="top" secondItem="Gc9-Ff-VzA" secondAttribute="top" id="i8r-3W-s1v"/>
+                                                        <constraint firstAttribute="width" constant="142" id="jTw-DG-BwY"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="button" destination="8Vb-5F-jWJ" id="sKA-LH-8sQ"/>
+                                                        <outlet property="label" destination="x9Y-17-mXI" id="kys-2b-SrM"/>
+                                                    </connections>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mGv-T4-d7X" customClass="IconButton" customModule="StepikTV" customModuleProvider="target">
+                                                    <rect key="frame" x="166" y="0.0" width="142" height="114"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89Y-z0-tWN">
+                                                            <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="142" id="4s6-3N-Lfm"/>
+                                                                <constraint firstAttribute="height" constant="80" id="VbF-ZG-a8U"/>
+                                                            </constraints>
+                                                            <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поступить" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-TZ-mX8">
+                                                            <rect key="frame" x="13" y="84" width="116" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="f1f-eZ-W5Q"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="89Y-z0-tWN" firstAttribute="centerX" secondItem="mGv-T4-d7X" secondAttribute="centerX" id="6gU-X3-ipS"/>
+                                                        <constraint firstItem="89Y-z0-tWN" firstAttribute="top" secondItem="mGv-T4-d7X" secondAttribute="top" id="Can-0b-JVv"/>
+                                                        <constraint firstItem="CWn-TZ-mX8" firstAttribute="top" secondItem="89Y-z0-tWN" secondAttribute="bottom" constant="4" id="PCh-J8-aff"/>
+                                                        <constraint firstAttribute="width" constant="142" id="RHD-Nh-XsU"/>
+                                                        <constraint firstAttribute="height" constant="114" id="eTM-iD-D82"/>
+                                                        <constraint firstItem="CWn-TZ-mX8" firstAttribute="centerX" secondItem="89Y-z0-tWN" secondAttribute="centerX" id="lvW-fk-fyN"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="button" destination="89Y-z0-tWN" id="1OS-zH-I7o"/>
+                                                        <outlet property="label" destination="CWn-TZ-mX8" id="yyq-Cn-SAc"/>
+                                                    </connections>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="308" id="DzW-NQ-dAu"/>
+                                                <constraint firstAttribute="height" constant="114" id="gDf-Eq-3Lk"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="YPf-pZ-tPP" secondAttribute="trailing" constant="204" id="4g0-Be-XeY"/>
+                                    <constraint firstItem="tfU-hr-8AD" firstAttribute="leading" secondItem="W1P-P7-DUH" secondAttribute="leading" id="6lY-3h-rD6"/>
+                                    <constraint firstItem="W1P-P7-DUH" firstAttribute="top" secondItem="EOa-IA-trp" secondAttribute="bottom" constant="50" id="7ci-wd-i4q"/>
+                                    <constraint firstItem="EOa-IA-trp" firstAttribute="leading" secondItem="WTE-HU-sBz" secondAttribute="leading" id="C9H-fb-fS3"/>
+                                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="tfU-hr-8AD" secondAttribute="bottom" constant="20" id="JCO-7M-ogr"/>
+                                    <constraint firstItem="tfU-hr-8AD" firstAttribute="top" secondItem="W1P-P7-DUH" secondAttribute="bottom" constant="50" id="LG1-3O-JaY"/>
+                                    <constraint firstItem="WTE-HU-sBz" firstAttribute="leading" secondItem="DeO-uf-BFX" secondAttribute="leadingMargin" constant="92" id="OCa-v8-1OW"/>
+                                    <constraint firstItem="W1P-P7-DUH" firstAttribute="trailing" secondItem="EOa-IA-trp" secondAttribute="trailing" id="TjN-dZ-YIb"/>
+                                    <constraint firstItem="YPf-pZ-tPP" firstAttribute="top" secondItem="DeO-uf-BFX" secondAttribute="topMargin" constant="160" id="n3s-mZ-Jd6"/>
+                                    <constraint firstItem="W1P-P7-DUH" firstAttribute="leading" secondItem="EOa-IA-trp" secondAttribute="leading" id="pHl-vV-BX1"/>
+                                    <constraint firstItem="YPf-pZ-tPP" firstAttribute="leading" secondItem="WTE-HU-sBz" secondAttribute="trailing" constant="220" id="shz-z1-JPy"/>
+                                    <constraint firstItem="EOa-IA-trp" firstAttribute="trailing" secondItem="WTE-HU-sBz" secondAttribute="trailing" id="t8F-bs-f6Q"/>
+                                    <constraint firstItem="EOa-IA-trp" firstAttribute="top" secondItem="WTE-HU-sBz" secondAttribute="bottom" constant="34" id="vQa-lz-cq0"/>
+                                    <constraint firstItem="WTE-HU-sBz" firstAttribute="top" secondItem="DeO-uf-BFX" secondAttribute="topMargin" constant="136" id="vid-d3-63Q"/>
+                                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YPf-pZ-tPP" secondAttribute="bottom" constant="20" id="vjH-Lk-BEJ"/>
+                                </constraints>
+                                <size key="customSize" width="1920" height="787"/>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DetailsCourseInfoCell" id="spx-Hs-B0m" customClass="DetailsCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="787" width="1920" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cw5-VR-hyc">
+                                            <rect key="frame" x="109" y="25" width="75" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ype-4C-mII">
+                                            <rect key="frame" x="109" y="74" width="1702" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="Ype-4C-mII" firstAttribute="top" secondItem="cw5-VR-hyc" secondAttribute="bottom" constant="3" id="1oU-bw-Hqf"/>
+                                    <constraint firstItem="Ype-4C-mII" firstAttribute="leading" secondItem="cw5-VR-hyc" secondAttribute="leading" id="4zr-zK-r0a"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Ype-4C-mII" secondAttribute="trailing" constant="89" id="65D-NB-en8"/>
+                                    <constraint firstItem="cw5-VR-hyc" firstAttribute="top" secondItem="spx-Hs-B0m" secondAttribute="topMargin" constant="25" id="al0-hf-z7o"/>
+                                    <constraint firstItem="cw5-VR-hyc" firstAttribute="leading" secondItem="spx-Hs-B0m" secondAttribute="leadingMargin" constant="89" id="bAQ-K6-pkf"/>
+                                </constraints>
+                                <size key="customSize" width="1920" height="200"/>
+                                <connections>
+                                    <outlet property="contentLabel" destination="Ype-4C-mII" id="lwB-tI-DuL"/>
+                                    <outlet property="titleLabel" destination="cw5-VR-hyc" id="8Qf-Rz-eKP"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Orj-vq-fVC" id="3qc-W4-6QT"/>
+                            <outlet property="delegate" destination="Orj-vq-fVC" id="K3x-me-y9B"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWJ-Lp-9BG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557" y="593"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NatGeo17" width="3200" height="2000"/>
+    </resources>
+</document>
