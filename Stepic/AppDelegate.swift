@@ -153,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     fileprivate func handleNotification(_ notificationDict: [NSString: AnyObject]) {
-        if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict),
+        if let reaction = NotificationReactionHandler.handle(with: notificationDict),
             let topController = currentNavigation?.topViewController {
             reaction(topController)
         }

@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7a5-ET-4lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687" y="2163"/>
+            <point key="canvasLocation" x="2024.8" y="2162.9685157421291"/>
         </scene>
         <!--Course-->
         <scene sceneID="wHU-ZO-zC9">
@@ -359,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cds-4V-qU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3068.8000000000002" y="1829.6851574212894"/>
+            <point key="canvasLocation" x="3407.1999999999998" y="1829.2353823088458"/>
         </scene>
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
@@ -573,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qo3-wV-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5778.2608695652179" y="1928.8"/>
+            <point key="canvasLocation" x="6116" y="1928.1859070464768"/>
         </scene>
         <!--Web Step View Controller-->
         <scene sceneID="bJt-5m-7H3">
@@ -758,6 +758,16 @@
             </objects>
             <point key="canvasLocation" x="362" y="1998"/>
         </scene>
+        <!--Notifications-->
+        <scene sceneID="YvC-9R-2bs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Notifications" id="Ndt-uw-0TO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vac-jm-MWc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XvM-lw-vUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="190" y="2591"/>
+        </scene>
         <!--Downloads-->
         <scene sceneID="Laj-7g-BZD">
             <objects>
@@ -775,7 +785,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcB-yW-iiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="2163"/>
+            <point key="canvasLocation" x="1255.2" y="2162.9685157421291"/>
         </scene>
         <!--Certificates-->
         <scene sceneID="3uD-23-Gsy">
@@ -864,6 +874,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgf-Uu-lLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2378" y="856"/>
+        </scene>
+        <!--Styled Navigation View Controller-->
+        <scene sceneID="r2H-fY-2yw">
+            <objects>
+                <navigationController storyboardIdentifier="NotificationsNavigation" id="v16-1y-UuB" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UK7-tx-bfD">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ndt-uw-0TO" kind="relationship" relationship="rootViewController" id="amC-aw-HEu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vad-ZM-NEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-382" y="2877"/>
         </scene>
     </scenes>
     <resources>

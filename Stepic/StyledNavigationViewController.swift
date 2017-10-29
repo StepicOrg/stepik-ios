@@ -65,6 +65,11 @@ class StyledNavigationViewController: UINavigationController {
             }, completion: nil)
     }
 
+    func changeShadowAlpha(_ alpha: CGFloat) {
+        navigationBar.layoutSubviews()
+        customShadowView?.alpha = alpha
+    }
+
     func animateShadowChange(for presentedController: UIViewController) {
         guard let coordinator = topViewController?.transitionCoordinator else {
             return
@@ -117,8 +122,7 @@ class StyledNavigationViewController: UINavigationController {
         coordinator.animate(alongsideTransition: {
             [weak self]
             _ in
-            self?.navigationBar.layoutSubviews()
-            self?.customShadowView?.alpha = targetAlpha
+            self?.changeShadowAlpha(targetAlpha)
         }, completion: {
             [weak self]
             coordinator in

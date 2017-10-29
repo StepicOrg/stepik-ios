@@ -359,9 +359,16 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
     func changeActiveTabIndex(_ newIndex: Int) {
 
+        if newIndex == self.activeTabIndex {
+            return
+        }
+
         self.activeTabIndex = newIndex
 
-        let tabView: UIView = self.tabViewAtIndex(self.activeTabIndex)!
+        guard let tabView: UIView = self.tabViewAtIndex(self.activeTabIndex) else {
+            return
+        }
+
         var frame: CGRect = tabView.frame
 
         if self.centerCurrentTab {
