@@ -40,6 +40,8 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     }
 
     var blocks: [CourseListBlock] = []
+    var countForID: [String: Int] = [:]
+    var countUpdateBlock: [String: () -> Void] = [:]
 
     private func reload() {
         for block in blocks {
@@ -50,10 +52,19 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
                 _ in
                 self?.show(block.verticalController, sender: nil)
             })
+            countUpdateBlock[block.ID] = {
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                courseListView.courseCount = strongSelf.countForID[block.ID] ?? 0
+            }
+            if let count = countForID[block.ID] {
+                courseListView.courseCount = count
+            }
             stackView.addArrangedSubview(courseListView)
             courseListView.alignLeading("0", trailing: "0", toView: self.view)
         }
-//        self.view.layoutSubviews()
     }
 
     func presentBlocks(blocks: [CourseListBlock]) {
@@ -63,6 +74,13 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
 
     func getNavigation() -> UINavigationController? {
         return self.navigationController
+    }
+
+    func updateCourseCount(to count: Int, forBlockWithID ID: String) {
+        if let index = blocks.index(where: {$0.ID == ID}) {
+            countForID[ID] = count
+            countUpdateBlock[ID]?()
+        }
     }
 
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
@@ -75,7 +93,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
-//        widgetBackgroundView.constrainAspectRatio(">=*\(16 / 9)@1000")
 
         UIView.animate(withDuration: 0.15) {
             widgetBackgroundView.isHidden = false

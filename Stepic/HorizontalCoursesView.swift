@@ -24,6 +24,12 @@ class HorizontalCoursesView: NibInitializableView {
         return "HorizontalCoursesView"
     }
 
+    var courseCount: Int = 0 {
+        didSet {
+            courseCountLabel.text = courseCount == 0 ? "" : "\(courseCount) курсов"
+        }
+    }
+
     @IBAction func showAllPressed(_ sender: Any) {
         showVerticalBlock?()
     }

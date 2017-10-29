@@ -34,12 +34,18 @@ protocol LastStepWidgetDataSource: class {
     func didLoadWithProgresses(courses: [Course])
 }
 
+protocol CourseListCountDelegate: class {
+    func updateCourseCount(to: Int, forListID: String)
+}
+
 class CourseListPresenter {
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
     private var reviewSummariesAPI: CourseReviewSummariesAPI
 
     private var colorMode: CourseListColorMode
+
+    private var ID: String
 
     private weak var view: CourseListView?
     private var limit: Int?
@@ -53,6 +59,7 @@ class CourseListPresenter {
     private var subscriptionManager = CourseSubscriptionManager()
 
     weak var lastStepDataSource: LastStepWidgetDataSource?
+    weak var couseListCountDelegate: CourseListCountDelegate?
 
     private var state: CourseListState = .empty {
         didSet {
@@ -78,6 +85,7 @@ class CourseListPresenter {
             } else {
                 displayingCourses = courses
             }
+            self.couseListCountDelegate?.updateCourseCount(to: courses.count, forListID: ID)
         }
     }
 
@@ -92,8 +100,9 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
         self.view = view
+        self.ID = ID
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
         self.reviewSummariesAPI = reviewSummariesAPI
@@ -271,6 +280,7 @@ class CourseListPresenter {
             }
             strongSelf.courses = courses
             strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
+
             strongSelf.updateReviewSummaries(for: courses)
             if updateProgresses {
                 strongSelf.updateProgresses(for: courses)

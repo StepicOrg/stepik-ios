@@ -85,6 +85,7 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         if let cell = collectionView.cellForItem(at: indexPath) as? CourseWidgetCollectionViewCell {
             cell.widgetView.progress = courses[indexPath.item].progress
             cell.widgetView.rating = courses[indexPath.item].rating
+            cell.widgetView.buttonState = courses[indexPath.item].isEnrolled ? .continueLearning : .join
         }
     }
 

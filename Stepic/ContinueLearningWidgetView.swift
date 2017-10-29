@@ -37,7 +37,7 @@ class ContinueLearningWidgetView: NibInitializableView {
         self.courseTitleLabel.text = widgetData.title
         if let progress = widgetData.progress {
             self.courseProgressProgressView.progress = progress / 100
-            self.courseProgressLabel.text = "Your current progress is \(Int(progress))%"
+            self.courseProgressLabel.text = "Your current progress is \(Int(progress.rounded(.toNearestOrAwayFromZero)))%"
         }
         continueLearningAction = widgetData.continueLearningAction
     }

@@ -642,14 +642,6 @@
 		088EDCBE1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
 		088EDCBF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
 		088EDCC01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
-		088EDCC21F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC31F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC41F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC51F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC61F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC71F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC81F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
-		088EDCC91F94CC5D0098DEC7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -4613,7 +4605,6 @@
 		088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListHorizontalViewController.swift; sourceTree = "<group>"; };
 		088EDCAF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetCollectionViewCell.swift; sourceTree = "<group>"; };
 		088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetCollectionViewCell.xib; sourceTree = "<group>"; };
-		088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -6161,7 +6152,6 @@
 				08E8F96A1F34DD36008CF4A1 /* Search Queries */,
 				08195A041FA00FE300E6D6CD /* Course List */,
 				086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */,
-				088EDCC11F94CC5D0098DEC7 /* HomeViewController.swift */,
 				081959E81FA0033800E6D6CD /* Home Screen */,
 			);
 			name = Courses;
@@ -10980,7 +10970,6 @@
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
 				086442D11F765011000CC53D /* AuthTextField.swift in Sources */,
 				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
-				088EDCC31F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				086BE2B31F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -11447,7 +11436,6 @@
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
-				088EDCC21F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
@@ -11915,7 +11903,6 @@
 				2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */,
-				088EDCC81F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */,
 				2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */,
 				2C1B61331F4C4AEF00236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -12355,7 +12342,6 @@
 				2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */,
-				088EDCC91F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */,
 				2C1B63431F4C590700236804 /* RGTabView.swift in Sources */,
 				2C1B63441F4C590700236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -12795,7 +12781,6 @@
 				2C8652DD1F4B33DE00D51654 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C8652DE1F4B33DE00D51654 /* RGPageViewController.swift in Sources */,
-				088EDCC51F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C8652DF1F4B33DE00D51654 /* RGTabBarItem.swift in Sources */,
 				2C8652E01F4B33DE00D51654 /* RGTabView.swift in Sources */,
 				2C8652E11F4B33DE00D51654 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -13250,7 +13235,6 @@
 				2C89A9D71F4C289900227C3B /* TeacherCollectionViewCell.swift in Sources */,
 				2C89A9D81F4C289900227C3B /* TitleTextTableViewCell.swift in Sources */,
 				2C89A9D91F4C289900227C3B /* CoursePreviewViewController.swift in Sources */,
-				088EDCC61F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */,
 				2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */,
 				2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */,
@@ -13674,7 +13658,6 @@
 				2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */,
-				088EDCC71F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */,
 				2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */,
 				2C97317B1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -14168,7 +14151,6 @@
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
-				088EDCC41F94CC5D0098DEC7 /* HomeViewController.swift in Sources */,
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
 				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,

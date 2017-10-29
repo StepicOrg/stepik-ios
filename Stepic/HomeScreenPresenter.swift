@@ -12,9 +12,10 @@ protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
     func getNavigation() -> UINavigationController?
+    func updateCourseCount(to: Int, forBlockWithID: String)
 }
 
-class HomeScreenPresenter: LastStepWidgetDataSource {
+class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     weak var view: HomeScreenView?
     init(view: HomeScreenView) {
         self.view = view
@@ -22,8 +23,8 @@ class HomeScreenPresenter: LastStepWidgetDataSource {
 
     func initBlocks() {
         let blocks = [
-            CourseListBlock(listType: .enrolled, horizontalLimit: 6, title: "Enrolled", colorMode: .light, lastStepWidgetDataSource: self),
-            CourseListBlock(listType: .popular, horizontalLimit: 6, title: "Popular", colorMode: .dark)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: "Enrolled", colorMode: .light, lastStepWidgetDataSource: self, courseListCountDelegate: self),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: "Popular", colorMode: .dark)
         ]
 
         view?.presentBlocks(blocks: blocks)
@@ -50,6 +51,10 @@ class HomeScreenPresenter: LastStepWidgetDataSource {
             }
         }
     }
+
+    func updateCourseCount(to: Int, forListID: String) {
+        view?.updateCourseCount(to: to, forBlockWithID: forListID)
+    }
 }
 
 struct ContinueLearningWidgetData {
@@ -75,18 +80,19 @@ struct ContinueLearningWidgetData {
 struct CourseListBlock {
     let title: String
     let colorMode: CourseListColorMode
-
+    var ID: String
     let horizontalController: CourseListHorizontalViewController
     let verticalController: CourseListVerticalViewController
 
-    init(listType: CourseListType, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
         self.title = title
         self.colorMode = colorMode
-
+        self.ID = ID
         self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
-        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
+        self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
-        self.verticalController.presenter = CourseListPresenter(view: verticalController, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
     }
 }
