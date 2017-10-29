@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SmallItemCell" customModule="StepikTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="308" height="180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="JlQ-sM-ddL">
+                    <rect key="frame" x="0.0" y="0.0" width="308" height="180"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0O7-6r-J04">
+                    <rect key="frame" x="17" y="58" width="274" height="74"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="31"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JlQ-sM-ddL" secondAttribute="bottom" id="36o-ZZ-dSA"/>
+                <constraint firstItem="0O7-6r-J04" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17" id="V5v-Nj-Nxe"/>
+                <constraint firstItem="JlQ-sM-ddL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a3i-cu-93P"/>
+                <constraint firstAttribute="trailing" secondItem="JlQ-sM-ddL" secondAttribute="trailing" id="aQJ-zd-OAf"/>
+                <constraint firstAttribute="trailing" secondItem="0O7-6r-J04" secondAttribute="trailing" constant="17" id="cRf-dD-DlQ"/>
+                <constraint firstItem="JlQ-sM-ddL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hBs-oz-voJ"/>
+                <constraint firstAttribute="bottom" secondItem="0O7-6r-J04" secondAttribute="bottom" constant="48" id="kdC-wS-60f"/>
+                <constraint firstItem="0O7-6r-J04" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="58" id="uLp-hM-R16"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
+            <connections>
+                <outlet property="imageView" destination="JlQ-sM-ddL" id="11H-rU-R3y"/>
+                <outlet property="titleLabel" destination="0O7-6r-J04" id="feE-Xa-Vvn"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="NatGeo17" width="3200" height="2000"/>
+    </resources>
+</document>
