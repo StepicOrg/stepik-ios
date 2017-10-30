@@ -35,6 +35,7 @@ class CourseListHorizontalViewController: CourseListViewController {
 }
 
 extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
+
     func setupContentView() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: widgetWidth, height: 100)

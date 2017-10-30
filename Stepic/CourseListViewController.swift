@@ -26,7 +26,11 @@ protocol CourseListViewControllerDelegate: class {
 }
 
 class CourseListViewController: UIViewController, CourseListView {
-    var presenter: CourseListPresenter?
+    var presenter: CourseListPresenter? {
+        didSet {
+            refresh()
+        }
+    }
     var refreshEnabled: Bool = true
     var paginationStatus: PaginationStatus = .none
 
@@ -116,9 +120,12 @@ class CourseListViewController: UIViewController, CourseListView {
         }
     }
 
+    var changedPlaceholderVisibleBlock: ((Bool) -> Void)?
+
     private func setPlaceholder(visible: Bool) {
         emptyPlaceholder.isHidden = !visible
         delegate?.setUserInteraction(enabled: !visible)
+        changedPlaceholderVisibleBlock?(visible)
     }
 
     func setState(state: CourseListState) {
@@ -138,12 +145,20 @@ class CourseListViewController: UIViewController, CourseListView {
             break
         case .empty:
             // Show empty placeholder
-            placeholderText = "Empty"
+            emptyPlaceholder.text = "<b>Empty</b> empty empty empty empty emptyempty emptyempty emptyempty empty"
+            emptyPlaceholder.onTap = {
+                [weak self] in
+                self?.presenter?.refresh()
+            }
             setPlaceholder(visible: true)
             break
         case .emptyError:
-            placeholderText = "Error"
+            emptyPlaceholder.text = "<b>Error</b> error roerer erere rere ere re re re re qewjr jqwe rqjew rjqew nrjkqewn rjkqewn kjqrew"
             setPlaceholder(visible: true)
+            emptyPlaceholder.onTap = {
+                [weak self] in
+                self?.presenter?.refresh()
+            }
             // Show error placeholder
             break
         case .emptyRefreshing:
@@ -152,7 +167,11 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
-            placeholderText = "Anonymous"
+            emptyPlaceholder.text = "Anonymous"
+            emptyPlaceholder.onTap = {
+                [weak self] in
+                self?.presenter?.refresh()
+            }
             setPlaceholder(visible: true)
             break
         }
@@ -188,26 +207,11 @@ class CourseListViewController: UIViewController, CourseListView {
         return self
     }
 
-    lazy var placeholderLabel: UILabel = {
-        let l = UILabel()
-        l.numberOfLines = 0
-        l.textAlignment = NSTextAlignment.center
-        return l
-    }()
-
-    var placeholderText: String? {
-        didSet {
-            placeholderLabel.text = placeholderText
-        }
-    }
-
-    lazy var emptyPlaceholder: UIView = {
-        let placeholder = UIView()
+    lazy var emptyPlaceholder: CourseListEmptyPlaceholder = {
+        let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         self.view.addSubview(placeholder)
         placeholder.align(toView: self.view)
         placeholder.isHidden = true
-        placeholder.addSubview(self.placeholderLabel)
-        self.placeholderLabel.align(toView: placeholder)
         return placeholder
     }()
 }

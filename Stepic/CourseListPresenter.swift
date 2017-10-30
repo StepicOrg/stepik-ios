@@ -176,10 +176,13 @@ class CourseListPresenter {
         }.catch {
             [weak self]
             error in
-            guard let strongSelf = self, let vc = self?.view?.getController(), (error as? PerformRequestError) == PerformRequestError.noAccessToRefreshToken else {
+            guard let strongSelf = self else {
                 return
             }
             strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
+            guard let vc = self?.view?.getController(), (error as? PerformRequestError) == PerformRequestError.noAccessToRefreshToken else {
+                return
+            }
             AuthInfo.shared.token = nil
             RoutingManager.auth.routeFrom(controller: vc, success: nil, cancel: nil)
         }

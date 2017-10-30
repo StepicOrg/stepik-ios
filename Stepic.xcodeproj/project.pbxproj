@@ -802,6 +802,22 @@
 		08C6E31D1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
 		08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB751FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB761FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB771FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB781FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB791FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB7A1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB7B1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */; };
+		08C7CB7D1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB7E1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB7F1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB801FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB811FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB821FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB831FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
+		08C7CB841FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */; };
 		08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */; };
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -4691,6 +4707,8 @@
 		08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakAlertViewController.swift; sourceTree = "<group>"; };
 		08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreakAlertViewController.xib; sourceTree = "<group>"; };
 		08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_exams_v10.xcdatamodel; sourceTree = "<group>"; };
+		08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseListEmptyPlaceholder.xib; sourceTree = "<group>"; };
+		08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListEmptyPlaceholder.swift; sourceTree = "<group>"; };
 		08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerManager.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
 		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoursePreviewViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -6145,6 +6163,7 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				08C7CB721FA7AC73001D8241 /* CourseListEmptyPlaceholder */,
 				084896931F9E8A1E00CFA273 /* Continue Learning Widget */,
 				088EDCAE1F949A2C0098DEC7 /* New Widgets Collection View Cell */,
 				08EDD6151F7C6054005203E4 /* New Widgets Table View Cell */,
@@ -6434,6 +6453,15 @@
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 			);
 			name = new;
+			sourceTree = "<group>";
+		};
+		08C7CB721FA7AC73001D8241 /* CourseListEmptyPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				08C7CB731FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib */,
+				08C7CB7C1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift */,
+			);
+			name = CourseListEmptyPlaceholder;
 			sourceTree = "<group>";
 		};
 		08CA59D71BBC0067008DC44D /* Course preview */ = {
@@ -8380,6 +8408,7 @@
 				08E8F97E1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
 				086494A11E8C7A060083E0BE /* SberbankUniversity.xcassets in Resources */,
+				08C7CB751FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 				0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
@@ -8396,6 +8425,7 @@
 				0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08CBA32F1F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
 				084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
+				08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
@@ -8555,6 +8585,7 @@
 				08CBA3471F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B62CA1F4C517500236804 /* Config.plist in Resources */,
 				2C1B62821F4C4AEF00236804 /* step5.html in Resources */,
+				08C7CB7A1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -8659,6 +8690,7 @@
 				08CBA3481F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C1B64941F4C590700236804 /* QuizViewController.xib in Resources */,
+				08C7CB7B1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B64961F4C590700236804 /* step5.html in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -8760,6 +8792,7 @@
 				2C8654251F4B33DE00D51654 /* DiscussionTableViewCell.xib in Resources */,
 				2C8654261F4B33DE00D51654 /* DiscussionsViewController.xib in Resources */,
 				2C8654291F4B33DE00D51654 /* LoadMoreTableViewCell.xib in Resources */,
+				08C7CB771FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				2C86542A1F4B33DE00D51654 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C86542C1F4B33DE00D51654 /* QuizViewController.xib in Resources */,
 				2C86542D1F4B33DE00D51654 /* step5.html in Resources */,
@@ -8865,6 +8898,7 @@
 				2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */,
 				2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */,
 				2C89AB101F4C289900227C3B /* DiscussionsStoryboard.storyboard in Resources */,
+				08C7CB781FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				2C89AB111F4C289900227C3B /* QuizViewController.xib in Resources */,
 				2C89AB121F4C289900227C3B /* step5.html in Resources */,
 				2C89AB141F4C289900227C3B /* SearchSuggestionTableViewCell.xib in Resources */,
@@ -8973,6 +9007,7 @@
 				08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C9732C51F4C38F600AC9301 /* QuizViewController.xib in Resources */,
+				08C7CB791FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C9732C61F4C38F600AC9301 /* step5.html in Resources */,
 				08CBA3221F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -9125,6 +9160,7 @@
 				08CBA3431F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
+				08C7CB761FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA31F1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -11272,6 +11308,7 @@
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				081566261F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				082799491E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
+				08C7CB7E1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08DF78BD1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
@@ -11629,6 +11666,7 @@
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
 				08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
+				08C7CB7D1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
@@ -12071,6 +12109,7 @@
 				2C1B61D11F4C4AEF00236804 /* StringDatasetExtension.swift in Sources */,
 				2C1B61D21F4C4AEF00236804 /* LoadingAnimationView.swift in Sources */,
 				2C1B61D31F4C4AEF00236804 /* SortingDataset.swift in Sources */,
+				08C7CB831FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				2C1B61D41F4C4AEF00236804 /* FreeAnswerDataset.swift in Sources */,
 				2C1B61D51F4C4AEF00236804 /* MatchingDataset.swift in Sources */,
 				2C1B61D61F4C4AEF00236804 /* FillBlanksDataset.swift in Sources */,
@@ -12510,6 +12549,7 @@
 				2C1B63E21F4C590700236804 /* StringDatasetExtension.swift in Sources */,
 				2C1B63E31F4C590700236804 /* LoadingAnimationView.swift in Sources */,
 				2C1B63E41F4C590700236804 /* SortingDataset.swift in Sources */,
+				08C7CB841FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				2C1B63E51F4C590700236804 /* FreeAnswerDataset.swift in Sources */,
 				2C1B63E61F4C590700236804 /* MatchingDataset.swift in Sources */,
 				2C1B63E71F4C590700236804 /* FillBlanksDataset.swift in Sources */,
@@ -12949,6 +12989,7 @@
 				2C86537F1F4B33DE00D51654 /* StringDatasetExtension.swift in Sources */,
 				2C8653801F4B33DE00D51654 /* LoadingAnimationView.swift in Sources */,
 				2C8653811F4B33DE00D51654 /* SortingDataset.swift in Sources */,
+				08C7CB801FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				2C8653821F4B33DE00D51654 /* FreeAnswerDataset.swift in Sources */,
 				2C8653831F4B33DE00D51654 /* MatchingDataset.swift in Sources */,
 				2C8653841F4B33DE00D51654 /* FillBlanksDataset.swift in Sources */,
@@ -13126,6 +13167,7 @@
 				2C89A9711F4C289900227C3B /* CurrentBestStreakViewController.swift in Sources */,
 				081566291F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */,
+				08C7CB811FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				2C89A9731F4C289900227C3B /* DefaultsContainer.swift in Sources */,
 				2C89A9741F4C289900227C3B /* CoursesAPI.swift in Sources */,
 				2C89A9751F4C289900227C3B /* SectionsAPI.swift in Sources */,
@@ -13826,6 +13868,7 @@
 				2C9732191F4C38F600AC9301 /* StringDatasetExtension.swift in Sources */,
 				2C97321A1F4C38F600AC9301 /* LoadingAnimationView.swift in Sources */,
 				2C97321B1F4C38F600AC9301 /* SortingDataset.swift in Sources */,
+				08C7CB821FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				2C97321C1F4C38F600AC9301 /* FreeAnswerDataset.swift in Sources */,
 				2C97321D1F4C38F600AC9301 /* MatchingDataset.swift in Sources */,
 				2C97321E1F4C38F600AC9301 /* FillBlanksDataset.swift in Sources */,
@@ -14319,6 +14362,7 @@
 				864D66D61E83DE03001E8D9E /* ChoiceDataset.swift in Sources */,
 				864D66D71E83DE03001E8D9E /* StringDatasetExtension.swift in Sources */,
 				86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */,
+				08C7CB7F1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				864D66D81E83DE03001E8D9E /* SortingDataset.swift in Sources */,
 				864D66D91E83DE03001E8D9E /* FreeAnswerDataset.swift in Sources */,
 				864D66DA1E83DE03001E8D9E /* MatchingDataset.swift in Sources */,

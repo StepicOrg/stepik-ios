@@ -17,6 +17,10 @@ class HorizontalCoursesView: NibInitializableView {
     @IBOutlet weak internal var courseCountLabel: StepikLabel!
 
     @IBOutlet weak internal var courseListContainerView: UIView!
+    @IBOutlet weak var courseListContainerHeight: NSLayoutConstraint!
+
+    let courseListHeight: CGFloat = 208
+    let courseListPlaceholderHeight: CGFloat = 100
 
     private var showVerticalBlock: (() -> Void)?
 
@@ -26,9 +30,12 @@ class HorizontalCoursesView: NibInitializableView {
 
     var courseCount: Int = 0 {
         didSet {
-            courseCountLabel.text = courseCount == 0 ? "" : "\(courseCount) курсов"
+            courseCountLabel.text = courseCount == 0 || !shouldShowCount ? "" : "\(courseCount) курсов"
+            showAllButton.isHidden = courseCount == 0
         }
     }
+
+    var shouldShowCount: Bool = false
 
     @IBAction func showAllPressed(_ sender: Any) {
         showVerticalBlock?()
@@ -37,11 +44,21 @@ class HorizontalCoursesView: NibInitializableView {
     func setup(block: CourseListBlock, showVerticalBlock: @escaping () -> Void) {
         self.showVerticalBlock = showVerticalBlock
 
+        block.horizontalController.changedPlaceholderVisibleBlock = {
+            [weak self]
+            visible in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.courseListContainerHeight.constant = visible ? strongSelf.courseListPlaceholderHeight : strongSelf.courseListHeight
+        }
         titleLabel.text = block.title
+        shouldShowCount = block.shouldShowCount
+        courseCountLabel.colorMode = .gray
+        courseCountLabel.isHidden = !shouldShowCount
         courseListContainerView.addSubview(block.horizontalController.view)
         block.horizontalController.view.align(toView: courseListContainerView)
         showAllButton.setTitleColor(UIColor.lightGray, for: .normal)
-        courseCountLabel.colorMode = .gray
         switch block.colorMode {
         case .dark:
             view.backgroundColor = UIColor.mainDark

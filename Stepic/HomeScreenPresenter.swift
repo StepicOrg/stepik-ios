@@ -26,8 +26,8 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
 
     func initBlocks() {
         let blocks = [
-            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: "Enrolled", colorMode: .light, lastStepWidgetDataSource: self, courseListCountDelegate: self),
-            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: "Popular", colorMode: .dark)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: "Enrolled", colorMode: .light, shouldShowCount: true, lastStepWidgetDataSource: self, courseListCountDelegate: self),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: "Popular", colorMode: .dark, shouldShowCount: false, courseListCountDelegate: self)
         ]
 
         view?.presentBlocks(blocks: blocks)
@@ -111,11 +111,13 @@ struct CourseListBlock {
     var ID: String
     let horizontalController: CourseListHorizontalViewController
     let verticalController: CourseListVerticalViewController
+    let shouldShowCount: Bool
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
         self.title = title
         self.colorMode = colorMode
         self.ID = ID
+        self.shouldShowCount = shouldShowCount
         self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
         self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
