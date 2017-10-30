@@ -16,6 +16,7 @@ protocol HomeScreenView: class {
 
     func getNavigation() -> UINavigationController?
     func updateCourseCount(to: Int, forBlockWithID: String)
+    func show(vc: UIViewController)
 }
 
 class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
@@ -25,9 +26,15 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     }
 
     func initBlocks() {
+        let showController: (UIViewController) -> Void = {
+            [weak self]
+            vc in
+            self?.view?.show(vc: vc)
+        }
+
         let blocks = [
-            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, lastStepWidgetDataSource: self, courseListCountDelegate: self),
-            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, courseListCountDelegate: self)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, showControllerBlock: showController, lastStepWidgetDataSource: self, courseListCountDelegate: self),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, showControllerBlock: showController, courseListCountDelegate: self)
         ]
 
         view?.presentBlocks(blocks: blocks)
@@ -110,10 +117,10 @@ struct CourseListBlock {
     let colorMode: CourseListColorMode
     var ID: String
     let horizontalController: CourseListHorizontalViewController
-    let verticalController: CourseListVerticalViewController
     let shouldShowCount: Bool
+    let showVerticalBlock: () -> Void
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
         self.title = title
         self.colorMode = colorMode
         self.ID = ID
@@ -122,8 +129,11 @@ struct CourseListBlock {
         self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
-        self.verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
-        self.verticalController.title = title
-        self.verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.showVerticalBlock = {
+            let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
+            verticalController.title = title
+            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+            showControllerBlock(verticalController)
+        }
     }
 }

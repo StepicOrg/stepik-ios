@@ -46,8 +46,8 @@ class HorizontalCoursesView: NibInitializableView {
         showVerticalBlock?()
     }
 
-    func setup(block: CourseListBlock, showVerticalBlock: @escaping () -> Void) {
-        self.showVerticalBlock = showVerticalBlock
+    func setup(block: CourseListBlock) {
+        self.showVerticalBlock = block.showVerticalBlock
         showAllButton.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         block.horizontalController.changedPlaceholderVisibleBlock = {
             [weak self]

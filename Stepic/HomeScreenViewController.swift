@@ -48,11 +48,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         for block in blocks {
             let courseListView: HorizontalCoursesView = HorizontalCoursesView(frame: CGRect.zero)
             self.addChildViewController(block.horizontalController)
-            courseListView.setup(block: block, showVerticalBlock: {
-                [weak self]
-                _ in
-                self?.show(block.verticalController, sender: nil)
-            })
+            courseListView.setup(block: block)
             countUpdateBlock[block.ID] = {
                 [weak self] in
                 guard let strongSelf = self else {
@@ -78,14 +74,15 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     }
 
     func updateCourseCount(to count: Int, forBlockWithID ID: String) {
-        if let index = blocks.index(where: {$0.ID == ID}) {
-            countForID[ID] = count
-            countUpdateBlock[ID]?()
-        }
+        countForID[ID] = count
+        countUpdateBlock[ID]?()
+    }
+
+    func show(vc: UIViewController) {
+        self.show(vc, sender: nil)
     }
 
     private let widgetBackgroundView = UIView()
-
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(widget)
