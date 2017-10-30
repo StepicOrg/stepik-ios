@@ -60,9 +60,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nsN-db-9aK">
-                    <rect key="frame" x="0.0" y="330" width="496" height="3"/>
+                    <rect key="frame" x="0.0" y="329" width="496" height="4"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="3" id="fjl-Ze-Ijc"/>
+                        <constraint firstAttribute="height" constant="4" id="fjl-Ze-Ijc"/>
                     </constraints>
                     <color key="progressTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
