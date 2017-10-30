@@ -26,8 +26,8 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
 
     func initBlocks() {
         let blocks = [
-            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: "Enrolled", colorMode: .light, shouldShowCount: true, lastStepWidgetDataSource: self, courseListCountDelegate: self),
-            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: "Popular", colorMode: .dark, shouldShowCount: false, courseListCountDelegate: self)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, lastStepWidgetDataSource: self, courseListCountDelegate: self),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, courseListCountDelegate: self)
         ]
 
         view?.presentBlocks(blocks: blocks)
@@ -123,6 +123,7 @@ struct CourseListBlock {
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
+        self.verticalController.title = title
         self.verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
     }
 }

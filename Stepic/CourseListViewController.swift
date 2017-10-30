@@ -145,21 +145,40 @@ class CourseListViewController: UIViewController, CourseListView {
             break
         case .empty:
             // Show empty placeholder
-            emptyPlaceholder.text = "<b>Empty</b> empty empty empty empty emptyempty emptyempty emptyempty empty"
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
+            }
+            if let listType = presenter?.listType {
+                switch listType {
+                case .enrolled:
+                    emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
+                case .popular:
+                    emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyPopular", comment: "")
+                default:
+                    emptyPlaceholder.text = "Empty"
+                    break
+                }
             }
             setPlaceholder(visible: true)
             break
         case .emptyError:
-            emptyPlaceholder.text = "<b>Error</b> error roerer erere rere ere re re re re qewjr jqwe rqjew rjqew nrjkqewn rjkqewn kjqrew"
-            setPlaceholder(visible: true)
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
             }
-            // Show error placeholder
+            if let listType = presenter?.listType {
+                switch listType {
+                case .enrolled:
+                    emptyPlaceholder.text = NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
+                case .popular:
+                    emptyPlaceholder.text = NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+                default:
+                    emptyPlaceholder.text = "Error"
+                    break
+                }
+            }
+            setPlaceholder(visible: true)
             break
         case .emptyRefreshing:
             delegate?.reloadData()
@@ -167,7 +186,7 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
-            emptyPlaceholder.text = "Anonymous"
+            emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()

@@ -23,10 +23,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-eV-vHu">
-                    <rect key="frame" x="356" y="19.5" width="40" height="30"/>
+                    <rect key="frame" x="356" y="18" width="40" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="0aa-dd-8yJ"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Все"/>
                     <connections>
                         <action selector="showAllPressed:" destination="-1" eventType="touchUpInside" id="Ed0-Y1-uhk"/>
@@ -43,7 +44,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="My courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU3-ni-m1D" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                     <rect key="frame" x="16" y="16" width="332" height="36"/>
-                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>

@@ -29,7 +29,7 @@
                         <constraint firstAttribute="width" secondItem="uNn-0b-eUo" secondAttribute="height" multiplier="16:9" id="5SG-6x-oqH"/>
                     </constraints>
                 </imageView>
-                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMe-fG-ImZ">
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMe-fG-ImZ">
                     <rect key="frame" x="0.0" y="0.0" width="496" height="333"/>
                     <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
@@ -60,17 +60,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nsN-db-9aK">
-                    <rect key="frame" x="0.0" y="329" width="496" height="4"/>
+                    <rect key="frame" x="0.0" y="330" width="496" height="3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="4" id="fjl-Ze-Ijc"/>
+                        <constraint firstAttribute="height" constant="3" id="fjl-Ze-Ijc"/>
                     </constraints>
                     <color key="progressTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </progressView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKS-wb-rwJ">
-                    <rect key="frame" x="168" y="146.5" width="160" height="40"/>
+                    <rect key="frame" x="148" y="146.5" width="200" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="160" id="3MA-Td-N0f"/>
+                        <constraint firstAttribute="width" constant="200" id="3MA-Td-N0f"/>
                         <constraint firstAttribute="height" constant="40" id="5Cq-Af-QGq"/>
                     </constraints>
                     <state key="normal" title="Continue Learning"/>
@@ -101,7 +101,7 @@
                 <constraint firstItem="eKS-wb-rwJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="998" id="lfy-DP-2eh"/>
                 <constraint firstItem="Ysj-iu-KvI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="qat-By-n3A"/>
                 <constraint firstAttribute="bottom" secondItem="2p1-Rz-jUd" secondAttribute="bottom" constant="16" id="wFu-z2-TQN"/>
-                <constraint firstItem="ypo-Im-Xk0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKS-wb-rwJ" secondAttribute="bottom" constant="40" id="x7L-aY-XAg"/>
+                <constraint firstItem="ypo-Im-Xk0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKS-wb-rwJ" secondAttribute="bottom" constant="24" id="x7L-aY-XAg"/>
                 <constraint firstAttribute="trailing" secondItem="ypo-Im-Xk0" secondAttribute="trailing" constant="16" id="zQU-zJ-zCX"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

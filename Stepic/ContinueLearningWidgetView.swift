@@ -24,6 +24,7 @@ class ContinueLearningWidgetView: NibInitializableView {
 
     override func setupSubviews() {
         courseImageImageView.setRoundedCorners(cornerRadius: 4)
+        continueLearningButton.setTitle(NSLocalizedString("ContinueLearningWidgetButtonTitle", comment: ""), for: .normal)
         continueLearningButton.setTitleColor(UIColor.mainDark, for: .normal)
         continueLearningButton.backgroundColor = UIColor.mainLight
         continueLearningButton.setRoundedCorners(cornerRadius: continueLearningButton.frame.height / 2)
@@ -43,7 +44,7 @@ class ContinueLearningWidgetView: NibInitializableView {
         if let progress = widgetData.progress {
             setProgress(hidden: false)
             self.courseProgressProgressView.progress = progress / 100
-            self.courseProgressLabel.text = "Your current progress is \(Int(progress.rounded(.toNearestOrAwayFromZero)))%"
+            self.courseProgressLabel.text = "\(NSLocalizedString("YourCurrentProgressIs", comment: "")) \(Int(progress.rounded(.toNearestOrAwayFromZero)))%"
         } else {
             setProgress(hidden: true)
         }

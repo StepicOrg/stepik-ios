@@ -30,7 +30,12 @@ class HorizontalCoursesView: NibInitializableView {
 
     var courseCount: Int = 0 {
         didSet {
-            courseCountLabel.text = courseCount == 0 || !shouldShowCount ? "" : "\(courseCount) курсов"
+            let pluralizedCountString = StringHelper.pluralize(number: courseCount, forms: [
+                NSLocalizedString("courses1", comment: ""),
+                NSLocalizedString("courses234", comment: ""),
+                NSLocalizedString("courses567890", comment: "")
+            ])
+            courseCountLabel.text = courseCount == 0 || !shouldShowCount ? "" : "\(courseCount) \(pluralizedCountString)"
             showAllButton.isHidden = courseCount == 0
         }
     }
@@ -43,7 +48,7 @@ class HorizontalCoursesView: NibInitializableView {
 
     func setup(block: CourseListBlock, showVerticalBlock: @escaping () -> Void) {
         self.showVerticalBlock = showVerticalBlock
-
+        showAllButton.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         block.horizontalController.changedPlaceholderVisibleBlock = {
             [weak self]
             visible in

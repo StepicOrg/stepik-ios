@@ -49,7 +49,7 @@ class CourseListPresenter {
 
     private weak var view: CourseListView?
     private var limit: Int?
-    private var listType: CourseListType
+    var listType: CourseListType
 
     private var currentPage: Int = 1
     private var hasNextPage: Bool = false
