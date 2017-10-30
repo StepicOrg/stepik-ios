@@ -129,7 +129,6 @@ class CourseListViewController: UIViewController, CourseListView {
     }
 
     func setState(state: CourseListState) {
-//        let prevState: CourseListState = self.state
         self.state = state
         switch state {
         case .displaying:
@@ -137,14 +136,11 @@ class CourseListViewController: UIViewController, CourseListView {
             break
         case .displayingWithError:
             setPlaceholder(visible: false)
-            // Show some error indicator here
             break
         case .displayingWithRefreshing:
             setPlaceholder(visible: false)
-            // Show some activity indicator here
             break
         case .empty:
-            // Show empty placeholder
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
@@ -189,13 +185,12 @@ class CourseListViewController: UIViewController, CourseListView {
             emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
-                self?.presenter?.refresh()
+                let vc = ControllerHelper.getAuthController()
+                self?.present(vc, animated: true, completion: nil)
             }
             setPlaceholder(visible: true)
             break
         }
-
-//        delegate?.updateState(from: prevState)
     }
 
     func setPaginationStatus(status: PaginationStatus) {

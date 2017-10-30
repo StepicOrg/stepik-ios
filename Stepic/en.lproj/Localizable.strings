@@ -337,11 +337,11 @@ Enrolled = "Enrolled"; //+
 Popular = "Popular"; //+
 Home = "Home"; //+
 YourCurrentProgressIs = "Your current progress is"; //+
-HomePlaceholderAnonymous = "<b>Sign in<\b> and start learning right now"; //+
-HomePlaceholderEmptyEnrolled = "<b>Enroll<\b> for free courses and they will be here"; //+
-HomePlaceholderEmptyPopular = "<b>Open courses<\b> are on vacation. Please, see later"; //+
-HomePlaceHolderErrorEnrolled = "Error while loading your courses. <b>Press<\b> to try again"; //+
-HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>Press<\b>to ttry again"; //+
+HomePlaceholderAnonymous = "<b>Sign in</b> and start learning right now"; //+
+HomePlaceholderEmptyEnrolled = "<b>Enroll</b> for free courses and they will be here"; //+
+HomePlaceholderEmptyPopular = "<b>Open courses</b> are on vacation. Please, see later"; //+
+HomePlaceHolderErrorEnrolled = "Error while loading your courses. <b>Press</b> to try again"; //+
+HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>Press</b>to ttry again"; //+
 //TODO: Add courses count
 courses1 = "course";
 courses234 = "courses";
