@@ -83,8 +83,9 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         }
     }
 
+    private let widgetBackgroundView = UIView()
+
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
-        let widgetBackgroundView = UIView()
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(widget)
         widget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
@@ -95,7 +96,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
 
         UIView.animate(withDuration: 0.15) {
-            widgetBackgroundView.isHidden = false
+            self.widgetBackgroundView.isHidden = false
+        }
+    }
+
+    func hideCountinueLearningWidget() {
+        stackView.removeArrangedSubview(widgetBackgroundView)
+        UIView.animate(withDuration: 0.15) {
+            self.widgetBackgroundView.isHidden = true
         }
     }
 }

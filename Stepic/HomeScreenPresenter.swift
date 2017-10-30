@@ -10,7 +10,10 @@ import Foundation
 
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
+
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
+    func hideCountinueLearningWidget()
+
     func getNavigation() -> UINavigationController?
     func updateCourseCount(to: Int, forBlockWithID: String)
 }
@@ -30,13 +33,37 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
         view?.presentBlocks(blocks: blocks)
     }
 
-    private func initLastStep(for course: Course) {
+    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+    private var isContinueLearningWidgetPresented: Bool = false
+
+    private func presentLastStep(for course: Course) {
         guard let widgetData = ContinueLearningWidgetData(course: course, navigation: view?.getNavigation()) else {
             return
         }
-        let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+
         continueLearningWidget.setup(widgetData: widgetData)
-        view?.presentContinueLearningWidget(widget: continueLearningWidget)
+
+        if !isContinueLearningWidgetPresented {
+            view?.presentContinueLearningWidget(widget: continueLearningWidget)
+            isContinueLearningWidgetPresented = true
+        }
+    }
+
+    private func updateCourseForLastStep(courses: [Course]) {
+        for course in courses {
+            if checkIsGoodForLastStep(course: course) {
+                presentLastStep(for: course)
+                return
+            }
+        }
+        if isContinueLearningWidgetPresented {
+            hideContinueLearningWidget()
+        }
+    }
+
+    private func hideContinueLearningWidget() {
+        view?.hideCountinueLearningWidget()
+        isContinueLearningWidgetPresented = false
     }
 
     private func checkIsGoodForLastStep(course: Course) -> Bool {
@@ -44,11 +71,12 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     }
 
     func didLoadWithProgresses(courses: [Course]) {
-        for course in courses {
-            if checkIsGoodForLastStep(course: course) {
-                initLastStep(for: course)
-                return
+        if courses.isEmpty {
+            if isContinueLearningWidgetPresented {
+                hideContinueLearningWidget()
             }
+        } else {
+            updateCourseForLastStep(courses: courses)
         }
     }
 

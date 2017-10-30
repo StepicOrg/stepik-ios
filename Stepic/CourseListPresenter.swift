@@ -192,6 +192,12 @@ class CourseListPresenter {
             return
         } else {
             handleCourseSubscriptionUpdates()
+            switch listType {
+            case .enrolled:
+                lastStepDataSource?.didLoadWithProgresses(courses: courses)
+            default:
+                break
+            }
         }
     }
 
@@ -332,6 +338,8 @@ class CourseListPresenter {
             }
         case .enrolled:
             if !AuthInfo.shared.isAuthorized {
+                self.courses = []
+                self.lastStepDataSource?.didLoadWithProgresses(courses: courses)
                 self.state = .emptyAnonymous
             }
             requestNonCollection(updateProgresses: false, completion: {

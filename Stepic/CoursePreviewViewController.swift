@@ -168,7 +168,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 [weak self] in
                 SVProgressHUD.show()
                 button.isEnabled = false
-                _ = AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
+                _ = AuthManager.sharedManager.joinCourse(course: c, delete: true, success : {
                     SVProgressHUD.showSuccess(withStatus: "")
                     button.isEnabled = true
                     c.enrolled = false
@@ -398,17 +398,39 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             if !c.enrolled {
                 SVProgressHUD.show()
                 sender.isEnabled = false
-                _ = AuthManager.sharedManager.joinCourseWithId(c.id, success : {
+                _ = AuthManager.sharedManager.joinCourse(course: c, success : {
                     [weak self] in
-                    SVProgressHUD.showSuccess(withStatus: "")
-                    sender.isEnabled = true
-                    sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
-                    self?.course?.enrolled = true
-                    CoreDataHelper.instance.save()
-                    CourseSubscriptionManager.sharedManager.subscribedTo(course: c)
-                    WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    self?.performSegue(withIdentifier: "showSections", sender: nil)
-                    self?.initBarButtonItems(dropAvailable: c.enrolled)
+
+                    let successBlock = {
+                        [weak self] in
+                        SVProgressHUD.showSuccess(withStatus: "")
+                        sender.isEnabled = true
+                        sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
+                        self?.course?.enrolled = true
+                        CoreDataHelper.instance.save()
+                        CourseSubscriptionManager.sharedManager.subscribedTo(course: c)
+                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                        self?.performSegue(withIdentifier: "showSections", sender: nil)
+                        self?.initBarButtonItems(dropAvailable: c.enrolled)
+                    }
+
+                    guard let progressId = c.progressId else {
+                        successBlock()
+                        return
+                    }
+
+                    ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: c.progress != nil ? [c.progress!] : [], refreshMode: .update, success: {
+                        progresses in
+                        guard let progress = progresses.first else {
+                            return
+                        }
+                        c.progress = progress
+                        successBlock()
+                    }, error: {
+                        _ in
+                        successBlock()
+                    })
+
                     }, error: {
                         status in
                         SVProgressHUD.showError(withStatus: status)

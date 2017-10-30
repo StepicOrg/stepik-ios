@@ -167,7 +167,7 @@ extension DownloadsViewController : UITableViewDelegate {
                                 UIThread.performUI({
                                     SVProgressHUD.show()
                                 })
-                                AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
+                                AuthManager.sharedManager.joinCourse(course: course, delete: false, success: {
                                     UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "")})
                                     self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                                     }, error: {

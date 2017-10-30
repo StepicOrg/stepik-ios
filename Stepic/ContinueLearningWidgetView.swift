@@ -31,13 +31,21 @@ class ContinueLearningWidgetView: NibInitializableView {
         courseTitleLabel.colorMode = .light
     }
 
+    private func setProgress(hidden: Bool) {
+        self.courseProgressProgressView.isHidden = hidden
+        self.courseProgressLabel.isHidden = hidden
+    }
+
     func setup(widgetData: ContinueLearningWidgetData) {
         let url = URL(string: widgetData.imageURL)
         self.courseImageImageView.setImageWithURL(url: url, placeholder: Images.lessonPlaceholderImage.size50x50)
         self.courseTitleLabel.text = widgetData.title
         if let progress = widgetData.progress {
+            setProgress(hidden: false)
             self.courseProgressProgressView.progress = progress / 100
             self.courseProgressLabel.text = "Your current progress is \(Int(progress.rounded(.toNearestOrAwayFromZero)))%"
+        } else {
+            setProgress(hidden: true)
         }
         continueLearningAction = widgetData.continueLearningAction
     }
