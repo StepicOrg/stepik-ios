@@ -61,6 +61,8 @@ class CourseListPresenter {
     weak var lastStepDataSource: LastStepWidgetDataSource?
     weak var couseListCountDelegate: CourseListCountDelegate?
 
+    private var didRefreshOnce: Bool = false
+
     private var state: CourseListState = .empty {
         didSet {
             if state != oldValue {
@@ -80,6 +82,7 @@ class CourseListPresenter {
     private var courses: [Course] = [] {
         didSet {
             listType.cachedListCourseIds = courses.map({ $0.id })
+            print("\(ID): cached courses with ids: \(listType.cachedListCourseIds)")
             if let limit = limit {
                 displayingCourses = [Course](courses.prefix(limit))
             } else {
@@ -109,12 +112,35 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
-        subscriptionManager.startObservingOtherSubscriptionmanagers()
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
         }
         view.colorMode = colorMode
+    }
+
+    private var reachabilityManager: Alamofire.NetworkReachabilityManager?
+    private func setupNetworkReachabilityListener() {
+        guard reachabilityManager == nil else {
+            return
+        }
+        reachabilityManager = Alamofire.NetworkReachabilityManager(host: StepicApplicationsInfo.stepicURL)
+        reachabilityManager?.listener = {
+            [weak self]
+            status in
+            guard let strongSelf = self else {
+                return
+            }
+            if !strongSelf.didRefreshOnce {
+                switch status {
+                case .reachable(_):
+                    strongSelf.refresh()
+                default:
+                    break
+                }
+            }
+        }
+        reachabilityManager?.startListening()
     }
 
     func getData(from courses: [Course]) -> [CourseViewData] {
@@ -157,6 +183,7 @@ class CourseListPresenter {
             AuthInfo.shared.token = nil
             RoutingManager.auth.routeFrom(controller: vc, success: nil, cancel: nil)
         }
+        subscriptionManager.startObservingOtherSubscriptionManagers()
     }
 
     func loadNextPage() {
@@ -295,6 +322,7 @@ class CourseListPresenter {
             strongSelf.hasNextPage = meta.hasNext
             strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
             strongSelf.state = courses.isEmpty ? .empty: .displaying
+            strongSelf.didRefreshOnce = true
             completion?()
             }.catch {
                 [weak self]
@@ -303,6 +331,9 @@ class CourseListPresenter {
                     return
                 }
                 print("Error while refreshing collection")
+                if !strongSelf.didRefreshOnce {
+                    strongSelf.setupNetworkReachabilityListener()
+                }
                 strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
                 completion?()
         }
@@ -327,6 +358,7 @@ class CourseListPresenter {
                 strongSelf.hasNextPage = false
                 strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
                 strongSelf.state = courses.isEmpty ? .empty: .displaying
+                strongSelf.didRefreshOnce = true
             }.catch {
                 [weak self]
                 _ in
@@ -334,6 +366,9 @@ class CourseListPresenter {
                     return
                 }
                 print("Error while refreshing collection")
+                if !strongSelf.didRefreshOnce {
+                    strongSelf.setupNetworkReachabilityListener()
+                }
                 strongSelf.state = strongSelf.courses.isEmpty ? .emptyError : .displayingWithError
             }
         case .enrolled:

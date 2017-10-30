@@ -19,7 +19,7 @@ class CourseSubscriptionManager: NSObject {
 
     override init() {}
 
-    func startObservingOtherSubscriptionmanagers() {
+    func startObservingOtherSubscriptionManagers() {
         NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseSubscribed(_:)), name: courseSubscribedNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseUnsubscribed(_:)), name: courseUnsubscribedNotificationName, object: nil)
     }
