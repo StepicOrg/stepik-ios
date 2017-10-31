@@ -20,25 +20,71 @@ class LoadingCourseWidgetView: NibInitializableView {
         return "LoadingCourseWidgetView"
     }
 
-    var gradientImageView: UIImageView?
-    private let gradientWidth: CGFloat = 40
+    private var gradientLayer: CAGradientLayer?
     private var isAnimating: Bool = false
 
-    private func setupGradient() {
-        gradientImageView = UIImageView(image: #imageLiteral(resourceName: "loading_view_gradient"))
-        guard let gradientImageView = gradientImageView else {
-            return
-        }
-        self.view.addSubview(gradientImageView)
-        gradientImageView.frame = CGRect(x: 0, y: 0, width: self.gradientWidth, height: self.view.frame.height)
-        self.view.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+
+        setupGradient()
+        updateGradient()
+        animateGradient()
     }
 
-    func animateGradient() {
-        self.gradientImageView?.frame = CGRect(x: 0, y: 0, width: self.gradientWidth, height: self.view.frame.height)
-        UIView.animate(withDuration: 3.0, delay: 0, options: UIViewAnimationOptions.repeat, animations: {
-            self.gradientImageView?.frame = CGRect(x: self.view.frame.width, y: 0, width: self.gradientWidth, height: self.view.frame.height)
-        })
+    private func setupGradient() {
+        if gradientLayer != nil { return }
+
+        gradientLayer = CAGradientLayer()
+
+        guard let gradientLayer = self.gradientLayer else {
+            return
+        }
+
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
+        gradientLayer.locations = [-0.2, -0.1, 0.0]
+
+        layer.insertSublayer(gradientLayer, at: UInt32.max)
+    }
+
+    private func updateGradient() {
+        guard let gradientLayer = self.gradientLayer else {
+            return
+        }
+
+        // Update frame
+        gradientLayer.frame = view.bounds
+
+        // Update mask
+        let path = UIBezierPath()
+        path.append(UIBezierPath(roundedRect: loadingImageView.frame, cornerRadius: 8))
+        path.append(UIBezierPath(roundedRect: loadingTitleView.frame, cornerRadius: 8))
+        path.append(UIBezierPath(roundedRect: loadingStatsView.frame, cornerRadius: 8))
+        path.append(UIBezierPath(roundedRect: loadingButtonView.frame, cornerRadius: 8))
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.path = path.cgPath
+        gradientLayer.mask = maskLayer
+    }
+
+    private func animateGradient() {
+        if isAnimating { return }
+
+        guard let gradientLayer = self.gradientLayer else {
+            return
+        }
+
+        isAnimating = true
+
+        let gradientAnimation = CABasicAnimation(keyPath: "locations")
+        gradientAnimation.fromValue = gradientLayer.locations
+        gradientAnimation.toValue = [0.9, 1.1, 1.2]
+        gradientAnimation.duration = 3.0
+        gradientAnimation.fillMode = kCAFillModeForwards
+        gradientAnimation.repeatCount = .infinity
+        gradientLayer.add(gradientAnimation, forKey: nil)
     }
 
     override func setupSubviews() {
@@ -50,9 +96,13 @@ class LoadingCourseWidgetView: NibInitializableView {
         loadingStatsView.backgroundColor = UIColor.mainLight
         loadingButtonView.setRoundedCorners(cornerRadius: 8)
         loadingButtonView.backgroundColor = UIColor.mainLight
-        setupGradient()
-        self.layoutSubviews()
-        self.view.layoutSubviews()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        view.layoutIfNeeded()
+        updateGradient()
     }
 
 }
