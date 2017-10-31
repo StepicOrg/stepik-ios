@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum PerformRequestError: Error {
-    case noAccessToRefreshToken, other
+    case noAccessToRefreshToken, other, badConnection
 }
 
 //Should preferrably be called from a UIViewController subclass
@@ -30,9 +30,17 @@ class ApiRequestPerformer {
                     User.removeAllExcept(user)
                     print("retrieved current user")
                     performRequestWithAuthorizationCheck(completion, error: errorHandler)
-                }, error: {
-                    _ in
-                    errorHandler?(.other)
+                }, error: { e in
+                    if let typedError = e as? URLError {
+                        switch typedError.code {
+                        case .notConnectedToInternet:
+                            errorHandler?(.badConnection)
+                        default:
+                            errorHandler?(.other)
+                        }
+                    } else {
+                        errorHandler?(.other)
+                    }
                 }
             )
         } else {

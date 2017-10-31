@@ -15,7 +15,7 @@ protocol RegistrationView: class {
 }
 
 enum RegistrationResult {
-    case success, error
+    case success, error, badConnection
 }
 
 enum RegistrationState {
@@ -57,8 +57,13 @@ class RegistrationPresenter {
                         AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
                         self.view?.update(with: .success)
                     })
-                }, failure: { _ in
-                    self.view?.update(with: .error)
+                }, failure: { e in
+                    switch e {
+                    case .badConnection:
+                        self.view?.update(with: .badConnection)
+                    default:
+                        self.view?.update(with: .error)
+                    }
                 })
             }, error: { _, registrationErrorInfo in
                 if let message = registrationErrorInfo?.firstError {
@@ -68,10 +73,15 @@ class RegistrationPresenter {
                 }
             })
         }, error: { err in
-            if err == PerformRequestError.noAccessToRefreshToken {
+            switch err {
+            case .noAccessToRefreshToken:
                 AuthInfo.shared.token = nil
+                self.view?.update(with: .error)
+            case .badConnection:
+                self.view?.update(with: .badConnection)
+            default:
+                self.view?.update(with: .error)
             }
-            self.view?.update(with: .error)
         })
     }
 }

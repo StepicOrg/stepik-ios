@@ -50,7 +50,16 @@ class AuthManager: NSObject {
             let response = response.response
 
             if let e = error {
-                failure(SignInError.other(error: e, code: nil, message: nil))
+                if let typedError = e as? URLError {
+                    switch typedError.code {
+                    case .notConnectedToInternet:
+                        failure(SignInError.badConnection)
+                    default:
+                        failure(SignInError.other(error: e, code: nil, message: nil))
+                    }
+                } else {
+                    failure(SignInError.other(error: e, code: nil, message: nil))
+                }
                 return
             }
 
@@ -101,7 +110,16 @@ class AuthManager: NSObject {
             let response = response.response
 
             if let e = error {
-                failure(SignInError.other(error: e, code: nil, message: nil))
+                if let typedError = e as? URLError {
+                    switch typedError.code {
+                    case .notConnectedToInternet:
+                        failure(SignInError.badConnection)
+                    default:
+                        failure(SignInError.other(error: e, code: nil, message: nil))
+                    }
+                } else {
+                    failure(SignInError.other(error: e, code: nil, message: nil))
+                }
                 return
             }
 
@@ -341,6 +359,7 @@ enum SignInError: Error {
     case manyAttempts
     case noAppWithCredentials
     case invalidEmailAndPassword
+    case badConnection
     case existingEmail(provider: String?, email: String?)
     case other(error: Error?, code: Int?, message: String?)
 }
