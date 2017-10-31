@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class UnitsAPI: APIEndpoint {
-    let name = "units"
+    override var name: String { return "units" }
 
     @discardableResult func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON({

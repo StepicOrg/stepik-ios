@@ -13,6 +13,7 @@ import SwiftyJSON
 class DevicesAPI: NSObject {
 
     let name = "devices"
+
     let manager: Alamofire.SessionManager
 
     override init() {

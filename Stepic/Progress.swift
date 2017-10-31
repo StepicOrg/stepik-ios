@@ -26,6 +26,7 @@ class Progress: NSManagedObject, JSONInitializable {
         cost = json["cost"].intValue
         numberOfSteps = json["n_steps"].intValue
         numberOfStepsPassed = json["n_steps_passed"].intValue
+        lastViewed = json["last_viewed"].doubleValue
     }
 
     func update(json: JSON) {

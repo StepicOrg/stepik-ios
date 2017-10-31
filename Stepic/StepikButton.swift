@@ -37,19 +37,26 @@ class StepikButton: UIButton {
     var isGray: Bool = false {
         didSet {
             if isGray != oldValue {
-                setGrayStyle()
+                updateStyle()
             }
         }
     }
 
-    private func setGrayStyle() {
+    var isLightBackground: Bool = true {
+        didSet {
+            if isLightBackground != oldValue {
+                updateStyle()
+            }
+        }
+    }
+
+    private func updateStyle() {
         if isGray {
-            self.backgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
-            //mainText or mainDark here?
-            self.setTitleColor(UIColor.mainText, for: .normal)
+            self.backgroundColor = isLightBackground ? UIColor(hex: 0xf5f5f6, alpha: 1) : UIColor(hex: 0x5d5d70, alpha: 1)
+            self.setTitleColor(isLightBackground ? UIColor.mainText : UIColor.white, for: .normal)
             setRoundedCorners(cornerRadius: 8, borderWidth: 0)
         } else {
-            self.backgroundColor = UIColor(hex: 0x66cc66, alpha: 0.06)
+            self.backgroundColor = isLightBackground ? UIColor(hex: 0xf6fcf6, alpha: 1) : UIColor(hex: 0x545a67, alpha: 1)
             self.setTitleColor(UIColor.stepicGreen, for: .normal)
             setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreen)
         }
@@ -65,7 +72,7 @@ class StepikButton: UIButton {
     }
 
     private func applyStyles() {
-        setGrayStyle()
+        updateStyle()
     }
 
     override init(frame: CGRect) {

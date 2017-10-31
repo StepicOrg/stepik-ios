@@ -56,20 +56,20 @@ class MyCoursesViewController: CoursesViewController {
     }
 
     override func handleCourseUpdates() {
-        if CoursesJoinManager.sharedManager.hasUpdates {
-            print("deleting courses -> \(CoursesJoinManager.sharedManager.deletedCourses.count)")
-            print("adding courses -> \(CoursesJoinManager.sharedManager.addedCourses.count)")
+        if CourseSubscriptionManager.sharedManager.hasUpdates {
+            print("deleting courses -> \(CourseSubscriptionManager.sharedManager.deletedCourses.count)")
+            print("adding courses -> \(CourseSubscriptionManager.sharedManager.addedCourses.count)")
 
             self.tableView.beginUpdates()
 
-            let deletingIndexPaths = getExistingIndexPathsFromCourses(CoursesJoinManager.sharedManager.deletedCourses)
+            let deletingIndexPaths = getExistingIndexPathsFromCourses(CourseSubscriptionManager.sharedManager.deletedCourses)
             tableView.deleteRows(at: deletingIndexPaths, with: .automatic)
             for index in deletingIndexPaths.sorted(by: {($0 as NSIndexPath).row > ($1 as NSIndexPath).row}) {
                 courses.remove(at: (index as NSIndexPath).row)
                 tabIds.remove(at: (index as NSIndexPath).row)
             }
 
-            let addedCourses = getNonExistingCourses(CoursesJoinManager.sharedManager.addedCourses)
+            let addedCourses = getNonExistingCourses(CourseSubscriptionManager.sharedManager.addedCourses)
             if addedCourses.count != 0 {
                 print("before: \(courses)")
                 courses = addedCourses + courses
@@ -80,7 +80,7 @@ class MyCoursesViewController: CoursesViewController {
 
             self.tableView.endUpdates()
 
-            CoursesJoinManager.sharedManager.clean()
+            CourseSubscriptionManager.sharedManager.clean()
             self.onRefresh()
         }
     }

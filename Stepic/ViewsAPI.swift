@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class ViewsAPI: APIEndpoint {
-    let name = "views"
+    override var name: String { return "views" }
 
     @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
         var params: Parameters = [:]
