@@ -109,6 +109,8 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             tableView.reloadData()
             resetHeightConstraints()
             if let introVideo = c.introVideo {
+                // Intro presented, send to analytics
+                AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.Video.shown)
                 setIntroMode(fromVideo: true)
                 setupPlayerWithVideo(introVideo)
             } else {
@@ -334,6 +336,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         if ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN() {
             setControls(playing: true)
             self.moviePlayer?.play()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.Video.clicked)
         }
     }
 

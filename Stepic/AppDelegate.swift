@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func presentStreaks(userActivity: UserActivity) {
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.opened, parameters: [
             "current": userActivity.currentStreak,
             "longest": userActivity.longestStreak,
             "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
