@@ -377,6 +377,7 @@ class CourseListPresenter {
         case .enrolled:
             if !AuthInfo.shared.isAuthorized {
                 self.courses = []
+                self.view?.display(courses: [])
                 self.lastStepDataSource?.didLoadWithProgresses(courses: courses)
                 self.state = .emptyAnonymous
             }

@@ -76,9 +76,17 @@ class CourseWidgetView: NibInitializableView {
         }
     }
 
+    func setElements(hidden: Bool) {
+        courseImageView.isHidden = hidden
+        courseTitleLabel.isHidden = hidden
+        courseStatsCollectionView.isHidden = hidden
+        actionButton.isHidden = hidden
+    }
+
     var isLoading: Bool = false {
         didSet {
             loadingWidgetView.isHidden = !isLoading
+            setElements(hidden: isLoading)
             if isLoading {
                 loadingWidgetView.animateGradient()
             }
