@@ -1247,6 +1247,7 @@
 		1BB3D2531FA3F068000B2FAA /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
 		1BB3D2551FA3F0F6000B2FAA /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
 		1BB3D2561FA79471000B2FAA /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
+		1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		1BB4EC901FA3DC43001CDE99 /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
 		1BB4EC911FA3DC43001CDE99 /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
 		1BB4EC921FA3DC43001CDE99 /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
@@ -11814,6 +11815,7 @@
 				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
 				93E4A0E01F9FDB8B00D27A37 /* MenuSplitViewController.swift in Sources */,
+				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
 				9386A46A1FA3AC0C00705195 /* MainCourseInfoCell.swift in Sources */,
 				93E4A0E21F9FDD5800D27A37 /* CatalogMenuViewController.swift in Sources */,
 				9386A4781FA54C1300705195 /* DetailsCourseInfoCell.swift in Sources */,
