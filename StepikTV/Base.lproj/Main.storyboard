@@ -14,7 +14,7 @@
         <!--Профиль-->
         <scene sceneID="4vw-zQ-VjQ">
             <objects>
-                <viewController id="Zl5-dF-RYl" customClass="ProfileViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zl5-dF-RYl" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zYH-8i-Z8t"/>
                         <viewControllerLayoutGuide type="bottom" id="zI4-VP-Uf5"/>
@@ -22,89 +22,9 @@
                     <view key="view" contentMode="scaleToFill" id="m1D-Ec-zLv">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stepik_logo" translatesAutoresizingMaskIntoConstraints="NO" id="qf2-bv-WRg">
-                                <rect key="frame" x="280" y="200" width="640" height="640"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="qf2-bv-WRg" secondAttribute="height" multiplier="1:1" id="Fc0-xT-pdE"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Профиль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enj-DY-ggF">
-                                <rect key="frame" x="1181" y="220" width="202" height="58"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uBg-g6-LN2">
-                                <rect key="frame" x="1121" y="329" width="517" height="248"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coj-07-fMi" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="517" height="72"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="eoK-FJ-5lh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
-                                        <inset key="titleEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Войти">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <state key="focused" title="Войти">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywX-Xn-36P" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88" width="517" height="72"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="Cfl-Ty-jHf"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
-                                        <inset key="titleEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Зарегистрироваться" backgroundImage="button_default_backgrnd">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.34000000000000002" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <state key="focused" backgroundImage="button_focused_backgrnd">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWx-1D-mMP" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="176" width="517" height="72"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="RiV-cg-Zht"/>
-                                        </constraints>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="40" maxY="20"/>
-                                        <inset key="titleEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Настройки" backgroundImage="button_default_backgrnd">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.33836793664383563" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <state key="focused" backgroundImage="button_focused_backgrnd">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="517" id="331-zg-Ccu"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="enj-DY-ggF" firstAttribute="top" secondItem="zYH-8i-Z8t" secondAttribute="bottom" constant="160" id="Cvs-nb-JOV"/>
-                            <constraint firstAttribute="bottom" secondItem="qf2-bv-WRg" secondAttribute="bottom" constant="240" id="GKe-nF-0O6"/>
-                            <constraint firstItem="enj-DY-ggF" firstAttribute="leading" secondItem="qf2-bv-WRg" secondAttribute="trailing" constant="261" id="Vbt-GS-zCY"/>
-                            <constraint firstItem="qf2-bv-WRg" firstAttribute="leading" secondItem="MuA-a3-zLV" secondAttribute="leading" constant="190" id="g1U-xY-Ex1"/>
-                            <constraint firstItem="uBg-g6-LN2" firstAttribute="top" secondItem="enj-DY-ggF" secondAttribute="bottom" constant="51" id="ijE-t1-mcz"/>
-                            <constraint firstItem="uBg-g6-LN2" firstAttribute="leading" secondItem="enj-DY-ggF" secondAttribute="leading" constant="-60" id="kKl-kG-H2Z"/>
-                            <constraint firstItem="qf2-bv-WRg" firstAttribute="top" secondItem="m1D-Ec-zLv" secondAttribute="topMargin" constant="140" id="oC7-za-vhA"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="MuA-a3-zLV"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" id="DsA-Hi-lyK"/>
-                    <connections>
-                        <outlet property="lowerButton" destination="JWx-1D-mMP" id="0KX-A8-g6c"/>
-                        <outlet property="midButton" destination="ywX-Xn-36P" id="Oe5-ap-ovx"/>
-                        <outlet property="upperButton" destination="Coj-07-fMi" id="cqQ-QX-RfQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPJ-ce-9LA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -438,7 +358,43 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
-                        <cells/>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="90" y="70" width="310" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="310" height="350"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x6Z-Ha-I5x">
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="x6Z-Ha-I5x" secondAttribute="height" multiplier="1:1" id="Dnm-Y8-f7y"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DK9-R3-2G2">
+                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="DK9-R3-2G2" secondAttribute="bottom" id="abP-75-c1u"/>
+                                    <constraint firstItem="x6Z-Ha-I5x" firstAttribute="top" secondItem="6Ua-XC-tcb" secondAttribute="top" id="hxv-cF-t6O"/>
+                                    <constraint firstItem="DK9-R3-2G2" firstAttribute="leading" secondItem="6Ua-XC-tcb" secondAttribute="leading" id="iaL-qi-dY3"/>
+                                    <constraint firstAttribute="trailing" secondItem="DK9-R3-2G2" secondAttribute="trailing" id="joS-9W-l90"/>
+                                    <constraint firstAttribute="trailing" secondItem="x6Z-Ha-I5x" secondAttribute="trailing" id="tSa-D8-sVq"/>
+                                    <constraint firstItem="DK9-R3-2G2" firstAttribute="top" secondItem="x6Z-Ha-I5x" secondAttribute="bottom" id="tad-eW-UtU"/>
+                                    <constraint firstItem="x6Z-Ha-I5x" firstAttribute="leading" secondItem="6Ua-XC-tcb" secondAttribute="leading" id="upu-0y-Qlt"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="x6Z-Ha-I5x" id="I9u-Ki-fKH"/>
+                                    <outlet property="label" destination="DK9-R3-2G2" id="QJK-BT-81L"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
                             <outlet property="dataSource" destination="RR9-YI-osV" id="xuY-eD-tdb"/>
                             <outlet property="delegate" destination="RR9-YI-osV" id="OH3-M8-vr7"/>
@@ -463,7 +419,43 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
-                        <cells/>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="90" y="70" width="310" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="310" height="350"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jgO-km-jaN">
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="jgO-km-jaN" secondAttribute="height" multiplier="1:1" id="xze-od-abR"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-KW-iKb">
+                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="gI7-KW-iKb" firstAttribute="leading" secondItem="rLg-4g-yHF" secondAttribute="leading" id="0eL-rQ-bAe"/>
+                                    <constraint firstAttribute="trailing" secondItem="gI7-KW-iKb" secondAttribute="trailing" id="Qy4-3e-tsG"/>
+                                    <constraint firstItem="gI7-KW-iKb" firstAttribute="top" secondItem="jgO-km-jaN" secondAttribute="bottom" id="R7B-IR-Ydm"/>
+                                    <constraint firstItem="jgO-km-jaN" firstAttribute="top" secondItem="rLg-4g-yHF" secondAttribute="top" id="VaL-dW-NEV"/>
+                                    <constraint firstItem="jgO-km-jaN" firstAttribute="leading" secondItem="rLg-4g-yHF" secondAttribute="leading" id="aPB-S0-3lQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="gI7-KW-iKb" secondAttribute="bottom" id="tPd-wZ-OMM"/>
+                                    <constraint firstAttribute="trailing" secondItem="jgO-km-jaN" secondAttribute="trailing" id="xIU-g5-O4b"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="jgO-km-jaN" id="fQT-iC-FkA"/>
+                                    <outlet property="label" destination="gI7-KW-iKb" id="d6Z-7i-Fbe"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
                             <outlet property="dataSource" destination="gZU-C6-QdM" id="xtX-Vs-9Pf"/>
                             <outlet property="delegate" destination="gZU-C6-QdM" id="ME0-BO-5fB"/>
@@ -477,8 +469,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Stepik_logo" width="1000" height="1000"/>
-        <image name="button_default_backgrnd" width="517" height="72"/>
-        <image name="button_focused_backgrnd" width="517" height="72"/>
+        <image name="Iceland 1.jpg" width="16" height="16"/>
     </resources>
 </document>

@@ -10,57 +10,56 @@ import Foundation
 import UIKit
 
 class Model {
-    
+
     static let sharedReference = Model()
-    
-    private let titles = [nil, "Предметы", "Новые курсы", "Editor's choice", "Современная грамотность","Умный досуг","Курсы для программистов","Математика для программистов"]
-    
-    private var source: [[Course]] = [[Course]]()
-    
+
+    private let titles = [nil, "Предметы", "Новые курсы", "Editor's choice", "Современная грамотность", "Умный досуг", "Курсы для программистов", "Математика для программистов"]
+
+    private var source: [[CourseMock]] = [[CourseMock]]()
+
     init() {
         for i in titles {
-            var inner = [Course]()
+            var inner = [CourseMock]()
             let index = titles.index(where: {$0 == i})
             for j in 1...(10 - index!) {
-                let course = Course(image: UIImage(), name: "\(i ?? "nil")#\(j)", host: "Яндекс")
+                let course = CourseMock(image: UIImage(), name: "\(i ?? "nil")#\(j)", host: "Яндекс")
                 inner.append(course)
             }
             source.append(inner)
         }
     }
-    
-    func getOuter() -> [[Course]] {
+
+    func getOuter() -> [[CourseMock]] {
         return source
     }
-    
-    func getInner(at index: Int) -> [Course] {
+
+    func getInner(at index: Int) -> [CourseMock] {
         return source[index]
     }
-    
+
     func getTitles(at index: Int) -> String? {
         return titles[index]
     }
-    
-    func getUndoneCourses() -> [Course] {
+
+    func getUndoneCourses() -> [CourseMock] {
         return source[5]
     }
-    
-    func getDoneCourses() -> [Course] {
+
+    func getDoneCourses() -> [CourseMock] {
         return source[2]
     }
 }
 
-struct Course {
-    
+struct CourseMock {
+
     var image: UIImage
     var name: String
     var host: String
-    
+
     init(image: UIImage, name: String, host: String) {
         self.image = image
         self.name = name
         self.host = host
     }
-    
-}
 
+}

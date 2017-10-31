@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="YPf-pZ-tPP">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="YPf-pZ-tPP">
                                             <rect key="frame" x="1296" y="160" width="400" height="400"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>

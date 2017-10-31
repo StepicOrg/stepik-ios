@@ -9,9 +9,9 @@
 import UIKit
 
 protocol DynamicallyCreatedProtocol {
-    
+
     static var size: CGSize { get }
-    
+
     static var reuseIdentifier: String { get }
-    
+
 }

@@ -92,6 +92,7 @@ class Video: NSManagedObject, JSONInitializable {
 
     var state: VideoState! {
         get {
+            #if os(iOS)
             if let s = _state {
                 return s
             } else {
@@ -117,6 +118,9 @@ class Video: NSManagedObject, JSONInitializable {
 
                 return _state!
             }
+            #else
+                return .online
+            #endif
         }
         set(value) {
             _state = value

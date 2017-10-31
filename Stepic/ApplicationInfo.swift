@@ -6,6 +6,8 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
+import Foundation
+
 class ApplicationInfo {
 
     struct Path {
