@@ -54,6 +54,8 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         #if swift(>=3.2)
             if #available(iOS 11.0, *) {
                 tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
