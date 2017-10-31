@@ -186,7 +186,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     }
 
     func isReachable(section: Int) -> Bool {
-        return (course.sections[section].isActive || course.sections[section].testSectionAction != nil) && (course.sections[section].progressId != nil || course.sections[section].isExam)
+        return course.sections[section].isReachable
     }
 
     func showSection(section sectionId: Int) {

@@ -205,7 +205,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
     }
 
-    func refreshUnits() {
+    func refreshUnits(success: (() -> Void)? = nil) {
 
         guard section != nil else {
             if let id = unitId {
@@ -226,6 +226,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 self.emptyDatasetState = EmptyDatasetState.empty
             })
             self.didRefresh = true
+            success?()
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
@@ -269,7 +270,25 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
                 dvc.sectionNavigationDelegate = self
                 currentlyDisplayingUnitIndex = index
-                dvc.navigationRules = (prev: index != 0, next: index < section.units.count - 1)
+
+                let isUnitFirstInSection = index == 0
+                let isUnitLastInSection = index == section.units.count - 1
+                if let course = section.course {
+                    let sectionBefore = course.getSection(before: section)
+                    let sectionAfter = course.getSection(after: section)
+
+                    let isSectionFirstInCourse = course.sectionsArray.count == 0 || sectionBefore == nil
+                    let isSectionLastInCourse = course.sectionsArray.count == 0 || sectionAfter == nil
+
+                    let isPrevSectionReachable = sectionBefore?.isReachable ?? false
+                    let isNextSectionReachable = sectionAfter?.isReachable ?? false
+
+                    let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable) || !isUnitFirstInSection
+                    let canNext = (!isSectionLastInCourse && isNextSectionReachable) || !isUnitLastInSection
+                    dvc.navigationRules = (prev: canPrev, next: canNext)
+                } else {
+                    dvc.navigationRules = (prev: !isUnitFirstInSection, next: !isUnitLastInSection)
+                }
             }
         }
         // Get the new view controller using segue.destinationViewController.
@@ -280,6 +299,40 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     func selectUnitAtIndex(_ index: Int, isLastStep: Bool = false, replace: Bool = false) {
         performSegue(withIdentifier: replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))
+    }
+
+    func goToNextSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find next section id
+        guard let nextSection = course.getSection(after: section) else {
+            // Current section is last section in the course
+            return
+        }
+
+        self.section = nextSection
+        self.refreshUnits {
+            self.selectUnitAtIndex(0, replace: true)
+        }
+    }
+
+    func goToPrevSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find prev section id
+        guard let prevSection = course.getSection(before: section) else {
+            // Current section is first section in the course
+            return
+        }
+
+        self.section = prevSection
+        self.refreshUnits {
+            self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
+        }
     }
 
     func clearAllSelection() {
@@ -355,6 +408,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
                 selectUnitAtIndex(uIndex + 1, replace: true)
+            } else if uIndex + 1 == section.units.count {
+                goToNextSection()
             }
         }
     }
@@ -363,6 +418,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex - 1 >= 0 {
                 selectUnitAtIndex(uIndex - 1, isLastStep: true, replace: true)
+            } else if uIndex - 1 == -1 {
+                goToPrevSection()
             }
         }
     }

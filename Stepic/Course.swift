@@ -326,6 +326,26 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
 
+    func getSection(before section: Section) -> Section? {
+        let currentIndex = sectionsArray.index(of: section.id)
+        if currentIndex == nil || currentIndex == sectionsArray.startIndex {
+            return nil
+        } else {
+            let prevId = sectionsArray[currentIndex!.advanced(by: -1)]
+            return sections.filter({ $0.id == prevId }).first
+        }
+    }
+
+    func getSection(after section: Section) -> Section? {
+        let currentIndex = sectionsArray.index(of: section.id)
+        if currentIndex == nil || currentIndex == sectionsArray.endIndex.advanced(by: -1) {
+            return nil
+        } else {
+            let nextId = sectionsArray[currentIndex!.advanced(by: 1)]
+            return sections.filter({ $0.id == nextId }).first
+        }
+    }
+
 //    func changeLastStepTo(lastStep: LastStep?) {
 //        let objectToDelete = self.lastStep
 //        self.lastStep = lastStep

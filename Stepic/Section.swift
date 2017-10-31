@@ -370,6 +370,10 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
 
+    var isReachable: Bool {
+        return (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
+    }
+
     //    func loadIfNotLoaded(success success : (Void -> Void)) {
     //        if !loaded {
     //            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
