@@ -104,8 +104,8 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         tableView.isUserInteractionEnabled = enabled
     }
 
-    func indexPathsForVisibleCells() -> [IndexPath] {
-        return tableView.indexPathsForVisibleRows ?? []
+    func indexesForVisibleCells() -> [Int] {
+        return tableView.indexPathsForVisibleRows?.map { $0.row } ?? []
     }
 
     func indexPathForIndex(index: Int) -> IndexPath {
@@ -122,11 +122,8 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         tableView.setContentOffset(offsetBefore, animated: false)
     }
 
-    func updateCell(atIndexPath indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? CourseWidgetTableViewCell {
-            cell.widgetView.progress = courses[indexPath.row].progress
-            cell.widgetView.rating = courses[indexPath.row].rating
-        }
+    func widgetForCell(atIndex index: Int) -> CourseWidgetView? {
+        return (tableView.cellForRow(at: indexPathForIndex(index: index)) as? CourseWidgetTableViewCell)?.widgetView
     }
 
     func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)? {
