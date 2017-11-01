@@ -25,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-//        let token = StepicToken(accessToken: "q0FPaRDvITg0DiltK98zvbMhsORUBc", refreshToken: "G5G98oDqA4HiiME74xQLtz4KINCaFV", tokenType: "Bearer", expireDate: Date(timeIntervalSince1970: 1509532200))
-//        AuthInfo.shared.token = token
-
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         WatchSessionManager.sharedManager.startSession()
