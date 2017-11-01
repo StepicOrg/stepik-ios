@@ -116,6 +116,7 @@ class CourseListPresenter {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
         }
+        subscriptionManager.startObservingOtherSubscriptionManagers()
         view.colorMode = colorMode
     }
 
@@ -186,7 +187,6 @@ class CourseListPresenter {
             AuthInfo.shared.token = nil
             RoutingManager.auth.routeFrom(controller: vc, success: nil, cancel: nil)
         }
-        subscriptionManager.startObservingOtherSubscriptionManagers()
     }
 
     func loadNextPage() {
@@ -277,6 +277,7 @@ class CourseListPresenter {
             view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
         default:
             let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
+            subscriptionManager.clean()
             self.view?.update(updatedCourses: getData(from: getDisplaying(from: updatedCourses)), courses: getData(from: getDisplaying(from: courses)))
             return
         }

@@ -17,7 +17,6 @@ end
 def all_pods
 
     shared_pods
-
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
