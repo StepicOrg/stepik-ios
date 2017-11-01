@@ -70,8 +70,8 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         collectionView.isUserInteractionEnabled = enabled
     }
 
-    func indexPathsForVisibleCells() -> [IndexPath] {
-        return collectionView.indexPathsForVisibleItems
+    func indexesForVisibleCells() -> [Int] {
+        return collectionView.indexPathsForVisibleItems.map { $0.item }
     }
 
     func indexPathForIndex(index: Int) -> IndexPath {
@@ -82,12 +82,8 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         collectionView.insertItems(at: indexPaths)
     }
 
-    func updateCell(atIndexPath indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? CourseWidgetCollectionViewCell {
-            cell.widgetView.progress = courses[indexPath.item].progress
-            cell.widgetView.rating = courses[indexPath.item].rating
-            cell.widgetView.buttonState = courses[indexPath.item].isEnrolled ? .continueLearning : .join
-        }
+    func widgetForCell(atIndex index: Int) -> CourseWidgetView? {
+        return (collectionView.cellForItem(at: indexPathForIndex(index: index)) as? CourseWidgetCollectionViewCell)?.widgetView
     }
 
     func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath]) {

@@ -38,7 +38,7 @@ class APIEndpoint {
 
     init() {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForRequest = 15
         manager = Alamofire.SessionManager(configuration: configuration)
     }
 
