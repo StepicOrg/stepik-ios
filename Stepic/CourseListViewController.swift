@@ -16,11 +16,11 @@ protocol CourseListViewControllerDelegate: class {
 
     func updatePagination()
 
-    func indexPathsForVisibleCells() -> [IndexPath]
+    func indexesForVisibleCells() -> [Int]
     func indexPathForIndex(index: Int) -> IndexPath
     func addElements(atIndexPaths: [IndexPath])
-    func updateCell(atIndexPath: IndexPath)
     func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath])
+    func widgetForCell(atIndex: Int) -> CourseWidgetView?
 
     func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)?
 }
@@ -107,16 +107,20 @@ class CourseListViewController: UIViewController, CourseListView {
     func update(updatedCourses: [CourseViewData], courses: [CourseViewData]) {
         self.courses = courses
 
-        guard let visibleIndexPathsArray = delegate?.indexPathsForVisibleCells() else {
+        guard let visibleIndexesArray = delegate?.indexesForVisibleCells() else {
             return
         }
 
-        let updatingIndexes: [Int] = getChangedIndexes(changedCourses: updatedCourses, courses: courses)
-        let visibleIndexPaths = Set<IndexPath>(visibleIndexPathsArray)
-        let updatingIndexPaths = Set<IndexPath>(updatingIndexes.flatMap({ delegate?.indexPathForIndex(index: $0) }))
-        let visibleUpdating = Array(updatingIndexPaths.intersection(visibleIndexPaths))
-        for indexPathToUpdate in visibleUpdating {
-            delegate?.updateCell(atIndexPath: indexPathToUpdate)
+        let updatingIndexesArray: [Int] = getChangedIndexes(changedCourses: updatedCourses, courses: courses)
+        let visibleIndexes = Set<Int>(visibleIndexesArray)
+        let updatingIndexes = Set<Int>(updatingIndexesArray)
+        let visibleUpdating = Array(updatingIndexes.intersection(visibleIndexes))
+        for indexToUpdate in visibleUpdating {
+            if let widgetView = delegate?.widgetForCell(atIndex: indexToUpdate) {
+                widgetView.progress = courses[indexToUpdate].progress
+                widgetView.rating = courses[indexToUpdate].rating
+                widgetView.buttonState = courses[indexToUpdate].isEnrolled ? .continueLearning : .join
+            }
         }
     }
 
