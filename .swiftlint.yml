@@ -36,6 +36,10 @@ disabled_rules:
   - todo
   - nesting
   - empty_enum_arguments
+  - colon
+  - unneeded_break_in_switch
+  - unneeded_parentheses_in_closure_argument
+  - switch_case_alignment
 
 opt_in_rules:
   - explicit_init 

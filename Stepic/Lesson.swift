@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 import SwiftyJSON
-import MagicalRecord
 
 class Lesson: NSManagedObject, JSONInitializable {
 

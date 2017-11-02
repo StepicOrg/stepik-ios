@@ -15,7 +15,7 @@ struct AnalyticsEvents {
     }
 
     struct SignIn {
-        static let onSocialAuth = "clicked_SignIn_on_social_auth_screen"
+        static let onSocialAuth = "clicked_SignIn_on_launch_screen"
         static let onEmailAuth = "clicked_SignIn_on_email_auth_screen"
         static let onSignInScreen = "click_sign_in_with_interaction_type"
         static let nextButton = "click_sign_in_next_sign_in_screen"
@@ -30,7 +30,7 @@ struct AnalyticsEvents {
     }
 
     struct SignUp {
-        static let onSocialAuth = "clicked_SignUp_on_social_auth_screen"
+        static let onSocialAuth = "clicked_SignUp_on_launch_screen"
         static let onEmailAuth = "clicked_SignUp_on_email_auth_screen"
         static let onSignUpScreen = "click_registration_with_interaction_type"
         static let nextButton = "click_registration_send_ime"
@@ -79,6 +79,10 @@ struct AnalyticsEvents {
         struct JoinPressed {
             static let anonymous = "join_course_anonymous"
             static let signed = "join_course_signed"
+        }
+        struct Video {
+            static let clicked = "course_detail_video_clicked"
+            static let shown = "course_detail_video_shown"
         }
     }
 
@@ -138,7 +142,7 @@ struct AnalyticsEvents {
 
         struct LocalNotification {
             static let shown = "streak_local_notification_shown"
-            static let clicked = "streak_local_notification_clicked"
+            static let opened = "streak_local_notification_opened"
         }
         struct ImproveAlert {
             static let notificationOffered = "streak_improve_alert_notifications_offered"

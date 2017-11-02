@@ -12,7 +12,6 @@ import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
-import MagicalRecord
 import VK_ios_sdk
 import FBSDKCoreKit
 import Mixpanel
@@ -30,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         WatchSessionManager.sharedManager.startSession()
 
-        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStore(at: CoreDataHelper.instance.storeURL as URL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
 
         ConnectionHelper.shared.instantiate()
@@ -100,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func presentStreaks(userActivity: UserActivity) {
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.opened, parameters: [
             "current": userActivity.currentStreak,
             "longest": userActivity.longestStreak,
             "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))

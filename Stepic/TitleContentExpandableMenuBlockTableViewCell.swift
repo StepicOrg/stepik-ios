@@ -74,10 +74,15 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     private func buildLabel(type: LabelType, text: String) -> StepikLabel {
         let label = StepikLabel(frame: CGRect.zero)
-        label.text = text
         label.font = type.font
         if let titleColor = block?.titleColor {
             label.textColor = titleColor
+        }
+
+        if type == .title {
+            label.text = text
+        } else {
+            label.setTextWithHTMLString(text)
         }
 
         return label

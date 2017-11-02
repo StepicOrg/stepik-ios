@@ -25,6 +25,7 @@ extension Course {
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
 
+    @NSManaged var managedScheduleType: String?
     @NSManaged var managedSummary: String?
     @NSManaged var managedReviewSummaryId: NSNumber?
     @NSManaged var managedWorkload: String?
@@ -100,6 +101,15 @@ extension Course {
         }
         get {
             return managedCourseDescription ?? ""
+        }
+    }
+
+    var scheduleType: String? {
+        set(value) {
+            self.managedScheduleType = value
+        }
+        get {
+            return managedScheduleType
         }
     }
 

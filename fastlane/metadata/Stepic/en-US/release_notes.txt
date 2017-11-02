@@ -1,7 +1,9 @@
-Hi!
 In the new version of the Stepik iOS app we:
-• Improved the courses screens. They look much better now
-• Fixed some strange iOS 11 bugs
+• Changed home screen and tab bar. The great redesign continues!
+• Seriously improved stability
+• Improved navigation between sections
+• Improved fullscreen mode in Code Challenge - now it scrolls when keyboard is on the screen
+• Also added HTML support to Profile, just to have it supported
 
 Enjoy learning,
 Stepik team

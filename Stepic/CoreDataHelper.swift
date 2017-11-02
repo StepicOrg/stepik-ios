@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 class CoreDataHelper: NSObject {
     static var instance = CoreDataHelper()
@@ -28,8 +27,7 @@ class CoreDataHelper: NSObject {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
 
         do {
-            _ = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true,
-                NSInferMappingModelAutomaticallyOption: true])
+            _ = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true, "WAL": "journal_mode"])
         } catch {
             print("STORE IS NIL")
             abort()

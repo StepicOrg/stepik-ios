@@ -16,6 +16,7 @@
                 <outlet property="courseStatsCollectionView" destination="o6G-uM-Uld" id="KuA-mO-2Jl"/>
                 <outlet property="courseStatsCollectionViewFlowLayout" destination="H6t-HR-gtO" id="C0K-Kp-qWX"/>
                 <outlet property="courseTitleLabel" destination="qgP-av-mN5" id="cJt-TN-Mr5"/>
+                <outlet property="loadingWidgetView" destination="e0u-me-rvn" id="hak-XC-L1r"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -75,23 +76,31 @@
                         <action selector="actionButtonPressed:" destination="-1" eventType="touchUpInside" id="CIe-Kz-IeA"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0u-me-rvn" customClass="LoadingCourseWidgetView" customModule="Adaptive_1838" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="376" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="sj1-d7-RHa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-1" id="2em-Lr-5Yl"/>
                 <constraint firstItem="7lZ-OG-8NC" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="67Y-83-m09"/>
                 <constraint firstItem="o6G-uM-Uld" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="8JU-RC-vYg"/>
                 <constraint firstAttribute="bottom" secondItem="7lZ-OG-8NC" secondAttribute="bottom" id="Btg-xG-RgO"/>
+                <constraint firstItem="e0u-me-rvn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H8D-hf-3dB"/>
                 <constraint firstAttribute="bottom" secondItem="JQx-VS-ijh" secondAttribute="bottom" id="KQX-ax-vCj"/>
                 <constraint firstAttribute="trailing" secondItem="o6G-uM-Uld" secondAttribute="trailing" constant="8" id="T3Q-n6-aYD"/>
                 <constraint firstItem="qgP-av-mN5" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="WMq-S3-bWq"/>
                 <constraint firstAttribute="trailing" secondItem="sj1-d7-RHa" secondAttribute="trailing" id="Xrg-mt-jqo"/>
+                <constraint firstItem="e0u-me-rvn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eyY-Db-nqw"/>
                 <constraint firstItem="sj1-d7-RHa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qgP-av-mN5" secondAttribute="trailing" constant="8" id="nv7-ph-skD"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oAH-Z8-HXE"/>
+                <constraint firstAttribute="bottom" secondItem="e0u-me-rvn" secondAttribute="bottom" id="tMq-IY-YN5"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tX3-Pz-I4I"/>
                 <constraint firstItem="7lZ-OG-8NC" firstAttribute="top" secondItem="o6G-uM-Uld" secondAttribute="bottom" priority="999" constant="10" id="xR0-Bg-kcB"/>
                 <constraint firstItem="o6G-uM-Uld" firstAttribute="top" secondItem="qgP-av-mN5" secondAttribute="bottom" constant="8" id="xTe-dx-Ckk"/>
                 <constraint firstAttribute="trailing" secondItem="7lZ-OG-8NC" secondAttribute="trailing" constant="8" id="yIc-6i-fsU"/>
+                <constraint firstItem="sj1-d7-RHa" firstAttribute="leading" secondItem="e0u-me-rvn" secondAttribute="trailing" id="zeR-yg-S2B"/>
                 <constraint firstItem="qgP-av-mN5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zwM-VF-hBg"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

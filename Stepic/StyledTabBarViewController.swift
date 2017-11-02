@@ -23,6 +23,7 @@ class StyledTabBarViewController: UITabBarController {
             vc.tabBarItem = $0.buildItem()
             return vc
         }, animated: false)
+        self.updateTitlesForTabBarItems()
 
         delegate = self
 
@@ -36,6 +37,46 @@ class StyledTabBarViewController: UITabBarController {
             return nil
         }
         return items[index].clickEventName
+    }
+
+    private func updateTitlesForTabBarItems() {
+        func hideTitle(for item: UITabBarItem) {
+            let inset: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 8.0 : 6.0
+            item.imageInsets = UIEdgeInsets(top: inset, left: 0, bottom: -inset, right: 0)
+            item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: CGFloat.greatestFiniteMagnitude)
+        }
+
+        func showDefaultTitle(for item: UITabBarItem) {
+            item.imageInsets = UIEdgeInsets.zero
+            item.titlePositionAdjustment = UIOffset.zero
+        }
+
+        self.tabBar.items?.forEach { item in
+            if #available(iOS 11.0, *) {
+                // For new tabbar in iOS 11.0+
+                switch UIDevice.current.orientation {
+                case .landscapeLeft, .landscapeRight:
+                    // Using default tabbar in landscape
+                    showDefaultTitle(for: item)
+                default:
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        // Using default tabbar on iPads in both orientations
+                        showDefaultTitle(for: item)
+                    } else {
+                        // Using tabbar w/o titles in other cases
+                        hideTitle(for: item)
+                    }
+                }
+            } else {
+                // Using tabbar w/o titles if iOS version < 11.0
+                hideTitle(for: item)
+            }
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.updateTitlesForTabBarItems()
     }
 }
 
@@ -62,20 +103,23 @@ enum TabController: String {
     case findCourses = "FindCourses"
     case certificates = "Certificates"
     case profile = "Profile"
+    case home = "Home"
     case notifications = "Notifications"
 
     var itemInfo: TabBarItemInfo {
         switch self {
         case .myCourses:
-            return TabBarItemInfo(title: NSLocalizedString("MyCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "MyCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.myCoursesClicked, image: #imageLiteral(resourceName: "tab-my-courses"))
+            return TabBarItemInfo(title: NSLocalizedString("MyCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "MyCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.myCoursesClicked, image: #imageLiteral(resourceName: "tab-home"))
         case .findCourses:
-            return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-find-courses"))
+            return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-explore"))
         case .certificates:
             return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"))
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"))
+        case .home:
+            return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-home"))
         case .notifications:
-            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "notifications"))
+            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
         }
     }
 }

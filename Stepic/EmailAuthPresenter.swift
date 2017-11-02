@@ -15,7 +15,7 @@ protocol EmailAuthView: class {
 }
 
 enum EmailAuthResult {
-    case success, error, manyAttempts
+    case success, error, manyAttempts, badConnection
 }
 
 enum EmailAuthState {
@@ -61,6 +61,8 @@ class EmailAuthPresenter {
                 self.view?.update(with: EmailAuthResult.manyAttempts)
             case .invalidEmailAndPassword:
                 self.view?.state = EmailAuthState.validationError
+            case .badConnection:
+                self.view?.update(with: EmailAuthResult.badConnection)
             default:
                 self.view?.update(with: EmailAuthResult.error)
             }

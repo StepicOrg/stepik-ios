@@ -4,19 +4,25 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-def all_pods
+def shared_pods
     pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
+    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    pod 'Fabric'
+    pod 'Crashlytics'
+
+end
+
+def all_pods
+
+    shared_pods
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'Fabric'
-    pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
-    
     pod 'YandexMobileMetrica/Dynamic'
     
     pod 'Firebase/Core', '3.16.0'
@@ -25,8 +31,7 @@ def all_pods
     pod 'Firebase/Analytics', '3.16.0'
     
     pod 'Mixpanel-swift'
-    
-    pod "MagicalRecord"
+
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
@@ -37,14 +42,11 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    
     pod 'Presentr', '1.2.3'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
     pod 'Highlightr'
     pod "RFKeyboardToolbar", "~> 1.3"
-
     pod 'TTTAttributedLabel'
     pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
@@ -68,6 +70,16 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        testing_pods
+    end
+end
+
+target 'StepikTV' do
+    platform :tvos, '10.1'
+    shared_pods
+    target 'StepikTVTests' do
+        inherit! :search_paths
+        shared_pods
         testing_pods
     end
 end

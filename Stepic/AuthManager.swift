@@ -50,7 +50,16 @@ class AuthManager: NSObject {
             let response = response.response
 
             if let e = error {
-                failure(SignInError.other(error: e, code: nil, message: nil))
+                if let typedError = e as? URLError {
+                    switch typedError.code {
+                    case .notConnectedToInternet:
+                        failure(SignInError.badConnection)
+                    default:
+                        failure(SignInError.other(error: e, code: nil, message: nil))
+                    }
+                } else {
+                    failure(SignInError.other(error: e, code: nil, message: nil))
+                }
                 return
             }
 
@@ -101,7 +110,16 @@ class AuthManager: NSObject {
             let response = response.response
 
             if let e = error {
-                failure(SignInError.other(error: e, code: nil, message: nil))
+                if let typedError = e as? URLError {
+                    switch typedError.code {
+                    case .notConnectedToInternet:
+                        failure(SignInError.badConnection)
+                    default:
+                        failure(SignInError.other(error: e, code: nil, message: nil))
+                    }
+                } else {
+                    failure(SignInError.other(error: e, code: nil, message: nil))
+                }
                 return
             }
 
@@ -221,13 +239,13 @@ class AuthManager: NSObject {
         })
     }
 
-    @discardableResult func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
+    @discardableResult func joinCourse(course: Course, delete: Bool = false, success : @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
 
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
 
         let params: Parameters = [
             "enrollment": [
-                "course": "\(courseId)"
+                "course": "\(course.id)"
             ]
         ]
 
@@ -236,18 +254,21 @@ class AuthManager: NSObject {
                 response in
 
                 var error = response.result.error
-//                var json : JSON = [:]
+                var json : JSON = [:]
                 if response.result.value == nil {
                     if error == nil {
                         error = NSError()
                     }
                 } else {
-//                    json = response.result.value!
+                    json = response.result.value!
                 }
                 let response = response.response
 
                 if let r = response {
                     if r.statusCode >= 200 && r.statusCode <= 299 {
+                        if let courseJSON = json["courses"].array?[0] {
+                            course.update(json: courseJSON)
+                        }
                         success()
                     } else {
                         let s = NSLocalizedString("TryJoinFromWeb", comment: "")
@@ -259,7 +280,7 @@ class AuthManager: NSObject {
                 }
             })
         } else {
-            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
 
                 var error = response.result.error
@@ -341,6 +362,7 @@ enum SignInError: Error {
     case manyAttempts
     case noAppWithCredentials
     case invalidEmailAndPassword
+    case badConnection
     case existingEmail(provider: String?, email: String?)
     case other(error: Error?, code: Int?, message: String?)
 }

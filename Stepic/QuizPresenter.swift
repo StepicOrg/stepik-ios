@@ -319,7 +319,11 @@ class QuizPresenter {
                 submission in
                 guard let s = self else { return }
 
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
+                if let codeReply = reply as? CodeReply {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
+                } else {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
+                }
 
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)
