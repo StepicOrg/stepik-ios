@@ -56,7 +56,5 @@ class RectangularCollectionViewController: UICollectionViewController {
         if let cell = cell as? RectangularItemCell {
             cell.configure(with: model[indexPath.row])
         }
-
     }
-
 }

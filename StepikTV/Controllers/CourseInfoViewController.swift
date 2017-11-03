@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseInfoTableViewController: UICollectionViewController {
+class CourseInfoViewController: UICollectionViewController {
 
     private var course: Course?
 

@@ -9,15 +9,11 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
+
     @IBOutlet var upperButton: StandardButton!
-    
+
     @IBOutlet var midButton: StandardButton!
-    
+
     @IBOutlet var lowerButton: StandardButton!
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print(midButton.layer.cornerRadius)
-    }
-    
+
 }

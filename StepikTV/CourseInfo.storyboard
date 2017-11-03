@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Course Info Table View Controller-->
+        <!--Course Info View Controller-->
         <scene sceneID="gyM-Tp-j5J">
             <objects>
-                <collectionViewController id="Orj-vq-fVC" customClass="CourseInfoTableViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="Orj-vq-fVC" customClass="CourseInfoViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="h75-bj-NUM">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

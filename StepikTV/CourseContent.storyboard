@@ -1,7 +1,168 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13142" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dAB-97-Pq5">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Course Content Menu View Controller-->
+        <scene sceneID="Cte-Oy-HAi">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="XSp-Xw-3p0" customClass="CourseContentMenuViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="40" id="3we-6R-fgX">
+                        <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CourseHeaderCell" rowHeight="220" id="bLl-6j-iRd" customClass="ParagraphTableViewCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="40" width="499" height="220"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bLl-6j-iRd" id="mx0-Nh-8CO">
+                                    <rect key="frame" x="0.0" y="0.0" width="499" height="220"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-0Z-LLt">
+                                            <rect key="frame" x="28" y="28" width="453" height="69"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Host name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-GS-OdD">
+                                            <rect key="frame" x="28" y="97" width="461" height="115"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="leading" secondItem="mx0-Nh-8CO" secondAttribute="leadingMargin" constant="20" id="4Bj-JU-BQp"/>
+                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="leading" secondItem="tgQ-0Z-LLt" secondAttribute="leading" id="HgH-LV-lvj"/>
+                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mx0-Nh-8CO" secondAttribute="bottomMargin" id="P1h-00-42U"/>
+                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="top" secondItem="tgQ-0Z-LLt" secondAttribute="bottom" id="Vb5-K6-ezI"/>
+                                        <constraint firstAttribute="trailing" secondItem="Gda-GS-OdD" secondAttribute="trailing" constant="10" id="dCF-q0-fLC"/>
+                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="top" secondItem="mx0-Nh-8CO" secondAttribute="topMargin" constant="20" id="eK4-Ql-xwM"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="tgQ-0Z-LLt" secondAttribute="trailing" constant="10" id="jtm-N6-VeD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="IjS-aO-18J" kind="showDetail" identifier="ShowDetailSegue" id="HNT-Ni-efP"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ParagraphTableViewCell" rowHeight="66" id="yzC-l9-G37" customClass="ParagraphTableViewCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="274" width="499" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yzC-l9-G37" id="JKd-1Q-eWp">
+                                    <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragraph name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b18-0l-Juh">
+                                            <rect key="frame" x="20" y="0.0" width="403" height="66"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="84K-3S-Waj">
+                                            <rect key="frame" x="433" y="0.0" width="66" height="66"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="84K-3S-Waj" secondAttribute="height" multiplier="1:1" id="xMB-LT-wJM"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="b18-0l-Juh" firstAttribute="leading" secondItem="JKd-1Q-eWp" secondAttribute="leading" constant="20" id="2bD-sz-abu"/>
+                                        <constraint firstAttribute="trailing" secondItem="84K-3S-Waj" secondAttribute="trailing" id="Bfe-eH-HiJ"/>
+                                        <constraint firstItem="84K-3S-Waj" firstAttribute="top" secondItem="JKd-1Q-eWp" secondAttribute="top" id="HBQ-sE-bCP"/>
+                                        <constraint firstAttribute="bottom" secondItem="b18-0l-Juh" secondAttribute="bottom" id="HkG-bW-tbV"/>
+                                        <constraint firstItem="84K-3S-Waj" firstAttribute="leading" secondItem="b18-0l-Juh" secondAttribute="trailing" constant="10" id="IU7-Ek-ZbD"/>
+                                        <constraint firstAttribute="bottom" secondItem="84K-3S-Waj" secondAttribute="bottom" id="LQq-8e-9O8"/>
+                                        <constraint firstItem="b18-0l-Juh" firstAttribute="top" secondItem="JKd-1Q-eWp" secondAttribute="top" id="WFN-c2-0AZ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="b18-0l-Juh" id="y0f-GX-JLm"/>
+                                    <outlet property="progressIcon" destination="84K-3S-Waj" id="zrV-8t-KLN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="XSp-Xw-3p0" id="RJk-DH-nTT"/>
+                            <outlet property="delegate" destination="XSp-Xw-3p0" id="Wbd-GH-6ln"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wXa-xK-Dkd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hjn-qh-roD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4572" y="4375"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="8e8-KN-3u1">
+            <objects>
+                <viewController id="IjS-aO-18J" customClass="DetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W6V-jS-7fS"/>
+                        <viewControllerLayoutGuide type="bottom" id="2D6-Ha-E92"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MuV-sq-eBN">
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First VC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8G-os-10F">
+                                <rect key="frame" x="550" y="506" width="186" height="69"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="57"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="E8G-os-10F" firstAttribute="centerY" secondItem="MuV-sq-eBN" secondAttribute="centerY" id="Jqu-em-KyE"/>
+                            <constraint firstItem="E8G-os-10F" firstAttribute="centerX" secondItem="MuV-sq-eBN" secondAttribute="centerX" id="SYA-qp-eCC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ipf-9H-1sm"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="E8G-os-10F" id="tVa-H6-wSt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wHM-6B-lMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4572" y="6409"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7kd-a1-up4">
+            <objects>
+                <navigationController id="cbM-7L-2gB" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gcO-1A-TGq">
+                        <rect key="frame" x="0.0" y="0.0" width="634" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="XSp-Xw-3p0" kind="relationship" relationship="rootViewController" id="6Pw-iR-eLJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2yj-O2-GLE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4572" y="2197"/>
+        </scene>
+        <!--Курс-->
+        <scene sceneID="2f0-Hb-84o">
+            <objects>
+                <splitViewController id="dAB-97-Pq5" customClass="MenuSplitViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Курс" id="tKk-RA-loN"/>
+                    <connections>
+                        <segue destination="cbM-7L-2gB" kind="relationship" relationship="masterViewController" id="HZG-lQ-Twa"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uuE-qL-WH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4572" y="-26"/>
+        </scene>
+    </scenes>
 </document>
