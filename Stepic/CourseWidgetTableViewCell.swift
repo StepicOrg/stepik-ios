@@ -12,8 +12,11 @@ class CourseWidgetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var widgetView: CourseWidgetView!
 
-    var isLoading: Bool = false {
-        didSet {
+    var isLoading: Bool {
+        get {
+            return widgetView.isLoading
+        }
+        set {
             widgetView.isLoading = isLoading
         }
     }
@@ -42,18 +45,6 @@ class CourseWidgetTableViewCell: UITableViewCell {
     }
 
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
-        widgetView.title = course.title
-        widgetView.action = course.action
-        widgetView.buttonState = course.isEnrolled ? .continueLearning : .join
-        widgetView.imageURL = URL(string: course.coverURLString)
-        widgetView.rating = course.rating
-        widgetView.learners = course.learners
-        widgetView.progress = course.progress
-        widgetView.colorMode = colorMode
-        isLoading = false
-        widgetView.layoutSubviews()
-        self.layoutSubviews()
-
-        widgetView.backgroundColor = UIColor.clear
+        widgetView.setup(courseViewData: course, colorMode: colorMode)
     }
 }

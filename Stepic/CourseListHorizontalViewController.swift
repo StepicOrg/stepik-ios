@@ -123,7 +123,7 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
 
 extension CourseListHorizontalViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: widgetWidth, height: 100)
+        return CGSize(width: widgetWidth, height: 140)
     }
 }
 

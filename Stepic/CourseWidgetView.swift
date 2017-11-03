@@ -15,6 +15,7 @@ class CourseWidgetView: NibInitializableView {
     @IBOutlet weak var courseTitleLabel: StepikLabel!
     @IBOutlet weak var courseStatsCollectionView: UICollectionView!
     @IBOutlet weak var actionButton: StepikButton!
+    @IBOutlet weak var secondaryActionButton: StepikButton!
 
     @IBOutlet weak var courseStatsCollectionViewFlowLayout: UICollectionViewFlowLayout!
 
@@ -25,15 +26,19 @@ class CourseWidgetView: NibInitializableView {
     }
 
     var action: (() -> Void)?
+    var secondaryAction: (() -> Void)?
+
     var colorMode: CourseListColorMode = .light {
         didSet {
             switch colorMode {
             case .dark:
                 courseTitleLabel.colorMode = .light
                 actionButton.isLightBackground = false
+                secondaryActionButton.isLightBackground = false
             case .light:
                 courseTitleLabel.colorMode = .dark
                 actionButton.isLightBackground = true
+                secondaryActionButton.isLightBackground = true
             }
             updateStats()
         }
@@ -95,11 +100,15 @@ class CourseWidgetView: NibInitializableView {
             switch buttonState {
             case .join:
                 actionButton.isGray = false
+                secondaryActionButton.isGray = true
                 actionButton.setTitle(NSLocalizedString("AboutCourse", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("Info", comment: ""), for: .normal)
                 break
             case .continueLearning:
                 actionButton.isGray = true
+                secondaryActionButton.isGray = true
                 actionButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("Syllabus", comment: ""), for: .normal)
                 break
             }
         }
@@ -162,8 +171,24 @@ class CourseWidgetView: NibInitializableView {
         view.backgroundColor = UIColor.clear
     }
 
+    func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
+        title = course.title
+        action = course.action
+
+        buttonState = course.isEnrolled ? .continueLearning : .join
+        imageURL = URL(string: course.coverURLString)
+        rating = course.rating
+        learners = course.learners
+        progress = course.progress
+        self.colorMode = colorMode
+        isLoading = false
+    }
+
     @IBAction func actionButtonPressed(_ sender: Any) {
         action?()
+    }
+
+    @IBAction func secondaryActionButtonPressed(_ sender: Any) {
     }
 
 }

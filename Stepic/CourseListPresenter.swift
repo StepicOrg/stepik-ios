@@ -149,15 +149,31 @@ class CourseListPresenter {
             course in
             CourseViewData(course: course, action: {
                 [weak self] in
-                self?.buttonPressed(course: course)
+                self?.actionButtonPressed(course: course)
+            }, secondaryAction: {
+                [weak self] in
+                self?.secondaryActionButtonPressed(course: course)
             })
         }
     }
 
-    private func buttonPressed(course: Course) {
+    private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
                 LastStepRouter.continueLearning(for: course, using: navigation)
+            }
+        } else {
+            // Join course here
+            if let controller = getCoursePreviewController(for: course) {
+                self.view?.show(controller: controller)
+            }
+        }
+    }
+
+    private func secondaryActionButtonPressed(course: Course) {
+        if course.enrolled {
+            if let controller = getSectionsController(for: course) {
+                self.view?.show(controller: controller)
             }
         } else {
             if let controller = getCoursePreviewController(for: course) {
@@ -554,8 +570,8 @@ struct CourseViewData {
     var learners: Int?
     var progress: Float?
     var action: (() -> Void)?
-
-    init(course: Course, action: (() -> Void)?) {
+    var secondaryAction: (() -> Void)?
+    init(course: Course, action: @escaping () -> Void, secondaryAction: @escaping () -> Void) {
         self.id = course.id
         self.title = course.title
         self.isEnrolled = course.enrolled
@@ -564,6 +580,7 @@ struct CourseViewData {
         self.learners = course.learnersCount
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
         self.action = action
+        self.secondaryAction = secondaryAction
     }
 }
 
