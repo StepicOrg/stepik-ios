@@ -112,6 +112,7 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
+        self.lastUser = AuthInfo.shared.user
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -218,6 +219,9 @@ class CourseListPresenter {
 
     func willAppear() {
         if lastUser != AuthInfo.shared.user {
+            courses = []
+            self.view?.display(courses: [])
+            lastUser = AuthInfo.shared.user
             refresh()
             return
         } else {
@@ -345,7 +349,6 @@ class CourseListPresenter {
 
     private func refreshCourses() {
         coursesAPI.cancelAllTasks()
-        lastUser = AuthInfo.shared.user
         switch listType {
         case let .collection(ids: ids):
             listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then {
@@ -381,6 +384,7 @@ class CourseListPresenter {
                 self.view?.display(courses: [])
                 self.lastStepDataSource?.didLoadWithProgresses(courses: courses)
                 self.state = .emptyAnonymous
+                return
             }
             requestNonCollection(updateProgresses: false, completion: {
                 [weak self] in
@@ -614,6 +618,12 @@ enum CourseListType {
 
         coursesAPI.retrieve(enrolled: true, order: "-activity", page: page).then {
             courses, meta -> Void in
+
+            guard !courses.isEmpty else {
+                success(loadedCourses, meta)
+                return
+            }
+
             var progressIds: [String] = []
             var progresses: [Progress] = []
             for course in courses {
