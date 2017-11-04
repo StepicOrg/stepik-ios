@@ -30,7 +30,7 @@ class WatchCoursesDisplayingHelper {
             enrolledIds = CourseSubscriptionManager.sharedManager.addedCourses.map({return $0.id}) + enrolledIds
         }
 
-        let courses = try! Course.getCourses(enrolledIds)
+        let courses = Course.getCourses(enrolledIds)
         return Sorter.sort(courses, byIds: enrolledIds)
     }
 }

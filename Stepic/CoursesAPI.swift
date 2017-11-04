@@ -115,7 +115,7 @@ class CoursesAPI: APIEndpoint {
                 let jsonArray: [JSON] = json["courses"].array ?? []
                 let ids: [Int] = jsonArray.flatMap { $0["id"].int }
                 // recover course objects from database
-                let recoveredCourses = try! Course.getCourses(ids)
+                let recoveredCourses = Course.getCourses(ids)
                 // update existing course objects or create new ones
                 let resultCourses: [Course] = ids.enumerated().map {
                     idIndex, id in

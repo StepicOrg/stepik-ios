@@ -288,7 +288,7 @@ class CourseListPresenter {
     }
 
     private func displayCached(ids: [Int]) {
-        let recoveredCourses = try! Course.getCourses(ids)
+        let recoveredCourses = Course.getCourses(ids)
         courses = Sorter.sort(recoveredCourses, byIds: ids)
         self.view?.display(courses: getData(from: self.displayingCourses))
     }
@@ -685,7 +685,7 @@ enum CourseListType {
     func request(coursesWithIds ids: [Int], withAPI coursesAPI: CoursesAPI) -> Promise<[Course]>? {
         switch self {
         case let .collection(ids: ids):
-            return coursesAPI.retrieve(ids: ids, existing: try! Course.getCourses(ids))
+            return coursesAPI.retrieve(ids: ids, existing: Course.getCourses(ids))
         default:
             return nil
         }

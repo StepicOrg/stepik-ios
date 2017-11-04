@@ -118,17 +118,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     fileprivate func getCachedCourses(completion: (() -> Void)?) {
         isRefreshing = true
         DispatchQueue.global(qos: .default).async {
-            do {
-                let cachedIds = self.tabIds
-                let c = try Course.getCourses(cachedIds)
-                self.courses = Sorter.sort(c, byIds: cachedIds)
-                print("got cached courses \(self.courses.count): \(cachedIds)\n")
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    completion?()
-                }
-            } catch {
-                print("Error while fetching data from store")
+            let cachedIds = self.tabIds
+            let c = Course.getCourses(cachedIds)
+            self.courses = Sorter.sort(c, byIds: cachedIds)
+            print("got cached courses \(self.courses.count): \(cachedIds)\n")
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                completion?()
             }
         }
     }

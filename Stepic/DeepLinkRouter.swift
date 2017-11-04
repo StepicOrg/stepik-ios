@@ -161,7 +161,7 @@ class DeepLinkRouter {
     fileprivate static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
         if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
             do {
-                let courses = try Course.getCourses([courseId])
+                let courses = Course.getCourses([courseId])
                 if courses.count == 0 {
                     performRequest({
                         _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: Course.getAllCourses(), refreshMode: .update, success: {
@@ -204,7 +204,7 @@ class DeepLinkRouter {
 
     fileprivate static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
         do {
-            let courses = try Course.getCourses([courseId])
+            let courses = Course.getCourses([courseId])
             if courses.count == 0 {
                 performRequest({
                     _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: Course.getAllCourses(), refreshMode: .update, success: {
