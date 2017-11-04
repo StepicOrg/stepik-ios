@@ -112,6 +112,7 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
+        self.lastUser = AuthInfo.shared.user
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -220,6 +221,7 @@ class CourseListPresenter {
         if lastUser != AuthInfo.shared.user {
             courses = []
             self.view?.display(courses: [])
+            lastUser = AuthInfo.shared.user
             refresh()
             return
         } else {
@@ -347,7 +349,6 @@ class CourseListPresenter {
 
     private func refreshCourses() {
         coursesAPI.cancelAllTasks()
-        lastUser = AuthInfo.shared.user
         switch listType {
         case let .collection(ids: ids):
             listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then {
