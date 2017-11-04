@@ -384,6 +384,7 @@ class CourseListPresenter {
                 self.view?.display(courses: [])
                 self.lastStepDataSource?.didLoadWithProgresses(courses: courses)
                 self.state = .emptyAnonymous
+                return
             }
             requestNonCollection(updateProgresses: false, completion: {
                 [weak self] in
