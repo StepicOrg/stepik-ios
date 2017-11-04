@@ -218,6 +218,8 @@ class CourseListPresenter {
 
     func willAppear() {
         if lastUser != AuthInfo.shared.user {
+            courses = []
+            self.view?.display(courses: [])
             refresh()
             return
         } else {
@@ -614,6 +616,12 @@ enum CourseListType {
 
         coursesAPI.retrieve(enrolled: true, order: "-activity", page: page).then {
             courses, meta -> Void in
+
+            guard !courses.isEmpty else {
+                success(loadedCourses, meta)
+                return
+            }
+
             var progressIds: [String] = []
             var progresses: [Progress] = []
             for course in courses {
