@@ -314,7 +314,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         self.section = nextSection
         self.refreshUnits {
-            self.selectUnitAtIndex(0, replace: true)
+            [weak self] in
+            self?.selectUnitAtIndex(0, replace: true)
         }
     }
 
@@ -331,7 +332,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         self.section = prevSection
         self.refreshUnits {
-            self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
+            [weak self] in
+            self?.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
         }
     }
 
