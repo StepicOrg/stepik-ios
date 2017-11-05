@@ -277,7 +277,12 @@ class CourseListPresenter {
                     addedIds += [index]
                 }
             })
-
+            if oldDisplayedCourses.isEmpty && !newDisplayedCourses.isEmpty {
+                view?.setState(state: .displaying)
+            }
+            if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
+                view?.setState(state: .empty)
+            }
             view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
         default:
             let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
