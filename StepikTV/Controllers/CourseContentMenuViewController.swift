@@ -15,7 +15,7 @@ class CourseContentMenuViewController: MenuTableViewController {
 
     override var segueIdentifier: String { return "ShowDetailSegue" }
 
-    override var cellIdentifier: String { return "ParagraphTableViewCell" }
+    override var cellIdentifier: String { return ParagraphTableViewCell.reuseIdentifier }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -35,7 +35,7 @@ class CourseContentMenuViewController: MenuTableViewController {
         case 0:
             return CGFloat(220)
         default:
-            return CGFloat(66)
+            return ParagraphTableViewCell.size
         }
     }
 
@@ -55,8 +55,9 @@ class CourseContentMenuViewController: MenuTableViewController {
         guard let indexPath = performingSegueSourceCellIndexPath else { fatalError("'prepare(for segue:)' called when no performing segues") }
 
         if segue.identifier == segueIdentifier {
-            let vc = segue.destination as? DetailViewController
-            vc?.share = indexPath.row
+            let vc = segue.destination as? ParagraphLessonsTableViewController
+            vc?.paragraphIndex = indexPath.row + 1
+            vc?.paragraph = course.paragraphs[indexPath.row]
         }
     }
 }
