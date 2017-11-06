@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
     @available(iOS 9.0, *)
     extension WatchSessionSender.Name {
         static let Metainfo = WatchSessionSender.Name("Metainfo")
