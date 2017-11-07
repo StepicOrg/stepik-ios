@@ -143,7 +143,7 @@
         <!--Подборка-->
         <scene sceneID="Wnd-tq-OXs">
             <objects>
-                <collectionViewController storyboardIdentifier="CollectionViewContainerViewController" id="37g-Fa-hN0" customClass="CompilationViewController" customModule="StepikTV" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CollectionViewContainerViewController" id="37g-Fa-hN0" customClass="CompilationCollectionViewController" customModule="StepikTV" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="B9B-4p-WY4">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

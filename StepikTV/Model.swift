@@ -83,5 +83,21 @@ struct Paragraph {
         self.name = name
         self.lessons = lessons
     }
+}
 
+struct LessonMock {
+
+    var parts: [LessonPart] = [LessonPart(type: .Video, isDone: true), LessonPart(type: .Task), LessonPart(type: .Text), LessonPart(type: .Task)]
+}
+
+struct LessonPart {
+
+    var type: LessonsPartContentType
+
+    var isDone: Bool = false
+
+    init(type: LessonsPartContentType, isDone: Bool = false) {
+        self.type = type
+        self.isDone = isDone
+    }
 }

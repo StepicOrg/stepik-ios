@@ -1,70 +1,53 @@
 //
-//  StandardButton.swift
+//  FocusableCustomView.swift
 //  StepikTV
 //
-//  Created by Александр Пономарев on 29.10.17.
+//  Created by Александр Пономарев on 07.11.17.
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-class StandardButton: UIButton {
+class FocusableCustomView: UIView {
+
+    override var canBecomeFocused: Bool {
+        return true
+    }
 
     var changeToDefault: () -> Void {
         return {
-            let font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium)
-            let color = UIColor.clear
-
             self.transform = CGAffineTransform.identity
+            self.layer.cornerRadius = 6
             self.layer.shadowOpacity = 0.0
-            self.backgroundColor = color
-            self.titleLabel?.font = font
         }
     }
 
     var changeToFocused: () -> Void {
         return {
-            let font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightSemibold)
-            let color = UIColor(red:0.50, green:0.79, blue:0.45, alpha:1.00)
-            let scale = CGFloat(1.09)
-
-            self.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.transform = CGAffineTransform(scaleX: 1.09, y: 1.09)
             self.layer.masksToBounds = false
-            self.layer.shadowOffset = CGSize(width: 0, height: 10)
-            self.layer.shadowRadius = 15
+            self.layer.shadowOffset = CGSize(width: 0, height: 40)
+            self.layer.shadowRadius = 30
             self.layer.shadowOpacity = 0.3
-            self.backgroundColor = color
-            self.titleLabel?.font = font
         }
     }
 
     var changeToHighlighted: () -> Void {
         return {
             self.transform = CGAffineTransform.identity
-            self.layer.shadowOffset = CGSize(width: 0, height: 5)
+            self.layer.shadowOffset = CGSize(width: 0, height: 10)
             self.layer.shadowOpacity = 0.15
         }
     }
 
-    var defaultStateTitleColor: UIColor { get { return UIColor.black.withAlphaComponent(0.2) } }
-
-    var focusStateTitleColor: UIColor { get { return UIColor.white } }
-
-    private func initStyle() {
-        self.layer.cornerRadius = 6
-        setTitleColor(defaultStateTitleColor, for: .normal)
-        setTitleColor(focusStateTitleColor, for: .focused)
-        setTitleColor(focusStateTitleColor, for: .highlighted)
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initStyle()
+        changeToDefault()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initStyle()
+        changeToDefault()
     }
 
     // Events to look for a Highlighted state

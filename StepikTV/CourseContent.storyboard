@@ -177,6 +177,7 @@
                                             <outlet property="progressIcon" destination="ptn-TD-BlO" id="qob-V0-262"/>
                                             <outlet property="progressLabel" destination="ULc-a5-H7r" id="yDJ-9e-VyJ"/>
                                             <outlet property="progressLabelWidth" destination="8XT-bb-xLE" id="bnq-Ln-dnJ"/>
+                                            <segue destination="JSK-T8-rbd" kind="presentation" id="H5d-wy-QdF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -245,6 +246,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uuE-qL-WH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4572" y="-26"/>
+        </scene>
+        <!--Мои курсы-->
+        <scene sceneID="M40-mi-Zzc">
+            <objects>
+                <navigationController id="JSK-T8-rbd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Мои курсы" id="xpJ-0N-CFY"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rRs-7W-Vhp">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DnO-eG-OqM" kind="relationship" relationship="rootViewController" id="TzT-AL-KkB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q2u-5Y-m93" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2064" y="6409"/>
+        </scene>
+        <!--Lessons title-->
+        <scene sceneID="t9K-YF-ZjG">
+            <objects>
+                <collectionViewController id="DnO-eG-OqM" customClass="LessonPartsCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="wVC-db-6S6">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QBG-3V-sna">
+                            <size key="itemSize" width="548" height="606"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2As-zF-07e">
+                                <rect key="frame" x="0.0" y="135" width="548" height="606"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="548" height="606"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="DnO-eG-OqM" id="UxV-e6-BZE"/>
+                            <outlet property="delegate" destination="DnO-eG-OqM" id="ZuA-Pl-lBo"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Lessons title" id="drm-cc-4UD"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNA-FC-OH5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="6409"/>
         </scene>
     </scenes>
 </document>
