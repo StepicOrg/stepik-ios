@@ -101,14 +101,14 @@ class CourseWidgetView: NibInitializableView {
             case .join:
                 actionButton.isGray = false
                 secondaryActionButton.isGray = true
-                actionButton.setTitle(NSLocalizedString("AboutCourse", comment: ""), for: .normal)
-                secondaryActionButton.setTitle(NSLocalizedString("Info", comment: ""), for: .normal)
+                actionButton.setTitle(NSLocalizedString("widget_button_join", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("widget_button_info", comment: ""), for: .normal)
                 break
             case .continueLearning:
                 actionButton.isGray = true
                 secondaryActionButton.isGray = true
-                actionButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
-                secondaryActionButton.setTitle(NSLocalizedString("Syllabus", comment: ""), for: .normal)
+                actionButton.setTitle(NSLocalizedString("widget_button_learn", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("widget_button_syllabus", comment: ""), for: .normal)
                 break
             }
         }

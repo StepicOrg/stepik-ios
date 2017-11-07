@@ -126,13 +126,13 @@ struct CourseListBlock {
         self.ID = ID
         self.shouldShowCount = shouldShowCount
         self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
-        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), subscriber: CourseSubscriber())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.showVerticalBlock = {
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
-            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), subscriber: CourseSubscriber())
             showControllerBlock(verticalController)
         }
     }

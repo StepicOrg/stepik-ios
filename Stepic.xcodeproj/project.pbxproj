@@ -642,6 +642,14 @@
 		088EDCBE1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
 		088EDCBF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
 		088EDCC01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */; };
+		088FD8171FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD8181FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD8191FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD81A1FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD81B1FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD81C1FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD81D1FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		088FD81E1FB242B3008A2953 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -4621,6 +4629,7 @@
 		088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListHorizontalViewController.swift; sourceTree = "<group>"; };
 		088EDCAF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetCollectionViewCell.swift; sourceTree = "<group>"; };
 		088EDCB01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetCollectionViewCell.xib; sourceTree = "<group>"; };
+		088FD8161FB242B3008A2953 /* CourseSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSubscriber.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -5488,6 +5497,7 @@
 				088EDB581F8F5A48009B736E /* CourseListViewController.swift */,
 				088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */,
 				08195A051FA00FF400E6D6CD /* CourseLists.storyboard */,
+				088FD8161FB242B3008A2953 /* CourseSubscriber.swift */,
 			);
 			name = "Course List";
 			sourceTree = "<group>";
@@ -11327,6 +11337,7 @@
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				080217841F55B1B200186245 /* Menu.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
+				088FD8181FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				085EDCBF1F9945DD00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				085E9E6D1F138C2800D6A4BC /* CodeLanguagePickerViewController.swift in Sources */,
@@ -11415,6 +11426,7 @@
 				08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */,
 				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
+				088FD8171FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				084DB9DE1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				08CBA34B1F57734900302154 /* NewProfileViewController.swift in Sources */,
@@ -12149,6 +12161,7 @@
 				2C1B61EC1F4C4AEF00236804 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08EDB8C11F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B61ED1F4C4AEF00236804 /* AchievementTableViewCell.swift in Sources */,
+				088FD81D1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C1B61EE1F4C4AEF00236804 /* VideoURL.swift in Sources */,
 				2C1B61EF1F4C4AEF00236804 /* Block+CoreDataProperties.swift in Sources */,
 				2C1B61F01F4C4AEF00236804 /* Block.swift in Sources */,
@@ -12589,6 +12602,7 @@
 				2C1B63FD1F4C590700236804 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08EDB8C21F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B63FE1F4C590700236804 /* AchievementTableViewCell.swift in Sources */,
+				088FD81E1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C1B63FF1F4C590700236804 /* VideoURL.swift in Sources */,
 				2C1B64001F4C590700236804 /* Block+CoreDataProperties.swift in Sources */,
 				2C1B64011F4C590700236804 /* Block.swift in Sources */,
@@ -13029,6 +13043,7 @@
 				2C86539A1F4B33DE00D51654 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C86539B1F4B33DE00D51654 /* AchievementTableViewCell.swift in Sources */,
+				088FD81A1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C86539C1F4B33DE00D51654 /* VideoURL.swift in Sources */,
 				2C86539D1F4B33DE00D51654 /* Block+CoreDataProperties.swift in Sources */,
 				2C86539E1F4B33DE00D51654 /* Block.swift in Sources */,
@@ -13316,6 +13331,7 @@
 				2C89A9F91F4C289900227C3B /* SectionTableViewCell.swift in Sources */,
 				2C89A9FA1F4C289900227C3B /* UnitsViewController.swift in Sources */,
 				2C89A9FB1F4C289900227C3B /* AchievementNotificationView.swift in Sources */,
+				088FD81B1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C89A9FC1F4C289900227C3B /* FullscreenCodeQuizViewController.swift in Sources */,
 				2C89A9FD1F4C289900227C3B /* UnitTableViewCell.swift in Sources */,
 				2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */,
@@ -13908,6 +13924,7 @@
 				2C9732341F4C38F600AC9301 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08EDB8C01F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C9732351F4C38F600AC9301 /* AchievementTableViewCell.swift in Sources */,
+				088FD81C1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C9732361F4C38F600AC9301 /* VideoURL.swift in Sources */,
 				2C9732371F4C38F600AC9301 /* Block+CoreDataProperties.swift in Sources */,
 				2C9732381F4C38F600AC9301 /* Block.swift in Sources */,
@@ -14402,6 +14419,7 @@
 				864D66EE1E83DE03001E8D9E /* VideoURL+CoreDataProperties.swift in Sources */,
 				08EDB8BD1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */,
+				088FD8191FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				864D66EF1E83DE03001E8D9E /* VideoURL.swift in Sources */,
 				864D66F01E83DE03001E8D9E /* Block+CoreDataProperties.swift in Sources */,
 				864D66F11E83DE03001E8D9E /* Block.swift in Sources */,

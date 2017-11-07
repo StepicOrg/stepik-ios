@@ -347,5 +347,10 @@ courses1 = "course";
 courses234 = "courses";
 courses567890 = "courses";
 
+widget_button_join = "Join";
+widget_button_info = "Info";
+widget_button_syllabus = "Syllabus";
+widget_button_learn = "Learn";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

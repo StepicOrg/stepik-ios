@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import Alamofire
+import SVProgressHUD
 
 protocol CourseListView: class {
     func display(courses: [CourseViewData])
@@ -57,6 +58,7 @@ class CourseListPresenter {
     private var lastUser: User?
 
     private var subscriptionManager = CourseSubscriptionManager()
+    private var subscriber = CourseSubscriber()
 
     weak var lastStepDataSource: LastStepWidgetDataSource?
     weak var couseListCountDelegate: CourseListCountDelegate?
@@ -103,7 +105,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, subscriber: CourseSubscriber) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -112,6 +114,7 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
+        self.subscriber = subscriber
         self.lastUser = AuthInfo.shared.user
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
@@ -164,9 +167,26 @@ class CourseListPresenter {
                 LastStepRouter.continueLearning(for: course, using: navigation)
             }
         } else {
-            // Join course here
-            if let controller = getCoursePreviewController(for: course) {
-                self.view?.show(controller: controller)
+            SVProgressHUD.show()
+            subscriber.join(course: course).then {
+                [weak self]
+                course -> Void in
+                SVProgressHUD.showSuccess(withStatus: "")
+                if let controller = self?.getSectionsController(for: course) {
+                    self?.view?.show(controller: controller)
+                }
+            }.catch {
+                error in
+                guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
+                    SVProgressHUD.showError(withStatus: "")
+                    return
+                }
+                switch error {
+                case let .error(status: status):
+                    SVProgressHUD.showError(withStatus: status)
+                case .badResponseFormat:
+                    SVProgressHUD.showError(withStatus: "")
+                }
             }
         }
     }
