@@ -145,10 +145,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: false)
             break
         case .empty:
-            emptyPlaceholder.onTap = {
-                [weak self] in
-                self?.presenter?.refresh()
-            }
+            emptyPlaceholder.onTap = nil
             if let listType = presenter?.listType {
                 switch listType {
                 case .enrolled:

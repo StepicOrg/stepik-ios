@@ -270,7 +270,7 @@ class Course: NSManagedObject, JSONInitializable {
         })
     }
 
-    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) throws -> [Course] {
+    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
@@ -300,9 +300,9 @@ class Course: NSManagedObject, JSONInitializable {
 
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
-            return results as! [Course]
+            return results as? [Course] ?? []
         } catch {
-            throw FetchError.requestExecution
+            return []
         }
     }
 

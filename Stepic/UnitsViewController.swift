@@ -44,7 +44,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(UnitsViewController.shareButtonPressed(_:)))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem
 
-        refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(UnitsViewController.refresh), for: .valueChanged)
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
@@ -67,6 +67,10 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
+    }
+
+    func refresh() {
+        refreshUnits()
     }
 
     var url: String? {
@@ -314,7 +318,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         self.section = nextSection
         self.refreshUnits {
-            self.selectUnitAtIndex(0, replace: true)
+            [weak self] in
+            self?.selectUnitAtIndex(0, replace: true)
         }
     }
 
@@ -331,7 +336,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         self.section = prevSection
         self.refreshUnits {
-            self.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
+            [weak self] in
+            self?.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
         }
     }
 
