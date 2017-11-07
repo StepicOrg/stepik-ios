@@ -93,7 +93,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         self.comment = comment
         self.separatorType = separatorType
 
-        timeLabel.text = comment.lastTime.getStepicFormatString()
+        timeLabel.text = comment.time.getStepicFormatString()
         loadWebView(comment.text)
     }
 
