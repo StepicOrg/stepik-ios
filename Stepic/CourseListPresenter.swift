@@ -479,14 +479,6 @@ class CourseListPresenter {
         return course.enrolled ? getSectionsController(for: course, sourceView: sourceView) : getCoursePreviewController(for: course, sourceView: sourceView)
     }
 
-    func didSelectCourse(at index: Int) {
-        let course = courses[index]
-        let controller = course.enrolled ? getSectionsController(for: course) : getCoursePreviewController(for: course)
-        if let controller = controller {
-            self.view?.show(controller: controller)
-        }
-    }
-
     // Progresses
 
     @discardableResult private func updateProgresses(for courses: [Course]) -> Promise<[Course]> {

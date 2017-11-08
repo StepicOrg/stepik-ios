@@ -176,7 +176,7 @@ class CourseWidgetView: NibInitializableView {
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
         title = course.title
         action = course.action
-
+        secondaryAction = course.secondaryAction
         buttonState = course.isEnrolled ? .continueLearning : .join
         imageURL = URL(string: course.coverURLString)
         rating = course.rating

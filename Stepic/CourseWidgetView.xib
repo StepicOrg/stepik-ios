@@ -92,7 +92,6 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isGray" value="NO"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="actionButtonPressed:" destination="-1" eventType="touchUpInside" id="JDe-Lv-QwX"/>
                         <action selector="secondaryActionButtonPressed:" destination="-1" eventType="touchUpInside" id="PZ1-G5-aBl"/>
                     </connections>
                 </button>
