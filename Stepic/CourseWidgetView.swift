@@ -86,12 +86,14 @@ class CourseWidgetView: NibInitializableView {
         courseTitleLabel.isHidden = hidden
         courseStatsCollectionView.isHidden = hidden
         actionButton.isHidden = hidden
+        secondaryActionButton.isHidden = hidden
     }
 
     var isLoading: Bool = false {
         didSet {
-            loadingWidgetView.isHidden = !isLoading
             setElements(hidden: isLoading)
+            loadingWidgetView.isHidden = !isLoading
+            loadingWidgetView.isAnimating = isLoading
         }
     }
 
@@ -189,6 +191,7 @@ class CourseWidgetView: NibInitializableView {
     }
 
     @IBAction func secondaryActionButtonPressed(_ sender: Any) {
+        secondaryAction?()
     }
 
 }

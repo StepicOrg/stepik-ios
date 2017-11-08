@@ -15,8 +15,8 @@ class CourseWidgetCollectionViewCell: UICollectionViewCell {
         get {
             return widgetView.isLoading
         }
-        set {
-            widgetView.isLoading = isLoading
+        set(value) {
+            widgetView.isLoading = value
         }
     }
 
