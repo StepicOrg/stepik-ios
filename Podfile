@@ -11,7 +11,6 @@ def shared_pods
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
     pod 'Crashlytics'
-
 end
 
 def all_pods
@@ -50,6 +49,7 @@ def all_pods
     pod 'TTTAttributedLabel'
     pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
+    pod 'DeviceKit', '~> 1.0'
 end
 
 def testing_pods

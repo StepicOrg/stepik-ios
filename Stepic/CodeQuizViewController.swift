@@ -26,7 +26,7 @@ class CodeQuizViewController: QuizViewController {
 
     var highlightr: Highlightr!
     let textStorage = CodeAttributedString()
-    let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
+    let size: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
 
     let playgroundManager = CodePlaygroundManager()
     var currentCode: String = "" {
