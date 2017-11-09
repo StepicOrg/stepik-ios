@@ -47,6 +47,8 @@ class LessonPartItemCell: UICollectionViewCell {
 
     var contentType: LessonsPartContentType?
 
+    var video : Video?
+
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [cardView]
     }
@@ -69,17 +71,21 @@ class LessonPartItemCell: UICollectionViewCell {
     }
 
     func loadVideoTask() {
-        // Create an AVAsset with for the media's URL.
-        let mediaURL = URL(string: "https://youtu.be/Lyxv0z4OcmI")!
-        let asset = AVAsset(url: mediaURL)
-        let playerItem = AVPlayerItem(asset: asset)
+        guard let video = video else { return }
 
-        // Create and present an `AVPlayerViewController`.
-        let playerViewController = AVPlayerViewController()
-        let player = AVPlayer(playerItem: playerItem)
-        playerViewController.player = player
+        if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
+            ///Present player
+            let player = TVPlayerViewController()
+            self.delegate?.loadContentIn(controller: player, completion: { player.playVideo(url: video.getUrlForQuality("480")) })
+        } 
+    }
+}
 
-        self.delegate?.loadContentIn(controller: playerViewController, completion: { player.play() })
+class TVPlayerViewController: AVPlayerViewController, AVPlayerViewControllerDelegate {
+
+    func playVideo(url: URL) {
+        player = AVPlayer(url: url)
+        player?.play()
     }
 
 }
