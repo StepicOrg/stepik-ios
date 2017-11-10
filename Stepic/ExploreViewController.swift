@@ -9,7 +9,6 @@
 import Foundation
 
 class ExploreViewController: UIViewController, ExploreView {
-
     var presenter: ExplorePresenter?
 
     var scrollView: UIScrollView = UIScrollView()
@@ -26,6 +25,7 @@ class ExploreViewController: UIViewController, ExploreView {
                 scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
+        presenter?.initLanguagesWidget()
     }
 
     private func setupStackView() {
@@ -63,7 +63,6 @@ class ExploreViewController: UIViewController, ExploreView {
             stackView.addArrangedSubview(courseListView)
             courseListView.alignLeading("0", trailing: "0", toView: self.view)
             removeBlockForId[block.ID] = {
-                [weak self] in
                 courseListView.isHidden = true
                 courseListView.removeFromSuperview()
                 block.horizontalController.removeFromParentViewController()
@@ -85,6 +84,22 @@ class ExploreViewController: UIViewController, ExploreView {
 
     func getNavigation() -> UINavigationController? {
         return self.navigationController
+    }
+
+    func setLanguages(withLanguages languages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void) {
+        let languagesWidget = ContentLanguagesView(frame: CGRect.zero)
+        languagesWidget.languages = languages
+        languagesWidget.languageSelectedAction = onSelected
+        languagesWidget.initialLanguage = initialLanguage
+
+        let widgetBackgroundView = UIView()
+        widgetBackgroundView.backgroundColor = UIColor.white
+        widgetBackgroundView.addSubview(languagesWidget)
+        languagesWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        languagesWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        widgetBackgroundView.isHidden = false
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
+        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
     }
 
     func updateCourseCount(to count: Int, forBlockWithID ID: String) {

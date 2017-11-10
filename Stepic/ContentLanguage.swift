@@ -31,6 +31,15 @@ enum ContentLanguage {
         }
     }
 
+    var displayingString: String {
+        switch self {
+        case .russian:
+            return "Ru"
+        case .english:
+            return "En"
+        }
+    }
+
     private static var appInterfaceLanguage: ContentLanguage {
         let currentLanguageString = Bundle.main.preferredLocalizations.first ?? "en"
         return ContentLanguage(languageString: currentLanguageString)

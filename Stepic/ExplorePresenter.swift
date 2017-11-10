@@ -13,8 +13,7 @@ protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
 
     func show(vc: UIViewController)
-
-//    func setLanguagesWidget()
+    func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
 //    func setTagsWidget()
     func updateCourseCount(to: Int, forBlockWithID: String)
 }
@@ -27,10 +26,24 @@ class ExplorePresenter: CourseListCountDelegate {
     private var lists: [CourseList] = []
     private var blocks: [CourseListBlock] = []
 
+    let supportedLanguages : [ContentLanguage] = [.russian, .english]
+
     init(view: ExploreView, courseListsAPI: CourseListsAPI, courseListsCache: CourseListsCache) {
         self.view = view
         self.courseListsAPI = courseListsAPI
         self.courseListsCache = courseListsCache
+
+    }
+
+    func initLanguagesWidget() {
+        view?.setLanguages(withLanguages: supportedLanguages, initialLanguage: ContentLanguage.sharedContentLanguage, onSelected: {
+            [weak self]
+            selectedLanguage in
+            if selectedLanguage != ContentLanguage.sharedContentLanguage {
+                ContentLanguage.sharedContentLanguage = selectedLanguage
+                self?.refresh()
+            }
+        })
     }
 
     private func getId(forList list: CourseList) -> String {

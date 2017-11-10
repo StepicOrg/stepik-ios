@@ -602,6 +602,22 @@
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
 		0884696D1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
+		0885B8D21FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D31FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D41FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D51FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D61FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D71FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D81FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8D91FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */; };
+		0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8DB1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8DC1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8DD1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8DE1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8DF1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8E01FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
+		0885B8E11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
 		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
@@ -892,6 +908,22 @@
 		08CB0D3F1FB5FB28001A1E02 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
 		08CB0D401FB5FB28001A1E02 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
 		08CB0D411FB5FB28001A1E02 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
+		08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D451FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D461FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D471FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D481FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D491FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D4A1FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D4B1FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */; };
+		08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D4E1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D4F1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D501FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D511FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D521FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D531FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
+		08CB0D541FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */; };
 		08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */; };
 		08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA2F71F573F6900302154 /* MenuViewController.swift */; };
 		08CBA2F91F573F6900302154 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA2F71F573F6900302154 /* MenuViewController.swift */; };
@@ -4663,6 +4695,8 @@
 		087D96BA1EBB7F5500059408 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepGlobalContext.swift; sourceTree = "<group>"; };
+		0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguageCollectionViewCell.swift; sourceTree = "<group>"; };
+		0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentLanguageCollectionViewCell.xib; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDataDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -4793,6 +4827,8 @@
 		08CB0D271FB5CD5E001A1E02 /* CourseListsCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListsCache.swift; sourceTree = "<group>"; };
 		08CB0D301FB5F9FC001A1E02 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		08CB0D391FB5FB28001A1E02 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
+		08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentLanguagesView.xib; sourceTree = "<group>"; };
+		08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguagesView.swift; sourceTree = "<group>"; };
 		08CB4ABC1C4D3DCE00D7F918 /* WKWebViewPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewPanelManager.h; sourceTree = "<group>"; };
 		08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewPanelManager.m; sourceTree = "<group>"; };
 		08CBA2F71F573F6900302154 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -6149,6 +6185,7 @@
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08CB0D421FB63F58001A1E02 /* ContentLanguagesView */,
 				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 				08F476201E82C12B0018E82C /* StreaksView */,
 				08970EC91C6A325600846119 /* PlaceholderView */,
@@ -6578,6 +6615,17 @@
 				08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */,
 			);
 			name = "Cell classes";
+			sourceTree = "<group>";
+		};
+		08CB0D421FB63F58001A1E02 /* ContentLanguagesView */ = {
+			isa = PBXGroup;
+			children = (
+				08CB0D431FB63F74001A1E02 /* ContentLanguagesView.xib */,
+				08CB0D4C1FB63F83001A1E02 /* ContentLanguagesView.swift */,
+				0885B8D01FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift */,
+				0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */,
+			);
+			name = ContentLanguagesView;
 			sourceTree = "<group>";
 		};
 		08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */ = {
@@ -8458,6 +8506,7 @@
 				083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				08CB0D451FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				0815661C1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -8501,6 +8550,7 @@
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
+				0885B8DB1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08E8F97E1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
@@ -8525,6 +8575,7 @@
 				084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
+				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -8581,6 +8632,7 @@
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
+				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
@@ -8673,6 +8725,7 @@
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62741F4C4AEF00236804 /* SignInCoursesTableViewCell.xib in Resources */,
 				2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */,
+				0885B8E01FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */,
 				2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B627B1F4C4AEF00236804 /* CardOverlayView.xib in Resources */,
@@ -8708,6 +8761,7 @@
 				2C1B62951F4C4AEF00236804 /* UserPreferences.storyboard in Resources */,
 				2C1B62961F4C4AEF00236804 /* RefreshTableViewCell.xib in Resources */,
 				2C1B62981F4C4AEF00236804 /* CourseTableViewCell.xib in Resources */,
+				08CB0D4A1FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C1B62991F4C4AEF00236804 /* SectionTableViewCell.xib in Resources */,
 				2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B629B1F4C4AEF00236804 /* Images.xcassets in Resources */,
@@ -8779,6 +8833,7 @@
 				2C1B64851F4C590700236804 /* step2.html in Resources */,
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B64871F4C590700236804 /* SignInCoursesTableViewCell.xib in Resources */,
+				0885B8E11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */,
 				2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */,
@@ -8814,6 +8869,7 @@
 				2C1B64DE1F4C596500236804 /* GoogleService-Info.plist in Resources */,
 				2C1B64AA1F4C590700236804 /* step4.html in Resources */,
 				2C1B64AB1F4C590700236804 /* UserPreferences.storyboard in Resources */,
+				08CB0D4B1FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C1B64AC1F4C590700236804 /* RefreshTableViewCell.xib in Resources */,
 				2C1B64AE1F4C590700236804 /* CourseTableViewCell.xib in Resources */,
 				2C1B64AF1F4C590700236804 /* SectionTableViewCell.xib in Resources */,
@@ -8860,10 +8916,12 @@
 				2C86540E1F4B33DE00D51654 /* Main.storyboard in Resources */,
 				2C86540F1F4B33DE00D51654 /* StepCardView.xib in Resources */,
 				2C8654101F4B33DE00D51654 /* CodeSuggestionsTableViewController.xib in Resources */,
+				0885B8DD1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				2C8654111F4B33DE00D51654 /* PlaceholderView.storyboard in Resources */,
 				2C35C4E21F4DA486002F3BF4 /* nouns_f.plist in Resources */,
 				2C8654121F4B33DE00D51654 /* VideoDownloadView.xib in Resources */,
 				2C86548B1F4B3A6200D51654 /* Icons.xcassets in Resources */,
+				08CB0D471FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C8654131F4B33DE00D51654 /* WarningView.xib in Resources */,
 				2C86548F1F4B3E1300D51654 /* MathJax in Resources */,
 				2C8654141F4B33DE00D51654 /* StepTabView.xib in Resources */,
@@ -8967,10 +9025,12 @@
 				2C89AAEE1F4C289900227C3B /* overlay_simple.png in Resources */,
 				2C89AAEF1F4C289900227C3B /* CurrentBestStreakViewController.xib in Resources */,
 				2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */,
+				0885B8DE1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */,
 				2C35C4E31F4DA487002F3BF4 /* nouns_f.plist in Resources */,
 				2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */,
+				08CB0D481FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */,
 				2C89AAF61F4C289900227C3B /* WarningView.xib in Resources */,
 				2C89AAF71F4C289900227C3B /* MathJax in Resources */,
@@ -9099,6 +9159,7 @@
 				2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C9732B71F4C38F600AC9301 /* step2.html in Resources */,
 				2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */,
+				0885B8DF1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				2C9732B91F4C38F600AC9301 /* SignInCoursesTableViewCell.xib in Resources */,
 				2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */,
@@ -9134,6 +9195,7 @@
 				2C9732D41F4C38F600AC9301 /* TitleTextTableViewCell.xib in Resources */,
 				2C9732D51F4C38F600AC9301 /* step4.html in Resources */,
 				2C9732D61F4C38F600AC9301 /* UserPreferences.storyboard in Resources */,
+				08CB0D491FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C9732D71F4C38F600AC9301 /* RefreshTableViewCell.xib in Resources */,
 				2C9732D91F4C38F600AC9301 /* CourseTableViewCell.xib in Resources */,
 				2C35C4E41F4DA487002F3BF4 /* nouns_f.plist in Resources */,
@@ -9253,6 +9315,7 @@
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
+				0885B8DC1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
@@ -9288,6 +9351,7 @@
 				2C9704211F3B0B7F00C36F0A /* step4.html in Resources */,
 				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
+				08CB0D461FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */,
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
@@ -11229,6 +11293,7 @@
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08E6BB691DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
+				08CB0D4E1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				0846B1041EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
 				080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
@@ -11383,6 +11448,7 @@
 				0846B1081EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08E8F96D1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
 				086442C41F764FEE000CC53D /* EmailAuthPresenter.swift in Sources */,
+				0885B8D31FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				081959EB1FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
 				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
@@ -11502,6 +11568,7 @@
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
+				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
@@ -11748,6 +11815,7 @@
 				0899842F1ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
+				0885B8D21FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
@@ -12196,6 +12264,7 @@
 				08195A1E1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				2C1B61A81F4C4AEF00236804 /* AchievementManager.swift in Sources */,
 				2C1B61A91F4C4AEF00236804 /* CourseSubscriptionManager.swift in Sources */,
+				0885B8D81FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2C1B61AA1F4C4AEF00236804 /* RemoteVersionManager.swift in Sources */,
 				087585A91FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B61AB1F4C4AEF00236804 /* UpdateChecker.swift in Sources */,
@@ -12203,6 +12272,7 @@
 				2C1B61AD1F4C4AEF00236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B61AF1F4C4AEF00236804 /* Version.swift in Sources */,
+				08CB0D531FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C1B61B01F4C4AEF00236804 /* SubmissonManager.swift in Sources */,
 				2C1B61B11F4C4AEF00236804 /* QuizDataManager.swift in Sources */,
 				2C1B61B21F4C4AEF00236804 /* Executable.swift in Sources */,
@@ -12643,6 +12713,7 @@
 				08195A1F1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				2C1B63B91F4C590700236804 /* AchievementManager.swift in Sources */,
 				2C1B63BA1F4C590700236804 /* CourseSubscriptionManager.swift in Sources */,
+				0885B8D91FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2C1B63BB1F4C590700236804 /* RemoteVersionManager.swift in Sources */,
 				087585AA1FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B63BC1F4C590700236804 /* UpdateChecker.swift in Sources */,
@@ -12650,6 +12721,7 @@
 				2C1B63BE1F4C590700236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B63C01F4C590700236804 /* Version.swift in Sources */,
+				08CB0D541FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C1B63C11F4C590700236804 /* SubmissonManager.swift in Sources */,
 				2C1B63C21F4C590700236804 /* QuizDataManager.swift in Sources */,
 				2C1B63C31F4C590700236804 /* Executable.swift in Sources */,
@@ -13090,6 +13162,7 @@
 				08195A1B1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				2C8653561F4B33DE00D51654 /* AchievementManager.swift in Sources */,
 				2C8653571F4B33DE00D51654 /* CourseSubscriptionManager.swift in Sources */,
+				0885B8D51FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2C8653581F4B33DE00D51654 /* RemoteVersionManager.swift in Sources */,
 				087585A61FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C8653591F4B33DE00D51654 /* UpdateChecker.swift in Sources */,
@@ -13097,6 +13170,7 @@
 				2C86535B1F4B33DE00D51654 /* UpdatePreferencesContainer.swift in Sources */,
 				2C86535C1F4B33DE00D51654 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C86535D1F4B33DE00D51654 /* Version.swift in Sources */,
+				08CB0D501FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C86535E1F4B33DE00D51654 /* SubmissonManager.swift in Sources */,
 				2C86535F1F4B33DE00D51654 /* QuizDataManager.swift in Sources */,
 				2C8653601F4B33DE00D51654 /* Executable.swift in Sources */,
@@ -13365,6 +13439,7 @@
 				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,
 				2C89A9A01F4C289900227C3B /* HTMLContentView.swift in Sources */,
+				0885B8D61FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2C89A9A11F4C289900227C3B /* HTMLStringWrapperUtil.swift in Sources */,
 				2C89A9A21F4C289900227C3B /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C89A9A31F4C289900227C3B /* AdaptiveStepsPresenter.swift in Sources */,
@@ -13499,6 +13574,7 @@
 				2C89AA1F1F4C289900227C3B /* RatingHelper.swift in Sources */,
 				2C89AA201F4C289900227C3B /* TimeFormatHelper.swift in Sources */,
 				084490041F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
+				08CB0D511FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C89AA211F4C289900227C3B /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0897009A1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C89AA221F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
@@ -13983,6 +14059,7 @@
 				08195A1D1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				2C9731F01F4C38F600AC9301 /* AchievementManager.swift in Sources */,
 				2C9731F11F4C38F600AC9301 /* CourseSubscriptionManager.swift in Sources */,
+				0885B8D71FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2C9731F21F4C38F600AC9301 /* RemoteVersionManager.swift in Sources */,
 				087585A81FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C9731F31F4C38F600AC9301 /* UpdateChecker.swift in Sources */,
@@ -13990,6 +14067,7 @@
 				2C9731F51F4C38F600AC9301 /* UpdatePreferencesContainer.swift in Sources */,
 				2C9731F61F4C38F600AC9301 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C9731F71F4C38F600AC9301 /* Version.swift in Sources */,
+				08CB0D521FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C9731F81F4C38F600AC9301 /* SubmissonManager.swift in Sources */,
 				2C9731F91F4C38F600AC9301 /* QuizDataManager.swift in Sources */,
 				2C9731FA1F4C38F600AC9301 /* Executable.swift in Sources */,
@@ -14484,6 +14562,7 @@
 				08195A1A1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */,
 				864D66B71E83DE03001E8D9E /* CourseSubscriptionManager.swift in Sources */,
+				0885B8D41FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				864D66B81E83DE03001E8D9E /* RemoteVersionManager.swift in Sources */,
 				087585A51FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				864D66B91E83DE03001E8D9E /* UpdateChecker.swift in Sources */,
@@ -14491,6 +14570,7 @@
 				864D66BA1E83DE03001E8D9E /* UpdatePreferencesContainer.swift in Sources */,
 				864D66BB1E83DE03001E8D9E /* VersionUpdateAlertConstructor.swift in Sources */,
 				082E5E101F46379100F41426 /* ReplyCache.swift in Sources */,
+				08CB0D4F1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				864D66BC1E83DE03001E8D9E /* Version.swift in Sources */,
 				864D66BD1E83DE03001E8D9E /* SubmissonManager.swift in Sources */,
 				864D66BE1E83DE03001E8D9E /* QuizDataManager.swift in Sources */,

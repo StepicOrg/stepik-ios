@@ -18,6 +18,7 @@ class CourseListsAPI: APIEndpoint {
 
     @discardableResult func retrieve(language: ContentLanguage, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([CourseList], Meta)> {
         let params : Parameters = [
+            "platform": "mobile",
             "language": language.languageString,
             "page": page
         ]
