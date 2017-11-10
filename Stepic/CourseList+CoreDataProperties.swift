@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension CourseList {
-    
+
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedTitle: String?
     @NSManaged var managedDescription: String?
@@ -18,15 +18,14 @@ extension CourseList {
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedCoursesArray: NSObject?
 
-    
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: CourseList.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
+
     var id: Int {
         set(newId) {
             self.managedId = newId as NSNumber?
@@ -35,7 +34,7 @@ extension CourseList {
             return managedId?.intValue ?? -1
         }
     }
-    
+
     var title: String {
         set(value) {
             managedTitle = value
@@ -44,7 +43,7 @@ extension CourseList {
             return managedTitle ?? ""
         }
     }
-    
+
     var listDescription: String {
         set(value) {
             managedDescription = value
@@ -53,7 +52,7 @@ extension CourseList {
             return managedDescription ?? ""
         }
     }
-    
+
     var languageString: String {
         set(value) {
             managedLanguage = value
@@ -62,7 +61,7 @@ extension CourseList {
             return managedLanguage ?? ""
         }
     }
-    
+
     var position: Int {
         set(value) {
             self.managedPosition = value as NSNumber?
@@ -71,7 +70,7 @@ extension CourseList {
             return managedPosition?.intValue ?? 0
         }
     }
-    
+
     var coursesArray: [Int] {
         set(value) {
             self.managedCoursesArray = value as NSObject?
@@ -81,4 +80,3 @@ extension CourseList {
         }
     }
 }
-

@@ -10,7 +10,7 @@ import Foundation
 
 enum ContentLanguage {
     case english, russian
-    
+
     init(languageString: String) {
         switch languageString {
         case "ru":
@@ -21,7 +21,7 @@ enum ContentLanguage {
             self = .english
         }
     }
-    
+
     var languageString: String {
         switch self {
         case .russian:
@@ -30,7 +30,7 @@ enum ContentLanguage {
             return "en"
         }
     }
-    
+
     static var appInterfaceLanguage: ContentLanguage {
         let currentLanguageString = Bundle.main.preferredLocalizations.first ?? "en"
         return ContentLanguage(languageString: currentLanguageString)

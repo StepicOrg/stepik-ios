@@ -15,21 +15,21 @@ class CourseListsAPI: APIEndpoint {
     override var name: String {
         return "course-lists"
     }
-    
+
     @discardableResult func retrieve(language: ContentLanguage, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([CourseList], Meta)> {
         let params : Parameters = [
             "language": language.languageString,
             "page": page
         ]
-        
+
         return Promise<([CourseList], Meta)> {
             fulfill, reject in
             manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .get, parameters: params, headers: headers).validate().responseSwiftyJSON { response in
                 switch response.result {
-                    
+
                 case .failure(let error):
                     reject(RetrieveError(error: error))
-                    
+
                 case .success(let json):
                     let meta = Meta(json: json["meta"])
                     //TODO: Better make this recovery-update mechanism more generic to avoid code duplication. Think about it.
@@ -47,7 +47,7 @@ class CourseListsAPI: APIEndpoint {
                             return CourseList(json: objectJSON)
                         }
                     }
-                    
+
                     CoreDataHelper.instance.save()
                     fulfill((resultArray, meta))
                 }
