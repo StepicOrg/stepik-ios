@@ -316,6 +316,12 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return
         }
 
+        // Exam
+        guard !nextSection.isExam else {
+            showExamAlert { }
+            return
+        }
+
         self.section = nextSection
         self.refreshUnits {
             [weak self] in
@@ -335,10 +341,41 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
 
         self.section = prevSection
+
+        // Exam
+        guard !prevSection.isExam else {
+            showExamAlert { }
+            return
+        }
+
         self.refreshUnits {
             [weak self] in
             self?.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
         }
+    }
+
+    func showExamAlert(seccancel cancelAction: @escaping (() -> Void)) {
+        var sUrl = ""
+        if let slug = section?.course?.slug {
+            sUrl = StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/"
+        }
+
+        let alert = UIAlertController(title: NSLocalizedString("ExamTitle", comment: ""), message: NSLocalizedString("ShowExamInWeb", comment: ""), preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: {
+            [weak self]
+            _ in
+            if let s = self {
+                WebControllerManager.sharedManager.presentWebControllerWithURLString(sUrl + "?from_mobile_app=true", inController: s, withKey: "exam", allowsSafari: true, backButtonStyle: .close)
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {
+            _ in
+            cancelAction()
+        }))
+
+        self.present(alert, animated: true, completion: {})
     }
 
     func clearAllSelection() {
