@@ -112,6 +112,8 @@ class SocialAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.top
+
         localize()
 
         presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, view: self)

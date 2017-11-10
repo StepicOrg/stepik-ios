@@ -23,6 +23,9 @@ class AuthNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
 
     // Maybe create Router layer?
@@ -71,12 +74,12 @@ class AuthNavigationViewController: UINavigationController {
         }
     }
 
-    // Disable landscape for iPhones
+    // Disable landscape for iPhones with diagonal <= 4.7
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return DeviceInfo.current.isPad ? .all : .portrait
+        return DeviceInfo.current.diagonal > 4.7 ? .all : .portrait
     }
 
     override var shouldAutorotate: Bool {
-        return DeviceInfo.current.isPad
+        return DeviceInfo.current.diagonal > 4.7
     }
 }

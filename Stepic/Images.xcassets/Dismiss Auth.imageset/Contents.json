@@ -1,23 +1,23 @@
 {
-  "info" : {
-    "author" : "zeplin",
-    "version" : "1"
-  },
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Dismiss Auth.png",
+      "filename" : "Close.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Dismiss Auth@2x.png",
+      "filename" : "Close@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Dismiss Auth@3x.png",
+      "filename" : "Close@3x.png",
       "scale" : "3x"
     }
-  ]
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
 }

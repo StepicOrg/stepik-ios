@@ -16,10 +16,6 @@ class SocialAuthHeaderView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let head = NSLocalizedString("SignInTitleHead", comment: "")
-        let tail = NSLocalizedString("SignInTitleSocialTail", comment: "")
-        let attributedString = NSMutableAttributedString(string: "\(head) \(tail)")
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-        titleLabel.attributedText = attributedString
+        titleLabel.setTextWithHTMLString(NSLocalizedString("SignInTitleSocial", comment: ""))
     }
 }
