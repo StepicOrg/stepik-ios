@@ -9,50 +9,38 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class StepicsAPI {
+    let name = "stepics"
+    let manager: Alamofire.SessionManager
 
-    init() {}
-
-    let manager: SessionManager = {
+    init() {
         let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        return SessionManager(configuration: configuration)
-    }()
+        manager = Alamofire.SessionManager(configuration: configuration)
+    }
 
-    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request {
-
-        let params = Parameters()
-
-        print("headers while retrieving user before: \(AuthInfo.shared.initialHTTPHeaders)")
-
-        return manager.request("\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
+    func retrieveCurrentUser() -> Promise<User> {
+        return Promise { fulfill, reject in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)/1", parameters: nil, encoding: URLEncoding.default, headers: AuthInfo.shared.initialHTTPHeaders).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(RetrieveError(error: error))
+                case .success(let json):
+                    let user = User(json: json["users"].arrayValue[0])
+                    fulfill(user)
                 }
-            } else {
-                json = response.result.value!
             }
-            let request = response.request
-//            let response = response.response
+        }
+    }
+}
 
-            print("headers while retrieving user: \(String(describing: request?.allHTTPHeaderFields)), retrieved user: \(json)")
-
-            if let e = error as NSError? {
-                print(e.localizedDescription)
-
-                errorHandler(e)
-                return
-            }
-
-            let user: User = User(json: json["users"].arrayValue[0])
-            success(user)
-        })
-
+extension StepicsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
+        retrieveCurrentUser().then { success($0) }.catch { errorHandler($0) }
+        return nil
     }
 }

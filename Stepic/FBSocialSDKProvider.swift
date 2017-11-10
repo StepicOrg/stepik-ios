@@ -8,6 +8,7 @@
 
 import Foundation
 import FBSDKLoginKit
+import PromiseKit
 
 class FBSocialSDKProvider: NSObject, SocialSDKProvider {
 
@@ -19,28 +20,30 @@ class FBSocialSDKProvider: NSObject, SocialSDKProvider {
         super.init()
     }
 
-    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withReadPermissions: ["email"], from: nil, handler: {
-            result, error in
-            if error != nil {
-                errorHandler(SocialSDKError.connectionError)
-                return
-            }
-            guard let res = result else {
-                errorHandler(SocialSDKError.connectionError)
-                return
-            }
+    func getAccessInfo() -> Promise<(token: String, email: String?)> {
+        return Promise { fulfill, reject in
+            let loginManager = FBSDKLoginManager()
+            loginManager.logIn(withReadPermissions: ["email"], from: nil, handler: {
+                result, error in
+                if error != nil {
+                    reject(SocialSDKError.connectionError)
+                    return
+                }
+                guard let res = result else {
+                    reject(SocialSDKError.connectionError)
+                    return
+                }
 
-            if res.isCancelled {
-                errorHandler(SocialSDKError.accessDenied)
-                return
-            }
-            if let t = res.token.tokenString {
-                successHandler(t, nil)
-                return
-            }
-        })
+                if res.isCancelled {
+                    reject(SocialSDKError.accessDenied)
+                    return
+                }
+                if let t = res.token.tokenString {
+                    fulfill((token: t, email: nil))
+                    return
+                }
+            })
+        }
     }
 
 }

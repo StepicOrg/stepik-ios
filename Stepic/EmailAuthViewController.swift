@@ -141,7 +141,7 @@ class EmailAuthViewController: UIViewController {
 
         localize()
 
-        presenter = EmailAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = EmailAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
         emailTextField.delegate = self
         passwordTextField.delegate = self

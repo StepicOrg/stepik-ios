@@ -70,4 +70,13 @@ class AuthNavigationViewController: UINavigationController {
             setViewControllers(vcs, animated: true)
         }
     }
+
+    // Disable landscape for iPhones
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return DeviceInfo.current.isPad ? .all : .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return DeviceInfo.current.isPad
+    }
 }

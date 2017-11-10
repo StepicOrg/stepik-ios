@@ -36,8 +36,6 @@ enum TokenRefreshError: Error {
 }
 
 class AuthAPI {
-    static var shared = AuthAPI()
-
     let manager: Alamofire.SessionManager
 
     init() {
@@ -46,7 +44,7 @@ class AuthAPI {
         manager = Alamofire.SessionManager(configuration: configuration)
     }
 
-    func signIn(with code: String) -> Promise<(StepicToken, AuthorizationType)> {
+    func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
         return Promise { fulfill, reject in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
@@ -84,7 +82,7 @@ class AuthAPI {
         }
     }
 
-    func signIn(with username: String, password: String) -> Promise<(StepicToken, AuthorizationType)> {
+    func signInWithAccount(email: String, password: String) -> Promise<(StepicToken, AuthorizationType)> {
         return Promise { fulfill, reject in
             guard let passwordInfo = StepicApplicationsInfo.password else {
                 throw SignInError.noAppWithCredentials
@@ -98,7 +96,7 @@ class AuthAPI {
             let params = [
                 "grant_type": "password",
                 "password": password,
-                "username": username
+                "username": email
             ]
 
             manager.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
@@ -191,7 +189,7 @@ class AuthAPI {
         }
     }
 
-    func signUp(with firstname: String, lastname: String, email: String, password: String) -> Promise<Void> {
+    func signUpWithAccount(firstname: String, lastname: String, email: String, password: String) -> Promise<Void> {
         return Promise { fulfill, reject in
             // FIXME: AuthInfo dependency
             let headers = AuthInfo.shared.initialHTTPHeaders
@@ -226,7 +224,7 @@ class AuthAPI {
         }
     }
 
-    func signUp(with socialToken: String, email: String?, provider: String) -> Promise<(StepicToken, AuthorizationType)> {
+    func signUpWithToken(socialToken: String, email: String?, provider: String) -> Promise<(StepicToken, AuthorizationType)> {
         return Promise { fulfill, reject in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
@@ -276,5 +274,38 @@ class AuthAPI {
                 }
             }
         }
+    }
+}
+
+// Welcome to the legacy world!
+// TODO: remove this extension after global refactoring
+extension AuthAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func logInWithUsername(_ username: String, password: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: SignInError) -> Void) -> Request? {
+        signInWithAccount(email: username, password: password).then { token, authorizationType -> Void in
+            AuthInfo.shared.authorizationType = authorizationType
+            success(token)
+        }.catch { error in
+            if let typedError = error as? SignInError {
+                failure(typedError)
+            } else {
+                failure(SignInError.other(error: error, code: nil, message: nil))
+            }
+        }
+        return nil
+    }
+
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func refreshTokenWith(_ refresh_token: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: TokenRefreshError) -> Void) -> Request? {
+        refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).then { token in
+            success(token)
+        }.catch { error in
+            if let typedError = error as? TokenRefreshError {
+                failure(typedError)
+            } else {
+                failure(TokenRefreshError.other)
+            }
+        }
+        return nil
     }
 }

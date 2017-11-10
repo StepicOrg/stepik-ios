@@ -114,7 +114,7 @@ class SocialAuthViewController: UIViewController {
 
         localize()
 
-        presenter = SocialAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, view: self)
         presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
