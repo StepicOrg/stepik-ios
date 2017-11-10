@@ -105,6 +105,7 @@ enum TabController: String {
     case profile = "Profile"
     case home = "Home"
     case notifications = "Notifications"
+    case explore = "Explore"
 
     var itemInfo: TabBarItemInfo {
         switch self {
@@ -120,6 +121,8 @@ enum TabController: String {
             return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-home"))
         case .notifications:
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
+        case .explore:
+            return TabBarItemInfo(title: NSLocalizedString("Explore", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
         }
     }
 }

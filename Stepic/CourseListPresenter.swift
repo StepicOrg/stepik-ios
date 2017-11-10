@@ -44,6 +44,7 @@ class CourseListPresenter {
     private var reviewSummariesAPI: CourseReviewSummariesAPI
 
     private var colorMode: CourseListColorMode
+    private var onlyLocal: Bool
 
     private var ID: String
 
@@ -103,7 +104,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -113,6 +114,7 @@ class CourseListPresenter {
         self.listType = listType
         self.colorMode = colorMode
         self.lastUser = AuthInfo.shared.user
+        self.onlyLocal = onlyLocal
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -170,6 +172,10 @@ class CourseListPresenter {
     func refresh() {
         if courses.isEmpty {
             displayCached(ids: listType.cachedListCourseIds)
+        }
+        if onlyLocal {
+            state = courses.isEmpty ? .empty : .displaying
+            return
         }
         state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
         checkToken().then {
@@ -362,7 +368,7 @@ class CourseListPresenter {
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.courses = courses
+                strongSelf.courses = Sorter.sort(courses, byIds: ids)
                 strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
