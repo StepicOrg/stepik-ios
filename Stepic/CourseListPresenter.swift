@@ -56,6 +56,7 @@ class CourseListPresenter {
     private var hasNextPage: Bool = false
 
     private var lastUser: User?
+    private var lastLanguage: ContentLanguage
 
     private var subscriptionManager = CourseSubscriptionManager()
 
@@ -114,6 +115,7 @@ class CourseListPresenter {
         self.listType = listType
         self.colorMode = colorMode
         self.lastUser = AuthInfo.shared.user
+        self.lastLanguage = ContentLanguage.sharedContentLanguage
         self.onlyLocal = onlyLocal
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
@@ -202,7 +204,7 @@ class CourseListPresenter {
         }
         self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
-        listType.request(page: currentPage + 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -224,7 +226,7 @@ class CourseListPresenter {
     }
 
     func willAppear() {
-        if lastUser != AuthInfo.shared.user {
+        if lastUser != AuthInfo.shared.user || lastLanguage != ContentLanguage.sharedContentLanguage {
             courses = []
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
@@ -324,7 +326,7 @@ class CourseListPresenter {
     }
 
     private func requestNonCollection(updateProgresses: Bool, completion: (() -> Void)? = nil) {
-        listType.request(page: 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -682,10 +684,10 @@ enum CourseListType {
         }
     }
 
-    func request(page: Int, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
+    func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         switch self {
         case .popular:
-            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
+            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", language: language, page: page)
         case .enrolled:
             return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
         default:
@@ -705,7 +707,7 @@ enum CourseListType {
     private var cacheId: String? {
         switch self {
         case .popular:
-            return "PopularCoursesInfo"
+            return "PopularCoursesInfo_\(ContentLanguage.sharedContentLanguage.languageString)"
         case .enrolled:
             return "MyCoursesInfo"
         default:
