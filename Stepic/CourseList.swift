@@ -34,5 +34,24 @@ class CourseList: NSManagedObject, JSONInitializable {
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].int
     }
-
+    
+    class func recover(ids: [Int]) -> [CourseList] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
+        let descriptor = NSSortDescriptor(key: "managedPosition", ascending: false)
+        
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        
+        request.predicate = idCompoundPredicate
+        request.sortDescriptors = [descriptor]
+        
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request)
+            return results as? [CourseList] ?? []
+        } catch {
+            return []
+        }
+    }
 }

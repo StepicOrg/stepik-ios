@@ -575,6 +575,14 @@
 		087585BC1FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		087585BD1FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		087585BE1FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
+		087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C11FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C21FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C31FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C41FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C51FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C61FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		087585C71FB524C20047A269 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
 		08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
@@ -4616,6 +4624,7 @@
 		087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_courselists_v21.xcdatamodel; sourceTree = "<group>"; };
 		087585AD1FB51D720047A269 /* CourseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseList.swift; sourceTree = "<group>"; };
 		087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		087585BF1FB524C20047A269 /* ContentLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguage.swift; sourceTree = "<group>"; };
 		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
 		087D96B81EBB7C7700059408 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
 		087D96BA1EBB7F5500059408 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
@@ -6772,6 +6781,7 @@
 			children = (
 				087387D91BB9B768003CFAD1 /* ErrorEnums.swift */,
 				08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */,
+				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -11139,6 +11149,7 @@
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				088E58C21DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
+				087585C11FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
@@ -11605,6 +11616,7 @@
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
+				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
@@ -12154,6 +12166,7 @@
 				2C1B61C21F4C4AEF00236804 /* DictionarySerializable.swift in Sources */,
 				2C1B61C31F4C4AEF00236804 /* PersistentTaskManagerProtocol.swift in Sources */,
 				2C1B61C41F4C4AEF00236804 /* SearchQueriesPresenter.swift in Sources */,
+				087585C61FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C1B61C51F4C4AEF00236804 /* RoutingManager.swift in Sources */,
 				2C1B61C61F4C4AEF00236804 /* NotificationRegistrator.swift in Sources */,
 				2C1B61C71F4C4AEF00236804 /* NotificationAlertConstructor.swift in Sources */,
@@ -12597,6 +12610,7 @@
 				2C1B63D31F4C590700236804 /* DictionarySerializable.swift in Sources */,
 				2C1B63D41F4C590700236804 /* PersistentTaskManagerProtocol.swift in Sources */,
 				2C1B63D51F4C590700236804 /* SearchQueriesPresenter.swift in Sources */,
+				087585C71FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C1B63D61F4C590700236804 /* RoutingManager.swift in Sources */,
 				2C1B63D71F4C590700236804 /* NotificationRegistrator.swift in Sources */,
 				2C1B63D81F4C590700236804 /* NotificationAlertConstructor.swift in Sources */,
@@ -13040,6 +13054,7 @@
 				2C8653701F4B33DE00D51654 /* DictionarySerializable.swift in Sources */,
 				2C8653711F4B33DE00D51654 /* PersistentTaskManagerProtocol.swift in Sources */,
 				2C8653721F4B33DE00D51654 /* SearchQueriesPresenter.swift in Sources */,
+				087585C31FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C8653731F4B33DE00D51654 /* RoutingManager.swift in Sources */,
 				2C8653741F4B33DE00D51654 /* NotificationRegistrator.swift in Sources */,
 				2C8653751F4B33DE00D51654 /* NotificationAlertConstructor.swift in Sources */,
@@ -13534,6 +13549,7 @@
 				2C89AA8A1F4C289900227C3B /* Unit.swift in Sources */,
 				08EDD62E1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C89AA8B1F4C289900227C3B /* Section+CoreDataProperties.swift in Sources */,
+				087585C41FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C89AA8C1F4C289900227C3B /* Section.swift in Sources */,
 				2C89AA8D1F4C289900227C3B /* Course+CoreDataProperties.swift in Sources */,
 				2C89AA8E1F4C289900227C3B /* Course.swift in Sources */,
@@ -13925,6 +13941,7 @@
 				2C97320A1F4C38F600AC9301 /* DictionarySerializable.swift in Sources */,
 				2C97320B1F4C38F600AC9301 /* PersistentTaskManagerProtocol.swift in Sources */,
 				2C97320C1F4C38F600AC9301 /* SearchQueriesPresenter.swift in Sources */,
+				087585C51FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C97320D1F4C38F600AC9301 /* RoutingManager.swift in Sources */,
 				2C97320E1F4C38F600AC9301 /* NotificationRegistrator.swift in Sources */,
 				2C97320F1F4C38F600AC9301 /* NotificationAlertConstructor.swift in Sources */,
@@ -14422,6 +14439,7 @@
 				864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */,
 				864D66CB1E83DE03001E8D9E /* DictionarySerializable.swift in Sources */,
 				864D66CC1E83DE03001E8D9E /* PersistentTaskManagerProtocol.swift in Sources */,
+				087585C21FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08E8F9691F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08E3A3B71E93C21300E9C2EF /* RoutingManager.swift in Sources */,
 				864D66CD1E83DE03001E8D9E /* NotificationRegistrator.swift in Sources */,
