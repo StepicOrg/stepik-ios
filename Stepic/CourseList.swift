@@ -35,6 +35,10 @@ class CourseList: NSManagedObject, JSONInitializable {
         return id == json["id"].int
     }
     
+    var language: ContentLanguage {
+        return ContentLanguage(languageString: languageString)
+    }
+    
     class func recover(ids: [Int]) -> [CourseList] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: false)
