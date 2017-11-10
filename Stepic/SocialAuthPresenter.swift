@@ -87,6 +87,7 @@ class SocialAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
             self.view?.update(with: .success)
         }.catch { error in
             switch error {
@@ -95,6 +96,7 @@ class SocialAuthPresenter {
                 self.view?.update(with: .error)
             case is RetrieveError:
                 print("social auth: successfully signed in, but could not get user")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
             case SignInError.existingEmail(_, let email):
                 self.view?.update(with: .existingEmail(email: email ?? ""))
