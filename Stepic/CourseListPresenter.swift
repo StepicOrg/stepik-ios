@@ -607,6 +607,7 @@ enum CourseListType {
     case enrolled
     case popular
     case collection(ids: [Int])
+    case search(query: String)
 
     private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         return Promise {
@@ -699,6 +700,32 @@ enum CourseListType {
         switch self {
         case let .collection(ids: ids):
             return coursesAPI.retrieve(ids: ids, existing: Course.getCourses(ids))
+        default:
+            return nil
+        }
+    }
+
+    func request(page: Int, withAPI coursesAPI: CoursesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
+        switch self {
+        case let .search(query: query):
+            var resultMeta: Meta = Meta(hasNext: false, hasPrev: false, page: 1)
+            var searchCoursesIDs: [Int] = []
+            return Promise<([Course], Meta)> {
+                fulfill, reject in
+                searchResultsAPI.searchCourse(query: query, page: page).then {
+                    (searchResults, meta) -> Promise<([Course])> in
+                    resultMeta = meta
+                    searchCoursesIDs = searchResults.flatMap { $0.courseId }
+                    return coursesAPI.retrieve(ids: searchCoursesIDs, existing: Course.getCourses(searchCoursesIDs))
+                }.then {
+                    (courses) -> Void in
+                    let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)
+                    fulfill((resultCourses, resultMeta))
+                }.catch {
+                    error in
+                    reject(error)
+                }
+            }
         default:
             return nil
         }

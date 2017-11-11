@@ -32,7 +32,6 @@ class ExplorePresenter: CourseListCountDelegate {
         self.view = view
         self.courseListsAPI = courseListsAPI
         self.courseListsCache = courseListsCache
-
     }
 
     func initLanguagesWidget() {
@@ -120,4 +119,8 @@ class ExplorePresenter: CourseListCountDelegate {
     func updateCourseCount(to: Int, forListID: String) {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
     }
+}
+
+enum SearchState {
+    case noSearch, suggestions, results
 }

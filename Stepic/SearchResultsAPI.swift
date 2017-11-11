@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class SearchResultsAPI: APIEndpoint {
     override var name: String { return "search-results" }
@@ -53,5 +54,18 @@ class SearchResultsAPI: APIEndpoint {
 
             success(results, meta)
         })
+    }
+
+    @discardableResult func searchCourse(query: String, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
+        return Promise<([SearchResult], Meta)> {
+            fulfill, reject in
+            search(query: query, type: "course", page: page, headers: headers, success: {
+                searchResults, meta in
+                fulfill((searchResults, meta))
+            }, error: {
+                error in
+                reject(RetrieveError(error: error))
+            })
+        }
     }
 }
