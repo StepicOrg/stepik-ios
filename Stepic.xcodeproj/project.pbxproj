@@ -4174,6 +4174,9 @@
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
+		933E3F061FB7AF5C005A885D /* LessonContentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */; };
+		933E3F071FB7BEF2005A885D /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
+		933E3F081FB7BF2B005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		934A30751FAA841600819A30 /* CourseContentMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */; };
 		934A30771FABBE0400819A30 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */; };
 		934A30791FABC85D00819A30 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30781FABC85D00819A30 /* MenuTableViewController.swift */; };
@@ -4188,6 +4191,7 @@
 		934C96D31F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96D21F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift */; };
 		934C96D91F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96D81F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift */; };
 		934C96DB1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96DA1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift */; };
+		937C27FF1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */; };
 		9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4521FA3819100705195 /* CourseInfo.storyboard */; };
 		9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4541FA3820600705195 /* CourseContent.storyboard */; };
 		9386A45F1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */; };
@@ -5070,6 +5074,7 @@
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A9DEBF6A6A06E535122558A /* Pods-Adaptive 3067.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.debug.xcconfig"; sourceTree = "<group>"; };
+		933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContentAlertController.swift; sourceTree = "<group>"; };
 		934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentMenuViewController.swift; sourceTree = "<group>"; };
 		934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
 		934A30781FABC85D00819A30 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -5084,6 +5089,7 @@
 		934C96D21F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCollectionViewContainerCell.swift; sourceTree = "<group>"; };
 		934C96D81F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowCollectionViewContainerCell.swift; sourceTree = "<group>"; };
 		934C96DA1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCollectionViewContainerCell.swift; sourceTree = "<group>"; };
+		937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChoiceCustomButton.swift; sourceTree = "<group>"; };
 		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
 		9386A4541FA3820600705195 /* CourseContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseContent.storyboard; sourceTree = "<group>"; };
 		9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicallyCreatedProtocol.swift; sourceTree = "<group>"; };
@@ -7618,6 +7624,7 @@
 				9386A4751FA53FAD00705195 /* IconButton.swift */,
 				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
 				93EF1FA91FB22BBD0073B0D1 /* FocusableCustomView.swift */,
+				937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */,
 				93E4A0DD1F9FB1EE00D27A37 /* ContainerCells */,
 				93E4A0DE1F9FB20500D27A37 /* ItemCells */,
 			);
@@ -7654,6 +7661,7 @@
 		93E4A0DC1F9FB1DC00D27A37 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */,
 				93EF1F991FAD20250073B0D1 /* ProfileViewController.swift */,
 				93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */,
 				934A30781FABC85D00819A30 /* MenuTableViewController.swift */,
@@ -11855,6 +11863,7 @@
 				1BB4ECB41FA3DEC3001CDE99 /* Unit+CoreDataProperties.swift in Sources */,
 				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
+				933E3F061FB7AF5C005A885D /* LessonContentAlertController.swift in Sources */,
 				93E4A0E01F9FDB8B00D27A37 /* MenuSplitViewController.swift in Sources */,
 				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
 				9386A46A1FA3AC0C00705195 /* MainCourseInfoCell.swift in Sources */,
@@ -11864,6 +11873,7 @@
 				934C96DB1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift in Sources */,
 				9386A4611FA3AA2F00705195 /* ContainerConfigurableProtocol.swift in Sources */,
 				93EF1F9F1FB10EFB0073B0D1 /* LessonTableViewCell.swift in Sources */,
+				933E3F071FB7BEF2005A885D /* ConnectionHelper.swift in Sources */,
 				93E4A0D71F9FAB2700D27A37 /* Model.swift in Sources */,
 				93E4A0E61F9FE1B300D27A37 /* RectangularCollectionViewController.swift in Sources */,
 				9386A4761FA53FAD00705195 /* IconButton.swift in Sources */,
@@ -11945,6 +11955,7 @@
 				1BB3D2451FA3EB5D000B2FAA /* UserActivity.swift in Sources */,
 				1BB4EC931FA3DC43001CDE99 /* UsersAPI.swift in Sources */,
 				1BB4EC971FA3DD55001CDE99 /* Attempt.swift in Sources */,
+				937C27FF1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift in Sources */,
 				1BB4ECB31FA3DEC3001CDE99 /* Lesson.swift in Sources */,
 				1BB3D2521FA3F057000B2FAA /* CacheManager.swift in Sources */,
 				1BB4EC951FA3DC43001CDE99 /* AssignmentsAPI.swift in Sources */,
@@ -11962,6 +11973,7 @@
 				1BB4ECA31FA3DE46001CDE99 /* DevicesAPI.swift in Sources */,
 				934C96A61F9E9DDE00F87F45 /* MediumItemCell.swift in Sources */,
 				9386A45F1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift in Sources */,
+				933E3F081FB7BF2B005A885D /* Reachability.m in Sources */,
 				934C96D31F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

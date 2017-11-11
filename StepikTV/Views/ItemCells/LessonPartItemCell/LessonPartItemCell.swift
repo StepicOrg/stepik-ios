@@ -10,9 +10,7 @@ import UIKit
 import AVKit
 
 enum LessonsPartContentType {
-    case Video
-    case Text
-    case Task
+    case Video, Text, Task
 
     var icon: UIImage {
         switch self {
@@ -24,7 +22,7 @@ enum LessonsPartContentType {
 }
 
 protocol LessonPartPresentContentDelegate: class {
-    func loadContentIn(controller: UIViewController, completion: @escaping () -> Void)
+    func loadLessonContent(with controller: UIViewController, completion: @escaping () -> Void)
 }
 
 class LessonPartItemCell: UICollectionViewCell {
@@ -65,20 +63,29 @@ class LessonPartItemCell: UICollectionViewCell {
         super.pressesEnded(presses, with: event)
 
         switch contentType {
+        case .Task?:
+            loadTask()
         default:
-            loadVideoTask()
+            loadVideo()
         }
     }
 
-    func loadVideoTask() {
+    func loadTask() {
+        let task = LessonContentAlertController(title: "", message: "", preferredStyle: .alert)
+            task.generateTaskContent(question: "Кто вы по профессии?", choices: ["Школьник", "Студент", "Учитель", "Программист"])
+        self.delegate?.loadLessonContent(with: task, completion: {})
+    }
+
+    func loadVideo() {
         guard let video = video else { return }
 
         if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             ///Present player
             let player = TVPlayerViewController()
-            self.delegate?.loadContentIn(controller: player, completion: { player.playVideo(url: video.getUrlForQuality("480")) })
-        } 
+            self.delegate?.loadLessonContent(with: player, completion: { player.playVideo(url: video.getUrlForQuality("480")) })
+        }
     }
+
 }
 
 class TVPlayerViewController: AVPlayerViewController, AVPlayerViewControllerDelegate {

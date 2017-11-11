@@ -38,6 +38,7 @@ class LessonPartsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
         if let cell = cell as? LessonPartItemCell {
+            cell.delegate = self
             cell.configure(with: lesson.parts[indexPath.section], index: indexPath.section + 1)
         }
     }
@@ -59,7 +60,7 @@ extension LessonPartsCollectionViewController: UICollectionViewDelegateFlowLayou
 
 extension LessonPartsCollectionViewController: LessonPartPresentContentDelegate {
 
-    func loadContentIn(controller: UIViewController, completion: @escaping () -> Void) {
+    func loadLessonContent(with controller: UIViewController, completion: @escaping () -> Void) {
         self.present(controller, animated: true, completion: completion)
     }
 }

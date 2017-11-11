@@ -63,8 +63,7 @@ class StandardButton: UIButton {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initStyle()
+        fatalError("init(coder:) has not been implemented")
     }
 
     // Events to look for a Highlighted state
