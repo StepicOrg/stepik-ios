@@ -12,10 +12,14 @@ import PromiseKit
 protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
 
-    func show(vc: UIViewController)
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
-//    func setTagsWidget()
     func updateCourseCount(to: Int, forBlockWithID: String)
+
+    func updateSearchQuery(to: String)
+
+    func show(vc: UIViewController)
+    func setSearch(vc: UIViewController)
+    func setSearch(hidden: Bool)
 }
 
 class ExplorePresenter: CourseListCountDelegate {
@@ -43,6 +47,32 @@ class ExplorePresenter: CourseListCountDelegate {
                 self?.refresh()
             }
         })
+    }
+
+    var searchController: NewSearchResultsViewController?
+//    var query = ""
+
+    func queryChanged(to query: String) {
+        //TODO: Refactor this to router layer in the next releases
+        if searchController == nil {
+            guard let controller = ControllerHelper.instantiateViewController(identifier: "SearchResultsViewController", storyboardName: "Explore") as? NewSearchResultsViewController else {
+                return
+            }
+            searchController = controller
+            controller.presenter = SearchResultsPresenter(view: controller)
+            controller.presenter?.updateQueryBlock = {
+                [weak self]
+                newQuery in
+                self?.view?.updateSearchQuery(to: newQuery)
+            }
+            view?.setSearch(vc: controller)
+        }
+        searchController?.presenter?.queryChanged(to: query)
+        view?.setSearch(hidden: false)
+    }
+
+    func searchCancelled() {
+        view?.setSearch(hidden: true)
     }
 
     private func getId(forList list: CourseList) -> String {

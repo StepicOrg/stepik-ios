@@ -848,6 +848,22 @@
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
+		08C1BF281FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF291FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2A1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2B1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2D1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2E1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF2F1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
+		08C1BF311FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF321FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF331FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF341FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF351FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF361FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF371FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
+		08C1BF381FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */; };
 		08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		08C1FC341F41E74500E14B46 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
@@ -4806,6 +4822,8 @@
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
 		08C1943F1ED0A05D00A41B72 /* PagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerController.swift; sourceTree = "<group>"; };
+		08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsPresenter.swift; sourceTree = "<group>"; };
+		08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSearchResultsViewController.swift; sourceTree = "<group>"; };
 		08C1FC321F41E74500E14B46 /* QuizPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizPresenter.swift; sourceTree = "<group>"; };
 		08C5E4FC1C315272004AA626 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakAlertViewController.swift; sourceTree = "<group>"; };
@@ -6295,6 +6313,7 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				08C1BF261FB9ECE2008F342F /* Search Results */,
 				085290C41FB5C43C0053F22D /* Explore */,
 				08C7CB721FA7AC73001D8241 /* CourseListEmptyPlaceholder */,
 				084896931F9E8A1E00CFA273 /* Continue Learning Widget */,
@@ -6586,6 +6605,15 @@
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 			);
 			name = new;
+			sourceTree = "<group>";
+		};
+		08C1BF261FB9ECE2008F342F /* Search Results */ = {
+			isa = PBXGroup;
+			children = (
+				08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */,
+				08C1BF301FBA0CA1008F342F /* NewSearchResultsViewController.swift */,
+			);
+			name = "Search Results";
 			sourceTree = "<group>";
 		};
 		08C7CB721FA7AC73001D8241 /* CourseListEmptyPlaceholder */ = {
@@ -11502,6 +11530,7 @@
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
+				08C1BF321FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				080217841F55B1B200186245 /* Menu.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
 				088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
@@ -11515,6 +11544,7 @@
 				0805FE451F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
 				08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */,
 				08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
+				08C1BF291FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
@@ -11759,6 +11789,7 @@
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
+				08C1BF311FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
 				084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
@@ -11885,6 +11916,7 @@
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
+				08C1BF281FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
@@ -12104,6 +12136,7 @@
 				2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */,
 				2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */,
+				08C1BF371FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				2C1B61131F4C4AEF00236804 /* CellOperationsUtil.swift in Sources */,
 				088EDB5F1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C1B61141F4C4AEF00236804 /* AdaptiveStepPresenter.swift in Sources */,
@@ -12172,6 +12205,7 @@
 				2C1B614D1F4C4AEF00236804 /* ProfileViewController.swift in Sources */,
 				2C1B614E1F4C4AEF00236804 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1B614F1F4C4AEF00236804 /* RefreshTableViewCell.swift in Sources */,
+				08C1BF2E1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C1B61501F4C4AEF00236804 /* StepCardView.swift in Sources */,
 				2C1B61511F4C4AEF00236804 /* TapProxyView.swift in Sources */,
 				2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */,
@@ -12553,6 +12587,7 @@
 				2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */,
 				2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */,
+				08C1BF381FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				2C1B63241F4C590700236804 /* CellOperationsUtil.swift in Sources */,
 				088EDB601F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C1B63251F4C590700236804 /* AdaptiveStepPresenter.swift in Sources */,
@@ -12621,6 +12656,7 @@
 				2C1B635E1F4C590700236804 /* ProfileViewController.swift in Sources */,
 				2C1B635F1F4C590700236804 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1B63601F4C590700236804 /* RefreshTableViewCell.swift in Sources */,
+				08C1BF2F1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C1B63611F4C590700236804 /* StepCardView.swift in Sources */,
 				2C1B63621F4C590700236804 /* TapProxyView.swift in Sources */,
 				2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */,
@@ -13002,6 +13038,7 @@
 				2C8652BE1F4B33DE00D51654 /* DiscussionsViewController.swift in Sources */,
 				2C8652BF1F4B33DE00D51654 /* LoadMoreTableViewCell.swift in Sources */,
 				2C8652C01F4B33DE00D51654 /* DiscussionUpdateDelegate.swift in Sources */,
+				08C1BF341FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				2C8652C11F4B33DE00D51654 /* CellOperationsUtil.swift in Sources */,
 				088EDB5C1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C8652C21F4B33DE00D51654 /* AdaptiveStepPresenter.swift in Sources */,
@@ -13070,6 +13107,7 @@
 				2C8652FB1F4B33DE00D51654 /* ProfileViewController.swift in Sources */,
 				2C8652FC1F4B33DE00D51654 /* NotificationTimePickerViewController.swift in Sources */,
 				2C8652FD1F4B33DE00D51654 /* RefreshTableViewCell.swift in Sources */,
+				08C1BF2B1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C8652FE1F4B33DE00D51654 /* StepCardView.swift in Sources */,
 				2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */,
 				2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */,
@@ -13522,6 +13560,7 @@
 				2C89A9F21F4C289900227C3B /* FindCoursesViewController.swift in Sources */,
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C89A9F31F4C289900227C3B /* MyCoursesViewController.swift in Sources */,
+				08C1BF351FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				2C89A9F41F4C289900227C3B /* CoursesViewController.swift in Sources */,
 				086BE2B61F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C89A9F51F4C289900227C3B /* DefaultsStorageManager.swift in Sources */,
@@ -13534,6 +13573,7 @@
 				2C89A9FC1F4C289900227C3B /* FullscreenCodeQuizViewController.swift in Sources */,
 				2C89A9FD1F4C289900227C3B /* UnitTableViewCell.swift in Sources */,
 				2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */,
+				08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */,
 				2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */,
 				08CBA32B1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -13899,6 +13939,7 @@
 				2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */,
 				2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */,
 				2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */,
+				08C1BF361FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				2C97315B1F4C38F600AC9301 /* CellOperationsUtil.swift in Sources */,
 				088EDB5E1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C97315C1F4C38F600AC9301 /* AdaptiveStepPresenter.swift in Sources */,
@@ -13967,6 +14008,7 @@
 				2C9731951F4C38F600AC9301 /* ProfileViewController.swift in Sources */,
 				2C9731961F4C38F600AC9301 /* NotificationTimePickerViewController.swift in Sources */,
 				2C9731971F4C38F600AC9301 /* RefreshTableViewCell.swift in Sources */,
+				08C1BF2D1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C9731981F4C38F600AC9301 /* StepCardView.swift in Sources */,
 				2C9731991F4C38F600AC9301 /* TapProxyView.swift in Sources */,
 				2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */,
@@ -14402,6 +14444,7 @@
 				864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */,
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
 				864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */,
+				08C1BF331FBA0CA1008F342F /* NewSearchResultsViewController.swift in Sources */,
 				864D676C1E83E08E001E8D9E /* CellOperationsUtil.swift in Sources */,
 				088EDB5B1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */,
@@ -14470,6 +14513,7 @@
 				864D67AB1E83E08E001E8D9E /* ProfileViewController.swift in Sources */,
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
+				08C1BF2A1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
 				2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */,
 				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,

@@ -41,5 +41,20 @@
             </objects>
             <point key="canvasLocation" x="354" y="134"/>
         </scene>
+        <!--New Search Results View Controller-->
+        <scene sceneID="dhu-7K-Qt2">
+            <objects>
+                <viewController storyboardIdentifier="SearchResultsViewController" id="vcj-M0-Gei" customClass="NewSearchResultsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0gB-sS-lNc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2d8-uE-Mbc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yOE-pl-AFP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="923"/>
+        </scene>
     </scenes>
 </document>

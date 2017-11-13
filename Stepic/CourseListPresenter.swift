@@ -42,6 +42,7 @@ class CourseListPresenter {
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
     private var reviewSummariesAPI: CourseReviewSummariesAPI
+    private var searchResultsAPI: SearchResultsAPI
 
     private var colorMode: CourseListColorMode
     private var onlyLocal: Bool
@@ -105,7 +106,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -117,6 +118,7 @@ class CourseListPresenter {
         self.lastUser = AuthInfo.shared.user
         self.lastLanguage = ContentLanguage.sharedContentLanguage
         self.onlyLocal = onlyLocal
+        self.searchResultsAPI = searchResultsAPI
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -204,7 +206,7 @@ class CourseListPresenter {
         }
         self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
-        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -326,7 +328,7 @@ class CourseListPresenter {
     }
 
     private func requestNonCollection(updateProgresses: Bool, completion: (() -> Void)? = nil) {
-        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -685,28 +687,12 @@ enum CourseListType {
         }
     }
 
-    func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
+    func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
         switch self {
         case .popular:
             return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", language: language, page: page)
         case .enrolled:
             return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
-        default:
-            return nil
-        }
-    }
-
-    func request(coursesWithIds ids: [Int], withAPI coursesAPI: CoursesAPI) -> Promise<[Course]>? {
-        switch self {
-        case let .collection(ids: ids):
-            return coursesAPI.retrieve(ids: ids, existing: Course.getCourses(ids))
-        default:
-            return nil
-        }
-    }
-
-    func request(page: Int, withAPI coursesAPI: CoursesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
-        switch self {
         case let .search(query: query):
             var resultMeta: Meta = Meta(hasNext: false, hasPrev: false, page: 1)
             var searchCoursesIDs: [Int] = []
@@ -717,15 +703,24 @@ enum CourseListType {
                     resultMeta = meta
                     searchCoursesIDs = searchResults.flatMap { $0.courseId }
                     return coursesAPI.retrieve(ids: searchCoursesIDs, existing: Course.getCourses(searchCoursesIDs))
-                }.then {
-                    (courses) -> Void in
-                    let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)
-                    fulfill((resultCourses, resultMeta))
-                }.catch {
-                    error in
-                    reject(error)
+                    }.then {
+                        (courses) -> Void in
+                        let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)
+                        fulfill((resultCourses, resultMeta))
+                    }.catch {
+                        error in
+                        reject(error)
                 }
             }
+        default:
+            return nil
+        }
+    }
+
+    func request(coursesWithIds ids: [Int], withAPI coursesAPI: CoursesAPI) -> Promise<[Course]>? {
+        switch self {
+        case let .collection(ids: ids):
+            return coursesAPI.retrieve(ids: ids, existing: Course.getCourses(ids))
         default:
             return nil
         }
