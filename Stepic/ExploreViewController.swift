@@ -280,6 +280,7 @@ extension ExploreViewController : CustomSearchBarDelegate {
     }
 
     func startedEditing(in searchBar: CustomSearchBar) {
+        self.presenter?.queryChanged(to: "")
 //        darkOverlayView.isHidden = false
 //        darkOverlayView.alpha = 0
 //        UIView.animate(withDuration: 0.3, animations: {

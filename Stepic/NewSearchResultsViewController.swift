@@ -13,8 +13,6 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
     var suggestionsVC: UIViewController?
     var coursesVC: UIViewController?
 
-    private let backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
-
     var state: CoursesSearchResultsState = CoursesSearchResultsState.waiting {
         didSet {
             updateUIForCurrentState()
@@ -26,15 +24,21 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
         case .courses:
             coursesVC?.view.isHidden = false
             suggestionsVC?.view.isHidden = true
+            self.view.alpha = 1
             break
         case .suggestions:
             suggestionsVC?.view.isHidden = false
             coursesVC?.view.isHidden = true
+            self.view.alpha = 1
             break
         case .waiting:
             suggestionsVC?.view.isHidden = true
             coursesVC?.view.isHidden = true
-            self.view.backgroundColor = backgroundColor
+            self.view.backgroundColor = UIColor.mainDark
+            self.view.alpha = 0
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.alpha = 0.6
+            })
             break
         }
     }

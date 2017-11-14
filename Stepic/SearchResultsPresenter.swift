@@ -29,6 +29,12 @@ class SearchResultsPresenter {
     }
 
     func queryChanged(to query: String) {
+        guard query != "" else {
+            view?.set(state: .waiting)
+            resultsVC = nil
+            suggestionsVC = nil
+            return
+        }
         if suggestionsVC == nil {
             suggestionsVC = SearchQueriesViewController()
             suggestionsVC?.delegate = self
