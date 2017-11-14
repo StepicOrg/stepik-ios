@@ -122,7 +122,7 @@ enum TabController: String {
         case .notifications:
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
         case .explore:
-            return TabBarItemInfo(title: NSLocalizedString("Explore", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
+            return TabBarItemInfo(title: NSLocalizedString("Explore", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-explore"))
         }
     }
 }
