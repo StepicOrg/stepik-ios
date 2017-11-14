@@ -340,14 +340,13 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return
         }
 
-        self.section = prevSection
-
         // Exam
         guard !prevSection.isExam else {
             showExamAlert { }
             return
         }
 
+        self.section = prevSection
         self.refreshUnits {
             [weak self] in
             self?.selectUnitAtIndex(prevSection.units.count - 1, replace: true)
