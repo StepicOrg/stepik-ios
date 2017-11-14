@@ -222,15 +222,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         updateTitle()
 
-        let failureHandler = {
-            UIThread.performUI({
-                self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.connectionError
-            })
-            self.didRefresh = true
-        }
-
-        let successHandler = {
+        didRefresh = false
+        section?.loadUnits(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -238,32 +231,13 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             })
             self.didRefresh = true
             success?()
-        }
-
-        didRefresh = false
-        section?.loadUnits(success: {
-            if let course = self.section?.course,
-               let section = self.section {
-                let sectionBefore = course.getSection(before: section)
-                let sectionAfter = course.getSection(after: section)
-
-                if sectionBefore == nil {
-                    if sectionAfter == nil {
-                        successHandler()
-                    } else {
-                        sectionAfter?.loadUnits(success: { successHandler() }, error: { failureHandler() })
-                    }
-                } else if sectionAfter == nil {
-                    sectionBefore?.loadUnits(success: { successHandler() }, error: { failureHandler() })
-                } else {
-                    sectionAfter?.loadUnits(success: {
-                        sectionBefore?.loadUnits(success: { successHandler() }, error: { failureHandler() })
-                    }, error: { failureHandler() })
-                }
-            } else {
-                failureHandler()
-            }
-        }, error: { failureHandler() })
+        }, error: {
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+                self.emptyDatasetState = EmptyDatasetState.connectionError
+            })
+            self.didRefresh = true
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -313,12 +287,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                     let isPrevSectionReachable = sectionBefore?.isReachable ?? false
                     let isNextSectionReachable = sectionAfter?.isReachable ?? false
 
-                    let isPrevSectionEmpty = sectionBefore?.units.isEmpty ?? true
-                    let isNextSectionEmpty = sectionAfter?.units.isEmpty ?? true
-                    print("DEBUGG", isNextSectionEmpty)
-
-                    let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable && !isPrevSectionEmpty) || !isUnitFirstInSection
-                    let canNext = (!isSectionLastInCourse && isNextSectionReachable && !isNextSectionEmpty) || !isUnitLastInSection
+                    let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable) || !isUnitFirstInSection
+                    let canNext = (!isSectionLastInCourse && isNextSectionReachable) || !isUnitLastInSection
                     dvc.navigationRules = (prev: canPrev, next: canNext)
                 } else {
                     dvc.navigationRules = (prev: !isUnitFirstInSection, next: !isUnitLastInSection)
