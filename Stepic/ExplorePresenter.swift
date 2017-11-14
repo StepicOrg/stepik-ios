@@ -71,6 +71,10 @@ class ExplorePresenter: CourseListCountDelegate {
         view?.setSearch(hidden: false)
     }
 
+    func search(query: String) {
+        searchController?.presenter?.search(query: query)
+    }
+
     func searchCancelled() {
         view?.setSearch(hidden: true)
     }

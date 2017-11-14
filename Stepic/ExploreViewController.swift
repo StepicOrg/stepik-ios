@@ -141,27 +141,15 @@ class ExploreViewController: UIViewController, ExploreView {
         searchController?.view.isHidden = hidden
     }
 
-    // Bad code here
-//    var searchResultsVC: SearchResultsCoursesViewController!
     lazy var searchBar: CustomSearchBar = {
         CustomSearchBar()
     }()
-
-//    lazy var darkOverlayView: UIView = {
-//        let v = UIView()
-//        v.backgroundColor = UIColor.black
-//        let tapG = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.didTapBlackView))
-//        v.addGestureRecognizer(tapG)
-//        return v
-//    }()
 
     func hideKeyboardIfNeeded() {
         searchBar.resignFirstResponder()
     }
 
     private func setupSearch() {
-//        searchResultsVC = ControllerHelper.instantiateViewController(identifier: "SearchResultsCoursesViewController") as! SearchResultsCoursesViewController
-//        searchResultsVC.parentVC = self
 //        searchResultsVC.hideKeyboardBlock = {
 //            [weak self] in
 //            self?.hideKeyboardIfNeeded()
@@ -181,27 +169,6 @@ class ExploreViewController: UIViewController, ExploreView {
         searchBar.alignTopEdge(withView: self.view, predicate: "0")
         searchBar.alignLeading("0", trailing: "0", toView: self.view)
     }
-//
-//    private func setupSearchResults() {
-//        self.view.addSubview(darkOverlayView)
-//        darkOverlayView.alignLeading("0", trailing: "0", toView: self.view)
-//        darkOverlayView.constrainTopSpace(toView: searchBar, predicate: "0")
-//        darkOverlayView.alignBottomEdge(withView: self.view, predicate: "0")
-//        darkOverlayView.isHidden = true
-//
-//        self.addChildViewController(searchResultsVC)
-//        self.view.addSubview(searchResultsVC.view)
-//        searchResultsVC.view.alignLeading("0", trailing: "0", toView: self.view)
-//        searchResultsVC.view.constrainTopSpace(toView: searchBar, predicate: "0")
-//        searchResultsVC.view.alignBottomEdge(withView: self.view, predicate: "0")
-//        searchResultsVC.view.isHidden = true
-//    }
-//
-//    var isDisplayingFromSuggestions: Bool = false
-//
-//    func didTapBlackView() {
-//        searchBar.cancel()
-//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -219,81 +186,20 @@ class ExploreViewController: UIViewController, ExploreView {
 extension ExploreViewController : CustomSearchBarDelegate {
     func changedText(in searchBar: CustomSearchBar, to text: String) {
         self.presenter?.queryChanged(to: text)
-//        guard let results = searchResultsVC else {
-//            return
-//        }
-//        guard !isDisplayingFromSuggestions else {
-//            isDisplayingFromSuggestions = false
-//            return
-//        }
-//        guard text != "" else {
-//            results.view.isHidden = true
-//            return
-//        }
-//        if results.view.isHidden {
-//            results.view.isHidden = false
-//            results.view.alpha = 0
-//            UIView.animate(withDuration: 0.3, animations: {
-//                results.view.alpha = 1
-//            })
-//        }
-//        results.state = .suggestions
-//        results.query = text
-//        results.updateSearchBarBlock = {
-//            [weak self]
-//            newQuery in
-//            self?.isDisplayingFromSuggestions = true
-//            self?.searchBar.text = newQuery
-//            self?.searchBar.becomeFirstResponder()
-//        }
-//        results.countTopOffset()
     }
 
     func cancelPressed(in searchBar: CustomSearchBar) {
         searchBar.resignFirstResponder()
         self.presenter?.searchCancelled()
-//        if searchBar.text == "" {
-//            UIView.animate(withDuration: 0.3, animations: {
-//                [weak self] in
-//                self?.darkOverlayView.alpha = 0
-//                }, completion: {
-//                    [weak self]
-//                    _ in
-//                    self?.darkOverlayView.isHidden = true
-//            })
-//        } else {
-//            self.darkOverlayView.isHidden = true
-//            UIView.animate(withDuration: 0.3, animations: {
-//                [weak self] in
-//                self?.searchResultsVC.view.alpha = 0
-//                }, completion: {
-//                    [weak self]
-//                    _ in
-//                    self?.searchResultsVC.view.isHidden = true
-//            })
-//        }
-//
-//        guard let results = searchResultsVC else {
-//            return
-//        }
-//        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled, parameters: ["context": results.state.rawValue])
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled)
     }
 
     func startedEditing(in searchBar: CustomSearchBar) {
         self.presenter?.queryChanged(to: "")
-//        darkOverlayView.isHidden = false
-//        darkOverlayView.alpha = 0
-//        UIView.animate(withDuration: 0.3, animations: {
-//            [weak self] in
-//            self?.darkOverlayView.alpha = 0.4
-//        })
     }
 
     func returnPressed(in searchBar: CustomSearchBar) {
-//        guard let results = searchResultsVC else {
-//            return
-//        }
-//        results.didSelectSuggestion(suggestion: searchBar.text, position: 0)
+        self.presenter?.search(query: searchBar.text)
     }
 }
 
