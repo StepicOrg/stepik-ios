@@ -37,7 +37,7 @@ class ContentLanguagesView: NibInitializableView {
         flowLayout.minimumInteritemSpacing = 12
         flowLayout.minimumLineSpacing = 12
         titleLabel.colorMode = .gray
-        titleLabel.text = "Choose search language"
+        titleLabel.text = NSLocalizedString("ChooseSearchLanguage", comment: "")
     }
 }
 
