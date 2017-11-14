@@ -349,6 +349,7 @@ courses567890 = "courses";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 ChooseSearchLanguage = "Choose search language";
+Catalog = "Catalog";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
