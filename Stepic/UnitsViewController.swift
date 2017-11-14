@@ -315,6 +315,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
                     let isPrevSectionEmpty = sectionBefore?.units.isEmpty ?? true
                     let isNextSectionEmpty = sectionAfter?.units.isEmpty ?? true
+                    print("DEBUGG", isNextSectionEmpty)
 
                     let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable && !isPrevSectionEmpty) || !isUnitFirstInSection
                     let canNext = (!isSectionLastInCourse && isNextSectionReachable && !isNextSectionEmpty) || !isUnitLastInSection
