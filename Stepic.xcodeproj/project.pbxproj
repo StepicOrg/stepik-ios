@@ -5026,6 +5026,7 @@
 		2CF44FF11F4B4F0400C19012 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1906/icon.png; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
+		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -16125,6 +16126,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */,
 				084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */,
 				2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */,
 				08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */,
@@ -16146,7 +16148,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */;
+			currentVersion = 2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

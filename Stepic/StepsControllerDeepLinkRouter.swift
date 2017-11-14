@@ -44,23 +44,45 @@ class StepsControllerDeepLinkRouter: NSObject {
         }
     }
 
-    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler: ((UIViewController) -> Void), error errorHandler: ((String) -> Void)) {
-        let enrolled = lesson.unit?.section?.course?.enrolled ?? false
-        if lesson.isPublic || enrolled {
-            guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
-                errorHandler("Could not instantiate controller")
-                return
-            }
-            lessonVC.initObjects = (lesson: lesson, startStepId: stepId - 1, context: .lesson)
-            lessonVC.hidesBottomBarWhenPushed = true
-//            let navigation : UINavigationController = StyledNavigationViewController(rootViewController: stepsVC)
-//            navigation.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
-//            navigation.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler: @escaping ((UIViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+        performRequest({
+            ApiDataDownloader.units.retrieve(lesson: lesson.id, success: { unit in
+                ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: [], refreshMode: .update, success: { sections in
+                    if let section = sections.first {
+                        ApiDataDownloader.courses.retrieve(ids: [section.courseId], existing: [], refreshMode: .update, success: { courses in
+                            if let course = courses.first {
+                                if lesson.isPublic || course.enrolled {
+                                    guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
+                                        errorHandler("Could not instantiate controller")
+                                        return
+                                    }
+                                    lessonVC.initObjects = (lesson: lesson, startStepId: stepId - 1, context: .lesson)
+                                    lessonVC.hidesBottomBarWhenPushed = true
+                                    //            let navigation : UINavigationController = StyledNavigationViewController(rootViewController: stepsVC)
+                                    //            navigation.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
+                                    //            navigation.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 
-            successHandler(lessonVC)
-        } else {
-            errorHandler("No access")
-        }
+                                    successHandler(lessonVC)
+                                } else {
+                                    errorHandler("No access")
+                                }
+                            } else {
+                                errorHandler("Course not found")
+                            }
+                        }, error: { _ in
+                            errorHandler("Course not loaded")
+                        })
+                    } else {
+                        errorHandler("Section not found")
+                    }
+                }, error: { _ in
+                    errorHandler("Section not loaded")
+                })
+            }, error: { _ in
+                errorHandler("Unit not loaded")
+            })
+        })
+
     }
 
     var vc: UIViewController?
