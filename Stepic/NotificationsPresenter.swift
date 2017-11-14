@@ -13,7 +13,7 @@ import PromiseKit
 protocol NotificationsView: class {
     var state: NotificationsViewState { get set }
 
-    func set(notifications: NotificationViewDataStruct)
+    func set(notifications: NotificationViewDataStruct, withReload: Bool)
     func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status)
 }
 
@@ -114,7 +114,7 @@ class NotificationsPresenter {
 
     fileprivate func updateDisplayedNotifications(_ notifications: NotificationViewDataStruct) {
         self.displayedNotifications = notifications
-        self.view?.set(notifications: self.displayedNotifications)
+        self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
     fileprivate func loadCached() -> Promise<NotificationViewDataStruct> {
@@ -123,20 +123,10 @@ class NotificationsPresenter {
     }
 
     fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
-        // FIXME: temporary wrapper
-        func retrieve(page: Int, notificationType: NotificationType?) -> Promise<(Meta, [Notification])> {
-            return Promise { fulfill, reject in
-                // TODO: ugly performRequest() call
-                performRequest({
-                    self.notificationsAPI.retrieve(page: page, notificationType: notificationType, success: { fulfill(($0, $1)) }, error: { reject($0) })
-                })
-            }
-        }
-
         return Promise { fulfill, reject in
             var hasNext: Bool = false
-            firstly {
-                retrieve(page: page, notificationType: section.notificationType)
+            checkToken().then { _ -> Promise<(Meta, [Notification])> in
+                self.notificationsAPI.retrieve(page: page, notificationType: section.notificationType)
             }.then { meta, result -> Promise<NotificationViewDataStruct> in
                 hasNext = meta.hasNext
 
@@ -148,16 +138,6 @@ class NotificationsPresenter {
     }
 
     fileprivate func merge(old: NotificationViewDataStruct, new: [Notification]) -> Promise<NotificationViewDataStruct> {
-        // FIXME: temporary wrapper
-        func retrieve(ids: [Int], existing: [User], refreshMode: RefreshMode) -> Promise<[User]> {
-            return Promise { fulfill, reject in
-                // TODO: ugly performRequest() call
-                performRequest({
-                    self.usersAPI.retrieve(ids: ids, existing: existing, refreshMode: refreshMode, success: { fulfill($0) }, error: { reject($0) })
-                })
-            }
-        }
-
         // id -> url
         var userAvatars: [Int: URL] = [:]
         var usersQuery: Set<Int> = Set()
@@ -222,7 +202,9 @@ class NotificationsPresenter {
 
         // Try to load user avatars and group notifications
         return Promise { fulfill, _ in
-            _ = retrieve(ids: Array(usersQuery), existing: [], refreshMode: .update).then { users -> Void in
+            checkToken().then { _ -> Promise<[User]> in
+                self.usersAPI.retrieve(ids: Array(usersQuery), existing: [])
+            }.then { users -> Void in
                 users.forEach { user in
                     userAvatars[user.id] = URL(string: user.avatarURL)
                 }
@@ -240,20 +222,31 @@ class NotificationsPresenter {
         }
 
         notification.status = status
-        // TODO: ugly performRequest() call
-        performRequest({
-            self.notificationsAPI.update(notification, success: { _ in
-                CoreDataHelper.instance.save()
-            }, error: { err in
-                print("notifications: unable to update notification with id = \(id), error = \(err)")
-            })
-        })
+        checkToken().then { _ -> Promise<Notification> in
+            self.notificationsAPI.update(notification)
+        }.then { notification -> Void in
+            CoreDataHelper.instance.save()
+
+            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+                let (date, notifications) = arg
+                return (date: date, notifications: notifications.map { notification in
+                    var openedNotification = notification
+                    openedNotification.status = .read
+                    return openedNotification.id == id ? openedNotification : notification
+                })
+            }
+            self.view?.set(notifications: self.displayedNotifications, withReload: false)
+        }.catch { error in
+            print("notifications: unable to update notification, id = \(id), error = \(error)")
+        }
     }
 
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        notificationsAPI.markAllAsRead(success: {
+        checkToken().then { _ -> Promise<()> in
+            self.notificationsAPI.markAllAsRead()
+        }.then { _ -> Void in
             Notification.markAllAsRead()
             self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
                 let (date, notifications) = arg
@@ -263,11 +256,11 @@ class NotificationsPresenter {
                     return openedNotification
                 })
             }
-            self.view?.set(notifications: self.displayedNotifications)
+            self.view?.set(notifications: self.displayedNotifications, withReload: true)
             self.view?.updateMarkAllAsReadButton(with: .normal)
-        }, error: { err in
-            print("notifications: unable to mark all notifications as read, error = \(err)")
+        }.catch { error in
+            print("notifications: unable to mark all notifications as read, error = \(error)")
             self.view?.updateMarkAllAsReadButton(with: .error)
-        })
+        }
     }
 }
