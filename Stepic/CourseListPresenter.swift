@@ -688,9 +688,12 @@ enum CourseListType {
     }
 
     func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
+
+        let requestedLanguage: ContentLanguage? = language == .russian ? nil : language
+
         switch self {
         case .popular:
-            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", language: language, page: page)
+            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", language: requestedLanguage, page: page)
         case .enrolled:
             return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
         case let .search(query: query):
@@ -698,7 +701,7 @@ enum CourseListType {
             var searchCoursesIDs: [Int] = []
             return Promise<([Course], Meta)> {
                 fulfill, reject in
-                searchResultsAPI.searchCourse(query: query, page: page).then {
+                searchResultsAPI.searchCourse(query: query, language: requestedLanguage, page: page).then {
                     (searchResults, meta) -> Promise<([Course])> in
                     resultMeta = meta
                     searchCoursesIDs = searchResults.flatMap { $0.courseId }

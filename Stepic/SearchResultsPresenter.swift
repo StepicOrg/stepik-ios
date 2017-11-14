@@ -16,8 +16,6 @@ protocol SearchResultsView: class {
 class SearchResultsPresenter {
     weak var view: SearchResultsView?
 
-    var state: CoursesSearchResultsState = .waiting
-
     var updateQueryBlock: ((String) -> Void)?
 
     //TODO: Somehow refactor this
@@ -39,6 +37,7 @@ class SearchResultsPresenter {
         suggestionsVC?.query = query
         self.query = query
         view?.set(state: .suggestions)
+        resultsVC = nil
     }
 
     func search(query: String) {
@@ -53,6 +52,7 @@ class SearchResultsPresenter {
         }
         resultsVC?.presenter?.refresh()
         view?.set(state: .courses)
+        suggestionsVC = nil
     }
 }
 
