@@ -335,8 +335,8 @@ class CourseListPresenter {
                 return
             }
             strongSelf.courses = courses
+            strongSelf.state = courses.isEmpty ? .empty: .displaying
             strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-
             strongSelf.updateReviewSummaries(for: courses)
             if updateProgresses {
                 strongSelf.updateProgresses(for: courses)
@@ -344,7 +344,6 @@ class CourseListPresenter {
             strongSelf.currentPage = meta.page
             strongSelf.hasNextPage = meta.hasNext
             strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-            strongSelf.state = courses.isEmpty ? .empty: .displaying
             strongSelf.didRefreshOnce = true
             completion?()
             }.catch {
@@ -373,13 +372,13 @@ class CourseListPresenter {
                     return
                 }
                 strongSelf.courses = Sorter.sort(courses, byIds: ids)
+                strongSelf.state = courses.isEmpty ? .empty: .displaying
                 strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = 1
                 strongSelf.hasNextPage = false
                 strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-                strongSelf.state = courses.isEmpty ? .empty: .displaying
                 strongSelf.didRefreshOnce = true
             }.catch {
                 [weak self]

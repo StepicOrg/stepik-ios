@@ -50,6 +50,15 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
 
     func set(state: CoursesSearchResultsState) {
         self.state = state
+        switch state {
+        case .courses:
+            removeController(forState: .suggestions)
+        case .suggestions:
+            removeController(forState: .courses)
+        case .waiting:
+            removeController(forState: .courses)
+            removeController(forState: .suggestions)
+        }
     }
 
     func set(controller: UIViewController, forState: CoursesSearchResultsState) {
@@ -65,5 +74,20 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
         self.view.addSubview(controller.view)
         controller.view.isHidden = true
         controller.view.align(toView: self.view)
+    }
+
+    func removeController(forState: CoursesSearchResultsState) {
+        switch forState {
+        case .courses:
+            coursesVC?.removeFromParentViewController()
+            coursesVC?.view.removeFromSuperview()
+            coursesVC = nil
+        case .suggestions:
+            suggestionsVC?.removeFromParentViewController()
+            suggestionsVC?.view.removeFromSuperview()
+            suggestionsVC = nil
+        case .waiting:
+            break
+        }
     }
 }

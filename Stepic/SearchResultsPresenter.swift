@@ -55,8 +55,8 @@ class SearchResultsPresenter {
             }
         } else {
             resultsVC?.presenter?.listType = .search(query: query)
+            resultsVC?.presenter?.refresh()
         }
-        resultsVC?.presenter?.refresh()
         view?.set(state: .courses)
         suggestionsVC = nil
     }
