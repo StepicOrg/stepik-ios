@@ -15,6 +15,15 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
 
     var state: CoursesSearchResultsState = CoursesSearchResultsState.waiting {
         didSet {
+            switch state {
+            case .courses:
+                removeController(forState: .suggestions)
+            case .suggestions:
+                removeController(forState: .courses)
+            case .waiting:
+                removeController(forState: .courses)
+                removeController(forState: .suggestions)
+            }
             updateUIForCurrentState()
         }
     }
@@ -22,16 +31,17 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
     private func updateUIForCurrentState() {
         switch state {
         case .courses:
+            self.view.isHidden = false
             coursesVC?.view.isHidden = false
             suggestionsVC?.view.isHidden = true
             self.view.alpha = 1
-            break
         case .suggestions:
+            self.view.isHidden = false
             suggestionsVC?.view.isHidden = false
             coursesVC?.view.isHidden = true
             self.view.alpha = 1
-            break
         case .waiting:
+            self.view.isHidden = false
             suggestionsVC?.view.isHidden = true
             coursesVC?.view.isHidden = true
             self.view.backgroundColor = UIColor.mainDark
@@ -39,7 +49,6 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.alpha = 0.6
             })
-            break
         }
     }
 
@@ -50,15 +59,6 @@ class NewSearchResultsViewController: UIViewController, SearchResultsView {
 
     func set(state: CoursesSearchResultsState) {
         self.state = state
-        switch state {
-        case .courses:
-            removeController(forState: .suggestions)
-        case .suggestions:
-            removeController(forState: .courses)
-        case .waiting:
-            removeController(forState: .courses)
-            removeController(forState: .suggestions)
-        }
     }
 
     func set(controller: UIViewController, forState: CoursesSearchResultsState) {

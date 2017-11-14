@@ -122,6 +122,10 @@ class ExploreViewController: UIViewController, ExploreView {
         searchBar.text = query
     }
 
+    func hideKeyboard() {
+        self.hideKeyboardIfNeeded()
+    }
+
     var searchController: UIViewController?
 
     func setSearch(vc: UIViewController) {
@@ -146,14 +150,10 @@ class ExploreViewController: UIViewController, ExploreView {
     }()
 
     func hideKeyboardIfNeeded() {
-        searchBar.resignFirstResponder()
+        searchBar.textField.resignFirstResponder()
     }
 
     private func setupSearch() {
-//        searchResultsVC.hideKeyboardBlock = {
-//            [weak self] in
-//            self?.hideKeyboardIfNeeded()
-//        }
         searchBar.delegate = self
         searchBar.barTintColor = navigationController?.navigationBar.barTintColor
 
@@ -195,7 +195,7 @@ extension ExploreViewController : CustomSearchBarDelegate {
     }
 
     func startedEditing(in searchBar: CustomSearchBar) {
-        self.presenter?.queryChanged(to: "")
+        self.presenter?.searchStarted()
     }
 
     func returnPressed(in searchBar: CustomSearchBar) {

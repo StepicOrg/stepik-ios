@@ -17,6 +17,8 @@ protocol ExploreView: class {
 
     func updateSearchQuery(to: String)
 
+    func hideKeyboard()
+
     func show(vc: UIViewController)
     func setSearch(vc: UIViewController)
     func setSearch(hidden: Bool)
@@ -60,6 +62,10 @@ class ExplorePresenter: CourseListCountDelegate {
             }
             searchController = controller
             controller.presenter = SearchResultsPresenter(view: controller)
+            controller.presenter?.hideKeyboardBlock = {
+                [weak self] in
+                self?.view?.hideKeyboard()
+            }
             controller.presenter?.updateQueryBlock = {
                 [weak self]
                 newQuery in
@@ -75,8 +81,17 @@ class ExplorePresenter: CourseListCountDelegate {
         searchController?.presenter?.search(query: query)
     }
 
+    func searchStarted() {
+        if searchController == nil {
+            queryChanged(to: "")
+        } else {
+            searchController?.presenter?.searchStarted()
+        }
+    }
+
     func searchCancelled() {
         view?.setSearch(hidden: true)
+        searchController?.presenter?.searchCancelled()
     }
 
     private func getId(forList list: CourseList) -> String {

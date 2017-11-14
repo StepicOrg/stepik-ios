@@ -17,6 +17,7 @@ class SearchResultsPresenter {
     weak var view: SearchResultsView?
 
     var updateQueryBlock: ((String) -> Void)?
+    var hideKeyboardBlock: (() -> Void)?
 
     //TODO: Somehow refactor this
     private var suggestionsVC: SearchQueriesViewController?
@@ -29,6 +30,7 @@ class SearchResultsPresenter {
     }
 
     func queryChanged(to query: String) {
+        self.query = query
         guard query != "" else {
             view?.set(state: .waiting)
             resultsVC = nil
@@ -38,15 +40,16 @@ class SearchResultsPresenter {
         if suggestionsVC == nil {
             suggestionsVC = SearchQueriesViewController()
             suggestionsVC?.delegate = self
+            suggestionsVC?.hideKeyboardBlock = self.hideKeyboardBlock
             self.view?.set(controller: suggestionsVC!, forState: .suggestions)
         }
         suggestionsVC?.query = query
-        self.query = query
         view?.set(state: .suggestions)
         resultsVC = nil
     }
 
     func search(query: String) {
+        self.query = query
         if resultsVC == nil {
             resultsVC = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController
             if let resultsVC = resultsVC {
@@ -54,11 +57,20 @@ class SearchResultsPresenter {
                 self.view?.set(controller: resultsVC, forState: .courses)
             }
         } else {
+            //Don't actually know if this code is ever being executed
             resultsVC?.presenter?.listType = .search(query: query)
             resultsVC?.presenter?.refresh()
         }
         view?.set(state: .courses)
         suggestionsVC = nil
+    }
+
+    func searchStarted() {
+        queryChanged(to: query)
+    }
+
+    func searchCancelled() {
+        query = ""
     }
 }
 
