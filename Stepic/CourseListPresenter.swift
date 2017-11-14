@@ -161,32 +161,55 @@ class CourseListPresenter {
         }
     }
 
+    private func subscribe(to course: Course) {
+        SVProgressHUD.show()
+        checkToken().then {
+            [weak self]
+            () -> Promise<Course> in
+            guard let strongSelf = self else {
+                throw CourseSubscriber.CourseSubscriptionError.error(status: "")
+            }
+            return strongSelf.subscriber.join(course: course)
+        }.then {
+            [weak self]
+            course -> Void in
+            SVProgressHUD.showSuccess(withStatus: "")
+            if let controller = self?.getSectionsController(for: course) {
+                self?.view?.show(controller: controller)
+            }
+        }.catch {
+            error in
+            guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
+                SVProgressHUD.showError(withStatus: "")
+                return
+            }
+            switch error {
+            case let .error(status: status):
+                SVProgressHUD.showError(withStatus: status)
+            case .badResponseFormat:
+                SVProgressHUD.showError(withStatus: "")
+            }
+        }
+    }
+
     private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
                 LastStepRouter.continueLearning(for: course, using: navigation)
             }
         } else {
-            SVProgressHUD.show()
-            subscriber.join(course: course).then {
-                [weak self]
-                course -> Void in
-                SVProgressHUD.showSuccess(withStatus: "")
-                if let controller = self?.getSectionsController(for: course) {
-                    self?.view?.show(controller: controller)
-                }
-            }.catch {
-                error in
-                guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
-                    SVProgressHUD.showError(withStatus: "")
+            let joinBlock: (() -> Void) = {
+                [weak self] in
+                self?.subscribe(to: course)
+            }
+            if !AuthInfo.shared.isAuthorized {
+                guard let vc = self.view?.getController() else {
                     return
                 }
-                switch error {
-                case let .error(status: status):
-                    SVProgressHUD.showError(withStatus: status)
-                case .badResponseFormat:
-                    SVProgressHUD.showError(withStatus: "")
-                }
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: vc, success: joinBlock, cancel: nil)
+            } else {
+                joinBlock()
             }
         }
     }
@@ -276,6 +299,13 @@ class CourseListPresenter {
             return
         }
 
+        switch state {
+        case .emptyRefreshing, .displayingWithRefreshing:
+            return
+        default:
+            break
+        }
+
         switch listType {
         case .enrolled:
             let oldDisplayedCourses = getDisplaying(from: courses)
@@ -314,10 +344,10 @@ class CourseListPresenter {
                 }
             })
             if oldDisplayedCourses.isEmpty && !newDisplayedCourses.isEmpty {
-                view?.setState(state: .displaying)
+                self.state = .displaying
             }
             if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
-                view?.setState(state: .empty)
+                self.state = .empty
             }
             view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
         default:
