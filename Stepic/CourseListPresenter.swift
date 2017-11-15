@@ -19,7 +19,6 @@ protocol CourseListView: class {
 
     func setState(state: CourseListState)
 
-//    func setRefreshing(isRefreshing: Bool)
     func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
