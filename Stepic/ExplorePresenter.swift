@@ -52,7 +52,6 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     var searchController: NewSearchResultsViewController?
-//    var query = ""
 
     func queryChanged(to query: String) {
         //TODO: Refactor this to router layer in the next releases
@@ -161,7 +160,6 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 return
             }
-
         }
     }
 

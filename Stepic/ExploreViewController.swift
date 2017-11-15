@@ -20,7 +20,6 @@ class ExploreViewController: UIViewController, ExploreView {
         self.presenter = ExplorePresenter(view: self, courseListsAPI: CourseListsAPI(), courseListsCache: CourseListsCache())
         setupSearch()
         setupStackView()
-//        setupSearchResults()
         (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
         presenter?.refresh()
         self.title = NSLocalizedString("Explore", comment: "")

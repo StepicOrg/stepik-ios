@@ -14,6 +14,7 @@ import PromiseKit
 class SearchResultsAPI: APIEndpoint {
     override var name: String { return "search-results" }
 
+    @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
     @discardableResult func search(query: String, type: String?, language: ContentLanguage? = nil, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
         var params: Parameters = [:]
 
@@ -59,7 +60,7 @@ class SearchResultsAPI: APIEndpoint {
         })
     }
 
-    @discardableResult func searchCourse(query: String, language: ContentLanguage?, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
+    func searchCourse(query: String, language: ContentLanguage?, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
         return Promise<([SearchResult], Meta)> {
             fulfill, reject in
             search(query: query, type: "course", language: language, page: page, headers: headers, success: {
