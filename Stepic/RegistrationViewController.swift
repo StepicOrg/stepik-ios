@@ -181,8 +181,8 @@ class RegistrationViewController: UIViewController {
         let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
             .foregroundColor(UIColor.mainText)
             .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightMedium)).foregroundColor(UIColor.stepicGreen)
-        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightMedium))
+        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular)).foregroundColor(UIColor.stepicGreen)
+        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
             .foregroundColor(UIColor.mainText)
             .backgroundColor(UIColor(hex: 0xF6F6F6))
 
@@ -218,8 +218,8 @@ extension RegistrationViewController: TTTAttributedLabelDelegate {
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
-        // 24 - default value in app (see AppDelegate), 60 - offset with button
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
+        // 24 - default value in app (see AppDelegate), 64 - offset with button
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
