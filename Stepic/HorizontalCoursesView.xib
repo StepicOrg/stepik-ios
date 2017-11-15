@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +27,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="0aa-dd-8yJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Все"/>
                     <connections>
                         <action selector="showAllPressed:" destination="-1" eventType="touchUpInside" id="Ed0-Y1-uhk"/>
@@ -43,8 +43,8 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="My courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU3-ni-m1D" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="16" y="16" width="332" height="0.0"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="16" y="16" width="332" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -58,11 +58,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="QOq-O1-Td8" firstAttribute="top" secondItem="qU3-ni-m1D" secondAttribute="bottom" constant="4" id="5lx-e0-Igr"/>
+                <constraint firstItem="QOq-O1-Td8" firstAttribute="top" secondItem="qU3-ni-m1D" secondAttribute="bottom" constant="2" id="5lx-e0-Igr"/>
                 <constraint firstItem="QOq-O1-Td8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="9Y1-OF-RuY"/>
                 <constraint firstItem="qU3-ni-m1D" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Dyp-Ua-fiC"/>
                 <constraint firstItem="Dcl-eV-vHu" firstAttribute="leading" secondItem="qU3-ni-m1D" secondAttribute="trailing" constant="8" id="I01-6D-4Cq"/>
                 <constraint firstItem="Dcl-eV-vHu" firstAttribute="leading" secondItem="qU3-ni-m1D" secondAttribute="trailing" constant="8" id="Je0-Jn-uKD"/>
+                <constraint firstItem="ySn-PK-nVa" firstAttribute="top" secondItem="qU3-ni-m1D" secondAttribute="bottom" constant="26" id="KWW-mk-xAK"/>
                 <constraint firstItem="Dcl-eV-vHu" firstAttribute="centerY" secondItem="qU3-ni-m1D" secondAttribute="centerY" id="Kis-wy-dt2"/>
                 <constraint firstAttribute="trailing" secondItem="Dcl-eV-vHu" secondAttribute="trailing" constant="13" id="LUs-Dy-KQZ"/>
                 <constraint firstAttribute="bottom" secondItem="ySn-PK-nVa" secondAttribute="bottom" constant="16" id="Mm7-8Y-FjM"/>
@@ -71,7 +72,6 @@
                 <constraint firstAttribute="trailing" secondItem="ySn-PK-nVa" secondAttribute="trailing" id="a3Y-qJ-8nY"/>
                 <constraint firstItem="qU3-ni-m1D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="i92-aV-yCA"/>
                 <constraint firstItem="ySn-PK-nVa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qIQ-y1-i3A"/>
-                <constraint firstItem="ySn-PK-nVa" firstAttribute="top" secondItem="QOq-O1-Td8" secondAttribute="bottom" priority="999" constant="8" id="utt-t9-Vqd"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

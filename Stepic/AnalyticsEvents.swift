@@ -125,6 +125,7 @@ struct AnalyticsEvents {
         static let certificatesClicked = "main_choice_certificates"
         static let profileClicked = "main_choice_profile"
         static let notificationsClicked = "main_choice_notifications"
+        static let catalogClicked = "main_choice_catalog"
     }
 
     struct Streaks {

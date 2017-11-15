@@ -153,6 +153,8 @@ class CourseListViewController: UIViewController, CourseListView {
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
                 case .popular:
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyPopular", comment: "")
+                case .search(query: _):
+                    emptyPlaceholder.text = NSLocalizedString("SearchPlaceholderEmpty", comment: "")
                 default:
                     emptyPlaceholder.text = "Empty"
                     break
@@ -171,6 +173,8 @@ class CourseListViewController: UIViewController, CourseListView {
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
                 case .popular:
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+                case .search(query: _):
+                    emptyPlaceholder.text = NSLocalizedString("SearchPlaceholderError", comment: "")
                 default:
                     emptyPlaceholder.text = "Error"
                     break
