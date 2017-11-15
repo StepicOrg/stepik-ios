@@ -39,13 +39,7 @@ class NotificationReactionHandler {
     fileprivate static func handleLearnNotification(_ notification: Notification) -> ((UIViewController) -> Void)? {
         let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
         if let courseId = extractor.courseId {
-            var course: Course? = nil
-            do {
-                course = try Course.getCourses([courseId])[0]
-            } catch {
-                print("handle notification: no course found, id = \(courseId)")
-                return nil
-            }
+            let course = Course.getCourses([courseId]).first
 
             let sectionsCOpt = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController
             if let sectionsController = sectionsCOpt, let course = course {

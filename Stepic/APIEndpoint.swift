@@ -10,12 +10,44 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreData
+import PromiseKit
 
 enum RetrieveError: Error {
     case connectionError, badStatus, cancelled
+
+    init(error: Error) {
+        guard let error = error as? NSError else {
+            self = .connectionError
+            return
+        }
+        switch error.code {
+        case -6003: self = .badStatus
+        case -999: self = .cancelled
+        default: self = .connectionError
+        }
+    }
 }
 
 class APIEndpoint {
+
+    var name: String {
+        return ""
+    }
+
+    let manager: Alamofire.SessionManager
+
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15
+        manager = Alamofire.SessionManager(configuration: configuration)
+    }
+
+    func cancelAllTasks() {
+        manager.session.getAllTasks(completionHandler: {
+            tasks in
+            tasks.forEach({ $0.cancel() })
+        })
+    }
 
     func constructIdsString<TID>(array arr: [TID]) -> String {
         var result = ""
@@ -28,6 +60,40 @@ class APIEndpoint {
         return result
     }
 
+    func getObjectsByIds<T: JSONInitializable>(ids: [T.idType], updating: [T], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false) -> Promise<([T])> {
+        let name = self.name
+        return Promise<([T])> {
+            fulfill, reject in
+            let params: Parameters = [
+                "ids": ids
+            ]
+
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, encoding: URLEncoding.default, headers: headers).validate().responseSwiftyJSON { response in
+                switch response.result {
+
+                case .failure(let error):
+                    reject(RetrieveError(error: error))
+
+                case .success(let json):
+                    let jsonArray: [JSON] = json[name].array ?? []
+                    let resultArray: [T] = jsonArray.map {
+                        objectJSON in
+                        if let recoveredIndex = updating.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                            updating[recoveredIndex].update(json: objectJSON)
+                            return updating[recoveredIndex]
+                        } else {
+                            return T(json: objectJSON)
+                        }
+                    }
+
+                    CoreDataHelper.instance.save()
+                    fulfill((resultArray))
+                }
+
+            }
+        }
+    }
+
     func getObjectsByIds<T: JSONInitializable>(requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [T.idType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
 
         let params: Parameters = [:]
@@ -38,7 +104,7 @@ class APIEndpoint {
             return nil
         }
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error

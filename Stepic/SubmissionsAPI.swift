@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class SubmissionsAPI: APIEndpoint {
-    let name = "submissions"
+    override var name: String { return "submissions" }
 
     @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 

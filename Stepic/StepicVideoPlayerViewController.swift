@@ -288,6 +288,7 @@ class StepicVideoPlayerViewController: UIViewController {
     deinit {
         WatchSessionSender.sendPlaybackStatus(.noVideo)
         WatchSessionManager.sharedManager.removeObserver(self)
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         print("did deinit")
         saveCurrentPlayerTime()
     }

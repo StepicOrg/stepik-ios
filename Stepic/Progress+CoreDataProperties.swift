@@ -20,6 +20,7 @@ extension Progress {
     @NSManaged var managedNumberOfSteps: NSNumber?
     @NSManaged var managedNumberOfStepsPassed: NSNumber?
     @NSManaged var managedCost: NSNumber?
+    @NSManaged var managedLastViewed: NSNumber?
 
     @NSManaged var managedStep: Step?
     @NSManaged var managedSection: Section?
@@ -49,6 +50,15 @@ extension Progress {
         }
         set(value) {
             managedIsPassed = value as NSNumber?
+        }
+    }
+
+    var lastViewed: Double {
+        get {
+            return managedLastViewed?.doubleValue ?? 0
+        }
+        set(value) {
+            managedLastViewed = value as NSNumber?
         }
     }
 

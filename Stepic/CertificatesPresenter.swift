@@ -131,7 +131,7 @@ class CertificatesPresenter {
             $0.courseId
         }
 
-        let localCourses = try! Course.getCourses(courseIds)
+        let localCourses = Course.getCourses(courseIds)
         matchCoursesToCertificates(courses: localCourses)
 
         coursesAPI?.retrieve(ids: courseIds, existing: localCourses, refreshMode: .update, success: {

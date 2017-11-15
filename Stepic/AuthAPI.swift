@@ -43,7 +43,16 @@ class AuthAPI {
             let response = response.response
 
             if let e = error {
-                failure(SignInError.other(error: e, code: nil, message: nil))
+                if let typedError = e as? URLError {
+                    switch typedError.code {
+                    case .notConnectedToInternet:
+                        failure(SignInError.badConnection)
+                    default:
+                        failure(SignInError.other(error: e, code: nil, message: nil))
+                    }
+                } else {
+                    failure(SignInError.other(error: e, code: nil, message: nil))
+                }
                 return
             }
 

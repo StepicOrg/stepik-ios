@@ -23,8 +23,33 @@ enum StepikLabelStyle {
     }
 }
 
+enum StepikLabelColorMode {
+    case dark, gray, light
+
+    var textColor: UIColor {
+        switch self {
+        case .dark:
+            return UIColor.mainText
+        case .light:
+            return UIColor.white
+        case .gray:
+            return UIColor.lightGray
+        }
+    }
+}
+
 @IBDesignable
 class StepikLabel: UILabel {
+
+    var colorMode: StepikLabelColorMode = .dark {
+        didSet {
+            updateColorMode()
+        }
+    }
+
+    private func updateColorMode() {
+        self.textColor = colorMode.textColor
+    }
 
     @IBInspectable
     var isGray: Bool = false {
@@ -38,7 +63,7 @@ class StepikLabel: UILabel {
     }
 
     private func applyStyles() {
-        self.textColor = UIColor.mainText
+        updateColorMode()
     }
 
     override init(frame: CGRect) {
