@@ -11,9 +11,12 @@ import UIKit
 class CourseWidgetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var widgetView: CourseWidgetView!
 
-    var isLoading: Bool = false {
-        didSet {
-            widgetView.isLoading = isLoading
+    var isLoading: Bool {
+        get {
+            return widgetView.isLoading
+        }
+        set(value) {
+            widgetView.isLoading = value
         }
     }
 
@@ -23,14 +26,6 @@ class CourseWidgetCollectionViewCell: UICollectionViewCell {
     }
 
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
-        widgetView.title = course.title
-        widgetView.action = course.action
-        widgetView.buttonState = course.isEnrolled ? .continueLearning : .join
-        widgetView.imageURL = URL(string: course.coverURLString)
-        widgetView.rating = course.rating
-        widgetView.learners = course.learners
-        widgetView.progress = course.progress
-        widgetView.colorMode = colorMode
-        isLoading = false
+        widgetView.setup(courseViewData: course, colorMode: colorMode)
     }
 }

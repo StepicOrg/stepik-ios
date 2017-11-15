@@ -343,6 +343,15 @@ HomePlaceholderErrorPopular = "Кажется, мы не смогли загру
 courses1 = "курс";
 courses234 = "курса";
 courses567890 = "курсов";
+SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного курса по запросу";
+SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
+ChooseSearchLanguage = "Выберите язык поиска";
+Catalog = "Каталог";
+
+WidgetButtonJoin = "Поступить";
+WidgetButtonInfo = "Инфо";
+WidgetButtonSyllabus = "План";
+WidgetButtonLearn = "Учиться";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

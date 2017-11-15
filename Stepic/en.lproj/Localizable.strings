@@ -342,6 +342,15 @@ HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>
 courses1 = "course";
 courses234 = "courses";
 courses567890 = "courses";
+SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
+SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
+ChooseSearchLanguage = "Choose search language";
+Catalog = "Catalog";
+
+WidgetButtonJoin = "Join";
+WidgetButtonInfo = "Info";
+WidgetButtonSyllabus = "Syllabus";
+WidgetButtonLearn = "Learn";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

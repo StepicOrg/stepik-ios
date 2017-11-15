@@ -10,7 +10,7 @@ def shared_pods
     pod 'SDWebImage'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
-    pod 'Crashlytics'
+    pod 'Crashlytics', '~> 3.9'
 end
 
 def all_pods
@@ -24,10 +24,10 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
-    pod 'Firebase/Core', '3.16.0'
-    pod 'Firebase/AppIndexing', '3.16.0'
-    pod 'Firebase/Messaging', '3.16.0'
-    pod 'Firebase/Analytics', '3.16.0'
+    pod 'Firebase/Core'
+    pod 'Firebase/AppIndexing'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/Analytics'
     
     pod 'Mixpanel-swift'
 

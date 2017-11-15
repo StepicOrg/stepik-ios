@@ -47,14 +47,22 @@ class LastStepRouter {
 
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
-        unitsVC.unitId = course.lastStep?.unitId
 
+        guard let unitId = course.lastStep?.unitId,
+              let section = Unit.getUnit(id: unitId)?.section,
+              section.isReachable else {
+                navigationController.pushViewController(sectionsVC, animated: true)
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
+                return
+        }
+
+        unitsVC.unitId = course.lastStep?.unitId
         lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
 
         //For prev-next step buttons navigation
         lessonVC.sectionNavigationDelegate = unitsVC
 
-        if course.lastStep?.unitId != nil && course.lastStep?.stepId != nil {
+        if course.lastStep?.stepId != nil {
             navigationController.pushViewController(sectionsVC, animated: false)
             navigationController.pushViewController(unitsVC, animated: false)
             navigationController.pushViewController(lessonVC, animated: true)

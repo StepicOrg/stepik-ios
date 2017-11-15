@@ -43,6 +43,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.allowsSelection = false
         self.view.addSubview(tableView)
         self.tableView.alignLeading("0", trailing: "0", toView: self.view)
         self.tableView.alignBottomEdge(withView: self.view, predicate: "0")
