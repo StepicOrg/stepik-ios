@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,13 +20,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjf-Pi-oU4">
-                    <rect key="frame" x="16" y="0.0" width="366" height="206"/>
+                    <rect key="frame" x="16" y="28" width="366" height="150"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="course_list_purple_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-z5-Ha9">
-                            <rect key="frame" x="0.0" y="0.0" width="366" height="206"/>
+                            <rect key="frame" x="0.0" y="0.0" width="366" height="150"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP1-Cf-vcP" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                            <rect key="frame" x="16" y="8" width="334" height="190"/>
+                            <rect key="frame" x="16" y="8" width="334" height="134"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -35,6 +35,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="FP1-Cf-vcP" secondAttribute="trailing" constant="16" id="4SV-pZ-AGq"/>
+                        <constraint firstAttribute="height" priority="999" constant="150" id="8vz-OA-uwI"/>
                         <constraint firstItem="FP1-Cf-vcP" firstAttribute="top" secondItem="tjf-Pi-oU4" secondAttribute="top" constant="8" id="IvC-oq-325"/>
                         <constraint firstItem="jcL-z5-Ha9" firstAttribute="leading" secondItem="tjf-Pi-oU4" secondAttribute="leading" id="aBN-6Y-8T5"/>
                         <constraint firstItem="FP1-Cf-vcP" firstAttribute="leading" secondItem="tjf-Pi-oU4" secondAttribute="leading" constant="16" id="eoc-ju-vWV"/>
@@ -47,8 +48,9 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="tjf-Pi-oU4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XCB-7c-NYV"/>
-                <constraint firstAttribute="bottom" secondItem="tjf-Pi-oU4" secondAttribute="bottom" id="Yca-Lt-9Pc"/>
+                <constraint firstItem="tjf-Pi-oU4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Oln-Cd-QsV"/>
+                <constraint firstItem="tjf-Pi-oU4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="XCB-7c-NYV"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tjf-Pi-oU4" secondAttribute="bottom" id="Yca-Lt-9Pc"/>
                 <constraint firstAttribute="trailing" secondItem="tjf-Pi-oU4" secondAttribute="trailing" constant="16" id="dBe-AF-emG"/>
                 <constraint firstItem="tjf-Pi-oU4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="w2D-m1-Ngi"/>
             </constraints>
