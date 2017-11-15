@@ -10,7 +10,6 @@ import Foundation
 
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
-
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
     func hideCountinueLearningWidget()
 

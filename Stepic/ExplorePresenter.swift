@@ -8,9 +8,11 @@
 
 import Foundation
 import PromiseKit
+import Alamofire
 
 protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
+    func setConnectionProblemsPlaceholder(hidden: Bool)
 
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
     func updateCourseCount(to: Int, forBlockWithID: String)
@@ -31,6 +33,7 @@ class ExplorePresenter: CourseListCountDelegate {
 
     private var lists: [CourseList] = []
     private var blocks: [CourseListBlock] = []
+    private var didRefreshOnce: Bool = false
 
     let supportedLanguages : [ContentLanguage] = [.russian, .english]
 
@@ -143,6 +146,7 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 throw WeakSelfError.noStrong
             }
+            strongSelf.didRefreshOnce = true
             return strongSelf.courseListsAPI.retrieve(language: language, page: 1)
         }.then {
             [weak self]
@@ -153,6 +157,7 @@ class ExplorePresenter: CourseListCountDelegate {
             strongSelf.courseListsCache.set(ids: lists.map { $0.id }, forLanguage: language)
             strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
             strongSelf.blocks = strongSelf.buildBlocks(forLists: strongSelf.lists, onlyLocal: false)
+            strongSelf.view?.setConnectionProblemsPlaceholder(hidden: true)
             strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
         }.catch {
             [weak self]
@@ -160,7 +165,39 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 return
             }
+            //TODO: Also present popular block here if needed
+            if strongSelf.lists.isEmpty {
+                strongSelf.view?.setConnectionProblemsPlaceholder(hidden: false)
+            }
+            if !strongSelf.didRefreshOnce {
+                strongSelf.setupNetworkReachabilityListener()
+            }
+            //TODO: Add Reachability observer here
         }
+    }
+
+    private var reachabilityManager: Alamofire.NetworkReachabilityManager?
+    private func setupNetworkReachabilityListener() {
+        guard reachabilityManager == nil else {
+            return
+        }
+        reachabilityManager = Alamofire.NetworkReachabilityManager(host: StepicApplicationsInfo.stepicURL)
+        reachabilityManager?.listener = {
+            [weak self]
+            status in
+            guard let strongSelf = self else {
+                return
+            }
+            if !strongSelf.didRefreshOnce {
+                switch status {
+                case .reachable(_):
+                    strongSelf.refresh()
+                default:
+                    break
+                }
+            }
+        }
+        reachabilityManager?.startListening()
     }
 
     func updateCourseCount(to: Int, forListID: String) {

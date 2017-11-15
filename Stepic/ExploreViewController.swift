@@ -22,7 +22,7 @@ class ExploreViewController: UIViewController, ExploreView {
         setupStackView()
         (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
         presenter?.refresh()
-        self.title = NSLocalizedString("Explore", comment: "")
+        self.title = NSLocalizedString("Catalog", comment: "")
         #if swift(>=3.2)
             if #available(iOS 11.0, *) {
                 scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
@@ -150,6 +150,32 @@ class ExploreViewController: UIViewController, ExploreView {
 
     func hideKeyboardIfNeeded() {
         searchBar.textField.resignFirstResponder()
+    }
+
+    lazy var emptyPlaceholder: UIView = {
+        let v = UIView()
+        let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
+        v.addSubview(placeholder)
+        placeholder.alignTop("16", leading: "0", bottom: "0", trailing: "0", toView: v)
+        placeholder.constrainHeight("100")
+        placeholder.isHidden = false
+        placeholder.text = "No connection. Touch to retry"
+        placeholder.onTap = {
+            [weak self] in
+            self?.presenter?.refresh()
+        }
+        v.isHidden = true
+        return v
+    }()
+
+    func setConnectionProblemsPlaceholder(hidden: Bool) {
+        if !hidden {
+            stackView.addArrangedSubview(emptyPlaceholder)
+            emptyPlaceholder.isHidden = false
+        } else {
+            emptyPlaceholder.isHidden = true
+            stackView.removeArrangedSubview(emptyPlaceholder)
+        }
     }
 
     private func setupSearch() {
