@@ -351,5 +351,10 @@ SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try aga
 ChooseSearchLanguage = "Choose search language";
 Catalog = "Catalog";
 
+WidgetButtonJoin = "Join";
+WidgetButtonInfo = "Info";
+WidgetButtonSyllabus = "Syllabus";
+WidgetButtonLearn = "Learn";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

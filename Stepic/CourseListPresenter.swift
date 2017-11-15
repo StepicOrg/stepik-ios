@@ -18,11 +18,13 @@ protocol CourseListView: class {
 
     func setState(state: CourseListState)
 
-//    func setRefreshing(isRefreshing: Bool)
     func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
     func show(controller: UIViewController)
+
+    func startProgressHUD()
+    func finishProgressHUD(success: Bool, message: String)
 
     var colorMode: CourseListColorMode! { get set }
 
@@ -58,6 +60,7 @@ class CourseListPresenter {
     private var hasNextPage: Bool = false
 
     private var lastUser: User?
+    private var subscriber = CourseSubscriber()
     private var lastLanguage: ContentLanguage
 
     weak var lastStepDataSource: LastStepWidgetDataSource?
@@ -105,7 +108,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -114,6 +117,7 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
+        self.subscriber = subscriber
         self.lastUser = AuthInfo.shared.user
         self.lastLanguage = ContentLanguage.sharedContentLanguage
         self.onlyLocal = onlyLocal
@@ -156,15 +160,72 @@ class CourseListPresenter {
             course in
             CourseViewData(course: course, action: {
                 [weak self] in
-                self?.buttonPressed(course: course)
+                self?.actionButtonPressed(course: course)
+            }, secondaryAction: {
+                [weak self] in
+                self?.secondaryActionButtonPressed(course: course)
             })
         }
     }
 
-    private func buttonPressed(course: Course) {
+    private func subscribe(to course: Course) {
+        self.view?.startProgressHUD()
+        checkToken().then {
+            [weak self]
+            () -> Promise<Course> in
+            guard let strongSelf = self else {
+                throw CourseSubscriber.CourseSubscriptionError.error(status: "")
+            }
+            return strongSelf.subscriber.join(course: course)
+        }.then {
+            [weak self]
+            course -> Void in
+            self?.view?.finishProgressHUD(success: true, message: "")
+            if let controller = self?.getSectionsController(for: course) {
+                self?.view?.show(controller: controller)
+            }
+        }.catch {
+            [weak self]
+            error in
+            guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
+                self?.view?.finishProgressHUD(success: false, message: "")
+                return
+            }
+            switch error {
+            case let .error(status: status):
+                self?.view?.finishProgressHUD(success: false, message: status)
+            case .badResponseFormat:
+                self?.view?.finishProgressHUD(success: false, message: "")
+            }
+        }
+    }
+
+    private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
                 LastStepRouter.continueLearning(for: course, using: navigation)
+            }
+        } else {
+            let joinBlock: (() -> Void) = {
+                [weak self] in
+                self?.subscribe(to: course)
+            }
+            if !AuthInfo.shared.isAuthorized {
+                guard let vc = self.view?.getController() else {
+                    return
+                }
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: vc, success: joinBlock, cancel: nil)
+            } else {
+                joinBlock()
+            }
+        }
+    }
+
+    private func secondaryActionButtonPressed(course: Course) {
+        if course.enrolled {
+            if let controller = getSectionsController(for: course) {
+                self.view?.show(controller: controller)
             }
         } else {
             if let controller = getCoursePreviewController(for: course) {
@@ -232,6 +293,7 @@ class CourseListPresenter {
             courses = []
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
+            lastLanguage = ContentLanguage.sharedContentLanguage
             refresh()
             return
         } else {
@@ -248,6 +310,13 @@ class CourseListPresenter {
     func handleCourseSubscriptionUpdates() {
         guard subscriptionManager.hasUpdates else {
             return
+        }
+
+        switch state {
+        case .emptyRefreshing, .displayingWithRefreshing:
+            return
+        default:
+            break
         }
 
         switch listType {
@@ -288,12 +357,16 @@ class CourseListPresenter {
                 }
             })
             if oldDisplayedCourses.isEmpty && !newDisplayedCourses.isEmpty {
-                view?.setState(state: .displaying)
+                self.state = .displaying
             }
             if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
-                view?.setState(state: .empty)
+                self.state = .empty
             }
-            view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            if oldDisplayedCourses.count - deletedIds.count + addedIds.count == newDisplayedCourses.count {
+                view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            } else {
+                view?.display(courses: getData(from: newDisplayedCourses))
+            }
         default:
             let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
             subscriptionManager.clean()
@@ -452,14 +525,6 @@ class CourseListPresenter {
         return course.enrolled ? getSectionsController(for: course, sourceView: sourceView) : getCoursePreviewController(for: course, sourceView: sourceView)
     }
 
-    func didSelectCourse(at index: Int) {
-        let course = courses[index]
-        let controller = course.enrolled ? getSectionsController(for: course) : getCoursePreviewController(for: course)
-        if let controller = controller {
-            self.view?.show(controller: controller)
-        }
-    }
-
     // Progresses
 
     @discardableResult private func updateProgresses(for courses: [Course]) -> Promise<[Course]> {
@@ -572,8 +637,8 @@ struct CourseViewData {
     var learners: Int?
     var progress: Float?
     var action: (() -> Void)?
-
-    init(course: Course, action: (() -> Void)?) {
+    var secondaryAction: (() -> Void)?
+    init(course: Course, action: @escaping () -> Void, secondaryAction: @escaping () -> Void) {
         self.id = course.id
         self.title = course.title
         self.isEnrolled = course.enrolled
@@ -582,6 +647,7 @@ struct CourseViewData {
         self.learners = course.learnersCount
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
         self.action = action
+        self.secondaryAction = secondaryAction
     }
 }
 

@@ -352,5 +352,10 @@ SearchPlaceholderError = "Ошибка при поиске курсов. <b>На
 ChooseSearchLanguage = "Выберите язык поиска";
 Catalog = "Каталог";
 
+WidgetButtonJoin = "Поступить";
+WidgetButtonInfo = "Инфо";
+WidgetButtonSyllabus = "План";
+WidgetButtonLearn = "Учиться";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

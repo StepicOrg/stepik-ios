@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SVProgressHUD
 
 protocol CourseListViewControllerDelegate: class {
     func setupContentView()
@@ -224,6 +225,18 @@ class CourseListViewController: UIViewController, CourseListView {
 
     func getController() -> UIViewController? {
         return self
+    }
+
+    func startProgressHUD() {
+        SVProgressHUD.show()
+    }
+
+    func finishProgressHUD(success: Bool, message: String) {
+        if success {
+            SVProgressHUD.showSuccess(withStatus: message)
+        } else {
+            SVProgressHUD.showError(withStatus: message)
+        }
     }
 
     lazy var emptyPlaceholder: CourseListEmptyPlaceholder = {

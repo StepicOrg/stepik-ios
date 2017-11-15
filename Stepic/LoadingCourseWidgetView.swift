@@ -15,20 +15,43 @@ class LoadingCourseWidgetView: NibInitializableView {
     @IBOutlet weak var loadingTitleView: UIView!
     @IBOutlet weak var loadingStatsView: UIView!
     @IBOutlet weak var loadingButtonView: UIView!
+    @IBOutlet weak var loadingSecondaryButtonView: UIView!
+    @IBOutlet weak var loadingSubtitleView: UIView!
 
     override var nibName: String {
         return "LoadingCourseWidgetView"
     }
 
     private var gradientLayer: CAGradientLayer?
-    private var isAnimating: Bool = false
+    var isAnimating: Bool = false {
+        didSet {
+            if isAnimating && !oldValue {
+                setupGradient()
+                updateGradient()
+
+                guard let gradientLayer = self.gradientLayer else {
+                    return
+                }
+
+                let gradientAnimation = CABasicAnimation(keyPath: "locations")
+                gradientAnimation.fromValue = gradientLayer.locations
+                gradientAnimation.toValue = [0.9, 1.1, 1.2]
+                gradientAnimation.duration = 3.0
+                gradientAnimation.fillMode = kCAFillModeForwards
+                gradientAnimation.repeatCount = .infinity
+                gradientLayer.add(gradientAnimation, forKey: nil)
+            }
+            if !isAnimating && oldValue {
+                gradientLayer?.removeAllAnimations()
+            }
+        }
+    }
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
         setupGradient()
         updateGradient()
-        animateGradient()
     }
 
     private func setupGradient() {
@@ -48,6 +71,10 @@ class LoadingCourseWidgetView: NibInitializableView {
         layer.insertSublayer(gradientLayer, at: UInt32.max)
     }
 
+    private func add(loadingView: UIView, toPath path: UIBezierPath) {
+        path.append(UIBezierPath(roundedRect: loadingView.frame, cornerRadius: 8))
+    }
+
     private func updateGradient() {
         guard let gradientLayer = self.gradientLayer else {
             return
@@ -58,44 +85,30 @@ class LoadingCourseWidgetView: NibInitializableView {
 
         // Update mask
         let path = UIBezierPath()
-        path.append(UIBezierPath(roundedRect: loadingImageView.frame, cornerRadius: 8))
-        path.append(UIBezierPath(roundedRect: loadingTitleView.frame, cornerRadius: 8))
-        path.append(UIBezierPath(roundedRect: loadingStatsView.frame, cornerRadius: 8))
-        path.append(UIBezierPath(roundedRect: loadingButtonView.frame, cornerRadius: 8))
-
+        add(loadingView: loadingImageView, toPath: path)
+        add(loadingView: loadingTitleView, toPath: path)
+        add(loadingView: loadingSubtitleView, toPath: path)
+        add(loadingView: loadingStatsView, toPath: path)
+        add(loadingView: loadingButtonView, toPath: path)
+        add(loadingView: loadingSecondaryButtonView, toPath: path)
         let maskLayer = CAShapeLayer()
         maskLayer.fillRule = kCAFillRuleEvenOdd
         maskLayer.path = path.cgPath
         gradientLayer.mask = maskLayer
     }
 
-    private func animateGradient() {
-        if isAnimating { return }
-
-        guard let gradientLayer = self.gradientLayer else {
-            return
-        }
-
-        isAnimating = true
-
-        let gradientAnimation = CABasicAnimation(keyPath: "locations")
-        gradientAnimation.fromValue = gradientLayer.locations
-        gradientAnimation.toValue = [0.9, 1.1, 1.2]
-        gradientAnimation.duration = 3.0
-        gradientAnimation.fillMode = kCAFillModeForwards
-        gradientAnimation.repeatCount = .infinity
-        gradientLayer.add(gradientAnimation, forKey: nil)
+    private func setRoundLoading(view: UIView) {
+        view.setRoundedCorners(cornerRadius: 8)
+        view.backgroundColor = UIColor.mainLight
     }
 
     override func setupSubviews() {
-        loadingImageView.setRoundedCorners(cornerRadius: 8)
-        loadingImageView.backgroundColor = UIColor.mainLight
-        loadingTitleView.setRoundedCorners(cornerRadius: 8)
-        loadingTitleView.backgroundColor = UIColor.mainLight
-        loadingStatsView.setRoundedCorners(cornerRadius: 8)
-        loadingStatsView.backgroundColor = UIColor.mainLight
-        loadingButtonView.setRoundedCorners(cornerRadius: 8)
-        loadingButtonView.backgroundColor = UIColor.mainLight
+        setRoundLoading(view: loadingImageView)
+        setRoundLoading(view: loadingTitleView)
+        setRoundLoading(view: loadingSecondaryButtonView)
+        setRoundLoading(view: loadingButtonView)
+        setRoundLoading(view: loadingStatsView)
+        setRoundLoading(view: loadingSubtitleView)
     }
 
     override func layoutSubviews() {
