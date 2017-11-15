@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 import IQKeyboardManagerSwift
+import TTTAttributedLabel
+import Atributika
 
 extension RegistrationViewController: RegistrationView {
     func update(with result: RegistrationResult) {
@@ -48,9 +50,9 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var separatorSecondHeight: NSLayoutConstraint!
 
     @IBOutlet weak var titleLabel: StepikLabel!
-    @IBOutlet weak var tosTextView: UITextView!
+    @IBOutlet weak var tosLabel: TTTAttributedLabel!
 
-    var errorMessage: NSMutableAttributedString? = nil {
+    var errorMessage: NSAttributedString? = nil {
         didSet {
             alertLabel.attributedText = errorMessage
             if errorMessage != nil {
@@ -80,9 +82,7 @@ class RegistrationViewController: UIViewController {
                 SVProgressHUD.show()
             case .validationError(let message):
                 let head = NSLocalizedString("WhoopsHead", comment: "")
-                let attributedString = NSMutableAttributedString(string: "\(head) \(message)")
-                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-                errorMessage = attributedString
+                errorMessage = "\(head) \(message)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
                 registerButton.isEnabled = false
 
                 SVProgressHUD.dismiss()
@@ -112,13 +112,16 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.top
+
         localize()
 
-        presenter = RegistrationPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
         nameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        tosLabel.delegate = self
 
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -167,43 +170,56 @@ class RegistrationViewController: UIViewController {
     }
 
     private func localize() {
-        // Title
-        var head = NSLocalizedString("SignUpTitleHead", comment: "")
-        var attributedString = NSMutableAttributedString(string: head)
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-        titleLabel.attributedText = attributedString
+        titleLabel.setTextWithHTMLString(NSLocalizedString("SignUpTitle", comment: ""))
 
         // Term of service warning
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        head = NSLocalizedString("AgreementLabelHead", comment: "")
-        let and = NSLocalizedString("And", comment: "")
-        let termsOfService = NSLocalizedString("AgreementLabelTermsOfService", comment: "")
-        let privacyPolicy = NSLocalizedString("AgreementLabelPrivacyPolicy", comment: "")
-        let string = "\(head) \(termsOfService) \(and) \(privacyPolicy)"
-        attributedString = NSMutableAttributedString(string: string, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.mainText, range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
-        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
-        tosTextView.attributedText = attributedString
+        let head = NSLocalizedString("AgreementLabelText", comment: "")
+
+        let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
+            .foregroundColor(UIColor.mainText)
+            .paragraphStyle(paragraphStyle)
+        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular)).foregroundColor(UIColor.stepicGreen)
+        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
+            .foregroundColor(UIColor.mainText)
+            .backgroundColor(UIColor(hex: 0xF6F6F6))
+
+        let styledText = head.style(tags: link).styleAll(all)
+
+        tosLabel.linkAttributes = link.attributes
+        tosLabel.activeLinkAttributes = activeLink.attributes
+        tosLabel.setText(styledText.attributedString)
+
+        styledText.detections.forEach { detection in
+            switch detection.type {
+            case .tag(let tag):
+                if tag.name == "a", let href = tag.attributes["href"] {
+                    tosLabel.addLink(to: URL(string: href), with: NSRange(detection.range))
+                }
+            default: break
+            }
+        }
 
         registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
         nameTextField.placeholder = NSLocalizedString("Name", comment: "")
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
-        tosTextView.textContainerInset = UIEdgeInsets.zero
+    }
+}
+
+extension RegistrationViewController: TTTAttributedLabelDelegate {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        WebControllerManager.sharedManager.presentWebControllerWithURLString(url.absoluteString, inController: self, withKey: "tos", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
     }
 }
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
-        // 24 - default value in app (see AppDelegate), 60 - offset with button
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
+        // 24 - default value in app (see AppDelegate), 64 - offset with button
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

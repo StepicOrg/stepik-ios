@@ -19,7 +19,7 @@ class CourseSubscriber {
     func join(course: Course) -> Promise<Course> {
         return Promise<Course> {
             fulfill, reject in
-            _ = AuthManager.sharedManager.joinCourse(course: course, success: {
+            _ = ApiDataDownloader.enrollments.joinCourse(course, success: {
                 guard let progressId = course.progressId else {
                     reject(CourseSubscriptionError.badResponseFormat)
                     return

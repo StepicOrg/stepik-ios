@@ -8,6 +8,7 @@
 
 import Foundation
 import VK_ios_sdk
+import PromiseKit
 
 protocol VKSocialSDKProviderDelegate: class {
     func presentAuthController(_ controller: UIViewController)
@@ -29,7 +30,17 @@ class VKSocialSDKProvider: NSObject, SocialSDKProvider {
         sdkInstance.uiDelegate = self
     }
 
-    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
+    func getAccessInfo() -> Promise<(token: String, email: String?)> {
+        return Promise { fulfill, reject in
+            getAccessInfo(success: { token, email in
+                fulfill((token: token, email: email))
+            }, error: { error in
+                reject(error)
+            })
+        }
+    }
+
+    private func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
         self.successHandler = successHandler
         self.errorHandler = errorHandler
 

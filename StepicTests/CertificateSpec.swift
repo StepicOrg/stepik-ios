@@ -24,7 +24,7 @@ class CertificateSpec: QuickSpec {
             beforeEach {
                 waitUntil {
                     done in
-                    _ = AuthManager.sharedManager.logInWithUsername(TestConfig.sharedConfig.username, password: TestConfig.sharedConfig.password, success: {
+                    _ = ApiDataDownloader.auth.logInWithUsername(TestConfig.sharedConfig.username, password: TestConfig.sharedConfig.password, success: {
                         token in
                         AuthInfo.shared.token = token
                         done()

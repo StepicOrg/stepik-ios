@@ -83,7 +83,7 @@ class PostViewsExecutableTask: Executable, DictionarySerializable {
         }, error: {
             error in
             print("error \(error) while posting views, trying to refresh token and retry")
-            AuthManager.sharedManager.refreshTokenWith(token.refreshToken, success: {
+            ApiDataDownloader.auth.refreshTokenWith(token.refreshToken, success: {
                     token in
                     print("successfully refreshed token")
                     if AuthInfo.shared.userId == user {
