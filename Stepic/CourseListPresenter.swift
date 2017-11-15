@@ -43,6 +43,7 @@ class CourseListPresenter {
     private var progressesAPI: ProgressesAPI
     private var reviewSummariesAPI: CourseReviewSummariesAPI
     private var searchResultsAPI: SearchResultsAPI
+    private var subscriptionManager: CourseSubscriptionManager
 
     private var colorMode: CourseListColorMode
     private var onlyLocal: Bool
@@ -58,8 +59,6 @@ class CourseListPresenter {
 
     private var lastUser: User?
     private var lastLanguage: ContentLanguage
-
-    private var subscriptionManager = CourseSubscriptionManager()
 
     weak var lastStepDataSource: LastStepWidgetDataSource?
     weak var couseListCountDelegate: CourseListCountDelegate?
@@ -106,7 +105,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -119,6 +118,7 @@ class CourseListPresenter {
         self.lastLanguage = ContentLanguage.sharedContentLanguage
         self.onlyLocal = onlyLocal
         self.searchResultsAPI = searchResultsAPI
+        self.subscriptionManager = subscriptionManager
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()

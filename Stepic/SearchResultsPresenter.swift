@@ -53,7 +53,7 @@ class SearchResultsPresenter {
         if resultsVC == nil {
             resultsVC = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController
             if let resultsVC = resultsVC {
-                resultsVC.presenter = CourseListPresenter(view: resultsVC, ID: "SearchCourses", limit: nil, listType: .search(query: query), colorMode: .light, onlyLocal: false, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI())
+                resultsVC.presenter = CourseListPresenter(view: resultsVC, ID: "SearchCourses", limit: nil, listType: .search(query: query), colorMode: .light, onlyLocal: false, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI())
                 self.view?.set(controller: resultsVC, forState: .courses)
             }
         } else {
