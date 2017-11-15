@@ -351,7 +351,11 @@ class CourseListPresenter {
             if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
                 self.state = .empty
             }
-            view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            if oldDisplayedCourses.count - deletedIds.count + addedIds.count == newDisplayedCourses.count {
+                view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            } else {
+                view?.display(courses: getData(from: newDisplayedCourses))
+            }
         default:
             let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
             subscriptionManager.clean()
