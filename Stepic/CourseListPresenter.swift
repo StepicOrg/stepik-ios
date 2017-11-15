@@ -60,7 +60,6 @@ class CourseListPresenter {
     private var hasNextPage: Bool = false
 
     private var lastUser: User?
-    private var subscriptionManager = CourseSubscriptionManager()
     private var subscriber = CourseSubscriber()
     private var lastLanguage: ContentLanguage
 
@@ -294,6 +293,7 @@ class CourseListPresenter {
             courses = []
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
+            lastLanguage = ContentLanguage.sharedContentLanguage
             refresh()
             return
         } else {
