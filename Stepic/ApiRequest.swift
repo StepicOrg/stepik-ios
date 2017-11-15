@@ -8,9 +8,22 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 enum PerformRequestError: Error {
-    case noAccessToRefreshToken, other
+    case noAccessToRefreshToken, other, badConnection
+}
+
+func checkToken() -> Promise<()> {
+    return Promise {
+        fulfill, reject in
+        ApiRequestPerformer.performAPIRequest({
+            fulfill()
+        }, error: {
+            error in
+            reject(error)
+        })
+    }
 }
 
 //Should preferrably be called from a UIViewController subclass
@@ -20,25 +33,55 @@ func performRequest(_ request: @escaping (() -> Void), error: ((PerformRequestEr
 
 class ApiRequestPerformer {
 
+    static let semaphore = DispatchSemaphore(value: 1)
+    static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.background)
+
     static func performAPIRequest(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
-        print("performing API request")
-        if !AuthInfo.shared.hasUser {
-            print("no user in AuthInfo, retrieving")
-            ApiDataDownloader.stepics.retrieveCurrentUser(success: {
+
+        let completionWithSemaphore : () -> Void = {
+            print("finished performing API Request")
+            semaphore.signal()
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+
+        let errorHandlerWithSemaphore: (PerformRequestError) -> Void = {
+            error in
+            print("finished performing API Request")
+            semaphore.signal()
+            DispatchQueue.main.async {
+                errorHandler?(error)
+            }
+        }
+
+        queue.async {
+            semaphore.wait()
+            print("performing API request")
+            if !AuthInfo.shared.hasUser {
+                print("no user in AuthInfo, retrieving")
+                ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                     user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     print("retrieved current user")
-                    performRequestWithAuthorizationCheck(completion, error: errorHandler)
-                }, error: {
-                    _ in
-                    errorHandler?(.other)
-                }
-            )
-        } else {
-            performRequestWithAuthorizationCheck(completion, error: errorHandler)
+                    performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
+                }, error: { e in
+                    if let typedError = e as? URLError {
+                        switch typedError.code {
+                        case .notConnectedToInternet:
+                            errorHandlerWithSemaphore(.badConnection)
+                        default:
+                            errorHandlerWithSemaphore(.other)
+                        }
+                    } else {
+                        errorHandlerWithSemaphore(.other)
+                    }
+                })
+            } else {
+                performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
+            }
         }
-
     }
 
     fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {

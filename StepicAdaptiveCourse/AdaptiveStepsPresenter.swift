@@ -437,7 +437,7 @@ class AdaptiveStepsPresenter {
                 if !course.enrolled {
                     self.isJoinedCourse = true
 
-                    _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
+                    _ = AuthManager.sharedManager.joinCourse(course: course, success: {
                         self.course?.enrolled = true
                         print("success joined course -> loading cards")
 

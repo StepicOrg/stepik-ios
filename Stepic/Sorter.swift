@@ -16,7 +16,7 @@ struct Sorter {
         for id in ids {
             let elements = array.filter({return $0.id == id})
 //            let elements = array.filter({return $0.hasEqualId(json: JSON(["id": id]))})//$0.id == id})
-            if elements.count == 1 {
+            if elements.count > 0 {
                 res += [elements[0]]
             } else {
                 //TODO : Maybe should throw exception here

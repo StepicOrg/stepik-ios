@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class AttemptsAPI: APIEndpoint {
-    let name = "attempts"
+    override var name: String { return "attempts" }
 
     @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 

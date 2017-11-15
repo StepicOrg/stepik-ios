@@ -11,7 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class CommentsAPI {
-    let name = "comments"
+
+    let name: String = "comments"
 
     @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)

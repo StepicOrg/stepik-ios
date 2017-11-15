@@ -20,7 +20,7 @@ class StepicsAPI {
         return SessionManager(configuration: configuration)
     }()
 
-    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
+    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request {
 
         let params = Parameters()
 
@@ -46,7 +46,7 @@ class StepicsAPI {
             if let e = error as NSError? {
                 print(e.localizedDescription)
 
-                errorHandler(e.localizedDescription)
+                errorHandler(e)
                 return
             }
 

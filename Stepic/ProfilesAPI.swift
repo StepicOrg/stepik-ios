@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class ProfilesAPI: APIEndpoint {
-    let name = "profiles"
+    override var name: String { return "profiles" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Profile], refreshMode: RefreshMode, success: @escaping (([Profile]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)

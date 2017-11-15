@@ -25,6 +25,8 @@ extension SocialAuthViewController: SocialAuthView {
         case .success:
             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
             navigationController.dismissAfterSuccess()
+        case .badConnection:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
         case .error:
             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         case .existingEmail(let email):

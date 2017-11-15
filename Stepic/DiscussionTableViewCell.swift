@@ -73,7 +73,7 @@ class DiscussionTableViewCell: UITableViewCell {
         self.comment = comment
         self.separatorType = separatorType
         labelContainerView.backgroundColor = UIColor.clear
-        timeLabel.text = comment.lastTime.getStepicFormatString(withTime: true)
+        timeLabel.text = comment.time.getStepicFormatString(withTime: true)
         setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
         loadLabel(comment.text)
         if comment.isDeleted {

@@ -44,7 +44,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(UnitsViewController.shareButtonPressed(_:)))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem
 
-        refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(UnitsViewController.refresh), for: .valueChanged)
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
@@ -67,6 +67,10 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
+    }
+
+    func refresh() {
+        refreshUnits()
     }
 
     var url: String? {
@@ -205,7 +209,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
     }
 
-    func refreshUnits() {
+    func refreshUnits(success: (() -> Void)? = nil) {
 
         guard section != nil else {
             if let id = unitId {
@@ -226,6 +230,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
                 self.emptyDatasetState = EmptyDatasetState.empty
             })
             self.didRefresh = true
+            success?()
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
@@ -269,7 +274,28 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
                 dvc.sectionNavigationDelegate = self
                 currentlyDisplayingUnitIndex = index
-                dvc.navigationRules = (prev: index != 0, next: index < section.units.count - 1)
+
+                let isUnitFirstInSection = index == 0
+                let isUnitLastInSection = index == section.units.count - 1
+                if let course = section.course {
+                    let sectionBefore = course.getSection(before: section)
+                    let sectionAfter = course.getSection(after: section)
+
+                    let isSectionFirstInCourse = course.sectionsArray.count == 0 || sectionBefore == nil
+                    let isSectionLastInCourse = course.sectionsArray.count == 0 || sectionAfter == nil
+
+                    let isPrevSectionReachable = sectionBefore?.isReachable ?? false
+                    let isNextSectionReachable = sectionAfter?.isReachable ?? false
+
+                    let isPrevSectionEmpty = sectionBefore?.unitsArray.isEmpty ?? true
+                    let isNextSectionEmpty = sectionAfter?.unitsArray.isEmpty ?? true
+
+                    let canPrev = (!isSectionFirstInCourse && isPrevSectionReachable && !isPrevSectionEmpty) || !isUnitFirstInSection
+                    let canNext = (!isSectionLastInCourse && isNextSectionReachable && !isNextSectionEmpty) || !isUnitLastInSection
+                    dvc.navigationRules = (prev: canPrev, next: canNext)
+                } else {
+                    dvc.navigationRules = (prev: !isUnitFirstInSection, next: !isUnitLastInSection)
+                }
             }
         }
         // Get the new view controller using segue.destinationViewController.
@@ -280,6 +306,78 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     func selectUnitAtIndex(_ index: Int, isLastStep: Bool = false, replace: Bool = false) {
         performSegue(withIdentifier: replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))
+    }
+
+    func goToNextSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find next section id
+        guard let nextSection = course.getSection(after: section) else {
+            // Current section is last section in the course
+            return
+        }
+
+        // Exam
+        guard !nextSection.isExam else {
+            showExamAlert { }
+            return
+        }
+
+        self.section = nextSection
+        self.refreshUnits {
+            [weak self] in
+            self?.selectUnitAtIndex(0, replace: true)
+        }
+    }
+
+    func goToPrevSection() {
+        guard let section = section, let course = section.course else {
+            return
+        }
+
+        // Find prev section id
+        guard let prevSection = course.getSection(before: section) else {
+            // Current section is first section in the course
+            return
+        }
+
+        // Exam
+        guard !prevSection.isExam else {
+            showExamAlert { }
+            return
+        }
+
+        self.section = prevSection
+        self.refreshUnits {
+            [weak self] in
+            self?.selectUnitAtIndex(prevSection.unitsArray.count - 1, replace: true)
+        }
+    }
+
+    func showExamAlert(seccancel cancelAction: @escaping (() -> Void)) {
+        var sUrl = ""
+        if let slug = section?.course?.slug {
+            sUrl = StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/"
+        }
+
+        let alert = UIAlertController(title: NSLocalizedString("ExamTitle", comment: ""), message: NSLocalizedString("ShowExamInWeb", comment: ""), preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: {
+            [weak self]
+            _ in
+            if let s = self {
+                WebControllerManager.sharedManager.presentWebControllerWithURLString(sUrl + "?from_mobile_app=true", inController: s, withKey: "exam", allowsSafari: true, backButtonStyle: .close)
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {
+            _ in
+            cancelAction()
+        }))
+
+        self.present(alert, animated: true, completion: {})
     }
 
     func clearAllSelection() {
@@ -355,6 +453,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
                 selectUnitAtIndex(uIndex + 1, replace: true)
+            } else if uIndex + 1 == section.units.count {
+                goToNextSection()
             }
         }
     }
@@ -363,6 +463,8 @@ extension UnitsViewController : SectionNavigationDelegate {
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex - 1 >= 0 {
                 selectUnitAtIndex(uIndex - 1, isLastStep: true, replace: true)
+            } else if uIndex - 1 == -1 {
+                goToPrevSection()
             }
         }
     }

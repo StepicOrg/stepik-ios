@@ -6,7 +6,7 @@
 	<dict>
 		<key>tabs</key>
 		<array>
-			<string>MyCourses</string>
+			<string>Home</string>
 			<string>FindCourses</string>
 			<string>Profile</string>
 			<string>Certificates</string>

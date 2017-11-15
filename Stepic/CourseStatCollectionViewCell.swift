@@ -21,5 +21,11 @@ class CourseStatCollectionViewCell: UICollectionViewCell {
     func setup(data: CourseStatData) {
         self.image.image = data.image
         self.text.text = data.text
+        switch data.colorMode {
+        case .dark:
+            self.text.colorMode = .light
+        case .light:
+            self.text.colorMode = .dark
+        }
     }
 }

@@ -45,6 +45,7 @@ class Course: NSManagedObject, JSONInitializable {
         slug = json["slug"].string
         progressId = json["progress"].string
         lastStepId = json["last_step"].string
+        scheduleType = json["schedule_type"].string
         learnersCount = json["learners_count"].int
         reviewSummaryId = json["review_summary"].int
         sectionsArray = json["sections"].arrayObject as! [Int]
@@ -269,7 +270,7 @@ class Course: NSManagedObject, JSONInitializable {
         })
     }
 
-    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) throws -> [Course] {
+    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
@@ -299,9 +300,9 @@ class Course: NSManagedObject, JSONInitializable {
 
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
-            return results as! [Course]
+            return results as? [Course] ?? []
         } catch {
-            throw FetchError.requestExecution
+            return []
         }
     }
 
@@ -322,6 +323,26 @@ class Course: NSManagedObject, JSONInitializable {
             print("Error while getting courses")
             return []
 //            throw FetchError.RequestExecution
+        }
+    }
+
+    func getSection(before section: Section) -> Section? {
+        let currentIndex = sectionsArray.index(of: section.id)
+        if currentIndex == nil || currentIndex == sectionsArray.startIndex {
+            return nil
+        } else {
+            let prevId = sectionsArray[currentIndex!.advanced(by: -1)]
+            return sections.filter({ $0.id == prevId }).first
+        }
+    }
+
+    func getSection(after section: Section) -> Section? {
+        let currentIndex = sectionsArray.index(of: section.id)
+        if currentIndex == nil || currentIndex == sectionsArray.endIndex.advanced(by: -1) {
+            return nil
+        } else {
+            let nextId = sectionsArray[currentIndex!.advanced(by: 1)]
+            return sections.filter({ $0.id == nextId }).first
         }
     }
 

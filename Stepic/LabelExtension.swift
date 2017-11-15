@@ -30,16 +30,16 @@ extension UILabel {
 
         label.numberOfLines = lines
 
+        label.font = UIFont(name: fontName, size: fontSize)
+        label.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        label.baselineAdjustment = UIBaselineAdjustment.alignBaselines
+        label.textAlignment = alignment
+
         if html {
             label.setTextWithHTMLString(text)
         } else {
             label.text = text
         }
-
-        label.font = UIFont(name: fontName, size: fontSize)
-        label.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        label.baselineAdjustment = UIBaselineAdjustment.alignBaselines
-        label.textAlignment = alignment
         label.sizeToFit()
 
         return label.bounds.height
@@ -64,6 +64,15 @@ extension UILabel {
 
 //        print(label.bounds.height)
         return label.bounds.height
+    }
+}
+
+extension UILabel {
+    var numberOfVisibleLines: Int {
+        let textSize = CGSize(width: CGFloat(self.frame.size.width), height: CGFloat.greatestFiniteMagnitude)
+        let rHeight: Int = lroundf(Float(self.sizeThatFits(textSize).height))
+        let charSize: Int = lroundf(Float(self.font.pointSize))
+        return rHeight / charSize
     }
 }
 
