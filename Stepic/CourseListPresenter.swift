@@ -9,7 +9,6 @@
 import Foundation
 import PromiseKit
 import Alamofire
-import SVProgressHUD
 
 protocol CourseListView: class {
     func display(courses: [CourseViewData])
@@ -23,6 +22,9 @@ protocol CourseListView: class {
 
     func present(controller: UIViewController)
     func show(controller: UIViewController)
+
+    func startProgressHUD()
+    func finishProgressHUD(success: Bool, message: String)
 
     var colorMode: CourseListColorMode! { get set }
 
@@ -161,7 +163,7 @@ class CourseListPresenter {
     }
 
     private func subscribe(to course: Course) {
-        SVProgressHUD.show()
+        self.view?.startProgressHUD()
         checkToken().then {
             [weak self]
             () -> Promise<Course> in
@@ -172,21 +174,22 @@ class CourseListPresenter {
         }.then {
             [weak self]
             course -> Void in
-            SVProgressHUD.showSuccess(withStatus: "")
+            self?.view?.finishProgressHUD(success: true, message: "")
             if let controller = self?.getSectionsController(for: course) {
                 self?.view?.show(controller: controller)
             }
         }.catch {
+            [weak self]
             error in
             guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
-                SVProgressHUD.showError(withStatus: "")
+                self?.view?.finishProgressHUD(success: false, message: "")
                 return
             }
             switch error {
             case let .error(status: status):
-                SVProgressHUD.showError(withStatus: status)
+                self?.view?.finishProgressHUD(success: false, message: status)
             case .badResponseFormat:
-                SVProgressHUD.showError(withStatus: "")
+                self?.view?.finishProgressHUD(success: false, message: "")
             }
         }
     }
