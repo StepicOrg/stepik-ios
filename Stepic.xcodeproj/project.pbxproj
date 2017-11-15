@@ -4175,8 +4175,7 @@
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		933E3F061FB7AF5C005A885D /* LessonContentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */; };
-		933E3F071FB7BEF2005A885D /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
-		933E3F081FB7BF2B005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
+		933E3F271FBA61D9005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		934A30751FAA841600819A30 /* CourseContentMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */; };
 		934A30771FABBE0400819A30 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */; };
 		934A30791FABC85D00819A30 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30781FABC85D00819A30 /* MenuTableViewController.swift */; };
@@ -11873,7 +11872,6 @@
 				934C96DB1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift in Sources */,
 				9386A4611FA3AA2F00705195 /* ContainerConfigurableProtocol.swift in Sources */,
 				93EF1F9F1FB10EFB0073B0D1 /* LessonTableViewCell.swift in Sources */,
-				933E3F071FB7BEF2005A885D /* ConnectionHelper.swift in Sources */,
 				93E4A0D71F9FAB2700D27A37 /* Model.swift in Sources */,
 				93E4A0E61F9FE1B300D27A37 /* RectangularCollectionViewController.swift in Sources */,
 				9386A4761FA53FAD00705195 /* IconButton.swift in Sources */,
@@ -11973,7 +11971,7 @@
 				1BB4ECA31FA3DE46001CDE99 /* DevicesAPI.swift in Sources */,
 				934C96A61F9E9DDE00F87F45 /* MediumItemCell.swift in Sources */,
 				9386A45F1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift in Sources */,
-				933E3F081FB7BF2B005A885D /* Reachability.m in Sources */,
+				933E3F271FBA61D9005A885D /* Reachability.m in Sources */,
 				934C96D31F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

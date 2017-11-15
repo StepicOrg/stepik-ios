@@ -12,6 +12,10 @@ import AVKit
 enum LessonsPartContentType {
     case Video, Text, Task
 
+    enum TaskType {
+        case Choice, Text
+    }
+
     var icon: UIImage {
         switch self {
         case .Video: return UIImage(named: "video_icon.pdf")!
@@ -45,6 +49,8 @@ class LessonPartItemCell: UICollectionViewCell {
 
     var contentType: LessonsPartContentType?
 
+    var taskType: LessonsPartContentType.TaskType?
+
     var video : Video?
 
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
@@ -64,26 +70,34 @@ class LessonPartItemCell: UICollectionViewCell {
 
         switch contentType {
         case .Task?:
-            loadTask()
+            loadTask(taskType!)
         default:
             loadVideo()
         }
     }
 
-    func loadTask() {
+    func loadTask(_ type: LessonsPartContentType.TaskType) {
         let task = LessonContentAlertController(title: "", message: "", preferredStyle: .alert)
-            task.generateTaskContent(question: "Кто вы по профессии?", choices: ["Школьник", "Студент", "Учитель", "Программист"])
+
+        switch type {
+        case .Text:
+            task.generateTextTaskContent(question: "Рядом с каждым тестом и задачей указано количество баллов, которое вы получите за правильное решение. Ваш общий прогресс также отображается в оглавлении курса, там же видны и сроки сдачи каждой из задач.")
+        case .Choice:
+            task.generateChoiceTaskContent(question: "Кто вы по профессии?", choices: ["Школьник", "Студент", "Учитель", "Программист"])
+        }
+
         self.delegate?.loadLessonContent(with: task, completion: {})
     }
 
     func loadVideo() {
         guard let video = video else { return }
 
+        /*
         if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             ///Present player
             let player = TVPlayerViewController()
             self.delegate?.loadLessonContent(with: player, completion: { player.playVideo(url: video.getUrlForQuality("480")) })
-        }
+        }*/
     }
 
 }
