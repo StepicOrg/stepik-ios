@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="qOI-QY-ky4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-yF-JBK">
-                                <rect key="frame" x="0.0" y="190" width="375" height="125"/>
+                                <rect key="frame" x="0.0" y="192" width="375" height="125"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="Wq4-Ni-nrn"/>
@@ -59,7 +58,7 @@
                                 </collectionReusableView>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyI-UL-4R6">
-                                <rect key="frame" x="168.5" y="345" width="38" height="32"/>
+                                <rect key="frame" x="168.5" y="347" width="38" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="More">
                                     <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,7 +68,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o00-ed-SpF">
-                                <rect key="frame" x="24" y="551" width="134" height="32"/>
+                                <rect key="frame" x="24" y="555" width="134" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign In with e-mail">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +77,7 @@
                                     <action selector="onSignInWithEmailClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="an0-r8-Exn"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gb0-7l-u82">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gb0-7l-u82">
                                 <rect key="frame" x="163.5" y="50" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="48" id="LNn-gH-wZx"/>
@@ -89,7 +88,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3e-7n-JkS">
-                                <rect key="frame" x="293" y="551" width="58" height="32"/>
+                                <rect key="frame" x="293" y="555" width="58" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -119,10 +118,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="xcD-X5-Vei"/>
                                 <exclude reference="1cB-te-TSm"/>
                                 <exclude reference="l5A-cT-1TG"/>
                                 <exclude reference="9eB-BB-J1N"/>
+                                <exclude reference="xcD-X5-Vei"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -132,8 +131,8 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="xcD-X5-Vei"/>
                                 <include reference="1cB-te-TSm"/>
+                                <include reference="xcD-X5-Vei"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
@@ -147,7 +146,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Q9d-gC-NfY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="sFt-p5-h5c">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
-                                <rect key="frame" x="16" y="13" width="17" height="22"/>
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="0bm-Lk-Njn"/>
@@ -182,11 +181,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Lsp-SO-0Mq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ecb-mE-jfH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQR-hv-GBW">
-                                <rect key="frame" x="24" y="551" width="130" height="32"/>
+                                <rect key="frame" x="24" y="555" width="130" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign In with social">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -195,7 +194,7 @@
                                     <action selector="onSignInWithSocialClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="w96-HN-Xxv"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-dF-9x8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-dF-9x8">
                                 <rect key="frame" x="163.5" y="50" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="48" id="RDE-UM-mDV"/>
@@ -206,7 +205,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrc-hu-CrF">
-                                <rect key="frame" x="293" y="551" width="58" height="32"/>
+                                <rect key="frame" x="293" y="555" width="58" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -222,7 +221,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-d4-W7U">
-                                <rect key="frame" x="24" y="231" width="327" height="105"/>
+                                <rect key="frame" x="24" y="231" width="327" height="109"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.31372549019607843" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -231,13 +230,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-sQ-UuC">
-                                <rect key="frame" x="24" y="231" width="327" height="105"/>
+                                <rect key="frame" x="24" y="231" width="327" height="109"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-px-UvI" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="tWg-4k-CUe">
+                                            <constraint firstAttribute="height" constant="54" id="tWg-4k-CUe">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -246,17 +245,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syM-4D-gnF">
-                                        <rect key="frame" x="0.0" y="52" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="54" width="327" height="1"/>
                                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="baT-yf-3Zs"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umg-9h-bV9" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="53" width="327" height="52"/>
+                                        <rect key="frame" x="0.0" y="55" width="327" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="JBt-Z0-ScN">
+                                            <constraint firstAttribute="height" constant="54" id="JBt-Z0-ScN">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -270,7 +269,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Whoops! The e-mail address and/or password you specified are not correct." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="55E-Yo-HFU">
-                                <rect key="frame" x="24" y="352" width="327" height="0.0"/>
+                                <rect key="frame" x="24" y="356" width="327" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="cj6-hM-VuZ"/>
                                 </constraints>
@@ -279,7 +278,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="352" width="327" height="44"/>
+                                <rect key="frame" x="24" y="356" width="327" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="tX0-AL-jlM"/>
@@ -301,7 +300,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cic-9n-m9H">
-                                <rect key="frame" x="24" y="404" width="327" height="40"/>
+                                <rect key="frame" x="24" y="408" width="327" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Z2G-ri-lD3"/>
@@ -372,7 +371,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="lpD-Ep-HVB">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="F0p-Ac-pDB">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
-                                <rect key="frame" x="16" y="13" width="17" height="22"/>
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="oAe-YO-ram"/>
@@ -415,10 +414,10 @@
                         <viewControllerLayoutGuide type="bottom" id="w2K-bm-ZPQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GB8-Gv-9Jd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-hh-W9h">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-hh-W9h">
                                 <rect key="frame" x="163.5" y="50" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="Hm7-Zv-6Lk"/>
@@ -429,13 +428,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-i0-02l" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="160.5" width="327" height="24"/>
+                                <rect key="frame" x="24" y="159.5" width="327" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cu-FO-mN5">
-                                <rect key="frame" x="24" y="204.5" width="327" height="158"/>
+                                <rect key="frame" x="24" y="203.5" width="327" height="164"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -444,13 +443,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3wd-if-3To">
-                                <rect key="frame" x="24" y="204.5" width="327" height="158"/>
+                                <rect key="frame" x="24" y="203.5" width="327" height="164"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c81-1U-sKd" userLabel="Name" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="NsB-Dn-Qrw">
+                                            <constraint firstAttribute="height" constant="54" id="NsB-Dn-Qrw">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -459,17 +458,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8c-XX-pMK">
-                                        <rect key="frame" x="0.0" y="52" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="54" width="327" height="1"/>
                                         <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="gRU-SW-zdr"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dPv-EY-XCL" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="53" width="327" height="52"/>
+                                        <rect key="frame" x="0.0" y="55" width="327" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="6TR-dW-sh0">
+                                            <constraint firstAttribute="height" constant="54" id="6TR-dW-sh0">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -478,17 +477,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPV-1V-faR">
-                                        <rect key="frame" x="0.0" y="105" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="109" width="327" height="1"/>
                                         <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ga1-FK-AYK"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gng-wJ-E02" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="106" width="327" height="52"/>
+                                        <rect key="frame" x="0.0" y="110" width="327" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="dna-xZ-5h5">
+                                            <constraint firstAttribute="height" constant="54" id="dna-xZ-5h5">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -502,7 +501,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Whoops! The e-mail address and/or password you specified are not correct." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Sks-5y-rKN">
-                                <rect key="frame" x="24" y="378.5" width="327" height="0.0"/>
+                                <rect key="frame" x="24" y="383.5" width="327" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="y9u-6u-PKO"/>
                                 </constraints>
@@ -511,7 +510,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="378.5" width="327" height="44"/>
+                                <rect key="frame" x="24" y="383.5" width="327" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="MYS-WM-Iw2"/>
@@ -533,7 +532,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By registering you agree to the Terms of service and Privacy policy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqa-AS-4te" customClass="TTTAttributedLabel">
-                                <rect key="frame" x="24" y="544.5" width="327" height="38.5"/>
+                                <rect key="frame" x="24" y="548.5" width="327" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -591,7 +590,7 @@
                     <navigationItem key="navigationItem" id="VBR-hH-yzY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="LZL-zC-DDt">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
-                                <rect key="frame" x="16" y="13" width="17" height="22"/>
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="JpU-Um-0qu"/>
@@ -633,7 +632,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="peF-Iz-JYA">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
