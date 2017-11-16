@@ -13,16 +13,8 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
-class NotificationsAPI {
-    let name = "notifications"
-
-    let manager: Alamofire.SessionManager
-
-    init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
-        manager = Alamofire.SessionManager(configuration: configuration)
-    }
+class NotificationsAPI: APIEndpoint {
+    override var name: String { return "notifications" }
 
     func retrieve(page: Int = 1, notificationType: NotificationType? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<(Meta, [Notification])> {
         return Promise { fulfill, reject in
@@ -87,7 +79,7 @@ class NotificationsAPI {
                 switch response.result {
                 case .failure(let error):
                     reject(error)
-                case .success(let json):
+                case .success(_):
                     if response.response?.statusCode != 204 {
                         reject(NSError()) // raw error here
                     } else {
