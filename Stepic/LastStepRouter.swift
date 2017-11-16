@@ -29,7 +29,6 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.always {
-            SVProgressHUD.showSuccess(withStatus: "")
             navigate(for: course, using: navigationController)
         }.catch {
             _ in
@@ -48,28 +47,87 @@ class LastStepRouter {
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
 
-        guard let unitId = course.lastStep?.unitId,
-              let section = Unit.getUnit(id: unitId)?.section,
-              section.isReachable else {
-                navigationController.pushViewController(sectionsVC, animated: true)
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
-                return
-        }
-
-        unitsVC.unitId = course.lastStep?.unitId
-        lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
-
-        //For prev-next step buttons navigation
-        lessonVC.sectionNavigationDelegate = unitsVC
-
-        if course.lastStep?.stepId != nil {
-            navigationController.pushViewController(sectionsVC, animated: false)
-            navigationController.pushViewController(unitsVC, animated: false)
-            navigationController.pushViewController(lessonVC, animated: true)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
-        } else {
+        func openSyllabus() {
+            SVProgressHUD.showSuccess(withStatus: "")
             navigationController.pushViewController(sectionsVC, animated: true)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
+            return
         }
+
+        func checkUnitAndNavigate(for unitId: Int) {
+            if let unit = Unit.getUnit(id: unitId) {
+                checkSectionAndNavigate(in: unit)
+            } else {
+                ApiDataDownloader.units.retrieve(ids: [unitId], existing: [], refreshMode: .update, success: { units in
+                    if let unit = units.first {
+                        checkSectionAndNavigate(in: unit)
+                    } else {
+                        print("last step router: unit not found, id = \(unitId)")
+                        openSyllabus()
+                    }
+                }, error: { err in
+                    print("last step router: error while loading unit, error = \(err)")
+                    openSyllabus()
+                })
+            }
+        }
+
+        func navigateToStep() {
+            unitsVC.unitId = course.lastStep?.unitId
+            lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
+
+            //For prev-next step buttons navigation
+            lessonVC.sectionNavigationDelegate = unitsVC
+
+            if course.lastStep?.stepId != nil {
+                SVProgressHUD.showSuccess(withStatus: "")
+                navigationController.pushViewController(sectionsVC, animated: false)
+                navigationController.pushViewController(unitsVC, animated: false)
+                navigationController.pushViewController(lessonVC, animated: true)
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
+            } else {
+                openSyllabus()
+            }
+        }
+
+        func checkSectionAndNavigate(in unit: Unit) {
+            if let retrievedSections = try? Section.getSections(unit.sectionId),
+               let section = retrievedSections.first {
+                unit.section = section
+                CoreDataHelper.instance.save()
+
+                if section.isReachable {
+                    navigateToStep()
+                } else {
+                    openSyllabus()
+                }
+            } else {
+                ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: [], refreshMode: .update, success: { sections in
+                    if let section = sections.first {
+                        unit.section = section
+                        CoreDataHelper.instance.save()
+
+                        if section.isReachable {
+                            navigateToStep()
+                        } else {
+                            openSyllabus()
+                        }
+                    } else {
+                        print("last step router: section not found, id = \(unit.sectionId)")
+                        openSyllabus()
+                    }
+                }, error: { err in
+                    print("last step router: error while loading section, error = \(err)")
+                    openSyllabus()
+                })
+            }
+        }
+
+        guard let unitId = course.lastStep?.unitId else {
+            openSyllabus()
+            return
+        }
+
+        checkUnitAndNavigate(for: unitId)
     }
 }
