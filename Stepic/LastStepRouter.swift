@@ -91,36 +91,31 @@ class LastStepRouter {
         }
 
         func checkSectionAndNavigate(in unit: Unit) {
+            var sectionForUpdate: Section? = nil
             if let retrievedSections = try? Section.getSections(unit.sectionId),
                let section = retrievedSections.first {
-                unit.section = section
-                CoreDataHelper.instance.save()
+                sectionForUpdate = section
+            }
 
-                if section.isReachable {
-                    navigateToStep()
-                } else {
-                    openSyllabus()
-                }
-            } else {
-                ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: [], refreshMode: .update, success: { sections in
-                    if let section = sections.first {
-                        unit.section = section
-                        CoreDataHelper.instance.save()
+            // Always refresh section to prevent obsolete `isReachable` state
+            ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: sectionForUpdate == nil ? [] : [sectionForUpdate!], refreshMode: .update, success: { sections in
+                if let section = sections.first {
+                    unit.section = section
+                    CoreDataHelper.instance.save()
 
-                        if section.isReachable {
-                            navigateToStep()
-                        } else {
-                            openSyllabus()
-                        }
+                    if section.isReachable {
+                        navigateToStep()
                     } else {
-                        print("last step router: section not found, id = \(unit.sectionId)")
                         openSyllabus()
                     }
-                }, error: { err in
-                    print("last step router: error while loading section, error = \(err)")
+                } else {
+                    print("last step router: section not found, id = \(unit.sectionId)")
                     openSyllabus()
-                })
-            }
+                }
+            }, error: { err in
+                print("last step router: error while loading section, error = \(err)")
+                openSyllabus()
+            })
         }
 
         guard let unitId = course.lastStep?.unitId else {
