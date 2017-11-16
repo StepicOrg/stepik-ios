@@ -159,7 +159,7 @@ class ExploreViewController: UIViewController, ExploreView {
         placeholder.alignTop("16", leading: "0", bottom: "0", trailing: "0", toView: v)
         placeholder.constrainHeight("100")
         placeholder.isHidden = false
-        placeholder.text = "No connection. Touch to retry"
+        placeholder.text = NSLocalizedString("CatalogPlaceholderError", comment: "")
         placeholder.onTap = {
             [weak self] in
             self?.presenter?.refresh()
