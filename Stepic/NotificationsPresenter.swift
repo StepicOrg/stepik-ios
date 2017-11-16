@@ -32,6 +32,11 @@ struct NotificationViewData {
     var avatarURL: URL?
 }
 
+extension NSNotification.Name {
+    static let notificationUpdated = NSNotification.Name("notificationUpdated")
+    static let allNotificationsMarkedAsRead = NSNotification.Name("allNotificationsMarkedAsRead")
+}
+
 class NotificationsPresenter {
     weak var view: NotificationsView?
 
@@ -49,6 +54,36 @@ class NotificationsPresenter {
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
         self.view = view
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+              let firedSection = userInfo["section"] as? NotificationsSection,
+              let id = userInfo["id"] as? Int,
+              let status = userInfo["status"] as? NotificationStatus else {
+                return
+        }
+
+        self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+            let (date, notifications) = arg
+            return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: status, ids: [id]))
+        }
+        self.view?.set(notifications: self.displayedNotifications, withReload: firedSection != self.section)
+    }
+
+    @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
+        self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+            let (date, notifications) = arg
+            return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: .read))
+        }
+        self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
     func refresh() {
@@ -224,18 +259,9 @@ class NotificationsPresenter {
         notification.status = status
         checkToken().then { _ -> Promise<Notification> in
             self.notificationsAPI.update(notification)
-        }.then { notification -> Void in
+        }.then { _ -> Void in
             CoreDataHelper.instance.save()
-
-            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
-                let (date, notifications) = arg
-                return (date: date, notifications: notifications.map { notification in
-                    var openedNotification = notification
-                    openedNotification.status = .read
-                    return openedNotification.id == id ? openedNotification : notification
-                })
-            }
-            self.view?.set(notifications: self.displayedNotifications, withReload: false)
+            NotificationCenter.default.post(name: .notificationUpdated, object: self, userInfo: ["section": self.section, "id": id, "status": status])
         }.catch { error in
             print("notifications: unable to update notification, id = \(id), error = \(error)")
         }
@@ -248,19 +274,20 @@ class NotificationsPresenter {
             self.notificationsAPI.markAllAsRead()
         }.then { _ -> Void in
             Notification.markAllAsRead()
-            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
-                let (date, notifications) = arg
-                return (date: date, notifications: notifications.map { notification in
-                    var openedNotification = notification
-                    openedNotification.status = .read
-                    return openedNotification
-                })
-            }
-            self.view?.set(notifications: self.displayedNotifications, withReload: true)
+
+            NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
             self.view?.updateMarkAllAsReadButton(with: .normal)
         }.catch { error in
             print("notifications: unable to mark all notifications as read, error = \(error)")
             self.view?.updateMarkAllAsReadButton(with: .error)
+        }
+    }
+
+    private func updateNotificationsViewData(notifications: [NotificationViewData], newStatus: NotificationStatus, ids: [Int]? = nil) -> [NotificationViewData] {
+        return notifications.map { notification in
+            var editedNotification = notification
+            editedNotification.status = newStatus
+            return (ids?.contains(editedNotification.id) ?? true) ? editedNotification : notification
         }
     }
 }
