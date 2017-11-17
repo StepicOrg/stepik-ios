@@ -140,6 +140,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     func refresh() {
+        view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromLocal(forLanguage: listLanguage)
         refreshFromRemote(forLanguage: listLanguage)

@@ -146,6 +146,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: false)
             break
         case .empty:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = nil
             if let listType = presenter?.listType {
                 switch listType {
@@ -163,6 +164,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: true)
             break
         case .emptyError:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
@@ -188,6 +190,7 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
+            delegate?.reloadData()
             emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
