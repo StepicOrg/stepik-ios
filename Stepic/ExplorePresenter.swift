@@ -107,19 +107,28 @@ class ExplorePresenter: CourseListCountDelegate {
             self?.view?.show(vc: vc)
         }
 
-        return lists.map {
-            CourseListBlock(
-                listType: .collection(ids: $0.coursesArray),
-                ID: getId(forList: $0),
-                horizontalLimit: 6,
-                title: $0.title,
-                colorMode: .light,
-                shouldShowCount: true,
-                showControllerBlock: showController,
-                courseListCountDelegate: self,
-                onlyLocal: onlyLocal
-            )
-        }
+        return
+            [CourseListBlock(
+                listType: .popular,
+                ID: "Explore_Popular",
+                horizontalLimit: nil,
+                title: NSLocalizedString("Popular", comment: ""),
+                colorMode: .dark,
+                shouldShowCount: false,
+                showControllerBlock: showController)] +
+            lists.map {
+                CourseListBlock(
+                    listType: .collection(ids: $0.coursesArray),
+                    ID: getId(forList: $0),
+                    horizontalLimit: nil,
+                    title: $0.title,
+                    colorMode: .light,
+                    shouldShowCount: true,
+                    showControllerBlock: showController,
+                    courseListCountDelegate: self,
+                    onlyLocal: onlyLocal
+                )
+            }
     }
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
@@ -204,6 +213,10 @@ class ExplorePresenter: CourseListCountDelegate {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
     }
 }
+
+//enum ExploreState {
+//    case emptyRefreshing, empty, error, showing
+//}
 
 enum SearchState {
     case noSearch, suggestions, results
