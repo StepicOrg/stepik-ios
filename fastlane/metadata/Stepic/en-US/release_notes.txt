@@ -1,5 +1,5 @@
 In the new version of the Stepik iOS app we:
-• Added the brand new catalog screen
+• Added the brand new catalog screen.
 • Redesigned course widgets. It may seem not as convenient as before, but the changes were made with good intentions and, at least, you will get used to it sooner or later.
 • Added possibility to change the language of the app's content. Say no to strange cyrillic symbols and Russian trace in online education!
 • Seriously improved "continue learning". It does not allow you to see what you should not see anymore.
