@@ -114,7 +114,19 @@ class LastStepRouter {
                 }
             }, error: { err in
                 print("last step router: error while loading section, error = \(err)")
-                openSyllabus()
+
+                // Fallback: use cached section 
+                guard let section = sectionForUpdate else {
+                    openSyllabus()
+                    return
+                }
+
+                print("last step router: using cached section")
+                if section.isReachable {
+                    navigateToStep()
+                } else {
+                    openSyllabus()
+                }
             })
         }
 
