@@ -15,7 +15,7 @@ class SQLQuizViewController: CodeQuizViewController {
     override func viewDidLoad() {
         limitsLabelHeight = 20
         super.viewDidLoad()
-        limitsLabel.text = "Введите SQL запрос:"
+        limitsLabel.text = NSLocalizedString("EnterSQLQuery", comment: "")
         limitsLabel.font = UIFont.boldSystemFont(ofSize: 15)
 
         toolbarView.languageButton.isEnabled = false
