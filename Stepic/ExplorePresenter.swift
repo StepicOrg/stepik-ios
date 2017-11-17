@@ -218,10 +218,6 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 }
 
-//enum ExploreState {
-//    case emptyRefreshing, empty, error, showing
-//}
-
 enum SearchState {
     case noSearch, suggestions, results
 }
