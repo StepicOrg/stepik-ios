@@ -12,6 +12,10 @@ import FLKAutoLayout
 
 class SQLQuizViewController: CodeQuizViewController {
 
+    override var needsToRefreshAttemptWhenWrong: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         limitsLabelHeight = 20
         super.viewDidLoad()
