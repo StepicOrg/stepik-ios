@@ -347,6 +347,7 @@ SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного 
 SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
 ChooseSearchLanguage = "Выберите язык поиска";
 Catalog = "Каталог";
+CatalogPlaceholderError = "Не удалось загрузить каталог. <b>Нажмите</b> чтобы попробовать еще раз";
 
 WidgetButtonJoin = "Поступить";
 WidgetButtonInfo = "Инфо";

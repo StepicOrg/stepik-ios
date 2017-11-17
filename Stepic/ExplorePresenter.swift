@@ -107,19 +107,31 @@ class ExplorePresenter: CourseListCountDelegate {
             self?.view?.show(vc: vc)
         }
 
-        return lists.map {
-            CourseListBlock(
-                listType: .collection(ids: $0.coursesArray),
-                ID: getId(forList: $0),
-                horizontalLimit: 6,
-                title: $0.title,
-                colorMode: .light,
-                shouldShowCount: true,
-                showControllerBlock: showController,
-                courseListCountDelegate: self,
-                onlyLocal: onlyLocal
-            )
-        }
+        return
+            lists.map {
+                CourseListBlock(
+                    listType: .collection(ids: $0.coursesArray),
+                    ID: getId(forList: $0),
+                    horizontalLimit: 14,
+                    title: $0.title,
+                    colorMode: .light,
+                    shouldShowCount: true,
+                    showControllerBlock: showController,
+                    courseListCountDelegate: self,
+                    onlyLocal: onlyLocal
+                )
+            } +
+            [
+                CourseListBlock(
+                    listType: .popular,
+                    ID: "Popular",
+                    horizontalLimit: 14,
+                    title: NSLocalizedString("Popular", comment: ""),
+                    colorMode: .dark,
+                    shouldShowCount: false,
+                    showControllerBlock: showController
+                )
+            ]
     }
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
@@ -128,6 +140,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     func refresh() {
+        view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromLocal(forLanguage: listLanguage)
         refreshFromRemote(forLanguage: listLanguage)
