@@ -115,9 +115,11 @@ class NotificationsViewController: UIViewController, NotificationsView {
         presenter?.refresh()
     }
 
-    func set(notifications: NotificationViewDataStruct) {
+    func set(notifications: NotificationViewDataStruct, withReload: Bool = true) {
         self.data = notifications
-        tableView.reloadData()
+        if withReload {
+            tableView.reloadData()
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
