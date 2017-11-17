@@ -108,14 +108,6 @@ class ExplorePresenter: CourseListCountDelegate {
         }
 
         return
-            [CourseListBlock(
-                listType: .popular,
-                ID: "Explore_Popular",
-                horizontalLimit: nil,
-                title: NSLocalizedString("Popular", comment: ""),
-                colorMode: .dark,
-                shouldShowCount: false,
-                showControllerBlock: showController)] +
             lists.map {
                 CourseListBlock(
                     listType: .collection(ids: $0.coursesArray),
@@ -128,7 +120,18 @@ class ExplorePresenter: CourseListCountDelegate {
                     courseListCountDelegate: self,
                     onlyLocal: onlyLocal
                 )
-            }
+            } +
+            [
+                CourseListBlock(
+                    listType: .popular,
+                    ID: "Popular",
+                    horizontalLimit: nil,
+                    title: NSLocalizedString("Popular", comment: ""),
+                    colorMode: .dark,
+                    shouldShowCount: false,
+                    showControllerBlock: showController
+                )
+            ]
     }
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
