@@ -11,12 +11,13 @@ def shared_pods
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
     pod 'Crashlytics', '~> 3.9'
+    pod 'DeviceKit', '~> 1.0'
+    pod 'PromiseKit', '~> 4.4'
 end
 
 def all_pods
 
     shared_pods
-    pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
@@ -47,8 +48,8 @@ def all_pods
     pod 'Highlightr'
     pod "RFKeyboardToolbar", "~> 1.3"
     pod 'TTTAttributedLabel'
-    pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
+
 end
 
 def testing_pods

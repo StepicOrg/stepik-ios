@@ -9,11 +9,13 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class SearchResultsAPI: APIEndpoint {
     override var name: String { return "search-results" }
 
-    @discardableResult func search(query: String, type: String?, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
+    @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
+    @discardableResult func search(query: String, type: String?, language: ContentLanguage? = nil, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
         var params: Parameters = [:]
 
         params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
@@ -24,6 +26,9 @@ class SearchResultsAPI: APIEndpoint {
         }
         if let t = type {
             params["type"] = t
+        }
+        if let l = language {
+            params["language"] = l.languageString
         }
 
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
@@ -53,5 +58,18 @@ class SearchResultsAPI: APIEndpoint {
 
             success(results, meta)
         })
+    }
+
+    func searchCourse(query: String, language: ContentLanguage?, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
+        return Promise<([SearchResult], Meta)> {
+            fulfill, reject in
+            search(query: query, type: "course", language: language, page: page, headers: headers, success: {
+                searchResults, meta in
+                fulfill((searchResults, meta))
+            }, error: {
+                error in
+                reject(RetrieveError(error: error))
+            })
+        }
     }
 }

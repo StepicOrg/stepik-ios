@@ -297,10 +297,9 @@ ShortBio = "Short bio";
 Info = "Info";
 ProfileAnonymousTitle = "Seems like you have no profile";
 ProfileAnonymousSubtitle = "Sign in to access more features";
-SignInTitleHead = "Sign In";
-SignUpTitleHead = "Sign Up";
-SignInTitleSocialTail = "with social accounts";
-SignInTitleEmailTail = "with e-mail";
+SignUpTitle = "<b>Sign Up</b>";
+SignInTitleSocial = "<b>Sign In</b> with social accounts";
+SignInTitleEmail = "<b>Sign In</b> with e-mail";
 SignInSocialButton = "Sign In with social";
 SignInEmailButton = "Sign In with e-mail";
 SignUpButton = "Sign Up";
@@ -308,10 +307,7 @@ Name = "Name";
 SignInMoreButton = "More";
 SignInLessButton = "Less";
 RemindThePassword = "Remind the password";
-AgreementLabelTermsOfService = "Terms of Service";
-AgreementLabelPrivacyPolicy = "Privacy Policy";
-And = "and";
-AgreementLabelHead = "By registering you agree to the";
+AgreementLabelText = "By registering you agree to the <a href=\"http://welcome.stepik.org/en/terms\">Terms of Service</a> and <a href=\"http://welcome.stepik.org/ru/privacy\">Privacy Policy</a>";
 LogInButton = "Log in";
 RegisterButton = "Register";
 WhoopsHead = "Whoops!";
@@ -346,6 +342,15 @@ HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>
 courses1 = "course";
 courses234 = "courses";
 courses567890 = "courses";
+SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
+SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
+ChooseSearchLanguage = "Choose search language";
+Catalog = "Catalog";
+
+WidgetButtonJoin = "Join";
+WidgetButtonInfo = "Info";
+WidgetButtonSyllabus = "Syllabus";
+WidgetButtonLearn = "Learn";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

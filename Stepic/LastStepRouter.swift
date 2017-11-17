@@ -29,7 +29,6 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.always {
-            SVProgressHUD.showSuccess(withStatus: "")
             navigate(for: course, using: navigationController)
         }.catch {
             _ in
@@ -47,21 +46,95 @@ class LastStepRouter {
 
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
-        unitsVC.unitId = course.lastStep?.unitId
 
-        lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
-
-        //For prev-next step buttons navigation
-        lessonVC.sectionNavigationDelegate = unitsVC
-
-        if course.lastStep?.unitId != nil && course.lastStep?.stepId != nil {
-            navigationController.pushViewController(sectionsVC, animated: false)
-            navigationController.pushViewController(unitsVC, animated: false)
-            navigationController.pushViewController(lessonVC, animated: true)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
-        } else {
+        func openSyllabus() {
+            SVProgressHUD.showSuccess(withStatus: "")
             navigationController.pushViewController(sectionsVC, animated: true)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
+            return
         }
+
+        func checkUnitAndNavigate(for unitId: Int) {
+            if let unit = Unit.getUnit(id: unitId) {
+                checkSectionAndNavigate(in: unit)
+            } else {
+                ApiDataDownloader.units.retrieve(ids: [unitId], existing: [], refreshMode: .update, success: { units in
+                    if let unit = units.first {
+                        checkSectionAndNavigate(in: unit)
+                    } else {
+                        print("last step router: unit not found, id = \(unitId)")
+                        openSyllabus()
+                    }
+                }, error: { err in
+                    print("last step router: error while loading unit, error = \(err)")
+                    openSyllabus()
+                })
+            }
+        }
+
+        func navigateToStep() {
+            unitsVC.unitId = course.lastStep?.unitId
+            lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
+
+            //For prev-next step buttons navigation
+            lessonVC.sectionNavigationDelegate = unitsVC
+
+            if course.lastStep?.stepId != nil {
+                SVProgressHUD.showSuccess(withStatus: "")
+                navigationController.pushViewController(sectionsVC, animated: false)
+                navigationController.pushViewController(unitsVC, animated: false)
+                navigationController.pushViewController(lessonVC, animated: true)
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
+            } else {
+                openSyllabus()
+            }
+        }
+
+        func checkSectionAndNavigate(in unit: Unit) {
+            var sectionForUpdate: Section? = nil
+            if let retrievedSections = try? Section.getSections(unit.sectionId),
+               let section = retrievedSections.first {
+                sectionForUpdate = section
+            }
+
+            // Always refresh section to prevent obsolete `isReachable` state
+            ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: sectionForUpdate == nil ? [] : [sectionForUpdate!], refreshMode: .update, success: { sections in
+                if let section = sections.first {
+                    unit.section = section
+                    CoreDataHelper.instance.save()
+
+                    if section.isReachable {
+                        navigateToStep()
+                    } else {
+                        openSyllabus()
+                    }
+                } else {
+                    print("last step router: section not found, id = \(unit.sectionId)")
+                    openSyllabus()
+                }
+            }, error: { err in
+                print("last step router: error while loading section, error = \(err)")
+
+                // Fallback: use cached section 
+                guard let section = sectionForUpdate else {
+                    openSyllabus()
+                    return
+                }
+
+                print("last step router: using cached section")
+                if section.isReachable {
+                    navigateToStep()
+                } else {
+                    openSyllabus()
+                }
+            })
+        }
+
+        guard let unitId = course.lastStep?.unitId else {
+            openSyllabus()
+            return
+        }
+
+        checkUnitAndNavigate(for: unitId)
     }
 }

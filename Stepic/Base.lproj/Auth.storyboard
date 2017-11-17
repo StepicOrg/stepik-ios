@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,15 +15,15 @@
             <objects>
                 <viewController storyboardIdentifier="SocialAuth" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SocialAuthViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="834-nm-s3Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="qOI-QY-ky4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xtI-yF-JBK">
-                                <rect key="frame" x="0.0" y="224" width="375" height="125"/>
+                                <rect key="frame" x="0.0" y="98.5" width="320" height="125"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="Wq4-Ni-nrn"/>
@@ -35,11 +36,11 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="socialAuthHeaderView" id="e75-eK-LDk" customClass="SocialAuthHeaderView" customModule="Stepic" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with social account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlJ-ad-nLa" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="27"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="27"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                             <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -57,7 +58,7 @@
                                 </collectionReusableView>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyI-UL-4R6">
-                                <rect key="frame" x="168.5" y="379" width="38" height="32"/>
+                                <rect key="frame" x="141" y="253.5" width="38" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="More">
                                     <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,7 +68,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o00-ed-SpF">
-                                <rect key="frame" x="24" y="619" width="134" height="32"/>
+                                <rect key="frame" x="24" y="368" width="134" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign In with e-mail">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,36 +77,21 @@
                                     <action selector="onSignInWithEmailClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="an0-r8-Exn"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gb0-7l-u82">
-                                <rect key="frame" x="171" y="70" width="33" height="33"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gb0-7l-u82">
+                                <rect key="frame" x="136" y="17.5" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="LNn-gH-wZx"/>
-                                    <constraint firstAttribute="width" constant="33" id="hYO-WO-PsW"/>
+                                    <constraint firstAttribute="width" secondItem="gb0-7l-u82" secondAttribute="height" multiplier="1:1" id="I6g-zO-JT0"/>
+                                    <constraint firstAttribute="height" constant="48" id="LNn-gH-wZx"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3e-7n-JkS">
-                                <rect key="frame" x="293" y="619" width="58" height="32"/>
+                                <rect key="frame" x="238" y="368" width="58" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onSignUpClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIQ-0E-ayS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb4-mS-Y6z">
-                                <rect key="frame" x="4" y="20" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="0bm-Lk-Njn"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="3G2-LA-bwZ"/>
-                                    <constraint firstAttribute="width" constant="50" id="PAV-E0-mfh"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="wCF-JL-RAX"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="-10" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="Dismiss Auth"/>
-                                <connections>
-                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="6GA-aj-O8i"/>
-                                    <action selector="onCloseClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N5s-wk-cRy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -119,15 +105,12 @@
                             <constraint firstItem="UyI-UL-4R6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GoW-fY-RoV"/>
                             <constraint firstItem="gb0-7l-u82" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JkB-k9-S3c"/>
                             <constraint firstAttribute="trailing" secondItem="xtI-yF-JBK" secondAttribute="trailing" id="SJn-MR-LGn"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3e-7n-JkS" secondAttribute="bottom" constant="16" id="W9t-qf-1WH"/>
+                            <constraint firstItem="qOI-QY-ky4" firstAttribute="top" secondItem="C3e-7n-JkS" secondAttribute="bottom" constant="16" id="W9t-qf-1WH"/>
                             <constraint firstItem="xtI-yF-JBK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WlV-zC-UWM"/>
-                            <constraint firstItem="Tb4-mS-Y6z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Zkf-qY-ta7"/>
-                            <constraint firstItem="Tb4-mS-Y6z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="4" id="cvr-kW-is9"/>
-                            <constraint firstItem="xtI-yF-JBK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gb0-7l-u82" secondAttribute="bottom" constant="24" id="kIz-vR-HVq"/>
+                            <constraint firstItem="xtI-yF-JBK" firstAttribute="top" secondItem="gb0-7l-u82" secondAttribute="bottom" constant="33" id="kIz-vR-HVq"/>
                             <constraint firstItem="o00-ed-SpF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-180" id="l5A-cT-1TG"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="o00-ed-SpF" secondAttribute="bottom" constant="16" id="nuu-Nb-Ccd"/>
+                            <constraint firstItem="qOI-QY-ky4" firstAttribute="top" secondItem="o00-ed-SpF" secondAttribute="bottom" constant="16" id="nuu-Nb-Ccd"/>
                             <constraint firstAttribute="trailing" secondItem="C3e-7n-JkS" secondAttribute="trailing" constant="24" id="xcD-X5-Vei"/>
-                            <constraint firstItem="gb0-7l-u82" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" priority="999" constant="50" id="zAj-7G-ZFf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -156,13 +139,30 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="u3O-A3-RKe"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Q9d-gC-NfY">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="sFt-p5-h5c">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="0bm-Lk-Njn"/>
+                                    <constraint firstAttribute="width" constant="20" id="PAV-E0-mfh"/>
+                                </constraints>
+                                <state key="normal" image="Dismiss Auth"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="6GA-aj-O8i"/>
+                                    <action selector="onCloseClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N5s-wk-cRy"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="xtI-yF-JBK" id="HAP-R2-GyC"/>
                         <outlet property="collectionViewHeight" destination="Wq4-Ni-nrn" id="jtk-yJ-AhB"/>
                         <outlet property="moreButton" destination="UyI-UL-4R6" id="iSt-8U-hj2"/>
                         <outlet property="signInButton" destination="o00-ed-SpF" id="Ytv-t6-9qj"/>
                         <outlet property="signUpButton" destination="C3e-7n-JkS" id="uN9-Of-r1B"/>
+                        <outlet property="stepikLogoHeightConstraint" destination="LNn-gH-wZx" id="MuK-oC-wyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -174,15 +174,15 @@
             <objects>
                 <viewController storyboardIdentifier="EmailAuth" automaticallyAdjustsScrollViewInsets="NO" id="lqO-CD-A0H" customClass="EmailAuthViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uc0-2G-M98"/>
-                        <viewControllerLayoutGuide type="bottom" id="JgJ-6q-FCN"/>
+                        <viewControllerLayoutGuide type="top" id="6Oh-wg-Nki"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lsp-SO-0Mq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ecb-mE-jfH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQR-hv-GBW">
-                                <rect key="frame" x="24" y="619" width="130" height="32"/>
+                                <rect key="frame" x="24" y="368" width="130" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign In with social">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -191,15 +191,15 @@
                                     <action selector="onSignInWithSocialClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="w96-HN-Xxv"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-dF-9x8">
-                                <rect key="frame" x="171" y="70" width="33" height="33"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-dF-9x8">
+                                <rect key="frame" x="136" y="12.5" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="8We-DQ-q2X"/>
-                                    <constraint firstAttribute="width" constant="33" id="KhQ-OK-1EB"/>
+                                    <constraint firstAttribute="height" constant="48" id="RDE-UM-mDV"/>
+                                    <constraint firstAttribute="width" secondItem="Seg-dF-9x8" secondAttribute="height" multiplier="1:1" id="jLs-94-Jtc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrc-hu-CrF">
-                                <rect key="frame" x="293" y="619" width="58" height="32"/>
+                                <rect key="frame" x="238" y="368" width="58" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -209,13 +209,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqj-F6-Q1k" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="213" width="327" height="24"/>
+                                <rect key="frame" x="24" y="93.5" width="272" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-d4-W7U">
-                                <rect key="frame" x="24" y="257" width="327" height="121"/>
+                                <rect key="frame" x="24" y="137.5" width="272" height="109"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.31372549019607843" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -224,13 +224,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-sQ-UuC">
-                                <rect key="frame" x="24" y="257" width="327" height="121"/>
+                                <rect key="frame" x="24" y="137.5" width="272" height="109"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-px-UvI" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="tWg-4k-CUe">
+                                            <constraint firstAttribute="height" constant="54" id="tWg-4k-CUe">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -239,17 +239,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syM-4D-gnF">
-                                        <rect key="frame" x="0.0" y="60" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="54" width="272" height="1"/>
                                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="baT-yf-3Zs"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umg-9h-bV9" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="61" width="327" height="60"/>
+                                        <rect key="frame" x="0.0" y="55" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="JBt-Z0-ScN">
+                                            <constraint firstAttribute="height" constant="54" id="JBt-Z0-ScN">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -263,7 +263,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Whoops! The e-mail address and/or password you specified are not correct." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="55E-Yo-HFU">
-                                <rect key="frame" x="24" y="394" width="327" height="0.0"/>
+                                <rect key="frame" x="24" y="262.5" width="272" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="cj6-hM-VuZ"/>
                                 </constraints>
@@ -272,10 +272,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="394" width="327" height="40"/>
+                                <rect key="frame" x="24" y="256.5" width="272" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="tX0-AL-jlM"/>
+                                    <constraint firstAttribute="height" constant="44" id="tX0-AL-jlM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Log in">
@@ -286,7 +286,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -294,7 +294,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cic-9n-m9H">
-                                <rect key="frame" x="24" y="442" width="327" height="40"/>
+                                <rect key="frame" x="24" y="308.5" width="272" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Z2G-ri-lD3"/>
@@ -307,47 +307,32 @@
                                     <action selector="onRemindPasswordClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="Wb8-7F-4s0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zQ-WS-dr9">
-                                <rect key="frame" x="4" y="20" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="oAe-YO-ram"/>
-                                    <constraint firstAttribute="height" constant="50" id="qWg-JF-Ggd"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="-10" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="Dismiss Auth"/>
-                                <connections>
-                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="skM-an-3gH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cic-9n-m9H" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" id="0bn-dy-tQu"/>
-                            <constraint firstItem="JgJ-6q-FCN" firstAttribute="top" secondItem="Vrc-hu-CrF" secondAttribute="bottom" constant="16" id="0c7-3k-2wl"/>
+                            <constraint firstItem="Lsp-SO-0Mq" firstAttribute="top" secondItem="Vrc-hu-CrF" secondAttribute="bottom" constant="16" id="0c7-3k-2wl"/>
                             <constraint firstItem="Fnt-qB-XZx" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" id="2S2-4x-eXD"/>
                             <constraint firstItem="vQR-hv-GBW" firstAttribute="leading" secondItem="NCY-px-UvI" secondAttribute="leading" id="71d-Se-0s5"/>
-                            <constraint firstItem="Rqj-F6-Q1k" firstAttribute="top" secondItem="uc0-2G-M98" secondAttribute="bottom" constant="6" id="97v-ha-oG6"/>
+                            <constraint firstItem="Rqj-F6-Q1k" firstAttribute="top" secondItem="6Oh-wg-Nki" secondAttribute="bottom" constant="6" id="97v-ha-oG6"/>
                             <constraint firstItem="55E-Yo-HFU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ecb-mE-jfH" secondAttribute="leading" constant="24" id="Aat-eW-N7o"/>
-                            <constraint firstItem="Fnt-qB-XZx" firstAttribute="top" secondItem="55E-Yo-HFU" secondAttribute="bottom" id="FMb-Ob-Zlz"/>
-                            <constraint firstItem="Rqj-F6-Q1k" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Seg-dF-9x8" secondAttribute="bottom" priority="999" constant="24" id="H5c-PC-5ea"/>
+                            <constraint firstItem="Fnt-qB-XZx" firstAttribute="top" secondItem="55E-Yo-HFU" secondAttribute="bottom" constant="-6" id="FMb-Ob-Zlz"/>
+                            <constraint firstItem="Rqj-F6-Q1k" firstAttribute="top" secondItem="Seg-dF-9x8" secondAttribute="bottom" constant="33" id="H5c-PC-5ea"/>
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="leading" secondItem="YSS-sQ-UuC" secondAttribute="leading" id="KHO-no-Z2p"/>
                             <constraint firstItem="Rqj-F6-Q1k" firstAttribute="leading" secondItem="ecb-mE-jfH" secondAttribute="leading" constant="24" id="Kef-Ch-oSy"/>
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="bottom" secondItem="YSS-sQ-UuC" secondAttribute="bottom" id="MA0-wr-ijX"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="55E-Yo-HFU" secondAttribute="trailing" constant="24" id="NOa-fw-I1o"/>
-                            <constraint firstItem="JgJ-6q-FCN" firstAttribute="top" secondItem="vQR-hv-GBW" secondAttribute="bottom" constant="16" id="SjM-4v-eyU"/>
+                            <constraint firstItem="Lsp-SO-0Mq" firstAttribute="top" secondItem="vQR-hv-GBW" secondAttribute="bottom" constant="16" id="SjM-4v-eyU"/>
                             <constraint firstAttribute="trailing" secondItem="Rqj-F6-Q1k" secondAttribute="trailing" constant="24" id="UdF-XN-krz"/>
                             <constraint firstItem="Vrc-hu-CrF" firstAttribute="trailing" secondItem="NCY-px-UvI" secondAttribute="trailing" id="Web-ew-Gs1"/>
-                            <constraint firstItem="3zQ-WS-dr9" firstAttribute="top" secondItem="uc0-2G-M98" secondAttribute="bottom" id="YDX-UV-U4M"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" id="Yca-hi-7J7"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="centerY" secondItem="ecb-mE-jfH" secondAttribute="centerY" priority="999" constant="-16" id="dHs-sh-0cn"/>
                             <constraint firstItem="Vrc-hu-CrF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cic-9n-m9H" secondAttribute="bottom" id="dzP-Qn-5d4"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="leading" secondItem="ecb-mE-jfH" secondAttribute="leading" priority="999" constant="24" id="fBR-Cs-mC0"/>
                             <constraint firstItem="cic-9n-m9H" firstAttribute="width" secondItem="Fnt-qB-XZx" secondAttribute="width" id="fQF-Sb-ve9"/>
-                            <constraint firstItem="Seg-dF-9x8" firstAttribute="top" secondItem="uc0-2G-M98" secondAttribute="bottom" priority="998" constant="50" id="fd9-KH-5zg"/>
                             <constraint firstItem="Rqj-F6-Q1k" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" id="fhG-Zw-aFa"/>
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="trailing" secondItem="YSS-sQ-UuC" secondAttribute="trailing" id="gYx-Q5-B70"/>
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="top" secondItem="YSS-sQ-UuC" secondAttribute="top" id="jVX-jM-0lt"/>
-                            <constraint firstItem="3zQ-WS-dr9" firstAttribute="leading" secondItem="ecb-mE-jfH" secondAttribute="leading" constant="4" id="laK-Jf-u3A"/>
                             <constraint firstItem="55E-Yo-HFU" firstAttribute="width" secondItem="YSS-sQ-UuC" secondAttribute="width" id="mz1-I2-R9k"/>
                             <constraint firstItem="Fnt-qB-XZx" firstAttribute="width" secondItem="YSS-sQ-UuC" secondAttribute="width" id="n9m-XI-u9H"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="top" secondItem="Rqj-F6-Q1k" secondAttribute="bottom" constant="20" id="oEI-BZ-KbG">
@@ -376,6 +361,24 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="lpD-Ep-HVB">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="F0p-Ac-pDB">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="oAe-YO-ram"/>
+                                    <constraint firstAttribute="height" constant="20" id="qWg-JF-Ggd"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="-10" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="Dismiss Auth"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="skM-an-3gH"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="alertBottomLabelConstraint" destination="FMb-Ob-Zlz" id="wJp-re-UE1"/>
                         <outlet property="alertLabel" destination="55E-Yo-HFU" id="JuB-ib-Vs2"/>
@@ -388,6 +391,7 @@
                         <outlet property="separatorHeight" destination="baT-yf-3Zs" id="lpB-3y-RYz"/>
                         <outlet property="signInButton" destination="vQR-hv-GBW" id="J5U-5D-Qyf"/>
                         <outlet property="signUpButton" destination="Vrc-hu-CrF" id="fex-5G-aFw"/>
+                        <outlet property="stepikLogoHeightConstraint" destination="RDE-UM-mDV" id="Myk-Jx-hTv"/>
                         <outlet property="titleLabel" destination="Rqj-F6-Q1k" id="VYa-u8-tey"/>
                     </connections>
                 </viewController>
@@ -400,28 +404,28 @@
             <objects>
                 <viewController storyboardIdentifier="Registration" automaticallyAdjustsScrollViewInsets="NO" id="Ezc-h0-bV3" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BVN-Og-x3O"/>
-                        <viewControllerLayoutGuide type="bottom" id="Wwy-z5-ejh"/>
+                        <viewControllerLayoutGuide type="top" id="eac-RL-2NS"/>
+                        <viewControllerLayoutGuide type="bottom" id="w2K-bm-ZPQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GB8-Gv-9Jd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-hh-W9h">
-                                <rect key="frame" x="171" y="70" width="33" height="33"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-hh-W9h">
+                                <rect key="frame" x="136" y="-15" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="Hm7-Zv-6Lk"/>
-                                    <constraint firstAttribute="height" constant="33" id="PFF-U7-liF"/>
+                                    <constraint firstAttribute="width" secondItem="jBI-hh-W9h" secondAttribute="height" multiplier="1:1" id="748-HO-h5Q"/>
+                                    <constraint firstAttribute="height" constant="48" id="PFF-U7-liF"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-i0-02l" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="182.5" width="327" height="24"/>
+                                <rect key="frame" x="24" y="66" width="272" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cu-FO-mN5">
-                                <rect key="frame" x="24" y="226.5" width="327" height="182"/>
+                                <rect key="frame" x="24" y="110" width="272" height="164"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -430,13 +434,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3wd-if-3To">
-                                <rect key="frame" x="24" y="226.5" width="327" height="182"/>
+                                <rect key="frame" x="24" y="110" width="272" height="164"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c81-1U-sKd" userLabel="Name" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="NsB-Dn-Qrw">
+                                            <constraint firstAttribute="height" constant="54" id="NsB-Dn-Qrw">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -445,17 +449,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8c-XX-pMK">
-                                        <rect key="frame" x="0.0" y="60" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="54" width="272" height="1"/>
                                         <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="gRU-SW-zdr"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dPv-EY-XCL" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="61" width="327" height="60"/>
+                                        <rect key="frame" x="0.0" y="55" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="6TR-dW-sh0">
+                                            <constraint firstAttribute="height" constant="54" id="6TR-dW-sh0">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -464,17 +468,17 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPV-1V-faR">
-                                        <rect key="frame" x="0.0" y="121" width="327" height="1"/>
+                                        <rect key="frame" x="0.0" y="109" width="272" height="1"/>
                                         <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ga1-FK-AYK"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gng-wJ-E02" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="122" width="327" height="60"/>
+                                        <rect key="frame" x="0.0" y="110" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="dna-xZ-5h5">
+                                            <constraint firstAttribute="height" constant="54" id="dna-xZ-5h5">
                                                 <variation key="heightClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
@@ -488,7 +492,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Whoops! The e-mail address and/or password you specified are not correct." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Sks-5y-rKN">
-                                <rect key="frame" x="24" y="424.5" width="327" height="0.0"/>
+                                <rect key="frame" x="24" y="290" width="272" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="y9u-6u-PKO"/>
                                 </constraints>
@@ -497,10 +501,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
-                                <rect key="frame" x="24" y="424.5" width="327" height="40"/>
+                                <rect key="frame" x="24" y="284" width="272" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="MYS-WM-Iw2"/>
+                                    <constraint firstAttribute="height" constant="44" id="MYS-WM-Iw2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Register">
@@ -511,44 +515,19 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onRegisterClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="WNV-SG-ghE"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y0s-Kn-gay">
-                                <rect key="frame" x="24" y="592.5" width="327" height="54.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="By registering you agree to the Terms of service and Privacy policy.">
-                                        <attributes>
-                                            <color key="NSColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" metaFont="system" size="16"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlk-tX-Vkq">
-                                <rect key="frame" x="4" y="20" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="JpU-Um-0qu"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="buE-Xh-f2G"/>
-                                    <constraint firstAttribute="height" constant="50" id="dKR-lz-h3o"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="fvr-lj-kKL"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="-10" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="Dismiss Auth"/>
-                                <connections>
-                                    <action selector="onCloseClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="Z9j-dg-qee"/>
-                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="gQQ-jD-dB5"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By registering you agree to the Terms of service and Privacy policy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqa-AS-4te" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="24" y="361.5" width="272" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -559,30 +538,27 @@
                             <constraint firstItem="1Cu-FO-mN5" firstAttribute="trailing" secondItem="3wd-if-3To" secondAttribute="trailing" id="2WJ-H7-OWi"/>
                             <constraint firstItem="Sks-5y-rKN" firstAttribute="width" secondItem="3wd-if-3To" secondAttribute="width" id="6Iz-Qt-JdO"/>
                             <constraint firstItem="KmT-i0-02l" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="9Ca-P1-FwA"/>
-                            <constraint firstItem="Wwy-z5-ejh" firstAttribute="top" secondItem="Y0s-Kn-gay" secondAttribute="bottom" constant="20" id="CQI-3D-hn6"/>
-                            <constraint firstItem="Tlk-tX-Vkq" firstAttribute="top" secondItem="BVN-Og-x3O" secondAttribute="bottom" id="G0l-ir-3FD"/>
-                            <constraint firstItem="Y0s-Kn-gay" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="GmE-zk-ekZ"/>
                             <constraint firstItem="1Cu-FO-mN5" firstAttribute="top" secondItem="3wd-if-3To" secondAttribute="top" id="JBU-s0-UdL"/>
-                            <constraint firstItem="gfh-2r-iUJ" firstAttribute="top" secondItem="Sks-5y-rKN" secondAttribute="bottom" id="KNy-3m-2zg"/>
+                            <constraint firstItem="gfh-2r-iUJ" firstAttribute="top" secondItem="Sks-5y-rKN" secondAttribute="bottom" constant="-6" id="KNy-3m-2zg"/>
                             <constraint firstItem="3wd-if-3To" firstAttribute="centerY" secondItem="GB8-Gv-9Jd" secondAttribute="centerY" priority="999" constant="-16" id="Kj2-02-YgU"/>
+                            <constraint firstItem="Cqa-AS-4te" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="Ohr-am-xyM"/>
                             <constraint firstItem="jBI-hh-W9h" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="PIk-Hl-dUb"/>
                             <constraint firstItem="Sks-5y-rKN" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="QNg-7c-kdH"/>
                             <constraint firstItem="Sks-5y-rKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="Sc5-AD-R4u"/>
-                            <constraint firstItem="jBI-hh-W9h" firstAttribute="top" secondItem="BVN-Og-x3O" secondAttribute="bottom" priority="998" constant="50" id="UDz-fX-BlH"/>
                             <constraint firstAttribute="trailing" secondItem="KmT-i0-02l" secondAttribute="trailing" constant="24" id="Vma-ry-Hbm"/>
-                            <constraint firstItem="KmT-i0-02l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jBI-hh-W9h" secondAttribute="bottom" priority="999" constant="24" id="XT0-RL-Wf1"/>
+                            <constraint firstItem="KmT-i0-02l" firstAttribute="top" secondItem="jBI-hh-W9h" secondAttribute="bottom" constant="33" id="XT0-RL-Wf1"/>
                             <constraint firstItem="1Cu-FO-mN5" firstAttribute="leading" secondItem="3wd-if-3To" secondAttribute="leading" id="ZXi-5Y-SBb"/>
                             <constraint firstItem="3wd-if-3To" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" priority="999" constant="24" id="art-Si-m0y"/>
-                            <constraint firstItem="Tlk-tX-Vkq" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="4" id="fne-dT-VLM"/>
                             <constraint firstItem="Sks-5y-rKN" firstAttribute="top" secondItem="3wd-if-3To" secondAttribute="bottom" constant="16" id="gCH-53-W7h"/>
-                            <constraint firstItem="KmT-i0-02l" firstAttribute="top" secondItem="BVN-Og-x3O" secondAttribute="bottom" constant="6" id="gbH-qE-AKo"/>
+                            <constraint firstItem="KmT-i0-02l" firstAttribute="top" secondItem="eac-RL-2NS" secondAttribute="bottom" constant="6" id="gbH-qE-AKo"/>
                             <constraint firstItem="1Cu-FO-mN5" firstAttribute="bottom" secondItem="3wd-if-3To" secondAttribute="bottom" id="h9s-RV-QVp"/>
+                            <constraint firstItem="w2K-bm-ZPQ" firstAttribute="top" secondItem="Cqa-AS-4te" secondAttribute="bottom" constant="16" id="hGT-86-0hb"/>
                             <constraint firstItem="KmT-i0-02l" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="i6Q-lc-ZkB"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Sks-5y-rKN" secondAttribute="trailing" constant="24" id="ktQ-a4-YSK"/>
+                            <constraint firstItem="Cqa-AS-4te" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gfh-2r-iUJ" secondAttribute="bottom" constant="10" id="nE9-be-TTi"/>
                             <constraint firstAttribute="trailing" secondItem="3wd-if-3To" secondAttribute="trailing" priority="999" constant="24" id="pNd-cQ-Hmg"/>
                             <constraint firstItem="3wd-if-3To" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="qyE-9z-ZtB"/>
-                            <constraint firstItem="Y0s-Kn-gay" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gfh-2r-iUJ" secondAttribute="bottom" constant="10" id="vSy-yd-KFY"/>
-                            <constraint firstAttribute="trailing" secondItem="Y0s-Kn-gay" secondAttribute="trailing" constant="24" id="y2x-7e-T1h"/>
+                            <constraint firstAttribute="trailing" secondItem="Cqa-AS-4te" secondAttribute="trailing" constant="24" id="rBu-PP-Jue"/>
                             <constraint firstItem="gfh-2r-iUJ" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="zKb-BF-Ip6"/>
                         </constraints>
                         <variation key="default">
@@ -601,6 +577,25 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="VBR-hH-yzY">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="LZL-zC-DDt">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
+                                <rect key="frame" x="16" y="11" width="17" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="JpU-Um-0qu"/>
+                                    <constraint firstAttribute="height" constant="20" id="dKR-lz-h3o"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="-10" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="Dismiss Auth"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="Z9j-dg-qee"/>
+                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="gQQ-jD-dB5"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="alertBottomLabelConstraint" destination="KNy-3m-2zg" id="a4W-hk-6Bu"/>
                         <outlet property="alertLabel" destination="Sks-5y-rKN" id="1GS-vL-6fG"/>
@@ -612,8 +607,9 @@
                         <outlet property="registerButton" destination="gfh-2r-iUJ" id="kf8-1A-SID"/>
                         <outlet property="separatorFirstHeight" destination="gRU-SW-zdr" id="cJI-Oq-dT5"/>
                         <outlet property="separatorSecondHeight" destination="ga1-FK-AYK" id="ubA-cq-B3z"/>
+                        <outlet property="stepikLogoHeightConstraint" destination="PFF-U7-liF" id="9By-At-pmX"/>
                         <outlet property="titleLabel" destination="KmT-i0-02l" id="QdI-WC-E8d"/>
-                        <outlet property="tosTextView" destination="Y0s-Kn-gay" id="RTd-qS-5ly"/>
+                        <outlet property="tosLabel" destination="Cqa-AS-4te" id="uiS-cE-WJv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7EH-oC-Z0L" sceneMemberID="firstResponder"/>
@@ -623,10 +619,11 @@
         <!--Auth Navigation View Controller-->
         <scene sceneID="SAA-iA-D5h">
             <objects>
-                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="peF-Iz-JYA">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -640,7 +637,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Dismiss Auth" width="14" height="13"/>
-        <image name="stepik_auth_logo" width="33" height="33"/>
+        <image name="Dismiss Auth" width="17" height="17"/>
+        <image name="stepik_auth_logo" width="72" height="72"/>
     </resources>
 </document>

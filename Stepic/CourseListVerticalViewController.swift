@@ -18,6 +18,7 @@ class CourseListVerticalViewController: CourseListViewController {
         delegate = self
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.clear
+        tableView.allowsSelection = false
     }
 
     lazy var paginationView: LoadingPaginationView = {
@@ -152,14 +153,7 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     }
 }
 
-extension CourseListVerticalViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectCourse(at: indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension CourseListVerticalViewController: UITableViewDataSource {
+extension CourseListVerticalViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
