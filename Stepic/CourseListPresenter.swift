@@ -758,7 +758,7 @@ enum CourseListType {
 
         switch self {
         case .popular:
-            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", language: requestedLanguage, page: page)
+            return coursesAPI.retrieve(excludeEnded: true, isPublic: true, order: "-activity", language: requestedLanguage, page: page)
         case .enrolled:
             return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
         case let .search(query: query):
