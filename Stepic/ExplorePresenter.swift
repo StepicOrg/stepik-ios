@@ -112,7 +112,7 @@ class ExplorePresenter: CourseListCountDelegate {
                 CourseListBlock(
                     listType: .collection(ids: $0.coursesArray),
                     ID: getId(forList: $0),
-                    horizontalLimit: nil,
+                    horizontalLimit: 14,
                     title: $0.title,
                     colorMode: .light,
                     shouldShowCount: true,
@@ -125,7 +125,7 @@ class ExplorePresenter: CourseListCountDelegate {
                 CourseListBlock(
                     listType: .popular,
                     ID: "Popular",
-                    horizontalLimit: nil,
+                    horizontalLimit: 14,
                     title: NSLocalizedString("Popular", comment: ""),
                     colorMode: .dark,
                     shouldShowCount: false,

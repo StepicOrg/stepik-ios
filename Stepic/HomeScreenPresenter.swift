@@ -32,8 +32,8 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
         }
 
         let blocks = [
-            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: nil, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, showControllerBlock: showController, lastStepWidgetDataSource: self, courseListCountDelegate: self, onlyLocal: false),
-            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: nil, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, showControllerBlock: showController, courseListCountDelegate: self, onlyLocal: false)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 14, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, showControllerBlock: showController, lastStepWidgetDataSource: self, courseListCountDelegate: self, onlyLocal: false),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 14, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, showControllerBlock: showController, courseListCountDelegate: self, onlyLocal: false)
         ]
 
         view?.presentBlocks(blocks: blocks)
