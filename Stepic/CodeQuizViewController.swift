@@ -381,10 +381,15 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             if let userTemplate = options.template(language: s.language, userGenerated: true) {
                 CoreDataHelper.instance.deleteFromStore(userTemplate)
             }
+
             if let template = options.template(language: s.language, userGenerated: false) {
                 s.codeTextView.text = template.templateString
                 s.currentCode = template.templateString
+            } else {
+                s.codeTextView.text = ""
+                s.currentCode = ""
             }
+
             CoreDataHelper.instance.save()
         }))
         present(alert, animated: true, completion: nil)
