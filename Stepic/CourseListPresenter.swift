@@ -288,7 +288,7 @@ class CourseListPresenter {
         }
     }
 
-    private func shouldRefreshLanguageCondition() -> Bool {
+    private var shouldRefreshLanguage: Bool {
         switch listType {
         case .enrolled:
             return false
@@ -298,7 +298,7 @@ class CourseListPresenter {
     }
 
     func willAppear() {
-        if lastUser != AuthInfo.shared.user || shouldRefreshLanguageCondition() {
+        if lastUser != AuthInfo.shared.user || shouldRefreshLanguage {
             courses = []
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
