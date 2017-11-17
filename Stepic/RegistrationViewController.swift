@@ -37,6 +37,7 @@ class RegistrationViewController: UIViewController {
 
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var alertLabel: UILabel!
     @IBOutlet weak var registerButton: AuthButton!
@@ -62,7 +63,7 @@ class RegistrationViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 })
             } else {
-                alertBottomLabelConstraint.constant = 0
+                alertBottomLabelConstraint.constant = -6
                 alertLabelHeightConstraint.isActive = true
                 UIView.animate(withDuration: 0.1, animations: {
                     self.view.layoutIfNeeded()
@@ -167,6 +168,11 @@ class RegistrationViewController: UIViewController {
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         passwordTextField.fieldType = .password
+
+        // Small logo for small screens
+        if DeviceInfo.current.diagonal <= 4 {
+            stepikLogoHeightConstraint.constant = 38
+        }
     }
 
     private func localize() {
