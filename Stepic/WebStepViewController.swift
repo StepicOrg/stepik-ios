@@ -221,6 +221,10 @@ class WebStepViewController: UIViewController {
             let quizController = CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
+        case "sql":
+            let quizController = SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             print("unknown type \(step.block.name)")

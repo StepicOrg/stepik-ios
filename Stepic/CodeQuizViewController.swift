@@ -13,14 +13,14 @@ import Highlightr
 class CodeQuizViewController: QuizViewController {
 
     var dataset: String?
-    var reply: CodeReply?
+    var reply: Reply?
 
     var limitsLabel: StepikLabel = StepikLabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
 
     let toolbarHeight: CGFloat = 44
-    let limitsLabelHeight: CGFloat = 40
+    var limitsLabelHeight: CGFloat = 40
 
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
 
@@ -44,7 +44,7 @@ class CodeQuizViewController: QuizViewController {
 
     var tabSize: Int = 0
 
-    fileprivate func setupAccessoryView(editable: Bool) {
+    func setupAccessoryView(editable: Bool) {
         if editable {
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
                 [weak self] in

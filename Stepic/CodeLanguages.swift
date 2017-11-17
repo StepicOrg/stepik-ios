@@ -33,6 +33,7 @@ enum CodeLanguage: String {
     case go = "go"
     case pascal = "pascalabc"
     case perl = "perl"
+    case sql = "sql"
 
     var highlightr: String {
         switch self {
@@ -72,6 +73,8 @@ enum CodeLanguage: String {
             return "delphi"
         case .perl:
             return "perl"
+        case .sql:
+            return "sql"
         }
     }
 
