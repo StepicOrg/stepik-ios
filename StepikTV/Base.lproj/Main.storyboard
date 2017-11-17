@@ -8,13 +8,14 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Профиль-->
         <scene sceneID="4vw-zQ-VjQ">
             <objects>
-                <viewController id="Zl5-dF-RYl" sceneMemberID="viewController">
+                <viewController id="Zl5-dF-RYl" customClass="ProfileViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zYH-8i-Z8t"/>
                         <viewControllerLayoutGuide type="bottom" id="zI4-VP-Uf5"/>
@@ -22,9 +23,79 @@
                     <view key="view" contentMode="scaleToFill" id="m1D-Ec-zLv">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stepik_logo" translatesAutoresizingMaskIntoConstraints="NO" id="6lN-w4-EB8">
+                                <rect key="frame" x="200" y="210" width="630" height="630"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6lN-w4-EB8" secondAttribute="height" multiplier="1:1" id="hbO-Lu-Ksr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Профиль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dte-O0-1EJ">
+                                <rect key="frame" x="1091" y="250" width="719" height="69"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
+                                <color key="textColor" red="0.71999999999999997" green="0.71999999999999997" blue="0.71999999999999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fn0-Iz-H2o">
+                                <rect key="frame" x="1076" y="370" width="475" height="246"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-x5-BF3" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="475" height="66"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="4Lx-cw-wla"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                        <state key="normal" title="Войти">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-6E-hF7" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="90" width="475" height="66"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="B3r-TJ-M3W"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                        <state key="normal" title="Зарегистрироваться">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-hh-9Pe" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="180" width="475" height="66"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="mvN-aQ-OjZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                        <state key="normal" title="Настройки">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="475" id="6PO-zX-Z6x"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="dte-O0-1EJ" firstAttribute="leading" secondItem="6lN-w4-EB8" secondAttribute="trailing" constant="261" id="AWW-On-3nt"/>
+                            <constraint firstItem="Fn0-Iz-H2o" firstAttribute="top" secondItem="dte-O0-1EJ" secondAttribute="bottom" constant="51" id="Aqc-CO-sZe"/>
+                            <constraint firstItem="MuA-a3-zLV" firstAttribute="bottom" secondItem="6lN-w4-EB8" secondAttribute="bottom" constant="180" id="I5t-Fo-hfh"/>
+                            <constraint firstItem="Fn0-Iz-H2o" firstAttribute="leading" secondItem="dte-O0-1EJ" secondAttribute="leading" constant="-15" id="OBc-57-hPH"/>
+                            <constraint firstItem="6lN-w4-EB8" firstAttribute="top" secondItem="MuA-a3-zLV" secondAttribute="top" constant="150" id="OHs-0R-xbP"/>
+                            <constraint firstItem="MuA-a3-zLV" firstAttribute="trailing" secondItem="dte-O0-1EJ" secondAttribute="trailing" constant="20" id="Xwn-CA-Jel"/>
+                            <constraint firstItem="6lN-w4-EB8" firstAttribute="leading" secondItem="MuA-a3-zLV" secondAttribute="leading" constant="110" id="h0u-HN-qdq"/>
+                            <constraint firstItem="dte-O0-1EJ" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" constant="40" id="wBE-TL-d0Z"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="MuA-a3-zLV"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" id="DsA-Hi-lyK"/>
+                    <connections>
+                        <outlet property="lowerButton" destination="E4I-hh-9Pe" id="QIM-Ph-9SO"/>
+                        <outlet property="midButton" destination="leP-6E-hF7" id="pGq-s9-vsA"/>
+                        <outlet property="upperButton" destination="D9O-x5-BF3" id="MgI-Ec-8p6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPJ-ce-9LA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,7 +143,7 @@
         <!--Подборка-->
         <scene sceneID="Wnd-tq-OXs">
             <objects>
-                <collectionViewController storyboardIdentifier="CollectionViewContainerViewController" id="37g-Fa-hN0" customClass="CompilationViewController" customModule="StepikTV" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CollectionViewContainerViewController" id="37g-Fa-hN0" customClass="CompilationCollectionViewController" customModule="StepikTV" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="B9B-4p-WY4">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,7 +319,7 @@
                         <sections>
                             <tableViewSection id="Hgw-mB-0rC">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Gia-cQ-1lC" detailTextLabel="Phs-D5-iNp" rowHeight="66" style="IBUITableViewCellStyleValue1" id="qlN-DO-XvP">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StaticCoursesTableViewCell" textLabel="Gia-cQ-1lC" detailTextLabel="Phs-D5-iNp" rowHeight="66" style="IBUITableViewCellStyleValue1" id="qlN-DO-XvP">
                                         <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qlN-DO-XvP" id="hDA-BK-Hw0">
@@ -272,10 +343,10 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="gZU-C6-QdM" kind="showDetail" identifier="ShowUndoneCourses" id="I7n-4H-FeY"/>
+                                            <segue destination="gZU-C6-QdM" kind="showDetail" identifier="ShowCoursesTable" id="2ax-Z3-kFw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="AcB-RS-H1B" detailTextLabel="aSu-0N-Ei7" rowHeight="66" style="IBUITableViewCellStyleValue1" id="jhX-Ka-gQs">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StaticCoursesTableViewCell" textLabel="AcB-RS-H1B" detailTextLabel="aSu-0N-Ei7" rowHeight="66" style="IBUITableViewCellStyleValue1" id="jhX-Ka-gQs">
                                         <rect key="frame" x="0.0" y="80" width="499" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhX-Ka-gQs" id="WN3-vo-cvR">
@@ -299,7 +370,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="RR9-YI-osV" kind="showDetail" identifier="ShowDoneCourses" id="hOl-DQ-Zna"/>
+                                            <segue destination="RR9-YI-osV" kind="showDetail" identifier="ShowCoursesTable" id="hOl-DQ-Zna"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -470,5 +541,6 @@
     </scenes>
     <resources>
         <image name="Iceland 1.jpg" width="16" height="16"/>
+        <image name="Stepik_logo" width="1000" height="1000"/>
     </resources>
 </document>

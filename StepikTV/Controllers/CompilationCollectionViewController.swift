@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class CompilationViewController: UICollectionViewController {
+class CompilationCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class CompilationViewController: UICollectionViewController {
     }
 }
 
-extension CompilationViewController: UICollectionViewDelegateFlowLayout {
+extension CompilationCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 

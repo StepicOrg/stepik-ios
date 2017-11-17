@@ -10,24 +10,18 @@ import UIKit
 
 class CatalogMenuViewController: MenuTableViewController {
 
-    override var segueIdentifierMap: [[String]] {
-        return [
-            [
-                "ShowUndoneCourses",
-                "ShowDoneCourses"
-            ]
-        ]
-    }
+    override var segueIdentifier: String { return "ShowCoursesTable" }
+
+    override var cellIdentifier: String { return "StaticCoursesTableViewCell" }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as? RectangularCollectionViewController
+        guard let indexPath = performingSegueSourceCellIndexPath else { fatalError("'prepare(for segue:)' called when no performing segues") }
 
-        if segue.identifier == "ShowUndoneCourses" {
-            vc?.content = .Undone
-        }
+        if segue.identifier == segueIdentifier {
+            let vc = segue.destination as? RectangularCollectionViewController
 
-        if segue.identifier == "ShowDoneCourses" {
-            vc?.content = .Done
+            if indexPath.row == 0 { vc?.content = .Undone }
+            if indexPath.row == 1 { vc?.content = .Done }
         }
     }
 }

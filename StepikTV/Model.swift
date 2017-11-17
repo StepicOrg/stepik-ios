@@ -48,6 +48,11 @@ class Model {
     func getDoneCourses() -> [CourseMock] {
         return source[2]
     }
+
+    func getCurrentCourse() -> CourseMock {
+        return CourseMock(image: UIImage(), name: "Основы статистики", host: "")
+    }
+
 }
 
 struct CourseMock {
@@ -60,6 +65,39 @@ struct CourseMock {
         self.image = image
         self.name = name
         self.host = host
+
     }
 
+    let paragraphs = [Paragraph(name: "Введение", lessons: ["Приветсвие", "Введение"]),
+                      Paragraph(name: "Сравнение средних", lessons: ["T-распределение", "Сравнение двух средних", "Проверка распределения на нормальность и проверка многострочных имен", "Однофакторный дисперсионный анализ"]),
+                      Paragraph(name: "Корреляция и регрессия", lessons: ["Корреляция", "Регрессия при нормальном распределении"])]
+}
+
+struct Paragraph {
+
+    var name: String
+
+    var lessons: [String]
+
+    init(name: String, lessons: [String]) {
+        self.name = name
+        self.lessons = lessons
+    }
+}
+
+struct LessonMock {
+
+    var parts: [LessonPart] = [LessonPart(type: .Video, isDone: true), LessonPart(type: .Task), LessonPart(type: .Text), LessonPart(type: .Task)]
+}
+
+struct LessonPart {
+
+    var type: LessonsPartContentType
+
+    var isDone: Bool = false
+
+    init(type: LessonsPartContentType, isDone: Bool = false) {
+        self.type = type
+        self.isDone = isDone
+    }
 }

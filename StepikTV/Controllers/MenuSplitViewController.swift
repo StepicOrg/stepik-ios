@@ -8,8 +8,6 @@
 
 import UIKit
 
-//  APPLE recommended realization
-
 class MenuSplitViewController: UISplitViewController {
     // MARK: Properties
 
