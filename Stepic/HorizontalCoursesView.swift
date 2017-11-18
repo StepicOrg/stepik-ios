@@ -19,7 +19,7 @@ class HorizontalCoursesView: NibInitializableView {
     @IBOutlet weak internal var courseListContainerView: UIView!
     @IBOutlet weak var courseListContainerHeight: NSLayoutConstraint!
 
-    let courseListHeight: CGFloat = 210
+    let courseListHeight: CGFloat = 290
     let courseListPlaceholderHeight: CGFloat = 120
 
     private var showVerticalBlock: (() -> Void)?

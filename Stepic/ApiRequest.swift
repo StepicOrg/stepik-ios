@@ -101,7 +101,7 @@ class ApiRequestPerformer {
 
         if AuthInfo.shared.isAuthorized && AuthInfo.shared.needsToRefreshToken {
             if let refreshToken = AuthInfo.shared.token?.refreshToken {
-                AuthManager.sharedManager.refreshTokenWith(refreshToken, success: {
+                ApiDataDownloader.auth.refreshTokenWith(refreshToken, success: {
                         t in
                         AuthInfo.shared.token = t
                         completion()

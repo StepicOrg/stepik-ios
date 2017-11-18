@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WatchSessionManager.sharedManager.startSession()
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
-
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")

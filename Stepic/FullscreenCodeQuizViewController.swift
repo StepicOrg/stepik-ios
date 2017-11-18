@@ -19,7 +19,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     var codeTextView: UITextView = UITextView()
 
-    let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
+    let size: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
 
     var isSolved: Bool = false
     var options: StepOptions!

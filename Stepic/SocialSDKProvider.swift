@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol SocialSDKProvider {
     var name: String { get }
-    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void)
+    func getAccessInfo() -> Promise<(token: String, email: String?)>
 }
 
 enum SocialSDKError: Error {

@@ -18,11 +18,13 @@ protocol CourseListView: class {
 
     func setState(state: CourseListState)
 
-//    func setRefreshing(isRefreshing: Bool)
     func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
     func show(controller: UIViewController)
+
+    func startProgressHUD()
+    func finishProgressHUD(success: Bool, message: String)
 
     var colorMode: CourseListColorMode! { get set }
 
@@ -42,8 +44,11 @@ class CourseListPresenter {
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
     private var reviewSummariesAPI: CourseReviewSummariesAPI
+    private var searchResultsAPI: SearchResultsAPI
+    private var subscriptionManager: CourseSubscriptionManager
 
     private var colorMode: CourseListColorMode
+    private var onlyLocal: Bool
 
     private var ID: String
 
@@ -55,8 +60,8 @@ class CourseListPresenter {
     private var hasNextPage: Bool = false
 
     private var lastUser: User?
-
-    private var subscriptionManager = CourseSubscriptionManager()
+    private var subscriber = CourseSubscriber()
+    private var lastLanguage: ContentLanguage
 
     weak var lastStepDataSource: LastStepWidgetDataSource?
     weak var couseListCountDelegate: CourseListCountDelegate?
@@ -103,7 +108,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -112,7 +117,12 @@ class CourseListPresenter {
         self.limit = limit
         self.listType = listType
         self.colorMode = colorMode
+        self.subscriber = subscriber
         self.lastUser = AuthInfo.shared.user
+        self.lastLanguage = ContentLanguage.sharedContentLanguage
+        self.onlyLocal = onlyLocal
+        self.searchResultsAPI = searchResultsAPI
+        self.subscriptionManager = subscriptionManager
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -150,15 +160,72 @@ class CourseListPresenter {
             course in
             CourseViewData(course: course, action: {
                 [weak self] in
-                self?.buttonPressed(course: course)
+                self?.actionButtonPressed(course: course)
+            }, secondaryAction: {
+                [weak self] in
+                self?.secondaryActionButtonPressed(course: course)
             })
         }
     }
 
-    private func buttonPressed(course: Course) {
+    private func subscribe(to course: Course) {
+        self.view?.startProgressHUD()
+        checkToken().then {
+            [weak self]
+            () -> Promise<Course> in
+            guard let strongSelf = self else {
+                throw CourseSubscriber.CourseSubscriptionError.error(status: "")
+            }
+            return strongSelf.subscriber.join(course: course)
+        }.then {
+            [weak self]
+            course -> Void in
+            self?.view?.finishProgressHUD(success: true, message: "")
+            if let controller = self?.getSectionsController(for: course) {
+                self?.view?.show(controller: controller)
+            }
+        }.catch {
+            [weak self]
+            error in
+            guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
+                self?.view?.finishProgressHUD(success: false, message: "")
+                return
+            }
+            switch error {
+            case let .error(status: status):
+                self?.view?.finishProgressHUD(success: false, message: status)
+            case .badResponseFormat:
+                self?.view?.finishProgressHUD(success: false, message: "")
+            }
+        }
+    }
+
+    private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
                 LastStepRouter.continueLearning(for: course, using: navigation)
+            }
+        } else {
+            let joinBlock: (() -> Void) = {
+                [weak self] in
+                self?.subscribe(to: course)
+            }
+            if !AuthInfo.shared.isAuthorized {
+                guard let vc = self.view?.getController() else {
+                    return
+                }
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: vc, success: joinBlock, cancel: nil)
+            } else {
+                joinBlock()
+            }
+        }
+    }
+
+    private func secondaryActionButtonPressed(course: Course) {
+        if course.enrolled {
+            if let controller = getSectionsController(for: course) {
+                self.view?.show(controller: controller)
             }
         } else {
             if let controller = getCoursePreviewController(for: course) {
@@ -170,6 +237,10 @@ class CourseListPresenter {
     func refresh() {
         if courses.isEmpty {
             displayCached(ids: listType.cachedListCourseIds)
+        }
+        if onlyLocal {
+            state = courses.isEmpty ? .empty : .displaying
+            return
         }
         state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
         checkToken().then {
@@ -196,7 +267,7 @@ class CourseListPresenter {
         }
         self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
-        listType.request(page: currentPage + 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
@@ -217,11 +288,21 @@ class CourseListPresenter {
         }
     }
 
+    private var shouldRefreshLanguage: Bool {
+        switch listType {
+        case .enrolled:
+            return false
+        default:
+            return lastLanguage != ContentLanguage.sharedContentLanguage
+        }
+    }
+
     func willAppear() {
-        if lastUser != AuthInfo.shared.user {
+        if lastUser != AuthInfo.shared.user || shouldRefreshLanguage {
             courses = []
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
+            lastLanguage = ContentLanguage.sharedContentLanguage
             refresh()
             return
         } else {
@@ -238,6 +319,13 @@ class CourseListPresenter {
     func handleCourseSubscriptionUpdates() {
         guard subscriptionManager.hasUpdates else {
             return
+        }
+
+        switch state {
+        case .emptyRefreshing, .displayingWithRefreshing:
+            return
+        default:
+            break
         }
 
         switch listType {
@@ -278,12 +366,16 @@ class CourseListPresenter {
                 }
             })
             if oldDisplayedCourses.isEmpty && !newDisplayedCourses.isEmpty {
-                view?.setState(state: .displaying)
+                self.state = .displaying
             }
             if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
-                view?.setState(state: .empty)
+                self.state = .empty
             }
-            view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            if oldDisplayedCourses.count - deletedIds.count + addedIds.count == newDisplayedCourses.count {
+                view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))
+            } else {
+                view?.display(courses: getData(from: newDisplayedCourses))
+            }
         default:
             let updatedCourses = subscriptionManager.addedCourses + subscriptionManager.deletedCourses
             subscriptionManager.clean()
@@ -318,15 +410,15 @@ class CourseListPresenter {
     }
 
     private func requestNonCollection(updateProgresses: Bool, completion: (() -> Void)? = nil) {
-        listType.request(page: 1, withAPI: coursesAPI, progressesAPI: progressesAPI)?.then {
+        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
             (courses, meta) -> Void in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.courses = courses
+            strongSelf.state = courses.isEmpty ? .empty: .displaying
             strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-
             strongSelf.updateReviewSummaries(for: courses)
             if updateProgresses {
                 strongSelf.updateProgresses(for: courses)
@@ -334,7 +426,6 @@ class CourseListPresenter {
             strongSelf.currentPage = meta.page
             strongSelf.hasNextPage = meta.hasNext
             strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-            strongSelf.state = courses.isEmpty ? .empty: .displaying
             strongSelf.didRefreshOnce = true
             completion?()
             }.catch {
@@ -362,14 +453,14 @@ class CourseListPresenter {
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.courses = courses
+                strongSelf.courses = Sorter.sort(courses, byIds: ids)
+                strongSelf.state = courses.isEmpty ? .empty: .displaying
                 strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = 1
                 strongSelf.hasNextPage = false
                 strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
-                strongSelf.state = courses.isEmpty ? .empty: .displaying
                 strongSelf.didRefreshOnce = true
             }.catch {
                 [weak self]
@@ -441,14 +532,6 @@ class CourseListPresenter {
     func getViewControllerFor3DTouchPreviewing(forCourseAtIndex index: Int, withSourceView sourceView: UIView) -> UIViewController? {
         let course = courses[index]
         return course.enrolled ? getSectionsController(for: course, sourceView: sourceView) : getCoursePreviewController(for: course, sourceView: sourceView)
-    }
-
-    func didSelectCourse(at index: Int) {
-        let course = courses[index]
-        let controller = course.enrolled ? getSectionsController(for: course) : getCoursePreviewController(for: course)
-        if let controller = controller {
-            self.view?.show(controller: controller)
-        }
     }
 
     // Progresses
@@ -563,8 +646,8 @@ struct CourseViewData {
     var learners: Int?
     var progress: Float?
     var action: (() -> Void)?
-
-    init(course: Course, action: (() -> Void)?) {
+    var secondaryAction: (() -> Void)?
+    init(course: Course, action: @escaping () -> Void, secondaryAction: @escaping () -> Void) {
         self.id = course.id
         self.title = course.title
         self.isEnrolled = course.enrolled
@@ -573,6 +656,7 @@ struct CourseViewData {
         self.learners = course.learnersCount
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
         self.action = action
+        self.secondaryAction = secondaryAction
     }
 }
 
@@ -599,6 +683,7 @@ enum CourseListType {
     case enrolled
     case popular
     case collection(ids: [Int])
+    case search(query: String)
 
     private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         return Promise {
@@ -676,12 +761,34 @@ enum CourseListType {
         }
     }
 
-    func request(page: Int, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
+    func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
+
+        let requestedLanguage: ContentLanguage? = language == .russian ? nil : language
+
         switch self {
         case .popular:
-            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
+            return coursesAPI.retrieve(excludeEnded: true, isPublic: true, order: "-activity", language: requestedLanguage, page: page)
         case .enrolled:
             return requestAllEnrolled(coursesAPI: coursesAPI, progressesAPI: progressesAPI)
+        case let .search(query: query):
+            var resultMeta: Meta = Meta(hasNext: false, hasPrev: false, page: 1)
+            var searchCoursesIDs: [Int] = []
+            return Promise<([Course], Meta)> {
+                fulfill, reject in
+                searchResultsAPI.searchCourse(query: query, language: requestedLanguage, page: page).then {
+                    (searchResults, meta) -> Promise<([Course])> in
+                    resultMeta = meta
+                    searchCoursesIDs = searchResults.flatMap { $0.courseId }
+                    return coursesAPI.retrieve(ids: searchCoursesIDs, existing: Course.getCourses(searchCoursesIDs))
+                    }.then {
+                        (courses) -> Void in
+                        let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)
+                        fulfill((resultCourses, resultMeta))
+                    }.catch {
+                        error in
+                        reject(error)
+                }
+            }
         default:
             return nil
         }
@@ -699,7 +806,7 @@ enum CourseListType {
     private var cacheId: String? {
         switch self {
         case .popular:
-            return "PopularCoursesInfo"
+            return "PopularCoursesInfo_\(ContentLanguage.sharedContentLanguage.languageString)"
         case .enrolled:
             return "MyCoursesInfo"
         default:

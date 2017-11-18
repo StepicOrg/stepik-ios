@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SVProgressHUD
 
 protocol CourseListViewControllerDelegate: class {
     func setupContentView()
@@ -145,6 +146,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: false)
             break
         case .empty:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = nil
             if let listType = presenter?.listType {
                 switch listType {
@@ -152,6 +154,8 @@ class CourseListViewController: UIViewController, CourseListView {
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
                 case .popular:
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderEmptyPopular", comment: "")
+                case .search(query: _):
+                    emptyPlaceholder.text = NSLocalizedString("SearchPlaceholderEmpty", comment: "")
                 default:
                     emptyPlaceholder.text = "Empty"
                     break
@@ -160,6 +164,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: true)
             break
         case .emptyError:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
@@ -170,6 +175,8 @@ class CourseListViewController: UIViewController, CourseListView {
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
                 case .popular:
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+                case .search(query: _):
+                    emptyPlaceholder.text = NSLocalizedString("SearchPlaceholderError", comment: "")
                 default:
                     emptyPlaceholder.text = "Error"
                     break
@@ -183,6 +190,7 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
+            delegate?.reloadData()
             emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
@@ -220,6 +228,18 @@ class CourseListViewController: UIViewController, CourseListView {
 
     func getController() -> UIViewController? {
         return self
+    }
+
+    func startProgressHUD() {
+        SVProgressHUD.show()
+    }
+
+    func finishProgressHUD(success: Bool, message: String) {
+        if success {
+            SVProgressHUD.showSuccess(withStatus: message)
+        } else {
+            SVProgressHUD.showError(withStatus: message)
+        }
     }
 
     lazy var emptyPlaceholder: CourseListEmptyPlaceholder = {
