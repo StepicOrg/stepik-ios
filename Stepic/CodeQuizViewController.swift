@@ -77,9 +77,7 @@ class CodeQuizViewController: QuizViewController {
                 setLimits(time: limit.time, memory: limit.memory)
             }
 
-            if let template = step.options?.template(language: language, userGenerated: false) {
-                tabSize = playgroundManager.countTabSize(text: template.templateString)
-            }
+            tabSize = playgroundManager.countTabSize(text: step.options?.template(language: language, userGenerated: false)?.templateString ?? "")
 
             toolbarView.language = language.displayName
 
