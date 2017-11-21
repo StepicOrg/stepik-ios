@@ -32,6 +32,11 @@ class StyledTabBarViewController: UITabBarController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.fixBadgePosition()
+    }
+
     func getEventNameForTabIndex(index: Int) -> String? {
         guard index < items.count else {
             return nil
@@ -74,9 +79,21 @@ class StyledTabBarViewController: UITabBarController {
         }
     }
 
+    private func fixBadgePosition() {
+        (1...items.count).forEach {
+            for badgeView in tabBar.subviews[$0].subviews {
+                if NSStringFromClass(badgeView.classForCoder) == "_UIBadgeView" {
+                    badgeView.layer.transform = CATransform3DIdentity
+                    badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 1.0, 1.0)
+                }
+            }
+        }
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.updateTitlesForTabBarItems()
+        self.fixBadgePosition()
     }
 }
 
