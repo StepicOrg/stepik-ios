@@ -11,18 +11,18 @@ import Foundation
 class CourseTagsView: NibInitializableView {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
+
     var tags: [CourseTag] = []
-    
+
     var tagSelectedAction: ((CourseTag) -> Void)?
-    
+
     var language: ContentLanguage = ContentLanguage.sharedContentLanguage {
         didSet {
             //TODO: check if selection needs to be updated here
             collectionView.reloadData()
         }
     }
-    
+
     override func setupSubviews() {
         collectionView.register(UINib(nibName: "CourseTagsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseTagsCollectionViewCell")
         collectionView.delegate = self
@@ -31,7 +31,7 @@ class CourseTagsView: NibInitializableView {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
     }
-    
+
     override var nibName: String {
         return "CourseTagsView"
     }
@@ -47,11 +47,11 @@ extension CourseTagsView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentLanguageCollectionViewCell", for: indexPath) as? CourseTagCollectionViewCell else {
             return UICollectionViewCell()

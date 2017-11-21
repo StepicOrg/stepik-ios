@@ -18,7 +18,7 @@ class CourseTagCollectionViewCell: UICollectionViewCell {
         tagLabel.colorMode = .dark
         contentView.backgroundColor = UIColor.mainLight
     }
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {

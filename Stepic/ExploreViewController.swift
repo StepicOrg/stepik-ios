@@ -108,6 +108,10 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
     }
 
+    func setTags(withTags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void) {
+        //TODO: Set/update tags UI here
+    }
+
     func updateCourseCount(to count: Int, forBlockWithID ID: String) {
         countForID[ID] = count
         countUpdateBlock[ID]?()

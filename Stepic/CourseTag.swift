@@ -12,13 +12,13 @@ class CourseTag {
     var ID: Int
     var titleForLanguage: [ContentLanguage: String] = [:]
     var summaryForLanguage: [ContentLanguage: String] = [:]
-    
+
     init(ID: Int, ruTitle: String, enTitle: String, ruSummary: String, enSummary: String) {
         self.ID = ID
         self.titleForLanguage[ContentLanguage.english] = enTitle
         self.titleForLanguage[ContentLanguage.russian] = ruTitle
     }
-    
+
     static let featuredTags: [CourseTag] = [
         CourseTag(ID: 22760,
                   ruTitle: "математика",

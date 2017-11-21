@@ -15,8 +15,10 @@ protocol ExploreView: class {
     func setConnectionProblemsPlaceholder(hidden: Bool)
 
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
-    func updateCourseCount(to: Int, forBlockWithID: String)
 
+    func setTags(withTags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void)
+
+    func updateCourseCount(to: Int, forBlockWithID: String)
     func updateSearchQuery(to: String)
 
     func hideKeyboard()
@@ -49,8 +51,18 @@ class ExplorePresenter: CourseListCountDelegate {
             selectedLanguage in
             if selectedLanguage != ContentLanguage.sharedContentLanguage {
                 ContentLanguage.sharedContentLanguage = selectedLanguage
+                self?.initTagsWidget()
+                //TODO: Refresh tags view here
                 self?.refresh()
             }
+        })
+    }
+
+    func initTagsWidget() {
+        view?.setTags(withTags: CourseTag.featuredTags, language: ContentLanguage.sharedContentLanguage, onSelected: {
+            [weak self]
+            _ in
+            //TODO: Search tag here
         })
     }
 
