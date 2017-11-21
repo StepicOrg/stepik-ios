@@ -24,12 +24,12 @@ class CourseTagsView: NibInitializableView {
     }
 
     override func setupSubviews() {
-        collectionView.register(UINib(nibName: "CourseTagsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseTagsCollectionViewCell")
+        collectionView.register(UINib(nibName: "CourseTagCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseTagCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         flowLayout.estimatedItemSize = CGSize(width: 80, height: 40)
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumInteritemSpacing = 20
+        flowLayout.minimumLineSpacing = 20
     }
 
     override var nibName: String {
@@ -53,7 +53,7 @@ extension CourseTagsView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentLanguageCollectionViewCell", for: indexPath) as? CourseTagCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseTagCollectionViewCell", for: indexPath) as? CourseTagCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.tagLabel.text = tags[indexPath.item].titleForLanguage[language]

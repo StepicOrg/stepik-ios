@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-q1-9pt" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="8" y="0.0" width="76" height="40"/>
+                        <rect key="frame" x="16" y="0.0" width="60" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="evj-ZO-tj0"/>
                         </constraints>
@@ -29,10 +29,10 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="2E4-q1-9pt" secondAttribute="trailing" constant="8" id="8Be-XN-WEh"/>
+                <constraint firstAttribute="trailing" secondItem="2E4-q1-9pt" secondAttribute="trailing" constant="16" id="8Be-XN-WEh"/>
                 <constraint firstItem="2E4-q1-9pt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QVe-qZ-WJt"/>
                 <constraint firstAttribute="bottom" secondItem="2E4-q1-9pt" secondAttribute="bottom" id="ZmN-9N-ZQ0"/>
-                <constraint firstItem="2E4-q1-9pt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ebk-lc-zSZ"/>
+                <constraint firstItem="2E4-q1-9pt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="ebk-lc-zSZ"/>
             </constraints>
             <size key="customSize" width="92" height="40"/>
             <connections>

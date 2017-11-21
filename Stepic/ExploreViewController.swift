@@ -29,6 +29,7 @@ class ExploreViewController: UIViewController, ExploreView {
             }
         #endif
         presenter?.initLanguagesWidget()
+        presenter?.initTagsWidget()
     }
 
     private func setupStackView() {
@@ -108,8 +109,28 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
     }
 
-    func setTags(withTags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void) {
-        //TODO: Set/update tags UI here
+    var tagsWidget: CourseTagsView?
+
+    func setTags(withTags tags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void) {
+        tagsWidget = CourseTagsView(frame: CGRect.zero)
+        guard let tagsWidget = tagsWidget else {
+            return
+        }
+        let widgetBackgroundView = UIView()
+        widgetBackgroundView.backgroundColor = UIColor.white
+        widgetBackgroundView.addSubview(tagsWidget)
+        tagsWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        widgetBackgroundView.isHidden = false
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 1)
+        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+        tagsWidget.tags = tags
+        tagsWidget.language = language
+        tagsWidget.tagSelectedAction = onSelected
+    }
+
+    func updateTagsLanguage(language: ContentLanguage) {
+        tagsWidget?.language = language
     }
 
     func updateCourseCount(to count: Int, forBlockWithID ID: String) {
