@@ -31,6 +31,11 @@ class CourseTagsView: NibInitializableView {
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
 
     override var nibName: String {
         return "CourseTagsView"
