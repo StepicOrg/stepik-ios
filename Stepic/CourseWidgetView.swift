@@ -173,6 +173,11 @@ class CourseWidgetView: NibInitializableView {
         view.backgroundColor = UIColor.clear
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        courseStatsCollectionView.collectionViewLayout.invalidateLayout()
+    }
+
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
         title = course.title
         action = course.action
