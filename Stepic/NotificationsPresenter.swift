@@ -35,6 +35,7 @@ struct NotificationViewData {
 extension NSNotification.Name {
     static let notificationUpdated = NSNotification.Name("notificationUpdated")
     static let allNotificationsMarkedAsRead = NSNotification.Name("allNotificationsMarkedAsRead")
+    static let notificationAdded = NSNotification.Name("notificationAdded")
 }
 
 class NotificationsPresenter {
@@ -57,6 +58,7 @@ class NotificationsPresenter {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdded(systemNotification:)), name: .notificationAdded, object: nil)
     }
 
     deinit {
@@ -76,6 +78,22 @@ class NotificationsPresenter {
             return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: status, ids: [id]))
         }
         self.view?.set(notifications: self.displayedNotifications, withReload: firedSection != self.section)
+    }
+
+    @objc func didNotificationAdded(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+              let id = userInfo["id"] as? Int else {
+            return
+        }
+
+        guard let addedNotification = Notification.fetch(id: id) else {
+            return
+        }
+
+        merge(old: self.displayedNotifications, new: [addedNotification]).then { result -> Void in
+            self.displayedNotifications = result
+            self.view?.set(notifications: self.displayedNotifications, withReload: true)
+        }
     }
 
     @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
