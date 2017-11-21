@@ -11,7 +11,9 @@ import Foundation
 class NotificationsBadgesManager {
     static let shared = NotificationsBadgesManager()
 
-    var notificationsCount: Int = 0 {
+    private var badgeValues = Set<Int>()
+
+    private(set) var notificationsCount: Int = 0 {
         didSet {
             (UIApplication.shared.delegate as? AppDelegate)?.notificationsBadgeNumber = notificationsCount
         }
@@ -20,6 +22,7 @@ class NotificationsBadgesManager {
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
     }
 
     deinit {
@@ -31,16 +34,30 @@ class NotificationsBadgesManager {
     @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let status = userInfo["status"] as? NotificationStatus else {
-            return
+                return
         }
 
         if status == .read {
             notificationsCount -= 1
+            badgeValues.insert(notificationsCount)
         }
+    }
+
+    @objc func didNotificationAdd(systemNotification: Foundation.Notification) {
+        notificationsCount += 1
+        badgeValues.insert(notificationsCount)
     }
 
     @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
         notificationsCount = 0
+        badgeValues.insert(notificationsCount)
     }
 
+    func set(number: Int) {
+        if !badgeValues.contains(number) {
+            notificationsCount = number
+        } else {
+            badgeValues.remove(number)
+        }
+    }
 }

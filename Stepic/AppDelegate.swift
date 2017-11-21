@@ -288,7 +288,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         case "notification-statuses":
             if let badgeCount = (notificationDict["aps"] as? [String: Any])?["badge"] as? Int {
-                NotificationsBadgesManager.shared.notificationsCount = badgeCount
+                NotificationsBadgesManager.shared.set(number: badgeCount)
             }
         default:
             break
@@ -326,7 +326,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        NotificationsBadgesManager.shared.notificationsCount = application.applicationIconBadgeNumber
+        NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
     }
 
 //    @available(iOS 8.0, *)
