@@ -15,12 +15,14 @@ class Device: NSObject {
     var user: String?
     var deviceDescription: String
     var clentType: String = "ios"
+    var isBadgesEnabled = true
 
     init(json: JSON) {
         self.id = json["id"].intValue
         self.registrationId = json["registration_id"].stringValue
         self.user = json["user"].stringValue
         self.deviceDescription = json["description"].stringValue
+        self.isBadgesEnabled = json["is_badges_enabled"].boolValue
         super.init()
     }
 
@@ -46,6 +48,7 @@ class Device: NSObject {
         }
 
         res["description"] = self.deviceDescription as AnyObject?
+        res["is_badges_enabled"] = self.isBadgesEnabled as AnyObject?
 
         return res
     }
