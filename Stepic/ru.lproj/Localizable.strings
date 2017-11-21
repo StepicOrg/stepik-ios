@@ -354,5 +354,7 @@ WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
 
+EnterSQLQuery = "Введите SQL запрос:";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

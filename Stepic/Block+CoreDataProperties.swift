@@ -77,7 +77,7 @@ extension Block {
         switch (name) {
         case "video" : return #imageLiteral(resourceName: "ic_video_dark")
         case "text" : return #imageLiteral(resourceName: "ic_theory_dark")
-        case "code", "dataset", "admin" : return #imageLiteral(resourceName: "ic_hard_dark")
+        case "code", "dataset", "admin", "sql" : return #imageLiteral(resourceName: "ic_hard_dark")
         default: return #imageLiteral(resourceName: "ic_easy_dark")
         }
     }
