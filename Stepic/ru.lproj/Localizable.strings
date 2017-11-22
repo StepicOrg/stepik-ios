@@ -348,6 +348,7 @@ SearchPlaceholderError = "Ошибка при поиске курсов. <b>На
 ChooseSearchLanguage = "Выберите язык поиска";
 Catalog = "Каталог";
 CatalogPlaceholderError = "Не удалось загрузить каталог. <b>Нажмите</b> чтобы попробовать еще раз";
+TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
 WidgetButtonInfo = "Инфо";

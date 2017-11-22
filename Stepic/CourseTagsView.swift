@@ -11,6 +11,7 @@ import Foundation
 class CourseTagsView: NibInitializableView {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var titleLabel: StepikLabel!
 
     var tags: [CourseTag] = []
 
@@ -30,6 +31,8 @@ class CourseTagsView: NibInitializableView {
         flowLayout.estimatedItemSize = CGSize(width: 80, height: 40)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
+        titleLabel.colorMode = .gray
+        titleLabel.text = NSLocalizedString("TrendingTopics", comment: "")
     }
 
     override func layoutSubviews() {
