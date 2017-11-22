@@ -113,6 +113,7 @@ struct ContinueLearningWidgetData {
 
 struct CourseListBlock {
     let title: String
+    let description: String?
     let colorMode: CourseListColorMode
     var ID: String
     let horizontalController: CourseListHorizontalViewController
@@ -120,8 +121,9 @@ struct CourseListBlock {
     let showVerticalBlock: () -> Void
     let onlyLocal: Bool
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false) {
         self.title = title
+        self.description = description
         self.colorMode = colorMode
         self.ID = ID
         self.shouldShowCount = shouldShowCount
@@ -133,6 +135,7 @@ struct CourseListBlock {
         self.showVerticalBlock = {
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
+            verticalController.listDescription = description
             verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
             showControllerBlock(verticalController)
         }

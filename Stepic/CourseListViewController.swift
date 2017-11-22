@@ -247,6 +247,8 @@ class CourseListViewController: UIViewController, CourseListView {
         self.view.addSubview(placeholder)
         placeholder.align(toView: self.view)
         placeholder.isHidden = true
+        placeholder.colorStyle = .purple
+        placeholder.presentationStyle = .bordered
         return placeholder
     }()
 }

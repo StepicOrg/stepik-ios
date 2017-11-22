@@ -10,24 +10,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CourseListEmptyPlaceholder" customModule="Adaptive_1838" customModuleProvider="target">
             <connections>
+                <outlet property="bottomConstraint" destination="Yca-Lt-9Pc" id="QMb-nW-RVq"/>
                 <outlet property="contentView" destination="tjf-Pi-oU4" id="YFQ-bn-5J5"/>
+                <outlet property="leadingConstraint" destination="w2D-m1-Ngi" id="82P-eF-xPt"/>
+                <outlet property="placeholderImageView" destination="jcL-z5-Ha9" id="e88-7m-rAP"/>
                 <outlet property="textLabel" destination="FP1-Cf-vcP" id="AgR-fO-QKg"/>
+                <outlet property="topConstraint" destination="XCB-7c-NYV" id="tJU-9R-T6o"/>
+                <outlet property="trailingConstraint" destination="dBe-AF-emG" id="fY1-ZM-QM4"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="206"/>
+            <rect key="frame" x="0.0" y="0.0" width="398" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjf-Pi-oU4">
-                    <rect key="frame" x="16" y="28" width="366" height="150"/>
+                    <rect key="frame" x="16" y="30" width="366" height="140"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="course_list_purple_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-z5-Ha9">
-                            <rect key="frame" x="0.0" y="0.0" width="366" height="150"/>
+                            <rect key="frame" x="0.0" y="0.0" width="366" height="140"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP1-Cf-vcP" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                            <rect key="frame" x="16" y="8" width="334" height="134"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="16" y="8" width="334" height="124"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -35,7 +40,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="FP1-Cf-vcP" secondAttribute="trailing" constant="16" id="4SV-pZ-AGq"/>
-                        <constraint firstAttribute="height" priority="999" constant="150" id="8vz-OA-uwI"/>
+                        <constraint firstAttribute="height" priority="999" constant="140" id="8vz-OA-uwI"/>
                         <constraint firstItem="FP1-Cf-vcP" firstAttribute="top" secondItem="tjf-Pi-oU4" secondAttribute="top" constant="8" id="IvC-oq-325"/>
                         <constraint firstItem="jcL-z5-Ha9" firstAttribute="leading" secondItem="tjf-Pi-oU4" secondAttribute="leading" id="aBN-6Y-8T5"/>
                         <constraint firstItem="FP1-Cf-vcP" firstAttribute="leading" secondItem="tjf-Pi-oU4" secondAttribute="leading" constant="16" id="eoc-ju-vWV"/>
@@ -57,7 +62,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="46" y="65"/>
+            <point key="canvasLocation" x="45" y="55"/>
         </view>
     </objects>
     <resources>

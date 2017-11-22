@@ -12,13 +12,37 @@ import FLKAutoLayout
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
 
+    var listDescription: String? {
+        didSet {
+            updateDescription()
+        }
+    }
+
 //    var refreshControl: UIRefreshControl? = UIRefreshControl()
+
+    lazy var descriptionView: CourseListEmptyPlaceholder = {
+        let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
+        placeholder.colorStyle = CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
+        placeholder.presentationStyle = .fullWidth
+        placeholder.frame.size = placeholder.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: placeholder.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        return placeholder
+    }()
+
+    func updateDescription() {
+        if let listDescription = listDescription {
+            descriptionView.text = listDescription
+            tableView.tableHeaderView = descriptionView
+        } else {
+            tableView.tableHeaderView = nil
+        }
+    }
 
     override func viewDidLoad() {
         delegate = self
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.clear
         tableView.allowsSelection = false
+        updateDescription()
     }
 
     lazy var paginationView: LoadingPaginationView = {

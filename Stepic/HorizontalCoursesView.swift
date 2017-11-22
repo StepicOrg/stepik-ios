@@ -19,8 +19,13 @@ class HorizontalCoursesView: NibInitializableView {
     @IBOutlet weak internal var courseListContainerView: UIView!
     @IBOutlet weak var courseListContainerHeight: NSLayoutConstraint!
 
+    @IBOutlet weak var courseListDescriptionView: CourseListEmptyPlaceholder!
+    @IBOutlet weak var courseListDescriptionHeight: NSLayoutConstraint!
+
+    @IBOutlet weak var titleDescriptionSpacing: NSLayoutConstraint!
+
     let courseListHeight: CGFloat = 290
-    let courseListPlaceholderHeight: CGFloat = 120
+    let courseListPlaceholderHeight: CGFloat = 104
 
     private var showVerticalBlock: (() -> Void)?
 
@@ -40,6 +45,21 @@ class HorizontalCoursesView: NibInitializableView {
         }
     }
 
+    var listDescription: String? {
+        didSet {
+            if let listDescription = listDescription {
+                self.courseListDescriptionView.colorStyle = .randomPositiveStyle
+                self.courseListDescriptionView.presentationStyle = .bordered
+                self.courseListDescriptionView.text = listDescription
+                self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
+                self.titleDescriptionSpacing.constant = 16
+            } else {
+                self.courseListDescriptionHeight.constant = 0
+                self.titleDescriptionSpacing.constant = 0
+            }
+        }
+    }
+
     var shouldShowCount: Bool = false
 
     @IBAction func showAllPressed(_ sender: Any) {
@@ -47,6 +67,7 @@ class HorizontalCoursesView: NibInitializableView {
     }
 
     func setup(block: CourseListBlock) {
+        self.listDescription = block.description
         self.showVerticalBlock = block.showVerticalBlock
         showAllButton.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         block.horizontalController.changedPlaceholderVisibleBlock = {
