@@ -61,8 +61,20 @@ class ExplorePresenter: CourseListCountDelegate {
     func initTagsWidget() {
         view?.setTags(withTags: CourseTag.featuredTags, language: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]
-            _ in
-            //TODO: Search tag here
+            tag in
+            if let controller = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController {
+                controller.presenter = CourseListPresenter(
+                    view: controller,
+                    ID: "Tag_\(tag.ID)",
+                    limit: nil,
+                    listType:  CourseListType.tag(id: tag.ID) ,
+                    colorMode: .light,
+                    onlyLocal: false,
+                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber()
+                )
+                controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
+                self?.view?.show(vc: controller)
+            }
         })
     }
 

@@ -684,6 +684,7 @@ enum CourseListType {
     case popular
     case collection(ids: [Int])
     case search(query: String)
+    case tag(id: Int)
 
     private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         return Promise {
@@ -789,6 +790,8 @@ enum CourseListType {
                         reject(error)
                 }
             }
+        case let .tag(id: id):
+            return coursesAPI.retrieve(tag: id, language: requestedLanguage, page: page)
         default:
             return nil
         }

@@ -31,7 +31,7 @@ class CourseTagsView: NibInitializableView {
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
@@ -45,6 +45,7 @@ class CourseTagsView: NibInitializableView {
 extension CourseTagsView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         tagSelectedAction?(tags[indexPath.item])
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
