@@ -43,6 +43,7 @@ class NotificationsPresenter {
 
     var notificationsAPI: NotificationsAPI
     var usersAPI: UsersAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
     private var page = 1
     var hasNextPage = true
@@ -50,10 +51,11 @@ class NotificationsPresenter {
 
     private var section: NotificationsSection = .all
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationStatusesAPI: NotificationStatusesAPI, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
         self.view = view
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
@@ -119,6 +121,8 @@ class NotificationsPresenter {
         }.always {
             self.view?.state = .normal
         }
+        
+        loadStatuses()
     }
 
     func loadInitial() {
@@ -144,6 +148,8 @@ class NotificationsPresenter {
                 self.view?.state = .normal
             }
         }
+        
+        loadStatuses()
     }
 
     func loadNextPage() {
@@ -306,6 +312,14 @@ class NotificationsPresenter {
             var editedNotification = notification
             editedNotification.status = newStatus
             return (ids?.contains(editedNotification.id) ?? true) ? editedNotification : notification
+        }
+    }
+    
+    private func loadStatuses() {
+        notificationStatusesAPI.retrieve().then { statuses in
+            NotificationsBadgesManager.shared.set(number: statuses.totalCount)
+        }.catch { error in
+            print("notifications: unable to load statuses, error = \(error)")
         }
     }
 }
