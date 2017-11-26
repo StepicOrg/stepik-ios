@@ -9,6 +9,13 @@ import UIKit
 
 class CompilationCollectionViewController: UICollectionViewController {
 
+    var presenter: CompilationCollectionPresenter!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.presenter = CompilationCollectionPresenter()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,5 +81,10 @@ extension CompilationCollectionViewController: UICollectionViewDelegateFlowLayou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0.0, left: 0, bottom: 20.0, right: 0.0)
     }
+}
 
+extension CompilationCollectionViewController: CompilationCollectionView {
+    func provide(courses: [Course], for rowType: CompilationCollectionPresenter.RowType) {
+
+    }
 }

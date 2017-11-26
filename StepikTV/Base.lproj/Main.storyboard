@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -162,7 +162,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DfM-v0-ui7">
-                                            <rect key="frame" x="110" y="52" width="1700" height="196"/>
+                                            <rect key="frame" x="98" y="60" width="1724" height="240"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="8Gq-bN-sDj">
                                                 <size key="itemSize" width="370" height="154"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -196,7 +196,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6Lm-gi-Fdu">
-                                            <rect key="frame" x="110" y="76" width="1700" height="172"/>
+                                            <rect key="frame" x="98" y="76" width="1724" height="224"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="v23-66-XT1">
                                                 <size key="itemSize" width="370" height="154"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -210,7 +210,7 @@
                                             </connections>
                                         </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aev-qd-gAp">
-                                            <rect key="frame" x="110" y="20" width="75" height="46"/>
+                                            <rect key="frame" x="98" y="20" width="75" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="R5g-JW-gqs"/>
                                             </constraints>
@@ -242,7 +242,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kyd-i5-Gh5">
-                                            <rect key="frame" x="110" y="91" width="1700" height="157"/>
+                                            <rect key="frame" x="98" y="91" width="1724" height="209"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="yfe-ym-iwx">
                                                 <size key="itemSize" width="370" height="154"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -256,7 +256,7 @@
                                             </connections>
                                         </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7g-pp-KsO">
-                                            <rect key="frame" x="110" y="35" width="75" height="46"/>
+                                            <rect key="frame" x="98" y="35" width="75" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="nfp-L3-hxd"/>
                                             </constraints>
@@ -420,7 +420,7 @@
         <scene sceneID="0zh-0e-3Gz">
             <objects>
                 <collectionViewController id="RR9-YI-osV" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="khb-nr-ZIx">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lBb-fz-Abn">
@@ -430,7 +430,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -438,13 +438,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x6Z-Ha-I5x">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="x6Z-Ha-I5x" secondAttribute="height" multiplier="1:1" id="Dnm-Y8-f7y"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DK9-R3-2G2">
-                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -481,7 +480,7 @@
         <scene sceneID="Tq1-B3-oUl">
             <objects>
                 <collectionViewController id="gZU-C6-QdM" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="5y7-sm-ibV">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lwN-5z-dAd">
@@ -491,7 +490,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -499,13 +498,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jgO-km-jaN">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="jgO-km-jaN" secondAttribute="height" multiplier="1:1" id="xze-od-abR"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-KW-iKb">
-                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>

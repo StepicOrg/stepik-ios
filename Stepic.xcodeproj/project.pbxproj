@@ -1476,6 +1476,8 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		0DA1580723F235924352593E /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298C68765B5B069E794487FD /* Pods_Adaptive_3124.framework */; };
 		18E3575344DB48689E921002 /* Pods_Adaptive_3150_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E686691130D98F8426486AB1 /* Pods_Adaptive_3150_Screenshots.framework */; };
+		1B15915E1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */; };
+		1B1591601FC9C7ED0049C3E6 /* CompilationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */; };
 		1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
 		1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
@@ -5146,6 +5148,8 @@
 		134CF76BE3EAAF407789B9C6 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		14CEAE91C67F94BEAD76C723 /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		190363D297B5E16ACF94AB5C /* Pods_Adaptive_3067.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationCollectionPresenter.swift; sourceTree = "<group>"; };
+		1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationCollectionView.swift; sourceTree = "<group>"; };
 		1BAE12EF1F93F67700482251 /* StepikTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepikTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAE12F11F93F67700482251 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BAE12F81F93F67700482251 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -7387,6 +7391,16 @@
 			name = Streaks;
 			sourceTree = "<group>";
 		};
+		1B15915C1FC9C6400049C3E6 /* CompilationCollection */ = {
+			isa = PBXGroup;
+			children = (
+				934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */,
+				1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */,
+				1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */,
+			);
+			path = CompilationCollection;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -8098,15 +8112,15 @@
 		93E4A0DC1F9FB1DC00D27A37 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */,
+				1B15915C1FC9C6400049C3E6 /* CompilationCollection */,
+				93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */,
 				933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */,
 				93EF1F991FAD20250073B0D1 /* ProfileViewController.swift */,
-				93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */,
 				934A30781FABC85D00819A30 /* MenuTableViewController.swift */,
-				93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */,
 				934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */,
 				93E4A0E51F9FE1B300D27A37 /* RectangularCollectionViewController.swift */,
 				9386A46B1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift */,
-				934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */,
 				934A307A1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift */,
 				93EF1FA51FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift */,
 			);
@@ -12348,6 +12362,7 @@
 				1BB4ECD11FA3DF43001CDE99 /* Assignment+CoreDataProperties.swift in Sources */,
 				1BB4ECA71FA3DE46001CDE99 /* ProgressesAPI.swift in Sources */,
 				1BB3D2561FA79471000B2FAA /* AnalyticsEvents.swift in Sources */,
+				1B1591601FC9C7ED0049C3E6 /* CompilationCollectionView.swift in Sources */,
 				1BB4EC961FA3DC43001CDE99 /* AttemptsAPI.swift in Sources */,
 				1BB4ECBB1FA3DEC3001CDE99 /* User.swift in Sources */,
 				1BB4ECD91FA3DF6E001CDE99 /* Session.swift in Sources */,
@@ -12368,6 +12383,7 @@
 				93EF1FA31FB2144A0073B0D1 /* LessonPartItemCell.swift in Sources */,
 				1BB3D24B1FA3EC98000B2FAA /* FreeAnswerDataset.swift in Sources */,
 				1BB4ECBE1FA3DEC3001CDE99 /* CodeSample.swift in Sources */,
+				1B15915E1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2531FA3F068000B2FAA /* ErrorEnums.swift in Sources */,
 				1BB4ECF31FA3E74F001CDE99 /* CoursePlainEntity.swift in Sources */,
 				1BB4ECD71FA3DF68001CDE99 /* Parser.swift in Sources */,
