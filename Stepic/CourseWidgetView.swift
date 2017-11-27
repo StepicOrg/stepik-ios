@@ -167,7 +167,8 @@ class CourseWidgetView: NibInitializableView {
         self.courseStatsCollectionView.register(UINib(nibName: "CourseStatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseStatCollectionViewCell")
         courseStatsCollectionView.delegate = self
         courseStatsCollectionView.dataSource = self
-        courseStatsCollectionViewFlowLayout.estimatedItemSize = CGSize(width: 1.0, height: 1.0)
+
+        courseStatsCollectionViewFlowLayout.setEstimatedItemSize(CGSize(width: 1.0, height: 1.0), fallbackOnPlus: CGSize(width: 60.0, height: 10.0))
         courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
         courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
         view.backgroundColor = UIColor.clear
