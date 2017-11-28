@@ -31,4 +31,13 @@ class DeviceInfo {
     var deviceModelString: String {
         return currentDevice.model
     }
+
+    var orientation: UIDeviceOrientation {
+        return UIDevice.current.orientation
+    }
+
+    var isPlus: Bool {
+        return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
+               currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
+    }
 }

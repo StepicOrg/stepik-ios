@@ -69,12 +69,12 @@ class StyledTabBarViewController: UITabBarController {
         self.tabBar.items?.forEach { item in
             if #available(iOS 11.0, *) {
                 // For new tabbar in iOS 11.0+
-                switch UIDevice.current.orientation {
+                switch DeviceInfo.current.orientation {
                 case .landscapeLeft, .landscapeRight:
                     // Using default tabbar in landscape
                     showDefaultTitle(for: item)
                 default:
-                    if UIDevice.current.userInterfaceIdiom == .pad {
+                    if DeviceInfo.current.isPad {
                         // Using default tabbar on iPads in both orientations
                         showDefaultTitle(for: item)
                     } else {
@@ -90,11 +90,44 @@ class StyledTabBarViewController: UITabBarController {
     }
 
     private func fixBadgePosition() {
-        (1...items.count).forEach {
-            for badgeView in tabBar.subviews[$0].subviews {
+        for i in 1...items.count {
+            if i >= tabBar.subviews.count { break }
+
+            for badgeView in tabBar.subviews[i].subviews {
                 if NSStringFromClass(badgeView.classForCoder) == "_UIBadgeView" {
                     badgeView.layer.transform = CATransform3DIdentity
-                    badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+
+                    if #available(iOS 11.0, *) {
+                        switch DeviceInfo.current.orientation {
+                        case .landscapeLeft, .landscapeRight:
+                            if DeviceInfo.current.isPlus {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
+                            }
+                        default:
+                            if DeviceInfo.current.isPad {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        }
+                    } else {
+                        switch DeviceInfo.current.orientation {
+                        case .landscapeLeft, .landscapeRight:
+                            if DeviceInfo.current.isPlus {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        default:
+                            if DeviceInfo.current.isPad {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        }
+                    }
                 }
             }
         }
