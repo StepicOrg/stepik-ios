@@ -69,8 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
 
-        checkStreaks()
-
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             DefaultsContainer.launch.didLaunch = true

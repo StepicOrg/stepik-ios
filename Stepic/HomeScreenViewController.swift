@@ -28,6 +28,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         #endif
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.checkStreaks()
+    }
+
     private func setupStackView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
@@ -82,8 +87,31 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         self.show(vc, sender: nil)
     }
 
-    func setStreaksInfo(streakCount: Int, shouldSolveToday: Bool) {
-        //TODO: Add implementation here
+    private let streaksWidgetBackgroundView = UIView()
+    private var streaksWidgetView: UserActivityHomeView?
+    func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool) {
+        if streaksWidgetView == nil {
+            let widget = UserActivityHomeView(frame: CGRect.zero)
+            streaksWidgetView = widget
+            streaksWidgetBackgroundView.backgroundColor = UIColor.white
+            streaksWidgetBackgroundView.addSubview(widget)
+            widget.alignTop("16", bottom: "-8", toView: streaksWidgetBackgroundView)
+            widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            widget.setRoundedCorners(cornerRadius: 8)
+            streaksWidgetBackgroundView.isHidden = true
+            stackView.insertArrangedSubview(streaksWidgetBackgroundView, at: 0)
+            streaksWidgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+        }
+
+        streaksWidgetView?.set(streakCount: streakCount, shouldSolveToday: shouldSolveToday)
+
+        UIView.animate(withDuration: 0.15) {
+            self.streaksWidgetBackgroundView.isHidden = false
+        }
+    }
+
+    func hideStreaksInfo() {
+        streaksWidgetBackgroundView.isHidden = true
     }
 
     private let widgetBackgroundView = UIView()
@@ -94,7 +122,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
         widget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
-        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
+        stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
 
         UIView.animate(withDuration: 0.15) {

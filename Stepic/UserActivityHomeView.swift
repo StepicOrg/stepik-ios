@@ -9,27 +9,24 @@
 import Foundation
 
 class UserActivityHomeView: NibInitializableView {
-    
-    @IBOutlet weak var streakCountLabel: UILabel!
-    @IBOutlet weak var streakTextLabel: UILabel!
-    
+
+    @IBOutlet weak var streakCountLabel: StepikLabel!
+    @IBOutlet weak var streakTextLabel: StepikLabel!
+
     override var nibName: String {
-        return "UserActivity"
+        return "UserActivityHomeView"
     }
-    
-    var streakCount: Int = 0 {
-        didSet {
-            streakCountLabel.text = "\(streakCount)"
+
+    func set(streakCount: Int, shouldSolveToday: Bool) {
+        streakCountLabel.text = "\(streakCount)"
+        let pluralizedDaysCnt = StringHelper.pluralize(number: streakCount, forms: [NSLocalizedString("days1", comment: ""), NSLocalizedString("days234", comment: ""), NSLocalizedString("days567890", comment: "")])
+        var countText: String = String(format: NSLocalizedString("SolveStreaksDaysCount", comment: ""), "\(streakCount)", "\(pluralizedDaysCnt)")
+        if shouldSolveToday {
+            countText += "\n\(NSLocalizedString("SolveSomethingToday", comment: ""))"
         }
+        streakTextLabel.text = countText
     }
-    
-    var shouldSolveToday: Bool = false {
-        didSet {
-            streakTextLabel.text = ""
-        }
-    }
-    
+
     override func setupSubviews() {
-        
     }
 }

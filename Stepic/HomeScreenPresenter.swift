@@ -10,10 +10,13 @@ import Foundation
 
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
+
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
     func hideCountinueLearningWidget()
-    func setStreaksInfo(streakCount: Int, shouldSolveToday: Bool)
-    
+
+    func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool)
+    func hideStreaksInfo()
+
     func getNavigation() -> UINavigationController?
     func updateCourseCount(to: Int, forBlockWithID: String)
     func show(vc: UIViewController)
@@ -22,7 +25,7 @@ protocol HomeScreenView: class {
 class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     weak var view: HomeScreenView?
     var userActivitiesAPI: UserActivitiesAPI
-    
+
     init(view: HomeScreenView, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
@@ -30,24 +33,21 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
 
     func checkStreaks() {
         guard AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId else {
+            self.view?.hideStreaksInfo()
             return
         }
-        
+
         userActivitiesAPI.retrieve(user: userId).then {
             [weak self]
             userActivity -> Void in
             if userActivity.currentStreak > 0 {
-                self?.view?.setStreaksInfo(streakCount: userActivity.currentStreak, shouldSolveToday: userActivity.needsToSolveToday)
+                self?.view?.presentStreaksInfo(streakCount: userActivity.currentStreak, shouldSolveToday: userActivity.needsToSolveToday)
             }
         }.catch {
             _ in
         }
     }
-    
-    func didAppear() {
-        checkStreaks()
-    }
-    
+
     func initBlocks() {
         let showController: (UIViewController) -> Void = {
             [weak self]
