@@ -120,8 +120,11 @@ struct CourseListBlock {
     let shouldShowCount: Bool
     let showVerticalBlock: () -> Void
     let onlyLocal: Bool
+    let colorStyle: CourseListEmptyPlaceholder.ColorStyle
 
     init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false) {
+        let style: CourseListEmptyPlaceholder.ColorStyle = CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
+        self.colorStyle = style
         self.title = title
         self.description = description
         self.colorMode = colorMode
@@ -135,6 +138,7 @@ struct CourseListBlock {
         self.showVerticalBlock = {
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
+            verticalController.descriptionView.colorStyle = style
             verticalController.listDescription = description
             verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
             showControllerBlock(verticalController)

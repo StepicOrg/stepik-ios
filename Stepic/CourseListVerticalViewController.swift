@@ -22,7 +22,6 @@ class CourseListVerticalViewController: CourseListViewController {
 
     lazy var descriptionView: CourseListEmptyPlaceholder = {
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
-        placeholder.colorStyle = CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
         placeholder.presentationStyle = .fullWidth
         placeholder.frame.size = placeholder.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: placeholder.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
         return placeholder

@@ -48,7 +48,6 @@ class HorizontalCoursesView: NibInitializableView {
     var listDescription: String? {
         didSet {
             if let listDescription = listDescription {
-                self.courseListDescriptionView.colorStyle = .randomPositiveStyle
                 self.courseListDescriptionView.presentationStyle = .bordered
                 self.courseListDescriptionView.text = listDescription
                 self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
@@ -69,6 +68,7 @@ class HorizontalCoursesView: NibInitializableView {
     func setup(block: CourseListBlock) {
         self.listDescription = block.description
         self.showVerticalBlock = block.showVerticalBlock
+        self.courseListDescriptionView.colorStyle = block.colorStyle
         showAllButton.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         block.horizontalController.changedPlaceholderVisibleBlock = {
             [weak self]
