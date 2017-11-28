@@ -18,6 +18,7 @@ import Mixpanel
 import YandexMobileMetrica
 import Presentr
 import SwiftyJSON
+import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -73,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         checkStreaks()
+        checkNotificationsCount()
 
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
@@ -150,6 +152,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //Notification handling
+    func checkNotificationsCount() {
+        guard AuthInfo.shared.isAuthorized else {
+            return
+        }
+
+        ApiDataDownloader.notificationsStatusAPI.retrieve().then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
+        }.catch { _ in
+            print("notifications: unable to fetch badges count on launch")
+            NotificationsBadgesManager.shared.set(number: 0)
+        }
+    }
 
     func handleLocalNotification() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)

@@ -43,7 +43,7 @@ class NotificationsPresenter {
 
     var notificationsAPI: NotificationsAPI
     var usersAPI: UsersAPI
-    var notificationsStatusAPI: NotificationsStatusAPI
+    var notificationsStatusAPI: NotificationStatusesAPI
 
     private var page = 1
     var hasNextPage = true
@@ -51,7 +51,7 @@ class NotificationsPresenter {
 
     private var section: NotificationsSection = .all
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationsStatusAPI, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI

@@ -1,5 +1,5 @@
 //
-//  NotificationsStatusAPI.swift
+//  NotificationsStatusesAPI.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 23.11.2017.
@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-class NotificationsStatusAPI: APIEndpoint {
+class NotificationStatusesAPI: APIEndpoint {
     override var name: String { return "notification-statuses" }
 
     func retrieve() -> Promise<NotificationsStatus> {
