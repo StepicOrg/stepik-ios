@@ -12,7 +12,8 @@ protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
     func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
     func hideCountinueLearningWidget()
-
+    func setStreaksInfo(streakCount: Int, shouldSolveToday: Bool)
+    
     func getNavigation() -> UINavigationController?
     func updateCourseCount(to: Int, forBlockWithID: String)
     func show(vc: UIViewController)
@@ -20,10 +21,33 @@ protocol HomeScreenView: class {
 
 class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     weak var view: HomeScreenView?
-    init(view: HomeScreenView) {
+    var userActivitiesAPI: UserActivitiesAPI
+    
+    init(view: HomeScreenView, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
+        self.userActivitiesAPI = userActivitiesAPI
     }
 
+    func checkStreaks() {
+        guard AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId else {
+            return
+        }
+        
+        userActivitiesAPI.retrieve(user: userId).then {
+            [weak self]
+            userActivity -> Void in
+            if userActivity.currentStreak > 0 {
+                self?.view?.setStreaksInfo(streakCount: userActivity.currentStreak, shouldSolveToday: userActivity.needsToSolveToday)
+            }
+        }.catch {
+            _ in
+        }
+    }
+    
+    func didAppear() {
+        checkStreaks()
+    }
+    
     func initBlocks() {
         let showController: (UIViewController) -> Void = {
             [weak self]
@@ -39,6 +63,7 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
         view?.presentBlocks(blocks: blocks)
     }
 
+    //TODO: Remove this from Presenter, it should be part of the view layer
     private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
     private var isContinueLearningWidgetPresented: Bool = false
 

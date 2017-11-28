@@ -17,7 +17,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = HomeScreenPresenter(view: self)
+        self.presenter = HomeScreenPresenter(view: self, userActivitiesAPI: UserActivitiesAPI())
         setupStackView()
         presenter?.initBlocks()
         self.title = NSLocalizedString("Home", comment: "")
@@ -80,6 +80,10 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
 
     func show(vc: UIViewController) {
         self.show(vc, sender: nil)
+    }
+
+    func setStreaksInfo(streakCount: Int, shouldSolveToday: Bool) {
+        //TODO: Add implementation here
     }
 
     private let widgetBackgroundView = UIView()
