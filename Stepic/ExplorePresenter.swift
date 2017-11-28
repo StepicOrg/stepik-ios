@@ -119,7 +119,8 @@ class ExplorePresenter: CourseListCountDelegate {
                     shouldShowCount: true,
                     showControllerBlock: showController,
                     courseListCountDelegate: self,
-                    onlyLocal: onlyLocal
+                    onlyLocal: onlyLocal,
+                    descriptionColorStyle: $0.id % 2 == 0 ? .pink : .blue
                 )
             } +
             [

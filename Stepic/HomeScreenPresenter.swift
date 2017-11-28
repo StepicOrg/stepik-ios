@@ -122,8 +122,8 @@ struct CourseListBlock {
     let onlyLocal: Bool
     let colorStyle: CourseListEmptyPlaceholder.ColorStyle
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false) {
-        let style: CourseListEmptyPlaceholder.ColorStyle = CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
+    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false, descriptionColorStyle: CourseListEmptyPlaceholder.ColorStyle? = nil) {
+        let style: CourseListEmptyPlaceholder.ColorStyle = descriptionColorStyle ?? CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
         self.colorStyle = style
         self.title = title
         self.description = description
