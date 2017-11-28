@@ -72,7 +72,10 @@ class AuthInfo: NSObject {
                         }
 
                         Progress.deleteAllStoredProgresses()
+
                         Notification.deleteAll()
+                        NotificationsBadgesManager.shared.set(number: 0)
+
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
