@@ -1,5 +1,5 @@
 //
-//  NotificationStatuses.swift
+//  NotificationsStatus.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 23.11.2017.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class NotificationStatuses: NSObject {
+class NotificationsStatus: NSObject {
     var id: Int
     var learnCount: Int
     var reviewCount: Int
@@ -17,7 +17,7 @@ class NotificationStatuses: NSObject {
     var teachCount: Int
     var defaultCount: Int
     var totalCount: Int
-    
+
     init(json: JSON) {
         self.id = json["id"].intValue
         self.learnCount = json["learn"].intValue
