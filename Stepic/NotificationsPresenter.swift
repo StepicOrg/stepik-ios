@@ -60,7 +60,7 @@ class NotificationsPresenter {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdded(systemNotification:)), name: .notificationAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
     }
 
     deinit {
@@ -82,7 +82,7 @@ class NotificationsPresenter {
         self.view?.set(notifications: self.displayedNotifications, withReload: firedSection != self.section)
     }
 
-    @objc func didNotificationAdded(systemNotification: Foundation.Notification) {
+    @objc func didNotificationAdd(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let id = userInfo["id"] as? Int else {
             return
