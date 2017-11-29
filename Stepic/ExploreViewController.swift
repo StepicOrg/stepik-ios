@@ -122,6 +122,14 @@ class ExploreViewController: UIViewController, ExploreView {
         tagsWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
         tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
         widgetBackgroundView.isHidden = false
+
+        let separatorView = UIView()
+        separatorView.constrainHeight("0.5")
+        separatorView.backgroundColor = UIColor(red: 83 / 255.0, green: 83 / 255.0, blue: 102 / 255.0, alpha: 0.3)
+        widgetBackgroundView.addSubview(separatorView)
+        separatorView.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        separatorView.alignTopEdge(withView: widgetBackgroundView, predicate: "8")
+
         stackView.insertArrangedSubview(widgetBackgroundView, at: 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
         tagsWidget.tags = tags
