@@ -26,6 +26,8 @@ class CourseListVerticalViewController: CourseListViewController {
         }
     }
 
+    var descriptionWidgetView: UIView?
+
     lazy var descriptionView: CourseListEmptyPlaceholder = {
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         placeholder.presentationStyle = .fullWidth
@@ -36,7 +38,17 @@ class CourseListVerticalViewController: CourseListViewController {
     func updateDescription() {
         if let listDescription = listDescription {
             descriptionView.text = listDescription
-            tableView.tableHeaderView = descriptionView
+            if descriptionWidgetView == nil {
+                descriptionWidgetView = UIView()
+                guard let descriptionWidgetView = descriptionWidgetView else {
+                    return
+                }
+                descriptionWidgetView.backgroundColor = UIColor.clear
+                descriptionWidgetView.addSubview(descriptionView)
+                descriptionView.alignTop("0", leading: "0", bottom: "-16", trailing: "0", toView: descriptionWidgetView)
+                descriptionWidgetView.frame.size = descriptionWidgetView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: descriptionWidgetView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+            }
+            tableView.tableHeaderView = descriptionWidgetView
         } else {
             tableView.tableHeaderView = nil
         }
