@@ -39,13 +39,13 @@ class CourseTag {
                   enSummary: "study of the theoretical foundations of information and computation"
         ),
         CourseTag(ID: 485282,
-                  ruTitle: "natural science",
+                  ruTitle: "естественные науки",
                   enTitle: "natural science",
                   ruSummary: "разделы науки, отвечающие за изучение природных явлений",
                   enSummary: "branch of science about the natural world"
         ),
         CourseTag(ID: 20521,
-                  ruTitle: "social science",
+                  ruTitle: "общественные науки",
                   enTitle: "social science",
                   ruSummary: "науки об обществе и взаимоотношениях",
                   enSummary: "academic discipline concerned with society and the relationships"

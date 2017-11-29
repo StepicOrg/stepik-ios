@@ -764,6 +764,14 @@
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
+		089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88DF1FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E01FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E11FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E21FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E31FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E41FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		089C88E51FCF494300003B63 /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
 		089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
 		089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
 		089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
@@ -4810,6 +4818,7 @@
 		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadDelegate.swift; sourceTree = "<group>"; };
 		089B370E1BFA210F003DC593 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		089C88DD1FCF494300003B63 /* CourseListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListType.swift; sourceTree = "<group>"; };
 		089F58841D22BD3C000CD540 /* DiscussionCountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionCountView.swift; sourceTree = "<group>"; };
 		089F58881D22BD59000CD540 /* DiscussionCountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionCountView.xib; sourceTree = "<group>"; };
 		08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNavigationDelegate.swift; sourceTree = "<group>"; };
@@ -5658,6 +5667,7 @@
 				088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */,
 				08195A051FA00FF400E6D6CD /* CourseLists.storyboard */,
 				088FD8161FB242B3008A2953 /* CourseSubscriber.swift */,
+				089C88DD1FCF494300003B63 /* CourseListType.swift */,
 			);
 			name = "Course List";
 			sourceTree = "<group>";
@@ -11601,6 +11611,7 @@
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
 				0846B10D1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
+				089C88DF1FCF494300003B63 /* CourseListType.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				081566261F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				082799491E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
@@ -11950,6 +11961,7 @@
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
+				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
@@ -12523,6 +12535,7 @@
 				2C1B621C1F4C4AEF00236804 /* UnitsAPI.swift in Sources */,
 				2C1B621D1F4C4AEF00236804 /* UserActivitiesAPI.swift in Sources */,
 				2C1B621F1F4C4AEF00236804 /* AdaptiveOnboardingViewController.swift in Sources */,
+				089C88E41FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3511F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C1B62201F4C4AEF00236804 /* JSONInitializable.swift in Sources */,
 				2C1B62211F4C4AEF00236804 /* TabsInfo.swift in Sources */,
@@ -12976,6 +12989,7 @@
 				2C1B642D1F4C590700236804 /* UnitsAPI.swift in Sources */,
 				2C1B642E1F4C590700236804 /* UserActivitiesAPI.swift in Sources */,
 				2C1B64301F4C590700236804 /* AdaptiveOnboardingViewController.swift in Sources */,
+				089C88E51FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3521F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C1B64311F4C590700236804 /* JSONInitializable.swift in Sources */,
 				2C1B64321F4C590700236804 /* TabsInfo.swift in Sources */,
@@ -13429,6 +13443,7 @@
 				2C8653CA1F4B33DE00D51654 /* UnitsAPI.swift in Sources */,
 				2C8653CB1F4B33DE00D51654 /* UserActivitiesAPI.swift in Sources */,
 				2C8653CD1F4B33DE00D51654 /* AdaptiveOnboardingViewController.swift in Sources */,
+				089C88E11FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA34E1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C8653CE1F4B33DE00D51654 /* JSONInitializable.swift in Sources */,
 				2C8653CF1F4B33DE00D51654 /* TabsInfo.swift in Sources */,
@@ -13845,6 +13860,7 @@
 				2C89AA911F4C289900227C3B /* CongratulationAlertManager.swift in Sources */,
 				2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C89AA921F4C289900227C3B /* Parser.swift in Sources */,
+				089C88E21FCF494300003B63 /* CourseListType.swift in Sources */,
 				2C89AA931F4C289900227C3B /* StepicToken.swift in Sources */,
 				2C89AA941F4C289900227C3B /* AuthInfo.swift in Sources */,
 				2C89AA951F4C289900227C3B /* APIEndpoint.swift in Sources */,
@@ -14334,6 +14350,7 @@
 				2C9732641F4C38F600AC9301 /* UnitsAPI.swift in Sources */,
 				2C9732651F4C38F600AC9301 /* UserActivitiesAPI.swift in Sources */,
 				2C9732671F4C38F600AC9301 /* AdaptiveOnboardingViewController.swift in Sources */,
+				089C88E31FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3501F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C9732681F4C38F600AC9301 /* JSONInitializable.swift in Sources */,
 				2C9732691F4C38F600AC9301 /* TabsInfo.swift in Sources */,
@@ -14841,6 +14858,7 @@
 				864D67121E83DE03001E8D9E /* UnitsAPI.swift in Sources */,
 				864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */,
 				2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */,
+				089C88E01FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA34D1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				864D67151E83DE03001E8D9E /* JSONInitializable.swift in Sources */,
 				864D67161E83DE03001E8D9E /* TabsInfo.swift in Sources */,
