@@ -221,6 +221,7 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.reloadData()
             return
         }
+        self.courses = courses
         let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
         let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
         delegate?.updateCells(deletingIndexPaths: deletingIndexPaths, insertingIndexPaths: insertingIndexPaths)
