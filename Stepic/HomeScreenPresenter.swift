@@ -11,7 +11,7 @@ import Foundation
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
 
-    func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
+    func presentContinueLearningWidget(widgetData: ContinueLearningWidgetData)
     func hideCountinueLearningWidget()
 
     func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool)
@@ -63,21 +63,12 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
         view?.presentBlocks(blocks: blocks)
     }
 
-    //TODO: Remove this from Presenter, it should be part of the view layer
-    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
-    private var isContinueLearningWidgetPresented: Bool = false
-
     private func presentLastStep(for course: Course) {
         guard let widgetData = ContinueLearningWidgetData(course: course, navigation: view?.getNavigation()) else {
             return
         }
 
-        continueLearningWidget.setup(widgetData: widgetData)
-
-        if !isContinueLearningWidgetPresented {
-            view?.presentContinueLearningWidget(widget: continueLearningWidget)
-            isContinueLearningWidgetPresented = true
-        }
+        view?.presentContinueLearningWidget(widgetData: widgetData)
     }
 
     private func updateCourseForLastStep(courses: [Course]) {
@@ -87,14 +78,11 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
                 return
             }
         }
-        if isContinueLearningWidgetPresented {
-            hideContinueLearningWidget()
-        }
+        hideContinueLearningWidget()
     }
 
     private func hideContinueLearningWidget() {
         view?.hideCountinueLearningWidget()
-        isContinueLearningWidgetPresented = false
     }
 
     private func checkIsGoodForLastStep(course: Course) -> Bool {
@@ -103,9 +91,7 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
 
     func didLoadWithProgresses(courses: [Course]) {
         if courses.isEmpty {
-            if isContinueLearningWidgetPresented {
-                hideContinueLearningWidget()
-            }
+            hideContinueLearningWidget()
         } else {
             updateCourseForLastStep(courses: courses)
         }

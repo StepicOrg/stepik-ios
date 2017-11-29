@@ -114,13 +114,18 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         streaksWidgetBackgroundView.isHidden = true
     }
 
+    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+    private var isContinueLearningWidgetPresented: Bool = false
     private let widgetBackgroundView = UIView()
-    func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
+
+    func presentContinueLearningWidget(widgetData: ContinueLearningWidgetData) {
+        continueLearningWidget.setup(widgetData: widgetData)
+
         widgetBackgroundView.backgroundColor = UIColor.white
-        widgetBackgroundView.addSubview(widget)
-        widget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        widget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
-        widget.setRoundedCorners(cornerRadius: 8)
+        widgetBackgroundView.addSubview(continueLearningWidget)
+        continueLearningWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        continueLearningWidget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
@@ -128,9 +133,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = false
         }
+
+        if !isContinueLearningWidgetPresented {
+            isContinueLearningWidgetPresented = true
+        }
     }
 
     func hideCountinueLearningWidget() {
+        isContinueLearningWidgetPresented = false
         stackView.removeArrangedSubview(widgetBackgroundView)
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = true
