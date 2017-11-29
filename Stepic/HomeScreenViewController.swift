@@ -15,6 +15,17 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     var scrollView: UIScrollView = UIScrollView()
     var stackView: UIStackView = UIStackView()
 
+    var blocks: [CourseListBlock] = []
+    var countForID: [String: Int] = [:]
+    var countUpdateBlock: [String: () -> Void] = [:]
+
+    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+    private var isContinueLearningWidgetPresented: Bool = false
+    private let widgetBackgroundView = UIView()
+
+    private let streaksWidgetBackgroundView = UIView()
+    private var streaksWidgetView: UserActivityHomeView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = HomeScreenPresenter(view: self, userActivitiesAPI: UserActivitiesAPI())
@@ -44,10 +55,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         stackView.align(toView: scrollView)
         stackView.alignment = .fill
     }
-
-    var blocks: [CourseListBlock] = []
-    var countForID: [String: Int] = [:]
-    var countUpdateBlock: [String: () -> Void] = [:]
 
     private func reload() {
         for block in blocks {
@@ -87,8 +94,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         self.show(vc, sender: nil)
     }
 
-    private let streaksWidgetBackgroundView = UIView()
-    private var streaksWidgetView: UserActivityHomeView?
     func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool) {
         if streaksWidgetView == nil {
             let widget = UserActivityHomeView(frame: CGRect.zero)
@@ -113,10 +118,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     func hideStreaksInfo() {
         streaksWidgetBackgroundView.isHidden = true
     }
-
-    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
-    private var isContinueLearningWidgetPresented: Bool = false
-    private let widgetBackgroundView = UIView()
 
     func presentContinueLearningWidget(widgetData: ContinueLearningWidgetData) {
         continueLearningWidget.setup(widgetData: widgetData)
