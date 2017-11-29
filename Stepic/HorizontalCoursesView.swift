@@ -20,14 +20,14 @@ class HorizontalCoursesView: NibInitializableView {
     @IBOutlet weak var courseListContainerHeight: NSLayoutConstraint!
 
     @IBOutlet weak var courseListDescriptionView: CourseListEmptyPlaceholder!
-    @IBOutlet weak var courseListDescriptionHeight: NSLayoutConstraint!
+//    @IBOutlet weak var courseListDescriptionHeight: NSLayoutConstraint!
 
     @IBOutlet weak var titleDescriptionSpacing: NSLayoutConstraint!
 
     let courseListHeight: CGFloat = 290
     let courseListPlaceholderHeight: CGFloat = 104
 
-    private var showVerticalBlock: (() -> Void)?
+    private var showVerticalBlock: ((Int?) -> Void)?
 
     override var nibName: String {
         return "HorizontalCoursesView"
@@ -50,10 +50,11 @@ class HorizontalCoursesView: NibInitializableView {
             if let listDescription = listDescription {
                 self.courseListDescriptionView.presentationStyle = .bordered
                 self.courseListDescriptionView.text = listDescription
-                self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
+//                self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
                 self.titleDescriptionSpacing.constant = 16
             } else {
-                self.courseListDescriptionHeight.constant = 0
+                self.courseListDescriptionView.constrainHeight("0")
+//                self.courseListDescriptionHeight.constant = 0
                 self.titleDescriptionSpacing.constant = 0
             }
         }
@@ -62,7 +63,7 @@ class HorizontalCoursesView: NibInitializableView {
     var shouldShowCount: Bool = false
 
     @IBAction func showAllPressed(_ sender: Any) {
-        showVerticalBlock?()
+        showVerticalBlock?(shouldShowCount ? courseCount : nil)
     }
 
     func setup(block: CourseListBlock) {

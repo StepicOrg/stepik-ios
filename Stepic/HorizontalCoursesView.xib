@@ -13,7 +13,6 @@
                 <outlet property="courseCountLabel" destination="QOq-O1-Td8" id="4V6-ik-fOf"/>
                 <outlet property="courseListContainerHeight" destination="tW6-4l-Iwl" id="8GN-wo-SbD"/>
                 <outlet property="courseListContainerView" destination="ySn-PK-nVa" id="r04-yn-506"/>
-                <outlet property="courseListDescriptionHeight" destination="wA1-n7-qtK" id="AJA-eH-i5U"/>
                 <outlet property="courseListDescriptionView" destination="y98-72-tdM" id="ETa-Bn-erT"/>
                 <outlet property="showAllButton" destination="Dcl-eV-vHu" id="KIa-sB-NrR"/>
                 <outlet property="titleDescriptionSpacing" destination="Svo-ds-HSU" id="dw6-dd-bwZ"/>
@@ -26,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-eV-vHu">
-                    <rect key="frame" x="398" y="77" width="40" height="36"/>
+                    <rect key="frame" x="398" y="69" width="40" height="36"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="0aa-dd-8yJ"/>
                     </constraints>
@@ -46,7 +45,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="My courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU3-ni-m1D" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="16" y="91" width="374" height="8"/>
+                    <rect key="frame" x="16" y="75" width="374" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -59,11 +58,8 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y98-72-tdM" customClass="CourseListEmptyPlaceholder" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="16" width="451" height="59"/>
+                    <rect key="frame" x="0.0" y="16" width="451" height="43"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="59" id="wA1-n7-qtK"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

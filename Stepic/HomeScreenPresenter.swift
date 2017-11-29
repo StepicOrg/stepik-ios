@@ -118,7 +118,7 @@ struct CourseListBlock {
     var ID: String
     let horizontalController: CourseListHorizontalViewController
     let shouldShowCount: Bool
-    let showVerticalBlock: () -> Void
+    let showVerticalBlock: (Int?) -> Void
     let onlyLocal: Bool
     let colorStyle: CourseListEmptyPlaceholder.ColorStyle
 
@@ -136,11 +136,14 @@ struct CourseListBlock {
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.showVerticalBlock = {
+            count in
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
             verticalController.descriptionView.colorStyle = style
+            verticalController.courseCount = count
             verticalController.listDescription = description
             verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
+            verticalController.presenter?.couseListCountDelegate = verticalController
             showControllerBlock(verticalController)
         }
     }

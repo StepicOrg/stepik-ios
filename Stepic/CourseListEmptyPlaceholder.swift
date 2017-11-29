@@ -18,6 +18,11 @@ class CourseListEmptyPlaceholder: NibInitializableView {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var countLabel: StepikLabel!
+//    @IBOutlet weak var titleCenterVerticallyConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var countHeight: NSLayoutConstraint!
+    @IBOutlet weak var descriptionCountDistance: NSLayoutConstraint!
 
     var colorStyle: ColorStyle = .purple {
         didSet {
@@ -55,6 +60,27 @@ class CourseListEmptyPlaceholder: NibInitializableView {
         }
     }
 
+    var count: Int? {
+        didSet {
+
+            if let count = count {
+                let pluralizedCountString = StringHelper.pluralize(number: count, forms: [
+                    NSLocalizedString("courses1", comment: ""),
+                    NSLocalizedString("courses234", comment: ""),
+                    NSLocalizedString("courses567890", comment: "")
+                    ])
+
+                countLabel.text = "\(count) \(pluralizedCountString)"
+                countHeight.constant = 17
+                descriptionCountDistance.constant = 8
+            } else {
+                countHeight.constant = 0
+                descriptionCountDistance.constant = 0
+            }
+            self.view.layoutSubviews()
+        }
+    }
+
     var onTap: (() -> Void)?
 
     override var nibName: String {
@@ -73,6 +99,9 @@ class CourseListEmptyPlaceholder: NibInitializableView {
         topConstraint.constant = presentationStyle.insets.top
         contentView.setRoundedCorners(cornerRadius: presentationStyle.cornerRadius)
         updateTextAlignment()
+        if presentationStyle == .bordered {
+            count = nil
+        }
     }
 
     override func setupSubviews() {

@@ -20,6 +20,12 @@ class CourseListVerticalViewController: CourseListViewController {
 
 //    var refreshControl: UIRefreshControl? = UIRefreshControl()
 
+    var courseCount: Int? {
+        didSet {
+            descriptionView.count = courseCount
+        }
+    }
+
     lazy var descriptionView: CourseListEmptyPlaceholder = {
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         placeholder.presentationStyle = .fullWidth
@@ -209,5 +215,11 @@ extension CourseListVerticalViewController: UITableViewDelegate, UITableViewData
             cell.setup(courseViewData: courses[indexPath.row], colorMode: colorMode)
         }
         return cell
+    }
+}
+
+extension CourseListVerticalViewController: CourseListCountDelegate {
+    func updateCourseCount(to: Int, forListID: String) {
+        courseCount = to
     }
 }
