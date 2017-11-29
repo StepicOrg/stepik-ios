@@ -47,16 +47,13 @@ class CourseListEmptyPlaceholder: NibInitializableView {
         case .fullWidth:
             textLabel.textAlignment = .center
         }
+        textLabel.layoutSubviews()
     }
 
     var text: String = "" {
         didSet {
             textLabel.setTextWithHTMLString(text)
-            if textLabel.numberOfVisibleLines == 1 {
-                textLabel.textAlignment = .center
-            } else {
-                textLabel.textAlignment = .natural
-            }
+            updateTextAlignment()
         }
     }
 
