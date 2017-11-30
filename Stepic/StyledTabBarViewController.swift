@@ -45,6 +45,21 @@ class StyledTabBarViewController: UITabBarController {
         if !AuthInfo.shared.isAuthorized {
             selectedIndex = 1
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+            let value = userInfo["value"] as? Int else {
+                return
+        }
+
+        self.notificationsBadgeNumber = value
     }
 
     func getEventNameForTabIndex(index: Int) -> String? {

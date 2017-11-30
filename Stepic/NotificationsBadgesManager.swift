@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension NSNotification.Name {
+    static let badgeUpdated = NSNotification.Name("badgeUpdated")
+}
+
 class NotificationsBadgesManager {
     static let shared = NotificationsBadgesManager()
 
@@ -15,7 +19,7 @@ class NotificationsBadgesManager {
 
     private(set) var notificationsCount: Int = 0 {
         didSet {
-            (UIApplication.shared.delegate as? AppDelegate)?.notificationsBadgeNumber = notificationsCount
+            NotificationCenter.default.post(name: .badgeUpdated, object: self, userInfo: ["value": notificationsCount])
         }
     }
 

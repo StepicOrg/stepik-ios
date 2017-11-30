@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
 
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -82,6 +83,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+
+    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+            let value = userInfo["value"] as? Int else {
+                return
+        }
+
+        UIApplication.shared.applicationIconBadgeNumber = value
     }
 
     //Streaks presentation
@@ -309,21 +319,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    var notificationsBadgeNumber: Int {
-        get {
-            if let tabBarController = window?.rootViewController as? StyledTabBarViewController {
-                return tabBarController.notificationsBadgeNumber
-            }
-            return 0
-        }
-        set {
-            if let tabBarController = window?.rootViewController as? StyledTabBarViewController {
-                tabBarController.notificationsBadgeNumber = newValue
-            }
-            UIApplication.shared.applicationIconBadgeNumber = newValue
-        }
-    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -413,7 +408,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
 
 }
