@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict: notificationDict)
         }
 
-        checkStreaks()
         checkNotificationsCount()
 
         if !DefaultsContainer.launch.didLaunch {
@@ -92,73 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         UIApplication.shared.applicationIconBadgeNumber = value
-    }
-
-    //Streaks presentation
-    //TODO: Refactor this into a class
-    let streaksPopupPresentr: Presentr = {
-        let width = ModalSize.sideMargin(value: 24)
-        let height = ModalSize.custom(size: 300.0)
-        let center = ModalCenterPosition.center
-        let customType = PresentationType.custom(width: width, height: height, center: center)
-
-        let customPresenter = Presentr(presentationType: customType)
-        customPresenter.transitionType = .coverVerticalFromTop
-        customPresenter.dismissTransitionType = .coverVerticalFromTop
-        customPresenter.roundCorners = true
-        customPresenter.backgroundColor = UIColor.black
-        customPresenter.backgroundOpacity = 0.5
-        return customPresenter
-    }()
-
-    func presentStreaks(userActivity: UserActivity) {
-
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.opened, parameters: [
-            "current": userActivity.currentStreak,
-            "longest": userActivity.longestStreak,
-            "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
-            ])
-
-        guard let nav = currentNavigation else {
-            return
-        }
-
-        let vc = CurrentBestStreakViewController(nibName: "CurrentBestStreakViewController", bundle: nil) as CurrentBestStreakViewController
-
-        vc.activity = userActivity
-        nav.customPresentViewController(streaksPopupPresentr, viewController: vc, animated: true, completion: nil)
-    }
-
-    func checkStreaks() {
-        func dayLocalizableFor(daysCnt: Int) -> String {
-            switch (daysCnt % 10) {
-            case 1: return NSLocalizedString("days1", comment: "")
-            case 2, 3, 4: return NSLocalizedString("days234", comment: "")
-            default: return NSLocalizedString("days567890", comment: "")
-            }
-        }
-        guard let userId = AuthInfo.shared.userId else {
-            return
-        }
-        _ = ApiDataDownloader.userActivities.retrieve(user: userId, success: {
-            [weak self]
-            userActivity in
-            if userActivity.needsToSolveToday {
-                let streakText = "\(NSLocalizedString("YouAreSolving", comment: "")) \(userActivity.currentStreak) \(dayLocalizableFor(daysCnt: userActivity.currentStreak)) \(NSLocalizedString("InARow", comment: "")).\n\(NSLocalizedString("SolveToImprove", comment: ""))"
-                let subtitleText = "\(NSLocalizedString("TapToLearnAboutStreaks", comment: ""))"
-                NotificationAlertConstructor.sharedConstructor.presentStreakNotificationFake(streakText, subtitleText: subtitleText, success: {
-                    [weak self] in
-                    self?.presentStreaks(userActivity: userActivity)
-                })
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
-                    "current": userActivity.currentStreak,
-                    "longest": userActivity.longestStreak,
-                    "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
-                    ])
-            }
-        }, error: {
-            _ in
-        })
     }
 
     //Notification handling

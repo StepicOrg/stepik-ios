@@ -126,7 +126,7 @@ class AuthAPI {
                     }
 
                     let token = StepicToken(json: json)
-                    fulfill((token, AuthorizationType.code))
+                    fulfill((token, AuthorizationType.password))
                 }
             }
         }
