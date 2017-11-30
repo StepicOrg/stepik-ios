@@ -140,7 +140,12 @@ extension Section {
     }
 
     var course: Course? {
-        return managedCourse
+        get {
+            return managedCourse
+        }
+        set {
+            managedCourse = newValue
+        }
     }
 
     var progress: Progress? {
