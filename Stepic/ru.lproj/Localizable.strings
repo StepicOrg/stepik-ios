@@ -358,5 +358,8 @@ WidgetButtonLearn = "Учиться";
 
 EnterSQLQuery = "Введите SQL запрос:";
 
+SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
+SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
