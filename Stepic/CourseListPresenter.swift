@@ -234,16 +234,50 @@ class CourseListPresenter {
         }
     }
 
+    private func displayCachedAsyncIfEmpty() -> Promise<Void> {
+        return Promise<Void> {
+            fulfill, reject in
+            if courses.isEmpty {
+                Course.fetchAsync(listType.cachedListCourseIds).then {
+                    [weak self]
+                    courses -> Void in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
+                    strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
+                    fulfill()
+                }.catch {
+                    error in
+                    reject(error)
+                }
+            }
+        }
+    }
+
+    enum PromiseError: Error {
+        case localUpdate
+    }
+
+    private func updateState() -> Promise<Void>? {
+        return Promise<Void> {
+            fulfill, reject in
+            if onlyLocal {
+                state = courses.isEmpty ? .empty : .displaying
+                reject(PromiseError.localUpdate)
+            }
+            state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
+            fulfill()
+        }
+    }
+
     func refresh() {
-        if courses.isEmpty {
-            displayCached(ids: listType.cachedListCourseIds)
-        }
-        if onlyLocal {
-            state = courses.isEmpty ? .empty : .displaying
-            return
-        }
-        state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-        checkToken().then {
+        displayCachedAsyncIfEmpty().then {
+            [weak self] in
+            self!.updateState()!
+        }.then {
+            checkToken()
+        }.then {
             [weak self] in
             self?.refreshCourses()
         }.catch {

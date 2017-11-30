@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import PromiseKit
 
 @objc
 class Course: NSManagedObject, JSONInitializable {
@@ -268,6 +269,49 @@ class Course: NSManagedObject, JSONInitializable {
             print("Error while downloading progresses")
             errorHandler()
         })
+    }
+
+    class func fetchAsync(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> Promise<[Course]> {
+
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
+        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+
+        var nonIdPredicates = [NSPredicate]()
+        if let f = featured {
+            nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
+        }
+
+        if let e = enrolled {
+            nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
+        }
+
+        if let p = isPublic {
+            nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
+        }
+
+        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
+
+        let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
+        request.predicate = predicate
+        request.sortDescriptors = [descriptor]
+
+        return Promise<[Course]> {
+            fulfill, _ in
+            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
+                results in
+                guard let courses = results.finalResult as? [Course] else {
+                    fulfill([])
+                    return
+                }
+                fulfill(courses)
+            })
+            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+        }
     }
 
     class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> [Course] {
