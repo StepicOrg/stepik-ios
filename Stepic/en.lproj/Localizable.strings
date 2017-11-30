@@ -348,6 +348,7 @@ SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try aga
 ChooseSearchLanguage = "Choose search language";
 Catalog = "Catalog";
 CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
+TrendingTopics = "Trending topics";
 
 WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
