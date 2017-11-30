@@ -35,6 +35,7 @@ struct NotificationViewData {
 extension NSNotification.Name {
     static let notificationUpdated = NSNotification.Name("notificationUpdated")
     static let allNotificationsMarkedAsRead = NSNotification.Name("allNotificationsMarkedAsRead")
+    static let notificationAdded = NSNotification.Name("notificationAdded")
 }
 
 class NotificationsPresenter {
@@ -42,6 +43,7 @@ class NotificationsPresenter {
 
     var notificationsAPI: NotificationsAPI
     var usersAPI: UsersAPI
+    var notificationsStatusAPI: NotificationStatusesAPI
 
     private var page = 1
     var hasNextPage = true
@@ -49,14 +51,16 @@ class NotificationsPresenter {
 
     private var section: NotificationsSection = .all
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
+        self.notificationsStatusAPI = notificationsStatusAPI
         self.view = view
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
     }
 
     deinit {
@@ -76,6 +80,22 @@ class NotificationsPresenter {
             return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: status, ids: [id]))
         }
         self.view?.set(notifications: self.displayedNotifications, withReload: firedSection != self.section)
+    }
+
+    @objc func didNotificationAdd(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+              let id = userInfo["id"] as? Int else {
+            return
+        }
+
+        guard let addedNotification = Notification.fetch(id: id) else {
+            return
+        }
+
+        merge(old: self.displayedNotifications, new: [addedNotification]).then { result -> Void in
+            self.displayedNotifications = result
+            self.view?.set(notifications: self.displayedNotifications, withReload: true)
+        }
     }
 
     @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
@@ -101,6 +121,8 @@ class NotificationsPresenter {
         }.always {
             self.view?.state = .normal
         }
+
+        loadStatuses()
     }
 
     func loadInitial() {
@@ -126,6 +148,8 @@ class NotificationsPresenter {
                 self.view?.state = .normal
             }
         }
+
+        loadStatuses()
     }
 
     func loadNextPage() {
@@ -288,6 +312,14 @@ class NotificationsPresenter {
             var editedNotification = notification
             editedNotification.status = newStatus
             return (ids?.contains(editedNotification.id) ?? true) ? editedNotification : notification
+        }
+    }
+
+    private func loadStatuses() {
+        notificationsStatusAPI.retrieve().then { statuses in
+            NotificationsBadgesManager.shared.set(number: statuses.totalCount)
+        }.catch { error in
+            print("notifications: unable to load statuses, error = \(error)")
         }
     }
 }
