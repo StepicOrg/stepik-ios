@@ -114,11 +114,13 @@ class ExplorePresenter: CourseListCountDelegate {
                     ID: getId(forList: $0),
                     horizontalLimit: 14,
                     title: $0.title,
+                    description: $0.listDescription,
                     colorMode: .light,
                     shouldShowCount: true,
                     showControllerBlock: showController,
                     courseListCountDelegate: self,
-                    onlyLocal: onlyLocal
+                    onlyLocal: onlyLocal,
+                    descriptionColorStyle: $0.id % 2 == 0 ? .pink : .blue
                 )
             } +
             [

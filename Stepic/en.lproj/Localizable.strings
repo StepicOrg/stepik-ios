@@ -37,6 +37,7 @@ EmptyMyCoursesDescription = "Go to \"All courses\" tab to see the list of availa
 ReloadPlayerTitle = "Video download finished";
 ReloadPlayerMessage = "Reload video player?";
 BeginDate = "Begin date";
+EndDate = "End date";
 SoftDeadline = "Soft deadline";
 HardDeadline = "Hard deadline";
 Certificate = "Certificate";

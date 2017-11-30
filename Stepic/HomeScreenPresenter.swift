@@ -124,15 +124,20 @@ struct ContinueLearningWidgetData {
 
 struct CourseListBlock {
     let title: String
+    let description: String?
     let colorMode: CourseListColorMode
     var ID: String
     let horizontalController: CourseListHorizontalViewController
     let shouldShowCount: Bool
-    let showVerticalBlock: () -> Void
+    let showVerticalBlock: (Int?) -> Void
     let onlyLocal: Bool
+    let colorStyle: CourseListEmptyPlaceholder.ColorStyle
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false, descriptionColorStyle: CourseListEmptyPlaceholder.ColorStyle? = nil) {
+        let style: CourseListEmptyPlaceholder.ColorStyle = descriptionColorStyle ?? CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
+        self.colorStyle = style
         self.title = title
+        self.description = description
         self.colorMode = colorMode
         self.ID = ID
         self.shouldShowCount = shouldShowCount
@@ -142,9 +147,14 @@ struct CourseListBlock {
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.showVerticalBlock = {
+            count in
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
+            verticalController.descriptionView.colorStyle = style
+            verticalController.courseCount = count
+            verticalController.listDescription = description
             verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
+            verticalController.presenter?.couseListCountDelegate = verticalController
             showControllerBlock(verticalController)
         }
     }
