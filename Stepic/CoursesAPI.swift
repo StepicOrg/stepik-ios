@@ -79,7 +79,7 @@ class CoursesAPI: APIEndpoint {
         return getObjectsByIds(ids: ids, updating: existing)
     }
 
-    @discardableResult func retrieve(featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success successHandler: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
+    @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success successHandler: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
         var params = Parameters()
 
         if let isFeatured = featured {
@@ -100,6 +100,14 @@ class CoursesAPI: APIEndpoint {
 
         if let order = order {
             params["order"] = order
+        }
+
+        if let language = language {
+            params["language"] = language.languageString
+        }
+
+        if let tag = tag {
+            params["tag"] = tag
         }
 
         params["page"] = page
@@ -138,9 +146,9 @@ class CoursesAPI: APIEndpoint {
     }
 
     //Could wrap retrieveDisplayedIds 
-    @discardableResult func retrieve(featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([Course], Meta)> {
+    @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([Course], Meta)> {
         return Promise { fulfill, reject in
-            retrieve(featured: featured, enrolled: enrolled, excludeEnded: excludeEnded, isPublic: isPublic, order: order, page: page, headers: headers, success: {
+            retrieve(tag: tag, featured: featured, enrolled: enrolled, excludeEnded: excludeEnded, isPublic: isPublic, order: order, language: language, page: page, headers: headers, success: {
                 courses, meta in
                 fulfill((courses, meta))
             }, error: {

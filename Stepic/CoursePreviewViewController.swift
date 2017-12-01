@@ -170,7 +170,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 [weak self] in
                 SVProgressHUD.show()
                 button.isEnabled = false
-                _ = AuthManager.sharedManager.joinCourse(course: c, delete: true, success : {
+                _ = ApiDataDownloader.enrollments.joinCourse(c, delete: true, success : {
                     SVProgressHUD.showSuccess(withStatus: "")
                     button.isEnabled = true
                     c.enrolled = false
@@ -401,7 +401,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             if !c.enrolled {
                 SVProgressHUD.show()
                 sender.isEnabled = false
-                _ = AuthManager.sharedManager.joinCourse(course: c, success : {
+                _ = ApiDataDownloader.enrollments.joinCourse(c, success : {
                     [weak self] in
 
                     let successBlock = {

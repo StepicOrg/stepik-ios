@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 struct SocialProviderViewData {
     let image: UIImage!
@@ -36,11 +37,13 @@ class SocialAuthPresenter {
     weak var view: SocialAuthView?
 
     var stepicsAPI: StepicsAPI
-    var authManager: AuthManager
+    var authAPI: AuthAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authManager: AuthManager, stepicsAPI: StepicsAPI, view: SocialAuthView) {
-        self.authManager = authManager
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: SocialAuthView) {
+        self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
         self.view = view
 
         // TODO: create NSNotification.Name extension
@@ -63,40 +66,49 @@ class SocialAuthPresenter {
             return
         }
 
-        if let provider = provider.socialSDKProvider {
-            if let provider = provider as? VKSocialSDKProvider,
-               let viewDelegate = view as? VKSocialSDKProviderDelegate {
-                provider.delegate = viewDelegate
-            }
+        guard let SDKProvider = provider.socialSDKProvider else {
+            view?.presentWebController(with: provider.registerURL)
+            return
+        }
 
-            provider.getAccessInfo(success: { socialToken, email in
-                AuthManager.oauth.signUpWith(socialToken: socialToken, email: email, provider: provider.name, success: { token in
-                    AuthInfo.shared.token = token
+        if let SDKProvider = SDKProvider as? VKSocialSDKProvider,
+           let viewDelegate = view as? VKSocialSDKProviderDelegate {
+            SDKProvider.delegate = viewDelegate
+        }
 
-                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
+        SDKProvider.getAccessInfo().then { socialToken, email -> Promise<(StepicToken, AuthorizationType)> in
+            self.authAPI.signUpWithToken(socialToken: socialToken, email: email, provider: SDKProvider.name)
+        }.then { token, authorizationType -> Promise<User> in
+            AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
 
-                    self.stepicsAPI.retrieveCurrentUser(success: { user in
-                        AuthInfo.shared.user = user
-                        User.removeAllExcept(user)
-                        self.view?.update(with: .success)
-                    }, error: { _ in
-                        print("social auth: successfully signed in, but could not get user")
-                        self.view?.update(with: .success)
-                    })
-                }, failure: { error in
-                    switch error {
-                    case .existingEmail(_, let email):
-                        self.view?.update(with: .existingEmail(email: email ?? ""))
-                    default:
-                        self.view?.update(with: .error)
-                    }
-                })
-            }, error: { _ in
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
+
+            return self.stepicsAPI.retrieveCurrentUser()
+        }.then { user -> Promise<NotificationsStatus> in
+            AuthInfo.shared.user = user
+            User.removeAllExcept(user)
+
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+            self.view?.update(with: .success)
+
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
+        }.catch { error in
+            switch error {
+            case is SocialSDKError:
                 print("social auth: error while social auth")
                 self.view?.update(with: .error)
-            })
-        } else {
-            view?.presentWebController(with: provider.registerURL)
+            case is RetrieveError:
+                print("social auth: successfully signed in, but could not get user")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+                self.view?.update(with: .success)
+            case SignInError.existingEmail(_, let email):
+                self.view?.update(with: .existingEmail(email: email ?? ""))
+            default:
+                self.view?.update(with: .error)
+            }
         }
     }
 
@@ -112,31 +124,31 @@ class SocialAuthPresenter {
 
     private func auth(with code: String) {
         view?.state = .loading
-        authManager.logInWithCode(code, success: { token in
+
+        authAPI.signInWithCode(code).then { token, authorizationType -> Promise<User> in
             AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
 
-            // FIXME: we shouldn't have UI dependencies here...
-            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
-            self.stepicsAPI.retrieveCurrentUser(success: { user in
-                AuthInfo.shared.user = user
-                User.removeAllExcept(user)
+            return self.stepicsAPI.retrieveCurrentUser()
+        }.then { user -> Void in
+            AuthInfo.shared.user = user
+            User.removeAllExcept(user)
 
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
-                self.view?.update(with: .success)
-            }, error: { _ in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+            self.view?.update(with: .success)
+        }.catch { error in
+            switch error {
+            case is RetrieveError:
                 print("social auth: successfully signed in, but could not get user")
-
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
-            })
-        }, failure: { e in
-            switch e {
-            case .badConnection:
+            case SignInError.badConnection:
                 self.view?.update(with: .badConnection)
             default:
                 self.view?.update(with: .error)
             }
-        })
+        }
     }
 }

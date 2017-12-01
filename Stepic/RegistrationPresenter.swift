@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol RegistrationView: class {
     var state: RegistrationState { get set }
@@ -25,12 +26,14 @@ enum RegistrationState {
 class RegistrationPresenter {
     weak var view: RegistrationView?
 
-    var authManager: AuthManager
+    var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authManager: AuthManager, stepicsAPI: StepicsAPI, view: RegistrationView) {
-        self.authManager = authManager
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: RegistrationView) {
+        self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
 
         self.view = view
     }
@@ -38,50 +41,47 @@ class RegistrationPresenter {
     func register(with name: String, email: String, password: String) {
         view?.state = .loading
 
-        performRequest({
-            self.authManager.signUpWith(name, lastname: " ", email: email, password: password, success: {
-                self.authManager.logInWithUsername(email, password: password, success: { token in
-                    AuthInfo.shared.token = token
+        checkToken().then { () -> Promise<()> in
+            self.authAPI.signUpWithAccount(firstname: name, lastname: " ", email: email, password: password)
+        }.then { _ -> Promise<(StepicToken, AuthorizationType)> in
+            self.authAPI.signInWithAccount(email: email, password: password)
+        }.then { token, authorizationType -> Promise<User> in
+            AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
 
-                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
-                    self.stepicsAPI.retrieveCurrentUser(success: { user in
-                        AuthInfo.shared.user = user
-                        User.removeAllExcept(user)
+            return self.stepicsAPI.retrieveCurrentUser()
+        }.then { user -> Promise<NotificationsStatus> in
+            AuthInfo.shared.user = user
+            User.removeAllExcept(user)
 
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
-                        self.view?.update(with: .success)
-                    }, error: { _ in
-                        print("registration: successfully signed in, but could not get user")
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
+            self.view?.update(with: .success)
 
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
-                        self.view?.update(with: .success)
-                    })
-                }, failure: { e in
-                    switch e {
-                    case .badConnection:
-                        self.view?.update(with: .badConnection)
-                    default:
-                        self.view?.update(with: .error)
-                    }
-                })
-            }, error: { _, registrationErrorInfo in
-                if let message = registrationErrorInfo?.firstError {
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
+        }.catch { error in
+            switch error {
+            case PerformRequestError.noAccessToRefreshToken:
+                AuthInfo.shared.token = nil
+                self.view?.update(with: .error)
+            case PerformRequestError.badConnection, SignInError.badConnection:
+                self.view?.update(with: .badConnection)
+            case is RetrieveError:
+                print("registration: successfully signed in, but could not get user")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
+                self.view?.update(with: .success)
+            case SignUpError.validation(_, _, _, _):
+                if let message = (error as? SignUpError)?.firstError {
                     self.view?.state = .validationError(message: message)
                 } else {
                     self.view?.update(with: .error)
                 }
-            })
-        }, error: { err in
-            switch err {
-            case .noAccessToRefreshToken:
-                AuthInfo.shared.token = nil
-                self.view?.update(with: .error)
-            case .badConnection:
-                self.view?.update(with: .badConnection)
             default:
                 self.view?.update(with: .error)
             }
-        })
+        }
     }
 }

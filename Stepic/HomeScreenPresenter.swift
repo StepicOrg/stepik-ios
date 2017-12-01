@@ -11,8 +11,11 @@ import Foundation
 protocol HomeScreenView: class {
     func presentBlocks(blocks: [CourseListBlock])
 
-    func presentContinueLearningWidget(widget: ContinueLearningWidgetView)
+    func presentContinueLearningWidget(widgetData: ContinueLearningWidgetData)
     func hideCountinueLearningWidget()
+
+    func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool)
+    func hideStreaksInfo()
 
     func getNavigation() -> UINavigationController?
     func updateCourseCount(to: Int, forBlockWithID: String)
@@ -21,8 +24,28 @@ protocol HomeScreenView: class {
 
 class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     weak var view: HomeScreenView?
-    init(view: HomeScreenView) {
+    var userActivitiesAPI: UserActivitiesAPI
+
+    init(view: HomeScreenView, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
+        self.userActivitiesAPI = userActivitiesAPI
+    }
+
+    func checkStreaks() {
+        guard AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId else {
+            self.view?.hideStreaksInfo()
+            return
+        }
+
+        userActivitiesAPI.retrieve(user: userId).then {
+            [weak self]
+            userActivity -> Void in
+            if userActivity.currentStreak > 0 {
+                self?.view?.presentStreaksInfo(streakCount: userActivity.currentStreak, shouldSolveToday: userActivity.needsToSolveToday)
+            }
+        }.catch {
+            _ in
+        }
     }
 
     func initBlocks() {
@@ -33,27 +56,19 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
         }
 
         let blocks = [
-            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 6, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, showControllerBlock: showController, lastStepWidgetDataSource: self, courseListCountDelegate: self),
-            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 6, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, showControllerBlock: showController, courseListCountDelegate: self)
+            CourseListBlock(listType: .enrolled, ID: "enrolled", horizontalLimit: 14, title: NSLocalizedString("Enrolled", comment: ""), colorMode: .light, shouldShowCount: true, showControllerBlock: showController, lastStepWidgetDataSource: self, courseListCountDelegate: self, onlyLocal: false),
+            CourseListBlock(listType: .popular, ID: "popular", horizontalLimit: 14, title: NSLocalizedString("Popular", comment: ""), colorMode: .dark, shouldShowCount: false, showControllerBlock: showController, courseListCountDelegate: self, onlyLocal: false)
         ]
 
         view?.presentBlocks(blocks: blocks)
     }
-
-    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
-    private var isContinueLearningWidgetPresented: Bool = false
 
     private func presentLastStep(for course: Course) {
         guard let widgetData = ContinueLearningWidgetData(course: course, navigation: view?.getNavigation()) else {
             return
         }
 
-        continueLearningWidget.setup(widgetData: widgetData)
-
-        if !isContinueLearningWidgetPresented {
-            view?.presentContinueLearningWidget(widget: continueLearningWidget)
-            isContinueLearningWidgetPresented = true
-        }
+        view?.presentContinueLearningWidget(widgetData: widgetData)
     }
 
     private func updateCourseForLastStep(courses: [Course]) {
@@ -63,14 +78,11 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
                 return
             }
         }
-        if isContinueLearningWidgetPresented {
-            hideContinueLearningWidget()
-        }
+        hideContinueLearningWidget()
     }
 
     private func hideContinueLearningWidget() {
         view?.hideCountinueLearningWidget()
-        isContinueLearningWidgetPresented = false
     }
 
     private func checkIsGoodForLastStep(course: Course) -> Bool {
@@ -79,9 +91,7 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
 
     func didLoadWithProgresses(courses: [Course]) {
         if courses.isEmpty {
-            if isContinueLearningWidgetPresented {
-                hideContinueLearningWidget()
-            }
+            hideContinueLearningWidget()
         } else {
             updateCourseForLastStep(courses: courses)
         }
@@ -114,25 +124,37 @@ struct ContinueLearningWidgetData {
 
 struct CourseListBlock {
     let title: String
+    let description: String?
     let colorMode: CourseListColorMode
     var ID: String
     let horizontalController: CourseListHorizontalViewController
     let shouldShowCount: Bool
-    let showVerticalBlock: () -> Void
+    let showVerticalBlock: (Int?) -> Void
+    let onlyLocal: Bool
+    let colorStyle: CourseListEmptyPlaceholder.ColorStyle
 
-    init(listType: CourseListType, ID: String, horizontalLimit: Int, title: String, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil) {
+    init(listType: CourseListType, ID: String, horizontalLimit: Int?, title: String, description: String? = nil, colorMode: CourseListColorMode, shouldShowCount: Bool, showControllerBlock: @escaping (UIViewController) -> Void, lastStepWidgetDataSource: LastStepWidgetDataSource? = nil, courseListCountDelegate: CourseListCountDelegate? = nil, onlyLocal: Bool = false, descriptionColorStyle: CourseListEmptyPlaceholder.ColorStyle? = nil) {
+        let style: CourseListEmptyPlaceholder.ColorStyle = descriptionColorStyle ?? CourseListEmptyPlaceholder.ColorStyle.randomPositiveStyle
+        self.colorStyle = style
         self.title = title
+        self.description = description
         self.colorMode = colorMode
         self.ID = ID
         self.shouldShowCount = shouldShowCount
+        self.onlyLocal = onlyLocal
         self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
-        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
         self.showVerticalBlock = {
+            count in
             let verticalController = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as! CourseListVerticalViewController
             verticalController.title = title
-            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+            verticalController.descriptionView.colorStyle = style
+            verticalController.courseCount = count
+            verticalController.listDescription = description
+            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber())
+            verticalController.presenter?.couseListCountDelegate = verticalController
             showControllerBlock(verticalController)
         }
     }

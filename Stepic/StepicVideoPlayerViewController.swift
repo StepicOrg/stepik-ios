@@ -173,7 +173,7 @@ class StepicVideoPlayerViewController: UIViewController {
                     _ in
                     AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters:
                         ["quality": url.quality as NSObject,
-                            "device": DeviceInfo.deviceModelString as NSObject])
+                            "device": DeviceInfo.current.deviceModelString as NSObject])
                     self.currentQuality = url.quality
                     self.currentQualityURL = URL(string: url.url)
                 })

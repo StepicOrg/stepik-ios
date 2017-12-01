@@ -63,6 +63,7 @@ class SocialAuthViewController: UIViewController {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
 
     fileprivate var providers: [SocialProviderViewData] = []
 
@@ -112,9 +113,11 @@ class SocialAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.top
+
         localize()
 
-        presenter = SocialAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
         presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -126,6 +129,11 @@ class SocialAuthViewController: UIViewController {
         let collectionViewLayout = SocialCollectionViewFlowLayout()
         collectionViewLayout.numberOfColumns = numberOfColumns
         collectionView.collectionViewLayout = collectionViewLayout
+
+        // Small logo for small screens
+        if DeviceInfo.current.diagonal <= 4 {
+            stepikLogoHeightConstraint.constant = 38
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

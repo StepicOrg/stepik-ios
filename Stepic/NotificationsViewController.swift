@@ -75,7 +75,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, view: self)
+        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), view: self)
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
@@ -115,9 +115,11 @@ class NotificationsViewController: UIViewController, NotificationsView {
         presenter?.refresh()
     }
 
-    func set(notifications: NotificationViewDataStruct) {
+    func set(notifications: NotificationViewDataStruct, withReload: Bool = true) {
         self.data = notifications
-        tableView.reloadData()
+        if withReload {
+            tableView.reloadData()
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

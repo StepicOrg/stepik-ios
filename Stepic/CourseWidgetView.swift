@@ -15,6 +15,7 @@ class CourseWidgetView: NibInitializableView {
     @IBOutlet weak var courseTitleLabel: StepikLabel!
     @IBOutlet weak var courseStatsCollectionView: UICollectionView!
     @IBOutlet weak var actionButton: StepikButton!
+    @IBOutlet weak var secondaryActionButton: StepikButton!
 
     @IBOutlet weak var courseStatsCollectionViewFlowLayout: UICollectionViewFlowLayout!
 
@@ -25,15 +26,19 @@ class CourseWidgetView: NibInitializableView {
     }
 
     var action: (() -> Void)?
+    var secondaryAction: (() -> Void)?
+
     var colorMode: CourseListColorMode = .light {
         didSet {
             switch colorMode {
             case .dark:
                 courseTitleLabel.colorMode = .light
                 actionButton.isLightBackground = false
+                secondaryActionButton.isLightBackground = false
             case .light:
                 courseTitleLabel.colorMode = .dark
                 actionButton.isLightBackground = true
+                secondaryActionButton.isLightBackground = true
             }
             updateStats()
         }
@@ -81,12 +86,14 @@ class CourseWidgetView: NibInitializableView {
         courseTitleLabel.isHidden = hidden
         courseStatsCollectionView.isHidden = hidden
         actionButton.isHidden = hidden
+        secondaryActionButton.isHidden = hidden
     }
 
     var isLoading: Bool = false {
         didSet {
-            loadingWidgetView.isHidden = !isLoading
             setElements(hidden: isLoading)
+            loadingWidgetView.isHidden = !isLoading
+            loadingWidgetView.isAnimating = isLoading
         }
     }
 
@@ -95,11 +102,15 @@ class CourseWidgetView: NibInitializableView {
             switch buttonState {
             case .join:
                 actionButton.isGray = false
-                actionButton.setTitle(NSLocalizedString("AboutCourse", comment: ""), for: .normal)
+                secondaryActionButton.isGray = true
+                actionButton.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonInfo", comment: ""), for: .normal)
                 break
             case .continueLearning:
                 actionButton.isGray = true
-                actionButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+                secondaryActionButton.isGray = true
+                actionButton.setTitle(NSLocalizedString("WidgetButtonLearn", comment: ""), for: .normal)
+                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonSyllabus", comment: ""), for: .normal)
                 break
             }
         }
@@ -156,14 +167,37 @@ class CourseWidgetView: NibInitializableView {
         self.courseStatsCollectionView.register(UINib(nibName: "CourseStatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseStatCollectionViewCell")
         courseStatsCollectionView.delegate = self
         courseStatsCollectionView.dataSource = self
-        courseStatsCollectionViewFlowLayout.estimatedItemSize = CGSize(width: 1.0, height: 1.0)
+
+        courseStatsCollectionViewFlowLayout.setEstimatedItemSize(CGSize(width: 1.0, height: 1.0), fallbackOnPlus: CGSize(width: 60.0, height: 10.0))
         courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
         courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
         view.backgroundColor = UIColor.clear
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        courseStatsCollectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
+        title = course.title
+        action = course.action
+        secondaryAction = course.secondaryAction
+        buttonState = course.isEnrolled ? .continueLearning : .join
+        imageURL = URL(string: course.coverURLString)
+        rating = course.rating
+        learners = course.learners
+        progress = course.progress
+        self.colorMode = colorMode
+        isLoading = false
+    }
+
     @IBAction func actionButtonPressed(_ sender: Any) {
         action?()
+    }
+
+    @IBAction func secondaryActionButtonPressed(_ sender: Any) {
+        secondaryAction?()
     }
 
 }

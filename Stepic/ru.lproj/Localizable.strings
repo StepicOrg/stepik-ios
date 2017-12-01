@@ -37,6 +37,7 @@ EmptyMyCoursesDescription = "Чтобы записаться на курс, пе
 ReloadPlayerTitle = "Видео загружено";
 ReloadPlayerMessage = "Обновить проигрыватель?";
 BeginDate = "Дата начала";
+EndDate = "Дата закрытия";
 SoftDeadline = "Мягкий дедлайн";
 HardDeadline = "Жесткий дедлайн";
 Certificate = "Сертификат";
@@ -298,10 +299,9 @@ ShortBio = "Краткая биография";
 Info = "Информация";
 ProfileAnonymousTitle = "Кажется, у вас нет профиля";
 ProfileAnonymousSubtitle = "Войдите, чтобы получить доступ к большему количеству функций";
-SignInTitleHead = "Войти";
-SignUpTitleHead = "Зарегистрироваться";
-SignInTitleSocialTail = "через соцсети";
-SignInTitleEmailTail = "с email";
+SignUpTitle = "<b>Зарегистрироваться</b>";
+SignInTitleSocial = "<b>Войти</b> через соцсети";
+SignInTitleEmail = "<b>Войти</b> с email";
 SignInSocialButton = "Вход через соцсеть";
 SignInEmailButton = "Вход с email";
 SignUpButton = "Регистрация";
@@ -309,10 +309,7 @@ Name = "Имя";
 SignInMoreButton = "Ещё";
 SignInLessButton = "Скрыть";
 RemindThePassword = "Вспомнить пароль";
-AgreementLabelTermsOfService = "использования";
-AgreementLabelPrivacyPolicy = "конфиденциальности";
-And = "и";
-AgreementLabelHead = "Регистрируясь, вы принимаете условия";
+AgreementLabelText = "Регистрируясь, вы принимаете условия <a href=\"http://welcome.stepik.org/ru/terms\">использования</a> и <a href=\"http://welcome.stepik.org/ru/privacy\">конфиденциальности</a>";
 LogInButton = "Войти";
 RegisterButton = "Зарегистрироваться";
 WhoopsHead = "Ой!";
@@ -347,6 +344,22 @@ HomePlaceholderErrorPopular = "Кажется, мы не смогли загру
 courses1 = "курс";
 courses234 = "курса";
 courses567890 = "курсов";
+SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного курса по запросу";
+SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
+ChooseSearchLanguage = "Выберите язык поиска";
+Catalog = "Каталог";
+CatalogPlaceholderError = "Не удалось загрузить каталог. <b>Нажмите</b> чтобы попробовать еще раз";
+TrendingTopics = "Категории";
+
+WidgetButtonJoin = "Поступить";
+WidgetButtonInfo = "Инфо";
+WidgetButtonSyllabus = "План";
+WidgetButtonLearn = "Учиться";
+
+EnterSQLQuery = "Введите SQL запрос:";
+
+SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
+SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

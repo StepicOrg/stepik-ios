@@ -10,14 +10,12 @@ def shared_pods
     pod 'SDWebImage'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
-    pod 'Crashlytics'
-
+    pod 'Crashlytics', '~> 3.9'
 end
 
 def all_pods
 
     shared_pods
-    pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
@@ -25,10 +23,10 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
-    pod 'Firebase/Core', '3.16.0'
-    pod 'Firebase/AppIndexing', '3.16.0'
-    pod 'Firebase/Messaging', '3.16.0'
-    pod 'Firebase/Analytics', '3.16.0'
+    pod 'Firebase/Core'
+    pod 'Firebase/AppIndexing'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/Analytics'
     
     pod 'Mixpanel-swift'
 
@@ -50,6 +48,7 @@ def all_pods
     pod 'TTTAttributedLabel'
     pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
+    pod 'DeviceKit', '~> 1.0'
 end
 
 def testing_pods

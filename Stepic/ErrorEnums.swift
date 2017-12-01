@@ -15,3 +15,7 @@ enum FetchError: Error {
 enum ConnectionError: Error {
     case noDataRecievedError, parsingError, tokenRefreshError
 }
+
+enum WeakSelfError: Error {
+    case noStrong
+}

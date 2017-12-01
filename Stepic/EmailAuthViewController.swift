@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import IQKeyboardManagerSwift
+import Atributika
 
 extension EmailAuthViewController: EmailAuthView {
     func update(with result: EmailAuthResult) {
@@ -37,6 +38,7 @@ class EmailAuthViewController: UIViewController {
 
     var prefilledEmail: String?
 
+    @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
 
@@ -64,9 +66,7 @@ class EmailAuthViewController: UIViewController {
             case .validationError:
                 let head = NSLocalizedString("WhoopsHead", comment: "")
                 let error = NSLocalizedString("ValidationEmailAndPasswordError", comment: "")
-                let attributedString = NSMutableAttributedString(string: "\(head) \(error)")
-                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-                errorMessage = attributedString
+                errorMessage = "\(head) \(error)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
                 logInButton.isEnabled = false
 
                 SVProgressHUD.dismiss()
@@ -74,15 +74,13 @@ class EmailAuthViewController: UIViewController {
             case .existingEmail:
                 let head = NSLocalizedString("WhoopsHead", comment: "")
                 let error = NSLocalizedString("SocialSignupWithExistingEmailError", comment: "")
-                let attributedString = NSMutableAttributedString(string: "\(head) \(error)")
-                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-                errorMessage = attributedString
+                errorMessage = "\(head) \(error)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
                 inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
             }
         }
     }
 
-    var errorMessage: NSMutableAttributedString? = nil {
+    var errorMessage: NSAttributedString? = nil {
         didSet {
             alertLabel.attributedText = errorMessage
             if errorMessage != nil {
@@ -92,7 +90,7 @@ class EmailAuthViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 })
             } else {
-                alertBottomLabelConstraint.constant = 0
+                alertBottomLabelConstraint.constant = -6
                 alertLabelHeightConstraint.isActive = true
                 UIView.animate(withDuration: 0.1, animations: {
                     self.view.layoutIfNeeded()
@@ -139,9 +137,11 @@ class EmailAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.top
+
         localize()
 
-        presenter = EmailAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = EmailAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
 
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -192,6 +192,11 @@ class EmailAuthViewController: UIViewController {
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         passwordTextField.fieldType = .password
+
+        // Small logo for small screens
+        if DeviceInfo.current.diagonal <= 4 {
+            stepikLogoHeightConstraint.constant = 38
+        }
     }
 
     private func prefill() {
@@ -202,12 +207,7 @@ class EmailAuthViewController: UIViewController {
     }
 
     private func localize() {
-        // Title
-        let head = NSLocalizedString("SignInTitleHead", comment: "")
-        let tail = NSLocalizedString("SignInTitleEmailTail", comment: "")
-        let attributedString = NSMutableAttributedString(string: "\(head) \(tail)")
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
-        titleLabel.attributedText = attributedString
+        titleLabel.setTextWithHTMLString(NSLocalizedString("SignInTitleEmail", comment: ""))
 
         signInButton.setTitle(NSLocalizedString("SignInSocialButton", comment: ""), for: .normal)
         signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)

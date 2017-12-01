@@ -19,10 +19,15 @@ class HorizontalCoursesView: NibInitializableView {
     @IBOutlet weak internal var courseListContainerView: UIView!
     @IBOutlet weak var courseListContainerHeight: NSLayoutConstraint!
 
-    let courseListHeight: CGFloat = 210
-    let courseListPlaceholderHeight: CGFloat = 120
+    @IBOutlet weak var courseListDescriptionView: CourseListEmptyPlaceholder!
+//    @IBOutlet weak var courseListDescriptionHeight: NSLayoutConstraint!
 
-    private var showVerticalBlock: (() -> Void)?
+    @IBOutlet weak var titleDescriptionSpacing: NSLayoutConstraint!
+
+    let courseListHeight: CGFloat = 290
+    let courseListPlaceholderHeight: CGFloat = 104
+
+    private var showVerticalBlock: ((Int?) -> Void)?
 
     override var nibName: String {
         return "HorizontalCoursesView"
@@ -40,14 +45,31 @@ class HorizontalCoursesView: NibInitializableView {
         }
     }
 
+    var listDescription: String? {
+        didSet {
+            if let listDescription = listDescription {
+                self.courseListDescriptionView.presentationStyle = .bordered
+                self.courseListDescriptionView.text = listDescription
+//                self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
+                self.titleDescriptionSpacing.constant = 16
+            } else {
+                self.courseListDescriptionView.constrainHeight("0")
+//                self.courseListDescriptionHeight.constant = 0
+                self.titleDescriptionSpacing.constant = 0
+            }
+        }
+    }
+
     var shouldShowCount: Bool = false
 
     @IBAction func showAllPressed(_ sender: Any) {
-        showVerticalBlock?()
+        showVerticalBlock?(shouldShowCount ? courseCount : nil)
     }
 
     func setup(block: CourseListBlock) {
+        self.listDescription = block.description
         self.showVerticalBlock = block.showVerticalBlock
+        self.courseListDescriptionView.colorStyle = block.colorStyle
         showAllButton.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         block.horizontalController.changedPlaceholderVisibleBlock = {
             [weak self]

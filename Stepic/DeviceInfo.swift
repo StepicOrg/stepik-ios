@@ -7,19 +7,43 @@
 //
 
 import Foundation
+import DeviceKit
 
-struct DeviceInfo {
-    static func isIPad() -> Bool {
-        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+class DeviceInfo {
+    static var current = DeviceInfo()
+
+    private var currentDevice: DeviceKit.Device = DeviceKit.Device()
+
+    private init() { }
+
+    var isPad: Bool {
+        return currentDevice.isPad
     }
 
-    static var deviceInfoString: String {
-        let d = UIDevice.current
-        return "\(d.model) \(d.name) \(d.systemName) \(d.systemVersion)"
+    var isPlus: Bool {
+        return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
+               currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
     }
 
-    static var deviceModelString: String {
-        let d = UIDevice.current
-        return "\(d.model)"
+    var OSVersion: (major: Int, minor: Int, patch: Int) {
+        return (major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
+                minor: ProcessInfo.processInfo.operatingSystemVersion.minorVersion,
+                patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion)
+    }
+
+    var diagonal: Double {
+        return currentDevice.diagonal
+    }
+
+    var deviceInfoString: String {
+        return "\(currentDevice.model) \(currentDevice.name) \(currentDevice.systemName) \(currentDevice.systemVersion)"
+    }
+
+    var deviceModelString: String {
+        return currentDevice.model
+    }
+
+    var orientation: UIDeviceOrientation {
+        return UIDevice.current.orientation
     }
 }

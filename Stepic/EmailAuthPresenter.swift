@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol EmailAuthView: class {
     var state: EmailAuthState { get set }
@@ -25,12 +26,14 @@ enum EmailAuthState {
 class EmailAuthPresenter {
     weak var view: EmailAuthView?
 
-    var authManager: AuthManager
+    var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authManager: AuthManager, stepicsAPI: StepicsAPI, view: EmailAuthView) {
-        self.authManager = authManager
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: EmailAuthView) {
+        self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
 
         self.view = view
     }
@@ -38,34 +41,38 @@ class EmailAuthPresenter {
     func logIn(with email: String, password: String) {
         view?.state = .loading
 
-        authManager.logInWithUsername(email, password: password, success: { token in
+        authAPI.signInWithAccount(email: email, password: password).then { token, authorizationType -> Promise<User> in
             AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
 
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
-            self.stepicsAPI.retrieveCurrentUser(success: { user in
-                AuthInfo.shared.user = user
-                User.removeAllExcept(user)
+            return self.stepicsAPI.retrieveCurrentUser()
+        }.then { user -> Promise<NotificationsStatus> in
+            AuthInfo.shared.user = user
+            User.removeAllExcept(user)
 
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
-                self.view?.update(with: .success)
-            }, error: { _ in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
+            self.view?.update(with: .success)
+
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
+        }.catch { error in
+            switch error {
+            case is RetrieveError:
                 print("email auth: successfully signed in, but could not get user")
-
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
                 self.view?.update(with: .success)
-            })
-        }, failure: { e in
-            switch e {
-            case .manyAttempts:
+            case SignInError.manyAttempts:
                 self.view?.update(with: EmailAuthResult.manyAttempts)
-            case .invalidEmailAndPassword:
+            case SignInError.invalidEmailAndPassword:
                 self.view?.state = EmailAuthState.validationError
-            case .badConnection:
+            case SignInError.badConnection:
                 self.view?.update(with: EmailAuthResult.badConnection)
             default:
                 self.view?.update(with: EmailAuthResult.error)
             }
-        })
+        }
     }
 }
