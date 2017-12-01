@@ -121,7 +121,7 @@ enum CourseListType {
                 }
             }
         case let .tag(id: id):
-            return coursesAPI.retrieve(tag: id, language: requestedLanguage, page: page)
+            return coursesAPI.retrieve(tag: id, order: "-activity", language: requestedLanguage, page: page)
         default:
             return nil
         }
