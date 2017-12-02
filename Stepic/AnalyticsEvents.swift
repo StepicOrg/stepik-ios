@@ -222,4 +222,9 @@ struct AnalyticsEvents {
             static let clickBanner = "settings_click_banner"
         }
     }
+
+    struct Notifications {
+        static let markAllAsRead = "notifications_mark_all_as_read"
+        static let markAsRead = "notifications_mark_as_read"
+    }
 }
