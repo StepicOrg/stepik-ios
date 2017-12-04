@@ -17,6 +17,8 @@ import FBSDKCoreKit
 import Mixpanel
 import YandexMobileMetrica
 import Presentr
+import SwiftyJSON
+import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         WatchSessionManager.sharedManager.startSession()
+
+        NotificationsBadgesManager.shared.setup()
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
@@ -43,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
 
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -65,11 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleLocalNotification()
         }
 
-        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [NSString: AnyObject] {
-            handleNotification(notificationDict)
+        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: Any] {
+            handleNotification(notificationDict: notificationDict)
         }
 
-        checkStreaks()
+        checkNotificationsCount()
 
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
@@ -79,82 +84,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    //Streaks presentation
-    //TODO: Refactor this into a class
-    let streaksPopupPresentr: Presentr = {
-        let width = ModalSize.sideMargin(value: 24)
-        let height = ModalSize.custom(size: 300.0)
-        let center = ModalCenterPosition.center
-        let customType = PresentationType.custom(width: width, height: height, center: center)
-
-        let customPresenter = Presentr(presentationType: customType)
-        customPresenter.transitionType = .coverVerticalFromTop
-        customPresenter.dismissTransitionType = .coverVerticalFromTop
-        customPresenter.roundCorners = true
-        customPresenter.backgroundColor = UIColor.black
-        customPresenter.backgroundOpacity = 0.5
-        return customPresenter
-    }()
-
-    func presentStreaks(userActivity: UserActivity) {
-
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.opened, parameters: [
-            "current": userActivity.currentStreak,
-            "longest": userActivity.longestStreak,
-            "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
-            ])
-
-        guard let nav = currentNavigation else {
-            return
+    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+            let value = userInfo["value"] as? Int else {
+                return
         }
 
-        let vc = CurrentBestStreakViewController(nibName: "CurrentBestStreakViewController", bundle: nil) as CurrentBestStreakViewController
-
-        vc.activity = userActivity
-        nav.customPresentViewController(streaksPopupPresentr, viewController: vc, animated: true, completion: nil)
-    }
-
-    func checkStreaks() {
-        func dayLocalizableFor(daysCnt: Int) -> String {
-            switch (daysCnt % 10) {
-            case 1: return NSLocalizedString("days1", comment: "")
-            case 2, 3, 4: return NSLocalizedString("days234", comment: "")
-            default: return NSLocalizedString("days567890", comment: "")
-            }
-        }
-        guard let userId = AuthInfo.shared.userId else {
-            return
-        }
-        _ = ApiDataDownloader.userActivities.retrieve(user: userId, success: {
-            [weak self]
-            userActivity in
-            if userActivity.needsToSolveToday {
-                let streakText = "\(NSLocalizedString("YouAreSolving", comment: "")) \(userActivity.currentStreak) \(dayLocalizableFor(daysCnt: userActivity.currentStreak)) \(NSLocalizedString("InARow", comment: "")).\n\(NSLocalizedString("SolveToImprove", comment: ""))"
-                let subtitleText = "\(NSLocalizedString("TapToLearnAboutStreaks", comment: ""))"
-                NotificationAlertConstructor.sharedConstructor.presentStreakNotificationFake(streakText, subtitleText: subtitleText, success: {
-                    [weak self] in
-                    self?.presentStreaks(userActivity: userActivity)
-                })
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
-                    "current": userActivity.currentStreak,
-                    "longest": userActivity.longestStreak,
-                    "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
-                    ])
-            }
-        }, error: {
-            _ in
-        })
+        UIApplication.shared.applicationIconBadgeNumber = value
     }
 
     //Notification handling
+    func checkNotificationsCount() {
+        guard AuthInfo.shared.isAuthorized else {
+            return
+        }
+
+        ApiDataDownloader.notificationsStatusAPI.retrieve().then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
+        }.catch { _ in
+            print("notifications: unable to fetch badges count on launch")
+            NotificationsBadgesManager.shared.set(number: 0)
+        }
+    }
 
     func handleLocalNotification() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)
     }
 
-    fileprivate func handleNotification(_ notificationDict: [NSString: AnyObject]) {
+    func handleNotification(notificationDict: [String: Any]) {
         if let reaction = NotificationReactionHandler.handle(with: notificationDict),
-            let topController = currentNavigation?.topViewController {
+            let topController = self.currentNavigation?.topViewController {
             reaction(topController)
         }
     }
@@ -248,16 +207,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        print("remote notification received: DEBUG = \(userInfo)")
 
-        if let notificationDict = userInfo as? [NSString: AnyObject] {
-            if let text = ((notificationDict["aps"] as? [AnyHashable: Any])?["alert"] as? [AnyHashable: Any])?["body"] as? String {
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: {
-                        self.handleNotification(notificationDict)
-                    }
-                )
-            }
+        guard let notificationDict = userInfo as? [String: Any] else {
+            print("remote notification received: unable to parse userInfo")
+            return
         }
-        print("didReceiveRemoteNotification with userInfo: \(userInfo)")
+
+        guard let type = notificationDict["type"] as? String else {
+            print("remote notification received: unable to parse notification type")
+            return
+        }
+
+        switch type {
+        case "notifications":
+            if let text = ((notificationDict["aps"] as? [String: Any])?["alert"] as? [String: Any])?["body"] as? String {
+                // FIXME: incapsulate this logic
+                var notification: Notification?
+                guard let object = notificationDict["object"] as? String else {
+                    return
+                }
+                let json = JSON(parseJSON: object)
+                if let notificationId = json["id"].int,
+                   let notification = Notification.fetch(id: notificationId) {
+                    notification.update(json: json)
+                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification.id, "new": false])
+                } else {
+                    notification = Notification(json: json)
+                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification!.id, "new": true])
+                }
+                CoreDataHelper.instance.save()
+
+                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: {
+                    self.handleNotification(notificationDict: notificationDict)
+                })
+            }
+        case "notification-statuses":
+            if let badgeCount = (notificationDict["aps"] as? [String: Any])?["badge"] as? Int {
+                NotificationsBadgesManager.shared.set(number: badgeCount)
+            }
+        default:
+            break
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -276,6 +267,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
     }
 
 //    @available(iOS 8.0, *)
@@ -348,7 +340,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
 
 }

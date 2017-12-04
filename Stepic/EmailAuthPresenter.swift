@@ -28,10 +28,12 @@ class EmailAuthPresenter {
 
     var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, view: EmailAuthView) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: EmailAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
 
         self.view = view
     }
@@ -46,12 +48,16 @@ class EmailAuthPresenter {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
             return self.stepicsAPI.retrieveCurrentUser()
-        }.then { user -> Void in
+        }.then { user -> Promise<NotificationsStatus> in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
             self.view?.update(with: .success)
+
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
             case is RetrieveError:

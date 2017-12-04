@@ -13,7 +13,6 @@ class ContentLanguageCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         contentView.setRoundedCorners(cornerRadius: 4)
         languageLabel.colorMode = .dark
         contentView.backgroundColor = UIColor.mainLight

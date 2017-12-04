@@ -348,6 +348,7 @@ SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try aga
 ChooseSearchLanguage = "Choose search language";
 Catalog = "Catalog";
 CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
+TrendingTopics = "Trending topics";
 
 WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
@@ -355,6 +356,9 @@ WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
 
 EnterSQLQuery = "Enter SQL query:";
+
+SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
+SolveSomethingToday = "Solve anything today to increase your streak.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

@@ -34,7 +34,7 @@ struct Sorter {
 
         for id in ids {
             let elements = array.filter({return $0.id == id})
-            if elements.count == 1 {
+            if elements.count > 0 {
                 res += [elements[0]]
             } else {
                 //TODO : Maybe should throw exception here
@@ -53,7 +53,7 @@ struct Sorter {
 
         for step in steps {
             let elements = assignments.filter({return $0.stepId == step.id})
-            if elements.count == 1 {
+            if elements.count > 0 {
                 res += [elements[0]]
             } else {
                 //TODO : Maybe should throw exception here

@@ -42,4 +42,8 @@ class DeviceInfo {
     var deviceModelString: String {
         return currentDevice.model
     }
+
+    var orientation: UIDeviceOrientation {
+        return UIDevice.current.orientation
+    }
 }

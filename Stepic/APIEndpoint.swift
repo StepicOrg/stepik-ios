@@ -13,7 +13,7 @@ import CoreData
 import PromiseKit
 
 enum RetrieveError: Error {
-    case connectionError, badStatus, cancelled
+    case connectionError, badStatus, cancelled, parsingError
 
     init(error: Error) {
         guard let error = error as? NSError else {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="CourseTagCollectionViewCell" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="92" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="92" height="40"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-q1-9pt" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                        <rect key="frame" x="16" y="0.0" width="60" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="evj-ZO-tj0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2E4-q1-9pt" secondAttribute="trailing" constant="16" id="8Be-XN-WEh"/>
+                <constraint firstItem="2E4-q1-9pt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QVe-qZ-WJt"/>
+                <constraint firstAttribute="bottom" secondItem="2E4-q1-9pt" secondAttribute="bottom" id="ZmN-9N-ZQ0"/>
+                <constraint firstItem="2E4-q1-9pt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="ebk-lc-zSZ"/>
+            </constraints>
+            <size key="customSize" width="92" height="40"/>
+            <connections>
+                <outlet property="tagLabel" destination="2E4-q1-9pt" id="ggh-Mj-0MF"/>
+            </connections>
+            <point key="canvasLocation" x="55" y="49"/>
+        </collectionViewCell>
+    </objects>
+</document>

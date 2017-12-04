@@ -38,10 +38,12 @@ class SocialAuthPresenter {
 
     var stepicsAPI: StepicsAPI
     var authAPI: AuthAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, view: SocialAuthView) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
         self.view = view
 
         // TODO: create NSNotification.Name extension
@@ -83,12 +85,16 @@ class SocialAuthPresenter {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
             return self.stepicsAPI.retrieveCurrentUser()
-        }.then { user -> Void in
+        }.then { user -> Promise<NotificationsStatus> in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
             self.view?.update(with: .success)
+
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
             case is SocialSDKError:
