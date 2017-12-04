@@ -15,9 +15,20 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     var scrollView: UIScrollView = UIScrollView()
     var stackView: UIStackView = UIStackView()
 
+    var blocks: [CourseListBlock] = []
+    var countForID: [String: Int] = [:]
+    var countUpdateBlock: [String: () -> Void] = [:]
+
+    private let continueLearningWidget = ContinueLearningWidgetView(frame: CGRect.zero)
+    private var isContinueLearningWidgetPresented: Bool = false
+    private let widgetBackgroundView = UIView()
+
+    private let streaksWidgetBackgroundView = UIView()
+    private var streaksWidgetView: UserActivityHomeView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = HomeScreenPresenter(view: self)
+        self.presenter = HomeScreenPresenter(view: self, userActivitiesAPI: UserActivitiesAPI())
         setupStackView()
         presenter?.initBlocks()
         self.title = NSLocalizedString("Home", comment: "")
@@ -26,6 +37,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
                 scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             }
         #endif
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.checkStreaks()
     }
 
     private func setupStackView() {
@@ -39,10 +55,6 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         stackView.align(toView: scrollView)
         stackView.alignment = .fill
     }
-
-    var blocks: [CourseListBlock] = []
-    var countForID: [String: Int] = [:]
-    var countUpdateBlock: [String: () -> Void] = [:]
 
     private func reload() {
         for block in blocks {
@@ -82,23 +94,54 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         self.show(vc, sender: nil)
     }
 
-    private let widgetBackgroundView = UIView()
-    func presentContinueLearningWidget(widget: ContinueLearningWidgetView) {
+    func presentStreaksInfo(streakCount: Int, shouldSolveToday: Bool) {
+        if streaksWidgetView == nil {
+            let widget = UserActivityHomeView(frame: CGRect.zero)
+            streaksWidgetView = widget
+            streaksWidgetBackgroundView.backgroundColor = UIColor.white
+            streaksWidgetBackgroundView.addSubview(widget)
+            widget.alignTop("16", bottom: "-8", toView: streaksWidgetBackgroundView)
+            widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            widget.setRoundedCorners(cornerRadius: 8)
+            streaksWidgetBackgroundView.isHidden = true
+            stackView.insertArrangedSubview(streaksWidgetBackgroundView, at: 0)
+            streaksWidgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+        }
+
+        streaksWidgetView?.set(streakCount: streakCount, shouldSolveToday: shouldSolveToday)
+
+        UIView.animate(withDuration: 0.15) {
+            self.streaksWidgetBackgroundView.isHidden = false
+        }
+    }
+
+    func hideStreaksInfo() {
+        streaksWidgetBackgroundView.isHidden = true
+    }
+
+    func presentContinueLearningWidget(widgetData: ContinueLearningWidgetData) {
+        continueLearningWidget.setup(widgetData: widgetData)
+
         widgetBackgroundView.backgroundColor = UIColor.white
-        widgetBackgroundView.addSubview(widget)
-        widget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        widget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
-        widget.setRoundedCorners(cornerRadius: 8)
+        widgetBackgroundView.addSubview(continueLearningWidget)
+        continueLearningWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        continueLearningWidget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
-        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
+        stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
 
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = false
         }
+
+        if !isContinueLearningWidgetPresented {
+            isContinueLearningWidgetPresented = true
+        }
     }
 
     func hideCountinueLearningWidget() {
+        isContinueLearningWidgetPresented = false
         stackView.removeArrangedSubview(widgetBackgroundView)
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = true

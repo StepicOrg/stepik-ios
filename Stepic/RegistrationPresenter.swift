@@ -28,10 +28,12 @@ class RegistrationPresenter {
 
     var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
+    var notificationStatusesAPI: NotificationStatusesAPI
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, view: RegistrationView) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: RegistrationView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
 
         self.view = view
     }
@@ -50,12 +52,16 @@ class RegistrationPresenter {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
             return self.stepicsAPI.retrieveCurrentUser()
-        }.then { user -> Void in
+        }.then { user -> Promise<NotificationsStatus> in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
             self.view?.update(with: .success)
+
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
             case PerformRequestError.noAccessToRefreshToken:

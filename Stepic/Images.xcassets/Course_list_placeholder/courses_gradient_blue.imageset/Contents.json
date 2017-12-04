@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "blurred_blue_background.png"
+      "filename" : "courses_gradient_blue.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

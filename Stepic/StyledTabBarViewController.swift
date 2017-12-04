@@ -12,6 +12,21 @@ class StyledTabBarViewController: UITabBarController {
 
     let items = StepicApplicationsInfo.Modules.tabs?.flatMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
+    var notificationsBadgeNumber: Int {
+        get {
+            if let tab = tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
+                return Int(tab.badgeValue ?? "0") ?? 0
+            }
+            return 0
+        }
+        set {
+            if let tab = tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
+                tab.badgeValue = newValue > 0 ? "\(newValue)" : nil
+                fixBadgePosition()
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +45,21 @@ class StyledTabBarViewController: UITabBarController {
         if !AuthInfo.shared.isAuthorized {
             selectedIndex = 1
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+            let value = userInfo["value"] as? Int else {
+                return
+        }
+
+        self.notificationsBadgeNumber = value
     }
 
     func getEventNameForTabIndex(index: Int) -> String? {
@@ -54,12 +84,12 @@ class StyledTabBarViewController: UITabBarController {
         self.tabBar.items?.forEach { item in
             if #available(iOS 11.0, *) {
                 // For new tabbar in iOS 11.0+
-                switch UIDevice.current.orientation {
+                switch DeviceInfo.current.orientation {
                 case .landscapeLeft, .landscapeRight:
                     // Using default tabbar in landscape
                     showDefaultTitle(for: item)
                 default:
-                    if UIDevice.current.userInterfaceIdiom == .pad {
+                    if DeviceInfo.current.isPad {
                         // Using default tabbar on iPads in both orientations
                         showDefaultTitle(for: item)
                     } else {
@@ -74,27 +104,66 @@ class StyledTabBarViewController: UITabBarController {
         }
     }
 
+    private func fixBadgePosition() {
+        for i in 1...items.count {
+            if i >= tabBar.subviews.count { break }
+
+            for badgeView in tabBar.subviews[i].subviews {
+                if NSStringFromClass(badgeView.classForCoder) == "_UIBadgeView" {
+                    badgeView.layer.transform = CATransform3DIdentity
+
+                    if #available(iOS 11.0, *) {
+                        switch DeviceInfo.current.orientation {
+                        case .landscapeLeft, .landscapeRight:
+                            if DeviceInfo.current.isPlus {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
+                            }
+                        default:
+                            if DeviceInfo.current.isPad {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        }
+                    } else {
+                        switch DeviceInfo.current.orientation {
+                        case .landscapeLeft, .landscapeRight:
+                            if DeviceInfo.current.isPlus {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        default:
+                            if DeviceInfo.current.isPad {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            } else {
+                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.updateTitlesForTabBarItems()
+        self.fixBadgePosition()
     }
 }
 
 struct TabBarItemInfo {
-    var clickEventName: String
     var title: String
     var controller: UIViewController
+    var clickEventName: String
     var image: UIImage
-
-    init(title: String, controller: UIViewController, clickEventName: String, image: UIImage) {
-        self.title = title
-        self.controller = controller
-        self.clickEventName = clickEventName
-        self.image = image
-    }
+    var tag: Int
 
     func buildItem() -> UITabBarItem {
-        return UITabBarItem(title: title, image: image, tag: 0)
+        return UITabBarItem(title: title, image: image, tag: tag)
     }
 }
 
@@ -107,22 +176,26 @@ enum TabController: String {
     case notifications = "Notifications"
     case explore = "Catalog"
 
+    var tag: Int {
+        return self.hashValue
+    }
+
     var itemInfo: TabBarItemInfo {
         switch self {
         case .myCourses:
-            return TabBarItemInfo(title: NSLocalizedString("MyCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "MyCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.myCoursesClicked, image: #imageLiteral(resourceName: "tab-home"))
+            return TabBarItemInfo(title: NSLocalizedString("MyCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "MyCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.myCoursesClicked, image: #imageLiteral(resourceName: "tab-home"), tag: self.tag)
         case .findCourses:
-            return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-explore"))
+            return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-explore"), tag: self.tag)
         case .certificates:
-            return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"))
+            return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"), tag: self.tag)
         case .profile:
-            return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"))
+            return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
-            return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-home"))
+            return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-home"), tag: self.tag)
         case .notifications:
-            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"))
+            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .explore:
-            return TabBarItemInfo(title: NSLocalizedString("Catalog", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"))
+            return TabBarItemInfo(title: NSLocalizedString("Catalog", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"), tag: self.tag)
         }
     }
 }

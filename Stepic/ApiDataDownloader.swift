@@ -39,6 +39,7 @@ class ApiDataDownloader {
     static let courseReviewSummaries = CourseReviewSummariesAPI()
     static let enrollments = EnrollmentsAPI()
     static let auth = AuthAPI()
+    static let notificationsStatusAPI = NotificationStatusesAPI()
 }
 
 enum RefreshMode {

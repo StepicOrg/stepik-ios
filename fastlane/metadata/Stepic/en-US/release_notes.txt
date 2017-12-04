@@ -1,9 +1,9 @@
 In the new version of the Stepik iOS app we:
-• Added the brand new catalog screen.
-• Redesigned course widgets. It may seem not as convenient as before, but the changes were made with good intentions and, at least, you will get used to it sooner or later.
-• Added possibility to change the language of the app's content. Say no to strange cyrillic symbols and Russian trace in online education!
-• Seriously improved "continue learning". It does not allow you to see what you should not see anymore.
-• Fixed some strange bugs - now you can press pause on your EarPods without any crash.
+• Added SQL Challenge support.
+• Added categories and category descriptions.
+• Show the number of notifications everywhere we were supposed to.
+• Show your activity info on the home screen.
+• Fixed some bugs and improved some things.
 
 Enjoy learning,
 Stepik team

@@ -12,13 +12,54 @@ import FLKAutoLayout
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
 
+    var listDescription: String? {
+        didSet {
+            updateDescription()
+        }
+    }
+
 //    var refreshControl: UIRefreshControl? = UIRefreshControl()
+
+    var courseCount: Int? {
+        didSet {
+            descriptionView.count = courseCount
+        }
+    }
+
+    var descriptionWidgetView: UIView?
+
+    lazy var descriptionView: CourseListEmptyPlaceholder = {
+        let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
+        placeholder.presentationStyle = .fullWidth
+        placeholder.frame.size = placeholder.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: placeholder.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        return placeholder
+    }()
+
+    func updateDescription() {
+        if let listDescription = listDescription {
+            descriptionView.text = listDescription
+            if descriptionWidgetView == nil {
+                descriptionWidgetView = UIView()
+                guard let descriptionWidgetView = descriptionWidgetView else {
+                    return
+                }
+                descriptionWidgetView.backgroundColor = UIColor.clear
+                descriptionWidgetView.addSubview(descriptionView)
+                descriptionView.alignTop("0", leading: "0", bottom: "-16", trailing: "0", toView: descriptionWidgetView)
+                descriptionWidgetView.frame.size = descriptionWidgetView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: descriptionWidgetView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+            }
+            tableView.tableHeaderView = descriptionWidgetView
+        } else {
+            tableView.tableHeaderView = nil
+        }
+    }
 
     override func viewDidLoad() {
         delegate = self
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.clear
         tableView.allowsSelection = false
+        updateDescription()
     }
 
     lazy var paginationView: LoadingPaginationView = {
@@ -186,5 +227,11 @@ extension CourseListVerticalViewController: UITableViewDelegate, UITableViewData
             cell.setup(courseViewData: courses[indexPath.row], colorMode: colorMode)
         }
         return cell
+    }
+}
+
+extension CourseListVerticalViewController: CourseListCountDelegate {
+    func updateCourseCount(to: Int, forListID: String) {
+        courseCount = to
     }
 }

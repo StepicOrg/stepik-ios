@@ -37,6 +37,7 @@ EmptyMyCoursesDescription = "Чтобы записаться на курс, пе
 ReloadPlayerTitle = "Видео загружено";
 ReloadPlayerMessage = "Обновить проигрыватель?";
 BeginDate = "Дата начала";
+EndDate = "Дата закрытия";
 SoftDeadline = "Мягкий дедлайн";
 HardDeadline = "Жесткий дедлайн";
 Certificate = "Сертификат";
@@ -348,11 +349,17 @@ SearchPlaceholderError = "Ошибка при поиске курсов. <b>На
 ChooseSearchLanguage = "Выберите язык поиска";
 Catalog = "Каталог";
 CatalogPlaceholderError = "Не удалось загрузить каталог. <b>Нажмите</b> чтобы попробовать еще раз";
+TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
+
+EnterSQLQuery = "Введите SQL запрос:";
+
+SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
+SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

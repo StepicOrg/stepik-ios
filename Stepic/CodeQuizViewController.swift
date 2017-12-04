@@ -13,14 +13,14 @@ import Highlightr
 class CodeQuizViewController: QuizViewController {
 
     var dataset: String?
-    var reply: CodeReply?
+    var reply: Reply?
 
     var limitsLabel: StepikLabel = StepikLabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
 
     let toolbarHeight: CGFloat = 44
-    let limitsLabelHeight: CGFloat = 40
+    var limitsLabelHeight: CGFloat = 40
 
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
 
@@ -44,7 +44,7 @@ class CodeQuizViewController: QuizViewController {
 
     var tabSize: Int = 0
 
-    fileprivate func setupAccessoryView(editable: Bool) {
+    func setupAccessoryView(editable: Bool) {
         if editable {
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
                 [weak self] in
@@ -77,9 +77,7 @@ class CodeQuizViewController: QuizViewController {
                 setLimits(time: limit.time, memory: limit.memory)
             }
 
-            if let template = step.options?.template(language: language, userGenerated: false) {
-                tabSize = playgroundManager.countTabSize(text: template.templateString)
-            }
+            tabSize = playgroundManager.countTabSize(text: step.options?.template(language: language, userGenerated: false)?.templateString ?? "")
 
             toolbarView.language = language.displayName
 
@@ -381,10 +379,15 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             if let userTemplate = options.template(language: s.language, userGenerated: true) {
                 CoreDataHelper.instance.deleteFromStore(userTemplate)
             }
+
             if let template = options.template(language: s.language, userGenerated: false) {
                 s.codeTextView.text = template.templateString
                 s.currentCode = template.templateString
+            } else {
+                s.codeTextView.text = ""
+                s.currentCode = ""
             }
+
             CoreDataHelper.instance.save()
         }))
         present(alert, animated: true, completion: nil)
