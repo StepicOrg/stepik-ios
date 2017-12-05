@@ -256,14 +256,19 @@ class CourseListPresenter {
     }
 
     enum PromiseError: Error {
-        case localUpdate
+        case localUpdate, noSelf
     }
 
-    private func updateState() -> Promise<Void>? {
+    private func updateState() -> Promise<Void> {
         return Promise<Void> {
+            [weak self]
             fulfill, reject in
-            if onlyLocal {
-                state = courses.isEmpty ? .empty : .displaying
+            guard let strongSelf = self else {
+                reject(PromiseError.noSelf)
+                return
+            }
+            if strongSelf.onlyLocal {
+                strongSelf.state = strongSelf.courses.isEmpty ? .empty : .displaying
                 reject(PromiseError.localUpdate)
             }
             state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
@@ -273,8 +278,7 @@ class CourseListPresenter {
 
     func refresh() {
         displayCachedAsyncIfEmpty().then {
-            [weak self] in
-            self!.updateState()!
+            self.updateState()
         }.then {
             checkToken()
         }.then {

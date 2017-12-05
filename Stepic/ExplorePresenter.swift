@@ -12,6 +12,8 @@ import Alamofire
 
 protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
+//    func updateBlock(block: [CourseListBlock])
+
     func setConnectionProblemsPlaceholder(hidden: Bool)
 
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
@@ -160,22 +162,65 @@ class ExplorePresenter: CourseListCountDelegate {
             ]
     }
 
+    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Promise<[CourseList]> {
+        let recoveredIds = courseListsCache.get(forLanguage: language)
+        return CourseList.recoverAsync(ids: recoveredIds)
+    }
+
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
         let recoveredIds = courseListsCache.get(forLanguage: language)
         return CourseList.recover(ids: recoveredIds).sorted { $0.0.position < $0.1.position }
     }
 
-    func refresh() {
+    func refreshSync() {
         view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromLocal(forLanguage: listLanguage)
         refreshFromRemote(forLanguage: listLanguage)
     }
 
+    func refresh() {
+        view?.setConnectionProblemsPlaceholder(hidden: true)
+        let listLanguage = ContentLanguage.sharedContentLanguage
+        refreshFromLocalAsync(forLanguage: listLanguage).then {
+            [weak self] in
+            self?.refreshFromRemote(forLanguage: listLanguage)
+        }
+    }
+
+    private func refreshFromLocalAsync(forLanguage language: ContentLanguage) -> Promise<Void> {
+        return Promise {
+            fulfill, reject in
+            getCachedListsAsync(forLanguage: language).then {
+                [weak self]
+                lists -> Void in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.lists = lists
+                strongSelf.blocks = strongSelf.buildBlocks(forLists: lists, onlyLocal: true)
+                strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
+                fulfill()
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
+    }
+
     private func refreshFromLocal(forLanguage language: ContentLanguage) {
         lists = getCachedLists(forLanguage: language)
         blocks = buildBlocks(forLists: lists, onlyLocal: true)
         view?.presentBlocks(blocks: blocks)
+    }
+
+    private func shouldReloadAll(newLists: [CourseList]) -> Bool {
+        return newLists.map { $0.id } != lists.map { $0.id }
+    }
+
+    enum LanguageError: Error {
+        case wrongLanguageError
     }
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
@@ -185,6 +230,10 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 throw WeakSelfError.noStrong
             }
+            if ContentLanguage.sharedContentLanguage != language {
+                throw LanguageError.wrongLanguageError
+            }
+
             strongSelf.didRefreshOnce = true
             return strongSelf.courseListsAPI.retrieve(language: language, page: 1)
         }.then {
@@ -193,6 +242,10 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 throw WeakSelfError.noStrong
             }
+            if ContentLanguage.sharedContentLanguage != language {
+                throw LanguageError.wrongLanguageError
+            }
+
             strongSelf.courseListsCache.set(ids: lists.map { $0.id }, forLanguage: language)
             strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
             strongSelf.blocks = strongSelf.buildBlocks(forLists: strongSelf.lists, onlyLocal: false)
