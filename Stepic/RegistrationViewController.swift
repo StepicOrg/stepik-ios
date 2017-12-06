@@ -117,7 +117,7 @@ class RegistrationViewController: UIViewController {
 
         localize()
 
-        presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
 
         nameTextField.delegate = self
         emailTextField.delegate = self

@@ -75,7 +75,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, view: self)
+        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), view: self)
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
@@ -184,6 +184,8 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
         presenter?.updateNotification(with: id, status: .read)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "button"])
+
         cell.status = .read
     }
 
@@ -193,6 +195,8 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
             DeepLinkRouter.routeFromDeepLink(url: deepLinkingUrl, showAlertForUnsupported: false)
 
             presenter?.updateNotification(with: id, status: .read)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "link"])
+
             cell.status = .read
         }
     }

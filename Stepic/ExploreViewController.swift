@@ -29,6 +29,7 @@ class ExploreViewController: UIViewController, ExploreView {
             }
         #endif
         presenter?.initLanguagesWidget()
+        presenter?.initTagsWidget()
     }
 
     private func setupStackView() {
@@ -108,6 +109,38 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
     }
 
+    var tagsWidget: CourseTagsView?
+
+    func setTags(withTags tags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void) {
+        tagsWidget = CourseTagsView(frame: CGRect.zero)
+        guard let tagsWidget = tagsWidget else {
+            return
+        }
+        let widgetBackgroundView = UIView()
+        widgetBackgroundView.backgroundColor = UIColor.white
+        widgetBackgroundView.addSubview(tagsWidget)
+        tagsWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        widgetBackgroundView.isHidden = false
+
+        let separatorView = UIView()
+        separatorView.constrainHeight("0.5")
+        separatorView.backgroundColor = UIColor(red: 83 / 255.0, green: 83 / 255.0, blue: 102 / 255.0, alpha: 0.3)
+        widgetBackgroundView.addSubview(separatorView)
+        separatorView.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        separatorView.alignTopEdge(withView: widgetBackgroundView, predicate: "8")
+
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 1)
+        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+        tagsWidget.tags = tags
+        tagsWidget.language = language
+        tagsWidget.tagSelectedAction = onSelected
+    }
+
+    func updateTagsLanguage(language: ContentLanguage) {
+        tagsWidget?.language = language
+    }
+
     func updateCourseCount(to count: Int, forBlockWithID ID: String) {
         countForID[ID] = count
         countUpdateBlock[ID]?()
@@ -159,7 +192,7 @@ class ExploreViewController: UIViewController, ExploreView {
         placeholder.alignTop("16", leading: "0", bottom: "0", trailing: "0", toView: v)
         placeholder.constrainHeight("100")
         placeholder.isHidden = false
-        placeholder.text = "No connection. Touch to retry"
+        placeholder.text = NSLocalizedString("CatalogPlaceholderError", comment: "")
         placeholder.onTap = {
             [weak self] in
             self?.presenter?.refresh()

@@ -146,6 +146,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: false)
             break
         case .empty:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = nil
             if let listType = presenter?.listType {
                 switch listType {
@@ -163,6 +164,7 @@ class CourseListViewController: UIViewController, CourseListView {
             setPlaceholder(visible: true)
             break
         case .emptyError:
+            delegate?.reloadData()
             emptyPlaceholder.onTap = {
                 [weak self] in
                 self?.presenter?.refresh()
@@ -188,6 +190,7 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setUserInteraction(enabled: false)
             break
         case .emptyAnonymous:
+            delegate?.reloadData()
             emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
@@ -213,6 +216,11 @@ class CourseListViewController: UIViewController, CourseListView {
     }
 
     func update(deletingIds: [Int], insertingIds: [Int], courses: [CourseViewData]) {
+        guard self.courses.count - deletingIds.count + insertingIds.count == courses.count else {
+            self.courses = courses
+            delegate?.reloadData()
+            return
+        }
         self.courses = courses
         let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
         let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
@@ -244,6 +252,8 @@ class CourseListViewController: UIViewController, CourseListView {
         self.view.addSubview(placeholder)
         placeholder.align(toView: self.view)
         placeholder.isHidden = true
+        placeholder.colorStyle = .purple
+        placeholder.presentationStyle = .bordered
         return placeholder
     }()
 }

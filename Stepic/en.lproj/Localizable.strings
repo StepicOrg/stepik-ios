@@ -37,6 +37,7 @@ EmptyMyCoursesDescription = "Go to \"All courses\" tab to see the list of availa
 ReloadPlayerTitle = "Video download finished";
 ReloadPlayerMessage = "Reload video player?";
 BeginDate = "Begin date";
+EndDate = "End date";
 SoftDeadline = "Soft deadline";
 HardDeadline = "Hard deadline";
 Certificate = "Certificate";
@@ -346,11 +347,18 @@ SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 ChooseSearchLanguage = "Choose search language";
 Catalog = "Catalog";
+CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
+TrendingTopics = "Trending topics";
 
 WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
+
+EnterSQLQuery = "Enter SQL query:";
+
+SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
+SolveSomethingToday = "Solve anything today to increase your streak.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

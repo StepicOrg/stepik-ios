@@ -42,6 +42,9 @@ class SectionTableViewCell: UITableViewCell {
         if section.hardDeadline != nil {
             text = "\(text)\n\(NSLocalizedString("HardDeadline", comment: "")): \n\t\(section.hardDeadline!.getStepicFormatString(withTime: true))"
         }
+        if section.endDate != nil {
+            text = "\(text)\n\(NSLocalizedString("EndDate", comment: "")): \n\t\(section.endDate!.getStepicFormatString(withTime: true))"
+        }
         return text
     }
 

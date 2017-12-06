@@ -11,6 +11,7 @@ import Foundation
 struct CodeSnippetSymbols {
     static let python: [String] = ["self", ":", "=", ".", "_", ",", "(", ")", "[", "]", "'", "*", "/", "+", "%", ">", "<", "and", "or", "not", "&", "|", "#", "\\", "{", "}", "@", "^", "~", ";"]
     static let cpp: [String] = ["=", ".", "_", ";", ",", "{", "}", "(", ")", "[", "]", "'", "\"", "*", "+", "/", "%", ">", "<", "&", "|", ":", "@", "^", "\\", "~"]
+    static let sql: [String] = ["(", ")", "'", "`", ".", ",", "*", "/", "+", "-", ";", "<", ">", "=", "#", "@"]
     static var java: [String] {
         return cpp
     }
@@ -21,6 +22,8 @@ struct CodeSnippetSymbols {
             return python
         case .java, .java8 :
             return java
+        case .sql:
+            return sql
         default:
             return cpp
         }

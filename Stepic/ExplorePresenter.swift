@@ -15,8 +15,11 @@ protocol ExploreView: class {
     func setConnectionProblemsPlaceholder(hidden: Bool)
 
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
-    func updateCourseCount(to: Int, forBlockWithID: String)
 
+    func setTags(withTags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void)
+    func updateTagsLanguage(language: ContentLanguage)
+
+    func updateCourseCount(to: Int, forBlockWithID: String)
     func updateSearchQuery(to: String)
 
     func hideKeyboard()
@@ -49,7 +52,28 @@ class ExplorePresenter: CourseListCountDelegate {
             selectedLanguage in
             if selectedLanguage != ContentLanguage.sharedContentLanguage {
                 ContentLanguage.sharedContentLanguage = selectedLanguage
+                self?.view?.updateTagsLanguage(language: selectedLanguage)
                 self?.refresh()
+            }
+        })
+    }
+
+    func initTagsWidget() {
+        view?.setTags(withTags: CourseTag.featuredTags, language: ContentLanguage.sharedContentLanguage, onSelected: {
+            [weak self]
+            tag in
+            if let controller = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController {
+                controller.presenter = CourseListPresenter(
+                    view: controller,
+                    ID: "Tag_\(tag.ID)",
+                    limit: nil,
+                    listType:  CourseListType.tag(id: tag.ID) ,
+                    colorMode: .light,
+                    onlyLocal: false,
+                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber()
+                )
+                controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
+                self?.view?.show(vc: controller)
             }
         })
     }
@@ -107,19 +131,33 @@ class ExplorePresenter: CourseListCountDelegate {
             self?.view?.show(vc: vc)
         }
 
-        return lists.map {
-            CourseListBlock(
-                listType: .collection(ids: $0.coursesArray),
-                ID: getId(forList: $0),
-                horizontalLimit: 6,
-                title: $0.title,
-                colorMode: .light,
-                shouldShowCount: true,
-                showControllerBlock: showController,
-                courseListCountDelegate: self,
-                onlyLocal: onlyLocal
-            )
-        }
+        return
+            lists.map {
+                CourseListBlock(
+                    listType: .collection(ids: $0.coursesArray),
+                    ID: getId(forList: $0),
+                    horizontalLimit: 14,
+                    title: $0.title,
+                    description: $0.listDescription,
+                    colorMode: .light,
+                    shouldShowCount: true,
+                    showControllerBlock: showController,
+                    courseListCountDelegate: self,
+                    onlyLocal: onlyLocal,
+                    descriptionColorStyle: $0.id % 2 == 0 ? .pink : .blue
+                )
+            } +
+            [
+                CourseListBlock(
+                    listType: .popular,
+                    ID: "Popular",
+                    horizontalLimit: 14,
+                    title: NSLocalizedString("Popular", comment: ""),
+                    colorMode: .dark,
+                    shouldShowCount: false,
+                    showControllerBlock: showController
+                )
+            ]
     }
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
@@ -128,6 +166,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     func refresh() {
+        view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromLocal(forLanguage: listLanguage)
         refreshFromRemote(forLanguage: listLanguage)
