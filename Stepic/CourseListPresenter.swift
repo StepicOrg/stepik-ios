@@ -48,7 +48,7 @@ class CourseListPresenter {
     private var subscriptionManager: CourseSubscriptionManager
 
     private var colorMode: CourseListColorMode
-    private var onlyLocal: Bool
+    var onlyLocal: Bool
 
     private var ID: String
 
@@ -236,12 +236,18 @@ class CourseListPresenter {
 
     private func displayCachedAsyncIfEmpty() -> Promise<Void> {
         return Promise<Void> {
+            [weak self]
             fulfill, reject in
-            if courses.isEmpty {
-                Course.fetchAsync(listType.cachedListCourseIds).then {
+            guard let strongSelf = self else {
+                reject(PromiseError.noSelf)
+                return
+            }
+            if strongSelf.courses.isEmpty {
+                Course.fetchAsync(strongSelf.listType.cachedListCourseIds).then {
                     [weak self]
                     courses -> Void in
                     guard let strongSelf = self else {
+                        reject(PromiseError.noSelf)
                         return
                     }
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
@@ -251,6 +257,8 @@ class CourseListPresenter {
                     error in
                     reject(error)
                 }
+            } else {
+                fulfill()
             }
         }
     }
@@ -270,6 +278,7 @@ class CourseListPresenter {
             if strongSelf.onlyLocal {
                 strongSelf.state = strongSelf.courses.isEmpty ? .empty : .displaying
                 reject(PromiseError.localUpdate)
+                return
             }
             state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             fulfill()

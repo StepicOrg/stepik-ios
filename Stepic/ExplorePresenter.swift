@@ -12,7 +12,9 @@ import Alamofire
 
 protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
-//    func updateBlock(block: [CourseListBlock])
+    func updateBlock(withID: String, newListType: CourseListType, onlyLocal: Bool)
+    func updateBlock(withID: String, onlyLocal: Bool)
+    func updateBlock(withID: String, newTitle: String, newDescription: String?)
 
     func setConnectionProblemsPlaceholder(hidden: Bool)
 
@@ -216,11 +218,52 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     private func shouldReloadAll(newLists: [CourseList]) -> Bool {
-        return newLists.map { $0.id } != lists.map { $0.id }
+        return newLists.map { getId(forList: $0) } != blocks.flatMap {
+            switch $0.listType {
+            case .collection(ids: _):
+                return $0.ID
+            default:
+                return nil
+            }
+        }
     }
 
     enum LanguageError: Error {
         case wrongLanguageError
+    }
+
+    private func updateLists(newLists: [CourseList], forLanguage language: ContentLanguage) {
+        func refreshLists() {
+            lists = newLists
+            blocks = buildBlocks(forLists: lists, onlyLocal: false)
+            view?.setConnectionProblemsPlaceholder(hidden: true)
+            view?.presentBlocks(blocks: blocks)
+        }
+        courseListsCache.set(ids: newLists.map { $0.id }, forLanguage: language)
+
+        if shouldReloadAll(newLists: newLists) {
+            refreshLists()
+            return
+        }
+
+        for newList in newLists {
+            guard let blockForList: CourseListBlock = blocks.first(where: {
+                $0.ID == getId(forList: newList)
+            }) else {
+                refreshLists()
+                return
+            }
+
+            let ID = getId(forList: newList)
+            if newList.coursesArray != blockForList.coursesIDs {
+                view?.updateBlock(withID: ID, newListType: CourseListType.collection(ids: newList.coursesArray), onlyLocal: false)
+            } else {
+                view?.updateBlock(withID: ID, onlyLocal: false)
+            }
+            if newList.title != blockForList.title || newList.listDescription != blockForList.description {
+                view?.updateBlock(withID: ID, newTitle: newList.title, newDescription: newList.listDescription)
+            }
+        }
     }
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
@@ -245,26 +288,20 @@ class ExplorePresenter: CourseListCountDelegate {
             if ContentLanguage.sharedContentLanguage != language {
                 throw LanguageError.wrongLanguageError
             }
-
-            strongSelf.courseListsCache.set(ids: lists.map { $0.id }, forLanguage: language)
-            strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
-            strongSelf.blocks = strongSelf.buildBlocks(forLists: strongSelf.lists, onlyLocal: false)
-            strongSelf.view?.setConnectionProblemsPlaceholder(hidden: true)
-            strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
+            let newLists = lists.sorted { $0.0.position < $0.1.position }
+            strongSelf.updateLists(newLists: newLists, forLanguage: language)
         }.catch {
             [weak self]
             _ in
             guard let strongSelf = self else {
                 return
             }
-            //TODO: Also present popular block here if needed
             if strongSelf.lists.isEmpty {
                 strongSelf.view?.setConnectionProblemsPlaceholder(hidden: false)
             }
             if !strongSelf.didRefreshOnce {
                 strongSelf.setupNetworkReachabilityListener()
             }
-            //TODO: Add Reachability observer here
         }
     }
 
@@ -294,6 +331,20 @@ class ExplorePresenter: CourseListCountDelegate {
 
     func updateCourseCount(to: Int, forListID: String) {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
+    }
+}
+
+struct CourseListData {
+    let coursesArray: [Int]
+    let ID: Int
+    let title: String
+    let listDescription: String
+
+    init(courseList: CourseList) {
+        self.coursesArray = courseList.coursesArray
+        self.ID = courseList.id
+        self.title = courseList.title
+        self.listDescription = courseList.listDescription
     }
 }
 
