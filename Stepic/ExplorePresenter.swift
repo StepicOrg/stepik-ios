@@ -174,13 +174,6 @@ class ExplorePresenter: CourseListCountDelegate {
         return CourseList.recover(ids: recoveredIds).sorted { $0.0.position < $0.1.position }
     }
 
-    func refreshSync() {
-        view?.setConnectionProblemsPlaceholder(hidden: true)
-        let listLanguage = ContentLanguage.sharedContentLanguage
-        refreshFromLocal(forLanguage: listLanguage)
-        refreshFromRemote(forLanguage: listLanguage)
-    }
-
     func refresh() {
         view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
@@ -331,20 +324,6 @@ class ExplorePresenter: CourseListCountDelegate {
 
     func updateCourseCount(to: Int, forListID: String) {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
-    }
-}
-
-struct CourseListData {
-    let coursesArray: [Int]
-    let ID: Int
-    let title: String
-    let listDescription: String
-
-    init(courseList: CourseList) {
-        self.coursesArray = courseList.coursesArray
-        self.ID = courseList.id
-        self.title = courseList.title
-        self.listDescription = courseList.listDescription
     }
 }
 

@@ -431,12 +431,6 @@ class CourseListPresenter {
         }
     }
 
-    private func displayCached(ids: [Int]) {
-        let recoveredCourses = Course.getCourses(ids)
-        courses = Sorter.sort(recoveredCourses, byIds: ids)
-        self.view?.display(courses: getData(from: self.displayingCourses))
-    }
-
     private func handleRefreshError(error: Error) {
         print("Error while refreshing collection")
         if let error = error as? RetrieveError {
