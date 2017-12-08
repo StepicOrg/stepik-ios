@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Ckd-Qb-xxn">
+            <objects>
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="EHs-hl-3fE" customClass="ViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VP3-PB-wUp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-nB-MMj">
+                                <rect key="frame" x="16" y="80" width="382" height="640"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIR-cP-EPC" customClass="OnboardingAnimatedView" customModule="Stepic" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="191" height="640"/>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LQu-yC-spH">
+                                        <rect key="frame" x="191" y="0.0" width="191" height="640"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-vL-9FH">
+                                                <rect key="frame" x="0.0" y="0.0" width="191" height="608"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="gh6-Y8-a3S">
+                                                <rect key="frame" x="0.0" y="624" width="191" height="16"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="Aqz-lV-XCx"/>
+                                                </constraints>
+                                                <color key="pageIndicatorTintColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                                <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </pageControl>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="gc3-aW-rvM" firstAttribute="trailing" secondItem="5g3-nB-MMj" secondAttribute="trailing" constant="16" id="1zG-dx-Acc"/>
+                            <constraint firstItem="gc3-aW-rvM" firstAttribute="bottom" secondItem="5g3-nB-MMj" secondAttribute="bottom" constant="16" id="JZp-DR-Y6r"/>
+                            <constraint firstItem="5g3-nB-MMj" firstAttribute="leading" secondItem="gc3-aW-rvM" secondAttribute="leading" constant="16" id="nDo-2T-E4J"/>
+                            <constraint firstItem="5g3-nB-MMj" firstAttribute="top" secondItem="gc3-aW-rvM" secondAttribute="top" constant="16" id="vl7-zi-Daq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gc3-aW-rvM"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="o1s-iX-7hl"/>
+                    <connections>
+                        <outlet property="animatedView" destination="AIR-cP-EPC" id="7KE-4S-dvi"/>
+                        <outlet property="bottomConstraint" destination="JZp-DR-Y6r" id="ODE-mL-5da"/>
+                        <outlet property="containerView" destination="v5m-vL-9FH" id="MEJ-Ih-OvH"/>
+                        <outlet property="mainStackView" destination="5g3-nB-MMj" id="mBm-pF-rZl"/>
+                        <outlet property="pageControl" destination="gh6-Y8-a3S" id="rtX-gc-O7F"/>
+                        <outlet property="secondStackView" destination="LQu-yC-spH" id="10x-SF-lqi"/>
+                        <outlet property="topConstraint" destination="vl7-zi-Daq" id="nmg-DI-UL9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v1m-HU-HIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325.27173913043481" y="56.521739130434788"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9T4-1z-7Ir">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n4J-le-3oe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" backIndicatorImage="close" id="c4n-rt-F1d">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EHs-hl-3fE" kind="relationship" relationship="rootViewController" id="cwI-ok-dmm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KuO-eK-VU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-480" y="57"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="close" width="12" height="12"/>
+    </resources>
+</document>

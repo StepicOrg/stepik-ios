@@ -2553,6 +2553,11 @@
 		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
+		2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */; };
+		2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */; };
+		2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */; };
+		2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */; };
+		2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -5141,6 +5146,11 @@
 		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
+		2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation4.json; path = LottieFiles/onboardingAnimation4.json; sourceTree = "<group>"; };
+		2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation1.json; path = LottieFiles/onboardingAnimation1.json; sourceTree = "<group>"; };
+		2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation2.json; path = LottieFiles/onboardingAnimation2.json; sourceTree = "<group>"; };
+		2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation3.json; path = LottieFiles/onboardingAnimation3.json; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -6341,6 +6351,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C2060CB1FDAF71500605C42 /* Onboarding */,
 				08D565C91C5F7CF000DE2B6A /* Quizzes */,
 				2CB9E8BE1F7AA5550004E17F /* Notifications */,
 				083F2B0F1E9D8E2A00714173 /* Certificates */,
@@ -7419,6 +7430,15 @@
 			name = "Onboarding first page";
 			sourceTree = "<group>";
 		};
+		2C2060CB1FDAF71500605C42 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2C7FEE781FDAF9E100B2B4F1 /* Animations files */,
+				2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7527,6 +7547,17 @@
 				2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */,
 			);
 			name = Alerts;
+			sourceTree = "<group>";
+		};
+		2C7FEE781FDAF9E100B2B4F1 /* Animations files */ = {
+			isa = PBXGroup;
+			children = (
+				2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */,
+				2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */,
+				2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */,
+				2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */,
+			);
+			name = "Animations files";
 			sourceTree = "<group>";
 		};
 		2C8652561F4B2C2300D51654 /* Content */ = {
@@ -8454,7 +8485,7 @@
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8463,7 +8494,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0800;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8555,12 +8586,12 @@
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -8748,6 +8779,7 @@
 				08CBA3411F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
+				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
@@ -8755,6 +8787,7 @@
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
+				2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -8766,6 +8799,7 @@
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
+				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,
 				08A9F6FA1FC37DC100640F1F /* CourseTagsView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
@@ -8788,6 +8822,7 @@
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
+				2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				08195A061FA00FF400E6D6CD /* CourseLists.storyboard in Resources */,
@@ -8800,6 +8835,7 @@
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
+				2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */,
 				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				087D96B91EBB7C7700059408 /* Tokens.plist in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
@@ -9591,7 +9627,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		07DE52DC97B5C3EF2BF821CF /* [CP] Embed Pods Frameworks */ = {
@@ -9803,7 +9839,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
@@ -9958,7 +9994,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B64C11F4C590700236804 /* Fabric Script */ = {
@@ -10113,7 +10149,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C86544D1F4B33DE00D51654 /* Fabric Script */ = {
@@ -10268,7 +10304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C89AB331F4C289900227C3B /* Fabric Script */ = {
@@ -10423,7 +10459,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C9732E71F4C38F600AC9301 /* Fabric Script */ = {
@@ -10677,7 +10713,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		45CE712AD66CA83094F6F900 /* [CP] Check Pods Manifest.lock */ = {
@@ -10695,7 +10731,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		460C9F00C548446D1C967E75 /* [CP] Copy Pods Resources */ = {
@@ -10743,7 +10779,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		57A21D35DAB158DC23EDF3F4 /* [CP] Copy Pods Resources */ = {
@@ -10791,7 +10827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6A20E9FB2293700B9EC2205A /* [CP] Embed Pods Frameworks */ = {
@@ -10890,7 +10926,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8C8BB6790B996375C756FA85 /* [CP] Embed Pods Frameworks */ = {
@@ -10988,7 +11024,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B7CE161AA042FFACE2B0167F /* [CP] Check Pods Manifest.lock */ = {
@@ -11006,7 +11042,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C07C3CB7E9D0A791E794CD0A /* [CP] Check Pods Manifest.lock */ = {
@@ -11024,7 +11060,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C5EE6932485CCC67F33ECF96 /* [CP] Copy Pods Resources */ = {
@@ -11152,7 +11188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E030AAE96051BB02D324B16F /* [CP] Check Pods Manifest.lock */ = {
@@ -11170,7 +11206,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EAB7BCAC57BB734471F15DEA /* [CP] Embed Pods Frameworks */ = {
@@ -11310,7 +11346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -15365,16 +15401,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -15387,15 +15423,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -15561,8 +15597,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -15590,8 +15626,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -16297,16 +16333,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16325,15 +16361,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -16348,16 +16384,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16373,15 +16409,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
