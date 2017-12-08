@@ -339,6 +339,14 @@
 		0846B11A1EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
 		0846B11B1EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
+		084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C658E1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C658F1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C65901FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C65911FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C65921FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C65931FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
+		084C65941FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
 		084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084DB9D41FA2A19F0074B11E /* ContinueLearningWidgetView.xib */; };
@@ -4684,6 +4692,7 @@
 		0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodeTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_steps_restrictions_v14.xcdatamodel; sourceTree = "<group>"; };
 		084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_progress_activities_v20.xcdatamodel; sourceTree = "<group>"; };
@@ -6067,6 +6076,14 @@
 			name = "Continue Learning Widget";
 			sourceTree = "<group>";
 		};
+		084C658B1FDAAD35006A3E17 /* Remote Config */ = {
+			isa = PBXGroup;
+			children = (
+				084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */,
+			);
+			name = "Remote Config";
+			sourceTree = "<group>";
+		};
 		084F7AAF1E775A410088368A /* API Endpoints */ = {
 			isa = PBXGroup;
 			children = (
@@ -6891,6 +6908,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				084C658B1FDAAD35006A3E17 /* Remote Config */,
 				08DF78D01F64056B00AEEA85 /* UI Elements */,
 				08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */,
 				086E965C1BF6682000AB952D /* Views */,
@@ -8454,7 +8472,7 @@
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8463,7 +8481,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0800;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8555,12 +8573,12 @@
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -11688,6 +11706,7 @@
 				08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				08C1BF291FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
+				084C658E1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
@@ -12169,6 +12188,7 @@
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
+				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12515,6 +12535,7 @@
 				2C1B61DA1F4C4AEF00236804 /* ChoiceReply.swift in Sources */,
 				2C1B61DB1F4C4AEF00236804 /* TextReply.swift in Sources */,
 				2C1B61DC1F4C4AEF00236804 /* NumberReply.swift in Sources */,
+				084C65931FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C1B61DD1F4C4AEF00236804 /* FreeAnswerReply.swift in Sources */,
 				2C1B61DE1F4C4AEF00236804 /* MathReply.swift in Sources */,
 				2C1B61DF1F4C4AEF00236804 /* SortingReply.swift in Sources */,
@@ -12970,6 +12991,7 @@
 				2C1B63EB1F4C590700236804 /* ChoiceReply.swift in Sources */,
 				2C1B63EC1F4C590700236804 /* TextReply.swift in Sources */,
 				2C1B63ED1F4C590700236804 /* NumberReply.swift in Sources */,
+				084C65941FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C1B63EE1F4C590700236804 /* FreeAnswerReply.swift in Sources */,
 				2C1B63EF1F4C590700236804 /* MathReply.swift in Sources */,
 				2C1B63F01F4C590700236804 /* SortingReply.swift in Sources */,
@@ -13425,6 +13447,7 @@
 				2C8653881F4B33DE00D51654 /* ChoiceReply.swift in Sources */,
 				2C8653891F4B33DE00D51654 /* TextReply.swift in Sources */,
 				2C86538A1F4B33DE00D51654 /* NumberReply.swift in Sources */,
+				084C65901FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C86538B1F4B33DE00D51654 /* FreeAnswerReply.swift in Sources */,
 				2C86538C1F4B33DE00D51654 /* MathReply.swift in Sources */,
 				2C86538D1F4B33DE00D51654 /* SortingReply.swift in Sources */,
@@ -13670,6 +13693,7 @@
 				2C89A9B51F4C289900227C3B /* LastStep+CoreDataProperties.swift in Sources */,
 				2C89A9B61F4C289900227C3B /* StringQuizViewController.swift in Sources */,
 				2C89A9B71F4C289900227C3B /* NumberQuizViewController.swift in Sources */,
+				084C65911FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C89A9B81F4C289900227C3B /* FreeAnswerQuizViewController.swift in Sources */,
 				2C89A9B91F4C289900227C3B /* MathQuizViewController.swift in Sources */,
 				088EDB5D1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
@@ -14334,6 +14358,7 @@
 				2C9732221F4C38F600AC9301 /* ChoiceReply.swift in Sources */,
 				2C9732231F4C38F600AC9301 /* TextReply.swift in Sources */,
 				2C9732241F4C38F600AC9301 /* NumberReply.swift in Sources */,
+				084C65921FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C9732251F4C38F600AC9301 /* FreeAnswerReply.swift in Sources */,
 				2C9732261F4C38F600AC9301 /* MathReply.swift in Sources */,
 				2C9732271F4C38F600AC9301 /* SortingReply.swift in Sources */,
@@ -14843,6 +14868,7 @@
 				864D66DE1E83DE03001E8D9E /* ChoiceReply.swift in Sources */,
 				864D66DF1E83DE03001E8D9E /* TextReply.swift in Sources */,
 				864D66E01E83DE03001E8D9E /* NumberReply.swift in Sources */,
+				084C658F1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				864D66E11E83DE03001E8D9E /* FreeAnswerReply.swift in Sources */,
 				864D66E21E83DE03001E8D9E /* MathReply.swift in Sources */,
 				864D66E31E83DE03001E8D9E /* SortingReply.swift in Sources */,
@@ -15365,16 +15391,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -15387,15 +15413,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -15561,8 +15587,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -15590,8 +15616,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -16297,16 +16323,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16325,15 +16351,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -16348,16 +16374,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16373,15 +16399,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;

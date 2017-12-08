@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.setup()
 
+        RemoteConfig.sharedConfig.setup()
+
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         ConnectionHelper.shared.instantiate()
@@ -41,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-
         AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
