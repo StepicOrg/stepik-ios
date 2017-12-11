@@ -10,12 +10,20 @@ import UIKit
 
 class AuthNavigationViewController: UINavigationController {
 
+    var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager()
+    var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
+
     enum Controller {
         case social
         case email(email: String?)
         case registration
     }
 
+    weak var source: UIViewController? {
+        didSet {
+            streaksAlertPresentationManager.controller = source
+        }
+    }
     var success: (() -> Void)?
     var cancel: (() -> Void)?
 
@@ -23,13 +31,30 @@ class AuthNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        streaksAlertPresentationManager.controller = source
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
 
+    private func checkStreaksNotifications() {
+        guard let userId = AuthInfo.shared.userId else {
+            return
+        }
+        let userActivitiesAPI = UserActivitiesAPI()
+        checkToken().then {
+            userActivitiesAPI.retrieve(user: userId)
+        }.then {
+            userActivity -> Void in
+            if userActivity.didSolveThisWeek && self.streaksNotificationSuggestionManager.canShowAlert(after: .login) {
+                self.streaksNotificationSuggestionManager.didShowStreakAlert()
+                self.streaksAlertPresentationManager.suggestStreak(streak: userActivity.currentStreak)
+            }
+        }
+    }
+
     // Maybe create Router layer?
     func dismissAfterSuccess() {
+        checkStreaksNotifications()
         self.dismiss(animated: true, completion: { [weak self] in
             self?.success?()
         })

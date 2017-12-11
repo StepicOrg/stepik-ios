@@ -10,25 +10,25 @@ import Foundation
 import Firebase
 
 enum RemoteConfigKeys: String {
-    case showStreaksNotificationTime = "show_streaks_notification_time"
+    case ShowStreaksNotificationTrigger = "show_streaks_notification_trigger"
 }
 
 class RemoteConfig {
-    private let defaultShowStreaksNotificationTime = ShowStreaksNotificationTime.main
+    private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
 
     var loadingDoneCallback: (() -> Void)?
     var fetchComplete: Bool = false
 
-    enum ShowStreaksNotificationTime: String {
-        case main = "main"
+    enum ShowStreaksNotificationTrigger: String {
+        case loginAndSubmission = "login_and_submission"
         case submission = "submission"
     }
 
-    var showStreaksNotificationTime: ShowStreaksNotificationTime {
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.showStreaksNotificationTime.rawValue).stringValue else {
-            return defaultShowStreaksNotificationTime
+    var ShowStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
+        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.ShowStreaksNotificationTrigger.rawValue).stringValue else {
+            return defaultShowStreaksNotificationTrigger
         }
-        return ShowStreaksNotificationTime(rawValue: configValue) ?? defaultShowStreaksNotificationTime
+        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? defaultShowStreaksNotificationTrigger
     }
 
     init() {
@@ -42,7 +42,7 @@ class RemoteConfig {
 
     private func loadDefaultValues() {
         let appDefaults: [String: NSObject] = [
-            RemoteConfigKeys.showStreaksNotificationTime.rawValue : defaultShowStreaksNotificationTime.rawValue as NSObject
+            RemoteConfigKeys.ShowStreaksNotificationTrigger.rawValue : defaultShowStreaksNotificationTrigger.rawValue as NSObject
         ]
         FIRRemoteConfig.remoteConfig().setDefaults(appDefaults)
     }
@@ -55,7 +55,7 @@ class RemoteConfig {
             _, error in
 
             guard error == nil else {
-                print ("Uh-oh. Got an error fetching remote values \(String(describing: error))")
+                print ("Got an error fetching remote values \(String(describing: error))")
                 return
             }
 

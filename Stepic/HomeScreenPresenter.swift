@@ -25,7 +25,6 @@ protocol HomeScreenView: class {
 class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
     weak var view: HomeScreenView?
     var userActivitiesAPI: UserActivitiesAPI
-
     init(view: HomeScreenView, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI

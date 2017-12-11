@@ -1,5 +1,5 @@
 //
-//  SubmissonManager.swift
+//  StreaksNotificationSuggestionManager.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 30.11.16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SubmissionManager {
+class StreaksNotificationSuggestionManager {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
@@ -61,8 +61,17 @@ class SubmissionManager {
         updateShownNotificationTime()
     }
 
-    var canShowAlert: Bool {
-        return AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
+    enum StreakAlertTrigger {
+        case login, submission
     }
 
+    func canShowAlert(after trigger: StreakAlertTrigger) -> Bool {
+        let commonChecks = AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
+        switch trigger {
+        case .login:
+            return commonChecks && RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
+        case .submission:
+            return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
+        }
+    }
 }

@@ -26,6 +26,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
 
+    var streaksAlertPresentationManager = StreaksAlertPresentationManager()
     var presenter: QuizPresenter?
 
     var state = QuizState.nothing
@@ -157,12 +158,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
 
-        //        refreshAttempt(step.id, forceCreate: needNewAttempt)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
-            NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities)
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager())
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }
@@ -175,13 +171,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     deinit {
         print("deinit quiz controller for step \(step.id)")
         NotificationCenter.default.removeObserver(self)
-    }
-
-    func becameActive() {
-        if didTransitionToSettings {
-            didTransitionToSettings = false
-            self.notifyPressed(fromPreferences: true)
-        }
     }
 
     func set(state: QuizState) {
@@ -369,13 +358,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func suggestStreak(streak: Int) {
-        let alert = Alerts.streaks.construct(notify: {
-            [weak self] in
-            self?.notifyPressed(fromPreferences: false)
-        })
-        alert.currentStreak = streak
-
-        Alerts.streaks.present(alert: alert, inController: self)
+        streaksAlertPresentationManager.suggestStreak(streak: streak)
     }
 
     func showRateAlert() {
