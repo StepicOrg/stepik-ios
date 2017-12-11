@@ -17,8 +17,8 @@
 		0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
 		0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
 		0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
-		08019A821DEED7E900691F0B /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
-		08019A831DEED7E900691F0B /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		08019A821DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
+		08019A831DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080217791F54E91300186245 /* MenuBlocks.swift */; };
 		0802177B1F54E91300186245 /* MenuBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080217791F54E91300186245 /* MenuBlocks.swift */; };
@@ -1799,7 +1799,7 @@
 		2C1B61AD1F4C4AEF00236804 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		2C1B61AF1F4C4AEF00236804 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C1B61B01F4C4AEF00236804 /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		2C1B61B01F4C4AEF00236804 /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		2C1B61B21F4C4AEF00236804 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		2C1B61B31F4C4AEF00236804 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C1B61B41F4C4AEF00236804 /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -2252,7 +2252,7 @@
 		2C1B63BE1F4C590700236804 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		2C1B63C01F4C590700236804 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C1B63C11F4C590700236804 /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		2C1B63C11F4C590700236804 /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		2C1B63C31F4C590700236804 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		2C1B63C41F4C590700236804 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C1B63C51F4C590700236804 /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -2804,7 +2804,7 @@
 		2C86535B1F4B33DE00D51654 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		2C86535C1F4B33DE00D51654 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		2C86535D1F4B33DE00D51654 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		2C8653601F4B33DE00D51654 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		2C8653611F4B33DE00D51654 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C8653621F4B33DE00D51654 /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -3256,7 +3256,7 @@
 		2C89AA411F4C289900227C3B /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		2C89AA421F4C289900227C3B /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		2C89AA431F4C289900227C3B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C89AA441F4C289900227C3B /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		2C89AA441F4C289900227C3B /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		2C89AA461F4C289900227C3B /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		2C89AA471F4C289900227C3B /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C89AA481F4C289900227C3B /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -3715,7 +3715,7 @@
 		2C9731F51F4C38F600AC9301 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		2C9731F61F4C38F600AC9301 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		2C9731F71F4C38F600AC9301 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C9731F81F4C38F600AC9301 /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		2C9731F81F4C38F600AC9301 /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		2C9731FA1F4C38F600AC9301 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		2C9731FB1F4C38F600AC9301 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C9731FC1F4C38F600AC9301 /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -4102,7 +4102,7 @@
 		864D66BA1E83DE03001E8D9E /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
 		864D66BB1E83DE03001E8D9E /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		864D66BC1E83DE03001E8D9E /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		864D66BD1E83DE03001E8D9E /* StreaksNotificationSuggestionManager in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */; };
+		864D66BD1E83DE03001E8D9E /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
 		864D66BF1E83DE03001E8D9E /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		864D66C01E83DE03001E8D9E /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		864D66C11E83DE03001E8D9E /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -4532,7 +4532,7 @@
 		0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxiesAPI.swift; sourceTree = "<group>"; };
 		0800B8211D07029B006C987E /* CommentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
 		0800B8241D0704B6006C987E /* ApiUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUtil.swift; sourceTree = "<group>"; };
-		08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StreaksNotificationSuggestionManager; sourceTree = "<group>"; };
+		08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksNotificationSuggestionManager.swift; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		080217791F54E91300186245 /* MenuBlocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBlocks.swift; sourceTree = "<group>"; };
 		080217821F55B1B200186245 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -7034,7 +7034,7 @@
 				08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */,
 				08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */,
 				08901E661CD0F94C00D94613 /* In-app version control */,
-				08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager */,
+				08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */,
 				08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */,
 			);
 			name = Managers;
@@ -11402,7 +11402,7 @@
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
 				080E80FF1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
-				08019A831DEED7E900691F0B /* StreaksNotificationSuggestionManager in Sources */,
+				08019A831DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
 				088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				08D120891C937B2200A54ABC /* StandardsExtensions.swift in Sources */,
@@ -11845,7 +11845,7 @@
 				0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
 				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
-				08019A821DEED7E900691F0B /* StreaksNotificationSuggestionManager in Sources */,
+				08019A821DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
@@ -12484,7 +12484,7 @@
 				2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B61AF1F4C4AEF00236804 /* Version.swift in Sources */,
 				08CB0D531FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				2C1B61B01F4C4AEF00236804 /* StreaksNotificationSuggestionManager in Sources */,
+				2C1B61B01F4C4AEF00236804 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C1B61B21F4C4AEF00236804 /* Executable.swift in Sources */,
 				2C1B61B31F4C4AEF00236804 /* ExecutionQueue.swift in Sources */,
 				2C1B61B41F4C4AEF00236804 /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -12940,7 +12940,7 @@
 				2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B63C01F4C590700236804 /* Version.swift in Sources */,
 				08CB0D541FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				2C1B63C11F4C590700236804 /* StreaksNotificationSuggestionManager in Sources */,
+				2C1B63C11F4C590700236804 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C1B63C31F4C590700236804 /* Executable.swift in Sources */,
 				2C1B63C41F4C590700236804 /* ExecutionQueue.swift in Sources */,
 				2C1B63C51F4C590700236804 /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -13396,7 +13396,7 @@
 				2C86535C1F4B33DE00D51654 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C86535D1F4B33DE00D51654 /* Version.swift in Sources */,
 				08CB0D501FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager in Sources */,
+				2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C8653601F4B33DE00D51654 /* Executable.swift in Sources */,
 				2C8653611F4B33DE00D51654 /* ExecutionQueue.swift in Sources */,
 				2C8653621F4B33DE00D51654 /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -13851,7 +13851,7 @@
 				2C89AA411F4C289900227C3B /* UpdatePreferencesContainer.swift in Sources */,
 				2C89AA421F4C289900227C3B /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C89AA431F4C289900227C3B /* Version.swift in Sources */,
-				2C89AA441F4C289900227C3B /* StreaksNotificationSuggestionManager in Sources */,
+				2C89AA441F4C289900227C3B /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C89AA461F4C289900227C3B /* Executable.swift in Sources */,
 				2C89AA471F4C289900227C3B /* ExecutionQueue.swift in Sources */,
 				2C89AA481F4C289900227C3B /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -14307,7 +14307,7 @@
 				2C9731F61F4C38F600AC9301 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C9731F71F4C38F600AC9301 /* Version.swift in Sources */,
 				08CB0D521FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				2C9731F81F4C38F600AC9301 /* StreaksNotificationSuggestionManager in Sources */,
+				2C9731F81F4C38F600AC9301 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C9731FA1F4C38F600AC9301 /* Executable.swift in Sources */,
 				2C9731FB1F4C38F600AC9301 /* ExecutionQueue.swift in Sources */,
 				2C9731FC1F4C38F600AC9301 /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -14818,7 +14818,7 @@
 				082E5E101F46379100F41426 /* ReplyCache.swift in Sources */,
 				08CB0D4F1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				864D66BC1E83DE03001E8D9E /* Version.swift in Sources */,
-				864D66BD1E83DE03001E8D9E /* StreaksNotificationSuggestionManager in Sources */,
+				864D66BD1E83DE03001E8D9E /* StreaksNotificationSuggestionManager.swift in Sources */,
 				864D66BF1E83DE03001E8D9E /* Executable.swift in Sources */,
 				864D66C01E83DE03001E8D9E /* ExecutionQueue.swift in Sources */,
 				085EDCB91F9945D900AB3278 /* Notification+CoreDataProperties.swift in Sources */,
