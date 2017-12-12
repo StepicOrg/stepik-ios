@@ -92,7 +92,7 @@ class OnboardingAnimatedView: UIView {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -800
 
-        let angle = (hasFragmentOverscroll ? CGFloat.pi : 0) + (-CGFloat.pi * CGFloat(currentSegmentPercent))
+        let angle = (shouldFragmentBeMirrored ? CGFloat.pi : 0) + (-CGFloat.pi * CGFloat(currentSegmentPercent))
         currentView?.layer.transform = CATransform3DRotate(transform, angle, 0.0, 1.0, 0.0)
 
         prevPercent = currentSegmentPercent

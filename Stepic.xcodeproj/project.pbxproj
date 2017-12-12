@@ -2558,8 +2558,8 @@
 		2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */; };
 		2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */; };
 		2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */; };
-		2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */; };
-		2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */; };
+		2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE791FDAFB4600B2B4F1 /* OnboardingPageView.xib */; };
+		2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */; };
 		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
@@ -5155,8 +5155,8 @@
 		2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation1.json; path = LottieFiles/onboardingAnimation1.json; sourceTree = "<group>"; };
 		2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation2.json; path = LottieFiles/onboardingAnimation2.json; sourceTree = "<group>"; };
 		2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation3.json; path = LottieFiles/onboardingAnimation3.json; sourceTree = "<group>"; };
-		2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingPage.xib; sourceTree = "<group>"; };
-		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
+		2C7FEE791FDAFB4600B2B4F1 /* OnboardingPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingPageView.xib; sourceTree = "<group>"; };
+		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimatedView.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
@@ -7441,7 +7441,7 @@
 		2C2060CB1FDAF71500605C42 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				2C7FEE7B1FDAFB4A00B2B4F1 /* OnboardingPage */,
+				2C7FEE7B1FDAFB4A00B2B4F1 /* OnboardingPageView */,
 				2C7FEE781FDAF9E100B2B4F1 /* Animations files */,
 				2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */,
 				2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */,
@@ -7571,13 +7571,13 @@
 			name = "Animations files";
 			sourceTree = "<group>";
 		};
-		2C7FEE7B1FDAFB4A00B2B4F1 /* OnboardingPage */ = {
+		2C7FEE7B1FDAFB4A00B2B4F1 /* OnboardingPageView */ = {
 			isa = PBXGroup;
 			children = (
-				2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */,
-				2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */,
+				2C7FEE791FDAFB4600B2B4F1 /* OnboardingPageView.xib */,
+				2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */,
 			);
-			name = OnboardingPage;
+			name = OnboardingPageView;
 			sourceTree = "<group>";
 		};
 		2C8652561F4B2C2300D51654 /* Content */ = {
@@ -8813,7 +8813,7 @@
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
-				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPage.xib in Resources */,
+				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
@@ -12122,7 +12122,7 @@
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
-				2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPage.swift in Sources */,
+				2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPageView.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
