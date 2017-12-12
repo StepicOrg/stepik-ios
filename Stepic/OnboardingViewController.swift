@@ -153,17 +153,13 @@ class OnboardingViewController: UIViewController {
             pages[i].frame = CGRect(x: xPosition, y: yPosition, width: containerView.frame.width, height: containerView.frame.height)
         }
 
-        // Update alpha to add fade to scrolling in landscape
-        if isLandscape {
-            pages[currentPageIndex].alpha = 1.0
-            if currentPageIndex - 1 >= 0 {
-                pages[currentPageIndex - 1].alpha = 0.0
-            }
-            if currentPageIndex + 1 < pages.count {
-                pages[currentPageIndex + 1].alpha = 0.0
-            }
-        } else {
-            pages.forEach { $0.alpha = 1.0 }
+        // Update alpha to add fade to scrolling
+        pages[currentPageIndex].alpha = 1.0
+        if currentPageIndex - 1 >= 0 {
+            pages[currentPageIndex - 1].alpha = 0.0
+        }
+        if currentPageIndex + 1 < pages.count {
+            pages[currentPageIndex + 1].alpha = 0.0
         }
     }
 
@@ -197,16 +193,14 @@ extension OnboardingViewController: UIScrollViewDelegate {
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 
-        // Animate alpha to add fade to scrolling for landscape
-        if isLandscape {
-            let segmentPercent = offset - CGFloat(Int(page))
-            pages[currentPageIndex].alpha = 1.0 - 1.5 * segmentPercent
-            if currentPageIndex - 1 >= 0 {
-                pages[currentPageIndex - 1].alpha = 1.5 * segmentPercent
-            }
-            if currentPageIndex + 1 < pages.count {
-                pages[currentPageIndex + 1].alpha = 1.5 * segmentPercent
-            }
+        // Animate alpha to add fade to scrolling
+        let segmentPercent = offset - CGFloat(Int(page))
+        pages[currentPageIndex].alpha = 1.0 - 1.5 * segmentPercent
+        if currentPageIndex - 1 >= 0 {
+            pages[currentPageIndex - 1].alpha = 1.5 * segmentPercent
+        }
+        if currentPageIndex + 1 < pages.count {
+            pages[currentPageIndex + 1].alpha = 1.5 * segmentPercent
         }
     }
 }
