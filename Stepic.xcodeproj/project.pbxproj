@@ -494,7 +494,6 @@
 		0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */; };
 		0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086494881E8C753B0083E0BE /* SbAppDelegate.swift */; };
 		0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948B1E8C753B0083E0BE /* SbEntranceViewController.swift */; };
-		086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086494841E8C753B0083E0BE /* SberbankUniversity-Info.plist */; };
 		086494A11E8C7A060083E0BE /* SberbankUniversity.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086494851E8C753B0083E0BE /* SberbankUniversity.xcassets */; };
 		086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086494871E8C753B0083E0BE /* GoogleService-Info.plist */; };
 		086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086494891E8C753B0083E0BE /* SbAuth.storyboard */; };
@@ -3979,23 +3978,17 @@
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
-		2CD12B961F4F3374001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD12B981F4F33E2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
 		2CD12B9D1F4F348C001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12B9E1F4F348C001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
-		2CD12BA11F4F348C001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD12BAE1F4F34A2001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12BAF1F4F34A2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
-		2CD12BB21F4F34A2001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD12BBD1F4F34AE001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12BBE1F4F34AE001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
-		2CD12BC11F4F34AE001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD12BCC1F4F34BD001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12BCD1F4F34BD001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
-		2CD12BD01F4F34BD001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD12BDB1F4F34CC001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12BDC1F4F34CC001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
-		2CD12BDF1F4F34CC001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846401F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846411F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
@@ -8458,7 +8451,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
 					085D5CD81D007F2100092060 = {
@@ -8707,7 +8700,6 @@
 				0888D0FA1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */,
-				086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */,
 				08CBA3421F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				080C5E731EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				08CBA3301F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
@@ -9404,7 +9396,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12B961F4F3374001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9412,7 +9403,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12BA11F4F348C001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9420,7 +9410,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12BB21F4F34A2001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9428,7 +9417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12BC11F4F34AE001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9436,7 +9424,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12BD01F4F34BD001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9444,7 +9431,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD12BDF1F4F34CC001D3C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15493,14 +15479,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -15546,14 +15538,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
