@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 
 class OnboardingAnimatedView: UIView {
-    private let autoFlipAnimationDuration = 0.3
+    private let autoFlipAnimationDuration = 0.5
 
     private let animationSegmentsNames = [
         "onboardingAnimation1",
@@ -102,8 +102,7 @@ class OnboardingAnimatedView: UIView {
         }
 
         if (currentSegmentPercent >= 0.99 || currentSegmentPercent <= 0.1) && shouldFinishSegment {
-            currentView?.animationProgress = 0.0
-            currentView?.play()
+            play()
             shouldFinishSegment = false
 
             // Control can skip some data -> prevent unsync
@@ -117,11 +116,18 @@ class OnboardingAnimatedView: UIView {
     }
 
     func flip(to segmentIndex: Int) {
-        transitionToSegment(from: currentSegmentIndex, to: segmentIndex, next: segmentIndex > currentSegmentIndex)
-        currentSegmentIndex = segmentIndex
+        transitionToSegment(from: currentSegmentIndex, to: segmentIndex, next: segmentIndex > currentSegmentIndex) {
+            self.currentSegmentIndex = segmentIndex
+            self.play()
+        }
     }
 
-    private func transitionToSegment(from fromIndex: Int, to toIndex: Int, next: Bool = true) {
+    func play() {
+        currentView?.animationProgress = 0.0
+        currentView?.play()
+    }
+
+    private func transitionToSegment(from fromIndex: Int, to toIndex: Int, next: Bool = true, completion: (() -> Void)? = nil) {
         guard fromIndex != toIndex else {
             return
         }
@@ -132,11 +138,8 @@ class OnboardingAnimatedView: UIView {
         fView.layer.transform = CATransform3DIdentity
         sView.layer.transform = CATransform3DIdentity
 
-        sView.isHidden = false
-        UIView.transition(from: fView, to: sView, duration: autoFlipAnimationDuration, options: next ? .transitionFlipFromLeft : .transitionFlipFromRight, completion: { _ in
-            fView.isHidden = true
-            sView.animationProgress = 0.0
-            sView.play()
+        UIView.transition(from: fView, to: sView, duration: autoFlipAnimationDuration, options: [next ? .transitionFlipFromLeft : .transitionFlipFromRight, .showHideTransitionViews], completion: { _ in
+            completion?()
         })
     }
 

@@ -159,13 +159,16 @@ class OnboardingViewController: UIViewController {
             currentPageIndex += 1
 
             let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex) * self.scrollView.frame.width
-            self.scrollView.contentOffset = CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y)
-            animatedView?.flip(to: self.currentPageIndex)
+            scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y), animated: true)
         }
     }
 }
 
 extension OnboardingViewController: UIScrollViewDelegate {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        animatedView?.play()
+    }
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let offset = scrollView.contentOffset.x / scrollView.frame.width
         animatedView?.flip(percent: Double(offset), didInteractionFinished: true)
