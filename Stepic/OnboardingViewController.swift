@@ -21,7 +21,7 @@ class OnboardingViewController: UIViewController {
     fileprivate var currentPageIndex = 0
 
     private var scrollView: UIScrollView!
-    private var pages: [OnboardingPageView] = []
+    fileprivate var pages: [OnboardingPageView] = []
 
     private var backgroundGradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -49,7 +49,7 @@ class OnboardingViewController: UIViewController {
         "Установите напоминания, чтобы заниматься регулярнее и быстрее закончить курс"
     ]
 
-    var isLandscape: Bool {
+    fileprivate var isLandscape: Bool {
         switch DeviceInfo.current.orientation {
         case .landscapeLeft, .landscapeRight:
             return true
@@ -152,6 +152,19 @@ class OnboardingViewController: UIViewController {
 
             pages[i].frame = CGRect(x: xPosition, y: yPosition, width: containerView.frame.width, height: containerView.frame.height)
         }
+
+        // Update alpha to add fade to scrolling in landscape
+        if isLandscape {
+            pages[currentPageIndex].alpha = 1.0
+            if currentPageIndex - 1 >= 0 {
+                pages[currentPageIndex - 1].alpha = 0.0
+            }
+            if currentPageIndex + 1 < pages.count {
+                pages[currentPageIndex + 1].alpha = 0.0
+            }
+        } else {
+            pages.forEach { $0.alpha = 1.0 }
+        }
     }
 
     private func nextButtonClick() {
@@ -179,9 +192,21 @@ extension OnboardingViewController: UIScrollViewDelegate {
         let page = Int(offset)
         pageControl.currentPage = page
 
-        if page != self.currentPageIndex {
-            self.currentPageIndex = page
+        if page != currentPageIndex {
+            currentPageIndex = page
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
+
+        // Animate alpha to add fade to scrolling for landscape
+        if isLandscape {
+            let segmentPercent = offset - CGFloat(Int(page))
+            pages[currentPageIndex].alpha = 1.0 - 1.5 * segmentPercent
+            if currentPageIndex - 1 >= 0 {
+                pages[currentPageIndex - 1].alpha = 1.5 * segmentPercent
+            }
+            if currentPageIndex + 1 < pages.count {
+                pages[currentPageIndex + 1].alpha = 1.5 * segmentPercent
+            }
+        }
     }
 }
