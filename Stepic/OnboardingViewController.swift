@@ -118,16 +118,18 @@ class OnboardingViewController: UIViewController {
         DispatchQueue.main.async {
             // Recalculate pages frames and update scroll view offset
             self.reloadPages()
+
             let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex) * self.scrollView.frame.width
-            self.scrollView.contentOffset = CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y)
+            self.scrollView.bounds.origin = CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y)
         }
     }
 
     private func reloadPages() {
-        let convertedCoordinates = scrollView.convert(containerView.frame, from: secondStackView)
-
+        scrollView.bounds.origin = CGPoint.zero
         scrollView.frame = isLandscape ? secondStackView.frame : view.frame
         scrollView.contentSize.width = CGFloat(titles.count) * (isLandscape ? secondStackView.frame.width : view.frame.width)
+
+        let convertedCoordinates = scrollView.convert(containerView.frame, from: secondStackView)
 
         if pages.isEmpty {
             for i in 0..<titles.count {
@@ -145,7 +147,7 @@ class OnboardingViewController: UIViewController {
         }
 
         for i in 0..<pages.count {
-            let xPosition = convertedCoordinates.origin.x + (CGFloat(i) * scrollView.frame.width)
+            let xPosition = convertedCoordinates.origin.x + CGFloat(i) * scrollView.frame.width
             let yPosition = convertedCoordinates.origin.y
 
             pages[i].frame = CGRect(x: xPosition, y: yPosition, width: containerView.frame.width, height: containerView.frame.height)
