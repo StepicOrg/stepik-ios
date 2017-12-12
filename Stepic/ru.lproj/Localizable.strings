@@ -361,5 +361,7 @@ EnterSQLQuery = "Введите SQL запрос:";
 SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
 SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
+StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках."
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

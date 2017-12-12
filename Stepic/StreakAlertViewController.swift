@@ -46,7 +46,11 @@ class StreakAlertViewController: UIViewController {
 
     func localize() {
         titleLabel.text = NSLocalizedString("StreakAlertTitle", comment: "")
-        messageLabel.text = String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(currentStreak)", dayLocalizableFor(daysCnt: currentStreak))
+        if currentStreak > 0 {
+            messageLabel.text = String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(currentStreak)", dayLocalizableFor(daysCnt: currentStreak))
+        } else {
+            messageLabel.text = NSLocalizedString("StreakAlertMessageNoStreak", comment: "")
+        }
         noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
         yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
     }
