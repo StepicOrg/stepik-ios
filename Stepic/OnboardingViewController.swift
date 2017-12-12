@@ -17,6 +17,9 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightParentView: UIView!
+    @IBOutlet weak var rightParentViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightParentViewBottomConstraint: NSLayoutConstraint!
 
     fileprivate var currentPageIndex = 0
 
@@ -76,7 +79,7 @@ class OnboardingViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.frame = self.view.frame
         scrollView.showsHorizontalScrollIndicator = false
-        view.addSubview(scrollView)
+        view.insertSubview(scrollView, aboveSubview: pageControl)
 
         backgroundGradient.frame = view.bounds
         view.layer.insertSublayer(self.backgroundGradient, at: 0)
@@ -125,17 +128,19 @@ class OnboardingViewController: UIViewController {
     }
 
     private func reloadPages() {
+        let rightParentViewConvertedFrame = view.convert(rightParentView.frame, from: mainStackView)
         scrollView.bounds.origin = CGPoint.zero
-        scrollView.frame = isLandscape ? secondStackView.frame : view.frame
-        scrollView.contentSize.width = CGFloat(titles.count) * (isLandscape ? secondStackView.frame.width : view.frame.width)
+        scrollView.frame = isLandscape ? rightParentViewConvertedFrame : view.frame
+        scrollView.contentSize.width = CGFloat(titles.count) * (isLandscape ? rightParentViewConvertedFrame.width : view.frame.width)
 
-        let convertedCoordinates = scrollView.convert(containerView.frame, from: secondStackView)
+        let convertedCoordinates = scrollView.convert(containerView.frame, from: rightParentView)
 
         if pages.isEmpty {
             for i in 0..<titles.count {
                 let pageView = OnboardingPageView()
                 pageView.pageTitleLabel.text = titles[i]
                 pageView.pageDescriptionLabel.text = descriptions[i]
+                pageView.pageDescriptionLabel.sizeToFit()
                 pageView.buttonStyle = (i == titles.count - 1) ? .start : .next
                 pageView.onClick = { [weak self] in
                     self?.nextButtonClick()
@@ -146,12 +151,20 @@ class OnboardingViewController: UIViewController {
             }
         }
 
+        let maxDescriptionsHeight = pages.map { $0.pageDescriptionLabel.bounds.size.height }.max() ?? 0
+        pages.forEach { $0.updateHeight(maxDescriptionsHeight) }
+        let maxPagesHeight = pages.map { $0.height }.max() ?? 0
+
         for i in 0..<pages.count {
             let xPosition = convertedCoordinates.origin.x + CGFloat(i) * scrollView.frame.width
             let yPosition = convertedCoordinates.origin.y
 
+            pages[i].updateHeight(maxDescriptionsHeight)
             pages[i].frame = CGRect(x: xPosition, y: yPosition, width: containerView.frame.width, height: containerView.frame.height)
         }
+
+        rightParentViewTopConstraint.constant = (rightParentView.bounds.size.height - maxPagesHeight) / 2
+        rightParentViewBottomConstraint.constant = rightParentViewTopConstraint.constant
 
         // Update alpha to add fade to scrolling
         pages[currentPageIndex].alpha = 1.0

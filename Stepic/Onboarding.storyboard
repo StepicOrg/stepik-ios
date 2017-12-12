@@ -21,27 +21,57 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-nB-MMj">
                                 <rect key="frame" x="16" y="80" width="382" height="640"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIR-cP-EPC" customClass="OnboardingAnimatedView" customModule="Stepic" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Cm-VeE">
                                         <rect key="frame" x="0.0" y="0.0" width="191" height="640"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIR-cP-EPC" customClass="OnboardingAnimatedView" customModule="Stepic" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="95" width="191" height="450"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="450" id="OdL-Uj-qVv"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="pfu-S8-QvJ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="AIR-cP-EPC" firstAttribute="centerY" secondItem="jnj-Cm-VeE" secondAttribute="centerY" id="3be-88-uY6"/>
+                                            <constraint firstAttribute="bottom" secondItem="AIR-cP-EPC" secondAttribute="bottom" priority="999" id="P5T-S9-Gaw"/>
+                                            <constraint firstItem="AIR-cP-EPC" firstAttribute="top" secondItem="jnj-Cm-VeE" secondAttribute="top" priority="999" id="hgz-uj-e1d"/>
+                                            <constraint firstItem="AIR-cP-EPC" firstAttribute="centerX" secondItem="jnj-Cm-VeE" secondAttribute="centerX" id="jQt-l7-WTt"/>
+                                            <constraint firstAttribute="trailing" secondItem="AIR-cP-EPC" secondAttribute="trailing" priority="999" id="mCQ-hT-XRT"/>
+                                            <constraint firstItem="AIR-cP-EPC" firstAttribute="leading" secondItem="jnj-Cm-VeE" secondAttribute="leading" priority="999" id="thk-HK-wv7"/>
+                                        </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LQu-yC-spH">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuE-WN-TTq">
                                         <rect key="frame" x="191" y="0.0" width="191" height="640"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-vL-9FH">
-                                                <rect key="frame" x="0.0" y="0.0" width="191" height="608"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="gh6-Y8-a3S">
-                                                <rect key="frame" x="0.0" y="624" width="191" height="16"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="Aqz-lV-XCx"/>
-                                                </constraints>
-                                                <color key="pageIndicatorTintColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
-                                                <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </pageControl>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LQu-yC-spH">
+                                                <rect key="frame" x="0.0" y="0.0" width="191" height="640"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-vL-9FH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="608"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="gh6-Y8-a3S">
+                                                        <rect key="frame" x="0.0" y="624" width="191" height="16"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="16" id="Aqz-lV-XCx"/>
+                                                        </constraints>
+                                                        <color key="pageIndicatorTintColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                                        <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </pageControl>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="LQu-yC-spH" firstAttribute="leading" secondItem="kuE-WN-TTq" secondAttribute="leading" id="25L-av-je8"/>
+                                            <constraint firstAttribute="bottom" secondItem="LQu-yC-spH" secondAttribute="bottom" id="C6l-Jz-Jja"/>
+                                            <constraint firstAttribute="trailing" secondItem="LQu-yC-spH" secondAttribute="trailing" id="fcr-7q-js4"/>
+                                            <constraint firstItem="LQu-yC-spH" firstAttribute="top" secondItem="kuE-WN-TTq" secondAttribute="top" id="spG-Ke-uno"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -61,6 +91,9 @@
                         <outlet property="containerView" destination="v5m-vL-9FH" id="MEJ-Ih-OvH"/>
                         <outlet property="mainStackView" destination="5g3-nB-MMj" id="mBm-pF-rZl"/>
                         <outlet property="pageControl" destination="gh6-Y8-a3S" id="rtX-gc-O7F"/>
+                        <outlet property="rightParentView" destination="kuE-WN-TTq" id="qb1-Bj-3WH"/>
+                        <outlet property="rightParentViewBottomConstraint" destination="C6l-Jz-Jja" id="tGl-Sm-VhA"/>
+                        <outlet property="rightParentViewTopConstraint" destination="spG-Ke-uno" id="Xd7-LD-ZmC"/>
                         <outlet property="secondStackView" destination="LQu-yC-spH" id="10x-SF-lqi"/>
                         <outlet property="topConstraint" destination="vl7-zi-Daq" id="nmg-DI-UL9"/>
                     </connections>

@@ -48,6 +48,7 @@ class OnboardingPageView: NibInitializableView {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var pageTitleLabel: StepikLabel!
     @IBOutlet weak var pageDescriptionLabel: StepikLabel!
+    @IBOutlet private weak var buttonPaddingConstraint: NSLayoutConstraint!
 
     var buttonStyle: NextButtonStyle = .next {
         didSet {
@@ -58,6 +59,13 @@ class OnboardingPageView: NibInitializableView {
     }
 
     var onClick: (() -> Void)?
+
+    var height: CGFloat {
+        // 28 – 24 + 4, constraints from xib
+        pageTitleLabel.sizeToFit()
+        pageDescriptionLabel.sizeToFit()
+        return 28 + pageDescriptionLabel.bounds.size.height + pageTitleLabel.bounds.size.height + nextButton.bounds.size.height
+    }
 
     @IBAction func onNextButtonClick(_ sender: Any) {
         onClick?()
@@ -70,5 +78,9 @@ class OnboardingPageView: NibInitializableView {
         nextButton.backgroundColor = .clear
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+    }
+
+    func updateHeight(_ height: CGFloat) {
+        buttonPaddingConstraint.constant = 16 + (height - pageDescriptionLabel.bounds.size.height)
     }
 }

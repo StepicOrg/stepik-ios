@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingPageView" customModule="Stepic" customModuleProvider="target">
             <connections>
+                <outlet property="buttonPaddingConstraint" destination="u0a-Ga-iS8" id="c4O-lg-rwJ"/>
                 <outlet property="nextButton" destination="VCF-Ix-jhf" id="cWR-lk-3r2"/>
                 <outlet property="pageDescriptionLabel" destination="xpr-Ku-6EC" id="wUF-mv-D2W"/>
                 <outlet property="pageTitleLabel" destination="daL-Gs-pWj" id="T91-Nc-0JV"/>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCF-Ix-jhf">
-                    <rect key="frame" x="143.5" y="122" width="88" height="44"/>
+                    <rect key="frame" x="143.5" y="99" width="88" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="cde-aB-wiI"/>
                         <constraint firstAttribute="width" constant="88" id="kqG-oZ-0cI"/>
@@ -62,10 +63,9 @@
                 <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6o8-OI-qWt"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="top" secondItem="daL-Gs-pWj" secondAttribute="bottom" constant="4" id="M2S-Va-Egk"/>
                 <constraint firstItem="daL-Gs-pWj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="TWM-dN-DDm"/>
-                <constraint firstItem="VCF-Ix-jhf" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="bs9-zg-nqg"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cdw-iN-lnH"/>
                 <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="jDy-UV-1t2"/>
-                <constraint firstItem="VCF-Ix-jhf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xpr-Ku-6EC" secondAttribute="bottom" constant="16" id="u0a-Ga-iS8"/>
+                <constraint firstItem="VCF-Ix-jhf" firstAttribute="top" secondItem="xpr-Ku-6EC" secondAttribute="bottom" id="u0a-Ga-iS8"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="w3o-GQ-VyX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
