@@ -56,9 +56,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="button" destination="VCF-Ix-jhf" id="Txl-uG-mlB"/>
-                <outlet property="descriptions" destination="xpr-Ku-6EC" id="pHs-8s-SGa"/>
-                <outlet property="title" destination="daL-Gs-pWj" id="wd6-7s-jUA"/>
+                <outlet property="nextButton" destination="VCF-Ix-jhf" id="4tN-uI-3d5"/>
+                <outlet property="pageDescriptionLabel" destination="xpr-Ku-6EC" id="DAP-73-kHA"/>
+                <outlet property="pageTitleLabel" destination="daL-Gs-pWj" id="ygk-bm-cod"/>
             </connections>
             <point key="canvasLocation" x="-61.5" y="-739"/>
         </view>

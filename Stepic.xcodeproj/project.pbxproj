@@ -2559,6 +2559,8 @@
 		2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */; };
 		2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */; };
 		2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */; };
+		2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */; };
+		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -3934,6 +3936,7 @@
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
+		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
 		2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
@@ -5153,6 +5156,8 @@
 		2C7FEE721FDAF9D500B2B4F1 /* onboardingAnimation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation2.json; path = LottieFiles/onboardingAnimation2.json; sourceTree = "<group>"; };
 		2C7FEE731FDAF9D600B2B4F1 /* onboardingAnimation3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation3.json; path = LottieFiles/onboardingAnimation3.json; sourceTree = "<group>"; };
 		2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingPage.xib; sourceTree = "<group>"; };
+		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
+		2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimatedView.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -5193,6 +5198,7 @@
 		2C9732F61F4C391900AC9301 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3150/icon.png; sourceTree = "<group>"; };
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
+		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -7438,6 +7444,8 @@
 				2C7FEE7B1FDAFB4A00B2B4F1 /* OnboardingPage */,
 				2C7FEE781FDAF9E100B2B4F1 /* Animations files */,
 				2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */,
+				2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */,
+				2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -7567,6 +7575,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7FEE791FDAFB4600B2B4F1 /* OnboardingPage.xib */,
+				2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPage.swift */,
 			);
 			name = OnboardingPage;
 			sourceTree = "<group>";
@@ -11795,6 +11804,7 @@
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
+				2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */,
 				08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				0846B10C1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
@@ -12029,6 +12039,7 @@
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
+				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
@@ -12111,6 +12122,7 @@
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
+				2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPage.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
