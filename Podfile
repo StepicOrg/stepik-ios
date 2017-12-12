@@ -29,7 +29,7 @@ def all_pods
     pod 'Firebase/Analytics'
     pod 'Firebase/RemoteConfig'
     
-    pod 'Mixpanel-swift'
+    pod 'Mixpanel-swift', '2.2.3'
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'

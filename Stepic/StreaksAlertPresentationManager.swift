@@ -9,12 +9,25 @@
 import Foundation
 import Presentr
 
+protocol StreaksAlertPresentationDelegate: class {
+    func didDismiss()
+}
+
 class StreaksAlertPresentationManager {
     weak var controller: UIViewController?
+    weak var delegate: StreaksAlertPresentationDelegate?
 
-    init(controller: UIViewController) {
+    var source: StreaksAlertPresentationSource?
+
+    enum StreaksAlertPresentationSource: String {
+        case login = "login"
+        case submission = "submission"
+    }
+
+    init(controller: UIViewController, source: StreaksAlertPresentationSource) {
         NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         self.controller = controller
+        self.source = source
     }
 
     init() {
@@ -41,8 +54,14 @@ class StreaksAlertPresentationManager {
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in
-            if self != nil {
+            if let source = self?.source?.rawValue {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger.rawValue))
             }
+            self?.delegate?.didDismiss()
+        }
+        vc.cancelAction = {
+            [weak self] in
+            self?.delegate?.didDismiss()
         }
         controller.customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
@@ -66,7 +85,7 @@ class StreaksAlertPresentationManager {
         controller.present(alert, animated: true, completion: nil)
     }
 
-    private func notifyPressed(fromPreferences: Bool) {
+    func notifyPressed(fromPreferences: Bool) {
 
         guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
             if !fromPreferences {
@@ -82,12 +101,13 @@ class StreaksAlertPresentationManager {
         guard let controller = controller else {
             return
         }
-        let alert = Alerts.streaks.construct(notify: {
-            [weak self] in
-            self?.notifyPressed(fromPreferences: false)
-        })
+        let alert = Alerts.streaks.construct(presentationManager: self)
+
         alert.currentStreak = streak
 
+        if let source = source?.rawValue {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger.rawValue))
+        }
         Alerts.streaks.present(alert: alert, inController: controller)
     }
 
