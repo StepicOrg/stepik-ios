@@ -78,7 +78,7 @@ class FindCoursesViewController: CoursesViewController {
 
         self.view.addSubview(searchBar)
         searchBar.constrainHeight("44")
-        searchBar.setContentCompressionResistancePriority(800, for: .vertical)
+        searchBar.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 800), for: .vertical)
         searchBar.alignTopEdge(withView: self.view, predicate: "0")
         searchBar.alignLeading("0", trailing: "0", toView: self.view)
         super.viewDidLoad()
@@ -145,7 +145,7 @@ class FindCoursesViewController: CoursesViewController {
 
     var isDisplayingFromSuggestions: Bool = false
 
-    func didTapBlackView() {
+    @objc func didTapBlackView() {
         searchBar.cancel()
     }
 }
@@ -262,8 +262,8 @@ extension FindCoursesViewController {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-            NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -288,9 +288,9 @@ extension FindCoursesViewController {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-            NSForegroundColorAttributeName: UIColor.lightGray,
-            NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

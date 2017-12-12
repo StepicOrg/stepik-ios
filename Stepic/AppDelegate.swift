@@ -190,7 +190,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
 
-    func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+    @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
         if let token = FIRInstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized {
                 NotificationRegistrator.sharedInstance.registerDevice(token)

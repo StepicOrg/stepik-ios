@@ -218,7 +218,7 @@ class StepicVideoPlayerViewController: UIViewController {
         fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, for: UIControlState())
     }
 
-    func audioRouteChanged(_ notification: Foundation.Notification) {
+    @objc func audioRouteChanged(_ notification: Foundation.Notification) {
         if let routeChangeReason = ((notification as NSNotification).userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber)?.intValue {
             if (UInt(routeChangeReason) == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue) {
                 self.player.pause()
@@ -275,7 +275,7 @@ class StepicVideoPlayerViewController: UIViewController {
 //        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand.addTarget(self, action: #selector(togglePlayStop(_:)));
     }
 
-    func togglePlayPause() {
+    @objc func togglePlayPause() {
         handlePlay()
     }
 
@@ -311,7 +311,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     fileprivate var wasPlayingBeforeSeeking: Bool = false
 
-    func startedSeeking() {
+    @objc func startedSeeking() {
         print("started seeking")
         if self.player.playbackState == .playing {
             wasPlayingBeforeSeeking = true
@@ -321,7 +321,7 @@ class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
-    func finishedSeeking() {
+    @objc func finishedSeeking() {
         print("finished seeking")
         if wasPlayingBeforeSeeking {
             self.player.playFromCurrentTime()
@@ -351,7 +351,7 @@ class StepicVideoPlayerViewController: UIViewController {
 //        }
     }
 
-    func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
+    @objc func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         handleControlsVisibility()
     }
 

@@ -27,13 +27,13 @@ class CourseSubscriptionManager: NSObject {
     fileprivate var dCourses = [Course]()
     fileprivate var aCourses = [Course]()
 
-    func courseSubscribed(_ notification: Foundation.Notification) {
+    @objc func courseSubscribed(_ notification: Foundation.Notification) {
         if let course = (notification as NSNotification).userInfo?["course"] as? Course {
             subscribedTo(course: course, notifyOthers: false)
         }
     }
 
-    func courseUnsubscribed(_ notification: Foundation.Notification) {
+    @objc func courseUnsubscribed(_ notification: Foundation.Notification) {
         if let course = (notification as NSNotification).userInfo?["course"] as? Course {
             unsubscribedFrom(course: course, notifyOthers: false)
         }

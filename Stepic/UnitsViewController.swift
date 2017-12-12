@@ -69,7 +69,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         #endif
     }
 
-    func refresh() {
+    @objc func refresh() {
         refreshUnits()
     }
 
@@ -85,7 +85,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
     }
 
-    func shareButtonPressed(_ button: UIBarButtonItem) {
+    @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         guard let url = self.url else {
             return
         }
@@ -673,8 +673,8 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-            NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -698,9 +698,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-            NSForegroundColorAttributeName: UIColor.lightGray,
-            NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

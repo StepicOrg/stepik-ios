@@ -55,7 +55,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(tapG)
     }
 
-    func didTap(recognizer: UITapGestureRecognizer) {
+    @objc func didTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: self.tableView)
         let path = tableView.indexPathForRow(at: location)
         if let row = path?.row {

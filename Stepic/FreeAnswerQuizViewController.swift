@@ -74,9 +74,9 @@ class FreeAnswerQuizViewController: QuizViewController {
         }
 
         if dataset.isHTMLEnabled {
-            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
             let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
+            mutableAttributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
             textView.attributedText = mutableAttributed
         } else {
             textView.text = reply.text

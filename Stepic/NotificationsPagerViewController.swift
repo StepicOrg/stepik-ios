@@ -49,7 +49,7 @@ class NotificationsPagerViewController: PagerController {
         indicatorColor = UIColor.mainDark
         selectedTabTextColor = UIColor.mainDark
         tabsTextColor = UIColor.mainDark
-        tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
+        tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         tabsViewBackgroundColor = UIColor.mainLight
     }
 
@@ -74,7 +74,7 @@ extension NotificationsPagerViewController: PagerDataSource {
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         let label = UILabel()
 
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         label.text = sections[index].localizedName
         label.sizeToFit()
         return label

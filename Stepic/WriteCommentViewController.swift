@@ -59,7 +59,7 @@ class WriteCommentViewController: UIViewController {
         okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.okPressed))
     }
 
-    func okPressed() {
+    @objc func okPressed() {
         print("should have never been pressed")
     }
 
@@ -85,7 +85,7 @@ class WriteCommentViewController: UIViewController {
 
     var request: Request?
 
-    func sendPressed() {
+    @objc func sendPressed() {
         print("send pressed")
         state = .sending
         sendComment()

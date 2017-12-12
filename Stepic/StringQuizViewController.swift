@@ -73,7 +73,7 @@ class StringQuizViewController: QuizViewController {
         textView.text = reply.text
     }
 
-    func tap() {
+    @objc func tap() {
         self.view.endEditing(true)
     }
 

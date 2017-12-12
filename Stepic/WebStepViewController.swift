@@ -78,7 +78,7 @@ class WebStepViewController: UIViewController {
         initialize()
     }
 
-    func sharePressed(_ item: UIBarButtonItem) {
+    @objc func sharePressed(_ item: UIBarButtonItem) {
         //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         guard let stepid = stepId,
             let slug = lessonSlug else {
@@ -143,7 +143,7 @@ class WebStepViewController: UIViewController {
         }
     }
 
-    func updatedStepNotification(_ notification: Foundation.Notification) {
+    @objc func updatedStepNotification(_ notification: Foundation.Notification) {
         print("did get update step notification")
         initialize()
         loadStepHTML()

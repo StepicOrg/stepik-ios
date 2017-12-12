@@ -129,7 +129,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
-    func shareButtonPressed(_ button: UIBarButtonItem) {
+    @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         share(popoverSourceItem: button, popoverView: nil, fromParent: false)
     }
 
@@ -155,7 +155,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         }
     }
 
-    func moreButtonPressed(_ button: UIBarButtonItem) {
+    @objc func moreButtonPressed(_ button: UIBarButtonItem) {
 
         guard let c = course else {
             return
@@ -298,13 +298,13 @@ class CoursePreviewViewController: UIViewController, ShareableController {
 
     var fullScreenWasPlaying: Bool = false
 
-    func didExitFullscreen() {
+    @objc func didExitFullscreen() {
         if fullScreenWasPlaying {
             self.moviePlayer?.play()
         }
     }
 
-    func willExitFullscreen() {
+    @objc func willExitFullscreen() {
         fullScreenWasPlaying = self.moviePlayer?.playbackState == MPMoviePlaybackState.playing
     }
 

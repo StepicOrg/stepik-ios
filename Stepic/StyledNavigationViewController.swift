@@ -26,8 +26,8 @@ class StyledNavigationViewController: UINavigationController {
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = false
         let fontSize: CGFloat = 17.0
-        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightRegular)
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDark, NSFontAttributeName: titleFont]
+        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark, NSAttributedStringKey.font: titleFont]
         navigationBar.tintColor = UIColor.mainDark
     }
 

@@ -83,7 +83,9 @@ class RegistrationViewController: UIViewController {
                 SVProgressHUD.show()
             case .validationError(let message):
                 let head = NSLocalizedString("WhoopsHead", comment: "")
-                errorMessage = "\(head) \(message)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
+                let fullMessage = "\(head) \(message)"
+                let range = fullMessage.startIndex..<fullMessage.index(fullMessage.startIndex, offsetBy: head.count)
+                errorMessage = fullMessage.style(range: range, style: Style.font(.systemFont(ofSize: 16, weight: UIFont.Weight.medium))).attributedString
                 registerButton.isEnabled = false
 
                 SVProgressHUD.dismiss()
@@ -184,11 +186,11 @@ class RegistrationViewController: UIViewController {
 
         let head = NSLocalizedString("AgreementLabelText", comment: "")
 
-        let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
+        let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
             .foregroundColor(UIColor.mainText)
             .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular)).foregroundColor(UIColor.stepicGreen)
-        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFontWeightRegular))
+        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular)).foregroundColor(UIColor.stepicGreen)
+        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
             .foregroundColor(UIColor.mainText)
             .backgroundColor(UIColor(hex: 0xF6F6F6))
 
@@ -202,7 +204,7 @@ class RegistrationViewController: UIViewController {
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    tosLabel.addLink(to: URL(string: href), with: NSRange(detection.range))
+                    tosLabel.addLink(to: URL(string: href), with: detection.range.nsRange)
                 }
             default: break
             }

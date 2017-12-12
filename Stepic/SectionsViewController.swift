@@ -73,11 +73,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    func shareButtonPressed(_ button: UIBarButtonItem) {
+    @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         share(popoverSourceItem: button, popoverView: nil, fromParent: false)
     }
 
-    func infoButtonPressed(_ button: UIButton) {
+    @objc func infoButtonPressed(_ button: UIButton) {
         self.performSegue(withIdentifier: "showCourse", sender: nil)
     }
 
@@ -107,7 +107,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    func refreshSections() {
+    @objc func refreshSections() {
         didRefresh = false
         emptyDatasetState = .refreshing
         course.loadAllSections(success: {
@@ -441,8 +441,8 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-            NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -466,9 +466,9 @@ extension SectionsViewController : DZNEmptyDataSetSource {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-            NSForegroundColorAttributeName: UIColor.lightGray,
-            NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

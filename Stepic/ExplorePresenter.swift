@@ -162,7 +162,7 @@ class ExplorePresenter: CourseListCountDelegate {
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
         let recoveredIds = courseListsCache.get(forLanguage: language)
-        return CourseList.recover(ids: recoveredIds).sorted { $0.0.position < $0.1.position }
+        return CourseList.recover(ids: recoveredIds).sorted { $0.position < $1.position }
     }
 
     func refresh() {
@@ -194,7 +194,7 @@ class ExplorePresenter: CourseListCountDelegate {
                 throw WeakSelfError.noStrong
             }
             strongSelf.courseListsCache.set(ids: lists.map { $0.id }, forLanguage: language)
-            strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
+            strongSelf.lists = lists.sorted { $0.position < $1.position }
             strongSelf.blocks = strongSelf.buildBlocks(forLists: strongSelf.lists, onlyLocal: false)
             strongSelf.view?.setConnectionProblemsPlaceholder(hidden: true)
             strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)

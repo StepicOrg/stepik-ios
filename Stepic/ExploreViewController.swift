@@ -223,7 +223,7 @@ class ExploreViewController: UIViewController, ExploreView {
 
         self.view.addSubview(searchBar)
         searchBar.constrainHeight("44")
-        searchBar.setContentCompressionResistancePriority(800, for: .vertical)
+        searchBar.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 800), for: .vertical)
         searchBar.alignTopEdge(withView: self.view, predicate: "0")
         searchBar.alignLeading("0", trailing: "0", toView: self.view)
     }

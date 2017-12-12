@@ -124,7 +124,7 @@ class DiscussionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func writeCommentPressed() {
+    @objc func writeCommentPressed() {
         if !AuthInfo.shared.isAuthorized {
             RoutingManager.auth.routeFrom(controller: self, success: {
                 [weak self] in
@@ -285,7 +285,7 @@ class DiscussionsViewController: UIViewController {
 
     var isReloading: Bool = false
 
-    func reloadDiscussions() {
+    @objc func reloadDiscussions() {
         emptyDatasetState = .none
         if isReloading {
             return
@@ -758,8 +758,8 @@ extension DiscussionsViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDele
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -783,9 +783,9 @@ extension DiscussionsViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDele
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-                          NSForegroundColorAttributeName: UIColor.lightGray,
-                          NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                          NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

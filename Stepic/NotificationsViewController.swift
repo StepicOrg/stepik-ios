@@ -107,7 +107,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
     }
 
-    func refreshNotifications() {
+    @objc func refreshNotifications() {
         if state == .loading || state == .refreshing {
             return
         }
@@ -210,7 +210,7 @@ extension NotificationsViewController: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text: String = NSLocalizedString("NoNotifications", comment: "")
 
-        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFontWeightLight))
+        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFont.Weight.light))
             .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
         return text.styleAll(style).attributedString
     }

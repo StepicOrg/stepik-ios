@@ -15,11 +15,11 @@ class SearchSuggestionTableViewCell: UITableViewCell {
     func set(suggestion: String, query: String) {
         let fontSize: CGFloat = 17
         var bold = UIFont.boldSystemFont(ofSize: fontSize)
-        bold = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightMedium)
+        bold = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.medium)
         let regular = UIFont.systemFont(ofSize: fontSize)
-        let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSFontAttributeName: regular, NSForegroundColorAttributeName: UIColor.gray])
+        let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSAttributedStringKey.font: regular, NSAttributedStringKey.foregroundColor: UIColor.gray])
         if let queryLocation = suggestion.indexOf(query.lowercased()) {
-            attributedSuggestion.addAttributes([NSFontAttributeName: bold, NSForegroundColorAttributeName: UIColor.mainText], range: NSRange(location: queryLocation, length: query.characters.count))
+            attributedSuggestion.addAttributes([NSAttributedStringKey.font: bold, NSAttributedStringKey.foregroundColor: UIColor.mainText], range: NSRange(location: queryLocation, length: query.characters.count))
         }
         suggestionLabel.attributedText = attributedSuggestion
     }

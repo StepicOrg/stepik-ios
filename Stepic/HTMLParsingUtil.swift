@@ -33,7 +33,7 @@ class HTMLParsingUtil {
 
     static func getAllLinksWithText(_ htmlString: String, onlyTags: Bool = true) -> [(link: String, text: String)] {
         var res = [(link: String, text: String)]()
-        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+        if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             res += doc.css("a").flatMap {
                 if let link = $0["href"],
                     let text = $0.text {
@@ -68,7 +68,7 @@ class HTMLParsingUtil {
 
     static func getAlliFrameLinks(_ htmlString: String) -> [String] {
         var res = [String]()
-        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+        if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             for element in doc.css("iframe") {
                 if let link = element["src"] {
                     res += [link]
@@ -79,7 +79,7 @@ class HTMLParsingUtil {
     }
 
     static func getImageSrcLinks(_ htmlString: String) -> [String] {
-        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+        if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let imgNodes = doc.css("img")
             return imgNodes.flatMap({return $0["src"]})
         } else {
@@ -88,7 +88,7 @@ class HTMLParsingUtil {
     }
 
     static func getCodeStrings(_ htmlString: String) -> [String] {
-        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+        if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let codeNodes = doc.css("code")
             return codeNodes.flatMap({return $0.text})
         } else {
@@ -97,7 +97,7 @@ class HTMLParsingUtil {
     }
 
     static func getAllHTMLTags(_ htmlString: String) -> [String] {
-        if let doc = Kanna.HTML(html: "<html><body>\(htmlString)</body></html>", encoding: String.Encoding.utf8) {
+        if let doc = try? Kanna.HTML(html: "<html><body>\(htmlString)</body></html>", encoding: String.Encoding.utf8) {
             let nodes = doc.css("*")
             // Drop 2 first tags: html, body
             let tags = Array(nodes.flatMap { $0.tagName }.dropFirst(2))

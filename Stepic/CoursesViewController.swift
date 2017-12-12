@@ -136,7 +136,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     func refreshBegan() {
     }
 
-    func refreshCourses() {
+    @objc func refreshCourses() {
         isRefreshing = true
         refreshBegan()
         performRequest({

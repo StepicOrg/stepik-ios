@@ -52,7 +52,7 @@ class TeachersTableViewCell: UITableViewCell {
 //        collectionView.reloadData()
     }
 
-    func didRotate() {
+    @objc func didRotate() {
         collectionView.collectionViewLayout.invalidateLayout()
     }
 }

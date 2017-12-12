@@ -336,8 +336,8 @@ extension SearchResultsCoursesViewController {
     func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
 
         let text = NSLocalizedString("NoSearchResultsTitle", comment: "")
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

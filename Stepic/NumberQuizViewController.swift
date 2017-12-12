@@ -34,7 +34,7 @@ class NumberQuizViewController: QuizViewController {
         textField.addTarget(self, action: #selector(NumberQuizViewController.textFieldTextDidChange(textField:)), for: UIControlEvents.editingChanged)
     }
 
-    func textFieldTextDidChange(textField: UITextField) {
+    @objc func textFieldTextDidChange(textField: UITextField) {
         switch presenter?.state ?? .nothing {
         case .attempt:
             break
@@ -45,7 +45,7 @@ class NumberQuizViewController: QuizViewController {
         }
     }
 
-    func tap() {
+    @objc func tap() {
         self.view.endEditing(true)
     }
 

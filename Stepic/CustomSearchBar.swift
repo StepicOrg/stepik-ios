@@ -114,7 +114,7 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         textField.addTarget(self, action: #selector(CustomSearchBar.textFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
     }
 
-    func cancel() {
+    @objc func cancel() {
         if isCancelActive {
             setCancelButton(visible: false, animated: true)
         }
@@ -123,7 +123,7 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         textField.text = ""
     }
 
-    func textFieldDidChange(textField: UITextField) {
+    @objc func textFieldDidChange(textField: UITextField) {
         guard let text = textField.text else {
             return
         }
