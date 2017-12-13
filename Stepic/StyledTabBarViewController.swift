@@ -49,6 +49,17 @@ class StyledTabBarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            DefaultsContainer.launch.didLaunch = true
+
+            let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
+            present(onboardingVC, animated: true, completion: nil)
+        }
+
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
