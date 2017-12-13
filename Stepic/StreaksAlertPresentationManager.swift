@@ -18,6 +18,7 @@ class StreaksAlertPresentationManager {
     weak var delegate: StreaksAlertPresentationDelegate?
 
     var source: StreaksAlertPresentationSource?
+    private var didTransitionToSettings = false
 
     enum StreaksAlertPresentationSource: String {
         case login = "login"
@@ -66,7 +67,7 @@ class StreaksAlertPresentationManager {
         vc.selectedBlock = {
             [weak self] in
             if let source = self?.source?.rawValue {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger.rawValue))
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
             }
             self?.didChooseTime()
             self?.delegate?.didDismiss()
@@ -77,8 +78,6 @@ class StreaksAlertPresentationManager {
         }
         controller.customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
-
-    private var didTransitionToSettings = false
 
     private func showStreaksSettingsNotificationAlert() {
         guard let controller = controller else {
@@ -118,7 +117,7 @@ class StreaksAlertPresentationManager {
         alert.currentStreak = streak
 
         if let source = source?.rawValue {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger.rawValue))
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
         }
         Alerts.streaks.present(alert: alert, inController: controller)
     }

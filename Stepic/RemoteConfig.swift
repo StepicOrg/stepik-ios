@@ -15,6 +15,7 @@ enum RemoteConfigKeys: String {
 
 class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+    static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
     var fetchComplete: Bool = false
@@ -37,8 +38,6 @@ class RemoteConfig {
     }
 
     func setup() {}
-
-    static let sharedConfig = RemoteConfig()
 
     private func loadDefaultValues() {
         let appDefaults: [String: NSObject] = [

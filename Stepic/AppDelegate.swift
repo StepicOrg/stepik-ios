@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.setup()
 
-        RemoteConfig.sharedConfig.setup()
+        RemoteConfig.shared.setup()
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
