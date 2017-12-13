@@ -51,6 +51,12 @@ class StreaksAlertPresentationManager {
         return streakTimePickerPresenter
     }()
 
+    private func didChooseTime() {
+        if let controller = controller as? NewProfileViewController {
+            controller.onAppear()
+        }
+    }
+
     private func selectStreakNotificationTime() {
         guard let controller = controller else {
             return
@@ -62,6 +68,7 @@ class StreaksAlertPresentationManager {
             if let source = self?.source?.rawValue {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.sharedConfig.ShowStreaksNotificationTrigger.rawValue))
             }
+            self?.didChooseTime()
             self?.delegate?.didDismiss()
         }
         vc.cancelAction = {

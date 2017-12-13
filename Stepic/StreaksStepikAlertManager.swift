@@ -44,8 +44,4 @@ class StreaksStepikAlertManager: AlertManager, StreaksAlertPresentationDelegate 
     func didDismiss() {
         self.presentationManager = nil
     }
-
-    deinit {
-        print("did deinit streaks alert manager")
-    }
 }

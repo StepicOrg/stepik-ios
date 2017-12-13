@@ -157,10 +157,14 @@ class NewProfileViewController: MenuViewController, ProfileView {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func onAppear() {
         self.presenter?.updateProfile()
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        onAppear()
     }
 }
 
