@@ -280,7 +280,7 @@ class CourseListPresenter {
                 reject(PromiseError.localUpdate)
                 return
             }
-            state = courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
+            strongSelf.state = strongSelf.courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
             fulfill()
         }
     }
