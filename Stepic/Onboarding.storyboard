@@ -62,14 +62,15 @@
                                                         <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </pageControl>
                                                 </subviews>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="LQu-yC-spH" firstAttribute="leading" secondItem="kuE-WN-TTq" secondAttribute="leading" id="25L-av-je8"/>
-                                            <constraint firstAttribute="bottom" secondItem="LQu-yC-spH" secondAttribute="bottom" id="C6l-Jz-Jja"/>
-                                            <constraint firstAttribute="trailing" secondItem="LQu-yC-spH" secondAttribute="trailing" id="fcr-7q-js4"/>
-                                            <constraint firstItem="LQu-yC-spH" firstAttribute="top" secondItem="kuE-WN-TTq" secondAttribute="top" id="spG-Ke-uno"/>
+                                            <constraint firstItem="LQu-yC-spH" firstAttribute="leading" secondItem="kuE-WN-TTq" secondAttribute="leading" id="29o-9p-Cb8"/>
+                                            <constraint firstAttribute="bottom" secondItem="LQu-yC-spH" secondAttribute="bottom" id="2Iy-g6-XaA"/>
+                                            <constraint firstAttribute="trailing" secondItem="LQu-yC-spH" secondAttribute="trailing" id="U01-b0-S4J"/>
+                                            <constraint firstItem="LQu-yC-spH" firstAttribute="top" secondItem="kuE-WN-TTq" secondAttribute="top" id="d7D-MI-uFp"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -92,8 +93,8 @@
                         <outlet property="mainStackView" destination="5g3-nB-MMj" id="mBm-pF-rZl"/>
                         <outlet property="pageControl" destination="gh6-Y8-a3S" id="rtX-gc-O7F"/>
                         <outlet property="rightParentView" destination="kuE-WN-TTq" id="qb1-Bj-3WH"/>
-                        <outlet property="rightParentViewBottomConstraint" destination="C6l-Jz-Jja" id="tGl-Sm-VhA"/>
-                        <outlet property="rightParentViewTopConstraint" destination="spG-Ke-uno" id="Xd7-LD-ZmC"/>
+                        <outlet property="rightParentViewBottomConstraint" destination="2Iy-g6-XaA" id="KHC-md-6He"/>
+                        <outlet property="rightParentViewTopConstraint" destination="d7D-MI-uFp" id="YiS-Gg-zwb"/>
                         <outlet property="secondStackView" destination="LQu-yC-spH" id="10x-SF-lqi"/>
                         <outlet property="topConstraint" destination="vl7-zi-Daq" id="nmg-DI-UL9"/>
                     </connections>

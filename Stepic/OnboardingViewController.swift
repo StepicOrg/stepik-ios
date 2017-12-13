@@ -133,8 +133,6 @@ class OnboardingViewController: UIViewController {
         scrollView.frame = isLandscape ? rightParentViewConvertedFrame : view.frame
         scrollView.contentSize.width = CGFloat(titles.count) * (isLandscape ? rightParentViewConvertedFrame.width : view.frame.width)
 
-        let convertedCoordinates = scrollView.convert(containerView.frame, from: rightParentView)
-
         if pages.isEmpty {
             for i in 0..<titles.count {
                 let pageView = OnboardingPageView()
@@ -151,20 +149,28 @@ class OnboardingViewController: UIViewController {
             }
         }
 
-        let maxDescriptionsHeight = pages.map { $0.pageDescriptionLabel.bounds.size.height }.max() ?? 0
-        pages.forEach { $0.updateHeight(maxDescriptionsHeight) }
-        let maxPagesHeight = pages.map { $0.height }.max() ?? 0
+        // Calculate estimated text height
+        let descriptionsHeights = pages.map { UILabel.heightForLabelWithText($0.pageDescriptionLabel.text ?? "", lines: 0, standardFontOfSize: $0.pageDescriptionLabel.font.pointSize, width: containerView.frame.width - 32) }
+        let maxDescriptionsHeight = descriptionsHeights.max() ?? 0
+        (0..<pages.count).forEach { index in
+            let estimatedHeight = descriptionsHeights[index]
+            pages[index].updateHeight(maxDescriptionsHeight - estimatedHeight)
+        }
 
+        if isLandscape {
+            let maxPagesHeight = pages.map { $0.height }.max() ?? 0
+            rightParentViewTopConstraint.constant = (rightParentView.bounds.size.height - maxPagesHeight - pageControl.bounds.size.height - secondStackView.spacing) / 2
+            rightParentViewBottomConstraint.constant = rightParentViewTopConstraint.constant
+            rightParentView.layoutIfNeeded()
+        }
+
+        let convertedCoordinates = scrollView.convert(containerView.frame, from: secondStackView)
         for i in 0..<pages.count {
             let xPosition = convertedCoordinates.origin.x + CGFloat(i) * scrollView.frame.width
             let yPosition = convertedCoordinates.origin.y
 
-            pages[i].updateHeight(maxDescriptionsHeight)
             pages[i].frame = CGRect(x: xPosition, y: yPosition, width: containerView.frame.width, height: containerView.frame.height)
         }
-
-        rightParentViewTopConstraint.constant = (rightParentView.bounds.size.height - maxPagesHeight) / 2
-        rightParentViewBottomConstraint.constant = rightParentViewTopConstraint.constant
 
         // Update alpha to add fade to scrolling
         pages[currentPageIndex].alpha = 1.0
