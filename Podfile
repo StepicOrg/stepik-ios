@@ -27,6 +27,7 @@ def all_pods
     pod 'Firebase/AppIndexing'
     pod 'Firebase/Messaging'
     pod 'Firebase/Analytics'
+    pod 'Firebase/RemoteConfig'
     
     pod 'Mixpanel-swift', '2.2.3'
 

@@ -26,6 +26,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
 
+    var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
     var presenter: QuizPresenter?
 
     var state = QuizState.nothing
@@ -157,12 +158,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
 
-        //        refreshAttempt(step.id, forceCreate: needNewAttempt)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
-            NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities)
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager())
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }
@@ -175,13 +171,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     deinit {
         print("deinit quiz controller for step \(step.id)")
         NotificationCenter.default.removeObserver(self)
-    }
-
-    func becameActive() {
-        if didTransitionToSettings {
-            didTransitionToSettings = false
-            self.notifyPressed(fromPreferences: true)
-        }
     }
 
     func set(state: QuizState) {
@@ -369,13 +358,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func suggestStreak(streak: Int) {
-        let alert = Alerts.streaks.construct(notify: {
-            [weak self] in
-            self?.notifyPressed(fromPreferences: false)
-        })
-        alert.currentStreak = streak
-
-        Alerts.streaks.present(alert: alert, inController: self)
+        streaksAlertPresentationManager.suggestStreak(streak: streak)
     }
 
     func showRateAlert() {
@@ -454,50 +437,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    private let streakTimePickerPresenter: Presentr = {
-        let streakTimePickerPresenter = Presentr(presentationType: .popup)
-        return streakTimePickerPresenter
-    }()
-
-    private func selectStreakNotificationTime() {
-        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
-        vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
-        vc.selectedBlock = {
-            [weak self] in
-            if self != nil {
-            }
-        }
-        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
-    }
-
-    private var didTransitionToSettings = false
-
-    private func showStreaksSettingsNotificationAlert() {
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
-            [weak self]
-            _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-            self?.didTransitionToSettings = true
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    private func notifyPressed(fromPreferences: Bool) {
-
-        guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
-            if !fromPreferences {
-                showStreaksSettingsNotificationAlert()
-            }
-            return
-        }
-
-        self.selectStreakNotificationTime()
     }
 
     func submitPressed() {
