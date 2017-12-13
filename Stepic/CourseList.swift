@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import PromiseKit
 
 class CourseList: NSManagedObject, JSONInitializable {
     typealias idType = Int
@@ -37,6 +38,32 @@ class CourseList: NSManagedObject, JSONInitializable {
 
     var language: ContentLanguage {
         return ContentLanguage(languageString: languageString)
+    }
+
+    class func recoverAsync(ids: [Int]) -> Promise<[CourseList]> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
+        let descriptor = NSSortDescriptor(key: "managedPosition", ascending: true)
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+
+        request.predicate = idCompoundPredicate
+        request.sortDescriptors = [descriptor]
+
+        return Promise<[CourseList]> {
+            fulfill, _ in
+            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
+                results in
+                guard let courseLists = results.finalResult as? [CourseList] else {
+                    fulfill([])
+                    return
+                }
+                fulfill(courseLists)
+            })
+            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+        }
     }
 
     class func recover(ids: [Int]) -> [CourseList] {
