@@ -44,13 +44,8 @@ class OnboardingViewController: UIViewController {
         return gradient
     }()
 
-    private var titles = ["Выбирайте", "Сохраняйте", "Решайте", "Достигайте"]
-    private var descriptions = [
-        "Доступ ко всем курсам на Stepik – выбирайте что интересно",
-        "Смотрите лекции и сохраняйте их для просмотра без доступа в сеть",
-        "Решайте задачи прямо с мобильного устройства",
-        "Установите напоминания, чтобы заниматься регулярнее и быстрее закончить курс"
-    ]
+    private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "")}
+    private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "")}
 
     fileprivate var isLandscape: Bool {
         switch DeviceInfo.current.orientation {

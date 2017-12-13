@@ -13,9 +13,9 @@ class OnboardingPageView: NibInitializableView {
         var title: String {
             switch self {
             case .next:
-                return "Далее"
+                return NSLocalizedString("OnboardingNextButton", comment: "")
             case .start:
-                return "Начать"
+                return NSLocalizedString("OnboardingStartButton", comment: "")
             }
         }
 
