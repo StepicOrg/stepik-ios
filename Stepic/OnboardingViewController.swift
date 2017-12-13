@@ -161,8 +161,11 @@ class OnboardingViewController: UIViewController {
             let maxPagesHeight = pages.map { $0.height }.max() ?? 0
             rightParentViewTopConstraint.constant = (rightParentView.bounds.size.height - maxPagesHeight - pageControl.bounds.size.height - secondStackView.spacing) / 2
             rightParentViewBottomConstraint.constant = rightParentViewTopConstraint.constant
-            rightParentView.layoutIfNeeded()
+        } else {
+            rightParentViewTopConstraint.constant = 0
+            rightParentViewBottomConstraint.constant = 0
         }
+        rightParentView.layoutIfNeeded()
 
         let convertedCoordinates = scrollView.convert(containerView.frame, from: secondStackView)
         for i in 0..<pages.count {
@@ -203,6 +206,10 @@ extension OnboardingViewController: UIScrollViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !pages.isEmpty else {
+            return
+        }
+
         let offset = scrollView.contentOffset.x / scrollView.frame.width
         let page = Int(offset)
         pageControl.currentPage = page
