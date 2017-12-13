@@ -26,7 +26,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
 
-    var streaksAlertPresentationManager = StreaksAlertPresentationManager()
+    var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
     var presenter: QuizPresenter?
 
     var state = QuizState.nothing

@@ -30,6 +30,11 @@ class StreaksAlertPresentationManager {
         self.source = source
     }
 
+    init(source: StreaksAlertPresentationSource) {
+        NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        self.source = source
+    }
+
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class AuthNavigationViewController: UINavigationController {
 
-    var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager()
+    var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
     var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
 
     enum Controller {
