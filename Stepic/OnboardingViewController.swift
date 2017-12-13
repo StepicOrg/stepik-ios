@@ -56,6 +56,10 @@ class OnboardingViewController: UIViewController {
         }
     }
 
+    @IBAction func onCloseButtonClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": currentPageIndex + 1])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,8 +67,6 @@ class OnboardingViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.backgroundColor = UIColor.clear
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "onboarding-close"), style: .plain, target: nil, action: nil)
 
         mainStackView.axis = isLandscape ? .horizontal : .vertical
 
@@ -181,11 +183,13 @@ class OnboardingViewController: UIViewController {
     }
 
     private func nextButtonClick() {
-        if currentPageIndex < pages.count - 1 {
-            currentPageIndex += 1
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingAction, parameters: ["screen": currentPageIndex + 1])
 
-            let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex) * self.scrollView.frame.width
+        if currentPageIndex < pages.count - 1 {
+            let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex + 1) * self.scrollView.frame.width
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y), animated: true)
+        } else {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
         }
     }
 }
@@ -211,6 +215,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
 
         if page != currentPageIndex {
             currentPageIndex = page
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 
