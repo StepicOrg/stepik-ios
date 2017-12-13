@@ -159,7 +159,7 @@ ShowExamInWeb = "Open exam in web version?";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
 No = "No";
 StreakAlertTitle = "Congrats!";
-StreakAlertMessage = "You are solving %@ %@ in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
+StreakAlertMessage = "You are solving %@ %@ in a row. Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 Select = "Select";
 SelectTimeTitle = "Pick time";
 NotifyAboutStreaksPreference = "Notify about streaks";
@@ -370,6 +370,8 @@ OnboardingDescription3 = "Complete the assignments using your mobile device";
 OnboardingDescription4 = "Set up reminders to study regularly and complete the courses faster";
 OnboardingNextButton = "Next";
 OnboardingStartButton = "Start";
+
+StreakAlertMessageNoStreak = "Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
