@@ -47,7 +47,7 @@ class RemoteConfig {
     }
 
     private func fetchCloudValues() {
-        let fetchDuration: TimeInterval = 0
+        let fetchDuration: TimeInterval = 43200
         #if DEBUG
             activateDebugMode()
         #endif
