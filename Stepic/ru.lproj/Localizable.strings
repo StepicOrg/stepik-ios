@@ -361,6 +361,17 @@ EnterSQLQuery = "Введите SQL запрос:";
 SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
 SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
+OnboardingTitle1 = "Выбирайте";
+OnboardingTitle2 = "Сохраняйте";
+OnboardingTitle3 = "Решайте";
+OnboardingTitle4 = "Достигайте";
+OnboardingDescription1 = "Доступ ко всем курсам на Stepik – выбирайте что интересно";
+OnboardingDescription2 = "Смотрите лекции и сохраняйте их для просмотра без доступа в сеть";
+OnboardingDescription3 = "Решайте задачи прямо с мобильного устройства";
+OnboardingDescription4 = "Установите напоминания, чтобы заниматься регулярнее и быстрее закончить курс";
+OnboardingNextButton = "Далее";
+OnboardingStartButton = "Начать";
+
 StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
 
 /* Arts */

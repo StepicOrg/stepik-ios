@@ -236,4 +236,11 @@ struct AnalyticsEvents {
         static let markAllAsRead = "notifications_mark_all_as_read"
         static let markAsRead = "notifications_mark_as_read"
     }
+
+    struct Onboarding {
+        static let onboardingClosed = "onboarding_closed"
+        static let onboardingScreenOpened = "onboarding_screen_opened"
+        static let onboardingAction = "onboarding_action"
+        static let onboardingComplete = "onboarding_complete"
+    }
 }
