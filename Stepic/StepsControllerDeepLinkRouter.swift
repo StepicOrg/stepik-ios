@@ -67,7 +67,7 @@ class StepsControllerDeepLinkRouter: NSObject {
         func fetchOrLoadSection(for unit: Unit) -> Promise<Section> {
             return Promise { fulfill, reject in
                 if let sections = try? Section.getSections(unit.sectionId),
-                   let section = sections.first {
+                   let section = sections.first, section.courseId != -1 {
                     fulfill(section)
                     return
                 }
