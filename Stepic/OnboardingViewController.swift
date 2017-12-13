@@ -57,7 +57,9 @@ class OnboardingViewController: UIViewController {
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": currentPageIndex + 1])
+        dismiss(animated: true) {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
+        }
     }
     
     override func viewDidLoad() {
@@ -96,6 +98,8 @@ class OnboardingViewController: UIViewController {
         super.viewDidAppear(animated)
 
         reloadPages()
+
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.animatedView.start()
@@ -186,10 +190,11 @@ class OnboardingViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingAction, parameters: ["screen": currentPageIndex + 1])
 
         if currentPageIndex < pages.count - 1 {
-            let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex + 1) * self.scrollView.frame.width
-            scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y), animated: true)
+            let newScrollViewContentOffsetX = CGFloat(currentPageIndex + 1) * scrollView.frame.width
+            scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
+            dismiss(animated: true, completion: nil)
         }
     }
 }
