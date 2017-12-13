@@ -26,28 +26,12 @@ class OnboardingViewController: UIViewController {
     private var scrollView: UIScrollView!
     fileprivate var pages: [OnboardingPageView] = []
 
-    private var backgroundGradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.colors = [
-            UIColor(hex: 0x3a3947).cgColor,
-            UIColor(hex: 0x5d6780).cgColor
-        ]
-
-        let alpha: Float = 50.0 / 360.0
-        let startPointX = powf(sinf(2 * Float.pi * ((alpha + 0.75) / 2)), 2)
-        let startPointY = powf(sinf(2 * Float.pi * ((alpha + 0) / 2)), 2)
-        let endPointX = powf(sinf(2 * Float.pi * ((alpha + 0.25) / 2)), 2)
-        let endPointY = powf(sinf(2 * Float.pi * ((alpha + 0.5) / 2)), 2)
-
-        gradient.endPoint = CGPoint(x: CGFloat(endPointX), y: CGFloat(endPointY))
-        gradient.startPoint = CGPoint(x: CGFloat(startPointX), y: CGFloat(startPointY))
-        return gradient
-    }()
+    private var backgroundGradient: CAGradientLayer = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
 
     private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "")}
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "")}
 
-    fileprivate var isLandscape: Bool {
+    fileprivate var shouldUseLandscapeLayout: Bool {
         switch DeviceInfo.current.orientation {
         case .landscapeLeft, .landscapeRight:
             return true
@@ -70,7 +54,7 @@ class OnboardingViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.backgroundColor = UIColor.clear
 
-        mainStackView.axis = isLandscape ? .horizontal : .vertical
+        mainStackView.axis = shouldUseLandscapeLayout ? .horizontal : .vertical
 
         scrollView = UIScrollView()
         scrollView.delegate = self
@@ -109,9 +93,9 @@ class OnboardingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        mainStackView.axis = isLandscape ? .horizontal : .vertical
-        topConstraint.constant = isLandscape ? 0.0 : 16.0
-        bottomConstraint.constant = isLandscape ? (navigationController?.navigationBar.frame.height ?? 40) : 16.0
+        mainStackView.axis = shouldUseLandscapeLayout ? .horizontal : .vertical
+        topConstraint.constant = shouldUseLandscapeLayout ? 0.0 : 16.0
+        bottomConstraint.constant = shouldUseLandscapeLayout ? (navigationController?.navigationBar.frame.height ?? 40) : 16.0
 
         backgroundGradient.frame = view.bounds
     }
@@ -131,8 +115,8 @@ class OnboardingViewController: UIViewController {
     private func reloadPages() {
         let rightParentViewConvertedFrame = view.convert(rightParentView.frame, from: mainStackView)
         scrollView.bounds.origin = CGPoint.zero
-        scrollView.frame = isLandscape ? rightParentViewConvertedFrame : view.frame
-        scrollView.contentSize.width = CGFloat(titles.count) * (isLandscape ? rightParentViewConvertedFrame.width : view.frame.width)
+        scrollView.frame = shouldUseLandscapeLayout ? rightParentViewConvertedFrame : view.frame
+        scrollView.contentSize.width = CGFloat(titles.count) * (shouldUseLandscapeLayout ? rightParentViewConvertedFrame.width : view.frame.width)
 
         if pages.isEmpty {
             for i in 0..<titles.count {
@@ -158,7 +142,7 @@ class OnboardingViewController: UIViewController {
             pages[index].updateHeight(maxDescriptionsHeight - estimatedHeight)
         }
 
-        if isLandscape {
+        if shouldUseLandscapeLayout {
             let maxPagesHeight = pages.map { $0.height }.max() ?? 0
             rightParentViewTopConstraint.constant = (rightParentView.bounds.size.height - maxPagesHeight - pageControl.bounds.size.height - secondStackView.spacing) / 2
             rightParentViewBottomConstraint.constant = rightParentViewTopConstraint.constant
