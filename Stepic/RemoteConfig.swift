@@ -48,7 +48,9 @@ class RemoteConfig {
 
     private func fetchCloudValues() {
         let fetchDuration: TimeInterval = 0
-        activateDebugMode()
+        #if DEBUG
+            activateDebugMode()
+        #endif
         FIRRemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
             [weak self]
             _, error in
