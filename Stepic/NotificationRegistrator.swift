@@ -82,7 +82,7 @@ class NotificationRegistrator {
                     switch error {
                     case DeviceError.notFound:
                         print("notification registrator: device not found on deletion, id = \(deviceId)")
-                        return
+                        DeviceDefaults.sharedDefaults.deviceId = nil
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
@@ -100,12 +100,11 @@ class NotificationRegistrator {
                             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
 
                             DeviceDefaults.sharedDefaults.deviceId = nil
-                            fulfill()
                         } else {
                             print("notification registrator: could not get current user ID or token to delete device")
-                            fulfill()
                         }
                     }
+                    fulfill()
                 }
             } else {
                 print("notification registrator: no saved device")
