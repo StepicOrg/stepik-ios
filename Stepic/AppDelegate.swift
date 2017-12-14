@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if AuthInfo.shared.isAuthorized {
-            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+            NotificationRegistrator.shared.registerForRemoteNotifications(application)
         }
 
         if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {
@@ -189,13 +189,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
         if let token = FIRInstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized {
-                NotificationRegistrator.sharedInstance.registerDevice(token)
+                NotificationRegistrator.shared.registerDevice(token)
             }
         }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
+        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
