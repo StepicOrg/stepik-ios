@@ -28,7 +28,7 @@ class DevicesAPI: APIEndpoint {
         return retrieve(params: ["user": userId, "page": page])
     }
 
-    func retrieve(deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device?> {
+    func retrieve(deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         return Promise { fulfill, reject in
             manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", parameters: [:], headers: headers).responseSwiftyJSON { response in
                 switch response.result {
@@ -37,15 +37,16 @@ class DevicesAPI: APIEndpoint {
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
-                        switch  r.statusCode {
-                        case 404:
+                        switch r.statusCode {
+                        // when we pass wrong (but existing) device id we get 403 with error presented in field "detail"
+                        case 403, 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
                         }
                     }
 
-                    fulfill(json["devices"].arrayValue.map { Device(json: $0) }.first)
+                    fulfill(Device(json: json["devices"].arrayValue[0]))
                 }
             }
         }
@@ -57,18 +58,22 @@ class DevicesAPI: APIEndpoint {
                 throw DeviceError.notFound
             }
 
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", method: .put, parameters: Parameters(), encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            let params: Parameters? = [
+                "device": device.json as AnyObject
+            ]
+
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     reject(error)
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
-                        switch  r.statusCode {
+                        switch r.statusCode {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
                         }
                     }
 
@@ -89,11 +94,11 @@ class DevicesAPI: APIEndpoint {
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
-                        switch  r.statusCode {
+                        switch r.statusCode {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
                         }
                     }
 
@@ -112,11 +117,11 @@ class DevicesAPI: APIEndpoint {
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
-                        switch  r.statusCode {
+                        switch r.statusCode {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
                         }
                     }
 
@@ -135,11 +140,11 @@ class DevicesAPI: APIEndpoint {
                 case .success(let json):
                     if let r = response.response,
                        !(200...299 ~= r.statusCode) {
-                        switch  r.statusCode {
+                        switch r.statusCode {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
                         }
                     }
 
@@ -164,18 +169,12 @@ extension DevicesAPI {
     }
 
     @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping (() -> Void), error errorHandler: @escaping ((DeviceError) -> Void)) -> Request? {
-        delete(deviceId).then { success() }.catch { errorHandler($0 as! DeviceError) }
+        delete(deviceId, headers: headers).then { success() }.catch { errorHandler($0 as! DeviceError) }
         return nil
     }
 
     @discardableResult func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
-        retrieve(deviceId: deviceId).then { device -> Void in
-            if let d = device {
-                success(d)
-            } else {
-                errorHandler("not found")
-            }
-        }.catch { errorHandler($0.localizedDescription) }
+        retrieve(deviceId: deviceId, headers: headers).then { success($0) }.catch { errorHandler($0.localizedDescription) }
         return nil
     }
 }

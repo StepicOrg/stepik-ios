@@ -47,11 +47,19 @@ class NotificationRegistrator {
 
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
-        ApiDataDownloader.devices.retrieve(registrationId: registrationToken).then { device -> Promise<Device> in
-            if let remoteDevice = device {
-                return !remoteDevice.isBadgesEnabled ? ApiDataDownloader.devices.update(newDevice) : Promise(value: remoteDevice)
+        var updatingPromise: Promise<Device>!
+        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId {
+            updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
+        } else {
+            updatingPromise = ApiDataDownloader.devices.create(newDevice)
+        }
+
+        updatingPromise.then { remoteDevice -> Promise<Device> in
+            if remoteDevice.isBadgesEnabled {
+                return Promise(value: remoteDevice)
             } else {
-                return ApiDataDownloader.devices.create(newDevice)
+                remoteDevice.isBadgesEnabled = true
+                return ApiDataDownloader.devices.update(remoteDevice)
             }
         }.then { device -> Void in
             print("notification registrator: device registered, info = \(device.json)")
@@ -68,11 +76,13 @@ class NotificationRegistrator {
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
                 ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
                     print("notification registrator: successfully delete device, id = \(deviceId)")
+                    DeviceDefaults.sharedDefaults.deviceId = nil
                     fulfill()
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
                         print("notification registrator: device not found on deletion, id = \(deviceId)")
+                        return
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
@@ -95,7 +105,6 @@ class NotificationRegistrator {
                             print("notification registrator: could not get current user ID or token to delete device")
                             fulfill()
                         }
-                        fulfill()
                     }
                 }
             } else {
