@@ -45,7 +45,7 @@ class OnboardingViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
