@@ -78,9 +78,16 @@ class OnboardingPageView: NibInitializableView {
         nextButton.backgroundColor = .clear
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+
+        // For iPhone 4s decrease font size
+        if DeviceInfo.current.diagonal <= 3.5 {
+            pageTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+            pageDescriptionLabel.font = UIFont.systemFont(ofSize: 15)
+        }
     }
 
     func updateHeight(_ delta: CGFloat) {
-        buttonPaddingConstraint.constant = 24 + delta
+        // For iPhone 4s decrease padding: 16px instead of 24px
+        buttonPaddingConstraint.constant = (DeviceInfo.current.diagonal <= 3.5 ? 16 : 24) + delta
     }
 }
