@@ -67,7 +67,7 @@ class StepsControllerDeepLinkRouter: NSObject {
         func fetchOrLoadSection(for unit: Unit) -> Promise<Section> {
             return Promise { fulfill, reject in
                 if let sections = try? Section.getSections(unit.sectionId),
-                   let section = sections.first, section.courseId != -1 {
+                   let section = sections.first, section.courseId != 0 {
                     fulfill(section)
                     return
                 }
@@ -79,7 +79,7 @@ class StepsControllerDeepLinkRouter: NSObject {
 
                         fulfill(section)
                     } else {
-                        reject(NSError()) // no ideas what we should throw here...
+                        reject(NSError(domain: "", code: -1, userInfo: nil)) // no ideas what we should throw here...
                     }
                 }, error: { err in
                     reject(err)
@@ -101,7 +101,7 @@ class StepsControllerDeepLinkRouter: NSObject {
 
                         fulfill(course)
                     } else {
-                        reject(NSError())
+                        reject(NSError(domain: "", code: -1, userInfo: nil))
                     }
                 }, error: { err in
                     reject(err)
