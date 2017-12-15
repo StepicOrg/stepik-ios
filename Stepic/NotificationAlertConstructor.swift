@@ -18,7 +18,7 @@ class NotificationAlertConstructor {
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
             _ in
-            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+            NotificationRegistrator.shared.registerForRemoteNotifications(UIApplication.shared)
         }))
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .cancel, handler: {

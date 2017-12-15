@@ -7,17 +7,14 @@
 //
 
 import UIKit
-//import Google
 import FirebaseMessaging
 import Firebase
+import PromiseKit
 
-//Class for registering the remote notifications service
-class NotificationRegistrator: NSObject {
-    static let sharedInstance = NotificationRegistrator()
+class NotificationRegistrator {
+    static let shared = NotificationRegistrator()
 
-    fileprivate override init() {
-        super.init()
-    }
+    private init () { }
 
     func registerForRemoteNotifications() {
         return registerForRemoteNotifications(UIApplication.shared)
@@ -25,8 +22,7 @@ class NotificationRegistrator: NSObject {
 
     func registerForRemoteNotifications(_ application: UIApplication) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
@@ -48,68 +44,81 @@ class NotificationRegistrator: NSObject {
 
     func registerDevice(_ registrationToken: String!) {
         print("Registration Token: \(registrationToken)")
-        let device = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
-        ApiDataDownloader.devices.create(device, success: {
-            device in
-            DeviceDefaults.sharedDefaults.deviceId = device.id
-            print("created device: \(device.getJSON())")
-        }, error : {
-            _ in
-            print("device creation error")
-        })
-    }
 
-    // Should be executed first before any actions were performed, contains abort()
-    //TODO: remove abort, add failure completion handler
-    func unregisterFromNotifications(completion: @escaping (() -> Void)) {
-        print(AuthInfo.shared.token?.accessToken ?? "")
-        UIApplication.shared.unregisterForRemoteNotifications()
-        if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
-            ApiDataDownloader.devices.delete(deviceId, success: {
-                    print("successfully deleted device with id \(deviceId) when unregistering from notifications")
-                    completion()
-                }, error: {
-                    error in
-                    switch error {
-                    case .notFound:
-                        print("device not found on deletion, not writing executable task")
-                        return
-                    case .other(error: let e, code: _, message: let message):
-                        if let errorMessage = message {
-                            print(errorMessage)
-                        }
-                        if e != nil {
-                            print("initializing delete device task")
-                            print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
-                            if let userId = AuthInfo.shared.userId,
-                                let token = AuthInfo.shared.token {
+        let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
-                                let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
-                                ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
-
-                                let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
-                                userPersistencyManager.writeStepicToken(token, userId: userId)
-
-                                let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
-                                taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
-
-                                let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
-                                queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
-
-                                DeviceDefaults.sharedDefaults.deviceId = nil
-                                completion()
-                            } else {
-                                print("Could not get current user ID or token to delete device")
-                                completion()
-                            }
-                        }
-                    }
-                }
-            )
+        var updatingPromise: Promise<Device>!
+        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId {
+            updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
         } else {
-            print("no deviceId found")
-            completion()
+            updatingPromise = ApiDataDownloader.devices.create(newDevice)
+        }
+
+        updatingPromise.then { remoteDevice -> Promise<Device> in
+            if remoteDevice.isBadgesEnabled {
+                return Promise(value: remoteDevice)
+            } else {
+                remoteDevice.isBadgesEnabled = true
+                return ApiDataDownloader.devices.update(remoteDevice)
+            }
+        }.then { device -> Void in
+            print("notification registrator: device registered, info = \(device.json)")
+            DeviceDefaults.sharedDefaults.deviceId = device.id
+        }.catch { error in
+            print("notification registrator: device registration error, error = \(error)")
         }
     }
 
+    func unregisterFromNotifications() -> Promise<Void> {
+        return Promise { fulfill, _ in
+            UIApplication.shared.unregisterForRemoteNotifications()
+
+            if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
+                ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
+                    print("notification registrator: successfully delete device, id = \(deviceId)")
+                    DeviceDefaults.sharedDefaults.deviceId = nil
+                    fulfill()
+                }.catch { error in
+                    switch error {
+                    case DeviceError.notFound:
+                        print("notification registrator: device not found on deletion, id = \(deviceId)")
+                        DeviceDefaults.sharedDefaults.deviceId = nil
+                    default:
+                        if let userId = AuthInfo.shared.userId,
+                           let token = AuthInfo.shared.token {
+
+                            let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                            ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+
+                            let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                            userPersistencyManager.writeStepicToken(token, userId: userId)
+
+                            let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                            taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+
+                            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+
+                            DeviceDefaults.sharedDefaults.deviceId = nil
+                        } else {
+                            print("notification registrator: could not get current user ID or token to delete device")
+                        }
+                    }
+                    fulfill()
+                }
+            } else {
+                print("notification registrator: no saved device")
+                fulfill()
+            }
+        }
+    }
+}
+
+extension NotificationRegistrator {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    func unregisterFromNotifications(completion: @escaping (() -> Void)) {
+        unregisterFromNotifications().then {
+            completion()
+        }.catch { _ in }
+    }
 }
