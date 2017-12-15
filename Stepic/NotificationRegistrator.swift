@@ -42,13 +42,13 @@ class NotificationRegistrator {
 
     let registrationKey = "onRegistrationCompleted"
 
-    func registerDevice(_ registrationToken: String!) {
+    func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
         print("Registration Token: \(registrationToken)")
 
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
         var updatingPromise: Promise<Device>!
-        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId {
+        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
             updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
         } else {
             updatingPromise = ApiDataDownloader.devices.create(newDevice)
@@ -65,7 +65,13 @@ class NotificationRegistrator {
             print("notification registrator: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
-            print("notification registrator: device registration error, error = \(error)")
+            switch error {
+            case DeviceError.notFound:
+                print("notification registrator: device not found, create new")
+                self.registerDevice(registrationToken, forceCreation: true)
+            default:
+                print("notification registrator: device registration error, error = \(error)")
+            }
         }
     }
 

@@ -108,7 +108,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
-    func delete(_ deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Void> {
+    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
         return Promise { fulfill, reject in
             manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
