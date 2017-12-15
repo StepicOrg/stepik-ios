@@ -54,7 +54,9 @@ class NotificationRegistrator {
             updatingPromise = ApiDataDownloader.devices.create(newDevice)
         }
 
-        updatingPromise.then { remoteDevice -> Promise<Device> in
+        checkToken().then { _ -> Promise<Device> in
+            return updatingPromise
+        }.then { remoteDevice -> Promise<Device> in
             if remoteDevice.isBadgesEnabled {
                 return Promise(value: remoteDevice)
             } else {
