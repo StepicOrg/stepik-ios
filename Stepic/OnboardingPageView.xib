@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCF-Ix-jhf">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCF-Ix-jhf" customClass="StepikButton" customModule="Stepic" customModuleProvider="target">
                     <rect key="frame" x="143.5" y="110.5" width="88" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="cde-aB-wiI"/>
@@ -41,7 +41,7 @@
                         <action selector="onNextButtonClick:" destination="-1" eventType="touchUpInside" id="Mbo-7G-EPG"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смотрите лекции и сохраняйте их без доступа в сеть" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-Ku-6EC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смотрите лекции и сохраняйте их без доступа в сеть" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-Ku-6EC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
                     <rect key="frame" x="16" y="53.5" width="343" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>

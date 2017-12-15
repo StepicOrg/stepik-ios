@@ -32,12 +32,7 @@ class OnboardingViewController: UIViewController {
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "")}
 
     fileprivate var shouldUseLandscapeLayout: Bool {
-        switch DeviceInfo.current.orientation {
-        case .landscapeLeft, .landscapeRight:
-            return true
-        default:
-            return false
-        }
+        return DeviceInfo.current.orientation.interface.isLandscape
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
@@ -62,6 +57,12 @@ class OnboardingViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.frame = self.view.frame
         scrollView.showsHorizontalScrollIndicator = false
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                scrollView.contentInsetAdjustmentBehavior = .never
+            }
+        #endif
+
         view.insertSubview(scrollView, aboveSubview: pageControl)
 
         backgroundGradient.frame = view.bounds
@@ -134,8 +135,15 @@ class OnboardingViewController: UIViewController {
             }
         }
 
+        // Change width, cause we should have resized pageView before text height calculation
+        // containerView width is constant after rotation, so we can use it safely
+        for i in 0..<pages.count {
+            pages[i].frame = CGRect(x: pages[i].frame.origin.x, y: pages[i].frame.origin.y, width: containerView.frame.width, height: containerView.frame.height)
+            pages[i].layoutIfNeeded()
+        }
+
         // Calculate estimated text height
-        let descriptionsHeights = pages.map { UILabel.heightForLabelWithText($0.pageDescriptionLabel.text ?? "", lines: 0, standardFontOfSize: $0.pageDescriptionLabel.font.pointSize, width: containerView.frame.width - 32) }
+        let descriptionsHeights = pages.map { $0.descriptionHeight }
         let maxDescriptionsHeight = descriptionsHeights.max() ?? 0
         (0..<pages.count).forEach { index in
             let estimatedHeight = descriptionsHeights[index]
@@ -161,7 +169,9 @@ class OnboardingViewController: UIViewController {
         }
 
         // Update alpha to add fade to scrolling
-        pages[currentPageIndex].alpha = 1.0
+        if currentPageIndex >= 0 && currentPageIndex < pages.count {
+            pages[currentPageIndex].alpha = 1.0
+        }
         if currentPageIndex - 1 >= 0 {
             pages[currentPageIndex - 1].alpha = 0.0
         }
@@ -210,7 +220,9 @@ extension OnboardingViewController: UIScrollViewDelegate {
 
         // Animate alpha to add fade to scrolling
         let segmentPercent = offset - CGFloat(Int(page))
-        pages[currentPageIndex].alpha = 1.0 - 1.5 * segmentPercent
+        if currentPageIndex >= 0 && currentPageIndex < pages.count {
+            pages[currentPageIndex].alpha = 1.0 - 1.5 * segmentPercent
+        }
         if currentPageIndex - 1 >= 0 {
             pages[currentPageIndex - 1].alpha = 1.5 * segmentPercent
         }

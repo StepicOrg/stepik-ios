@@ -45,7 +45,7 @@ class OnboardingPageView: NibInitializableView {
         return "OnboardingPageView"
     }
 
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: StepikButton!
     @IBOutlet weak var pageTitleLabel: StepikLabel!
     @IBOutlet weak var pageDescriptionLabel: StepikLabel!
     @IBOutlet private weak var buttonPaddingConstraint: NSLayoutConstraint!
@@ -67,6 +67,12 @@ class OnboardingPageView: NibInitializableView {
         return 28 + pageDescriptionLabel.bounds.size.height + pageTitleLabel.bounds.size.height + nextButton.bounds.size.height + buttonPaddingConstraint.constant
     }
 
+    var descriptionHeight: CGFloat {
+        pageDescriptionLabel.sizeToFit()
+        pageDescriptionLabel.layoutIfNeeded()
+        return UILabel.heightForLabelWithText(pageDescriptionLabel.text ?? "", lines: 0, standardFontOfSize: pageDescriptionLabel.font.pointSize, width: pageDescriptionLabel.bounds.width)
+    }
+
     @IBAction func onNextButtonClick(_ sender: Any) {
         onClick?()
     }
@@ -78,9 +84,17 @@ class OnboardingPageView: NibInitializableView {
         nextButton.backgroundColor = .clear
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        nextButton.setTitleColor(.white, for: .normal)
+
+        // For iPhone 4s decrease font size
+        if DeviceInfo.current.diagonal <= 3.5 {
+            pageTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+            pageDescriptionLabel.font = UIFont.systemFont(ofSize: 15)
+        }
     }
 
     func updateHeight(_ delta: CGFloat) {
-        buttonPaddingConstraint.constant = 24 + delta
+        // For iPhone 4s decrease padding: 16px instead of 24px
+        buttonPaddingConstraint.constant = (DeviceInfo.current.diagonal <= 3.5 ? 16 : 24) + delta
     }
 }

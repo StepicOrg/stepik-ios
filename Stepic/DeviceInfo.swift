@@ -43,7 +43,7 @@ class DeviceInfo {
         return currentDevice.model
     }
 
-    var orientation: UIDeviceOrientation {
-        return UIDevice.current.orientation
+    var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {
+        return (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
     }
 }
