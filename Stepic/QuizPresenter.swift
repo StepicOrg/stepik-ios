@@ -19,6 +19,7 @@ class QuizPresenter {
     var attemptsAPI: AttemptsAPI
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
+    var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager
 
     var state: QuizState = .nothing {
         didSet {
@@ -33,7 +34,7 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
@@ -41,6 +42,7 @@ class QuizPresenter {
         self.attemptsAPI = attemptsAPI
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
+        self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
 
     private var submissionLimit: SubmissionLimitation? {
@@ -378,7 +380,7 @@ class QuizPresenter {
             return
         }
 
-        guard QuizDataManager.submission.canShowAlert else {
+        guard streaksNotificationSuggestionManager.canShowAlert(after: .submission) else {
             return
         }
 
@@ -392,7 +394,7 @@ class QuizPresenter {
             guard activity.currentStreak > 0 else {
                 return
             }
-            QuizDataManager.submission.didShowStreakAlert()
+            self?.streaksNotificationSuggestionManager.didShowStreakAlert()
             self?.view?.suggestStreak(streak: activity.currentStreak)
         }, error: {
             _ in

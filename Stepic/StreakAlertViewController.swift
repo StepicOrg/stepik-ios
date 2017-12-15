@@ -23,6 +23,7 @@ class StreakAlertViewController: UIViewController {
 //    
     var yesAction : (() -> Void)?
     var noAction : (() -> Void)?
+    var streaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
 
     var messageLabelWidth: NSLayoutConstraint?
 
@@ -45,7 +46,11 @@ class StreakAlertViewController: UIViewController {
 
     func localize() {
         titleLabel.text = NSLocalizedString("StreakAlertTitle", comment: "")
-        messageLabel.text = String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(currentStreak)", dayLocalizableFor(daysCnt: currentStreak))
+        if currentStreak > 0 {
+            messageLabel.text = String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(currentStreak)", dayLocalizableFor(daysCnt: currentStreak))
+        } else {
+            messageLabel.text = NSLocalizedString("StreakAlertMessageNoStreak", comment: "")
+        }
         noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
         yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
     }
@@ -58,14 +63,14 @@ class StreakAlertViewController: UIViewController {
     @IBAction func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         PreferencesContainer.notifications.allowStreaksNotifications = false
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.fail(QuizDataManager.submission.streakAlertShownCnt), parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.fail(streaksNotificationSuggestionManager.streakAlertShownCnt), parameters: nil)
         noAction?()
     }
 
     @IBAction func yesPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         PreferencesContainer.notifications.allowStreaksNotifications = true
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.success(QuizDataManager.submission.streakAlertShownCnt), parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.success(streaksNotificationSuggestionManager.streakAlertShownCnt), parameters: nil)
         yesAction?()
     }
 

@@ -184,6 +184,8 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
         presenter?.updateNotification(with: id, status: .read)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "button"])
+
         cell.status = .read
     }
 
@@ -193,6 +195,8 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
             DeepLinkRouter.routeFromDeepLink(url: deepLinkingUrl, showAlertForUnsupported: false)
 
             presenter?.updateNotification(with: id, status: .read)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "link"])
+
             cell.status = .read
         }
     }

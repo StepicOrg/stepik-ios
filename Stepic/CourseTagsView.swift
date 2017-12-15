@@ -28,7 +28,9 @@ class CourseTagsView: NibInitializableView {
         collectionView.register(UINib(nibName: "CourseTagCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CourseTagCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        flowLayout.estimatedItemSize = CGSize(width: 80, height: 40)
+        flowLayout.setEstimatedItemSize(CGSize(width: 80.0, height: 40.0), fallbackOnPlus: CGSize(width: 20.0, height: 40.0))
+
+        //estimatedItemSize = CGSize(width: 80, height: 40)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
         titleLabel.colorMode = .gray

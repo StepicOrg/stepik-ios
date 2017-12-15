@@ -51,6 +51,9 @@ class NotificationsPresenter {
 
     private var section: NotificationsSection = .all
 
+    // Store unread notifications count to pass it to analytics
+    private var badgeUnreadCount = 0
+
     init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
@@ -61,10 +64,20 @@ class NotificationsPresenter {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+        guard let userInfo = systemNotification.userInfo,
+            let value = userInfo["value"] as? Int else {
+                return
+        }
+
+        self.badgeUnreadCount = value
     }
 
     @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
@@ -298,6 +311,7 @@ class NotificationsPresenter {
             self.notificationsAPI.markAllAsRead()
         }.then { _ -> Void in
             Notification.markAllAsRead()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAllAsRead, parameters: ["badge": self.badgeUnreadCount])
 
             NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
             self.view?.updateMarkAllAsReadButton(with: .normal)

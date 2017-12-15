@@ -159,7 +159,7 @@ ShowExamInWeb = "Open exam in web version?";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
 No = "No";
 StreakAlertTitle = "Congrats!";
-StreakAlertMessage = "You are solving %@ %@ in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
+StreakAlertMessage = "You are solving %@ %@ in a row. Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 Select = "Select";
 SelectTimeTitle = "Pick time";
 NotifyAboutStreaksPreference = "Notify about streaks";
@@ -359,6 +359,19 @@ EnterSQLQuery = "Enter SQL query:";
 
 SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
 SolveSomethingToday = "Solve anything today to increase your streak.";
+
+OnboardingTitle1 = "Choose";
+OnboardingTitle2 = "Download";
+OnboardingTitle3 = "Solve";
+OnboardingTitle4 = "Complete";
+OnboardingDescription1 = "Browse through all the courses available on Stepik and choose what suits you";
+OnboardingDescription2 = "Watch the video lectures online or download them for access without the connection";
+OnboardingDescription3 = "Complete the assignments using your mobile device";
+OnboardingDescription4 = "Set up reminders to study regularly and complete the courses faster";
+OnboardingNextButton = "Next";
+OnboardingStartButton = "Start";
+
+StreakAlertMessageNoStreak = "Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

@@ -194,8 +194,10 @@ class CourseListViewController: UIViewController, CourseListView {
             emptyPlaceholder.text = NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             emptyPlaceholder.onTap = {
                 [weak self] in
-                let vc = ControllerHelper.getAuthController()
-                self?.present(vc, animated: true, completion: nil)
+                guard let strongSelf = self else {
+                    return
+                }
+                RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
             }
             setPlaceholder(visible: true)
             break

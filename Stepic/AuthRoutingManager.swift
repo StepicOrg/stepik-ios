@@ -13,6 +13,7 @@ class AuthRoutingManager {
         if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
             vc.success = success
             vc.cancel = cancel
+            vc.source = controller
             controller.present(vc, animated: true, completion: nil)
         }
     }

@@ -56,6 +56,7 @@ class ProfilePresenter {
             buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
+//            buildOnboardingTransitionBlock(), // FIXME: remove after debug
             buildLogoutBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)
@@ -177,6 +178,20 @@ class ProfilePresenter {
 
         return block
     }
+
+    // FIXME: remove after debug
+//    private func buildOnboardingTransitionBlock() -> TransitionMenuBlock {
+//        let block: TransitionMenuBlock = TransitionMenuBlock(id: "onboarding", title: "Launch onboarding")
+//
+//        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+//        block.onTouch = {
+//            [weak self] in
+//            let vc = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
+//            (self?.view as? UIViewController)?.present(vc, animated: true, completion: nil)
+//        }
+//
+//        return block
+//    }
 
     // MARK: - Streaks notifications
 
