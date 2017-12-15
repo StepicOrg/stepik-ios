@@ -25,6 +25,7 @@ extension Section {
     @NSManaged var managedProgressId: String?
     @NSManaged var managedTestSectionAction: String?
     @NSManaged var managedIsExam: NSNumber?
+    @NSManaged var managedCourseId: NSNumber?
 
     @NSManaged var managedUnitsArray: NSObject?
 
@@ -139,8 +140,22 @@ extension Section {
         }
     }
 
+    var courseId: Int {
+        set(newId) {
+            self.managedCourseId = newId as NSNumber?
+        }
+        get {
+            return managedCourseId?.intValue ?? -1
+        }
+    }
+
     var course: Course? {
-        return managedCourse
+        get {
+            return managedCourse
+        }
+        set {
+            managedCourse = newValue
+        }
     }
 
     var progress: Progress? {

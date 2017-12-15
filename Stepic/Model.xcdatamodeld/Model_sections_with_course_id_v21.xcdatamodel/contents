@@ -75,14 +75,6 @@
         <relationship name="managedReviewSummary" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CourseReviewSummary" inverseName="managedCourse" inverseEntity="CourseReviewSummary" syncable="YES"/>
         <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
     </entity>
-    <entity name="CourseList" representedClassName=".CourseList" syncable="YES">
-        <attribute name="managedCoursesArray" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="managedDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedLanguage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="CourseReviewSummary" representedClassName=".CourseReviewSummary" syncable="YES">
         <attribute name="managedAverage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -142,7 +134,6 @@
         <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedHardDeadline" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsCached" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -229,14 +220,13 @@
         <element name="CodeSample" positionX="-36" positionY="135" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="510"/>
-        <element name="CourseList" positionX="-36" positionY="135" width="128" height="135"/>
         <element name="CourseReviewSummary" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Notification" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="Profile" positionX="-36" positionY="135" width="128" height="105"/>
         <element name="Progress" positionX="-45" positionY="135" width="128" height="210"/>
-        <element name="Section" positionX="-54" positionY="126" width="128" height="300"/>
+        <element name="Section" positionX="-54" positionY="126" width="128" height="285"/>
         <element name="Step" positionX="-45" positionY="135" width="128" height="240"/>
         <element name="StepOptions" positionX="-27" positionY="153" width="128" height="105"/>
         <element name="Unit" positionX="-45" positionY="144" width="128" height="255"/>
