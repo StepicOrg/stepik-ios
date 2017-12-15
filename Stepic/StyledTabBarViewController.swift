@@ -51,6 +51,8 @@ class StyledTabBarViewController: UITabBarController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
