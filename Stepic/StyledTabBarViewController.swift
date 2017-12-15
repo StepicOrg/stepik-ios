@@ -47,6 +47,7 @@ class StyledTabBarViewController: UITabBarController {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +58,6 @@ class StyledTabBarViewController: UITabBarController {
             let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
             present(onboardingVC, animated: true, completion: nil)
         }
-
     }
 
     deinit {
@@ -73,6 +73,11 @@ class StyledTabBarViewController: UITabBarController {
         self.notificationsBadgeNumber = value
     }
 
+    @objc func didScreenRotate() {
+        self.updateTitlesForTabBarItems()
+        self.fixBadgePosition()
+    }
+
     func getEventNameForTabIndex(index: Int) -> String? {
         guard index < items.count else {
             return nil
@@ -82,7 +87,7 @@ class StyledTabBarViewController: UITabBarController {
 
     private func updateTitlesForTabBarItems() {
         func hideTitle(for item: UITabBarItem) {
-            let inset: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 8.0 : 6.0
+            let inset: CGFloat = DeviceInfo.current.isPad ? 8.0 : 6.0
             item.imageInsets = UIEdgeInsets(top: inset, left: 0, bottom: -inset, right: 0)
             item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: CGFloat.greatestFiniteMagnitude)
         }
@@ -154,12 +159,6 @@ class StyledTabBarViewController: UITabBarController {
                 }
             }
         }
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        self.updateTitlesForTabBarItems()
-        self.fixBadgePosition()
     }
 }
 
