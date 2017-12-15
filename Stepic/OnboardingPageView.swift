@@ -45,7 +45,7 @@ class OnboardingPageView: NibInitializableView {
         return "OnboardingPageView"
     }
 
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: StepikButton!
     @IBOutlet weak var pageTitleLabel: StepikLabel!
     @IBOutlet weak var pageDescriptionLabel: StepikLabel!
     @IBOutlet private weak var buttonPaddingConstraint: NSLayoutConstraint!
@@ -84,6 +84,7 @@ class OnboardingPageView: NibInitializableView {
         nextButton.backgroundColor = .clear
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        nextButton.setTitleColor(.white, for: .normal)
 
         // For iPhone 4s decrease font size
         if DeviceInfo.current.diagonal <= 3.5 {
