@@ -32,12 +32,7 @@ class OnboardingViewController: UIViewController {
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "")}
 
     fileprivate var shouldUseLandscapeLayout: Bool {
-        switch DeviceInfo.current.orientation {
-        case .landscapeLeft, .landscapeRight:
-            return true
-        default:
-            return false
-        }
+        return DeviceInfo.current.orientation.interface.isLandscape
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
