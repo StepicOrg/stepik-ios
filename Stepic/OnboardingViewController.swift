@@ -139,6 +139,7 @@ class OnboardingViewController: UIViewController {
         // containerView width is constant after rotation, so we can use it safely
         for i in 0..<pages.count {
             pages[i].frame = CGRect(x: pages[i].frame.origin.x, y: pages[i].frame.origin.y, width: containerView.frame.width, height: containerView.frame.height)
+            pages[i].layoutIfNeeded()
         }
 
         // Calculate estimated text height
