@@ -67,6 +67,12 @@ class OnboardingPageView: NibInitializableView {
         return 28 + pageDescriptionLabel.bounds.size.height + pageTitleLabel.bounds.size.height + nextButton.bounds.size.height + buttonPaddingConstraint.constant
     }
 
+    var descriptionHeight: CGFloat {
+        pageDescriptionLabel.sizeToFit()
+        pageDescriptionLabel.layoutIfNeeded()
+        return UILabel.heightForLabelWithText(pageDescriptionLabel.text ?? "", lines: 0, standardFontOfSize: pageDescriptionLabel.font.pointSize, width: pageDescriptionLabel.bounds.width)
+    }
+
     @IBAction func onNextButtonClick(_ sender: Any) {
         onClick?()
     }
