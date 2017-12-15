@@ -62,6 +62,10 @@ class OnboardingViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.frame = self.view.frame
         scrollView.showsHorizontalScrollIndicator = false
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+
         view.insertSubview(scrollView, aboveSubview: pageControl)
 
         backgroundGradient.frame = view.bounds
