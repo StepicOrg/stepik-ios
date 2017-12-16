@@ -84,13 +84,11 @@ class NotificationRegistrator {
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
                 ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
                     print("notification registrator: successfully delete device, id = \(deviceId)")
-                    DeviceDefaults.sharedDefaults.deviceId = nil
                     fulfill()
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
                         print("notification registrator: device not found on deletion, id = \(deviceId)")
-                        DeviceDefaults.sharedDefaults.deviceId = nil
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
@@ -106,8 +104,6 @@ class NotificationRegistrator {
 
                             let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
                             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
-
-                            DeviceDefaults.sharedDefaults.deviceId = nil
                         } else {
                             print("notification registrator: could not get current user ID or token to delete device")
                         }
