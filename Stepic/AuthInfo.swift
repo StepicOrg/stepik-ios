@@ -79,6 +79,7 @@ class AuthInfo: NSObject {
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
+                        DeviceDefaults.sharedDefaults.deviceId = nil
 
                         self.setTokenValue(nil)
                     }

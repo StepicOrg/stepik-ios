@@ -42,19 +42,19 @@ class NotificationRegistrator {
 
     let registrationKey = "onRegistrationCompleted"
 
-    func registerDevice(_ registrationToken: String!) {
+    func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
         print("Registration Token: \(registrationToken)")
 
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
-        var updatingPromise: Promise<Device>!
-        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId {
-            updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
-        } else {
-            updatingPromise = ApiDataDownloader.devices.create(newDevice)
-        }
-
-        updatingPromise.then { remoteDevice -> Promise<Device> in
+        checkToken().then { _ -> Promise<Device> in
+            if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
+                print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")
+                return ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
+            } else {
+                return ApiDataDownloader.devices.create(newDevice)
+            }
+        }.then { remoteDevice -> Promise<Device> in
             if remoteDevice.isBadgesEnabled {
                 return Promise(value: remoteDevice)
             } else {
@@ -65,7 +65,17 @@ class NotificationRegistrator {
             print("notification registrator: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
-            print("notification registrator: device registration error, error = \(error)")
+            switch error {
+            case DeviceError.notFound:
+                print("notification registrator: device not found, create new")
+                self.registerDevice(registrationToken, forceCreation: true)
+            case DeviceError.other(_, _, let message):
+                print("notification registrator: device registration error, error = \(String(describing: message))")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(String(describing: message))"])
+            default:
+                print("notification registrator: device registration error, error = \(error)")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
+            }
         }
     }
 
@@ -76,13 +86,11 @@ class NotificationRegistrator {
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
                 ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
                     print("notification registrator: successfully delete device, id = \(deviceId)")
-                    DeviceDefaults.sharedDefaults.deviceId = nil
                     fulfill()
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
                         print("notification registrator: device not found on deletion, id = \(deviceId)")
-                        DeviceDefaults.sharedDefaults.deviceId = nil
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
@@ -98,10 +106,9 @@ class NotificationRegistrator {
 
                             let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
                             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
-
-                            DeviceDefaults.sharedDefaults.deviceId = nil
                         } else {
                             print("notification registrator: could not get current user ID or token to delete device")
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
                         }
                     }
                     fulfill()
