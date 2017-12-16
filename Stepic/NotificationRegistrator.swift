@@ -47,16 +47,13 @@ class NotificationRegistrator {
 
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
-        var updatingPromise: Promise<Device>!
-        if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
-            print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")
-            updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
-        } else {
-            updatingPromise = ApiDataDownloader.devices.create(newDevice)
-        }
-
         checkToken().then { _ -> Promise<Device> in
-            return updatingPromise
+            if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
+                print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")
+                return ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
+            } else {
+                return ApiDataDownloader.devices.create(newDevice)
+            }
         }.then { remoteDevice -> Promise<Device> in
             if remoteDevice.isBadgesEnabled {
                 return Promise(value: remoteDevice)
