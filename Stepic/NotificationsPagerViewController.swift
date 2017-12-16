@@ -131,7 +131,6 @@ extension NotificationsPagerViewController: PlaceholderViewDataSource {
 
 extension NotificationsPagerViewController: PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
-        let vc = ControllerHelper.getAuthController()
-        self.present(vc, animated: true, completion: nil)
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

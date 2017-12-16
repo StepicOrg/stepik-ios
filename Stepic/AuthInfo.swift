@@ -62,7 +62,7 @@ class AuthInfo: NSObject {
                 print("\nsetting new token to nil\n")
 
                 //Unregister from notifications
-                NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
+                NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {
                         //Delete enrolled information
                         TabsInfo.myCoursesIds = []
@@ -79,6 +79,7 @@ class AuthInfo: NSObject {
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
+                        DeviceDefaults.sharedDefaults.deviceId = nil
 
                         self.setTokenValue(nil)
                     }

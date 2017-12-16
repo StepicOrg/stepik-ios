@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingPageView" customModule="Stepic" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonPaddingConstraint" destination="u0a-Ga-iS8" id="c4O-lg-rwJ"/>
+                <outlet property="nextButton" destination="VCF-Ix-jhf" id="cWR-lk-3r2"/>
+                <outlet property="pageDescriptionLabel" destination="xpr-Ku-6EC" id="wUF-mv-D2W"/>
+                <outlet property="pageTitleLabel" destination="daL-Gs-pWj" id="T91-Nc-0JV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCF-Ix-jhf" customClass="StepikButton" customModule="Stepic" customModuleProvider="target">
+                    <rect key="frame" x="143.5" y="110.5" width="88" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="cde-aB-wiI"/>
+                        <constraint firstAttribute="width" constant="88" id="kqG-oZ-0cI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <state key="normal" title="Далее">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onNextButtonClick:" destination="-1" eventType="touchUpInside" id="Mbo-7G-EPG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смотрите лекции и сохраняйте их без доступа в сеть" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-Ku-6EC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                    <rect key="frame" x="16" y="53.5" width="343" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохраняйте" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daL-Gs-pWj" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                    <rect key="frame" x="128.5" y="24" width="118.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xpr-Ku-6EC" secondAttribute="trailing" constant="16" id="3sx-jG-fXc"/>
+                <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6o8-OI-qWt"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="top" secondItem="daL-Gs-pWj" secondAttribute="bottom" constant="4" id="M2S-Va-Egk"/>
+                <constraint firstItem="daL-Gs-pWj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="TWM-dN-DDm"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cdw-iN-lnH"/>
+                <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="jDy-UV-1t2"/>
+                <constraint firstItem="VCF-Ix-jhf" firstAttribute="top" secondItem="xpr-Ku-6EC" secondAttribute="bottom" constant="16" id="u0a-Ga-iS8"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="w3o-GQ-VyX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-63.5" y="-735.5"/>
+        </view>
+    </objects>
+</document>

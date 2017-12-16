@@ -81,13 +81,17 @@ class NotificationsAPI: APIEndpoint {
                     reject(error)
                 case .success(_):
                     if response.response?.statusCode != 204 {
-                        reject(NSError()) // raw error here
+                        reject(NotificationsAPIError.invalidStatus)
                     } else {
                         fulfill()
                     }
                 }
-
             }
         }
     }
+}
+
+// TODO: replace this class by generic error class
+enum NotificationsAPIError: Error {
+    case invalidStatus
 }
