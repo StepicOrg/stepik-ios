@@ -14,7 +14,7 @@ class CollectionRowViewCell: UICollectionViewCell {
     var cellSize: CGSize { return CGSize() }
 
     func getCell(for indexPath: IndexPath) -> UICollectionViewCell { return UICollectionViewCell() }
-    
+
     func configure(cell: UICollectionViewCell, for indexPath: IndexPath) {}
 
     override func prepareForReuse() {

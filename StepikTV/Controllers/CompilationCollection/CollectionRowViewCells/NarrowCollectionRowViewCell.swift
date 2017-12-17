@@ -26,6 +26,9 @@ class NarrowCollectionRowViewCell: CollectionRowViewCell, CollectionRowView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
         let nib = UINib(nibName: NarrowItemCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: NarrowItemCell.reuseIdentifier)
     }
