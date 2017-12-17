@@ -48,6 +48,9 @@
                                         <state key="normal" title="Войти">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="Y4U-IZ-OK9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-6E-hF7" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="475" height="66"/>
@@ -59,6 +62,9 @@
                                         <state key="normal" title="Зарегистрироваться">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="registerAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="P5M-D3-H3R"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-hh-9Pe" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="180" width="475" height="66"/>
@@ -70,6 +76,9 @@
                                         <state key="normal" title="Войти с iPhone">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="remoteLoginAciton:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="fwx-4R-91C"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -91,8 +100,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" id="DsA-Hi-lyK"/>
                     <connections>
+                        <outlet property="imageView" destination="6lN-w4-EB8" id="o1c-cC-A2Z"/>
                         <outlet property="lowerButton" destination="E4I-hh-9Pe" id="QIM-Ph-9SO"/>
                         <outlet property="midButton" destination="leP-6E-hF7" id="pGq-s9-vsA"/>
+                        <outlet property="stackView" destination="Fn0-Iz-H2o" id="GeG-il-B7N"/>
                         <outlet property="upperButton" destination="D9O-x5-BF3" id="MgI-Ec-8p6"/>
                     </connections>
                 </viewController>

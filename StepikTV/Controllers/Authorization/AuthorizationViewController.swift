@@ -10,10 +10,69 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
 
-    @IBOutlet var upperButton: StandardButton!
+  @IBOutlet weak var imageView: UIImageView!
 
-    @IBOutlet var midButton: StandardButton!
+  @IBOutlet weak var stackView: UIStackView!
 
-    @IBOutlet var lowerButton: StandardButton!
+  @IBOutlet var upperButton: StandardButton!
+  @IBOutlet var midButton: StandardButton!
+  @IBOutlet var lowerButton: StandardButton!
 
+  var nameLabel: UILabel = UILabel()
+  var exitButton: StandardButton = StandardButton() {
+    didSet {
+      exitButton.titleLabel?.text = "Exit"
+    }
+  }
+  var settingsButton: StandardButton = StandardButton() {
+    didSet {
+      settingsButton.titleLabel?.text = "Settings"
+    }
+  }
+
+  var presenter: AuthorizationPresenter?
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    self.presenter = AuthorizationPresenter(view: self, authAPI: AuthAPI(), stepicsAPI: StepicsAPI())
+  }
+
+  @IBAction func loginAction(_ sender: UIButton) {
+    presenter?.loginAction()
+  }
+
+  @IBAction func registerAction(_ sender: UIButton) {
+    presenter?.registerAction()
+  }
+
+  @IBAction func remoteLoginAciton(_ sender: UIButton) {
+    presenter?.remoteLoginAction()
+  }
+}
+
+extension AuthorizationViewController: AuthorizationView {
+  func show(alert: AuthorizationAlert) {
+    alert.show(in: self)
+  }
+
+  func showProfile(for user: User) {
+    if let avatarUrl = URL(string: user.avatarURL) {
+      imageView.sd_setImage(with: avatarUrl, completed: nil)
+    }
+
+    cleanStackView()
+
+    nameLabel.text = "\(user.firstName) \(user.lastName)"
+
+    stackView.addArrangedSubview(nameLabel)
+    stackView.addArrangedSubview(exitButton)
+    stackView.addArrangedSubview(settingsButton)
+  }
+
+  func cleanStackView() {
+    for arrangedView in stackView.arrangedSubviews {
+      stackView.removeArrangedSubview(arrangedView)
+      arrangedView.removeFromSuperview()
+    }
+  }
 }
