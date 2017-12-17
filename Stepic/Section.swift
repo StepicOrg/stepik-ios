@@ -36,6 +36,7 @@ class Section: NSManagedObject, JSONInitializable {
         testSectionAction = json["actions"]["test_section"].string
         isExam = json["is_exam"].boolValue
         unitsArray = json["units"].arrayObject as! [Int]
+        courseId = json["course"].intValue
     }
 
     func update(json: JSON) {

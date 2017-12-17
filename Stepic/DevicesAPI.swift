@@ -9,114 +9,172 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
-class DevicesAPI: NSObject {
+class DevicesAPI: APIEndpoint {
+    override var name: String { return "devices" }
 
-    let name = "devices"
-
-    let manager: Alamofire.SessionManager
-
-    override init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 5
-        manager = Alamofire.SessionManager(configuration: configuration)
-    }
-
-    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        let params = ["device": device.getJSON()]
-        return manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
+    func retrieve(registrationId: String) -> Promise<Device?> {
+        return Promise { fulfill, reject in
+            retrieve(params: ["registration_id": registrationId]).then {
+                fulfill($0.1.first)
+            }.catch {
+                reject($0)
             }
-            let response = response.response
-
-            print(json)
-
-            if let e = error as NSError? {
-                errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
-                return
-            }
-
-            if response?.statusCode != 201 {
-                errorHandler("CREATE device: bad response status code \(String(describing: response?.statusCode))")
-                return
-            }
-
-            let device = Device(json: json["devices"].arrayValue[0])
-            success(device)
-
-            return
-        })
-    }
-
-    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping (() -> Void), error errorHandler: @escaping ((DeleteDeviceError) -> Void)) -> Request {
-
-        return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
-            response in
-//            _, response, data, error in
-
-            if let e = response.error as NSError? {
-                errorHandler(.other(error: e, code: nil, message: "DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)"))
-                return
-            }
-
-            if let code = response.response?.statusCode {
-                if code != 204 && code != 404 {
-                    errorHandler(.other(error: nil, code: code, message: "DESTROY device: bad response status code \(String(describing: response.response?.statusCode))"))
-                    return
-                }
-                if code == 404 {
-                    errorHandler(.notFound)
-                }
-            }
-
-            success()
-
-            return
         }
     }
 
-    func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
-            response in
+    func retrieve(userId: Int, page: Int = 1) -> Promise<(Meta, [Device])> {
+        return retrieve(params: ["user": userId, "page": page])
+    }
 
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
+    func retrieve(deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+        return Promise { fulfill, reject in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", parameters: [:], headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(RetrieveError(error: error))
+                case .success(let json):
+                    if let r = response.response,
+                        !(200...299 ~= r.statusCode) {
+                        switch r.statusCode {
+                        // when we pass wrong (but existing) device id we get 403 with error presented in field "detail"
+                        case 403, 404:
+                            return reject(DeviceError.notFound)
+                        default:
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                        }
+                    }
+
+                    fulfill(Device(json: json["devices"].arrayValue[0]))
                 }
-            } else {
-                json = response.result.value!
             }
-            let response = response.response
+        }
+    }
 
-            if let e = error as NSError? {
-                errorHandler("RETRIEVE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
-                return
-            }
-
-            if response?.statusCode != 200 {
-                errorHandler("RETRIEVE device: bad response status code \(String(describing: response?.statusCode))")
-                return
+    func update(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+        return Promise { fulfill, reject in
+            guard let deviceId = device.id else {
+                throw DeviceError.notFound
             }
 
-            let device = Device(json: json["devices"].arrayValue[0])
-            success(device)
+            let params: Parameters? = [
+                "device": device.json as AnyObject
+            ]
 
-            return
-        })
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(error)
+                case .success(let json):
+                    if let r = response.response,
+                        !(200...299 ~= r.statusCode) {
+                        switch r.statusCode {
+                        case 404:
+                            return reject(DeviceError.notFound)
+                        default:
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                        }
+                    }
+
+                    fulfill(Device(json: json["devices"].arrayValue[0]))
+                }
+            }
+        }
+    }
+
+    func create(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+        let params = ["device": device.json]
+
+        return Promise { fulfill, reject in
+            manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(error)
+                case .success(let json):
+                    if let r = response.response,
+                        !(200...299 ~= r.statusCode) {
+                        switch r.statusCode {
+                        case 404:
+                            return reject(DeviceError.notFound)
+                        default:
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                        }
+                    }
+
+                    fulfill(Device(json: json["devices"].arrayValue[0]))
+                }
+            }
+        }
+    }
+
+    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
+        return Promise { fulfill, reject in
+            manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(error)
+                case .success(let json):
+                    if let r = response.response,
+                        !(200...299 ~= r.statusCode) {
+                        switch r.statusCode {
+                        case 404:
+                            return reject(DeviceError.notFound)
+                        default:
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                        }
+                    }
+
+                    fulfill()
+                }
+            }
+        }
+    }
+
+    private func retrieve(params: Parameters, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<(Meta, [Device])> {
+        return Promise { fulfill, reject in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: params, headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(RetrieveError(error: error))
+                case .success(let json):
+                    if let r = response.response,
+                       !(200...299 ~= r.statusCode) {
+                        switch r.statusCode {
+                        case 404:
+                            return reject(DeviceError.notFound)
+                        default:
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                        }
+                    }
+
+                    let meta = Meta(json: json["meta"])
+                    let devices = json["devices"].arrayValue.map { Device(json: $0) }
+                    fulfill((meta, devices))
+                }
+            }
+        }
     }
 }
 
-enum DeleteDeviceError: Error {
+enum DeviceError: Error {
     case notFound, other(error: Error?, code: Int?, message: String?)
+}
+
+extension DevicesAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
+        create(device, headers: headers).then { success($0) }.catch { errorHandler($0.localizedDescription) }
+        return nil
+    }
+
+    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping (() -> Void), error errorHandler: @escaping ((DeviceError) -> Void)) -> Request? {
+        delete(deviceId, headers: headers).then { success() }.catch { errorHandler($0 as! DeviceError) }
+        return nil
+    }
+
+    @discardableResult func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
+        retrieve(deviceId: deviceId, headers: headers).then { success($0) }.catch { errorHandler($0.localizedDescription) }
+        return nil
+    }
 }

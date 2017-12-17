@@ -14,7 +14,7 @@ class Device: NSObject {
     var registrationId: String
     var user: String?
     var deviceDescription: String
-    var clentType: String = "ios"
+    var clientType = "ios"
     var isBadgesEnabled = true
 
     init(json: JSON) {
@@ -34,7 +34,7 @@ class Device: NSObject {
         super.init()
     }
 
-    func getJSON() -> [String:AnyObject] {
+    var json: [String: AnyObject] {
         var res = [String: AnyObject]()
 
         if let id = self.id {

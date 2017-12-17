@@ -29,8 +29,9 @@ def all_pods
     pod 'Firebase/AppIndexing'
     pod 'Firebase/Messaging'
     pod 'Firebase/Analytics'
-    
-    pod 'Mixpanel-swift'
+    pod 'Firebase/RemoteConfig'
+
+    pod 'Mixpanel-swift', '2.2.3'
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
@@ -49,7 +50,7 @@ def all_pods
     pod "RFKeyboardToolbar", "~> 1.3"
     pod 'TTTAttributedLabel'
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
-
+    pod 'lottie-ios'
 end
 
 def testing_pods

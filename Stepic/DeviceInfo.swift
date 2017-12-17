@@ -24,7 +24,6 @@ class DeviceInfo {
         #endif
     }
 
-
     var isPlus: Bool {
         #if os(iOS)
             return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
@@ -33,7 +32,6 @@ class DeviceInfo {
             return false
         #endif
     }
-
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
         return (major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
@@ -58,8 +56,8 @@ class DeviceInfo {
     }
 
     #if os(iOS)
-        var orientation: UIDeviceOrientation {
-            return UIDevice.current.orientation
+        var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {
+            return (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
         }
     #endif
 }
