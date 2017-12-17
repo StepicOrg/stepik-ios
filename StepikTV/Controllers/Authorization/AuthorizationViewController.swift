@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class AuthorizationViewController: UIViewController {
 
     @IBOutlet var upperButton: StandardButton!
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -14,7 +14,7 @@
         <!--Профиль-->
         <scene sceneID="4vw-zQ-VjQ">
             <objects>
-                <viewController id="Zl5-dF-RYl" customClass="ProfileViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zl5-dF-RYl" customClass="AuthorizationViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zYH-8i-Z8t"/>
                         <viewControllerLayoutGuide type="bottom" id="zI4-VP-Uf5"/>
@@ -67,7 +67,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Настройки">
+                                        <state key="normal" title="Войти с iPhone">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -292,7 +292,7 @@
         <scene sceneID="0zh-0e-3Gz">
             <objects>
                 <collectionViewController id="RR9-YI-osV" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="khb-nr-ZIx">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lBb-fz-Abn">
@@ -302,7 +302,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -310,13 +310,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x6Z-Ha-I5x">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="x6Z-Ha-I5x" secondAttribute="height" multiplier="1:1" id="Dnm-Y8-f7y"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DK9-R3-2G2">
-                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -353,7 +352,7 @@
         <scene sceneID="Tq1-B3-oUl">
             <objects>
                 <collectionViewController id="gZU-C6-QdM" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="5y7-sm-ibV">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lwN-5z-dAd">
@@ -363,7 +362,7 @@
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="90" y="70" width="310" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -371,13 +370,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jgO-km-jaN">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="jgO-km-jaN" secondAttribute="height" multiplier="1:1" id="xze-od-abR"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-KW-iKb">
-                                            <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>

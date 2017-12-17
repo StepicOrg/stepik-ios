@@ -4534,7 +4534,7 @@
 		93E4A0E81F9FE51B00D27A37 /* RectangularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E4A0E71F9FE51B00D27A37 /* RectangularItemCell.xib */; };
 		93E4A0EA1F9FE52B00D27A37 /* RectangularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E4A0E91F9FE52B00D27A37 /* RectangularItemCell.swift */; };
 		93EF1F9A1FAD20250073B0D1 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1F981FAD20240073B0D1 /* StandardButton.swift */; };
-		93EF1F9B1FAD20250073B0D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1F991FAD20250073B0D1 /* ProfileViewController.swift */; };
+		93EF1F9B1FAD20250073B0D1 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1F991FAD20250073B0D1 /* AuthorizationViewController.swift */; };
 		93EF1F9F1FB10EFB0073B0D1 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1F9E1FB10EFB0073B0D1 /* LessonTableViewCell.swift */; };
 		93EF1FA11FB20D220073B0D1 /* LessonPartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EF1FA01FB20D220073B0D1 /* LessonPartItemCell.xib */; };
 		93EF1FA31FB2144A0073B0D1 /* LessonPartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */; };
@@ -5500,7 +5500,7 @@
 		93E4A0E71F9FE51B00D27A37 /* RectangularItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RectangularItemCell.xib; sourceTree = "<group>"; };
 		93E4A0E91F9FE52B00D27A37 /* RectangularItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularItemCell.swift; sourceTree = "<group>"; };
 		93EF1F981FAD20240073B0D1 /* StandardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardButton.swift; path = StepikTV/Views/StandardButton.swift; sourceTree = SOURCE_ROOT; };
-		93EF1F991FAD20250073B0D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		93EF1F991FAD20250073B0D1 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		93EF1F9E1FB10EFB0073B0D1 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		93EF1FA01FB20D220073B0D1 /* LessonPartItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonPartItemCell.xib; sourceTree = "<group>"; };
 		93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPartItemCell.swift; sourceTree = "<group>"; };
@@ -7538,6 +7538,14 @@
 			path = CompilationCollection;
 			sourceTree = "<group>";
 		};
+		1B3BB0481FE6D27E002DDD9A /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				93EF1F991FAD20250073B0D1 /* AuthorizationViewController.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -8233,10 +8241,10 @@
 			isa = PBXGroup;
 			children = (
 				93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */,
+				1B3BB0481FE6D27E002DDD9A /* Authorization */,
 				1B15915C1FC9C6400049C3E6 /* CompilationCollection */,
 				93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */,
 				933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */,
-				93EF1F991FAD20250073B0D1 /* ProfileViewController.swift */,
 				934A30781FABC85D00819A30 /* MenuTableViewController.swift */,
 				934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */,
 				93E4A0E51F9FE1B300D27A37 /* RectangularCollectionViewController.swift */,
@@ -12696,7 +12704,7 @@
 				1BB3D24D1FA3EC98000B2FAA /* FillBlanksDataset.swift in Sources */,
 				1BB3D2481FA3EB9C000B2FAA /* NSDateExtensions.swift in Sources */,
 				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
-				93EF1F9B1FAD20250073B0D1 /* ProfileViewController.swift in Sources */,
+				93EF1F9B1FAD20250073B0D1 /* AuthorizationViewController.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
 				1BB4ECAD1FA3DE46001CDE99 /* CourseReviewSummariesAPI.swift in Sources */,
 				93F4CF471FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift in Sources */,
