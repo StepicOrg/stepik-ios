@@ -10,23 +10,16 @@ import UIKit
 
 class CourseInfoCollectionViewController: UICollectionViewController {
 
-    private var course: Course?
+    var presenter: CourseInfoPresenter?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var sections: [CourseInfoSection] = []
 
-    fileprivate func itemType(for indexPath: IndexPath) -> DynamicallyCreatedProtocol.Type {
-        switch indexPath.section {
-        case 0:
-            return type(of: MainCourseInfoCell.self())
-        default:
-            return type(of: DetailsCourseInfoCell.self())
-        }
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sections.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -34,7 +27,7 @@ class CourseInfoCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = itemType(for: indexPath).reuseIdentifier
+        let identifier = sections[indexPath.section].contentType.viewClass.reuseIdentifier
         return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
@@ -42,10 +35,22 @@ class CourseInfoCollectionViewController: UICollectionViewController {
         return false
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let cellSize = itemType(for: indexPath).size
-        return cellSize
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {MainCourseInfoSectionCell.reuseIdentifier
+        guard let cell = cell as? CourseInfoSectionView else { return }
+        cell.setup(with: sections[indexPath.section])
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let size = sections[indexPath.section].contentType.viewClass.size
+        return size
+    }
+}
+
+extension CourseInfoCollectionViewController: CourseInfoView {
+
+    func provide(sections: [CourseInfoSection]) {
+        self.sections = sections
+        collectionView?.reloadData()
+    }
 }

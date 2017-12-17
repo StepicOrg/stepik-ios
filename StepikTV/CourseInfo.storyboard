@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Orj-vq-fVC">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -9,7 +12,7 @@
         <!--Course Info Collection View Controller-->
         <scene sceneID="gyM-Tp-j5J">
             <objects>
-                <collectionViewController id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CourseInfoCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="h75-bj-NUM">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +23,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MainCourseInfoCell" id="DeO-uf-BFX" customClass="MainCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MainCourseInfoSectionCell" id="DeO-uf-BFX" customClass="MainCourseInfoSectionCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -153,8 +156,16 @@
                                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YPf-pZ-tPP" secondAttribute="bottom" constant="20" id="vjH-Lk-BEJ"/>
                                 </constraints>
                                 <size key="customSize" width="1920" height="787"/>
+                                <connections>
+                                    <outlet property="descr" destination="W1P-P7-DUH" id="dQe-dF-VJD"/>
+                                    <outlet property="hosts" destination="EOa-IA-trp" id="MlN-BB-2HH"/>
+                                    <outlet property="imageView" destination="YPf-pZ-tPP" id="gzj-gJ-Eaf"/>
+                                    <outlet property="leftIconButton" destination="Gc9-Ff-VzA" id="kKG-Lm-jNV"/>
+                                    <outlet property="rightIconButton" destination="mGv-T4-d7X" id="CUc-aS-aO3"/>
+                                    <outlet property="title" destination="WTE-HU-sBz" id="H0k-z1-O3N"/>
+                                </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DetailsCourseInfoCell" id="spx-Hs-B0m" customClass="DetailsCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DetailsCourseInfoSectionCell" id="spx-Hs-B0m" customClass="DetailsCourseInfoSectionCell" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="787" width="1920" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -184,8 +195,8 @@
                                 </constraints>
                                 <size key="customSize" width="1920" height="200"/>
                                 <connections>
-                                    <outlet property="contentLabel" destination="Ype-4C-mII" id="lwB-tI-DuL"/>
-                                    <outlet property="titleLabel" destination="cw5-VR-hyc" id="8Qf-Rz-eKP"/>
+                                    <outlet property="content" destination="Ype-4C-mII" id="kgx-JX-oHe"/>
+                                    <outlet property="title" destination="cw5-VR-hyc" id="UBS-KT-m0g"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

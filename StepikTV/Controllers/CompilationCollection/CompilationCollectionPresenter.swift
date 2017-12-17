@@ -66,7 +66,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses)
+                    strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -81,7 +81,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses)
+                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -90,7 +90,7 @@ class CompilationCollectionPresenter {
                     }
 
                     if let tags = loader.getTags() {
-                        strongSelf.rows[index].setData(with: tags, language: language)
+                        strongSelf.rows[index].setData(with: tags, language: language, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }
                 }
@@ -201,9 +201,9 @@ class CollectionRow {
 
     private(set) var data: [ItemViewData] = []
 
-    func setData(with tags: [CourseTag], language: ContentLanguage) {
+    func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController?) {
         data = tags.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!, viewController: viewController) {
 
             }
         }
@@ -211,10 +211,16 @@ class CollectionRow {
         loaded = true
     }
 
-    func setData(with courses: [Course]) {
-        data = courses.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.coverURLString, title: $0.title, subtitle: "Higher School of Economics") {
+    func setData(with courses: [Course], for viewController: UIViewController?) {
+        data = courses.map { course in
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics", viewController: viewController) {
 
+                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoCollectionViewController", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
+
+                courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
+                courseInfoVC.presenter?.course = course
+
+                viewController?.present(courseInfoVC, animated: true, completion: {})
             }
         }
 
@@ -226,6 +232,7 @@ struct ItemViewData {
     let title: String
     var subtitle: String?
     var action: (() -> Void)?
+    weak var viewController: UIViewController?
 
     let placeholder: UIImage
     var backgroundImageURL: URL?
@@ -239,18 +246,20 @@ struct ItemViewData {
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, title: String, subtitle: String? = nil, viewController: UIViewController?, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
+        self.viewController = viewController
 
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, viewController: UIViewController?, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
+        self.viewController = viewController
 
         self.placeholder = placeholder
         self.backgroundImageURL = URL(string: imageURLString)
