@@ -8834,7 +8834,7 @@
 					};
 					1BAE12EE1F93F67700482251 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = PEYKHN6GF6;
+						DevelopmentTeam = 3YGLEX9HN3;
 						ProvisioningStyle = Automatic;
 					};
 					1BAE13001F93F67700482251 = {
@@ -16302,7 +16302,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
@@ -16348,7 +16348,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
