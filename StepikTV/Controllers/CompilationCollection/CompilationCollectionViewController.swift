@@ -58,7 +58,7 @@ class CompilationCollectionViewController: UICollectionViewController {
 
         guard let cell = cell as? CollectionRowView else { return }
         let row = collectionRows[indexPath.section]
-        
+      
         cell.setup(with: row.data, title: row.title)
     }
 
