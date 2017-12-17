@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LargeItemCell" customModule="StepikTV" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MajorItemCell" customModule="StepikTV" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="860" height="390"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="EQK-1g-f7u">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="EQK-1g-f7u">
                     <rect key="frame" x="0.0" y="0.0" width="860" height="390"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzq-u5-EiU">
@@ -54,6 +54,6 @@
         </view>
     </objects>
     <resources>
-        <image name="NatGeo17" width="3200" height="2000"/>
+        <image name="placeholder" width="512" height="512"/>
     </resources>
 </document>

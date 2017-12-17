@@ -25,11 +25,9 @@ class ApiDataDownloader {
     static let sections = SectionsAPI()
     static let lessons = LessonsAPI()
     static let users = UsersAPI()
-    static let attempts = AttemptsAPI()
     static let submissions = SubmissionsAPI()
     static let search = SearchResultsAPI()
     static let views = ViewsAPI()
-    static let progresses = ProgressesAPI()
     static let steps = StepsAPI()
     static let assignments = AssignmentsAPI()
     static let certificates = CertificatesAPI()
@@ -38,8 +36,12 @@ class ApiDataDownloader {
     static let notifications = NotificationsAPI()
     static let courseReviewSummaries = CourseReviewSummariesAPI()
     static let enrollments = EnrollmentsAPI()
+    static let attempts = AttemptsAPI()
+    static let progresses = ProgressesAPI()
     static let auth = AuthAPI()
-    static let notificationsStatusAPI = NotificationStatusesAPI()
+    #if os(iOS)
+        static let notificationsStatusAPI = NotificationStatusesAPI()
+    #endif
 }
 
 enum RefreshMode {

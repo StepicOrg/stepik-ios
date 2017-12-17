@@ -1584,7 +1584,6 @@
 		1BB4EC931FA3DC43001CDE99 /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
 		1BB4EC941FA3DC43001CDE99 /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
 		1BB4EC951FA3DC43001CDE99 /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
-		1BB4EC961FA3DC43001CDE99 /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
 		1BB4EC971FA3DD55001CDE99 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		1BB4EC981FA3DD55001CDE99 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
 		1BB4EC991FA3DD5F001CDE99 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
@@ -1595,13 +1594,11 @@
 		1BB4EC9E1FA3DD84001CDE99 /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
 		1BB4EC9F1FA3DD87001CDE99 /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
 		1BB4ECA01FA3DDA2001CDE99 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
-		1BB4ECA11FA3DDB5001CDE99 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		1BB4ECA21FA3DE26001CDE99 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
 		1BB4ECA31FA3DE46001CDE99 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		1BB4ECA41FA3DE46001CDE99 /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
 		1BB4ECA51FA3DE46001CDE99 /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
 		1BB4ECA61FA3DE46001CDE99 /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
-		1BB4ECA71FA3DE46001CDE99 /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
 		1BB4ECA81FA3DE46001CDE99 /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
 		1BB4ECA91FA3DE46001CDE99 /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
 		1BB4ECAA1FA3DE46001CDE99 /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
@@ -1613,7 +1610,6 @@
 		1BB4ECB01FA3DEC3001CDE99 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		1BB4ECB11FA3DEC3001CDE99 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		1BB4ECB21FA3DEC3001CDE99 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
-		1BB4ECB31FA3DEC3001CDE99 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
 		1BB4ECB41FA3DEC3001CDE99 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
 		1BB4ECB51FA3DEC3001CDE99 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
 		1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
@@ -1656,7 +1652,6 @@
 		1BB4ECDB1FA3E285001CDE99 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
 		1BB4ECDC1FA3E294001CDE99 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
 		1BB4ECDD1FA3E2C1001CDE99 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
-		1BB4ECDE1FA3E2F2001CDE99 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		1BB4ECE01FA3E4F8001CDE99 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		1BB4ECE11FA3E529001CDE99 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		1BB4ECE21FA3E53C001CDE99 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
@@ -4501,17 +4496,18 @@
 		934A30771FABBE0400819A30 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */; };
 		934A30791FABC85D00819A30 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A30781FABC85D00819A30 /* MenuTableViewController.swift */; };
 		934A307B1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A307A1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift */; };
-		934C96A01F9E9DDE00F87F45 /* SmallItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C96971F9E9DDC00F87F45 /* SmallItemCell.xib */; };
-		934C96A11F9E9DDE00F87F45 /* LargeItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C96981F9E9DDC00F87F45 /* LargeItemCell.xib */; };
+		934C96A01F9E9DDE00F87F45 /* NarrowItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C96971F9E9DDC00F87F45 /* NarrowItemCell.xib */; };
+		934C96A11F9E9DDE00F87F45 /* MajorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C96981F9E9DDC00F87F45 /* MajorItemCell.xib */; };
 		934C96A41F9E9DDE00F87F45 /* CompilationCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */; };
-		934C96A51F9E9DDE00F87F45 /* LargeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C969C1F9E9DDD00F87F45 /* LargeItemCell.swift */; };
-		934C96A61F9E9DDE00F87F45 /* MediumItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C969D1F9E9DDE00F87F45 /* MediumItemCell.swift */; };
-		934C96A71F9E9DDE00F87F45 /* MediumItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C969E1F9E9DDE00F87F45 /* MediumItemCell.xib */; };
-		934C96A81F9E9DDE00F87F45 /* SmallItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C969F1F9E9DDE00F87F45 /* SmallItemCell.swift */; };
-		934C96D31F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96D21F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift */; };
-		934C96D91F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96D81F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift */; };
-		934C96DB1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C96DA1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift */; };
+		934C96A71F9E9DDE00F87F45 /* RegularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C969E1F9E9DDE00F87F45 /* RegularItemCell.xib */; };
+		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
+		93765C5A1FDED259004C74C1 /* RegularCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93765C591FDED259004C74C1 /* RegularCollectionRowViewCell.swift */; };
+		93765C5C1FDED39D004C74C1 /* RegularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93765C5B1FDED39D004C74C1 /* RegularItemCell.swift */; };
 		937C27FF1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */; };
+		937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
+		937E1D001FDD897900F34045 /* MajorCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937E1CFF1FDD897900F34045 /* MajorCollectionRowViewCell.swift */; };
+		937E1D031FDEAFF800F34045 /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937E1D021FDEAFF800F34045 /* CollectionRowView.swift */; };
+		937E1D051FDEBA4900F34045 /* MajorItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937E1D041FDEBA4900F34045 /* MajorItemCell.swift */; };
 		9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4521FA3819100705195 /* CourseInfo.storyboard */; };
 		9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4541FA3820600705195 /* CourseContent.storyboard */; };
 		9386A45F1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */; };
@@ -4521,6 +4517,14 @@
 		9386A46C1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386A46B1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift */; };
 		9386A4761FA53FAD00705195 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386A4751FA53FAD00705195 /* IconButton.swift */; };
 		9386A4781FA54C1300705195 /* DetailsCourseInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9386A4771FA54C1300705195 /* DetailsCourseInfoCell.swift */; };
+		93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
+		93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
+		93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
+		93BBE5EB1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BBE5EA1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib */; };
+		93BBE5ED1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BBE5EC1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib */; };
+		93BBE5EF1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BBE5EE1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib */; };
 		93E4A0D71F9FAB2700D27A37 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E4A0D61F9FAB2700D27A37 /* Model.swift */; };
 		93E4A0E01F9FDB8B00D27A37 /* MenuSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */; };
 		93E4A0E21F9FDD5800D27A37 /* CatalogMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */; };
@@ -4534,6 +4538,16 @@
 		93EF1FA31FB2144A0073B0D1 /* LessonPartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */; };
 		93EF1FA61FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1FA51FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift */; };
 		93EF1FAA1FB22BBD0073B0D1 /* FocusableCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1FA91FB22BBD0073B0D1 /* FocusableCustomView.swift */; };
+		93F4CF471FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F4CF461FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift */; };
+		93F4CF491FDEDFC900735A0E /* NarrowItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F4CF481FDEDFC900735A0E /* NarrowItemCell.swift */; };
+		93F4CF4F1FDF356100735A0E /* ImagesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */; };
+		93F4CF521FDF3E6B00735A0E /* CollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F4CF511FDF3E6B00735A0E /* CollectionRowViewCell.swift */; };
+		93FAE2201FE03E320094939D /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585A21FB50D640047A269 /* CourseListsAPI.swift */; };
+		93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D271FB5CD5E001A1E02 /* CourseListsCache.swift */; };
+		93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
+		93FAE2261FE142810094939D /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
+		93FAE2291FE148020094939D /* CourseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585AD1FB51D720047A269 /* CourseList.swift */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -5455,17 +5469,16 @@
 		934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
 		934A30781FABC85D00819A30 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		934A307A1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphLessonsTableViewController.swift; sourceTree = "<group>"; };
-		934C96971F9E9DDC00F87F45 /* SmallItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmallItemCell.xib; sourceTree = "<group>"; };
-		934C96981F9E9DDC00F87F45 /* LargeItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LargeItemCell.xib; sourceTree = "<group>"; };
+		934C96971F9E9DDC00F87F45 /* NarrowItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NarrowItemCell.xib; sourceTree = "<group>"; };
+		934C96981F9E9DDC00F87F45 /* MajorItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorItemCell.xib; sourceTree = "<group>"; };
 		934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionViewController.swift; sourceTree = "<group>"; };
-		934C969C1F9E9DDD00F87F45 /* LargeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeItemCell.swift; sourceTree = "<group>"; };
-		934C969D1F9E9DDE00F87F45 /* MediumItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediumItemCell.swift; sourceTree = "<group>"; };
-		934C969E1F9E9DDE00F87F45 /* MediumItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediumItemCell.xib; sourceTree = "<group>"; };
-		934C969F1F9E9DDE00F87F45 /* SmallItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallItemCell.swift; sourceTree = "<group>"; };
-		934C96D21F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCollectionViewContainerCell.swift; sourceTree = "<group>"; };
-		934C96D81F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowCollectionViewContainerCell.swift; sourceTree = "<group>"; };
-		934C96DA1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCollectionViewContainerCell.swift; sourceTree = "<group>"; };
+		934C969E1F9E9DDE00F87F45 /* RegularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularItemCell.xib; sourceTree = "<group>"; };
+		93765C591FDED259004C74C1 /* RegularCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		93765C5B1FDED39D004C74C1 /* RegularItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularItemCell.swift; sourceTree = "<group>"; };
 		937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChoiceCustomButton.swift; sourceTree = "<group>"; };
+		937E1CFF1FDD897900F34045 /* MajorCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		937E1D021FDEAFF800F34045 /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
+		937E1D041FDEBA4900F34045 /* MajorItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorItemCell.swift; sourceTree = "<group>"; };
 		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
 		9386A4541FA3820600705195 /* CourseContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseContent.storyboard; sourceTree = "<group>"; };
 		9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicallyCreatedProtocol.swift; sourceTree = "<group>"; };
@@ -5475,6 +5488,9 @@
 		9386A46B1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoCollectionViewController.swift; sourceTree = "<group>"; };
 		9386A4751FA53FAD00705195 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		9386A4771FA54C1300705195 /* DetailsCourseInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCourseInfoCell.swift; sourceTree = "<group>"; };
+		93BBE5EA1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MajorCollectionRowViewCell.xib; sourceTree = "<group>"; };
+		93BBE5EC1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCollectionRowViewCell.xib; sourceTree = "<group>"; };
+		93BBE5EE1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NarrowCollectionRowViewCell.xib; sourceTree = "<group>"; };
 		93E4A0D61F9FAB2700D27A37 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSplitViewController.swift; sourceTree = "<group>"; };
 		93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogMenuViewController.swift; sourceTree = "<group>"; };
@@ -5488,6 +5504,10 @@
 		93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPartItemCell.swift; sourceTree = "<group>"; };
 		93EF1FA51FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPartsCollectionViewController.swift; sourceTree = "<group>"; };
 		93EF1FA91FB22BBD0073B0D1 /* FocusableCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableCustomView.swift; sourceTree = "<group>"; };
+		93F4CF461FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		93F4CF481FDEDFC900735A0E /* NarrowItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowItemCell.swift; sourceTree = "<group>"; };
+		93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesExtension.swift; sourceTree = "<group>"; };
+		93F4CF511FDF3E6B00735A0E /* CollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowViewCell.swift; sourceTree = "<group>"; };
 		96B625462DF3C82464C3D1A5 /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
 		97FB5FBA080E060D67A4A37A /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		986CB8E226FB02C8EF7EF1DF /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
@@ -7510,6 +7530,8 @@
 				934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */,
 				1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */,
 				1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */,
+				93F4CF421FDEDBB400735A0E /* CollectionRowViewCells */,
+				93F4CF431FDEDBED00735A0E /* CollectionRowItemCells */,
 			);
 			path = CompilationCollection;
 			sourceTree = "<group>";
@@ -7551,6 +7573,7 @@
 			isa = PBXGroup;
 			children = (
 				93E4A0D61F9FAB2700D27A37 /* Model.swift */,
+				93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */,
 				93E4A0DC1F9FB1DC00D27A37 /* Controllers */,
 				934C96A91F9E9DEA00F87F45 /* Views */,
 				1BAE12F11F93F67700482251 /* AppDelegate.swift */,
@@ -8204,33 +8227,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		934C96AA1F9E9DF600F87F45 /* LargeItemCell */ = {
-			isa = PBXGroup;
-			children = (
-				934C969C1F9E9DDD00F87F45 /* LargeItemCell.swift */,
-				934C96981F9E9DDC00F87F45 /* LargeItemCell.xib */,
-			);
-			path = LargeItemCell;
-			sourceTree = "<group>";
-		};
-		934C96AB1F9E9DFF00F87F45 /* MediumItemCell */ = {
-			isa = PBXGroup;
-			children = (
-				934C969D1F9E9DDE00F87F45 /* MediumItemCell.swift */,
-				934C969E1F9E9DDE00F87F45 /* MediumItemCell.xib */,
-			);
-			path = MediumItemCell;
-			sourceTree = "<group>";
-		};
-		934C96AC1F9E9E0A00F87F45 /* SmallItemCell */ = {
-			isa = PBXGroup;
-			children = (
-				934C969F1F9E9DDE00F87F45 /* SmallItemCell.swift */,
-				934C96971F9E9DDC00F87F45 /* SmallItemCell.xib */,
-			);
-			path = SmallItemCell;
-			sourceTree = "<group>";
-		};
 		93E4A0DC1F9FB1DC00D27A37 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -8252,9 +8248,6 @@
 		93E4A0DD1F9FB1EE00D27A37 /* ContainerCells */ = {
 			isa = PBXGroup;
 			children = (
-				934C96D21F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift */,
-				934C96D81F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift */,
-				934C96DA1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift */,
 				9386A4691FA3AC0C00705195 /* MainCourseInfoCell.swift */,
 				9386A4771FA54C1300705195 /* DetailsCourseInfoCell.swift */,
 				934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */,
@@ -8267,9 +8260,6 @@
 			isa = PBXGroup;
 			children = (
 				93EF1FA41FB21D130073B0D1 /* LessonPartItemCell */,
-				934C96AA1F9E9DF600F87F45 /* LargeItemCell */,
-				934C96AB1F9E9DFF00F87F45 /* MediumItemCell */,
-				934C96AC1F9E9E0A00F87F45 /* SmallItemCell */,
 				93E4A0EB1F9FE5CF00D27A37 /* RectangularItemCell */,
 			);
 			path = ItemCells;
@@ -8291,6 +8281,34 @@
 				93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */,
 			);
 			path = LessonPartItemCell;
+			sourceTree = "<group>";
+		};
+		93F4CF421FDEDBB400735A0E /* CollectionRowViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				937E1D021FDEAFF800F34045 /* CollectionRowView.swift */,
+				93F4CF511FDF3E6B00735A0E /* CollectionRowViewCell.swift */,
+				937E1CFF1FDD897900F34045 /* MajorCollectionRowViewCell.swift */,
+				93BBE5EA1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib */,
+				93765C591FDED259004C74C1 /* RegularCollectionRowViewCell.swift */,
+				93BBE5EC1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib */,
+				93F4CF461FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift */,
+				93BBE5EE1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib */,
+			);
+			path = CollectionRowViewCells;
+			sourceTree = "<group>";
+		};
+		93F4CF431FDEDBED00735A0E /* CollectionRowItemCells */ = {
+			isa = PBXGroup;
+			children = (
+				93765C5B1FDED39D004C74C1 /* RegularItemCell.swift */,
+				934C969E1F9E9DDE00F87F45 /* RegularItemCell.xib */,
+				937E1D041FDEBA4900F34045 /* MajorItemCell.swift */,
+				934C96981F9E9DDC00F87F45 /* MajorItemCell.xib */,
+				93F4CF481FDEDFC900735A0E /* NarrowItemCell.swift */,
+				934C96971F9E9DDC00F87F45 /* NarrowItemCell.xib */,
+			);
+			path = CollectionRowItemCells;
 			sourceTree = "<group>";
 		};
 		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
@@ -8781,7 +8799,7 @@
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8790,7 +8808,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0800;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8882,12 +8900,12 @@
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -9138,15 +9156,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93BBE5ED1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib in Resources */,
 				9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */,
-				934C96A11F9E9DDE00F87F45 /* LargeItemCell.xib in Resources */,
+				934C96A11F9E9DDE00F87F45 /* MajorItemCell.xib in Resources */,
 				93E4A0E81F9FE51B00D27A37 /* RectangularItemCell.xib in Resources */,
 				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
 				93EF1FA11FB20D220073B0D1 /* LessonPartItemCell.xib in Resources */,
+				93BBE5EB1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib in Resources */,
 				1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */,
-				934C96A71F9E9DDE00F87F45 /* MediumItemCell.xib in Resources */,
+				93BBE5EF1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib in Resources */,
+				934C96A71F9E9DDE00F87F45 /* RegularItemCell.xib in Resources */,
 				1BAE12F91F93F67700482251 /* Main.storyboard in Resources */,
-				934C96A01F9E9DDE00F87F45 /* SmallItemCell.xib in Resources */,
+				934C96A01F9E9DDE00F87F45 /* NarrowItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9910,7 +9931,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		06B5E9D556009737379429A6 /* [CP] Copy Pods Resources */ = {
@@ -10012,7 +10033,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		12741B66C9D47E7D563FE791 /* [CP] Embed Pods Frameworks */ = {
@@ -10290,7 +10311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2BE54618F4A48B193B7218D2 /* [CP] Check Pods Manifest.lock */ = {
@@ -10308,7 +10329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
@@ -10506,7 +10527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2D62095AE5A344EED94465A9 /* [CP] Embed Pods Frameworks */ = {
@@ -10596,7 +10617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4C5089BF4101C9655E28D82E /* [CP] Copy Pods Resources */ = {
@@ -11091,7 +11112,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		991EF00D405F89B64A354DC5 /* [CP] Embed Pods Frameworks */ = {
@@ -11250,7 +11271,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A95603ACD488B8E0F98C9D62 /* [CP] Check Pods Manifest.lock */ = {
@@ -11268,7 +11289,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B2B134DA735FA3E758DB1EFF /* [CP] Embed Pods Frameworks */ = {
@@ -11385,7 +11406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BDB129DC3D9E835FA71A5CBE /* [CP] Check Pods Manifest.lock */ = {
@@ -11403,7 +11424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C29D9F35FD2E33EE7B4A1B14 /* [CP] Check Pods Manifest.lock */ = {
@@ -11421,7 +11442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C7958F47E1166E2E152EDD72 /* [CP] Copy Pods Resources */ = {
@@ -11518,7 +11539,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D64DF6AC8533E726030242EF /* [CP] Embed Pods Frameworks */ = {
@@ -11616,7 +11637,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EF16593E318284A4745630B1 /* [CP] Copy Pods Resources */ = {
@@ -11649,7 +11670,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F1D991CDA2B86A2ECFB40DBF /* [CP] Copy Pods Resources */ = {
@@ -11682,7 +11703,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FCA2CA42EB1D567821A8F107 /* [CP] Embed Pods Frameworks */ = {
@@ -11794,7 +11815,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -12664,10 +12685,8 @@
 				1BB4ECBF1FA3DEC3001CDE99 /* CodeSample+CoreDataProperties.swift in Sources */,
 				1BB4ECC81FA3DF43001CDE99 /* Profile.swift in Sources */,
 				1BB4ECD11FA3DF43001CDE99 /* Assignment+CoreDataProperties.swift in Sources */,
-				1BB4ECA71FA3DE46001CDE99 /* ProgressesAPI.swift in Sources */,
 				1BB3D2561FA79471000B2FAA /* AnalyticsEvents.swift in Sources */,
 				1B1591601FC9C7ED0049C3E6 /* CompilationCollectionView.swift in Sources */,
-				1BB4EC961FA3DC43001CDE99 /* AttemptsAPI.swift in Sources */,
 				1BB4ECBB1FA3DEC3001CDE99 /* User.swift in Sources */,
 				1BB4ECD91FA3DF6E001CDE99 /* Session.swift in Sources */,
 				1BB3D24D1FA3EC98000B2FAA /* FillBlanksDataset.swift in Sources */,
@@ -12676,12 +12695,16 @@
 				93EF1F9B1FAD20250073B0D1 /* ProfileViewController.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
 				1BB4ECAD1FA3DE46001CDE99 /* CourseReviewSummariesAPI.swift in Sources */,
+				93F4CF471FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift in Sources */,
 				1BB4ECD21FA3DF43001CDE99 /* Assignment.swift in Sources */,
 				1BB4ECC71FA3DF43001CDE99 /* Notification+FetchMethods.swift in Sources */,
 				1BB4ECC21FA3DED8001CDE99 /* CoreDataHelper.swift in Sources */,
 				1BB4ECA91FA3DE46001CDE99 /* SearchResultsAPI.swift in Sources */,
 				1BB4ECEC1FA3E6A7001CDE99 /* FreeAnswerReply.swift in Sources */,
 				1BB4ECD31FA3DF43001CDE99 /* Progress+CoreDataProperties.swift in Sources */,
+				93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */,
+				93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */,
+				93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */,
 				1BB3D23D1FA3EB2D000B2FAA /* VotesAPI.swift in Sources */,
 				1BB4ECCE1FA3DF43001CDE99 /* StepOptions+CoreDataProperties.swift in Sources */,
 				93EF1FA31FB2144A0073B0D1 /* LessonPartItemCell.swift in Sources */,
@@ -12690,6 +12713,7 @@
 				1B15915E1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2531FA3F068000B2FAA /* ErrorEnums.swift in Sources */,
 				1BB4ECF31FA3E74F001CDE99 /* CoursePlainEntity.swift in Sources */,
+				93F4CF521FDF3E6B00735A0E /* CollectionRowViewCell.swift in Sources */,
 				1BB4ECD71FA3DF68001CDE99 /* Parser.swift in Sources */,
 				1BB4ECB81FA3DEC3001CDE99 /* Course+CoreDataProperties.swift in Sources */,
 				1BB4EC9C1FA3DD7C001CDE99 /* Reply.swift in Sources */,
@@ -12707,21 +12731,25 @@
 				1BB3D2411FA3EB2D000B2FAA /* (null) in Sources */,
 				1BB4ECC31FA3DEEA001CDE99 /* JSONInitializable.swift in Sources */,
 				1BB4ECA41FA3DE46001CDE99 /* DiscussionProxiesAPI.swift in Sources */,
+				93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */,
 				1BB4EC941FA3DC43001CDE99 /* StepsAPI.swift in Sources */,
 				1BB3D24C1FA3EC98000B2FAA /* MatchingDataset.swift in Sources */,
 				1BB4ECCB1FA3DF43001CDE99 /* CodeTemplate+CoreDataProperties.swift in Sources */,
+				93F4CF491FDEDFC900735A0E /* NarrowItemCell.swift in Sources */,
 				1BB4ECCF1FA3DF43001CDE99 /* Certificate.swift in Sources */,
 				1BB4ECB41FA3DEC3001CDE99 /* Unit+CoreDataProperties.swift in Sources */,
 				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
 				933E3F061FB7AF5C005A885D /* LessonContentAlertController.swift in Sources */,
+				93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */,
+				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
 				93E4A0E01F9FDB8B00D27A37 /* MenuSplitViewController.swift in Sources */,
 				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
 				9386A46A1FA3AC0C00705195 /* MainCourseInfoCell.swift in Sources */,
 				93E4A0E21F9FDD5800D27A37 /* CatalogMenuViewController.swift in Sources */,
+				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,
 				9386A4781FA54C1300705195 /* DetailsCourseInfoCell.swift in Sources */,
-				934C96D91F9F97A700F87F45 /* NarrowCollectionViewContainerCell.swift in Sources */,
-				934C96DB1F9F9F2D00F87F45 /* RegularCollectionViewContainerCell.swift in Sources */,
+				93765C5A1FDED259004C74C1 /* RegularCollectionRowViewCell.swift in Sources */,
 				9386A4611FA3AA2F00705195 /* ContainerConfigurableProtocol.swift in Sources */,
 				1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */,
 				93EF1F9F1FB10EFB0073B0D1 /* LessonTableViewCell.swift in Sources */,
@@ -12729,10 +12757,8 @@
 				93E4A0E61F9FE1B300D27A37 /* RectangularCollectionViewController.swift in Sources */,
 				9386A4761FA53FAD00705195 /* IconButton.swift in Sources */,
 				9386A46C1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift in Sources */,
-				934C96A81F9E9DDE00F87F45 /* SmallItemCell.swift in Sources */,
 				934C96A41F9E9DDE00F87F45 /* CompilationCollectionViewController.swift in Sources */,
 				9386A4631FA3AA6D00705195 /* ItemConfigurableProtocol.swift in Sources */,
-				934C96A51F9E9DDE00F87F45 /* LargeItemCell.swift in Sources */,
 				93E4A0EA1F9FE52B00D27A37 /* RectangularItemCell.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
 				1BB4ECB11FA3DEC3001CDE99 /* Step.swift in Sources */,
@@ -12744,6 +12770,7 @@
 				1BB4ECC01FA3DEC3001CDE99 /* CourseReviewSummary.swift in Sources */,
 				1BB4EC991FA3DD5F001CDE99 /* Dataset.swift in Sources */,
 				1BB3D2421FA3EB2D000B2FAA /* RecommendationsAPI.swift in Sources */,
+				937E1D031FDEAFF800F34045 /* CollectionRowView.swift in Sources */,
 				1BB4ECD01FA3DF43001CDE99 /* Certificate+CoreDataProperties.swift in Sources */,
 				1BB4EC911FA3DC43001CDE99 /* SectionsAPI.swift in Sources */,
 				1BB4ECD61FA3DF43001CDE99 /* Video.swift in Sources */,
@@ -12767,6 +12794,9 @@
 				1BB4ECBD1FA3DEC3001CDE99 /* LastStep+CoreDataProperties.swift in Sources */,
 				934A30751FAA841600819A30 /* CourseContentMenuViewController.swift in Sources */,
 				93EF1F9A1FAD20250073B0D1 /* StandardButton.swift in Sources */,
+				93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */,
+				937E1D051FDEBA4900F34045 /* MajorItemCell.swift in Sources */,
+				93765C5C1FDED39D004C74C1 /* RegularItemCell.swift in Sources */,
 				1BB4ECF11FA3E6A7001CDE99 /* CodeReply.swift in Sources */,
 				1BB4ECEA1FA3E664001CDE99 /* Vote.swift in Sources */,
 				1BB4ECCC1FA3DF43001CDE99 /* CodeLimit.swift in Sources */,
@@ -12776,9 +12806,9 @@
 				1BB4ECE41FA3E58F001CDE99 /* TCBlobDownloadManager.swift in Sources */,
 				1BB4ECDC1FA3E294001CDE99 /* VideoURL+CoreDataProperties.swift in Sources */,
 				1BB4ECA51FA3DE46001CDE99 /* CommentsAPI.swift in Sources */,
-				1BB4ECDE1FA3E2F2001CDE99 /* AuthAPI.swift in Sources */,
 				1BB3D2461FA3EB6D000B2FAA /* Device.swift in Sources */,
 				1BB4ECCA1FA3DF43001CDE99 /* CodeTemplate.swift in Sources */,
+				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
 				1BB4ECDA1FA3DF79001CDE99 /* DictionarySerializable.swift in Sources */,
 				1BB4EC9B1FA3DD6A001CDE99 /* StringDatasetExtension.swift in Sources */,
 				934A307B1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift in Sources */,
@@ -12790,10 +12820,12 @@
 				1BB4ECAE1FA3DEC3001CDE99 /* Block+CoreDataProperties.swift in Sources */,
 				1BB4ECAF1FA3DEC3001CDE99 /* Block.swift in Sources */,
 				1BB4ECB01FA3DEC3001CDE99 /* Step+CoreDataProperties.swift in Sources */,
+				937E1D001FDD897900F34045 /* MajorCollectionRowViewCell.swift in Sources */,
 				1BB4ECD41FA3DF43001CDE99 /* Progress.swift in Sources */,
 				934A30771FABBE0400819A30 /* ParagraphTableViewCell.swift in Sources */,
 				1BB3D2551FA3F0F6000B2FAA /* AnalyticsReporter.swift in Sources */,
 				1BB4ECDD1FA3E2C1001CDE99 /* Meta.swift in Sources */,
+				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,
 				1BB3D24A1FA3EC98000B2FAA /* SortingDataset.swift in Sources */,
 				1BB4ECF01FA3E6A7001CDE99 /* FillBlanksReply.swift in Sources */,
 				1BB4ECAA1FA3DE46001CDE99 /* SubmissionsAPI.swift in Sources */,
@@ -12804,10 +12836,12 @@
 				1BB4EC9D1FA3DD80001CDE99 /* ChoiceReply.swift in Sources */,
 				1BB4ECC91FA3DF43001CDE99 /* Profile+CoreDataProperties.swift in Sources */,
 				1BB3D2451FA3EB5D000B2FAA /* UserActivity.swift in Sources */,
+				93FAE2261FE142810094939D /* SQLReply.swift in Sources */,
 				1BB4EC931FA3DC43001CDE99 /* UsersAPI.swift in Sources */,
+				93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */,
+				93F4CF4F1FDF356100735A0E /* ImagesExtension.swift in Sources */,
 				1BB4EC971FA3DD55001CDE99 /* Attempt.swift in Sources */,
 				937C27FF1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift in Sources */,
-				1BB4ECB31FA3DEC3001CDE99 /* Lesson.swift in Sources */,
 				1BB3D2521FA3F057000B2FAA /* CacheManager.swift in Sources */,
 				1BB4EC951FA3DC43001CDE99 /* AssignmentsAPI.swift in Sources */,
 				1BB4ECC51FA3DF43001CDE99 /* Notification.swift in Sources */,
@@ -12817,16 +12851,14 @@
 				1BB4ECE71FA3E64D001CDE99 /* ApplicationInfo.swift in Sources */,
 				1BB4ECA81FA3DE46001CDE99 /* ViewsAPI.swift in Sources */,
 				1BB4ECBA1FA3DEC3001CDE99 /* User+CoreDataProperties.swift in Sources */,
+				93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */,
 				1BB4ECB71FA3DEC3001CDE99 /* Section.swift in Sources */,
 				1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */,
 				1BB4ECD81FA3DF6E001CDE99 /* StepicToken.swift in Sources */,
 				1BB4ECE51FA3E5A8001CDE99 /* VideoDownloadDelegate.swift in Sources */,
-				1BB4ECA11FA3DDB5001CDE99 /* AuthInfo.swift in Sources */,
 				1BB4ECA31FA3DE46001CDE99 /* DevicesAPI.swift in Sources */,
-				934C96A61F9E9DDE00F87F45 /* MediumItemCell.swift in Sources */,
 				9386A45F1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift in Sources */,
 				933E3F271FBA61D9005A885D /* Reachability.m in Sources */,
-				934C96D31F9F8BAA00F87F45 /* MajorCollectionViewContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16013,16 +16045,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -16035,15 +16067,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -16209,8 +16241,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -16238,8 +16270,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -16267,6 +16299,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CocoaLumberjack-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DeviceKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/PromiseKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVGKit-iOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON-tvOS\"",
+					"\"${PODS_ROOT}/Crashlytics/tvOS\"",
+					"\"${PODS_ROOT}/Fabric/tvOS\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -16301,6 +16345,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PEYKHN6GF6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CocoaLumberjack-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DeviceKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/PromiseKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SVGKit-iOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON-tvOS\"",
+					"\"${PODS_ROOT}/Crashlytics/tvOS\"",
+					"\"${PODS_ROOT}/Fabric/tvOS\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -16949,16 +17005,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16977,15 +17033,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -17000,16 +17056,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-                DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -17025,15 +17081,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
-                DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
-                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;

@@ -16,6 +16,7 @@ enum CourseListType {
     case search(query: String)
     case tag(id: Int)
 
+    #if os(iOS)
     private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
         return Promise {
             fulfill, reject in
@@ -34,6 +35,7 @@ enum CourseListType {
             })
         }
     }
+    #endif
 
     private func loadPageWithProgresses(loadedCourses: [Course], page: Int, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, success: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) {
 
@@ -92,6 +94,7 @@ enum CourseListType {
         }
     }
 
+    #if os(iOS)
     func request(page: Int, language: ContentLanguage, withAPI coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, searchResultsAPI: SearchResultsAPI) -> Promise<([Course], Meta)>? {
 
         let requestedLanguage: ContentLanguage? = language == .russian ? nil : language
@@ -126,6 +129,7 @@ enum CourseListType {
             return nil
         }
     }
+    #endif
 
     func request(coursesWithIds ids: [Int], withAPI coursesAPI: CoursesAPI) -> Promise<[Course]>? {
         switch self {

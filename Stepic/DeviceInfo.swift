@@ -24,10 +24,16 @@ class DeviceInfo {
         #endif
     }
 
+
     var isPlus: Bool {
-        return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
-               currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
+        #if os(iOS)
+            return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
+                   currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
+        #else
+            return false
+        #endif
     }
+
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
         return (major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
@@ -51,7 +57,9 @@ class DeviceInfo {
         return currentDevice.model
     }
 
-    var orientation: UIDeviceOrientation {
-        return UIDevice.current.orientation
-    }
+    #if os(iOS)
+        var orientation: UIDeviceOrientation {
+            return UIDevice.current.orientation
+        }
+    #endif
 }

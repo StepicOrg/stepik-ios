@@ -61,6 +61,7 @@ class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
+                #if os(iOS)
                 //Unregister from notifications
                 NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
                     UIThread.performUI {
@@ -83,6 +84,7 @@ class AuthInfo: NSObject {
                         self.setTokenValue(nil)
                     }
                 })
+                #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true

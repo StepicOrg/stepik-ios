@@ -9,38 +9,38 @@ import UIKit
 
 class CompilationCollectionViewController: UICollectionViewController {
 
-    var presenter: CompilationCollectionPresenter!
+    var presenter: CompilationCollectionPresenter?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.presenter = CompilationCollectionPresenter()
+        self.presenter = CompilationCollectionPresenter(view: self, courseListsAPI: CourseListsAPI(), courseListsCache: CourseListsCache())
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.refresh()
 
-        guard let collectionView = collectionView, let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        guard let cv = collectionView, let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+
+        var nib = UINib(nibName: "MajorCollectionRowViewCell", bundle: nil)
+        cv.register(nib, forCellWithReuseIdentifier: MajorCollectionRowViewCell.reuseIdentifier)
+
+        nib = UINib(nibName: "NarrowCollectionRowViewCell", bundle: nil)
+        cv.register(nib, forCellWithReuseIdentifier: NarrowCollectionRowViewCell.reuseIdentifier)
+
+        nib = UINib(nibName: "RegularCollectionRowViewCell", bundle: nil)
+        cv.register(nib, forCellWithReuseIdentifier: RegularCollectionRowViewCell.reuseIdentifier)
 
         let minimumEdgePadding = CGFloat(90.0)
-        collectionView.contentInset.top = CGFloat(-120)
-        collectionView.contentInset.bottom = minimumEdgePadding - layout.sectionInset.bottom
+        cv.contentInset.top = CGFloat(-120)
+        cv.contentInset.bottom = minimumEdgePadding - layout.sectionInset.bottom
     }
 
-    fileprivate func itemType(for indexPath: IndexPath) -> DynamicallyCreatedProtocol.Type {
-        switch indexPath.section {
-        case 0:
-            return type(of: MajorCollectionViewContainerCell.self())
-        case 1:
-            return type(of: NarrowCollectionViewContainerCell.self())
-        default:
-            return type(of: RegularCollectionViewContainerCell.self())
-        }
-    }
+    var collectionRows: [CollectionRow] = []
 
     // MARK: UICollectionViewDataSource methods
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Model.sharedReference.getOuter().count
+        return collectionRows.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -48,21 +48,16 @@ class CompilationCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = itemType(for: indexPath).reuseIdentifier
+
+        let identifier = collectionRows[indexPath.section].type.viewClass.reuseIdentifier
         return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
     // MARK: UICollectionViewDelegate methods
-
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
-        let sectionData = Model.sharedReference.getInner(at: indexPath.section)
-        let sectionTitle = Model.sharedReference.getTitles(at: indexPath.section)
-
-        if let cell = cell as? ContainerConfigurableProtocol {
-            cell.configure(with: sectionData, title: sectionTitle)
-        }
-
+        guard let cell = cell as? CollectionRowView else { return }
+        cell.setup(with: collectionRows[indexPath.section].data)
     }
 
     override func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
@@ -74,8 +69,8 @@ extension CompilationCollectionViewController: UICollectionViewDelegateFlowLayou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let cellSize = itemType(for: indexPath).size
-        return cellSize
+        let size = collectionRows[indexPath.section].type.viewClass.size
+        return size
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -84,7 +79,14 @@ extension CompilationCollectionViewController: UICollectionViewDelegateFlowLayou
 }
 
 extension CompilationCollectionViewController: CompilationCollectionView {
-    func provide(courses: [Course], for rowType: CompilationCollectionPresenter.RowType) {
 
+    func setup(with rows: [CollectionRow]) {
+        self.collectionRows = rows
+        collectionView?.reloadData()
+    }
+
+    func update(rowWith index: Int) {
+        let indexPath = IndexPath(item: 0, section: index)
+        collectionView?.reloadItems(at: [indexPath])
     }
 }

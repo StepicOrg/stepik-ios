@@ -10,5 +10,8 @@ import Foundation
 
 protocol CompilationCollectionView: class {
 
-    func provide(courses: [Course], for rowType: CompilationCollectionPresenter.RowType)
+    func setup(with rows: [CollectionRow])
+
+    func update(rowWith index: Int)
+
 }
