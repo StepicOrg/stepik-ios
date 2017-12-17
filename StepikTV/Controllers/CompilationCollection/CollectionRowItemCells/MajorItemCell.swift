@@ -28,11 +28,6 @@ class MajorItemCell: UICollectionViewCell {
         titleLabel.text = item.title
         subtitleLabel.text = item.subtitle
 
-        if item.isEmpty {
-            guard let image = item.backgroundImage else { fatalError() }
-            imageView.image = image
-        }
-
-        //...
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
     }
 }

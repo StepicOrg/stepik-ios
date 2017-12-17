@@ -57,7 +57,9 @@ class CompilationCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
         guard let cell = cell as? CollectionRowView else { return }
-        cell.setup(with: collectionRows[indexPath.section].data)
+        let row = collectionRows[indexPath.section]
+        
+        cell.setup(with: row.data, title: row.title)
     }
 
     override func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {

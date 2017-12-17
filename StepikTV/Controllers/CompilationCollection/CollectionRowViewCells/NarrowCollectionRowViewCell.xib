@@ -28,7 +28,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vas-3e-ffn">
-                        <rect key="frame" x="0.0" y="20" width="75" height="46"/>
+                        <rect key="frame" x="90" y="20" width="75" height="46"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -37,11 +37,11 @@
             </view>
             <constraints>
                 <constraint firstItem="jVV-tV-G8k" firstAttribute="top" secondItem="Vas-3e-ffn" secondAttribute="bottom" constant="10" id="15a-5Y-ECg"/>
-                <constraint firstItem="Vas-3e-ffn" firstAttribute="leading" secondItem="aiH-or-bYx" secondAttribute="leading" id="IfZ-yX-Adi"/>
                 <constraint firstItem="jVV-tV-G8k" firstAttribute="leading" secondItem="aiH-or-bYx" secondAttribute="leading" id="UUe-vj-188"/>
                 <constraint firstAttribute="trailing" secondItem="jVV-tV-G8k" secondAttribute="trailing" id="YPf-5h-gWN"/>
                 <constraint firstAttribute="bottom" secondItem="jVV-tV-G8k" secondAttribute="bottom" constant="8" id="axs-aY-iSQ"/>
                 <constraint firstItem="Vas-3e-ffn" firstAttribute="top" secondItem="aiH-or-bYx" secondAttribute="top" constant="20" id="kNK-3t-OL0"/>
+                <constraint firstItem="5H9-cL-Ksq" firstAttribute="leading" secondItem="Vas-3e-ffn" secondAttribute="leading" id="uBR-hJ-36j"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="5H9-cL-Ksq"/>
             <size key="customSize" width="764" height="237"/>

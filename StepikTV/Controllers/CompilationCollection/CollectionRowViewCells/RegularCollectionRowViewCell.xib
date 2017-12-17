@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +28,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcr-TD-aZT">
-                        <rect key="frame" x="0.0" y="20" width="75" height="46"/>
+                        <rect key="frame" x="90" y="20" width="75" height="46"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -35,13 +36,14 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="6iT-ne-SG0" firstAttribute="leading" secondItem="mcr-TD-aZT" secondAttribute="leading" id="I0d-tq-yO0"/>
                 <constraint firstItem="Z76-BT-PPz" firstAttribute="leading" secondItem="VoK-Hg-otD" secondAttribute="leading" id="Lqt-HK-Mww"/>
                 <constraint firstItem="mcr-TD-aZT" firstAttribute="top" secondItem="VoK-Hg-otD" secondAttribute="top" constant="20" id="MdJ-Ri-Tfw"/>
                 <constraint firstItem="Z76-BT-PPz" firstAttribute="top" secondItem="mcr-TD-aZT" secondAttribute="bottom" constant="10" id="NKR-Pu-8Tx"/>
                 <constraint firstAttribute="trailing" secondItem="Z76-BT-PPz" secondAttribute="trailing" id="S5k-zS-TZL"/>
                 <constraint firstAttribute="bottom" secondItem="Z76-BT-PPz" secondAttribute="bottom" constant="8" id="jdK-wS-JF8"/>
-                <constraint firstItem="mcr-TD-aZT" firstAttribute="leading" secondItem="VoK-Hg-otD" secondAttribute="leading" id="ocm-xT-Hwn"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="6iT-ne-SG0"/>
             <size key="customSize" width="764" height="237"/>
             <connections>
                 <outlet property="collectionView" destination="Z76-BT-PPz" id="gC1-rV-cfa"/>

@@ -18,8 +18,9 @@ class RegularCollectionRowViewCell: CollectionRowViewCell, CollectionRowView {
 
     var data: [ItemViewData] = []
 
-    func setup(with data: [ItemViewData]) {
+    func setup(with data: [ItemViewData], title: String? = nil) {
         self.data = data
+        self.title.text = title
         collectionView.reloadData()
     }
 

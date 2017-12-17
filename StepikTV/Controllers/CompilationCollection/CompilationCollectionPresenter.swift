@@ -56,9 +56,10 @@ class CompilationCollectionPresenter {
                 strongSelf.rows = strongSelf.loaders.map { strongSelf.buildRow(from: $0) }
                 strongSelf.view?.setup(with: strongSelf.rows)
 
-                // Foreaching loaders
+                let courseAPI = CoursesAPI()
+
                 for (index, loader) in strongSelf.loaders.enumerated() {
-                    loader.getCourses(withAPI: CoursesAPI())?.then {
+                    loader.getCourses(withAPI: courseAPI)?.then {
                         [weak self]
                         courses -> Void in
                         guard let strongSelf = self else {
@@ -74,7 +75,7 @@ class CompilationCollectionPresenter {
                         print("Error while refreshing collection")
                     }
 
-                    loader.getPopular(withAPI: CoursesAPI(), language: language)?.then {
+                    loader.getPopular(withAPI: courseAPI, language: language)?.then {
                         [weak self]
                         (courses, _) -> Void in
                         guard let strongSelf = self else {
@@ -83,11 +84,11 @@ class CompilationCollectionPresenter {
 
                         strongSelf.rows[index].setData(with: courses)
                         strongSelf.view?.update(rowWith: index)
-                        }.catch {
-                            [weak self]
-                            _ in
-                            guard let _ = self else { return }
-                            print("Error while refreshing collection")
+                    }.catch {
+                        [weak self]
+                        _ in
+                        guard let _ = self else { return }
+                        //print("Error while refreshing collection")
                     }
 
                     if let tags = loader.getTags() {
@@ -190,13 +191,13 @@ class CollectionRow {
         switch type {
         case let .regular(title: title):
             self.title = title
-            data = [ItemViewData](repeating: ItemViewData(image: #imageLiteral(resourceName: "placeholder")), count: count)
+            data = [ItemViewData](repeating: ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder")), count: count)
         case let .narrow(title: title):
             self.title = title
-            data = [ItemViewData](repeating: ItemViewData(image: #imageLiteral(resourceName: "tag-placeholder")), count: count)
+            data = [ItemViewData](repeating: ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder")), count: count)
         default:
             self.title = nil
-            data = [ItemViewData](repeating: ItemViewData(image: #imageLiteral(resourceName: "placeholder")), count: count)
+            data = [ItemViewData](repeating: ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder")), count: count)
         }
     }
 
@@ -204,7 +205,7 @@ class CollectionRow {
 
     func setData(with tags: [CourseTag], language: ContentLanguage) {
         data = tags.map {
-            ItemViewData(image: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
 
             }
         }
@@ -214,7 +215,7 @@ class CollectionRow {
 
     func setData(with courses: [Course]) {
         data = courses.map {
-            ItemViewData(imageURLString: $0.coverURLString, title: $0.title, subtitle: $0.instructors[0].firstName) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.coverURLString, title: $0.title, subtitle: $0.instructors[0].firstName) {
 
             }
         }
@@ -228,31 +229,32 @@ struct ItemViewData {
     var subtitle: String?
     var action: (() -> Void)?
 
+    let placeholder: UIImage
     var backgroundImageURL: URL?
-    var backgroundImage: UIImage?
 
     var isEmpty: Bool = false
 
-    init(image: UIImage) {
+    init(placeholder: UIImage) {
         isEmpty = true
 
         title = ""
-        backgroundImage = image
+        self.placeholder = placeholder
     }
 
-    init(image: UIImage, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
 
-        self.backgroundImage = image
+        self.placeholder = placeholder
     }
 
-    init(imageURLString: String, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
 
+        self.placeholder = placeholder
         self.backgroundImageURL = URL(string: imageURLString)
     }
 }

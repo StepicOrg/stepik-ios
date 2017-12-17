@@ -13,5 +13,5 @@ protocol CollectionRowView {
     static var size: CGSize { get }
     static var reuseIdentifier: String { get }
 
-    func setup(with data: [ItemViewData])
+    func setup(with data: [ItemViewData], title: String?)
 }

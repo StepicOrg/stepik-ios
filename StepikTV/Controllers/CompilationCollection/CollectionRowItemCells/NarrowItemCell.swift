@@ -27,11 +27,6 @@ class NarrowItemCell: UICollectionViewCell {
     func setup(with item: ItemViewData) {
         titleLabel.text = item.title
 
-        if item.isEmpty {
-            guard let image = item.backgroundImage else { fatalError() }
-            imageView.image = image
-        }
-
-        //...
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
     }
 }

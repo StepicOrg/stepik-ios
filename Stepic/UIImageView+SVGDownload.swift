@@ -8,8 +8,10 @@
 
 import Foundation
 import SDWebImage
-import SVGKit
 import Alamofire
+#if os(iOS)
+import SVGKit
+#endif
 
 extension UIImageView {
     func setImageWithURL(url optionalURL: URL?, placeholder: UIImage) {
@@ -23,6 +25,7 @@ extension UIImageView {
             self.sd_setImage(with: url, placeholderImage: placeholder)
         } else {
             self.image = placeholder
+            #if os(iOS)
             Alamofire.request(url).responseData(completionHandler: {
                 response in
                 if response.result.error != nil {
@@ -45,6 +48,7 @@ extension UIImageView {
                 }
 
             })
+            #endif
         }
     }
 }
