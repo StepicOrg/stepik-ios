@@ -215,7 +215,7 @@ class CollectionRow {
 
     func setData(with courses: [Course]) {
         data = courses.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.coverURLString, title: $0.title, subtitle: $0.instructors[0].firstName) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.coverURLString, title: $0.title, subtitle: "Higher School of Economics") {
 
             }
         }
