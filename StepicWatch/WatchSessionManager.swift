@@ -90,7 +90,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 		#elseif os(watchOS)
 			return session
 		#endif
-		return nil
+        return nil
 	}
 
 	func startSession() {

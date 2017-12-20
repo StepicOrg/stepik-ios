@@ -27,7 +27,7 @@ struct FillBlanksComponent {
         let emptyTags = ["<br>", "<br/>", "<br />"]
         for tag in emptyTags {
             if text.indexOf(tag) == 0 {
-                text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: tag.characters.count))
+                text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: tag.count))
                 return
             }
         }

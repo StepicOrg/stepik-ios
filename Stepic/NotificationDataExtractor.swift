@@ -20,7 +20,7 @@ class NotificationDataExtractor {
 
         if let link = HTMLParsingUtil.getLink(self.text, index: 0) {
             if let slashPos = link.lastIndexOf("/") {
-                let startIndex = link.characters.index(link.startIndex, offsetBy: slashPos + 1)
+                let startIndex = link.index(link.startIndex, offsetBy: slashPos + 1)
                 let userIdString = link.substring(with: startIndex..<link.endIndex)
                 return Int(userIdString)
             }
@@ -36,8 +36,8 @@ class NotificationDataExtractor {
 
         if let courseLink = HTMLParsingUtil.getLink(self.text, index: 0) {
             if let courseIdStartIndex = courseLink.lastIndexOf("-") {
-                let start = courseLink.characters.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
-                let end = courseLink.characters.index(courseLink.startIndex, offsetBy: courseLink.characters.count - 1)
+                let start = courseLink.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
+                let end = courseLink.index(courseLink.startIndex, offsetBy: courseLink.count - 1)
                 let courseIdString = courseLink.substring(with: start..<end)
                 return Int(courseIdString)
             }

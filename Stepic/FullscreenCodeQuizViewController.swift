@@ -275,7 +275,7 @@ extension FullscreenCodeQuizViewController : UITextViewDelegate {
 extension FullscreenCodeQuizViewController: CodeSuggestionDelegate {
     func didSelectSuggestion(suggestion: String, prefix: String) {
         codeTextView.becomeFirstResponder()
-        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
     }

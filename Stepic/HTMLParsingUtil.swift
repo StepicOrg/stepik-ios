@@ -52,7 +52,7 @@ class HTMLParsingUtil {
                 return res
             }
 
-            let matches = detect.matches(in: htmlString, options: .reportCompletion, range: NSRange(location: 0, length: htmlString.characters.count))
+            let matches = detect.matches(in: htmlString, options: .reportCompletion, range: NSRange(location: 0, length: htmlString.count))
 
             for match in matches {
                 if let urlString = match.url?.absoluteString {

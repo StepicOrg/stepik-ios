@@ -83,7 +83,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.characters.count, size: delegate?.suggestionsSize)
+        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.count, size: delegate?.suggestionsSize)
 
         return cell
     }
