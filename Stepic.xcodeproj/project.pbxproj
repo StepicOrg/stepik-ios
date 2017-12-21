@@ -2546,6 +2546,8 @@
 		2C35C5051F4DB91A002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C5011F4DB912002F3BF4 /* step1.html */; };
 		2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
+		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
+		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
 		2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */; };
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
@@ -5137,6 +5139,8 @@
 		2C35C5041F4DB915002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1906/en.lproj/step1.html; sourceTree = "<group>"; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
+		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
+		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
@@ -6379,6 +6383,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C5DF1371FEBDC50003B1177 /* AdaptiveSteps */,
 				2C2060CB1FDAF71500605C42 /* Onboarding */,
 				08D565C91C5F7CF000DE2B6A /* Quizzes */,
 				2CB9E8BE1F7AA5550004E17F /* Notifications */,
@@ -7517,6 +7522,23 @@
 				2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */,
 			);
 			name = "Leaderboard names";
+			sourceTree = "<group>";
+		};
+		2C5DF1371FEBDC50003B1177 /* AdaptiveSteps */ = {
+			isa = PBXGroup;
+			children = (
+				2C5DF13C1FEC0541003B1177 /* CardsSteps */,
+			);
+			name = AdaptiveSteps;
+			sourceTree = "<group>";
+		};
+		2C5DF13C1FEC0541003B1177 /* CardsSteps */ = {
+			isa = PBXGroup;
+			children = (
+				2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */,
+				2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */,
+			);
+			name = CardsSteps;
 			sourceTree = "<group>";
 		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
@@ -12018,6 +12040,7 @@
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
+				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
@@ -12085,6 +12108,7 @@
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
+				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08E8F9671F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,

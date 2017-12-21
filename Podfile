@@ -51,6 +51,7 @@ def all_pods
     pod 'Atributika', '~> 3.0' # update after migration to Swift 4
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
+    pod 'Koloda', '4.3.1'
 end
 
 def testing_pods
