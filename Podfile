@@ -27,8 +27,9 @@ def all_pods
     pod 'Firebase/AppIndexing'
     pod 'Firebase/Messaging'
     pod 'Firebase/Analytics'
+    pod 'Firebase/RemoteConfig'
     
-    pod 'Mixpanel-swift'
+    pod 'Mixpanel-swift', '2.3.0'
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
@@ -49,6 +50,7 @@ def all_pods
     pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 4.0'
     pod 'DeviceKit', '~> 1.0'
+    pod 'lottie-ios'
 end
 
 def testing_pods

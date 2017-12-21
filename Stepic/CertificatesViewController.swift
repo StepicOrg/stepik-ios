@@ -182,8 +182,7 @@ extension CertificatesViewController : DZNEmptyDataSetDelegate {
     func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
         switch emptyState {
         case .anonymous:
-            let vc = ControllerHelper.getAuthController()
-            self.present(vc, animated: true, completion: nil)
+            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
             break
 
         case .empty:

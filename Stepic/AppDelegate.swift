@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.setup()
 
+        RemoteConfig.shared.setup()
+
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         ConnectionHelper.shared.instantiate()
@@ -41,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-
         AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if AuthInfo.shared.isAuthorized {
-            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+            NotificationRegistrator.shared.registerForRemoteNotifications(application)
         }
 
         if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {
@@ -75,11 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         checkNotificationsCount()
-
-        if !DefaultsContainer.launch.didLaunch {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
-            DefaultsContainer.launch.didLaunch = true
-        }
 
         return true
     }
@@ -193,13 +189,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
         if let token = FIRInstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized {
-                NotificationRegistrator.sharedInstance.registerDevice(token)
+                NotificationRegistrator.shared.registerDevice(token)
             }
         }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
+        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

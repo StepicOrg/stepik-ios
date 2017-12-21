@@ -54,6 +54,11 @@ class UserActivity {
         return lStreak
     }
 
+    var didSolveThisWeek: Bool {
+        let thisWeekPins = pins.prefix(7)
+        return thisWeekPins.index(where: { $0 > 0 }) != nil
+    }
+
     var needsToSolveToday: Bool {
         guard pins.count > 1 else {
             return false

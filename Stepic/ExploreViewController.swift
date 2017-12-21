@@ -50,7 +50,10 @@ class ExploreViewController: UIViewController, ExploreView {
     var blocks: [CourseListBlock] = []
     var countForID: [String: Int] = [:]
     var countUpdateBlock: [String: () -> Void] = [:]
-    var removeBlockForId: [String: () -> Void] = [:]
+    var removeBlockForID: [String: () -> Void] = [:]
+    var listTypeUpdateBlockForID: [String: (CourseListType, Bool) -> Void] = [:]
+    var onlyLocalUpdateBlockForID: [String: (Bool) -> Void] = [:]
+    var titleDescriptionUpdateBlockForID: [String: (String, String?) -> Void] = [:]
 
     private func reload() {
         for block in blocks {
@@ -69,17 +72,50 @@ class ExploreViewController: UIViewController, ExploreView {
             }
             stackView.addArrangedSubview(courseListView)
             courseListView.alignLeading("0", trailing: "0", toView: self.view)
-            removeBlockForId[block.ID] = {
+            removeBlockForID[block.ID] = {
                 courseListView.isHidden = true
                 courseListView.removeFromSuperview()
                 block.horizontalController.removeFromParentViewController()
             }
+            listTypeUpdateBlockForID[block.ID] = {
+                newListType, onlyLocal in
+                block.onlyLocal = onlyLocal
+                block.listType = newListType
+                block.horizontalController.presenter?.listType = newListType
+                block.horizontalController.presenter?.onlyLocal = onlyLocal
+                block.horizontalController.presenter?.refresh()
+            }
+            onlyLocalUpdateBlockForID[block.ID] = {
+                onlyLocal in
+                block.onlyLocal = onlyLocal
+                block.horizontalController.presenter?.onlyLocal = onlyLocal
+                block.horizontalController.presenter?.refresh()
+            }
+            titleDescriptionUpdateBlockForID[block.ID] = {
+                newTitle, newDescription in
+                block.description = newDescription
+                block.title = newTitle
+                courseListView.titleLabel.text = newTitle
+                courseListView.listDescription = newDescription
+            }
         }
+    }
+
+    func updateBlock(withID ID: String, newListType: CourseListType, onlyLocal: Bool) {
+        listTypeUpdateBlockForID[ID]?(newListType, onlyLocal)
+    }
+
+    func updateBlock(withID ID: String, onlyLocal: Bool) {
+        onlyLocalUpdateBlockForID[ID]?(onlyLocal)
+    }
+
+    func updateBlock(withID ID: String, newTitle: String, newDescription: String?) {
+        titleDescriptionUpdateBlockForID[ID]?(newTitle, newDescription)
     }
 
     private func removeBlocks() {
         for block in blocks {
-            removeBlockForId[block.ID]?()
+            removeBlockForID[block.ID]?()
         }
     }
 

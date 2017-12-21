@@ -131,6 +131,15 @@ struct AnalyticsEvents {
     struct Streaks {
         static let preferencesOn = "streak_notification_pref_on"
         static let preferencesOff = "streak_notification_pref_off"
+
+        static func notifySuggestionShown(source: String, trigger: String) -> String {
+            return "streak_suggestion_shown_source_\(source)_trigger_\(trigger)"
+        }
+
+        static func notifySuggestionApproved(source: String, trigger: String) -> String {
+            return "streak_suggestion_approved_source_\(source)_trigger_\(trigger)"
+        }
+
         struct Suggestion {
             static func fail(_ index: Int) -> String {
                 return "streak_suggestion_\(index)_fail"
@@ -159,6 +168,8 @@ struct AnalyticsEvents {
 
     struct Errors {
         static let tokenRefresh = "error_token_refresh"
+        static let unregisterDeviceInvalidCredentials = "error_unregister_device_credentials"
+        static let registerDevice = "error_register_device"
     }
 
     struct Continue {
@@ -226,5 +237,12 @@ struct AnalyticsEvents {
     struct Notifications {
         static let markAllAsRead = "notifications_mark_all_as_read"
         static let markAsRead = "notifications_mark_as_read"
+    }
+
+    struct Onboarding {
+        static let onboardingClosed = "onboarding_closed"
+        static let onboardingScreenOpened = "onboarding_screen_opened"
+        static let onboardingAction = "onboarding_action"
+        static let onboardingComplete = "onboarding_complete"
     }
 }

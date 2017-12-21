@@ -12,6 +12,10 @@ import Alamofire
 
 protocol ExploreView: class {
     func presentBlocks(blocks: [CourseListBlock])
+    func updateBlock(withID: String, newListType: CourseListType, onlyLocal: Bool)
+    func updateBlock(withID: String, onlyLocal: Bool)
+    func updateBlock(withID: String, newTitle: String, newDescription: String?)
+
     func setConnectionProblemsPlaceholder(hidden: Bool)
 
     func setLanguages(withLanguages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void)
@@ -160,6 +164,11 @@ class ExplorePresenter: CourseListCountDelegate {
             ]
     }
 
+    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Promise<[CourseList]> {
+        let recoveredIds = courseListsCache.get(forLanguage: language)
+        return CourseList.recoverAsync(ids: recoveredIds)
+    }
+
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
         let recoveredIds = courseListsCache.get(forLanguage: language)
         return CourseList.recover(ids: recoveredIds).sorted { $0.position < $1.position }
@@ -168,14 +177,86 @@ class ExplorePresenter: CourseListCountDelegate {
     func refresh() {
         view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
-        refreshFromLocal(forLanguage: listLanguage)
-        refreshFromRemote(forLanguage: listLanguage)
+        refreshFromLocalAsync(forLanguage: listLanguage).then {
+            [weak self] in
+            self?.refreshFromRemote(forLanguage: listLanguage)
+        }
+    }
+
+    private func refreshFromLocalAsync(forLanguage language: ContentLanguage) -> Promise<Void> {
+        return Promise {
+            fulfill, reject in
+            getCachedListsAsync(forLanguage: language).then {
+                [weak self]
+                lists -> Void in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.lists = lists
+                strongSelf.blocks = strongSelf.buildBlocks(forLists: lists, onlyLocal: true)
+                strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
+                fulfill(())
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
     }
 
     private func refreshFromLocal(forLanguage language: ContentLanguage) {
         lists = getCachedLists(forLanguage: language)
         blocks = buildBlocks(forLists: lists, onlyLocal: true)
         view?.presentBlocks(blocks: blocks)
+    }
+
+    private func shouldReloadAll(newLists: [CourseList]) -> Bool {
+        return newLists.map { getId(forList: $0) } != blocks.flatMap {
+            switch $0.listType {
+            case .collection(ids: _):
+                return $0.ID
+            default:
+                return nil
+            }
+        }
+    }
+
+    enum LanguageError: Error {
+        case wrongLanguageError
+    }
+
+    private func updateLists(newLists: [CourseList], forLanguage language: ContentLanguage) {
+        func refreshLists() {
+            lists = newLists
+            blocks = buildBlocks(forLists: lists, onlyLocal: false)
+            view?.setConnectionProblemsPlaceholder(hidden: true)
+            view?.presentBlocks(blocks: blocks)
+        }
+        courseListsCache.set(ids: newLists.map { $0.id }, forLanguage: language)
+
+        if shouldReloadAll(newLists: newLists) {
+            refreshLists()
+            return
+        }
+
+        for newList in newLists {
+            guard let blockForList: CourseListBlock = blocks.first(where: {
+                $0.ID == getId(forList: newList)
+            }) else {
+                refreshLists()
+                return
+            }
+
+            let ID = getId(forList: newList)
+            if newList.coursesArray != blockForList.coursesIDs {
+                view?.updateBlock(withID: ID, newListType: CourseListType.collection(ids: newList.coursesArray), onlyLocal: false)
+            } else {
+                view?.updateBlock(withID: ID, onlyLocal: false)
+            }
+            if newList.title != blockForList.title || newList.listDescription != blockForList.description {
+                view?.updateBlock(withID: ID, newTitle: newList.title, newDescription: newList.listDescription)
+            }
+        }
     }
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
@@ -185,6 +266,10 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 throw WeakSelfError.noStrong
             }
+            if ContentLanguage.sharedContentLanguage != language {
+                throw LanguageError.wrongLanguageError
+            }
+
             strongSelf.didRefreshOnce = true
             return strongSelf.courseListsAPI.retrieve(language: language, page: 1)
         }.then {
@@ -193,25 +278,23 @@ class ExplorePresenter: CourseListCountDelegate {
             guard let strongSelf = self else {
                 throw WeakSelfError.noStrong
             }
-            strongSelf.courseListsCache.set(ids: lists.map { $0.id }, forLanguage: language)
-            strongSelf.lists = lists.sorted { $0.position < $1.position }
-            strongSelf.blocks = strongSelf.buildBlocks(forLists: strongSelf.lists, onlyLocal: false)
-            strongSelf.view?.setConnectionProblemsPlaceholder(hidden: true)
-            strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
+            if ContentLanguage.sharedContentLanguage != language {
+                throw LanguageError.wrongLanguageError
+            }
+            let newLists = lists.sorted(by: {  $0.position < $1.position })
+            strongSelf.updateLists(newLists: newLists, forLanguage: language)
         }.catch {
             [weak self]
             _ in
             guard let strongSelf = self else {
                 return
             }
-            //TODO: Also present popular block here if needed
             if strongSelf.lists.isEmpty {
                 strongSelf.view?.setConnectionProblemsPlaceholder(hidden: false)
             }
             if !strongSelf.didRefreshOnce {
                 strongSelf.setupNetworkReachabilityListener()
             }
-            //TODO: Add Reachability observer here
         }
     }
 
