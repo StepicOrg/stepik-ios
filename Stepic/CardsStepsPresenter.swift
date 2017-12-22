@@ -39,7 +39,7 @@ class CardsStepsPresenter {
     var nextRecommendationsBatchThreshold: Int { return 4 }
 
     weak var view: CardsStepsView?
-    var currentStepPresenter: CardStepPresenter
+    var currentStepPresenter: CardStepPresenter?
 
     fileprivate var stepsAPI: StepsAPI
     fileprivate var lessonsAPI: LessonsAPI
@@ -47,7 +47,8 @@ class CardsStepsPresenter {
     fileprivate var unitsAPI: UnitsAPI
     fileprivate var viewsAPI: ViewsAPI
 
-    private(set) var state: State = .loaded
+    // FIXME: incapsulate/remove this 
+    var state: State = .loaded
     private(set) var course: Course
 
     var cachedRecommendedLessons: [Lesson] = []
@@ -84,7 +85,7 @@ class CardsStepsPresenter {
             }
 
             var title = ""
-            state = .loading
+            strongSelf.state = .loading
             strongSelf.getNewRecommendation(for: strongSelf.course).then { lesson -> Promise<Step> in
                 title = lesson.title
                 return strongSelf.getStep(for: lesson)
@@ -96,13 +97,14 @@ class CardsStepsPresenter {
                     }
 
                     let cardStepPresenter = CardStepPresenter(view: cardStepViewController, step: step)
-                    cardStepPresenter.delegate = strongSelf
                     cardStepViewController.presenter = cardStepPresenter
-
                     strongSelf.currentStepPresenter = cardStepPresenter
+                    if strongSelf.view is CardStepDelegate {
+                        cardStepPresenter.delegate = (strongSelf.view as! CardStepDelegate)
+                    }
 
-                    strongSelf.view?.updateTopCardContent(stepViewController)
-                    strongSelf.view?.updateTopCardTitle(title)
+                    strongSelf.view?.updateTopCardContent(stepViewController: cardStepViewController)
+                    strongSelf.view?.updateTopCardTitle(title: title)
                 }
 
                 return strongSelf.sendView(step: step)
@@ -131,7 +133,7 @@ class CardsStepsPresenter {
             return
         }
 
-        self.sendReaction(reaction, for: lesson, user: user)
+        self.sendReaction(reaction, for: lesson, user: user).then { _ -> Void in }
     }
 
     func tryAgain() {
@@ -143,11 +145,11 @@ class CardsStepsPresenter {
         return Promise { fulfill, reject in
             self.recommendationsAPI.retrieve(course: course.id, count: count).then { lessonsIds -> Promise<[Lesson]> in
                 guard !lessonsIds.isEmpty else {
-                    return fulfill([])
+                    return Promise(value: [])
                 }
 
                 // FIXME: retrieve local lessons here
-                return self.lessonsAPI.retrieve(ids: recommendations, existing: [], refreshMode: .update)
+                return self.lessonsAPI.retrieve(ids: lessonsIds, existing: [])
             }.then { lessons -> Void in
                 fulfill(lessons)
             }.catch { _ in
@@ -165,7 +167,7 @@ class CardsStepsPresenter {
             let stepId = lesson.stepsArray[index]
             // FIXME: retrieve step here
 
-            self.stepsAPI.retrieve(ids: [stepId], existing: [], refreshMode: .update).then { steps -> Void in
+            self.stepsAPI.retrieve(ids: [stepId], existing: []).then { steps -> Void in
                 if let step = steps.first {
                     fulfill(step)
                 } else {
@@ -219,7 +221,7 @@ class CardsStepsPresenter {
                                 self.cachedRecommendedLessons.append(lesson)
                             }
                         }
-                    }.catch { error in
+                    }.catch { _ in
                         print("cards steps: error while loading next recommendations batch")
                     }
                 }
@@ -233,13 +235,13 @@ class CardsStepsPresenter {
                 throw CardsStepsError.viewNotSent
             }
 
-            // FIXME: existing
-            self.unitsAPI.retrieve(lesson: lesson.id, existing: [], refreshMode: .update).then { unit -> Promise<Void> in
+            self.unitsAPI.retrieve(lesson: lesson.id).then { unit -> Promise<Void> in
                 guard let assignmentId = unit.assignmentsArray.first else {
-                    return reject(AdaptiveStepsError.viewNotSent)
+                    reject(CardsStepsError.viewNotSent)
+                    return Promise(value: ())
                 }
 
-                return self.viewsAPI.create(stepId: step.id, assignmentId: assignmentId)
+                return self.viewsAPI.create(step: step.id, assignment: assignmentId)
             }.then { _ in
                 fulfill()
             }.catch { _ in
@@ -250,14 +252,17 @@ class CardsStepsPresenter {
 
     fileprivate func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
         return Promise { fulfill, reject in
-            self.recommendationsAPI?.sendRecommendationReaction(user: user.id, lesson: lesson.id, reaction: reaction).then { _ -> Void in
+            self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).then { _ -> Void in
                 // Analytics
                 if let curState = self.currentStepPresenter?.state {
                     switch reaction {
                     case .maybeLater:
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
+                        break
+                        // FIXME: analytics
+                        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
                     case .neverAgain:
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
+                        break
+                        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
                     default: break
                     }
                 }
@@ -270,8 +275,7 @@ class CardsStepsPresenter {
     }
 }
 
-
-extension CardsStepsPresenter: CardViewDelegate {
+extension CardsStepsPresenter: StepCardViewDelegate {
     func onControlButtonClick() {
         switch currentStepPresenter?.state ?? .unsolved {
         case .unsolved:
@@ -284,38 +288,12 @@ extension CardsStepsPresenter: CardViewDelegate {
     }
 
     func onShareButtonClick() {
-        guard let slug = currentLesson?.slug else {
-            return
-        }
-        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
-        view?.presentShareDialog(for: shareLink)
-    }
-}
-
-extension CardsStepsPresenter: CardStepDelegate {
-    func stepSubmissionDidCorrect() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
-        sendReaction(.solved)
-        view?.updateTopCardControl(stepState: .successful)
-    }
-
-    func stepSubmissionDidWrong() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
-        view?.updateTopCardControl(stepState: .wrong)
-    }
-
-    func stepSubmissionDidRetry() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
-        view?.updateTopCardControl(stepState: .unsolved)
-    }
-
-    func contentLoadingDidFail() {
-        view?.state = .connectionError
-    }
-
-    func contentLoadingDidComplete() {
-        state = .loaded
-        view?.updateTopCard(cardState: .normal) // FIX
+        // FIXME: current lesson
+//        guard let slug = currentLesson?.slug else {
+//            return
+//        }
+//        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
+//        view?.presentShareDialog(for: shareLink)
     }
 }
 

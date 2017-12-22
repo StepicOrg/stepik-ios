@@ -82,4 +82,3 @@ enum Reaction: Int {
     case maybeLater = 0
     case neverAgain = -1
 }
-

@@ -22,7 +22,7 @@ class StepsAPI: APIEndpoint {
 extension StepsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Step], refreshMode: RefreshMode, success: @escaping (([Step]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-        retrieve(ids: ids, existing: existing, headers: headers).then { success($0) }.catch { errorHandler(RetrieveError(error: error)) }
+        retrieve(ids: ids, existing: existing, headers: headers).then { success($0) }.catch { errorHandler(RetrieveError(error: $0)) }
         return nil
     }
 }

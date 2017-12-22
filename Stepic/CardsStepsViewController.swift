@@ -77,14 +77,13 @@ extension CardsStepsViewController: CardsStepsView {
     }
 
     func updateTopCardContent(stepViewController: CardStepViewController) {
-        guard let currentStepUIViewController = currentStepViewController as? UIViewController,
-              let selfUIViewController = self as? UIViewController,
+        guard let currentStepUIViewController = currentStepViewController,
               let card = topCard else {
             return
         }
 
         currentStepUIViewController.removeFromParentViewController()
-        selfUIViewController?.addChildViewController(currentStepUIViewController)
+        self.addChildViewController(currentStepUIViewController)
 
         card.addContentSubview(currentStepUIViewController.view)
     }
@@ -99,7 +98,7 @@ extension CardsStepsViewController: CardsStepsView {
 
     func presentShareDialog(for link: String) {
         let activityViewController = SharingHelper.getSharingController(link)
-        activityViewController.popoverPresentationController?.sourceView = card?.shareButton ?? view
+        activityViewController.popoverPresentationController?.sourceView = topCard?.shareButton ?? view
         present(activityViewController, animated: true, completion: nil)
     }
 }
@@ -147,12 +146,12 @@ extension CardsStepsViewController: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         if index > 0 {
             let card = StepReversedCardView()
-            return card!
+            return card
         } else {
             topCard = StepCardView()
-            topCard.delegate = presenter
+            topCard?.delegate = presenter
             presenter?.refreshTopCard()
-            return topCard
+            return topCard ?? UIView()
         }
     }
 
@@ -219,5 +218,32 @@ extension CardsStepsViewController: PlaceholderViewDelegate {
         default:
             return
         }
+    }
+}
+
+extension CardsStepsViewController: CardStepDelegate {
+    func stepSubmissionDidCorrect() {
+        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
+        presenter?.sendReaction(.solved)
+        topCard?.controlState = .successful
+    }
+
+    func stepSubmissionDidWrong() {
+        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        topCard?.controlState = .wrong
+    }
+
+    func stepSubmissionDidRetry() {
+        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
+        topCard?.controlState = .unsolved
+    }
+
+    func contentLoadingDidFail() {
+        state = .connectionError
+    }
+
+    func contentLoadingDidComplete() {
+        presenter?.state = .loaded
+        topCard?.cardState = .normal
     }
 }

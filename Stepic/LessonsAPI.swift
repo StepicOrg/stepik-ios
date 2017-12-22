@@ -9,11 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class LessonsAPI: APIEndpoint {
     override var name: String { return "lessons" }
 
+    func retrieve(ids: [Int], existing: [Lesson], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
+        return getObjectsByIds(ids: ids, updating: existing, headers: headers, printOutput: false)
+    }
+}
+
+extension LessonsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Lesson], refreshMode: RefreshMode, success: @escaping (([Lesson]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+        retrieve(ids: ids, existing: existing, headers: headers).then { success($0) }.catch { errorHandler(RetrieveError(error: $0)) }
+        return nil
     }
 }
