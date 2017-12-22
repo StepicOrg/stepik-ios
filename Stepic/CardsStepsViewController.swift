@@ -17,6 +17,8 @@ class CardsStepsViewController: UIViewController {
 
     var canSwipeCurrentCardUp = false
 
+    var course: Course!
+
     fileprivate var topCard: StepCardView?
     fileprivate var currentStepViewController: CardStepViewController?
 
@@ -45,10 +47,13 @@ class CardsStepsViewController: UIViewController {
         return v
     }()
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-        presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: Course(), view: self)
+        if presenter == nil {
+            presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
+            presenter?.refresh()
+        }
     }
 }
 

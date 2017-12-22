@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Card Step View Controller-->
+        <scene sceneID="0gR-Yw-kZD">
+            <objects>
+                <viewController storyboardIdentifier="CardStep" id="eJP-Ja-phW" customClass="CardStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aeI-qb-4nR"/>
+                        <viewControllerLayoutGuide type="bottom" id="jVy-dP-WyP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wqO-Jl-YEe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Am-VA-FTv">
+                                <rect key="frame" x="0.0" y="20" width="375" height="880"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5eX-H9-4P6">
+                                        <rect key="frame" x="2" y="5" width="371" height="5"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="blu-xZ-KpD"/>
+                                        </constraints>
+                                        <dataDetectorType key="dataDetectorTypes"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="scrollView.scrollEnabled" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="eJP-Ja-phW" id="vhc-St-1YC"/>
+                                        </connections>
+                                    </webView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-Hw-f8f">
+                                        <rect key="frame" x="0.0" y="10" width="375" height="5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" placeholder="YES" id="LY2-WB-yMw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Lbp-Hw-f8f" secondAttribute="bottom" id="36P-G1-CxM"/>
+                                    <constraint firstItem="Lbp-Hw-f8f" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" id="4oq-9A-P9H"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lbp-Hw-f8f" secondAttribute="trailing" id="5i4-a0-QPH"/>
+                                    <constraint firstItem="Lbp-Hw-f8f" firstAttribute="top" secondItem="5eX-H9-4P6" secondAttribute="bottom" id="BJ1-3G-PZH"/>
+                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Nhi-Te-N7k"/>
+                                    <constraint firstItem="Lbp-Hw-f8f" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Qbk-78-Csk"/>
+                                    <constraint firstAttribute="trailing" secondItem="5eX-H9-4P6" secondAttribute="trailing" constant="2" id="W8E-yz-NVM"/>
+                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="top" constant="5" id="pg8-gv-dmN"/>
+                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="2" id="uwH-JJ-niY"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1Am-VA-FTv" firstAttribute="leading" secondItem="wqO-Jl-YEe" secondAttribute="leading" id="QxB-tu-k6A"/>
+                            <constraint firstItem="jVy-dP-WyP" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="bottom" id="TNh-ch-AbZ"/>
+                            <constraint firstAttribute="trailing" secondItem="1Am-VA-FTv" secondAttribute="trailing" id="fpD-5D-DxD"/>
+                            <constraint firstItem="1Am-VA-FTv" firstAttribute="top" secondItem="aeI-qb-4nR" secondAttribute="bottom" id="jGX-3X-byr"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="900"/>
+                    <connections>
+                        <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
+                        <outlet property="scrollView" destination="1Am-VA-FTv" id="z2z-6Y-8PD"/>
+                        <outlet property="stepWebView" destination="5eX-H9-4P6" id="ORF-cp-ZMN"/>
+                        <outlet property="stepWebViewHeight" destination="blu-xZ-KpD" id="miR-yw-cQp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FjP-XU-kDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4069.6875" y="208.09859154929578"/>
+        </scene>
+        <!--Cards Steps View Controller-->
+        <scene sceneID="pVF-Bu-Kgp">
+            <objects>
+                <viewController storyboardIdentifier="CardsSteps" id="6Dd-WV-Z8n" customClass="CardsStepsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hF7-0Z-sGm"/>
+                        <viewControllerLayoutGuide type="bottom" id="N8f-j4-uap"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pQd-fo-zuT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHb-6A-jG0" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="10" y="28" width="300" height="536"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="AHb-6A-jG0" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" constant="8" id="9r0-BG-o1S"/>
+                            <constraint firstAttribute="trailing" secondItem="AHb-6A-jG0" secondAttribute="trailing" constant="10" id="GBl-LW-BUV"/>
+                            <constraint firstItem="N8f-j4-uap" firstAttribute="top" secondItem="AHb-6A-jG0" secondAttribute="bottom" constant="4" id="Goz-Jl-rP3"/>
+                            <constraint firstItem="AHb-6A-jG0" firstAttribute="leading" secondItem="pQd-fo-zuT" secondAttribute="leading" constant="10" id="JRs-Dn-iJZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QLo-PF-g3I"/>
+                    <connections>
+                        <outlet property="kolodaView" destination="AHb-6A-jG0" id="hFz-AB-TRu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097.5" y="33.802816901408448"/>
+        </scene>
+    </scenes>
+</document>

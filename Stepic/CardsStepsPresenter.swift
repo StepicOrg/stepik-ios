@@ -25,8 +25,6 @@ protocol CardsStepsView: class {
     func updateTopCardContent(stepViewController: CardStepViewController)
     func updateTopCardTitle(title: String)
     func presentShareDialog(for link: String)
-//    func updateTopCardControl(stepState: AdaptiveStepState)
-//    func updateTopCard(cardState: StepCardView.CardState)
     func refreshCards()
 }
 
@@ -65,8 +63,6 @@ class CardsStepsPresenter {
 
         self.course = course
         self.view = view
-
-        self.refresh()
     }
 
     func refresh() {
@@ -91,7 +87,7 @@ class CardsStepsPresenter {
                 return strongSelf.getStep(for: lesson)
             }.then { step -> Promise<Void> in
                 DispatchQueue.main.async {
-                    guard let cardStepViewController = ControllerHelper.instantiateViewController(identifier: "Step", storyboardName: "Adaptive") as? CardStepViewController else {
+                    guard let cardStepViewController = ControllerHelper.instantiateViewController(identifier: "CardStep", storyboardName: "Adaptive") as? CardStepViewController else {
                         print("cards steps: fail to init card step view")
                         return
                     }

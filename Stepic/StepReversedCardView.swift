@@ -18,6 +18,7 @@ class StepReversedCardView: UIView {
         white = UIView(frame: bounds)
         backgroundColor = .white
         if white != nil {
+            layer.cornerRadius = 12
             addSubview(white!)
         }
     }

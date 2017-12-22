@@ -56,6 +56,7 @@ class ProfilePresenter {
             buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
+            buildAdaptiveBlock(), // FIXME: remove after debug
             buildLogoutBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)
@@ -161,6 +162,27 @@ class ProfilePresenter {
         block.onTouch = {
             [weak self] in
             self?.view?.navigateToDownloads()
+        }
+
+        return block
+    }
+
+    // FIXME: remove after debug
+    private func buildAdaptiveBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: "adaptiveDebug", title: "1838 course")
+
+        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+        block.onTouch = {
+            [weak self] in
+            Course.fetchAsync([1838]).then { courses in
+                ApiDataDownloader.courses.retrieve(ids: [1838], existing: courses)
+            }.then { courses -> Void in
+                let vc = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as! CardsStepsViewController
+                let navVC = UINavigationController(rootViewController: vc)
+                vc.course = courses.first!
+                (self?.view as? UIViewController)?.present(navVC, animated: true, completion: nil)
+            }
+
         }
 
         return block

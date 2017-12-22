@@ -19,7 +19,11 @@ extension StepCardViewDelegate {
     func onShareButtonClick() { }
 }
 
-class StepCardView: UIView {
+class StepCardView: NibInitializableView {
+    override var nibName: String {
+        return "StepCardView"
+    }
+
     enum ControlState {
         case unsolved, wrong, successful
     }
@@ -82,7 +86,7 @@ class StepCardView: UIView {
         delegate?.onShareButtonClick()
     }
 
-    override func draw(_ rect: CGRect) {
+    override func setupSubviews() {
         colorize()
 
         let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
