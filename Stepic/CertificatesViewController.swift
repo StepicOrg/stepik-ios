@@ -60,11 +60,9 @@ class CertificatesViewController: UIViewController, CertificatesView {
         tableView.backgroundColor = UIColor.groupTableViewBackground
         initPaginationView()
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

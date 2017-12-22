@@ -94,11 +94,9 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         videoWebView.scrollView.isScrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
 
         if let c = course {
             sectionTitles = []

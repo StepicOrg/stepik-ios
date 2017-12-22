@@ -23,11 +23,9 @@ class ExploreViewController: UIViewController, ExploreView {
         (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
         presenter?.refresh()
         self.title = NSLocalizedString("Catalog", comment: "")
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
         presenter?.initLanguagesWidget()
         presenter?.initTagsWidget()
     }

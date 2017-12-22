@@ -32,11 +32,9 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         setupStackView()
         presenter?.initBlocks()
         self.title = NSLocalizedString("Home", comment: "")
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

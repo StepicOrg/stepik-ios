@@ -58,11 +58,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             registerForPreviewing(with: self, sourceView: view)
         }
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     var url: String {
