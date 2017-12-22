@@ -9,9 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class ViewsAPI: APIEndpoint {
     override var name: String { return "views" }
+
+    func create(step stepId: Int, assignment assignmentId: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Void> {
+        return Promise { fulfill, reject in
+            create(stepId: stepId, assignment: assignmentId, headers: headers, success: { _ -> Void in
+                fulfill()
+            }, error: { error in
+                reject(error)
+            })
+        }
+    }
 
     @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
         var params: Parameters = [:]
