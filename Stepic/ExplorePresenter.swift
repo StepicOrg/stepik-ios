@@ -281,7 +281,7 @@ class ExplorePresenter: CourseListCountDelegate {
             if ContentLanguage.sharedContentLanguage != language {
                 throw LanguageError.wrongLanguageError
             }
-            let newLists = lists.sorted(by: {  $0.position < $1.position })
+            let newLists = lists.sorted { $0.position < $1.position }
             strongSelf.updateLists(newLists: newLists, forLanguage: language)
         }.catch {
             [weak self]
