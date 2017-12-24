@@ -42,7 +42,7 @@ class DevicesAPI: APIEndpoint {
                         case 403, 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
                         }
                     }
 
@@ -73,7 +73,7 @@ class DevicesAPI: APIEndpoint {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
                         }
                     }
 
@@ -98,7 +98,7 @@ class DevicesAPI: APIEndpoint {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
                         }
                     }
 
@@ -121,7 +121,7 @@ class DevicesAPI: APIEndpoint {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
                         }
                     }
 
@@ -144,7 +144,7 @@ class DevicesAPI: APIEndpoint {
                         case 404:
                             return reject(DeviceError.notFound)
                         default:
-                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json["detail"].string))
+                            return reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
                         }
                     }
 

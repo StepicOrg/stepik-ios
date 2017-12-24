@@ -49,6 +49,7 @@ class NotificationRegistrator {
 
         var updatingPromise: Promise<Device>!
         if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
+            print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")
             updatingPromise = ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
         } else {
             updatingPromise = ApiDataDownloader.devices.create(newDevice)
