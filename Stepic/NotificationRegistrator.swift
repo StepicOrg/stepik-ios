@@ -72,8 +72,12 @@ class NotificationRegistrator {
             case DeviceError.notFound:
                 print("notification registrator: device not found, create new")
                 self.registerDevice(registrationToken, forceCreation: true)
+            case DeviceError.other(_, _, let message):
+                print("notification registrator: device registration error, error = \(String(describing: message))")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(String(describing: message))"])
             default:
                 print("notification registrator: device registration error, error = \(error)")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
             }
         }
     }
@@ -107,6 +111,7 @@ class NotificationRegistrator {
                             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
                         } else {
                             print("notification registrator: could not get current user ID or token to delete device")
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
                         }
                     }
                     fulfill()

@@ -168,6 +168,8 @@ struct AnalyticsEvents {
 
     struct Errors {
         static let tokenRefresh = "error_token_refresh"
+        static let unregisterDeviceInvalidCredentials = "error_unregister_device_credentials"
+        static let registerDevice = "error_register_device"
     }
 
     struct Continue {
