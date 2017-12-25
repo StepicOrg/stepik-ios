@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,14 +59,14 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="xpr-Ku-6EC" secondAttribute="trailingMargin" constant="8" id="3sx-jG-fXc"/>
-                <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6o8-OI-qWt"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="trailing" secondItem="Kp9-Cc-7vh" secondAttribute="trailing" constant="-16" id="61a-TS-nZK"/>
+                <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerXWithinMargins" id="6o8-OI-qWt"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="top" secondItem="daL-Gs-pWj" secondAttribute="bottom" constant="4" id="M2S-Va-Egk"/>
                 <constraint firstItem="daL-Gs-pWj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="TWM-dN-DDm"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="Kp9-Cc-7vh" secondAttribute="leading" constant="16" id="V9b-xo-Gjp"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cdw-iN-lnH"/>
-                <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="24" id="jDy-UV-1t2"/>
+                <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="Kp9-Cc-7vh" secondAttribute="top" constant="24" id="jDy-UV-1t2"/>
                 <constraint firstItem="VCF-Ix-jhf" firstAttribute="top" secondItem="xpr-Ku-6EC" secondAttribute="bottom" constant="16" id="u0a-Ga-iS8"/>
-                <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="w3o-GQ-VyX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Kp9-Cc-7vh"/>
