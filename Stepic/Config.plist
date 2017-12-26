@@ -51,6 +51,10 @@
 	</dict>
 	<key>adaptive</key>
 	<dict>
+		<key>supportedCourses</key>
+		<array/>
+		<key>Item 0</key>
+		<integer>1838</integer>
 		<key>isAdaptive</key>
 		<false/>
 	</dict>

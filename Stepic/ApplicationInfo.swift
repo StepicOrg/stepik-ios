@@ -27,6 +27,7 @@ class ApplicationInfo {
             static let notifications = "feature.notifications"
         }
         struct Adaptive {
+            static let supportedCourses = "adaptive.supportedCourses"
             static let isAdaptive = "adaptive.isAdaptive"
             static let courseId = "adaptive.courseId"
             static let mainColor = "adaptive.mainColor"
