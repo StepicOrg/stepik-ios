@@ -50,6 +50,8 @@ class CardsStepsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = course.title
+
         if presenter == nil {
             presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
             presenter?.refresh()
@@ -82,15 +84,16 @@ extension CardsStepsViewController: CardsStepsView {
     }
 
     func updateTopCardContent(stepViewController: CardStepViewController) {
-        guard let currentStepUIViewController = currentStepViewController,
-              let card = topCard else {
+        guard let card = topCard else {
             return
         }
 
-        currentStepUIViewController.removeFromParentViewController()
-        self.addChildViewController(currentStepUIViewController)
+        currentStepViewController?.removeFromParentViewController()
+        currentStepViewController = stepViewController
 
-        card.addContentSubview(currentStepUIViewController.view)
+        self.addChildViewController(stepViewController)
+
+        card.addContentSubview(stepViewController.view)
     }
 
     func updateTopCardTitle(title: String) {

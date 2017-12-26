@@ -78,9 +78,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjP-XU-kDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4069.6875" y="208.09859154929578"/>
+            <point key="canvasLocation" x="4467.1875" y="208.09859154929578"/>
         </scene>
-        <!--Cards Steps View Controller-->
+        <!--Title-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
                 <viewController storyboardIdentifier="CardsSteps" id="6Dd-WV-Z8n" customClass="CardsStepsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
@@ -99,20 +99,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="AHb-6A-jG0" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" constant="8" id="9r0-BG-o1S"/>
+                            <constraint firstItem="AHb-6A-jG0" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" constant="8" id="9dc-L7-1rd"/>
                             <constraint firstAttribute="trailing" secondItem="AHb-6A-jG0" secondAttribute="trailing" constant="10" id="GBl-LW-BUV"/>
                             <constraint firstItem="N8f-j4-uap" firstAttribute="top" secondItem="AHb-6A-jG0" secondAttribute="bottom" constant="4" id="Goz-Jl-rP3"/>
                             <constraint firstItem="AHb-6A-jG0" firstAttribute="leading" secondItem="pQd-fo-zuT" secondAttribute="leading" constant="10" id="JRs-Dn-iJZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="QLo-PF-g3I"/>
+                    <navigationItem key="navigationItem" title="Title" id="exn-Yg-ayA"/>
                     <connections>
                         <outlet property="kolodaView" destination="AHb-6A-jG0" id="hFz-AB-TRu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3097.5" y="33.802816901408448"/>
+            <point key="canvasLocation" x="3495" y="33.802816901408448"/>
         </scene>
     </scenes>
 </document>

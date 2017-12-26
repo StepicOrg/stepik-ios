@@ -51,7 +51,7 @@ class CardsStepsPresenter {
 
     var cachedRecommendedLessons: [Lesson] = []
     var canSwipeCard: Bool {
-        return state != .loaded
+        return state == .loaded
     }
 
     init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, course: Course, view: CardsStepsView) {

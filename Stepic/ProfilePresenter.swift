@@ -178,7 +178,7 @@ class ProfilePresenter {
                 ApiDataDownloader.courses.retrieve(ids: [1838], existing: courses)
             }.then { courses -> Void in
                 let vc = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as! CardsStepsViewController
-                let navVC = UINavigationController(rootViewController: vc)
+                let navVC = StyledNavigationViewController(rootViewController: vc)
                 vc.course = courses.first!
                 (self?.view as? UIViewController)?.present(navVC, animated: true, completion: nil)
             }

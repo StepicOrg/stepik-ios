@@ -19,9 +19,9 @@ class CardOverlayView: OverlayView {
         self.addSubview(imageView)
         imageView.constrainWidth("180")
         imageView.constrainHeight("180")
-        imageView.constrainTopSpace(toView: self, predicate: "10")
-        self.leadingConstraint = imageView.constrainLeadingSpace(toView: self, predicate: "10")
-        self.trailingConstraint = imageView.constrainTrailingSpace(toView: self, predicate: "10")
+        imageView.alignTopEdge(withView: self, predicate: "10")
+        self.leadingConstraint = imageView.alignLeadingEdge(withView: self, predicate: "10")
+        self.trailingConstraint = imageView.alignTrailingEdge(withView: self, predicate: "-10")
         self.trailingConstraint.isActive = false
 
         return imageView
@@ -38,13 +38,11 @@ class CardOverlayView: OverlayView {
 
                 leadingConstraint.isActive = false
                 trailingConstraint.isActive = true
-                leadingConstraint.constant = 10
             case .right? :
                 overlayImageView.image = UIImage(named: overlayRightImageName)
 
                 leadingConstraint.isActive = true
                 trailingConstraint.isActive = false
-                trailingConstraint.constant = 10
             default:
                 overlayImageView.image = nil
             }
