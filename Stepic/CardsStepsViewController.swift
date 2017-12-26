@@ -158,6 +158,7 @@ extension CardsStepsViewController: KolodaViewDataSource {
         } else {
             topCard = StepCardView()
             topCard?.delegate = presenter
+            topCard?.cardState = .loading
             presenter?.refreshTopCard()
             return topCard ?? UIView()
         }
