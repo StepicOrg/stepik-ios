@@ -37,7 +37,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.title = course.title
         widgetView.action = action
         widgetView.actionButtonState = course.enrolled ? .continueLearning : .join
-        widgetView.secondaryActionButtonState = course.enrolled ? .info : .syllabus
+        widgetView.secondaryActionButtonState = course.enrolled ? .syllabus : .info
         widgetView.imageURL = URL(string: course.coverURLString)
         widgetView.rating = course.reviewSummary?.average
         widgetView.learners = course.learnersCount
@@ -47,5 +47,9 @@ class CourseWidgetTableViewCell: UITableViewCell {
 
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
         widgetView.setup(courseViewData: course, colorMode: colorMode)
+
+        if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id) {
+            widgetView.secondaryActionButtonState = .info
+        }
     }
 }

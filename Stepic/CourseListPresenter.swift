@@ -223,7 +223,9 @@ class CourseListPresenter {
     }
 
     private func secondaryActionButtonPressed(course: Course) {
-        if course.enrolled {
+        let isAdaptiveMode = AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
+
+        if course.enrolled && !isAdaptiveMode {
             if let controller = getSectionsController(for: course) {
                 self.view?.show(controller: controller)
             }

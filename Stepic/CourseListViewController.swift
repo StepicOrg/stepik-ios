@@ -120,8 +120,13 @@ class CourseListViewController: UIViewController, CourseListView {
             if let widgetView = delegate?.widgetForCell(atIndex: indexToUpdate) {
                 widgetView.progress = courses[indexToUpdate].progress
                 widgetView.rating = courses[indexToUpdate].rating
+
+                if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: courses[indexToUpdate].id) {
+                    widgetView.secondaryActionButtonState = .info
+                } else {
+                    widgetView.secondaryActionButtonState = courses[indexToUpdate].isEnrolled ? .syllabus : .info
+                }
                 widgetView.actionButtonState = courses[indexToUpdate].isEnrolled ? .continueLearning : .join
-                widgetView.secondaryActionButtonState = courses[indexToUpdate].isEnrolled ? .info : .syllabus
             }
         }
     }

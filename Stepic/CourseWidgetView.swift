@@ -196,7 +196,7 @@ class CourseWidgetView: NibInitializableView {
         action = course.action
         secondaryAction = course.secondaryAction
         actionButtonState = course.isEnrolled ? .continueLearning : .join
-        secondaryActionButtonState = course.isEnrolled ? .info : .syllabus
+        secondaryActionButtonState = course.isEnrolled ? .syllabus : .info
         imageURL = URL(string: course.coverURLString)
         rating = course.rating
         learners = course.learners

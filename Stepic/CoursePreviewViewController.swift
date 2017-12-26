@@ -440,7 +440,16 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                         sender.isEnabled = true
                 })
             } else {
-                self.performSegue(withIdentifier: "showSections", sender: nil)
+                if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: c.id) {
+                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+                        return
+                    }
+                    cardsViewController.hidesBottomBarWhenPushed = true
+                    cardsViewController.course = c
+                    self.navigationController?.pushViewController(cardsViewController, animated: true)
+                } else {
+                    self.performSegue(withIdentifier: "showSections", sender: nil)
+                }
             }
         }
     }

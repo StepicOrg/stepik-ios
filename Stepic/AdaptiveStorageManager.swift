@@ -22,4 +22,9 @@ class AdaptiveStorageManager {
             defaults.set(newValue, forKey: adaptiveModeKey)
         }
     }
+
+    func canOpenInAdaptiveMode(courseId: Int) -> Bool {
+        let adaptiveSupportedCourses = self.isAdaptiveModeEnabled ? StepicApplicationsInfo.adaptiveSupportedCourses : []
+        return adaptiveSupportedCourses.contains(courseId)
+    }
 }

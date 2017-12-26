@@ -52,9 +52,9 @@
 	<key>adaptive</key>
 	<dict>
 		<key>supportedCourses</key>
-		<array/>
-		<key>Item 0</key>
-		<integer>1838</integer>
+		<array>
+			<integer>1838</integer>
+		</array>
 		<key>isAdaptive</key>
 		<false/>
 	</dict>
