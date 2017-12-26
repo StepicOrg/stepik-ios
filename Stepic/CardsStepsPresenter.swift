@@ -165,6 +165,7 @@ class CardsStepsPresenter {
 
             self.stepsAPI.retrieve(ids: [stepId], existing: []).then { steps -> Void in
                 if let step = steps.first {
+                    step.lesson = lesson
                     fulfill(step)
                 } else {
                     reject(CardsStepsError.noStepsInLesson)
@@ -263,6 +264,7 @@ class CardsStepsPresenter {
                     }
                 }
 
+                print("cards steps: reaction sent, reaction = \(reaction), lesson = \(lesson.id)")
                 fulfill()
             }.catch { _ in
                 reject(CardsStepsError.reactionNotSent)
