@@ -36,7 +36,8 @@ class CourseWidgetTableViewCell: UITableViewCell {
     func initWithCourse(_ course: Course, action: (() -> Void)?) {
         widgetView.title = course.title
         widgetView.action = action
-        widgetView.buttonState = course.enrolled ? .continueLearning : .join
+        widgetView.actionButtonState = course.enrolled ? .continueLearning : .join
+        widgetView.secondaryActionButtonState = course.enrolled ? .info : .syllabus
         widgetView.imageURL = URL(string: course.coverURLString)
         widgetView.rating = course.reviewSummary?.average
         widgetView.learners = course.learnersCount

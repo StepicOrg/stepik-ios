@@ -120,7 +120,8 @@ class CourseListViewController: UIViewController, CourseListView {
             if let widgetView = delegate?.widgetForCell(atIndex: indexToUpdate) {
                 widgetView.progress = courses[indexToUpdate].progress
                 widgetView.rating = courses[indexToUpdate].rating
-                widgetView.buttonState = courses[indexToUpdate].isEnrolled ? .continueLearning : .join
+                widgetView.actionButtonState = courses[indexToUpdate].isEnrolled ? .continueLearning : .join
+                widgetView.secondaryActionButtonState = courses[indexToUpdate].isEnrolled ? .info : .syllabus
             }
         }
     }

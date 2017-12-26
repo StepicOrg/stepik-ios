@@ -21,8 +21,12 @@ class CourseWidgetView: NibInitializableView {
 
     @IBOutlet weak var loadingWidgetView: LoadingCourseWidgetView!
 
-    enum ButtonState {
+    enum ActionButtonState {
         case join, continueLearning
+    }
+
+    enum SecondaryActionButtonState {
+        case info, syllabus
     }
 
     var action: (() -> Void)?
@@ -97,21 +101,29 @@ class CourseWidgetView: NibInitializableView {
         }
     }
 
-    var buttonState: ButtonState = .continueLearning {
+    var actionButtonState: ActionButtonState = .continueLearning {
         didSet {
-            switch buttonState {
+            switch actionButtonState {
             case .join:
                 actionButton.isGray = false
-                secondaryActionButton.isGray = true
                 actionButton.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
-                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonInfo", comment: ""), for: .normal)
                 break
             case .continueLearning:
                 actionButton.isGray = true
-                secondaryActionButton.isGray = true
                 actionButton.setTitle(NSLocalizedString("WidgetButtonLearn", comment: ""), for: .normal)
-                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonSyllabus", comment: ""), for: .normal)
                 break
+            }
+        }
+    }
+
+    var secondaryActionButtonState: SecondaryActionButtonState = .info {
+        didSet {
+            secondaryActionButton.isGray = true
+            switch secondaryActionButtonState {
+            case .info:
+                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonInfo", comment: ""), for: .normal)
+            case .syllabus:
+                secondaryActionButton.setTitle(NSLocalizedString("WidgetButtonSyllabus", comment: ""), for: .normal)
             }
         }
     }
@@ -183,7 +195,8 @@ class CourseWidgetView: NibInitializableView {
         title = course.title
         action = course.action
         secondaryAction = course.secondaryAction
-        buttonState = course.isEnrolled ? .continueLearning : .join
+        actionButtonState = course.isEnrolled ? .continueLearning : .join
+        secondaryActionButtonState = course.isEnrolled ? .info : .syllabus
         imageURL = URL(string: course.coverURLString)
         rating = course.rating
         learners = course.learners
