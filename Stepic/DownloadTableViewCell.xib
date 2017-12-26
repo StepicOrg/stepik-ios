@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,25 +21,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QGR-PV-bUe">
-                        <rect key="frame" x="8" y="8" width="76" height="43"/>
+                        <rect key="frame" x="16" y="11" width="71.5" height="40.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="QGR-PV-bUe" secondAttribute="height" multiplier="16:9" id="e8H-BZ-2Fh"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lesson &quot;lesson name blabla&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjo-4U-ajy" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="92" y="8" width="169" height="17"/>
+                        <rect key="frame" x="95.5" y="11" width="160" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suv-pk-oNx" customClass="PKDownloadButton">
-                        <rect key="frame" x="269" y="8" width="43" height="43"/>
+                        <rect key="frame" x="263.5" y="11" width="40.5" height="40.5"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="suv-pk-oNx" secondAttribute="height" multiplier="1:1" id="ydr-my-nQn"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqQ-pM-4hv" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="92" y="35" width="116" height="16"/>
+                        <rect key="frame" x="95.5" y="35.5" width="107" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,7 +48,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1080p" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="468-XS-rrj" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="216" y="35" width="45" height="17"/>
+                        <rect key="frame" x="210.5" y="35.5" width="45" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="f9c-O0-dWL"/>
                         </constraints>
@@ -60,22 +61,24 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="suv-pk-oNx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3b4-ok-SvV"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="FqQ-pM-4hv" secondAttribute="bottom" id="4ym-Eh-i2N"/>
+                    <constraint firstItem="suv-pk-oNx" firstAttribute="top" secondItem="2fc-R0-fCl" secondAttribute="top" constant="11" id="3b4-ok-SvV"/>
+                    <constraint firstItem="2fc-R0-fCl" firstAttribute="bottom" secondItem="FqQ-pM-4hv" secondAttribute="bottom" constant="8" id="4ym-Eh-i2N"/>
                     <constraint firstItem="Sjo-4U-ajy" firstAttribute="leading" secondItem="QGR-PV-bUe" secondAttribute="trailing" constant="8" id="7Rt-mm-7ch"/>
                     <constraint firstItem="QGR-PV-bUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="M03-5x-OXK"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="suv-pk-oNx" secondAttribute="bottom" id="ZD1-hM-nbv"/>
-                    <constraint firstItem="Sjo-4U-ajy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ZGt-N5-Y3G"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="suv-pk-oNx" secondAttribute="trailing" id="Zav-OW-q4G"/>
+                    <constraint firstItem="2fc-R0-fCl" firstAttribute="bottom" secondItem="suv-pk-oNx" secondAttribute="bottom" constant="8" id="ZD1-hM-nbv"/>
+                    <constraint firstItem="Sjo-4U-ajy" firstAttribute="top" secondItem="2fc-R0-fCl" secondAttribute="top" constant="11" id="ZGt-N5-Y3G"/>
+                    <constraint firstItem="2fc-R0-fCl" firstAttribute="trailing" secondItem="suv-pk-oNx" secondAttribute="trailing" constant="16" id="Zav-OW-q4G"/>
                     <constraint firstItem="suv-pk-oNx" firstAttribute="leading" secondItem="Sjo-4U-ajy" secondAttribute="trailing" constant="8" id="acp-O1-OTt"/>
                     <constraint firstItem="FqQ-pM-4hv" firstAttribute="leading" secondItem="QGR-PV-bUe" secondAttribute="trailing" constant="8" id="cDc-lc-RXj"/>
                     <constraint firstItem="suv-pk-oNx" firstAttribute="leading" secondItem="468-XS-rrj" secondAttribute="trailing" constant="8" id="csM-S7-a12"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="QGR-PV-bUe" secondAttribute="bottom" id="qYK-UO-b5w"/>
+                    <constraint firstItem="2fc-R0-fCl" firstAttribute="bottom" secondItem="QGR-PV-bUe" secondAttribute="bottom" constant="8" id="qYK-UO-b5w"/>
                     <constraint firstItem="468-XS-rrj" firstAttribute="centerY" secondItem="FqQ-pM-4hv" secondAttribute="centerY" id="r2f-Gj-Uce"/>
-                    <constraint firstItem="QGR-PV-bUe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="uEs-D8-JwQ"/>
+                    <constraint firstItem="QGR-PV-bUe" firstAttribute="leading" secondItem="2fc-R0-fCl" secondAttribute="leading" constant="16" id="uEs-D8-JwQ"/>
                     <constraint firstItem="468-XS-rrj" firstAttribute="leading" secondItem="FqQ-pM-4hv" secondAttribute="trailing" constant="8" id="vxq-WV-GXQ"/>
                 </constraints>
+                <viewLayoutGuide key="safeArea" id="2fc-R0-fCl"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="pcN-c6-BVP"/>
             <inset key="separatorInset" minX="91" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="downloadButton" destination="suv-pk-oNx" id="g2x-La-vky"/>
