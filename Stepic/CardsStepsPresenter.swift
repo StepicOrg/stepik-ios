@@ -144,8 +144,8 @@ class CardsStepsPresenter {
                     return Promise(value: [])
                 }
 
-                // FIXME: retrieve local lessons here
-                return self.lessonsAPI.retrieve(ids: lessonsIds, existing: [])
+                let cachedLessons = lessonsIds.flatMap { Lesson.getLesson($0) }
+                return self.lessonsAPI.retrieve(ids: lessonsIds, existing: cachedLessons)
             }.then { lessons -> Void in
                 fulfill(lessons)
             }.catch { _ in
@@ -161,9 +161,9 @@ class CardsStepsPresenter {
             }
 
             let stepId = lesson.stepsArray[index]
-            // FIXME: retrieve step here
 
-            self.stepsAPI.retrieve(ids: [stepId], existing: []).then { steps -> Void in
+            let cachedSteps = [Step.getStepWithId(stepId)].flatMap { $0 }
+            self.stepsAPI.retrieve(ids: [stepId], existing: cachedSteps).then { steps -> Void in
                 if let step = steps.first {
                     step.lesson = lesson
                     fulfill(step)
