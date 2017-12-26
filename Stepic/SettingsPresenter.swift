@@ -28,7 +28,9 @@ class SettingsPresenter {
             buildTitleMenuBlock(id: videoHeaderBlockId, title: NSLocalizedString("Video", comment: "")),
             buildOnlyWifiSwitchBlock(),
             buildLoadedVideoQualityBlock(),
-            buildOnlineVideoQualityBlock()
+            buildOnlineVideoQualityBlock(),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: "Adaptive"),
+            buildAdaptiveModeSwitchBlock()
         ]
         return Menu(blocks: blocks)
     }
@@ -39,6 +41,8 @@ class SettingsPresenter {
     private let onlyWifiSwitchBlockId = "only_wifi_switch"
     private let loadedVideoQualityBlockId = "loaded_video_quality"
     private let onlineVideoQualityBlockId = "online_video_quality"
+    private let adaptiveHeaderBlockId = "adaptive_header"
+    private let adaptiveModeSwitchBlockId = "use_adaptive_mode"
 
     private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock {
         return HeaderMenuBlock(id: id, title: title)
@@ -72,6 +76,17 @@ class SettingsPresenter {
         block.onSwitch = {
             isOn in
             ConnectionHelper.shared.reachableOnWWAN = !isOn
+        }
+
+        return block
+    }
+
+    private func buildAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
+        let block = SwitchMenuBlock(id: adaptiveModeSwitchBlockId, title: "Use adaptive mode", isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled)
+
+        block.onSwitch = {
+            isOn in
+            AdaptiveStorageManager.shared.isAdaptiveModeEnabled = !AdaptiveStorageManager.shared.isAdaptiveModeEnabled
         }
 
         return block
