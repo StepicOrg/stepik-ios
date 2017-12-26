@@ -2,7 +2,7 @@
 //  StepReversedCardView.swift
 //  Stepic
 //
-//  Created by jetbrains on 22/12/2017.
+//  Created by Vladislav Kiryukhin on 22.12.2017.
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 

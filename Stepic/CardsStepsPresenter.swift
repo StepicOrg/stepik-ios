@@ -67,11 +67,6 @@ class CardsStepsPresenter {
 
     func refresh() {
         view?.refreshCards()
-        launchOnboarding()
-    }
-
-    func launchOnboarding() {
-
     }
 
     func refreshTopCard() {
@@ -286,12 +281,11 @@ extension CardsStepsPresenter: StepCardViewDelegate {
     }
 
     func onShareButtonClick() {
-        // FIXME: current lesson
-//        guard let slug = currentLesson?.slug else {
-//            return
-//        }
-//        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
-//        view?.presentShareDialog(for: shareLink)
+        guard let slug = currentStepPresenter?.step.lesson?.slug else {
+            return
+        }
+        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
+        view?.presentShareDialog(for: shareLink)
     }
 }
 
