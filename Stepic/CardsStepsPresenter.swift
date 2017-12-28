@@ -24,7 +24,7 @@ protocol CardsStepsView: class {
     func swipeCardRight()
     func updateTopCardContent(stepViewController: CardStepViewController)
     func updateTopCardTitle(title: String)
-    func presentShareDialog(for link: String)
+    func presentDiscussions(stepId: Int, discussionProxyId: String)
     func refreshCards()
 }
 
@@ -280,12 +280,13 @@ extension CardsStepsPresenter: StepCardViewDelegate {
         }
     }
 
-    func onShareButtonClick() {
-        guard let slug = currentStepPresenter?.step.lesson?.slug else {
+    func onTitleButtonClick() {
+        guard let stepId = currentStepPresenter?.step.id,
+              let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
             return
         }
-        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
-        view?.presentShareDialog(for: shareLink)
+
+        view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
     }
 }
 

@@ -11,12 +11,12 @@ import FLAnimatedImage
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
-    func onShareButtonClick()
+    func onTitleButtonClick()
 }
 
 extension StepCardViewDelegate {
     func onControlButtonClick() { }
-    func onShareButtonClick() { }
+    func onTitleButtonClick() { }
 }
 
 class StepCardView: NibInitializableView {
@@ -30,7 +30,7 @@ class StepCardView: NibInitializableView {
 
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
 
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var titlePadView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -82,8 +82,8 @@ class StepCardView: NibInitializableView {
         delegate?.onControlButtonClick()
     }
 
-    @IBAction func onShareButtonClick(_ sender: Any) {
-        delegate?.onShareButtonClick()
+    @IBAction func onTitleButtonClick(_ sender: Any) {
+        delegate?.onTitleButtonClick()
     }
 
     override func setupSubviews() {
@@ -134,7 +134,7 @@ class StepCardView: NibInitializableView {
     fileprivate func colorize() {
         loadingLabel.textColor = UIColor.mainDark
         controlButton.tintColor = UIColor.mainDark
-        shareButton.superview?.tintColor = UIColor.mainDark
+        titleButton.superview?.tintColor = UIColor.mainDark
     }
 
     enum CardState {

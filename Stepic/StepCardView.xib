@@ -16,7 +16,7 @@
                 <outlet property="loadingImageView" destination="V5w-aY-Ny6" id="7oG-9V-H3N"/>
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="9OP-aI-LVc"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="DqQ-aN-C2J"/>
-                <outlet property="shareButton" destination="8aa-Jm-cMF" id="v1X-Mu-Uqe"/>
+                <outlet property="titleButton" destination="8aa-Jm-cMF" id="fGo-LL-DNH"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="pA6-nj-ZdD"/>
                 <outlet property="titlePadView" destination="HzP-xg-1iP" id="e8u-ty-StC"/>
                 <outlet property="whitePadView" destination="xHA-bo-OBf" id="fhj-iN-vCB"/>
@@ -48,17 +48,17 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aa-Jm-cMF">
-                            <rect key="frame" x="287" y="8" width="25" height="25"/>
+                            <rect key="frame" x="288" y="12" width="20" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="OfG-0a-bJ7"/>
-                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="iJs-z2-tJI"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="20" id="OfG-0a-bJ7"/>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="iJs-z2-tJI"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="share">
+                            <state key="normal" image="Topic-100">
                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="onShareButtonClick:" destination="-1" eventType="touchUpInside" id="Bii-oz-eba"/>
+                                <action selector="onTitleButtonClick:" destination="-1" eventType="touchUpInside" id="FnJ-ga-73g"/>
                             </connections>
                         </button>
                     </subviews>
@@ -66,9 +66,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="352-UI-eCn"/>
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="leading" secondItem="HzP-xg-1iP" secondAttribute="leading" constant="8" id="F7I-GS-cJQ"/>
-                        <constraint firstAttribute="trailing" secondItem="8aa-Jm-cMF" secondAttribute="trailing" constant="8" id="TXJ-7K-mxt"/>
+                        <constraint firstAttribute="trailing" secondItem="8aa-Jm-cMF" secondAttribute="trailing" constant="12" id="TXJ-7K-mxt"/>
                         <constraint firstItem="WzK-ck-ENu" firstAttribute="top" secondItem="Cwb-9k-TMQ" secondAttribute="bottom" constant="7.5" id="X2O-R9-9DX"/>
-                        <constraint firstItem="8aa-Jm-cMF" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" constant="8" id="fXU-4A-Vk8"/>
+                        <constraint firstItem="8aa-Jm-cMF" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" constant="12" id="fXU-4A-Vk8"/>
                         <constraint firstAttribute="trailing" secondItem="WzK-ck-ENu" secondAttribute="trailing" constant="8" id="lYP-5a-Tau"/>
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" constant="13" id="shI-1z-zhM"/>
                         <constraint firstItem="WzK-ck-ENu" firstAttribute="leading" secondItem="HzP-xg-1iP" secondAttribute="leading" constant="8" id="xM1-Rv-li7"/>
@@ -173,6 +173,6 @@
         </view>
     </objects>
     <resources>
-        <image name="share" width="50" height="50"/>
+        <image name="Topic-100" width="33" height="33"/>
     </resources>
 </document>

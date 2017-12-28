@@ -104,10 +104,11 @@ extension CardsStepsViewController: CardsStepsView {
         card.updateLabel(title)
     }
 
-    func presentShareDialog(for link: String) {
-        let activityViewController = SharingHelper.getSharingController(link)
-        activityViewController.popoverPresentationController?.sourceView = topCard?.shareButton ?? view
-        present(activityViewController, animated: true, completion: nil)
+    func presentDiscussions(stepId: Int, discussionProxyId: String) {
+        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+        vc.discussionProxyId = discussionProxyId
+        vc.target = stepId
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
