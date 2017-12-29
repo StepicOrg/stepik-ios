@@ -16,7 +16,12 @@ class AdaptiveStorageManager {
 
     var isAdaptiveModeEnabled: Bool {
         get {
-            return defaults.bool(forKey: adaptiveModeKey)
+            if let value = defaults.object(forKey: adaptiveModeKey) as? Bool {
+                return value
+            } else {
+                defaults.set(true, forKey: adaptiveModeKey)
+                return true
+            }
         }
         set {
             defaults.set(newValue, forKey: adaptiveModeKey)
