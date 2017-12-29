@@ -24,20 +24,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Am-VA-FTv">
                                 <rect key="frame" x="0.0" y="20" width="375" height="880"/>
                                 <subviews>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5eX-H9-4P6">
-                                        <rect key="frame" x="2" y="5" width="371" height="5"/>
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="blu-xZ-KpD"/>
-                                        </constraints>
-                                        <dataDetectorType key="dataDetectorTypes"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="scrollView.scrollEnabled" value="NO"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="eJP-Ja-phW" id="vhc-St-1YC"/>
-                                        </connections>
-                                    </webView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-Hw-f8f">
                                         <rect key="frame" x="0.0" y="10" width="375" height="5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,12 +36,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Lbp-Hw-f8f" secondAttribute="bottom" id="36P-G1-CxM"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" id="4oq-9A-P9H"/>
                                     <constraint firstAttribute="trailing" secondItem="Lbp-Hw-f8f" secondAttribute="trailing" id="5i4-a0-QPH"/>
-                                    <constraint firstItem="Lbp-Hw-f8f" firstAttribute="top" secondItem="5eX-H9-4P6" secondAttribute="bottom" id="BJ1-3G-PZH"/>
-                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Nhi-Te-N7k"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Qbk-78-Csk"/>
-                                    <constraint firstAttribute="trailing" secondItem="5eX-H9-4P6" secondAttribute="trailing" constant="2" id="W8E-yz-NVM"/>
-                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="top" constant="5" id="pg8-gv-dmN"/>
-                                    <constraint firstItem="5eX-H9-4P6" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="2" id="uwH-JJ-niY"/>
+                                    <constraint firstItem="Lbp-Hw-f8f" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="top" constant="10" placeholder="YES" id="RSd-fB-4jl"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -72,8 +54,6 @@
                     <connections>
                         <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
                         <outlet property="scrollView" destination="1Am-VA-FTv" id="z2z-6Y-8PD"/>
-                        <outlet property="stepWebView" destination="5eX-H9-4P6" id="ORF-cp-ZMN"/>
-                        <outlet property="stepWebViewHeight" destination="blu-xZ-KpD" id="miR-yw-cQp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjP-XU-kDB" userLabel="First Responder" sceneMemberID="firstResponder"/>

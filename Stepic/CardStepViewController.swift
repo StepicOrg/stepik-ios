@@ -8,6 +8,9 @@
 
 import Foundation
 import Agrume
+import WebKit
+import PromiseKit
+import FLKAutoLayout
 
 class CardStepViewController: UIViewController, CardStepView {
     weak var presenter: CardStepPresenter?
@@ -16,9 +19,9 @@ class CardStepViewController: UIViewController, CardStepView {
     weak var quizView: UIView?
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var stepWebView: UIWebView!
+    var stepWebView: WKWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
-    @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
+    var stepWebViewHeight: NSLayoutConstraint!
 
     var baseScrollView: UIScrollView {
         get {
@@ -29,7 +32,20 @@ class CardStepViewController: UIViewController, CardStepView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupWebView()
         presenter?.refreshStep()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
+    }
+
+    @objc func didScreenRotate() {
+        alignImages(in: stepWebView).then {
+            self.getContentHeight(self.stepWebView)
+        }.then { height -> Void in
+            self.resetWebViewHeight(Float(height))
+            self.scrollView.layoutIfNeeded()
+        }.catch { _ in
+            print("card step: error after rotation")
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +56,28 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self)
         print("card step: deinit vc")
+    }
+
+    func setupWebView() {
+        let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let wkUController = WKUserContentController()
+        wkUController.addUserScript(userScript)
+        let wkWebConfig = WKWebViewConfiguration()
+        wkWebConfig.userContentController = wkUController
+
+        stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
+        stepWebView.navigationDelegate = self
+        stepWebView.scrollView.isScrollEnabled = false
+        scrollView.addSubview(stepWebView)
+
+        stepWebViewHeight = stepWebView.constrainHeight("5")
+        stepWebView.constrainBottomSpace(toView: quizPlaceholderView, predicate: "0")
+        stepWebView.alignLeadingEdge(withView: scrollView, predicate: "2")
+        stepWebView.alignTrailingEdge(withView: scrollView, predicate: "-2")
+        stepWebView.alignTopEdge(withView: scrollView, predicate: "5")
     }
 
     func updateProblem(with htmlText: String) {
@@ -80,32 +117,51 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 }
 
-extension CardStepViewController: UIWebViewDelegate {
+extension CardStepViewController: WKNavigationDelegate {
     func resetWebViewHeight(_ height: Float) {
         stepWebViewHeight.constant = CGFloat(height)
     }
 
-    func getContentHeight(_ webView: UIWebView) -> Int {
-        let height = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
-        return height
+    func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
+        return Promise { fulfill, reject in
+            webView.evaluateJavaScript("document.body.scrollHeight;", completionHandler: { res, error in
+                if let error = error {
+                    return reject(error)
+                }
+
+                if let height = res as? Int {
+                    fulfill(height)
+                } else {
+                    fulfill(0)
+                }
+            })
+        }
     }
 
-    func alignImages(in webView: UIWebView) {
+    func alignImages(in webView: WKWebView) -> Promise<Void> {
         var jsCode = "var imgs = document.getElementsByTagName('img');"
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
 
-        webView.stringByEvaluatingJavaScript(from: jsCode)
+        return Promise { fulfill, reject in
+            webView.evaluateJavaScript(jsCode, completionHandler: { _, error in
+                if let error = error {
+                    return reject(error)
+                }
+
+                fulfill()
+            })
+        }
     }
 
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        guard let url = request.url else {
-            return false
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let url = navigationAction.request.url else {
+            return decisionHandler(.cancel)
         }
 
-        //Check if the request is an iFrame
+        // Check if the request is an iFrame
         if let text = problemText {
             if HTMLParsingUtil.getAlliFrameLinks(text).index(of: url.absoluteString) != nil {
-                return true
+                return decisionHandler(.allow)
             }
         }
 
@@ -119,21 +175,21 @@ extension CardStepViewController: UIWebViewDelegate {
                     agrume.showFrom(self)
                 }
             }
-            return false
+            return decisionHandler(.cancel)
         }
-        return true
+        return decisionHandler(.allow)
     }
 
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        presenter?.problemDidLoad()
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        alignImages(in: webView).then {
+            self.getContentHeight(webView)
+        }.then { height -> Void in
+            self.resetWebViewHeight(Float(height))
+            self.scrollView.layoutIfNeeded()
 
-        alignImages(in: webView)
-        resetWebViewHeight(Float(getContentHeight(webView)))
-    }
-
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        alignImages(in: stepWebView)
-
-        resetWebViewHeight(Float(getContentHeight(stepWebView)))
+            self.presenter?.problemDidLoad()
+        }.catch { _ in
+            print("card step: error after webview loading did finish")
+        }
     }
 }
