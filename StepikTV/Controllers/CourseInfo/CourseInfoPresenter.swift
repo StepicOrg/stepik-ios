@@ -33,13 +33,16 @@ class CourseInfoPresenter {
         let action: (Course) -> Void = {_ in }
         let mainSection = CourseInfoSection(.main(hosts: [hosts], descr: descr, imageURL: imageURL, introVideo: introVideo, subscriptionAction: action), title: title)
 
+        let summary = course.summary
+        let summarySection = CourseInfoSection(.text(content: summary), title: "Summary")
+
         let workload = course.audience
         let workloadSection = CourseInfoSection(.text(content: workload), title: "Audience")
 
         let format = course.format
         let formatSection = CourseInfoSection(.text(content: format), title: "Format")
 
-        return [mainSection, workloadSection, formatSection]
+        return [mainSection, summarySection, workloadSection, formatSection]
     }
 }
 

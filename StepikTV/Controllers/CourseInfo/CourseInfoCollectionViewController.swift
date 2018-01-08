@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseInfoCollectionViewController: UICollectionViewController {
+class CourseInfoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var presenter: CourseInfoPresenter?
 
@@ -35,7 +35,7 @@ class CourseInfoCollectionViewController: UICollectionViewController {
         return false
     }
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {MainCourseInfoSectionCell.reuseIdentifier
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? CourseInfoSectionView else { return }
         cell.setup(with: sections[indexPath.section])
     }

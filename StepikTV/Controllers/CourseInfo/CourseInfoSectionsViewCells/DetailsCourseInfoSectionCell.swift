@@ -10,7 +10,7 @@ import UIKit
 
 class DetailsCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionView {
     static var reuseIdentifier: String { return "DetailsCourseInfoSectionCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 300.0) }
+    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 150.0) }
 
     @IBOutlet var title: UILabel!
     @IBOutlet var content: UILabel!
