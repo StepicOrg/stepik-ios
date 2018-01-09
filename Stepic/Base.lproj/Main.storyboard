@@ -309,10 +309,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Q7F-3H-ipp" firstAttribute="top" secondItem="eEo-OZ-NVq" secondAttribute="top" id="BTb-5d-8al"/>
-                            <constraint firstItem="Q7F-3H-ipp" firstAttribute="leading" secondItem="Fdr-IE-SLL" secondAttribute="leading" id="Fps-sV-lrn"/>
+                            <constraint firstItem="Q7F-3H-ipp" firstAttribute="top" secondItem="Fdr-IE-SLL" secondAttribute="top" id="BTb-5d-8al"/>
+                            <constraint firstItem="Q7F-3H-ipp" firstAttribute="leading" secondItem="eEo-OZ-NVq" secondAttribute="leading" id="Fps-sV-lrn"/>
                             <constraint firstItem="Fdr-IE-SLL" firstAttribute="bottom" secondItem="Q7F-3H-ipp" secondAttribute="bottom" id="X5L-zX-yIU"/>
-                            <constraint firstItem="Fdr-IE-SLL" firstAttribute="trailing" secondItem="Q7F-3H-ipp" secondAttribute="trailing" id="qmO-Uh-Zr5"/>
+                            <constraint firstAttribute="trailing" secondItem="Q7F-3H-ipp" secondAttribute="trailing" id="qmO-Uh-Zr5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fdr-IE-SLL"/>
                     </view>
