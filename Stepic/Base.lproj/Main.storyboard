@@ -258,13 +258,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <navigationBar key="tableFooterView" contentMode="scaleToFill" id="OA9-cU-ctc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <items>
-                                        <navigationItem title="Title" id="sHJ-Zn-w6K"/>
-                                    </items>
-                                </navigationBar>
+                                <viewLayoutGuide key="safeArea" id="GLF-og-ZMI"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Zo1-Oj-Hsk" id="zBn-9O-FKh"/>
                                     <outlet property="delegate" destination="Zo1-Oj-Hsk" id="6jt-pg-jVy"/>
@@ -274,9 +268,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ACD-Fw-X2i" firstAttribute="bottom" secondItem="L6O-ow-pfW" secondAttribute="bottom" id="BGA-Hp-GSU"/>
-                            <constraint firstItem="L6O-ow-pfW" firstAttribute="leading" secondItem="ACD-Fw-X2i" secondAttribute="leading" id="N2u-d2-ezu"/>
-                            <constraint firstItem="L6O-ow-pfW" firstAttribute="top" secondItem="z7c-c8-8wj" secondAttribute="top" id="dwe-fR-Yv1"/>
-                            <constraint firstItem="ACD-Fw-X2i" firstAttribute="trailing" secondItem="L6O-ow-pfW" secondAttribute="trailing" id="fqE-YW-KlI"/>
+                            <constraint firstItem="L6O-ow-pfW" firstAttribute="leading" secondItem="z7c-c8-8wj" secondAttribute="leading" id="N2u-d2-ezu"/>
+                            <constraint firstItem="L6O-ow-pfW" firstAttribute="top" secondItem="ACD-Fw-X2i" secondAttribute="top" id="dwe-fR-Yv1"/>
+                            <constraint firstAttribute="trailing" secondItem="L6O-ow-pfW" secondAttribute="trailing" id="fqE-YW-KlI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ACD-Fw-X2i"/>
                     </view>
@@ -691,7 +685,7 @@
         <image name="tab-downloads" width="20" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LaP-cg-j2K"/>
-        <segue reference="gVj-jL-WXR"/>
+        <segue reference="Ymm-um-wgY"/>
+        <segue reference="n0y-oT-VBo"/>
     </inferredMetricsTieBreakers>
 </document>
