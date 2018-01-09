@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,7 +63,7 @@
                     <constraint firstItem="suv-pk-oNx" firstAttribute="top" secondItem="2fc-R0-fCl" secondAttribute="top" constant="11" id="3b4-ok-SvV"/>
                     <constraint firstItem="2fc-R0-fCl" firstAttribute="bottom" secondItem="FqQ-pM-4hv" secondAttribute="bottom" constant="8" id="4ym-Eh-i2N"/>
                     <constraint firstItem="Sjo-4U-ajy" firstAttribute="leading" secondItem="QGR-PV-bUe" secondAttribute="trailing" constant="8" id="7Rt-mm-7ch"/>
-                    <constraint firstItem="QGR-PV-bUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="M03-5x-OXK"/>
+                    <constraint firstItem="QGR-PV-bUe" firstAttribute="top" secondItem="2fc-R0-fCl" secondAttribute="top" constant="11" id="M03-5x-OXK"/>
                     <constraint firstItem="2fc-R0-fCl" firstAttribute="bottom" secondItem="suv-pk-oNx" secondAttribute="bottom" constant="8" id="ZD1-hM-nbv"/>
                     <constraint firstItem="Sjo-4U-ajy" firstAttribute="top" secondItem="2fc-R0-fCl" secondAttribute="top" constant="11" id="ZGt-N5-Y3G"/>
                     <constraint firstItem="2fc-R0-fCl" firstAttribute="trailing" secondItem="suv-pk-oNx" secondAttribute="trailing" constant="16" id="Zav-OW-q4G"/>
