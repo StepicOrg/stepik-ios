@@ -21,6 +21,8 @@ class CardsStepsViewController: UIViewController {
 
     fileprivate var topCard: StepCardView?
     fileprivate var currentStepViewController: CardStepViewController?
+    fileprivate var navigationView: AdaptiveNavigationBar?
+    fileprivate var statusBarPad: UIView?
 
     var state: CardsStepsViewState = .normal {
         didSet {
@@ -50,12 +52,43 @@ class CardsStepsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = course.title
+        navigationView = AdaptiveNavigationBar()
+        navigationView?.onCloseAction = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        if let navView = navigationView {
+            navigationController?.view.addSubview(navView)
+            navView.layer.zPosition = kolodaView.layer.zPosition - 1
+        }
+
+        statusBarPad = UIView()
+        statusBarPad?.backgroundColor = UIColor.mainLight
+        if let padView = statusBarPad {
+            navigationController?.view.addSubview(padView)
+        }
 
         if presenter == nil {
             presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
             presenter?.refresh()
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        statusBarPad?.frame = UIApplication.shared.statusBarFrame
+        navigationView?.frame = navigationController?.navigationBar.frame ?? CGRect.zero
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationView?.isHidden = false
+        navigationController?.navigationBar.layer.zPosition = -1
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationView?.isHidden = true
+        navigationController?.navigationBar.layer.zPosition = 0
     }
 }
 
