@@ -52,6 +52,8 @@ class CardsStepsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = ""
+
         navigationView = AdaptiveNavigationBar()
         navigationView?.onCloseAction = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -85,10 +87,15 @@ class CardsStepsViewController: UIViewController {
         navigationController?.navigationBar.layer.zPosition = -1
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.layer.zPosition = 0
+        (navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationView?.isHidden = true
-        navigationController?.navigationBar.layer.zPosition = 0
     }
 }
 
