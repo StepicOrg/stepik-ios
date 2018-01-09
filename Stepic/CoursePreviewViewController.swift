@@ -29,33 +29,25 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             if let c = course {
                 if c.summary != "" {
                     textData[0] += [(NSLocalizedString("Summary", comment: ""), c.summary)]
-                    heights[0] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Summary", comment: ""), text: c.summary)]
                 }
                 textData[0] += [("", "")]
-                heights[0] += [0]
                 if c.courseDescription != "" {
                     textData[1] += [(NSLocalizedString("Description", comment: ""), c.courseDescription)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Description", comment: ""), text: c.courseDescription)]
                 }
                 if c.workload != "" {
                     textData[1] += [(NSLocalizedString("Workload", comment: ""), c.workload)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Workload", comment: ""), text: c.workload)]
                 }
                 if c.certificate != "" {
                     textData[1] += [(NSLocalizedString("Certificate", comment: ""), c.certificate)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Certificate", comment: ""), text: c.certificate)]
                 }
                 if c.audience != "" {
                     textData[1] += [(NSLocalizedString("Audience", comment: ""), c.audience)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Audience", comment: ""), text: c.audience)]
                 }
                 if c.format != "" {
                     textData[1] += [(NSLocalizedString("Format", comment: ""), c.format)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Format", comment: ""), text: c.format)]
                 }
                 if c.requirements != "" {
                     textData[1] += [(NSLocalizedString("Requirements", comment: ""), c.requirements)]
-                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Requirements", comment: ""), text: c.requirements)]
                 }
             }
         }
@@ -353,13 +345,6 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         []
     ]
 
-    fileprivate var heights: [[CGFloat]] = [
-        //Overview
-        [],
-        //Detailed
-        []
-    ]
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -573,7 +558,7 @@ extension CoursePreviewViewController : UITableViewDelegate {
                 return 167
             }
         }
-        return heights[displayingInfoType.rawValue][indexPath.row]
+        return UITableViewAutomaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
