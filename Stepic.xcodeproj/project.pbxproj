@@ -5600,8 +5600,6 @@
 			children = (
 				081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */,
 				081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */,
-				08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */,
-				08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */,
 			);
 			name = "Home Screen";
 			sourceTree = "<group>";
@@ -6171,6 +6169,15 @@
 			path = StickerPackExtension;
 			sourceTree = "<group>";
 		};
+		086688152006380300CBC328 /* Horizontal Courses View */ = {
+			isa = PBXGroup;
+			children = (
+				08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */,
+				08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */,
+			);
+			name = "Horizontal Courses View";
+			sourceTree = "<group>";
+		};
 		0867D82A1E85313100B13285 /* Streaks */ = {
 			isa = PBXGroup;
 			children = (
@@ -6335,6 +6342,7 @@
 				08E8F96A1F34DD36008CF4A1 /* Search Queries */,
 				08195A041FA00FE300E6D6CD /* Course List */,
 				086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */,
+				086688152006380300CBC328 /* Horizontal Courses View */,
 				081959E81FA0033800E6D6CD /* Home Screen */,
 			);
 			name = Courses;

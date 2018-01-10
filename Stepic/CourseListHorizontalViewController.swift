@@ -29,7 +29,11 @@ class CourseListHorizontalViewController: CourseListViewController {
     let nextWidgetVisibleWidth: CGFloat = 16
 
     var widgetWidth: CGFloat {
-        return view.frame.width - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        if #available(iOS 11.0, *) {
+            return (view.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right) - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        } else {
+            return view.bounds.width - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        }
     }
 
     var currentColumn: Int = 0
@@ -161,7 +165,7 @@ extension CourseListHorizontalViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if shouldShowLoadingWidgets {
-            return Int(collectionView.frame.height) / 100
+            return Int(collectionView.frame.height) / 140
         } else {
             return courses.count
         }
