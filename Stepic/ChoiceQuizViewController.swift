@@ -20,6 +20,14 @@ class ChoiceQuizViewController: QuizViewController {
 
     var cellHeights: [CGFloat?] = []
 
+    var cellWidth: CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        } else {
+            return tableView.bounds.width
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -128,7 +136,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         if let height = cellHeights[indexPath.row] {
             return height
         } else {
-            return ChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: tableView.bounds.width)
+            return ChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: cellWidth)
         }
     }
 
@@ -187,7 +195,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         }
         print("cell for row \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
-        cell.setHTMLText(dataset.options[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
+        cell.setHTMLText(dataset.options[indexPath.row], width: cellWidth, finishedBlock: {
             [weak self]
             newHeight in
 

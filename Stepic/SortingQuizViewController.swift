@@ -18,6 +18,14 @@ class SortingQuizViewController: QuizViewController {
 
     var cellHeights: [CGFloat?] = []
 
+    var cellWidth: CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        } else {
+            return tableView.bounds.width
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -130,7 +138,7 @@ extension SortingQuizViewController : UITableViewDelegate {
         if let height = cellHeights[indexPath.row] {
             return height
         } else {
-            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.tableView.bounds.width, sortable: true)
+            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: cellWidth, sortable: true)
         }
     }
 
@@ -163,7 +171,7 @@ extension SortingQuizViewController : UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
 
-        cell.setHTMLText(orderedOptions[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
+        cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth, finishedBlock: {
             [weak self]
             newHeight in
 
