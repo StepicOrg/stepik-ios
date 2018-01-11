@@ -18,8 +18,6 @@ class SortingQuizViewController: QuizViewController {
 
     var cellHeights: [CGFloat?] = []
 
-    var didReload: Bool = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,7 +49,6 @@ class SortingQuizViewController: QuizViewController {
         resetOptionsToDataset()
 
         self.cellHeights = Array(repeating: nil, count: optionsCount)
-        didReload = false
         tableView.reloadData()
         self.tableView.isUserInteractionEnabled = true
     }
@@ -108,7 +105,6 @@ class SortingQuizViewController: QuizViewController {
             _ in
             guard let s = self else { return }
             s.cellHeights = Array(repeating: nil, count: s.optionsCount)
-            s.didReload = false
             s.tableView.reloadData()
         }
     }
@@ -172,7 +168,6 @@ extension SortingQuizViewController : UITableViewDataSource {
             newHeight in
 
             guard let s = self else { return }
-            if s.didReload { return }
 
             s.cellHeights[indexPath.row] = newHeight
             var sum: CGFloat = 0
@@ -184,7 +179,6 @@ extension SortingQuizViewController : UITableViewDataSource {
                 }
             }
             UIThread.performUI {
-                s.didReload = true
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()

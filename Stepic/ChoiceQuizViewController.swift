@@ -20,8 +20,6 @@ class ChoiceQuizViewController: QuizViewController {
 
     var cellHeights: [CGFloat?] = []
 
-    var didReload: Bool = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,9 +64,14 @@ class ChoiceQuizViewController: QuizViewController {
 
         self.choices = [Bool](repeating: false, count: optionsCount)
         self.cellHeights = Array(repeating: nil, count: optionsCount)
-        didReload = false
         tableView.reloadData()
+        tableView.invalidateIntrinsicContentSize()
+        containerView.invalidateIntrinsicContentSize()
+        self.view.invalidateIntrinsicContentSize()
+        containerView.setNeedsLayout()
         containerView.layoutIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
         self.tableView.isUserInteractionEnabled = true
     }
 
@@ -90,7 +93,13 @@ class ChoiceQuizViewController: QuizViewController {
 
         self.choices = reply.choices
         self.tableView.reloadData()
+        self.tableView.invalidateIntrinsicContentSize()
+        containerView.invalidateIntrinsicContentSize()
+        self.view.invalidateIntrinsicContentSize()
+        containerView.setNeedsLayout()
         containerView.layoutIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
 
     override func getReply() -> Reply {
@@ -105,9 +114,7 @@ class ChoiceQuizViewController: QuizViewController {
             _ in
             guard let s = self else { return }
             s.cellHeights = Array(repeating: nil, count: s.optionsCount)
-            s.didReload = false
             s.tableView.reloadData()
-            s.containerView.layoutIfNeeded()
         }
     }
 }
@@ -178,14 +185,13 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         guard let dataset = dataset else {
             return UITableViewCell()
         }
-
+        print("cell for row \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
         cell.setHTMLText(dataset.options[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
 
             guard let s = self else { return }
-            if s.didReload { return }
 
             s.cellHeights[indexPath.row] = newHeight
             var sum: CGFloat = 0
@@ -197,7 +203,6 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 }
             }
             UIThread.performUI {
-                s.didReload = true
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()
