@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CourseInfoSectionView {
-
+protocol CourseInfoSectionViewProtocol {
+    static var nibName: String { get }
     static var size: CGSize { get }
     static var reuseIdentifier: String { get }
 

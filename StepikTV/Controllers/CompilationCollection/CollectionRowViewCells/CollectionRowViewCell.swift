@@ -16,10 +16,6 @@ class CollectionRowViewCell: UICollectionViewCell {
     func getCell(for indexPath: IndexPath) -> UICollectionViewCell { return UICollectionViewCell() }
 
     func configure(cell: UICollectionViewCell, for indexPath: IndexPath) {}
-
-    override func prepareForReuse() {
-        // 
-    }
 }
 
 extension CollectionRowViewCell: UICollectionViewDelegate {

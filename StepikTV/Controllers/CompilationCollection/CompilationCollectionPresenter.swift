@@ -163,7 +163,7 @@ enum CollectionRowType {
     case regular(title: String)
     case narrow(title: String)
 
-    var viewClass: CollectionRowView.Type {
+    var viewClass: CollectionRowViewProtocol.Type {
         switch self {
         case .major:
             return MajorCollectionRowViewCell.self
@@ -203,7 +203,7 @@ class CollectionRow {
 
     func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController?) {
         data = tags.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!, viewController: viewController) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
 
             }
         }
@@ -213,7 +213,7 @@ class CollectionRow {
 
     func setData(with courses: [Course], for viewController: UIViewController?) {
         data = courses.map { course in
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics", viewController: viewController) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics") {
 
                 let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoCollectionViewController", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
 
@@ -232,7 +232,6 @@ struct ItemViewData {
     let title: String
     var subtitle: String?
     var action: (() -> Void)?
-    weak var viewController: UIViewController?
 
     let placeholder: UIImage
     var backgroundImageURL: URL?
@@ -246,20 +245,18 @@ struct ItemViewData {
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, title: String, subtitle: String? = nil, viewController: UIViewController?, action: @escaping () -> Void) {
+    init(placeholder: UIImage, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
-        self.viewController = viewController
 
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, viewController: UIViewController?, action: @escaping () -> Void) {
+    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
-        self.viewController = viewController
 
         self.placeholder = placeholder
         self.backgroundImageURL = URL(string: imageURLString)

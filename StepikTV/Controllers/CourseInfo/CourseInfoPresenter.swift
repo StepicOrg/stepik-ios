@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class CourseInfoPresenter {
 
@@ -15,9 +16,13 @@ class CourseInfoPresenter {
     var course: Course? {
         didSet {
             guard let course = course else { return }
-            view?.provide(sections: buildSections(with: course))
+            course.loadAllInstructors {
+                self.instructors = course.instructors
+                self.view?.provide(sections: self.buildSections(with: course))
+            }
         }
     }
+    var instructors: [User]?
     var sections: [CourseInfoSection] = []
 
     init(view: CourseInfoView) {
@@ -25,24 +30,34 @@ class CourseInfoPresenter {
     }
 
     private func buildSections(with course: Course) -> [CourseInfoSection] {
+        guard let viewController = view as? UIViewController else { fatalError() }
+
         let title = course.title
         let hosts = ""
         let descr = course.courseDescription
         let imageURL = URL(string: course.coverURLString)
-        let introVideo = course.introVideo
-        let action: (Course) -> Void = {_ in }
-        let mainSection = CourseInfoSection(.main(hosts: [hosts], descr: descr, imageURL: imageURL, introVideo: introVideo, subscriptionAction: action), title: title)
+        let trailerAction: (Video) -> Void = {_ in }
+        let subscriptionAction: (Course) -> Void = {_ in }
+
+        let selectionAction: (TVFocusableText) -> Void = {
+            let textPresenter = TVTextPresentationAlertController(title: "", message: "", preferredStyle: .alert)
+            textPresenter.setText($0.text ?? "")
+            viewController.present(textPresenter, animated: true, completion: {})
+        }
+
+        let mainSection = CourseInfoSection(.main(hosts: [hosts], descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction), title: title)
 
         let summary = course.summary
-        let summarySection = CourseInfoSection(.text(content: summary), title: "Summary")
+        let summarySection = CourseInfoSection(.text(content: summary, selectionAction: selectionAction), title: "Summary")
 
-        let workload = course.audience
-        let workloadSection = CourseInfoSection(.text(content: workload), title: "Audience")
+        guard let instructors = instructors else { return [mainSection, summarySection] }
 
-        let format = course.format
-        let formatSection = CourseInfoSection(.text(content: format), title: "Format")
+        let instructorsViewData = instructors.map { instructor in
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: instructor.avatarURL, title: "\(instructor.lastName) \(instructor.firstName)") { }
+        }
+        let instructorsSection = CourseInfoSection(.instructors(items: instructorsViewData), title: "Instructors")
 
-        return [mainSection, summarySection, workloadSection, formatSection]
+        return [mainSection, instructorsSection, summarySection]
     }
 }
 
@@ -57,11 +72,11 @@ struct CourseInfoSection {
 }
 
 enum CourseInfoSectionType {
-    case main(hosts: [String], descr: String, imageURL: URL?, introVideo: Video?, subscriptionAction: (Course) -> Void)
-    case text(content: String)
-    case instructors
+    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: (Video) -> Void, subscriptionAction: (Course) -> Void, selectionAction: (TVFocusableText) -> Void)
+    case text(content: String, selectionAction: (TVFocusableText) -> Void)
+    case instructors(items: [ItemViewData])
 
-    var viewClass: CourseInfoSectionView.Type {
+    var viewClass: CourseInfoSectionViewProtocol.Type {
         switch self {
         case .main:
             return MainCourseInfoSectionCell.self

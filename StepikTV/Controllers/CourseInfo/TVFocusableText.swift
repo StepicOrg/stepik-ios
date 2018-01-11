@@ -10,9 +10,10 @@ import UIKit
 
 class TVFocusableText: UILabel {
 
-    let substrateView: UIView = UIView()
+    var pressAction: ((TVFocusableText) -> Void)?
 
-    var lastText: String = ""
+    private let substrateView: UIView = UIView()
+    private var lastText: String = ""
 
     override var canBecomeFocused: Bool {
         return true
@@ -20,22 +21,11 @@ class TVFocusableText: UILabel {
 
     override func drawText(in rect: CGRect) {
 
-        guard lastText != text else {
+        guard lastText != text || text != "" else {
             super.drawText(in: rect)
             return
         }
 
-        /*
-        let height = rect.size.height + 40
-        let width = rect.size.width + 40
-        //bounds.size = CGSize(width: width, height: height)
-        print(frame.origin)
-        frame = frame.insetBy(dx: -20, dy: -20)
-        print(frame.origin)
-        //layer.cornerRadius = 10
-        //layer.masksToBounds = true
-        //backgroundColor = UIColor.white.withAlphaComponent(0.2)
- */
         substrateView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         substrateView.frame = rect.insetBy(dx: -20, dy: -20)
         substrateView.center = center
@@ -67,7 +57,6 @@ class TVFocusableText: UILabel {
         return {
             self.transform = CGAffineTransform.identity
             self.substrateView.transform = CGAffineTransform.identity
-            self.layer.shadowOffset = CGSize(width: 0, height: 10)
         }
     }
 
@@ -86,6 +75,8 @@ class TVFocusableText: UILabel {
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
         super.pressesBegan(presses, with: event)
+
+        pressAction?(self)
     }
 
     override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -122,28 +113,49 @@ class TVFocusableText: UILabel {
 
 }
 
-class TextPresentationViewController: UIViewController {
-    let label = UILabel()
-    let blurStyle = UIBlurEffectStyle.dark
+class TVTextPresentationAlertController: UIAlertController {
 
-    override func viewDidLoad() {
+    private var contentLabel: UILabel!
 
-        let blurEffect = UIBlurEffect(style: blurStyle)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        view.addSubview(blurEffectView)
+    let contentWidth: CGFloat = 900
 
-        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-        view.addSubview(vibrancyEffectView)
+    func setText(_ text: String) {
+        contentLabel = initMainLabel(with: text)
 
-        vibrancyEffectView.addSubview(label)
+        arrangeViews()
+    }
 
+    private func initMainLabel(with text: String) -> UILabel {
+        let label = UILabel(frame: CGRect.zero)
+
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = UIColor.white
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightRegular)
 
-        label.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 1.0).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 1.0).isActive = true
+        return label
+    }
+
+    private func arrangeViews() {
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentLabel)
+
+        contentLabel.widthAnchor.constraint(equalToConstant: contentWidth).isActive = true
+        contentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        contentLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard presses.first!.type == UIPressType.menu else {
+            super.pressesBegan(presses, with: event)
+            return
+        }
+
+        leaveAlert(self)
+    }
+
+    @objc func leaveAlert(_: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

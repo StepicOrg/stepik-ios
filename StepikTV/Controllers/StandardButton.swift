@@ -46,9 +46,9 @@ class StandardButton: UIButton {
         }
     }
 
-    var defaultStateTitleColor: UIColor { get { return UIColor.black.withAlphaComponent(0.2) } }
+    var defaultStateTitleColor: UIColor { return UIColor.black.withAlphaComponent(0.2) }
 
-    var focusStateTitleColor: UIColor { get { return UIColor.white } }
+    var focusStateTitleColor: UIColor { return UIColor.white }
 
     private func initStyle() {
         self.layer.cornerRadius = 6
@@ -64,7 +64,6 @@ class StandardButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
-//        fatalError("init(coder:) has not been implemented")
     }
 
     // Events to look for a Highlighted state

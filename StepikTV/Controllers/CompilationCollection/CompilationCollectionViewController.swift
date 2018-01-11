@@ -56,7 +56,7 @@ class CompilationCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate methods
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
-        guard let cell = cell as? CollectionRowView else { return }
+        guard let cell = cell as? CollectionRowViewProtocol else { return }
         let row = collectionRows[indexPath.section]
 
         cell.setup(with: row.data, title: row.title)

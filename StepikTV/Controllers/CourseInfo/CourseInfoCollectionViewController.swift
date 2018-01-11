@@ -10,13 +10,24 @@ import UIKit
 
 class CourseInfoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var presenter: CourseInfoPresenter?
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    var sections: [CourseInfoSection] = []
+        let mainNib = UINib(nibName: MainCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(mainNib, forCellWithReuseIdentifier: MainCourseInfoSectionCell.reuseIdentifier)
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+        let detailsNib = UINib(nibName: DetailsCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(detailsNib, forCellWithReuseIdentifier: DetailsCourseInfoSectionCell.reuseIdentifier)
+
+        let instructorsNib = UINib(nibName: InstructorsCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(instructorsNib, forCellWithReuseIdentifier: InstructorsCourseInfoSectionCell.reuseIdentifier)
+
+        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }
+
+    var presenter: CourseInfoPresenter?
+    var sections: [CourseInfoSection] = []
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
@@ -36,14 +47,8 @@ class CourseInfoCollectionViewController: UICollectionViewController, UICollecti
     }
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? CourseInfoSectionView else { return }
+        guard let cell = cell as? CourseInfoSectionViewProtocol else { return }
         cell.setup(with: sections[indexPath.section])
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let size = sections[indexPath.section].contentType.viewClass.size
-        return size
     }
 }
 

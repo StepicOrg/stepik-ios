@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NarrowCollectionRowViewCell: CollectionRowViewCell, CollectionRowView {
+class NarrowCollectionRowViewCell: CollectionRowViewCell, CollectionRowViewProtocol {
 
     static var reuseIdentifier: String { return "NarrowCollectionRowViewCell" }
     static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 280.0) }
