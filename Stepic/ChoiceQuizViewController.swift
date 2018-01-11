@@ -68,6 +68,7 @@ class ChoiceQuizViewController: QuizViewController {
         self.cellHeights = Array(repeating: nil, count: optionsCount)
         didReload = false
         tableView.reloadData()
+        containerView.layoutIfNeeded()
         self.tableView.isUserInteractionEnabled = true
     }
 
@@ -89,6 +90,7 @@ class ChoiceQuizViewController: QuizViewController {
 
         self.choices = reply.choices
         self.tableView.reloadData()
+        containerView.layoutIfNeeded()
     }
 
     override func getReply() -> Reply {
@@ -105,6 +107,7 @@ class ChoiceQuizViewController: QuizViewController {
             s.cellHeights = Array(repeating: nil, count: s.optionsCount)
             s.didReload = false
             s.tableView.reloadData()
+            s.containerView.layoutIfNeeded()
         }
     }
 }
@@ -198,6 +201,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()
+                s.containerView.layoutIfNeeded()
             }
         })
 

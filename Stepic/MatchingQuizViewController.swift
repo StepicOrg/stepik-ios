@@ -209,9 +209,13 @@ extension MatchingQuizViewController : UITableViewDelegate {
 extension MatchingQuizViewController : UITableViewDataSource {
 
     fileprivate func updateTableHeight(table: UITableView) {
+        print("started updating table height for \(table.tag) | height -> \(table.bounds.height), content size -> \(table.contentSize)")
+        table.invalidateIntrinsicContentSize()
         table.contentSize = CGSize(width: table.contentSize.width, height: maxHeight * CGFloat(optionsCount))
         table.beginUpdates()
         table.endUpdates()
+        containerView.layoutIfNeeded()
+        print("finished updating table height for \(table.tag) | height -> \(table.bounds.height), content size -> \(table.contentSize)")
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

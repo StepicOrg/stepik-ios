@@ -41,6 +41,8 @@ class WebStepViewController: UIViewController {
     var nItem: UINavigationItem!
     var didStartLoadingFirstRequest = false
 
+    var quizViewController: QuizViewController?
+
     var step: Step!
     var stepId: Int!
     var lesson: Lesson!
@@ -170,11 +172,20 @@ class WebStepViewController: UIViewController {
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
-    func initQuizController(_ quizController: QuizViewController) {
+    func initQuizController(_ quizController: QuizViewController?) {
+        guard let quizController = quizController else {
+            self.quizViewController?.view.removeFromSuperview()
+            self.quizViewController?.removeFromParentViewController()
+            self.view.layoutIfNeeded()
+            return
+        }
         quizController.step = self.step
-        self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.align(toView: quizPlaceholderView)
+        self.quizViewController?.view.removeFromSuperview()
+        self.quizViewController?.removeFromParentViewController()
+        self.addChildViewController(quizController)
+        quizViewController = quizController
 //        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
@@ -182,52 +193,43 @@ class WebStepViewController: UIViewController {
     func handleQuizType() {
         switch step.block.name {
         case "text":
+            quizViewController = nil
             stepWebView.constrainBottomSpace(toView: discussionCountView, predicate: "8")
             //            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
         case "choice":
-            let quizController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "string":
-            let quizController = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(StringQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "number":
-            let quizController = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(NumberQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "free-answer":
-            let quizController = FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "math":
-            let quizController = MathQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(MathQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "sorting":
-            let quizController = SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(SortingQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "matching":
-            let quizController = MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(MatchingQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "fill-blanks":
-            let quizController = FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "code":
-            let quizController = CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(CodeQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         case "sql":
-            let quizController = SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
-            initQuizController(quizController)
+            initQuizController(SQLQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
         default:
-            let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             print("unknown type \(step.block.name)")
+            let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
