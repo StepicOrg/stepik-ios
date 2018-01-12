@@ -1574,8 +1574,6 @@
 		1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */; };
 		1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */; };
 		1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */; };
-		1B3BB0901FE6E0FC002DDD9A /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */; };
-		1B3BB0911FE6E0FC002DDD9A /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */; };
 		1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */; };
 		1B3BB0951FE6E118002DDD9A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */; };
 		1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */; };
@@ -4546,6 +4544,12 @@
 		933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */; };
 		933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */; };
 		933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
+		9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */; };
+		9335E3622008DCF0001BDFA8 /* TitleInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */; };
+		9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */; };
+		9335E3642008DCF0001BDFA8 /* AuthorizationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */; };
+		9335E3652008DFB9001BDFA8 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */; };
+		9335E3662008DFBC001BDFA8 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */; };
 		933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */; };
 		933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */; };
 		933E3F271FBA61D9005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
@@ -5546,6 +5550,10 @@
 		8C247C46B366E3C00E5374DA /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
 		933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSectionViewProtocol.swift; sourceTree = "<group>"; };
 		933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorsCourseInfoSectionCell.swift; sourceTree = "<group>"; };
+		9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationView.swift; path = StepikTV/Controllers/Authorization/AuthorizationView.swift; sourceTree = SOURCE_ROOT; };
+		9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleInputAccessoryView.swift; path = StepikTV/Controllers/Authorization/TitleInputAccessoryView.swift; sourceTree = SOURCE_ROOT; };
+		9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationPresenter.swift; path = StepikTV/Controllers/Authorization/AuthorizationPresenter.swift; sourceTree = SOURCE_ROOT; };
+		9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationAlert.swift; path = StepikTV/Controllers/Authorization/AuthorizationAlert.swift; sourceTree = SOURCE_ROOT; };
 		933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCourseInfoSectionCell.xib; sourceTree = "<group>"; };
 		933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
 		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
@@ -7662,11 +7670,11 @@
 		1B3BB0931FE6E110002DDD9A /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */,
+				9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */,
+				9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */,
+				9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */,
 				1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */,
-				1B3BB0C61FE6F1B6002DDD9A /* AuthorizationView.swift */,
-				1B3BB0C41FE6F146002DDD9A /* AuthorizationPresenter.swift */,
-				1B3BB0C01FE6EC91002DDD9A /* TitleInputAccessoryView.swift */,
-				1B3BB0C21FE6F088002DDD9A /* AuthorizationAlert.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -12761,7 +12769,6 @@
 				1BB3D24D1FA3EC98000B2FAA /* FillBlanksDataset.swift in Sources */,
 				1B3BB0701FE6DE71002DDD9A /* IconButton.swift in Sources */,
 				1BB3D2481FA3EB9C000B2FAA /* NSDateExtensions.swift in Sources */,
-				1B3BB0BC1FE6EB6F002DDD9A /* DetailsCourseInfoCell.swift in Sources */,
 				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
@@ -12796,6 +12803,7 @@
 				1BB4ECD71FA3DF68001CDE99 /* Parser.swift in Sources */,
 				1BB4ECB81FA3DEC3001CDE99 /* Course+CoreDataProperties.swift in Sources */,
 				1BB4EC9C1FA3DD7C001CDE99 /* Reply.swift in Sources */,
+				9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */,
 				1BB4ECED1FA3E6A7001CDE99 /* MathReply.swift in Sources */,
 				1B3BB0641FE6DE48002DDD9A /* CatalogMenuViewController.swift in Sources */,
 				1BB4ECC41FA3DF10001CDE99 /* StepOptions.swift in Sources */,
@@ -12808,7 +12816,7 @@
 				1BB4ECE91FA3E664001CDE99 /* Comment.swift in Sources */,
 				1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */,
 				1BB4ECC61FA3DF43001CDE99 /* Notification+CoreDataProperties.swift in Sources */,
-				1B3BB0BF1FE6EB76002DDD9A /* ParagraphTableViewCell.swift in Sources */,
+				9335E3622008DCF0001BDFA8 /* TitleInputAccessoryView.swift in Sources */,
 				1BB4EC981FA3DD55001CDE99 /* Submission.swift in Sources */,
 				1BB4ECC31FA3DEEA001CDE99 /* JSONInitializable.swift in Sources */,
 				1BB4ECA41FA3DE46001CDE99 /* DiscussionProxiesAPI.swift in Sources */,
@@ -12830,12 +12838,12 @@
 				1B3BB0611FE6DE48002DDD9A /* RectangularCollectionViewController.swift in Sources */,
 				1B3BB0621FE6DE48002DDD9A /* ParagraphLessonsTableViewController.swift in Sources */,
 				1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */,
-				1B3BB0BE1FE6EB73002DDD9A /* MainCourseInfoCell.swift in Sources */,
 				93E4A0D71F9FAB2700D27A37 /* Model.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
 				1BB4ECB11FA3DEC3001CDE99 /* Step.swift in Sources */,
 				1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */,
 				1B3BB06F1FE6DE71002DDD9A /* ContainerConfigurableProtocol.swift in Sources */,
+				9335E3652008DFB9001BDFA8 /* LessonTableViewCell.swift in Sources */,
 				1BB3D2491FA3EC1A000B2FAA /* UIThreadHelper.swift in Sources */,
 				1BB3D2511FA3EFFE000B2FAA /* PathManager.swift in Sources */,
 				1BB3D2371FA3E9E1000B2FAA /* VideosInfo.swift in Sources */,
@@ -12854,16 +12862,16 @@
 				1BB3D2391FA3EA8B000B2FAA /* DeviceInfo.swift in Sources */,
 				1BB4ECB51FA3DEC3001CDE99 /* Unit.swift in Sources */,
 				1BB4ECB21FA3DEC3001CDE99 /* Lesson+CoreDataProperties.swift in Sources */,
+				9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */,
 				1BB4ECEE1FA3E6A7001CDE99 /* SortingReply.swift in Sources */,
 				1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */,
 				1BB4ECEB1FA3E670001CDE99 /* SearchResult.swift in Sources */,
 				1BB4ECE81FA3E664001CDE99 /* DiscussionProxy.swift in Sources */,
+				9335E3662008DFBC001BDFA8 /* ParagraphTableViewCell.swift in Sources */,
 				1BB3D23C1FA3EB2D000B2FAA /* ApiUtil.swift in Sources */,
 				1BB4ECE31FA3E571001CDE99 /* TCBlobDownload.swift in Sources */,
 				1B3BB0A61FE6E145002DDD9A /* NarrowItemCell.swift in Sources */,
-				1B3BB0C51FE6F146002DDD9A /* AuthorizationPresenter.swift in Sources */,
 				93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */,
-				1B3BB0C31FE6F088002DDD9A /* AuthorizationAlert.swift in Sources */,
 				1BB4ECF41FA3E838001CDE99 /* StepicApplicationsInfo.swift in Sources */,
 				1BB4ECF21FA3E73F001CDE99 /* Sorter.swift in Sources */,
 				1BB4ECDB1FA3E285001CDE99 /* VideoURL.swift in Sources */,
@@ -12897,13 +12905,11 @@
 				1BB3D23B1FA3EB2D000B2FAA /* NotificationsAPI.swift in Sources */,
 				1BB4ECAE1FA3DEC3001CDE99 /* Block+CoreDataProperties.swift in Sources */,
 				1BB4ECAF1FA3DEC3001CDE99 /* Block.swift in Sources */,
-				1B3BB0C71FE6F1B6002DDD9A /* AuthorizationView.swift in Sources */,
 				1BB4ECB01FA3DEC3001CDE99 /* Step+CoreDataProperties.swift in Sources */,
 				1BB4ECD41FA3DF43001CDE99 /* Progress.swift in Sources */,
 				1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */,
 				1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */,
 				1BB4ECDD1FA3E2C1001CDE99 /* Meta.swift in Sources */,
-				1B3BB0BD1FE6EB71002DDD9A /* LessonTableViewCell.swift in Sources */,
 				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,
 				1BB3D24A1FA3EC98000B2FAA /* SortingDataset.swift in Sources */,
 				1BB4ECF01FA3E6A7001CDE99 /* FillBlanksReply.swift in Sources */,
@@ -12914,7 +12920,6 @@
 				1BB4ECA21FA3DE26001CDE99 /* ApiDataDownloader.swift in Sources */,
 				1BB4EC9D1FA3DD80001CDE99 /* ChoiceReply.swift in Sources */,
 				1B3BB0711FE6DE71002DDD9A /* TaskChoiceCustomButton.swift in Sources */,
-				1B3BB0C11FE6EC91002DDD9A /* TitleInputAccessoryView.swift in Sources */,
 				1BB4ECC91FA3DF43001CDE99 /* Profile+CoreDataProperties.swift in Sources */,
 				1BB3D2451FA3EB5D000B2FAA /* UserActivity.swift in Sources */,
 				93FAE2261FE142810094939D /* SQLReply.swift in Sources */,
@@ -12932,6 +12937,7 @@
 				1BB4ECA81FA3DE46001CDE99 /* ViewsAPI.swift in Sources */,
 				1BB4ECBA1FA3DEC3001CDE99 /* User+CoreDataProperties.swift in Sources */,
 				93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */,
+				9335E3642008DCF0001BDFA8 /* AuthorizationAlert.swift in Sources */,
 				1BB4ECB71FA3DEC3001CDE99 /* Section.swift in Sources */,
 				93BBE6261FE6E6AD006DEC28 /* CourseInfoPresenter.swift in Sources */,
 				1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */,
