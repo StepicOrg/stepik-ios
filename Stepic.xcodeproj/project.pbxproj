@@ -1573,6 +1573,10 @@
 		1B3BB0851FE6E0C9002DDD9A /* LessonPartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0831FE6E0C8002DDD9A /* LessonPartItemCell.swift */; };
 		1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */; };
 		1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */; };
+		1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */; };
+		1B3BB0901FE6E0FC002DDD9A /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */; };
+		1B3BB0911FE6E0FC002DDD9A /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */; };
+		1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */; };
 		1B3BB0951FE6E118002DDD9A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */; };
 		1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */; };
 		1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */; };
@@ -1584,21 +1588,13 @@
 		1B3BB0A81FE6E145002DDD9A /* MajorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A21FE6E145002DDD9A /* MajorItemCell.xib */; };
 		1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A31FE6E145002DDD9A /* RegularItemCell.swift */; };
 		1B3BB0B31FE6E170002DDD9A /* MajorCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */; };
-		1B3BB0B41FE6E170002DDD9A /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AC1FE6E16F002DDD9A /* CollectionRowView.swift */; };
+		1B3BB0B41FE6E170002DDD9A /* CollectionRowViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */; };
 		1B3BB0B51FE6E170002DDD9A /* NarrowCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AD1FE6E16F002DDD9A /* NarrowCollectionRowViewCell.xib */; };
 		1B3BB0B61FE6E170002DDD9A /* CollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */; };
 		1B3BB0B71FE6E170002DDD9A /* MajorCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */; };
 		1B3BB0B81FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B01FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift */; };
 		1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B11FE6E170002DDD9A /* RegularCollectionRowViewCell.swift */; };
 		1B3BB0BA1FE6E170002DDD9A /* RegularCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */; };
-		1B3BB0BC1FE6EB6F002DDD9A /* DetailsCourseInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoCell.swift */; };
-		1B3BB0BD1FE6EB71002DDD9A /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */; };
-		1B3BB0BE1FE6EB73002DDD9A /* MainCourseInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoCell.swift */; };
-		1B3BB0BF1FE6EB76002DDD9A /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */; };
-		1B3BB0C11FE6EC91002DDD9A /* TitleInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0C01FE6EC91002DDD9A /* TitleInputAccessoryView.swift */; };
-		1B3BB0C31FE6F088002DDD9A /* AuthorizationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0C21FE6F088002DDD9A /* AuthorizationAlert.swift */; };
-		1B3BB0C51FE6F146002DDD9A /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0C41FE6F146002DDD9A /* AuthorizationPresenter.swift */; };
-		1B3BB0C71FE6F1B6002DDD9A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0C61FE6F1B6002DDD9A /* AuthorizationView.swift */; };
 		1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
 		1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
@@ -4547,11 +4543,18 @@
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		927834364D92A9C2BAEE0A83 /* Pods_Adaptive_1906.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45411934367762C09D0F14C2 /* Pods_Adaptive_1906.framework */; };
 		92F4093FB2E6F647A8369A5D /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A9FB462502CAA792A7AB11 /* Pods_Stepic.framework */; };
+		933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */; };
+		933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */; };
+		933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
+		933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */; };
+		933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */; };
 		933E3F271FBA61D9005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4521FA3819100705195 /* CourseInfo.storyboard */; };
 		9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4541FA3820600705195 /* CourseContent.storyboard */; };
+		93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
+		93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7F1D52003E090006B9934 /* TVFocusableText.swift */; };
 		93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
 		93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
@@ -4571,6 +4574,9 @@
 		93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		93FAE2261FE142810094939D /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		93FAE2291FE148020094939D /* CourseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585AD1FB51D720047A269 /* CourseList.swift */; };
+		93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */; };
+		93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B67200537330058B94D /* InstructorItemCell.xib */; };
+		93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF4B6920053A170058B94D /* InstructorItemCell.swift */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -5262,8 +5268,6 @@
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
 		17BE381BB3496D26578FE8C5 /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
 		19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationCollectionPresenter.swift; sourceTree = "<group>"; };
-		1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationCollectionView.swift; sourceTree = "<group>"; };
 		1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseInfoCollectionViewController.swift; path = StepikTV/Controllers/CourseInfo/CourseInfoCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSplitViewController.swift; path = StepikTV/Controllers/MenuSplitViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = StepikTV/Controllers/MenuTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -5283,10 +5287,10 @@
 		1B3BB0831FE6E0C8002DDD9A /* LessonPartItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonPartItemCell.swift; path = StepikTV/Views/ItemCells/LessonPartItemCell/LessonPartItemCell.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RectangularItemCell.swift; path = StepikTV/Views/ItemCells/RectangularItemCell/RectangularItemCell.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RectangularItemCell.xib; path = StepikTV/Views/ItemCells/RectangularItemCell/RectangularItemCell.xib; sourceTree = SOURCE_ROOT; };
-		1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCourseInfoCell.swift; sourceTree = "<group>"; };
+		1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCourseInfoSectionCell.swift; sourceTree = "<group>"; };
 		1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
-		1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCourseInfoCell.swift; sourceTree = "<group>"; };
+		1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCourseInfoSectionCell.swift; sourceTree = "<group>"; };
 		1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionPresenter.swift; sourceTree = "<group>"; };
 		1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionView.swift; sourceTree = "<group>"; };
@@ -5298,17 +5302,13 @@
 		1B3BB0A21FE6E145002DDD9A /* MajorItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorItemCell.xib; sourceTree = "<group>"; };
 		1B3BB0A31FE6E145002DDD9A /* RegularItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularItemCell.swift; sourceTree = "<group>"; };
 		1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MajorCollectionRowViewCell.swift; sourceTree = "<group>"; };
-		1B3BB0AC1FE6E16F002DDD9A /* CollectionRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
+		1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRowViewProtocol.swift; sourceTree = "<group>"; };
 		1B3BB0AD1FE6E16F002DDD9A /* NarrowCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NarrowCollectionRowViewCell.xib; sourceTree = "<group>"; };
 		1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRowViewCell.swift; sourceTree = "<group>"; };
 		1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorCollectionRowViewCell.xib; sourceTree = "<group>"; };
 		1B3BB0B01FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NarrowCollectionRowViewCell.swift; sourceTree = "<group>"; };
 		1B3BB0B11FE6E170002DDD9A /* RegularCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularCollectionRowViewCell.swift; sourceTree = "<group>"; };
 		1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularCollectionRowViewCell.xib; sourceTree = "<group>"; };
-		1B3BB0C01FE6EC91002DDD9A /* TitleInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputAccessoryView.swift; sourceTree = "<group>"; };
-		1B3BB0C21FE6F088002DDD9A /* AuthorizationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationAlert.swift; sourceTree = "<group>"; };
-		1B3BB0C41FE6F146002DDD9A /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
-		1B3BB0C61FE6F1B6002DDD9A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		1BAE12EF1F93F67700482251 /* StepikTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepikTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAE12F11F93F67700482251 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BAE12F81F93F67700482251 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -5544,52 +5544,21 @@
 		896BCA3288F70D53F2E435E6 /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		8B17EDD17EF7E7B6AF350C25 /* Pods-Adaptive 3124 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		8C247C46B366E3C00E5374DA /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
-		933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContentAlertController.swift; sourceTree = "<group>"; };
-		934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentMenuViewController.swift; sourceTree = "<group>"; };
-		934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
-		934A30781FABC85D00819A30 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
-		934A307A1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphLessonsTableViewController.swift; sourceTree = "<group>"; };
-		934C96971F9E9DDC00F87F45 /* NarrowItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NarrowItemCell.xib; sourceTree = "<group>"; };
-		934C96981F9E9DDC00F87F45 /* MajorItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorItemCell.xib; sourceTree = "<group>"; };
-		934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionViewController.swift; sourceTree = "<group>"; };
-		934C969E1F9E9DDE00F87F45 /* RegularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularItemCell.xib; sourceTree = "<group>"; };
-		93765C591FDED259004C74C1 /* RegularCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCollectionRowViewCell.swift; sourceTree = "<group>"; };
-		93765C5B1FDED39D004C74C1 /* RegularItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularItemCell.swift; sourceTree = "<group>"; };
-		937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChoiceCustomButton.swift; sourceTree = "<group>"; };
-		937E1CFF1FDD897900F34045 /* MajorCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCollectionRowViewCell.swift; sourceTree = "<group>"; };
-		937E1D021FDEAFF800F34045 /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
-		937E1D041FDEBA4900F34045 /* MajorItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorItemCell.swift; sourceTree = "<group>"; };
+		933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSectionViewProtocol.swift; sourceTree = "<group>"; };
+		933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorsCourseInfoSectionCell.swift; sourceTree = "<group>"; };
+		933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCourseInfoSectionCell.xib; sourceTree = "<group>"; };
+		933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
 		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
 		9386A4541FA3820600705195 /* CourseContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseContent.storyboard; sourceTree = "<group>"; };
-		9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicallyCreatedProtocol.swift; sourceTree = "<group>"; };
-		9386A4601FA3AA2F00705195 /* ContainerConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerConfigurableProtocol.swift; sourceTree = "<group>"; };
-		9386A4621FA3AA6D00705195 /* ItemConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemConfigurableProtocol.swift; sourceTree = "<group>"; };
-		9386A4691FA3AC0C00705195 /* MainCourseInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCourseInfoCell.swift; sourceTree = "<group>"; };
-		9386A46B1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoCollectionViewController.swift; sourceTree = "<group>"; };
-		9386A4751FA53FAD00705195 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
-		9386A4771FA54C1300705195 /* DetailsCourseInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCourseInfoCell.swift; sourceTree = "<group>"; };
-		93BBE5EA1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MajorCollectionRowViewCell.xib; sourceTree = "<group>"; };
-		93BBE5EC1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCollectionRowViewCell.xib; sourceTree = "<group>"; };
-		93BBE5EE1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NarrowCollectionRowViewCell.xib; sourceTree = "<group>"; };
+		93B7F1D52003E090006B9934 /* TVFocusableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVFocusableText.swift; sourceTree = "<group>"; };
 		93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
 		93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoView.swift; sourceTree = "<group>"; };
 		93E4A0D61F9FAB2700D27A37 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSplitViewController.swift; sourceTree = "<group>"; };
-		93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogMenuViewController.swift; sourceTree = "<group>"; };
-		93E4A0E51F9FE1B300D27A37 /* RectangularCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularCollectionViewController.swift; sourceTree = "<group>"; };
-		93E4A0E71F9FE51B00D27A37 /* RectangularItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RectangularItemCell.xib; sourceTree = "<group>"; };
-		93E4A0E91F9FE52B00D27A37 /* RectangularItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularItemCell.swift; sourceTree = "<group>"; };
-		93EF1F981FAD20240073B0D1 /* StandardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardButton.swift; path = StepikTV/Views/StandardButton.swift; sourceTree = SOURCE_ROOT; };
-		93EF1F991FAD20250073B0D1 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
-		93EF1F9E1FB10EFB0073B0D1 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
-		93EF1FA01FB20D220073B0D1 /* LessonPartItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonPartItemCell.xib; sourceTree = "<group>"; };
-		93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPartItemCell.swift; sourceTree = "<group>"; };
-		93EF1FA51FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPartsCollectionViewController.swift; sourceTree = "<group>"; };
-		93EF1FA91FB22BBD0073B0D1 /* FocusableCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableCustomView.swift; sourceTree = "<group>"; };
-		93F4CF461FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowCollectionRowViewCell.swift; sourceTree = "<group>"; };
-		93F4CF481FDEDFC900735A0E /* NarrowItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NarrowItemCell.swift; sourceTree = "<group>"; };
+		93EF1F981FAD20240073B0D1 /* StandardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardButton.swift; path = StepikTV/Controllers/StandardButton.swift; sourceTree = SOURCE_ROOT; };
 		93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesExtension.swift; sourceTree = "<group>"; };
-		93F4CF511FDF3E6B00735A0E /* CollectionRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowViewCell.swift; sourceTree = "<group>"; };
+		93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
+		93FF4B67200537330058B94D /* InstructorItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorItemCell.xib; sourceTree = "<group>"; };
+		93FF4B6920053A170058B94D /* InstructorItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorItemCell.swift; sourceTree = "<group>"; };
 		9837A965E2C5F03E6C6D13DD /* Pods-Adaptive 1906 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CA8E12D968676E486F96F74 /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7179,7 +7148,6 @@
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
 				74CB1DDD3050EB43220A619F /* Pods */,
-				1B3BB04C1FE6DC6F002DDD9A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -7619,55 +7587,6 @@
 			name = Streaks;
 			sourceTree = "<group>";
 		};
-		1B3BB04C1FE6DC6F002DDD9A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				1B15915F1FC9C7ED0049C3E6 /* CompilationCollectionView.swift */,
-				93EF1F991FAD20250073B0D1 /* AuthorizationViewController.swift */,
-				93F4CF461FDEDEBB00735A0E /* NarrowCollectionRowViewCell.swift */,
-				93EF1FA21FB2144A0073B0D1 /* LessonPartItemCell.swift */,
-				1B15915D1FC9C66D0049C3E6 /* CompilationCollectionPresenter.swift */,
-				93F4CF511FDF3E6B00735A0E /* CollectionRowViewCell.swift */,
-				93F4CF481FDEDFC900735A0E /* NarrowItemCell.swift */,
-				933E3F051FB7AF5C005A885D /* LessonContentAlertController.swift */,
-				93E4A0DF1F9FDB8B00D27A37 /* MenuSplitViewController.swift */,
-				9386A4691FA3AC0C00705195 /* MainCourseInfoCell.swift */,
-				93E4A0E11F9FDD5800D27A37 /* CatalogMenuViewController.swift */,
-				9386A4771FA54C1300705195 /* DetailsCourseInfoCell.swift */,
-				93765C591FDED259004C74C1 /* RegularCollectionRowViewCell.swift */,
-				9386A4601FA3AA2F00705195 /* ContainerConfigurableProtocol.swift */,
-				93EF1F9E1FB10EFB0073B0D1 /* LessonTableViewCell.swift */,
-				93E4A0E51F9FE1B300D27A37 /* RectangularCollectionViewController.swift */,
-				9386A4751FA53FAD00705195 /* IconButton.swift */,
-				9386A46B1FA3AC9D00705195 /* CourseInfoCollectionViewController.swift */,
-				934C969B1F9E9DDD00F87F45 /* CompilationCollectionViewController.swift */,
-				9386A4621FA3AA6D00705195 /* ItemConfigurableProtocol.swift */,
-				93E4A0E91F9FE52B00D27A37 /* RectangularItemCell.swift */,
-				934A30781FABC85D00819A30 /* MenuTableViewController.swift */,
-				93EF1FA51FB21DF20073B0D1 /* LessonPartsCollectionViewController.swift */,
-				937E1D021FDEAFF800F34045 /* CollectionRowView.swift */,
-				93EF1FA91FB22BBD0073B0D1 /* FocusableCustomView.swift */,
-				934A30741FAA841600819A30 /* CourseContentMenuViewController.swift */,
-				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
-				937E1D041FDEBA4900F34045 /* MajorItemCell.swift */,
-				93765C5B1FDED39D004C74C1 /* RegularItemCell.swift */,
-				934A307A1FACC47F00819A30 /* ParagraphLessonsTableViewController.swift */,
-				937E1CFF1FDD897900F34045 /* MajorCollectionRowViewCell.swift */,
-				934A30761FABBE0400819A30 /* ParagraphTableViewCell.swift */,
-				937C27FE1FB4C6B600AE9459 /* TaskChoiceCustomButton.swift */,
-				9386A45E1FA3A7AD00705195 /* DynamicallyCreatedProtocol.swift */,
-				93BBE5EC1FE69A89006DEC28 /* RegularCollectionRowViewCell.xib */,
-				934C96981F9E9DDC00F87F45 /* MajorItemCell.xib */,
-				93E4A0E71F9FE51B00D27A37 /* RectangularItemCell.xib */,
-				93EF1FA01FB20D220073B0D1 /* LessonPartItemCell.xib */,
-				93BBE5EA1FE699F4006DEC28 /* MajorCollectionRowViewCell.xib */,
-				93BBE5EE1FE69AC9006DEC28 /* NarrowCollectionRowViewCell.xib */,
-				934C969E1F9E9DDE00F87F45 /* RegularItemCell.xib */,
-				934C96971F9E9DDC00F87F45 /* NarrowItemCell.xib */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		1B3BB04F1FE6DE2B002DDD9A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -7675,6 +7594,7 @@
 				1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */,
 				1B3BB0961FE6E123002DDD9A /* CompilationCollection */,
 				1B3BB0541FE6DE47002DDD9A /* CourseContentMenuViewController.swift */,
+				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
 				93BBE6241FE6E63C006DEC28 /* CourseInfo */,
 				1B3BB05A1FE6DE48002DDD9A /* LessonContentAlertController.swift */,
 				1B3BB0551FE6DE47002DDD9A /* LessonPartsCollectionViewController.swift */,
@@ -7698,8 +7618,7 @@
 				1B3BB06B1FE6DE70002DDD9A /* ItemConfigurableProtocol.swift */,
 				1B3BB0691FE6DE70002DDD9A /* TaskChoiceCustomButton.swift */,
 			);
-			name = Views;
-			path = "New Group1";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1B3BB0771FE6DFCA002DDD9A /* RectangularItemCell */ = {
@@ -7733,10 +7652,8 @@
 		1B3BB08A1FE6E0EE002DDD9A /* ContainerCells */ = {
 			isa = PBXGroup;
 			children = (
-				1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoCell.swift */,
-				1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */,
-				1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoCell.swift */,
 				1B3BB08D1FE6E0FC002DDD9A /* ParagraphTableViewCell.swift */,
+				1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */,
 			);
 			name = ContainerCells;
 			path = ../Views/ContainerCells;
@@ -7757,11 +7674,11 @@
 		1B3BB0961FE6E123002DDD9A /* CompilationCollection */ = {
 			isa = PBXGroup;
 			children = (
-				1B3BB09D1FE6E134002DDD9A /* CollectionRowItemCells */,
-				1B3BB0AA1FE6E14B002DDD9A /* CollectionRowViewCells */,
 				1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */,
 				1B3BB0991FE6E131002DDD9A /* CompilationCollectionViewController.swift */,
 				1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */,
+				1B3BB09D1FE6E134002DDD9A /* CollectionRowItemCells */,
+				1B3BB0AA1FE6E14B002DDD9A /* CollectionRowViewCells */,
 			);
 			path = CompilationCollection;
 			sourceTree = "<group>";
@@ -7782,7 +7699,7 @@
 		1B3BB0AA1FE6E14B002DDD9A /* CollectionRowViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				1B3BB0AC1FE6E16F002DDD9A /* CollectionRowView.swift */,
+				1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */,
 				1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */,
 				1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */,
 				1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */,
@@ -8501,12 +8418,30 @@
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
 		};
+		933437DE1FE6F32D00140AD2 /* CourseInfoSectionsViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */,
+				93FF4B6920053A170058B94D /* InstructorItemCell.swift */,
+				93FF4B67200537330058B94D /* InstructorItemCell.xib */,
+				933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */,
+				93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */,
+				1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */,
+				933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */,
+				1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */,
+				933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */,
+			);
+			path = CourseInfoSectionsViewCells;
+			sourceTree = "<group>";
+		};
 		93BBE6241FE6E63C006DEC28 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */,
 				1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */,
 				93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */,
-				93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */,
+				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
+				933437DE1FE6F32D00140AD2 /* CourseInfoSectionsViewCells */,
 			);
 			path = CourseInfo;
 			sourceTree = "<group>";
@@ -9362,13 +9297,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */,
 				1B3BB0BA1FE6E170002DDD9A /* RegularCollectionRowViewCell.xib in Resources */,
+				933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */,
 				1B3BB0B71FE6E170002DDD9A /* MajorCollectionRowViewCell.xib in Resources */,
 				9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */,
+				93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */,
 				1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */,
 				1B3BB0841FE6E0C9002DDD9A /* LessonPartItemCell.xib in Resources */,
 				93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */,
 				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
+				93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */,
 				1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */,
 				1B3BB0A41FE6E145002DDD9A /* RegularItemCell.xib in Resources */,
 				1B3BB0B51FE6E170002DDD9A /* NarrowCollectionRowViewCell.xib in Resources */,
@@ -10353,7 +10292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		04C7FDD36E5F5D3B2E1EF2F5 /* [CP] Embed Pods Frameworks */ = {
@@ -10473,7 +10412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		14F6AAB6848C2C348D6F36AE /* [CP] Check Pods Manifest.lock */ = {
@@ -10491,7 +10430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		15F1B2E08ADC389B57D6CB42 /* [CP] Copy Pods Resources */ = {
@@ -10524,7 +10463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1A72A49ECB1076943FDEA10D /* [CP] Embed Pods Frameworks */ = {
@@ -10670,7 +10609,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		27C9BE988E6259E10F2643B1 /* [CP] Embed Pods Frameworks */ = {
@@ -11176,7 +11115,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		56DA85F79D55F4E80FC1DB25 /* [CP] Embed Pods Frameworks */ = {
@@ -11399,7 +11338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		909BF21B7CB2CEC6B7DA174C /* [CP] Check Pods Manifest.lock */ = {
@@ -11417,7 +11356,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		93ACBCFD0A61A7248D2ADEFB /* [CP] Copy Pods Resources */ = {
@@ -11465,7 +11404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AE4E5B6747940B30A2E0E07E /* [CP] Check Pods Manifest.lock */ = {
@@ -11483,7 +11422,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B18D3BCF3F0AE3509AB10816 /* [CP] Embed Pods Frameworks */ = {
@@ -11544,7 +11483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C0E7264FE810AAA4EEC6964C /* [CP] Check Pods Manifest.lock */ = {
@@ -11562,7 +11501,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C23E78C339D3E8431EAF04BE /* [CP] Embed Pods Frameworks */ = {
@@ -11772,7 +11711,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D518213BB4FF97665C2F4C8C /* [CP] Copy Pods Resources */ = {
@@ -11805,7 +11744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DBBEF88436C7AC6CD1206FB6 /* [CP] Check Pods Manifest.lock */ = {
@@ -11823,7 +11762,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E6E1C040BD74BE7250089830 /* [CP] Embed Pods Frameworks */ = {
@@ -11889,7 +11828,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F68A6CF4AF922A954F4226EF /* [CP] Embed Pods Frameworks */ = {
@@ -11940,7 +11879,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -12840,14 +12779,17 @@
 				93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */,
 				1B3BB0851FE6E0C9002DDD9A /* LessonPartItemCell.swift in Sources */,
 				93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */,
+				93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */,
 				1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */,
 				93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */,
+				93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */,
 				1BB3D23D1FA3EB2D000B2FAA /* VotesAPI.swift in Sources */,
+				933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */,
 				1BB4ECCE1FA3DF43001CDE99 /* StepOptions+CoreDataProperties.swift in Sources */,
 				1BB3D24B1FA3EC98000B2FAA /* FreeAnswerDataset.swift in Sources */,
 				1BB4ECBE1FA3DEC3001CDE99 /* CodeSample.swift in Sources */,
 				1B3BB0761FE6DE71002DDD9A /* FocusableCustomView.swift in Sources */,
-				1B3BB0B41FE6E170002DDD9A /* CollectionRowView.swift in Sources */,
+				1B3BB0B41FE6E170002DDD9A /* CollectionRowViewProtocol.swift in Sources */,
 				1B3BB0601FE6DE48002DDD9A /* LessonPartsCollectionViewController.swift in Sources */,
 				1BB3D2531FA3F068000B2FAA /* ErrorEnums.swift in Sources */,
 				1BB4ECF31FA3E74F001CDE99 /* CoursePlainEntity.swift in Sources */,
@@ -12879,9 +12821,11 @@
 				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
 				1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */,
+				933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */,
 				93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */,
 				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
 				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
+				93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */,
 				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,
 				1B3BB0611FE6DE48002DDD9A /* RectangularCollectionViewController.swift in Sources */,
 				1B3BB0621FE6DE48002DDD9A /* ParagraphLessonsTableViewController.swift in Sources */,
@@ -12890,12 +12834,14 @@
 				93E4A0D71F9FAB2700D27A37 /* Model.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
 				1BB4ECB11FA3DEC3001CDE99 /* Step.swift in Sources */,
+				1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */,
 				1B3BB06F1FE6DE71002DDD9A /* ContainerConfigurableProtocol.swift in Sources */,
 				1BB3D2491FA3EC1A000B2FAA /* UIThreadHelper.swift in Sources */,
 				1BB3D2511FA3EFFE000B2FAA /* PathManager.swift in Sources */,
 				1BB3D2371FA3E9E1000B2FAA /* VideosInfo.swift in Sources */,
 				1BB4ECC01FA3DEC3001CDE99 /* CourseReviewSummary.swift in Sources */,
 				1BB4EC991FA3DD5F001CDE99 /* Dataset.swift in Sources */,
+				933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */,
 				1B3BB0B61FE6E170002DDD9A /* CollectionRowViewCell.swift in Sources */,
 				1BB3D2421FA3EB2D000B2FAA /* RecommendationsAPI.swift in Sources */,
 				1BB4ECD01FA3DF43001CDE99 /* Certificate+CoreDataProperties.swift in Sources */,
@@ -12941,6 +12887,7 @@
 				1BB4ECCA1FA3DF43001CDE99 /* CodeTemplate.swift in Sources */,
 				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
 				1BB4ECDA1FA3DF79001CDE99 /* DictionarySerializable.swift in Sources */,
+				1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */,
 				1BB4EC9B1FA3DD6A001CDE99 /* StringDatasetExtension.swift in Sources */,
 				1BB4ECB91FA3DEC3001CDE99 /* Course.swift in Sources */,
 				1BB3D2401FA3EB2D000B2FAA /* UserActivitiesAPI.swift in Sources */,
@@ -16474,7 +16421,19 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				DEVELOPMENT_TEAM = GFNJS2X8DC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Atributika\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CocoaLumberjack-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/DeviceKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/PromiseKit-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage-tvOS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftyJSON-tvOS\"",
+					"\"${PODS_ROOT}/Crashlytics/tvOS\"",
+					"\"${PODS_ROOT}/Fabric/tvOS\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

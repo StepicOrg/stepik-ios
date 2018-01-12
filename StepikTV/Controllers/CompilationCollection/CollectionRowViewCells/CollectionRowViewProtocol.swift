@@ -1,5 +1,5 @@
 //
-//  CollectionRowView.swift
+//  CollectionRowViewProtocol.swift
 //  StepikTV
 //
 //  Created by Александр Пономарев on 11.12.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CollectionRowView {
+protocol CollectionRowViewProtocol {
 
     static var size: CGSize { get }
     static var reuseIdentifier: String { get }

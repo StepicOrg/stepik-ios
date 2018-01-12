@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+protocol CourseInfoView: class {
+
+    func provide(sections: [CourseInfoSection])
+
+}

@@ -66,7 +66,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses)
+                    strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -81,7 +81,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses)
+                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -90,7 +90,7 @@ class CompilationCollectionPresenter {
                     }
 
                     if let tags = loader.getTags() {
-                        strongSelf.rows[index].setData(with: tags, language: language)
+                        strongSelf.rows[index].setData(with: tags, language: language, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }
                 }
@@ -163,7 +163,7 @@ enum CollectionRowType {
     case regular(title: String)
     case narrow(title: String)
 
-    var viewClass: CollectionRowView.Type {
+    var viewClass: CollectionRowViewProtocol.Type {
         switch self {
         case .major:
             return MajorCollectionRowViewCell.self
@@ -201,7 +201,7 @@ class CollectionRow {
 
     private(set) var data: [ItemViewData] = []
 
-    func setData(with tags: [CourseTag], language: ContentLanguage) {
+    func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController?) {
         data = tags.map {
             ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
 
@@ -211,10 +211,16 @@ class CollectionRow {
         loaded = true
     }
 
-    func setData(with courses: [Course]) {
-        data = courses.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.coverURLString, title: $0.title, subtitle: "Higher School of Economics") {
+    func setData(with courses: [Course], for viewController: UIViewController?) {
+        data = courses.map { course in
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics") {
 
+                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoCollectionViewController", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
+
+                courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
+                courseInfoVC.presenter?.course = course
+
+                viewController?.present(courseInfoVC, animated: true, completion: {})
             }
         }
 

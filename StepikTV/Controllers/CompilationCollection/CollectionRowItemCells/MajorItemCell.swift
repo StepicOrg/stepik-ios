@@ -17,6 +17,8 @@ class MajorItemCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
 
+    var pressAction: (()->Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -27,7 +29,13 @@ class MajorItemCell: UICollectionViewCell {
     func setup(with item: ItemViewData) {
         titleLabel.text = item.title
         subtitleLabel.text = item.subtitle
+        pressAction = item.action
 
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
+    }
+
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        super.pressesBegan(presses, with: event)
+        pressAction?()
     }
 }

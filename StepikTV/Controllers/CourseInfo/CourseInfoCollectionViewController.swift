@@ -8,25 +8,29 @@
 
 import UIKit
 
-class CourseInfoCollectionViewController: UICollectionViewController {
-
-    private var course: Course?
+class CourseInfoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let mainNib = UINib(nibName: MainCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(mainNib, forCellWithReuseIdentifier: MainCourseInfoSectionCell.reuseIdentifier)
+
+        let detailsNib = UINib(nibName: DetailsCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(detailsNib, forCellWithReuseIdentifier: DetailsCourseInfoSectionCell.reuseIdentifier)
+
+        let instructorsNib = UINib(nibName: InstructorsCourseInfoSectionCell.nibName, bundle: nil)
+        collectionView?.register(instructorsNib, forCellWithReuseIdentifier: InstructorsCourseInfoSectionCell.reuseIdentifier)
+
+        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }
 
-    fileprivate func itemType(for indexPath: IndexPath) -> DynamicallyCreatedProtocol.Type {
-        switch indexPath.section {
-        case 0:
-            return type(of: MainCourseInfoCell.self())
-        default:
-            return type(of: DetailsCourseInfoCell.self())
-        }
-    }
+    var presenter: CourseInfoPresenter?
+    var sections: [CourseInfoSection] = []
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sections.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -34,7 +38,7 @@ class CourseInfoCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = itemType(for: indexPath).reuseIdentifier
+        let identifier = sections[indexPath.section].contentType.viewClass.reuseIdentifier
         return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
@@ -42,10 +46,16 @@ class CourseInfoCollectionViewController: UICollectionViewController {
         return false
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let cellSize = itemType(for: indexPath).size
-        return cellSize
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? CourseInfoSectionViewProtocol else { return }
+        cell.setup(with: sections[indexPath.section])
     }
+}
 
+extension CourseInfoCollectionViewController: CourseInfoView {
+
+    func provide(sections: [CourseInfoSection]) {
+        self.sections = sections
+        collectionView?.reloadData()
+    }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Orj-vq-fVC">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -9,7 +12,7 @@
         <!--Course Info Collection View Controller-->
         <scene sceneID="gyM-Tp-j5J">
             <objects>
-                <collectionViewController id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CourseInfoCollectionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="h75-bj-NUM">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,44 +23,47 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MainCourseInfoCell" id="DeO-uf-BFX" customClass="MainCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="" id="DeO-uf-BFX" customClass="MainCourseInfoSectionCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="634"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="787"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="634"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2Q-KP-hE2" userLabel="Width View">
+                                            <rect key="frame" x="0.0" y="0.0" width="1920" height="634"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="1920" id="d2S-l7-iQg"/>
+                                            </constraints>
+                                        </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="YPf-pZ-tPP">
-                                            <rect key="frame" x="1296" y="160" width="400" height="400"/>
+                                            <rect key="frame" x="1390" y="160" width="400" height="400"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="400" id="AnP-PP-utn"/>
                                                 <constraint firstAttribute="height" constant="400" id="p3g-QK-B4h"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course short about " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-P7-DUH">
-                                            <rect key="frame" x="112" y="335" width="964" height="35"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="295" id="rUY-Oi-lX9"/>
-                                            </constraints>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course short about " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-P7-DUH" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="335" width="1150" height="35"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Host" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOa-IA-trp">
-                                            <rect key="frame" x="112" y="239" width="964" height="46"/>
+                                            <rect key="frame" x="20" y="239" width="1150" height="46"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTE-HU-sBz">
-                                            <rect key="frame" x="112" y="136" width="964" height="69"/>
+                                            <rect key="frame" x="20" y="136" width="1150" height="69"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-hr-8AD">
-                                            <rect key="frame" x="112" y="420" width="308" height="114"/>
+                                            <rect key="frame" x="20" y="420" width="308" height="114"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-Ff-VzA" customClass="IconButton" customModule="StepikTV" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="142" height="114"/>
@@ -136,39 +142,58 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailingMargin" secondItem="YPf-pZ-tPP" secondAttribute="trailing" constant="204" id="4g0-Be-XeY"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="YPf-pZ-tPP" secondAttribute="trailing" constant="110" id="4g0-Be-XeY"/>
                                     <constraint firstItem="tfU-hr-8AD" firstAttribute="leading" secondItem="W1P-P7-DUH" secondAttribute="leading" id="6lY-3h-rD6"/>
                                     <constraint firstItem="W1P-P7-DUH" firstAttribute="top" secondItem="EOa-IA-trp" secondAttribute="bottom" constant="50" id="7ci-wd-i4q"/>
                                     <constraint firstItem="EOa-IA-trp" firstAttribute="leading" secondItem="WTE-HU-sBz" secondAttribute="leading" id="C9H-fb-fS3"/>
-                                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="tfU-hr-8AD" secondAttribute="bottom" constant="20" id="JCO-7M-ogr"/>
-                                    <constraint firstItem="tfU-hr-8AD" firstAttribute="top" secondItem="W1P-P7-DUH" secondAttribute="bottom" constant="50" id="LG1-3O-JaY"/>
-                                    <constraint firstItem="WTE-HU-sBz" firstAttribute="leading" secondItem="DeO-uf-BFX" secondAttribute="leadingMargin" constant="92" id="OCa-v8-1OW"/>
+                                    <constraint firstItem="e2Q-KP-hE2" firstAttribute="top" secondItem="DeO-uf-BFX" secondAttribute="top" id="HxS-dy-oKs"/>
+                                    <constraint firstItem="WTE-HU-sBz" firstAttribute="leading" secondItem="DeO-uf-BFX" secondAttribute="leadingMargin" id="OCa-v8-1OW"/>
                                     <constraint firstItem="W1P-P7-DUH" firstAttribute="trailing" secondItem="EOa-IA-trp" secondAttribute="trailing" id="TjN-dZ-YIb"/>
+                                    <constraint firstAttribute="bottom" secondItem="e2Q-KP-hE2" secondAttribute="bottom" id="adc-xU-3IF"/>
+                                    <constraint firstItem="e2Q-KP-hE2" firstAttribute="leading" secondItem="DeO-uf-BFX" secondAttribute="leading" id="epD-wm-Eba"/>
+                                    <constraint firstItem="tfU-hr-8AD" firstAttribute="top" secondItem="W1P-P7-DUH" secondAttribute="bottom" constant="50" id="fcd-eS-rLf"/>
                                     <constraint firstItem="YPf-pZ-tPP" firstAttribute="top" secondItem="DeO-uf-BFX" secondAttribute="topMargin" constant="160" id="n3s-mZ-Jd6"/>
+                                    <constraint firstAttribute="bottom" secondItem="tfU-hr-8AD" secondAttribute="bottom" constant="100" id="p0h-ff-PNc"/>
                                     <constraint firstItem="W1P-P7-DUH" firstAttribute="leading" secondItem="EOa-IA-trp" secondAttribute="leading" id="pHl-vV-BX1"/>
                                     <constraint firstItem="YPf-pZ-tPP" firstAttribute="leading" secondItem="WTE-HU-sBz" secondAttribute="trailing" constant="220" id="shz-z1-JPy"/>
                                     <constraint firstItem="EOa-IA-trp" firstAttribute="trailing" secondItem="WTE-HU-sBz" secondAttribute="trailing" id="t8F-bs-f6Q"/>
                                     <constraint firstItem="EOa-IA-trp" firstAttribute="top" secondItem="WTE-HU-sBz" secondAttribute="bottom" constant="34" id="vQa-lz-cq0"/>
                                     <constraint firstItem="WTE-HU-sBz" firstAttribute="top" secondItem="DeO-uf-BFX" secondAttribute="topMargin" constant="136" id="vid-d3-63Q"/>
                                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YPf-pZ-tPP" secondAttribute="bottom" constant="20" id="vjH-Lk-BEJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="e2Q-KP-hE2" secondAttribute="trailing" id="yoG-X0-eqw"/>
                                 </constraints>
-                                <size key="customSize" width="1920" height="787"/>
+                                <size key="customSize" width="1920" height="634"/>
+                                <connections>
+                                    <outlet property="descr" destination="W1P-P7-DUH" id="dQe-dF-VJD"/>
+                                    <outlet property="hosts" destination="EOa-IA-trp" id="MlN-BB-2HH"/>
+                                    <outlet property="imageView" destination="YPf-pZ-tPP" id="gzj-gJ-Eaf"/>
+                                    <outlet property="leftIconButton" destination="Gc9-Ff-VzA" id="kKG-Lm-jNV"/>
+                                    <outlet property="rightIconButton" destination="mGv-T4-d7X" id="CUc-aS-aO3"/>
+                                    <outlet property="title" destination="WTE-HU-sBz" id="H0k-z1-O3N"/>
+                                    <outlet property="widthConstraint" destination="d2S-l7-iQg" id="AG0-1P-44v"/>
+                                </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DetailsCourseInfoCell" id="spx-Hs-B0m" customClass="DetailsCourseInfoCell" customModule="StepikTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="787" width="1920" height="200"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="" id="spx-Hs-B0m" customClass="DetailsCourseInfoSectionCell" customModule="StepikTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="634" width="1920" height="176"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="176"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoo-r6-l8q" userLabel="Width View">
+                                            <rect key="frame" x="0.0" y="0.0" width="1920" height="176"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="1920" id="naY-er-rKn"/>
+                                            </constraints>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cw5-VR-hyc">
-                                            <rect key="frame" x="109" y="25" width="75" height="46"/>
+                                            <rect key="frame" x="20" y="25" width="75" height="46"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ype-4C-mII">
-                                            <rect key="frame" x="109" y="74" width="1702" height="35"/>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ype-4C-mII" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="91" width="1791" height="35"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -176,16 +201,22 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Ype-4C-mII" firstAttribute="top" secondItem="cw5-VR-hyc" secondAttribute="bottom" constant="3" id="1oU-bw-Hqf"/>
+                                    <constraint firstItem="Ype-4C-mII" firstAttribute="top" secondItem="cw5-VR-hyc" secondAttribute="bottom" constant="20" id="1oU-bw-Hqf"/>
                                     <constraint firstItem="Ype-4C-mII" firstAttribute="leading" secondItem="cw5-VR-hyc" secondAttribute="leading" id="4zr-zK-r0a"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Ype-4C-mII" secondAttribute="trailing" constant="89" id="65D-NB-en8"/>
+                                    <constraint firstAttribute="trailing" secondItem="qoo-r6-l8q" secondAttribute="trailing" id="7N7-hW-xsv"/>
+                                    <constraint firstItem="qoo-r6-l8q" firstAttribute="top" secondItem="spx-Hs-B0m" secondAttribute="top" id="9J5-gl-xSL"/>
+                                    <constraint firstAttribute="bottom" secondItem="qoo-r6-l8q" secondAttribute="bottom" id="ROt-A4-V3o"/>
                                     <constraint firstItem="cw5-VR-hyc" firstAttribute="top" secondItem="spx-Hs-B0m" secondAttribute="topMargin" constant="25" id="al0-hf-z7o"/>
-                                    <constraint firstItem="cw5-VR-hyc" firstAttribute="leading" secondItem="spx-Hs-B0m" secondAttribute="leadingMargin" constant="89" id="bAQ-K6-pkf"/>
+                                    <constraint firstItem="qoo-r6-l8q" firstAttribute="leading" secondItem="spx-Hs-B0m" secondAttribute="leading" id="awr-Tg-gSY"/>
+                                    <constraint firstItem="cw5-VR-hyc" firstAttribute="leading" secondItem="spx-Hs-B0m" secondAttribute="leadingMargin" id="bAQ-K6-pkf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ype-4C-mII" secondAttribute="bottom" constant="50" id="bOi-EV-FoY"/>
                                 </constraints>
-                                <size key="customSize" width="1920" height="200"/>
+                                <size key="customSize" width="1920" height="176"/>
                                 <connections>
-                                    <outlet property="contentLabel" destination="Ype-4C-mII" id="lwB-tI-DuL"/>
-                                    <outlet property="titleLabel" destination="cw5-VR-hyc" id="8Qf-Rz-eKP"/>
+                                    <outlet property="content" destination="Ype-4C-mII" id="kgx-JX-oHe"/>
+                                    <outlet property="title" destination="cw5-VR-hyc" id="UBS-KT-m0g"/>
+                                    <outlet property="widthConstraint" destination="naY-er-rKn" id="0TS-eq-cS8"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
