@@ -154,6 +154,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         doneItem.tintColor = UIColor.white
+        updateTextViewInsets()
     }
 
     fileprivate func configureKeyboardNotifications() {
@@ -244,6 +245,11 @@ class FullscreenCodeQuizViewController: UIViewController {
         CoreDataHelper.instance.save()
     }
 
+    private func updateTextViewInsets() {
+        if #available(iOS 11.0, *) {
+            codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: view.safeAreaInsets.left, bottom: 0, right: view.safeAreaInsets.right)
+        }
+    }
     /*
     // MARK: - Navigation
 

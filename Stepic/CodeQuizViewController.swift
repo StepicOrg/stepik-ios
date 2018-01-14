@@ -176,7 +176,6 @@ class CodeQuizViewController: QuizViewController {
         languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
 
         codeTextView.delegate = self
-
         submissionPressedBlock = {
             [weak self] in
             self?.codeTextView.resignFirstResponder()
@@ -186,6 +185,7 @@ class CodeQuizViewController: QuizViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         toolbarView.layoutSubviews()
+        updateTextViewInsets()
     }
 
     func hidePicker() {
@@ -314,6 +314,12 @@ class CodeQuizViewController: QuizViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    private func updateTextViewInsets() {
+        if #available(iOS 11.0, *) {
+            codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
+        }
     }
 
     /*
