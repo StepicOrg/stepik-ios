@@ -35,9 +35,6 @@
                     </imageView>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" text="Course short about " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goK-dj-Uzp" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
                         <rect key="frame" x="110" y="279" width="970" height="35"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="7Ib-2J-b7M"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="29"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

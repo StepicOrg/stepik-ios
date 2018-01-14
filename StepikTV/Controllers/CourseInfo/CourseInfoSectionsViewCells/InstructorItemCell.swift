@@ -39,6 +39,7 @@ class InstructorItemCell: UICollectionViewCell {
         return {
             self.transform = CGAffineTransform.identity
             self.layer.shadowOpacity = 0.0
+            self.titleLabel.textColor = UIColor.black
         }
     }
 
@@ -49,6 +50,8 @@ class InstructorItemCell: UICollectionViewCell {
             self.layer.shadowRadius = 25
             self.layer.shadowOpacity = 0.2
             self.layer.shadowPath = UIBezierPath(roundedRect: self.imageView.bounds, cornerRadius: self.imageView.bounds.height / 2).cgPath
+
+            self.titleLabel.textColor = UIColor.white
         }
     }
 

@@ -8,17 +8,16 @@
 
 import UIKit
 
-class RectangularItemCell: UICollectionViewCell, DynamicallyCreatedProtocol, ItemConfigurableProtocol {
+class RectangularItemCell: UICollectionViewCell {
 
     static var nibName: String { get { return "RectangularItemCell" } }
-
     static var reuseIdentifier: String { get { return "RectangularItemCell" } }
-
     static var size: CGSize { get { return CGSize(width: 310.0, height: 350.0) } }
 
     @IBOutlet var imageView: UIImageView!
-
     @IBOutlet var titleLabel: UILabel!
+
+    var pressAction: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,8 +26,15 @@ class RectangularItemCell: UICollectionViewCell, DynamicallyCreatedProtocol, Ite
         imageView.clipsToBounds = false
     }
 
-    func configure(with data: CourseMock) {
-        titleLabel.text = data.name
+    func setup(with item: ItemViewData) {
+        titleLabel.text = item.title
+        pressAction = item.action
+
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
     }
 
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        super.pressesBegan(presses, with: event)
+        pressAction?()
+    }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -45,9 +45,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Войти">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="Войти"/>
                                         <connections>
                                             <action selector="loginAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="Y4U-IZ-OK9"/>
                                         </connections>
@@ -59,9 +57,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Зарегистрироваться">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="Зарегистрироваться"/>
                                         <connections>
                                             <action selector="registerAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="P5M-D3-H3R"/>
                                         </connections>
@@ -73,9 +69,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Войти с iPhone">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="Войти с iPhone"/>
                                         <connections>
                                             <action selector="remoteLoginAciton:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="fwx-4R-91C"/>
                                         </connections>
@@ -303,7 +297,7 @@
         <scene sceneID="0zh-0e-3Gz">
             <objects>
                 <collectionViewController id="RR9-YI-osV" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="khb-nr-ZIx">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lBb-fz-Abn">
@@ -312,42 +306,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="6Ua-XC-tcb" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
-                                <rect key="frame" x="90" y="70" width="310" height="350"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="310" height="350"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x6Z-Ha-I5x">
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="x6Z-Ha-I5x" secondAttribute="height" multiplier="1:1" id="Dnm-Y8-f7y"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DK9-R3-2G2">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="DK9-R3-2G2" secondAttribute="bottom" id="abP-75-c1u"/>
-                                    <constraint firstItem="x6Z-Ha-I5x" firstAttribute="top" secondItem="6Ua-XC-tcb" secondAttribute="top" id="hxv-cF-t6O"/>
-                                    <constraint firstItem="DK9-R3-2G2" firstAttribute="leading" secondItem="6Ua-XC-tcb" secondAttribute="leading" id="iaL-qi-dY3"/>
-                                    <constraint firstAttribute="trailing" secondItem="DK9-R3-2G2" secondAttribute="trailing" id="joS-9W-l90"/>
-                                    <constraint firstAttribute="trailing" secondItem="x6Z-Ha-I5x" secondAttribute="trailing" id="tSa-D8-sVq"/>
-                                    <constraint firstItem="DK9-R3-2G2" firstAttribute="top" secondItem="x6Z-Ha-I5x" secondAttribute="bottom" id="tad-eW-UtU"/>
-                                    <constraint firstItem="x6Z-Ha-I5x" firstAttribute="leading" secondItem="6Ua-XC-tcb" secondAttribute="leading" id="upu-0y-Qlt"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="imageView" destination="x6Z-Ha-I5x" id="I9u-Ki-fKH"/>
-                                    <outlet property="label" destination="DK9-R3-2G2" id="QJK-BT-81L"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="RR9-YI-osV" id="xuY-eD-tdb"/>
                             <outlet property="delegate" destination="RR9-YI-osV" id="OH3-M8-vr7"/>
@@ -363,7 +322,7 @@
         <scene sceneID="Tq1-B3-oUl">
             <objects>
                 <collectionViewController id="gZU-C6-QdM" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
+                    <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="5y7-sm-ibV">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lwN-5z-dAd">
@@ -372,42 +331,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="90" minY="70" maxX="90" maxY="70"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DataItemCell" id="rLg-4g-yHF" customClass="DataItemCollectionViewCell" customModule="StepikTV" customModuleProvider="target">
-                                <rect key="frame" x="90" y="70" width="310" height="350"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="310" height="350"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Iceland 1.jpg" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jgO-km-jaN">
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="jgO-km-jaN" secondAttribute="height" multiplier="1:1" id="xze-od-abR"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-KW-iKb">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="350"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="gI7-KW-iKb" firstAttribute="leading" secondItem="rLg-4g-yHF" secondAttribute="leading" id="0eL-rQ-bAe"/>
-                                    <constraint firstAttribute="trailing" secondItem="gI7-KW-iKb" secondAttribute="trailing" id="Qy4-3e-tsG"/>
-                                    <constraint firstItem="gI7-KW-iKb" firstAttribute="top" secondItem="jgO-km-jaN" secondAttribute="bottom" id="R7B-IR-Ydm"/>
-                                    <constraint firstItem="jgO-km-jaN" firstAttribute="top" secondItem="rLg-4g-yHF" secondAttribute="top" id="VaL-dW-NEV"/>
-                                    <constraint firstItem="jgO-km-jaN" firstAttribute="leading" secondItem="rLg-4g-yHF" secondAttribute="leading" id="aPB-S0-3lQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="gI7-KW-iKb" secondAttribute="bottom" id="tPd-wZ-OMM"/>
-                                    <constraint firstAttribute="trailing" secondItem="jgO-km-jaN" secondAttribute="trailing" id="xIU-g5-O4b"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="imageView" destination="jgO-km-jaN" id="fQT-iC-FkA"/>
-                                    <outlet property="label" destination="gI7-KW-iKb" id="d6Z-7i-Fbe"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="gZU-C6-QdM" id="xtX-Vs-9Pf"/>
                             <outlet property="delegate" destination="gZU-C6-QdM" id="ME0-BO-5fB"/>
@@ -421,7 +345,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Iceland 1.jpg" width="16" height="16"/>
         <image name="Stepik_logo" width="1000" height="1000"/>
     </resources>
 </document>

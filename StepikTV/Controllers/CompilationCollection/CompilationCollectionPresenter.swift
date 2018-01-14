@@ -11,7 +11,7 @@ import PromiseKit
 
 class CompilationCollectionPresenter {
 
-    let courseAPI = CoursesAPI()
+    let coursesAPI = CoursesAPI()
 
     private weak var view: CompilationCollectionView?
     private var courseListsAPI: CourseListsAPI
@@ -59,7 +59,7 @@ class CompilationCollectionPresenter {
                 strongSelf.view?.setup(with: strongSelf.rows)
 
                 for (index, loader) in strongSelf.loaders.enumerated() {
-                  loader.getCourses(withAPI: strongSelf.courseAPI)?.then {
+                  loader.getCourses(withAPI: strongSelf.coursesAPI)?.then {
                         [weak self]
                         courses -> Void in
                         guard let strongSelf = self else {
@@ -74,7 +74,7 @@ class CompilationCollectionPresenter {
                         print("Error while refreshing collection")
                     }
 
-                    loader.getPopular(withAPI: strongSelf.courseAPI, language: language)?.then {
+                    loader.getPopular(withAPI: strongSelf.coursesAPI, language: language)?.then {
                         [weak self]
                         (courses, _) -> Void in
                         guard let strongSelf = self else {

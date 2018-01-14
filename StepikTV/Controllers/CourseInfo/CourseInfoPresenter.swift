@@ -22,8 +22,8 @@ class CourseInfoPresenter {
             }
         }
     }
-    var instructors: [User]?
-    var sections: [CourseInfoSection] = []
+    private var instructors: [User]?
+    private var sections: [CourseInfoSection] = []
 
     init(view: CourseInfoView) {
         self.view = view

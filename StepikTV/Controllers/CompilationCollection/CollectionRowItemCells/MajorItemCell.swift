@@ -17,7 +17,7 @@ class MajorItemCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
 
-    var pressAction: (()->Void)?
+    var pressAction: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
