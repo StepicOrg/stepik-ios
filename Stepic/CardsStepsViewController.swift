@@ -68,7 +68,7 @@ class CardsStepsViewController: UIViewController {
         progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
 
         if presenter == nil {
-            presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
+            presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), course: course, view: self)
             presenter?.refresh()
         }
     }
@@ -154,6 +154,40 @@ extension CardsStepsViewController: CardsStepsView {
         vc.discussionProxyId = discussionProxyId
         vc.target = stepId
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
+        let currentLevel = level
+
+        expLabel.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(maxRating)")
+        levelLabel.text = String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
+
+        progressBar.progress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating) + 0.005
+        UIView.animate(withDuration: 1.2, animations: {
+            self.progressBar.layoutIfNeeded()
+        }, completion: nil)
+    }
+
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
+        let text = self.expLabel.text ?? ""
+        let color = self.expLabel.textColor ?? UIColor.mainDark
+
+        func transitionToText(_ text: String, color: UIColor, duration: Double, completionBlock: (() -> Void)? = nil) {
+            UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {
+                self.expLabel.textColor = UIColor.clear
+            }, completion: { _ in
+                self.expLabel.text = text
+                UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {
+                    self.expLabel.textColor = color
+                }, completion: { _ in completionBlock?() })
+            })
+        }
+
+        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex: 0x008040), duration: 0.4, completionBlock: { _ in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
+                transitionToText(text, color: color, duration: 0.4, completionBlock: { completion?() })
+            })
+        })
     }
 }
 
@@ -280,11 +314,13 @@ extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
         //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
         presenter?.sendReaction(.solved)
+        presenter?.updateRatingWhenSuccess()
         topCard?.controlState = .successful
     }
 
     func stepSubmissionDidWrong() {
         //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        presenter?.updateRatingWhenFail()
         topCard?.controlState = .wrong
     }
 

@@ -1623,7 +1623,7 @@
 		2C1B60F41F4C4AEF00236804 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C1B60F51F4C4AEF00236804 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C1B60F61F4C4AEF00236804 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C1B60F71F4C4AEF00236804 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C1B60F71F4C4AEF00236804 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C1B60F81F4C4AEF00236804 /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		2C1B60F91F4C4AEF00236804 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C1B60FA1F4C4AEF00236804 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -1694,7 +1694,7 @@
 		2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
 		2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
 		2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C1B613E1F4C4AEF00236804 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B61401F4C4AEF00236804 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
@@ -1762,7 +1762,7 @@
 		2C1B61881F4C4AEF00236804 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C1B61891F4C4AEF00236804 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		2C1B618A1F4C4AEF00236804 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
-		2C1B618B1F4C4AEF00236804 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2C1B618B1F4C4AEF00236804 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2C1B618C1F4C4AEF00236804 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		2C1B618D1F4C4AEF00236804 /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		2C1B618E1F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -2076,7 +2076,7 @@
 		2C1B63051F4C590700236804 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C1B63061F4C590700236804 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C1B63071F4C590700236804 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C1B63081F4C590700236804 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C1B63081F4C590700236804 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C1B63091F4C590700236804 /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		2C1B630A1F4C590700236804 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C1B630B1F4C590700236804 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -2147,7 +2147,7 @@
 		2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
 		2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
 		2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C1B634F1F4C590700236804 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B63511F4C590700236804 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
@@ -2215,7 +2215,7 @@
 		2C1B63991F4C590700236804 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C1B639A1F4C590700236804 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		2C1B639B1F4C590700236804 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
-		2C1B639C1F4C590700236804 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2C1B639C1F4C590700236804 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2C1B639D1F4C590700236804 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		2C1B639E1F4C590700236804 /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		2C1B639F1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -2575,8 +2575,8 @@
 		2C6E9CD61FED6AE0001821A2 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7A51EB9054B001E3E42 /* overlay_simple.png */; };
 		2C6E9CD71FED6AE3001821A2 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7A81EB90555001E3E42 /* overlay_hard.png */; };
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
-		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C733C3A1F29E090000E7FAF /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
+		2C76ACCD1F16496C0077D9D7 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */; };
@@ -2650,7 +2650,7 @@
 		2C8652A21F4B33DE00D51654 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C8652A31F4B33DE00D51654 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C8652A41F4B33DE00D51654 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C8652A51F4B33DE00D51654 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C8652A51F4B33DE00D51654 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C8652A61F4B33DE00D51654 /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -2721,7 +2721,7 @@
 		2C8652E91F4B33DE00D51654 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
 		2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
 		2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C8652EC1F4B33DE00D51654 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C8652EC1F4B33DE00D51654 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C8652EE1F4B33DE00D51654 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		2C8652EF1F4B33DE00D51654 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
@@ -2789,7 +2789,7 @@
 		2C8653361F4B33DE00D51654 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C8653371F4B33DE00D51654 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		2C8653381F4B33DE00D51654 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
-		2C8653391F4B33DE00D51654 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2C8653391F4B33DE00D51654 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -3103,7 +3103,7 @@
 		2C89A9881F4C289900227C3B /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C89A9891F4C289900227C3B /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C89A98A1F4C289900227C3B /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C89A98B1F4C289900227C3B /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C89A98C1F4C289900227C3B /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -3173,7 +3173,7 @@
 		2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
 		2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
 		2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C89A9D21F4C289900227C3B /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C89A9D41F4C289900227C3B /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
@@ -3241,7 +3241,7 @@
 		2C89AA1C1F4C289900227C3B /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C89AA1D1F4C289900227C3B /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		2C89AA1E1F4C289900227C3B /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
-		2C89AA1F1F4C289900227C3B /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2C89AA1F1F4C289900227C3B /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2C89AA201F4C289900227C3B /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		2C89AA211F4C289900227C3B /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		2C89AA221F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -3561,7 +3561,7 @@
 		2C97313C1F4C38F600AC9301 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C97313D1F4C38F600AC9301 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C97313E1F4C38F600AC9301 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C97313F1F4C38F600AC9301 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
+		2C97313F1F4C38F600AC9301 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2C9731401F4C38F600AC9301 /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		2C9731411F4C38F600AC9301 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C9731421F4C38F600AC9301 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -3632,7 +3632,7 @@
 		2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
 		2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
 		2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C9731861F4C38F600AC9301 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C9731881F4C38F600AC9301 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
@@ -3700,7 +3700,7 @@
 		2C9731D01F4C38F600AC9301 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C9731D11F4C38F600AC9301 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		2C9731D21F4C38F600AC9301 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
-		2C9731D31F4C38F600AC9301 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2C9731D31F4C38F600AC9301 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2C9731D41F4C38F600AC9301 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		2C9731D51F4C38F600AC9301 /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		2C9731D61F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -3973,6 +3973,9 @@
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
+		2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
+		2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
+		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
@@ -4025,7 +4028,7 @@
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
 		2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
-		2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
+		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
@@ -5179,8 +5182,8 @@
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
 		2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Adaptive.storyboard; sourceTree = "<group>"; };
 		2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStorageManager.swift; sourceTree = "<group>"; };
-		2C733C391F29E090000E7FAF /* StatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManager.swift; sourceTree = "<group>"; };
-		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
+		2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveStatsManager.swift; path = Stepic/AdaptiveStatsManager.swift; sourceTree = SOURCE_ROOT; };
+		2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingManager.swift; path = Stepic/AdaptiveRatingManager.swift; sourceTree = SOURCE_ROOT; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
 		2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -5275,7 +5278,7 @@
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLQuizViewController.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
-		2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
+		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF44FF11F4B4F0400C19012 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1906/icon.png; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
@@ -7423,7 +7426,6 @@
 				2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */,
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
-				2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */,
 				2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */,
 			);
 			name = Helpers;
@@ -7548,6 +7550,7 @@
 		2C5DF1371FEBDC50003B1177 /* Adaptive steps */ = {
 			isa = PBXGroup;
 			children = (
+				2CA5E5A4200E1EC200CE77B0 /* Rating & Stats */,
 				2C6E9CD91FF2752B001821A2 /* Helpers */,
 				2C5DF1501FED319F003B1177 /* Views */,
 				2C5DF13D1FED2690003B1177 /* Card step */,
@@ -7811,6 +7814,16 @@
 			name = AdaptiveOnboarding;
 			sourceTree = "<group>";
 		};
+		2CA5E5A4200E1EC200CE77B0 /* Rating & Stats */ = {
+			isa = PBXGroup;
+			children = (
+				2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */,
+				2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */,
+				2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */,
+			);
+			name = "Rating & Stats";
+			sourceTree = "<group>";
+		};
 		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -7949,8 +7962,6 @@
 		2CEDA35D1F336EFD005F4A5D /* Rating & Stats */ = {
 			isa = PBXGroup;
 			children = (
-				2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */,
-				2C733C391F29E090000E7FAF /* StatsManager.swift */,
 			);
 			name = "Rating & Stats";
 			sourceTree = "<group>";
@@ -12279,6 +12290,7 @@
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPageView.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
+				2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -12323,6 +12335,7 @@
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
+				2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
@@ -12380,6 +12393,7 @@
 				088EDCA61F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
+				2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */,
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
@@ -12476,7 +12490,7 @@
 				2C1B60F41F4C4AEF00236804 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C1B60F51F4C4AEF00236804 /* VideoDownloadView.swift in Sources */,
 				2C1B60F61F4C4AEF00236804 /* CodeSample.swift in Sources */,
-				2C1B60F71F4C4AEF00236804 /* RatingManager.swift in Sources */,
+				2C1B60F71F4C4AEF00236804 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB91F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C1B60F81F4C4AEF00236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B60F91F4C4AEF00236804 /* WarningView.swift in Sources */,
@@ -12563,7 +12577,7 @@
 				2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */,
 				2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C1B613E1F4C4AEF00236804 /* StatsManager.swift in Sources */,
+				2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */,
 				2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B61401F4C4AEF00236804 /* StepsViewController.swift in Sources */,
 				2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */,
@@ -12638,7 +12652,7 @@
 				2C1B61881F4C4AEF00236804 /* GCDThings.swift in Sources */,
 				2C1B61891F4C4AEF00236804 /* GlobalFunctions.swift in Sources */,
 				2C1B618A1F4C4AEF00236804 /* CongratulationViewController.swift in Sources */,
-				2C1B618B1F4C4AEF00236804 /* RatingHelper.swift in Sources */,
+				2C1B618B1F4C4AEF00236804 /* AdaptiveRatingHelper.swift in Sources */,
 				2C1B618C1F4C4AEF00236804 /* TimeFormatHelper.swift in Sources */,
 				084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B618D1F4C4AEF00236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
@@ -12932,7 +12946,7 @@
 				2C1B63051F4C590700236804 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C1B63061F4C590700236804 /* VideoDownloadView.swift in Sources */,
 				2C1B63071F4C590700236804 /* CodeSample.swift in Sources */,
-				2C1B63081F4C590700236804 /* RatingManager.swift in Sources */,
+				2C1B63081F4C590700236804 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DBA1F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C1B63091F4C590700236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B630A1F4C590700236804 /* WarningView.swift in Sources */,
@@ -13019,7 +13033,7 @@
 				2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */,
 				2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C1B634F1F4C590700236804 /* StatsManager.swift in Sources */,
+				2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */,
 				2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B63511F4C590700236804 /* StepsViewController.swift in Sources */,
 				2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */,
@@ -13094,7 +13108,7 @@
 				2C1B63991F4C590700236804 /* GCDThings.swift in Sources */,
 				2C1B639A1F4C590700236804 /* GlobalFunctions.swift in Sources */,
 				2C1B639B1F4C590700236804 /* CongratulationViewController.swift in Sources */,
-				2C1B639C1F4C590700236804 /* RatingHelper.swift in Sources */,
+				2C1B639C1F4C590700236804 /* AdaptiveRatingHelper.swift in Sources */,
 				2C1B639D1F4C590700236804 /* TimeFormatHelper.swift in Sources */,
 				084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B639E1F4C590700236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
@@ -13388,7 +13402,7 @@
 				2C8652A21F4B33DE00D51654 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C8652A31F4B33DE00D51654 /* VideoDownloadView.swift in Sources */,
 				2C8652A41F4B33DE00D51654 /* CodeSample.swift in Sources */,
-				2C8652A51F4B33DE00D51654 /* RatingManager.swift in Sources */,
+				2C8652A51F4B33DE00D51654 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB61F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C8652A61F4B33DE00D51654 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */,
@@ -13475,7 +13489,7 @@
 				2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */,
 				2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C8652EC1F4B33DE00D51654 /* StatsManager.swift in Sources */,
+				2C8652EC1F4B33DE00D51654 /* AdaptiveStatsManager.swift in Sources */,
 				2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C8652EE1F4B33DE00D51654 /* StepsViewController.swift in Sources */,
 				2C8652EF1F4B33DE00D51654 /* GeneralInfoTableViewCell.swift in Sources */,
@@ -13550,7 +13564,7 @@
 				2C8653361F4B33DE00D51654 /* GCDThings.swift in Sources */,
 				2C8653371F4B33DE00D51654 /* GlobalFunctions.swift in Sources */,
 				2C8653381F4B33DE00D51654 /* CongratulationViewController.swift in Sources */,
-				2C8653391F4B33DE00D51654 /* RatingHelper.swift in Sources */,
+				2C8653391F4B33DE00D51654 /* AdaptiveRatingHelper.swift in Sources */,
 				2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */,
 				084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */,
@@ -13843,7 +13857,7 @@
 				2C89A9881F4C289900227C3B /* PlaceholderStyleExtensions.swift in Sources */,
 				2C89A9891F4C289900227C3B /* VideoDownloadView.swift in Sources */,
 				2C89A98A1F4C289900227C3B /* CodeSample.swift in Sources */,
-				2C89A98B1F4C289900227C3B /* RatingManager.swift in Sources */,
+				2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C89A98C1F4C289900227C3B /* AdaptiveOnboardingStep.swift in Sources */,
 				08A9F7111FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
@@ -13923,7 +13937,7 @@
 				2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */,
 				2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C89A9D21F4C289900227C3B /* StatsManager.swift in Sources */,
+				2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */,
 				2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */,
 				2C89A9D41F4C289900227C3B /* StepsViewController.swift in Sources */,
 				2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */,
@@ -14004,7 +14018,7 @@
 				08A9F7071FC37DD000640F1F /* CourseTagsView.swift in Sources */,
 				2C89AA1D1F4C289900227C3B /* GlobalFunctions.swift in Sources */,
 				2C89AA1E1F4C289900227C3B /* CongratulationViewController.swift in Sources */,
-				2C89AA1F1F4C289900227C3B /* RatingHelper.swift in Sources */,
+				2C89AA1F1F4C289900227C3B /* AdaptiveRatingHelper.swift in Sources */,
 				2C89AA201F4C289900227C3B /* TimeFormatHelper.swift in Sources */,
 				084490041F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				08CB0D511FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
@@ -14299,7 +14313,7 @@
 				2C97313C1F4C38F600AC9301 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C97313D1F4C38F600AC9301 /* VideoDownloadView.swift in Sources */,
 				2C97313E1F4C38F600AC9301 /* CodeSample.swift in Sources */,
-				2C97313F1F4C38F600AC9301 /* RatingManager.swift in Sources */,
+				2C97313F1F4C38F600AC9301 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB81F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C9731401F4C38F600AC9301 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C9731411F4C38F600AC9301 /* WarningView.swift in Sources */,
@@ -14386,7 +14400,7 @@
 				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
 				2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C9731861F4C38F600AC9301 /* StatsManager.swift in Sources */,
+				2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */,
 				2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C9731881F4C38F600AC9301 /* StepsViewController.swift in Sources */,
 				2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */,
@@ -14461,7 +14475,7 @@
 				2C9731D01F4C38F600AC9301 /* GCDThings.swift in Sources */,
 				2C9731D11F4C38F600AC9301 /* GlobalFunctions.swift in Sources */,
 				2C9731D21F4C38F600AC9301 /* CongratulationViewController.swift in Sources */,
-				2C9731D31F4C38F600AC9301 /* RatingHelper.swift in Sources */,
+				2C9731D31F4C38F600AC9301 /* AdaptiveRatingHelper.swift in Sources */,
 				2C9731D41F4C38F600AC9301 /* TimeFormatHelper.swift in Sources */,
 				084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C9731D51F4C38F600AC9301 /* WebViewHorizontalScrollHelper.swift in Sources */,
@@ -14809,7 +14823,7 @@
 				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
-				2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */,
+				2C76ACCD1F16496C0077D9D7 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB51F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
@@ -14896,7 +14910,7 @@
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */,
+				2C733C3A1F29E090000E7FAF /* AdaptiveStatsManager.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
@@ -14971,7 +14985,7 @@
 				864D669A1E83DE03001E8D9E /* GCDThings.swift in Sources */,
 				864D669B1E83DE03001E8D9E /* GlobalFunctions.swift in Sources */,
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
-				2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */,
+				2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */,
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
 				084490021F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
