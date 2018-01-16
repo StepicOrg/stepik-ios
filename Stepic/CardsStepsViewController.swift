@@ -14,6 +14,11 @@ class CardsStepsViewController: UIViewController {
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var expLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var labelsStackView: UIStackView!
 
     var canSwipeCurrentCardUp = false
 
@@ -21,7 +26,6 @@ class CardsStepsViewController: UIViewController {
 
     fileprivate var topCard: StepCardView?
     fileprivate var currentStepViewController: CardStepViewController?
-    fileprivate var navigationView: AdaptiveNavigationBar?
     fileprivate var statusBarPad: UIView?
 
     var state: CardsStepsViewState = .normal {
@@ -54,20 +58,14 @@ class CardsStepsViewController: UIViewController {
 
         title = ""
 
-        navigationView = AdaptiveNavigationBar()
-        navigationView?.onCloseAction = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        if let navView = navigationView {
-            navigationController?.view.addSubview(navView)
-            navView.layer.zPosition = kolodaView.layer.zPosition - 1
-        }
-
         statusBarPad = UIView()
         statusBarPad?.backgroundColor = UIColor.mainLight
         if let padView = statusBarPad {
-            navigationController?.view.addSubview(padView)
+            view.addSubview(padView)
         }
+        navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
+        progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
 
         if presenter == nil {
             presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
@@ -78,24 +76,31 @@ class CardsStepsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         statusBarPad?.frame = UIApplication.shared.statusBarFrame
-        navigationView?.frame = navigationController?.navigationBar.frame ?? CGRect.zero
+
+        if DeviceInfo.current.orientation.interface.isLandscape && !DeviceInfo.current.isPad {
+            labelsStackView.axis = .horizontal
+            labelsStackView.spacing = 8
+        } else {
+            labelsStackView.axis = .vertical
+            labelsStackView.spacing = 0
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationView?.isHidden = false
-        navigationController?.navigationBar.layer.zPosition = -1
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.layer.zPosition = 0
-        (navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationView?.isHidden = true
+    @IBAction func onBackButtonClick(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func onTrophyButtonClick(_ sender: Any) {
     }
 }
 
