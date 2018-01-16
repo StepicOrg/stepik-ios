@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,19 +20,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aer-63-xtx" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="16" y="12" width="296" height="19.5"/>
+                        <rect key="frame" x="24" y="15" width="280" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="leadingMargin" secondItem="aer-63-xtx" secondAttribute="leading" constant="-8" id="Jsr-Z8-Iem"/>
+                    <constraint firstItem="cY0-Ar-8k9" firstAttribute="leading" secondItem="aer-63-xtx" secondAttribute="leading" constant="-24" id="Jsr-Z8-Iem"/>
                     <constraint firstAttribute="topMargin" secondItem="aer-63-xtx" secondAttribute="top" constant="-4" id="MOv-8x-kcc"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="aer-63-xtx" secondAttribute="trailing" id="bfz-Dr-5Ap"/>
+                    <constraint firstItem="cY0-Ar-8k9" firstAttribute="trailing" secondItem="aer-63-xtx" secondAttribute="trailing" constant="16" id="bfz-Dr-5Ap"/>
                     <constraint firstAttribute="bottomMargin" secondItem="aer-63-xtx" secondAttribute="bottom" constant="4" id="lsY-28-ElR"/>
                 </constraints>
+                <viewLayoutGuide key="safeArea" id="cY0-Ar-8k9"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="1SB-Gg-KLt"/>
             <connections>
                 <outlet property="suggestionLabel" destination="aer-63-xtx" id="kGC-Iq-Tnc"/>
             </connections>
