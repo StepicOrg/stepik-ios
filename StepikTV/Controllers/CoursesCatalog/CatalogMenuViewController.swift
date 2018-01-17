@@ -11,7 +11,6 @@ import UIKit
 class CatalogMenuViewController: MenuTableViewController {
 
     var presenter: CatalogPresenter?
-
     var userCourses: UserCourses?
 
     override func awakeFromNib() {

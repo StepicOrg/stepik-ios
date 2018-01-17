@@ -11,18 +11,15 @@ import UIKit
 class ParagraphLessonsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var paragraphIndex: Int!
-
-    var paragraph: Paragraph!
+    var section: SectionViewData!
 
     @IBOutlet var paragraphName: UILabel!
-
     @IBOutlet var progressLabel: UILabel!
-
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        paragraphName.text = paragraph.name
+        paragraphName.text = section.title
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -33,15 +30,21 @@ class ParagraphLessonsTableViewController: UIViewController, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return paragraph.lessons.count
+        return self.section.lessons.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonTableViewCell", for: indexPath) as! LessonTableViewCell
-
-        cell.configure(with: paragraphIndex, indexPath.row + 1, paragraph.lessons[indexPath.row])
+        cell.configure(with: paragraphIndex, indexPath.row + 1, section.lessons[indexPath.row].title)
 
         return cell
     }
 
+}
+
+extension ParagraphLessonsTableViewController: DetailCourseContentView {
+
+    func updateLessonsList() {
+        tableView.reloadData()
+    }
 }

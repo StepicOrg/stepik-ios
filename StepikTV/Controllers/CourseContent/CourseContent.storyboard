@@ -237,7 +237,7 @@
         <!--Курс-->
         <scene sceneID="2f0-Hb-84o">
             <objects>
-                <splitViewController id="dAB-97-Pq5" customClass="MenuSplitViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="CourseContentInitial" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAB-97-Pq5" customClass="MenuSplitViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Курс" id="tKk-RA-loN"/>
                     <connections>
                         <segue destination="cbM-7L-2gB" kind="relationship" relationship="masterViewController" id="HZG-lQ-Twa"/>

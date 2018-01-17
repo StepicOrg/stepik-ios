@@ -215,12 +215,14 @@ class CollectionRow {
         data = courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics") {
 
-                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoCollectionViewController", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
+                let navigationController = ControllerHelper.instantiateViewController(identifier: "CourseInfoNavigation", storyboardName: "CourseInfo") as! UINavigationController
+
+                let courseInfoVC = navigationController.viewControllers.first as! CourseInfoCollectionViewController
 
                 courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
                 courseInfoVC.presenter?.course = course
 
-                viewController?.present(courseInfoVC, animated: true, completion: {})
+                viewController?.present(navigationController, animated: true, completion: {})
             }
         }
 

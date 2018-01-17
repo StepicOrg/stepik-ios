@@ -12,7 +12,7 @@
         <!--Navigation Controller-->
         <scene sceneID="z0R-ih-nLz">
             <objects>
-                <navigationController navigationBarHidden="YES" id="6RN-Wr-B5v" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CourseInfoNavigation" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="6RN-Wr-B5v" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lTO-G9-RVQ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -27,7 +27,7 @@
         <!--Course Info Collection View Controller-->
         <scene sceneID="gyM-Tp-j5J">
             <objects>
-                <collectionViewController storyboardIdentifier="CourseInfoCollectionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CourseInfoPage" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Orj-vq-fVC" customClass="CourseInfoCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="h75-bj-NUM">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -10,11 +10,10 @@ import UIKit
 
 class CourseContentMenuViewController: MenuTableViewController {
 
-    // Pass data for current vc with some case
-    var course = Model.sharedReference.getCurrentCourse()
+    var presenter: CourseContentPresenter?
+    var sections: [SectionViewData] = []
 
     override var segueIdentifier: String { return "ShowDetailSegue" }
-
     override var cellIdentifier: String { return ParagraphTableViewCell.reuseIdentifier }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -26,7 +25,7 @@ class CourseContentMenuViewController: MenuTableViewController {
         case 0:
             return 1
         default:
-            return course.paragraphs.count
+            return sections.count
         }
     }
 
@@ -46,7 +45,7 @@ class CourseContentMenuViewController: MenuTableViewController {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ParagraphTableViewCell
-            cell.configure(with: indexPath.row + 1, course.paragraphs[indexPath.row].name)
+            cell.configure(with: indexPath.row + 1, sections[indexPath.row].title)
             return cell
         }
     }
@@ -54,10 +53,21 @@ class CourseContentMenuViewController: MenuTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = performingSegueSourceCellIndexPath else { fatalError("'prepare(for segue:)' called when no performing segues") }
 
-        if segue.identifier == segueIdentifier {
-            let vc = segue.destination as? ParagraphLessonsTableViewController
-            vc?.paragraphIndex = indexPath.row + 1
-            vc?.paragraph = course.paragraphs[indexPath.row]
-        }
+        guard let vc = segue.destination as? ParagraphLessonsTableViewController, segue.identifier == segueIdentifier else { return }
+
+        vc.paragraphIndex = indexPath.row + 1
+        vc.section = sections[indexPath.row]
+
+        presenter?.loadUnitsForSection(vc, index: indexPath.row)
+    }
+}
+
+extension CourseContentMenuViewController: MenuCourseContentView {
+    func provide(courseTitle: String, action: () -> Void) {
+    }
+
+    func provide(sections: [SectionViewData]) {
+        self.sections = sections
+        tableView.reloadData()
     }
 }

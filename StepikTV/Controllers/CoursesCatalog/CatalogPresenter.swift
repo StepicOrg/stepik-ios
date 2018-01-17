@@ -97,14 +97,18 @@ class CatalogPresenter {
     private func buildViewData(from courses: [Course]) -> [ItemViewData] {
         guard let viewController = view as? UIViewController else { fatalError() }
         return courses.map { course in
-            ItemViewData.init(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
 
-                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoCollectionViewController", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
+                let initialVC = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! MenuSplitViewController
 
-                courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
-                courseInfoVC.presenter?.course = course
+                let navController = initialVC.viewControllers.first as! UINavigationController
 
-                viewController.present(courseInfoVC, animated: true, completion: {})
+                let courseContentVC = navController.viewControllers.first as! CourseContentMenuViewController
+
+                courseContentVC.presenter = CourseContentPresenter(view: courseContentVC)
+                courseContentVC.presenter?.course = course
+
+                viewController.present(initialVC, animated: true, completion: {})
             }
         }
     }

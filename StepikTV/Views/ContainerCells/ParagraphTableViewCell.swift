@@ -10,16 +10,13 @@ import UIKit
 
 class ParagraphTableViewCell: UITableViewCell {
 
-    static var reuseIdentifier: String { get { return "ParagraphTableViewCell" } }
-
+    static var reuseIdentifier: String { return "ParagraphTableViewCell" }
     static var size: CGFloat { get { return CGFloat(66) } }
 
     @IBOutlet var nameLabel: UILabel!
-
     @IBOutlet var progressIcon: UIImageView!
 
     private var index: Int?
-
     private var paragraphName: String?
 
     func configure(with index: Int, _ paragraphName: String) {
