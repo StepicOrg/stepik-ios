@@ -88,7 +88,7 @@ class AdaptiveStepsPresenter {
         didSet {
             if let curState = self.currentStepPresenter?.state,
                let reaction = self.lastReaction {
-                self.sendReaction(reaction: lastReaction!, success: { _ in
+                self.sendReaction(reaction: lastReaction!, success: {
                     // Analytics
                     switch reaction {
                     case .maybeLater:
@@ -322,7 +322,7 @@ class AdaptiveStepsPresenter {
         let password = StringHelper.generateRandomString(of: 16)
 
         performRequest({
-            AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
+            ApiDataDownloader.auth.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
                 print("new user registered: \(email):\(password)")
 
                 // Save account to defaults
@@ -342,7 +342,7 @@ class AdaptiveStepsPresenter {
 
     fileprivate func logIn(with email: String, password: String, success: @escaping (() -> Void)) {
         performRequest({
-            AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
+            ApiDataDownloader.auth.logInWithUsername(email, password: password, success: { token in
                 AuthInfo.shared.token = token
 
                 self.stepicsAPI?.retrieveCurrentUser(success: { user in
@@ -437,7 +437,7 @@ class AdaptiveStepsPresenter {
                 if !course.enrolled {
                     self.isJoinedCourse = true
 
-                    _ = AuthManager.sharedManager.joinCourse(course: course, success: {
+                    _ = ApiDataDownloader.enrollments.joinCourse(course: course, success: {
                         self.course?.enrolled = true
                         print("success joined course -> loading cards")
 

@@ -17,6 +17,14 @@ class FillBlanksQuizViewController: QuizViewController {
     var dataset: FillBlanksDataset?
     var reply: FillBlanksReply?
 
+    var cellWidth: CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        } else {
+            return tableView.bounds.width
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -111,10 +119,10 @@ class FillBlanksQuizViewController: QuizViewController {
         case .input :
             return FillBlanksInputTableViewCell.defaultHeight
         case .text:
-            return FillBlanksTextTableViewCell.getHeight(htmlText: dataset.components[index].text, width: self.view.bounds.width)
+            return FillBlanksTextTableViewCell.getHeight(htmlText: dataset.components[index].text, width: cellWidth)
         case .select:
             if let ans = getAnswerForComponent(atIndex: index) {
-                return FillBlanksChoiceTableViewCell.getHeight(text: ans, width: self.view.bounds.width)
+                return FillBlanksChoiceTableViewCell.getHeight(text: ans, width: cellWidth)
             } else {
                 return 0
             }

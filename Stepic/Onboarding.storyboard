@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,11 +14,7 @@
         <scene sceneID="Ckd-Qb-xxn">
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="EHs-hl-3fE" customClass="OnboardingViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Vcm-Rh-acO"/>
-                        <viewControllerLayoutGuide type="bottom" id="lhJ-x4-WG8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VP3-PB-wUp">
+                    <view key="view" contentMode="scaleToFill" id="VP3-PB-wUp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -82,11 +78,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="5g3-nB-MMj" secondAttribute="trailing" constant="16" id="1zG-dx-Acc"/>
-                            <constraint firstItem="lhJ-x4-WG8" firstAttribute="top" secondItem="5g3-nB-MMj" secondAttribute="bottom" constant="16" id="JZp-DR-Y6r"/>
-                            <constraint firstItem="5g3-nB-MMj" firstAttribute="leading" secondItem="VP3-PB-wUp" secondAttribute="leading" constant="16" id="nDo-2T-E4J"/>
-                            <constraint firstItem="5g3-nB-MMj" firstAttribute="top" secondItem="Vcm-Rh-acO" secondAttribute="bottom" constant="16" id="vl7-zi-Daq"/>
+                            <constraint firstItem="y1Z-Jg-MVB" firstAttribute="trailing" secondItem="5g3-nB-MMj" secondAttribute="trailing" constant="16" id="1zG-dx-Acc"/>
+                            <constraint firstItem="y1Z-Jg-MVB" firstAttribute="bottom" secondItem="5g3-nB-MMj" secondAttribute="bottom" constant="16" id="JZp-DR-Y6r"/>
+                            <constraint firstItem="5g3-nB-MMj" firstAttribute="leading" secondItem="y1Z-Jg-MVB" secondAttribute="leading" constant="16" id="nDo-2T-E4J"/>
+                            <constraint firstItem="5g3-nB-MMj" firstAttribute="top" secondItem="y1Z-Jg-MVB" secondAttribute="top" constant="16" id="vl7-zi-Daq"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="y1Z-Jg-MVB"/>
                     </view>
                     <navigationItem key="navigationItem" id="o1s-iX-7hl">
                         <barButtonItem key="leftBarButtonItem" image="onboarding-close" style="plain" id="rgL-TT-6ic">

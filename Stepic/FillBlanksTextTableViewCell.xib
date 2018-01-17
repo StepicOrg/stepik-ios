@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ah-Rl-SPS" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="296" height="27"/>
+                        <rect key="frame" x="24" y="11" width="280" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -27,11 +28,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="topMargin" secondItem="2ah-Rl-SPS" secondAttribute="top" id="0w4-YU-v9Y"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="2ah-Rl-SPS" secondAttribute="leading" constant="-8" id="9SI-bF-GyD"/>
+                    <constraint firstItem="KZF-6Q-Ebn" firstAttribute="leading" secondItem="2ah-Rl-SPS" secondAttribute="leading" constant="-24" id="9SI-bF-GyD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="2ah-Rl-SPS" secondAttribute="bottom" id="IXR-sE-dB7"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="2ah-Rl-SPS" secondAttribute="trailing" id="vLo-Hu-Q8d"/>
+                    <constraint firstItem="KZF-6Q-Ebn" firstAttribute="trailing" secondItem="2ah-Rl-SPS" secondAttribute="trailing" id="vLo-Hu-Q8d"/>
                 </constraints>
+                <viewLayoutGuide key="safeArea" id="KZF-6Q-Ebn"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="6st-Rs-R49"/>
             <connections>
                 <outlet property="optionLabel" destination="2ah-Rl-SPS" id="z45-Qg-gcE"/>
             </connections>

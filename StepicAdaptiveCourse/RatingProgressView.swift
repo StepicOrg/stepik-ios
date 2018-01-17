@@ -137,7 +137,7 @@ class RatingProgressView: UIView {
         self.addGestureRecognizer(tapRecognizer)
     }
 
-    func tap(_ gestureRecognizer: UITapGestureRecognizer) {
+    @objc func tap(_ gestureRecognizer: UITapGestureRecognizer) {
         func showPressed() {
             frontViewShadowLayer.isHidden = true
             label.textColor = backLabelColor?.withAlphaComponent(0.4)
@@ -170,7 +170,7 @@ class RatingProgressView: UIView {
         autoresizesSubviews = true
 
         // Font
-        labelFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
+        labelFont = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
 
         // Make bg with light color (back)
         self.backgroundColor = mainColor?.withAlphaComponent(0.1)

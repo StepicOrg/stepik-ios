@@ -246,6 +246,9 @@ class StepicVideoPlayerViewController: UIViewController {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
 
+        topContainerView.setRoundedCorners(cornerRadius: 8.0)
+        bottomFullscreenControlsView.setRoundedCorners(cornerRadius: 8.0)
+
         rateButton.setTitle("\(currentRate.rawValue)x", for: UIControlState())
 
         self.player = Player()

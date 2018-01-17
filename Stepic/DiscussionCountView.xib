@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,7 +27,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Показать комментарии(1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqm-fS-dY2" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="44" y="15" width="174" height="17"/>
+                    <rect key="frame" x="44" y="15" width="175" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -47,7 +48,7 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="w00-Pw-zGl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="0zU-5U-gOx"/>
+                <constraint firstItem="w00-Pw-zGl" firstAttribute="leading" secondItem="uBI-y3-BSO" secondAttribute="leading" constant="16" id="0zU-5U-gOx"/>
                 <constraint firstItem="iZt-1V-Xtp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4xL-hU-HC2"/>
                 <constraint firstItem="jqm-fS-dY2" firstAttribute="leading" secondItem="w00-Pw-zGl" secondAttribute="trailing" constant="8" id="8Zu-N8-6dO"/>
                 <constraint firstAttribute="bottom" secondItem="iZt-1V-Xtp" secondAttribute="bottom" id="JpG-Jt-URY"/>
@@ -55,13 +56,14 @@
                 <constraint firstItem="iZt-1V-Xtp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QA8-tj-aJb"/>
                 <constraint firstItem="jqm-fS-dY2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Sjc-9t-pYM"/>
                 <constraint firstItem="C5U-NN-EU7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="T6i-sp-2u0"/>
-                <constraint firstAttribute="trailing" secondItem="C5U-NN-EU7" secondAttribute="trailing" constant="8" id="ZMp-gP-yso"/>
+                <constraint firstItem="uBI-y3-BSO" firstAttribute="trailing" secondItem="C5U-NN-EU7" secondAttribute="trailing" constant="8" id="ZMp-gP-yso"/>
                 <constraint firstAttribute="trailing" secondItem="iZt-1V-Xtp" secondAttribute="trailing" id="t1C-vB-9sc"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="uBI-y3-BSO"/>
             <point key="canvasLocation" x="319" y="141"/>
         </view>
     </objects>
