@@ -82,12 +82,12 @@ class ExplorePresenter: CourseListCountDelegate {
         })
     }
 
-    var searchController: NewSearchResultsViewController?
+    var searchController: SearchResultsViewController?
 
     func queryChanged(to query: String) {
         //TODO: Refactor this to router layer in the next releases
         if searchController == nil {
-            guard let controller = ControllerHelper.instantiateViewController(identifier: "SearchResultsViewController", storyboardName: "Explore") as? NewSearchResultsViewController else {
+            guard let controller = ControllerHelper.instantiateViewController(identifier: "SearchResultsViewController", storyboardName: "Explore") as? SearchResultsViewController else {
                 return
             }
             searchController = controller
