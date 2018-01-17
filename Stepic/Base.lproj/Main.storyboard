@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -352,13 +351,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="245" translatesAutoresizingMaskIntoConstraints="NO" id="pKw-C7-Y9N">
-                                <rect key="frame" x="0.0" y="228" width="375" height="211"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="pKw-C7-Y9N" secondAttribute="height" multiplier="16:9" id="Vyc-yQ-fpJ"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-nY-c6L">
-                                <rect key="frame" x="162.5" y="308.5" width="50" height="50"/>
+                                <rect key="frame" x="162.5" y="318.5" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5LT-2m-88H"/>
                                     <constraint firstAttribute="width" constant="50" id="Pvt-Ch-E4a"/>
@@ -369,17 +365,17 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="Adaptive_1838" customModuleProvider="target">
-                                <rect key="frame" x="-4" y="559" width="383" height="46"/>
+                                <rect key="frame" x="0.0" y="559" width="375" height="46"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="f61-MW-YzU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Byl-jj-21l">
-                                <rect key="frame" x="-4" y="605" width="383" height="62"/>
+                                <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxQ-px-hgG">
-                                        <rect key="frame" x="291" y="8" width="80" height="46"/>
+                                        <rect key="frame" x="287" y="8" width="80" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="PBc-MK-hnR"/>
                                         </constraints>
@@ -389,7 +385,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBh-Uu-7V4">
-                                        <rect key="frame" x="12" y="8" width="107" height="46"/>
+                                        <rect key="frame" x="8" y="8" width="107" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="Tec-oH-suA"/>
                                         </constraints>
@@ -405,8 +401,10 @@
                                     <constraint firstItem="JBh-Uu-7V4" firstAttribute="top" secondItem="Byl-jj-21l" secondAttribute="top" constant="8" id="A0J-XF-xwz"/>
                                     <constraint firstAttribute="height" constant="62" id="FPj-un-aWy"/>
                                     <constraint firstAttribute="bottom" secondItem="JBh-Uu-7V4" secondAttribute="bottom" constant="8" id="IOO-Mr-Mgd"/>
+                                    <constraint firstItem="NxQ-px-hgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Byl-jj-21l" secondAttribute="leading" constant="20" symbolic="YES" id="Jp6-Yc-oRM"/>
                                     <constraint firstItem="aZZ-Ju-B2W" firstAttribute="trailing" secondItem="NxQ-px-hgG" secondAttribute="trailing" constant="8" id="MaT-Cn-Cq5"/>
                                     <constraint firstItem="JBh-Uu-7V4" firstAttribute="leading" secondItem="aZZ-Ju-B2W" secondAttribute="leading" constant="8" id="TYt-bP-rJi"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JBh-Uu-7V4" secondAttribute="trailing" constant="20" symbolic="YES" id="cb6-Ev-wBU"/>
                                     <constraint firstAttribute="bottom" secondItem="NxQ-px-hgG" secondAttribute="bottom" constant="8" id="hEE-vD-5Xm"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="aZZ-Ju-B2W"/>
@@ -414,8 +412,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="1EZ-1G-TyA" secondAttribute="centerY" id="02E-tW-49l"/>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerX" secondItem="pKw-C7-Y9N" secondAttribute="centerX" id="6dR-Rr-VEP"/>
-                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="eOu-jp-hBO" secondAttribute="centerY" id="GBF-9u-zUN"/>
+                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="top" secondItem="1EZ-1G-TyA" secondAttribute="top" id="9tu-Xz-rOq"/>
                             <constraint firstAttribute="trailing" secondItem="68N-yM-TOn" secondAttribute="trailing" id="JD8-OV-XB5"/>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerY" secondItem="pKw-C7-Y9N" secondAttribute="centerY" id="ML7-NF-DQL"/>
                             <constraint firstItem="pKw-C7-Y9N" firstAttribute="bottom" secondItem="Byl-jj-21l" secondAttribute="bottom" id="TPx-dk-L5K"/>
@@ -504,9 +503,11 @@
                                         <constraints>
                                             <constraint firstItem="hFM-dX-wwu" firstAttribute="trailing" secondItem="WfD-iN-bQ6" secondAttribute="trailing" constant="8" id="1Ag-uv-sMb"/>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="3GV-fJ-hPz"/>
+                                            <constraint firstItem="WfD-iN-bQ6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pp4-VH-jhD" secondAttribute="leading" constant="20" symbolic="YES" id="4pS-iV-hD6"/>
                                             <constraint firstAttribute="trailing" secondItem="BE9-jp-jJZ" secondAttribute="trailing" id="5IQ-0k-G67"/>
                                             <constraint firstAttribute="bottom" secondItem="WfD-iN-bQ6" secondAttribute="bottom" constant="8" id="DDw-e1-EIm"/>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="-1" id="DvZ-wU-sTq"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P6P-J7-5Ea" secondAttribute="trailing" constant="20" symbolic="YES" id="GVv-gD-ygy"/>
                                             <constraint firstItem="P6P-J7-5Ea" firstAttribute="leading" secondItem="hFM-dX-wwu" secondAttribute="leading" constant="8" id="IDh-7f-nJx"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="hFM-dX-wwu" secondAttribute="leading" id="SVq-w0-3Vg"/>
