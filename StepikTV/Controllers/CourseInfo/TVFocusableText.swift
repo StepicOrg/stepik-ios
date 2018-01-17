@@ -113,13 +113,34 @@ class TVFocusableText: UILabel {
 
 }
 
-class TVTextPresentationAlertController: UIAlertController {
+class TVTextPresentationAlertController: UIViewController {
 
     private var contentLabel: UILabel!
+    private var blurView: UIVisualEffectView!
+    private var vibrancyView: UIVisualEffectView!
 
+    let blurStyle = UIBlurEffectStyle.dark
     let contentWidth: CGFloat = 900
 
+    func initBlur() -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: blurStyle)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+
+        return blurEffectView
+    }
+
+    func initVibrancy() -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: blurStyle)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+
+        return vibrancyEffectView
+    }
+
     func setText(_ text: String) {
+        blurView = initBlur()
+        vibrancyView = initVibrancy()
         contentLabel = initMainLabel(with: text)
 
         arrangeViews()
@@ -138,6 +159,9 @@ class TVTextPresentationAlertController: UIAlertController {
     }
 
     private func arrangeViews() {
+        view.addSubview(blurView)
+        view.addSubview(vibrancyView)
+
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(contentLabel)
 
@@ -146,6 +170,7 @@ class TVTextPresentationAlertController: UIAlertController {
         contentLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
+    /*
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard presses.first!.type == UIPressType.menu else {
             super.pressesBegan(presses, with: event)
@@ -157,5 +182,5 @@ class TVTextPresentationAlertController: UIAlertController {
 
     @objc func leaveAlert(_: AnyObject) {
         self.dismiss(animated: true, completion: nil)
-    }
+    } */
 }

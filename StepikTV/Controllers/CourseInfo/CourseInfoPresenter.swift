@@ -40,8 +40,9 @@ class CourseInfoPresenter {
         let subscriptionAction: (Course) -> Void = {_ in }
 
         let selectionAction: (TVFocusableText) -> Void = {
-            let textPresenter = TVTextPresentationAlertController(title: "", message: "", preferredStyle: .alert)
+            let textPresenter = TVTextPresentationAlertController()
             textPresenter.setText($0.text ?? "")
+            textPresenter.modalPresentationStyle = .overFullScreen
             viewController.present(textPresenter, animated: true, completion: {})
         }
 

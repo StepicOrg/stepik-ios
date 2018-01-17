@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Orj-vq-fVC">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6RN-Wr-B5v">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
@@ -9,6 +9,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="z0R-ih-nLz">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="6RN-Wr-B5v" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lTO-G9-RVQ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Orj-vq-fVC" kind="relationship" relationship="rootViewController" id="O4m-9q-8Q1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Sv-hH-bAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1713" y="-1343"/>
+        </scene>
         <!--Course Info Collection View Controller-->
         <scene sceneID="gyM-Tp-j5J">
             <objects>
@@ -225,6 +240,7 @@
                             <outlet property="delegate" destination="Orj-vq-fVC" id="K3x-me-y9B"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="Y9G-6U-uWa"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWJ-Lp-9BG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
