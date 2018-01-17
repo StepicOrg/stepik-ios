@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Profile View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="2md-QC-a9y">
             <objects>
-                <viewController id="PjG-kv-YKT" customClass="NewProfileViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PjG-kv-YKT" customClass="ProfileViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEb-uO-Gd8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-276" y="150"/>
         </scene>
-        <!--New Settings View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="JVY-5p-0UI">
             <objects>
-                <viewController storyboardIdentifier="NewSettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OwV-6h-QBp" customClass="NewSettingsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OwV-6h-QBp" customClass="SettingsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3oO-pI-Igs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

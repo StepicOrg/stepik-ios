@@ -53,7 +53,7 @@ class StreaksAlertPresentationManager {
     }()
 
     private func didChooseTime() {
-        if let controller = controller as? NewProfileViewController {
+        if let controller = controller as? ProfileViewController {
             controller.onAppear()
         }
     }

@@ -1,5 +1,5 @@
 //
-//  NewSettingsViewController.swift
+//  SettingsViewController.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 04.09.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewSettingsViewController: MenuViewController, SettingsView {
+class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
     override func viewDidLoad() {

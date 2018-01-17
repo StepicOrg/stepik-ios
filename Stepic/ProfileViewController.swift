@@ -10,7 +10,7 @@ import UIKit
 import Presentr
 import DZNEmptyDataSet
 
-class NewProfileViewController: MenuViewController, ProfileView {
+class ProfileViewController: MenuViewController, ProfileView {
 
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?
@@ -21,7 +21,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
         super.viewDidLoad()
 
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
-        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(NewProfileViewController.shareButtonPressed))
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
 
         tableView.emptyDataSetSource = self
@@ -166,7 +166,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 }
 
-extension NewProfileViewController : DZNEmptyDataSetDelegate {
+extension ProfileViewController : DZNEmptyDataSetDelegate {
     @objc func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return false
     }
@@ -185,7 +185,7 @@ extension NewProfileViewController : DZNEmptyDataSetDelegate {
     }
 }
 
-extension NewProfileViewController : DZNEmptyDataSetSource {
+extension ProfileViewController : DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         switch state {
         case .anonymous:
