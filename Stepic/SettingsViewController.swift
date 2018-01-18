@@ -1,5 +1,5 @@
 //
-//  NewSettingsViewController.swift
+//  SettingsViewController.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 04.09.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewSettingsViewController: MenuViewController, SettingsView {
+class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
     override func viewDidLoad() {
@@ -17,18 +17,21 @@ class NewSettingsViewController: MenuViewController, SettingsView {
         tableView.tableHeaderView = artView
         self.title = NSLocalizedString("Settings", comment: "")
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
         artView.art = Images.arts.customizeLearningProcess
-        artView.width = UIScreen.main.bounds.width
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        if #available(iOS 11.0, *) {
+            artView.width = UIScreen.main.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        } else {
+            artView.width = UIScreen.main.bounds.width
+        }
+
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
         artView.onTap = {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
         }
@@ -52,7 +55,11 @@ class NewSettingsViewController: MenuViewController, SettingsView {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        artView.width = size.width
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: size.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        if #available(iOS 11.0, *) {
+            artView.width = size.width - view.safeAreaInsets.top - view.safeAreaInsets.bottom
+        } else {
+            artView.width = size.width
+        }
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
     }
 }

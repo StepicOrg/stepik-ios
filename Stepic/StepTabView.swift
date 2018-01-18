@@ -52,7 +52,7 @@ class StepTabView: NibInitializableView {
 
     }
 
-    func stepDone(_ notification: Foundation.Notification) {
+    @objc func stepDone(_ notification: Foundation.Notification) {
         if let notificationStepId = (notification as NSNotification).userInfo?["id"] as? Int,
             let stepId = self.stepId {
             if notificationStepId == stepId {

@@ -119,10 +119,10 @@ class ProfilePresenter {
 
     private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock? {
         var content: [TitleContentExpandableMenuBlock.TitleContent] = []
-        if user.bio.characters.count > 0 {
+        if user.bio.count > 0 {
             content += [(title: NSLocalizedString("ShortBio", comment: ""), content: user.bio)]
         }
-        if user.details.characters.count > 0 {
+        if user.details.count > 0 {
             content += [(title: NSLocalizedString("Info", comment: ""), content: user.details)]
         }
 

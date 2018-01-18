@@ -43,7 +43,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func didRotate() {
+    @objc func didRotate() {
         print("did rotate in general info")
         setNeedsLayout()
         layoutIfNeeded()

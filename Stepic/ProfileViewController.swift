@@ -1,265 +1,277 @@
 //
-//  ProfileViewController.swift
+//  NewProfileViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 28.10.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
+//  Created by Ostrenkiy on 31.08.17.
+//  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
 import UIKit
+import Presentr
 import DZNEmptyDataSet
 
-class ProfileViewController: UITableViewController {
+class ProfileViewController: MenuViewController, ProfileView {
 
-    @IBOutlet weak var signInHeight: NSLayoutConstraint!
-    @IBOutlet weak var signInNameDistance: NSLayoutConstraint!
+    var presenter: ProfilePresenter?
+    var shareBarButtonItem: UIBarButtonItem?
 
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var avatarImageView: AvatarImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-
-    @IBOutlet weak var signOutButton: UIButton!
-
-    @IBOutlet weak var streaksView: StreaksView!
-
-    var heightForRows = [[131], [0], [40]]
-    let selectionForRows = [[false], [false], [true]]
-    let sectionTitles = [
-        NSLocalizedString("UserInfo", comment: ""),
-        NSLocalizedString("Activity", comment: ""),
-        NSLocalizedString("Actions", comment: "")
-    ]
-
-    fileprivate func localize() {
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
-        signOutButton.setTitle(NSLocalizedString("SignOut", comment: ""), for: UIControlState())
-    }
+    var state: ProfileState = .refreshing
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem!
 
-        localize()
-        signInButton.setStepicWhiteStyle()
-        signInButton.isHidden = false
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        // Do any additional setup after loading the view.
-    }
 
-    func setStreaks(activity: UserActivity) {
-        streaksView.setStreaks(current: activity.currentStreak, best: activity.longestStreak)
-    }
-
-    func updateUser() {
-        if let user = AuthInfo.shared.user {
-            self.initWithUser(user)
-        } else {
-            performRequest({
-                if let user = AuthInfo.shared.user {
-                    self.initWithUser(user)
-                }
-            }, error: {
-                [weak self]
-                error in
-                guard let s = self else { return }
-                if error == PerformRequestError.noAccessToRefreshToken {
-                    AuthInfo.shared.token = nil
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
-                        self?.updateUser()
-                    }, cancel: {
-                        [weak self] in
-                        self?.updateUser()
-                    })
-                }
-            })
-        }
-    }
-
-    fileprivate func initWithUser(_ user: User) {
-        print("\(user.avatarURL)")
-
-        if !AuthInfo.shared.isAuthorized {
-            signInHeight.constant = 40
-            signInNameDistance.constant = 8
-            heightForRows[0][0] = 131 + 48
-            heightForRows[2][0] = 0
-            heightForRows[1][0] = 0
-            signInButton.isHidden = false
-            userNameLabel.text = NSLocalizedString("NotWithUsYet", comment: "")
-            avatarImageView.contentMode = UIViewContentMode.scaleAspectFit
-            avatarImageView.image = Images.placeholders.anonymous
-        } else {
-            signInHeight.constant = 0
-            signInNameDistance.constant = 0
-            heightForRows[0][0] = 131
-            heightForRows[2][0] = 40
-//            heightForRows[1][0] = 0
-            signInButton.isHidden = true
-            avatarImageView.contentMode = UIViewContentMode.scaleAspectFill
-
-            if let url = URL(string: user.avatarURL) {
-                avatarImageView.set(with: url)
-            }
-            userNameLabel.text = "\(user.firstName) \(user.lastName)"
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
 
-        if AuthInfo.shared.isAuthorized {
-            _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
-                [weak self]
-                activity in
-                if let s = self {
-                    s.setStreaks(activity: activity)
-                    s.heightForRows[1][0] = 108
-                    s.tableView.beginUpdates()
-                    s.tableView.endUpdates()
-                }
-            }, error: {
-                _ in
-
-                //TODO: Display error button
-            })
-        }
-
-        print("beginning updates")
-        tableView.reloadData()
+        self.title = NSLocalizedString("Profile", comment: "")
     }
 
-    func dayLocalizableFor(daysCnt: Int) -> String {
-        switch (daysCnt % 10) {
-        case 1: return NSLocalizedString("days1", comment: "")
-        case 2, 3, 4: return NSLocalizedString("days234", comment: "")
-        default: return NSLocalizedString("days567890", comment: "")
-        }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-        if !AuthInfo.shared.isAuthorized {
-            tableView.reloadData()
-        }
-        updateUser()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(heightForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])
-    }
-
-    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return selectionForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
-            signOut()
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == 2 && heightForRows[2][0] == 0) || (section == 1 && heightForRows[1][0] == 0) {
-            return nil
-        } else {
-            return sectionTitles[section]
-        }
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        if !AuthInfo.shared.isAuthorized {
-            return 0
-        } else {
-            return sectionTitles.count
-        }
-    }
-
-    func signOut() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
-        AuthInfo.shared.token = nil
-        let updateBlock : (() -> Void) = {
-            [weak self] in
-            self?.updateUser()
-        }
-        RoutingManager.auth.routeFrom(controller: self, success: updateBlock, cancel: updateBlock)
-    }
-
-    func signIn() {
-        RoutingManager.auth.routeFrom(controller: self, success: {
-            [weak self] in
-            self?.updateUser()
-        }, cancel: nil)
-    }
-
-    @IBAction func signInButtonPressed(_ sender: AnyObject) {
-        signIn()
-    }
-
-    @IBAction func signOutButtonPressed(_ sender: UIButton) {
-        signOut()
+    @objc func shareButtonPressed() {
+        presenter?.sharePressed()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    var profile: ProfileData? {
+        didSet {
+            profileStreaksView?.profile = profile
+        }
+    }
+    var streaks: StreakData? {
+        didSet {
+            profileStreaksView?.streaks = streaks
+        }
+    }
+
+    var profileStreaksView: ProfileStreaksView?
+
+    func refreshProfileStreaksView() {
+        profileStreaksView = ProfileStreaksView(frame: CGRect.zero)
+        guard let profileStreaksView = profileStreaksView else {
+            return
+        }
+        profileStreaksView.profile = profile
+        profileStreaksView.streaks = streaks
+        profileStreaksView.frame.size = profileStreaksView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+    }
+
+    func setEmpty() {
+        self.tableView.tableHeaderView = nil
+        self.menu = Menu(blocks: [])
+        self.profile = nil
+        self.streaks = nil
+    }
+
+    // MARK: - ProfileView
+
+    func set(state: ProfileState) {
+        self.state = state
+        switch state {
+        case .authorized:
+            self.menu = presenter?.menu
+            refreshProfileStreaksView()
+            tableView.tableHeaderView = profileStreaksView
+            break
+        default:
+            setEmpty()
+            break
+        }
+    }
+
+    func set(profile: ProfileData?) {
+        self.profile = profile
+    }
+
+    func set(streaks: StreakData?) {
+        self.streaks = streaks
+    }
+
+    func set(menu: Menu) {
+        self.menu = menu
+    }
+
+    func showNotificationSettingsAlert(completion: (() -> Void)?) {
+        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+            _ in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+        }))
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: {
+            completion?()
+        })
+    }
+
+    private let streakTimePickerPresenter: Presentr = {
+        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        return streakTimePickerPresenter
+    }()
+
+    func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?) {
+        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
+        vc.startHour = startHour
+        vc.selectedBlock = {
+            selectedBlock?()
+        }
+        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
+    }
+
+    func showShareProfileAlert(url: URL) {
+        DispatchQueue.global(qos: .background).async {
+            [weak self] in
+            let shareVC = SharingHelper.getSharingController(url.absoluteString)
+            shareVC.popoverPresentationController?.barButtonItem = self?.shareBarButtonItem
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.present(shareVC, animated: true, completion: nil)
+            }
+        }
+    }
+
+    func logout(onBack: (() -> Void)?) {
+        AuthInfo.shared.token = nil
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func navigateToSettings() {
+        self.performSegue(withIdentifier: "showSettings", sender: nil)
+    }
+
+    func navigateToDownloads() {
+        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func onAppear() {
+        self.presenter?.updateProfile()
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        onAppear()
+    }
+}
+
+extension ProfileViewController : DZNEmptyDataSetDelegate {
+    @objc func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+
+    @objc func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
+        switch state {
+        case .anonymous:
+            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+            break
+        case .error:
+            presenter?.updateProfile()
+            break
+        default:
+            break
+        }
+    }
 }
 
 extension ProfileViewController : DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return Images.placeholders.anonymous
+        switch state {
+        case .anonymous:
+            return Images.placeholders.anonymous
+        case .error:
+            return Images.placeholders.connectionError
+        case .refreshing:
+            return Images.placeholders.anonymous
+        default:
+            return UIImage()
+        }
     }
 
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = NSLocalizedString("NotWithUsYet", comment: "")
+        var text: String = ""
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGray]
+        switch state {
+        case .anonymous:
+            text = NSLocalizedString("ProfileAnonymousTitle", comment: "")
+        case .error:
+            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
+            break
+        default:
+            break
+        }
+
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        var text: String = ""
 
-        let text = NSLocalizedString("JoinCoursesSuggestionDescription", comment: "")
+        switch state {
+        case .anonymous:
+            text = NSLocalizedString("ProfileAnonymousSubtitle", comment: "")
+            break
+        case .error:
+            text = ""
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
+            break
+        default:
+            break
+        }
 
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-                          NSForegroundColorAttributeName: UIColor.lightGray,
-                          NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                          NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
 
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        let text = NSLocalizedString("SignIn", comment: "")
+        var text: String = ""
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.mainDark]
+        switch self.state {
+        case .anonymous:
+            text = NSLocalizedString("SignIn", comment: "")
+        case .error:
+            text = NSLocalizedString("TryAgain", comment: "")
+            break
+        case .refreshing:
+            text = ""
+            break
+        default:
+            break
+        }
+
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.mainDark]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
 
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.groupTableViewBackground
-    }
-}
-
-extension ProfileViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
-    }
-
-    func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
-        let vc = ControllerHelper.getAuthController()
-        self.present(vc, animated: true, completion: nil)
     }
 }

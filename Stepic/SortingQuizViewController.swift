@@ -18,7 +18,13 @@ class SortingQuizViewController: QuizViewController {
 
     var cellHeights: [CGFloat?] = []
 
-    var didReload: Bool = false
+    var cellWidth: CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        } else {
+            return tableView.bounds.width
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +57,6 @@ class SortingQuizViewController: QuizViewController {
         resetOptionsToDataset()
 
         self.cellHeights = Array(repeating: nil, count: optionsCount)
-        didReload = false
         tableView.reloadData()
         self.tableView.isUserInteractionEnabled = true
     }
@@ -108,7 +113,6 @@ class SortingQuizViewController: QuizViewController {
             _ in
             guard let s = self else { return }
             s.cellHeights = Array(repeating: nil, count: s.optionsCount)
-            s.didReload = false
             s.tableView.reloadData()
         }
     }
@@ -134,7 +138,7 @@ extension SortingQuizViewController : UITableViewDelegate {
         if let height = cellHeights[indexPath.row] {
             return height
         } else {
-            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.tableView.bounds.width, sortable: true)
+            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: cellWidth, sortable: true)
         }
     }
 
@@ -167,12 +171,11 @@ extension SortingQuizViewController : UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
 
-        cell.setHTMLText(orderedOptions[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
+        cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth, finishedBlock: {
             [weak self]
             newHeight in
 
             guard let s = self else { return }
-            if s.didReload { return }
 
             s.cellHeights[indexPath.row] = newHeight
             var sum: CGFloat = 0
@@ -184,7 +187,6 @@ extension SortingQuizViewController : UITableViewDataSource {
                 }
             }
             UIThread.performUI {
-                s.didReload = true
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()

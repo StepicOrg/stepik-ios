@@ -32,11 +32,9 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         setupStackView()
         presenter?.initBlocks()
         self.title = NSLocalizedString("Home", comment: "")
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +99,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
             streaksWidgetBackgroundView.backgroundColor = UIColor.white
             streaksWidgetBackgroundView.addSubview(widget)
             widget.alignTop("16", bottom: "-8", toView: streaksWidgetBackgroundView)
-            widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            if #available(iOS 11.0, *) {
+                NSLayoutConstraint.activate([
+                    widget.leadingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                    widget.trailingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+            } else {
+                widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            }
             widget.setRoundedCorners(cornerRadius: 8)
             streaksWidgetBackgroundView.isHidden = true
             stackView.insertArrangedSubview(streaksWidgetBackgroundView, at: 0)
@@ -125,7 +130,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(continueLearningWidget)
         continueLearningWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                continueLearningWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                continueLearningWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+        } else {
+            continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        }
         continueLearningWidget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)

@@ -28,10 +28,10 @@ class CyrillicURLActivityItemSource: NSObject, UIActivityItemSource {
         }
     }
 
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
         print("\(activityType)")
-        switch activityType.rawValue {
-        case "TUSafariActivity" :
+        switch activityType?.rawValue {
+        case "TUSafariActivity"? :
             if let url = self.url {
                 return url
             } else {

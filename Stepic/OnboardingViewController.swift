@@ -57,11 +57,9 @@ class OnboardingViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.frame = self.view.frame
         scrollView.showsHorizontalScrollIndicator = false
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = .never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
 
         view.insertSubview(scrollView, aboveSubview: pageControl)
 

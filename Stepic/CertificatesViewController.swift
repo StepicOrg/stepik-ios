@@ -60,11 +60,9 @@ class CertificatesViewController: UIViewController, CertificatesView {
         tableView.backgroundColor = UIColor.groupTableViewBackground
         initPaginationView()
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +106,7 @@ class CertificatesViewController: UIViewController, CertificatesView {
         }
     }
 
-    func refreshCertificates() {
+    @objc func refreshCertificates() {
         presenter?.refreshCertificates()
     }
 
@@ -307,8 +305,8 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -335,9 +333,9 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-                          NSForegroundColorAttributeName: UIColor.lightGray,
-                          NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                          NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -357,8 +355,8 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.mainDark]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16.0),
+                          NSAttributedStringKey.foregroundColor: UIColor.mainDark]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

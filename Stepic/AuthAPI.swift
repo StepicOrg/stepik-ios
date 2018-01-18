@@ -218,7 +218,7 @@ class AuthAPI {
                         }
                     }
 
-                    fulfill()
+                    fulfill(())
                 }
             }
         }

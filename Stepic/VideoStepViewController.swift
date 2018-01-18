@@ -67,7 +67,7 @@ class VideoStepViewController: UIViewController {
         navigationController?.navigationBar.sizeToFit()
     }
 
-    func sharePressed(_ item: UIBarButtonItem) {
+    @objc func sharePressed(_ item: UIBarButtonItem) {
 //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
 
         guard let slug = lessonSlug, let stepid = stepId else {
@@ -116,7 +116,7 @@ class VideoStepViewController: UIViewController {
         }
     }
 
-    func updatedStepNotification(_ notification: Foundation.Notification) {
+    @objc func updatedStepNotification(_ notification: Foundation.Notification) {
         initialize()
     }
 

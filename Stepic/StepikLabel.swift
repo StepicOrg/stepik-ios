@@ -14,11 +14,11 @@ enum StepikLabelStyle {
     var weight: CGFloat {
         switch self {
         case .thin:
-            return UIFontWeightThin
+            return UIFont.Weight.thin.rawValue
         case .light:
-            return UIFontWeightLight
+            return UIFont.Weight.light.rawValue
         case .regular:
-            return UIFontWeightRegular
+            return UIFont.Weight.regular.rawValue
         }
     }
 }

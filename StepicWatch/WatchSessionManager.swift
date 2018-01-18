@@ -68,7 +68,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 		}
 	}
 
-	private let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
+	private let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
 
 	@available(iOS 9.3, *)
 	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -90,7 +90,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 		#elseif os(watchOS)
 			return session
 		#endif
-		return nil
+        return nil
 	}
 
 	func startSession() {

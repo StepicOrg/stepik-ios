@@ -252,13 +252,13 @@ class CourseListPresenter {
                     }
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
                     strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                    fulfill()
+                    fulfill(())
                 }.catch {
                     error in
                     reject(error)
                 }
             } else {
-                fulfill()
+                fulfill(())
             }
         }
     }
@@ -281,7 +281,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.state = strongSelf.courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-            fulfill()
+            fulfill(())
         }
     }
 

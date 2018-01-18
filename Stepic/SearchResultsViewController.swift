@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewSearchResultsViewController: UIViewController, SearchResultsView {
+class SearchResultsViewController: UIViewController, SearchResultsView {
     var presenter: SearchResultsPresenter?
     var suggestionsVC: UIViewController?
     var coursesVC: UIViewController?

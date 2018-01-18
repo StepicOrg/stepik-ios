@@ -72,7 +72,7 @@ class CertificatesAPI: APIEndpoint {
 
                 //Return certificates
 
-                success((meta, res))
+                success(meta, res)
 
                 return
             }

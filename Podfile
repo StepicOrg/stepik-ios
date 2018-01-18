@@ -29,11 +29,11 @@ def all_pods
     pod 'Firebase/Analytics'
     pod 'Firebase/RemoteConfig'
     
-    pod 'Mixpanel-swift', '2.2.3'
+    pod 'Mixpanel-swift', '2.3.0'
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna', '~> 2.0.0'
+    pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'master'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     
@@ -41,14 +41,14 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'Presentr', '1.2.3'
+    pod 'Presentr', '1.3.0'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
-    pod 'Highlightr'
+    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
     pod "RFKeyboardToolbar", "~> 1.3"
     pod 'TTTAttributedLabel'
     pod 'PromiseKit', '~> 4.4'
-    pod 'Atributika', '~> 3.0' # update after migration to Swift 4
+    pod 'Atributika', '~> 4.0'
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
 end
@@ -61,8 +61,8 @@ end
 def adaptive_pods
     pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
-    pod 'Charts', '3.0.2'
-    pod 'NotificationBannerSwift', '1.4.1' 
+    pod 'Charts', '3.0.4'
+    pod 'NotificationBannerSwift', '1.5.2' 
 end
 
 target 'Stepic' do
