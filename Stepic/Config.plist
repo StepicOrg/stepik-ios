@@ -53,6 +53,7 @@
 	<dict>
 		<key>supportedCourses</key>
 		<array>
+			<integer>3150</integer>
 			<integer>1838</integer>
 		</array>
 		<key>isAdaptive</key>

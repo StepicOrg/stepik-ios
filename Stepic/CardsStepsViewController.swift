@@ -67,6 +67,7 @@ class CardsStepsViewController: UIViewController {
         navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
         statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
         progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        progressBar.progress = 0
 
         if presenter == nil {
             presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), course: course, view: self)
@@ -176,10 +177,25 @@ extension CardsStepsViewController: CardsStepsView {
         expLabel.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(maxRating)")
         levelLabel.text = String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
 
-        progressBar.progress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating) + 0.005
+        let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
+        let shouldFulfill = progressBar.progress > newProgress
+
+        progressBar.progress = shouldFulfill ? 100.0 : newProgress + 0.005
         UIView.animate(withDuration: 1.2, animations: {
             self.progressBar.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { _ in
+            if !shouldFulfill {
+                return
+            }
+
+            self.progressBar.progress = 0
+            self.progressBar.layoutIfNeeded()
+
+            self.progressBar.progress = newProgress + 0.005
+            UIView.animate(withDuration: 1.2, animations: {
+                self.progressBar.layoutIfNeeded()
+            }, completion: nil)
+        })
     }
 
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
