@@ -21,6 +21,7 @@ class CardsStepsViewController: UIViewController {
     @IBOutlet weak var labelsStackView: UIStackView!
 
     var canSwipeCurrentCardUp = false
+    private var shouldToggleNavigationBar = true
 
     var course: Course!
 
@@ -88,12 +89,16 @@ class CardsStepsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        shouldToggleNavigationBar = true
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+
+        if shouldToggleNavigationBar {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
 
     @IBAction func onBackButtonClick(_ sender: Any) {
@@ -101,6 +106,15 @@ class CardsStepsViewController: UIViewController {
     }
 
     @IBAction func onTrophyButtonClick(_ sender: Any) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "Adaptive") as? AdaptiveStatsViewController else {
+            return
+        }
+
+        shouldToggleNavigationBar = false
+
+        vc.statsPresenter = AdaptiveStatsPresenter(statsManager: AdaptiveStatsManager(courseId: course.id), ratingManager: AdaptiveRatingManager(courseId: course.id), view: vc)
+        let navigationVC = StyledNavigationViewController(rootViewController: vc)
+        present(navigationVC, animated: true, completion: nil)
     }
 }
 

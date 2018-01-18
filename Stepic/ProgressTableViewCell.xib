@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="progressCell" rowHeight="82" id="hsY-1l-z0R" customClass="ProgressTableViewCell" customModule="Stepic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hsY-1l-z0R" id="dMJ-dt-4ZG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="81.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veb-k2-zTx">
+                        <rect key="frame" x="8" y="4" width="304" height="74"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-zY-WXM">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="73.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3y3-wP-Mnh">
+                                <rect key="frame" x="16" y="17" width="35" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="опыта за неделю" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMK-Q0-yK4">
+                                <rect key="frame" x="16" y="41" width="122" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 июля 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiV-zm-iZK">
+                                <rect key="frame" x="176" y="16" width="95.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23 июля 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFZ-T2-3RS">
+                                <rect key="frame" x="173" y="41" width="98.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzF-7K-i5D">
+                                <rect key="frame" x="277.5" y="15" width="10.5" height="39"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="33"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="LFZ-T2-3RS" secondAttribute="bottom" constant="15" id="69c-H9-3YJ"/>
+                            <constraint firstItem="HzF-7K-i5D" firstAttribute="leading" secondItem="LFZ-T2-3RS" secondAttribute="trailing" constant="6" id="Afu-qR-LsY"/>
+                            <constraint firstItem="HzF-7K-i5D" firstAttribute="top" secondItem="veb-k2-zTx" secondAttribute="top" constant="15" id="Ig0-ko-A2Z"/>
+                            <constraint firstAttribute="trailing" secondItem="HzF-7K-i5D" secondAttribute="trailing" constant="16" id="QAU-FV-MX0"/>
+                            <constraint firstItem="3y3-wP-Mnh" firstAttribute="top" secondItem="veb-k2-zTx" secondAttribute="top" constant="17" id="RaC-hI-K7W"/>
+                            <constraint firstItem="dMK-Q0-yK4" firstAttribute="top" secondItem="3y3-wP-Mnh" secondAttribute="bottom" id="YDU-kX-7Sd"/>
+                            <constraint firstItem="dMK-Q0-yK4" firstAttribute="leading" secondItem="veb-k2-zTx" secondAttribute="leading" constant="16" id="coF-Vp-pfc"/>
+                            <constraint firstItem="dMK-Q0-yK4" firstAttribute="top" secondItem="3y3-wP-Mnh" secondAttribute="bottom" id="fJG-qF-67b"/>
+                            <constraint firstItem="NiV-zm-iZK" firstAttribute="top" secondItem="veb-k2-zTx" secondAttribute="top" constant="16" id="khW-Cx-jNM"/>
+                            <constraint firstAttribute="bottom" secondItem="dMK-Q0-yK4" secondAttribute="bottom" constant="15" id="qDh-I9-ATO"/>
+                            <constraint firstItem="3y3-wP-Mnh" firstAttribute="leading" secondItem="veb-k2-zTx" secondAttribute="leading" constant="16" id="ubc-W5-Bca"/>
+                            <constraint firstItem="HzF-7K-i5D" firstAttribute="leading" secondItem="NiV-zm-iZK" secondAttribute="trailing" constant="6" id="yoG-XR-MKL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="veb-k2-zTx" firstAttribute="leading" secondItem="dMJ-dt-4ZG" secondAttribute="leading" constant="8" id="1zo-sF-9Xq"/>
+                    <constraint firstItem="3MM-zY-WXM" firstAttribute="leading" secondItem="dMJ-dt-4ZG" secondAttribute="leading" constant="8" id="H1q-6b-lJA"/>
+                    <constraint firstAttribute="bottom" secondItem="veb-k2-zTx" secondAttribute="bottom" constant="4" id="JL2-oq-MuF"/>
+                    <constraint firstAttribute="bottom" secondItem="3MM-zY-WXM" secondAttribute="bottom" constant="4" id="JjC-6l-jWC"/>
+                    <constraint firstItem="3MM-zY-WXM" firstAttribute="top" secondItem="dMJ-dt-4ZG" secondAttribute="top" constant="4" id="XVX-kd-K2d"/>
+                    <constraint firstAttribute="trailing" secondItem="3MM-zY-WXM" secondAttribute="trailing" constant="8" id="ZGH-Gx-bpU"/>
+                    <constraint firstItem="veb-k2-zTx" firstAttribute="top" secondItem="dMJ-dt-4ZG" secondAttribute="top" constant="4" id="aGB-ad-JHA"/>
+                    <constraint firstAttribute="trailing" secondItem="veb-k2-zTx" secondAttribute="trailing" constant="8" id="ms9-b1-Iz5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="bracketLabel" destination="HzF-7K-i5D" id="3Ee-C4-uvw"/>
+                <outlet property="cardPadView" destination="3MM-zY-WXM" id="d6S-4o-sxj"/>
+                <outlet property="cellContentView" destination="veb-k2-zTx" id="sL4-Me-ONG"/>
+                <outlet property="firstDateLabel" destination="NiV-zm-iZK" id="m2k-MT-ALX"/>
+                <outlet property="pointsLabel" destination="3y3-wP-Mnh" id="wHo-le-HHv"/>
+                <outlet property="secondDateLabel" destination="LFZ-T2-3RS" id="3Ji-5V-vha"/>
+                <outlet property="xpPerWeekTitleLabel" destination="dMK-Q0-yK4" id="PKa-9o-cub"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

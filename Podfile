@@ -53,6 +53,7 @@ def all_pods
     pod 'lottie-ios'
     pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
+    pod 'Charts', '3.0.2'
 end
 
 def testing_pods

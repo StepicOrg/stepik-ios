@@ -2007,7 +2007,6 @@
 		2C1B62991F4C4AEF00236804 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C1B629B1F4C4AEF00236804 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -2460,7 +2459,6 @@
 		2C1B64AF1F4C590700236804 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C1B64B11F4C590700236804 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -2567,7 +2565,6 @@
 		2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
 		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
-		2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */; };
 		2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
@@ -3034,7 +3031,6 @@
 		2C86543F1F4B33DE00D51654 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -3487,7 +3483,6 @@
 		2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C89AB281F4C289900227C3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -3945,7 +3940,6 @@
 		2C9732DA1F4C38F600AC9301 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C9732DC1F4C38F600AC9301 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C9732DD1F4C38F600AC9301 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C9732E11F4C38F600AC9301 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C9732E21F4C38F600AC9301 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -3976,6 +3970,12 @@
 		2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
+		2CA9D97720109718007AA743 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */; };
+		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
+		2CA9D97B20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */; };
+		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
+		2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */; };
+		2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA9D9822010A13C007AA743 /* ProgressTableViewCell.xib */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
@@ -5175,9 +5175,6 @@
 		2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementTableViewCell.swift; sourceTree = "<group>"; };
 		2C6640D81F30BC4D0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640DA1F30BC4E0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
-		2C6640DC1F30BCCB0033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProgressTableViewCell.xib; sourceTree = "<group>"; };
-		2C6640DF1F30BCCD0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ProgressTableViewCell.strings; sourceTree = "<group>"; };
-		2C6640E11F30BCCE0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ProgressTableViewCell.strings; sourceTree = "<group>"; };
 		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
 		2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Adaptive.storyboard; sourceTree = "<group>"; };
@@ -5242,6 +5239,12 @@
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
+		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
+		2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
+		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
+		2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
+		2CA9D9822010A13C007AA743 /* ProgressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTableViewCell.xib; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -7550,6 +7553,7 @@
 		2C5DF1371FEBDC50003B1177 /* Adaptive steps */ = {
 			isa = PBXGroup;
 			children = (
+				2CA9D975201096EB007AA743 /* Stats */,
 				2CA5E5A4200E1EC200CE77B0 /* Rating & Stats */,
 				2C6E9CD91FF2752B001821A2 /* Helpers */,
 				2C5DF1501FED319F003B1177 /* Views */,
@@ -7824,11 +7828,39 @@
 			name = "Rating & Stats";
 			sourceTree = "<group>";
 		};
+		2CA9D975201096EB007AA743 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9D97E2010A0A6007AA743 /* Views */,
+				2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */,
+				2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */,
+				2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */,
+				2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */,
+			);
+			name = Stats;
+			sourceTree = "<group>";
+		};
+		2CA9D97E2010A0A6007AA743 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9D97F2010A0AE007AA743 /* ProgressTableViewCell */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2CA9D97F2010A0AE007AA743 /* ProgressTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9D9822010A13C007AA743 /* ProgressTableViewCell.xib */,
+				2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */,
+			);
+			name = ProgressTableViewCell;
+			sourceTree = "<group>";
+		};
 		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */,
-				2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */,
 			);
 			name = ProgressTableViewCell;
 			sourceTree = "<group>";
@@ -8938,6 +8970,7 @@
 				08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C5DF1461FED2B36003B1177 /* StepCardView.xib in Resources */,
 				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
+				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
@@ -9098,7 +9131,6 @@
 				2C1B629B1F4C4AEF00236804 /* Images.xcassets in Resources */,
 				2C35C4E61F4DA488002F3BF4 /* nouns_f.plist in Resources */,
 				2C1B62C71F4C4B6C00236804 /* icon.png in Resources */,
-				2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */,
 				2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */,
 				2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C35C4F61F4DB8AC002F3BF4 /* step1.html in Resources */,
@@ -9210,7 +9242,6 @@
 				2C35C4E51F4DA488002F3BF4 /* nouns_f.plist in Resources */,
 				2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B64B11F4C590700236804 /* Images.xcassets in Resources */,
-				2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */,
 				2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */,
 				2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
@@ -9320,7 +9351,6 @@
 				2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */,
 				2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */,
 				08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
-				2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */,
 				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
 				086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
@@ -9432,7 +9462,6 @@
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
 				08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
-				2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */,
 				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
 				086BE2AD1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
@@ -9545,7 +9574,6 @@
 				2C9732DA1F4C38F600AC9301 /* SectionTableViewCell.xib in Resources */,
 				2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */,
 				2C9732DC1F4C38F600AC9301 /* Images.xcassets in Resources */,
-				2C9732DD1F4C38F600AC9301 /* ProgressTableViewCell.xib in Resources */,
 				2C9733081F4C394A00AC9301 /* Config.plist in Resources */,
 				2C35C4FB1F4DB8D4002F3BF4 /* step1.html in Resources */,
 				2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */,
@@ -9702,7 +9730,6 @@
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
-				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C35C4E71F4DA48D002F3BF4 /* nouns_m.plist in Resources */,
 				2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */,
@@ -12059,10 +12086,12 @@
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
+				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
+				2CA9D97720109718007AA743 /* AdaptiveStatsViewController.swift in Sources */,
 				085290C61FB5C4550053F22D /* ExplorePresenter.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CourseSubscriptionManager.swift in Sources */,
@@ -12144,6 +12173,7 @@
 				085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				2C5DF1481FED2B71003B1177 /* StepCardView.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
+				2CA9D97B20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
@@ -12377,12 +12407,14 @@
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				08CB0D311FB5F9FC001A1E02 /* ExploreViewController.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
+				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0868C17E1F375A1200D77C5F /* SearchQueriesPersistentManager.swift in Sources */,
 				089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */,
 				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
+				2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */,
 				08EDB8BB1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
@@ -15439,16 +15471,6 @@
 				2C35C5041F4DB915002F3BF4 /* en */,
 			);
 			name = step1.html;
-			sourceTree = "<group>";
-		};
-		2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C6640DC1F30BCCB0033A274 /* Base */,
-				2C6640DF1F30BCCD0033A274 /* en */,
-				2C6640E11F30BCCE0033A274 /* ru */,
-			);
-			name = ProgressTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */ = {

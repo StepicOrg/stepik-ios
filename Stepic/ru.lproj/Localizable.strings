@@ -374,5 +374,18 @@ OnboardingStartButton = "Начать";
 
 StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
 
+AdaptiveProgress = "Прогресс";
+AdaptiveAchievements = "Достижения";
+AdaptiveRating = "Рейтинг";
+AdaptiveXPperWeek = "Опыта за неделю";
+AdaptiveBestStreak = "Лучшая серия";
+AdaptiveLevelSuffix = "уровень";
+AdaptiveLast7Days = "Последние 7 дней";
+AdaptiveStats = "Статистика";
+AdaptiveAllTime = "Всё время";
+Adaptive7Days = "7 дней";
+AdaptiveToday = "Сегодня";
+AdaptiveXPperWeekCell = "опыта за неделю";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
