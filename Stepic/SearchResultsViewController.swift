@@ -1,5 +1,5 @@
 //
-//  NewSearchResultsViewController.swift
+//  SearchResultsViewController.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 13.11.2017.
