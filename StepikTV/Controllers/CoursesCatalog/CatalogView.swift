@@ -13,5 +13,10 @@ protocol CatalogView: class {
     func notifyNotAuthorized()
 
     func provide(userCourses: UserCourses)
+}
+
+protocol DetailCatalogView: class {
+
+    func updateDetailView()
 
 }

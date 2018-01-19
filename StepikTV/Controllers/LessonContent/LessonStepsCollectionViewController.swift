@@ -9,9 +9,11 @@
 import UIKit
 import AVKit
 
-class LessonPartsCollectionViewController: UICollectionViewController {
+class LessonStepsCollectionViewController: UICollectionViewController {
 
-    var lesson = LessonMock()
+    var presenter: LessonContentPresenter?
+
+    var steps: [Step] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,7 @@ class LessonPartsCollectionViewController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return lesson.parts.count
+        return steps.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,13 +41,13 @@ class LessonPartsCollectionViewController: UICollectionViewController {
 
         if let cell = cell as? LessonPartItemCell {
             cell.delegate = self
-            cell.configure(with: lesson.parts[indexPath.section], index: indexPath.section + 1)
+            //cell.configure(with: steps[indexPath.section], index: indexPath.section + 1)
         }
     }
 
 }
 
-extension LessonPartsCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension LessonStepsCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
@@ -58,9 +60,13 @@ extension LessonPartsCollectionViewController: UICollectionViewDelegateFlowLayou
     }
 }
 
-extension LessonPartsCollectionViewController: LessonPartPresentContentDelegate {
+extension LessonStepsCollectionViewController: LessonPartPresentContentDelegate {
 
     func loadLessonContent(with controller: UIViewController, completion: @escaping () -> Void) {
         self.present(controller, animated: true, completion: completion)
     }
+}
+
+extension LessonStepsCollectionViewController: LessonContentView {
+
 }

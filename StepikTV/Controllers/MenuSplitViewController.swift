@@ -9,6 +9,7 @@
 import UIKit
 
 class MenuSplitViewController: UISplitViewController {
+
     // MARK: Properties
 
     /**

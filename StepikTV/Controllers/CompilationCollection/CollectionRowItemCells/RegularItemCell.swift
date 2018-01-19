@@ -27,6 +27,5 @@ class RegularItemCell: UICollectionViewCell {
         titleLabel.text = item.title
 
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
-
     }
 }

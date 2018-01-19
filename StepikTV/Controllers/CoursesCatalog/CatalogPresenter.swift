@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct UserCourses {
+class UserCourses {
     private var passed: [ItemViewData]
     private var notpassed: [ItemViewData]
 
@@ -112,4 +112,5 @@ class CatalogPresenter {
             }
         }
     }
+
 }

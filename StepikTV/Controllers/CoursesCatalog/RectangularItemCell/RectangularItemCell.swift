@@ -35,6 +35,8 @@ class RectangularItemCell: UICollectionViewCell {
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesBegan(presses, with: event)
+
+        guard presses.first!.type != UIPressType.menu else { return }
         pressAction?()
     }
 }

@@ -8,7 +8,7 @@
 
 protocol MenuCourseContentView: class {
 
-    func provide(courseTitle: String, action: () -> Void)
+    func provide(courseInfo: CourseViewData)
 
     func provide(sections: [SectionViewData])
 

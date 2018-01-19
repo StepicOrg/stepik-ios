@@ -29,7 +29,7 @@ class CatalogMenuViewController: MenuTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = performingSegueSourceCellIndexPath else { fatalError("'prepare(for segue:)' called when no performing segues") }
 
-        guard let courses = userCourses, segue.identifier == segueIdentifier else { return }
+        guard segue.identifier == segueIdentifier, let courses = userCourses else { return }
 
         let vc = segue.destination as? RectangularCollectionViewController
         vc?.sectionCourses = courses.getCourses(by: indexPath)
@@ -43,5 +43,7 @@ extension CatalogMenuViewController: CatalogView {
 
     func provide(userCourses: UserCourses) {
         self.userCourses = userCourses
+
+        //performSegue(withIdentifier: segueIdentifier, sender: self)
     }
 }

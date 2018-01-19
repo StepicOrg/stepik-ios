@@ -73,6 +73,11 @@ class TVFocusableText: UILabel {
     // Events to look for a Highlighted state
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard presses.first!.type != UIPressType.menu else {
+            super.pressesBegan(presses, with: event)
+            return
+        }
+
         UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
         super.pressesBegan(presses, with: event)
 
@@ -172,11 +177,17 @@ class TVTextPresentationAlertController: UIViewController {
 
     /*
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        print("Alert")
+        super.pressesBegan(presses, with: event)
+    }*/
+
+    /*
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard presses.first!.type == UIPressType.menu else {
             super.pressesBegan(presses, with: event)
             return
         }
-
+        print("Alert")
         leaveAlert(self)
     }
 

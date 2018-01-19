@@ -66,6 +66,11 @@ class InstructorItemCell: UICollectionViewCell {
     // Events to look for a Highlighted state
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard presses.first!.type != UIPressType.menu else {
+            super.pressesBegan(presses, with: event)
+            return
+        }
+
         UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
         super.pressesBegan(presses, with: event)
 
