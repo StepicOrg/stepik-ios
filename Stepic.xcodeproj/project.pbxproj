@@ -2495,12 +2495,6 @@
 		2C35C4AD1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
 		2C35C4AE1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
 		2C35C4AF1F4DA3F2002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
-		2C35C4B01F4DA3FE002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
-		2C35C4B11F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
-		2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
-		2C35C4B31F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
-		2C35C4B41F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
-		2C35C4B51F4DA401002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
 		2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C35C4B71F4DA413002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
@@ -3972,10 +3966,12 @@
 		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
-		2CA9D97B20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
 		2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */; };
 		2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA9D9822010A13C007AA743 /* ProgressTableViewCell.xib */; };
+		2CA9D9852010EEA2007AA743 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
+		2CA9D9882011FB4E007AA743 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */; };
+		2CA9D98A2011FBD5007AA743 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
@@ -5133,7 +5129,6 @@
 		2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
 		2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
 		2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
-		2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
 		2C35C4CA1F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/nouns_f.plist; sourceTree = "<group>"; };
@@ -5241,10 +5236,12 @@
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
-		2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9822010A13C007AA743 /* ProgressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTableViewCell.xib; sourceTree = "<group>"; };
+		2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsAPI.swift; sourceTree = "<group>"; };
+		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -6457,6 +6454,7 @@
 				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
 				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
+				2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -7534,7 +7532,6 @@
 			isa = PBXGroup;
 			children = (
 				2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */,
-				2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */,
 			);
 			name = LeaderboardTableViewCell;
 			sourceTree = "<group>";
@@ -7834,7 +7831,6 @@
 				2CA9D97E2010A0A6007AA743 /* Views */,
 				2CA9D97620109718007AA743 /* AdaptiveStatsViewController.swift */,
 				2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */,
-				2CA9D97A20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift */,
 				2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */,
 			);
 			name = Stats;
@@ -7843,6 +7839,7 @@
 		2CA9D97E2010A0A6007AA743 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CA9D9862011FB33007AA743 /* LeaderboardTableViewCell */,
 				2CA9D97F2010A0AE007AA743 /* ProgressTableViewCell */,
 			);
 			name = Views;
@@ -7855,6 +7852,15 @@
 				2CA9D9802010A0CD007AA743 /* ProgressTableViewCell.swift */,
 			);
 			name = ProgressTableViewCell;
+			sourceTree = "<group>";
+		};
+		2CA9D9862011FB33007AA743 /* LeaderboardTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */,
+				2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */,
+			);
+			name = LeaderboardTableViewCell;
 			sourceTree = "<group>";
 		};
 		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
@@ -8654,7 +8660,7 @@
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8663,7 +8669,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8755,12 +8761,12 @@
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -8994,6 +9000,7 @@
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
+				2CA9D98A2011FBD5007AA743 /* LeaderboardTableViewCell.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -9053,7 +9060,6 @@
 				2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */,
 				2C1B625B1F4C4AEF00236804 /* overlay_hard.png in Resources */,
 				2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */,
-				2C35C4B41F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C1B625D1F4C4AEF00236804 /* overlay_simple.png in Resources */,
 				2C1B625E1F4C4AEF00236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
@@ -9163,7 +9169,6 @@
 				2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */,
 				2C1B646C1F4C590700236804 /* overlay_hard.png in Resources */,
 				2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */,
-				2C35C4B51F4DA401002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C1B646E1F4C590700236804 /* overlay_simple.png in Resources */,
 				2C1B646F1F4C590700236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
@@ -9329,7 +9334,6 @@
 				2C8654301F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C8654311F4B33DE00D51654 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C8654321F4B33DE00D51654 /* SortingQuizTableViewCell.xib in Resources */,
-				2C35C4B01F4DA3FE002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C8654331F4B33DE00D51654 /* CodeQuizToolbarView.xib in Resources */,
 				088EDCBC1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C8654341F4B33DE00D51654 /* FillBlanksTextTableViewCell.xib in Resources */,
@@ -9439,7 +9443,6 @@
 				2C89AB151F4C289900227C3B /* UnknownTypeQuizViewController.xib in Resources */,
 				2C89AB161F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C89AB171F4C289900227C3B /* ChoiceQuizTableViewCell.xib in Resources */,
-				2C35C4B11F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C89AB181F4C289900227C3B /* SortingQuizTableViewCell.xib in Resources */,
 				2C89AB191F4C289900227C3B /* CodeQuizToolbarView.xib in Resources */,
 				088EDCBD1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
@@ -9495,7 +9498,6 @@
 				2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */,
 				2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */,
 				2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */,
-				2C35C4B31F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */,
 				2C9732A01F4C38F600AC9301 /* overlay_hard.png in Resources */,
 				2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */,
@@ -9730,7 +9732,6 @@
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
-				2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C35C4E71F4DA48D002F3BF4 /* nouns_m.plist in Resources */,
 				2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */,
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
@@ -12036,6 +12037,7 @@
 				08A9F7031FC37DD000640F1F /* CourseTagsView.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
+				2CA9D9882011FB4E007AA743 /* LeaderboardTableViewCell.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
@@ -12173,7 +12175,6 @@
 				085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				2C5DF1481FED2B71003B1177 /* StepCardView.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
-				2CA9D97B20109BF5007AA743 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
@@ -12359,6 +12360,7 @@
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
+				2CA9D9852010EEA2007AA743 /* AdaptiveRatingsAPI.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
@@ -15626,16 +15628,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -15648,15 +15650,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
+                PROVISIONING_PROFILE = "3ae12062-1be6-4a02-8bcd-71cbcf0548a1";
+                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -15811,10 +15813,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -15822,8 +15824,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -15841,10 +15843,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -15852,8 +15854,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+                PROVISIONING_PROFILE = "14879420-52b9-45eb-acba-a432ebb6beef";
+                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -16559,16 +16561,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16587,15 +16589,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+                PROVISIONING_PROFILE = "bc64c9de-3b3b-41d8-99d7-50e01442b72a";
+                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -16610,16 +16612,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16635,15 +16637,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+                PROVISIONING_PROFILE = "fc475dc6-dbdc-4ab6-9c9e-9365637447d3";
+                PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;

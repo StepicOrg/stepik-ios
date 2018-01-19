@@ -10,7 +10,7 @@ import Foundation
 
 class AdaptiveRatingManager {
 
-    private let courseId: Int
+    let courseId: Int
 
     private lazy var ratingKey: String = {
         "rating_\(self.courseId)"

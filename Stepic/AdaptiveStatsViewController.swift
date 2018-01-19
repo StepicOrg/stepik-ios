@@ -30,8 +30,7 @@ class OverlapTableView: UITableView {
 class AdaptiveStatsViewController: UIViewController {
     enum Section {
         case progress
-//        case achievements
-//        case ratings(days: Int?)
+        case ratings(days: Int?)
     }
 
     enum State {
@@ -74,19 +73,14 @@ class AdaptiveStatsViewController: UIViewController {
                 statsPresenter?.reloadData(force: data == nil)
                 ratingSegmentedControl.isHidden = true
                 break
-//            case .achievements:
-//                achievementsPresenter?.reloadData(force: data == nil)
-//                ratingSegmentedControl.isHidden = true
-//                break
-//            case .ratings(let days):
-//                ratingsPresenter?.reloadData(days: days, force: data == nil)
-//                ratingSegmentedControl.isHidden = false
+            case .ratings(let days):
+                ratingsPresenter?.reloadData(days: days, force: data == nil)
+                ratingSegmentedControl.isHidden = false
             }
         }
     }
 
     var statsPresenter: AdaptiveStatsPresenter?
-    var achievementsPresenter: AdaptiveAchievementsPresenter?
     var ratingsPresenter: AdaptiveRatingsPresenter?
 
     @IBOutlet weak var tableView: OverlapTableView!
@@ -107,23 +101,22 @@ class AdaptiveStatsViewController: UIViewController {
 
     fileprivate var data: [Any]?
 
-//    @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
-//        let sections: [Int: Section] = [
-//            0: .ratings(days: nil),
-//            1: .ratings(days: 7),
-//            2: .ratings(days: 1)
-//        ]
-//        section = sections[ratingSegmentedControl.selectedSegmentIndex] ?? .ratings(days: 1)
-//    }
-//
-//    @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
-//        let sections: [Int: Section] = [
-//            0: .progress,
-//            1: .achievements,
-//            2: .ratings(days: 1)
-//        ]
-//        section = sections[segmentedControl.selectedSegmentIndex] ?? .progress
-//    }
+    @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
+        let sections: [Int: Section] = [
+            0: .ratings(days: nil),
+            1: .ratings(days: 7),
+            2: .ratings(days: 1)
+        ]
+        section = sections[ratingSegmentedControl.selectedSegmentIndex] ?? .ratings(days: 1)
+    }
+
+    @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
+        let sections: [Int: Section] = [
+            0: .progress,
+            1: .ratings(days: 1)
+        ]
+        section = sections[segmentedControl.selectedSegmentIndex] ?? .progress
+    }
 
     @IBAction func onCancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -157,8 +150,11 @@ class AdaptiveStatsViewController: UIViewController {
 
     private func localize() {
         segmentedControl.setTitle(NSLocalizedString("AdaptiveProgress", comment: ""), forSegmentAt: 0)
-        segmentedControl.setTitle(NSLocalizedString("AdaptiveAchievements", comment: ""), forSegmentAt: 1)
-        segmentedControl.setTitle(NSLocalizedString("AdaptiveRating", comment: ""), forSegmentAt: 2)
+        segmentedControl.setTitle(NSLocalizedString("AdaptiveRating", comment: ""), forSegmentAt: 1)
+
+        ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveAllTime", comment: ""), forSegmentAt: 0)
+        ratingSegmentedControl.setTitle(NSLocalizedString("Adaptive7Days", comment: ""), forSegmentAt: 1)
+        ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveToday", comment: ""), forSegmentAt: 2)
 
         title = NSLocalizedString("AdaptiveStats", comment: "")
         levelTitleLabel.text = NSLocalizedString("AdaptiveLevelSuffix", comment: "")
@@ -214,14 +210,7 @@ class AdaptiveStatsViewController: UIViewController {
         tableView.estimatedRowHeight = 112
 
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
-        //tableView.register(UINib(nibName: "AchievementTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementTableViewCell.reuseId)
-        //tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
-
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
     }
 
     fileprivate func setUpChart() {
@@ -256,29 +245,23 @@ class AdaptiveStatsViewController: UIViewController {
     }
 }
 
-//extension AdaptiveStatsViewController: AdaptiveRatingsView {
-//    func setRatings(data: ScoreboardViewData) {
-//        self.data = data.leaders
-//
-//        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
-//            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
-//            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
-//            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
-//            ])
-//        state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
-//    }
-//
-//    func showError() {
-//        state = .error(message: NSLocalizedString("AdaptiveRatingLoadError", comment: ""))
-//    }
-//}
-//
-//extension AdaptiveStatsViewController: AdaptiveAchievementsView {
-//    func setAchievements(records: [AchievementViewData]) {
-//        data = records
-//    }
-//}
-//
+extension AdaptiveStatsViewController: AdaptiveRatingsView {
+    func setRatings(data: ScoreboardViewData) {
+        self.data = data.leaders
+
+        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
+            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
+            ])
+        state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
+    }
+
+    func showError() {
+        state = .error(message: NSLocalizedString("AdaptiveRatingLoadError", comment: ""))
+    }
+}
+
 extension AdaptiveStatsViewController: AdaptiveStatsView {
     func setProgress(records: [WeekProgressViewData]) {
         data = records
@@ -303,18 +286,18 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
         var separatorPosition: Int? {
-//            guard let data = data as? [RatingViewData] else {
-//                return nil
-//            }
+            guard let data = data as? [RatingViewData] else {
+                return nil
+            }
 
             switch section {
-    //        case .ratings(_):
-    //            for i in 0..<max(0, data.count - 1) {
-    //                if data[i].position + 1 != data[i + 1].position {
-    //                    return i
-    //                }
-    //            }
-    //            return nil
+            case .ratings(_):
+                for i in 0..<max(0, data.count - 1) {
+                    if data[i].position + 1 != data[i + 1].position {
+                        return i
+                    }
+                }
+                return nil
             default:
                 return nil
             }
@@ -332,35 +315,29 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
             }
             return cell
-//        case .achievements:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
-//            if let achievement = data?[indexPath.item] as? AchievementViewData {
-//                cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
-//            }
-//            return cell
-//        case .ratings(_):
-//            let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
-//
-//            let separatorAfterIndex = (separatorPosition ?? Int.max - 1)
-//
-//            if separatorAfterIndex + 1 == indexPath.item {
-//                cell.cellPosition = .separator
-//            } else {
-//                let dataIndex = separatorAfterIndex < indexPath.item ? indexPath.item - 1 : indexPath.item
-//
-//                if let user = data?[dataIndex] as? RatingViewData {
-//                    cell.cellPosition = indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 ? .bottom : (indexPath.item == 0 ? .top : .middle)
-//
-//                    if dataIndex == separatorAfterIndex {
-//                        cell.cellPosition = .bottom
-//                    } else if dataIndex - 1 == separatorAfterIndex {
-//                        cell.cellPosition = .top
-//                    }
-//
-//                    cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
-//                }
-//            }
-//            return cell
+        case .ratings(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
+
+            let separatorAfterIndex = (separatorPosition ?? Int.max - 1)
+
+            if separatorAfterIndex + 1 == indexPath.item {
+                cell.cellPosition = .separator
+            } else {
+                let dataIndex = separatorAfterIndex < indexPath.item ? indexPath.item - 1 : indexPath.item
+
+                if let user = data?[dataIndex] as? RatingViewData {
+                    cell.cellPosition = indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 ? .bottom : (indexPath.item == 0 ? .top : .middle)
+
+                    if dataIndex == separatorAfterIndex {
+                        cell.cellPosition = .bottom
+                    } else if dataIndex - 1 == separatorAfterIndex {
+                        cell.cellPosition = .top
+                    }
+
+                    cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
+                }
+            }
+            return cell
         }
     }
 }

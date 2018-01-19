@@ -113,7 +113,10 @@ class CardsStepsViewController: UIViewController {
 
         shouldToggleNavigationBar = false
 
-        vc.statsPresenter = AdaptiveStatsPresenter(statsManager: AdaptiveStatsManager(courseId: course.id), ratingManager: AdaptiveRatingManager(courseId: course.id), view: vc)
+        let ratingManager = AdaptiveRatingManager(courseId: course.id)
+        vc.statsPresenter = AdaptiveStatsPresenter(statsManager: AdaptiveStatsManager(courseId: course.id), ratingManager: ratingManager, view: vc)
+        vc.ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), ratingManager: ratingManager, view: vc)
+
         let navigationVC = StyledNavigationViewController(rootViewController: vc)
         present(navigationVC, animated: true, completion: nil)
     }
