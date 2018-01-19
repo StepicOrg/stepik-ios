@@ -19,7 +19,11 @@ class AuthInfo: NSObject {
         print("initializing AuthInfo with userId \(String(describing: userId))")
         if let id = userId {
             if let users = User.fetchById(id) {
-                user = users.first
+                if users.isEmpty {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                } else {
+                    user = users.first
+                }
             }
         }
     }
