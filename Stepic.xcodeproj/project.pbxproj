@@ -1569,8 +1569,8 @@
 		1B3BB0731FE6DE71002DDD9A /* ItemConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06B1FE6DE70002DDD9A /* ItemConfigurableProtocol.swift */; };
 		1B3BB0751FE6DE71002DDD9A /* DynamicallyCreatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06D1FE6DE70002DDD9A /* DynamicallyCreatedProtocol.swift */; };
 		1B3BB0761FE6DE71002DDD9A /* FocusableCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */; };
-		1B3BB0841FE6E0C9002DDD9A /* LessonPartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0821FE6E0C8002DDD9A /* LessonPartItemCell.xib */; };
-		1B3BB0851FE6E0C9002DDD9A /* LessonPartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0831FE6E0C8002DDD9A /* LessonPartItemCell.swift */; };
+		1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */; };
+		1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */; };
 		1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */; };
 		1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */; };
 		1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */; };
@@ -5294,8 +5294,8 @@
 		1B3BB06B1FE6DE70002DDD9A /* ItemConfigurableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemConfigurableProtocol.swift; path = StepikTV/Views/ItemConfigurableProtocol.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB06D1FE6DE70002DDD9A /* DynamicallyCreatedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicallyCreatedProtocol.swift; path = StepikTV/Views/DynamicallyCreatedProtocol.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusableCustomView.swift; path = StepikTV/Views/FocusableCustomView.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB0821FE6E0C8002DDD9A /* LessonPartItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LessonPartItemCell.xib; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/LessonPartItemCell.xib; sourceTree = SOURCE_ROOT; };
-		1B3BB0831FE6E0C8002DDD9A /* LessonPartItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonPartItemCell.swift; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/LessonPartItemCell.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StepItemCell.xib; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.xib; sourceTree = SOURCE_ROOT; };
+		1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepItemCell.swift; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RectangularItemCell.swift; path = StepikTV/Controllers/CoursesCatalog/RectangularItemCell/RectangularItemCell.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RectangularItemCell.xib; path = StepikTV/Controllers/CoursesCatalog/RectangularItemCell/RectangularItemCell.xib; sourceTree = SOURCE_ROOT; };
 		1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCourseInfoSectionCell.swift; sourceTree = "<group>"; };
@@ -7659,8 +7659,8 @@
 		1B3BB07D1FE6E057002DDD9A /* LessonPartItemCell */ = {
 			isa = PBXGroup;
 			children = (
-				1B3BB0831FE6E0C8002DDD9A /* LessonPartItemCell.swift */,
-				1B3BB0821FE6E0C8002DDD9A /* LessonPartItemCell.xib */,
+				1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */,
+				1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */,
 			);
 			path = LessonPartItemCell;
 			sourceTree = "<group>";
@@ -9357,7 +9357,7 @@
 				9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */,
 				93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */,
 				1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */,
-				1B3BB0841FE6E0C9002DDD9A /* LessonPartItemCell.xib in Resources */,
+				1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */,
 				93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */,
 				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
 				93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */,
@@ -12830,7 +12830,7 @@
 				1BB4ECEC1FA3E6A7001CDE99 /* FreeAnswerReply.swift in Sources */,
 				1BB4ECD31FA3DF43001CDE99 /* Progress+CoreDataProperties.swift in Sources */,
 				93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */,
-				1B3BB0851FE6E0C9002DDD9A /* LessonPartItemCell.swift in Sources */,
+				1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */,
 				93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */,
 				93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */,
 				1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */,

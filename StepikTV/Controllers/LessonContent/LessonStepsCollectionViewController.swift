@@ -13,13 +13,13 @@ class LessonStepsCollectionViewController: UICollectionViewController {
 
     var presenter: LessonContentPresenter?
 
-    var steps: [Step] = []
+    var steps: [StepViewData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let nib = UINib(nibName: LessonPartItemCell.nibName, bundle: nil)
-        collectionView?.register(nib, forCellWithReuseIdentifier: LessonPartItemCell.reuseIdentifier)
+        let nib = UINib(nibName: StepItemCell.nibName, bundle: nil)
+        collectionView?.register(nib, forCellWithReuseIdentifier: StepItemCell.reuseIdentifier)
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -31,7 +31,7 @@ class LessonStepsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = LessonPartItemCell.reuseIdentifier
+        let identifier = StepItemCell.reuseIdentifier
         return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
@@ -39,10 +39,8 @@ class LessonStepsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
-        if let cell = cell as? LessonPartItemCell {
-            cell.delegate = self
-            //cell.configure(with: steps[indexPath.section], index: indexPath.section + 1)
-        }
+        guard let cell = cell as? StepItemCell else { return }
+        cell.setup(with: steps[indexPath.section], index: indexPath.section + 1)
     }
 
 }
@@ -51,7 +49,7 @@ extension LessonStepsCollectionViewController: UICollectionViewDelegateFlowLayou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let cellSize = LessonPartItemCell.size
+        let cellSize = StepItemCell.size
         return cellSize
     }
 
@@ -60,13 +58,10 @@ extension LessonStepsCollectionViewController: UICollectionViewDelegateFlowLayou
     }
 }
 
-extension LessonStepsCollectionViewController: LessonPartPresentContentDelegate {
-
-    func loadLessonContent(with controller: UIViewController, completion: @escaping () -> Void) {
-        self.present(controller, animated: true, completion: completion)
-    }
-}
-
 extension LessonStepsCollectionViewController: LessonContentView {
 
+    func provide(steps: [StepViewData]) {
+        self.steps = steps
+        self.collectionView?.reloadData()
+    }
 }
