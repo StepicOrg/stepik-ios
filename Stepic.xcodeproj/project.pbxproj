@@ -549,6 +549,22 @@
 		086BE2B71F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
 		086BE2B81F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
 		086BE2B91F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */; };
+		086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4020127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4120127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4220127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4320127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4420127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4520127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B4620127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
+		086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B53201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B54201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B55201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B56201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B57201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B58201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
+		086D5B59201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		086FC6A01FE046C100C7DFF4 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
@@ -4710,6 +4726,8 @@
 		086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastStepRouter.swift; sourceTree = "<group>"; };
 		086BE2A81F93A20B00B4BE56 /* LoadingCourseWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCourseWidgetView.xib; sourceTree = "<group>"; };
 		086BE2B11F93A21B00B4BE56 /* LoadingCourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCourseWidgetView.swift; sourceTree = "<group>"; };
+		086D5B3E20127A25000F7715 /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
+		086D5B51201283C2000F7715 /* TooltipFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipFactory.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtension.swift; sourceTree = "<group>"; };
@@ -6248,6 +6266,15 @@
 			name = Generic;
 			sourceTree = "<group>";
 		};
+		086D5B4720128398000F7715 /* Tooltip */ = {
+			isa = PBXGroup;
+			children = (
+				086D5B3E20127A25000F7715 /* Tooltip.swift */,
+				086D5B51201283C2000F7715 /* TooltipFactory.swift */,
+			);
+			name = Tooltip;
+			sourceTree = "<group>";
+		};
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -6930,6 +6957,7 @@
 				081566231F69C39A0082B359 /* Search Bar */,
 				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
 				08EDD6291F7C6785005203E4 /* StepikButton.swift */,
+				086D5B4720128398000F7715 /* Tooltip */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -9572,6 +9600,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -9582,6 +9611,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -9615,6 +9645,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -9625,6 +9656,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -9755,6 +9787,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -9765,6 +9798,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -9798,6 +9832,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -9808,6 +9843,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -9869,6 +9905,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -9879,6 +9916,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -9912,6 +9950,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -9922,6 +9961,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -10137,6 +10177,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -10147,6 +10188,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -10173,6 +10215,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10183,6 +10226,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -10237,6 +10281,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -10247,6 +10292,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -10280,6 +10326,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10290,6 +10337,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -10736,6 +10784,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -10746,6 +10795,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -10779,6 +10829,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10789,6 +10840,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -10865,6 +10917,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -10875,6 +10928,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -10908,6 +10962,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10918,6 +10973,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -11012,6 +11068,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -11022,6 +11079,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -11048,6 +11106,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -11058,6 +11117,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -11160,6 +11220,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
@@ -11170,6 +11231,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -11198,6 +11260,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -11208,6 +11271,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -11553,6 +11617,7 @@
 				08D120D51C937B2200A54ABC /* NumberQuizViewController.swift in Sources */,
 				08D120D61C937B2200A54ABC /* GCDThings.swift in Sources */,
 				08D120D81C937B2200A54ABC /* Block.swift in Sources */,
+				086D5B4020127A25000F7715 /* Tooltip.swift in Sources */,
 				084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083056D21DBFB4BE00F1F2A4 /* DiscussionWebTableViewCell.swift in Sources */,
@@ -11656,6 +11721,7 @@
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08ECC4481DB8D3D60005D401 /* StyledNavigationViewController.swift in Sources */,
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
+				086D5B53201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				08CB0D291FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */,
@@ -11910,6 +11976,7 @@
 				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
 				08DF789E1F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
+				086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
@@ -12035,6 +12102,7 @@
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
+				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,
 				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */,
@@ -12361,6 +12429,7 @@
 				2C1B61861F4C4AEF00236804 /* AnalyticsHelper.swift in Sources */,
 				2C1B61871F4C4AEF00236804 /* ControllerHelper.swift in Sources */,
 				2C1B61881F4C4AEF00236804 /* GCDThings.swift in Sources */,
+				086D5B4520127A25000F7715 /* Tooltip.swift in Sources */,
 				2C1B61891F4C4AEF00236804 /* GlobalFunctions.swift in Sources */,
 				2C1B618A1F4C4AEF00236804 /* CongratulationViewController.swift in Sources */,
 				2C1B618B1F4C4AEF00236804 /* RatingHelper.swift in Sources */,
@@ -12536,6 +12605,7 @@
 				2C1B62191F4C4AEF00236804 /* VotesAPI.swift in Sources */,
 				2C1B621A1F4C4AEF00236804 /* CodeQuizToolbarView.swift in Sources */,
 				2C1B621B1F4C4AEF00236804 /* StepicsAPI.swift in Sources */,
+				086D5B58201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2C1B621C1F4C4AEF00236804 /* UnitsAPI.swift in Sources */,
 				2C1B621D1F4C4AEF00236804 /* UserActivitiesAPI.swift in Sources */,
 				2C1B621F1F4C4AEF00236804 /* AdaptiveOnboardingViewController.swift in Sources */,
@@ -12814,6 +12884,7 @@
 				2C1B63971F4C590700236804 /* AnalyticsHelper.swift in Sources */,
 				2C1B63981F4C590700236804 /* ControllerHelper.swift in Sources */,
 				2C1B63991F4C590700236804 /* GCDThings.swift in Sources */,
+				086D5B4620127A25000F7715 /* Tooltip.swift in Sources */,
 				2C1B639A1F4C590700236804 /* GlobalFunctions.swift in Sources */,
 				2C1B639B1F4C590700236804 /* CongratulationViewController.swift in Sources */,
 				2C1B639C1F4C590700236804 /* RatingHelper.swift in Sources */,
@@ -12989,6 +13060,7 @@
 				2C1B642A1F4C590700236804 /* VotesAPI.swift in Sources */,
 				2C1B642B1F4C590700236804 /* CodeQuizToolbarView.swift in Sources */,
 				2C1B642C1F4C590700236804 /* StepicsAPI.swift in Sources */,
+				086D5B59201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2C1B642D1F4C590700236804 /* UnitsAPI.swift in Sources */,
 				2C1B642E1F4C590700236804 /* UserActivitiesAPI.swift in Sources */,
 				2C1B64301F4C590700236804 /* AdaptiveOnboardingViewController.swift in Sources */,
@@ -13267,6 +13339,7 @@
 				2C8653341F4B33DE00D51654 /* AnalyticsHelper.swift in Sources */,
 				2C8653351F4B33DE00D51654 /* ControllerHelper.swift in Sources */,
 				2C8653361F4B33DE00D51654 /* GCDThings.swift in Sources */,
+				086D5B4220127A25000F7715 /* Tooltip.swift in Sources */,
 				2C8653371F4B33DE00D51654 /* GlobalFunctions.swift in Sources */,
 				2C8653381F4B33DE00D51654 /* CongratulationViewController.swift in Sources */,
 				2C8653391F4B33DE00D51654 /* RatingHelper.swift in Sources */,
@@ -13442,6 +13515,7 @@
 				2C8653C71F4B33DE00D51654 /* VotesAPI.swift in Sources */,
 				2C8653C81F4B33DE00D51654 /* CodeQuizToolbarView.swift in Sources */,
 				2C8653C91F4B33DE00D51654 /* StepicsAPI.swift in Sources */,
+				086D5B55201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2C8653CA1F4B33DE00D51654 /* UnitsAPI.swift in Sources */,
 				2C8653CB1F4B33DE00D51654 /* UserActivitiesAPI.swift in Sources */,
 				2C8653CD1F4B33DE00D51654 /* AdaptiveOnboardingViewController.swift in Sources */,
@@ -13744,6 +13818,7 @@
 				2C89AA2D1F4C289900227C3B /* DiscussionProxy.swift in Sources */,
 				2C89AA2E1F4C289900227C3B /* Comment.swift in Sources */,
 				2C89AA2F1F4C289900227C3B /* Vote.swift in Sources */,
+				086D5B4320127A25000F7715 /* Tooltip.swift in Sources */,
 				2C89AA301F4C289900227C3B /* CodePlaygroundManager.swift in Sources */,
 				2C89AA311F4C289900227C3B /* Scripts.swift in Sources */,
 				085EDCB41F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */,
@@ -13914,6 +13989,7 @@
 				2C89AAC01F4C289900227C3B /* QuizPresenter.swift in Sources */,
 				2C89AAC11F4C289900227C3B /* StreaksStepikAlertManager.swift in Sources */,
 				2C89AAC21F4C289900227C3B /* InputAccessoryBuilder.swift in Sources */,
+				086D5B56201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2C89AAC31F4C289900227C3B /* AlertManager.swift in Sources */,
 				08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217871F55B1B200186245 /* Menu.swift in Sources */,
@@ -14172,6 +14248,7 @@
 				2C9731CE1F4C38F600AC9301 /* AnalyticsHelper.swift in Sources */,
 				2C9731CF1F4C38F600AC9301 /* ControllerHelper.swift in Sources */,
 				2C9731D01F4C38F600AC9301 /* GCDThings.swift in Sources */,
+				086D5B4420127A25000F7715 /* Tooltip.swift in Sources */,
 				2C9731D11F4C38F600AC9301 /* GlobalFunctions.swift in Sources */,
 				2C9731D21F4C38F600AC9301 /* CongratulationViewController.swift in Sources */,
 				2C9731D31F4C38F600AC9301 /* RatingHelper.swift in Sources */,
@@ -14347,6 +14424,7 @@
 				2C9732611F4C38F600AC9301 /* VotesAPI.swift in Sources */,
 				2C9732621F4C38F600AC9301 /* CodeQuizToolbarView.swift in Sources */,
 				2C9732631F4C38F600AC9301 /* StepicsAPI.swift in Sources */,
+				086D5B57201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2C9732641F4C38F600AC9301 /* UnitsAPI.swift in Sources */,
 				2C9732651F4C38F600AC9301 /* UserActivitiesAPI.swift in Sources */,
 				2C9732671F4C38F600AC9301 /* AdaptiveOnboardingViewController.swift in Sources */,
@@ -14679,6 +14757,7 @@
 				864D66981E83DE03001E8D9E /* AnalyticsHelper.swift in Sources */,
 				864D66991E83DE03001E8D9E /* ControllerHelper.swift in Sources */,
 				864D669A1E83DE03001E8D9E /* GCDThings.swift in Sources */,
+				086D5B4120127A25000F7715 /* Tooltip.swift in Sources */,
 				864D669B1E83DE03001E8D9E /* GlobalFunctions.swift in Sources */,
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
 				2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */,
@@ -14854,6 +14933,7 @@
 				864D67101E83DE03001E8D9E /* VotesAPI.swift in Sources */,
 				080C5E791EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				864D67111E83DE03001E8D9E /* StepicsAPI.swift in Sources */,
+				086D5B54201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				864D67121E83DE03001E8D9E /* UnitsAPI.swift in Sources */,
 				864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */,
 				2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */,

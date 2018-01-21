@@ -20,6 +20,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     var moduleId: Int?
     var parentShareBlock: ((UIActivityViewController) -> Void)?
+    private var shareBarButtonItem: UIBarButtonItem!
+    private var shareTooltip: Tooltip?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
         let infoBtn = UIButton(type: UIButtonType.infoDark)
         infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), for: UIControlEvents.touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
@@ -95,6 +97,17 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 self?.tableView.reloadData()
             }, error: {})
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        shareTooltip = TooltipFactory.streaksTooltip
+        shareTooltip?.show(direction: .up, in: self.view, from: shareBarButtonItem)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shareTooltip?.dismiss()
     }
 
     var emptyDatasetState: EmptyDatasetState = .empty {
