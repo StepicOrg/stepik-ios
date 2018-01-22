@@ -15,6 +15,7 @@ class TooltipDefaultsManager {
     private let defaults = UserDefaults.standard
 
     private let didShowOnLessonDownloadsKey = "didShowOnLessonDownloadsKey"
+    private let didShowOnHomeContinueLearningKey = "didShowOnHomeContinueLearningKey"
 
     var didShowOnLessonDownloads: Bool {
         set(value) {
@@ -22,9 +23,22 @@ class TooltipDefaultsManager {
         }
 
         get {
-//            return false
             return defaults.value(forKey: didShowOnLessonDownloadsKey) as? Bool ?? false
         }
+    }
+
+    var didShowOnHomeContinueLearning: Bool {
+        set(value) {
+            defaults.set(value, forKey: didShowOnHomeContinueLearningKey)
+        }
+
+        get {
+            return defaults.value(forKey: didShowOnHomeContinueLearningKey) as? Bool ?? false
+        }
+    }
+
+    var shouldShowOnHomeContinueLearning: Bool {
+        return !didShowOnHomeContinueLearning
     }
 
     var shouldShowLessonDownloadsTooltip: Bool {

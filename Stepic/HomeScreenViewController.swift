@@ -26,6 +26,8 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     private let streaksWidgetBackgroundView = UIView()
     private var streaksWidgetView: UserActivityHomeView?
 
+    private var continueLearningTooltip: Tooltip?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = HomeScreenPresenter(view: self, userActivitiesAPI: UserActivitiesAPI())
@@ -40,6 +42,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStreaks()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        continueLearningTooltip?.dismiss()
     }
 
     private func setupStackView() {
@@ -143,9 +150,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
 
-        UIView.animate(withDuration: 0.15) {
+        UIView.animate(withDuration: 0.15, animations: {
             self.widgetBackgroundView.isHidden = false
-        }
+        }, completion: {
+            _ in
+            self.continueLearningTooltip = TooltipFactory.continueLearningWidget
+            self.continueLearningTooltip?.show(direction: .up, in: nil, from: self.continueLearningWidget.continueLearningButton)
+            TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+        })
 
         if !isContinueLearningWidgetPresented {
             isContinueLearningWidgetPresented = true
@@ -155,6 +167,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     func hideCountinueLearningWidget() {
         isContinueLearningWidgetPresented = false
         stackView.removeArrangedSubview(widgetBackgroundView)
+        continueLearningTooltip?.dismiss()
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = true
         }

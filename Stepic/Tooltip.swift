@@ -10,10 +10,41 @@ import Foundation
 import EasyTipView
 
 protocol Tooltip {
-    init(text: String, shouldDismissAfterTime: Bool)
+    init(text: String, shouldDismissAfterTime: Bool, color: TooltipColor)
     func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView)
     func show(direction: TooltipDirection, in inView: UIView?, from fromItem: UIBarButtonItem)
     func dismiss()
+}
+
+enum TooltipColor {
+    case light, dark
+
+    var textColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.mainDark
+        case .dark:
+            return UIColor.mainLight
+        }
+    }
+
+    var borderColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.mainDark
+        case .dark:
+            return UIColor.mainLight
+        }
+    }
+
+    var backgroundColor: UIColor {
+        switch self {
+        case .light:
+            return UIColor.mainLight
+        case .dark:
+            return UIColor.mainDark
+        }
+    }
 }
 
 class EasyTipTooltip: Tooltip {
@@ -37,15 +68,15 @@ class EasyTipTooltip: Tooltip {
         }
     }
 
-    required init(text: String, shouldDismissAfterTime: Bool) {
+    required init(text: String, shouldDismissAfterTime: Bool, color: TooltipColor) {
         self.text = text
         self.shouldDismissAfterTime = shouldDismissAfterTime
         preferences = EasyTipView.Preferences()
         preferences.drawing.font = UIFont.systemFont(ofSize: 13)
-        preferences.drawing.foregroundColor = UIColor.mainLight
-        preferences.drawing.backgroundColor = UIColor.mainDark
+        preferences.drawing.foregroundColor = color.textColor
+        preferences.drawing.backgroundColor = color.backgroundColor
         preferences.drawing.borderWidth = 1.0
-        preferences.drawing.borderColor = UIColor.mainLight
+        preferences.drawing.borderColor = color.borderColor
     }
 
     private func setupTooltip(direction: TooltipDirection) {
