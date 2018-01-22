@@ -16,7 +16,6 @@ class CourseSubscriptionManager: NSObject {
     let courseUnsubscribedNotificationName = NSNotification.Name(rawValue: "CourseUnsubscribedNotification")
 
     var handleUpdatesBlock: (() -> Void)?
-
     override init() {}
 
     func startObservingOtherSubscriptionManagers() {

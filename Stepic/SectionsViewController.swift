@@ -17,11 +17,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     let refreshControl = UIRefreshControl()
     var didRefresh = false
     var course: Course!
-
     var moduleId: Int?
     var parentShareBlock: ((UIActivityViewController) -> Void)?
     private var shareBarButtonItem: UIBarButtonItem!
     private var shareTooltip: Tooltip?
+    var shouldShowShareTooltip: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +101,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        shareTooltip = TooltipFactory.streaksTooltip
-        shareTooltip?.show(direction: .up, in: self.view, from: shareBarButtonItem)
+        if shouldShowShareTooltip {
+            shareTooltip = TooltipFactory.streaksTooltip
+            shareTooltip?.show(direction: .up, in: self.view, from: shareBarButtonItem)
+            shouldShowShareTooltip = false
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -214,7 +217,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         let shareBlock: ((UIActivityViewController) -> Void)? = parentShareBlock
         let url = self.url
-
+        shareTooltip?.dismiss()
         DispatchQueue.global(qos: .background).async {
             [weak self] in
 
