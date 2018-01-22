@@ -11,8 +11,8 @@ import EasyTipView
 
 protocol Tooltip {
     init(text: String, shouldDismissAfterTime: Bool)
-    func show(direction: TooltipDirection, in inView: UIView, from fromView: UIView)
-    func show(direction: TooltipDirection, in inView: UIView, from fromItem: UIBarButtonItem)
+    func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView)
+    func show(direction: TooltipDirection, in inView: UIView?, from fromItem: UIBarButtonItem)
     func dismiss()
 }
 
@@ -63,15 +63,15 @@ class EasyTipTooltip: Tooltip {
         }
     }
 
-    func show(direction: TooltipDirection, in inView: UIView, from fromView: UIView) {
+    func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView) {
         setupTooltip(direction: direction)
-        easyTip.show(forView: fromView)
+        easyTip.show(forView: fromView, withinSuperview: inView)
         setupDisappear()
     }
 
-    func show(direction: TooltipDirection, in inView: UIView, from fromItem: UIBarButtonItem) {
+    func show(direction: TooltipDirection, in inView: UIView?, from fromItem: UIBarButtonItem) {
         setupTooltip(direction: direction)
-        easyTip.show(forItem: fromItem)
+        easyTip.show(forItem: fromItem, withinSuperView: inView)
         setupDisappear()
     }
 

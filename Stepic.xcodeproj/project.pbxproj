@@ -584,6 +584,14 @@
 		086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
 		087039311CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
+		087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296DD20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296DE20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296DF20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296E020168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296E120168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296E220168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
+		087296E320168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
 		087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
 		087585A31FB50D640047A269 /* CourseListsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585A21FB50D640047A269 /* CourseListsAPI.swift */; };
@@ -4732,6 +4740,7 @@
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtension.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
+		087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipDefaultsManager.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
 		087585A21FB50D640047A269 /* CourseListsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListsAPI.swift; sourceTree = "<group>"; };
@@ -6271,6 +6280,7 @@
 			children = (
 				086D5B3E20127A25000F7715 /* Tooltip.swift */,
 				086D5B51201283C2000F7715 /* TooltipFactory.swift */,
+				087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */,
 			);
 			name = Tooltip;
 			sourceTree = "<group>";
@@ -11481,6 +11491,7 @@
 				0860D9161F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
+				087296DD20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08E6BB691DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08CB0D4E1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
@@ -11955,6 +11966,7 @@
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
+				087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				08C1BF311FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -12434,6 +12446,7 @@
 				2C1B618A1F4C4AEF00236804 /* CongratulationViewController.swift in Sources */,
 				2C1B618B1F4C4AEF00236804 /* RatingHelper.swift in Sources */,
 				2C1B618C1F4C4AEF00236804 /* TimeFormatHelper.swift in Sources */,
+				087296E220168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B618D1F4C4AEF00236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
@@ -12889,6 +12902,7 @@
 				2C1B639B1F4C590700236804 /* CongratulationViewController.swift in Sources */,
 				2C1B639C1F4C590700236804 /* RatingHelper.swift in Sources */,
 				2C1B639D1F4C590700236804 /* TimeFormatHelper.swift in Sources */,
+				087296E320168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B639E1F4C590700236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
@@ -13344,6 +13358,7 @@
 				2C8653381F4B33DE00D51654 /* CongratulationViewController.swift in Sources */,
 				2C8653391F4B33DE00D51654 /* RatingHelper.swift in Sources */,
 				2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */,
+				087296DF20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				089700991F6B2A830041C24E /* NibInitializableView.swift in Sources */,
@@ -13792,6 +13807,7 @@
 				2C89AA1A1F4C289900227C3B /* AnalyticsHelper.swift in Sources */,
 				2C89AA1B1F4C289900227C3B /* ControllerHelper.swift in Sources */,
 				2C89AA1C1F4C289900227C3B /* GCDThings.swift in Sources */,
+				087296E020168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				08A9F7071FC37DD000640F1F /* CourseTagsView.swift in Sources */,
 				2C89AA1D1F4C289900227C3B /* GlobalFunctions.swift in Sources */,
 				2C89AA1E1F4C289900227C3B /* CongratulationViewController.swift in Sources */,
@@ -14253,6 +14269,7 @@
 				2C9731D21F4C38F600AC9301 /* CongratulationViewController.swift in Sources */,
 				2C9731D31F4C38F600AC9301 /* RatingHelper.swift in Sources */,
 				2C9731D41F4C38F600AC9301 /* TimeFormatHelper.swift in Sources */,
+				087296E120168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C9731D51F4C38F600AC9301 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
@@ -14762,6 +14779,7 @@
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
 				2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */,
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
+				087296DE20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				084490021F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
 				089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */,

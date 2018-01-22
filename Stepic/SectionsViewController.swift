@@ -103,7 +103,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         super.viewDidAppear(animated)
         if shouldShowShareTooltip {
             shareTooltip = TooltipFactory.streaksTooltip
-            shareTooltip?.show(direction: .up, in: self.view, from: shareBarButtonItem)
+            shareTooltip?.show(direction: .up, in: nil, from: shareBarButtonItem)
             shouldShowShareTooltip = false
         }
     }
