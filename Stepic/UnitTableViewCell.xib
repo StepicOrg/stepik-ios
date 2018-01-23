@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -71,23 +72,25 @@
                 <constraints>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="QxI-CU-R8q" secondAttribute="trailing" constant="8" id="8Qk-D4-OeH"/>
                     <constraint firstItem="Sb2-Rm-6K6" firstAttribute="leading" secondItem="4dV-wS-tGY" secondAttribute="trailing" constant="4" id="9Gs-Pm-e79"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-12" id="BFx-aY-Qr2"/>
+                    <constraint firstAttribute="bottom" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-1" id="BFx-aY-Qr2"/>
                     <constraint firstItem="fNw-FX-c6i" firstAttribute="top" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="-1" id="DvL-NQ-oqe"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fNw-FX-c6i" secondAttribute="bottom" constant="-1" id="Ijf-O0-uLt"/>
                     <constraint firstItem="QxI-CU-R8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="PPv-1d-2OG"/>
                     <constraint firstItem="QxI-CU-R8q" firstAttribute="leading" secondItem="Sb2-Rm-6K6" secondAttribute="trailing" constant="8" id="Tzu-Wk-X2A"/>
                     <constraint firstAttribute="trailingMargin" secondItem="QKu-BZ-2u6" secondAttribute="trailing" id="UWd-IU-jKN"/>
-                    <constraint firstItem="4dV-wS-tGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-16" id="ZlV-IZ-voL"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZlV-IZ-voL"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="fNw-FX-c6i" secondAttribute="trailing" constant="8" id="avB-56-1bw"/>
                     <constraint firstItem="c0q-zs-efb" firstAttribute="top" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="9" id="fNe-Po-xg0"/>
                     <constraint firstItem="Sb2-Rm-6K6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hta-op-5uC"/>
-                    <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-11" id="kbe-lJ-6F6"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kbe-lJ-6F6"/>
                     <constraint firstItem="fNw-FX-c6i" firstAttribute="leading" secondItem="c0q-zs-efb" secondAttribute="trailing" constant="9" id="pbX-kf-8pB"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sHy-nY-VVe"/>
                     <constraint firstAttribute="bottomMargin" secondItem="c0q-zs-efb" secondAttribute="bottom" constant="6.5" id="tpJ-xa-EbT"/>
                     <constraint firstItem="c0q-zs-efb" firstAttribute="leading" secondItem="Sb2-Rm-6K6" secondAttribute="trailing" constant="8" id="xb2-eg-DQs"/>
                 </constraints>
+                <viewLayoutGuide key="safeArea" id="dcR-Sm-JEe"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="HUF-mk-cDE"/>
             <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="coverImageView" destination="Sb2-Rm-6K6" id="AE0-DP-4xB"/>
