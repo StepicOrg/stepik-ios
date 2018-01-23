@@ -107,15 +107,15 @@ class CardsStepsViewController: UIViewController {
     }
 
     @IBAction func onTrophyButtonClick(_ sender: Any) {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "Adaptive") as? AdaptiveStatsViewController else {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "Adaptive") as? AdaptiveStatsPagerViewController else {
             return
         }
 
         shouldToggleNavigationBar = false
 
         let ratingManager = AdaptiveRatingManager(courseId: course.id)
-        vc.statsPresenter = AdaptiveStatsPresenter(statsManager: AdaptiveStatsManager(courseId: course.id), ratingManager: ratingManager, view: vc)
-        vc.ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), ratingManager: ratingManager, view: vc)
+        vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
+        vc.statsManager = AdaptiveStatsManager(courseId: course.id)
 
         let navigationVC = StyledNavigationViewController(rootViewController: vc)
         present(navigationVC, animated: true, completion: nil)

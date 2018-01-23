@@ -63,7 +63,6 @@ class AdaptiveRatingsAPI: APIEndpoint {
                 case .failure(let error):
                     reject(error)
                 case .success(let json):
-                    print(json)
                     if response.response?.statusCode == 200 {
                         let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue) }
                         fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
