@@ -18,7 +18,7 @@ struct TooltipFactory {
     }
 
     static var continueLearningWidget: Tooltip {
-        return EasyTipTooltip(text: "Нажмите, чтобы перейти к тому месту, где закончили в прошлый раз", shouldDismissAfterTime: true, color: .light)
+        return EasyTipTooltip(text: "Нажмите, чтобы перейти к тому месту, где закончили в прошлый раз", shouldDismissAfterTime: true, color: .dark)
     }
 
     static var streaksTooltip: Tooltip {

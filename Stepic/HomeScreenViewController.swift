@@ -154,9 +154,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
             self.widgetBackgroundView.isHidden = false
         }, completion: {
             _ in
-            self.continueLearningTooltip = TooltipFactory.continueLearningWidget
-            self.continueLearningTooltip?.show(direction: .up, in: nil, from: self.continueLearningWidget.continueLearningButton)
-            TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+            if TooltipDefaultsManager.shared.shouldShowOnHomeContinueLearning {
+                self.continueLearningTooltip = TooltipFactory.continueLearningWidget
+                self.continueLearningTooltip?.show(direction: .up, in: nil, from: self.continueLearningWidget.continueLearningButton)
+                TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+            }
         })
 
         if !isContinueLearningWidgetPresented {

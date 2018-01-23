@@ -97,8 +97,42 @@ class ProfileViewController: MenuViewController, ProfileView {
         self.streaks = streaks
     }
 
+    var streaksTooltip: Tooltip?
+
     func set(menu: Menu) {
         self.menu = menu
+
+        guard let presenter = presenter else {
+            return
+        }
+
+        guard let blockIndex = menu.getBlockIndex(id: presenter.notificationsSwitchBlockId),
+            let block = menu.getBlock(id: presenter.notificationsSwitchBlockId) as? SwitchMenuBlock else {
+            return
+        }
+
+        if TooltipDefaultsManager.shared.shouldShowOnStreaksSwitchInProfile {
+            delay(0.1) {
+                [weak self] in
+                guard let s = self else {
+                    return
+                }
+                if let cell = s.tableView.cellForRow(at: IndexPath(row: blockIndex, section: 0)) as? SwitchMenuBlockTableViewCell {
+                    if !cell.blockSwitch.isOn {
+                        let oldOnSwitch = block.onSwitch
+                        block.onSwitch = {
+                            [weak self]
+                            isOn in
+                            self?.streaksTooltip?.dismiss()
+                            oldOnSwitch?(isOn)
+                        }
+                        s.streaksTooltip = TooltipFactory.streaksTooltip
+                        s.streaksTooltip?.show(direction: .up, in: s.tableView, from: cell.blockSwitch)
+                        TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile = true
+                    }
+                }
+            }
+        }
     }
 
     func showNotificationSettingsAlert(completion: (() -> Void)?) {
@@ -163,6 +197,11 @@ class ProfileViewController: MenuViewController, ProfileView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         onAppear()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        streaksTooltip?.dismiss()
     }
 }
 

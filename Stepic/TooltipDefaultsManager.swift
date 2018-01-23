@@ -16,6 +16,7 @@ class TooltipDefaultsManager {
 
     private let didShowOnLessonDownloadsKey = "didShowOnLessonDownloadsKey"
     private let didShowOnHomeContinueLearningKey = "didShowOnHomeContinueLearningKey"
+    private let didShowOnStreaksSwitchInProfileKey = "didShowOnStreaksSwitchInProfileKey"
 
     var didShowOnLessonDownloads: Bool {
         set(value) {
@@ -37,11 +38,25 @@ class TooltipDefaultsManager {
         }
     }
 
+    var didShowOnStreaksSwitchInProfile: Bool {
+        set(value) {
+            defaults.set(value, forKey: didShowOnStreaksSwitchInProfileKey)
+        }
+
+        get {
+            return defaults.value(forKey: didShowOnStreaksSwitchInProfileKey) as? Bool ?? false
+        }
+    }
+
     var shouldShowOnHomeContinueLearning: Bool {
         return !didShowOnHomeContinueLearning
     }
 
     var shouldShowLessonDownloadsTooltip: Bool {
         return !didShowOnLessonDownloads
+    }
+
+    var shouldShowOnStreaksSwitchInProfile: Bool {
+        return !didShowOnStreaksSwitchInProfile
     }
 }
