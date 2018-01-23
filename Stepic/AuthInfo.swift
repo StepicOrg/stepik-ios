@@ -19,31 +19,11 @@ class AuthInfo: NSObject {
         print("initializing AuthInfo with userId \(String(describing: userId))")
         if let id = userId {
             if let users = User.fetchById(id) {
-                let c = users.count
-                if c == 0 {
-                    print("No user with such id found, downloading")
-                    ApiDataDownloader.users.retrieve(ids: [id], existing: [], refreshMode: .update, success: {
-                        [weak self]
-                        users in
-                        if let user = users.first {
-                            self?.user = user
-                            return
-                        }
-                        print("downloaded user")
-                        CoreDataHelper.instance.save()
-
-                        }, error: {
-                            [weak self]
-                            _ in
-                            print("failed to fetch user")
-                            self?.userId = nil
-                    })
-                }
-
-                if c >= 1 {
+                if users.isEmpty {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                } else {
                     user = users.first
                 }
-
             }
         }
     }
