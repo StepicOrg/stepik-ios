@@ -17,7 +17,7 @@ protocol Tooltip {
 }
 
 enum TooltipColor {
-    case light, dark
+    case light, dark, standard
 
     var textColor: UIColor {
         switch self {
@@ -25,6 +25,8 @@ enum TooltipColor {
             return UIColor.mainDark
         case .dark:
             return UIColor.mainLight
+        case .standard:
+            return UIColor.white
         }
     }
 
@@ -34,6 +36,8 @@ enum TooltipColor {
             return UIColor.mainDark
         case .dark:
             return UIColor.mainLight
+        case .standard:
+            return UIColor.thirdColor
         }
     }
 
@@ -43,6 +47,8 @@ enum TooltipColor {
             return UIColor.mainLight
         case .dark:
             return UIColor.mainDark
+        case .standard:
+            return UIColor.thirdColor
         }
     }
 }
@@ -50,7 +56,7 @@ enum TooltipColor {
 class EasyTipTooltip: Tooltip {
     private var easyTip: EasyTipView = EasyTipView(text: "")
     private var preferences: EasyTipView.Preferences
-    let dismissesAfter: TimeInterval = 5.0
+    let dismissesAfter: TimeInterval = 7.5
 
     var text: String
     var shouldDismissAfterTime: Bool
@@ -72,7 +78,7 @@ class EasyTipTooltip: Tooltip {
         self.text = text
         self.shouldDismissAfterTime = shouldDismissAfterTime
         preferences = EasyTipView.Preferences()
-        preferences.drawing.font = UIFont.systemFont(ofSize: 13)
+        preferences.drawing.font = UIFont.systemFont(ofSize: 14)
         preferences.drawing.foregroundColor = color.textColor
         preferences.drawing.backgroundColor = color.backgroundColor
         preferences.drawing.borderWidth = 1.0
