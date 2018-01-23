@@ -10,18 +10,18 @@ import Foundation
 
 struct TooltipFactory {
     static var sharingCourse: Tooltip {
-        return EasyTipTooltip(text: "Поделитесь ссылкой с друзьями, чтобы проходить курс вместе!", shouldDismissAfterTime: true, color: .standard)
+        return EasyTipTooltip(text: NSLocalizedString("ShareCourseTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
 
     static var lessonDownload: Tooltip {
-        return EasyTipTooltip(text: "Загрузите урок, чтобы смотреть видео оффлайн", shouldDismissAfterTime: true, color: .standard)
+        return EasyTipTooltip(text: NSLocalizedString("LessonDownloadTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
 
     static var continueLearningWidget: Tooltip {
-        return EasyTipTooltip(text: "Нажмите, чтобы перейти к тому месту, где закончили в прошлый раз", shouldDismissAfterTime: true, color: .standard)
+        return EasyTipTooltip(text: NSLocalizedString("ContinueLearningWidgetTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
 
     static var streaksTooltip: Tooltip {
-        return EasyTipTooltip(text: "Включите, чтобы получать новую порцию знаний каждый день", shouldDismissAfterTime: true, color: .standard)
+        return EasyTipTooltip(text: NSLocalizedString("StreaksSwitchTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
 }

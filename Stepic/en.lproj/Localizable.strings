@@ -373,5 +373,11 @@ OnboardingStartButton = "Start";
 
 StreakAlertMessageNoStreak = "Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 
+/* Tooltips */
+ShareCourseTooltip = "Share the link with your friends to learn together";
+LessonDownloadTooltip = "Download lesson ";
+ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
+StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
