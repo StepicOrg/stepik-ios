@@ -41,3 +41,11 @@ class RectangularCollectionViewController: UICollectionViewController {
         cell.setup(with: sectionCourses[indexPath.row])
     }
 }
+
+extension RectangularCollectionViewController: DetailCatalogView {
+
+    func updateDetailView() {
+        collectionView?.reloadData()
+    }
+
+}

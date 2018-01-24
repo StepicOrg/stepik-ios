@@ -10,18 +10,20 @@ import Foundation
 import UIKit
 
 class UserCourses {
-    private var passed: [ItemViewData]
-    private var notpassed: [ItemViewData]
+    private var passed: [ItemViewData] = []
+    private var notpassed: [ItemViewData] = []
 
-    init(passed: [ItemViewData], notpassed: [ItemViewData]) {
-        self.passed = passed
-        self.notpassed = notpassed
-    }
+    init() {}
 
     func getCourses(by indexPath: IndexPath) -> [ItemViewData] {
         if indexPath.row == 0 { return notpassed }
         if indexPath.row == 1 { return passed }
         fatalError()
+    }
+
+    func setData(passed: [ItemViewData], notpassed: [ItemViewData]) {
+        self.passed = passed
+        self.notpassed = notpassed
     }
 }
 
@@ -30,23 +32,23 @@ class CatalogPresenter {
     private let listType = CourseListType.enrolled
 
     weak var view: CatalogView?
+    private weak var currentDetailView: DetailCatalogView?
 
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
     private var searchResultsAPI: SearchResultsAPI = SearchResultsAPI()
 
     private var courses: [Course]?
-    private var userCourses: UserCourses? {
-        didSet {
-            guard let data = userCourses else { return }
-            view?.provide(userCourses: data)
-        }
-    }
+    private var userCourses: UserCourses = UserCourses()
 
     init(view: CatalogView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
+    }
+
+    func setViewWaitingForAData(detailView: DetailCatalogView) {
+        currentDetailView = detailView
     }
 
     func refresh() {
@@ -66,6 +68,7 @@ class CatalogPresenter {
                 return
             }
             requestEnrolled(updateProgresses: false, language: language)
+            view?.provide(userCourses: userCourses)
         default:
             fatalError()
         }
@@ -83,7 +86,9 @@ class CatalogPresenter {
             let notpassedCourses = courses.filter { $0.progress?.percentPassed != 1.0 }
             let passedViewData = strongSelf.buildViewData(from: passedCourses)
             let notpassedViewData = strongSelf.buildViewData(from: notpassedCourses)
-            strongSelf.userCourses = UserCourses(passed: passedViewData, notpassed: notpassedViewData)
+            strongSelf.userCourses.setData(passed: passedViewData, notpassed: notpassedViewData)
+            strongSelf.currentDetailView?.updateDetailView()
+            print("updateData")
             }.catch {
                 [weak self]
                 _ in

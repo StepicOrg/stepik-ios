@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TVQuizViewController" customModule="StepikTV" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="4y4-Ns-jtG" id="Ftc-f6-JG4"/>
+                <outlet property="sendButton" destination="cCf-gG-RnJ" id="wwp-2f-jEe"/>
+                <outlet property="statusLabel" destination="qci-1j-V8m" id="6qX-J9-Lsw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Y74-Qj-o8Z"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="900" height="335"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCf-gG-RnJ">
+                    <rect key="frame" x="300" y="189" width="300" height="86"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="Q9z-56-u2Y"/>
+                        <constraint firstAttribute="height" constant="86" id="ewK-vW-Dka"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Button"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4y4-Ns-jtG">
+                    <rect key="frame" x="0.0" y="0.0" width="900" height="103"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qci-1j-V8m">
+                    <rect key="frame" x="90" y="128" width="720" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="wji-Du-65C"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="qci-1j-V8m" firstAttribute="top" secondItem="4y4-Ns-jtG" secondAttribute="bottom" constant="25" id="0NR-dv-xqZ"/>
+                <constraint firstItem="cCf-gG-RnJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DRE-60-tEi"/>
+                <constraint firstItem="4y4-Ns-jtG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gcj-Vx-ucK"/>
+                <constraint firstAttribute="trailing" secondItem="4y4-Ns-jtG" secondAttribute="trailing" id="SRD-EL-LoG"/>
+                <constraint firstAttribute="bottom" secondItem="cCf-gG-RnJ" secondAttribute="bottom" constant="60" id="YLV-qf-PYv"/>
+                <constraint firstItem="qci-1j-V8m" firstAttribute="trailing" secondItem="Pmt-tb-8Ig" secondAttribute="trailing" id="c5M-yz-imV"/>
+                <constraint firstItem="cCf-gG-RnJ" firstAttribute="top" secondItem="qci-1j-V8m" secondAttribute="bottom" constant="15" id="nVH-Hu-6Hy"/>
+                <constraint firstItem="4y4-Ns-jtG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tvM-JZ-5nk"/>
+                <constraint firstItem="qci-1j-V8m" firstAttribute="leading" secondItem="Pmt-tb-8Ig" secondAttribute="leading" id="yUl-UM-8PI"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
+            <point key="canvasLocation" x="69" y="160.5"/>
+        </view>
+    </objects>
+</document>

@@ -19,7 +19,10 @@ class QuizPresenter {
     var attemptsAPI: AttemptsAPI
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
+
+    #if os(iOS)
     var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager
+    #endif
 
     var state: QuizState = .nothing {
         didSet {
@@ -34,6 +37,19 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
+    #if os(tvOS)
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
+        self.view = view
+        self.step = step
+        self.dataSource = dataSource
+        self.submissionsAPI = submissionsAPI
+        self.attemptsAPI = attemptsAPI
+        self.userActivitiesAPI = userActivitiesAPI
+        self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
+    }
+    #endif
+
+    #if os(iOS)
     init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
         self.view = view
         self.step = step
@@ -44,6 +60,7 @@ class QuizPresenter {
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
+    #endif
 
     private var submissionLimit: SubmissionLimitation? {
         var limit: SubmissionLimitation?
@@ -83,7 +100,9 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
+                    #if os(iOS)
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
+                    #endif
                     DispatchQueue.main.async {
                         [weak self] in
                         self?.step.progress?.isPassed = true
@@ -296,7 +315,9 @@ class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
+        #if os(iOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: self.view?.submissionAnalyticsParams)
+        #endif
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
             submit(reply: reply, completion: {
@@ -311,6 +332,7 @@ class QuizPresenter {
         }
     }
 
+    #if os(tvOS)
     private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
         let id = attempt!.id!
         performRequest({
@@ -319,12 +341,45 @@ class QuizPresenter {
             _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
                 [weak self]
                 submission in
+
+                guard let s = self else { return }
+
+                s.submission = submission
+                s.checkSubmission(submission.id!, time: 0, completion: completion)
+                }, error: {
+                    errorText in
+                    errorHandler(errorText)
+                    //TODO: test this
+            })
+            }, error: {
+                [weak self]
+                error in
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    self?.view?.logout {
+                        [weak self] in
+                        self?.refreshAttempt()
+                    }
+                }
+        })
+    }
+    #endif
+
+    #if os(iOS)
+    private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
+        let id = attempt!.id!
+        performRequest({
+            [weak self] in
+            guard let s = self else { return }
+            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
+                [weak self]
+                submission in
+
                 guard let s = self else { return }
 
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
                 } else {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                 }
 
                 s.submission = submission
@@ -345,10 +400,14 @@ class QuizPresenter {
             }
         })
     }
+    #endif
 
     private func retrySubmission() {
         view?.showLoading(visible: true)
+
+        #if os(iOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+        #endif
 
         self.delegate?.submissionDidRetry()
 
@@ -375,6 +434,7 @@ class QuizPresenter {
             return nil
         }
 
+        #if os(iOS)
         if RoutingManager.rate.submittedCorrect() {
             self.view?.showRateAlert()
             return
@@ -383,11 +443,13 @@ class QuizPresenter {
         guard streaksNotificationSuggestionManager.canShowAlert(after: .submission) else {
             return
         }
+        #endif
 
         guard let user = AuthInfo.shared.user else {
             return
         }
 
+        #if os(iOS)
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
             activity in
@@ -399,6 +461,18 @@ class QuizPresenter {
         }, error: {
             _ in
         })
+        #else
+        _ = userActivitiesAPI.retrieve(user: user.id, success: {
+            [weak self]
+            activity in
+            guard activity.currentStreak > 0 else {
+                return
+            }
+            self?.view?.suggestStreak(streak: activity.currentStreak)
+            }, error: {
+                _ in
+        })
+        #endif
     }
 
     private func checkSubmission(_ id: Int, time: Int, completion: (() -> Void)? = nil) {

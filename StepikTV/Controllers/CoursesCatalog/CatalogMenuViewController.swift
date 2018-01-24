@@ -31,8 +31,10 @@ class CatalogMenuViewController: MenuTableViewController {
 
         guard segue.identifier == segueIdentifier, let courses = userCourses else { return }
 
-        let vc = segue.destination as? RectangularCollectionViewController
-        vc?.sectionCourses = courses.getCourses(by: indexPath)
+        guard let vc = segue.destination as? RectangularCollectionViewController else { return }
+
+        vc.sectionCourses = courses.getCourses(by: indexPath)
+        presenter?.setViewWaitingForAData(detailView: vc)
     }
 }
 
@@ -43,7 +45,6 @@ extension CatalogMenuViewController: CatalogView {
 
     func provide(userCourses: UserCourses) {
         self.userCourses = userCourses
-
         //performSegue(withIdentifier: segueIdentifier, sender: self)
     }
 }

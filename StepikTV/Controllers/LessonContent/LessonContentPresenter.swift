@@ -35,7 +35,7 @@ class LessonContentPresenter {
             strongSelf.stepsViewData = strongSelf.steps.map {
                 var s = StepViewData(with: $0)
                     s.setAction {
-                        let stepVC = s.viewController
+                        let stepVC = s.stepViewController
                             stepVC.modalPresentationStyle = .overFullScreen
                         viewController.present(stepVC, animated: true, completion: {})
                     }
@@ -57,7 +57,7 @@ struct StepViewData {
         case number = "number"
         case unavailable = "unavailable"
     }
-
+    let step: Step
     let stepType: StepType
     let block: Block
     let isPassed: Bool?
@@ -66,6 +66,7 @@ struct StepViewData {
     init(with step: Step) {
         self.stepType = StepType(rawValue: step.block.name) ?? .unavailable
         self.block = step.block
+        self.step = step
 
         self.isPassed = step.progress?.isPassed
     }
@@ -81,30 +82,44 @@ struct StepViewData {
         }
     }
 
-    var viewController: UIViewController {
+    var stepViewController: UIViewController {
+        switch stepType {
+        case .video:
+            // TO DO
+            let stepVC = ControllerHelper.instantiateViewController(identifier: "StepViewController", storyboardName: "StepViewController") as! StepViewController
+            stepVC.stepViewData = self
+            return stepVC
+        default:
+            let stepVC = ControllerHelper.instantiateViewController(identifier: "StepViewController", storyboardName: "StepViewController") as! StepViewController
+                stepVC.stepViewData = self
+            return stepVC
+        }
+    }
+
+    var quizViewController: TVQuizViewController? {
         switch stepType {
         case .video:
             print(stepType.rawValue)
-            return UIViewController()
+            return nil
         case .text:
-            let textPresenter = TVTextPresentationAlertController()
-            textPresenter.setText(block.text!)
             print(stepType.rawValue)
-            return textPresenter
+            return nil
         case .choice:
             print(stepType.rawValue)
-            return UIViewController()
+            return TVQuizViewController()
         case .free:
             print(stepType.rawValue)
-            return UIViewController()
+            let vc = TVFreeAnswerQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            return vc
         case .string:
             print(stepType.rawValue)
-            return UIViewController()
+            let vc = TVFreeAnswerQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            return vc
         case .number:
             print(stepType.rawValue)
-            return UIViewController()
+            return TVQuizViewController()
         case .unavailable:
-            return UIViewController()
+            return TVQuizViewController()
         }
     }
 

@@ -82,7 +82,7 @@ class LessonContentAlertController: UIAlertController {
         contentView.widthAnchor.constraint(equalToConstant: screenWidth - 350).isActive = true
 
         // Force layout subviews to adopt contentView's size
-        contentView.setNeedsLayout()
+        //contentView.setNeedsLayout()
         contentView.layoutIfNeeded()
         adoptContentViewHeight()
 
