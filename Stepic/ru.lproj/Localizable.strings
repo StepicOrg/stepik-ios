@@ -386,6 +386,7 @@ AdaptiveAllTime = "Всё время";
 Adaptive7Days = "7 дней";
 AdaptiveToday = "Сегодня";
 AdaptiveXPperWeekCell = "опыта за неделю";
+AdaptiveProgressByWeeks = "Прогресс по неделям";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

@@ -53,6 +53,7 @@ class AdaptiveStatsViewController: UIViewController {
     @IBOutlet weak var allCountLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var progressByWeeksTitleLabel: UILabel!
     @IBOutlet weak var levelTitleLabel: UILabel!
     @IBOutlet weak var streakTitleLabel: UILabel!
     @IBOutlet weak var xpPer7DaysTitleLabel: UILabel!
@@ -96,6 +97,7 @@ class AdaptiveStatsViewController: UIViewController {
         streakTitleLabel.text = NSLocalizedString("AdaptiveBestStreak", comment: "")
         xpPer7DaysTitleLabel.text = NSLocalizedString("AdaptiveXPperWeek", comment: "")
         last7DaysTitleLabel.text = NSLocalizedString("AdaptiveLast7Days", comment: "")
+        progressByWeeksTitleLabel.text = NSLocalizedString("AdaptiveProgressByWeeks", comment: "")
     }
 
     override func viewDidLayoutSubviews() {

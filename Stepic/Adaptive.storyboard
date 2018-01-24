@@ -397,6 +397,7 @@
                         <outlet property="last7DaysTitleLabel" destination="Q7J-qA-Fph" id="lub-1A-V6N"/>
                         <outlet property="levelTitleLabel" destination="hta-XX-wC3" id="LG4-3b-rIX"/>
                         <outlet property="loadingIndicator" destination="B4W-Gb-pV4" id="r1c-Ze-uQ9"/>
+                        <outlet property="progressByWeeksTitleLabel" destination="bAz-mE-WUK" id="znb-ch-czI"/>
                         <outlet property="progressChart" destination="Pje-0G-2Uu" id="kgn-nF-PeH"/>
                         <outlet property="streakTitleLabel" destination="qeX-Dc-4R4" id="xqZ-ib-DlW"/>
                         <outlet property="tableView" destination="VGd-yt-5n7" id="jXC-ok-eEo"/>

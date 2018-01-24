@@ -59,6 +59,7 @@ class AdaptiveRatingsViewController: UIViewController {
             2: 1
         ]
         daysCount = sections[ratingSegmentedControl.selectedSegmentIndex] ?? 1
+        state = .loading
         ratingsPresenter?.reloadData(days: daysCount, force: false)
     }
 
@@ -70,6 +71,8 @@ class AdaptiveRatingsViewController: UIViewController {
 
         setUpTable()
         ratingsPresenter?.reloadData(days: daysCount, force: true)
+
+        state = .loading
     }
 
     fileprivate func colorize() {

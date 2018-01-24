@@ -113,7 +113,6 @@ class CardsStepsViewController: UIViewController {
 
         shouldToggleNavigationBar = false
 
-        let ratingManager = AdaptiveRatingManager(courseId: course.id)
         vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
         vc.statsManager = AdaptiveStatsManager(courseId: course.id)
 
