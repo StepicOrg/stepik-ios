@@ -39,7 +39,7 @@
                             <constraint firstAttribute="width" constant="25" id="u1j-Zu-9x3"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lho-PN-aNW">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lho-PN-aNW">
                         <rect key="frame" x="16" y="12" width="34.5" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="0P6-RY-uSI"/>
@@ -61,13 +61,12 @@
                     <constraint firstItem="FUM-uG-df4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5VA-Tm-JYn"/>
                     <constraint firstItem="ir6-nv-fhN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="77I-Gr-Vc3"/>
                     <constraint firstItem="lho-PN-aNW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="9SJ-cE-etY"/>
-                    <constraint firstItem="1Bf-3X-o6S" firstAttribute="centerY" secondItem="pCk-xP-Xd0" secondAttribute="centerY" id="GPz-VW-tuW"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pCk-xP-Xd0" secondAttribute="bottom" constant="12" id="LxX-vs-lzH"/>
                     <constraint firstItem="ir6-nv-fhN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="Pqv-5y-Q2h"/>
                     <constraint firstItem="FUM-uG-df4" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RnE-93-iFQ"/>
                     <constraint firstItem="lho-PN-aNW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Tvt-LZ-1jt"/>
                     <constraint firstItem="pCk-xP-Xd0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="WBx-B6-EdK"/>
-                    <constraint firstItem="pCk-xP-Xd0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ir6-nv-fhN" secondAttribute="trailing" constant="21" id="hHh-vN-8Zm"/>
+                    <constraint firstItem="1Bf-3X-o6S" firstAttribute="centerY" secondItem="lho-PN-aNW" secondAttribute="centerY" id="Zp1-ev-xzr"/>
                     <constraint firstAttribute="trailing" secondItem="1Bf-3X-o6S" secondAttribute="trailing" constant="12" id="mol-0o-J50"/>
                     <constraint firstItem="pCk-xP-Xd0" firstAttribute="leading" secondItem="lho-PN-aNW" secondAttribute="trailing" constant="8" id="uk5-5W-coi"/>
                 </constraints>

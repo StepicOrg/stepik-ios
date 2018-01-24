@@ -42,6 +42,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         backgroundColor = .clear
         isSeparator = false
         positionLabel.isHidden = true
+        layoutIfNeeded()
     }
 
     func updateInfo(position: Int, username: String, exp: Int, isMe: Bool = false) {
@@ -58,6 +59,7 @@ class LeaderboardTableViewCell: UITableViewCell {
     fileprivate func updatePosition(_ position: Int) {
         medalImageView.isHidden = false
         positionLabel.isHidden = true
+        positionLabel.text = "\(position)."
         switch position {
         case 1:
             medalImageView.image = #imageLiteral(resourceName: "medal1")
@@ -69,7 +71,6 @@ class LeaderboardTableViewCell: UITableViewCell {
             medalImageView.image = #imageLiteral(resourceName: "medal3")
             break
         default:
-            positionLabel.text = "\(position)."
             positionLabel.isHidden = false
             medalImageView.isHidden = true
         }
