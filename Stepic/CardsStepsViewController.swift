@@ -65,6 +65,7 @@ class CardsStepsViewController: UIViewController {
             view.addSubview(padView)
         }
         navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        navigationBar.barTintColor = UIColor.mainLight
         statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
         progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
         progressBar.progress = 0
