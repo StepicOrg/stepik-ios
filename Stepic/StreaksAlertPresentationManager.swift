@@ -67,7 +67,7 @@ class StreaksAlertPresentationManager {
         vc.selectedBlock = {
             [weak self] in
             if let source = self?.source?.rawValue {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
             }
             self?.didChooseTime()
             self?.delegate?.didDismiss()
@@ -117,7 +117,7 @@ class StreaksAlertPresentationManager {
         alert.currentStreak = streak
 
         if let source = source?.rawValue {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
         }
         Alerts.streaks.present(alert: alert, inController: controller)
     }

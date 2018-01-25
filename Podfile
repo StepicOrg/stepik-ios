@@ -51,6 +51,8 @@ def all_pods
     pod 'Atributika', '~> 4.0'
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
+    pod 'Koloda', '4.3.1'
+    pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
 end
 
@@ -62,7 +64,6 @@ end
 def adaptive_pods
     pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
-    pod 'Charts', '3.0.4'
     pod 'NotificationBannerSwift', '1.5.2' 
 end
 

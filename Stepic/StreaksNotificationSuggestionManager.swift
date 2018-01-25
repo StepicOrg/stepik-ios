@@ -69,7 +69,7 @@ class StreaksNotificationSuggestionManager {
         let commonChecks = AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
         switch trigger {
         case .login:
-            return commonChecks && RemoteConfig.shared.ShowStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
+            return commonChecks && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
         case .submission:
             return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
         }

@@ -10,7 +10,9 @@ import Foundation
 import Firebase
 
 enum RemoteConfigKeys: String {
-    case ShowStreaksNotificationTrigger = "show_streaks_notification_trigger"
+    case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
+    case adaptiveBackendUrl = "adaptive_backend_url"
+    case supportedInAdaptiveModeCourses = "adaptive_courses_ios"
 }
 
 class RemoteConfig {
@@ -25,11 +27,28 @@ class RemoteConfig {
         case submission = "submission"
     }
 
-    var ShowStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.ShowStreaksNotificationTrigger.rawValue).stringValue else {
+    var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
+        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue).stringValue else {
             return defaultShowStreaksNotificationTrigger
         }
         return ShowStreaksNotificationTrigger(rawValue: configValue) ?? defaultShowStreaksNotificationTrigger
+    }
+
+    var adaptiveBackendUrl: String {
+        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue).stringValue else {
+            return StepicApplicationsInfo.adaptiveRatingURL
+        }
+
+        return configValue
+    }
+
+    var supportedInAdaptiveModeCourses: [Int] {
+        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue).stringValue else {
+            return StepicApplicationsInfo.adaptiveSupportedCourses
+        }
+
+        let ids = configValue.components(separatedBy: ",").flatMap { Int($0) }
+        return ids
     }
 
     init() {
@@ -41,7 +60,9 @@ class RemoteConfig {
 
     private func loadDefaultValues() {
         let appDefaults: [String: NSObject] = [
-            RemoteConfigKeys.ShowStreaksNotificationTrigger.rawValue : defaultShowStreaksNotificationTrigger.rawValue as NSObject
+            RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
+            RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
+            RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
         ]
         FIRRemoteConfig.remoteConfig().setDefaults(appDefaults)
     }

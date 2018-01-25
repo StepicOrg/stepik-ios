@@ -170,6 +170,7 @@ struct AnalyticsEvents {
         static let tokenRefresh = "error_token_refresh"
         static let unregisterDeviceInvalidCredentials = "error_unregister_device_credentials"
         static let registerDevice = "error_register_device"
+        static let adaptiveRatingServer = "error_adaptive_rating_server"
         static let authInfoNoUserOnInit = "error_AuthInfo_no_user_on_init"
     }
 
@@ -245,5 +246,18 @@ struct AnalyticsEvents {
         static let onboardingScreenOpened = "onboarding_screen_opened"
         static let onboardingAction = "onboarding_action"
         static let onboardingComplete = "onboarding_complete"
+    }
+
+    struct Adaptive {
+        static let onboardingFinished = "adaptive_onboarding_finished"
+        struct Step {
+            static let correctAnswer = "adaptive_correct_answer"
+            static let wrongAnswer = "adaptive_wrong_answer"
+            static let retry = "adaptive_retry_answer"
+        }
+        struct Reaction {
+            static let easy = "adaptive_reaction_easy"
+            static let hard = "adaptive_reaction_hard"
+        }
     }
 }
