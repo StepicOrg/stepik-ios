@@ -51,6 +51,7 @@ def all_pods
     pod 'Atributika', '~> 4.0'
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
+    pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
 end
 
 def testing_pods

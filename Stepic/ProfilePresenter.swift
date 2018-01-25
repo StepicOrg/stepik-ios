@@ -41,7 +41,7 @@ class ProfilePresenter {
 
     // MARK: - Menu initialization
 
-    private let notificationsSwitchBlockId = "notifications_switch"
+    let notificationsSwitchBlockId = "notifications_switch"
     private let notificationsTimeSelectionBlockId = "notifications_time_selection"
     private let infoBlockId = "info"
     private let settingsBlockId = "settings"

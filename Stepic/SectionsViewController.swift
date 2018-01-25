@@ -17,9 +17,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     let refreshControl = UIRefreshControl()
     var didRefresh = false
     var course: Course!
-
     var moduleId: Int?
     var parentShareBlock: ((UIActivityViewController) -> Void)?
+    private var shareBarButtonItem: UIBarButtonItem!
+    private var shareTooltip: Tooltip?
+    var shouldShowShareTooltip: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
         let infoBtn = UIButton(type: UIButtonType.infoDark)
         infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), for: UIControlEvents.touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
@@ -95,6 +97,20 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 self?.tableView.reloadData()
             }, error: {})
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldShowShareTooltip {
+            shareTooltip = TooltipFactory.streaksTooltip
+            shareTooltip?.show(direction: .up, in: nil, from: shareBarButtonItem)
+            shouldShowShareTooltip = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shareTooltip?.dismiss()
     }
 
     var emptyDatasetState: EmptyDatasetState = .empty {
@@ -201,7 +217,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         let shareBlock: ((UIActivityViewController) -> Void)? = parentShareBlock
         let url = self.url
-
+        shareTooltip?.dismiss()
         DispatchQueue.global(qos: .background).async {
             [weak self] in
 

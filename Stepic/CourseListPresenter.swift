@@ -181,7 +181,7 @@ class CourseListPresenter {
             [weak self]
             course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
-            if let controller = self?.getSectionsController(for: course) {
+            if let controller = self?.getSectionsController(for: course, didSubscribe: true) {
                 self?.view?.show(controller: controller)
             }
         }.catch {
@@ -536,12 +536,13 @@ class CourseListPresenter {
         }
     }
 
-    private func getSectionsController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {
+    private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
         guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
             return nil
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
         courseVC.course = course
+        courseVC.shouldShowShareTooltip = didSubscribe
         courseVC.parentShareBlock = {
             [weak self]
             shareVC in

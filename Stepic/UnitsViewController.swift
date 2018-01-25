@@ -27,6 +27,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?
 
+    var downloadTooltip: Tooltip?
+
     fileprivate func updateTitle() {
         self.navigationItem.title = section?.title ?? NSLocalizedString("Module", comment: "")
     }
@@ -177,6 +179,11 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             })
             self.didRefresh = true
         })
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        downloadTooltip?.dismiss()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -529,6 +536,19 @@ extension UnitsViewController : UITableViewDataSource {
         }
 
         cell.initWithUnit(section.units[(indexPath as NSIndexPath).row], delegate: self)
+
+        if indexPath.row == 0 && TooltipDefaultsManager.shared.shouldShowLessonDownloadsTooltip {
+            //Delay here to fight some layout issues
+            delay(0.1) {
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.downloadTooltip = TooltipFactory.lessonDownload
+                strongSelf.downloadTooltip?.show(direction: .up, in: strongSelf.tableView, from: cell.downloadButton)
+                TooltipDefaultsManager.shared.didShowOnLessonDownloads = true
+            }
+        }
 
         return cell
     }
