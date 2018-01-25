@@ -28,7 +28,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
         }
 
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.adaptiveRatingURL)/\(name)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: nil).responseSwiftyJSON { response in
+            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: nil).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     reject(error)

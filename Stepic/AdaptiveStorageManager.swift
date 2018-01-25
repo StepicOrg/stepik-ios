@@ -39,7 +39,7 @@ class AdaptiveStorageManager {
     }
 
     func canOpenInAdaptiveMode(courseId: Int) -> Bool {
-        let adaptiveSupportedCourses = self.isAdaptiveModeEnabled ? StepicApplicationsInfo.adaptiveSupportedCourses : []
+        let adaptiveSupportedCourses = self.isAdaptiveModeEnabled ? RemoteConfig.shared.supportedInAdaptiveModeCourses : []
         return adaptiveSupportedCourses.contains(courseId)
     }
 }
