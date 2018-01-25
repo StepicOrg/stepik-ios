@@ -85,6 +85,8 @@ class StepCardView: NibInitializableView {
     }
 
     override func setupSubviews() {
+        controlState = .unsolved
+
         colorize()
 
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]

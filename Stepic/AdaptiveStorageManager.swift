@@ -13,6 +13,7 @@ class AdaptiveStorageManager {
 
     let defaults = UserDefaults.standard
     private let adaptiveModeKey = "useAdaptiveMode"
+    private let adaptiveOnboardingPassedKey = "adaptiveOnboardingPassed"
 
     var isAdaptiveModeEnabled: Bool {
         get {
@@ -25,6 +26,15 @@ class AdaptiveStorageManager {
         }
         set {
             defaults.set(newValue, forKey: adaptiveModeKey)
+        }
+    }
+
+    var isAdaptiveOnboardingPassed: Bool {
+        get {
+            return defaults.bool(forKey: adaptiveOnboardingPassedKey)
+        }
+        set {
+            defaults.set(newValue, forKey: adaptiveOnboardingPassedKey)
         }
     }
 

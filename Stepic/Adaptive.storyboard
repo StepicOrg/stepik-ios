@@ -521,6 +521,54 @@
             </objects>
             <point key="canvasLocation" x="5446.875" y="702.46478873239437"/>
         </scene>
+        <!--Onboarding Card Step View Controller-->
+        <scene sceneID="ZfC-Gm-Hsm">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingCardStep" id="yak-BZ-2j6" customClass="OnboardingCardStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yW0-6m-cwl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyD-o4-nQh">
+                                <rect key="frame" x="0.0" y="20" width="375" height="880"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lov-1h-lG2">
+                                        <rect key="frame" x="0.0" y="10" width="375" height="5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" placeholder="YES" id="WMi-SK-igf"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="lov-1h-lG2" firstAttribute="leading" secondItem="tyD-o4-nQh" secondAttribute="leading" id="3HU-qd-qhT"/>
+                                    <constraint firstAttribute="bottom" secondItem="lov-1h-lG2" secondAttribute="bottom" id="4TD-c1-Ue6"/>
+                                    <constraint firstAttribute="trailing" secondItem="lov-1h-lG2" secondAttribute="trailing" id="Y9G-TZ-ddq"/>
+                                    <constraint firstItem="lov-1h-lG2" firstAttribute="top" secondItem="tyD-o4-nQh" secondAttribute="top" constant="10" placeholder="YES" id="pan-7w-0my"/>
+                                    <constraint firstItem="lov-1h-lG2" firstAttribute="centerX" secondItem="tyD-o4-nQh" secondAttribute="centerX" id="w6R-SL-Ibb"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tyD-o4-nQh" firstAttribute="leading" secondItem="ncy-mw-obP" secondAttribute="leading" id="45q-RI-lua"/>
+                            <constraint firstItem="tyD-o4-nQh" firstAttribute="top" secondItem="ncy-mw-obP" secondAttribute="top" id="9ta-5J-qE1"/>
+                            <constraint firstItem="ncy-mw-obP" firstAttribute="bottom" secondItem="tyD-o4-nQh" secondAttribute="bottom" id="Vgm-VU-iVy"/>
+                            <constraint firstItem="ncy-mw-obP" firstAttribute="trailing" secondItem="tyD-o4-nQh" secondAttribute="trailing" id="eRn-Xu-fOf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ncy-mw-obP"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="900"/>
+                    <connections>
+                        <outlet property="quizPlaceholderView" destination="lov-1h-lG2" id="gbD-Si-hnM"/>
+                        <outlet property="scrollView" destination="tyD-o4-nQh" id="dQ5-iH-icM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zjG-GS-W4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4467" y="1246"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back-arrow" width="12" height="20"/>

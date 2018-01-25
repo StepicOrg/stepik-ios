@@ -50,6 +50,7 @@ class CardsStepsPresenter {
     fileprivate var viewsAPI: ViewsAPI
     fileprivate var ratingManager: AdaptiveRatingManager
     fileprivate var statsManager: AdaptiveStatsManager
+    fileprivate var storageManager: AdaptiveStorageManager
 
     // FIXME: incapsulate/remove this 
     var state: State = .loaded
@@ -81,7 +82,11 @@ class CardsStepsPresenter {
     // Last solve date (num)
     var lastSolvedDay = 0
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, course: Course, view: CardsStepsView) {
+    // Onboarding
+    private var lastOnboardingStep: Int?
+    private var onboardingStepsCount = 3
+
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -89,6 +94,7 @@ class CardsStepsPresenter {
         self.viewsAPI = viewsAPI
         self.ratingManager = ratingManager
         self.statsManager = statsManager
+        self.storageManager = storageManager
 
         self.course = course
         self.view = view
@@ -103,7 +109,44 @@ class CardsStepsPresenter {
         view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
     }
 
+    private func refreshTopCardForOnboarding(stepIndex: Int) {
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            let title = NSLocalizedString("AdaptiveOnboardingTitle", comment: "")
+            strongSelf.state = .loading
+            DispatchQueue.main.async {
+                guard let cardStepViewController = ControllerHelper.instantiateViewController(identifier: "OnboardingCardStep", storyboardName: "Adaptive") as? OnboardingCardStepViewController else {
+                    print("cards steps: fail to init onboarding card step view")
+                    return
+                }
+
+                cardStepViewController.stepIndex = stepIndex
+                if let cardStepDelegate = strongSelf.view as? CardStepDelegate {
+                    cardStepViewController.delegate = cardStepDelegate
+                }
+
+                strongSelf.view?.updateTopCardContent(stepViewController: cardStepViewController)
+                strongSelf.view?.updateTopCardTitle(title: title)
+            }
+        }
+    }
+
     func refreshTopCard() {
+        if !storageManager.isAdaptiveOnboardingPassed {
+            let stepIndex = (lastOnboardingStep ?? 0) + 1
+
+            if stepIndex <= onboardingStepsCount {
+                refreshTopCardForOnboarding(stepIndex: stepIndex)
+                lastOnboardingStep = stepIndex
+                return
+            } else {
+                storageManager.isAdaptiveOnboardingPassed = true
+            }
+        }
+
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -124,8 +167,8 @@ class CardsStepsPresenter {
                     let cardStepPresenter = CardStepPresenter(view: cardStepViewController, step: step)
                     cardStepViewController.presenter = cardStepPresenter
                     strongSelf.currentStepPresenter = cardStepPresenter
-                    if strongSelf.view is CardStepDelegate {
-                        cardStepPresenter.delegate = (strongSelf.view as! CardStepDelegate)
+                    if let cardStepDelegate = strongSelf.view as? CardStepDelegate {
+                        cardStepPresenter.delegate = cardStepDelegate
                     }
 
                     strongSelf.view?.updateTopCardContent(stepViewController: cardStepViewController)
@@ -332,6 +375,12 @@ class CardsStepsPresenter {
 
 extension CardsStepsPresenter: StepCardViewDelegate {
     func onControlButtonClick() {
+        // Onboarding -> just skip card
+        if !storageManager.isAdaptiveOnboardingPassed {
+            view?.swipeCardUp()
+            return
+        }
+
         switch currentStepPresenter?.state ?? .unsolved {
         case .unsolved:
             currentStepPresenter?.submit()

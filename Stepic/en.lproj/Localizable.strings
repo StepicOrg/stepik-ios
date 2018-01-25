@@ -388,6 +388,7 @@ AdaptiveXPperWeekCell = "XP per week";
 AdaptiveProgressByWeeks = "Progress by weeks";
 AdaptivePreferencesTitle = "Adaptive courses";
 UseAdaptiveModePreference = "Adaptive mode";
+AdaptiveOnboardingTitle = "Adaptive mode: tutorial";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
