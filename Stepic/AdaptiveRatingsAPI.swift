@@ -13,6 +13,7 @@ import PromiseKit
 
 class AdaptiveRatingsAPI: APIEndpoint {
     override var name: String { return "rating" }
+    var restoreName: String { return "rating-restore" }
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int)
     typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])
@@ -58,7 +59,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
         }
 
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.adaptiveRatingURL)/\(name)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
+            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     reject(error)
@@ -66,6 +67,33 @@ class AdaptiveRatingsAPI: APIEndpoint {
                     if response.response?.statusCode == 200 {
                         let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue) }
                         fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
+                    } else {
+                        reject(RatingsAPIError.serverError)
+                    }
+                }
+            }
+        }
+    }
+
+    func restore(courseId: Int) -> Promise<(exp: Int, streak: Int)> {
+        var params: Parameters = [
+            "course": courseId
+        ]
+
+        if let token = AuthInfo.shared.token?.accessToken {
+            params["token"] = token
+        }
+
+        return Promise { fulfill, reject in
+            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(restoreName)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(error)
+                case .success(let json):
+                    if response.response?.statusCode == 200 {
+                        let exp = json["exp"].intValue
+                        let streak = json["streak"].intValue
+                        fulfill((exp: exp, streak: streak))
                     } else {
                         reject(RatingsAPIError.serverError)
                     }

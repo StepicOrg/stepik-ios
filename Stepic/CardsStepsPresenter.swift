@@ -51,6 +51,7 @@ class CardsStepsPresenter {
     fileprivate var ratingManager: AdaptiveRatingManager
     fileprivate var statsManager: AdaptiveStatsManager
     fileprivate var storageManager: AdaptiveStorageManager
+    fileprivate var ratingsAPI: AdaptiveRatingsAPI
 
     // FIXME: incapsulate/remove this 
     var state: State = .loaded
@@ -79,19 +80,20 @@ class CardsStepsPresenter {
         }
     }
 
-    // Last solve date (num)
-    var lastSolvedDay = 0
-
     // Onboarding
     private var lastOnboardingStep: Int?
     private var onboardingStepsCount = 3
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course, view: CardsStepsView) {
+    // Sync
+    private var shouldSyncRating = true
+
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
+        self.ratingsAPI = ratingsAPI
         self.ratingManager = ratingManager
         self.statsManager = statsManager
         self.storageManager = storageManager
@@ -102,8 +104,6 @@ class CardsStepsPresenter {
 
     func refresh() {
         view?.refreshCards()
-
-        lastSolvedDay = statsManager.getLastDays(count: 1)[0] > 0 ? statsManager.dayByDate(Date()) : 0
 
         let currentLevel = AdaptiveRatingHelper.getLevel(for: rating)
         view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
@@ -135,6 +135,7 @@ class CardsStepsPresenter {
     }
 
     func refreshTopCard() {
+
         if !storageManager.isAdaptiveOnboardingPassed {
             let stepIndex = (lastOnboardingStep ?? 0) + 1
 
@@ -154,7 +155,11 @@ class CardsStepsPresenter {
 
             var title = ""
             strongSelf.state = .loading
-            strongSelf.getNewRecommendation(for: strongSelf.course).then { lesson -> Promise<Step> in
+
+            let startPromise = strongSelf.shouldSyncRating ? strongSelf.syncRatingAndStreak(for: strongSelf.course) : Promise(value: ())
+            startPromise.then {
+                strongSelf.getNewRecommendation(for: strongSelf.course)
+            }.then { lesson -> Promise<Step> in
                 title = lesson.title
                 return strongSelf.getStep(for: lesson)
             }.then { step -> Promise<Void> in
@@ -341,6 +346,23 @@ class CardsStepsPresenter {
         }
     }
 
+    fileprivate func syncRatingAndStreak(for course: Course) -> Promise<Void> {
+        return Promise { fulfill, _ in
+            self.ratingsAPI.restore(courseId: course.id).then { exp, streak -> Void in
+                self.rating = max(self.rating, exp)
+                self.streak = max(self.streak, streak)
+
+                let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
+                self.view?.updateProgress(rating: self.rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+            }.catch { error in
+                print("cards steps: unable to restore exp and streak, error = \(error)")
+            }.always {
+                self.shouldSyncRating = false
+                fulfill()
+            }
+        }
+    }
+
     func updateRatingWhenSuccess() {
         let curStreak = streak
         let oldRating = rating
@@ -349,12 +371,6 @@ class CardsStepsPresenter {
         // Update stats
         statsManager.incrementRating(curStreak)
         statsManager.maxStreak = curStreak
-
-        // Days streak achievement
-        let curDay = statsManager.dayByDate(Date())
-        if lastSolvedDay != curDay {
-            lastSolvedDay = curDay
-        }
 
         view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
             let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
