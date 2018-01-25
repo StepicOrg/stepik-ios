@@ -109,7 +109,7 @@ class DiscussionTableViewCell: UITableViewCell {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
         if let data = wrapped.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             do {
-                let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
+                let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).attributedStringByTrimmingNewlines()
                 commentLabel?.attributedText = attributedString
                 layoutSubviews()
                 updateConstraints()

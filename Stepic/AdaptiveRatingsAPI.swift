@@ -35,7 +35,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
                     reject(error)
                 case .success(_):
                     switch response.response?.statusCode ?? 500 {
-                    case 200: fulfill()
+                    case 200: fulfill(())
                     case 401: reject(RatingsAPIError.badRequest)
                     default: reject(RatingsAPIError.serverError)
                     }

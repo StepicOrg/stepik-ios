@@ -171,6 +171,7 @@ struct AnalyticsEvents {
         static let unregisterDeviceInvalidCredentials = "error_unregister_device_credentials"
         static let registerDevice = "error_register_device"
         static let adaptiveRatingServer = "error_adaptive_rating_server"
+        static let authInfoNoUserOnInit = "error_AuthInfo_no_user_on_init"
     }
 
     struct Continue {

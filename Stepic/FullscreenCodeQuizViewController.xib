@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,10 +50,11 @@
             </subviews>
             <color key="backgroundColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="jhO-pA-wkB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="0Cq-Hq-NG3"/>
+                <constraint firstItem="jhO-pA-wkB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="0Cq-Hq-NG3"/>
                 <constraint firstItem="jhO-pA-wkB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1n-Gy-di4"/>
                 <constraint firstAttribute="trailing" secondItem="jhO-pA-wkB" secondAttribute="trailing" id="pAe-vY-feh"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="wEw-uP-lSC"/>
             <point key="canvasLocation" x="34.5" y="76.5"/>
         </view>
     </objects>

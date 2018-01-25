@@ -67,7 +67,7 @@ class VideoStepViewController: UIViewController {
         navigationController?.navigationBar.sizeToFit()
     }
 
-    func sharePressed(_ item: UIBarButtonItem) {
+    @objc func sharePressed(_ item: UIBarButtonItem) {
 //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
 
         guard let slug = lessonSlug, let stepid = stepId else {
@@ -116,7 +116,7 @@ class VideoStepViewController: UIViewController {
         }
     }
 
-    func updatedStepNotification(_ notification: Foundation.Notification) {
+    @objc func updatedStepNotification(_ notification: Foundation.Notification) {
         initialize()
     }
 
@@ -157,11 +157,8 @@ class VideoStepViewController: UIViewController {
     var itemView: VideoDownloadView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), video: video, buttonDelegate: self, downloadDelegate: self)
 
-        itemView.constrainHeight("40")
-        itemView.constrainWidth("40")
         let downloadItem = UIBarButtonItem(customView: itemView)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem, downloadItem]

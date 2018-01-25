@@ -181,7 +181,7 @@ class CourseListPresenter {
             [weak self]
             course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
-            if let controller = self?.getSectionsController(for: course) {
+            if let controller = self?.getSectionsController(for: course, didSubscribe: true) {
                 self?.view?.show(controller: controller)
             }
         }.catch {
@@ -254,13 +254,13 @@ class CourseListPresenter {
                     }
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
                     strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                    fulfill()
+                    fulfill(())
                 }.catch {
                     error in
                     reject(error)
                 }
             } else {
-                fulfill()
+                fulfill(())
             }
         }
     }
@@ -283,7 +283,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.state = strongSelf.courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-            fulfill()
+            fulfill(())
         }
     }
 
@@ -538,12 +538,13 @@ class CourseListPresenter {
         }
     }
 
-    private func getSectionsController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {
+    private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
         guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
             return nil
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
         courseVC.course = course
+        courseVC.shouldShowShareTooltip = didSubscribe
         courseVC.parentShareBlock = {
             [weak self]
             shareVC in

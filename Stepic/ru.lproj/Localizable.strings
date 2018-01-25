@@ -391,5 +391,11 @@ AdaptivePreferencesTitle = "Адаптивные курсы";
 UseAdaptiveModePreference = "Адаптивный режим";
 AdaptiveOnboardingTitle = "Адаптивный режим: обучение";
 
+/* Tooltips */
+ShareCourseTooltip = "Поделитесь ссылкой с друзьями, чтобы проходить курс вместе";
+LessonDownloadTooltip = "Загрузите урок, чтобы смотреть видео оффлайн";
+ContinueLearningWidgetTooltip = "Нажмите, чтобы перейти к тому месту, где закончили в прошлый раз";
+StreaksSwitchTooltip = "Включите, чтобы получать новую порцию знаний каждый день";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

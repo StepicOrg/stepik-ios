@@ -50,7 +50,7 @@ class RecommendationsAPI: APIEndpoint {
                     if response.response?.statusCode != 201 {
                         reject(RecommendationsAPIError.invalidStatus)
                     } else {
-                        fulfill()
+                        fulfill(())
                     }
                 }
             }

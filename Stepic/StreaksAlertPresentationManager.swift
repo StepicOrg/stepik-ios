@@ -53,7 +53,7 @@ class StreaksAlertPresentationManager {
     }()
 
     private func didChooseTime() {
-        if let controller = controller as? NewProfileViewController {
+        if let controller = controller as? ProfileViewController {
             controller.onAppear()
         }
     }
@@ -63,7 +63,7 @@ class StreaksAlertPresentationManager {
             return
         }
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
-        vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        vc.startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         vc.selectedBlock = {
             [weak self] in
             if let source = self?.source?.rawValue {

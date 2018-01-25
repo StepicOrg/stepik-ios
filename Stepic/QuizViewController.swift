@@ -61,7 +61,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         v.constrainHeight("150")
         v.delegate = self
         v.datasource = self
-        v.setContentCompressionResistancePriority(1000.0, for: UILayoutConstraintAxis.vertical)
+        v.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000.0), for: UILayoutConstraintAxis.vertical)
         v.backgroundColor = UIColor.white
         return v
     }

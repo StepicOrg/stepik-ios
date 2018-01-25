@@ -109,11 +109,9 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         codeTextView.autocorrectionType = UITextAutocorrectionType.no
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                codeTextView.smartQuotesType = .no
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            codeTextView.smartQuotesType = .no
+        }
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
@@ -156,6 +154,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         doneItem.tintColor = UIColor.white
+        updateTextViewInsets()
     }
 
     fileprivate func configureKeyboardNotifications() {
@@ -246,6 +245,11 @@ class FullscreenCodeQuizViewController: UIViewController {
         CoreDataHelper.instance.save()
     }
 
+    private func updateTextViewInsets() {
+        if #available(iOS 11.0, *) {
+            codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: view.safeAreaInsets.left, bottom: 0, right: view.safeAreaInsets.right)
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -279,7 +283,7 @@ extension FullscreenCodeQuizViewController : UITextViewDelegate {
 extension FullscreenCodeQuizViewController: CodeSuggestionDelegate {
     func didSelectSuggestion(suggestion: String, prefix: String) {
         codeTextView.becomeFirstResponder()
-        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
     }

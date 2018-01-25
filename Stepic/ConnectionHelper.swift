@@ -56,7 +56,7 @@ class ConnectionHelper: NSObject {
         }
     }
 
-    func reachabilityChanged(_ notification: Foundation.Notification) {
+    @objc func reachabilityChanged(_ notification: Foundation.Notification) {
         if isReachable {
             print("Service avalaible!!!")
             callReachabilityhandlers(true)

@@ -88,7 +88,7 @@ class HTMLBuilder: NSObject {
         var linkMap = [String: String]()
 
         for link in links {
-            if link.characters.first == Character("/") {
+            if link.first == Character("/") {
                 linkMap[link] = "\(StepicApplicationsInfo.stepicURL)/\(link)"
             }
         }

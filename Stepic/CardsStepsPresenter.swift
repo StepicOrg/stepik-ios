@@ -317,7 +317,7 @@ class CardsStepsPresenter {
 
                 return self.viewsAPI.create(step: step.id, assignment: assignmentId)
             }.then { _ in
-                fulfill()
+                fulfill(())
             }.catch { _ in
                 reject(CardsStepsError.viewNotSent)
             }
@@ -339,7 +339,7 @@ class CardsStepsPresenter {
                 }
 
                 print("cards steps: reaction sent, reaction = \(reaction), lesson = \(lesson.id)")
-                fulfill()
+                fulfill(())
             }.catch { _ in
                 reject(CardsStepsError.reactionNotSent)
             }
@@ -358,7 +358,7 @@ class CardsStepsPresenter {
                 print("cards steps: unable to restore exp and streak, error = \(error)")
             }.always {
                 self.shouldSyncRating = false
-                fulfill()
+                fulfill(())
             }
         }
     }

@@ -16,6 +16,12 @@ class Menu {
         self.blocks = blocks
     }
 
+    func getBlockIndex(id: String) -> Int? {
+        return blocks.index(where: {
+            $0.id == id
+        })
+    }
+
     func getBlock(id: String) -> MenuBlock? {
         return blocks.first(where: {
             $0.id == id

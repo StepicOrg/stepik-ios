@@ -95,7 +95,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        ApiDataDownloader.notificationsStatusAPI.retrieve().then { result -> Void in
+        checkToken().then {
+            ApiDataDownloader.notificationsStatusAPI.retrieve()
+        }.then { result -> Void in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { _ in
             print("notifications: unable to fetch badges count on launch")
@@ -186,7 +188,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
 
-    func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+    @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
         if let token = FIRInstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized {
                 NotificationRegistrator.shared.registerDevice(token)

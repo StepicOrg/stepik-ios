@@ -79,7 +79,7 @@ class AdaptiveRatingsViewController: UIViewController {
         loadingIndicator.color = UIColor.mainDark
         ratingSegmentedControl.tintColor = UIColor.mainDark
         navigationItem.leftBarButtonItem?.tintColor = UIColor.mainDark
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDark]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark]
     }
 
     fileprivate func localize() {

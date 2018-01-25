@@ -41,7 +41,7 @@ class ProfilePresenter {
 
     // MARK: - Menu initialization
 
-    private let notificationsSwitchBlockId = "notifications_switch"
+    let notificationsSwitchBlockId = "notifications_switch"
     private let notificationsTimeSelectionBlockId = "notifications_time_selection"
     private let infoBlockId = "info"
     private let settingsBlockId = "settings"
@@ -79,7 +79,8 @@ class ProfilePresenter {
     private var currentZone00UTC: String {
         let date = Date(timeIntervalSince1970: 0)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
         dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }
@@ -119,10 +120,10 @@ class ProfilePresenter {
 
     private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock? {
         var content: [TitleContentExpandableMenuBlock.TitleContent] = []
-        if user.bio.characters.count > 0 {
+        if user.bio.count > 0 {
             content += [(title: NSLocalizedString("ShortBio", comment: ""), content: user.bio)]
         }
-        if user.details.characters.count > 0 {
+        if user.details.count > 0 {
             content += [(title: NSLocalizedString("Info", comment: ""), content: user.details)]
         }
 
@@ -231,7 +232,7 @@ class ProfilePresenter {
     }
 
     private func presentStreakTimeSelection(forBlock block: TransitionMenuBlock) {
-        let startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        let startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         view?.showStreakTimeSelectionAlert(startHour: startHour, selectedBlock: {
             [weak self] in
             block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(self?.notificationTimeString ?? "")"

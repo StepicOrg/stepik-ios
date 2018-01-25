@@ -26,22 +26,27 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     private let streaksWidgetBackgroundView = UIView()
     private var streaksWidgetView: UserActivityHomeView?
 
+    private var continueLearningTooltip: Tooltip?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = HomeScreenPresenter(view: self, userActivitiesAPI: UserActivitiesAPI())
         setupStackView()
         presenter?.initBlocks()
         self.title = NSLocalizedString("Home", comment: "")
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStreaks()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        continueLearningTooltip?.dismiss()
     }
 
     private func setupStackView() {
@@ -101,7 +106,14 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
             streaksWidgetBackgroundView.backgroundColor = UIColor.white
             streaksWidgetBackgroundView.addSubview(widget)
             widget.alignTop("16", bottom: "-8", toView: streaksWidgetBackgroundView)
-            widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            if #available(iOS 11.0, *) {
+                NSLayoutConstraint.activate([
+                    widget.leadingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                    widget.trailingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+            } else {
+                widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+            }
             widget.setRoundedCorners(cornerRadius: 8)
             streaksWidgetBackgroundView.isHidden = true
             stackView.insertArrangedSubview(streaksWidgetBackgroundView, at: 0)
@@ -125,15 +137,29 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(continueLearningWidget)
         continueLearningWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                continueLearningWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                continueLearningWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+        } else {
+            continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        }
         continueLearningWidget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
 
-        UIView.animate(withDuration: 0.15) {
+        UIView.animate(withDuration: 0.15, animations: {
             self.widgetBackgroundView.isHidden = false
-        }
+        }, completion: {
+            _ in
+            if TooltipDefaultsManager.shared.shouldShowOnHomeContinueLearning {
+                self.continueLearningTooltip = TooltipFactory.continueLearningWidget
+                self.continueLearningTooltip?.show(direction: .up, in: nil, from: self.continueLearningWidget.continueLearningButton)
+                TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+            }
+        })
 
         if !isContinueLearningWidgetPresented {
             isContinueLearningWidgetPresented = true
@@ -143,6 +169,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     func hideCountinueLearningWidget() {
         isContinueLearningWidgetPresented = false
         stackView.removeArrangedSubview(widgetBackgroundView)
+        continueLearningTooltip?.dismiss()
         UIView.animate(withDuration: 0.15) {
             self.widgetBackgroundView.isHidden = true
         }

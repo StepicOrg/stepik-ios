@@ -139,7 +139,7 @@ class CoursesAPI: APIEndpoint {
                 CoreDataHelper.instance.save()
                 let meta = Meta(json: json["meta"])
 
-                successHandler((resultCourses, meta))
+                successHandler(resultCourses, meta)
                 return
             }
         })

@@ -83,7 +83,7 @@ class NotificationsAPI: APIEndpoint {
                     if response.response?.statusCode != 204 {
                         reject(NotificationsAPIError.invalidStatus)
                     } else {
-                        fulfill()
+                        fulfill(())
                     }
                 }
             }

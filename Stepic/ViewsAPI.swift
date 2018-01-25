@@ -16,8 +16,8 @@ class ViewsAPI: APIEndpoint {
 
     func create(step stepId: Int, assignment assignmentId: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Void> {
         return Promise { fulfill, reject in
-            create(stepId: stepId, assignment: assignmentId, headers: headers, success: { _ -> Void in
-                fulfill()
+            create(stepId: stepId, assignment: assignmentId, headers: headers, success: {
+                fulfill(())
             }, error: { error in
                 reject(error)
             })

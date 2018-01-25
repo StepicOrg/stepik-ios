@@ -13,6 +13,10 @@ enum LessonViewState {
     case displayingSteps, placeholder, refreshing
 }
 
+enum StepsControllerPresentationContext {
+    case lesson, unit
+}
+
 typealias LessonInitObjects = (lesson: Lesson, startStepId: Int, context: StepsControllerPresentationContext)
 typealias LessonInitIds = (stepId: Int?, unitId: Int?)
 

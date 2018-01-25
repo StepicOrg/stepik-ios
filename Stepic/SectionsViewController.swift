@@ -17,9 +17,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     let refreshControl = UIRefreshControl()
     var didRefresh = false
     var course: Course!
-
     var moduleId: Int?
     var parentShareBlock: ((UIActivityViewController) -> Void)?
+    private var shareBarButtonItem: UIBarButtonItem!
+    private var shareTooltip: Tooltip?
+    var shouldShowShareTooltip: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
         let infoBtn = UIButton(type: UIButtonType.infoDark)
         infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), for: UIControlEvents.touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
@@ -58,11 +60,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             registerForPreviewing(with: self, sourceView: view)
         }
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     var url: String {
@@ -73,11 +73,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    func shareButtonPressed(_ button: UIBarButtonItem) {
+    @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         share(popoverSourceItem: button, popoverView: nil, fromParent: false)
     }
 
-    func infoButtonPressed(_ button: UIButton) {
+    @objc func infoButtonPressed(_ button: UIButton) {
         self.performSegue(withIdentifier: "showCourse", sender: nil)
     }
 
@@ -99,6 +99,20 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldShowShareTooltip {
+            shareTooltip = TooltipFactory.streaksTooltip
+            shareTooltip?.show(direction: .up, in: nil, from: shareBarButtonItem)
+            shouldShowShareTooltip = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shareTooltip?.dismiss()
+    }
+
     var emptyDatasetState: EmptyDatasetState = .empty {
         didSet {
             UIThread.performUI {
@@ -107,7 +121,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    func refreshSections() {
+    @objc func refreshSections() {
         didRefresh = false
         emptyDatasetState = .refreshing
         course.loadAllSections(success: {
@@ -203,7 +217,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         let shareBlock: ((UIActivityViewController) -> Void)? = parentShareBlock
         let url = self.url
-
+        shareTooltip?.dismiss()
         DispatchQueue.global(qos: .background).async {
             [weak self] in
 
@@ -441,8 +455,8 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-            NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -466,9 +480,9 @@ extension SectionsViewController : DZNEmptyDataSetSource {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-            NSForegroundColorAttributeName: UIColor.lightGray,
-            NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

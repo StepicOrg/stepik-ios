@@ -148,7 +148,7 @@ extension CardStepViewController: WKNavigationDelegate {
                     return reject(error)
                 }
 
-                fulfill()
+                fulfill(())
             })
         }
     }

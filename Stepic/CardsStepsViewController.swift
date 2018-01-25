@@ -216,7 +216,7 @@ extension CardsStepsViewController: CardsStepsView {
             })
         }
 
-        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex: 0x008040), duration: 0.4, completionBlock: { _ in
+        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex: 0x008040), duration: 0.4, completionBlock: { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
                 transitionToText(text, color: color, duration: 0.4, completionBlock: { completion?() })
             })

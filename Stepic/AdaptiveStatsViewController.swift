@@ -88,7 +88,7 @@ class AdaptiveStatsViewController: UIViewController {
         currentLevelLabel.textColor = UIColor.mainDark
 
         navigationItem.leftBarButtonItem?.tintColor = UIColor.mainDark
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDark]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark]
     }
 
     private func localize() {

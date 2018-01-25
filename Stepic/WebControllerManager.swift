@@ -59,6 +59,14 @@ class WebControllerManager: NSObject {
     }
 
     func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true, forceCustom: Bool = false) {
+        guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+            return
+        }
 
         if !forceCustom {
             let svc = SFSafariViewController(url: url)
@@ -85,7 +93,7 @@ class WebControllerManager: NSObject {
         }
     }
 
-    func defaultSelector() {}
+    @objc func defaultSelector() {}
 }
 
 enum BackButtonStyle {

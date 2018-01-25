@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PjG-kv-YKT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PjG-kv-YKT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Profile View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="2md-QC-a9y">
             <objects>
-                <viewController id="PjG-kv-YKT" customClass="NewProfileViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7Qc-uS-oIj"/>
-                        <viewControllerLayoutGuide type="bottom" id="xAH-dh-5Sy"/>
-                    </layoutGuides>
+                <viewController id="PjG-kv-YKT" customClass="ProfileViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEb-uO-Gd8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="kwk-Cc-2c4"/>
                     </view>
                     <connections>
                         <segue destination="OwV-6h-QBp" kind="show" identifier="showSettings" id="DUN-Iv-Fae"/>
@@ -30,18 +28,15 @@
             </objects>
             <point key="canvasLocation" x="-276" y="150"/>
         </scene>
-        <!--New Settings View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="JVY-5p-0UI">
             <objects>
-                <viewController storyboardIdentifier="NewSettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OwV-6h-QBp" customClass="NewSettingsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jbn-EV-KWg"/>
-                        <viewControllerLayoutGuide type="bottom" id="9a6-Nw-5P3"/>
-                    </layoutGuides>
+                <viewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OwV-6h-QBp" customClass="SettingsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3oO-pI-Igs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="X0H-Oi-4KX"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsT-L2-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -68,7 +63,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low (270p)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZS-Ow-cdN" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21.5" width="351" height="17"/>
+                                                    <rect key="frame" x="24" y="21.5" width="335" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -89,7 +84,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium (360p)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9U-lN-Lem" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21.5" width="351" height="17"/>
+                                                    <rect key="frame" x="24" y="21.5" width="335" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -110,7 +105,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High (720p)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTI-Xi-QE0" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21.5" width="351" height="17"/>
+                                                    <rect key="frame" x="24" y="21.5" width="335" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -131,7 +126,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very high (1080p)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ye-lu-mh5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21.5" width="351" height="17"/>
+                                                    <rect key="frame" x="24" y="21.5" width="335" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
