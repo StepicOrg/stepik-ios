@@ -222,6 +222,20 @@ extension CardsStepsViewController: CardsStepsView {
             })
         })
     }
+
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)? = nil) {
+        if state == .congratulation {
+            completion?()
+            return
+        }
+
+        let controller = Alerts.congratulation.construct(congratulationType: type, continueHandler: { [weak self] in
+            self?.state = .normal
+            completion?()
+        })
+        state = .congratulation
+        Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
+    }
 }
 
 extension CardsStepsViewController: KolodaViewDelegate {

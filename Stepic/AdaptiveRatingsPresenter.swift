@@ -67,7 +67,7 @@ class AdaptiveRatingsPresenter {
             switch error {
             case RatingsAPIError.serverError:
                 print("adaptive ratings: remote rating update failed: server error")
-                //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.ratingServerError)
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
             default:
                 print("adaptive ratings: remote rating update failed: \(error)")
             }

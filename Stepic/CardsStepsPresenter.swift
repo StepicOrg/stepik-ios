@@ -29,6 +29,7 @@ protocol CardsStepsView: class {
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)?)
 }
 
 class CardsStepsPresenter {
@@ -345,11 +346,9 @@ extension CardsStepsPresenter: StepCardViewDelegate {
             // updated rating here
             let newRating = rating
             let oldRating = newRating - streak + 1
-//            if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
-//                achievementsManager?.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
-//
-//                view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
-//            }
+            if AdaptiveRatingHelper.getLevel(for: oldRating) != AdaptiveRatingHelper.getLevel(for: newRating) {
+                view?.showCongratulationPopup(type: .level(level: AdaptiveRatingHelper.getLevel(for: newRating)), completion: nil)
+            }
         }
     }
 
