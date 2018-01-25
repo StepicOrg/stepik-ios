@@ -27,7 +27,7 @@ class CongratulationViewController: UIViewController {
         var shareText: String {
             switch self {
             case .level(let level):
-                return String(format: NSLocalizedString("AdaptiveNewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
+                return String(format: NSLocalizedString("NewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
             }
         }
 
@@ -82,4 +82,3 @@ class CongratulationViewController: UIViewController {
         shareButton.tintColor = UIColor.mainDark
     }
 }
-

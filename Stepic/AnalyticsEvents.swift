@@ -246,7 +246,7 @@ struct AnalyticsEvents {
         static let onboardingAction = "onboarding_action"
         static let onboardingComplete = "onboarding_complete"
     }
-    
+
     struct Adaptive {
         static let onboardingFinished = "adaptive_onboarding_finished"
         struct Step {
