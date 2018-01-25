@@ -359,20 +359,20 @@ extension CardsStepsViewController: PlaceholderViewDelegate {
 
 extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
-        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
         presenter?.sendReaction(.solved)
         presenter?.updateRatingWhenSuccess()
         topCard?.controlState = .successful
     }
 
     func stepSubmissionDidWrong() {
-        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
         presenter?.updateRatingWhenFail()
         topCard?.controlState = .wrong
     }
 
     func stepSubmissionDidRetry() {
-        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
         topCard?.controlState = .unsolved
     }
 

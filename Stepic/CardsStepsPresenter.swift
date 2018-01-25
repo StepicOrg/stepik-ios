@@ -283,12 +283,9 @@ class CardsStepsPresenter {
                 if let curState = self.currentStepPresenter?.state {
                     switch reaction {
                     case .maybeLater:
-                        break
-                        // FIXME: analytics
-                        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
                     case .neverAgain:
-                        break
-                        //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
                     default: break
                     }
                 }

@@ -29,7 +29,7 @@ class SettingsPresenter {
             buildOnlyWifiSwitchBlock(),
             buildLoadedVideoQualityBlock(),
             buildOnlineVideoQualityBlock(),
-            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: "Adaptive"),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
             buildAdaptiveModeSwitchBlock()
         ]
         return Menu(blocks: blocks)
@@ -82,7 +82,7 @@ class SettingsPresenter {
     }
 
     private func buildAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: adaptiveModeSwitchBlockId, title: "Use adaptive mode", isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled)
+        let block = SwitchMenuBlock(id: adaptiveModeSwitchBlockId, title: NSLocalizedString("UseAdaptiveModePreference", comment: ""), isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled)
 
         block.onSwitch = {
             isOn in

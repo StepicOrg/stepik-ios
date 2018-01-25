@@ -386,6 +386,8 @@ Adaptive7Days = "7 days";
 AdaptiveToday = "Today";
 AdaptiveXPperWeekCell = "XP per week";
 AdaptiveProgressByWeeks = "Progress by weeks";
+AdaptivePreferencesTitle = "Adaptive courses";
+UseAdaptiveModePreference = "Adaptive mode";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
