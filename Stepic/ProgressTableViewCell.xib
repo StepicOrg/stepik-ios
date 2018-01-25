@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="progressCell" rowHeight="82" id="hsY-1l-z0R" customClass="ProgressTableViewCell" customModule="Stepic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hsY-1l-z0R" id="dMJ-dt-4ZG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="81.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="gfs-Lf-MUo">
+                        <rect key="frame" x="16" y="20" width="122" height="42"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3y3-wP-Mnh">
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="опыта за неделю" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMK-Q0-yK4">
+                                <rect key="frame" x="0.0" y="24" width="122" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzF-7K-i5D">
+                        <rect key="frame" x="293.5" y="18.5" width="10.5" height="39.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="33"/>
+                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M5s-wk-U0K">
+                        <rect key="frame" x="191" y="19" width="98.5" height="44"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 июля 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiV-zm-iZK">
+                                <rect key="frame" x="0.0" y="0.0" width="98.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23 июля 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFZ-T2-3RS">
+                                <rect key="frame" x="0.0" y="26" width="98.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gfs-Lf-MUo" secondAttribute="bottom" constant="12" id="7IX-oq-Hsd"/>
+                    <constraint firstAttribute="trailing" secondItem="HzF-7K-i5D" secondAttribute="trailing" constant="16" id="9xI-do-sDg"/>
+                    <constraint firstItem="HzF-7K-i5D" firstAttribute="leading" secondItem="M5s-wk-U0K" secondAttribute="trailing" constant="4" id="BVC-fU-I3j"/>
+                    <constraint firstItem="gfs-Lf-MUo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dMJ-dt-4ZG" secondAttribute="top" constant="12" id="Re2-Gy-ZnV"/>
+                    <constraint firstItem="gfs-Lf-MUo" firstAttribute="centerY" secondItem="dMJ-dt-4ZG" secondAttribute="centerY" id="V0s-e6-1Nw"/>
+                    <constraint firstItem="gfs-Lf-MUo" firstAttribute="leading" secondItem="dMJ-dt-4ZG" secondAttribute="leading" constant="16" id="VNf-8T-Idw"/>
+                    <constraint firstItem="M5s-wk-U0K" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dMJ-dt-4ZG" secondAttribute="top" constant="12" id="WE4-3w-0m9"/>
+                    <constraint firstItem="M5s-wk-U0K" firstAttribute="centerY" secondItem="dMJ-dt-4ZG" secondAttribute="centerY" id="Wjh-ol-656"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="M5s-wk-U0K" secondAttribute="bottom" constant="12" id="gwA-lt-Brq"/>
+                    <constraint firstItem="HzF-7K-i5D" firstAttribute="centerY" secondItem="M5s-wk-U0K" secondAttribute="centerY" constant="-3" id="t80-aC-qt2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="bracketLabel" destination="HzF-7K-i5D" id="3Ee-C4-uvw"/>
+                <outlet property="firstDateLabel" destination="NiV-zm-iZK" id="m2k-MT-ALX"/>
+                <outlet property="pointsLabel" destination="3y3-wP-Mnh" id="wHo-le-HHv"/>
+                <outlet property="secondDateLabel" destination="LFZ-T2-3RS" id="3Ji-5V-vha"/>
+                <outlet property="xpPerWeekTitleLabel" destination="dMK-Q0-yK4" id="PKa-9o-cub"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

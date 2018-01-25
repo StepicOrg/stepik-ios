@@ -14,13 +14,20 @@ class CardsStepsViewController: UIViewController {
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var expLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var labelsStackView: UIStackView!
 
     var canSwipeCurrentCardUp = false
+    private var shouldToggleNavigationBar = true
 
     var course: Course!
 
     fileprivate var topCard: StepCardView?
     fileprivate var currentStepViewController: CardStepViewController?
+    fileprivate var statusBarPad: UIView?
 
     var state: CardsStepsViewState = .normal {
         didSet {
@@ -50,12 +57,68 @@ class CardsStepsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = course.title
+        title = ""
+
+        statusBarPad = UIView()
+        statusBarPad?.backgroundColor = UIColor.mainLight
+        if let padView = statusBarPad {
+            view.addSubview(padView)
+        }
+        navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        navigationBar.barTintColor = UIColor.mainLight
+        statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
+        progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        progressBar.progress = 0
 
         if presenter == nil {
-            presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), course: course, view: self)
+            presenter = CardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), course: course, view: self)
             presenter?.refresh()
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        statusBarPad?.frame = UIApplication.shared.statusBarFrame
+
+        if DeviceInfo.current.orientation.interface.isLandscape && !DeviceInfo.current.isPad {
+            labelsStackView.axis = .horizontal
+            labelsStackView.spacing = 8
+        } else {
+            labelsStackView.axis = .vertical
+            labelsStackView.spacing = 0
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        shouldToggleNavigationBar = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if shouldToggleNavigationBar {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+
+    @IBAction func onBackButtonClick(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func onTrophyButtonClick(_ sender: Any) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "Adaptive") as? AdaptiveStatsPagerViewController else {
+            return
+        }
+
+        shouldToggleNavigationBar = false
+
+        vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
+        vc.statsManager = AdaptiveStatsManager(courseId: course.id)
+
+        let navigationVC = StyledNavigationViewController(rootViewController: vc)
+        present(navigationVC, animated: true, completion: nil)
     }
 }
 
@@ -109,6 +172,69 @@ extension CardsStepsViewController: CardsStepsView {
         vc.discussionProxyId = discussionProxyId
         vc.target = stepId
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
+        let currentLevel = level
+
+        expLabel.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(maxRating)")
+        levelLabel.text = String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
+
+        let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
+        let shouldFulfill = progressBar.progress > newProgress
+
+        progressBar.progress = shouldFulfill ? 100.0 : newProgress + 0.005
+        UIView.animate(withDuration: 1.2, animations: {
+            self.progressBar.layoutIfNeeded()
+        }, completion: { _ in
+            if !shouldFulfill {
+                return
+            }
+
+            self.progressBar.progress = 0
+            self.progressBar.layoutIfNeeded()
+
+            self.progressBar.progress = newProgress + 0.005
+            UIView.animate(withDuration: 1.2, animations: {
+                self.progressBar.layoutIfNeeded()
+            }, completion: nil)
+        })
+    }
+
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
+        let text = self.expLabel.text ?? ""
+        let color = self.expLabel.textColor ?? UIColor.mainDark
+
+        func transitionToText(_ text: String, color: UIColor, duration: Double, completionBlock: (() -> Void)? = nil) {
+            UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {
+                self.expLabel.textColor = UIColor.clear
+            }, completion: { _ in
+                self.expLabel.text = text
+                UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {
+                    self.expLabel.textColor = color
+                }, completion: { _ in completionBlock?() })
+            })
+        }
+
+        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex: 0x008040), duration: 0.4, completionBlock: { _ in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
+                transitionToText(text, color: color, duration: 0.4, completionBlock: { completion?() })
+            })
+        })
+    }
+
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)? = nil) {
+        if state == .congratulation {
+            completion?()
+            return
+        }
+
+        let controller = Alerts.congratulation.construct(congratulationType: type, continueHandler: { [weak self] in
+            self?.state = .normal
+            completion?()
+        })
+        state = .congratulation
+        Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
     }
 }
 
@@ -235,11 +361,13 @@ extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
         //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
         presenter?.sendReaction(.solved)
+        presenter?.updateRatingWhenSuccess()
         topCard?.controlState = .successful
     }
 
     func stepSubmissionDidWrong() {
         //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        presenter?.updateRatingWhenFail()
         topCard?.controlState = .wrong
     }
 

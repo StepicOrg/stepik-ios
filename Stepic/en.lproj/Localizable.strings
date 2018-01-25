@@ -373,5 +373,19 @@ OnboardingStartButton = "Start";
 
 StreakAlertMessageNoStreak = "Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 
+AdaptiveProgress = "Progress";
+AdaptiveAchievements = "Achievements";
+AdaptiveRating = "Rating";
+AdaptiveXPperWeek = "XP per week";
+AdaptiveBestStreak = "Best streak";
+AdaptiveLevelSuffix = "level";
+AdaptiveLast7Days = "Last 7 days";
+AdaptiveStats = "Stats";
+AdaptiveAllTime = "All time";
+Adaptive7Days = "7 days";
+AdaptiveToday = "Today";
+AdaptiveXPperWeekCell = "XP per week";
+AdaptiveProgressByWeeks = "Progress by weeks";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

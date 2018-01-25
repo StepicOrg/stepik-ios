@@ -26,6 +26,10 @@ protocol CardsStepsView: class {
     func updateTopCardTitle(title: String)
     func presentDiscussions(stepId: Int, discussionProxyId: String)
     func refreshCards()
+
+    func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)?)
 }
 
 class CardsStepsPresenter {
@@ -44,6 +48,8 @@ class CardsStepsPresenter {
     fileprivate var recommendationsAPI: RecommendationsAPI
     fileprivate var unitsAPI: UnitsAPI
     fileprivate var viewsAPI: ViewsAPI
+    fileprivate var ratingManager: AdaptiveRatingManager
+    fileprivate var statsManager: AdaptiveStatsManager
 
     // FIXME: incapsulate/remove this 
     var state: State = .loaded
@@ -54,12 +60,35 @@ class CardsStepsPresenter {
         return state == .loaded
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, course: Course, view: CardsStepsView) {
+    var rating: Int {
+        get {
+            return self.ratingManager.rating
+        }
+        set {
+            self.ratingManager.rating = newValue
+        }
+    }
+
+    var streak: Int {
+        get {
+            return self.ratingManager.streak
+        }
+        set {
+            self.ratingManager.streak = newValue
+        }
+    }
+
+    // Last solve date (num)
+    var lastSolvedDay = 0
+
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, course: Course, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
+        self.ratingManager = ratingManager
+        self.statsManager = statsManager
 
         self.course = course
         self.view = view
@@ -67,6 +96,11 @@ class CardsStepsPresenter {
 
     func refresh() {
         view?.refreshCards()
+
+        lastSolvedDay = statsManager.getLastDays(count: 1)[0] > 0 ? statsManager.dayByDate(Date()) : 0
+
+        let currentLevel = AdaptiveRatingHelper.getLevel(for: rating)
+        view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
     }
 
     func refreshTopCard() {
@@ -266,6 +300,37 @@ class CardsStepsPresenter {
             }
         }
     }
+
+    func updateRatingWhenSuccess() {
+        let curStreak = streak
+        let oldRating = rating
+        let newRating = oldRating + curStreak
+
+        // Update stats
+        statsManager.incrementRating(curStreak)
+        statsManager.maxStreak = curStreak
+
+        // Days streak achievement
+        let curDay = statsManager.dayByDate(Date())
+        if lastSolvedDay != curDay {
+            lastSolvedDay = curDay
+        }
+
+        view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
+            let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
+            self.view?.updateProgress(rating: newRating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+        })
+
+        rating = newRating
+        streak += 1
+    }
+
+    func updateRatingWhenFail() {
+        // Drop streak
+        if streak > 1 {
+            streak = 1
+        }
+    }
 }
 
 extension CardsStepsPresenter: StepCardViewDelegate {
@@ -277,6 +342,13 @@ extension CardsStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.retry()
         case .successful:
             view?.swipeCardUp()
+
+            // updated rating here
+            let newRating = rating
+            let oldRating = newRating - streak + 1
+            if AdaptiveRatingHelper.getLevel(for: oldRating) != AdaptiveRatingHelper.getLevel(for: newRating) {
+                view?.showCongratulationPopup(type: .level(level: AdaptiveRatingHelper.getLevel(for: newRating)), completion: nil)
+            }
         }
     }
 

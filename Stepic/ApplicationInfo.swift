@@ -16,6 +16,7 @@ class ApplicationInfo {
             static let oauth = "url.oauth"
             static let stepik = "url.stepik"
             static let version = "url.version"
+            static let adaptiveRating = "url.adaptiveRating"
         }
         struct Cookie {
             static let prefix = "cookie.prefix"
@@ -31,7 +32,6 @@ class ApplicationInfo {
             static let isAdaptive = "adaptive.isAdaptive"
             static let courseId = "adaptive.courseId"
             static let mainColor = "adaptive.mainColor"
-            static let ratingURL = "adaptive.ratingURL"
         }
         struct RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"
