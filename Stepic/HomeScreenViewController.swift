@@ -42,11 +42,17 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStreaks()
+        isOnScreen = true
+        viewWillAppearBlock?()
     }
+
+    var isOnScreen: Bool = false
+    var viewWillAppearBlock: (() -> Void)?
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         continueLearningTooltip?.dismiss()
+        isOnScreen = false
     }
 
     private func setupStackView() {
@@ -155,9 +161,19 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         }, completion: {
             _ in
             if TooltipDefaultsManager.shared.shouldShowOnHomeContinueLearning {
-                self.continueLearningTooltip = TooltipFactory.continueLearningWidget
-                self.continueLearningTooltip?.show(direction: .up, in: nil, from: self.continueLearningWidget.continueLearningButton)
-                TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+                self.viewWillAppearBlock = {
+                    [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.continueLearningTooltip = TooltipFactory.continueLearningWidget
+                    strongSelf.continueLearningTooltip?.show(direction: .up, in: nil, from: strongSelf.continueLearningWidget.continueLearningButton)
+                    TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
+                    strongSelf.viewWillAppearBlock = nil
+                }
+                if self.isOnScreen {
+                    self.viewWillAppearBlock?()
+                }
             }
         })
 
