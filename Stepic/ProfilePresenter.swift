@@ -79,7 +79,8 @@ class ProfilePresenter {
     private var currentZone00UTC: String {
         let date = Date(timeIntervalSince1970: 0)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
         dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }
@@ -231,7 +232,7 @@ class ProfilePresenter {
     }
 
     private func presentStreakTimeSelection(forBlock block: TransitionMenuBlock) {
-        let startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        let startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         view?.showStreakTimeSelectionAlert(startHour: startHour, selectedBlock: {
             [weak self] in
             block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(self?.notificationTimeString ?? "")"
