@@ -52,7 +52,6 @@ def all_pods
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
     pod 'Koloda', '4.3.1'
-    pod 'SDWebImage/GIF'
     pod 'Charts', '3.0.2'
 end
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
@@ -38,7 +37,6 @@ class StepCardView: NibInitializableView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var controlButton: UIButton!
-    @IBOutlet weak var loadingImageView: FLAnimatedImageView!
 
     weak var delegate: StepCardViewDelegate?
 
@@ -89,8 +87,6 @@ class StepCardView: NibInitializableView {
     override func setupSubviews() {
         colorize()
 
-        let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
-        loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
 
         if cardPadView == nil {
