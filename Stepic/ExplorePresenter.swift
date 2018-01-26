@@ -74,7 +74,7 @@ class ExplorePresenter: CourseListCountDelegate {
                     listType:  CourseListType.tag(id: tag.ID) ,
                     colorMode: .light,
                     onlyLocal: false,
-                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber()
+                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager()
                 )
                 controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
                 self?.view?.show(vc: controller)

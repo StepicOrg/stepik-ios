@@ -46,6 +46,7 @@ class CourseListPresenter {
     private var reviewSummariesAPI: CourseReviewSummariesAPI
     private var searchResultsAPI: SearchResultsAPI
     private var subscriptionManager: CourseSubscriptionManager
+    private var adaptiveStorageManager: AdaptiveStorageManager
 
     private var colorMode: CourseListColorMode
     var onlyLocal: Bool
@@ -108,7 +109,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber, adaptiveStorageManager: AdaptiveStorageManager) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -123,6 +124,7 @@ class CourseListPresenter {
         self.onlyLocal = onlyLocal
         self.searchResultsAPI = searchResultsAPI
         self.subscriptionManager = subscriptionManager
+        self.adaptiveStorageManager = adaptiveStorageManager
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -223,7 +225,7 @@ class CourseListPresenter {
     }
 
     private func secondaryActionButtonPressed(course: Course) {
-        let isAdaptiveMode = AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
+        let isAdaptiveMode = adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id)
 
         if course.enrolled && !isAdaptiveMode {
             if let controller = getSectionsController(for: course) {
@@ -539,6 +541,16 @@ class CourseListPresenter {
     }
 
     private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
+        // FIXME: code duplication, we should use DeepLinkRouter/LastStepRouter here
+        if adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id) {
+            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+                return nil
+            }
+            cardsViewController.hidesBottomBarWhenPushed = true
+            cardsViewController.course = course
+            return cardsViewController
+        }
+
         guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
             return nil
         }
