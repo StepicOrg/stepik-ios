@@ -17,9 +17,7 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
     var step: Step!
 
     weak var delegate: QuizControllerDelegate? {
-        didSet {
-            presenter?.delegate = delegate
-        }
+        didSet { presenter?.delegate = delegate }
     }
 
     var submissionPressedBlock : (() -> Void)?
@@ -90,11 +88,9 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
         }
     }
 
-    func display(reply: Reply, withStatus status: SubmissionStatus) {
-    }
+    func display(reply: Reply, withStatus status: SubmissionStatus) {}
 
-    func display(reply: Reply) {
-    }
+    func display(reply: Reply) {}
 
     private func updateSendButtonWithoutLimit() {
         switch state {

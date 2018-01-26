@@ -1563,7 +1563,6 @@
 		1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0571FE6DE48002DDD9A /* SectionTableViewController.swift */; };
 		1B3BB0641FE6DE48002DDD9A /* CatalogMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */; };
 		1B3BB0701FE6DE71002DDD9A /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0681FE6DE70002DDD9A /* IconButton.swift */; };
-		1B3BB0751FE6DE71002DDD9A /* DynamicallyCreatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06D1FE6DE70002DDD9A /* DynamicallyCreatedProtocol.swift */; };
 		1B3BB0761FE6DE71002DDD9A /* FocusableCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */; };
 		1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */; };
 		1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */; };
@@ -4584,10 +4583,10 @@
 		93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */; };
 		93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
 		93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */; };
+		93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		93C9E302200F950500192091 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E301200F950500192091 /* CourseContentView.swift */; };
 		93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E303200F951500192091 /* CourseContentPresenter.swift */; };
 		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
-		93E5AAF420161FE400290B4E /* TVQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF320161FE400290B4E /* TVQuizPresenter.swift */; };
 		93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		93E5AAF920163B6200290B4E /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
@@ -5304,8 +5303,6 @@
 		1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatalogMenuViewController.swift; path = StepikTV/Controllers/CoursesCatalog/CatalogMenuViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB05A1FE6DE48002DDD9A /* LessonContentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonContentAlertController.swift; path = StepikTV/Controllers/LessonContent/LessonContentAlertController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0681FE6DE70002DDD9A /* IconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconButton.swift; path = StepikTV/Views/IconButton.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB0691FE6DE70002DDD9A /* TaskChoiceCustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskChoiceCustomButton.swift; path = StepikTV/Views/TaskChoiceCustomButton.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB06D1FE6DE70002DDD9A /* DynamicallyCreatedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicallyCreatedProtocol.swift; path = StepikTV/Views/DynamicallyCreatedProtocol.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusableCustomView.swift; path = StepikTV/Views/FocusableCustomView.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StepItemCell.xib; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.xib; sourceTree = SOURCE_ROOT; };
 		1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepItemCell.swift; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.swift; sourceTree = SOURCE_ROOT; };
@@ -5601,8 +5598,7 @@
 		93C9E301200F950500192091 /* CourseContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentView.swift; sourceTree = "<group>"; };
 		93C9E303200F951500192091 /* CourseContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentPresenter.swift; sourceTree = "<group>"; };
 		93E5AAF120161ED300290B4E /* TVQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVQuizViewController.swift; sourceTree = "<group>"; };
-		93E5AAF320161FE400290B4E /* TVQuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVQuizPresenter.swift; sourceTree = "<group>"; };
-		93EF1F981FAD20240073B0D1 /* StandardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardButton.swift; path = StepikTV/Controllers/StandardButton.swift; sourceTree = SOURCE_ROOT; };
+		93EF1F981FAD20240073B0D1 /* StandardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardButton.swift; path = StepikTV/StandardButton.swift; sourceTree = SOURCE_ROOT; };
 		93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesExtension.swift; sourceTree = "<group>"; };
 		93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
 		93FF4B67200537330058B94D /* InstructorItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorItemCell.xib; sourceTree = "<group>"; };
@@ -7644,10 +7640,8 @@
 				9335E3672008E51D001BDFA8 /* CoursesCatalog */,
 				93C9E300200F941600192091 /* CourseContent */,
 				933563BD20125AC00061FE2E /* LessonContent */,
-				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
 				1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */,
 				1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */,
-				93A6A4C32018CD5C004C0797 /* ExtensionUIView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -7655,11 +7649,10 @@
 		1B3BB0661FE6DE5E002DDD9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1B3BB06D1FE6DE70002DDD9A /* DynamicallyCreatedProtocol.swift */,
 				1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */,
 				9322BE982018F13400D16638 /* FocusableView.swift */,
 				1B3BB0681FE6DE70002DDD9A /* IconButton.swift */,
-				1B3BB0691FE6DE70002DDD9A /* TaskChoiceCustomButton.swift */,
+				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7781,6 +7774,8 @@
 			children = (
 				93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */,
 				9300843F2016717500DBFC0E /* BlurredViewController.swift */,
+				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
+				93A6A4C32018CD5C004C0797 /* ExtensionUIView.swift */,
 				1B3BB0661FE6DE5E002DDD9A /* Views */,
 				1B3BB04F1FE6DE2B002DDD9A /* Controllers */,
 				1BAE12F11F93F67700482251 /* AppDelegate.swift */,
@@ -8506,7 +8501,6 @@
 				93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */,
 				1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */,
 				93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */,
-				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
 				933437DE1FE6F32D00140AD2 /* CourseInfoSectionsViewCells */,
 			);
 			path = CourseInfo;
@@ -8553,7 +8547,6 @@
 				93C3C1E3201BA0830040BD1D /* QuizTypesViewControllers */,
 				93E5AAF120161ED300290B4E /* TVQuizViewController.swift */,
 				9300843D201663C100DBFC0E /* TVQuizViewController.xib */,
-				93E5AAF320161FE400290B4E /* TVQuizPresenter.swift */,
 			);
 			path = QuizViewController;
 			sourceTree = "<group>";
@@ -9079,7 +9072,7 @@
 					};
 					1BAE12EE1F93F67700482251 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 3YGLEX9HN3;
+						DevelopmentTeam = PEYKHN6GF6;
 						ProvisioningStyle = Automatic;
 					};
 					1BAE13001F93F67700482251 = {
@@ -12867,7 +12860,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93E5AAF420161FE400290B4E /* TVQuizPresenter.swift in Sources */,
 				930084402016717500DBFC0E /* BlurredViewController.swift in Sources */,
 				1BB4ECD51FA3DF43001CDE99 /* Video+CoreDataProperties.swift in Sources */,
 				93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */,
@@ -12882,6 +12874,7 @@
 				1BB3D2481FA3EB9C000B2FAA /* NSDateExtensions.swift in Sources */,
 				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
+				93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
 				1BB4ECAD1FA3DE46001CDE99 /* CourseReviewSummariesAPI.swift in Sources */,
 				9335E36B2008FF10001BDFA8 /* CatalogView.swift in Sources */,
@@ -12993,7 +12986,6 @@
 				1BB4ECE21FA3E53C001CDE99 /* DataConvertable.swift in Sources */,
 				1BB4EC921FA3DC43001CDE99 /* LessonsAPI.swift in Sources */,
 				1BB4ECBD1FA3DEC3001CDE99 /* LastStep+CoreDataProperties.swift in Sources */,
-				1B3BB0751FE6DE71002DDD9A /* DynamicallyCreatedProtocol.swift in Sources */,
 				93E5AAF920163B6200290B4E /* GCDThings.swift in Sources */,
 				93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */,
 				93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */,
@@ -16519,12 +16511,13 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16553,7 +16546,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GFNJS2X8DC;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire-tvOS\"",
@@ -16571,6 +16564,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;

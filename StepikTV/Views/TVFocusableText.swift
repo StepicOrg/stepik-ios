@@ -11,6 +11,7 @@ import UIKit
 class TVFocusableText: UILabel {
 
     var pressAction: ((TVFocusableText) -> Void)?
+    var isAnimatable: Bool = true
 
     private let substrateView: UIView = UIView()
     private var lastText: String = ""
@@ -95,6 +96,8 @@ class TVFocusableText: UILabel {
     }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+        guard isAnimatable else { return }
 
         // Mimik system focus/unfocus animation besides backgroundColor and title font
 

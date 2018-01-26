@@ -36,7 +36,7 @@ class TVChoiceQuizTableViewCell: UITableViewCell {
     static var nibName: String { return "TVChoiceQuizTableViewCell" }
     static var reuseIdentifier: String { return "TVChoiceQuizTableViewCell" }
     static func getHeightForText(text: String, width: CGFloat) -> CGFloat {
-        return max(45, UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium), width: width - 100, html: true, alignment: .left)) + 10
+        return max(45, UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium), width: width - 100, html: true, alignment: .left)) + 30
     }
 
     @IBOutlet weak var containerLabel: UILabel!
@@ -77,6 +77,8 @@ class TVChoiceQuizTableViewCell: UITableViewCell {
         containerLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
         containerLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         containerLabel.textAlignment = NSTextAlignment.left
+
+        checkBox.setRoundedCorners(cornerRadius: checkBox.bounds.height / 2)
     }
 
     var changeToDefault: () -> Void {
@@ -122,9 +124,7 @@ class TVChoiceQuizTableViewCell: UITableViewCell {
         UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
         super.pressesEnded(presses, with: event)
 
-        print(status)
         delegate?.statusWillChange(self, to: status.inverted)
-        print(status)
     }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

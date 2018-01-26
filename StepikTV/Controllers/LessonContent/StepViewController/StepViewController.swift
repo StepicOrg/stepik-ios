@@ -11,9 +11,11 @@ import UIKit
 class StepViewController: BlurredViewController {
 
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var quizPlaceholderView: UIView!
-    @IBOutlet weak var stepText: UILabel!
     @IBOutlet weak var contentViewInsideVerticalSpacingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var quizPlaceholderView: UIView!
+    @IBOutlet weak var stepText: TVFocusableText!
+    @IBOutlet weak var stepTextMaxHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var scrollViewTopInset: NSLayoutConstraint!
     @IBOutlet weak var scrollViewBottomInset: NSLayoutConstraint!
@@ -29,16 +31,23 @@ class StepViewController: BlurredViewController {
         stepText.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
         stepText.setTextWithHTMLString(stepViewData.block.text ?? "")
 
-        scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
+        let selectionAction: (TVFocusableText) -> Void = {
+            [weak self] in
+            guard let strongSelf = self else { return }
 
-        scrollView.alwaysBounceVertical = false
+            let textPresenter = TVTextPresentationAlertController()
+            textPresenter.setText($0.text ?? "")
+            textPresenter.modalPresentationStyle = .overFullScreen
+            strongSelf.present(textPresenter, animated: true, completion: {})
+        }
+        stepText.pressAction = selectionAction
 
         handleQuizType()
-        contentView.layoutIfNeeded()
+        contentView.setNeedsLayout()
     }
 
     override func viewWillLayoutSubviews() {
-
+        print("\(contentView.bounds.height) \(scrollView.bounds.height)")
         if contentView.bounds.height <= scrollView.bounds.height {
             let insetValue = (scrollView.bounds.height - contentView.bounds.height) / 2
             scrollViewTopInset.constant = insetValue
@@ -56,31 +65,20 @@ class StepViewController: BlurredViewController {
         quizController.view.align(to: quizPlaceholderView)
     }
 
+    private func adaptStepText() {
+        stepTextMaxHeightConstraint.isActive = false
+        contentViewInsideVerticalSpacingConstraint.isActive = false
+        stepText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        stepText.isAnimatable = false
+    }
+
     private func handleQuizType() {
         guard let quizVC = stepViewData.quizViewController else {
-            contentViewInsideVerticalSpacingConstraint.isActive = false
-            stepText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            adaptStepText()
+            scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
             return
         }
 
-        //stepText.heightForLabelWithText
         initQuizController(quizVC)
     }
-
-    /*
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
-        print(context.nextFocusedView)
-        for subview in quizPlaceholderView.allSubviews {
-            if context.nextFocusedView == subview {
-                scrollView.isScrollEnabled = false
-                print(false)
-                return
-            }
-        }
-
-        scrollView.isScrollEnabled = true
-        print(true)
-    }
- */
 }

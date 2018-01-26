@@ -118,8 +118,7 @@ class TVNumberQuizViewController: TVQuizViewController {
 extension TVNumberQuizViewController : UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        guard reason == .committed else  { return }
-
+        guard reason == .committed else { return }
         textFieldDidEndEditing()
     }
 }

@@ -28,16 +28,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1340" height="960"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-ce-SLt">
-                                                <rect key="frame" x="0.0" y="0.0" width="1340" height="553"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1340" height="628"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bds-0n-v0N" customClass="FocusableLabel" customModule="StepikTV" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1340" height="46"/>
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bds-0n-v0N" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
+                                                        <rect key="frame" x="25" y="25" width="1290" height="46"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCe-8A-RcV">
-                                                        <rect key="frame" x="0.0" y="71" width="1340" height="482"/>
+                                                        <rect key="frame" x="0.0" y="146" width="1340" height="482"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="482" placeholder="YES" id="OoF-bV-06i"/>
                                                         </constraints>
@@ -46,15 +46,16 @@
                                                 <constraints>
                                                     <constraint firstItem="QCe-8A-RcV" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" id="6Me-dL-3vd"/>
                                                     <constraint firstAttribute="bottom" secondItem="QCe-8A-RcV" secondAttribute="bottom" id="7sL-Fe-rMR"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bds-0n-v0N" secondAttribute="trailing" id="SBX-80-xIs"/>
-                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="top" secondItem="jG1-ce-SLt" secondAttribute="top" id="Xoh-N5-w6v"/>
-                                                    <constraint firstItem="QCe-8A-RcV" firstAttribute="top" secondItem="bds-0n-v0N" secondAttribute="bottom" constant="25" id="m0h-C7-dvc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bds-0n-v0N" secondAttribute="trailing" constant="25" id="SBX-80-xIs"/>
+                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="top" secondItem="jG1-ce-SLt" secondAttribute="top" constant="25" id="Xoh-N5-w6v"/>
+                                                    <constraint firstItem="QCe-8A-RcV" firstAttribute="top" secondItem="bds-0n-v0N" secondAttribute="bottom" constant="75" id="m0h-C7-dvc"/>
                                                     <constraint firstAttribute="trailing" secondItem="QCe-8A-RcV" secondAttribute="trailing" id="mRd-va-bW8"/>
-                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" id="npH-1u-XDb"/>
+                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" constant="25" id="npH-1u-XDb"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="bds-0n-v0N" firstAttribute="height" relation="lessThanOrEqual" secondItem="xhh-j9-ZMy" secondAttribute="height" constant="-200" id="3D5-nj-vLV"/>
                                             <constraint firstAttribute="trailing" secondItem="jG1-ce-SLt" secondAttribute="trailing" id="GZa-li-s0F"/>
                                             <constraint firstItem="jG1-ce-SLt" firstAttribute="top" secondItem="xhh-j9-ZMy" secondAttribute="top" id="LEU-0h-YC5"/>
                                             <constraint firstAttribute="bottom" secondItem="jG1-ce-SLt" secondAttribute="bottom" id="agj-R7-F1t"/>
@@ -87,6 +88,7 @@
                         <outlet property="scrollViewBottomInset" destination="agj-R7-F1t" id="KF7-2l-FKd"/>
                         <outlet property="scrollViewTopInset" destination="LEU-0h-YC5" id="Hnw-u6-oV4"/>
                         <outlet property="stepText" destination="bds-0n-v0N" id="UKQ-Wq-AHj"/>
+                        <outlet property="stepTextMaxHeightConstraint" destination="3D5-nj-vLV" id="fML-ro-TRN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQR-T6-tcA" userLabel="First Responder" sceneMemberID="firstResponder"/>

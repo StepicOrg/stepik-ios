@@ -14,17 +14,17 @@
             <rect key="frame" x="0.0" y="0.0" width="173" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ox7-HD-R73" id="OQN-4o-hWT">
-                <rect key="frame" x="0.0" y="0.0" width="173" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="157" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSP-LJ-cHy">
-                        <rect key="frame" x="100" y="5" width="53" height="34"/>
+                        <rect key="frame" x="100" y="10" width="53" height="24"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdl-7b-ArX">
-                        <rect key="frame" x="20" y="2" width="40" height="40"/>
+                        <rect key="frame" x="40" y="20" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="6aI-Zf-KK5"/>
@@ -33,12 +33,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fdl-7b-ArX" firstAttribute="top" secondItem="OQN-4o-hWT" secondAttribute="top" constant="2" id="7zg-Vk-Ici"/>
-                    <constraint firstItem="XSP-LJ-cHy" firstAttribute="top" secondItem="OQN-4o-hWT" secondAttribute="top" constant="5" id="I8I-B9-Hle"/>
-                    <constraint firstItem="fdl-7b-ArX" firstAttribute="leading" secondItem="OQN-4o-hWT" secondAttribute="leading" constant="20" id="Jc9-uA-Y7N"/>
+                    <constraint firstItem="fdl-7b-ArX" firstAttribute="top" secondItem="OQN-4o-hWT" secondAttribute="top" constant="20" id="7zg-Vk-Ici"/>
+                    <constraint firstItem="XSP-LJ-cHy" firstAttribute="top" secondItem="OQN-4o-hWT" secondAttribute="top" constant="10" id="I8I-B9-Hle"/>
+                    <constraint firstItem="fdl-7b-ArX" firstAttribute="leading" secondItem="OQN-4o-hWT" secondAttribute="leading" constant="40" id="Jc9-uA-Y7N"/>
                     <constraint firstAttribute="trailing" secondItem="XSP-LJ-cHy" secondAttribute="trailing" constant="20" id="KmW-ig-dLp"/>
-                    <constraint firstItem="XSP-LJ-cHy" firstAttribute="leading" secondItem="fdl-7b-ArX" secondAttribute="trailing" constant="40" id="rCX-Uy-tiy"/>
-                    <constraint firstAttribute="bottom" secondItem="XSP-LJ-cHy" secondAttribute="bottom" constant="5" id="vT7-D5-rb6"/>
+                    <constraint firstItem="XSP-LJ-cHy" firstAttribute="leading" secondItem="fdl-7b-ArX" secondAttribute="trailing" constant="20" id="rCX-Uy-tiy"/>
+                    <constraint firstAttribute="bottom" secondItem="XSP-LJ-cHy" secondAttribute="bottom" constant="10" id="vT7-D5-rb6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

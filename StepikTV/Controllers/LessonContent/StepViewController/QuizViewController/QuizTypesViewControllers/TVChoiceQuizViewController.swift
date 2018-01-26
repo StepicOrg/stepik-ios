@@ -26,7 +26,7 @@ class TVChoiceQuizViewController: TVQuizViewController {
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.align(to: self.containerView, top: 0, leading: 150, bottom: 0, trailing: 150)
+        tableView.align(to: self.containerView)
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
@@ -105,9 +105,13 @@ extension TVChoiceQuizViewController : UITableViewDelegate {
             return 0
         }
         if let height = cellHeights[indexPath.row] {
+            print(height)
             return height
         } else {
-            return TVChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: tableView.bounds.width)
+            print(dataset.options[indexPath.row])
+            print(tableView.bounds.width)
+            let i = TVChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: tableView.bounds.width)
+            return i
         }
     }
 
@@ -123,31 +127,6 @@ extension TVChoiceQuizViewController : UITableViewDelegate {
             }
         }
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //reactOnSelection(tableView, didSelectRowAtIndexPath: indexPath)
-
-        print(indexPath)
-    }
-
-    /*
-    fileprivate func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-
-        if let cell = tableView.cellForRow(at: indexPath) as? TVChoiceQuizTableViewCell {
-            if let dataset = dataset {
-                if dataset.isMultipleChoice {
-                    //choices[indexPath.row] = cell.status == .on ? false : true
-                    //cell.checkBox.setOn(!cell.checkBox.on, animated: true)
-                } else {
-                    setAllCellsOff()
-                    choices = [Bool](repeating: false, count: optionsCount)
-                    choices[indexPath.row] = !cell.checkBox.on
-                    cell.checkBox.setOn(!cell.checkBox.on, animated: true)
-                }
-            }
-        }
-    }
- */
 }
 
 extension TVChoiceQuizViewController : CheckStatusDelegate {
