@@ -14,11 +14,14 @@ class CardsStepsViewController: UIViewController {
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var expLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var labelsStackView: UIStackView!
+    @IBOutlet weak var shadowViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var trophyButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var shadowView: UIView!
 
     var canSwipeCurrentCardUp = false
     private var shouldToggleNavigationBar = true
@@ -59,15 +62,21 @@ class CardsStepsViewController: UIViewController {
 
         title = ""
 
+        shadowViewHeight.constant = 0.5
+
         statusBarPad = UIView()
         statusBarPad?.backgroundColor = UIColor.mainLight
         if let padView = statusBarPad {
-            view.addSubview(padView)
+            view.insertSubview(padView, at: 0)
         }
-        navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
-        navigationBar.barTintColor = UIColor.mainLight
+
+        trophyButton.layer.zPosition = kolodaView.layer.zPosition - 1
+        backButton.layer.zPosition = kolodaView.layer.zPosition - 1
         statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
         progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        labelsStackView.layer.zPosition = kolodaView.layer.zPosition - 1
+        shadowView.layer.zPosition = kolodaView.layer.zPosition - 1
+
         progressBar.progress = 0
 
         if presenter == nil {
@@ -78,7 +87,7 @@ class CardsStepsViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        statusBarPad?.frame = UIApplication.shared.statusBarFrame
+        statusBarPad?.frame = CGRect(x: UIApplication.shared.statusBarFrame.origin.x, y: UIApplication.shared.statusBarFrame.origin.y, width: UIApplication.shared.statusBarFrame.width, height: progressBar.frame.origin.y)
 
         if DeviceInfo.current.orientation.interface.isLandscape && !DeviceInfo.current.isPad {
             labelsStackView.axis = .horizontal
