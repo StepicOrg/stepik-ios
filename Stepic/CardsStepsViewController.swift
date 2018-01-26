@@ -196,8 +196,13 @@ extension CardsStepsViewController: CardsStepsView {
 
         let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
         let shouldFulfill = progressBar.progress > newProgress
-
-        progressBar.progress = shouldFulfill ? 100.0 : newProgress + 0.005
+        let progressAddition: Float = 0.005
+        
+        guard !progressBar.progress.isEqual(to: newProgress + progressAddition) else {
+            return
+        }
+        
+        progressBar.progress = shouldFulfill ? 100.0 : newProgress + progressAddition
         UIView.animate(withDuration: 1.2, animations: {
             self.progressBar.layoutIfNeeded()
         }, completion: { _ in
@@ -208,7 +213,7 @@ extension CardsStepsViewController: CardsStepsView {
             self.progressBar.progress = 0
             self.progressBar.layoutIfNeeded()
 
-            self.progressBar.progress = newProgress + 0.005
+            self.progressBar.progress = newProgress + progressAddition
             UIView.animate(withDuration: 1.2, animations: {
                 self.progressBar.layoutIfNeeded()
             }, completion: nil)
