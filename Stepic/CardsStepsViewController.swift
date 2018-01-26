@@ -100,7 +100,7 @@ class CardsStepsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        shouldToggleNavigationBar = true
+        shouldToggleNavigationBar = false
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -113,6 +113,7 @@ class CardsStepsViewController: UIViewController {
     }
 
     @IBAction func onBackButtonClick(_ sender: Any) {
+        shouldToggleNavigationBar = true
         navigationController?.popViewController(animated: true)
     }
 
@@ -121,13 +122,12 @@ class CardsStepsViewController: UIViewController {
             return
         }
 
-        shouldToggleNavigationBar = false
+        shouldToggleNavigationBar = true
 
         vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
         vc.statsManager = AdaptiveStatsManager(courseId: course.id)
 
-        let navigationVC = StyledNavigationViewController(rootViewController: vc)
-        present(navigationVC, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -177,6 +177,7 @@ extension CardsStepsViewController: CardsStepsView {
     }
 
     func presentDiscussions(stepId: Int, discussionProxyId: String) {
+        shouldToggleNavigationBar = true
         let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
         vc.discussionProxyId = discussionProxyId
         vc.target = stepId

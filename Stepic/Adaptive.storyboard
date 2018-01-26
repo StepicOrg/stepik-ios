@@ -94,7 +94,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K88-hy-YP3">
-                                <rect key="frame" x="4" y="24" width="25" height="32.5"/>
+                                <rect key="frame" x="3" y="24" width="25" height="32.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="fJK-ma-Iyt"/>
                                 </constraints>
@@ -105,16 +105,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="BdQ-x7-zt9">
-                                <rect key="frame" x="29" y="22" width="250" height="36.5"/>
+                                <rect key="frame" x="28" y="22" width="251" height="36.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000000／100000000 опыта" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zas-Cf-ppK">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="251" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 уровень" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQs-Ys-bMg">
-                                        <rect key="frame" x="0.0" y="19.5" width="250" height="17"/>
+                                        <rect key="frame" x="0.0" y="19.5" width="251" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -140,7 +140,7 @@
                             <constraint firstItem="K88-hy-YP3" firstAttribute="top" secondItem="mE2-7G-wol" secondAttribute="top" constant="4" id="bQv-MH-57B"/>
                             <constraint firstItem="dfT-1T-5iN" firstAttribute="leading" secondItem="BdQ-x7-zt9" secondAttribute="trailing" id="bVv-HF-5fh"/>
                             <constraint firstItem="2WI-8l-04p" firstAttribute="top" secondItem="BdQ-x7-zt9" secondAttribute="bottom" constant="5" id="fPq-uG-540"/>
-                            <constraint firstItem="K88-hy-YP3" firstAttribute="leading" secondItem="mE2-7G-wol" secondAttribute="leading" constant="4" id="gFC-sc-IbJ"/>
+                            <constraint firstItem="K88-hy-YP3" firstAttribute="leading" secondItem="mE2-7G-wol" secondAttribute="leading" constant="3" id="gFC-sc-IbJ"/>
                             <constraint firstItem="dfT-1T-5iN" firstAttribute="centerY" secondItem="BdQ-x7-zt9" secondAttribute="centerY" id="gsj-fQ-rgP"/>
                             <constraint firstItem="mE2-7G-wol" firstAttribute="trailing" secondItem="Cay-Sq-8Po" secondAttribute="trailing" id="kdg-b6-eA4"/>
                             <constraint firstItem="dfT-1T-5iN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mE2-7G-wol" secondAttribute="top" id="pGT-eL-OYJ"/>
@@ -418,7 +418,7 @@
             </objects>
             <point key="canvasLocation" x="5446.875" y="32.74647887323944"/>
         </scene>
-        <!--Title-->
+        <!--Adaptive Stats Pager View Controller-->
         <scene sceneID="CL4-FO-uc7">
             <objects>
                 <viewController storyboardIdentifier="Stats" id="fjQ-pL-dZL" customClass="AdaptiveStatsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
@@ -428,13 +428,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="SpU-yt-5gL"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="9PV-lB-izM">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WTQ-iu-x00">
-                            <connections>
-                                <action selector="onCancelButtonClick:" destination="fjQ-pL-dZL" id="30c-oj-sNm"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuN-0j-Djo" userLabel="First Responder" sceneMemberID="firstResponder"/>
