@@ -24,4 +24,10 @@ extension UIView {
         self.topAnchor.constraint(equalTo: view.topAnchor, constant: top).isActive = true
         self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom).isActive = true
     }
+
+    var allSubviews : [UIView] {
+        var array = [self.subviews].flatMap { $0 }
+            array.forEach { array.append(contentsOf: $0.allSubviews)}
+        return array
+    }
 }

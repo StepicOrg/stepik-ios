@@ -29,7 +29,7 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
     @IBOutlet weak var statusLabel: UILabel!
 
     fileprivate let submitTitle: String = NSLocalizedString("Submit", comment: "")
-    fileprivate let tryAgainTitle: String = NSLocalizedString("TryAgain", comment: "")
+    fileprivate let tryAgainTitle: String = NSLocalizedString("Try Again", comment: "")
     fileprivate var correctTitle: String = NSLocalizedString("Correct", comment: "")
     fileprivate let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
 

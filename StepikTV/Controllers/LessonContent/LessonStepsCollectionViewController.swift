@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVKit
 
 class LessonStepsCollectionViewController: UICollectionViewController {
 

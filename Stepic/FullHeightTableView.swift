@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(tvOS)
+    import UIKit
+#endif
+
 class FullHeightTableView: UITableView {
     override var intrinsicContentSize: CGSize {
 //        self.layoutIfNeeded()

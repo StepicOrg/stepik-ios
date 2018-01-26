@@ -1,21 +1,22 @@
 //
-//  TVFreeAnswerQuizViewController.swift
+//  TVNumberQuizViewController.swift
 //  StepikTV
 //
-//  Created by Александр Пономарев on 24.01.18.
+//  Created by Александр Пономарев on 25.01.18.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-class TVFreeAnswerQuizViewController: TVQuizViewController {
+class TVNumberQuizViewController: TVQuizViewController {
 
-    let textViewHeight = 64
-
-    var dataset: FreeAnswerDataset?
-    var reply: FreeAnswerReply?
+    var dataset: String?
+    var reply: NumberReply?
 
     var textField = UITextField(frame: CGRect.zero)
+    let textFieldHeight: CGFloat = 79.0
+
+    private let textFieldPlaceholder: String = NSLocalizedString("Answer", comment: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +24,30 @@ class TVFreeAnswerQuizViewController: TVQuizViewController {
         textField.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         textField.font = UIFont.systemFont(ofSize: 47, weight: UIFontWeightRegular)
         textField.textColor = UIColor.white
-        textField.placeholder = "Ответ"
+        textField.placeholder = textFieldPlaceholder
 
         // Keyboard settings
         textField.keyboardAppearance = .dark
+        textField.keyboardType = .decimalPad
 
         //textField.widthAnchor.constraint(equalToConstant: 809.0).isActive = true
-        textField.heightAnchor.constraint(equalToConstant: 79.0).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: textFieldHeight).isActive = true
 
         textField.translatesAutoresizingMaskIntoConstraints = false
 
         containerView.addSubview(textField)
         textField.align(to: containerView, top: 10.0, leading: 15.0, bottom: 10.0, trailing: 15.0)
+    }
+
+    func textFieldDidEndEditing() {
+        switch presenter?.state ?? .nothing {
+        case .attempt:
+            break
+        case .submission:
+            presenter?.state = .attempt
+        default:
+            break
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +60,7 @@ class TVFreeAnswerQuizViewController: TVQuizViewController {
     }
 
     override func display(dataset: Dataset) {
-        guard let dataset = dataset as? FreeAnswerDataset else {
+        guard let dataset = dataset as? String else {
             return
         }
 
@@ -57,7 +70,7 @@ class TVFreeAnswerQuizViewController: TVQuizViewController {
     }
 
     override func display(reply: Reply, withStatus status: SubmissionStatus) {
-        guard let reply = reply as? FreeAnswerReply else {
+        guard let reply = reply as? NumberReply else {
             return
         }
 
@@ -67,34 +80,27 @@ class TVFreeAnswerQuizViewController: TVQuizViewController {
     }
 
     override func display(reply: Reply) {
-        guard let reply = reply as? FreeAnswerReply else {
+        guard let reply = reply as? NumberReply else {
             return
         }
 
-        guard let dataset = dataset else {
-            return
-        }
-
-        if dataset.isHTMLEnabled {
-            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.count))
-            textField.attributedText = mutableAttributed
-        } else {
-            textField.text = reply.text
-        }
+        textField.text = reply.number
     }
 
     //Override this in the subclass
     override func getReply() -> Reply? {
-        if let d = dataset {
-            if d.isHTMLEnabled {
-                return FreeAnswerReply(text: (textField.text ?? "").replacingOccurrences(of: "\n", with: "<br>"))
-            } else {
-                return FreeAnswerReply(text: textField.text ?? "")
-            }
-        }
-        return FreeAnswerReply(text: textField.text ?? "")
+        return NumberReply(number: textField.text ?? "")
+    }
+
+    fileprivate func presentWrongFormatAlert() {
+        let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertControllerStyle.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            _ in
+
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
 
     /*
@@ -106,4 +112,14 @@ class TVFreeAnswerQuizViewController: TVQuizViewController {
      // Pass the selected object to the new view controller.
      }
      */
+
+}
+
+extension TVNumberQuizViewController : UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        guard reason == .committed else  { return }
+
+        textFieldDidEndEditing()
+    }
 }

@@ -8,17 +8,6 @@
 
 import UIKit
 
-enum ChoiceStatus {
-    case Selected, NotSelected
-
-    var icon: UIImage {
-        switch self {
-        case .Selected: return UIImage(named: "choicebutton_selected_icon.pdf")!
-        case .NotSelected: return UIImage(named: "choicebutton_notselected_icon.pdf")!
-        }
-    }
-}
-
 class TaskChoiceCustomButton: UIButton {
 
     static func createButtonsStack(with array: [String]) -> [TaskChoiceCustomButton] {

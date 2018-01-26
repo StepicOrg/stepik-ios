@@ -52,7 +52,6 @@ struct StepViewData {
         case video = "video"
         case text = "text"
         case choice = "choice"
-        case free = "free"
         case string = "string"
         case number = "number"
         case unavailable = "unavailable"
@@ -106,20 +105,19 @@ struct StepViewData {
             return nil
         case .choice:
             print(stepType.rawValue)
-            return TVQuizViewController()
-        case .free:
-            print(stepType.rawValue)
-            let vc = TVFreeAnswerQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            let vc = TVChoiceQuizViewController(nibName: "TVQuizViewController", bundle: nil)
             return vc
         case .string:
             print(stepType.rawValue)
-            let vc = TVFreeAnswerQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            let vc = TVStringQuizViewController(nibName: "TVQuizViewController", bundle: nil)
             return vc
         case .number:
             print(stepType.rawValue)
-            return TVQuizViewController()
+            let vc = TVNumberQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            return vc
         case .unavailable:
-            return TVQuizViewController()
+            let vc = TVUnavailableQuizViewController(nibName: "TVQuizViewController", bundle: nil)
+            return vc
         }
     }
 

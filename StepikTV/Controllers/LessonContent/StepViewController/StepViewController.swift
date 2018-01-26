@@ -31,13 +31,19 @@ class StepViewController: BlurredViewController {
 
         scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
 
+        scrollView.alwaysBounceVertical = false
+
         handleQuizType()
         contentView.layoutIfNeeded()
+    }
+
+    override func viewWillLayoutSubviews() {
 
         if contentView.bounds.height <= scrollView.bounds.height {
             let insetValue = (scrollView.bounds.height - contentView.bounds.height) / 2
             scrollViewTopInset.constant = insetValue
             scrollViewBottomInset.constant = insetValue
+
             //contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
         }
     }
@@ -60,4 +66,21 @@ class StepViewController: BlurredViewController {
         //stepText.heightForLabelWithText
         initQuizController(quizVC)
     }
+
+    /*
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+        print(context.nextFocusedView)
+        for subview in quizPlaceholderView.allSubviews {
+            if context.nextFocusedView == subview {
+                scrollView.isScrollEnabled = false
+                print(false)
+                return
+            }
+        }
+
+        scrollView.isScrollEnabled = true
+        print(true)
+    }
+ */
 }
