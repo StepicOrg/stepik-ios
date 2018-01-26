@@ -165,7 +165,7 @@
             </objects>
             <point key="canvasLocation" x="3495" y="33.802816901408448"/>
         </scene>
-        <!--Статистика-->
+        <!--Adaptive Stats View Controller-->
         <scene sceneID="y0t-pS-F9m">
             <objects>
                 <viewController storyboardIdentifier="Progress" automaticallyAdjustsScrollViewInsets="NO" id="AWG-RN-TTu" customClass="AdaptiveStatsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
@@ -391,14 +391,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rdw-8r-iAE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Статистика" id="fVA-d6-Xml">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Jzn-hn-KAm">
-                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onCancelButtonClick:" destination="AWG-RN-TTu" id="dJt-19-axa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="allCountLabel" destination="gFU-zq-oAk" id="IKS-Mj-8ic"/>
                         <outlet property="bestStreakLabel" destination="LPI-3b-EfT" id="kJz-mC-onj"/>
@@ -428,13 +420,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="SpU-yt-5gL"/>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuN-0j-Djo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6360" y="33"/>
         </scene>
-        <!--Статистика-->
+        <!--Adaptive Ratings View Controller-->
         <scene sceneID="Hkx-av-SNz">
             <objects>
                 <viewController storyboardIdentifier="Ratings" automaticallyAdjustsScrollViewInsets="NO" id="Xqf-wi-d5U" customClass="AdaptiveRatingsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
@@ -506,14 +497,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Qu-Aq-0d5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Статистика" id="32M-ID-FDY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rb2-b7-wDi">
-                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onCancelButtonClick:" destination="Xqf-wi-d5U" id="igq-RF-dGl"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="allCountLabel" destination="jpI-S9-1iR" id="IWD-2B-aw9"/>
                         <outlet property="loadingIndicator" destination="EeE-T4-eRv" id="Wfk-o2-d3b"/>
