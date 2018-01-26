@@ -388,7 +388,7 @@ AdaptiveXPperWeekCell = "XP per week";
 AdaptiveProgressByWeeks = "Progress by weeks";
 AdaptivePreferencesTitle = "Adaptive courses";
 UseAdaptiveModePreference = "Adaptive mode";
-AdaptiveOnboardingTitle = "Adaptive mode: tutorial";
+AdaptiveOnboardingTitle = "Adaptive mode";
 
 /* Tooltips */
 ShareCourseTooltip = "Share the link with your friends to learn together";

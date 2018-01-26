@@ -168,9 +168,13 @@ extension CardsStepsViewController: CardsStepsView {
         card.addContentSubview(stepViewController.view)
     }
 
-    func updateTopCardTitle(title: String) {
+    func updateTopCardTitle(title: String, showControls: Bool) {
         guard let card = topCard else {
             return
+        }
+
+        if !showControls {
+            card.discussionButton.isHidden = true
         }
 
         card.updateLabel(title)
