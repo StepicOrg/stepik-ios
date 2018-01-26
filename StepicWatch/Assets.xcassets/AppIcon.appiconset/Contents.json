@@ -63,8 +63,9 @@
       "subtype" : "42mm"
     },
     {
-      "idiom" : "watch-marketing",
       "size" : "1024x1024",
+      "idiom" : "watch-marketing",
+      "filename" : "stepik_logotype_square_black_watch_1024.png",
       "scale" : "1x"
     }
   ],
