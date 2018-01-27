@@ -35,7 +35,7 @@ class CardStepViewController: UIViewController, CardStepView {
         setupWebView()
         presenter?.refreshStep()
         NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
-        
+
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
@@ -111,7 +111,7 @@ class CardStepViewController: UIViewController, CardStepView {
                 return
             }
             self.scrollView.layoutIfNeeded()
-            
+
             if quizHint.height > self.view.frame.height {
                 self.scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHint.top.y, width: 1, height: self.scrollView.frame.height), animated: true)
             } else {

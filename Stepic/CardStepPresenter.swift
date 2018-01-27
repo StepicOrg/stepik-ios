@@ -84,7 +84,7 @@ class CardStepPresenter {
 
     func calculateQuizHintSize() -> (height: CGFloat, top: CGPoint) {
         quizViewController?.view.layoutIfNeeded()
-        
+
         let sPoint = quizViewController?.statusLabel.superview?.convert(quizViewController?.statusLabel.frame.origin ?? CGPoint.zero, to: view?.baseScrollView)
         return (height: quizViewController?.hintView.frame.height ?? 0, top: sPoint ?? CGPoint.zero)
     }
