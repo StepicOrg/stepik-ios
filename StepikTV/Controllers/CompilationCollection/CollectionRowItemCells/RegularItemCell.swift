@@ -26,6 +26,9 @@ class RegularItemCell: UICollectionViewCell {
     func setup(with item: ItemViewData) {
         titleLabel.text = item.title
 
-        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
+            let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
+            self.imageView.image = UIImage(data: data!)
+        });
     }
 }

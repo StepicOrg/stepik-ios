@@ -31,7 +31,10 @@ class MajorItemCell: UICollectionViewCell {
         subtitleLabel.text = item.subtitle
         pressAction = item.action
 
-        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
+            let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
+            self.imageView.image = UIImage(data: data!)
+        });
     }
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
