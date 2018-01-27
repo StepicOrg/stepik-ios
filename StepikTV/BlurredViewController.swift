@@ -23,9 +23,5 @@ class BlurredViewController: UIViewController {
 
         view.insertSubview(vibrancyEffectView, at: 0)
         view.insertSubview(blurEffectView, at: 0)
-        /*
-        view.addSubview(blurEffectView)
-        view.addSubview(vibrancyEffectView)
- */
     }
 }

@@ -24,8 +24,10 @@ class SectionTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.delegate = self
 
+        /*
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = LessonTableViewCell.estimatedSize
+ */
 
         tableView.remembersLastFocusedIndexPath = false
     }
@@ -41,8 +43,14 @@ class SectionTableViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? LessonTableViewCell else { return }
-
         cell.setup(with: paragraphIndex, indexPath.row + 1, viewData: section.lessons[indexPath.row])
+    }
+}
+
+extension SectionTableViewController: UICollectionViewDelegateFlowLayout {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return LessonTableViewCell.getHeightForCell(with: section.lessons[indexPath.row], width: tableView.bounds.width)
     }
 
 }

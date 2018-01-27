@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,44 +13,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstructorsCourseInfoSectionCell" id="gvF-cP-QHz" customClass="InstructorsCourseInfoSectionCell" customModule="StepikTV" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="1920" height="426"/>
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="484"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="1920" height="426"/>
+                <rect key="frame" x="0.0" y="0.0" width="1920" height="484"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikK-yN-Y97" userLabel="Width View">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="426"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="1920" id="IQx-Ub-VZz"/>
-                        </constraints>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7O-kr-Y3S">
                         <rect key="frame" x="110" y="25" width="75" height="46"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjf-PU-uWC">
-                        <rect key="frame" x="110" y="91" width="1700" height="310"/>
-                        <mutableString key="text">UICollectionViewFlowLayout *flowLayout;
-flowLayout = [[UICollectionViewFlowLayout alloc]init];
-[flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-[flowLayout setMinimumInteritemSpacing:0.0f]; UICollectionViewFlowLayout *flowLayout;
-flowLayout = [[UICollectionViewFlowLayout alloc]init];
-[flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-[flowLayout setMinimumInteritemSpacing:0.0f];UICollectionViewFlowLayout *flowLayout;
-flowLayout = [[UICollectionViewFlowLayout alloc]init];
-[flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];</mutableString>
-                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Dff-el-nmq">
-                        <rect key="frame" x="0.0" y="71" width="1920" height="400"/>
+                        <rect key="frame" x="0.0" y="71" width="1920" height="413"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1920" id="qwB-4x-cFy"/>
-                            <constraint firstAttribute="height" constant="400" id="vxO-da-bLz"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="ve8-N9-BQA">
                             <size key="itemSize" width="50" height="50"/>
@@ -62,28 +40,19 @@ flowLayout = [[UICollectionViewFlowLayout alloc]init];
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ikK-yN-Y97" secondAttribute="bottom" id="2dt-nI-qSL"/>
                 <constraint firstAttribute="trailing" secondItem="Dff-el-nmq" secondAttribute="trailing" id="5JZ-CA-e9I"/>
-                <constraint firstAttribute="trailing" secondItem="ikK-yN-Y97" secondAttribute="trailing" id="7g6-x3-Dma"/>
-                <constraint firstAttribute="bottom" secondItem="Qjf-PU-uWC" secondAttribute="bottom" constant="25" id="9AR-Lm-fQG"/>
-                <constraint firstItem="ikK-yN-Y97" firstAttribute="leading" secondItem="gvF-cP-QHz" secondAttribute="leading" id="I8M-A5-kyY"/>
-                <constraint firstItem="ikK-yN-Y97" firstAttribute="top" secondItem="gvF-cP-QHz" secondAttribute="top" id="UdT-6z-IpA"/>
-                <constraint firstAttribute="trailingMargin" secondItem="Qjf-PU-uWC" secondAttribute="trailing" id="ivA-eH-tV6"/>
-                <constraint firstItem="Qjf-PU-uWC" firstAttribute="leading" secondItem="E7O-kr-Y3S" secondAttribute="leading" id="olV-FE-qE9"/>
+                <constraint firstAttribute="bottom" secondItem="Dff-el-nmq" secondAttribute="bottom" id="mZy-nn-Fc6"/>
                 <constraint firstItem="E7O-kr-Y3S" firstAttribute="leading" secondItem="gvF-cP-QHz" secondAttribute="leadingMargin" id="oo1-SM-Vym"/>
                 <constraint firstItem="E7O-kr-Y3S" firstAttribute="top" secondItem="gvF-cP-QHz" secondAttribute="top" constant="25" id="vyN-qf-wX0"/>
-                <constraint firstItem="Qjf-PU-uWC" firstAttribute="top" secondItem="E7O-kr-Y3S" secondAttribute="bottom" constant="20" id="zUO-15-ADA"/>
                 <constraint firstItem="Dff-el-nmq" firstAttribute="top" secondItem="E7O-kr-Y3S" secondAttribute="bottom" id="zmB-w1-VUR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="w4e-WL-Lp6"/>
-            <size key="customSize" width="1920" height="451"/>
+            <size key="customSize" width="1920" height="509"/>
             <connections>
-                <outlet property="backSizeLabel" destination="Qjf-PU-uWC" id="97E-f9-4dP"/>
                 <outlet property="collectionView" destination="Dff-el-nmq" id="Ic5-Ti-26g"/>
                 <outlet property="title" destination="E7O-kr-Y3S" id="JvY-Mu-KNS"/>
-                <outlet property="widthConstraint" destination="IQx-Ub-VZz" id="QKM-Ye-PDl"/>
             </connections>
-            <point key="canvasLocation" x="146" y="1192"/>
+            <point key="canvasLocation" x="146" y="1163"/>
         </collectionViewCell>
     </objects>
 </document>

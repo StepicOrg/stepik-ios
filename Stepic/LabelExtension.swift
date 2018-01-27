@@ -24,6 +24,10 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
+    func getHeightWithText(_ text: String, html: Bool = false) -> CGFloat {
+        return type(of: self).heightForLabelWithText(text, lines: numberOfLines, font: font, width: bounds.width, html: html, alignment: textAlignment)
+    }
+
     class func heightForLabelWithText(_ text: String, lines: Int, font: UIFont, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
 
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))

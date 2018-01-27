@@ -23,8 +23,12 @@ extension UILabel {
 
 class LessonTableViewCell: UITableViewCell {
 
-    static var reuseIdentifier: String { get { return "LessonTableViewCell" } }
-    static var estimatedSize: CGFloat { get { return CGFloat(90) } }
+    static var reuseIdentifier: String { return "LessonTableViewCell" }
+    static var estimatedSize: CGFloat { return CGFloat(90) }
+
+    static func getHeightForCell(with viewData: LessonViewData, width: CGFloat) -> CGFloat {
+        return UILabel.heightForLabelWithText(viewData.title, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 430, alignment: .left) + 45
+    }
 
     @IBOutlet var indexLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!

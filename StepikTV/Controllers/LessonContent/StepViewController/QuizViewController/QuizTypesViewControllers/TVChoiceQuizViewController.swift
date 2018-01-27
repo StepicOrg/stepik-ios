@@ -105,11 +105,8 @@ extension TVChoiceQuizViewController : UITableViewDelegate {
             return 0
         }
         if let height = cellHeights[indexPath.row] {
-            print(height)
             return height
         } else {
-            print(dataset.options[indexPath.row])
-            print(tableView.bounds.width)
             let i = TVChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: tableView.bounds.width)
             return i
         }

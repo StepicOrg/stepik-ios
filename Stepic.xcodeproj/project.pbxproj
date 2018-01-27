@@ -5301,7 +5301,6 @@
 		1B3BB0561FE6DE47002DDD9A /* RectangularCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RectangularCollectionViewController.swift; path = StepikTV/Controllers/CoursesCatalog/RectangularCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0571FE6DE48002DDD9A /* SectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionTableViewController.swift; path = StepikTV/Controllers/CourseContent/SectionTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatalogMenuViewController.swift; path = StepikTV/Controllers/CoursesCatalog/CatalogMenuViewController.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB05A1FE6DE48002DDD9A /* LessonContentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonContentAlertController.swift; path = StepikTV/Controllers/LessonContent/LessonContentAlertController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0681FE6DE70002DDD9A /* IconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconButton.swift; path = StepikTV/Views/IconButton.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusableCustomView.swift; path = StepikTV/Views/FocusableCustomView.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StepItemCell.xib; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.xib; sourceTree = SOURCE_ROOT; };
@@ -8465,7 +8464,6 @@
 				933563BB20125AB20061FE2E /* LessonContent.storyboard */,
 				933563BE20126BCD0061FE2E /* LessonContentView.swift */,
 				1B3BB0551FE6DE47002DDD9A /* LessonStepsCollectionViewController.swift */,
-				1B3BB05A1FE6DE48002DDD9A /* LessonContentAlertController.swift */,
 				933563C020126BE30061FE2E /* LessonContentPresenter.swift */,
 				93E5AAEE20161CFD00290B4E /* StepViewController */,
 				1B3BB07D1FE6E057002DDD9A /* LessonPartItemCell */,

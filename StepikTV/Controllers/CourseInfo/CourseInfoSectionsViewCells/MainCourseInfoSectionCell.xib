@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,12 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="1920" height="503"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyJ-L7-huC" userLabel="Width View">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="503"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="1920" id="nL0-so-ad5"/>
-                        </constraints>
-                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatGeo17" translatesAutoresizingMaskIntoConstraints="NO" id="g2X-W8-KyK">
                         <rect key="frame" x="1300" y="100" width="400" height="400"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,11 +135,7 @@
                 <constraint firstItem="4yN-VX-zgO" firstAttribute="trailing" secondItem="9nX-aR-jMw" secondAttribute="trailing" id="URW-Dm-3LY"/>
                 <constraint firstItem="goK-dj-Uzp" firstAttribute="leading" secondItem="4yN-VX-zgO" secondAttribute="leading" id="UTG-5M-ZuP"/>
                 <constraint firstItem="4yN-VX-zgO" firstAttribute="top" secondItem="9nX-aR-jMw" secondAttribute="bottom" constant="34" id="Zvk-9C-0I4"/>
-                <constraint firstItem="JyJ-L7-huC" firstAttribute="leading" secondItem="TP4-Dq-wuB" secondAttribute="leading" id="bWD-BA-LC1"/>
                 <constraint firstItem="9nX-aR-jMw" firstAttribute="leading" secondItem="TP4-Dq-wuB" secondAttribute="leadingMargin" id="c43-OB-a3D"/>
-                <constraint firstItem="JyJ-L7-huC" firstAttribute="top" secondItem="TP4-Dq-wuB" secondAttribute="top" id="cIM-Hw-7eS"/>
-                <constraint firstAttribute="trailing" secondItem="JyJ-L7-huC" secondAttribute="trailing" id="gmp-dg-my1"/>
-                <constraint firstAttribute="bottom" secondItem="JyJ-L7-huC" secondAttribute="bottom" id="jyg-b7-dAn"/>
                 <constraint firstItem="g2X-W8-KyK" firstAttribute="leading" secondItem="9nX-aR-jMw" secondAttribute="trailing" constant="220" id="khA-TL-l9Y"/>
                 <constraint firstAttribute="trailingMargin" secondItem="g2X-W8-KyK" secondAttribute="trailing" constant="110" id="rs5-ok-wGH"/>
                 <constraint firstItem="xyL-0n-FZ0" firstAttribute="top" secondItem="goK-dj-Uzp" secondAttribute="bottom" constant="50" id="ukf-J6-gbd"/>
@@ -159,7 +149,6 @@
                 <outlet property="leftIconButton" destination="f6G-UO-LrY" id="7fC-rl-3Bt"/>
                 <outlet property="rightIconButton" destination="ZSy-K5-8HJ" id="zjH-oU-tng"/>
                 <outlet property="title" destination="9nX-aR-jMw" id="3dh-nt-Pjj"/>
-                <outlet property="widthConstraint" destination="nL0-so-ad5" id="nDj-N0-Q32"/>
             </connections>
             <point key="canvasLocation" x="69" y="96"/>
         </collectionViewCell>

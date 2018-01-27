@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,12 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="1920" height="151"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-Yn-hBr" userLabel="Width View">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="151"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="1920" id="fj9-2i-KKw"/>
-                        </constraints>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m86-Yu-EBk">
                         <rect key="frame" x="110" y="25" width="75" height="46"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
@@ -42,11 +36,7 @@
             <constraints>
                 <constraint firstItem="m86-Yu-EBk" firstAttribute="top" secondItem="8py-fP-AhR" secondAttribute="top" constant="25" id="3ry-H9-4IX"/>
                 <constraint firstAttribute="trailingMargin" secondItem="kly-MA-hjl" secondAttribute="trailing" id="7TC-uw-Py8"/>
-                <constraint firstItem="vAu-Yn-hBr" firstAttribute="top" secondItem="8py-fP-AhR" secondAttribute="top" id="Wbp-Eq-Ecx"/>
-                <constraint firstItem="vAu-Yn-hBr" firstAttribute="leading" secondItem="8py-fP-AhR" secondAttribute="leading" id="XtN-Wx-t9b"/>
                 <constraint firstItem="m86-Yu-EBk" firstAttribute="leading" secondItem="8py-fP-AhR" secondAttribute="leadingMargin" id="egV-zI-BZp"/>
-                <constraint firstAttribute="bottom" secondItem="vAu-Yn-hBr" secondAttribute="bottom" id="h0p-DX-W7q"/>
-                <constraint firstAttribute="trailing" secondItem="vAu-Yn-hBr" secondAttribute="trailing" id="hvl-7C-J1G"/>
                 <constraint firstAttribute="bottom" secondItem="kly-MA-hjl" secondAttribute="bottom" constant="25" id="pRz-Xm-2Y3"/>
                 <constraint firstItem="kly-MA-hjl" firstAttribute="top" secondItem="m86-Yu-EBk" secondAttribute="bottom" constant="20" id="v5P-NW-GMi"/>
                 <constraint firstItem="kly-MA-hjl" firstAttribute="leading" secondItem="m86-Yu-EBk" secondAttribute="leading" id="vjt-QO-GN7"/>
@@ -56,7 +46,6 @@
             <connections>
                 <outlet property="content" destination="kly-MA-hjl" id="rzq-e0-qBw"/>
                 <outlet property="title" destination="m86-Yu-EBk" id="fGR-a6-Rn9"/>
-                <outlet property="widthConstraint" destination="fj9-2i-KKw" id="9Ux-tN-rkf"/>
             </connections>
         </collectionViewCell>
     </objects>

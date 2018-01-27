@@ -11,10 +11,7 @@ import UIKit
 class IconButton: UIView {
 
     @IBOutlet var button: UIButton!
-
     @IBOutlet var label: UILabel!
-
-    override var preferredFocusEnvironments: [UIFocusEnvironment] { get { return [button] } }
 
     func configure(with icon: UIImage, _ title: String) {
         button.setImage(icon, for: .normal)

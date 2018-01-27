@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseInfoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class CourseInfoCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,6 @@ class CourseInfoCollectionViewController: UICollectionViewController, UICollecti
 
         let instructorsNib = UINib(nibName: InstructorsCourseInfoSectionCell.nibName, bundle: nil)
         collectionView?.register(instructorsNib, forCellWithReuseIdentifier: InstructorsCourseInfoSectionCell.reuseIdentifier)
-
-        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }
 
     var presenter: CourseInfoPresenter?
@@ -49,6 +46,16 @@ class CourseInfoCollectionViewController: UICollectionViewController, UICollecti
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? CourseInfoSectionViewProtocol else { return }
         cell.setup(with: sections[indexPath.section])
+    }
+}
+
+extension CourseInfoCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let width = UIScreen.main.bounds.width
+        let height = sections[indexPath.section].contentType.viewClass.getHeightForCell(section: sections[indexPath.section], width: width)
+
+        return CGSize(width: width, height: height)
     }
 }
 

@@ -13,16 +13,16 @@ class DetailsCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewP
     static var reuseIdentifier: String { return "DetailsCourseInfoSectionCell" }
     static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 150.0) }
 
+    static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
+        guard case let .text(content: content, selectionAction: _) = section.contentType else {
+            return 35.0
+        }
+
+        return max(35, UILabel.heightForLabelWithText(content, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 220, html: true, alignment: .left)) + 125
+    }
+
     @IBOutlet var title: UILabel!
     @IBOutlet var content: TVFocusableText!
-    @IBOutlet var widthConstraint: NSLayoutConstraint!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        widthConstraint.constant = DetailsCourseInfoSectionCell.size.width
-    }
 
     func setup(with section: CourseInfoSection) {
         title.text = section.title

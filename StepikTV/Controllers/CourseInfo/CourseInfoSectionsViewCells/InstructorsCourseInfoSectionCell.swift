@@ -11,20 +11,19 @@ import UIKit
 class InstructorsCourseInfoSectionCell: CollectionRowViewCell, CourseInfoSectionViewProtocol {
     static var nibName: String { return "InstructorsCourseInfoSectionCell" }
     static var reuseIdentifier: String { return "InstructorsCourseInfoSectionCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 100.0) }
+    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 500.0) }
+
+    static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
+        return size.height
+    }
 
     @IBOutlet var title: UILabel!
     @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var backSizeLabel: UILabel!
-    @IBOutlet var widthConstraint: NSLayoutConstraint!
 
     var data: [ItemViewData] = []
 
     func setup(with section: CourseInfoSection) {
         title.text = section.title
-
-        // Fix autolayout self-sizing cell bag
-        backSizeLabel.text = "\n\n\n\n\n\n\n\n\n"
 
         switch section.contentType {
         case let .instructors(items: items):
@@ -37,9 +36,6 @@ class InstructorsCourseInfoSectionCell: CollectionRowViewCell, CourseInfoSection
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        widthConstraint.constant = InstructorsCourseInfoSectionCell.size.width
 
         collectionView.delegate = self
         collectionView.dataSource = self

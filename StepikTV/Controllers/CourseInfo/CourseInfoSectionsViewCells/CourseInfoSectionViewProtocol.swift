@@ -13,5 +13,7 @@ protocol CourseInfoSectionViewProtocol {
     static var size: CGSize { get }
     static var reuseIdentifier: String { get }
 
+    static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat
+
     func setup(with section: CourseInfoSection)
 }
