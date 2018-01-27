@@ -55,7 +55,6 @@ class AdaptiveStatsPagerViewController: PagerController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        (navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1)
         if navigationController?.delegate === self {
             navigationController?.delegate = nil
         }
@@ -100,6 +99,6 @@ extension AdaptiveStatsPagerViewController: UINavigationControllerDelegate {
             return
         }
 
-        navController.changeShadowAlpha(0)
+        navController.animateShadowChange(for: self)
     }
 }

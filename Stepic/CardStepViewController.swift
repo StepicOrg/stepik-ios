@@ -195,8 +195,6 @@ extension CardStepViewController: WKNavigationDelegate {
             self.scrollView.layoutIfNeeded()
 
             self.presenter?.problemDidLoad()
-            
-            print(self.scrollView.contentSize.height, self.scrollView.bounds.size.height, self.scrollView.contentInset.bottom)
         }.catch { _ in
             print("card step: error after webview loading did finish")
         }
