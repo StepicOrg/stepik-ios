@@ -35,6 +35,10 @@ class CardStepViewController: UIViewController, CardStepView {
         setupWebView()
         presenter?.refreshStep()
         NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
+        
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
     }
 
     @objc func didScreenRotate() {
@@ -71,7 +75,7 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
         stepWebView.navigationDelegate = self
         stepWebView.scrollView.isScrollEnabled = false
-        scrollView.addSubview(stepWebView)
+        scrollView.insertSubview(stepWebView, at: 0)
 
         stepWebViewHeight = stepWebView.constrainHeight("5")
         stepWebView.constrainBottomSpace(toView: quizPlaceholderView, predicate: "0")
@@ -101,17 +105,20 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 
     func scrollToQuizBottom() {
-        guard let quizHint = presenter?.calculateQuizHintSize() else {
-            return
-        }
-        scrollView.layoutIfNeeded()
-
-        if quizHint.height > view.frame.height {
-            scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHint.top.y, width: 1, height: scrollView.frame.height), animated: true)
-        } else {
-            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
-            if bottomOffset.y > 0 {
-                scrollView.setContentOffset(bottomOffset, animated: true)
+        DispatchQueue.main.async {
+            // FIXME: move logic from presenter
+            guard let quizHint = self.presenter?.calculateQuizHintSize() else {
+                return
+            }
+            self.scrollView.layoutIfNeeded()
+            
+            if quizHint.height > self.view.frame.height {
+                self.scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHint.top.y, width: 1, height: self.scrollView.frame.height), animated: true)
+            } else {
+                let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.height + self.scrollView.contentInset.bottom)
+                if bottomOffset.y > 0 {
+                    self.scrollView.setContentOffset(bottomOffset, animated: true)
+                }
             }
         }
     }
@@ -188,6 +195,8 @@ extension CardStepViewController: WKNavigationDelegate {
             self.scrollView.layoutIfNeeded()
 
             self.presenter?.problemDidLoad()
+            
+            print(self.scrollView.contentSize.height, self.scrollView.bounds.size.height, self.scrollView.contentInset.bottom)
         }.catch { _ in
             print("card step: error after webview loading did finish")
         }
