@@ -14,11 +14,14 @@ class CardsStepsViewController: UIViewController {
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var expLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var labelsStackView: UIStackView!
+    @IBOutlet weak var shadowViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var trophyButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var shadowView: UIView!
 
     var canSwipeCurrentCardUp = false
     private var shouldToggleNavigationBar = true
@@ -59,15 +62,21 @@ class CardsStepsViewController: UIViewController {
 
         title = ""
 
+        shadowViewHeight.constant = 0.5
+
         statusBarPad = UIView()
         statusBarPad?.backgroundColor = UIColor.mainLight
         if let padView = statusBarPad {
-            view.addSubview(padView)
+            view.insertSubview(padView, at: 0)
         }
-        navigationBar.layer.zPosition = kolodaView.layer.zPosition - 1
-        navigationBar.barTintColor = UIColor.mainLight
+
+        trophyButton.layer.zPosition = kolodaView.layer.zPosition - 1
+        backButton.layer.zPosition = kolodaView.layer.zPosition - 1
         statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
         progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        labelsStackView.layer.zPosition = kolodaView.layer.zPosition - 1
+        shadowView.layer.zPosition = kolodaView.layer.zPosition - 1
+
         progressBar.progress = 0
 
         if presenter == nil {
@@ -78,7 +87,7 @@ class CardsStepsViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        statusBarPad?.frame = UIApplication.shared.statusBarFrame
+        statusBarPad?.frame = CGRect(x: UIApplication.shared.statusBarFrame.origin.x, y: UIApplication.shared.statusBarFrame.origin.y, width: UIApplication.shared.statusBarFrame.width, height: progressBar.frame.origin.y)
 
         if DeviceInfo.current.orientation.interface.isLandscape && !DeviceInfo.current.isPad {
             labelsStackView.axis = .horizontal
@@ -91,7 +100,7 @@ class CardsStepsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        shouldToggleNavigationBar = true
+        shouldToggleNavigationBar = false
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -104,6 +113,7 @@ class CardsStepsViewController: UIViewController {
     }
 
     @IBAction func onBackButtonClick(_ sender: Any) {
+        shouldToggleNavigationBar = true
         navigationController?.popViewController(animated: true)
     }
 
@@ -112,13 +122,12 @@ class CardsStepsViewController: UIViewController {
             return
         }
 
-        shouldToggleNavigationBar = false
+        shouldToggleNavigationBar = true
 
         vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
         vc.statsManager = AdaptiveStatsManager(courseId: course.id)
 
-        let navigationVC = StyledNavigationViewController(rootViewController: vc)
-        present(navigationVC, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -159,15 +168,20 @@ extension CardsStepsViewController: CardsStepsView {
         card.addContentSubview(stepViewController.view)
     }
 
-    func updateTopCardTitle(title: String) {
+    func updateTopCardTitle(title: String, showControls: Bool) {
         guard let card = topCard else {
             return
+        }
+
+        if !showControls {
+            card.discussionButton.isHidden = true
         }
 
         card.updateLabel(title)
     }
 
     func presentDiscussions(stepId: Int, discussionProxyId: String) {
+        shouldToggleNavigationBar = true
         let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
         vc.discussionProxyId = discussionProxyId
         vc.target = stepId
@@ -182,8 +196,13 @@ extension CardsStepsViewController: CardsStepsView {
 
         let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
         let shouldFulfill = progressBar.progress > newProgress
-
-        progressBar.progress = shouldFulfill ? 100.0 : newProgress + 0.005
+        let progressAddition: Float = 0.005
+        
+        guard !progressBar.progress.isEqual(to: newProgress + progressAddition) else {
+            return
+        }
+        
+        progressBar.progress = shouldFulfill ? 100.0 : newProgress + progressAddition
         UIView.animate(withDuration: 1.2, animations: {
             self.progressBar.layoutIfNeeded()
         }, completion: { _ in
@@ -194,7 +213,7 @@ extension CardsStepsViewController: CardsStepsView {
             self.progressBar.progress = 0
             self.progressBar.layoutIfNeeded()
 
-            self.progressBar.progress = newProgress + 0.005
+            self.progressBar.progress = newProgress + progressAddition
             UIView.animate(withDuration: 1.2, animations: {
                 self.progressBar.layoutIfNeeded()
             }, completion: nil)

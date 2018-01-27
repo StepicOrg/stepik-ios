@@ -86,13 +86,9 @@ class AdaptiveStatsViewController: UIViewController {
         currentWeekXPLabel.textColor = UIColor.mainDark
         bestStreakLabel.textColor = UIColor.mainDark
         currentLevelLabel.textColor = UIColor.mainDark
-
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.mainDark
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark]
     }
 
     private func localize() {
-        title = NSLocalizedString("AdaptiveStats", comment: "")
         levelTitleLabel.text = NSLocalizedString("AdaptiveLevelSuffix", comment: "")
         streakTitleLabel.text = NSLocalizedString("AdaptiveBestStreak", comment: "")
         xpPer7DaysTitleLabel.text = NSLocalizedString("AdaptiveXPperWeek", comment: "")

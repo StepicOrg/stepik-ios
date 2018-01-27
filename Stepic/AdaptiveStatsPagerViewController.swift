@@ -28,10 +28,6 @@ class AdaptiveStatsPagerViewController: PagerController {
     var statsManager: AdaptiveStatsManager?
     var ratingsManager: AdaptiveRatingManager?
 
-    @IBAction func onCancelButtonClick(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -103,6 +99,6 @@ extension AdaptiveStatsPagerViewController: UINavigationControllerDelegate {
             return
         }
 
-        navController.changeShadowAlpha(0)
+        navController.animateShadowChange(for: self)
     }
 }

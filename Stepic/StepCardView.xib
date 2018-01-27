@@ -13,9 +13,9 @@
             <connections>
                 <outlet property="contentView" destination="LM4-eR-A8y" id="j6L-Gk-CxC"/>
                 <outlet property="controlButton" destination="LCg-u0-xF2" id="ceu-N0-3vh"/>
+                <outlet property="discussionButton" destination="8aa-Jm-cMF" id="ohH-cn-Vuy"/>
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="9OP-aI-LVc"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="DqQ-aN-C2J"/>
-                <outlet property="titleButton" destination="8aa-Jm-cMF" id="fGo-LL-DNH"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="pA6-nj-ZdD"/>
                 <outlet property="titlePadView" destination="HzP-xg-1iP" id="e8u-ty-StC"/>
                 <outlet property="whitePadView" destination="xHA-bo-OBf" id="fhj-iN-vCB"/>
@@ -41,7 +41,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.68 Билет 21 Вопрос 4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwb-9k-TMQ">
-                            <rect key="frame" x="8" y="13" width="304" height="21.5"/>
+                            <rect key="frame" x="8" y="13" width="272" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                             <color key="textColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -65,13 +65,13 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="352-UI-eCn"/>
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="leading" secondItem="HzP-xg-1iP" secondAttribute="leading" constant="8" id="F7I-GS-cJQ"/>
+                        <constraint firstItem="8aa-Jm-cMF" firstAttribute="leading" secondItem="Cwb-9k-TMQ" secondAttribute="trailing" constant="8" id="MyA-p5-8ud"/>
                         <constraint firstAttribute="trailing" secondItem="8aa-Jm-cMF" secondAttribute="trailing" constant="12" id="TXJ-7K-mxt"/>
                         <constraint firstItem="WzK-ck-ENu" firstAttribute="top" secondItem="Cwb-9k-TMQ" secondAttribute="bottom" constant="7.5" id="X2O-R9-9DX"/>
                         <constraint firstItem="8aa-Jm-cMF" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" constant="12" id="fXU-4A-Vk8"/>
                         <constraint firstAttribute="trailing" secondItem="WzK-ck-ENu" secondAttribute="trailing" constant="8" id="lYP-5a-Tau"/>
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" constant="13" id="shI-1z-zhM"/>
                         <constraint firstItem="WzK-ck-ENu" firstAttribute="leading" secondItem="HzP-xg-1iP" secondAttribute="leading" constant="8" id="xM1-Rv-li7"/>
-                        <constraint firstAttribute="trailing" secondItem="Cwb-9k-TMQ" secondAttribute="trailing" constant="8" id="yNN-77-yCt"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHA-bo-OBf">

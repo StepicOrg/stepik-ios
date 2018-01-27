@@ -29,7 +29,7 @@ class StepCardView: NibInitializableView {
 
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
 
-    @IBOutlet weak var titleButton: UIButton!
+    @IBOutlet weak var discussionButton: UIButton!
     @IBOutlet weak var titlePadView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -132,7 +132,7 @@ class StepCardView: NibInitializableView {
     fileprivate func colorize() {
         loadingLabel.textColor = UIColor.mainDark
         controlButton.tintColor = UIColor.mainDark
-        titleButton.superview?.tintColor = UIColor.mainDark
+        discussionButton.superview?.tintColor = UIColor.mainDark
     }
 
     enum CardState {

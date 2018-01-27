@@ -23,7 +23,7 @@ protocol CardsStepsView: class {
     func swipeCardLeft()
     func swipeCardRight()
     func updateTopCardContent(stepViewController: CardStepViewController)
-    func updateTopCardTitle(title: String)
+    func updateTopCardTitle(title: String, showControls: Bool)
     func presentDiscussions(stepId: Int, discussionProxyId: String)
     func refreshCards()
 
@@ -129,7 +129,7 @@ class CardsStepsPresenter {
                 }
 
                 strongSelf.view?.updateTopCardContent(stepViewController: cardStepViewController)
-                strongSelf.view?.updateTopCardTitle(title: title)
+                strongSelf.view?.updateTopCardTitle(title: title, showControls: false)
             }
         }
     }
@@ -177,7 +177,7 @@ class CardsStepsPresenter {
                     }
 
                     strongSelf.view?.updateTopCardContent(stepViewController: cardStepViewController)
-                    strongSelf.view?.updateTopCardTitle(title: title)
+                    strongSelf.view?.updateTopCardTitle(title: title, showControls: true)
                 }
 
                 return strongSelf.sendView(step: step)
