@@ -371,7 +371,7 @@ class CardsStepsPresenter {
         // Update stats
         statsManager.incrementRating(curStreak)
         statsManager.maxStreak = curStreak
-        
+
         // Send rating
         ratingsAPI.update(courseId: course.id, exp: newRating).then {
             print("cards steps: remote rating updated")
