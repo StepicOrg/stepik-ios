@@ -1,4 +1,9 @@
-In the new version of the Stepik iOS app we fixed some bugs and crashes.
+In the new version of the Stepik iOS app we:
+
+• Added possibility to pass adaptive courses
+• Added iPhone X support
+• Changed the app icon so it is black and fashionable now
+• Fixed lots of bugs and improved stability
 
 Enjoy learning in 2018!
 Stepik team

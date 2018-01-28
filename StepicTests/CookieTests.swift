@@ -26,7 +26,7 @@ class CookieTests: XCTestCase {
         let expectation = self.expectation(description: "testAnonymousAttempt")
 
         _ = Session.refresh(completion: {
-                _ in
+
                 print("successfully refreshed session data")
                 ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                     user in

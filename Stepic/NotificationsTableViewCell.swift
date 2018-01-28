@@ -64,11 +64,11 @@ class NotificationsTableViewCell: UITableViewCell {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2.2
 
-        let all = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFontWeightLight))
+        let all = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.light))
                        .foregroundColor(UIColor.mainText)
                        .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFontWeightMedium)).foregroundColor(UIColor.mainText)
-        let activeLink = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFontWeightMedium))
+        let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium)).foregroundColor(UIColor.mainText)
+        let activeLink = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium))
                         .foregroundColor(UIColor.mainText)
                         .backgroundColor(UIColor(hex: 0xF6F6F6))
 
@@ -82,7 +82,7 @@ class NotificationsTableViewCell: UITableViewCell {
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    notificationTextLabel.addLink(to: URL(string: href), with: NSRange(detection.range))
+                    notificationTextLabel.addLink(to: URL(string: href), with: detection.range.nsRange)
                 }
             default: break
             }

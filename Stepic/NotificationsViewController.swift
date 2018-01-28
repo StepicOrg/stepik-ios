@@ -83,11 +83,9 @@ class NotificationsViewController: UIViewController, NotificationsView {
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+//        }
 
         refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
         if #available(iOS 10.0, *) {
@@ -107,7 +105,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
     }
 
-    func refreshNotifications() {
+    @objc func refreshNotifications() {
         if state == .loading || state == .refreshing {
             return
         }
@@ -159,7 +157,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
                     cell.updateLeftView(.avatar(url: url))
                 }
             default:
-                cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.characters.first ?? "A"))
+                cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.first ?? "A"))
             }
 
             cell.delegate = self
@@ -210,7 +208,7 @@ extension NotificationsViewController: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text: String = NSLocalizedString("NoNotifications", comment: "")
 
-        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFontWeightLight))
+        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFont.Weight.light))
             .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
         return text.styleAll(style).attributedString
     }

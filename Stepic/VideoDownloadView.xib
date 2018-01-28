@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,15 +20,12 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSS-bs-LOG" customClass="PKDownloadButton">
                     <rect key="frame" x="0.0" y="0.0" width="37" height="36"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="37" id="OKH-xN-YFg"/>
-                        <constraint firstAttribute="height" constant="36" id="tXM-er-wj4"/>
-                    </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="QSS-bs-LOG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NHP-fX-jH9"/>
+                <constraint firstItem="QSS-bs-LOG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5M2-TT-Zo2"/>
                 <constraint firstAttribute="trailing" secondItem="QSS-bs-LOG" secondAttribute="trailing" id="Zgs-FE-6dN"/>
+                <constraint firstAttribute="bottom" secondItem="QSS-bs-LOG" secondAttribute="bottom" id="e4m-4C-9pp"/>
                 <constraint firstItem="QSS-bs-LOG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ooY-T2-swf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

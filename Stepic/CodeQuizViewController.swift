@@ -131,10 +131,10 @@ class CodeQuizViewController: QuizViewController {
 
     fileprivate func setLimits(time: Double, memory: Double) {
 
-        let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
-        let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
-        let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
-        let attMemory = NSAttributedString(string: "\(memory) MB", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
+        let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)])
+        let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)])
+        let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)])
+        let attMemory = NSAttributedString(string: "\(memory) MB", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)])
 
         let result = NSMutableAttributedString(attributedString: attTimeLimit)
         result.append(attTime)
@@ -155,11 +155,9 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         codeTextView.autocorrectionType = UITextAutocorrectionType.no
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                codeTextView.smartQuotesType = .no
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            codeTextView.smartQuotesType = .no
+        }
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
@@ -178,7 +176,6 @@ class CodeQuizViewController: QuizViewController {
         languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
 
         codeTextView.delegate = self
-
         submissionPressedBlock = {
             [weak self] in
             self?.codeTextView.resignFirstResponder()
@@ -188,6 +185,7 @@ class CodeQuizViewController: QuizViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         toolbarView.layoutSubviews()
+        updateTextViewInsets()
     }
 
     func hidePicker() {
@@ -318,6 +316,12 @@ class CodeQuizViewController: QuizViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    private func updateTextViewInsets() {
+        if #available(iOS 11.0, *) {
+            codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
+        }
+    }
+
     /*
     // MARK: - Navigation
 
@@ -415,7 +419,7 @@ extension CodeQuizViewController : UITextViewDelegate {
 extension CodeQuizViewController: CodeSuggestionDelegate {
     func didSelectSuggestion(suggestion: String, prefix: String) {
         codeTextView.becomeFirstResponder()
-        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
     }

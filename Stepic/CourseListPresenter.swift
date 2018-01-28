@@ -46,6 +46,7 @@ class CourseListPresenter {
     private var reviewSummariesAPI: CourseReviewSummariesAPI
     private var searchResultsAPI: SearchResultsAPI
     private var subscriptionManager: CourseSubscriptionManager
+    private var adaptiveStorageManager: AdaptiveStorageManager
 
     private var colorMode: CourseListColorMode
     var onlyLocal: Bool
@@ -108,7 +109,7 @@ class CourseListPresenter {
         return result
     }
 
-    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber) {
+    init(view: CourseListView, ID: String, limit: Int?, listType: CourseListType, colorMode: CourseListColorMode, onlyLocal: Bool, subscriptionManager: CourseSubscriptionManager, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI, searchResultsAPI: SearchResultsAPI, subscriber: CourseSubscriber, adaptiveStorageManager: AdaptiveStorageManager) {
         self.view = view
         self.ID = ID
         self.coursesAPI = coursesAPI
@@ -123,6 +124,7 @@ class CourseListPresenter {
         self.onlyLocal = onlyLocal
         self.searchResultsAPI = searchResultsAPI
         self.subscriptionManager = subscriptionManager
+        self.adaptiveStorageManager = adaptiveStorageManager
         subscriptionManager.handleUpdatesBlock = {
             [weak self] in
             self?.handleCourseSubscriptionUpdates()
@@ -181,7 +183,7 @@ class CourseListPresenter {
             [weak self]
             course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
-            if let controller = self?.getSectionsController(for: course) {
+            if let controller = self?.getSectionsController(for: course, didSubscribe: true) {
                 self?.view?.show(controller: controller)
             }
         }.catch {
@@ -223,7 +225,9 @@ class CourseListPresenter {
     }
 
     private func secondaryActionButtonPressed(course: Course) {
-        if course.enrolled {
+        let isAdaptiveMode = adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id)
+
+        if course.enrolled && !isAdaptiveMode {
             if let controller = getSectionsController(for: course) {
                 self.view?.show(controller: controller)
             }
@@ -252,13 +256,13 @@ class CourseListPresenter {
                     }
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
                     strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                    fulfill()
+                    fulfill(())
                 }.catch {
                     error in
                     reject(error)
                 }
             } else {
-                fulfill()
+                fulfill(())
             }
         }
     }
@@ -281,7 +285,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.state = strongSelf.courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-            fulfill()
+            fulfill(())
         }
     }
 
@@ -536,12 +540,23 @@ class CourseListPresenter {
         }
     }
 
-    private func getSectionsController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {
+    private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
+        // FIXME: code duplication, we should use DeepLinkRouter/LastStepRouter here
+        if adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id) {
+            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+                return nil
+            }
+            cardsViewController.hidesBottomBarWhenPushed = true
+            cardsViewController.course = course
+            return cardsViewController
+        }
+
         guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
             return nil
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
         courseVC.course = course
+        courseVC.shouldShowShareTooltip = didSubscribe
         courseVC.parentShareBlock = {
             [weak self]
             shareVC in

@@ -93,7 +93,7 @@ class WebControllerManager: NSObject {
         }
     }
 
-    func defaultSelector() {}
+    @objc func defaultSelector() {}
 }
 
 enum BackButtonStyle {

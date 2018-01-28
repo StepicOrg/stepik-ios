@@ -74,7 +74,7 @@ class ExplorePresenter: CourseListCountDelegate {
                     listType:  CourseListType.tag(id: tag.ID) ,
                     colorMode: .light,
                     onlyLocal: false,
-                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber()
+                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager()
                 )
                 controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
                 self?.view?.show(vc: controller)
@@ -82,12 +82,12 @@ class ExplorePresenter: CourseListCountDelegate {
         })
     }
 
-    var searchController: NewSearchResultsViewController?
+    var searchController: SearchResultsViewController?
 
     func queryChanged(to query: String) {
         //TODO: Refactor this to router layer in the next releases
         if searchController == nil {
-            guard let controller = ControllerHelper.instantiateViewController(identifier: "SearchResultsViewController", storyboardName: "Explore") as? NewSearchResultsViewController else {
+            guard let controller = ControllerHelper.instantiateViewController(identifier: "SearchResultsViewController", storyboardName: "Explore") as? SearchResultsViewController else {
                 return
             }
             searchController = controller
@@ -171,7 +171,7 @@ class ExplorePresenter: CourseListCountDelegate {
 
     private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
         let recoveredIds = courseListsCache.get(forLanguage: language)
-        return CourseList.recover(ids: recoveredIds).sorted { $0.0.position < $0.1.position }
+        return CourseList.recover(ids: recoveredIds).sorted { $0.position < $1.position }
     }
 
     func refresh() {
@@ -196,7 +196,7 @@ class ExplorePresenter: CourseListCountDelegate {
                 strongSelf.lists = lists
                 strongSelf.blocks = strongSelf.buildBlocks(forLists: lists, onlyLocal: true)
                 strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
-                fulfill()
+                fulfill(())
             }.catch {
                 error in
                 reject(error)
@@ -281,7 +281,7 @@ class ExplorePresenter: CourseListCountDelegate {
             if ContentLanguage.sharedContentLanguage != language {
                 throw LanguageError.wrongLanguageError
             }
-            let newLists = lists.sorted { $0.0.position < $0.1.position }
+            let newLists = lists.sorted { $0.position < $1.position }
             strongSelf.updateLists(newLists: newLists, forLanguage: language)
         }.catch {
             [weak self]

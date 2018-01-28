@@ -38,7 +38,7 @@ class ArtView: NibInitializableView {
         self.artImageView.addGestureRecognizer(tapG)
     }
 
-    func didTap() {
+    @objc func didTap() {
         onTap?()
     }
 }

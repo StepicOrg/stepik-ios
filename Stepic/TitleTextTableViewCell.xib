@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTT-p4-NoP" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="296" height="21"/>
+                        <rect key="frame" x="24" y="11" width="280" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="7Wv-5f-OoA"/>
                         </constraints>
@@ -28,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long long long long long long long long long long long long long long long long long long long long long" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC4-PV-PUm" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="16" y="37" width="296" height="48"/>
+                        <rect key="frame" x="24" y="40" width="280" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +44,9 @@
                     <constraint firstItem="aC4-PV-PUm" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="g5a-Jp-YSQ"/>
                     <constraint firstItem="aC4-PV-PUm" firstAttribute="trailing" secondItem="NTT-p4-NoP" secondAttribute="trailing" id="y6q-TC-7mt"/>
                 </constraints>
+                <viewLayoutGuide key="safeArea" id="PCl-Q4-yaw"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="atQ-EZ-UsJ"/>
             <connections>
                 <outlet property="descriptionLabel" destination="aC4-PV-PUm" id="dBH-Ep-YRS"/>
                 <outlet property="titleLabel" destination="NTT-p4-NoP" id="DC7-fc-Ike"/>

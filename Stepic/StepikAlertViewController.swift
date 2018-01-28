@@ -101,7 +101,7 @@ class StepikAlertViewController: UIViewController {
         }
     }
 
-    func actionTriggered(button: UIButton) {
+    @objc func actionTriggered(button: UIButton) {
         if button.tag < actions.count {
             if let h = actions[button.tag].handler {
                 h()

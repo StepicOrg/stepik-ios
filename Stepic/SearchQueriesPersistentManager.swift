@@ -28,13 +28,14 @@ class SearchQueriesPersistentManager {
             return []
         }
 
-        let arr = [String](queriesDict.filter({
-            key, _ in
+        let filteredQueries = queriesDict.filter({
+            (key, _) in
             key.indexOf(query.lowercased()) != nil
-        }).sorted(by: {
+        })
+        let arr = [String](filteredQueries.sorted(by: {
             (first: (key: String, value: Int), second: (key: String, value: Int))  in
             if first.value == second.value {
-                return first.key.characters.count < second.key.characters.count
+                return first.key.count < second.key.count
             } else {
                 return first.value > second.value
             }

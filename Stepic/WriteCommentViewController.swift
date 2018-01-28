@@ -59,8 +59,12 @@ class WriteCommentViewController: UIViewController {
         okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.okPressed))
     }
 
-    func okPressed() {
+    @objc func okPressed() {
         print("should have never been pressed")
+    }
+
+    private func setupTopConstraint() {
+        commentTextView.alignTopEdge(withView: self.view, predicate: "0")
     }
 
     override func viewDidLoad() {
@@ -75,6 +79,8 @@ class WriteCommentViewController: UIViewController {
         commentTextView.tintColor = UIColor.mainDark
         commentTextView.textColor = UIColor.mainText
 
+        setupTopConstraint()
+
         state = .editing
     }
 
@@ -85,7 +91,7 @@ class WriteCommentViewController: UIViewController {
 
     var request: Request?
 
-    func sendPressed() {
+    @objc func sendPressed() {
         print("send pressed")
         state = .sending
         sendComment()

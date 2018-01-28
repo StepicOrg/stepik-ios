@@ -55,7 +55,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(tapG)
     }
 
-    func didTap(recognizer: UITapGestureRecognizer) {
+    @objc func didTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: self.tableView)
         let path = tableView.indexPathForRow(at: location)
         if let row = path?.row {
@@ -83,7 +83,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.characters.count, size: delegate?.suggestionsSize)
+        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.count, size: delegate?.suggestionsSize)
 
         return cell
     }

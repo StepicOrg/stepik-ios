@@ -125,7 +125,7 @@ class DevicesAPI: APIEndpoint {
                         }
                     }
 
-                    fulfill()
+                    fulfill(())
                 }
             }
         }

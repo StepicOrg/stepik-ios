@@ -105,7 +105,7 @@ class AvatarImageView: UIImageView {
     private func extractLetters(from svgString: String) -> String? {
         let xmlWOClosingTags = svgString.replacingOccurrences(of: "</text></svg>", with: "")
         if let letters = xmlWOClosingTags.components(separatedBy: ">").last {
-            return letters.characters.count <= 2 ? letters : nil
+            return letters.count <= 2 ? letters : nil
         }
         return nil
     }
