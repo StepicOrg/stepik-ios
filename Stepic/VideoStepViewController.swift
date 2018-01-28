@@ -158,7 +158,10 @@ class VideoStepViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), video: video, buttonDelegate: self, downloadDelegate: self)
-
+        if #available(iOS 11.0, *) {
+            itemView.constrainWidth("40")
+            itemView.constrainHeight("40")
+        }
         let downloadItem = UIBarButtonItem(customView: itemView)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem, downloadItem]

@@ -65,10 +65,16 @@ class NotificationsPresenter {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didLogout(systemNotification:)), name: .didLogout, object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didLogout(systemNotification: Foundation.Notification) {
+        displayedNotifications = []
+        view?.set(notifications: displayedNotifications, withReload: true)
     }
 
     @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {

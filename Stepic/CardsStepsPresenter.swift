@@ -371,6 +371,21 @@ class CardsStepsPresenter {
         // Update stats
         statsManager.incrementRating(curStreak)
         statsManager.maxStreak = curStreak
+        
+        // Send rating
+        ratingsAPI.update(courseId: course.id, exp: newRating).then {
+            print("cards steps: remote rating updated")
+        }.catch { error in
+            switch error {
+            case RatingsAPIError.serverError:
+                print("cards steps: remote rating update failed: server error")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+            case RatingsAPIError.connectionError(let error):
+                print("cards steps: remote rating update failed: \(error)")
+            default:
+                print("cards steps: remote rating update failed: \(error)")
+            }
+        }
 
         view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
             let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
