@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension NSNotification.Name {
+    static let didLogout = NSNotification.Name("didLogout")
+}
+
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
 
@@ -45,6 +49,7 @@ class AuthInfo: NSObject {
                 NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {
                         //Delete enrolled information
+                        NotificationCenter.default.post(name: .didLogout, object: nil)
                         TabsInfo.myCoursesIds = []
                         let c = Course.getAllCourses(enrolled: true)
                         for course in c {
@@ -55,7 +60,6 @@ class AuthInfo: NSObject {
 
                         Notification.deleteAll()
                         NotificationsBadgesManager.shared.set(number: 0)
-
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
