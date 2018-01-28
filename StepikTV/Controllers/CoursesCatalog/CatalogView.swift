@@ -10,13 +10,15 @@ import Foundation
 
 protocol CatalogView: class {
 
-    func notifyNotAuthorized()
-
-    func provide(userCourses: UserCourses)
+    func showNoticeMessage()
 }
 
 protocol DetailCatalogView: class {
 
-    func updateDetailView()
+    func showLoading(isVisible: Bool)
+
+    func provide(items: [ItemViewData])
+
+    func update()
 
 }

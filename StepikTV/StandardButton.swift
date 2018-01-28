@@ -52,9 +52,15 @@ class StandardButton: UIButton {
 
     private func initStyle() {
         self.layer.cornerRadius = 6
+
         setTitleColor(defaultStateTitleColor, for: .normal)
         setTitleColor(focusStateTitleColor, for: .focused)
         setTitleColor(focusStateTitleColor, for: .highlighted)
+
+        self.contentHorizontalAlignment = .left
+        self.contentEdgeInsets = UIEdgeInsetsMake(0, 20.0, 0, 20.0)
+        self.titleEdgeInsets = UIEdgeInsets.zero
+        self.imageEdgeInsets = UIEdgeInsets.zero
     }
 
     override init(frame: CGRect) {

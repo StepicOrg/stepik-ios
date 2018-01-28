@@ -44,8 +44,14 @@ class RectangularCollectionViewController: UICollectionViewController {
 
 extension RectangularCollectionViewController: DetailCatalogView {
 
-    func updateDetailView() {
-        collectionView?.reloadData()
+    func provide(items: [ItemViewData]) {
+        sectionCourses = items
     }
 
+    func showLoading(isVisible: Bool) {
+    }
+
+    func update() {
+        collectionView?.reloadData()
+    }
 }

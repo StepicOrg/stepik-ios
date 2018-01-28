@@ -13,6 +13,8 @@ class UserCourses {
     private var passed: [ItemViewData] = []
     private var notpassed: [ItemViewData] = []
 
+    private(set) var isLoaded = false
+
     init() {}
 
     func getCourses(by indexPath: IndexPath) -> [ItemViewData] {
@@ -24,6 +26,22 @@ class UserCourses {
     func setData(passed: [ItemViewData], notpassed: [ItemViewData]) {
         self.passed = passed
         self.notpassed = notpassed
+
+        isLoaded = true
+    }
+}
+
+struct DetailCatalogViewInfo {
+    var detailView: DetailCatalogView
+    var indexPath: IndexPath
+
+    init(detailView: DetailCatalogView, indexPath: IndexPath) {
+        self.detailView = detailView
+        self.indexPath = indexPath
+    }
+
+    func provideCourses(with data: UserCourses) {
+        detailView.provide(items: data.getCourses(by: indexPath))
     }
 }
 
@@ -32,7 +50,8 @@ class CatalogPresenter {
     private let listType = CourseListType.enrolled
 
     weak var view: CatalogView?
-    private weak var currentDetailView: DetailCatalogView?
+
+    private var currentDetailViewInfo: DetailCatalogViewInfo?
 
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
@@ -45,10 +64,10 @@ class CatalogPresenter {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
-    }
 
-    func setViewWaitingForAData(detailView: DetailCatalogView) {
-        currentDetailView = detailView
+        NotificationCenter.default.addObserver(self, selector: #selector(self.userLoginNotification), name: .userLogin, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.userLogoutNotification), name: .userLogout, object: nil)
     }
 
     func refresh() {
@@ -57,18 +76,24 @@ class CatalogPresenter {
         refreshCourses(for: language)
     }
 
+    func setDetailViewToProvideData(_ detailView: DetailCatalogView, by indexPath: IndexPath) {
+        currentDetailViewInfo = DetailCatalogViewInfo(detailView: detailView, indexPath: indexPath)
+
+        currentDetailViewInfo?.detailView.showLoading(isVisible: !userCourses.isLoaded)
+        currentDetailViewInfo?.provideCourses(with: userCourses)
+    }
+
     private func refreshCourses(for language: ContentLanguage) {
         coursesAPI.cancelAllTasks()
         switch listType {
         case .enrolled:
             if !AuthInfo.shared.isAuthorized {
-                self.courses = []
-                self.view?.notifyNotAuthorized()
-                print("crack")
+                self.courses = nil
+                self.userCourses = UserCourses()
+                view?.showNoticeMessage()
                 return
             }
             requestEnrolled(updateProgresses: false, language: language)
-            view?.provide(userCourses: userCourses)
         default:
             fatalError()
         }
@@ -86,9 +111,11 @@ class CatalogPresenter {
             let notpassedCourses = courses.filter { $0.progress?.percentPassed != 1.0 }
             let passedViewData = strongSelf.buildViewData(from: passedCourses)
             let notpassedViewData = strongSelf.buildViewData(from: notpassedCourses)
+
             strongSelf.userCourses.setData(passed: passedViewData, notpassed: notpassedViewData)
-            strongSelf.currentDetailView?.updateDetailView()
-            print("updateData")
+
+            strongSelf.currentDetailViewInfo?.detailView.showLoading(isVisible: false)
+            strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
             }.catch {
                 [weak self]
                 _ in
@@ -118,4 +145,18 @@ class CatalogPresenter {
         }
     }
 
+    @objc private func userLoginNotification() {
+        refresh()
+    }
+
+    @objc private func userLogoutNotification() {
+        self.courses = nil
+        self.userCourses = UserCourses()
+        self.currentDetailViewInfo?.provideCourses(with: userCourses)
+        view?.showNoticeMessage()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

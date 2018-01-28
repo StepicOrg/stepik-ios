@@ -7687,10 +7687,10 @@
 			isa = PBXGroup;
 			children = (
 				9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */,
-				9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */,
 				9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */,
 				9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */,
 				1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */,
+				9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";

@@ -9,6 +9,7 @@
 import Foundation
 
 protocol AuthorizationView: class {
-  func show(alert: AuthorizationAlert)
-  func showProfile(for user: User)
+    func show(alert: AuthorizationAlert)
+    func showProfile(for user: User)
+    func showNoProfile()
 }

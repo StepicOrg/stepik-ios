@@ -85,6 +85,23 @@ class AuthInfo: NSObject {
                         self.setTokenValue(nil)
                     }
                 })
+                #else
+                NotificationCenter.default.post(name: .userLogout, object: nil)
+                UIThread.performUI {
+                    //Delete enrolled information
+                    TabsInfo.myCoursesIds = []
+                    let c = Course.getAllCourses(enrolled: true)
+                    for course in c {
+                        course.enrolled = false
+                    }
+
+                    Progress.deleteAllStoredProgresses()
+
+                    CoreDataHelper.instance.save()
+                    AuthInfo.shared.user = nil
+
+                    self.setTokenValue(nil)
+                }
                 #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")

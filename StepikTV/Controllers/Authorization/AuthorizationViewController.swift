@@ -10,69 +10,87 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
 
-  @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var stackView: UIStackView!
 
-  @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet var upperButton: StandardButton!
+    @IBOutlet var midButton: StandardButton!
+    @IBOutlet var lowerButton: StandardButton!
 
-  @IBOutlet var upperButton: StandardButton!
-  @IBOutlet var midButton: StandardButton!
-  @IBOutlet var lowerButton: StandardButton!
+    var nameLabel: UILabel = UILabel()
+    var exitButton: StandardButton = StandardButton()
+    var settingsButton: StandardButton = StandardButton()
 
-  var nameLabel: UILabel = UILabel()
-  var exitButton: StandardButton = StandardButton() {
-    didSet {
-      exitButton.titleLabel?.text = "Exit"
+    var presenter: AuthorizationPresenter?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.presenter = AuthorizationPresenter(view: self, authAPI: AuthAPI(), stepicsAPI: StepicsAPI())
     }
-  }
-  var settingsButton: StandardButton = StandardButton() {
-    didSet {
-      settingsButton.titleLabel?.text = "Settings"
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        exitButton.setTitle("Exit", for: .normal)
+        settingsButton.setTitle("Settings", for: .normal)
+
+        exitButton.addTarget(self, action: #selector(logoutAction(_:)), for: UIControlEvents.primaryActionTriggered)
+
+        presenter?.checkForCachedUser()
     }
-  }
 
-  var presenter: AuthorizationPresenter?
+    @IBAction func loginAction(_ sender: UIButton) {
+        presenter?.loginAction()
+    }
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    self.presenter = AuthorizationPresenter(view: self, authAPI: AuthAPI(), stepicsAPI: StepicsAPI())
-  }
+    @IBAction func registerAction(_ sender: UIButton) {
+        presenter?.registerAction()
+    }
 
-  @IBAction func loginAction(_ sender: UIButton) {
-    presenter?.loginAction()
-  }
+    @IBAction func remoteLoginAciton(_ sender: UIButton) {
+        presenter?.remoteLoginAction()
+    }
 
-  @IBAction func registerAction(_ sender: UIButton) {
-    presenter?.registerAction()
-  }
-
-  @IBAction func remoteLoginAciton(_ sender: UIButton) {
-    presenter?.remoteLoginAction()
-  }
+    func logoutAction(_ sender: UIButton) {
+        presenter?.logoutAction()
+    }
 }
 
 extension AuthorizationViewController: AuthorizationView {
-  func show(alert: AuthorizationAlert) {
-    alert.show(in: self)
-  }
 
-  func showProfile(for user: User) {
-    if let avatarUrl = URL(string: user.avatarURL) {
-      imageView.sd_setImage(with: avatarUrl, completed: nil)
+    func show(alert: AuthorizationAlert) {
+        alert.show(in: self)
     }
 
-    cleanStackView()
+    func showProfile(for user: User) {
+        if let avatarUrl = URL(string: user.avatarURL) {
+          imageView.sd_setImage(with: avatarUrl, completed: nil)
+        }
 
-    nameLabel.text = "\(user.firstName) \(user.lastName)"
+        cleanStackView()
 
-    stackView.addArrangedSubview(nameLabel)
-    stackView.addArrangedSubview(exitButton)
-    stackView.addArrangedSubview(settingsButton)
-  }
+        nameLabel.text = "\(user.firstName) \(user.lastName)"
 
-  func cleanStackView() {
-    for arrangedView in stackView.arrangedSubviews {
-      stackView.removeArrangedSubview(arrangedView)
-      arrangedView.removeFromSuperview()
+        exitButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
+
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(exitButton)
+        stackView.addArrangedSubview(settingsButton)
     }
-  }
+
+    func showNoProfile() {
+        cleanStackView()
+
+        stackView.addArrangedSubview(upperButton)
+        stackView.addArrangedSubview(midButton)
+        stackView.addArrangedSubview(lowerButton)
+    }
+
+    func cleanStackView() {
+        for arrangedView in stackView.arrangedSubviews {
+          stackView.removeArrangedSubview(arrangedView)
+          arrangedView.removeFromSuperview()
+        }
+    }
 }
