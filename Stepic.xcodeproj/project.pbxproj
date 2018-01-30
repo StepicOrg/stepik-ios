@@ -4584,6 +4584,10 @@
 		93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
 		93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */; };
 		93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
+		93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E92020B2000040BD1D /* TVLoadingView.swift */; };
+		93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */; };
+		93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */; };
+		93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F0202106750040BD1D /* MenuSplitView.swift */; };
 		93C9E302200F950500192091 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E301200F950500192091 /* CourseContentView.swift */; };
 		93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E303200F951500192091 /* CourseContentPresenter.swift */; };
 		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
@@ -5594,6 +5598,10 @@
 		93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
 		93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoView.swift; sourceTree = "<group>"; };
 		93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVUnavailableQuizViewController.swift; sourceTree = "<group>"; };
+		93C3C1E92020B2000040BD1D /* TVLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVLoadingView.swift; sourceTree = "<group>"; };
+		93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredView.swift; sourceTree = "<group>"; };
+		93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAlertView.swift; sourceTree = "<group>"; };
+		93C3C1F0202106750040BD1D /* MenuSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSplitView.swift; sourceTree = "<group>"; };
 		93C9E301200F950500192091 /* CourseContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentView.swift; sourceTree = "<group>"; };
 		93C9E303200F951500192091 /* CourseContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentPresenter.swift; sourceTree = "<group>"; };
 		93E5AAF120161ED300290B4E /* TVQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVQuizViewController.swift; sourceTree = "<group>"; };
@@ -7640,6 +7648,7 @@
 				93C9E300200F941600192091 /* CourseContent */,
 				933563BD20125AC00061FE2E /* LessonContent */,
 				1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */,
+				93C3C1F0202106750040BD1D /* MenuSplitView.swift */,
 				1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */,
 			);
 			path = Controllers;
@@ -7651,6 +7660,8 @@
 				1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */,
 				9322BE982018F13400D16638 /* FocusableView.swift */,
 				1B3BB0681FE6DE70002DDD9A /* IconButton.swift */,
+				93C3C1E92020B2000040BD1D /* TVLoadingView.swift */,
+				93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */,
 				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
 			);
 			path = Views;
@@ -7773,6 +7784,7 @@
 			children = (
 				93F4CF4E1FDF356100735A0E /* ImagesExtension.swift */,
 				9300843F2016717500DBFC0E /* BlurredViewController.swift */,
+				93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */,
 				93EF1F981FAD20240073B0D1 /* StandardButton.swift */,
 				93A6A4C32018CD5C004C0797 /* ExtensionUIView.swift */,
 				1B3BB0661FE6DE5E002DDD9A /* Views */,
@@ -12873,6 +12885,7 @@
 				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
 				93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */,
+				93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
 				1BB4ECAD1FA3DE46001CDE99 /* CourseReviewSummariesAPI.swift in Sources */,
 				9335E36B2008FF10001BDFA8 /* CatalogView.swift in Sources */,
@@ -12916,6 +12929,7 @@
 				1BB4ECA61FA3DE46001CDE99 /* LastStepsAPI.swift in Sources */,
 				1BB3D23A1FA3EB2D000B2FAA /* APIDefaults.swift in Sources */,
 				1BB3D2501FA3EFE9000B2FAA /* StringExtensions.swift in Sources */,
+				93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */,
 				1BB4ECE91FA3E664001CDE99 /* Comment.swift in Sources */,
 				1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */,
 				1BB4ECC61FA3DF43001CDE99 /* Notification+CoreDataProperties.swift in Sources */,
@@ -12978,6 +12992,7 @@
 				934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */,
 				1B3BB0A61FE6E145002DDD9A /* NarrowItemCell.swift in Sources */,
 				93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */,
+				93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */,
 				1BB4ECF41FA3E838001CDE99 /* StepicApplicationsInfo.swift in Sources */,
 				1BB4ECF21FA3E73F001CDE99 /* Sorter.swift in Sources */,
 				1BB4ECDB1FA3E285001CDE99 /* VideoURL.swift in Sources */,
@@ -13021,6 +13036,7 @@
 				1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */,
 				1BB4ECDD1FA3E2C1001CDE99 /* Meta.swift in Sources */,
 				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,
+				93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */,
 				1BB3D24A1FA3EC98000B2FAA /* SortingDataset.swift in Sources */,
 				1BB4ECF01FA3E6A7001CDE99 /* FillBlanksReply.swift in Sources */,
 				933563C120126BE30061FE2E /* LessonContentPresenter.swift in Sources */,

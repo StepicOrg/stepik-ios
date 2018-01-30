@@ -14,7 +14,10 @@ class CatalogMenuViewController: MenuTableViewController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.presenter = CatalogPresenter(view: self, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI())
+
+        let splitroot = splitViewController as! MenuSplitViewController
+
+        self.presenter = CatalogPresenter(splitview: splitroot, masterview: self, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI())
     }
 
     override func viewDidLoad() {
@@ -37,7 +40,8 @@ class CatalogMenuViewController: MenuTableViewController {
 
 extension CatalogMenuViewController: CatalogView {
 
-    func showNoticeMessage() {
-
+    func provide(count: Int, at indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = "\(count)"
+        tableView.reloadData()
     }
 }

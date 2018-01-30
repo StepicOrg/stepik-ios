@@ -6,8 +6,9 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import UIKit
+
+let LOADING_CONST: Double = 1.0
 
 class CourseInfoPresenter {
 
@@ -16,9 +17,20 @@ class CourseInfoPresenter {
     var course: Course? {
         didSet {
             guard let course = course else { return }
+            view?.showLoading(title: course.title)
+            let beginLoadTimestamp = Date().timeIntervalSince1970
+
             course.loadAllInstructors {
+                let endLoadTimestamp = Date().timeIntervalSince1970
+                let diff = LOADING_CONST - endLoadTimestamp + beginLoadTimestamp
+
                 self.instructors = course.instructors
                 self.view?.provide(sections: self.buildSections(with: course))
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + diff) {
+                    [weak self] in
+                    self?.view?.hideLoading()
+                }
             }
         }
     }

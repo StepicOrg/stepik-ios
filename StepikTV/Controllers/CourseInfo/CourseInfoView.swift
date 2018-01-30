@@ -12,4 +12,8 @@ protocol CourseInfoView: class {
 
     func provide(sections: [CourseInfoSection])
 
+    func showLoading(title: String)
+
+    func hideLoading()
+
 }

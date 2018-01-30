@@ -17,6 +17,13 @@ class UserCourses {
 
     init() {}
 
+    func getCountWithIndexPath() -> [IndexPath: Int] {
+        let aIndexPath = IndexPath(row: 0, section: 0)
+        let bIndexPath = IndexPath(row: 1, section: 0)
+
+        return [aIndexPath: getCourses(by: aIndexPath).count, bIndexPath: getCourses(by: bIndexPath).count]
+    }
+
     func getCourses(by indexPath: IndexPath) -> [ItemViewData] {
         if indexPath.row == 0 { return notpassed }
         if indexPath.row == 1 { return passed }
@@ -49,8 +56,8 @@ class CatalogPresenter {
 
     private let listType = CourseListType.enrolled
 
-    weak var view: CatalogView?
-
+    weak var splitview: MenuSplitView?
+    weak var masterview: CatalogView?
     private var currentDetailViewInfo: DetailCatalogViewInfo?
 
     private var coursesAPI: CoursesAPI
@@ -60,8 +67,12 @@ class CatalogPresenter {
     private var courses: [Course]?
     private var userCourses: UserCourses = UserCourses()
 
-    init(view: CatalogView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
-        self.view = view
+    private let didntLoggedAlertMessage = NSLocalizedString("Please, log in to see the user courses catalog", comment: "")
+    private let alertButtonTitle = NSLocalizedString("Profile", comment: "")
+
+    init(splitview: MenuSplitView, masterview: CatalogView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
+        self.splitview = splitview
+        self.masterview = masterview
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
 
@@ -90,9 +101,14 @@ class CatalogPresenter {
             if !AuthInfo.shared.isAuthorized {
                 self.courses = nil
                 self.userCourses = UserCourses()
-                view?.showNoticeMessage()
+                splitview?.showMessageOver(didntLoggedAlertMessage, buttonTitle: alertButtonTitle) {
+                    let view = self.splitview as! UIViewController
+
+                    view.tabBarController?.selectedIndex = 2
+                }
                 return
             }
+            splitview?.hideMessageOver()
             requestEnrolled(updateProgresses: false, language: language)
         default:
             fatalError()
@@ -114,8 +130,12 @@ class CatalogPresenter {
 
             strongSelf.userCourses.setData(passed: passedViewData, notpassed: notpassedViewData)
 
-            strongSelf.currentDetailViewInfo?.detailView.showLoading(isVisible: false)
+            strongSelf.userCourses.getCountWithIndexPath().forEach {
+                strongSelf.masterview?.provide(count: $0.value, at: $0.key)
+            }
+
             strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
+            strongSelf.currentDetailViewInfo?.detailView.showLoading(isVisible: false)
             }.catch {
                 [weak self]
                 _ in
@@ -127,7 +147,7 @@ class CatalogPresenter {
     }
 
     private func buildViewData(from courses: [Course]) -> [ItemViewData] {
-        guard let viewController = view as? UIViewController else { fatalError() }
+        guard let viewController = masterview as? UIViewController else { fatalError() }
         return courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
 
@@ -146,6 +166,8 @@ class CatalogPresenter {
     }
 
     @objc private func userLoginNotification() {
+        splitview?.hideMessageOver()
+
         refresh()
     }
 
@@ -153,7 +175,12 @@ class CatalogPresenter {
         self.courses = nil
         self.userCourses = UserCourses()
         self.currentDetailViewInfo?.provideCourses(with: userCourses)
-        view?.showNoticeMessage()
+
+        splitview?.showMessageOver(didntLoggedAlertMessage, buttonTitle: alertButtonTitle) {
+            let view = self.splitview as! UIViewController
+
+            view.tabBarController?.selectedIndex = 2
+        }
     }
 
     deinit {

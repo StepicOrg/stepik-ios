@@ -26,7 +26,9 @@ class TVUnavailableQuizViewController: TVQuizViewController {
         textLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
 
         containerView.addSubview(textLabel)
+        view.sizeToFit()
         textLabel.align(to: containerView)
+        view.sizeToFit()
     }
 
 }

@@ -20,14 +20,12 @@ class CourseContentPresenter {
             guard let course = course, let viewController = view as? UIViewController else { return }
 
             let action: () -> Void = {
-                let navigationController = ControllerHelper.instantiateViewController(identifier: "CourseInfoNavigation", storyboardName: "CourseInfo") as! UINavigationController
-
-                let courseInfoVC = navigationController.viewControllers.first as! CourseInfoCollectionViewController
+                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoPage", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
 
                 courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
                 courseInfoVC.presenter?.course = course
 
-                viewController.present(navigationController, animated: true, completion: {})
+                viewController.present(courseInfoVC, animated: true, completion: {})
             }
             let courseInfo = CourseViewData(title: course.title, hosts: "", action: action)
             view?.provide(courseInfo: courseInfo)

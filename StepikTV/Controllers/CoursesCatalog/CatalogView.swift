@@ -10,7 +10,7 @@ import Foundation
 
 protocol CatalogView: class {
 
-    func showNoticeMessage()
+    func provide(count: Int, at indexPath: IndexPath)
 }
 
 protocol DetailCatalogView: class {
@@ -20,5 +20,4 @@ protocol DetailCatalogView: class {
     func provide(items: [ItemViewData])
 
     func update()
-
 }

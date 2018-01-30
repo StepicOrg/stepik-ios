@@ -28,16 +28,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1340" height="960"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-ce-SLt">
-                                                <rect key="frame" x="0.0" y="0.0" width="1340" height="628"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1340" height="582"/>
                                                 <subviews>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bds-0n-v0N" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
-                                                        <rect key="frame" x="25" y="25" width="1290" height="46"/>
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bds-0n-v0N" customClass="TVFocusableText" customModule="StepikTV" customModuleProvider="target">
+                                                        <rect key="frame" x="50" y="25" width="1240" height="0.0"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCe-8A-RcV">
-                                                        <rect key="frame" x="0.0" y="146" width="1340" height="482"/>
+                                                        <rect key="frame" x="0.0" y="100" width="1340" height="482"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="482" placeholder="YES" id="OoF-bV-06i"/>
                                                         </constraints>
@@ -46,11 +46,11 @@
                                                 <constraints>
                                                     <constraint firstItem="QCe-8A-RcV" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" id="6Me-dL-3vd"/>
                                                     <constraint firstAttribute="bottom" secondItem="QCe-8A-RcV" secondAttribute="bottom" id="7sL-Fe-rMR"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bds-0n-v0N" secondAttribute="trailing" constant="25" id="SBX-80-xIs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bds-0n-v0N" secondAttribute="trailing" constant="50" id="SBX-80-xIs"/>
                                                     <constraint firstItem="bds-0n-v0N" firstAttribute="top" secondItem="jG1-ce-SLt" secondAttribute="top" constant="25" id="Xoh-N5-w6v"/>
                                                     <constraint firstItem="QCe-8A-RcV" firstAttribute="top" secondItem="bds-0n-v0N" secondAttribute="bottom" constant="75" id="m0h-C7-dvc"/>
                                                     <constraint firstAttribute="trailing" secondItem="QCe-8A-RcV" secondAttribute="trailing" id="mRd-va-bW8"/>
-                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" constant="25" id="npH-1u-XDb"/>
+                                                    <constraint firstItem="bds-0n-v0N" firstAttribute="leading" secondItem="jG1-ce-SLt" secondAttribute="leading" constant="50" id="npH-1u-XDb"/>
                                                 </constraints>
                                             </view>
                                         </subviews>

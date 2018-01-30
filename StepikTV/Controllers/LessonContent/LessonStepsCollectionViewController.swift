@@ -10,6 +10,8 @@ import UIKit
 
 class LessonStepsCollectionViewController: UICollectionViewController {
 
+    fileprivate var loadingView: TVLoadingView?
+
     var presenter: LessonContentPresenter?
 
     var steps: [StepViewData] = []
@@ -58,6 +60,19 @@ extension LessonStepsCollectionViewController: UICollectionViewDelegateFlowLayou
 }
 
 extension LessonStepsCollectionViewController: LessonContentView {
+
+    func showLoading() {
+        loadingView = TVLoadingView(frame: self.view.bounds, color: .darkGray)
+        loadingView!.setup()
+
+        view.addSubview(loadingView!)
+    }
+
+    func hideLoading() {
+        loadingView?.purge()
+
+        loadingView?.removeFromSuperview()
+    }
 
     func provide(steps: [StepViewData]) {
         self.steps = steps

@@ -10,5 +10,9 @@ import Foundation
 
 protocol LessonContentView: class {
 
+    func showLoading()
+
+    func hideLoading()
+
     func provide(steps: [StepViewData])
 }

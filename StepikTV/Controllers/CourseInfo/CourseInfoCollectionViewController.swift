@@ -10,6 +10,8 @@ import UIKit
 
 class CourseInfoCollectionViewController: UICollectionViewController {
 
+    fileprivate var loadingView: TVLoadingView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,5 +66,18 @@ extension CourseInfoCollectionViewController: CourseInfoView {
     func provide(sections: [CourseInfoSection]) {
         self.sections = sections
         collectionView?.reloadData()
+    }
+
+    func showLoading(title: String) {
+        loadingView = TVLoadingView(frame: self.view.frame)
+        loadingView!.setup(title: title)
+
+        view.addSubview(loadingView!)
+    }
+
+    func hideLoading() {
+        loadingView?.purge()
+
+        loadingView?.removeFromSuperview()
     }
 }

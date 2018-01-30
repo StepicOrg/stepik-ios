@@ -29,7 +29,6 @@
                         <constraint firstAttribute="height" constant="86" id="ewK-vW-Dka"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" title="Button"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4y4-Ns-jtG">
                     <rect key="frame" x="0.0" y="0.0" width="900" height="103"/>

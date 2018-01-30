@@ -49,6 +49,7 @@ extension RectangularCollectionViewController: DetailCatalogView {
     }
 
     func showLoading(isVisible: Bool) {
+        print(self.view.bounds)
     }
 
     func update() {

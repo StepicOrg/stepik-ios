@@ -47,7 +47,6 @@ class StandardButton: UIButton {
     }
 
     var defaultStateTitleColor: UIColor { return UIColor.black.withAlphaComponent(0.2) }
-
     var focusStateTitleColor: UIColor { return UIColor.white }
 
     private func initStyle() {
@@ -69,7 +68,8 @@ class StandardButton: UIButton {
     }
 
     required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
+        initStyle()
     }
 
     // Events to look for a Highlighted state

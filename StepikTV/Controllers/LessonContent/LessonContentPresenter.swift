@@ -27,9 +27,15 @@ class LessonContentPresenter {
     private func loadSteps() {
         guard let lesson = lesson, let viewController = view as? UIViewController else { return }
 
+        view?.showLoading()
+        let beginLoadTimestamp = Date().timeIntervalSince1970
+
         lesson.loadSteps(completion: {
             [weak self] in
             guard let strongSelf = self else { return }
+
+            let endLoadTimestamp = Date().timeIntervalSince1970
+            let diff = LOADING_CONST - endLoadTimestamp + beginLoadTimestamp
 
             strongSelf.steps = lesson.steps
             strongSelf.stepsViewData = strongSelf.steps.map {
@@ -42,6 +48,11 @@ class LessonContentPresenter {
                 return s
             }
             strongSelf.view?.provide(steps: strongSelf.stepsViewData)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + diff) {
+                [weak self] in
+                self?.view?.hideLoading()
+            }
         }, error: { _ in }, onlyLesson: true)
     }
 }
