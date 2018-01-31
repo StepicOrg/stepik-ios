@@ -20,6 +20,10 @@ class CourseContentMenuViewController: MenuTableViewController {
 
     var additionalCellIdentifier: String { return MenuHeaderCourseTableViewCell.reuseIdentifier }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -36,9 +40,9 @@ class CourseContentMenuViewController: MenuTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return MenuHeaderCourseTableViewCell.size
+            return MenuHeaderCourseTableViewCell.getHeightForCell(with: courseInfo, width: tableView.bounds.width)
         default:
-            return MenuSectionTableViewCell.size
+            return MenuSectionTableViewCell.getHeightForCell(with: indexPath.row + 1, sections[indexPath.row].title, width: tableView.bounds.width)
         }
     }
 
@@ -70,6 +74,7 @@ class CourseContentMenuViewController: MenuTableViewController {
 
         vc.paragraphIndex = indexPath.row + 1
         vc.section = sections[indexPath.row]
+        vc.width = UIScreen.main.bounds.width - self.view.bounds.width
 
         presenter?.loadUnitsForSection(vc, index: indexPath.row)
     }

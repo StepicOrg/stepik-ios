@@ -16,6 +16,8 @@ protocol MenuCourseContentView: class {
 
 protocol DetailCourseContentView: class {
 
-    func updateLessonsList()
+    func update()
+
+    func showLoading(isVisible: Bool)
 
 }

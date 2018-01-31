@@ -13,6 +13,10 @@ class MenuSectionTableViewCell: UITableViewCell {
     static var reuseIdentifier: String { return "MenuSectionTableViewCell" }
     static var size: CGFloat { get { return CGFloat(66) } }
 
+    static func getHeightForCell(with index: Int, _ title: String, width: CGFloat) -> CGFloat {
+        return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 200, alignment: .left) + 20
+    }
+
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var progressIcon: UIImageView!
 
@@ -32,14 +36,16 @@ class MenuHeaderCourseTableViewCell: UITableViewCell {
     static var reuseIdentifier: String { return "MenuHeaderCourseTableViewCell" }
     static var size: CGFloat { return CGFloat(220) }
 
+    static func getHeightForCell(with viewData: CourseViewData?, width: CGFloat) -> CGFloat {
+        return max(80.0, UILabel.heightForLabelWithText(viewData?.title ?? "", lines: 0, font: UIFont.systemFont(ofSize: 57, weight: UIFontWeightMedium), width: width - 150, alignment: .left) + 40)
+    }
+
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var hostLabel: UILabel!
 
     var pressAction: (() -> Void)?
 
     func setup(with viewData: CourseViewData) {
         titleLabel.text = viewData.title
-        hostLabel.text = viewData.hosts
 
         self.pressAction = viewData.action
     }

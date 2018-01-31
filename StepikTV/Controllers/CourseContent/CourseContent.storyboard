@@ -27,31 +27,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="499" height="220"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-0Z-LLt">
-                                            <rect key="frame" x="28" y="43" width="441" height="69"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Course name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-0Z-LLt">
+                                            <rect key="frame" x="28" y="28" width="441" height="174"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Host name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-GS-OdD">
-                                            <rect key="frame" x="28" y="112" width="461" height="85"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="tgQ-0Z-LLt" firstAttribute="leading" secondItem="mx0-Nh-8CO" secondAttribute="leadingMargin" constant="20" id="4Bj-JU-BQp"/>
-                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="leading" secondItem="tgQ-0Z-LLt" secondAttribute="leading" id="HgH-LV-lvj"/>
-                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mx0-Nh-8CO" secondAttribute="bottomMargin" id="P1h-00-42U"/>
-                                        <constraint firstItem="Gda-GS-OdD" firstAttribute="top" secondItem="tgQ-0Z-LLt" secondAttribute="bottom" id="Vb5-K6-ezI"/>
-                                        <constraint firstAttribute="trailing" secondItem="Gda-GS-OdD" secondAttribute="trailing" constant="10" id="dCF-q0-fLC"/>
-                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="top" secondItem="mx0-Nh-8CO" secondAttribute="topMargin" constant="20" id="eK4-Ql-xwM"/>
+                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="bottom" secondItem="mx0-Nh-8CO" secondAttribute="bottomMargin" constant="5" id="4LM-X6-zvD"/>
+                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="top" secondItem="mx0-Nh-8CO" secondAttribute="topMargin" constant="5" id="eK4-Ql-xwM"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="tgQ-0Z-LLt" secondAttribute="trailing" constant="10" id="jtm-N6-VeD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="hostLabel" destination="Gda-GS-OdD" id="UFC-dC-QsU"/>
                                     <outlet property="titleLabel" destination="tgQ-0Z-LLt" id="xQz-ZT-qdw"/>
                                     <segue destination="IjS-aO-18J" kind="showDetail" identifier="ShowDetailSegue" id="HNT-Ni-efP"/>
                                 </connections>
@@ -63,7 +53,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragraph name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b18-0l-Juh">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Paragraph name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b18-0l-Juh">
                                             <rect key="frame" x="20" y="0.0" width="403" height="66"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                             <nil key="textColor"/>
@@ -183,13 +173,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragraph title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tA-3w-7gE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Paragraph title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tA-3w-7gE">
                                 <rect key="frame" x="46" y="124" width="952" height="69"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="N / M" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0x-R4-NJa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="N / M" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0x-R4-NJa">
                                 <rect key="frame" x="1058" y="124" width="133" height="69"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
                                 <nil key="textColor"/>

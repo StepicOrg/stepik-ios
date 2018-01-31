@@ -33,11 +33,9 @@ class CourseContentPresenter {
     }
 
     private var sections: [Section] = []
-
-    private var sectionsViewData: [SectionViewData]? {
+    private var sectionsViewData: [SectionViewData] = [] {
         didSet {
-            guard let data = sectionsViewData else { return }
-            view?.provide(sections: data)
+            view?.provide(sections: sectionsViewData)
         }
     }
 
@@ -45,14 +43,26 @@ class CourseContentPresenter {
         self.view = view
     }
 
-    func loadUnitsForSection(_ vc: DetailCourseContentView, index: Int) {
-        guard let sectionsVD = sectionsViewData, let viewController = view as? UIViewController, sections.count > index else { fatalError() }
-        let section = sections[index]
+    func loadUnitsForSection(_ detailView: DetailCourseContentView, index: Int) {
+        guard sectionsViewData[index].loadingStatus == .none else {
+            detailView.showLoading(isVisible: (sectionsViewData[index].loadingStatus != .loaded))
+            return
+        }
 
-        section.loadUnits(success: {
-            section.loadLessonsForUnits(units: section.units, completion: {
-                sectionsVD[index].setData(lessons: section.units.map { $0.lesson! }, for: vc as? UIViewController)
-                vc.updateLessonsList()
+        if index >= sections.count { fatalError() }
+
+        detailView.showLoading(isVisible: true)
+        sections[index].loadUnits(success: {
+            [weak self] in
+            guard let strongSelf = self else { return }
+
+            strongSelf.sectionsViewData[index].loadingStatus = .loading
+            strongSelf.sections[index].loadLessonsForUnits(units: strongSelf.sections[index].units, completion: {
+
+                strongSelf.sectionsViewData[index].setData(lessons: strongSelf.sections[index].units.map { $0.lesson! }, for: detailView as? UIViewController)
+
+                detailView.showLoading(isVisible: false)
+                detailView.update()
             })
         }, error: { print("error") })
     }
@@ -76,9 +86,15 @@ class CourseContentPresenter {
     }
 }
 
+enum LoadingStatus {
+    case none, loading, loaded
+}
+
 class SectionViewData {
     let title: String
     let progress: Progress
+
+    var loadingStatus: LoadingStatus = .none
 
     var lessons: [LessonViewData] = []
 
@@ -111,6 +127,7 @@ class SectionViewData {
                 viewController?.present(navigationController, animated: true, completion: {})
             }
         }
+        loadingStatus = .loaded
     }
 }
 
