@@ -108,7 +108,7 @@ class CatalogPresenter {
                 }
                 return
             }
-            splitview?.hideMessageOver()
+            //splitview?.hideMessageOver()
             requestEnrolled(updateProgresses: false, language: language)
         default:
             fatalError()
@@ -134,8 +134,8 @@ class CatalogPresenter {
                 strongSelf.masterview?.provide(count: $0.value, at: $0.key)
             }
 
-            strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
             strongSelf.currentDetailViewInfo?.detailView.showLoading(isVisible: false)
+            strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
             }.catch {
                 [weak self]
                 _ in
@@ -167,7 +167,6 @@ class CatalogPresenter {
 
     @objc private func userLoginNotification() {
         splitview?.hideMessageOver()
-
         refresh()
     }
 

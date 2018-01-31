@@ -22,20 +22,23 @@ class LessonContentPresenter {
 
     init(view: LessonContentView) {
         self.view = view
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stepUpdateNotification(_:)), name: .stepUpdate, object: nil)
+    }
+
+    @objc private func stepUpdateNotification(_ notification: NSNotification) {
+        if let stepId = notification.userInfo?["id"] as? Int {
+            view?.update(at: stepId - 1)
+        }
     }
 
     private func loadSteps() {
         guard let lesson = lesson, let viewController = view as? UIViewController else { return }
 
         view?.showLoading()
-        let beginLoadTimestamp = Date().timeIntervalSince1970
-
         lesson.loadSteps(completion: {
             [weak self] in
             guard let strongSelf = self else { return }
-
-            let endLoadTimestamp = Date().timeIntervalSince1970
-            let diff = LOADING_CONST - endLoadTimestamp + beginLoadTimestamp
 
             strongSelf.steps = lesson.steps
             strongSelf.stepsViewData = strongSelf.steps.map {
@@ -47,12 +50,8 @@ class LessonContentPresenter {
                     }
                 return s
             }
+            strongSelf.view?.hideLoading()
             strongSelf.view?.provide(steps: strongSelf.stepsViewData)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + diff) {
-                [weak self] in
-                self?.view?.hideLoading()
-            }
         }, error: { _ in }, onlyLesson: true)
     }
 }
@@ -70,7 +69,7 @@ struct StepViewData {
     let step: Step
     let stepType: StepType
     let block: Block
-    let isPassed: Bool?
+    var isPassed: Bool?
     var action: (() -> Void)?
 
     init(with step: Step) {

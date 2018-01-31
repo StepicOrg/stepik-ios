@@ -15,4 +15,6 @@ protocol LessonContentView: class {
     func hideLoading()
 
     func provide(steps: [StepViewData])
+
+    func update(at index: Int)
 }

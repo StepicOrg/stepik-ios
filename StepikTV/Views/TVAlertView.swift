@@ -56,6 +56,7 @@ class TVAlertView: BlurredView {
 
     private func addSubviews() {
         actionButton = StandardButton()
+        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 70.0, bottom: 0, right: 70.0)
 
         titleLabel = UILabel(frame: .zero)
         titleLabel.font = UIFont.systemFont(ofSize: 38.0, weight: UIFontWeightMedium)

@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension NSNotification.Name {
+    static let stepUpdate = NSNotification.Name("stepUpdate")
+}
+
 class StepViewController: BlurredViewController {
 
     @IBOutlet weak var contentView: UIView!
@@ -23,6 +27,8 @@ class StepViewController: BlurredViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     var stepViewData: StepViewData!
+
+    private var hasQuiz: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,20 @@ class StepViewController: BlurredViewController {
 
         handleQuizType()
         contentView.setNeedsLayout()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if hasQuiz {
+            NotificationCenter.default.post(name: .stepUpdate, object: nil, userInfo: ["id": stepViewData.step.position])
+
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.stepViewData.step.progress?.isPassed = true
+                CoreDataHelper.instance.save()
+            }
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -74,6 +94,7 @@ class StepViewController: BlurredViewController {
 
     private func handleQuizType() {
         guard let quizVC = stepViewData.quizViewController else {
+            hasQuiz = true
             adaptStepText()
             scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
             return

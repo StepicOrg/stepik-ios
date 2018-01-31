@@ -78,4 +78,12 @@ extension LessonStepsCollectionViewController: LessonContentView {
         self.steps = steps
         self.collectionView?.reloadData()
     }
+
+    func update(at index: Int) {
+        guard index < steps.count else { print("index > steps.count"); return }
+        steps[index].isPassed = true
+
+        let indexPath = IndexPath(item: 0, section: index)
+        self.collectionView?.reloadItems(at: [indexPath])
+    }
 }

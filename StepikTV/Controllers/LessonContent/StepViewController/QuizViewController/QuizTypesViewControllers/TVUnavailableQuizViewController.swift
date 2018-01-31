@@ -27,6 +27,7 @@ class TVUnavailableQuizViewController: TVQuizViewController {
 
         containerView.addSubview(textLabel)
         view.sizeToFit()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.align(to: containerView)
         view.sizeToFit()
     }

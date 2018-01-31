@@ -102,6 +102,8 @@ class QuizPresenter {
                 if !step.hasReview {
                     #if os(iOS)
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
+                    #else
+                    NotificationCenter.default.post(name: .stepUpdate, object: nil, userInfo: ["id": step.position])
                     #endif
                     DispatchQueue.main.async {
                         [weak self] in

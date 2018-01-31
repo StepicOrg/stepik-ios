@@ -10,6 +10,11 @@ import UIKit
 
 class RectangularCollectionViewController: UICollectionViewController {
 
+    fileprivate var loadingView: TVLoadingView?
+
+    // Set for correcting show loading
+    var width: CGFloat?
+
     var sectionCourses: [ItemViewData] = [] {
         didSet { collectionView?.reloadData() }
     }
@@ -49,7 +54,25 @@ extension RectangularCollectionViewController: DetailCatalogView {
     }
 
     func showLoading(isVisible: Bool) {
-        print(self.view.bounds)
+
+        guard isVisible else {
+            loadingView?.purge()
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+            return
+        }
+
+        guard let width = width else { return }
+        let rect = CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height)
+
+        guard let _ = loadingView else {
+
+            loadingView = TVLoadingView(frame: rect, color: .gray)
+            loadingView!.setup()
+
+            self.view.addSubview(loadingView!)
+            return
+        }
     }
 
     func update() {

@@ -13,7 +13,6 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
     var presenter: QuizPresenter?
 
     var state = QuizState.nothing
-
     var step: Step!
 
     weak var delegate: QuizControllerDelegate? {
@@ -25,6 +24,8 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
+
+    fileprivate var loadingView: TVLoadingView?
 
     fileprivate let submitTitle: String = NSLocalizedString("Submit", comment: "")
     fileprivate let tryAgainTitle: String = NSLocalizedString("Try Again", comment: "")
@@ -131,7 +132,7 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
                 self.sendButton.setTitle(title + " (\(submissionsLeftLocalizable(count: count)))", for: .normal)
                 self.sendButton.isEnabled = true
             } else {
-                self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
+                self.sendButton.setTitle(NSLocalizedString("No Submissions Left", comment: ""), for: .normal)
                 disableSendButton()
             }
         } else {
@@ -165,7 +166,23 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
     }
 
     func showLoading(visible: Bool) {
-        print("loading")
+
+        guard visible else {
+            loadingView?.purge()
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+            return
+        }
+
+        guard let _ = loadingView else {
+
+            loadingView = TVLoadingView(frame: self.view.bounds, color: .white)
+            loadingView!.setup()
+            self.view.addSubview(loadingView!)
+            loadingView!.translatesAutoresizingMaskIntoConstraints = false
+            loadingView!.align(to: self.view)
+            return
+        }
     }
 
     func showConnectionError() {
