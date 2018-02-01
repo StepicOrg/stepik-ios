@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MajorItemCell: UICollectionViewCell {
+class MajorItemCell: FocusableCustomCollectionViewCell {
     static var nibName: String { return "MajorItemCell" }
     static var reuseIdentifier: String { return "MajorItemCell" }
     static var size: CGSize { return CGSize(width: 860.0, height: 390.0) }
@@ -22,8 +22,8 @@ class MajorItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        imageView.adjustsImageWhenAncestorFocused = true
-        imageView.clipsToBounds = false
+        //imageView.adjustsImageWhenAncestorFocused = true
+        //imageView.clipsToBounds = false
     }
 
     func setup(with item: ItemViewData) {
@@ -34,7 +34,7 @@ class MajorItemCell: UICollectionViewCell {
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
             let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
             self.imageView.image = UIImage(data: data!)
-        });
+        })
     }
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
