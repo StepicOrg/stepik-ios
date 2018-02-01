@@ -4588,6 +4588,7 @@
 		93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */; };
 		93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */; };
 		93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F0202106750040BD1D /* MenuSplitView.swift */; };
+		93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */; };
 		93C9E302200F950500192091 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E301200F950500192091 /* CourseContentView.swift */; };
 		93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E303200F951500192091 /* CourseContentPresenter.swift */; };
 		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
@@ -5602,6 +5603,7 @@
 		93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredView.swift; sourceTree = "<group>"; };
 		93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAlertView.swift; sourceTree = "<group>"; };
 		93C3C1F0202106750040BD1D /* MenuSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSplitView.swift; sourceTree = "<group>"; };
+		93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPlayerViewController.swift; sourceTree = "<group>"; };
 		93C9E301200F950500192091 /* CourseContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentView.swift; sourceTree = "<group>"; };
 		93C9E303200F951500192091 /* CourseContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentPresenter.swift; sourceTree = "<group>"; };
 		93E5AAF120161ED300290B4E /* TVQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVQuizViewController.swift; sourceTree = "<group>"; };
@@ -7660,6 +7662,7 @@
 				1B3BB06E1FE6DE71002DDD9A /* FocusableCustomView.swift */,
 				9322BE982018F13400D16638 /* FocusableView.swift */,
 				1B3BB0681FE6DE70002DDD9A /* IconButton.swift */,
+				93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */,
 				93C3C1E92020B2000040BD1D /* TVLoadingView.swift */,
 				93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */,
 				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
@@ -12871,6 +12874,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				930084402016717500DBFC0E /* BlurredViewController.swift in Sources */,
+				93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */,
 				1BB4ECD51FA3DF43001CDE99 /* Video+CoreDataProperties.swift in Sources */,
 				93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */,
 				1BB4ECBF1FA3DEC3001CDE99 /* CodeSample+CoreDataProperties.swift in Sources */,
