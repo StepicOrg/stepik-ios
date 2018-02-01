@@ -124,53 +124,74 @@ class TVFocusableText: UILabel {
 class TVTextPresentationAlertController: BlurredViewController {
 
     private var contentLabel: UILabel!
+    private var scrollView: UIScrollView!
 
-    let contentWidth: CGFloat = 900
+    private var scrollViewTopInset: NSLayoutConstraint!
+    private var scrollViewBottomInset: NSLayoutConstraint!
 
-    func setText(_ text: String) {
-        contentLabel = initMainLabel(with: text)
+    private let scrollViewDefaultInsetsValue: CGFloat = 30.0
+
+    private var text: String?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
+
+        contentLabel = UILabel(frame: CGRect.zero)
+
+        contentLabel.text = text
+        contentLabel.textAlignment = .center
+        contentLabel.textColor = UIColor.white
+        contentLabel.numberOfLines = 0
+        contentLabel.font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightRegular)
 
         arrangeViews()
+        view.layoutIfNeeded()
     }
 
-    private func initMainLabel(with text: String) -> UILabel {
-        let label = UILabel(frame: CGRect.zero)
+    func setText(_ text: String) {
+        self.text = text
 
-        label.text = text
-        label.textAlignment = .center
-        label.textColor = UIColor.white
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightRegular)
-
-        return label
+        view?.layoutIfNeeded()
     }
 
     private func arrangeViews() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(contentLabel)
 
-        contentLabel.widthAnchor.constraint(equalToConstant: contentWidth).isActive = true
-        contentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        contentLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentLabel)
+
+        scrollView.align(to: view, top: 60.0, leading: 210.0, bottom: -60.0, trailing: -210.0)
+
+        contentLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+
+        scrollViewTopInset = contentLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 60.0)
+        scrollViewBottomInset = contentLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -60.0)
+
+        scrollViewTopInset.isActive = true
+        scrollViewBottomInset.isActive = true
+
+        contentLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
 
-    /*
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        print("Alert")
-        super.pressesBegan(presses, with: event)
-    }*/
+    override func viewDidLayoutSubviews() {
 
-    /*
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard presses.first!.type == UIPressType.menu else {
-            super.pressesBegan(presses, with: event)
-            return
+        print("\(contentLabel.bounds.height) \(scrollView.bounds.height)")
+
+        if contentLabel.bounds.height <= scrollView.bounds.height {
+            let insetValue = (scrollView.bounds.height - contentLabel.bounds.height) / 2
+            scrollViewTopInset.constant = insetValue
+            scrollViewBottomInset.constant = -insetValue
+
+            //contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+        } else {
+            scrollViewTopInset.constant = scrollViewDefaultInsetsValue
+            scrollViewBottomInset.constant = -scrollViewDefaultInsetsValue
         }
-        print("Alert")
-        leaveAlert(self)
     }
-
-    @objc func leaveAlert(_: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    } */
 }

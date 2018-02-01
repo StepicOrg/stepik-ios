@@ -22,9 +22,10 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
 
         let hostsHeight = CGFloat(46.0)
 
-        let contentHeight = min(250.0, max(35.0, UILabel.heightForLabelWithText(descr, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 1000, alignment: .left)))
+        var contentHeight = UILabel.heightForLabelWithText(descr, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 1000, alignment: .left)
+            contentHeight = contentHeight > 350.0 ? 350.0 : contentHeight
 
-        return (titleHeight + hostsHeight + contentHeight + 470.0)
+        return (titleHeight + hostsHeight + contentHeight + 300.0)
     }
 
     @IBOutlet var title: UILabel!
