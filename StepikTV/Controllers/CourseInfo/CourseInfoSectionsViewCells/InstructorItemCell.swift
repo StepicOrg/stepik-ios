@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InstructorItemCell: UICollectionViewCell {
+class InstructorItemCell: UICollectionViewCell, FocusAnimatable {
 
     static var nibName: String { return "InstructorItemCell" }
     static var reuseIdentifier: String { return "InstructorItemCell" }
@@ -34,79 +34,39 @@ class InstructorItemCell: UICollectionViewCell {
 
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
     }
-
-    var changeToDefault: () -> Void {
-        return {
-            self.transform = CGAffineTransform.identity
-            self.layer.shadowOpacity = 0.0
-            self.titleLabel.textColor = UIColor.black
-        }
+    
+    func changeToDefault() {
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOpacity = 0.0
+        self.titleLabel.textColor = UIColor.black
     }
 
-    var changeToFocused: () -> Void {
-        return {
-            self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            self.layer.shadowOffset = CGSize(width: 0, height: 10)
-            self.layer.shadowRadius = 25
-            self.layer.shadowOpacity = 0.2
-            self.layer.shadowPath = UIBezierPath(roundedRect: self.imageView.bounds, cornerRadius: self.imageView.bounds.height / 2).cgPath
+    func changeToFocused() {
+        self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        self.layer.shadowOffset = CGSize(width: 0, height: 10)
+        self.layer.shadowRadius = 25
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.imageView.bounds, cornerRadius: self.imageView.bounds.height / 2).cgPath
 
-            self.titleLabel.textColor = UIColor.white
-        }
+        self.titleLabel.textColor = UIColor.white
     }
 
-    var changeToHighlighted: () -> Void {
-        return {
-            self.transform = CGAffineTransform.identity
-            self.layer.shadowOffset = CGSize(width: 0, height: 5)
-            self.layer.shadowOpacity = 0.15
-        }
+    func changeToHighlighted() {
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+        self.layer.shadowOpacity = 0.15
     }
 
     // Events to look for a Highlighted state
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard presses.first!.type != UIPressType.menu else {
-            super.pressesBegan(presses, with: event)
-            return
-        }
-
-        UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
         super.pressesBegan(presses, with: event)
+        guard presses.first!.type != UIPressType.menu else { return }
 
         pressAction?()
     }
-
-    override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
-        super.pressesCancelled(presses, with: event)
-    }
-
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
-        super.pressesEnded(presses, with: event)
-    }
-
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
-        // Mimik system focus/unfocus animation besides backgroundColor and title font
-
-        if context.nextFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToFocused)
-            }
-            coordinator.addCoordinatedFocusingAnimations(animation, completion: nil)
-
-        } else if context.previouslyFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToDefault)
-            }
-            coordinator.addCoordinatedUnfocusingAnimations( animation, completion: nil)
-        }
+        self.updateFocus(in: context, with: coordinator)
     }
 
 }

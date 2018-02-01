@@ -8,42 +8,37 @@
 
 import UIKit
 
-class StandardButton: UIButton {
+class StandardButton: UIButton, FocusAnimatable {
 
-    var changeToDefault: () -> Void {
-        return {
-            let font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium)
-            let color = UIColor.clear
-
-            self.transform = CGAffineTransform.identity
-            self.layer.shadowOpacity = 0.0
-            self.backgroundColor = color
-            self.titleLabel?.font = font
-        }
+    
+    func changeToDefault() {
+        let font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium)
+        let color = UIColor.clear
+        
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOpacity = 0.0
+        self.backgroundColor = color
+        self.titleLabel?.font = font
     }
-
-    var changeToFocused: () -> Void {
-        return {
-            let font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightSemibold)
-            let color = UIColor(red:0.50, green:0.79, blue:0.45, alpha:1.00)
-            let scale = CGFloat(1.09)
-
-            self.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.layer.masksToBounds = false
-            self.layer.shadowOffset = CGSize(width: 0, height: 10)
-            self.layer.shadowRadius = 15
-            self.layer.shadowOpacity = 0.3
-            self.backgroundColor = color
-            self.titleLabel?.font = font
-        }
+    
+    func changeToFocused() {
+        let font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightSemibold)
+        let color = UIColor(red:0.50, green:0.79, blue:0.45, alpha:1.00)
+        let scale = CGFloat(1.09)
+        
+        self.transform = CGAffineTransform(scaleX: scale, y: scale)
+        self.layer.masksToBounds = false
+        self.layer.shadowOffset = CGSize(width: 0, height: 10)
+        self.layer.shadowRadius = 15
+        self.layer.shadowOpacity = 0.3
+        self.backgroundColor = color
+        self.titleLabel?.font = font
     }
-
-    var changeToHighlighted: () -> Void {
-        return {
-            self.transform = CGAffineTransform.identity
-            self.layer.shadowOffset = CGSize(width: 0, height: 5)
-            self.layer.shadowOpacity = 0.15
-        }
+    
+    func changeToHighlighted() {
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+        self.layer.shadowOpacity = 0.15
     }
 
     var defaultStateTitleColor: UIColor { return UIColor.black.withAlphaComponent(0.2) }
@@ -72,42 +67,7 @@ class StandardButton: UIButton {
         initStyle()
     }
 
-    // Events to look for a Highlighted state
-
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
-        super.pressesBegan(presses, with: event)
-    }
-
-    override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
-        super.pressesCancelled(presses, with: event)
-    }
-
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
-        super.pressesEnded(presses, with: event)
-    }
-
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
-        // Mimik system focus/unfocus animation besides backgroundColor and title font
-
-        if context.nextFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToFocused)
-            }
-            coordinator.addCoordinatedFocusingAnimations(animation, completion: nil)
-
-        } else if context.previouslyFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToDefault)
-            }
-            coordinator.addCoordinatedUnfocusingAnimations( animation, completion: nil)
-        }
+        self.updateFocus(in: context, with: coordinator)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegularItemCell: UICollectionViewCell {
+class RegularItemCell: FocusableCustomCollectionViewCell {
     static var nibName: String { return "RegularItemCell" }
     static var reuseIdentifier: String { return "RegularItemCell" }
     static var size: CGSize { return CGSize(width: 548.0, height: 308.0) }
@@ -19,8 +19,10 @@ class RegularItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        imageView.adjustsImageWhenAncestorFocused = true
-        imageView.clipsToBounds = false
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = imageView.bounds;
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.cgColor];
+        imageView.layer.addSublayer(gradientLayer);
     }
 
     func setup(with item: ItemViewData) {

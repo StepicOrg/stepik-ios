@@ -31,7 +31,7 @@ protocol CheckStatusDelegate: class {
     func statusWillChange(_ cell: TVChoiceQuizTableViewCell, to: CheckStatus)
 }
 
-class TVChoiceQuizTableViewCell: UITableViewCell {
+class TVChoiceQuizTableViewCell: UITableViewCell, FocusAnimatable {
 
     static var nibName: String { return "TVChoiceQuizTableViewCell" }
     static var reuseIdentifier: String { return "TVChoiceQuizTableViewCell" }
@@ -81,71 +81,27 @@ class TVChoiceQuizTableViewCell: UITableViewCell {
         checkBox.setRoundedCorners(cornerRadius: checkBox.bounds.height / 2)
     }
 
-    var changeToDefault: () -> Void {
-        return { self.transform = CGAffineTransform.identity }
+    func changeToDefault() {
+        self.transform = CGAffineTransform.identity
     }
 
-    var changeToFocused: () -> Void {
-        return { self.transform = CGAffineTransform(scaleX: 1.02, y: 1.02) }
+    func changeToFocused() {
+        self.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
     }
 
-    var changeToHighlighted: () -> Void {
-        return { self.transform = CGAffineTransform.identity }
+    func changeToHighlighted() {
+        self.transform = CGAffineTransform.identity
     }
 
     // Events to look for a Highlighted state
-
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard presses.first!.type != UIPressType.menu else {
-            super.pressesBegan(presses, with: event)
-            return
-        }
-
-        UIView.animate(withDuration: 0.1, animations: self.changeToHighlighted )
-        super.pressesBegan(presses, with: event)
-    }
-
-    override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard presses.first!.type != UIPressType.menu else {
-            super.pressesBegan(presses, with: event)
-            return
-        }
-
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
-        super.pressesCancelled(presses, with: event)
-    }
-
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard presses.first!.type != UIPressType.menu else {
-            super.pressesBegan(presses, with: event)
-            return
-        }
-
-        UIView.animate(withDuration: 0.1, animations: self.changeToFocused )
         super.pressesEnded(presses, with: event)
-
+        guard presses.first!.type != UIPressType.menu else { return }
+        
         delegate?.statusWillChange(self, to: status.inverted)
     }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
-        // Mimik system focus/unfocus animation besides backgroundColor and title font
-
-        if context.nextFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToFocused)
-            }
-            coordinator.addCoordinatedFocusingAnimations(animation, completion: nil)
-
-        } else if context.previouslyFocusedView == self {
-
-            let animation: ((UIFocusAnimationContext) -> Void) = {
-                let duration = $0.duration
-                UIView.animate(withDuration: duration, animations: self.changeToDefault)
-            }
-            coordinator.addCoordinatedUnfocusingAnimations( animation, completion: nil)
-        }
+        self.updateFocus(in: context, with: coordinator)
     }
 }
