@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 let LOADING_CONST: Double = 1.0
 
@@ -48,7 +50,9 @@ class CourseInfoPresenter {
         let hosts = ""
         let descr = course.courseDescription
         let imageURL = URL(string: course.coverURLString)
-        let trailerAction: (Video) -> Void = {_ in }
+        let trailerAction: () -> Void = { _ in
+            self.playIntro(intro: course.introVideo)
+        }
         let subscriptionAction: (Course) -> Void = {_ in }
 
         let selectionAction: (TVFocusableText) -> Void = {
@@ -72,6 +76,19 @@ class CourseInfoPresenter {
 
         return [mainSection, instructorsSection, summarySection]
     }
+
+    private func playIntro(intro: Video?) {
+        guard let viewController = view as? UIViewController else { fatalError() }
+        guard let url = intro?.getUrlForQuality("720") else { return }
+
+        let player = AVPlayer(url: url)
+        let controller = AVPlayerViewController()
+        controller.player = player
+
+        viewController.present(controller, animated: true) {
+            player.play()
+        }
+    }
 }
 
 struct CourseInfoSection {
@@ -85,7 +102,7 @@ struct CourseInfoSection {
 }
 
 enum CourseInfoSectionType {
-    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: (Video) -> Void, subscriptionAction: (Course) -> Void, selectionAction: (TVFocusableText) -> Void)
+    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: (Course) -> Void, selectionAction: (TVFocusableText) -> Void)
     case text(content: String, selectionAction: (TVFocusableText) -> Void)
     case instructors(items: [ItemViewData])
 
