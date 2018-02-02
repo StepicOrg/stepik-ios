@@ -24,7 +24,7 @@ class MajorItemCell: FocusableCustomCollectionViewCell {
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = imageView.bounds
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.cgColor]
+        gradientLayer.colors = [UIColor.black.withAlphaComponent(0.1).cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.withAlphaComponent(0.6).cgColor]
         imageView.layer.addSublayer(gradientLayer)
     }
 

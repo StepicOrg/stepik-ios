@@ -15,8 +15,6 @@ class TagCoursesCollectionPresenter {
     private var progressesAPI: ProgressesAPI
     private var searchResultsAPI: SearchResultsAPI = SearchResultsAPI()
 
-    private var items: [ItemViewData]?
-
     var tag: CourseTag? {
         didSet {
             guard let tag = tag else { return }
@@ -27,6 +25,13 @@ class TagCoursesCollectionPresenter {
     private var listType: CourseListType? {
         didSet {
             refresh()
+        }
+    }
+
+    private var items: [ItemViewData]? {
+        didSet {
+            guard let items = items else { return }
+            view?.provide(items: items)
         }
     }
 
@@ -58,7 +63,6 @@ class TagCoursesCollectionPresenter {
             }
 
             strongSelf.items = strongSelf.buildViewData(from: courses)
-            strongSelf.view?.provide(items: strongSelf.items!)
 
             completion?()
         }.catch {
@@ -72,8 +76,8 @@ class TagCoursesCollectionPresenter {
         }
     }
 
-    private func buildViewData(from courses: [Course]) -> [ItemViewData] {
-        guard let viewController = view as? UIViewController else { fatalError() }
+    private func buildViewData(from courses: [Course]) -> [ItemViewData]? {
+        guard let viewController = view as? UIViewController else { print("lose view"); return nil }
 
         return courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
