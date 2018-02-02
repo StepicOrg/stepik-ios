@@ -9,11 +9,22 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+import PromiseKit
 
 class EnrollmentsAPI {
     let name = "enrollments"
 
-    func joinCourse(_ course: Course, delete: Bool = false, success : @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
+    func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
+        return Promise { fulfill, reject in
+            joinCourse(course, delete: delete, success: {
+                fulfill(())
+            }, error: { _ in
+                reject(EnrollmentsAPIError.joinCourseFailed)
+            })
+        }
+    }
+
+    @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
 
         let params: Parameters = [
@@ -81,4 +92,8 @@ class EnrollmentsAPI {
         }
 
     }
+}
+
+enum EnrollmentsAPIError: Error {
+    case joinCourseFailed
 }

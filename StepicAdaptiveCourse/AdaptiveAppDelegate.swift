@@ -8,10 +8,9 @@
 
 import UIKit
 import Mixpanel
-import VK_ios_sdk
-import FBSDKCoreKit
 import Fabric
 import Crashlytics
+import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         if !DefaultsContainer.launch.didLaunch {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
+            //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
         }
 
@@ -31,11 +30,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
             if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+                //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
             }
         }
 
+        launchViewController()
+
         return true
+    }
+
+    func launchViewController() {
+        let supportedCourses = StepicApplicationsInfo.adaptiveSupportedCourses
+
+        if supportedCourses.count == 1 {
+            // One course -> skip course select
+            guard let courseId = supportedCourses.first else {
+                return
+            }
+
+            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
+                return
+            }
+
+            let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), defaultsStorageManager: DefaultsStorageManager())
+            let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: AchievementManager(), defaultsStorageManager: DefaultsStorageManager(), view: initialViewController)
+            presenter.initialActions = { completion in
+                firstly { () -> Promise<Void> in
+                    if !AuthInfo.shared.isAuthorized {
+                        return actions.registerNewUser()
+                    } else {
+                        return Promise(value: ())
+                    }
+                }.then { _ -> Promise<Course> in
+                    actions.loadCourseAndJoin(courseId: courseId)
+                }.then { course in
+                    completion?(course)
+                }
+            }
+            initialViewController.presenter = presenter
+
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        } else {
+            // Multiple courses -> present course select
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -45,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+            //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
         }
     }
 
@@ -68,15 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
-        if VKSdk.processOpen(url, fromApplication: sourceApplication) {
-            return true
-        }
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
-            return true
-        }
-        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
-            return true
-        }
         if let code = Parser.sharedParser.codeFromURL(url) {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])
         } else {

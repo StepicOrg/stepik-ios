@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -357,10 +357,10 @@
             </objects>
             <point key="canvasLocation" x="5222" y="-72"/>
         </scene>
-        <!--Adaptive Steps View Controller-->
+        <!--Adaptive Cards Steps View Controller-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveStepsViewController" id="6Dd-WV-Z8n" customClass="AdaptiveStepsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveCardsSteps" id="6Dd-WV-Z8n" customClass="AdaptiveCardsStepsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hF7-0Z-sGm"/>
                         <viewControllerLayoutGuide type="bottom" id="N8f-j4-uap"/>
@@ -560,6 +560,6 @@
         <image name="trophy" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1jw-M0-gxG"/>
+        <segue reference="4ET-bd-E5d"/>
     </inferredMetricsTieBreakers>
 </document>

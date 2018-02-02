@@ -48,8 +48,10 @@
 		<integer>32896</integer>
 		<key>isAdaptive</key>
 		<true/>
-		<key>courseId</key>
-		<integer>1838</integer>
+		<key>supportedCourses</key>
+		<array>
+			<integer>1838</integer>
+		</array>
 	</dict>
 	<key>rateApp</key>
 	<dict>

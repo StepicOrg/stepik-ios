@@ -59,7 +59,6 @@ struct StepicApplicationsInfo {
     // Section: Adaptive
     static let adaptiveSupportedCourses = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.supportedCourses) as? [Int] ?? []
     static let isAdaptive = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.isAdaptive) as? Bool ?? false
-    static let adaptiveCourseId = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.courseId) as? Int ?? 0
     static let adaptiveMainColor = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.mainColor) as? Int ?? 6736998)
 
     // Section: RateApp

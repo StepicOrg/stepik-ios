@@ -37,14 +37,14 @@ enum LocalNotification {
 
         switch self {
         case .tomorrow:
-            let streak = StatsManager.shared.currentDayStreak
+            let streak = 0/*StatsManager.shared.currentDayStreak*/
             if streak == 0 {
                 // 0 points today, 0 points prev
                 localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
                 localNotification.userInfo = ["type": "yesterday_zero"]
             } else if streak == 1 {
                 // X points today, 0 points prev
-                if let todayXP = StatsManager.shared.getLastDays(count: 1).first {
+                if let todayXP = Optional(0)/*StatsManager.shared.getLastDays(count: 1).first*/ {
                     localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
                     localNotification.userInfo = ["type": "yesterday"]
                 }

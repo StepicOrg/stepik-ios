@@ -13,9 +13,9 @@
             <connections>
                 <outlet property="contentView" destination="LM4-eR-A8y" id="j6L-Gk-CxC"/>
                 <outlet property="controlButton" destination="LCg-u0-xF2" id="ceu-N0-3vh"/>
-                <outlet property="discussionButton" destination="8aa-Jm-cMF" id="ohH-cn-Vuy"/>
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="9OP-aI-LVc"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="DqQ-aN-C2J"/>
+                <outlet property="titleButton" destination="8aa-Jm-cMF" id="SqM-1v-GUd"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="pA6-nj-ZdD"/>
                 <outlet property="titlePadView" destination="HzP-xg-1iP" id="e8u-ty-StC"/>
                 <outlet property="whitePadView" destination="xHA-bo-OBf" id="fhj-iN-vCB"/>
