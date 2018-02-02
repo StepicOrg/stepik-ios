@@ -35,11 +35,6 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     @IBOutlet var rightIconButton: IconButton!
     @IBOutlet var imageView: UIImageView!
 
-    var trailerAction : (() -> Void)?
-    func pressedVideoButton(_ sender: UIButton) {
-        trailerAction?()
-    }
-
     private let introTitle: String = NSLocalizedString("Intro", comment: "")
     private let subscribeTitle: String = NSLocalizedString("Subscribe", comment: "")
 
@@ -52,10 +47,9 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
             self.descr.setTextWithHTMLString(descr)
             self.descr.pressAction = selectionAction
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
-            self.trailerAction = trailerAction
             self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
+            self.leftIconButton.action = trailerAction
             self.rightIconButton.configure(with: #imageLiteral(resourceName: "subscribe_icon"), subscribeTitle)
-            self.leftIconButton.button.addTarget(self, action: #selector(pressedVideoButton(_:)), for: .primaryActionTriggered)
         default:
             fatalError("Sections data and view dependencies fails")
         }
