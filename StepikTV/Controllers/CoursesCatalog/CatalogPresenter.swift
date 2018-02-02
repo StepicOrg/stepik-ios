@@ -39,10 +39,10 @@ class UserCourses {
 }
 
 struct DetailCatalogViewInfo {
-    var detailView: DetailCatalogView
+    var detailView: CatalogDetailView
     var indexPath: IndexPath
 
-    init(detailView: DetailCatalogView, indexPath: IndexPath) {
+    init(detailView: CatalogDetailView, indexPath: IndexPath) {
         self.detailView = detailView
         self.indexPath = indexPath
     }
@@ -57,7 +57,7 @@ class CatalogPresenter {
     private let listType = CourseListType.enrolled
 
     weak var splitview: MenuSplitView?
-    weak var masterview: CatalogView?
+    weak var masterview: CatalogMenuView?
     private var currentDetailViewInfo: DetailCatalogViewInfo?
 
     private var coursesAPI: CoursesAPI
@@ -70,7 +70,7 @@ class CatalogPresenter {
     private let didntLoggedAlertMessage = NSLocalizedString("Please, log in to see the user courses catalog", comment: "")
     private let alertButtonTitle = NSLocalizedString("Profile", comment: "")
 
-    init(splitview: MenuSplitView, masterview: CatalogView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
+    init(splitview: MenuSplitView, masterview: CatalogMenuView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
         self.splitview = splitview
         self.masterview = masterview
         self.coursesAPI = coursesAPI
@@ -87,10 +87,11 @@ class CatalogPresenter {
         refreshCourses(for: language)
     }
 
-    func setDetailViewToProvideData(_ detailView: DetailCatalogView, by indexPath: IndexPath) {
+    func setDetailViewToProvideData(_ detailView: CatalogDetailView, width: Float, by indexPath: IndexPath) {
         currentDetailViewInfo = DetailCatalogViewInfo(detailView: detailView, indexPath: indexPath)
 
-        currentDetailViewInfo?.detailView.showLoading(isVisible: !userCourses.isLoaded)
+        if !userCourses.isLoaded { currentDetailViewInfo?.detailView.showLoading(with: width) }
+        //currentDetailViewInfo?.detailView.showLoading(isVisible: !userCourses.isLoaded)
         currentDetailViewInfo?.provideCourses(with: userCourses)
     }
 
@@ -134,7 +135,7 @@ class CatalogPresenter {
                 strongSelf.masterview?.provide(count: $0.value, at: $0.key)
             }
 
-            strongSelf.currentDetailViewInfo?.detailView.showLoading(isVisible: false)
+            strongSelf.currentDetailViewInfo?.detailView.hideLoading()
             strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
             }.catch {
                 [weak self]

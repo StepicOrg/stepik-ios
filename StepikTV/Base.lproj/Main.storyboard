@@ -293,10 +293,10 @@
             </objects>
             <point key="canvasLocation" x="-4572" y="-26"/>
         </scene>
-        <!--Rectangular Collection View Controller-->
+        <!--Catalog Detail View Controller-->
         <scene sceneID="0zh-0e-3Gz">
             <objects>
-                <collectionViewController id="RR9-YI-osV" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="RR9-YI-osV" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="-5649" y="6823"/>
         </scene>
-        <!--Rectangular Collection View Controller-->
+        <!--Catalog Detail View Controller-->
         <scene sceneID="Tq1-B3-oUl">
             <objects>
-                <collectionViewController id="gZU-C6-QdM" customClass="RectangularCollectionViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="gZU-C6-QdM" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

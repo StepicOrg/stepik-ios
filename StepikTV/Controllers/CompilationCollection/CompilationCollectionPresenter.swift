@@ -58,15 +58,17 @@ class CompilationCollectionPresenter {
                 strongSelf.rows = strongSelf.loaders.map { strongSelf.buildRow(from: $0) }
                 strongSelf.view?.setup(with: strongSelf.rows)
 
-                for (index, loader) in strongSelf.loaders.enumerated() {
-                  loader.getCourses(withAPI: strongSelf.coursesAPI)?.then {
+                strongSelf.loaders.enumerated().forEach { (index, loader) in
+
+                    // Load courses for every non popular and non subjects collection row
+                    loader.getCourses(withAPI: strongSelf.coursesAPI)?.then {
                         [weak self]
                         courses -> Void in
                         guard let strongSelf = self else {
                             throw WeakSelfError.noStrong
                         }
 
-                    strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
+                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -74,6 +76,7 @@ class CompilationCollectionPresenter {
                         print("Error while refreshing collection")
                     }
 
+                    // Load courses for popular courses row
                     loader.getPopular(withAPI: strongSelf.coursesAPI, language: language)?.then {
                         [weak self]
                         (courses, _) -> Void in
@@ -89,6 +92,7 @@ class CompilationCollectionPresenter {
                         print("Error while refreshing collection")
                     }
 
+                    // Get tags for subjects row
                     if let tags = loader.getTags() {
                         strongSelf.rows[index].setData(with: tags, language: language, for: strongSelf.view as? UIViewController)
                         strongSelf.view?.update(rowWith: index)
@@ -202,9 +206,18 @@ class CollectionRow {
     private(set) var data: [ItemViewData] = []
 
     func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController?) {
-        data = tags.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: $0.titleForLanguage[language]!) {
+        data = tags.map { tag in
+            let title = tag.titleForLanguage[language]!.lowercased().firstUppercased
+            return ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: title) {
+                let navigationController = ControllerHelper.instantiateViewController(identifier: "TagCoursesNavigation", storyboardName: "TagCourses") as! UINavigationController
 
+                let tagCoursesVC = navigationController.viewControllers.first as! TagCoursesCollectionViewController
+
+                tagCoursesVC.navigationItem.title = title
+                tagCoursesVC.presenter = TagCoursesCollectionPresenter(view: tagCoursesVC, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI())
+                tagCoursesVC.presenter?.tag = tag
+
+                viewController?.present(navigationController, animated: true, completion: {})
             }
         }
 

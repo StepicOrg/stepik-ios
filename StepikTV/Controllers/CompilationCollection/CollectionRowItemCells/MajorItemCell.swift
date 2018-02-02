@@ -23,9 +23,9 @@ class MajorItemCell: FocusableCustomCollectionViewCell {
         super.awakeFromNib()
 
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = imageView.bounds;
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.cgColor];
-        imageView.layer.addSublayer(gradientLayer);
+        gradientLayer.frame = imageView.bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.cgColor]
+        imageView.layer.addSublayer(gradientLayer)
     }
 
     func setup(with item: ItemViewData) {
@@ -42,7 +42,7 @@ class MajorItemCell: FocusableCustomCollectionViewCell {
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesBegan(presses, with: event)
         guard presses.first!.type != UIPressType.menu else { return }
-        
+
         pressAction?()
     }
 }

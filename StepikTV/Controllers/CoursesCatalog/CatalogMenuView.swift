@@ -8,15 +8,17 @@
 
 import Foundation
 
-protocol CatalogView: class {
+protocol CatalogMenuView: class {
 
     func provide(count: Int, at indexPath: IndexPath)
 }
 
-protocol DetailCatalogView: class {
+protocol CatalogDetailView: class {
 
-    func showLoading(isVisible: Bool)
+    func showLoading(with width: Float)
 
+    func hideLoading()
+    
     func provide(items: [ItemViewData])
 
     func update()

@@ -33,13 +33,13 @@ class CatalogMenuViewController: MenuTableViewController {
 
         guard segue.identifier == segueIdentifier else { return }
 
-        guard let vc = segue.destination as? RectangularCollectionViewController else { return }
-        vc.width = UIScreen.main.bounds.width - self.view.bounds.width
-        presenter?.setDetailViewToProvideData(vc, by: indexPath)
+        guard let vc = segue.destination as? CatalogDetailView else { return }
+        
+        presenter?.setDetailViewToProvideData(vc, width: Float(UIScreen.main.bounds.width - self.view.bounds.width), by: indexPath)
     }
 }
 
-extension CatalogMenuViewController: CatalogView {
+extension CatalogMenuViewController: CatalogMenuView {
 
     func provide(count: Int, at indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = "\(count)"

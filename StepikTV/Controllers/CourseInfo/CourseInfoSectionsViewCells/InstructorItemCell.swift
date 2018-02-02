@@ -32,9 +32,12 @@ class InstructorItemCell: UICollectionViewCell, FocusAnimatable {
         titleLabel.text = item.title
         pressAction = item.action
 
-        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
+            let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
+            self.imageView.image = UIImage(data: data!)
+        })
     }
-    
+
     func changeToDefault() {
         self.transform = CGAffineTransform.identity
         self.layer.shadowOpacity = 0.0

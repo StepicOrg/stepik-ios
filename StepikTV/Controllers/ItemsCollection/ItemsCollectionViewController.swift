@@ -8,12 +8,9 @@
 
 import UIKit
 
-class RectangularCollectionViewController: UICollectionViewController {
+class ItemsCollectionViewController: UICollectionViewController {
 
-    fileprivate var loadingView: TVLoadingView?
-
-    // Set for correcting show loading
-    var width: CGFloat?
+    var loadingView: TVLoadingView?
 
     var sectionCourses: [ItemViewData] = [] {
         didSet { collectionView?.reloadData() }
@@ -47,35 +44,21 @@ class RectangularCollectionViewController: UICollectionViewController {
     }
 }
 
-extension RectangularCollectionViewController: DetailCatalogView {
+extension ItemsCollectionViewController: UICollectionViewDelegateFlowLayout {
 
-    func provide(items: [ItemViewData]) {
-        sectionCourses = items
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return RectangularItemCell.size
     }
 
-    func showLoading(isVisible: Bool) {
-
-        guard isVisible else {
-            loadingView?.purge()
-            loadingView?.removeFromSuperview()
-            loadingView = nil
-            return
-        }
-
-        guard let width = width else { return }
-        let rect = CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height)
-
-        guard let _ = loadingView else {
-
-            loadingView = TVLoadingView(frame: rect, color: .gray)
-            loadingView!.setup()
-
-            self.view.addSubview(loadingView!)
-            return
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(70.0, 90.0, 70.0, 90.0)
     }
 
-    func update() {
-        collectionView?.reloadData()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 40.0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 40.0
     }
 }
