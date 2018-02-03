@@ -13,13 +13,13 @@ class AuthorizationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
 
-    @IBOutlet var upperButton: StandardButton!
-    @IBOutlet var midButton: StandardButton!
-    @IBOutlet var lowerButton: StandardButton!
+    @IBOutlet var upperButton: TVTextButton!
+    @IBOutlet var midButton: TVTextButton!
+    @IBOutlet var lowerButton: TVTextButton!
 
     var nameLabel: UILabel = UILabel()
-    var exitButton: StandardButton = StandardButton()
-    var settingsButton: StandardButton = StandardButton()
+    var exitButton: TVTextButton = TVTextButton()
+    var settingsButton: TVTextButton = TVTextButton()
 
     var presenter: AuthorizationPresenter?
 

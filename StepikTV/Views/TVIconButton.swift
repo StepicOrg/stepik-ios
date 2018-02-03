@@ -8,14 +8,10 @@
 
 import UIKit
 
-protocol IconButtonDelegate {
-    func iconButtonPressed(sender : IconButton)
-}
+class TVIconButton: UIView {
 
-class IconButton: UIView {
-
-    @IBOutlet public private(set) var button: UIButton!
-    @IBOutlet var label: UILabel!
+    @IBOutlet private(set) var button: UIButton!
+    @IBOutlet private var label: UILabel!
 
     func configure(with icon: UIImage, _ title: String) {
         button.setImage(icon, for: .normal)

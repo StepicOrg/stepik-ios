@@ -31,8 +31,8 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     @IBOutlet var title: UILabel!
     @IBOutlet var hosts: UILabel!
     @IBOutlet var descr: TVFocusableText!
-    @IBOutlet var leftIconButton: IconButton!
-    @IBOutlet var rightIconButton: IconButton!
+    @IBOutlet var leftIconButton: TVIconButton!
+    @IBOutlet var rightIconButton: TVIconButton!
     @IBOutlet var imageView: UIImageView!
 
     var trailerAction : (() -> Void)?
