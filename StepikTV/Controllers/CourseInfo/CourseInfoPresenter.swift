@@ -7,14 +7,18 @@
 //
 
 import UIKit
-import AVKit
-import AVFoundation
+import PromiseKit
 
 let LOADING_CONST: Double = 1.0
+
+extension NSNotification.Name {
+    static let subscribe = NSNotification.Name("subscribe")
+}
 
 class CourseInfoPresenter {
 
     private weak var view: CourseInfoView?
+    private var subscriber: CourseSubscriber
 
     var course: Course? {
         didSet {
@@ -41,6 +45,7 @@ class CourseInfoPresenter {
 
     init(view: CourseInfoView) {
         self.view = view
+        self.subscriber = CourseSubscriber()
     }
 
     private func buildSections(with course: Course) -> [CourseInfoSection] {
@@ -77,15 +82,14 @@ class CourseInfoPresenter {
         let imageURL = URL(string: course.coverURLString)
 
         let trailerAction: () -> Void = { _ in
-            let player = TVPlayerViewController()
-                player.video = course.introVideo
-
             self.playIntro(intro: course.introVideo)
         }
 
-        let subscriptionAction: (Course) -> Void = { _ in }
+        let subscriptionAction: () -> Void = { _ in
+            self.subscribe(to: course, delete: course.enrolled)
+        }
 
-        let section = CourseInfoSection(.main(hosts: [""], descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction), title: title)
+        let section = CourseInfoSection(.main(hosts: [""], descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: course.enrolled), title: title)
         return section
     }
 
@@ -119,6 +123,26 @@ class CourseInfoPresenter {
 
         viewController.present(player, animated: true) {}
     }
+
+    private func subscribe(to course: Course, delete: Bool = false) {
+        checkToken().then {
+            [weak self]
+            () -> Promise<Course> in
+            guard let strongSelf = self else {
+                throw CourseSubscriber.CourseSubscriptionError.error(status: "")
+            }
+            return strongSelf.subscriber.join(course: course, delete: delete)
+            }.then {
+                [weak self]
+                course -> Void in
+                guard let strongSelf = self else { return }
+                strongSelf.course?.enrolled = !delete
+                strongSelf.view?.provide(sections: strongSelf.buildSections(with: course))
+            }.catch {
+                error in
+                print("error: " + error.localizedDescription)
+        }
+    }
 }
 
 struct CourseInfoSection {
@@ -132,7 +156,7 @@ struct CourseInfoSection {
 }
 
 enum CourseInfoSectionType {
-    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: (Course) -> Void, selectionAction: (TVFocusableText) -> Void)
+    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: () -> Void, selectionAction: (TVFocusableText) -> Void, enrolled: Bool)
     case text(content: String, selectionAction: (TVFocusableText) -> Void)
     case instructors(items: [ItemViewData])
 

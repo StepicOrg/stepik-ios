@@ -10,12 +10,11 @@ import UIKit
 
 class TVIconButton: UIView {
 
-    @IBOutlet private(set) var button: UIButton!
+    @IBOutlet private var button: UIButton!
     @IBOutlet private var label: UILabel!
 
     var action : (() -> Void)? {
         didSet {
-            self.button.removeTarget(self, action: #selector(pressedVideoButton(_:)), for: .primaryActionTriggered)
             self.button.addTarget(self, action: #selector(pressedVideoButton(_:)), for: .primaryActionTriggered)
         }
     }

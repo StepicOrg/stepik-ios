@@ -4643,6 +4643,9 @@
 		A667815E9DD873E059ECE59B /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506695A094E6E58AB86F9808 /* Pods_SberbankUniversity.framework */; };
 		A676076BF3C3C830E9134314 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A100A094D88E21829B817E92 /* Pods_Adaptive_3067_Screenshots.framework */; };
 		B88D76335779C08097418110 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA6816E1CFA60839511175E /* Pods_Adaptive_3150.framework */; };
+		BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
+		BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
 		BFC1F3FE02FDDA97D65641BD /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2582002BE5895007F4AE8D88 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		C371D27D85D9CDBC5469955A /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68B35D4EB5759A795680DFF /* Pods_Adaptive_3124_Screenshots.framework */; };
 		C6CBAC439DE089727F2F883B /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D18FA9B8BF6F6E8B54F9CF3 /* Pods_Adaptive_3124.framework */; };
@@ -12989,6 +12992,7 @@
 				1BB4ECCB1FA3DF43001CDE99 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				1BB4ECCF1FA3DF43001CDE99 /* Certificate.swift in Sources */,
 				1BB4ECB41FA3DEC3001CDE99 /* Unit+CoreDataProperties.swift in Sources */,
+				BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */,
 				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
 				1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */,
@@ -13001,6 +13005,7 @@
 				936E90B52024D3BD009578C2 /* TagCoursesCollectionView.swift in Sources */,
 				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,
 				1B3BB0611FE6DE48002DDD9A /* ItemsCollectionViewController.swift in Sources */,
+				BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */,
 				1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */,
 				1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
@@ -13010,6 +13015,7 @@
 				1BB3D2491FA3EC1A000B2FAA /* UIThreadHelper.swift in Sources */,
 				1BB3D2511FA3EFFE000B2FAA /* PathManager.swift in Sources */,
 				1BB3D2371FA3E9E1000B2FAA /* VideosInfo.swift in Sources */,
+				BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */,
 				1BB4ECC01FA3DEC3001CDE99 /* CourseReviewSummary.swift in Sources */,
 				9335E3692008FF07001BDFA8 /* CatalogPresenter.swift in Sources */,
 				1BB4EC991FA3DD5F001CDE99 /* Dataset.swift in Sources */,

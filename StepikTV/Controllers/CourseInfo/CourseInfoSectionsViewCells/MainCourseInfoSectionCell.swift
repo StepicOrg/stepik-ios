@@ -14,7 +14,7 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 787.0) }
 
     static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
-        guard case let .main(hosts: _, descr: descr, imageURL: _, trailerAction: _, subscriptionAction: _, selectionAction: _) = section.contentType else {
+        guard case let .main(hosts: _, descr: descr, imageURL: _, trailerAction: _, subscriptionAction: _, selectionAction: _, enrolled: _) = section.contentType else {
             return 35.0
         }
 
@@ -37,21 +37,30 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
 
     private let introTitle = NSLocalizedString("Intro", comment: "")
     private let subscribeTitle = NSLocalizedString("Subscribe", comment: "")
+    private let subscribedTitle = NSLocalizedString("Leave", comment: "")
 
     func setup(with section: CourseInfoSection) {
         title.text = section.title
 
         switch section.contentType {
-        case let .main(hosts: _, descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: _, selectionAction: selectionAction):
+        case let .main(hosts: _, descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: enrolled):
             self.hosts.text = "To do..."
             self.descr.setTextWithHTMLString(descr)
             self.descr.pressAction = selectionAction
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
             self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
             self.leftIconButton.action = trailerAction
-            self.rightIconButton.configure(with: #imageLiteral(resourceName: "subscribe_icon"), subscribeTitle)
+            self.setSubscribed(enrolled: enrolled, action: subscriptionAction)
         default:
             fatalError("Sections data and view dependencies fails")
         }
     }
+
+    func setSubscribed(enrolled: Bool, action: @escaping () -> Void) {
+        let title = enrolled ? subscribedTitle : subscribeTitle
+        let image = enrolled ? #imageLiteral(resourceName: "unsubscribe_icon") :  #imageLiteral(resourceName: "subscribe_icon")
+        self.rightIconButton.configure(with: image, title)
+        self.rightIconButton.action = action
+    }
+
 }
