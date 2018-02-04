@@ -22,14 +22,11 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7O-kr-Y3S">
                         <rect key="frame" x="110" y="25" width="75" height="46"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Dff-el-nmq">
+                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Dff-el-nmq">
                         <rect key="frame" x="0.0" y="71" width="1920" height="413"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="1920" id="qwB-4x-cFy"/>
-                        </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="ve8-N9-BQA">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -41,6 +38,8 @@
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Dff-el-nmq" secondAttribute="trailing" id="5JZ-CA-e9I"/>
+                <constraint firstItem="Dff-el-nmq" firstAttribute="leading" secondItem="gvF-cP-QHz" secondAttribute="leading" id="7hT-ma-yw6"/>
+                <constraint firstAttribute="trailing" secondItem="Dff-el-nmq" secondAttribute="trailing" id="b46-09-mj0"/>
                 <constraint firstAttribute="bottom" secondItem="Dff-el-nmq" secondAttribute="bottom" id="mZy-nn-Fc6"/>
                 <constraint firstItem="E7O-kr-Y3S" firstAttribute="leading" secondItem="gvF-cP-QHz" secondAttribute="leadingMargin" id="oo1-SM-Vym"/>
                 <constraint firstItem="E7O-kr-Y3S" firstAttribute="top" secondItem="gvF-cP-QHz" secondAttribute="top" constant="25" id="vyN-qf-wX0"/>

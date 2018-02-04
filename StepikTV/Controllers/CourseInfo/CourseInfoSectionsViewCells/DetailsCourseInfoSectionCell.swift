@@ -29,7 +29,7 @@ class DetailsCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewP
 
         switch section.contentType {
         case let .text(content: content, selectionAction: selectionAction):
-            self.content.text = content
+            self.content.setTextWithHTMLString(content)
             self.content.pressAction = selectionAction
         default:
             fatalError("Sections data and view dependencies fails")

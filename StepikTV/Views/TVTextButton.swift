@@ -8,9 +8,8 @@
 
 import UIKit
 
-class StandardButton: UIButton, FocusAnimatable {
+class TVTextButton: UIButton, FocusAnimatable {
 
-    
     func changeToDefault() {
         let font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium)
         let color = UIColor.clear

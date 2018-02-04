@@ -28,49 +28,45 @@ class TagCoursesCollectionPresenter {
         }
     }
 
-    private var items: [ItemViewData]? {
-        didSet {
-            guard let items = items else { return }
-            view?.provide(items: items)
-        }
-    }
+    private var items: [ItemViewData]?
 
     init(view: TagCoursesCollectionView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
-
     }
 
     func refresh() {
-        //view?.setConnectionProblemsPlaceholder(hidden: true)
+        guard let listType = listType else { return }
+
         view?.showLoading(isVisible: true)
 
         let listLanguage = ContentLanguage.sharedContentLanguage
-        requestForCourses(forLanguage: listLanguage) {
-            self.view?.showLoading(isVisible: false)
+        requestForCourses(with: listType, forLanguage: listLanguage) {
+            [weak self]
+            _ in
+
+            if let items = self?.items {
+                self?.view?.provide(items: items)
+            }
+            self?.view?.showLoading(isVisible: false)
         }
     }
 
-    private func requestForCourses(forLanguage language: ContentLanguage, completion: (() -> Void)? = nil) {
-        guard let listType = listType else { return }
+    private func requestForCourses(with listType: CourseListType, forLanguage language: ContentLanguage, completion: (() -> Void)? = nil) {
 
         listType.request(page: 1, language: language, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
-            (courses, meta) -> Void in
+            (courses, _) -> Void in
             guard let strongSelf = self else {
+                completion?()
                 return
             }
 
             strongSelf.items = strongSelf.buildViewData(from: courses)
-
             completion?()
         }.catch {
-            [weak self]
             _ in
-            guard let strongSelf = self else {
-                return
-            }
             print("Error while refreshing collection")
             completion?()
         }
@@ -82,25 +78,12 @@ class TagCoursesCollectionPresenter {
         return courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
 
-                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoPage", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
+                guard course.enrolled else {
+                    ScreensTransitions.getTransitionToCourseInformationScreen(from: viewController, for: course)
+                    return
+                }
 
-                courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
-                courseInfoVC.presenter?.course = course
-
-                viewController.present(courseInfoVC, animated: true, completion: {})
-
-                // if subscribed
-
-//                let initialVC = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! MenuSplitViewController
-//
-//                let navController = initialVC.viewControllers.first as! UINavigationController
-//
-//                let courseContentVC = navController.viewControllers.first as! CourseContentMenuViewController
-//
-//                courseContentVC.presenter = CourseContentPresenter(view: courseContentVC)
-//                courseContentVC.presenter?.course = course
-//
-//                viewController.present(initialVC, animated: true, completion: {})
+                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
             }
         }
     }

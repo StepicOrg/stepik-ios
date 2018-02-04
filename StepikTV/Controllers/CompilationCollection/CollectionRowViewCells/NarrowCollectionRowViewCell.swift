@@ -30,6 +30,8 @@ class NarrowCollectionRowViewCell: CollectionRowViewCell, CollectionRowViewProto
         collectionView.delegate = self
         collectionView.dataSource = self
 
+        collectionView.clipsToBounds = false
+
         let nib = UINib(nibName: NarrowItemCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: NarrowItemCell.reuseIdentifier)
     }

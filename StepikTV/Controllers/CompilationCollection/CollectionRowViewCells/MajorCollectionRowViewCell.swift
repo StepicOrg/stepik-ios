@@ -27,6 +27,8 @@ class MajorCollectionRowViewCell: CollectionRowViewCell, CollectionRowViewProtoc
         collectionView.delegate = self
         collectionView.dataSource = self
 
+        collectionView.clipsToBounds = false
+
         let nib = UINib(nibName: MajorItemCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MajorItemCell.reuseIdentifier)
         collectionView.isScrollEnabled = false

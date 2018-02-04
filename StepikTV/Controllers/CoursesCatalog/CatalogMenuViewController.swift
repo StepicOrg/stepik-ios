@@ -34,7 +34,7 @@ class CatalogMenuViewController: MenuTableViewController {
         guard segue.identifier == segueIdentifier else { return }
 
         guard let vc = segue.destination as? CatalogDetailView else { return }
-        
+
         presenter?.setDetailViewToProvideData(vc, width: Float(UIScreen.main.bounds.width - self.view.bounds.width), by: indexPath)
     }
 }

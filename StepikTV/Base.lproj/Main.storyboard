@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
-    <device id="appleTV" orientation="landscape">
-        <adaptation id="light"/>
-    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -38,7 +35,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fn0-Iz-H2o">
                                 <rect key="frame" x="1076" y="370" width="475" height="246"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-x5-BF3" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-x5-BF3" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="475" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="66" id="4Lx-cw-wla"/>
@@ -50,7 +47,7 @@
                                             <action selector="loginAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="Y4U-IZ-OK9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-6E-hF7" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-6E-hF7" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="475" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="66" id="B3r-TJ-M3W"/>
@@ -62,7 +59,7 @@
                                             <action selector="registerAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="P5M-D3-H3R"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-hh-9Pe" customClass="StandardButton" customModule="StepikTV" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-hh-9Pe" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="180" width="475" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="66" id="mvN-aQ-OjZ"/>
@@ -191,7 +188,7 @@
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="fTX-kv-iqz" customClass="CatalogMenuViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="40" sectionFooterHeight="40" id="ZMK-zu-sad">
-                        <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection id="Hgw-mB-0rC">
@@ -298,7 +295,7 @@
             <objects>
                 <collectionViewController id="RR9-YI-osV" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
-                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lBb-fz-Abn">
                             <size key="itemSize" width="310" height="350"/>
@@ -323,7 +320,7 @@
             <objects>
                 <collectionViewController id="gZU-C6-QdM" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
-                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lwN-5z-dAd">
                             <size key="itemSize" width="310" height="350"/>

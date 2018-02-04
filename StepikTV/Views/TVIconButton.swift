@@ -8,10 +8,14 @@
 
 import UIKit
 
+<<<<<<< HEAD:StepikTV/Views/IconButton.swift
 class IconButton: UIView {
+=======
+class TVIconButton: UIView {
+>>>>>>> fix/course-content-to-info-units-buttons-behavior:StepikTV/Views/TVIconButton.swift
 
-    @IBOutlet public private(set) var button: UIButton!
-    @IBOutlet var label: UILabel!
+    @IBOutlet private(set) var button: UIButton!
+    @IBOutlet private var label: UILabel!
 
     var action : (() -> Void)? {
         didSet {
