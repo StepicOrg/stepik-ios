@@ -4561,6 +4561,7 @@
 		93435355201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */; };
 		934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */; };
 		936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B62024D8F500DFC7EE /* StringExtension.swift */; };
+		936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B920263A4800DFC7EE /* ScreensTransitions.swift */; };
 		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		936CF2442018A06800186A97 /* StepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936CF2432018A06800186A97 /* StepViewController.storyboard */; };
 		936CF2462018A53A00186A97 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CF2452018A53A00186A97 /* StepViewController.swift */; };
@@ -5594,6 +5595,7 @@
 		93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
 		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
 		936CF2452018A53A00186A97 /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
 		936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -7655,7 +7657,7 @@
 				936E90AD2024B8A6009578C2 /* ItemsCollection */,
 				93BBE6241FE6E63C006DEC28 /* CourseInfo */,
 				93C9E300200F941600192091 /* CourseContent */,
-				936E90A82024B3CF009578C2 /* CoursesCollection */,
+				936E90A82024B3CF009578C2 /* TagCourses */,
 				9335E3672008E51D001BDFA8 /* CoursesCatalog */,
 				1B3BB0961FE6E123002DDD9A /* CompilationCollection */,
 				933563BD20125AC00061FE2E /* LessonContent */,
@@ -7797,6 +7799,7 @@
 		1BAE12F01F93F67700482251 /* StepikTV */ = {
 			isa = PBXGroup;
 			children = (
+				936351B920263A4800DFC7EE /* ScreensTransitions.swift */,
 				936351B82025FB2600DFC7EE /* Extensions */,
 				1B3BB0661FE6DE5E002DDD9A /* Views */,
 				1B3BB04F1FE6DE2B002DDD9A /* Controllers */,
@@ -8523,7 +8526,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		936E90A82024B3CF009578C2 /* CoursesCollection */ = {
+		936E90A82024B3CF009578C2 /* TagCourses */ = {
 			isa = PBXGroup;
 			children = (
 				936E90AE2024C1A8009578C2 /* TagCourses.storyboard */,
@@ -8531,7 +8534,7 @@
 				936E90B02024C88C009578C2 /* TagCoursesCollectionViewController.swift */,
 				936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */,
 			);
-			path = CoursesCollection;
+			path = TagCourses;
 			sourceTree = "<group>";
 		};
 		936E90AD2024B8A6009578C2 /* ItemsCollection */ = {
@@ -12910,6 +12913,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */,
 				930084402016717500DBFC0E /* BlurredViewController.swift in Sources */,
 				93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */,
 				1BB4ECD51FA3DF43001CDE99 /* Video+CoreDataProperties.swift in Sources */,

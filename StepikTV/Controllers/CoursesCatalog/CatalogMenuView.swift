@@ -18,7 +18,7 @@ protocol CatalogDetailView: class {
     func showLoading(with width: Float)
 
     func hideLoading()
-    
+
     func provide(items: [ItemViewData])
 
     func update()

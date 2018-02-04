@@ -77,7 +77,6 @@ class CatalogPresenter {
         self.progressesAPI = progressesAPI
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.userLoginNotification), name: .userLogin, object: nil)
-
         NotificationCenter.default.addObserver(self, selector: #selector(self.userLogoutNotification), name: .userLogout, object: nil)
     }
 
@@ -102,66 +101,60 @@ class CatalogPresenter {
             if !AuthInfo.shared.isAuthorized {
                 self.courses = nil
                 self.userCourses = UserCourses()
+
                 splitview?.showMessageOver(didntLoggedAlertMessage, buttonTitle: alertButtonTitle) {
                     let view = self.splitview as! UIViewController
-
                     view.tabBarController?.selectedIndex = 2
                 }
                 return
             }
             //splitview?.hideMessageOver()
-            requestEnrolled(updateProgresses: false, language: language)
+            requestEnrolled(updateProgresses: false, language: language) {
+                [weak self]
+                _ in
+
+                self?.userCourses.getCountWithIndexPath().forEach {
+                    self?.masterview?.provide(count: $0.value, at: $0.key)
+                }
+                self?.currentDetailViewInfo?.detailView.hideLoading()
+                self?.currentDetailViewInfo?.provideCourses(with: self!.userCourses)
+            }
         default:
             fatalError()
         }
     }
 
-    private func requestEnrolled(updateProgresses: Bool, language: ContentLanguage) {
+    private func requestEnrolled(updateProgresses: Bool, language: ContentLanguage, completion: (() -> Void)? = nil) {
         listType.request(page: 1, language: language, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then {
             [weak self]
             (courses, _) -> Void in
             guard let strongSelf = self else {
+                completion?()
                 return
             }
+
             strongSelf.courses = courses
             let passedCourses = courses.filter { $0.progress?.percentPassed == 1.0 }
             let notpassedCourses = courses.filter { $0.progress?.percentPassed != 1.0 }
-            let passedViewData = strongSelf.buildViewData(from: passedCourses)
-            let notpassedViewData = strongSelf.buildViewData(from: notpassedCourses)
+
+            guard let passedViewData = strongSelf.buildViewData(from: passedCourses), let notpassedViewData = strongSelf.buildViewData(from: notpassedCourses) else { return }
 
             strongSelf.userCourses.setData(passed: passedViewData, notpassed: notpassedViewData)
 
-            strongSelf.userCourses.getCountWithIndexPath().forEach {
-                strongSelf.masterview?.provide(count: $0.value, at: $0.key)
-            }
-
-            strongSelf.currentDetailViewInfo?.detailView.hideLoading()
-            strongSelf.currentDetailViewInfo?.provideCourses(with: strongSelf.userCourses)
-            }.catch {
-                [weak self]
-                _ in
-                guard let strongSelf = self else {
-                    return
-                }
-                print("Error while refreshing collection")
+            completion?()
+        }.catch {
+            _ in
+            print("Error while refreshing collection")
+            completion?()
         }
     }
 
-    private func buildViewData(from courses: [Course]) -> [ItemViewData] {
-        guard let viewController = masterview as? UIViewController else { fatalError() }
+    private func buildViewData(from courses: [Course]) -> [ItemViewData]? {
+        guard let viewController = masterview as? UIViewController else { print("lose view"); return nil }
+
         return courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
-
-                let initialVC = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! MenuSplitViewController
-
-                let navController = initialVC.viewControllers.first as! UINavigationController
-
-                let courseContentVC = navController.viewControllers.first as! CourseContentMenuViewController
-
-                courseContentVC.presenter = CourseContentPresenter(view: courseContentVC)
-                courseContentVC.presenter?.course = course
-
-                viewController.present(initialVC, animated: true, completion: {})
+                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
             }
         }
     }

@@ -11,7 +11,6 @@ import UIKit
 class TagCoursesCollectionViewController: ItemsCollectionViewController {
 
     var presenter: TagCoursesCollectionPresenter?
-
 }
 
 extension TagCoursesCollectionViewController: TagCoursesCollectionView {

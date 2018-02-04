@@ -68,7 +68,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
+                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as! UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -84,7 +84,7 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as? UIViewController)
+                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as! UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }.catch {
                         [weak self]
@@ -94,7 +94,7 @@ class CompilationCollectionPresenter {
 
                     // Get tags for subjects row
                     if let tags = loader.getTags() {
-                        strongSelf.rows[index].setData(with: tags, language: language, for: strongSelf.view as? UIViewController)
+                        strongSelf.rows[index].setData(with: tags, language: language, for: strongSelf.view as! UIViewController)
                         strongSelf.view?.update(rowWith: index)
                     }
                 }
@@ -205,35 +205,25 @@ class CollectionRow {
 
     private(set) var data: [ItemViewData] = []
 
-    func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController?) {
+    func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController) {
         data = tags.map { tag in
             let title = tag.titleForLanguage[language]!.lowercased().firstUppercased
             return ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: title) {
-                let navigationController = ControllerHelper.instantiateViewController(identifier: "TagCoursesNavigation", storyboardName: "TagCourses") as! UINavigationController
-
-                let tagCoursesVC = navigationController.viewControllers.first as! TagCoursesCollectionViewController
-
-                tagCoursesVC.navigationItem.title = title
-                tagCoursesVC.presenter = TagCoursesCollectionPresenter(view: tagCoursesVC, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI())
-                tagCoursesVC.presenter?.tag = tag
-
-                viewController?.present(navigationController, animated: true, completion: {})
+                ScreensTransitions.getTransitionToTagCoursesScreen(from: viewController, for: tag, title: title)
             }
         }
 
         loaded = true
     }
 
-    func setData(with courses: [Course], for viewController: UIViewController?) {
+    func setData(with courses: [Course], for viewController: UIViewController) {
         data = courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics") {
-
-                let courseInfoVC = ControllerHelper.instantiateViewController(identifier: "CourseInfoPage", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
-
-                courseInfoVC.presenter = CourseInfoPresenter(view: courseInfoVC)
-                courseInfoVC.presenter?.course = course
-
-                viewController?.present(courseInfoVC, animated: true, completion: {})
+                guard course.enrolled else {
+                    ScreensTransitions.getTransitionToCourseInformationScreen(from: viewController, for: course)
+                    return
+                }
+                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
             }
         }
 
