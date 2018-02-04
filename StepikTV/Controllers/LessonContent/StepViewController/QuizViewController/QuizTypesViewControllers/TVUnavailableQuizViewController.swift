@@ -12,7 +12,7 @@ class TVUnavailableQuizViewController: TVQuizViewController {
 
     var textLabel: UILabel!
 
-    private let textLabelPlaceholder: String = NSLocalizedString("This quiz is unavailable on AppleTV", comment: "")
+    private let textLabelPlaceholder = NSLocalizedString("This quiz is unavailable on AppleTV", comment: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()

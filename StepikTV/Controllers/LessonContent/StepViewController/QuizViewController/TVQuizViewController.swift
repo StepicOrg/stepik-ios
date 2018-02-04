@@ -27,10 +27,10 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
 
     fileprivate var loadingView: TVLoadingView?
 
-    fileprivate let submitTitle: String = NSLocalizedString("Submit", comment: "")
-    fileprivate let tryAgainTitle: String = NSLocalizedString("Try Again", comment: "")
-    fileprivate var correctTitle: String = NSLocalizedString("Correct", comment: "")
-    fileprivate let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
+    fileprivate let submitTitle = NSLocalizedString("Submit", comment: "")
+    fileprivate let tryAgainTitle = NSLocalizedString("Try Again", comment: "")
+    fileprivate var correctTitle = NSLocalizedString("Correct", comment: "")
+    fileprivate let wrongTitle = NSLocalizedString("Wrong", comment: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()

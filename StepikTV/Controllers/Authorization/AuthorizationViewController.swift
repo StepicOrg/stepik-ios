@@ -10,18 +10,23 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
 
-    @IBOutlet var upperButton: TVTextButton!
-    @IBOutlet var midButton: TVTextButton!
-    @IBOutlet var lowerButton: TVTextButton!
-
-    var nameLabel: UILabel = UILabel()
-    var exitButton: TVTextButton = TVTextButton()
-    var settingsButton: TVTextButton = TVTextButton()
+    fileprivate var nameLabel: UILabel = UILabel()
+    fileprivate var loginButton: TVTextButton = TVTextButton()
+    fileprivate var signupButton: TVTextButton = TVTextButton()
+    fileprivate var settingsButton: TVTextButton = TVTextButton()
+    fileprivate var exitButton: TVTextButton = TVTextButton()
 
     var presenter: AuthorizationPresenter?
+
+    private let screenTitle = NSLocalizedString("Profile", comment: "")
+    private let loginTitle = NSLocalizedString("Log In", comment: "")
+    private let signupTitle = NSLocalizedString("Sign Up", comment: "")
+    private let settingsTitle = NSLocalizedString("Settings", comment: "")
+    private let exitTitle = NSLocalizedString("Exit", comment: "")
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,23 +36,31 @@ class AuthorizationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        exitButton.setTitle("Exit", for: .normal)
-        settingsButton.setTitle("Settings", for: .normal)
+        profileImage.setRoundedCorners(cornerRadius: profileImage.bounds.height / 2)
 
+        titleLabel.text = screenTitle
+
+        loginButton.setTitle(loginTitle, for: .normal)
+        signupButton.setTitle(signupTitle, for: .normal)
+        exitButton.setTitle(exitTitle, for: .normal)
+        settingsButton.setTitle(settingsTitle, for: .normal)
+
+        loginButton.addTarget(self, action: #selector(loginAction(_:)), for: UIControlEvents.primaryActionTriggered)
+        signupButton.addTarget(self, action: #selector(registerAction(_:)), for: UIControlEvents.primaryActionTriggered)
         exitButton.addTarget(self, action: #selector(logoutAction(_:)), for: UIControlEvents.primaryActionTriggered)
 
         presenter?.checkForCachedUser()
     }
 
-    @IBAction func loginAction(_ sender: UIButton) {
+    func loginAction(_ sender: UIButton) {
         presenter?.loginAction()
     }
 
-    @IBAction func registerAction(_ sender: UIButton) {
+    func registerAction(_ sender: UIButton) {
         presenter?.registerAction()
     }
 
-    @IBAction func remoteLoginAciton(_ sender: UIButton) {
+    func remoteLoginAciton(_ sender: UIButton) {
         presenter?.remoteLoginAction()
     }
 
@@ -64,7 +77,7 @@ extension AuthorizationViewController: AuthorizationView {
 
     func showProfile(for user: User) {
         if let avatarUrl = URL(string: user.avatarURL) {
-          imageView.sd_setImage(with: avatarUrl, completed: nil)
+            profileImage.setImageWithURL(url: avatarUrl, placeholder: UIImage())
         }
 
         cleanStackView()
@@ -82,15 +95,19 @@ extension AuthorizationViewController: AuthorizationView {
     func showNoProfile() {
         cleanStackView()
 
-        stackView.addArrangedSubview(upperButton)
-        stackView.addArrangedSubview(midButton)
-        stackView.addArrangedSubview(lowerButton)
+        loginButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
+        signupButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
+
+        stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(signupButton)
+        stackView.addArrangedSubview(settingsButton)
     }
 
     func cleanStackView() {
         for arrangedView in stackView.arrangedSubviews {
-          stackView.removeArrangedSubview(arrangedView)
-          arrangedView.removeFromSuperview()
+            stackView.removeArrangedSubview(arrangedView)
+            arrangedView.removeFromSuperview()
         }
     }
 }

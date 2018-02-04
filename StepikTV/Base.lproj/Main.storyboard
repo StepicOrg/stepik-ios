@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TKw-So-MMg">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,70 +36,37 @@
                                 <color key="textColor" red="0.71999999999999997" green="0.71999999999999997" blue="0.71999999999999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fn0-Iz-H2o">
-                                <rect key="frame" x="1076" y="370" width="475" height="246"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-x5-BF3" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="475" height="66"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="66" id="4Lx-cw-wla"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Войти"/>
-                                        <connections>
-                                            <action selector="loginAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="Y4U-IZ-OK9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-6E-hF7" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90" width="475" height="66"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="66" id="B3r-TJ-M3W"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Зарегистрироваться"/>
-                                        <connections>
-                                            <action selector="registerAction:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="P5M-D3-H3R"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4I-hh-9Pe" customClass="TVTextButton" customModule="StepikTV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="180" width="475" height="66"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="66" id="mvN-aQ-OjZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                        <state key="normal" title="Войти с iPhone"/>
-                                        <connections>
-                                            <action selector="remoteLoginAciton:" destination="Zl5-dF-RYl" eventType="primaryActionTriggered" id="fwx-4R-91C"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fn0-Iz-H2o">
+                                <rect key="frame" x="1076" y="370" width="475" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="475" id="6PO-zX-Z6x"/>
                                 </constraints>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RHr-OH-NIp">
+                                <rect key="frame" x="704" y="210" width="126" height="126"/>
+                            </imageView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="trailing" secondItem="6lN-w4-EB8" secondAttribute="trailing" id="8B2-yD-9LC"/>
                             <constraint firstItem="dte-O0-1EJ" firstAttribute="leading" secondItem="6lN-w4-EB8" secondAttribute="trailing" constant="261" id="AWW-On-3nt"/>
                             <constraint firstItem="Fn0-Iz-H2o" firstAttribute="top" secondItem="dte-O0-1EJ" secondAttribute="bottom" constant="51" id="Aqc-CO-sZe"/>
                             <constraint firstItem="MuA-a3-zLV" firstAttribute="bottom" secondItem="6lN-w4-EB8" secondAttribute="bottom" constant="180" id="I5t-Fo-hfh"/>
                             <constraint firstItem="Fn0-Iz-H2o" firstAttribute="leading" secondItem="dte-O0-1EJ" secondAttribute="leading" constant="-15" id="OBc-57-hPH"/>
                             <constraint firstItem="6lN-w4-EB8" firstAttribute="top" secondItem="MuA-a3-zLV" secondAttribute="top" constant="150" id="OHs-0R-xbP"/>
                             <constraint firstItem="MuA-a3-zLV" firstAttribute="trailing" secondItem="dte-O0-1EJ" secondAttribute="trailing" constant="20" id="Xwn-CA-Jel"/>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="height" secondItem="6lN-w4-EB8" secondAttribute="height" multiplier="1/5" id="c5j-uf-k4N"/>
                             <constraint firstItem="6lN-w4-EB8" firstAttribute="leading" secondItem="MuA-a3-zLV" secondAttribute="leading" constant="110" id="h0u-HN-qdq"/>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" id="lTP-6h-Bch"/>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="width" secondItem="6lN-w4-EB8" secondAttribute="width" multiplier="1/5" id="nyX-SS-xZS"/>
                             <constraint firstItem="dte-O0-1EJ" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" constant="40" id="wBE-TL-d0Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MuA-a3-zLV"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" id="DsA-Hi-lyK"/>
                     <connections>
-                        <outlet property="imageView" destination="6lN-w4-EB8" id="o1c-cC-A2Z"/>
-                        <outlet property="lowerButton" destination="E4I-hh-9Pe" id="QIM-Ph-9SO"/>
-                        <outlet property="midButton" destination="leP-6E-hF7" id="pGq-s9-vsA"/>
+                        <outlet property="profileImage" destination="RHr-OH-NIp" id="ULr-i0-4iI"/>
                         <outlet property="stackView" destination="Fn0-Iz-H2o" id="GeG-il-B7N"/>
-                        <outlet property="upperButton" destination="D9O-x5-BF3" id="MgI-Ec-8p6"/>
+                        <outlet property="titleLabel" destination="dte-O0-1EJ" id="ZMK-ch-njH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPJ-ce-9LA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -188,7 +159,7 @@
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="fTX-kv-iqz" customClass="CatalogMenuViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="40" sectionFooterHeight="40" id="ZMK-zu-sad">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection id="Hgw-mB-0rC">
@@ -295,7 +266,7 @@
             <objects>
                 <collectionViewController id="RR9-YI-osV" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="khb-nr-ZIx">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lBb-fz-Abn">
                             <size key="itemSize" width="310" height="350"/>
@@ -320,7 +291,7 @@
             <objects>
                 <collectionViewController id="gZU-C6-QdM" customClass="CatalogDetailViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5y7-sm-ibV">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="lwN-5z-dAd">
                             <size key="itemSize" width="310" height="350"/>

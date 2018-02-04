@@ -35,8 +35,8 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     @IBOutlet var rightIconButton: TVIconButton!
     @IBOutlet var imageView: UIImageView!
 
-    private let introTitle: String = NSLocalizedString("Intro", comment: "")
-    private let subscribeTitle: String = NSLocalizedString("Subscribe", comment: "")
+    private let introTitle = NSLocalizedString("Intro", comment: "")
+    private let subscribeTitle = NSLocalizedString("Subscribe", comment: "")
 
     func setup(with section: CourseInfoSection) {
         title.text = section.title

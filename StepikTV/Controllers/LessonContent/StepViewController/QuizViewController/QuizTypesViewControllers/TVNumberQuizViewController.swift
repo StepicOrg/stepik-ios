@@ -16,7 +16,7 @@ class TVNumberQuizViewController: TVQuizViewController {
     var textField = UITextField(frame: CGRect.zero)
     let textFieldHeight: CGFloat = 79.0
 
-    private let textFieldPlaceholder: String = NSLocalizedString("Answer", comment: "")
+    private let textFieldPlaceholder = NSLocalizedString("Answer", comment: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()

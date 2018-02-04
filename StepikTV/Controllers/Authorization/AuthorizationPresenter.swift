@@ -29,7 +29,10 @@ class AuthorizationPresenter {
     }
 
     func checkForCachedUser() {
-        guard let user = AuthInfo.shared.user else { return }
+        guard AuthInfo.shared.isAuthorized, let user = AuthInfo.shared.user else {
+            view?.showNoProfile()
+            return
+        }
 
         view?.showProfile(for: user)
     }
