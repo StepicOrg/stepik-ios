@@ -8,11 +8,7 @@
 
 import UIKit
 
-<<<<<<< HEAD:StepikTV/Views/IconButton.swift
-class IconButton: UIView {
-=======
 class TVIconButton: UIView {
->>>>>>> fix/course-content-to-info-units-buttons-behavior:StepikTV/Views/TVIconButton.swift
 
     @IBOutlet private(set) var button: UIButton!
     @IBOutlet private var label: UILabel!
@@ -32,5 +28,4 @@ class TVIconButton: UIView {
     func pressedVideoButton(_ sender: UIButton) {
         self.action?()
     }
-
 }
