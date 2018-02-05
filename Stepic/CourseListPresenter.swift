@@ -238,6 +238,10 @@ class CourseListPresenter {
         }
     }
 
+    func didTouchWidget(atIndex index: Int) {
+        secondaryActionButtonPressed(course: courses[index])
+    }
+
     private func displayCachedAsyncIfEmpty() -> Promise<Void> {
         return Promise<Void> {
             [weak self]
