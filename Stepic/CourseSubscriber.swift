@@ -28,7 +28,8 @@ class CourseSubscriber {
                     course in
                     CoreDataHelper.instance.save()
                     CourseSubscriptionManager.sharedManager.subscribedTo(course: course)
-                    WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                    
                     fulfill(course)
                 }
                 ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: course.progress != nil ? [course.progress!] : [], refreshMode: .update, success: {

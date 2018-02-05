@@ -80,7 +80,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            NotificationCenter.default.post(name: .userLogin, object: nil)
+            NotificationCenter.default.post(name: .userLogin, object: self)
 
             self.view?.showProfile(for: user)
           }.catch { _ in
@@ -102,7 +102,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            NotificationCenter.default.post(name: .userLogin, object: nil)
+            NotificationCenter.default.post(name: .userLogin, object: self)
 
             self.view?.showProfile(for: user)
           }.catch { _ in

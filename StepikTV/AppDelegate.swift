@@ -40,4 +40,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+
+//    func packagedSearchController() -> UIViewController {
+//        // Load a `SearchResultsViewController` from its storyboard.
+//        let searchResultsController = SearchResultsViewController()
+//
+//        /*
+//         Create a UISearchController, passing the `searchResultsController` to
+//         use to display search results.
+//         */
+//        let searchController = UISearchController(searchResultsController: searchResultsController)
+//        searchController.searchResultsUpdater = searchResultsController
+//        searchController.searchBar.placeholder = NSLocalizedString("Enter course name", comment: "")
+//
+//        // Contain the `UISearchController` in a `UISearchContainerViewController`.
+//        let searchContainer = UISearchContainerViewController(searchController: searchController)
+//        searchContainer.title = NSLocalizedString("Search", comment: "")
+//
+//        // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
+//        let searchNavigationController = UINavigationController(rootViewController: searchContainer)
+//        return searchNavigationController
+//    }
+
 }

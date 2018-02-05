@@ -5596,6 +5596,7 @@
 		934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
+		936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
 		936CF2452018A53A00186A97 /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
 		936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -7653,6 +7654,7 @@
 		1B3BB04F1FE6DE2B002DDD9A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				936351BF20279F9E00DFC7EE /* Search */,
 				1B3BB0931FE6E110002DDD9A /* Authorization */,
 				936E90AD2024B8A6009578C2 /* ItemsCollection */,
 				93BBE6241FE6E63C006DEC28 /* CourseInfo */,
@@ -8524,6 +8526,14 @@
 				936351B62024D8F500DFC7EE /* StringExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		936351BF20279F9E00DFC7EE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		936E90A82024B3CF009578C2 /* TagCourses */ = {
