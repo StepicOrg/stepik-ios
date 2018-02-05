@@ -137,7 +137,12 @@ class CourseInfoPresenter {
                 course -> Void in
                 guard let strongSelf = self else { return }
                 strongSelf.course?.enrolled = !delete
-                strongSelf.view?.provide(sections: strongSelf.buildSections(with: course))
+
+                if delete {
+                    strongSelf.view?.dismissOnUnsubscribe()
+                } else {
+                    strongSelf.view?.provide(sections: strongSelf.buildSections(with: course))
+                }
             }.catch {
                 error in
                 print("error: " + error.localizedDescription)

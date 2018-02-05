@@ -80,4 +80,8 @@ extension CourseInfoCollectionViewController: CourseInfoView {
 
         loadingView?.removeFromSuperview()
     }
+
+    func dismissOnUnsubscribe() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
