@@ -188,7 +188,7 @@ extension CourseListHorizontalViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseWidgetCollectionViewCell", for: indexPath) as? CourseWidgetCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+
         if shouldShowLoadingWidgets {
             cell.isLoading = true
         } else {
