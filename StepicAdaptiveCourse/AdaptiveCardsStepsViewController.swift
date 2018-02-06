@@ -38,7 +38,7 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
         // Migration from old version
         let isOnboardingPassed = AdaptiveStorageManager.shared.isAdaptiveOnboardingPassed || DefaultsStorageManager.shared.isRatingOnboardingFinished
 
-        vc.achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
+        vc.achievementsManager = AchievementManager.shared
 
         present(navVC, animated: true, completion: nil)
     }

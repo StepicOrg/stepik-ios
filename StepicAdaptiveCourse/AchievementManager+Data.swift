@@ -9,6 +9,8 @@
 import Foundation
 
 extension AchievementManager {
+    static var shared: AchievementManager?
+
     static func createAndRegisterAchievements(currentRating: Int, currentStreak: Int, currentLevel: Int, isOnboardingPassed: Bool) -> AchievementManager {
         let mgr = AchievementManager()
 

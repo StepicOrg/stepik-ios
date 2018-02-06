@@ -45,9 +45,7 @@ class AdaptiveUserActions {
     func loadCourseAndJoin(courseId: Int) -> Promise<Course> {
         var loadedCourse: Course!
         return Promise { fulfill, reject in
-            checkToken().then {
-                Course.fetchAsync([courseId])
-            }.then { courses -> Promise<[Course]> in
+            Course.fetchAsync([courseId]).then { courses -> Promise<[Course]> in
                 if let course = courses.first {
                     return Promise(value: [course])
                 } else {

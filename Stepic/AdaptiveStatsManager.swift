@@ -28,6 +28,10 @@ class AdaptiveStatsManager {
         self.courseId = courseId
     }
 
+    var lastSolvedDayNum: Int {
+        return getLastDays(count: 1)[0] > 0 ? dayByDate(Date()) : 0
+    }
+
     var stats: [Int: Int]? {
         get {
             guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {

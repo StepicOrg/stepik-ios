@@ -36,6 +36,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         self.achievementsManager = achievementsManager
 
         super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, course: nil, view: view)
+        self.achievementsManager.delegate = self
 
         // Migration
         if defaultsStorageManager.isRatingOnboardingFinished {
@@ -44,7 +45,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     override func refresh() {
-        lastSolvedDay = statsManager.getLastDays(count: 1)[0] > 0 ? statsManager.dayByDate(Date()) : 0
+        lastSolvedDay = statsManager.lastSolvedDayNum
 
         super.refresh()
 
@@ -88,6 +89,20 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
                 achievementsManager.fireEvent(.level(value: AdaptiveRatingHelper.getLevel(for: newRating)))
             }
         }
+    }
+
+    override func updateRatingWhenSuccess() {
+        achievementsManager.fireEvent(.exp(value: streak))
+        achievementsManager.fireEvent(.streak(value: streak))
+
+        // Days streak achievement
+        let curDay = statsManager.dayByDate(Date())
+        if lastSolvedDay != curDay {
+            lastSolvedDay = curDay
+            achievementsManager.fireEvent(.days(value: statsManager.currentDayStreak))
+        }
+
+        super.updateRatingWhenSuccess()
     }
 }
 
