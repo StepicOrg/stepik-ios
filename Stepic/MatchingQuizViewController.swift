@@ -85,7 +85,8 @@ class MatchingQuizViewController: QuizViewController {
 
         self.firstCellHeights = Array(repeating: nil, count: optionsCount)
         self.secondCellHeights = Array(repeating: nil, count: optionsCount)
-
+        self.firstUpdateFinished = false
+        self.secondUpdateFinished = false
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
 
@@ -118,6 +119,8 @@ class MatchingQuizViewController: QuizViewController {
         optionsPermutation = reply.ordering
         orderedOptions = o
 
+        self.firstUpdateFinished = false
+        self.secondUpdateFinished = false
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
     }
