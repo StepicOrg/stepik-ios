@@ -17,7 +17,7 @@ class CourseListHorizontalViewController: CourseListViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
         collectionView.backgroundColor = UIColor.clear
-        collectionView.allowsSelection = false
+        collectionView.allowsSelection = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +133,11 @@ extension CourseListHorizontalViewController: UICollectionViewDelegateFlowLayout
 }
 
 extension CourseListHorizontalViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.didTouchWidget(atIndex: indexPath.item)
+    }
+
     private func getNearestColumnToPoint(point: CGPoint) -> Int {
         return Int(round(point.x / (widgetWidth + horizontalSpacing)))
     }

@@ -238,6 +238,19 @@ class CourseListPresenter {
         }
     }
 
+    func didTouchWidget(atIndex index: Int) {
+        let selectedCourse = courses[index]
+        let isAdaptiveMode = adaptiveStorageManager.canOpenInAdaptiveMode(courseId: selectedCourse.id)
+
+        if !isAdaptiveMode {
+            secondaryActionButtonPressed(course: selectedCourse)
+        }
+
+        if isAdaptiveMode {
+            actionButtonPressed(course: selectedCourse)
+        }
+    }
+
     private func displayCachedAsyncIfEmpty() -> Promise<Void> {
         return Promise<Void> {
             [weak self]
