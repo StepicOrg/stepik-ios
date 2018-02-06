@@ -68,6 +68,9 @@ class CourseSubscriptionManager: NSObject {
         handleUpdatesBlock?()
         if notifyOthers {
             NotificationCenter.default.post(name: courseUnsubscribedNotificationName, object: nil, userInfo: ["course": course])
+            #if os(tvOS)
+            NotificationCenter.default.post(name: .courseUnsubscribed, object: nil, userInfo: ["id": course.id])
+            #endif
         }
     }
 
@@ -76,6 +79,9 @@ class CourseSubscriptionManager: NSObject {
         handleUpdatesBlock?()
         if notifyOthers {
             NotificationCenter.default.post(name: courseSubscribedNotificationName, object: nil, userInfo: ["course": course])
+            #if os(tvOS)
+                NotificationCenter.default.post(name: .courseSubscribed, object: nil, userInfo: ["course": course])
+            #endif
         }
     }
 

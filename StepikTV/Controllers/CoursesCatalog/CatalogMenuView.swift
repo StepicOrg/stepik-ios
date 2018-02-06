@@ -21,5 +21,9 @@ protocol CatalogDetailView: class {
 
     func provide(items: [ItemViewData])
 
+    func add(item: ItemViewData)
+
+    func remove(itemWithId id: Int)
+
     func update()
 }

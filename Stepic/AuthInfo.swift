@@ -86,7 +86,7 @@ class AuthInfo: NSObject {
                     }
                 })
                 #else
-                NotificationCenter.default.post(name: .userLogout, object: nil)
+                NotificationCenter.default.post(name: .userLoggedOut, object: nil)
                 UIThread.performUI {
                     //Delete enrolled information
                     TabsInfo.myCoursesIds = []

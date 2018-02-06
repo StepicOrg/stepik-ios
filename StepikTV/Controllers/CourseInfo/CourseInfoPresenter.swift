@@ -11,10 +11,6 @@ import PromiseKit
 
 let LOADING_CONST: Double = 1.0
 
-extension NSNotification.Name {
-    static let subscribe = NSNotification.Name("subscribe")
-}
-
 class CourseInfoPresenter {
 
     private weak var view: CourseInfoView?
@@ -105,7 +101,7 @@ class CourseInfoPresenter {
 
     private func createInstructorsSection(selectionAction: @escaping (TVFocusableText) -> Void) -> CourseInfoSection? {
         let instructorsViewData = instructors.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.avatarURL, title: "\($0.lastName) \($0.firstName)") { }
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.avatarURL, id: $0.id, title: "\($0.lastName) \($0.firstName)") { }
         }
 
         guard instructorsViewData.count != 0 else { return nil }

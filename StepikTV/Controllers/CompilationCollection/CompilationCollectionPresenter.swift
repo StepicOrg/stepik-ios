@@ -208,7 +208,7 @@ class CollectionRow {
     func setData(with tags: [CourseTag], language: ContentLanguage, for viewController: UIViewController) {
         data = tags.map { tag in
             let title = tag.titleForLanguage[language]!.lowercased().firstUppercased
-            return ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), title: title) {
+            return ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), id: tag.ID, title: title) {
                 ScreensTransitions.getTransitionToTagCoursesScreen(from: viewController, for: tag, title: title)
             }
         }
@@ -218,7 +218,7 @@ class CollectionRow {
 
     func setData(with courses: [Course], for viewController: UIViewController) {
         data = courses.map { course in
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title, subtitle: "Higher School of Economics") {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title, subtitle: "Higher School of Economics") {
                 guard course.enrolled else {
                     ScreensTransitions.getTransitionToCourseInformationScreen(from: viewController, for: course)
                     return
@@ -232,7 +232,9 @@ class CollectionRow {
 }
 
 struct ItemViewData {
+    let id: Int?
     let title: String
+
     var subtitle: String?
     var action: (() -> Void)?
 
@@ -243,12 +245,14 @@ struct ItemViewData {
 
     init(placeholder: UIImage) {
         isEmpty = true
-
         title = ""
+
+        self.id = nil
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, id: Int, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+        self.id = id
         self.title = title
         self.subtitle = subtitle
         self.action = action
@@ -256,7 +260,8 @@ struct ItemViewData {
         self.placeholder = placeholder
     }
 
-    init(placeholder: UIImage, imageURLString: String, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+    init(placeholder: UIImage, imageURLString: String, id: Int, title: String, subtitle: String? = nil, action: @escaping () -> Void) {
+        self.id = id
         self.title = title
         self.subtitle = subtitle
         self.action = action

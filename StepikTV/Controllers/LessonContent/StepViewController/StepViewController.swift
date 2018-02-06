@@ -8,10 +8,6 @@
 
 import UIKit
 
-extension NSNotification.Name {
-    static let stepUpdate = NSNotification.Name("stepUpdate")
-}
-
 class StepViewController: BlurredViewController {
 
     @IBOutlet weak var contentView: UIView!
@@ -56,7 +52,7 @@ class StepViewController: BlurredViewController {
         super.viewWillDisappear(animated)
 
         if hasQuiz {
-            NotificationCenter.default.post(name: .stepUpdate, object: nil, userInfo: ["id": stepViewData.step.position])
+            NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": stepViewData.step.position])
 
             DispatchQueue.main.async {
                 [weak self] in

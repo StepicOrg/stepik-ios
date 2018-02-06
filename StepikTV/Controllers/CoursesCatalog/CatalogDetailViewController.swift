@@ -37,9 +37,20 @@ extension CatalogDetailViewController: CatalogDetailView {
 
     func provide(items: [ItemViewData]) {
         sectionCourses = items
+        collectionView?.reloadData()
     }
 
     func update() {
+        collectionView?.reloadData()
+    }
+
+    func add(item: ItemViewData) {
+        sectionCourses.append(item)
+        collectionView?.reloadData()
+    }
+
+    func remove(itemWithId id: Int) {
+        sectionCourses = sectionCourses.filter { $0.id! != id }
         collectionView?.reloadData()
     }
 

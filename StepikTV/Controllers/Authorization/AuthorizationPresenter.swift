@@ -9,11 +9,6 @@
 import Foundation
 import PromiseKit
 
-extension NSNotification.Name {
-    static let userLogout = NSNotification.Name("userLogout")
-    static let userLogin = NSNotification.Name("userLogin")
-}
-
 class AuthorizationPresenter {
 
     var authAPI: AuthAPI
@@ -80,7 +75,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            NotificationCenter.default.post(name: .userLogin, object: nil)
+            NotificationCenter.default.post(name: .userLoggedIn, object: self)
 
             self.view?.showProfile(for: user)
           }.catch { _ in
@@ -102,7 +97,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            NotificationCenter.default.post(name: .userLogin, object: nil)
+            NotificationCenter.default.post(name: .userLoggedIn, object: self)
 
             self.view?.showProfile(for: user)
           }.catch { _ in

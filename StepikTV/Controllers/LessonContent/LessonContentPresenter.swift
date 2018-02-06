@@ -23,7 +23,7 @@ class LessonContentPresenter {
     init(view: LessonContentView) {
         self.view = view
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.stepUpdateNotification(_:)), name: .stepUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stepUpdateNotification(_:)), name: .stepUpdated, object: nil)
     }
 
     @objc private func stepUpdateNotification(_ notification: NSNotification) {

@@ -36,6 +36,19 @@ class UserCourses {
 
         isLoaded = true
     }
+
+    func addCourses(passed: [ItemViewData], notpassed: [ItemViewData]) {
+        self.passed.append(contentsOf: passed)
+        self.notpassed.append(contentsOf: notpassed)
+    }
+
+    func removePassed(withId id: Int) {
+        passed = passed.filter { $0.id != id }
+    }
+
+    func removeNotpassed(withId id: Int) {
+        notpassed = notpassed.filter { $0.id != id }
+    }
 }
 
 struct DetailCatalogViewInfo {
@@ -76,8 +89,10 @@ class CatalogPresenter {
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.userLoginNotification), name: .userLogin, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.userLogoutNotification), name: .userLogout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.userLoggedInNotification(_:)), name: .userLoggedIn, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.userLoggedOutNotification(_:)), name: .userLoggedOut, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.courseSubscribedNotification(_:)), name: .courseSubscribed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.courseUnsubscribedNotification(_:)), name: .courseUnsubscribed, object: nil)
     }
 
     func refresh() {
@@ -153,18 +168,51 @@ class CatalogPresenter {
         guard let viewController = masterview as? UIViewController else { print("lose view"); return nil }
 
         return courses.map { course in
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, title: course.title) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title) {
                 ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
             }
         }
     }
 
-    @objc private func userLoginNotification() {
+    @objc private func courseSubscribedNotification(_ notification: NSNotification) {
+        if let course = notification.userInfo?["course"] as? Course {
+
+            guard let percent = course.progress?.percentPassed else { return }
+            guard let viewData = buildViewData(from: [course]) else { return }
+
+            if percent < 1.0 {
+                userCourses.addCourses(passed: [], notpassed: viewData)
+            } else {
+                userCourses.addCourses(passed: viewData, notpassed: [])
+            }
+
+            // Provide data to view
+            userCourses.getCountWithIndexPath().forEach {
+                self.masterview?.provide(count: $0.value, at: $0.key)
+            }
+            currentDetailViewInfo?.provideCourses(with: self.userCourses)
+        }
+    }
+
+    @objc private func courseUnsubscribedNotification(_ notification: NSNotification) {
+        if let id = notification.userInfo?["id"] as? Int {
+            userCourses.removeNotpassed(withId: id)
+            userCourses.removePassed(withId: id)
+
+            // Provide data to view
+            userCourses.getCountWithIndexPath().forEach {
+                self.masterview?.provide(count: $0.value, at: $0.key)
+            }
+            currentDetailViewInfo?.provideCourses(with: self.userCourses)
+        }
+    }
+
+    @objc private func userLoggedInNotification(_ notification: NSNotification) {
         splitview?.hideMessageOver()
         refresh()
     }
 
-    @objc private func userLogoutNotification() {
+    @objc private func userLoggedOutNotification(_ notification: NSNotification) {
         self.courses = nil
         self.userCourses = UserCourses()
         self.currentDetailViewInfo?.provideCourses(with: userCourses)

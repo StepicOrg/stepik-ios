@@ -4562,6 +4562,7 @@
 		934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */; };
 		936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B62024D8F500DFC7EE /* StringExtension.swift */; };
 		936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B920263A4800DFC7EE /* ScreensTransitions.swift */; };
+		936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C02029116B00DFC7EE /* NotificationNameExtension.swift */; };
 		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		936CF2442018A06800186A97 /* StepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936CF2432018A06800186A97 /* StepViewController.storyboard */; };
 		936CF2462018A53A00186A97 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CF2452018A53A00186A97 /* StepViewController.swift */; };
@@ -5599,6 +5600,7 @@
 		934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
+		936351C02029116B00DFC7EE /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
 		936CF2452018A53A00186A97 /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
 		936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -8525,6 +8527,7 @@
 			children = (
 				93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */,
 				936351B62024D8F500DFC7EE /* StringExtension.swift */,
+				936351C02029116B00DFC7EE /* NotificationNameExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -13073,6 +13076,7 @@
 				1BB3D2461FA3EB6D000B2FAA /* Device.swift in Sources */,
 				1BB4ECCA1FA3DF43001CDE99 /* CodeTemplate.swift in Sources */,
 				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
+				936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */,
 				1BB4ECDA1FA3DF79001CDE99 /* DictionarySerializable.swift in Sources */,
 				1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */,
 				1BB4EC9B1FA3DD6A001CDE99 /* StringDatasetExtension.swift in Sources */,

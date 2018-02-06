@@ -12,9 +12,7 @@ class ItemsCollectionViewController: UICollectionViewController {
 
     var loadingView: TVLoadingView?
 
-    var sectionCourses: [ItemViewData] = [] {
-        didSet { collectionView?.reloadData() }
-    }
+    var sectionCourses: [ItemViewData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
