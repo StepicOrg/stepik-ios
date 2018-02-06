@@ -32,12 +32,6 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
 
         vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
         vc.statsManager = AdaptiveStatsManager(courseId: course.id)
-
-        let rating = vc.ratingsManager?.rating ?? 0
-        let streak = vc.ratingsManager?.streak ?? 1
-        // Migration from old version
-        let isOnboardingPassed = AdaptiveStorageManager.shared.isAdaptiveOnboardingPassed || DefaultsStorageManager.shared.isRatingOnboardingFinished
-
         vc.achievementsManager = AchievementManager.shared
 
         present(navVC, animated: true, completion: nil)
