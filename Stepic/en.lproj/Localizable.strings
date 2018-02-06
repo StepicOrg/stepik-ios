@@ -389,6 +389,7 @@ AdaptiveProgressByWeeks = "Progress by weeks";
 AdaptivePreferencesTitle = "Adaptive courses";
 UseAdaptiveModePreference = "Adaptive mode";
 AdaptiveOnboardingTitle = "Adaptive mode";
+AdaptiveCourseSelectLoading = "Loading courses...";
 
 /* Tooltips */
 ShareCourseTooltip = "Share the link with your friends to learn together";

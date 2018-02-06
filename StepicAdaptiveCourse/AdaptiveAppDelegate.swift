@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func launchViewController() {
         let supportedCourses = StepicApplicationsInfo.adaptiveSupportedCourses
 
+        var startViewController: UIViewController!
+        let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), defaultsStorageManager: DefaultsStorageManager())
+
         if supportedCourses.count == 1 {
             // One course -> skip course select
             guard let courseId = supportedCourses.first else {
@@ -61,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
             AchievementManager.shared = achievementsManager
 
-            let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), defaultsStorageManager: DefaultsStorageManager())
             let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: initialViewController)
             presenter.initialActions = { success, failure in
                 checkToken().then { () -> Promise<Void> in
@@ -79,13 +81,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             initialViewController.presenter = presenter
-
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-        } else {
+            startViewController = initialViewController
+        } else if supportedCourses.count > 1 {
             // Multiple courses -> present course select
+            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseSelect", storyboardName: "AdaptiveMain") as? AdaptiveCourseSelectViewController else {
+                return
+            }
+
+            let presenter = AdaptiveCourseSelectPresenter(view: initialViewController)
+            presenter.initialActions = { success, failure in
+                checkToken().then { () -> Promise<Void> in
+                    if !AuthInfo.shared.isAuthorized {
+                        return actions.registerNewUser()
+                    } else {
+                        return Promise(value: ())
+                    }
+                }.then { _ -> Promise<[Course]> in
+                    actions.loadCourses(ids: supportedCourses)
+                }.then { courses in
+                    success?(courses)
+                }.catch { error in
+                    failure?(error)
+                }
+            }
+            startViewController = initialViewController
         }
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = startViewController
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -138,4 +138,19 @@ class AdaptiveUserActions {
         }
     }
 
+    internal func loadCourses(ids: [Int]) -> Promise<[Course]> {
+        return Promise { fulfill, reject in
+            Course.fetchAsync(ids).then { courses -> Promise<[Course]> in
+                if courses.count == ids.count {
+                    return Promise(value: courses)
+                } else {
+                    return self.coursesAPI.retrieve(ids: ids, existing: [])
+                }
+            }.then { courses -> Void in
+                fulfill(courses)
+            }.catch { error in
+                reject(error)
+            }
+        }
+    }
 }

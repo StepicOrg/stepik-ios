@@ -1,0 +1,133 @@
+//
+//  AdaptiveCourseSelectViewController.swift
+//  Stepic
+//
+//  Created by Vladislav Kiryukhin on 06.02.2018.
+//  Copyright © 2018 Alex Karpov. All rights reserved.
+//
+
+import Foundation
+
+enum AdaptiveCourseSelectViewState {
+    case loading, normal, error
+}
+
+class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelectView {
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loadingContainerView: UIView!
+    @IBOutlet weak var loadingLabel: UILabel!
+
+    var data: [AdaptiveCourseSelectViewData] = []
+
+    lazy var placeholderView: UIView = {
+        let v = PlaceholderView()
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.align(toView: self.view)
+        v.delegate = self
+        v.datasource = self
+        v.backgroundColor = self.view.backgroundColor
+        return v
+    }()
+
+    var presenter: AdaptiveCourseSelectPresenter?
+    var state: AdaptiveCourseSelectViewState = .normal {
+        didSet {
+            switch state {
+            case .normal:
+                self.placeholderView.isHidden = true
+                self.tableView.isHidden = false
+                self.loadingContainerView.isHidden = true
+            case .error:
+                self.placeholderView.isHidden = false
+                self.tableView.isHidden = true
+                self.loadingContainerView.isHidden = true
+            case .loading:
+                self.placeholderView.isHidden = true
+                self.tableView.isHidden = true
+                self.loadingContainerView.isHidden = false
+            }
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        loadingLabel.text = NSLocalizedString("AdaptiveCourseSelectLoading", comment: "")
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.register(UINib(nibName: "AdaptiveCourseTableViewCell", bundle: nil), forCellReuseIdentifier: AdaptiveCourseTableViewCell.reuseId)
+
+        presenter?.refresh()
+    }
+
+    func set(data: [AdaptiveCourseSelectViewData]) {
+        self.data = data
+        tableView.reloadData()
+    }
+}
+
+extension AdaptiveCourseSelectViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: AdaptiveCourseTableViewCell.reuseId, for: indexPath) as! AdaptiveCourseTableViewCell
+        let currentCourse = data[indexPath.item]
+        cell.setData(imageLink: currentCourse.cover, courseName: currentCourse.name)
+        return cell
+    }
+}
+
+extension AdaptiveCourseSelectViewController: PlaceholderViewDataSource {
+    func placeholderImage() -> UIImage? {
+        switch state {
+        case .error:
+            return Images.placeholders.connectionError
+        default:
+            return nil
+        }
+    }
+
+    func placeholderButtonTitle() -> String? {
+        switch state {
+        case .error:
+            return NSLocalizedString("TryAgain", comment: "")
+        default:
+            return nil
+        }
+    }
+
+    func placeholderDescription() -> String? {
+        switch state {
+        case .error:
+            return nil
+        default:
+            return nil
+        }
+    }
+
+    func placeholderStyle() -> PlaceholderStyle {
+        var style = PlaceholderStyle()
+        style.button.textColor = StepicApplicationsInfo.adaptiveMainColor
+        return style
+    }
+
+    func placeholderTitle() -> String? {
+        switch state {
+        case .error:
+            return NSLocalizedString("ConnectionErrorText", comment: "")
+        default:
+            return nil
+        }
+    }
+}
+
+extension AdaptiveCourseSelectViewController: PlaceholderViewDelegate {
+    func placeholderButtonDidPress() {
+        presenter?.tryAgain()
+    }
+}

@@ -390,6 +390,7 @@ AdaptiveProgressByWeeks = "Прогресс по неделям";
 AdaptivePreferencesTitle = "Адаптивные курсы";
 UseAdaptiveModePreference = "Адаптивный режим";
 AdaptiveOnboardingTitle = "Адаптивный режим";
+AdaptiveCourseSelectLoading = "Загрузка курсов...";
 
 /* Tooltips */
 ShareCourseTooltip = "Поделитесь ссылкой с друзьями, чтобы проходить курс вместе";

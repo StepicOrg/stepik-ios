@@ -10,6 +10,63 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Adaptive Course Select View Controller-->
+        <scene sceneID="WJN-ET-wbo">
+            <objects>
+                <viewController storyboardIdentifier="AdaptiveCourseSelect" id="Q7T-fV-CwQ" customClass="AdaptiveCourseSelectViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oxn-uh-kzU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j84-6Q-fWD">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31H-9Q-RL8">
+                                <rect key="frame" x="66.5" y="267.5" width="187" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bx-dl-AR2">
+                                        <rect key="frame" x="30" y="16" width="75" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hCR-Ee-wKH">
+                                        <rect key="frame" x="121" y="16" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Bx-dl-AR2" firstAttribute="top" secondItem="31H-9Q-RL8" secondAttribute="top" constant="16" id="2ND-tu-K6g"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Bx-dl-AR2" secondAttribute="bottom" constant="16" id="6PX-8e-cMj"/>
+                                    <constraint firstAttribute="trailing" secondItem="hCR-Ee-wKH" secondAttribute="trailing" constant="46" id="U8x-B0-u9C"/>
+                                    <constraint firstItem="hCR-Ee-wKH" firstAttribute="centerY" secondItem="7Bx-dl-AR2" secondAttribute="centerY" id="XOC-3x-PHi"/>
+                                    <constraint firstItem="hCR-Ee-wKH" firstAttribute="leading" secondItem="7Bx-dl-AR2" secondAttribute="trailing" constant="16" id="lg9-xd-xdU"/>
+                                    <constraint firstItem="7Bx-dl-AR2" firstAttribute="leading" secondItem="31H-9Q-RL8" secondAttribute="leading" constant="30" id="nYc-Yh-Ch7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cmG-Sw-HV3" firstAttribute="bottom" secondItem="j84-6Q-fWD" secondAttribute="bottom" id="Fm5-J1-dNO"/>
+                            <constraint firstItem="cmG-Sw-HV3" firstAttribute="trailing" secondItem="j84-6Q-fWD" secondAttribute="trailing" id="bVp-2y-wbS"/>
+                            <constraint firstItem="31H-9Q-RL8" firstAttribute="centerX" secondItem="cmG-Sw-HV3" secondAttribute="centerX" id="cav-1K-oxU"/>
+                            <constraint firstItem="j84-6Q-fWD" firstAttribute="leading" secondItem="cmG-Sw-HV3" secondAttribute="leading" id="obY-ZP-AdB"/>
+                            <constraint firstItem="j84-6Q-fWD" firstAttribute="top" secondItem="cmG-Sw-HV3" secondAttribute="top" id="slA-jC-h5G"/>
+                            <constraint firstItem="31H-9Q-RL8" firstAttribute="centerY" secondItem="cmG-Sw-HV3" secondAttribute="centerY" id="szB-Ge-sVW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cmG-Sw-HV3"/>
+                    </view>
+                    <connections>
+                        <outlet property="loadingContainerView" destination="31H-9Q-RL8" id="THk-A2-G1r"/>
+                        <outlet property="loadingLabel" destination="7Bx-dl-AR2" id="Ilf-J3-Gn0"/>
+                        <outlet property="tableView" destination="j84-6Q-fWD" id="GVg-tb-Pw6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3hl-m1-aWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2025" y="33.802816901408448"/>
+        </scene>
         <!--Adaptive Cards Steps View Controller-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
