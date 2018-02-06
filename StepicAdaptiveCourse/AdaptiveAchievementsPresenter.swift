@@ -32,7 +32,6 @@ class AdaptiveAchievementsPresenter {
 
     init(achievementsManager: AchievementManager, view: AdaptiveAchievementsView) {
         self.view = view
-
         self.achievementsManager = achievementsManager
     }
 

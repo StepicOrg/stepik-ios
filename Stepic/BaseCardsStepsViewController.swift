@@ -21,6 +21,9 @@ class BaseCardsStepsViewController: CardsStepsViewController {
     fileprivate var statusBarPad: UIView?
     private var shouldToggleNavigationBar = true
 
+    // For init View-Presenter via view creating
+    var course: Course!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -83,6 +86,10 @@ class BaseCardsStepsViewController: CardsStepsViewController {
 
     @IBAction func onTrophyButtonClick(_ sender: Any) {
         guard let vc = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "Adaptive") as? AdaptiveStatsPagerViewController else {
+            return
+        }
+
+        guard let course = presenter?.course else {
             return
         }
 

@@ -17,6 +17,32 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
         return AdaptiveStepCardView()
     }
 
+    @IBAction func onTrophyButtonClick(_ sender: Any) {
+        guard let navVC = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "AdaptiveMain") as? StyledNavigationViewController else {
+            return
+        }
+
+        guard let vc = navVC.childViewControllers.first as? AdaptiveAdaptiveStatsPagerViewController else {
+            return
+        }
+
+        guard let course = presenter?.course else {
+            return
+        }
+
+        vc.ratingsManager = AdaptiveRatingManager(courseId: course.id)
+        vc.statsManager = AdaptiveStatsManager(courseId: course.id)
+
+        let rating = vc.ratingsManager?.rating ?? 0
+        let streak = vc.ratingsManager?.streak ?? 1
+        // Migration from old version
+        let isOnboardingPassed = AdaptiveStorageManager.shared.isAdaptiveOnboardingPassed || DefaultsStorageManager.shared.isRatingOnboardingFinished
+
+        vc.achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
+
+        present(navVC, animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

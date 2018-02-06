@@ -1609,6 +1609,7 @@
 		1F125E9042A2210C7C204239 /* Pods_Adaptive_3149.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C173F98D6CDBFD82F42D2D1 /* Pods_Adaptive_3149.framework */; };
 		28563BCC521D1E700384AE0D /* Pods_Adaptive_3150_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
@@ -1748,7 +1749,6 @@
 		2C1B61501F4C4AEF00236804 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2C1B61511F4C4AEF00236804 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C1B61581F4C4AEF00236804 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B61621F4C4AEF00236804 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C1B61641F4C4AEF00236804 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -2160,7 +2160,6 @@
 		2C1B63611F4C590700236804 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2C1B63621F4C590700236804 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C1B63691F4C590700236804 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C1B636E1F4C590700236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B63731F4C590700236804 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C1B63751F4C590700236804 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -2446,11 +2445,6 @@
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
-		2C35C4B71F4DA413002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
-		2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
-		2C35C4B91F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
-		2C35C4BA1F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
-		2C35C4BB1F4DA417002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
 		2C35C4D61F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
 		2C35C4D71F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
@@ -2674,7 +2668,6 @@
 		2C8652FE1F4B33DE00D51654 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C8653061F4B33DE00D51654 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C8653101F4B33DE00D51654 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C8653121F4B33DE00D51654 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -3085,7 +3078,6 @@
 		2C89A9E41F4C289900227C3B /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C89A9EC1F4C289900227C3B /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C89A9F61F4C289900227C3B /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C89A9F81F4C289900227C3B /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -3501,7 +3493,6 @@
 		2C9731981F4C38F600AC9301 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2C9731991F4C38F600AC9301 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C9731A01F4C38F600AC9301 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C9731AA1F4C38F600AC9301 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C9731AC1F4C38F600AC9301 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -3884,6 +3875,10 @@
 		2CE1C2B520249C2B00722989 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
+		2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
+		2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
+		2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
+		2CE527C82029E1600047EC5F /* AdaptiveAchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF425262024A5EC002D7305 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
 		2CF425272024A5F0002D7305 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
@@ -4934,7 +4929,7 @@
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
-		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
+		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1B62B21F4C4B4300236804 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/3149/Auth.plist; sourceTree = "<group>"; };
 		2C1B62B31F4C4B4300236804 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/3149/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5111,6 +5106,8 @@
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLQuizViewController.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
+		2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsSection.swift; sourceTree = "<group>"; };
+		2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
@@ -7275,8 +7272,8 @@
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
-				2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */,
-				2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */,
+				2CE527C62029DC450047EC5F /* Achievements */,
+				2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */,
 			);
 			name = AdaptiveStats;
 			sourceTree = "<group>";
@@ -7608,6 +7605,7 @@
 			children = (
 				2CA9D97E2010A0A6007AA743 /* Views */,
 				2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */,
+				2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */,
 				2CBD855D201799BE00E14F83 /* AdaptiveStats */,
 				2CBD8560201799DC00E14F83 /* AdaptiveRatings */,
 			);
@@ -7807,6 +7805,15 @@
 				2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */,
 			);
 			name = SQLQuizViewController;
+			sourceTree = "<group>";
+		};
+		2CE527C62029DC450047EC5F /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */,
+				2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */,
+			);
+			name = Achievements;
 			sourceTree = "<group>";
 		};
 		2CEDA35E1F336F0E005F4A5D /* Managers */ = {
@@ -11867,6 +11874,7 @@
 				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08019A821DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
+				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
@@ -12416,7 +12424,6 @@
 				2C1B61501F4C4AEF00236804 /* AdaptiveStepCardView.swift in Sources */,
 				2C1B61511F4C4AEF00236804 /* TapProxyView.swift in Sources */,
 				2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C1B61581F4C4AEF00236804 /* AdaptiveStatsViewController.swift in Sources */,
 				2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */,
 				2C1B61621F4C4AEF00236804 /* SearchQueriesViewController.swift in Sources */,
 				2C1B61641F4C4AEF00236804 /* SectionsViewController.swift in Sources */,
@@ -12597,7 +12604,6 @@
 				2C1B61FA1F4C4AEF00236804 /* Course.swift in Sources */,
 				2C1B61FB1F4C4AEF00236804 /* User+CoreDataProperties.swift in Sources */,
 				2C1B61FC1F4C4AEF00236804 /* User.swift in Sources */,
-				2C35C4BB1F4DA417002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C1B61FE1F4C4AEF00236804 /* Parser.swift in Sources */,
 				2C1B61FF1F4C4AEF00236804 /* StepicToken.swift in Sources */,
 				2C1B62001F4C4AEF00236804 /* AuthInfo.swift in Sources */,
@@ -12852,7 +12858,6 @@
 				2C1B63611F4C590700236804 /* AdaptiveStepCardView.swift in Sources */,
 				2C1B63621F4C590700236804 /* TapProxyView.swift in Sources */,
 				2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C1B63691F4C590700236804 /* AdaptiveStatsViewController.swift in Sources */,
 				2C1B636E1F4C590700236804 /* Achievement.swift in Sources */,
 				2C1B63731F4C590700236804 /* SearchQueriesViewController.swift in Sources */,
 				2C1B63751F4C590700236804 /* SectionsViewController.swift in Sources */,
@@ -13033,7 +13038,6 @@
 				2C1B640B1F4C590700236804 /* Course.swift in Sources */,
 				2C1B640C1F4C590700236804 /* User+CoreDataProperties.swift in Sources */,
 				2C1B640D1F4C590700236804 /* User.swift in Sources */,
-				2C35C4BA1F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C1B640F1F4C590700236804 /* Parser.swift in Sources */,
 				2C1B64101F4C590700236804 /* StepicToken.swift in Sources */,
 				2C1B64111F4C590700236804 /* AuthInfo.swift in Sources */,
@@ -13288,7 +13292,6 @@
 				2C8652FE1F4B33DE00D51654 /* AdaptiveStepCardView.swift in Sources */,
 				2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */,
 				2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C8653061F4B33DE00D51654 /* AdaptiveStatsViewController.swift in Sources */,
 				2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */,
 				2C8653101F4B33DE00D51654 /* SearchQueriesViewController.swift in Sources */,
 				2C8653121F4B33DE00D51654 /* SectionsViewController.swift in Sources */,
@@ -13469,7 +13472,6 @@
 				2C8653A81F4B33DE00D51654 /* Course.swift in Sources */,
 				2C8653A91F4B33DE00D51654 /* User+CoreDataProperties.swift in Sources */,
 				2C8653AA1F4B33DE00D51654 /* User.swift in Sources */,
-				2C35C4B71F4DA413002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C8653AC1F4B33DE00D51654 /* Parser.swift in Sources */,
 				2C8653AD1F4B33DE00D51654 /* StepicToken.swift in Sources */,
 				2C8653AE1F4B33DE00D51654 /* AuthInfo.swift in Sources */,
@@ -13715,7 +13717,6 @@
 				2C89A9E41F4C289900227C3B /* AdaptiveStepCardView.swift in Sources */,
 				2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */,
 				2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C89A9EC1F4C289900227C3B /* AdaptiveStatsViewController.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				08C1BF351FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -13901,7 +13902,6 @@
 				2C89AA8E1F4C289900227C3B /* Course.swift in Sources */,
 				2C89AA8F1F4C289900227C3B /* User+CoreDataProperties.swift in Sources */,
 				2C89AA901F4C289900227C3B /* User.swift in Sources */,
-				2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C89AA921F4C289900227C3B /* Parser.swift in Sources */,
 				089C88E21FCF494300003B63 /* CourseListType.swift in Sources */,
 				2C89AA931F4C289900227C3B /* StepicToken.swift in Sources */,
@@ -14159,7 +14159,6 @@
 				2C9731981F4C38F600AC9301 /* AdaptiveStepCardView.swift in Sources */,
 				2C9731991F4C38F600AC9301 /* TapProxyView.swift in Sources */,
 				2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C9731A01F4C38F600AC9301 /* AdaptiveStatsViewController.swift in Sources */,
 				2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */,
 				2C9731AA1F4C38F600AC9301 /* SearchQueriesViewController.swift in Sources */,
 				2C9731AC1F4C38F600AC9301 /* SectionsViewController.swift in Sources */,
@@ -14340,7 +14339,6 @@
 				2C9732421F4C38F600AC9301 /* Course.swift in Sources */,
 				2C9732431F4C38F600AC9301 /* User+CoreDataProperties.swift in Sources */,
 				2C9732441F4C38F600AC9301 /* User.swift in Sources */,
-				2C35C4B91F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C9732461F4C38F600AC9301 /* Parser.swift in Sources */,
 				2C9732471F4C38F600AC9301 /* StepicToken.swift in Sources */,
 				2C9732481F4C38F600AC9301 /* AuthInfo.swift in Sources */,
@@ -14516,6 +14514,7 @@
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
 				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
+				2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */,
 				0888D0FF1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
 				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
@@ -14636,9 +14635,11 @@
 				864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0846B1121EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
 				08A9F7201FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
+				2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
 				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -14913,6 +14914,7 @@
 				864D671F1E83DE03001E8D9E /* Alerts.swift in Sources */,
 				08EDB8C71F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				864D67201E83DE03001E8D9E /* StreaksAlertManager.swift in Sources */,
+				2CE527C82029E1600047EC5F /* AdaptiveAchievementsViewController.swift in Sources */,
 				08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2CA2E72420237E4D001DC410 /* AdaptiveStatsViewController.swift in Sources */,
 				864D67211E83DE03001E8D9E /* StreaksStepikAlertManager.swift in Sources */,

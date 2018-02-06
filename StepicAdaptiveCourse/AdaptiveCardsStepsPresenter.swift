@@ -11,7 +11,7 @@ import PromiseKit
 
 class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
-    private var achievementsManager: AchievementManager?
+    private var achievementsManager: AchievementManager
 
     // Last solved day num (for achievements)
     private var lastSolvedDay = 0
@@ -29,9 +29,14 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: CardsStepsView) {
+        self.achievementsManager = achievementsManager
+
         super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, course: nil, view: view)
 
-        self.achievementsManager = achievementsManager
+        // Migration
+        if defaultsStorageManager.isRatingOnboardingFinished {
+            storageManager.isAdaptiveOnboardingPassed = true
+        }
     }
 
     override func refresh() {
@@ -71,7 +76,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
             let newRating = rating
             let oldRating = newRating - streak + 1
             if AdaptiveRatingHelper.getLevel(for: oldRating) != AdaptiveRatingHelper.getLevel(for: newRating) {
-                //achievementsManager.fireEvent(.level(value: AdaptiveRatingHelper.getLevel(for: newRating)))
+                achievementsManager.fireEvent(.level(value: AdaptiveRatingHelper.getLevel(for: newRating)))
             }
         }
     }
@@ -79,7 +84,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
 extension AdaptiveCardsStepsPresenter: AchievementManagerDelegate {
     func achievementUnlocked(for achievement: Achievement) {
-        //view?.showCongratulationPopup(type: .achievement(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover ?? Images.placeholders.coursePassed), completion: nil)
+        view?.showCongratulationPopup(type: .achievement(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover ?? Images.placeholders.coursePassed), completion: nil)
     }
 }
 

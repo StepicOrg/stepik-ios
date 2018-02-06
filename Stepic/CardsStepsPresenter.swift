@@ -35,6 +35,7 @@ protocol CardsStepsView: class {
 protocol CardsStepsPresenter: StepCardViewDelegate {
     var canSwipeCard: Bool { get }
     var state: CardsStepsPresenterState { get set }
+    var course: Course? { get set }
 
     func refresh()
     func refreshTopCard()

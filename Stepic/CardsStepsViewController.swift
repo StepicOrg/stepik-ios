@@ -17,8 +17,6 @@ class CardsStepsViewController: UIViewController, CardsStepsView {
 
     var canSwipeCurrentCardUp = false
 
-    var course: Course!
-
     fileprivate var topCard: StepCardView?
     fileprivate var currentStepViewController: CardStepViewController?
 
