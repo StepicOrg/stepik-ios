@@ -64,7 +64,7 @@ class WriteCommentViewController: UIViewController {
     }
 
     private func setupTopConstraint() {
-        commentTextView.alignTopEdge(withView: self.view, predicate: "0")
+//        commentTextView.alignTopEdge(withView: self.view, predicate: "0")
     }
 
     override func viewDidLoad() {
