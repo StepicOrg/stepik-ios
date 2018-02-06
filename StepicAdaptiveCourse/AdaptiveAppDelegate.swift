@@ -52,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
 
+            // Init achievements
+            // Use shared object to get access from view (cause we don't have a router layer) and have only one instance per app
             let rating = AdaptiveRatingManager(courseId: courseId).rating
             let streak = AdaptiveRatingManager(courseId: courseId).streak
             // Migration from old version
@@ -61,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), defaultsStorageManager: DefaultsStorageManager())
             let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: initialViewController)
-            presenter.initialActions = { completion in
+            presenter.initialActions = { success, failure in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
@@ -71,7 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }.then { _ -> Promise<Course> in
                     actions.loadCourseAndJoin(courseId: courseId)
                 }.then { course in
-                    completion?(course)
+                    success?(course)
+                }.catch { error in
+                    failure?(error)
                 }
             }
             initialViewController.presenter = presenter

@@ -18,7 +18,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     // Initial actions (registration, join course, etc)
     // We init presenter w/o course and load it in the initialActions block
     var isInitialActionsFinished = false
-    var initialActions: ((((Course) -> Void)?) -> Void)?
+    var initialActions: ((((Course) -> Void)?, ((Error) -> Void)?) -> Void)?
 
     override var onboardingLastStepIndex: Int {
         return 4
@@ -58,6 +58,15 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
                     if self?.storageManager.isAdaptiveOnboardingPassed ?? false {
                         self?.view?.refreshCards()
+                    }
+                }, { error in
+                    if let error = error as? AdaptiveCardsStepsError {
+                        switch error {
+                        case .noProfile, .userNotUnregisteredFromEmails:
+                            break
+                        default:
+                            self?.view?.state = .connectionError
+                        }
                     }
                 })
             } else {
@@ -103,6 +112,15 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         }
 
         super.updateRatingWhenSuccess()
+    }
+
+    override func tryAgain() {
+        if self.view?.state == .connectionError && !isInitialActionsFinished {
+            refresh()
+            return
+        }
+
+        super.tryAgain()
     }
 }
 
