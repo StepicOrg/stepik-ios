@@ -190,19 +190,19 @@ extension CardsStepsViewController: CardsStepsView {
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
         let currentLevel = level
+        let progressAddition: Float = 0.005
 
         expLabel.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(maxRating)")
         levelLabel.text = String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
 
-        let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
+        let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating) + progressAddition
         let shouldFulfill = progressBar.progress > newProgress
-        let progressAddition: Float = 0.005
 
-        guard !progressBar.progress.isEqual(to: newProgress + progressAddition) else {
+        guard !progressBar.progress.isEqual(to: newProgress) else {
             return
         }
 
-        progressBar.progress = shouldFulfill ? 100.0 : newProgress + progressAddition
+        progressBar.progress = shouldFulfill ? 100.0 : newProgress
         UIView.animate(withDuration: 1.2, animations: {
             self.progressBar.layoutIfNeeded()
         }, completion: { _ in
@@ -213,7 +213,7 @@ extension CardsStepsViewController: CardsStepsView {
             self.progressBar.progress = 0
             self.progressBar.layoutIfNeeded()
 
-            self.progressBar.progress = newProgress + progressAddition
+            self.progressBar.progress = newProgress
             UIView.animate(withDuration: 1.2, animations: {
                 self.progressBar.layoutIfNeeded()
             }, completion: nil)
