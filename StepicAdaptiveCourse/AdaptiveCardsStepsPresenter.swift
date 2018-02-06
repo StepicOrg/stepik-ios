@@ -122,6 +122,14 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
         super.tryAgain()
     }
+
+    override func onTitleButtonClick() {
+        guard let slug = currentStepPresenter?.lesson?.slug else {
+            return
+        }
+        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
+        view?.presentShareDialog(for: shareLink)
+    }
 }
 
 extension AdaptiveCardsStepsPresenter: AchievementManagerDelegate {

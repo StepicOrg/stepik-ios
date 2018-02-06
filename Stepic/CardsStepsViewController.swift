@@ -113,6 +113,12 @@ class CardsStepsViewController: UIViewController, CardsStepsView {
 
     }
 
+    func presentShareDialog(for link: String) {
+        let activityViewController = SharingHelper.getSharingController(link)
+        activityViewController.popoverPresentationController?.sourceView = topCard?.titleButton ?? view
+        present(activityViewController, animated: true, completion: nil)
+    }
+
     func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)? = nil) {
         if state == .congratulation {
             completion?()
@@ -238,12 +244,7 @@ extension CardsStepsViewController: PlaceholderViewDataSource {
 
 extension CardsStepsViewController: PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
-        switch state {
-        case .connectionError:
-            presenter?.tryAgain()
-        default:
-            return
-        }
+        presenter?.tryAgain()
     }
 }
 

@@ -25,6 +25,7 @@ protocol CardsStepsView: class {
     func updateTopCardContent(stepViewController: CardStepViewController)
     func updateTopCardTitle(title: String, showControls: Bool)
     func presentDiscussions(stepId: Int, discussionProxyId: String)
+    func presentShareDialog(for link: String)
     func refreshCards()
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
