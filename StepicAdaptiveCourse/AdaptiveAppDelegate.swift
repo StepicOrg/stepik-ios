@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         if !DefaultsContainer.launch.didLaunch {
-            //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.firstOpen, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
         }
 
@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
             if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-                //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+                AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.localNotification, parameters: ["type": notificationType])
             }
         }
 
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-            //AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.localNotification, parameters: ["type": notificationType])
         }
     }
 

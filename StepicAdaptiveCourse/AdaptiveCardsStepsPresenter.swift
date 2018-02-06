@@ -28,6 +28,10 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         return 0
     }
 
+    override var useRatingSynchronization: Bool {
+        return false
+    }
+
     init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: CardsStepsView) {
         self.achievementsManager = achievementsManager
 
@@ -62,6 +66,11 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     override func refreshTopCard() {
+        // Onboarding complete -> send event for achievements
+        if storageManager.isAdaptiveOnboardingPassed {
+            achievementsManager.fireEvent(.onboarding)
+        }
+
         // Waiting until user will not be registered/joined to the course
         // But meanwhile we can present onboarding
         if !storageManager.isAdaptiveOnboardingPassed || isInitialActionsFinished {

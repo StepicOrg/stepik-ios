@@ -3849,6 +3849,7 @@
 		2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12B981F4F33E2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
 		2CD12B9D1F4F348C001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
@@ -14806,6 +14807,7 @@
 				864D66D51E83DE03001E8D9E /* Dataset.swift in Sources */,
 				864D66D61E83DE03001E8D9E /* ChoiceDataset.swift in Sources */,
 				864D66D71E83DE03001E8D9E /* StringDatasetExtension.swift in Sources */,
+				2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				08C7CB7F1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				864D66D81E83DE03001E8D9E /* SortingDataset.swift in Sources */,
 				08EA89B5200E53AA00BCAF44 /* EnrollmentsAPI.swift in Sources */,

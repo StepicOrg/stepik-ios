@@ -108,6 +108,10 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     // Sync
     private var shouldSyncRating = true
 
+    var useRatingSynchronization: Bool {
+        return true
+    }
+
     init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course?, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
@@ -181,7 +185,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             var title = ""
             strongSelf.state = .loading
 
-            let startPromise = strongSelf.shouldSyncRating ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
+            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
             startPromise.then {
                 strongSelf.getNewRecommendation(for: course)
             }.then { lesson -> Promise<Step> in
