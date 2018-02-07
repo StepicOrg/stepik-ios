@@ -47,5 +47,6 @@ extension SearchResultsViewController: SearchResultsView {
 
     func provide(items: [ItemViewData]) {
         sectionCourses = items
+        collectionView?.reloadData()
     }
 }
