@@ -147,7 +147,7 @@ extension CardStepViewController: WKNavigationDelegate {
 
     func alignImages(in webView: WKWebView) -> Promise<Void> {
         // Disable WebKit callout on long press
-        var jsCode = "document.documentElement.style.webkitTouchCallout='none';"; 
+        var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
         // Center images
         jsCode += "var imgs = document.getElementsByTagName('img');"
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
