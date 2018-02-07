@@ -10,32 +10,42 @@ import UIKit
 
 class SearchResultsViewController: ItemsCollectionViewController, UISearchResultsUpdating {
 
-    var search: CourseListType
+    var presenter: SearchResultsPresenter?
 
-    var filterString = "" {
-        didSet {
-            // Return if the filter string hasn't changed.
-            guard filterString != oldValue else { return }
-
-            /*
-            CourseListType.search(query: filterString).request(page: , language: , withAPI: , progressesAPI: , searchResultsAPI: )
- */
-
-            // Apply the filter or show all items if the filter string is empty.
-            if filterString.isEmpty {
-                filteredDataItems = allDataItems
-            }
-            else {
-                filteredDataItems = allDataItems.filter { $0.title.localizedStandardContains(filterString) }
-            }
-
-            // Reload the collection view to reflect the changes.
-            collectionView?.reloadData()
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter = SearchResultsPresenter(view: self, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), searchResultsAPI: SearchResultsAPI())
     }
 
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let text = searchController.searchBar.text ?? ""
+        presenter?.updateSearchQuery(with: text)
     }
 
+}
+
+extension SearchResultsViewController: SearchResultsView {
+
+    func showLoading(isVisible: Bool) {
+
+        guard isVisible else {
+            loadingView?.purge()
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+            return
+        }
+
+        guard let _ = loadingView else {
+
+            loadingView = TVLoadingView(frame: self.view.bounds, color: .gray)
+            loadingView!.setup()
+
+            self.view.addSubview(loadingView!)
+            return
+        }
+    }
+
+    func provide(items: [ItemViewData]) {
+        sectionCourses = items
+    }
 }

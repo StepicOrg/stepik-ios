@@ -86,31 +86,11 @@
                         <segue destination="37g-Fa-hN0" kind="relationship" relationship="viewControllers" id="3ax-zj-RGw"/>
                         <segue destination="AE1-M1-NUh" kind="relationship" relationship="viewControllers" id="nMR-vP-giS"/>
                         <segue destination="Zl5-dF-RYl" kind="relationship" relationship="viewControllers" id="0j6-9I-zIS"/>
-                        <segue destination="Vzi-Co-nSU" kind="relationship" relationship="viewControllers" id="0yu-5M-TU7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkX-mW-m5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3017" y="-4765"/>
-        </scene>
-        <!--Поиск-->
-        <scene sceneID="xnk-nK-l1Q">
-            <objects>
-                <viewController id="Vzi-Co-nSU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WUF-cg-SXJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="cON-iZ-1Vq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3wj-q2-crD">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="gkT-hM-2LX"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Поиск" id="VhR-X5-VfT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dv0-ZZ-hH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1019" y="-2261"/>
         </scene>
         <!--Подборка-->
         <scene sceneID="Wnd-tq-OXs">
