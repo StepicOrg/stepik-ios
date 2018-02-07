@@ -39,9 +39,9 @@ class TagCoursesCollectionPresenter {
     func refresh() {
         guard let listType = listType else { return }
 
-        view?.showLoading(isVisible: true)
-
         let listLanguage = ContentLanguage.sharedContentLanguage
+
+        view?.showLoading(isVisible: true)
         requestForCourses(with: listType, forLanguage: listLanguage) {
             [weak self]
             _ in

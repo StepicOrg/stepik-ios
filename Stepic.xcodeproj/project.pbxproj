@@ -4563,6 +4563,8 @@
 		936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B62024D8F500DFC7EE /* StringExtension.swift */; };
 		936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B920263A4800DFC7EE /* ScreensTransitions.swift */; };
 		936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C02029116B00DFC7EE /* NotificationNameExtension.swift */; };
+		936351C3202A0D6D00DFC7EE /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */; };
+		936351C5202A0D9900DFC7EE /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C4202A0D9900DFC7EE /* SearchResultsView.swift */; };
 		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
 		936CF2442018A06800186A97 /* StepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936CF2432018A06800186A97 /* StepViewController.storyboard */; };
 		936CF2462018A53A00186A97 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CF2452018A53A00186A97 /* StepViewController.swift */; };
@@ -4588,6 +4590,7 @@
 		93BBE5F21FE6B1D6006DEC28 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
 		93BBE6261FE6E6AD006DEC28 /* CourseInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */; };
 		93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */; };
+		93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */; };
 		93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
 		93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */; };
 		93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
@@ -5601,6 +5604,9 @@
 		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
 		936351C02029116B00DFC7EE /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsPresenter.swift; sourceTree = "<group>"; };
+		936351C4202A0D9900DFC7EE /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
 		936CF2452018A53A00186A97 /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
 		936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -7658,6 +7664,7 @@
 		1B3BB04F1FE6DE2B002DDD9A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				936351BF20279F9E00DFC7EE /* Search */,
 				1B3BB0931FE6E110002DDD9A /* Authorization */,
 				936E90AD2024B8A6009578C2 /* ItemsCollection */,
 				93BBE6241FE6E63C006DEC28 /* CourseInfo */,
@@ -8530,6 +8537,16 @@
 				936351C02029116B00DFC7EE /* NotificationNameExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		936351BF20279F9E00DFC7EE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				936351C4202A0D9900DFC7EE /* SearchResultsView.swift */,
+				936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */,
+				936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		936E90A82024B3CF009578C2 /* TagCourses */ = {
@@ -12936,6 +12953,7 @@
 				1BB3D2481FA3EB9C000B2FAA /* NSDateExtensions.swift in Sources */,
 				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
 				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
+				936351C3202A0D6D00DFC7EE /* SearchResultsPresenter.swift in Sources */,
 				93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */,
 				93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */,
 				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
@@ -13088,6 +13106,7 @@
 				1BB3D2431FA3EB2D000B2FAA /* QueriesAPI.swift in Sources */,
 				1BB3D23B1FA3EB2D000B2FAA /* NotificationsAPI.swift in Sources */,
 				1BB4ECAE1FA3DEC3001CDE99 /* Block+CoreDataProperties.swift in Sources */,
+				93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */,
 				1BB4ECAF1FA3DEC3001CDE99 /* Block.swift in Sources */,
 				1BB4ECB01FA3DEC3001CDE99 /* Step+CoreDataProperties.swift in Sources */,
 				1BB4ECD41FA3DF43001CDE99 /* Progress.swift in Sources */,
@@ -13103,6 +13122,7 @@
 				1BB4ECE11FA3E529001CDE99 /* CourseMetainfoEntity.swift in Sources */,
 				1BB4ECAB1FA3DE46001CDE99 /* CertificatesAPI.swift in Sources */,
 				9343534F201A067300DD2F1A /* TVNumberQuizViewController.swift in Sources */,
+				936351C5202A0D9900DFC7EE /* SearchResultsView.swift in Sources */,
 				1BB3D24E1FA3ED69000B2FAA /* TabsInfo.swift in Sources */,
 				1BB4ECA21FA3DE26001CDE99 /* ApiDataDownloader.swift in Sources */,
 				1BB4EC9D1FA3DD80001CDE99 /* ChoiceReply.swift in Sources */,

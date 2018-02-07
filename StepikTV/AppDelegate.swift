@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Add a search view controller to the root `UITabBarController`.
+        if let tabController = window?.rootViewController as? UITabBarController {
+            tabController.viewControllers?.append(packagedSearchController())
+        }
         return true
     }
 
@@ -38,6 +41,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func packagedSearchController() -> UIViewController {
+        // Load a `SearchResultsViewController` from its storyboard.
+        let flowLayout = UICollectionViewFlowLayout()
+            flowLayout.scrollDirection = .vertical
+        let searchResultsController = SearchResultsViewController(collectionViewLayout: flowLayout)
+
+        /*
+         Create a UISearchController, passing the `searchResultsController` to
+         use to display search results.
+         */
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchController.searchResultsUpdater = searchResultsController
+        searchController.searchBar.placeholder = NSLocalizedString("Enter course name", comment: "")
+
+        // Contain the `UISearchController` in a `UISearchContainerViewController`.
+        let searchContainer = UISearchContainerViewController(searchController: searchController)
+        searchContainer.title = NSLocalizedString("Search", comment: "")
+
+        // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
+        let searchNavigationController = UINavigationController(rootViewController: searchContainer)
+        return searchNavigationController
     }
 
 }
