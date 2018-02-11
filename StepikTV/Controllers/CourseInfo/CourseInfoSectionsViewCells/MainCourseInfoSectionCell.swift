@@ -14,13 +14,13 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 787.0) }
 
     static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
-        guard case let .main(hosts: _, descr: descr, imageURL: _, trailerAction: _, subscriptionAction: _, selectionAction: _, enrolled: _) = section.contentType else {
+        guard case let .main(host: host, descr: descr, imageURL: _, trailerAction: _, subscriptionAction: _, selectionAction: _, enrolled: _) = section.contentType else {
             return 35.0
         }
 
         let titleHeight = max(69.0, UILabel.heightForLabelWithText(section.title, lines: 0, font: UIFont.systemFont(ofSize: 57, weight: UIFontWeightMedium), width: width - 1000, alignment: .left))
 
-        let hostsHeight = CGFloat(46.0)
+        let hostsHeight = max(46.0, UILabel.heightForLabelWithText(host, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 1000, alignment: .left))
 
         var contentHeight = UILabel.heightForLabelWithText(descr, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 1000, alignment: .left)
             contentHeight = contentHeight > 350.0 ? 350.0 : contentHeight
@@ -43,14 +43,15 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
         title.text = section.title
 
         switch section.contentType {
-        case let .main(hosts: _, descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: enrolled):
-            self.hosts.text = "To do..."
+        case let .main(host: host, descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: enrolled):
+            self.hosts.text = host
             self.descr.setTextWithHTMLString(descr)
             self.descr.pressAction = selectionAction
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
             self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
             self.leftIconButton.action = trailerAction
             self.setSubscribed(enrolled: enrolled, action: subscriptionAction)
+            self.setAuthorized(status: section.isAuthorized!)
         default:
             fatalError("Sections data and view dependencies fails")
         }
@@ -58,9 +59,13 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
 
     func setSubscribed(enrolled: Bool, action: @escaping () -> Void) {
         let title = enrolled ? subscribedTitle : subscribeTitle
-        let image = enrolled ? #imageLiteral(resourceName: "unsubscribe_icon") :  #imageLiteral(resourceName: "subscribe_icon")
+        let image = enrolled ? #imageLiteral(resourceName: "unsubscribe_icon") : #imageLiteral(resourceName: "subscribe_icon")
         self.rightIconButton.configure(with: image, title)
         self.rightIconButton.action = action
+    }
+
+    func setAuthorized(status: Bool) {
+        self.rightIconButton.isEnabled = status
     }
 
 }

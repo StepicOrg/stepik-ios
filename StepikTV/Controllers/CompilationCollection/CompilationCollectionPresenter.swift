@@ -84,8 +84,15 @@ class CompilationCollectionPresenter {
                             throw WeakSelfError.noStrong
                         }
 
-                        strongSelf.rows[index].setData(with: courses, for: strongSelf.view as! UIViewController)
-                        strongSelf.view?.update(rowWith: index)
+                        courses.forEach {
+                            $0.loadAllInstructors {
+                                [weak self] _ in
+                                guard let strongSelf = self else { return }
+
+                                strongSelf.rows[index].setData(with: courses, for: strongSelf.view as! UIViewController)
+                                strongSelf.view?.update(rowWith: index)
+                            }
+                        }
                     }.catch {
                         [weak self]
                         _ in
@@ -209,7 +216,7 @@ class CollectionRow {
         data = tags.map { tag in
             let title = tag.titleForLanguage[language]!.lowercased().firstUppercased
             return ItemViewData(placeholder: #imageLiteral(resourceName: "tag-placeholder"), id: tag.ID, title: title) {
-                ScreensTransitions.getTransitionToTagCoursesScreen(from: viewController, for: tag, title: title)
+                ScreensTransitions.moveToTagCoursesScreen(from: viewController, for: tag, title: title)
             }
         }
 
@@ -218,12 +225,16 @@ class CollectionRow {
 
     func setData(with courses: [Course], for viewController: UIViewController) {
         data = courses.map { course in
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title, subtitle: "Higher School of Economics") {
+            var hostname = ""
+            if let host = course.instructors.first {
+                hostname = "\(host.firstName) \(host.lastName) "
+            }
+            return ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title, subtitle: hostname) {
                 guard course.enrolled else {
-                    ScreensTransitions.getTransitionToCourseInformationScreen(from: viewController, for: course)
+                    ScreensTransitions.moveToCourseInformationScreen(from: viewController, for: course)
                     return
                 }
-                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
+                ScreensTransitions.moveToCourseContent(from: viewController, for: course)
             }
         }
 

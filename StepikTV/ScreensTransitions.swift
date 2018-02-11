@@ -10,7 +10,7 @@ import UIKit
 
 class ScreensTransitions {
 
-    class func getTransitionToCourseInformationScreen(from viewController: UIViewController, for course: Course) {
+    class func moveToCourseInformationScreen(from viewController: UIViewController, for course: Course) {
 
         let destinationViewController = ControllerHelper.instantiateViewController(identifier: "CourseInfoPage", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
 
@@ -20,7 +20,7 @@ class ScreensTransitions {
         viewController.present(destinationViewController, animated: true, completion: {})
     }
 
-    class func getTransitionToTagCoursesScreen(from viewController: UIViewController, for tag: CourseTag, title: String) {
+    class func moveToTagCoursesScreen(from viewController: UIViewController, for tag: CourseTag, title: String) {
 
         let navigationController = ControllerHelper.instantiateViewController(identifier: "TagCoursesNavigation", storyboardName: "TagCourses") as! UINavigationController
 
@@ -34,7 +34,7 @@ class ScreensTransitions {
         viewController.present(navigationController, animated: true, completion: {})
     }
 
-    class func getTransitionToCourseContent(from viewController: UIViewController, for course: Course) {
+    class func moveToCourseContent(from viewController: UIViewController, for course: Course) {
 
         let splitViewController = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! MenuSplitViewController
 

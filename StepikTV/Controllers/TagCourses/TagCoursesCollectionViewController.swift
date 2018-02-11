@@ -14,7 +14,7 @@ class TagCoursesCollectionViewController: ItemsCollectionViewController {
 }
 
 extension TagCoursesCollectionViewController: TagCoursesCollectionView {
-    
+
     func showLoading(isVisible: Bool) {
 
         guard isVisible else {
@@ -36,5 +36,6 @@ extension TagCoursesCollectionViewController: TagCoursesCollectionView {
 
     func provide(items: [ItemViewData]) {
         sectionCourses = items
+        collectionView?.reloadData()
     }
 }

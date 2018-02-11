@@ -43,11 +43,11 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RHr-OH-NIp">
-                                <rect key="frame" x="704" y="210" width="126" height="126"/>
+                                <rect key="frame" x="624" y="290" width="126" height="126"/>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="RHr-OH-NIp" firstAttribute="trailing" secondItem="6lN-w4-EB8" secondAttribute="trailing" id="8B2-yD-9LC"/>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="trailing" secondItem="6lN-w4-EB8" secondAttribute="trailing" constant="-80" id="8B2-yD-9LC"/>
                             <constraint firstItem="dte-O0-1EJ" firstAttribute="leading" secondItem="6lN-w4-EB8" secondAttribute="trailing" constant="261" id="AWW-On-3nt"/>
                             <constraint firstItem="Fn0-Iz-H2o" firstAttribute="top" secondItem="dte-O0-1EJ" secondAttribute="bottom" constant="51" id="Aqc-CO-sZe"/>
                             <constraint firstItem="MuA-a3-zLV" firstAttribute="bottom" secondItem="6lN-w4-EB8" secondAttribute="bottom" constant="180" id="I5t-Fo-hfh"/>
@@ -56,7 +56,7 @@
                             <constraint firstItem="MuA-a3-zLV" firstAttribute="trailing" secondItem="dte-O0-1EJ" secondAttribute="trailing" constant="20" id="Xwn-CA-Jel"/>
                             <constraint firstItem="RHr-OH-NIp" firstAttribute="height" secondItem="6lN-w4-EB8" secondAttribute="height" multiplier="1/5" id="c5j-uf-k4N"/>
                             <constraint firstItem="6lN-w4-EB8" firstAttribute="leading" secondItem="MuA-a3-zLV" secondAttribute="leading" constant="110" id="h0u-HN-qdq"/>
-                            <constraint firstItem="RHr-OH-NIp" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" id="lTP-6h-Bch"/>
+                            <constraint firstItem="RHr-OH-NIp" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" constant="80" id="lTP-6h-Bch"/>
                             <constraint firstItem="RHr-OH-NIp" firstAttribute="width" secondItem="6lN-w4-EB8" secondAttribute="width" multiplier="1/5" id="nyX-SS-xZS"/>
                             <constraint firstItem="dte-O0-1EJ" firstAttribute="top" secondItem="6lN-w4-EB8" secondAttribute="top" constant="40" id="wBE-TL-d0Z"/>
                         </constraints>

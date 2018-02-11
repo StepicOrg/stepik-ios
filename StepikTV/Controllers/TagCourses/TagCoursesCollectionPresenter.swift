@@ -79,11 +79,11 @@ class TagCoursesCollectionPresenter {
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title) {
 
                 guard course.enrolled else {
-                    ScreensTransitions.getTransitionToCourseInformationScreen(from: viewController, for: course)
+                    ScreensTransitions.moveToCourseInformationScreen(from: viewController, for: course)
                     return
                 }
 
-                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
+                ScreensTransitions.moveToCourseContent(from: viewController, for: course)
             }
         }
     }

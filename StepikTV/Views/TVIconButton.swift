@@ -13,9 +13,15 @@ class TVIconButton: UIView {
     @IBOutlet private var button: UIButton!
     @IBOutlet private var label: UILabel!
 
+    var isEnabled: Bool = true {
+        didSet {
+            button.isEnabled = isEnabled
+        }
+    }
+
     var action : (() -> Void)? {
         didSet {
-            self.button.addTarget(self, action: #selector(pressedVideoButton(_:)), for: .primaryActionTriggered)
+            self.button.addTarget(self, action: #selector(pressedButton(_:)), for: .primaryActionTriggered)
         }
     }
 
@@ -24,7 +30,7 @@ class TVIconButton: UIView {
         label.text = title
     }
 
-    func pressedVideoButton(_ sender: UIButton) {
-        self.action?()
+    func pressedButton(_ sender: UIButton) {
+        if isEnabled { self.action?() }
     }
 }

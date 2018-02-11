@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RegularCollectionRowViewCell" id="VoK-Hg-otD" customClass="RegularCollectionRowViewCell" customModule="StepikTV" customModuleProvider="target">
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RegularCollectionRowViewCell" id="VoK-Hg-otD" customClass="RegularCollectionRowViewCell" customModule="StepikTV" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="1920" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Z76-BT-PPz">
-                        <rect key="frame" x="0.0" y="76" width="1920" height="216"/>
+                        <rect key="frame" x="0.0" y="76" width="1920" height="196"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="XNS-r6-rkZ">
                             <size key="itemSize" width="300" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -41,7 +41,7 @@
                 <constraint firstItem="mcr-TD-aZT" firstAttribute="top" secondItem="VoK-Hg-otD" secondAttribute="top" constant="20" id="MdJ-Ri-Tfw"/>
                 <constraint firstItem="Z76-BT-PPz" firstAttribute="top" secondItem="mcr-TD-aZT" secondAttribute="bottom" constant="10" id="NKR-Pu-8Tx"/>
                 <constraint firstAttribute="trailing" secondItem="Z76-BT-PPz" secondAttribute="trailing" id="S5k-zS-TZL"/>
-                <constraint firstAttribute="bottom" secondItem="Z76-BT-PPz" secondAttribute="bottom" constant="8" id="jdK-wS-JF8"/>
+                <constraint firstAttribute="bottom" secondItem="Z76-BT-PPz" secondAttribute="bottom" constant="28" id="jdK-wS-JF8"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="6iT-ne-SG0"/>
             <size key="customSize" width="764" height="237"/>

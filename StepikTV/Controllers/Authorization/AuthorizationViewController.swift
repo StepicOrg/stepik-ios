@@ -35,9 +35,6 @@ class AuthorizationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        profileImage.setRoundedCorners(cornerRadius: profileImage.bounds.height / 2)
-
         titleLabel.text = screenTitle
 
         loginButton.setTitle(loginTitle, for: .normal)
@@ -50,6 +47,10 @@ class AuthorizationViewController: UIViewController {
         exitButton.addTarget(self, action: #selector(logoutAction(_:)), for: UIControlEvents.primaryActionTriggered)
 
         presenter?.checkForCachedUser()
+    }
+
+    override func viewDidLayoutSubviews() {
+        profileImage.setRoundedCorners(cornerRadius: profileImage.bounds.height / 2)
     }
 
     func loginAction(_ sender: UIButton) {
@@ -93,6 +94,8 @@ extension AuthorizationViewController: AuthorizationView {
     }
 
     func showNoProfile() {
+        profileImage.image = nil
+
         cleanStackView()
 
         loginButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true

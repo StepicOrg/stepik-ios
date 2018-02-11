@@ -10,7 +10,7 @@ import UIKit
 
 class MajorCollectionRowViewCell: CollectionRowViewCell, CollectionRowViewProtocol {
     static var reuseIdentifier: String { return "MajorCollectionRowViewCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 420.0) }
+    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 440.0) }
 
     @IBOutlet var collectionView: UICollectionView!
 

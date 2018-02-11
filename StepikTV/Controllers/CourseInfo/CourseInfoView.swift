@@ -17,5 +17,4 @@ protocol CourseInfoView: class {
     func hideLoading()
 
     func dismissOnUnsubscribe()
-
 }

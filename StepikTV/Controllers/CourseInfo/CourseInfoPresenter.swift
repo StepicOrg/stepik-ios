@@ -39,6 +39,9 @@ class CourseInfoPresenter {
     private var instructors: [User] = []
     private var sections: [CourseInfoSection] = []
 
+    private let subscribeTitle = NSLocalizedString("Subscribing...", comment: "")
+    private let unsubscribeTitle = NSLocalizedString("Unsubscribing...", comment: "")
+
     init(view: CourseInfoView) {
         self.view = view
         self.subscriber = CourseSubscriber()
@@ -57,7 +60,8 @@ class CourseInfoPresenter {
         }
 
         // Main section
-        let mainSection = createMainSection(course: course, selectionAction: textSelectionAction)
+        let isAuthorized = AuthInfo.shared.isAuthorized
+        let mainSection = createMainSection(course: course, isAuthorized: isAuthorized, selectionAction: textSelectionAction)
         sections.append(mainSection)
 
         // Instructors section
@@ -72,8 +76,10 @@ class CourseInfoPresenter {
         return sections
     }
 
-    private func createMainSection(course: Course, selectionAction: @escaping (TVFocusableText) -> Void) -> CourseInfoSection {
+    private func createMainSection(course: Course, isAuthorized: Bool, selectionAction: @escaping (TVFocusableText) -> Void) -> CourseInfoSection {
         let title = course.title
+        var hostname: String = ""
+        if let host = course.instructors.first { hostname = "\(host.lastName) \(host.firstName)"}
         let descr = course.courseDescription
         let imageURL = URL(string: course.coverURLString)
 
@@ -81,16 +87,20 @@ class CourseInfoPresenter {
             self.playIntro(intro: course.introVideo)
         }
 
-        let subscriptionAction: () -> Void = { _ in
-            self.subscribe(to: course, delete: course.enrolled)
+        let subscriptionAction: () -> Void = {
+            let title = course.enrolled ? self.unsubscribeTitle : self.subscribeTitle
+            self.view?.showLoading(title: title)
+            self.subscribe(to: course, delete: course.enrolled) {
+                self.view?.hideLoading()
+            }
         }
 
-        let section = CourseInfoSection(.main(hosts: [""], descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: course.enrolled), title: title)
+        let section = CourseInfoSection(.main(host: hostname, descr: descr, imageURL: imageURL, trailerAction: trailerAction, subscriptionAction: subscriptionAction, selectionAction: selectionAction, enrolled: course.enrolled), title: title, isAuthorized: isAuthorized)
         return section
     }
 
     private func createDetailSections(course: Course, selectionAction: @escaping (TVFocusableText) -> Void) -> [CourseInfoSection] {
-        let detailsParams = ["Audience": course.audience, "Certificate": course.certificate, "Requirements": course.requirements , "Workload": course.workload, "Summary": course.summary].filter {
+        let detailsParams = ["Audience": course.audience, "Certificate": course.certificate, "Requirements": course.requirements, "Workload": course.workload, "Summary": course.summary].filter {
             $0.value != ""
         }
         let sections = detailsParams.map {
@@ -120,7 +130,7 @@ class CourseInfoPresenter {
         viewController.present(player, animated: true) {}
     }
 
-    private func subscribe(to course: Course, delete: Bool = false) {
+    private func subscribe(to course: Course, delete: Bool = false, completion: @escaping () -> Void) {
         checkToken().then {
             [weak self]
             () -> Promise<Course> in
@@ -128,20 +138,25 @@ class CourseInfoPresenter {
                 throw CourseSubscriber.CourseSubscriptionError.error(status: "")
             }
             return strongSelf.subscriber.join(course: course, delete: delete)
-            }.then {
-                [weak self]
-                course -> Void in
-                guard let strongSelf = self else { return }
-                strongSelf.course?.enrolled = !delete
+        }.then {
+            [weak self]
+            course -> Void in
+            guard let strongSelf = self else { return }
+            strongSelf.course?.enrolled = !delete
 
-                if delete {
-                    strongSelf.view?.dismissOnUnsubscribe()
-                } else {
-                    strongSelf.view?.provide(sections: strongSelf.buildSections(with: course))
-                }
-            }.catch {
-                error in
-                print("error: " + error.localizedDescription)
+            if delete {
+                completion()
+                strongSelf.view?.dismissOnUnsubscribe()
+            } else {
+                strongSelf.view?.provide(sections: strongSelf.buildSections(with: course))
+
+                completion()
+                guard let viewController = strongSelf.view as? UIViewController, let course = strongSelf.course else { return }
+                ScreensTransitions.moveToCourseContent(from: viewController, for: course)
+            }
+        }.catch {
+            error in
+            print("error: " + error.localizedDescription)
         }
     }
 }
@@ -149,15 +164,17 @@ class CourseInfoPresenter {
 struct CourseInfoSection {
     let title: String
     let contentType: CourseInfoSectionType
+    var isAuthorized: Bool?
 
-    init(_ contentType: CourseInfoSectionType, title: String) {
+    init(_ contentType: CourseInfoSectionType, title: String, isAuthorized: Bool? = nil) {
         self.contentType = contentType
         self.title = title
+        self.isAuthorized = isAuthorized
     }
 }
 
 enum CourseInfoSectionType {
-    case main(hosts: [String], descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: () -> Void, selectionAction: (TVFocusableText) -> Void, enrolled: Bool)
+    case main(host: String, descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: () -> Void, selectionAction: (TVFocusableText) -> Void, enrolled: Bool)
     case text(content: String, selectionAction: (TVFocusableText) -> Void)
     case instructors(items: [ItemViewData])
 

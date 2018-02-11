@@ -169,7 +169,7 @@ class CatalogPresenter {
 
         return courses.map { course in
             ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title) {
-                ScreensTransitions.getTransitionToCourseContent(from: viewController, for: course)
+                ScreensTransitions.moveToCourseContent(from: viewController, for: course)
             }
         }
     }

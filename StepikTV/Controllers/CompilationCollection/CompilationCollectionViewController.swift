@@ -76,7 +76,7 @@ extension CompilationCollectionViewController: UICollectionViewDelegateFlowLayou
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0.0, left: 0, bottom: 20.0, right: 0.0)
+        return UIEdgeInsets(top: 0.0, left: 0, bottom: 0.0, right: 0.0)
     }
 }
 

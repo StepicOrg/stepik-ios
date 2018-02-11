@@ -11,7 +11,7 @@ import UIKit
 class RegularCollectionRowViewCell: CollectionRowViewCell, CollectionRowViewProtocol {
 
     static var reuseIdentifier: String { return "RegularCollectionRowViewCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 408.0) }
+    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 428.0) }
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var title: UILabel!

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NarrowItemCell: FocusableCustomCollectionViewCell {
+class NarrowItemCell: ImageConvertableCollectionViewCell {
     static var nibName: String { return "NarrowItemCell" }
     static var reuseIdentifier: String { return "NarrowItemCell" }
     static var size: CGSize { return CGSize(width: 308.0, height: 180.0) }
@@ -18,11 +18,20 @@ class NarrowItemCell: FocusableCustomCollectionViewCell {
 
     var pressAction: (() -> Void)?
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        imageView.adjustsImageWhenAncestorFocused = true
+        imageView.clipsToBounds = false
+
+        isGradientNeeded = false
+    }
     func setup(with item: ItemViewData) {
         titleLabel.text = item.title
         pressAction = item.action
 
-        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder)
+        imageView.image = item.placeholder
+        self.imageView.image = generateImage(with: item.title, inImage: item.placeholder)
     }
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -30,5 +39,25 @@ class NarrowItemCell: FocusableCustomCollectionViewCell {
         guard presses.first!.type != UIPressType.menu else { return }
 
         pressAction?()
+    }
+
+    override func getTextRect(_ text: String) -> CGRect {
+        let leading: CGFloat = 17.0
+        let width: CGFloat = imageView.bounds.width - leading * 2
+        let height = UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 31, weight: UIFontWeightMedium), width: width, alignment: .center)
+        let top: CGFloat = (imageView.bounds.height - height) / 2
+
+        return CGRect(x: leading, y: top, width: width, height: height)
+    }
+
+    override func getTextAttributes() -> [String : Any] {
+        let textColor = UIColor.white
+        let textFont = UIFont.systemFont(ofSize: 31.0, weight: UIFontWeightMedium)
+        let style = NSMutableParagraphStyle()
+            style.alignment = .center
+            style.lineBreakMode = .byWordWrapping
+        let offset = NSNumber(value: 15)
+
+        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style, NSBaselineOffsetAttributeName: offset] as [String : Any]
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegularItemCell: FocusableCustomCollectionViewCell {
+class RegularItemCell: ImageConvertableCollectionViewCell {
     static var nibName: String { return "RegularItemCell" }
     static var reuseIdentifier: String { return "RegularItemCell" }
     static var size: CGSize { return CGSize(width: 548.0, height: 308.0) }
@@ -21,20 +21,19 @@ class RegularItemCell: FocusableCustomCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = imageView.bounds
-        gradientLayer.colors = [UIColor.black.withAlphaComponent(0.1).cgColor, UIColor.black.withAlphaComponent(0.3).cgColor, UIColor.black.withAlphaComponent(0.6).cgColor]
-        imageView.layer.addSublayer(gradientLayer)
+        imageView.adjustsImageWhenAncestorFocused = true
+        imageView.clipsToBounds = false
     }
 
     func setup(with item: ItemViewData) {
         titleLabel.text = item.title
         pressAction = item.action
 
-        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
+        imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder) {
             let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
-            self.imageView.image = UIImage(data: data!)
-        })
+            let image = UIImage(data: data!)!
+            self.imageView.image = self.generateImage(with: item.title, inImage: image)
+        }
     }
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -42,5 +41,24 @@ class RegularItemCell: FocusableCustomCollectionViewCell {
         guard presses.first!.type != UIPressType.menu else { return }
 
         pressAction?()
+    }
+
+    override func getTextRect(_ text: String) -> CGRect {
+        let leading: CGFloat = 38.0
+        let top: CGFloat = 204.0
+        let width: CGFloat = imageView.bounds.width - leading * 2
+        let height: CGFloat = 72.0
+
+        return CGRect(x: leading, y: top, width: width, height: height)
+    }
+
+    override func getTextAttributes() -> [String : Any] {
+        let textColor = UIColor.white
+        let textFont = UIFont.systemFont(ofSize: 31.0, weight: UIFontWeightHeavy)
+        let style = NSMutableParagraphStyle()
+            style.lineBreakMode = .byWordWrapping
+        let offset = NSNumber(value: 0)
+
+        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style, NSBaselineOffsetAttributeName: offset] as [String : Any]
     }
 }

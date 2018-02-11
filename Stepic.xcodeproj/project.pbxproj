@@ -4576,6 +4576,8 @@
 		937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4521FA3819100705195 /* CourseInfo.storyboard */; };
 		9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4541FA3820600705195 /* CourseContent.storyboard */; };
+		938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D12030A58D00DFEA3A /* UIImageExtension.swift */; };
+		938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */; };
 		93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
 		93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */; };
 		93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
@@ -5603,8 +5605,8 @@
 		934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
-		936351C02029116B00DFC7EE /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		936351C02029116B00DFC7EE /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsPresenter.swift; sourceTree = "<group>"; };
 		936351C4202A0D9900DFC7EE /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
@@ -5616,6 +5618,8 @@
 		936E90B42024D3BD009578C2 /* TagCoursesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionView.swift; sourceTree = "<group>"; };
 		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
 		9386A4541FA3820600705195 /* CourseContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseContent.storyboard; sourceTree = "<group>"; };
+		938860D12030A58D00DFEA3A /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConvertableCollectionViewCell.swift; sourceTree = "<group>"; };
 		93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		93B7F1D52003E090006B9934 /* TVFocusableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVFocusableText.swift; sourceTree = "<group>"; };
 		93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
@@ -7691,6 +7695,7 @@
 				93C3C1E92020B2000040BD1D /* TVLoadingView.swift */,
 				93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */,
 				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
+				938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */,
 				93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */,
 			);
 			path = Views;
@@ -8533,6 +8538,7 @@
 			isa = PBXGroup;
 			children = (
 				93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */,
+				938860D12030A58D00DFEA3A /* UIImageExtension.swift */,
 				936351B62024D8F500DFC7EE /* StringExtension.swift */,
 				936351C02029116B00DFC7EE /* NotificationNameExtension.swift */,
 			);
@@ -12988,6 +12994,7 @@
 				1BB4ECF31FA3E74F001CDE99 /* CoursePlainEntity.swift in Sources */,
 				1BB4ECD71FA3DF68001CDE99 /* Parser.swift in Sources */,
 				1BB4ECB81FA3DEC3001CDE99 /* Course+CoreDataProperties.swift in Sources */,
+				938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */,
 				1BB4EC9C1FA3DD7C001CDE99 /* Reply.swift in Sources */,
 				9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */,
 				1BB4ECED1FA3E6A7001CDE99 /* MathReply.swift in Sources */,
@@ -13022,6 +13029,7 @@
 				93E5AAFA201641EC00290B4E /* ReplyCache.swift in Sources */,
 				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
 				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
+				938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */,
 				93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */,
 				936E90B52024D3BD009578C2 /* TagCoursesCollectionView.swift in Sources */,
 				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,

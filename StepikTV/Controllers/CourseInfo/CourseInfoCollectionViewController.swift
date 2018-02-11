@@ -77,7 +77,6 @@ extension CourseInfoCollectionViewController: CourseInfoView {
 
     func hideLoading() {
         loadingView?.purge()
-
         loadingView?.removeFromSuperview()
     }
 

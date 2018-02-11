@@ -9,7 +9,6 @@
 import UIKit
 
 class RectangularItemCell: UICollectionViewCell {
-
     static var nibName: String { get { return "RectangularItemCell" } }
     static var reuseIdentifier: String { get { return "RectangularItemCell" } }
     static var size: CGSize { get { return CGSize(width: 310.0, height: 350.0) } }

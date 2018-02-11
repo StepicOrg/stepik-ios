@@ -149,7 +149,18 @@ struct LessonViewData {
     }
 
     var progressImage: UIImage {
-        return #imageLiteral(resourceName: "placeholder")
+        let deviation = Float(progress.score) / Float(progress.cost)
+
+        guard deviation != 0.0, progress.cost != 0 else { return #imageLiteral(resourceName: "progress_icon@nil") }
+        guard deviation > 1 / 8  else { return #imageLiteral(resourceName: "progress_icon@18") }
+        guard deviation > 1 / 4 else { return #imageLiteral(resourceName: "progress_icon@14") }
+        guard deviation > 3 / 8 else { return #imageLiteral(resourceName: "progress_icon@38") }
+        guard deviation > 1 / 2 else { return #imageLiteral(resourceName: "progress_icon@12") }
+        guard deviation > 5 / 8 else { return #imageLiteral(resourceName: "progress_icon@58") }
+        guard deviation > 3 / 4 else { return #imageLiteral(resourceName: "progress_icon@34") }
+        guard deviation > 7 / 8 else { return #imageLiteral(resourceName: "progress_icon@78") }
+
+        return #imageLiteral(resourceName: "progress_icon@full")
     }
 
 }
