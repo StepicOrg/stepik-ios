@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RectangularItemCell: UICollectionViewCell {
+class RectangularItemCell: UICollectionViewCell, FocusAnimatable {
     static var nibName: String { get { return "RectangularItemCell" } }
     static var reuseIdentifier: String { get { return "RectangularItemCell" } }
     static var size: CGSize { get { return CGSize(width: 310.0, height: 350.0) } }
@@ -23,6 +23,8 @@ class RectangularItemCell: UICollectionViewCell {
 
         imageView.adjustsImageWhenAncestorFocused = true
         imageView.clipsToBounds = false
+
+        self.bringSubview(toFront: titleLabel)
     }
 
     func setup(with item: ItemViewData) {
@@ -40,5 +42,21 @@ class RectangularItemCell: UICollectionViewCell {
 
         guard presses.first!.type != UIPressType.menu else { return }
         pressAction?()
+    }
+
+    func changeToDefault() {
+        self.titleLabel.transform = CGAffineTransform.identity
+    }
+
+    func changeToFocused() {
+        self.titleLabel.transform = CGAffineTransform(translationX: 0, y: 50)
+    }
+
+    func changeToHighlighted() {
+        self.changeToFocused()
+    }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        self.updateFocus(in: context, with: coordinator)
     }
 }
