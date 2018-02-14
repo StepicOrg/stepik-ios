@@ -373,6 +373,13 @@ class CourseListPresenter {
             handleCourseSubscriptionUpdates()
             switch listType {
             case .enrolled:
+                courses = courses.sorted(by: {
+                    guard let lastViewed1 = $0.progress?.lastViewed, let lastViewed2 = $1.progress?.lastViewed else {
+                        return false
+                    }
+                    return lastViewed1 > lastViewed2
+                })
+                self.view?.display(courses: getData(from: displayingCourses))
                 lastStepDataSource?.didLoadWithProgresses(courses: courses)
             default:
                 break
