@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class CompilationCollectionViewController: UICollectionViewController {
+class CompilationCollectionViewController: BlurredImageCollectionViewController {
 
     var presenter: CompilationCollectionPresenter?
 
@@ -18,6 +18,7 @@ class CompilationCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         presenter?.refresh()
 
         guard let cv = collectionView, let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout else { return }

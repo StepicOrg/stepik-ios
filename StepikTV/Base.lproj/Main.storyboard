@@ -120,7 +120,7 @@
         <!--Мои курсы-->
         <scene sceneID="g08-Mo-RAH">
             <objects>
-                <navigationController id="AE1-M1-NUh" sceneMemberID="viewController">
+                <navigationController id="AE1-M1-NUh" customClass="BlurredImageNavigationController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Мои курсы" id="5Hx-xA-TbX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Rl-gB-WbH">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>

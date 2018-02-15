@@ -10,6 +10,10 @@ import UIKit
 
 class CatalogDetailViewController: ItemsCollectionViewController {
 
+    override func viewDidLoad() {
+        blurStyle = nil
+        super.viewDidLoad()
+    }
 }
 
 extension CatalogDetailViewController: CatalogDetailView {

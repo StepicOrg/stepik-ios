@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         // Add a search view controller to the root `UITabBarController`.
         if let tabController = window?.rootViewController as? UITabBarController {
-            tabController.viewControllers?.append(packagedSearchController())
+            let searchController = packagedSearchController()
+            tabController.viewControllers?.append(searchController)
         }
         return true
     }
@@ -54,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          use to display search results.
          */
         let searchController = UISearchController(searchResultsController: searchResultsController)
+        let rect = UIScreen.main.bounds
+        let view = BlurredView(frame: rect, image: #imageLiteral(resourceName: "background"))
+        searchController.view.insertSubview(view, at: 0)
         searchController.searchResultsUpdater = searchResultsController
         searchController.searchBar.placeholder = NSLocalizedString("Enter course name", comment: "")
 

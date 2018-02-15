@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LessonStepsCollectionViewController: UICollectionViewController {
+class LessonStepsCollectionViewController: BlurredImageCollectionViewController {
 
     fileprivate var loadingView: TVLoadingView?
 

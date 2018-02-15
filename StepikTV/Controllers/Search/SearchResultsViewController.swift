@@ -12,7 +12,10 @@ class SearchResultsViewController: ItemsCollectionViewController, UISearchResult
 
     var presenter: SearchResultsPresenter?
 
+    var bounds: CGRect?
+
     override func viewDidLoad() {
+        blurStyle = nil
         super.viewDidLoad()
         presenter = SearchResultsPresenter(view: self, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), searchResultsAPI: SearchResultsAPI())
     }

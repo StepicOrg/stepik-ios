@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthorizationViewController: UIViewController {
+class AuthorizationViewController: BlurredViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -34,6 +34,8 @@ class AuthorizationViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        backgroundImage = #imageLiteral(resourceName: "background")
+        blurStyle = .extraLight
         super.viewDidLoad()
         titleLabel.text = screenTitle
 

@@ -10,10 +10,18 @@ import UIKit
 
 class BlurredView: UIView {
 
-    var blurStyle = UIBlurEffectStyle.light
+    var backgroundImage: UIImage?
+    var blurStyle = UIBlurEffectStyle.extraLight
 
     private var blurEffectView: UIVisualEffectView!
     private var vibrancyEffectView: UIVisualEffectView!
+
+    init(frame: CGRect, image: UIImage) {
+        super.init(frame: frame)
+
+        backgroundImage = image
+        addSubviews()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +43,12 @@ class BlurredView: UIView {
 
         self.insertSubview(vibrancyEffectView, at: 0)
         self.insertSubview(blurEffectView, at: 0)
+
+        if let image = backgroundImage {
+            let imageView = UIImageView(frame: self.bounds)
+            imageView.image = image
+            self.insertSubview(imageView, at: 0)
+        }
     }
 
 }
