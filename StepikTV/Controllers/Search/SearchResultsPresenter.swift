@@ -81,7 +81,7 @@ class SearchResultsPresenter {
         guard let viewController = view as? UIViewController else { print("lose view"); return nil }
 
         return courses.map { course in
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: course.coverURLString, id: course.id, title: course.title) {
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholderEmpty"), imageURLString: course.coverURLString, id: course.id, title: course.title) {
 
                 guard course.enrolled else {
                     ScreensTransitions.moveToCourseInformationScreen(from: viewController, for: course)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemsCollectionViewController: UICollectionViewController {
+class ItemsCollectionViewController: BlurredImageCollectionViewController {
 
     var loadingView: TVLoadingView?
 
@@ -53,7 +53,7 @@ extension ItemsCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 40.0
+        return 80.0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

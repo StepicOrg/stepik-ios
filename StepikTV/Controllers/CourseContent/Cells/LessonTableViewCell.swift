@@ -21,7 +21,7 @@ extension UILabel {
     }
 }
 
-class LessonTableViewCell: UITableViewCell {
+class LessonTableViewCell: FocusableCustomTableViewCell {
 
     static var reuseIdentifier: String { return "LessonTableViewCell" }
     static var estimatedSize: CGFloat { return CGFloat(90) }
@@ -40,8 +40,12 @@ class LessonTableViewCell: UITableViewCell {
 
     private var pressAction: (() -> Void)?
 
-    func setup(with paragraphIndex: Int, _ lessonIndex: Int, viewData: LessonViewData) {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        changeToDefault()
+    }
 
+    func setup(with paragraphIndex: Int, _ lessonIndex: Int, viewData: LessonViewData) {
         self.indexLabel.text = "\(paragraphIndex).\(lessonIndex)."
         self.nameLabel.text = viewData.title
         self.progressLabel.text = viewData.progressText
@@ -58,6 +62,28 @@ class LessonTableViewCell: UITableViewCell {
 
         guard presses.first!.type != UIPressType.menu else { return }
         pressAction?()
+    }
+
+    override func changeToDefault() {
+        super.changeToDefault()
+
+        let color = UIColor.black.withAlphaComponent(0.1)
+
+        indexLabel?.textColor = color
+        nameLabel?.textColor = color
+        progressLabel?.textColor = color
+        progressIcon?.tintColor = color
+    }
+
+    override func changeToFocused() {
+        super.changeToFocused()
+
+        let color = UIColor.white
+
+        indexLabel?.textColor = color
+        nameLabel?.textColor = color
+        progressLabel?.textColor = color
+        progressIcon?.tintColor = color
     }
 
 }

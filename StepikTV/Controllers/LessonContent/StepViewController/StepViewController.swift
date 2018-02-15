@@ -9,7 +9,7 @@
 import UIKit
 
 class StepViewController: BlurredViewController {
-    
+
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentViewInsideVerticalSpacingConstraint: NSLayoutConstraint!
 

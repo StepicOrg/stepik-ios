@@ -19,7 +19,7 @@ extension UIView {
     // Events to look for a Highlighted state
     override open func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesBegan(presses, with: event)
-        
+
         guard presses.first!.type != UIPressType.menu else {
             return
         }

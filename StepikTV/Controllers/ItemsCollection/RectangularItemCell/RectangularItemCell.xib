@@ -18,7 +18,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-Sg-NXo">
                     <rect key="frame" x="0.0" y="310" width="310" height="40"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="29"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>

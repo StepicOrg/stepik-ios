@@ -36,7 +36,9 @@ class ScreensTransitions {
 
     class func moveToCourseContent(from viewController: UIViewController, for course: Course) {
 
-        let splitViewController = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! MenuSplitViewController
+        let initialNavController = ControllerHelper.instantiateViewController(identifier: "CourseContentInitial", storyboardName: "CourseContent") as! UINavigationController
+
+        let splitViewController = initialNavController.viewControllers.first as! MenuSplitViewController
 
         let navigationController = splitViewController.viewControllers.first as! UINavigationController
 
@@ -45,7 +47,7 @@ class ScreensTransitions {
         destinationViewController.presenter = CourseContentPresenter(view: destinationViewController)
         destinationViewController.presenter?.course = course
 
-        viewController.present(splitViewController, animated: true, completion: {})
+        viewController.present(initialNavController, animated: true, completion: {})
     }
 
 }

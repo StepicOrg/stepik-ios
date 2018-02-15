@@ -15,18 +15,13 @@ class CourseContentMenuViewController: MenuTableViewController {
     var sections: [SectionViewData] = []
     var courseInfo: CourseViewData?
 
+    private var isFirstSectionRowLoaded: Bool = false
+
     override var segueIdentifier: String { return "ShowDetailSegue" }
     override var cellIdentifier: String { return MenuSectionTableViewCell.reuseIdentifier }
 
     var additionalCellIdentifier: String { return MenuHeaderCourseTableViewCell.reuseIdentifier }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -88,7 +83,18 @@ class CourseContentMenuViewController: MenuTableViewController {
         vc.section = sections[indexPath.row]
         vc.width = UIScreen.main.bounds.width - self.view.bounds.width
 
+        if indexPath.row == 0 && !isFirstSectionRowLoaded {
+            vc.showBackgroundAnimation()
+            isFirstSectionRowLoaded = true
+        }
+
         presenter?.loadUnitsForSection(vc, index: indexPath.row)
+    }
+
+    override func moveToDetailView(from tableViewCellIndexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: tableViewCellIndexPath) as? MenuSectionTableViewCell else { return }
+
+        cell.setCurrentSection()
     }
 }
 

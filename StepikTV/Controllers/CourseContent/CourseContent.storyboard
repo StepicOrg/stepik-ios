@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dAB-97-Pq5">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="puu-sS-owg">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
@@ -28,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Course name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-0Z-LLt">
-                                            <rect key="frame" x="28" y="28" width="441" height="174"/>
+                                            <rect key="frame" x="28" y="28" width="441" height="179"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="57"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -36,14 +36,13 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="tgQ-0Z-LLt" firstAttribute="leading" secondItem="mx0-Nh-8CO" secondAttribute="leadingMargin" constant="20" id="4Bj-JU-BQp"/>
-                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="bottom" secondItem="mx0-Nh-8CO" secondAttribute="bottomMargin" constant="5" id="4LM-X6-zvD"/>
+                                        <constraint firstItem="tgQ-0Z-LLt" firstAttribute="bottom" secondItem="mx0-Nh-8CO" secondAttribute="bottomMargin" constant="10" id="4LM-X6-zvD"/>
                                         <constraint firstItem="tgQ-0Z-LLt" firstAttribute="top" secondItem="mx0-Nh-8CO" secondAttribute="topMargin" constant="5" id="eK4-Ql-xwM"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="tgQ-0Z-LLt" secondAttribute="trailing" constant="10" id="jtm-N6-VeD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="titleLabel" destination="tgQ-0Z-LLt" id="xQz-ZT-qdw"/>
-                                    <segue destination="IjS-aO-18J" kind="showDetail" identifier="ShowDetailSegue" id="HNT-Ni-efP"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuSectionTableViewCell" rowHeight="66" id="yzC-l9-G37" customClass="MenuSectionTableViewCell" customModule="StepikTV" customModuleProvider="target">
@@ -79,6 +78,7 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="b18-0l-Juh" id="y0f-GX-JLm"/>
                                     <outlet property="progressIcon" destination="84K-3S-Waj" id="zrV-8t-KLN"/>
+                                    <segue destination="IjS-aO-18J" kind="showDetail" identifier="ShowDetailSegue" id="ylD-K1-4C6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -110,7 +110,7 @@
                                 <rect key="frame" x="0.0" y="288" width="1285" height="792"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LessonTableViewCell" rowHeight="90" id="mEI-jJ-j4f" customClass="LessonTableViewCell" customModule="StepikTV" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LessonTableViewCell" rowHeight="90" id="mEI-jJ-j4f" customClass="LessonTableViewCell" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="66" width="1195" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mEI-jJ-j4f" id="8E9-Hv-nUb">
@@ -118,20 +118,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lesson title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rz4-Lr-uoo">
-                                                    <rect key="frame" x="140" y="5" width="154" height="45"/>
+                                                    <rect key="frame" x="140" y="5" width="789" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-TD-BlO">
-                                                    <rect key="frame" x="354" y="7" width="38" height="38"/>
+                                                    <rect key="frame" x="989" y="7" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="T7d-U5-Fek"/>
                                                         <constraint firstAttribute="height" constant="38" id="hAk-Nk-JlD"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N / M" textAlignment="right" lineBreakMode="headTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULc-a5-H7r">
-                                                    <rect key="frame" x="424" y="5" width="91" height="46"/>
+                                                    <rect key="frame" x="1059" y="5" width="91" height="46"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="91" id="8XT-bb-xLE"/>
                                                     </constraints>
@@ -186,6 +186,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.49339148116438358" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ynv-e1-0Fz" secondAttribute="trailing" id="9fq-PU-Nai"/>
                             <constraint firstItem="5tA-3w-7gE" firstAttribute="leading" secondItem="MuV-sq-eBN" secondAttribute="leading" constant="46" id="CVT-cp-FvP"/>
@@ -225,11 +226,26 @@
             </objects>
             <point key="canvasLocation" x="-4572" y="2197"/>
         </scene>
-        <!--Курс-->
+        <!--Blurred Image Navigation Controller-->
+        <scene sceneID="Lvh-Ru-Soh">
+            <objects>
+                <navigationController storyboardIdentifier="CourseContentInitial" navigationBarHidden="YES" id="puu-sS-owg" customClass="BlurredImageNavigationController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qww-19-TcL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dAB-97-Pq5" kind="relationship" relationship="rootViewController" id="jsr-bM-mgX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lvj-Jm-9aE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4572" y="-1804"/>
+        </scene>
+        <!--Menu Split View Controller-->
         <scene sceneID="2f0-Hb-84o">
             <objects>
-                <splitViewController storyboardIdentifier="CourseContentInitial" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dAB-97-Pq5" customClass="MenuSplitViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Курс" id="tKk-RA-loN"/>
+                <splitViewController id="dAB-97-Pq5" customClass="MenuSplitViewController" customModule="StepikTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tKk-RA-loN"/>
                     <connections>
                         <segue destination="cbM-7L-2gB" kind="relationship" relationship="masterViewController" id="HZG-lQ-Twa"/>
                     </connections>

@@ -59,7 +59,7 @@ class CourseContentPresenter {
             strongSelf.sectionsViewData[index].loadingStatus = .loading
             strongSelf.sections[index].loadLessonsForUnits(units: strongSelf.sections[index].units, completion: {
 
-                strongSelf.sectionsViewData[index].setData(lessons: strongSelf.sections[index].units.map { $0.lesson! }, for: detailView as? UIViewController)
+                strongSelf.sectionsViewData[index].setData(lessons: strongSelf.sections[index].units.map { $0.lesson! }, for: strongSelf.view as? UIViewController)
 
                 detailView.showLoading(isVisible: false)
                 detailView.update()

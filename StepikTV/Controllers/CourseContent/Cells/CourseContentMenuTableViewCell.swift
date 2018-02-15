@@ -37,12 +37,17 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
 
     override func changeToDefault() {
         super.changeToDefault()
-        nameLabel?.textColor = UIColor.lightGray
+        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
     }
 
     override func changeToFocused() {
         super.changeToFocused()
         nameLabel?.textColor = UIColor.white
+    }
+
+    func setCurrentSection() {
+        changeToDefault()
+        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.6)
     }
 }
 
@@ -78,7 +83,7 @@ class MenuHeaderCourseTableViewCell: FocusableCustomTableViewCell {
 
     override func changeToDefault() {
         super.changeToDefault()
-        titleLabel?.textColor = UIColor.lightGray
+        titleLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
     }
 
     override func changeToFocused() {

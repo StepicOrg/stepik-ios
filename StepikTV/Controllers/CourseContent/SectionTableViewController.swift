@@ -24,12 +24,22 @@ class SectionTableViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         paragraphName.text = section.title
         progressLabel.text = section.progressText
         tableView.dataSource = self
         tableView.delegate = self
 
+
         tableView.remembersLastFocusedIndexPath = false
+    }
+
+    func showBackgroundAnimation() {
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+
+        UIView.animate(withDuration: 0.4) {
+            self.view.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

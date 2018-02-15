@@ -52,11 +52,24 @@ class MenuTableViewController: UITableViewController {
         return false
     }
 
+    func moveToDetailView(from tableViewCellIndexPath: IndexPath) {
+
+    }
+
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
 
-        guard let focusedCell = context.nextFocusedView as? UITableViewCell, focusedCell.reuseIdentifier == cellIdentifier, focusedCell.isDescendant(of: tableView) else { return }
+        guard let focusedCell = context.nextFocusedView as? UITableViewCell, focusedCell.isDescendant(of: tableView) else {
+            if let indexPath = lastPerformedIndexPath {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.moveToDetailView(from: indexPath)
+                }
+            }
+            return
+        }
+
+        guard focusedCell.reuseIdentifier == cellIdentifier else { return }
 
         guard let focusedIndexPath = context.nextFocusedIndexPath else { return }
 

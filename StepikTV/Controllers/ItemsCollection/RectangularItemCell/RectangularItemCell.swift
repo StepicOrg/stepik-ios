@@ -46,10 +46,12 @@ class RectangularItemCell: UICollectionViewCell, FocusAnimatable {
 
     func changeToDefault() {
         self.titleLabel.transform = CGAffineTransform.identity
+        self.titleLabel.textColor = UIColor.black
     }
 
     func changeToFocused() {
-        self.titleLabel.transform = CGAffineTransform(translationX: 0, y: 50)
+        self.titleLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 40).scaledBy(x: 1.09, y: 1.09)
+        self.titleLabel.textColor = UIColor.white
     }
 
     func changeToHighlighted() {

@@ -10,6 +10,7 @@ import UIKit
 
 class BlurredViewController: UIViewController {
 
+    var backgroundImage: UIImage?
     var blurStyle = UIBlurEffectStyle.dark
 
     override func viewDidLoad() {
@@ -23,15 +24,23 @@ class BlurredViewController: UIViewController {
 
         view.insertSubview(vibrancyEffectView, at: 0)
         view.insertSubview(blurEffectView, at: 0)
+
+        if let image = backgroundImage {
+            let imageView = UIImageView(frame: view.bounds)
+            imageView.image = image
+            view.insertSubview(imageView, at: 0)
+        }
     }
 }
 
 class BlurredImageCollectionViewController: UICollectionViewController {
 
-    var backgroundImage: UIImage?
-    var blurStyle = UIBlurEffectStyle.dark
+    var backgroundImage: UIImage? = #imageLiteral(resourceName: "background")
+    var blurStyle: UIBlurEffectStyle? = UIBlurEffectStyle.extraLight
 
     override func viewDidLoad() {
+        guard let blurStyle = blurStyle else { return }
+
         let blurEffect = UIBlurEffect(style: blurStyle)
 
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -51,35 +60,9 @@ class BlurredImageCollectionViewController: UICollectionViewController {
     }
 }
 
-class BlurredImageSplitViewController: UISplitViewController {
+class BlurredImageNavigationController: UINavigationController {
 
-    var backgroundImage: UIImage?
-    var blurStyle = UIBlurEffectStyle.dark
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let blurEffect = UIBlurEffect(style: blurStyle)
-
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-
-        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-
-        view.insertSubview(vibrancyEffectView, at: 0)
-        view.insertSubview(blurEffectView, at: 0)
-
-        if let image = backgroundImage {
-            let imageView = UIImageView(frame: view.bounds)
-            imageView.image = image
-            view.insertSubview(imageView, at: 0)
-        }
-    }
-}
-
-class BlurredNavigationController: UINavigationController {
-    
-    var backgroundImage: UIImage = #imageLiteral(resourceName: "background")
+    var backgroundImage: UIImage? = #imageLiteral(resourceName: "background")
     var blurStyle = UIBlurEffectStyle.extraLight
 
     override func viewDidLoad() {
@@ -95,8 +78,10 @@ class BlurredNavigationController: UINavigationController {
         view.insertSubview(vibrancyEffectView, at: 0)
         view.insertSubview(blurEffectView, at: 0)
 
-        let imageView = UIImageView(frame: view.bounds)
-        imageView.image = backgroundImage
-        view.insertSubview(imageView, at: 0)
+        if let image = backgroundImage {
+            let imageView = UIImageView(frame: view.bounds)
+            imageView.image = image
+            view.insertSubview(imageView, at: 0)
+        }
     }
 }

@@ -17,8 +17,6 @@ class CompilationCollectionViewController: BlurredImageCollectionViewController 
     }
 
     override func viewDidLoad() {
-        backgroundImage = #imageLiteral(resourceName: "background")
-        blurStyle = .extraLight
         super.viewDidLoad()
 
         presenter?.refresh()
