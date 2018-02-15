@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuSectionTableViewCell: UITableViewCell {
+class MenuSectionTableViewCell: FocusableCustomTableViewCell {
 
     static var reuseIdentifier: String { return "MenuSectionTableViewCell" }
     static var size: CGFloat { get { return CGFloat(66) } }
@@ -17,21 +17,36 @@ class MenuSectionTableViewCell: UITableViewCell {
         return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 200, alignment: .left) + 20
     }
 
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var progressIcon: UIImageView!
+    @IBOutlet var nameLabel: UILabel?
+    @IBOutlet var progressIcon: UIImageView?
 
     private var index: Int?
     private var sectionTitle: String?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        changeToDefault()
+    }
 
     func setup(with index: Int, _ sectionTitle: String) {
         self.index = index
         self.sectionTitle = sectionTitle
 
-        self.nameLabel.text = "\(index). \(sectionTitle)"
+        self.nameLabel?.text = "\(index). \(sectionTitle)"
+    }
+
+    override func changeToDefault() {
+        super.changeToDefault()
+        nameLabel?.textColor = UIColor.lightGray
+    }
+
+    override func changeToFocused() {
+        super.changeToFocused()
+        nameLabel?.textColor = UIColor.white
     }
 }
 
-class MenuHeaderCourseTableViewCell: UITableViewCell {
+class MenuHeaderCourseTableViewCell: FocusableCustomTableViewCell {
 
     static var reuseIdentifier: String { return "MenuHeaderCourseTableViewCell" }
     static var size: CGFloat { return CGFloat(220) }
@@ -40,12 +55,17 @@ class MenuHeaderCourseTableViewCell: UITableViewCell {
         return max(80.0, UILabel.heightForLabelWithText(viewData?.title ?? "", lines: 0, font: UIFont.systemFont(ofSize: 57, weight: UIFontWeightMedium), width: width - 150, alignment: .left) + 40)
     }
 
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel?
 
     var pressAction: (() -> Void)?
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        changeToDefault()
+    }
+
     func setup(with viewData: CourseViewData) {
-        titleLabel.text = viewData.title
+        titleLabel?.text = viewData.title
 
         self.pressAction = viewData.action
     }
@@ -54,5 +74,15 @@ class MenuHeaderCourseTableViewCell: UITableViewCell {
         super.pressesBegan(presses, with: event)
         guard presses.first!.type != UIPressType.menu else { return }
         pressAction?()
+    }
+
+    override func changeToDefault() {
+        super.changeToDefault()
+        titleLabel?.textColor = UIColor.lightGray
+    }
+
+    override func changeToFocused() {
+        super.changeToFocused()
+        titleLabel?.textColor = UIColor.white
     }
 }

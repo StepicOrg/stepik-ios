@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         // Add a search view controller to the root `UITabBarController`.
         if let tabController = window?.rootViewController as? UITabBarController {
             tabController.viewControllers?.append(packagedSearchController())

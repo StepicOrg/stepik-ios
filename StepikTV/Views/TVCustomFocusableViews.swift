@@ -120,6 +120,53 @@ class FocusableCustomView: UIView, FocusAnimatable {
     }
 }
 
+class FocusableCustomTableViewCell: UITableViewCell, FocusAnimatable {
+
+    override var canBecomeFocused: Bool {
+        return true
+    }
+
+    func changeToDefault() {
+        let color = UIColor.clear
+
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOpacity = 0.0
+        self.backgroundColor = color
+    }
+
+    func changeToFocused() {
+        let color = UIColor(red:0.50, green:0.79, blue:0.45, alpha:1.00)
+        let scale = CGFloat(1.09)
+
+        self.transform = CGAffineTransform(scaleX: scale, y: scale)
+        self.layer.masksToBounds = false
+        self.layer.shadowOffset = CGSize(width: 0, height: 10)
+        self.layer.shadowRadius = 15
+        self.layer.shadowOpacity = 0.3
+        self.backgroundColor = color
+    }
+
+    func changeToHighlighted() {
+        self.transform = CGAffineTransform.identity
+        self.layer.shadowOffset = CGSize(width: 0, height: 10)
+        self.layer.shadowOpacity = 0.15
+    }
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+         changeToDefault()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        changeToDefault()
+    }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        self.updateFocus(in: context, with: coordinator)
+    }
+}
+
 class FocusableCustomCollectionViewCell: UICollectionViewCell, FocusAnimatable {
 
     override var canBecomeFocused: Bool {
