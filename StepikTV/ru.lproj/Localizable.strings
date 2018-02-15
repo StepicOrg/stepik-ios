@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  Stepic
+
+  Created by Matvey Kravtsov on 15/02/2018.
+  Copyright © 2018 Alex Karpov. All rights reserved.
+*/
+"Search" = "Поиск";
+"Subjects" = "Предметы";
+"Enter course name" = "Введите название курса";
+"Authorization" = "Авторизация";
+"Registration" = "Регистрация";
+"Name" = "Имя";
+"Enter your name" = "Введите имя";
+"Email" = "Email";
+"Enter your email address" = "Введите Email";
+"Password" = "Пароль";
+"Enter your password" = "Введите пароль";
+"Profile" = "Профиль";
+"Sign In" = "Войти";
+"Sign Up" = "Зарегистрироваться";
+"Settings" = "Настройки";
+"Exit" = "Выйти";
+"Subscribing..." = "Подписка...";
+"Unsubscribing..." = "Отписка...";
+"Intro" = "Вступление";
+"Subscribe"= "Подписаться";
+"Leave"= "Отписаться";
+"Please, log in to see the user courses catalog" = "Пожалуйста, войдите, чтобы увидеть каталог курсов пользователя";
+"Answer" = "Ответ";
+"This quiz is unavailable on AppleTV" = "Это задание недоступно на AppleTV";
+"Submit" = "Подтвердить";
+"Try Again" = "Попробовать снова";
+"Correct" = "Верно";
+"Wrong" = "Неверно";
+"No Submissions Left" = "Попыток не осталось";
+"triesLeft1" = "%@ попытка осталась";
+"triesLeft234" = "%@ попытки осталось";
+"triesLeft567890" = "%@ попыток осталось";

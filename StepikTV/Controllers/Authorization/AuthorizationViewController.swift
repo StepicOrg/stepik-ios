@@ -23,7 +23,7 @@ class AuthorizationViewController: UIViewController {
     var presenter: AuthorizationPresenter?
 
     private let screenTitle = NSLocalizedString("Profile", comment: "")
-    private let loginTitle = NSLocalizedString("Log In", comment: "")
+    private let loginTitle = NSLocalizedString("Sign In", comment: "")
     private let signupTitle = NSLocalizedString("Sign Up", comment: "")
     private let settingsTitle = NSLocalizedString("Settings", comment: "")
     private let exitTitle = NSLocalizedString("Exit", comment: "")

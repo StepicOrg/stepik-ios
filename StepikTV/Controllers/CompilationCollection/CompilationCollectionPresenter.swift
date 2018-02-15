@@ -28,7 +28,6 @@ class CompilationCollectionPresenter {
     }
 
     func refresh() {
-        //view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromRemote(forLanguage: listLanguage)
     }
@@ -52,7 +51,7 @@ class CompilationCollectionPresenter {
                 strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
                 strongSelf.loaders = [
                     CollectionRowLoader(listType: .popular, title: "Popular"),
-                    CollectionRowLoader(title: "Subjects")
+                    CollectionRowLoader(title: NSLocalizedString("Subjects", comment: ""))
                     ] + lists.map { CollectionRowLoader(listType: .collection(ids: $0.coursesArray), title: $0.title) }
 
                 strongSelf.rows = strongSelf.loaders.map { strongSelf.buildRow(from: $0) }

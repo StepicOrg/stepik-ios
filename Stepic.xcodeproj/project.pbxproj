@@ -4649,6 +4649,7 @@
 		A667815E9DD873E059ECE59B /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506695A094E6E58AB86F9808 /* Pods_SberbankUniversity.framework */; };
 		A676076BF3C3C830E9134314 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A100A094D88E21829B817E92 /* Pods_Adaptive_3067_Screenshots.framework */; };
 		B88D76335779C08097418110 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA6816E1CFA60839511175E /* Pods_Adaptive_3150.framework */; };
+		BA52CB622035B29D002971B6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA52CB602035B29D002971B6 /* Localizable.strings */; };
 		BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
@@ -5671,6 +5672,10 @@
 		B888379ED2EBF5F37E240D27 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		B925226149C4D2BABFCA0936 /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B96ACFE0E1B4A2E580DDDEC7 /* Pods_Adaptive_3067.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA52CB632035B427002971B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BA895F852035C91E00B4198B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		BA895F872035C92300B4198B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		BAC391752035C64F0089D6F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C4168E76032F26D38CF984B0 /* Pods_Adaptive_3149.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBF2C4462FA89D22B0189602 /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		CE90C63BA7470B4B025B6984 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
@@ -7824,6 +7829,7 @@
 				1BAE12F71F93F67700482251 /* Main.storyboard */,
 				1BAE12FA1F93F67700482251 /* Assets.xcassets */,
 				1BAE12FC1F93F67700482251 /* Info.plist */,
+				BA52CB602035B29D002971B6 /* Localizable.strings */,
 			);
 			path = StepikTV;
 			sourceTree = "<group>";
@@ -9496,6 +9502,7 @@
 				1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */,
 				93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */,
 				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
+				BA52CB622035B29D002971B6 /* Localizable.strings in Resources */,
 				93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */,
 				1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */,
 				1B3BB0A41FE6E145002DDD9A /* RegularItemCell.xib in Resources */,
@@ -16089,6 +16096,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				1BAE12F81F93F67700482251 /* Base */,
+				BA895F852035C91E00B4198B /* en */,
+				BA895F872035C92300B4198B /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -16301,6 +16310,15 @@
 				08DC5A041E171EA00051B14A /* en */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		BA52CB602035B29D002971B6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA52CB632035B427002971B6 /* en */,
+				BAC391752035C64F0089D6F7 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

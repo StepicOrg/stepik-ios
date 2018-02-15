@@ -1,0 +1,27 @@
+
+/* Class = "UITabBarItem"; title = "Мои курсы"; ObjectID = "5Hx-xA-TbX"; */
+"5Hx-xA-TbX.title" = "My courses";
+
+/* Class = "UILabel"; text = "Пройденные"; ObjectID = "AcB-RS-H1B"; */
+"AcB-RS-H1B.text" = "Passed";
+
+/* Class = "UITabBarItem"; title = "Профиль"; ObjectID = "DsA-Hi-lyK"; */
+"DsA-Hi-lyK.title" = "Profile";
+
+/* Class = "UILabel"; text = "Не пройденные"; ObjectID = "Gia-cQ-1lC"; */
+"Gia-cQ-1lC.text" = "In progress";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Phs-D5-iNp"; */
+"Phs-D5-iNp.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "aSu-0N-Ei7"; */
+"aSu-0N-Ei7.text" = "0";
+
+/* Class = "UILabel"; text = "Профиль"; ObjectID = "dte-O0-1EJ"; */
+"dte-O0-1EJ.text" = "Profile";
+
+/* Class = "UITabBarItem"; title = "Подборка"; ObjectID = "frM-PU-Iqh"; */
+"frM-PU-Iqh.title" = "Featured";
+
+/* Class = "UINavigationItem"; title = "Мои курсы"; ObjectID = "qwE-Eb-AL3"; */
+"qwE-Eb-AL3.title" = "My courses";
