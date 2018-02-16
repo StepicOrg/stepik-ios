@@ -22,7 +22,6 @@ class CourseContentMenuViewController: MenuTableViewController {
 
     var additionalCellIdentifier: String { return MenuHeaderCourseTableViewCell.reuseIdentifier }
 
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -91,10 +90,12 @@ class CourseContentMenuViewController: MenuTableViewController {
         presenter?.loadUnitsForSection(vc, index: indexPath.row)
     }
 
-    override func moveToDetailView(from tableViewCellIndexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: tableViewCellIndexPath) as? MenuSectionTableViewCell else { return }
+    override func moveTo(detailViewController: UIViewController, from tableViewCellIndexPath: IndexPath) {
+        let cellFrom = self.tableView.cellForRow(at: tableViewCellIndexPath) as? MenuSectionTableViewCell
 
-        cell.setCurrentSection()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            cellFrom?.setCurrentSection()
+        }
     }
 }
 

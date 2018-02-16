@@ -67,23 +67,21 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
     override func changeToDefault() {
         super.changeToDefault()
 
-        let color = UIColor.black.withAlphaComponent(0.1)
-
-        indexLabel?.textColor = color
-        nameLabel?.textColor = color
-        progressLabel?.textColor = color
-        progressIcon?.tintColor = color
+        let color = UIColor.black.withAlphaComponent(0.3)
+        setTint(color: color)
     }
 
     override func changeToFocused() {
         super.changeToFocused()
 
         let color = UIColor.white
+        setTint(color: color)
+    }
 
+    private func setTint(color: UIColor) {
         indexLabel?.textColor = color
         nameLabel?.textColor = color
         progressLabel?.textColor = color
         progressIcon?.tintColor = color
     }
-
 }

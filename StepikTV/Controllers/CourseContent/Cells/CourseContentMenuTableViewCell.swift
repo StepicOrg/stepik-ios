@@ -14,7 +14,7 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
     static var size: CGFloat { get { return CGFloat(66) } }
 
     static func getHeightForCell(with index: Int, _ title: String, width: CGFloat) -> CGFloat {
-        return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 200, alignment: .left) + 20
+        return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 180, alignment: .left) + 20
     }
 
     @IBOutlet var nameLabel: UILabel?
@@ -40,7 +40,7 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
 
     override func changeToDefault() {
         super.changeToDefault()
-        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
+        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.3)
     }
 
     override func changeToFocused() {
@@ -50,7 +50,7 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
 
     func setCurrentSection() {
         changeToDefault()
-        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.6)
+        nameLabel?.textColor = UIColor.black.withAlphaComponent(0.9)
     }
 }
 
@@ -86,7 +86,7 @@ class MenuHeaderCourseTableViewCell: FocusableCustomTableViewCell {
 
     override func changeToDefault() {
         super.changeToDefault()
-        titleLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
+        titleLabel?.textColor = UIColor.black.withAlphaComponent(0.3)
     }
 
     override func changeToFocused() {

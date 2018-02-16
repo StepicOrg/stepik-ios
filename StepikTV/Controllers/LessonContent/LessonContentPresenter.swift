@@ -94,9 +94,10 @@ struct StepViewData {
     var stepViewController: UIViewController {
         switch stepType {
         case .video:
-            let videoPlayer = TVPlayerViewController()
-                videoPlayer.video = block.video
-            return videoPlayer
+            let videoStepVC = VideoStepViewController()
+                videoStepVC.video = block.video
+                videoStepVC.stepPosition = self.step.position
+            return videoStepVC
         default:
             let stepVC = ControllerHelper.instantiateViewController(identifier: "StepViewController", storyboardName: "StepViewController") as! StepViewController
                 stepVC.stepViewData = self

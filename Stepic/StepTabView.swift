@@ -49,7 +49,6 @@ class StepTabView: NibInitializableView {
         } else {
             self.view.layoutIfNeeded()
         }
-
     }
 
     func stepDone(_ notification: Foundation.Notification) {

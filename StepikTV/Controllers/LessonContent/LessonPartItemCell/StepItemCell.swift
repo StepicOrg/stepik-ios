@@ -39,18 +39,4 @@ class StepItemCell: UICollectionViewCell {
         pressAction?()
     }
 
-    /*
-    func loadTask(_ type: LessonsPartContentType.TaskType) {
-        let task = LessonContentAlertController(title: "", message: "", preferredStyle: .alert)
-
-        switch type {
-        case .Text:
-            task.generateTextTaskContent(question: "Рядом с каждым тестом и задачей указано количество баллов, которое вы получите за правильное решение. Ваш общий прогресс также отображается в оглавлении курса, там же видны и сроки сдачи каждой из задач.")
-        case .Choice:
-            task.generateChoiceTaskContent(question: "Кто вы по профессии?", choices: ["Школьник", "Студент", "Учитель", "Программист"])
-        }
-
-        //self.delegate?.loadLessonContent(with: task, completion: {})
-    } */
-
 }

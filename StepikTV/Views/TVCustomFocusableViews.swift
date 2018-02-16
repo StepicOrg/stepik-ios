@@ -87,13 +87,13 @@ class FocusableCustomView: UIView, FocusAnimatable {
 
     func changeToDefault() {
         self.transform = CGAffineTransform.identity
-        self.layer.masksToBounds = true
         self.layer.cornerRadius = 6
         self.layer.shadowOpacity = 0.0
     }
 
     func changeToFocused() {
         self.transform = CGAffineTransform(scaleX: 1.09, y: 1.09)
+        self.layer.masksToBounds = false
         self.layer.shadowOffset = CGSize(width: 0, height: 40)
         self.layer.shadowRadius = 30
         self.layer.shadowOpacity = 0.3

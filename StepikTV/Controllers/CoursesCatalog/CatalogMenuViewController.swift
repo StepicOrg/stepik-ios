@@ -42,8 +42,7 @@ class CatalogMenuViewController: MenuTableViewController {
 extension CatalogMenuViewController: CatalogMenuView {
 
     func provide(count: Int, at indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! RightDetailedCustomTableViewCell
-            cell.detailedLabel.text = "\(count)"
-        tableView.reloadData()
+        let cell = tableView.cellForRow(at: indexPath) as? RightDetailedCustomTableViewCell
+        cell?.detailedLabel.text = "\(count)"
     }
 }

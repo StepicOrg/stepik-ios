@@ -6,7 +6,6 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-
 import UIKit
 
 class RightDetailedCustomTableViewCell: FocusableCustomTableViewCell {
@@ -29,8 +28,8 @@ class RightDetailedCustomTableViewCell: FocusableCustomTableViewCell {
 
     override func changeToDefault() {
         super.changeToDefault()
-        titleLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
-        detailedLabel?.textColor = UIColor.black.withAlphaComponent(0.1)
+        titleLabel?.textColor = UIColor.black.withAlphaComponent(0.3)
+        detailedLabel?.textColor = UIColor.black.withAlphaComponent(0.3)
     }
 
     override func changeToFocused() {

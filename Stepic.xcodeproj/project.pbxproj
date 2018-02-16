@@ -4579,6 +4579,7 @@
 		938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D12030A58D00DFEA3A /* UIImageExtension.swift */; };
 		938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */; };
 		938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */; };
+		938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860DA2037471900DFEA3A /* VideoStepViewController.swift */; };
 		93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
 		93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */; };
 		93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
@@ -5315,8 +5316,8 @@
 		17BE381BB3496D26578FE8C5 /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
 		19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseInfoCollectionViewController.swift; path = StepikTV/Controllers/CourseInfo/CourseInfoCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSplitViewController.swift; path = StepikTV/Controllers/MenuSplitViewController.swift; sourceTree = SOURCE_ROOT; };
-		1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = StepikTV/Controllers/MenuTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSplitViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuSplitViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0541FE6DE47002DDD9A /* CourseContentMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseContentMenuViewController.swift; path = StepikTV/Controllers/CourseContent/CourseContentMenuViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0551FE6DE47002DDD9A /* LessonStepsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonStepsCollectionViewController.swift; path = StepikTV/Controllers/LessonContent/LessonStepsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0561FE6DE47002DDD9A /* ItemsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemsCollectionViewController.swift; path = StepikTV/Controllers/ItemsCollection/ItemsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -5623,6 +5624,7 @@
 		938860D12030A58D00DFEA3A /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConvertableCollectionViewCell.swift; sourceTree = "<group>"; };
 		938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightDetailedCustomTableViewCell.swift; sourceTree = "<group>"; };
+		938860DA2037471900DFEA3A /* VideoStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		93B7F1D52003E090006B9934 /* TVFocusableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVFocusableText.swift; sourceTree = "<group>"; };
 		93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
@@ -7684,9 +7686,7 @@
 				9335E3672008E51D001BDFA8 /* CoursesCatalog */,
 				1B3BB0961FE6E123002DDD9A /* CompilationCollection */,
 				933563BD20125AC00061FE2E /* LessonContent */,
-				1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */,
-				93C3C1F0202106750040BD1D /* MenuSplitView.swift */,
-				1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */,
+				938860DC20374D2700DFEA3A /* SplitViewController */,
 				9300843F2016717500DBFC0E /* BlurredViewController.swift */,
 				93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */,
 			);
@@ -8584,6 +8584,16 @@
 			path = ItemsCollection;
 			sourceTree = "<group>";
 		};
+		938860DC20374D2700DFEA3A /* SplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */,
+				93C3C1F0202106750040BD1D /* MenuSplitView.swift */,
+				1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */,
+			);
+			path = SplitViewController;
+			sourceTree = "<group>";
+		};
 		93BBE6241FE6E63C006DEC28 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -8626,6 +8636,7 @@
 			children = (
 				936CF2432018A06800186A97 /* StepViewController.storyboard */,
 				936CF2452018A53A00186A97 /* StepViewController.swift */,
+				938860DA2037471900DFEA3A /* VideoStepViewController.swift */,
 				93E5AAEF20161D2700290B4E /* QuizViewController */,
 			);
 			path = StepViewController;
@@ -13075,6 +13086,7 @@
 				1BB4ECB21FA3DEC3001CDE99 /* Lesson+CoreDataProperties.swift in Sources */,
 				938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */,
 				9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */,
+				938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */,
 				1BB4ECEE1FA3E6A7001CDE99 /* SortingReply.swift in Sources */,
 				1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */,
 				1BB4ECEB1FA3E670001CDE99 /* SearchResult.swift in Sources */,

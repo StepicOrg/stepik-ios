@@ -52,7 +52,7 @@ class MenuTableViewController: UITableViewController {
         return false
     }
 
-    func moveToDetailView(from tableViewCellIndexPath: IndexPath) {
+    func moveTo(detailViewController: UIViewController, from tableViewCellIndexPath: IndexPath) {
 
     }
 
@@ -62,9 +62,8 @@ class MenuTableViewController: UITableViewController {
 
         guard let focusedCell = context.nextFocusedView as? UITableViewCell, focusedCell.isDescendant(of: tableView) else {
             if let indexPath = lastPerformedIndexPath {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.moveToDetailView(from: indexPath)
-                }
+                let detail = (splitViewController as! MenuSplitViewController).detailViewContoller!
+                self.moveTo(detailViewController: detail, from: indexPath)
             }
             return
         }

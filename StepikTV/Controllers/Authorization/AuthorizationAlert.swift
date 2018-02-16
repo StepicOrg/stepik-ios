@@ -26,9 +26,9 @@ class AuthorizationAlert: NSObject {
     var buttonTitle: String {
       switch self {
       case .login:
-        return "Sign in"
+        return "Sign In"
       case .registration:
-        return "Sign up"
+        return "Sign Up"
       }
     }
   }

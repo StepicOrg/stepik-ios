@@ -14,6 +14,10 @@ class MenuSplitViewController: UISplitViewController {
 
     // MARK: Properties
 
+    var detailViewContoller: UIViewController? {
+        return viewControllers.last
+    }
+
     /**
      Set to true from `updateFocusToDetailViewController()` to indicate that
      the detail view controller should be the preferred focused view when

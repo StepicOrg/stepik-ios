@@ -68,8 +68,6 @@ class StepViewController: BlurredViewController {
             let insetValue = (scrollView.bounds.height - contentView.bounds.height) / 2
             scrollViewTopInset.constant = insetValue
             scrollViewBottomInset.constant = insetValue
-
-            //contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
         }
     }
 

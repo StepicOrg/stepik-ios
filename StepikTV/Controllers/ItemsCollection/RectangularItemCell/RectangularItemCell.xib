@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-Sg-NXo">
-                    <rect key="frame" x="0.0" y="310" width="310" height="40"/>
+                    <rect key="frame" x="0.0" y="315" width="310" height="35"/>
                     <fontDescription key="fontDescription" type="system" pointSize="29"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="Sfe-Sg-NXo" firstAttribute="top" secondItem="Ygp-KA-zNs" secondAttribute="bottom" id="UPx-I2-VIV"/>
+                <constraint firstItem="Sfe-Sg-NXo" firstAttribute="top" secondItem="Ygp-KA-zNs" secondAttribute="bottom" constant="5" id="UPx-I2-VIV"/>
                 <constraint firstAttribute="trailing" secondItem="Sfe-Sg-NXo" secondAttribute="trailing" id="YHr-HX-R5Y"/>
                 <constraint firstAttribute="trailing" secondItem="Ygp-KA-zNs" secondAttribute="trailing" id="bsl-eX-MeG"/>
                 <constraint firstItem="Sfe-Sg-NXo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gfA-NJ-xp7"/>
