@@ -34,11 +34,20 @@ struct AdaptiveCourseSelectViewData {
 class AdaptiveCourseSelectPresenter {
     weak var view: AdaptiveCourseSelectView?
 
+    var defaultsStorageManager: DefaultsStorageManager
+
     var initialActions: Promise<([Course], [AdaptiveCourseInfo])>?
     private var courses: [Course] = []
 
-    init(view: AdaptiveCourseSelectView) {
+    // Save actions to prevent deallocation
+    var actions: AdaptiveUserActions?
+    var lastDisplayedData: [AdaptiveCourseSelectViewData]?
+
+    init(defaultsStorageManager: DefaultsStorageManager, view: AdaptiveCourseSelectView) {
         self.view = view
+        self.defaultsStorageManager = defaultsStorageManager
+
+        actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI(), defaultsStorageManager: DefaultsStorageManager())
     }
 
     func refresh() {
@@ -62,6 +71,28 @@ class AdaptiveCourseSelectPresenter {
                 }
             }
         }
+    }
+
+    func refreshProgresses() {
+        guard let lastData = lastDisplayedData else {
+            // First loading, no displayed data yet -> skip progress refreshing
+            return
+        }
+
+        var newData = [AdaptiveCourseSelectViewData]()
+        for item in lastData {
+            var newItem = item
+            newItem.points = AdaptiveRatingManager(courseId: item.id).rating
+            newItem.level = AdaptiveRatingHelper.getLevel(for: newItem.points)
+            newData.append(newItem)
+        }
+
+        view?.set(data: newData)
+        lastDisplayedData = newData
+    }
+
+    func resetLastCourse() {
+        defaultsStorageManager.lastCourseId = nil
     }
 
     private func reloadData(courses: [Course], adaptiveCoursesInfo: [AdaptiveCourseInfo]) {
@@ -96,6 +127,13 @@ class AdaptiveCourseSelectPresenter {
             }
         }
         view?.set(data: viewData)
+        lastDisplayedData = viewData
+
+        // If last course saved, open it
+        if let lastCourseId = defaultsStorageManager.lastCourseId {
+            openCourse(id: lastCourseId)
+            return
+        }
     }
 
     func tryAgain() {
@@ -103,11 +141,13 @@ class AdaptiveCourseSelectPresenter {
     }
 
     func openCourse(id: Int) {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
+        guard let actions = actions else {
             return
         }
 
-        let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI(), defaultsStorageManager: DefaultsStorageManager())
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
+            return
+        }
 
         let rating = AdaptiveRatingManager(courseId: id).rating
         let streak = AdaptiveRatingManager(courseId: id).streak
@@ -116,6 +156,7 @@ class AdaptiveCourseSelectPresenter {
         let achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
         AchievementManager.shared = achievementsManager
 
+        // Init course controller
         let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: id), statsManager: AdaptiveStatsManager(courseId: id), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: vc)
         presenter.initialActions = Promise { fulfill, reject in
             checkToken().then { _ -> Promise<Course> in
@@ -128,5 +169,8 @@ class AdaptiveCourseSelectPresenter {
         }
         vc.presenter = presenter
         view?.presentCourse(viewController: vc)
+
+        // Save last course
+        defaultsStorageManager.lastCourseId = id
     }
 }

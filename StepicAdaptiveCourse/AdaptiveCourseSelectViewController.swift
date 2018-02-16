@@ -20,6 +20,7 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
     @IBOutlet weak var loadingLabel: UILabel!
 
     var data: [AdaptiveCourseSelectViewData] = []
+    var didControllerDisplayBefore = false
 
     lazy var placeholderView: PlaceholderView = {
         let v = PlaceholderView()
@@ -64,6 +65,12 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
         presenter?.refresh()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        presenter?.refreshProgresses()
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
@@ -85,6 +92,13 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+
+        if didControllerDisplayBefore {
+            // View controller will appear at second time
+            presenter?.resetLastCourse()
+        } else {
+            didControllerDisplayBefore = true
+        }
     }
 }
 

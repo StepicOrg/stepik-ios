@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
 
-            let presenter = AdaptiveCourseSelectPresenter(view: selectController)
+            let presenter = AdaptiveCourseSelectPresenter(defaultsStorageManager: DefaultsStorageManager(), view: selectController)
             presenter.initialActions = Promise { fulfill, reject in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
