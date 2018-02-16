@@ -91,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             initialViewController.presenter = presenter
+            initialViewController.isBackActionAllowed = false
             startViewController = initialViewController
         } else if supportedCourses.count > 1 {
             // Multiple courses -> present course select

@@ -19,6 +19,8 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
         return AdaptiveStepCardView()
     }
 
+    var isBackActionAllowed = true
+
     @IBAction func onTrophyButtonClick(_ sender: Any) {
         guard let navVC = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "AdaptiveMain") as? StyledNavigationViewController else {
             return
@@ -50,6 +52,14 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
         tapBackProxyView.targetView = backButton
         trophyButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
         backButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+
+        if !isBackActionAllowed {
+            tapBackProxyView.removeFromSuperview()
+            backButton.removeFromSuperview()
+            NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: levelProgress, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 10)
+            ])
+        }
 
         presenter?.refresh()
     }
