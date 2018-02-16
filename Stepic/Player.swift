@@ -183,7 +183,7 @@ public class Player: UIViewController {
     public var naturalSize: CGSize {
         get {
             if let playerItem = self.playerItem {
-                let track = playerItem.asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+                let track = playerItem.asset.tracks(withMediaType: AVMediaType.video)[0]
                 return track.naturalSize
             } else {
                 return CGSize.zero
@@ -285,7 +285,7 @@ public class Player: UIViewController {
 
     public override func loadView() {
         self.playerView = PlayerView(frame: CGRect.zero)
-        self.playerView.fillMode = AVLayerVideoGravityResizeAspect
+        self.playerView.fillMode = AVLayerVideoGravity.resizeAspect.rawValue
         self.playerView.playerLayer.isHidden = true
         self.view = self.playerView
     }
@@ -641,10 +641,10 @@ internal class PlayerView: UIView {
 
     var fillMode: String {
         get {
-            return (self.layer as! AVPlayerLayer).videoGravity
+            return (self.layer as! AVPlayerLayer).videoGravity.rawValue
         }
         set {
-            (self.layer as! AVPlayerLayer).videoGravity = newValue
+            (self.layer as! AVPlayerLayer).videoGravity = AVLayerVideoGravity(rawValue: newValue)
         }
     }
 

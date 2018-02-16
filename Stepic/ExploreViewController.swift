@@ -23,11 +23,9 @@ class ExploreViewController: UIViewController, ExploreView {
         (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
         presenter?.refresh()
         self.title = NSLocalizedString("Catalog", comment: "")
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
         presenter?.initLanguagesWidget()
         presenter?.initTagsWidget()
     }
@@ -139,7 +137,14 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(languagesWidget)
         languagesWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        languagesWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                languagesWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                languagesWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+        } else {
+            languagesWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+        }
         widgetBackgroundView.isHidden = false
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
@@ -156,6 +161,14 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(tagsWidget)
         tagsWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                tagsWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+                tagsWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+                ])
+        } else {
+            tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        }
         tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
         widgetBackgroundView.isHidden = false
 
@@ -259,7 +272,7 @@ class ExploreViewController: UIViewController, ExploreView {
 
         self.view.addSubview(searchBar)
         searchBar.constrainHeight("44")
-        searchBar.setContentCompressionResistancePriority(800, for: .vertical)
+        searchBar.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 800), for: .vertical)
         searchBar.alignTopEdge(withView: self.view, predicate: "0")
         searchBar.alignLeading("0", trailing: "0", toView: self.view)
     }

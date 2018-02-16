@@ -40,7 +40,7 @@ struct AutocompleteWords {
         }
 
         return suggestions.filter {
-            $0.indexOf(text) == 0 && $0.characters.count > text.characters.count
+            $0.indexOf(text) == 0 && $0.count > text.count
         }
     }
 

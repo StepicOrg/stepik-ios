@@ -19,7 +19,16 @@ class FreeAnswerQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
+        textView.alignTop("8", bottom: "0", toView: self.containerView)
+
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                ])
+        } else {
+            textView.alignLeading("16", trailing: "-16", toView: containerView)
+        }
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
         textView.textColor = UIColor.mainText
 
@@ -74,9 +83,9 @@ class FreeAnswerQuizViewController: QuizViewController {
         }
 
         if dataset.isHTMLEnabled {
-            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
             let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
+            mutableAttributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.count))
             textView.attributedText = mutableAttributed
         } else {
             textView.text = reply.text

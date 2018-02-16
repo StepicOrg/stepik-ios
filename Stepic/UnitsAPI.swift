@@ -9,9 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class UnitsAPI: APIEndpoint {
     override var name: String { return "units" }
+
+    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Unit> {
+        return Promise { fulfill, reject in
+            retrieve(lesson: lessonId, headers: headers, success: { unit in
+                fulfill(unit)
+            }, error: { err in
+                reject(err)
+            })
+        }
+    }
 
     @discardableResult func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON({

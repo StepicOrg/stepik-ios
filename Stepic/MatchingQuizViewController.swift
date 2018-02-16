@@ -20,6 +20,14 @@ class MatchingQuizViewController: QuizViewController {
     var firstUpdateFinished: Bool = false
     var secondUpdateFinished: Bool = false
 
+    func cellWidth(forTableView tableView: UITableView) -> CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.bounds.width - CGFloat(view.safeAreaInsets.left + view.safeAreaInsets.right) / 2
+        } else {
+            return tableView.bounds.width
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,7 +85,8 @@ class MatchingQuizViewController: QuizViewController {
 
         self.firstCellHeights = Array(repeating: nil, count: optionsCount)
         self.secondCellHeights = Array(repeating: nil, count: optionsCount)
-
+        self.firstUpdateFinished = false
+        self.secondUpdateFinished = false
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
 
@@ -110,6 +119,8 @@ class MatchingQuizViewController: QuizViewController {
         optionsPermutation = reply.ordering
         orderedOptions = o
 
+        self.firstUpdateFinished = false
+        self.secondUpdateFinished = false
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
     }
@@ -162,7 +173,7 @@ class MatchingQuizViewController: QuizViewController {
                     max = h
                 }
             } else {
-                let h = SortingQuizTableViewCell.getHeightForText(text: options[index], width: self.view.bounds.width / 2, sortable: sortable)
+                let h = SortingQuizTableViewCell.getHeightForText(text: options[index], width: sortable ? cellWidth(forTableView: secondTableView) : cellWidth(forTableView: firstTableView), sortable: sortable)
                 if h > max {
                     max = h
                 }
@@ -209,9 +220,13 @@ extension MatchingQuizViewController : UITableViewDelegate {
 extension MatchingQuizViewController : UITableViewDataSource {
 
     fileprivate func updateTableHeight(table: UITableView) {
+        print("started updating table height for \(table.tag) | height -> \(table.bounds.height), content size -> \(table.contentSize)")
+        table.invalidateIntrinsicContentSize()
         table.contentSize = CGSize(width: table.contentSize.width, height: maxHeight * CGFloat(optionsCount))
         table.beginUpdates()
         table.endUpdates()
+        containerView.layoutIfNeeded()
+        print("finished updating table height for \(table.tag) | height -> \(table.bounds.height), content size -> \(table.contentSize)")
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -232,7 +247,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
 
         switch tableView.tag {
         case 1:
-            cell.setHTMLText(dataset.firstValues[indexPath.row], width: self.firstTableView.bounds.width, finishedBlock: {
+            cell.setHTMLText(dataset.firstValues[indexPath.row], width: cellWidth(forTableView: firstTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 
@@ -256,7 +271,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
             })
         case 2:
             cell.sortable = true
-            cell.setHTMLText(orderedOptions[indexPath.row], width: self.secondTableView.bounds.width, finishedBlock: {
+            cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth(forTableView: secondTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 

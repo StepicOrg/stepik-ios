@@ -86,7 +86,7 @@ class NotificationRegistrator {
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
                 ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
                     print("notification registrator: successfully delete device, id = \(deviceId)")
-                    fulfill()
+                    fulfill(())
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
@@ -111,11 +111,11 @@ class NotificationRegistrator {
                             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
                         }
                     }
-                    fulfill()
+                    fulfill(())
                 }
             } else {
                 print("notification registrator: no saved device")
-                fulfill()
+                fulfill(())
             }
         }
     }

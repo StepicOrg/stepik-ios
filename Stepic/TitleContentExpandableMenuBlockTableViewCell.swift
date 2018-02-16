@@ -65,9 +65,9 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         var font: UIFont {
             switch self {
             case .title:
-                return UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
+                return UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.light)
             case .content:
-                return UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
+                return UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.light)
             }
         }
     }

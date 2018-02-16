@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,9 +40,9 @@
             </subviews>
             <constraints>
                 <constraint firstItem="LTQ-gq-vP7" firstAttribute="leading" secondItem="xHf-ei-rL7" secondAttribute="trailing" id="05x-5S-rh4"/>
-                <constraint firstAttribute="trailing" secondItem="LTQ-gq-vP7" secondAttribute="trailing" constant="16" id="7ol-tu-tkd"/>
+                <constraint firstItem="vbf-P1-YSt" firstAttribute="trailing" secondItem="LTQ-gq-vP7" secondAttribute="trailing" constant="16" id="7ol-tu-tkd"/>
                 <constraint firstItem="LTQ-gq-vP7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="B1u-1c-7cZ"/>
-                <constraint firstItem="xHf-ei-rL7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Xab-Xt-IDi"/>
+                <constraint firstItem="xHf-ei-rL7" firstAttribute="leading" secondItem="vbf-P1-YSt" secondAttribute="leading" constant="8" id="Xab-Xt-IDi"/>
                 <constraint firstAttribute="bottom" secondItem="LTQ-gq-vP7" secondAttribute="bottom" constant="2" id="bwR-sC-Mol"/>
                 <constraint firstItem="xHf-ei-rL7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="g2s-St-bQ9"/>
                 <constraint firstAttribute="bottom" secondItem="xHf-ei-rL7" secondAttribute="bottom" constant="2" id="rtr-Pu-gFR"/>
@@ -50,6 +51,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vbf-P1-YSt"/>
             <point key="canvasLocation" x="5" y="-156"/>
         </view>
     </objects>

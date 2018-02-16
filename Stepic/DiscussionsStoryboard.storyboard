@@ -1,46 +1,70 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Write Comment View Controller-->
         <scene sceneID="uQf-ld-I5H">
             <objects>
-                <viewController storyboardIdentifier="WriteCommentViewController" id="4hM-YH-FAZ" customClass="WriteCommentViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Grh-Me-Ntl"/>
-                        <viewControllerLayoutGuide type="bottom" id="kFg-uz-SXz"/>
-                    </layoutGuides>
+                <viewController storyboardIdentifier="WriteCommentViewController" id="4hM-YH-FAZ" customClass="WriteCommentViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PoY-wT-x23">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dCz-M7-3Sb" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
-                                <rect key="frame" x="20" y="20" width="560" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDg-Gj-0a5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5P-Nm-s1b">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UjI-WA-3Vc" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="UjI-WA-3Vc" firstAttribute="leading" secondItem="c5P-Nm-s1b" secondAttribute="leading" id="9eS-WX-GVL"/>
+                                            <constraint firstAttribute="bottom" secondItem="UjI-WA-3Vc" secondAttribute="bottom" id="Bgw-n0-PdL"/>
+                                            <constraint firstItem="UjI-WA-3Vc" firstAttribute="top" secondItem="c5P-Nm-s1b" secondAttribute="top" id="hjp-Xh-w96"/>
+                                            <constraint firstAttribute="trailing" secondItem="UjI-WA-3Vc" secondAttribute="trailing" id="tGu-dN-Hkk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="c5P-Nm-s1b" secondAttribute="bottom" id="49u-aV-USe"/>
+                                    <constraint firstItem="c5P-Nm-s1b" firstAttribute="leading" secondItem="QDg-Gj-0a5" secondAttribute="leading" id="N55-cd-U8a"/>
+                                    <constraint firstItem="c5P-Nm-s1b" firstAttribute="centerY" secondItem="QDg-Gj-0a5" secondAttribute="centerY" id="Pak-9Q-7e2"/>
+                                    <constraint firstItem="c5P-Nm-s1b" firstAttribute="top" secondItem="QDg-Gj-0a5" secondAttribute="top" id="if2-bM-TJo"/>
+                                    <constraint firstAttribute="trailing" secondItem="c5P-Nm-s1b" secondAttribute="trailing" id="xDq-ph-ZvF"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kFg-uz-SXz" firstAttribute="top" secondItem="dCz-M7-3Sb" secondAttribute="bottom" id="D6T-dy-ljG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dCz-M7-3Sb" secondAttribute="trailing" id="FhS-np-uq3"/>
-                            <constraint firstItem="dCz-M7-3Sb" firstAttribute="top" secondItem="Grh-Me-Ntl" secondAttribute="bottom" id="f9d-i8-r8g"/>
-                            <constraint firstItem="dCz-M7-3Sb" firstAttribute="leading" secondItem="PoY-wT-x23" secondAttribute="leadingMargin" id="pe0-4F-KnT"/>
+                            <constraint firstItem="tla-KX-M42" firstAttribute="trailing" secondItem="QDg-Gj-0a5" secondAttribute="trailing" id="Bk7-6p-b5N"/>
+                            <constraint firstItem="QDg-Gj-0a5" firstAttribute="leading" secondItem="tla-KX-M42" secondAttribute="leading" id="NBX-RQ-Yvd"/>
+                            <constraint firstItem="c5P-Nm-s1b" firstAttribute="width" secondItem="PoY-wT-x23" secondAttribute="width" id="cXt-ee-1tV"/>
+                            <constraint firstItem="tla-KX-M42" firstAttribute="bottom" secondItem="QDg-Gj-0a5" secondAttribute="bottom" id="knv-aL-AxJ"/>
+                            <constraint firstItem="tla-KX-M42" firstAttribute="top" secondItem="QDg-Gj-0a5" secondAttribute="top" id="nvq-Xj-wkM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="tla-KX-M42"/>
                     </view>
                     <connections>
-                        <outlet property="IQLayoutGuideConstraint" destination="D6T-dy-ljG" id="kWB-zC-O3K"/>
-                        <outlet property="commentTextView" destination="dCz-M7-3Sb" id="uXx-qF-UyN"/>
+                        <outlet property="commentTextView" destination="UjI-WA-3Vc" id="Osq-OV-G1q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bX-o0-I8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="533" y="472"/>
+            <point key="canvasLocation" x="532" y="471.8140929535233"/>
         </scene>
     </scenes>
 </document>

@@ -44,7 +44,7 @@ class PlaceholderView: UIView {
         middleView.alignLeading("0", trailing: "0", toView: self)
         middleView.alignCenterY(withView: self, predicate: "0")
         middleViewHeight = middleView.constrainHeight("0")
-        middleView.setContentCompressionResistancePriority(999, for: .vertical)
+        middleView.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 999), for: .vertical)
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -132,7 +132,7 @@ class PlaceholderView: UIView {
         buttonHeight = button?.constrainHeight("30")
     }
 
-    func didPressButton() {
+    @objc func didPressButton() {
         delegate?.placeholderButtonDidPress?()
     }
 

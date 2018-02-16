@@ -88,7 +88,7 @@ class OnboardingPageView: NibInitializableView {
 
         // For iPhone 4s decrease font size
         if DeviceInfo.current.diagonal <= 3.5 {
-            pageTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
+            pageTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
             pageDescriptionLabel.font = UIFont.systemFont(ofSize: 15)
         }
     }

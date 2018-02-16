@@ -63,7 +63,8 @@ class SortingQuizTableViewCell: UITableViewCell {
     }
 
     class func getHeightForText(text: String, width: CGFloat, sortable: Bool) -> CGFloat {
-        return max(27, StepikLabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - (sortable  ? 60 : 16), html: true)) + 17
+        print("width for text \(text) -> \(width - (sortable  ? 72 : 32)) ")
+        return max(27, StepikLabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - (sortable  ? 72 : 32), html: true)) + 17
     }
 }
 

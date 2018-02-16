@@ -46,6 +46,7 @@ struct StepicApplicationsInfo {
     static let oauthURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.oauth) as? String ?? ""
     static let stepicURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.stepik) as? String ?? ""
     static let versionInfoURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.version) as? String ?? ""
+    static let adaptiveRatingURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.adaptiveRating) as? String ?? ""
 
     // Section: Cookie
     static let cookiePrefix = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Cookie.prefix) as? String ?? ""
@@ -57,10 +58,10 @@ struct StepicApplicationsInfo {
     static let shouldRegisterNotifications = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Feature.notifications) as? Bool ?? true
 
     // Section: Adaptive
+    static let adaptiveSupportedCourses = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.supportedCourses) as? [Int] ?? []
     static let isAdaptive = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.isAdaptive) as? Bool ?? false
     static let adaptiveCourseId = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.courseId) as? Int ?? 0
     static let adaptiveMainColor = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.mainColor) as? Int ?? 6736998)
-    static let adaptiveRatingURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.ratingURL) as? String ?? ""
 
     // Section: RateApp
     struct RateApp {

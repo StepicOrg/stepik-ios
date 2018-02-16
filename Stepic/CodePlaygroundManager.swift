@@ -31,7 +31,7 @@ class CodePlaygroundManager {
         var isInsertion: Bool = true
 
         //Understand, if something was deleted or inserted
-        if currentText.characters.count > previousText.characters.count {
+        if currentText.count > previousText.count {
             maxString = currentText
             minString = previousText
             isInsertion = true
@@ -43,7 +43,7 @@ class CodePlaygroundManager {
 
         //Searching for the beginning of the changed substring
         var changesBeginningOffset = 0
-        while (changesBeginningOffset < minString.characters.count) && (minString.characters[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)] == maxString.characters[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)]) {
+        while (changesBeginningOffset < minString.count) && (minString.characters[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)] == maxString.characters[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)]) {
             changesBeginningOffset += 1
         }
         minString.removeSubrange(minString.startIndex..<minString.index(minString.startIndex, offsetBy: changesBeginningOffset))
@@ -51,7 +51,7 @@ class CodePlaygroundManager {
 
         //Searching for the ending of the changed substring
         var changesEndingOffset = 0
-        while (changesEndingOffset < minString.characters.count) && (minString.characters[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)] == maxString.characters[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)]) {
+        while (changesEndingOffset < minString.count) && (minString.characters[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)] == maxString.characters[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)]) {
             changesEndingOffset += 1
         }
 
@@ -124,7 +124,7 @@ class CodePlaygroundManager {
 
                 //searching for the last non-space symbol in the string to know if we need to do more than just return
                 var characterBeforeEndline: Character? = nil
-                for character in line.characters.reversed() {
+                for character in line.reversed() {
                     if character == " " {
                         continue
                     } else {
@@ -299,7 +299,7 @@ class CodePlaygroundManager {
             var text = textView.text!
             text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
             textView.text = text
-            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.characters.count, textView: textView)
+            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
         }
     }
 

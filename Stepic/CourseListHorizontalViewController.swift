@@ -17,7 +17,7 @@ class CourseListHorizontalViewController: CourseListViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
         collectionView.backgroundColor = UIColor.clear
-        collectionView.allowsSelection = false
+        collectionView.allowsSelection = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +29,11 @@ class CourseListHorizontalViewController: CourseListViewController {
     let nextWidgetVisibleWidth: CGFloat = 16
 
     var widgetWidth: CGFloat {
-        return view.frame.width - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        if #available(iOS 11.0, *) {
+            return (view.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right) - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        } else {
+            return view.bounds.width - (horizontalSpacing * 3 + nextWidgetVisibleWidth)
+        }
     }
 
     var currentColumn: Int = 0
@@ -129,6 +133,11 @@ extension CourseListHorizontalViewController: UICollectionViewDelegateFlowLayout
 }
 
 extension CourseListHorizontalViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.didTouchWidget(atIndex: indexPath.item)
+    }
+
     private func getNearestColumnToPoint(point: CGPoint) -> Int {
         return Int(round(point.x / (widgetWidth + horizontalSpacing)))
     }
@@ -161,7 +170,7 @@ extension CourseListHorizontalViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if shouldShowLoadingWidgets {
-            return Int(collectionView.frame.height) / 100
+            return Int(collectionView.frame.height) / 140
         } else {
             return courses.count
         }

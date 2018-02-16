@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,8 +44,8 @@
                         <action selector="onNextButtonClick:" destination="-1" eventType="touchUpInside" id="Mbo-7G-EPG"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смотрите лекции и сохраняйте их без доступа в сеть" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-Ku-6EC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                    <rect key="frame" x="16" y="53.5" width="343" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Смотрите лекции и сохраняйте их без доступа в сеть" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-Ku-6EC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                    <rect key="frame" x="16" y="54" width="343" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -56,16 +59,17 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="xpr-Ku-6EC" secondAttribute="trailing" constant="16" id="3sx-jG-fXc"/>
-                <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6o8-OI-qWt"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="trailing" secondItem="Kp9-Cc-7vh" secondAttribute="trailing" constant="-16" id="61a-TS-nZK"/>
+                <constraint firstItem="VCF-Ix-jhf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerXWithinMargins" id="6o8-OI-qWt"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="top" secondItem="daL-Gs-pWj" secondAttribute="bottom" constant="4" id="M2S-Va-Egk"/>
                 <constraint firstItem="daL-Gs-pWj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="TWM-dN-DDm"/>
+                <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="Kp9-Cc-7vh" secondAttribute="leading" constant="16" id="V9b-xo-Gjp"/>
                 <constraint firstItem="xpr-Ku-6EC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cdw-iN-lnH"/>
-                <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="jDy-UV-1t2"/>
+                <constraint firstItem="daL-Gs-pWj" firstAttribute="top" secondItem="Kp9-Cc-7vh" secondAttribute="top" constant="24" id="jDy-UV-1t2"/>
                 <constraint firstItem="VCF-Ix-jhf" firstAttribute="top" secondItem="xpr-Ku-6EC" secondAttribute="bottom" constant="16" id="u0a-Ga-iS8"/>
-                <constraint firstItem="xpr-Ku-6EC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="w3o-GQ-VyX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Kp9-Cc-7vh"/>
             <point key="canvasLocation" x="-63.5" y="-735.5"/>
         </view>
     </objects>

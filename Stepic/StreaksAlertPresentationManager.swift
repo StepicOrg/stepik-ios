@@ -53,7 +53,7 @@ class StreaksAlertPresentationManager {
     }()
 
     private func didChooseTime() {
-        if let controller = controller as? NewProfileViewController {
+        if let controller = controller as? ProfileViewController {
             controller.onAppear()
         }
     }
@@ -63,11 +63,11 @@ class StreaksAlertPresentationManager {
             return
         }
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
-        vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        vc.startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         vc.selectedBlock = {
             [weak self] in
             if let source = self?.source?.rawValue {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
             }
             self?.didChooseTime()
             self?.delegate?.didDismiss()
@@ -117,7 +117,7 @@ class StreaksAlertPresentationManager {
         alert.currentStreak = streak
 
         if let source = source?.rawValue {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.ShowStreaksNotificationTrigger.rawValue))
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
         }
         Alerts.streaks.present(alert: alert, inController: controller)
     }

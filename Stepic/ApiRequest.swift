@@ -18,7 +18,7 @@ func checkToken() -> Promise<()> {
     return Promise {
         fulfill, reject in
         ApiRequestPerformer.performAPIRequest({
-            fulfill()
+            fulfill(())
         }, error: {
             error in
             reject(error)

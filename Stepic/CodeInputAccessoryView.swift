@@ -38,7 +38,7 @@ class CodeInputAccessoryView: NibInitializableView {
         hideKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    func didTapHideKeyboardImageView(recognizer: UIGestureRecognizer) {
+    @objc func didTapHideKeyboardImageView(recognizer: UIGestureRecognizer) {
         hideKeyboardAction?()
     }
 

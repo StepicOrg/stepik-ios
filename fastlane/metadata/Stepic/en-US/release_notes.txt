@@ -1,10 +1,8 @@
 In the new version of the Stepik iOS app we:
-• Added really beautiful perfect awesome magnificent onboarding.
-• Removed all lags from home and catalog screen.
-• Fixed the bug, when number of notifications wasn't shown correctly.
-• Added emoji and any other keyboard to Code Challenge. Only god knows, why.
-• Fixed some bugs and improved some things.
-• Will a/b test you, no offence please.
 
-Enjoy learning,
+• Added support for multiline samples in Code Challenge
+• Added touchable course widgets
+• Fixed multiple bugs and greatly improved stability
+
+Enjoy learning!
 Stepik team

@@ -27,6 +27,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?
 
+    var downloadTooltip: Tooltip?
+
     fileprivate func updateTitle() {
         self.navigationItem.title = section?.title ?? NSLocalizedString("Module", comment: "")
     }
@@ -62,14 +64,12 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             registerForPreviewing(with: self, sourceView: view)
         }
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
-    func refresh() {
+    @objc func refresh() {
         refreshUnits()
     }
 
@@ -85,7 +85,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
     }
 
-    func shareButtonPressed(_ button: UIBarButtonItem) {
+    @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         guard let url = self.url else {
             return
         }
@@ -179,6 +179,11 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             })
             self.didRefresh = true
         })
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        downloadTooltip?.dismiss()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -532,6 +537,19 @@ extension UnitsViewController : UITableViewDataSource {
 
         cell.initWithUnit(section.units[(indexPath as NSIndexPath).row], delegate: self)
 
+        if indexPath.row == 0 && TooltipDefaultsManager.shared.shouldShowLessonDownloadsTooltip {
+            //Delay here to fight some layout issues
+            delay(0.1) {
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.downloadTooltip = TooltipFactory.lessonDownload
+                strongSelf.downloadTooltip?.show(direction: .up, in: strongSelf.tableView, from: cell.downloadButton)
+                TooltipDefaultsManager.shared.didShowOnLessonDownloads = true
+            }
+        }
+
         return cell
     }
 }
@@ -673,8 +691,8 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         }
 
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
-            NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -698,9 +716,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
-            NSForegroundColorAttributeName: UIColor.lightGray,
-            NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            NSAttributedStringKey.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

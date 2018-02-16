@@ -66,7 +66,9 @@ class EmailAuthViewController: UIViewController {
             case .validationError:
                 let head = NSLocalizedString("WhoopsHead", comment: "")
                 let error = NSLocalizedString("ValidationEmailAndPasswordError", comment: "")
-                errorMessage = "\(head) \(error)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
+                let message = "\(head) \(error)"
+                let range = message.startIndex..<message.index(message.startIndex, offsetBy: head.count)
+                errorMessage = message.style(range: range, style: Style.font(.systemFont(ofSize: 16, weight: UIFont.Weight.medium))).attributedString
                 logInButton.isEnabled = false
 
                 SVProgressHUD.dismiss()
@@ -74,7 +76,9 @@ class EmailAuthViewController: UIViewController {
             case .existingEmail:
                 let head = NSLocalizedString("WhoopsHead", comment: "")
                 let error = NSLocalizedString("SocialSignupWithExistingEmailError", comment: "")
-                errorMessage = "\(head) \(error)".style(range: 0..<head.characters.count, style: Style.font(.systemFont(ofSize: 16, weight: UIFontWeightMedium))).attributedString
+                let message = "\(head) \(error)"
+                let range = message.startIndex..<message.index(message.startIndex, offsetBy: head.count)
+                errorMessage = message.style(range: range, style: Style.font(.systemFont(ofSize: 16, weight: UIFont.Weight.medium))).attributedString
                 inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
             }
         }
@@ -169,7 +173,7 @@ class EmailAuthViewController: UIViewController {
 
         // Drop state after rotation to prevent layout issues on small screens
         switch state {
-        case .validationError(_):
+        case .validationError:
             state = .normal
         default:
             break

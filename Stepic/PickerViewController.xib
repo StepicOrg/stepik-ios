@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -55,16 +56,17 @@
                 <constraint firstItem="qdr-ho-8KE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="2Zr-qC-QaQ"/>
                 <constraint firstItem="Dm9-le-zKo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="8mx-JA-cPs"/>
                 <constraint firstItem="iH6-pI-6Tu" firstAttribute="top" secondItem="Dm9-le-zKo" secondAttribute="bottom" constant="8" id="Jn8-AI-gPL"/>
-                <constraint firstItem="Dm9-le-zKo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="KWC-cz-rl0"/>
-                <constraint firstItem="Zdr-e9-mf9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="St4-Eb-x36"/>
-                <constraint firstAttribute="trailing" secondItem="Zdr-e9-mf9" secondAttribute="trailing" id="TtR-Zj-uWK"/>
-                <constraint firstAttribute="trailing" secondItem="qdr-ho-8KE" secondAttribute="trailing" constant="16" id="Zhf-ef-32a"/>
-                <constraint firstAttribute="trailing" secondItem="iH6-pI-6Tu" secondAttribute="trailing" constant="16" id="hUb-vV-4gO"/>
+                <constraint firstItem="Dm9-le-zKo" firstAttribute="leading" secondItem="x8q-k5-7zl" secondAttribute="leading" constant="16" id="KWC-cz-rl0"/>
+                <constraint firstItem="Zdr-e9-mf9" firstAttribute="leading" secondItem="x8q-k5-7zl" secondAttribute="leading" id="St4-Eb-x36"/>
+                <constraint firstItem="x8q-k5-7zl" firstAttribute="trailing" secondItem="Zdr-e9-mf9" secondAttribute="trailing" id="TtR-Zj-uWK"/>
+                <constraint firstItem="x8q-k5-7zl" firstAttribute="trailing" secondItem="qdr-ho-8KE" secondAttribute="trailing" constant="16" id="Zhf-ef-32a"/>
+                <constraint firstItem="x8q-k5-7zl" firstAttribute="trailing" secondItem="iH6-pI-6Tu" secondAttribute="trailing" constant="16" id="hUb-vV-4gO"/>
                 <constraint firstAttribute="bottom" secondItem="Zdr-e9-mf9" secondAttribute="bottom" id="jo4-pU-yy5"/>
                 <constraint firstItem="iH6-pI-6Tu" firstAttribute="top" secondItem="qdr-ho-8KE" secondAttribute="bottom" constant="8" id="jxX-9J-Ru4"/>
                 <constraint firstItem="Zdr-e9-mf9" firstAttribute="top" secondItem="iH6-pI-6Tu" secondAttribute="bottom" constant="8" id="liu-pk-6HR"/>
-                <constraint firstItem="iH6-pI-6Tu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="rQL-FJ-slA"/>
+                <constraint firstItem="iH6-pI-6Tu" firstAttribute="leading" secondItem="x8q-k5-7zl" secondAttribute="leading" constant="16" id="rQL-FJ-slA"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="x8q-k5-7zl"/>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>

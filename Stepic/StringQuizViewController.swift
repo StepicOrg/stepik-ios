@@ -21,7 +21,17 @@ class StringQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
+
+        textView.alignTop("8", bottom: "0", toView: self.containerView)
+
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            ])
+        } else {
+            textView.alignLeading("16", trailing: "-16", toView: containerView)
+        }
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
@@ -73,7 +83,7 @@ class StringQuizViewController: QuizViewController {
         textView.text = reply.text
     }
 
-    func tap() {
+    @objc func tap() {
         self.view.endEditing(true)
     }
 

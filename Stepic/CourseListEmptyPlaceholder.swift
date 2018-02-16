@@ -108,7 +108,7 @@ class CourseListEmptyPlaceholder: NibInitializableView {
         updatePresentationStyle()
     }
 
-    func didTap(touch: UITapGestureRecognizer) {
+    @objc func didTap(touch: UITapGestureRecognizer) {
         onTap?()
     }
 

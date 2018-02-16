@@ -86,7 +86,7 @@ class RateAppViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func didTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func didTap(_ recognizer: UITapGestureRecognizer) {
         guard let tappedIndex = recognizer.view?.tag else {
             return
         }

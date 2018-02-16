@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension NSNotification.Name {
+    static let didLogout = NSNotification.Name("didLogout")
+}
+
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
 
@@ -19,31 +23,11 @@ class AuthInfo: NSObject {
         print("initializing AuthInfo with userId \(String(describing: userId))")
         if let id = userId {
             if let users = User.fetchById(id) {
-                let c = users.count
-                if c == 0 {
-                    print("No user with such id found, downloading")
-                    ApiDataDownloader.users.retrieve(ids: [id], existing: [], refreshMode: .update, success: {
-                        [weak self]
-                        users in
-                        if let user = users.first {
-                            self?.user = user
-                            return
-                        }
-                        print("downloaded user")
-                        CoreDataHelper.instance.save()
-
-                        }, error: {
-                            [weak self]
-                            _ in
-                            print("failed to fetch user")
-                            self?.userId = nil
-                    })
-                }
-
-                if c >= 1 {
+                if users.isEmpty {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                } else {
                     user = users.first
                 }
-
             }
         }
     }
@@ -66,6 +50,7 @@ class AuthInfo: NSObject {
                 NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {
                         //Delete enrolled information
+                        NotificationCenter.default.post(name: .didLogout, object: nil)
                         TabsInfo.myCoursesIds = []
                         let c = Course.getAllCourses(enrolled: true)
                         for course in c {
@@ -76,7 +61,6 @@ class AuthInfo: NSObject {
 
                         Notification.deleteAll()
                         NotificationsBadgesManager.shared.set(number: 0)
-
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil

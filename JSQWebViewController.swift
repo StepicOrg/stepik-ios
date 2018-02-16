@@ -200,11 +200,11 @@ class WebViewController: UIViewController {
 
     // MARK: Actions
 
-    final func didTapDoneButton(_ sender: UIBarButtonItem) {
+    @objc final func didTapDoneButton(_ sender: UIBarButtonItem) {
         onDismiss?()
     }
 
-    final func didTapSafariButton(_ sender: UIBarButtonItem) {
+    @objc final func didTapSafariButton(_ sender: UIBarButtonItem) {
         if let url = webView.url {
             UIApplication.shared.openURL(url)
         }
