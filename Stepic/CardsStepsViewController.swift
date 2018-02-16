@@ -104,6 +104,11 @@ class CardsStepsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.didAppear()
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 

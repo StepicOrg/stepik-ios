@@ -64,6 +64,10 @@ class CardStepPresenter {
         quizViewController.isSubmitButtonHidden = true
     }
 
+    func didAppear() {
+        LocalProgressLastViewedUpdater.shared.updateView(for: step)
+    }
+
     func problemDidLoad() {
         delegate?.contentLoadingDidComplete()
     }

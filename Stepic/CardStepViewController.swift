@@ -59,6 +59,11 @@ class CardStepViewController: UIViewController, CardStepView {
         view.layoutIfNeeded()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.didAppear()
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
         print("card step: deinit vc")

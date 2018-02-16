@@ -109,6 +109,10 @@ class CardsStepsPresenter {
         view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
     }
 
+    func didAppear() {
+        LocalProgressLastViewedUpdater.shared.updateView(for: course)
+    }
+
     private func refreshTopCardForOnboarding(stepIndex: Int) {
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else {
