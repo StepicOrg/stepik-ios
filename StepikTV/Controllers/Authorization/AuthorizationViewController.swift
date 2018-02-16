@@ -17,7 +17,6 @@ class AuthorizationViewController: BlurredViewController {
     fileprivate var nameLabel: UILabel = UILabel()
     fileprivate var loginButton: TVTextButton = TVTextButton()
     fileprivate var signupButton: TVTextButton = TVTextButton()
-    fileprivate var settingsButton: TVTextButton = TVTextButton()
     fileprivate var exitButton: TVTextButton = TVTextButton()
 
     var presenter: AuthorizationPresenter?
@@ -25,7 +24,6 @@ class AuthorizationViewController: BlurredViewController {
     private let screenTitle = NSLocalizedString("Profile", comment: "")
     private let loginTitle = NSLocalizedString("Sign In", comment: "")
     private let signupTitle = NSLocalizedString("Sign Up", comment: "")
-    private let settingsTitle = NSLocalizedString("Settings", comment: "")
     private let exitTitle = NSLocalizedString("Exit", comment: "")
 
     override func awakeFromNib() {
@@ -42,7 +40,6 @@ class AuthorizationViewController: BlurredViewController {
         loginButton.setTitle(loginTitle, for: .normal)
         signupButton.setTitle(signupTitle, for: .normal)
         exitButton.setTitle(exitTitle, for: .normal)
-        settingsButton.setTitle(settingsTitle, for: .normal)
 
         loginButton.addTarget(self, action: #selector(loginAction(_:)), for: UIControlEvents.primaryActionTriggered)
         signupButton.addTarget(self, action: #selector(registerAction(_:)), for: UIControlEvents.primaryActionTriggered)
@@ -79,34 +76,30 @@ extension AuthorizationViewController: AuthorizationView {
     }
 
     func showProfile(for user: User) {
+        cleanStackView()
+
         if let avatarUrl = URL(string: user.avatarURL) {
             profileImage.setImageWithURL(url: avatarUrl, placeholder: UIImage())
         }
 
-        cleanStackView()
-
         nameLabel.text = "\(user.firstName) \(user.lastName)"
 
         exitButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
-        settingsButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
 
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(exitButton)
-        stackView.addArrangedSubview(settingsButton)
     }
 
     func showNoProfile() {
-        profileImage.image = nil
-
         cleanStackView()
+
+        profileImage.image = nil
 
         loginButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
         signupButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
-        settingsButton.heightAnchor.constraint(equalToConstant: 66.0).isActive = true
 
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(signupButton)
-        stackView.addArrangedSubview(settingsButton)
     }
 
     func cleanStackView() {
