@@ -16,13 +16,15 @@ class AdaptiveUserActions {
     private var profilesAPI: ProfilesAPI
     private var enrollmentsAPI: EnrollmentsAPI
     private var coursesAPI: CoursesAPI
+    private var adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI
 
-    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, defaultsStorageManager: DefaultsStorageManager) {
+    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI, defaultsStorageManager: DefaultsStorageManager) {
         self.enrollmentsAPI = enrollmentsAPI
         self.profilesAPI = profilesAPI
         self.stepicsAPI = stepicsAPI
         self.authAPI = authAPI
         self.coursesAPI = coursesAPI
+        self.adaptiveCoursesInfoAPI = adaptiveCoursesInfoAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
 
@@ -150,6 +152,16 @@ class AdaptiveUserActions {
                 fulfill(courses)
             }.catch { error in
                 reject(error)
+            }
+        }
+    }
+
+    internal func loadAdaptiveCoursesInfo(locale: String) -> Promise<[AdaptiveCourseInfo]> {
+        return Promise { fulfill, reject in
+            adaptiveCoursesInfoAPI.retrieve(locale: locale).then { info in
+                fulfill(info)
+            }.catch { _ in
+                reject(AdaptiveCardsStepsError.noCoursesInfo)
             }
         }
     }

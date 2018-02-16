@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UPCarouselFlowLayout
 
 enum AdaptiveCourseSelectViewState {
     case loading, normal, error
@@ -20,12 +21,11 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
 
     var data: [AdaptiveCourseSelectViewData] = []
 
-    lazy var placeholderView: UIView = {
+    lazy var placeholderView: PlaceholderView = {
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.align(toView: self.view)
         v.delegate = self
-        v.datasource = self
         v.backgroundColor = self.view.backgroundColor
         return v
     }()
@@ -42,6 +42,9 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
                 self.placeholderView.isHidden = false
                 self.tableView.isHidden = true
                 self.loadingContainerView.isHidden = true
+
+                // Refresh placeholder state
+                self.placeholderView.datasource = self
             case .loading:
                 self.placeholderView.isHidden = true
                 self.tableView.isHidden = true
@@ -55,30 +58,63 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
 
         loadingLabel.text = NSLocalizedString("AdaptiveCourseSelectLoading", comment: "")
 
-        tableView.delegate = self
-        tableView.dataSource = self
-
+        title = "Select course"
         tableView.register(UINib(nibName: "AdaptiveCourseTableViewCell", bundle: nil), forCellReuseIdentifier: AdaptiveCourseTableViewCell.reuseId)
 
         presenter?.refresh()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     func set(data: [AdaptiveCourseSelectViewData]) {
         self.data = data
         tableView.reloadData()
     }
+
+    func presentCourse(viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 }
 
-extension AdaptiveCourseSelectViewController: UITableViewDataSource, UITableViewDelegate {
+extension AdaptiveCourseSelectViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdaptiveCourseTableViewCell.reuseId, for: indexPath) as! AdaptiveCourseTableViewCell
-        let currentCourse = data[indexPath.item]
-        cell.setData(imageLink: currentCourse.cover, courseName: currentCourse.name)
+        cell.setData(imageLink: data[indexPath.row].cover, name: data[indexPath.row].name, description: data[indexPath.row].description, learners: data[indexPath.row].learners, points: data[indexPath.row].points, level: data[indexPath.row].level)
+        cell.updateColors(firstColor: data[indexPath.row].firstColor, secondColor: data[indexPath.row].secondColor)
+        cell.delegate = self
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let courseId = data[indexPath.row].id
+        presenter?.openCourse(id: courseId)
+    }
+}
+
+extension AdaptiveCourseSelectViewController: AdaptiveCourseTableViewCellDelegate {
+    func buttonDidClick(_ cell: AdaptiveCourseTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        tableView(tableView, didSelectRowAt: indexPath)
     }
 }
 

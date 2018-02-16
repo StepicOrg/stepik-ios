@@ -12,6 +12,8 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
     @IBOutlet weak var levelProgress: RatingProgressView!
     @IBOutlet weak var tapProxyView: TapProxyView!
     @IBOutlet weak var trophyButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var tapBackProxyView: TapProxyView!
 
     override var cardView: StepCardView {
         return AdaptiveStepCardView()
@@ -37,11 +39,17 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
         present(navVC, animated: true, completion: nil)
     }
 
+    @IBAction func onBackButtonClick(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tapProxyView.targetView = trophyButton
+        tapBackProxyView.targetView = backButton
         trophyButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        backButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
 
         presenter?.refresh()
     }

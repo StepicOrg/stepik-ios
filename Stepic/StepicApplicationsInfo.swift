@@ -60,6 +60,7 @@ struct StepicApplicationsInfo {
     static let adaptiveSupportedCourses = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.supportedCourses) as? [Int] ?? []
     static let isAdaptive = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.isAdaptive) as? Bool ?? false
     static let adaptiveMainColor = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.mainColor) as? Int ?? 6736998)
+    static let adaptiveCoursesInfoURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Adaptive.coursesInfoURL) as? String ?? ""
 
     // Section: RateApp
     struct RateApp {

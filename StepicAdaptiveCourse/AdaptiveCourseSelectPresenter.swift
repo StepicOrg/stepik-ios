@@ -7,19 +7,34 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol AdaptiveCourseSelectView: class {
     var state: AdaptiveCourseSelectViewState { get set }
 
     func set(data: [AdaptiveCourseSelectViewData])
+    func presentCourse(viewController: UIViewController)
 }
 
-typealias AdaptiveCourseSelectViewData = (id: Int, name: String, cover: URL?)
+struct AdaptiveCourseSelectViewData {
+    var id: Int
+    var name: String
+    var cover: URL?
+    var description: String
+
+    var points: Int
+    var learners: Int
+    var level: Int
+
+    var firstColor: UIColor
+    var secondColor: UIColor
+    var mainColor: UIColor
+}
 
 class AdaptiveCourseSelectPresenter {
     weak var view: AdaptiveCourseSelectView?
 
-    var initialActions: (((([Course]) -> Void)?, ((Error) -> Void)?) -> Void)?
+    var initialActions: Promise<([Course], [AdaptiveCourseInfo])>?
     private var courses: [Course] = []
 
     init(view: AdaptiveCourseSelectView) {
@@ -31,10 +46,11 @@ class AdaptiveCourseSelectPresenter {
 
         DispatchQueue.global().async { [weak self] in
             if let actions = self?.initialActions {
-                actions({ courses -> Void in
+                actions.then { courses, adaptiveCoursesInfo -> Void in
                     self?.courses = courses
-                    self?.reloadData(courses: courses)
-                }, { error in
+                    self?.reloadData(courses: courses, adaptiveCoursesInfo: adaptiveCoursesInfo)
+                    self?.view?.state = .normal
+                }.catch { error in
                     if let error = error as? AdaptiveCardsStepsError {
                         switch error {
                         case .noProfile, .userNotUnregisteredFromEmails:
@@ -43,17 +59,74 @@ class AdaptiveCourseSelectPresenter {
                             self?.view?.state = .error
                         }
                     }
-                })
+                }
             }
         }
     }
 
-    private func reloadData(courses: [Course]) {
-        let viewData = courses.map { (id: $0.id, name: $0.title, cover:  URL(string: $0.coverURLString)) }
+    private func reloadData(courses: [Course], adaptiveCoursesInfo: [AdaptiveCourseInfo]) {
+        var viewData: [AdaptiveCourseSelectViewData] = []
+        for course in courses {
+            let rating = AdaptiveRatingManager(courseId: course.id).rating
+            let level = AdaptiveRatingHelper.getLevel(for: rating)
+
+            let filteredCoursesInfo = adaptiveCoursesInfo.filter { $0.id == course.id }
+            if let courseInfo = filteredCoursesInfo.first {
+                viewData.append(AdaptiveCourseSelectViewData(id: course.id,
+                                                             name: courseInfo.title,
+                                                             cover: URL(string: courseInfo.coverURL),
+                                                             description: courseInfo.description,
+                                                             points: rating,
+                                                             learners: course.learnersCount ?? 0,
+                                                             level: level,
+                                                             firstColor: courseInfo.firstColor,
+                                                             secondColor: courseInfo.secondColor,
+                                                             mainColor: courseInfo.mainColor))
+            } else {
+                viewData.append(AdaptiveCourseSelectViewData(id: course.id,
+                                                             name: course.title,
+                                                             cover: URL(string: course.coverURLString),
+                                                             description: "",
+                                                             points: rating,
+                                                             learners: course.learnersCount ?? 0,
+                                                             level: level,
+                                                             firstColor: StepicApplicationsInfo.adaptiveMainColor,
+                                                             secondColor: StepicApplicationsInfo.adaptiveMainColor,
+                                                             mainColor: StepicApplicationsInfo.adaptiveMainColor))
+            }
+        }
         view?.set(data: viewData)
     }
 
     func tryAgain() {
         refresh()
+    }
+
+    func openCourse(id: Int) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
+            return
+        }
+
+        let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI(), defaultsStorageManager: DefaultsStorageManager())
+
+        let rating = AdaptiveRatingManager(courseId: id).rating
+        let streak = AdaptiveRatingManager(courseId: id).streak
+
+        let isOnboardingPassed = AdaptiveStorageManager.shared.isAdaptiveOnboardingPassed || DefaultsStorageManager.shared.isRatingOnboardingFinished
+        let achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
+        AchievementManager.shared = achievementsManager
+
+        let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: id), statsManager: AdaptiveStatsManager(courseId: id), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: vc)
+        presenter.initialActions = Promise { fulfill, reject in
+            checkToken().then { _ -> Promise<Course> in
+                actions.loadCourseAndJoin(courseId: id)
+            }.then { course in
+                fulfill(course)
+            }.catch { error in
+                reject(error)
+            }
+        }
+        vc.presenter = presenter
+        view?.presentCourse(viewController: vc)
     }
 }

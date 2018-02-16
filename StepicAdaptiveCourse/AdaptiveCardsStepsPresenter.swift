@@ -18,7 +18,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     // Initial actions (registration, join course, etc)
     // We init presenter w/o course and load it in the initialActions block
     var isInitialActionsFinished = false
-    var initialActions: ((((Course) -> Void)?, ((Error) -> Void)?) -> Void)?
+    var initialActions: Promise<Course>?
 
     override var onboardingLastStepIndex: Int {
         return 4
@@ -51,7 +51,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
         DispatchQueue.global().async { [weak self] in
             if let actions = self?.initialActions {
-                actions({ course -> Void in
+                actions.then { course -> Void in
                     self?.course = course
 
                     self?.isInitialActionsFinished = true
@@ -59,7 +59,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
                     if self?.storageManager.isAdaptiveOnboardingPassed ?? false {
                         self?.view?.refreshCards()
                     }
-                }, { error in
+                }.catch { error in
                     if let error = error as? AdaptiveCardsStepsError {
                         switch error {
                         case .noProfile, .userNotUnregisteredFromEmails:
@@ -68,7 +68,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
                             self?.view?.state = .connectionError
                         }
                     }
-                })
+                }
             } else {
                 self?.isInitialActionsFinished = true
             }
@@ -145,4 +145,5 @@ enum AdaptiveCardsStepsError: Error {
     case userNotUnregisteredFromEmails
     case joinCourseFailed
     case noCourse
+    case noCoursesInfo
 }

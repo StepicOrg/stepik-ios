@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // We should store link to actions to prevent deallocating
+    var actions: AdaptiveUserActions?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
@@ -43,7 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let supportedCourses = StepicApplicationsInfo.adaptiveSupportedCourses
 
         var startViewController: UIViewController!
-        let actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), defaultsStorageManager: DefaultsStorageManager())
+
+        actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI(), defaultsStorageManager: DefaultsStorageManager())
+
+        guard let actions = actions else {
+            return
+        }
 
         if supportedCourses.count == 1 {
             // One course -> skip course select
@@ -65,7 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AchievementManager.shared = achievementsManager
 
             let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: initialViewController)
-            presenter.initialActions = { success, failure in
+
+            presenter.initialActions = Promise { fulfill, reject in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
@@ -74,36 +83,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }.then { _ -> Promise<Course> in
                     actions.loadCourseAndJoin(courseId: courseId)
-                }.then { course in
-                    success?(course)
+                }.then { course -> Void in
+                    fulfill(course)
                 }.catch { error in
-                    failure?(error)
+                    reject(error)
                 }
             }
+
             initialViewController.presenter = presenter
             startViewController = initialViewController
         } else if supportedCourses.count > 1 {
             // Multiple courses -> present course select
-            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseSelect", storyboardName: "AdaptiveMain") as? AdaptiveCourseSelectViewController else {
+            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "CourseSelect", storyboardName: "AdaptiveMain") as? UINavigationController else {
                 return
             }
 
-            let presenter = AdaptiveCourseSelectPresenter(view: initialViewController)
-            presenter.initialActions = { success, failure in
+            guard let selectController = initialViewController.childViewControllers.first as? AdaptiveCourseSelectViewController else {
+                return
+            }
+
+            let presenter = AdaptiveCourseSelectPresenter(view: selectController)
+            presenter.initialActions = Promise { fulfill, reject in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
                     } else {
                         return Promise(value: ())
                     }
-                }.then { _ -> Promise<[Course]> in
-                    actions.loadCourses(ids: supportedCourses)
-                }.then { courses in
-                    success?(courses)
+                }.then { _ -> Promise<([Course], [AdaptiveCourseInfo])> in
+                    var locale = Locale.preferredLanguages.first ?? "en"
+                    if !Bundle.main.localizations.contains(locale) {
+                        locale = "en"
+                    }
+
+                    return when(fulfilled: actions.loadCourses(ids: supportedCourses), actions.loadAdaptiveCoursesInfo(locale: locale))
+                }.then { courses, adaptiveCoursesInfo -> Void in
+                    fulfill((courses, adaptiveCoursesInfo))
                 }.catch { error in
-                    failure?(error)
+                    reject(error)
                 }
             }
+            selectController.presenter = presenter
             startViewController = initialViewController
         }
 
