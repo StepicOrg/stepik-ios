@@ -50,8 +50,6 @@ class InstructorItemCell: UICollectionViewCell, FocusAnimatable {
         self.layer.shadowRadius = 25
         self.layer.shadowOpacity = 0.2
         self.layer.shadowPath = UIBezierPath(roundedRect: self.imageView.bounds, cornerRadius: self.imageView.bounds.height / 2).cgPath
-
-        self.titleLabel.textColor = UIColor.white
     }
 
     func changeToHighlighted() {

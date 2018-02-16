@@ -10,8 +10,8 @@ import UIKit
 
 class TVLoadingView: UIView {
 
-    private var blurStyle = UIBlurEffectStyle.light
-    private var colorStyle: UIColor = UIColor.white
+    private var blurStyle = UIBlurEffectStyle.regular
+    private var colorStyle: UIColor = UIColor.black
 
     private var blurEffectView: UIVisualEffectView!
     private var vibrancyEffectView: UIVisualEffectView!

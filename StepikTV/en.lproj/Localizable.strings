@@ -37,3 +37,9 @@
 "triesLeft1" = "%@ try left";
 "triesLeft234" = "%@ tries left";
 "triesLeft567890" = "%@ tries left";
+"Audience" = "Audience";
+"Certificate" = "Certificate";
+"Requirements" = "Requirements";
+"Workload" = "Workload";
+"Summary" = "Summary";
+"Instructors" = "Instructors";

@@ -144,58 +144,76 @@
                         <sections>
                             <tableViewSection id="Hgw-mB-0rC">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StaticCoursesTableViewCell" textLabel="Gia-cQ-1lC" detailTextLabel="Phs-D5-iNp" rowHeight="66" style="IBUITableViewCellStyleValue1" id="qlN-DO-XvP">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RightDetailedCustomTableViewCell" rowHeight="66" id="qlN-DO-XvP" customClass="RightDetailedCustomTableViewCell" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qlN-DO-XvP" id="hDA-BK-Hw0">
                                             <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Не пройденные" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gia-cQ-1lC">
-                                                    <rect key="frame" x="20" y="10" width="284" height="46"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Not passed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xB9-DM-dVA">
+                                                    <rect key="frame" x="20" y="0.0" width="356" height="66"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Phs-D5-iNp">
-                                                    <rect key="frame" x="455" y="10" width="24" height="46"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lz4-b2-Yrs">
+                                                    <rect key="frame" x="386" y="0.0" width="93" height="66"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xB9-DM-dVA" firstAttribute="top" secondItem="hDA-BK-Hw0" secondAttribute="top" id="3k4-eL-fi1"/>
+                                                <constraint firstItem="Lz4-b2-Yrs" firstAttribute="top" secondItem="hDA-BK-Hw0" secondAttribute="top" id="3oT-bH-bUL"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lz4-b2-Yrs" secondAttribute="bottom" id="AOB-D7-W99"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lz4-b2-Yrs" secondAttribute="trailing" constant="20" id="HQM-ed-EOD"/>
+                                                <constraint firstItem="Lz4-b2-Yrs" firstAttribute="leading" secondItem="xB9-DM-dVA" secondAttribute="trailing" constant="10" id="gHi-lI-Vah"/>
+                                                <constraint firstAttribute="bottom" secondItem="xB9-DM-dVA" secondAttribute="bottom" id="hol-pI-1y9"/>
+                                                <constraint firstItem="xB9-DM-dVA" firstAttribute="leading" secondItem="hDA-BK-Hw0" secondAttribute="leading" constant="20" id="yOw-Fb-7cO"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailedLabel" destination="Lz4-b2-Yrs" id="QhH-TB-yaC"/>
+                                            <outlet property="titleLabel" destination="xB9-DM-dVA" id="8h5-j9-5oR"/>
                                             <segue destination="gZU-C6-QdM" kind="showDetail" identifier="ShowCoursesTable" id="2ax-Z3-kFw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StaticCoursesTableViewCell" textLabel="AcB-RS-H1B" detailTextLabel="aSu-0N-Ei7" rowHeight="66" style="IBUITableViewCellStyleValue1" id="jhX-Ka-gQs">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RightDetailedCustomTableViewCell" rowHeight="66" id="Uzl-XY-tpw" customClass="RightDetailedCustomTableViewCell" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="80" width="499" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhX-Ka-gQs" id="WN3-vo-cvR">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uzl-XY-tpw" id="UAc-m9-lqY">
                                             <rect key="frame" x="0.0" y="0.0" width="499" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Пройденные" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AcB-RS-H1B">
-                                                    <rect key="frame" x="20" y="10" width="231" height="46"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Passed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xcj-1s-8pO">
+                                                    <rect key="frame" x="20" y="0.0" width="356" height="66"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aSu-0N-Ei7">
-                                                    <rect key="frame" x="455" y="10" width="24" height="46"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-Ed-PHa">
+                                                    <rect key="frame" x="386" y="0.0" width="93" height="66"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="jqQ-Ed-PHa" secondAttribute="bottom" id="2wj-B3-70b"/>
+                                                <constraint firstItem="Xcj-1s-8pO" firstAttribute="leading" secondItem="UAc-m9-lqY" secondAttribute="leading" constant="20" id="DNF-SR-iaR"/>
+                                                <constraint firstAttribute="trailing" secondItem="jqQ-Ed-PHa" secondAttribute="trailing" constant="20" id="DiD-cl-veW"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xcj-1s-8pO" secondAttribute="bottom" id="LIN-F1-0Xi"/>
+                                                <constraint firstItem="Xcj-1s-8pO" firstAttribute="top" secondItem="UAc-m9-lqY" secondAttribute="top" id="X8O-A0-RQI"/>
+                                                <constraint firstItem="jqQ-Ed-PHa" firstAttribute="leading" secondItem="Xcj-1s-8pO" secondAttribute="trailing" constant="10" id="a46-5Y-fH0"/>
+                                                <constraint firstItem="jqQ-Ed-PHa" firstAttribute="top" secondItem="UAc-m9-lqY" secondAttribute="top" id="srW-S2-QI7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="RR9-YI-osV" kind="showDetail" identifier="ShowCoursesTable" id="hOl-DQ-Zna"/>
+                                            <outlet property="detailedLabel" destination="jqQ-Ed-PHa" id="N0T-hb-lZN"/>
+                                            <outlet property="titleLabel" destination="Xcj-1s-8pO" id="9F2-Au-HxW"/>
+                                            <segue destination="RR9-YI-osV" kind="showDetail" identifier="ShowCoursesTable" trigger="accessoryAction" id="tWQ-eV-WHr"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

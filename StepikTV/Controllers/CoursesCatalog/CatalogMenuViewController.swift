@@ -26,7 +26,7 @@ class CatalogMenuViewController: MenuTableViewController {
     }
 
     override var segueIdentifier: String { return "ShowCoursesTable" }
-    override var cellIdentifier: String { return "StaticCoursesTableViewCell" }
+    override var cellIdentifier: String { return "RightDetailedCustomTableViewCell" }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = performingSegueSourceCellIndexPath else { fatalError("'prepare(for segue:)' called when no performing segues") }
@@ -42,7 +42,8 @@ class CatalogMenuViewController: MenuTableViewController {
 extension CatalogMenuViewController: CatalogMenuView {
 
     func provide(count: Int, at indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = "\(count)"
+        let cell = tableView.cellForRow(at: indexPath) as! RightDetailedCustomTableViewCell
+            cell.detailedLabel.text = "\(count)"
         tableView.reloadData()
     }
 }

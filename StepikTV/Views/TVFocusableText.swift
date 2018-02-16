@@ -16,19 +16,29 @@ class TVFocusableText: UILabel, FocusAnimatable {
     private let substrateView: UIView = UIView()
     private var lastText: String = ""
 
+    func setupStyle(defaultTextColor: UIColor, focusedTextColor: UIColor? = nil, substrateViewColor: UIColor) {
+        self.defaultTextColor = defaultTextColor
+        self.focusedTextColor = focusedTextColor ?? defaultTextColor
+        self.substrateViewColor = substrateViewColor
+
+        changeToDefault()
+    }
+
+    private var defaultTextColor: UIColor = UIColor.white
+    private var focusedTextColor: UIColor = UIColor.white
+    private var substrateViewColor: UIColor = UIColor.white.withAlphaComponent(0.5)
+
     override var canBecomeFocused: Bool {
         return true
     }
 
     override func drawText(in rect: CGRect) {
-
         guard lastText != text || text != "" else {
             super.drawText(in: rect)
             return
         }
 
-        substrateView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        substrateView.frame = rect.insetBy(dx: -20, dy: -20)
+        substrateView.frame = rect.insetBy(dx: -40, dy: -20)
         substrateView.center = center
         substrateView.layer.cornerRadius = 10
         substrateView.clipsToBounds = true
@@ -40,14 +50,16 @@ class TVFocusableText: UILabel, FocusAnimatable {
 
     func changeToDefault() {
         self.transform = CGAffineTransform.identity
-        self.substrateView.transform = CGAffineTransform.identity
-        self.substrateView.alpha = 0
+        //self.substrateView.transform = CGAffineTransform.identity
+        self.substrateView.backgroundColor = substrateViewColor.withAlphaComponent(0.0)
+        self.textColor = defaultTextColor
     }
 
     func changeToFocused() {
         self.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
-        self.substrateView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
-        self.substrateView.alpha = 1
+        //self.substrateView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
+        self.substrateView.backgroundColor = substrateViewColor
+        self.textColor = focusedTextColor
     }
 
     func changeToHighlighted() {

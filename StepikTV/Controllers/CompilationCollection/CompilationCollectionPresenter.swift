@@ -29,6 +29,7 @@ class CompilationCollectionPresenter {
 
     func refresh() {
         let listLanguage = ContentLanguage.sharedContentLanguage
+        print(listLanguage)
         refreshFromRemote(forLanguage: listLanguage)
     }
 

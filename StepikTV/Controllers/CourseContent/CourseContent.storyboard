@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -53,31 +52,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Paragraph name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b18-0l-Juh">
-                                            <rect key="frame" x="20" y="0.0" width="403" height="66"/>
+                                            <rect key="frame" x="20" y="0.0" width="459" height="66"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="84K-3S-Waj">
-                                            <rect key="frame" x="433" y="0.0" width="66" height="66"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="84K-3S-Waj" secondAttribute="height" multiplier="1:1" id="xMB-LT-wJM"/>
-                                            </constraints>
-                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="b18-0l-Juh" firstAttribute="leading" secondItem="JKd-1Q-eWp" secondAttribute="leading" constant="20" id="2bD-sz-abu"/>
-                                        <constraint firstAttribute="trailing" secondItem="84K-3S-Waj" secondAttribute="trailing" id="Bfe-eH-HiJ"/>
-                                        <constraint firstItem="84K-3S-Waj" firstAttribute="top" secondItem="JKd-1Q-eWp" secondAttribute="top" id="HBQ-sE-bCP"/>
                                         <constraint firstAttribute="bottom" secondItem="b18-0l-Juh" secondAttribute="bottom" id="HkG-bW-tbV"/>
-                                        <constraint firstItem="84K-3S-Waj" firstAttribute="leading" secondItem="b18-0l-Juh" secondAttribute="trailing" constant="10" id="IU7-Ek-ZbD"/>
-                                        <constraint firstAttribute="bottom" secondItem="84K-3S-Waj" secondAttribute="bottom" id="LQq-8e-9O8"/>
                                         <constraint firstItem="b18-0l-Juh" firstAttribute="top" secondItem="JKd-1Q-eWp" secondAttribute="top" id="WFN-c2-0AZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="b18-0l-Juh" secondAttribute="trailing" constant="20" id="bl4-CQ-Xpr"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="b18-0l-Juh" id="y0f-GX-JLm"/>
-                                    <outlet property="progressIcon" destination="84K-3S-Waj" id="zrV-8t-KLN"/>
                                     <segue destination="IjS-aO-18J" kind="showDetail" identifier="ShowDetailSegue" id="ylD-K1-4C6"/>
                                 </connections>
                             </tableViewCell>
@@ -110,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="288" width="1285" height="792"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LessonTableViewCell" rowHeight="90" id="mEI-jJ-j4f" customClass="LessonTableViewCell" customModule="StepikTV" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LessonTableViewCell" rowHeight="90" id="mEI-jJ-j4f" customClass="LessonTableViewCell" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="66" width="1195" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mEI-jJ-j4f" id="8E9-Hv-nUb">
@@ -118,20 +107,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lesson title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rz4-Lr-uoo">
-                                                    <rect key="frame" x="140" y="5" width="789" height="45"/>
+                                                    <rect key="frame" x="140" y="5" width="154" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-TD-BlO">
-                                                    <rect key="frame" x="989" y="7" width="38" height="38"/>
+                                                    <rect key="frame" x="354" y="7" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="T7d-U5-Fek"/>
                                                         <constraint firstAttribute="height" constant="38" id="hAk-Nk-JlD"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N / M" textAlignment="right" lineBreakMode="headTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULc-a5-H7r">
-                                                    <rect key="frame" x="1059" y="5" width="91" height="46"/>
+                                                    <rect key="frame" x="424" y="5" width="91" height="46"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="91" id="8XT-bb-xLE"/>
                                                     </constraints>

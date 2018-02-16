@@ -100,7 +100,13 @@ class CourseInfoPresenter {
     }
 
     private func createDetailSections(course: Course, selectionAction: @escaping (TVFocusableText) -> Void) -> [CourseInfoSection] {
-        let detailsParams = ["Audience": course.audience, "Certificate": course.certificate, "Requirements": course.requirements, "Workload": course.workload, "Summary": course.summary].filter {
+        let audienceTitle = NSLocalizedString("Audience", comment: "")
+        let certificateTitle = NSLocalizedString("Certificate", comment: "")
+        let requirementsTitle = NSLocalizedString("Requirements", comment: "")
+        let workloadTitle = NSLocalizedString("Workload", comment: "")
+        let summaryTitle = NSLocalizedString("Summary", comment: "")
+
+        let detailsParams = [audienceTitle: course.audience, certificateTitle: course.certificate, requirementsTitle: course.requirements, workloadTitle: course.workload, summaryTitle: course.summary].filter {
             $0.value != ""
         }
         let sections = detailsParams.map {
@@ -111,12 +117,14 @@ class CourseInfoPresenter {
 
     private func createInstructorsSection(selectionAction: @escaping (TVFocusableText) -> Void) -> CourseInfoSection? {
         let instructorsViewData = instructors.map {
-            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholder"), imageURLString: $0.avatarURL, id: $0.id, title: "\($0.lastName) \($0.firstName)") { }
+            ItemViewData(placeholder: #imageLiteral(resourceName: "placeholderEmpty"), imageURLString: $0.avatarURL, id: $0.id, title: "\($0.lastName) \($0.firstName)") { }
         }
 
         guard instructorsViewData.count != 0 else { return nil }
 
-        let instructorsSection = CourseInfoSection(.instructors(items: instructorsViewData), title: "Instructors")
+        let instructorsTitle = NSLocalizedString("Instructors", comment: "")
+
+        let instructorsSection = CourseInfoSection(.instructors(items: instructorsViewData), title: instructorsTitle)
         return instructorsSection
     }
 

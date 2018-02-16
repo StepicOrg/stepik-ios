@@ -30,7 +30,6 @@ class SectionTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.delegate = self
 
-
         tableView.remembersLastFocusedIndexPath = false
     }
 

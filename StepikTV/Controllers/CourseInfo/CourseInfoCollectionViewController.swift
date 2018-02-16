@@ -13,6 +13,10 @@ class CourseInfoCollectionViewController: BlurredImageCollectionViewController {
     fileprivate var loadingView: TVLoadingView?
 
     override func viewDidLoad() {
+        let whiteview = UIView(frame: view.bounds)
+            whiteview.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        view.insertSubview(whiteview, at: 0)
+
         super.viewDidLoad()
 
         let mainNib = UINib(nibName: MainCourseInfoSectionCell.nibName, bundle: nil)
@@ -23,6 +27,8 @@ class CourseInfoCollectionViewController: BlurredImageCollectionViewController {
 
         let instructorsNib = UINib(nibName: InstructorsCourseInfoSectionCell.nibName, bundle: nil)
         collectionView?.register(instructorsNib, forCellWithReuseIdentifier: InstructorsCourseInfoSectionCell.reuseIdentifier)
+
+        collectionView?.contentInset = UIEdgeInsetsMake(-20, 0, -50, 0)
     }
 
     var presenter: CourseInfoPresenter?
@@ -59,6 +65,14 @@ extension CourseInfoCollectionViewController: UICollectionViewDelegateFlowLayout
 
         return CGSize(width: width, height: height)
     }
+
+    /*
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        guard section == sections.count - 1 else { return CGSize.zero }
+
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: width, height: 20)
+    } */
 }
 
 extension CourseInfoCollectionViewController: CourseInfoView {

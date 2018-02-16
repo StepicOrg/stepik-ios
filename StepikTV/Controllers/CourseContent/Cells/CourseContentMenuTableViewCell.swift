@@ -18,7 +18,6 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
     }
 
     @IBOutlet var nameLabel: UILabel?
-    @IBOutlet var progressIcon: UIImageView?
 
     private var index: Int?
     private var sectionTitle: String?
@@ -28,11 +27,15 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
         changeToDefault()
     }
 
-    func setup(with index: Int, _ sectionTitle: String) {
+    func setup(with index: Int? = nil, _ sectionTitle: String) {
         self.index = index
         self.sectionTitle = sectionTitle
 
-        self.nameLabel?.text = "\(index). \(sectionTitle)"
+        if let index = index {
+            self.nameLabel?.text = "\(index). \(sectionTitle)"
+        } else {
+            self.nameLabel?.text = "\(sectionTitle)"
+        }
     }
 
     override func changeToDefault() {

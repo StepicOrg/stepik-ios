@@ -2,14 +2,14 @@
 /* Class = "UITabBarItem"; title = "Мои курсы"; ObjectID = "5Hx-xA-TbX"; */
 "5Hx-xA-TbX.title" = "My courses";
 
-/* Class = "UILabel"; text = "Пройденные"; ObjectID = "AcB-RS-H1B"; */
-"AcB-RS-H1B.text" = "Passed";
+/* Class = "UILabel"; text = "Пройденные"; ObjectID = "Xcj-1s-8pO"; */
+"Xcj-1s-8pO.text" = "Passed";
 
 /* Class = "UITabBarItem"; title = "Профиль"; ObjectID = "DsA-Hi-lyK"; */
 "DsA-Hi-lyK.title" = "Profile";
 
-/* Class = "UILabel"; text = "Не пройденные"; ObjectID = "Gia-cQ-1lC"; */
-"Gia-cQ-1lC.text" = "In progress";
+/* Class = "UILabel"; text = "Не пройденные"; ObjectID = "xB9-DM-dVA"; */
+"xB9-DM-dVA.text" = "In progress";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "Phs-D5-iNp"; */
 "Phs-D5-iNp.text" = "0";

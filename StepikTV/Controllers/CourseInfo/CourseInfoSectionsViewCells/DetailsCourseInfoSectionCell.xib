@@ -33,6 +33,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="m86-Yu-EBk" firstAttribute="top" secondItem="8py-fP-AhR" secondAttribute="top" constant="25" id="3ry-H9-4IX"/>
                 <constraint firstAttribute="trailingMargin" secondItem="kly-MA-hjl" secondAttribute="trailing" id="7TC-uw-Py8"/>

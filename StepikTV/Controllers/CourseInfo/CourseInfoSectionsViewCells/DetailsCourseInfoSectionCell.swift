@@ -24,6 +24,12 @@ class DetailsCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewP
     @IBOutlet var title: UILabel!
     @IBOutlet var content: TVFocusableText!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        content.setupStyle(defaultTextColor: UIColor.black, focusedTextColor: UIColor.white, substrateViewColor: UIColor(hex: 0x80c972).withAlphaComponent(0.8))
+    }
+
     func setup(with section: CourseInfoSection) {
         title.text = section.title
 

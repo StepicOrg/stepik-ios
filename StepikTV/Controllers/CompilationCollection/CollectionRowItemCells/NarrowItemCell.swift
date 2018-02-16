@@ -56,7 +56,8 @@ class NarrowItemCell: ImageConvertableCollectionViewCell {
         let style = NSMutableParagraphStyle()
             style.alignment = .center
             style.lineBreakMode = .byWordWrapping
-        let offset = NSNumber(value: 15)
+            style.lineHeightMultiple = 0.95
+        let offset = NSNumber(value: 5)
 
         return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style, NSBaselineOffsetAttributeName: offset] as [String : Any]
     }

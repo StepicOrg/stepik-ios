@@ -39,6 +39,12 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
     private let subscribeTitle = NSLocalizedString("Subscribe", comment: "")
     private let subscribedTitle = NSLocalizedString("Leave", comment: "")
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        descr.setupStyle(defaultTextColor: UIColor.black, focusedTextColor: UIColor.white, substrateViewColor: UIColor(hex: 0x80c972).withAlphaComponent(0.8))
+    }
+
     func setup(with section: CourseInfoSection) {
         title.text = section.title
 
@@ -49,7 +55,7 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
             self.descr.pressAction = selectionAction
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
             self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
-            self.leftIconButton.action = trailerAction
+            self.leftIconButton.pressAction = trailerAction
             self.setSubscribed(enrolled: enrolled, action: subscriptionAction)
             self.setAuthorized(status: section.isAuthorized!)
         default:
@@ -61,7 +67,7 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
         let title = enrolled ? subscribedTitle : subscribeTitle
         let image = enrolled ? #imageLiteral(resourceName: "unsubscribe_icon") : #imageLiteral(resourceName: "subscribe_icon")
         self.rightIconButton.configure(with: image, title)
-        self.rightIconButton.action = action
+        self.rightIconButton.pressAction = action
     }
 
     func setAuthorized(status: Bool) {

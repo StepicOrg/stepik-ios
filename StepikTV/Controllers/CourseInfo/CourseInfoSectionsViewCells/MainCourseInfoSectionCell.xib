@@ -51,7 +51,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6G-UO-LrY" customClass="TVIconButton" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="142" height="114"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6E-Ie-pyW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6E-Ie-pyW" customClass="IconButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="142" id="Lbq-Ay-UwF"/>
@@ -85,7 +85,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSy-K5-8HJ" customClass="TVIconButton" customModule="StepikTV" customModuleProvider="target">
                                 <rect key="frame" x="166" y="0.0" width="142" height="114"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1E-bO-BdC">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1E-bO-BdC" customClass="IconButton" customModule="StepikTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="6Xk-7E-bsJ"/>
