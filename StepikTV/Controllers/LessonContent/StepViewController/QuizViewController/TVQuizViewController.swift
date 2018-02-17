@@ -36,7 +36,7 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
         super.viewDidLoad()
 
         statusLabel.textColor = UIColor.white
-        statusLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
+        statusLabel.font = UIFont.systemFont(ofSize: 40, weight: .medium)
 
         sendButton.addTarget(self, action: #selector(TVQuizViewController.sendButtonPressed(_:)), for: UIControlEvents.primaryActionTriggered)
 
@@ -145,7 +145,7 @@ class TVQuizViewController: UIViewController, QuizView, QuizControllerDataSource
         presenter?.submitPressed()
     }
 
-    func sendButtonPressed(_ sender: UIButton) {
+    @objc func sendButtonPressed(_ sender: UIButton) {
         submitPressed()
     }
 

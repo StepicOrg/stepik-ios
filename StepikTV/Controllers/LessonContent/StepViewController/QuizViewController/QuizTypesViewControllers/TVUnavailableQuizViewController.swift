@@ -23,7 +23,7 @@ class TVUnavailableQuizViewController: TVQuizViewController {
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor.white
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
+        textLabel.font = UIFont.systemFont(ofSize: 40, weight: .medium)
 
         containerView.addSubview(textLabel)
         view.sizeToFit()

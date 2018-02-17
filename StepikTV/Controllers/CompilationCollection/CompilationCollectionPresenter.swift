@@ -49,7 +49,7 @@ class CompilationCollectionPresenter {
                     throw WeakSelfError.noStrong
                 }
 
-                strongSelf.lists = lists.sorted { $0.0.position < $0.1.position }
+                strongSelf.lists = lists.sorted { $0.position < $1.position }
                 strongSelf.loaders = [
                     CollectionRowLoader(listType: .popular, title: "Popular"),
                     CollectionRowLoader(title: NSLocalizedString("Subjects", comment: ""))
@@ -86,7 +86,7 @@ class CompilationCollectionPresenter {
 
                         courses.forEach {
                             $0.loadAllInstructors {
-                                [weak self] _ in
+                                [weak self] in
                                 guard let strongSelf = self else { return }
 
                                 strongSelf.rows[index].setData(with: courses, for: strongSelf.view as! UIViewController)

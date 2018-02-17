@@ -23,7 +23,7 @@ class TitleInputAccessoryView: UIView {
     super.init(frame: CGRect.zero)
 
     // Setup the label and add it to the view.
-    titleLabel.font = UIFont.systemFont(ofSize: 60, weight: UIFontWeightMedium)
+    titleLabel.font = UIFont.systemFont(ofSize: 60, weight: .medium)
     titleLabel.text = title
 
     addSubview(titleLabel)

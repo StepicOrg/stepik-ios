@@ -11,7 +11,7 @@ import UIKit
 class TVTextButton: UIButton, FocusAnimatable {
 
     func changeToDefault() {
-        let font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium)
+        let font = UIFont.systemFont(ofSize: 38, weight: .medium)
         let color = UIColor.clear
 
         self.transform = CGAffineTransform.identity
@@ -21,7 +21,7 @@ class TVTextButton: UIButton, FocusAnimatable {
     }
 
     func changeToFocused() {
-        let font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightSemibold)
+        let font = UIFont.systemFont(ofSize: 40, weight: .semibold)
         let color = UIColor(red:0.50, green:0.79, blue:0.45, alpha:1.00)
         let scale = CGFloat(1.09)
 
@@ -51,7 +51,7 @@ class TVTextButton: UIButton, FocusAnimatable {
         setTitleColor(focusStateTitleColor, for: .highlighted)
 
         self.contentHorizontalAlignment = .left
-        self.contentEdgeInsets = UIEdgeInsetsMake(0, 20.0, 0, 20.0)
+        self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20.0, bottom: 0, right: 20.0)
         self.titleEdgeInsets = UIEdgeInsets.zero
         self.imageEdgeInsets = UIEdgeInsets.zero
     }

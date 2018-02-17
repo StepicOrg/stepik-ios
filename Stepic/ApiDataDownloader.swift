@@ -39,7 +39,7 @@ class ApiDataDownloader {
     static let attempts = AttemptsAPI()
     static let progresses = ProgressesAPI()
     static let auth = AuthAPI()
-    #if os(iOS)
+    #if !os(tvOS)
         static let notificationsStatusAPI = NotificationStatusesAPI()
     #endif
 }

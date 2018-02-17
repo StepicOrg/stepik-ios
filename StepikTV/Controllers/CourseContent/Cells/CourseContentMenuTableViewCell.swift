@@ -14,7 +14,7 @@ class MenuSectionTableViewCell: FocusableCustomTableViewCell {
     static var size: CGFloat { get { return CGFloat(66) } }
 
     static func getHeightForCell(with index: Int, _ title: String, width: CGFloat) -> CGFloat {
-        return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 180, alignment: .left) + 20
+        return UILabel.heightForLabelWithText("\(index). \(title)", lines: 0, font: UIFont.systemFont(ofSize: 38, weight: .medium), width: width - 180, alignment: .left) + 20
     }
 
     @IBOutlet var nameLabel: UILabel?
@@ -60,7 +60,7 @@ class MenuHeaderCourseTableViewCell: FocusableCustomTableViewCell {
     static var size: CGFloat { return CGFloat(220) }
 
     static func getHeightForCell(with viewData: CourseViewData?, width: CGFloat) -> CGFloat {
-        return max(80.0, UILabel.heightForLabelWithText(viewData?.title ?? "", lines: 0, font: UIFont.systemFont(ofSize: 57, weight: UIFontWeightMedium), width: width - 150, alignment: .left) + 40)
+        return max(80.0, UILabel.heightForLabelWithText(viewData?.title ?? "", lines: 0, font: UIFont.systemFont(ofSize: 57, weight: .medium), width: width - 150, alignment: .left) + 40)
     }
 
     @IBOutlet var titleLabel: UILabel?

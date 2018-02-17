@@ -18,7 +18,7 @@ class DetailsCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewP
             return 35.0
         }
 
-        return max(35, UILabel.heightForLabelWithText(content, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 220, html: true, alignment: .left)) + 125
+        return max(35, UILabel.heightForLabelWithText(content, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: .regular), width: width - 220, html: true, alignment: .left)) + 125
     }
 
     @IBOutlet var title: UILabel!

@@ -15,7 +15,7 @@ extension UILabel {
             return nil
         }
 
-        let labelTextSize = (labelText as NSString).size(attributes: [NSFontAttributeName: font])
+        let labelTextSize = (labelText as NSString).size(withAttributes: [NSAttributedStringKey.font: font])
 
         return labelTextSize
     }
@@ -27,7 +27,7 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
     static var estimatedSize: CGFloat { return CGFloat(90) }
 
     static func getHeightForCell(with viewData: LessonViewData, width: CGFloat) -> CGFloat {
-        return UILabel.heightForLabelWithText(viewData.title, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 430, alignment: .left) + 45
+        return UILabel.heightForLabelWithText(viewData.title, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: .medium), width: width - 430, alignment: .left) + 45
     }
 
     @IBOutlet var indexLabel: UILabel!

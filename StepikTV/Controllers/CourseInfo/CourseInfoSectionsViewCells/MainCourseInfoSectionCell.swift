@@ -18,11 +18,11 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
             return 35.0
         }
 
-        let titleHeight = max(69.0, UILabel.heightForLabelWithText(section.title, lines: 0, font: UIFont.systemFont(ofSize: 57, weight: UIFontWeightMedium), width: width - 1000, alignment: .left))
+        let titleHeight = max(69.0, UILabel.heightForLabelWithText(section.title, lines: 0, font: UIFont.systemFont(ofSize: 57, weight: .medium), width: width - 1000, alignment: .left))
 
-        let hostsHeight = max(46.0, UILabel.heightForLabelWithText(host, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: UIFontWeightMedium), width: width - 1000, alignment: .left))
+        let hostsHeight = max(46.0, UILabel.heightForLabelWithText(host, lines: 0, font: UIFont.systemFont(ofSize: 38, weight: .medium), width: width - 1000, alignment: .left))
 
-        var contentHeight = UILabel.heightForLabelWithText(descr, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: UIFontWeightRegular), width: width - 1000, alignment: .left)
+        var contentHeight = UILabel.heightForLabelWithText(descr, lines: 0, font: UIFont.systemFont(ofSize: 29, weight: .regular), width: width - 1000, alignment: .left)
             contentHeight = contentHeight > 350.0 ? 350.0 : contentHeight
 
         return (titleHeight + hostsHeight + contentHeight + 300.0)

@@ -137,7 +137,7 @@ class AuthAPI {
             var parameters: [String: String] = [:]
             if let code = statusCode { parameters["code"] = "\(code)" }
             if let m = message { parameters["message"] = m }
-            #if os(iOS)
+            #if !os(tvOS)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
             #endif
         }

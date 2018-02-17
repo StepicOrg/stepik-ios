@@ -11,7 +11,7 @@ import Foundation
 class VideoStepViewController: TVPlayerViewController {
 
     var stepPosition: Int!
-    
+
     override func playVideo() {
         super.playVideo()
 

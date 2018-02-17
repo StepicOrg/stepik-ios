@@ -119,7 +119,7 @@ class TVTextPresentationAlertController: BlurredViewController {
         contentLabel.textAlignment = .center
         contentLabel.textColor = UIColor.white
         contentLabel.numberOfLines = 0
-        contentLabel.font = UIFont.systemFont(ofSize: 38, weight: UIFontWeightRegular)
+        contentLabel.font = UIFont.systemFont(ofSize: 38, weight: .regular)
 
         arrangeViews()
         view.layoutIfNeeded()
@@ -153,9 +153,6 @@ class TVTextPresentationAlertController: BlurredViewController {
     }
 
     override func viewDidLayoutSubviews() {
-
-        print("\(contentLabel.bounds.height) \(scrollView.bounds.height)")
-
         if contentLabel.bounds.height <= scrollView.bounds.height {
             let insetValue = (scrollView.bounds.height - contentLabel.bounds.height) / 2
             scrollViewTopInset.constant = insetValue

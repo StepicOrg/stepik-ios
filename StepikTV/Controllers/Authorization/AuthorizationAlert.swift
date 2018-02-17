@@ -131,7 +131,7 @@ class AuthorizationAlert: NSObject {
     return alertController
   }
 
-  func handleTextChange(_ textField: UITextField) {
+    @objc func handleTextChange(_ textField: UITextField) {
     guard let acceptAction = self.acceptAction else { fatalError("no accept action") }
 
     switch authType {

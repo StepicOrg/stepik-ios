@@ -83,7 +83,7 @@ class CourseInfoPresenter {
         let descr = course.courseDescription
         let imageURL = URL(string: course.coverURLString)
 
-        let trailerAction: () -> Void = { _ in
+        let trailerAction: () -> Void = {
             self.playIntro(intro: course.introVideo)
         }
 

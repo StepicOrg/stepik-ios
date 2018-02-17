@@ -36,7 +36,7 @@ class TVChoiceQuizTableViewCell: UITableViewCell, FocusAnimatable {
     static var nibName: String { return "TVChoiceQuizTableViewCell" }
     static var reuseIdentifier: String { return "TVChoiceQuizTableViewCell" }
     static func getHeightForText(text: String, width: CGFloat) -> CGFloat {
-        return max(45, UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium), width: width - 100, html: true, alignment: .left)) + 30
+        return max(45, UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 40, weight: .medium), width: width - 100, html: true, alignment: .left)) + 30
     }
 
     @IBOutlet weak var containerLabel: UILabel!
@@ -73,7 +73,7 @@ class TVChoiceQuizTableViewCell: UITableViewCell, FocusAnimatable {
 
         containerLabel.textColor = UIColor.white.withAlphaComponent(0.3)
         containerLabel.numberOfLines = 0
-        containerLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
+        containerLabel.font = UIFont.systemFont(ofSize: 40, weight: .medium)
         containerLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
         containerLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         containerLabel.textAlignment = NSTextAlignment.left
@@ -97,7 +97,7 @@ class TVChoiceQuizTableViewCell: UITableViewCell, FocusAnimatable {
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesEnded(presses, with: event)
         guard presses.first!.type != UIPressType.menu else { return }
-        
+
         delegate?.statusWillChange(self, to: status.inverted)
     }
 

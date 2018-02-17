@@ -9,7 +9,6 @@
 import Foundation
 import PromiseKit
 
-
 class CourseSubscriber {
 
     enum CourseSubscriptionError: Error {
@@ -45,8 +44,7 @@ class CourseSubscriber {
                 ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: course.progress != nil ? [course.progress!] : [], refreshMode: .update, success: {
                     progresses in
 
-                    if (!delete)
-                    {
+                    if (!delete) {
                         guard let progress = progresses.first else {
                             reject(CourseSubscriptionError.badResponseFormat)
                             return

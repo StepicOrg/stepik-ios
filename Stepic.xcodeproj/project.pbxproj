@@ -4408,7 +4408,6 @@
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		92688AAC4BD0741FF7F01BE8 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47CB98C00BEE01915CD88F5 /* Pods_Adaptive_3150.framework */; };
-		92F4093FB2E6F647A8369A5D /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A9FB462502CAA792A7AB11 /* Pods_Stepic.framework */; };
 		9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9300843D201663C100DBFC0E /* TVQuizViewController.xib */; };
 		930084402016717500DBFC0E /* BlurredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300843F2016717500DBFC0E /* BlurredViewController.swift */; };
 		933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */; };
@@ -4429,7 +4428,6 @@
 		933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */; };
 		933E3F271FBA61D9005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		9343534D201A066200DD2F1A /* TVStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343534C201A066200DD2F1A /* TVStringQuizViewController.swift */; };
-		9343534F201A067300DD2F1A /* TVNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343534E201A067300DD2F1A /* TVNumberQuizViewController.swift */; };
 		93435353201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93435352201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib */; };
 		93435355201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */; };
 		934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */; };
@@ -4453,6 +4451,127 @@
 		938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */; };
 		938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */; };
 		938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860DA2037471900DFEA3A /* VideoStepViewController.swift */; };
+		938860E1203799BA00DFEA3A /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */; };
+		938860E2203799D900DFEA3A /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		938860E320379A4B00DFEA3A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
+		938860E420379A6300DFEA3A /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
+		938860E520379A8000DFEA3A /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
+		938860E620379A8B00DFEA3A /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
+		938860E720379AB700DFEA3A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
+		938860E820379AE100DFEA3A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
+		938860E920379B0000DFEA3A /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
+		938860EA20379B1200DFEA3A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
+		938860EB20379B1900DFEA3A /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
+		938860EC20379B2B00DFEA3A /* TVNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343534E201A067300DD2F1A /* TVNumberQuizViewController.swift */; };
+		938860ED20379B3400DFEA3A /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
+		938860EE20379B4D00DFEA3A /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
+		938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
+		938860F020379B6600DFEA3A /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		938860F120379B7300DFEA3A /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		938860F220379B7900DFEA3A /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
+		938860F320379B8300DFEA3A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		938860F420379B8E00DFEA3A /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
+		938860F520379BB200DFEA3A /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
+		938860F620379BC100DFEA3A /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
+		938860F720379BD300DFEA3A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
+		938860F820379C2500DFEA3A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
+		938860F920379C2D00DFEA3A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
+		938860FA20379C4A00DFEA3A /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
+		938860FB20379C5600DFEA3A /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
+		938860FC20379C6700DFEA3A /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
+		938860FD20379C7100DFEA3A /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
+		938860FF20379C8700DFEA3A /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
+		9388610020379CAB00DFEA3A /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
+		9388610120379CBA00DFEA3A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
+		9388610220379CF500DFEA3A /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
+		9388610320379D0000DFEA3A /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
+		9388610420379D0B00DFEA3A /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
+		9388610520379D2900DFEA3A /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
+		9388610620379D3A00DFEA3A /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		9388610720379D4700DFEA3A /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
+		9388610820379D5200DFEA3A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
+		9388610920379D6100DFEA3A /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
+		9388610B20379D8700DFEA3A /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
+		9388610C20379DB300DFEA3A /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
+		9388610D20379E4800DFEA3A /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
+		9388610E20379F0000DFEA3A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
+		9388610F20379F1B00DFEA3A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
+		9388611020379F2C00DFEA3A /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
+		9388611120379F3E00DFEA3A /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		938861122037DEFC00DFEA3A /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
+		938861132037DF0B00DFEA3A /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
+		938861142037DF3400DFEA3A /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		938861152037DF5200DFEA3A /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
+		938861162037DF5A00DFEA3A /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		938861172037DF7100DFEA3A /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
+		938861182037DF8600DFEA3A /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
+		938861192037DF9500DFEA3A /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		9388611A2037DFA600DFEA3A /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		9388611B2037DFBC00DFEA3A /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		9388611C2037DFC600DFEA3A /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		9388611D2037DFD300DFEA3A /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		9388611E2037DFE100DFEA3A /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		9388611F2037DFF600DFEA3A /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		938861202037E01900DFEA3A /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
+		938861212037E02000DFEA3A /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
+		938861222037E02E00DFEA3A /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		938861232037E03800DFEA3A /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
+		938861242037E05300DFEA3A /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
+		938861252037E05C00DFEA3A /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
+		938861262037E06F00DFEA3A /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
+		938861272037E08600DFEA3A /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
+		938861282037E0A500DFEA3A /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
+		938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
+		9388612A2037E0DA00DFEA3A /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		9388612C2037E12900DFEA3A /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		9388612D2037E19800DFEA3A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
+		9388612E2037E1B100DFEA3A /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		9388612F2037E1CA00DFEA3A /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
+		938861302037E1E300DFEA3A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
+		938861312037E1EE00DFEA3A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
+		938861322037E1FC00DFEA3A /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
+		938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
+		938861342037E23700DFEA3A /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
+		938861352037E27300DFEA3A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
+		938861362037E28500DFEA3A /* StepOptions+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */; };
+		938861372037E2CF00DFEA3A /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
+		938861382037E2D400DFEA3A /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
+		938861392037E2E800DFEA3A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
+		9388613A2037E30500DFEA3A /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
+		9388613B2037E30A00DFEA3A /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
+		9388613C2037E36600DFEA3A /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
+		9388613D2037E36F00DFEA3A /* CodeLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */; };
+		9388613E2037E37800DFEA3A /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
+		9388613F2037E38800DFEA3A /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		938861402037E39300DFEA3A /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
+		938861412037E3A600DFEA3A /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
+		938861422037E3ED00DFEA3A /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
+		938861432037E41B00DFEA3A /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
+		938861442037E42600DFEA3A /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		938861452037E43200DFEA3A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		938861462037E48800DFEA3A /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
+		938861472037E49700DFEA3A /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		938861482037E54400DFEA3A /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		938861492037E54600DFEA3A /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		9388614A2037E5F500DFEA3A /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
+		9388614B2037E68200DFEA3A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
+		9388614C2037E69100DFEA3A /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
+		9388614D2037E6B100DFEA3A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
+		9388614E2037E6E600DFEA3A /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
+		9388614F2037E6F700DFEA3A /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */; };
+		938861502037E70B00DFEA3A /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
+		938861512037E74A00DFEA3A /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
+		938861522037E77000DFEA3A /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
+		938861532037E7F300DFEA3A /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		938861542037E80200DFEA3A /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
+		938861552037E82900DFEA3A /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
+		938861562037E96100DFEA3A /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
+		938861572037E97600DFEA3A /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
+		938861582037E98A00DFEA3A /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
+		938861592037E9BC00DFEA3A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
+		9388615A2037E9F500DFEA3A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
 		93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
 		93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */; };
 		93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
@@ -4522,15 +4641,15 @@
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		B2897794E535FA733BEE6945 /* Pods_Adaptive_1906_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */; };
-		C9144FDA6B99F2DED2616956 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */; };
-		D030F90E329766F21066395B /* Pods_StepikTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C17FA1CA4937F3CEEA611 /* Pods_StepikTV.framework */; };
-		DA44536FA7369C2A913661D8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */; };
-		F6B3F297DBC2024B5DCC9E7D /* Pods_Adaptive_3067.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A116DAAAF6FF9135E043C7 /* Pods_Adaptive_3067.framework */; };
-		FE9E95BAC4BA07DE5F490569 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523264B4C39A4383B77E3294 /* Pods_Adaptive_3067_Screenshots.framework */; };
 		BA52CB622035B29D002971B6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA52CB602035B29D002971B6 /* Localizable.strings */; };
 		BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
+		C9144FDA6B99F2DED2616956 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */; };
+		D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */; };
+		DA44536FA7369C2A913661D8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */; };
+		F6B3F297DBC2024B5DCC9E7D /* Pods_Adaptive_3067.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A116DAAAF6FF9135E043C7 /* Pods_Adaptive_3067.framework */; };
+		FE9E95BAC4BA07DE5F490569 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523264B4C39A4383B77E3294 /* Pods_Adaptive_3067_Screenshots.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -5225,7 +5344,6 @@
 		1CCAD05D790E889F0A1B0BBE /* Pods-Adaptive 1906 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		1F2DEFF1E5750C83E1EE4083 /* Pods-Adaptive 3149.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.release.xcconfig"; sourceTree = "<group>"; };
 		2063E36B4EC96399AAB6ABC9 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
-        23A9FB462502CAA792A7AB11 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C04C1041F160643006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step2.html; sourceTree = "<group>"; };
 		2C04C1071F160650006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step3.html; sourceTree = "<group>"; };
@@ -5429,19 +5547,19 @@
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BEF79D32646AF1AAA1044 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
-        4729F9B4639AAD9EBFC01D1E /* Pods_Adaptive_1906.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4729F9B4639AAD9EBFC01D1E /* Pods_Adaptive_1906.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.release.xcconfig"; sourceTree = "<group>"; };
 		492DD97BAFC352B77663BCE7 /* Pods-Adaptive 3067.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.release.xcconfig"; sourceTree = "<group>"; };
 		5003B355F9C103E512D8A2A2 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		523264B4C39A4383B77E3294 /* Pods_Adaptive_3067_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6148D39767518C0599A3 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		6E380C5B32834C4523AC836F /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
-        3CB71B21737409A533B451E9 /* Pods-StepikTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.release.xcconfig"; sourceTree = "<group>"; };
-        527579D70C016E961B5FBB68 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
-        828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
 		860DB7A41EB9054B001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
@@ -5475,10 +5593,6 @@
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
 		894CF0BBB58CB38AFE4FB6F1 /* Pods-Adaptive 3150.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.debug.xcconfig"; sourceTree = "<group>"; };
-		9BB7DFEA3B42E4DB3EFCD558 /* Pods-Adaptive 1906.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.release.xcconfig"; sourceTree = "<group>"; };
-		9C173F98D6CDBFD82F42D2D1 /* Pods_Adaptive_3149.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C247C46B366E3C00E5374DA /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
 		9300843D201663C100DBFC0E /* TVQuizViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVQuizViewController.xib; sourceTree = "<group>"; };
 		9300843F2016717500DBFC0E /* BlurredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredViewController.swift; sourceTree = "<group>"; };
 		933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSectionViewProtocol.swift; sourceTree = "<group>"; };
@@ -5535,9 +5649,11 @@
 		93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
 		93FF4B67200537330058B94D /* InstructorItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorItemCell.xib; sourceTree = "<group>"; };
 		93FF4B6920053A170058B94D /* InstructorItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorItemCell.swift; sourceTree = "<group>"; };
-		9837A965E2C5F03E6C6D13DD /* Pods-Adaptive 1906 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-        9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
+		9BB7DFEA3B42E4DB3EFCD558 /* Pods-Adaptive 1906.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.release.xcconfig"; sourceTree = "<group>"; };
+		9C173F98D6CDBFD82F42D2D1 /* Pods_Adaptive_3149.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -5559,12 +5675,19 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
+		A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
+		A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A53D37FA4CD8A9B6D7AE2222 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA52CB632035B427002971B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BA895F852035C91E00B4198B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		BA895F872035C92300B4198B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		BAA3067633C83C1C28423DCA /* Pods-Adaptive 1906.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.debug.xcconfig"; sourceTree = "<group>"; };
+		BAC391752035C64F0089D6F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BB035CD08BB7AB3FD3A64F49 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10545C3657205B9CF673A80 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		C3141665863D4EB5882EF1AC /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
 		C56E1AFEE69481800B794FE4 /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		C5CC7ADFCE6AA65DDEFF282C /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -5578,12 +5701,7 @@
 		F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9511455F084F8CF424B234F /* Pods-Adaptive 1906 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		FCF43FC15E3F7136F29091DE /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
-        A45C24E6134CDBD3A00C005E /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
-		BA52CB632035B427002971B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BA895F852035C91E00B4198B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		BA895F872035C92300B4198B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		BAC391752035C64F0089D6F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		/* End PBXFileReference section */
+/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		085D5CD61D007F2100092060 /* Frameworks */ = {
@@ -5625,6 +5743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E6ECF7D5E3928A2D8BC5789 /* Pods_StepikTVTests.framework in Frameworks */,
+				D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7124,6 +7243,7 @@
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
 				15A6EA0367C62E2E49D43D22 /* Pods */,
+				938860E02037994800DFEA3A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -7560,7 +7680,6 @@
 				1CCAD05D790E889F0A1B0BBE /* Pods-Adaptive 1906 Screenshots.release.xcconfig */,
 				112E8E44AFC42F38284E3EDC /* Pods-Adaptive 3067.debug.xcconfig */,
 				492DD97BAFC352B77663BCE7 /* Pods-Adaptive 3067.release.xcconfig */,
-				8016516087E572E4D193AE27 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */,
 				12D63200148C5C3674B3200F /* Pods-Adaptive 3067 Screenshots.release.xcconfig */,
 				C56E1AFEE69481800B794FE4 /* Pods-Adaptive 3124.debug.xcconfig */,
 				0D24DF74966B1953145A4BA9 /* Pods-Adaptive 3124.release.xcconfig */,
@@ -7580,10 +7699,11 @@
 				67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */,
 				C5CC7ADFCE6AA65DDEFF282C /* Pods-StepicTests.debug.xcconfig */,
 				A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */,
-				A563DCFCAB59C8CE5BAE71BF /* Pods-StepikTV.debug.xcconfig */,
-				2607B5745D3DFAFA3A60F3F5 /* Pods-StepikTV.release.xcconfig */,
-				6F7ED61471D9FBE1AE51C058 /* Pods-StepikTVTests.debug.xcconfig */,
-				470147BA7F6957FD9C32ACD1 /* Pods-StepikTVTests.release.xcconfig */,
+				C10545C3657205B9CF673A80 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */,
+				A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */,
+				5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */,
+				A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */,
+				47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -7728,7 +7848,7 @@
 				60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */,
 				9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */,
 				2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */,
-                19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */,
+				19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */,
 				9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */,
 			);
 			name = Frameworks;
@@ -8612,6 +8732,14 @@
 			path = SplitViewController;
 			sourceTree = "<group>";
 		};
+		938860E02037994800DFEA3A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		93BBE6241FE6E63C006DEC28 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -8806,13 +8934,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BAE130C1F93F67700482251 /* Build configuration list for PBXNativeTarget "StepikTV" */;
 			buildPhases = (
-				909BF21B7CB2CEC6B7DA174C /* [CP] Check Pods Manifest.lock */,
+				C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */,
 				1BAE12EB1F93F67700482251 /* Sources */,
 				1BAE12EC1F93F67700482251 /* Frameworks */,
 				1BAE12ED1F93F67700482251 /* Resources */,
 				1B6F294F1FA138EF004A5D4B /* Swift Lint */,
-				B18D3BCF3F0AE3509AB10816 /* [CP] Embed Pods Frameworks */,
-				A1874A7637492E6778488ADC /* [CP] Copy Pods Resources */,
+				56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */,
+				F35153A9F6AF04007D0C426F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9193,7 +9321,7 @@
 					};
 					1BAE12EE1F93F67700482251 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = PEYKHN6GF6;
+						DevelopmentTeam = GFNJS2X8DC;
 						ProvisioningStyle = Automatic;
 					};
 					1BAE13001F93F67700482251 = {
@@ -10301,7 +10429,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		028CE5EE3334D63072DBE18D /* [CP] Copy Pods Resources */ = {
@@ -10317,38 +10445,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-        03683A3B857DE0E347EBAE98 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-tvOS/DeviceKit.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-tvOS/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble-tvOS/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick-tvOS/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		061030A95E08083D13FBBE53 /* [CP] Copy Pods Resources */ = {
@@ -10589,7 +10685,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		13FD40DAA032234A82A4C0D1 /* [CP] Embed Pods Frameworks */ = {
@@ -10967,7 +11063,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		39B9A02277FC07A870F16D37 /* [CP] Embed Pods Frameworks */ = {
@@ -11126,7 +11222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B86B3AA305B75C681CB7E4 /* [CP] Copy Pods Resources */ = {
@@ -11353,7 +11449,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5F19E2747F5D6629C8FEF5E7 /* [CP] Check Pods Manifest.lock */ = {
@@ -11371,7 +11482,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		65C535413C69ED00939DCAD1 /* [CP] Check Pods Manifest.lock */ = {
@@ -11389,7 +11500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		70EFC192696D5555256659A4 /* [CP] Check Pods Manifest.lock */ = {
@@ -11407,7 +11518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		85E907A1A287863152512762 /* [CP] Check Pods Manifest.lock */ = {
@@ -11425,7 +11536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		90D5BF622B57091524FFAED3 /* [CP] Copy Pods Resources */ = {
@@ -11443,30 +11554,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		915993A996C90352AD184522 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		91845B62D5C88E949EA20B73 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11482,7 +11569,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		91A02346CA5C3E187154BF03 /* [CP] Check Pods Manifest.lock */ = {
@@ -11500,7 +11587,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		956CAA573016DB9192BFCFF7 /* [CP] Copy Pods Resources */ = {
@@ -11516,24 +11603,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9577C30FD5B0CD024AAB29A1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StepikTV-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A7AB062E3C376E0B4519B9E /* [CP] Embed Pods Frameworks */ = {
@@ -11569,7 +11638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9C7D4843CF72B9D22D976747 /* [CP] Copy Pods Resources */ = {
@@ -11748,21 +11817,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0541596D51E881565A0DF8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C12B0654CB9637165095251A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11779,6 +11833,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D1C2410F5D8E8E1ED8B9C470 /* [CP] Embed Pods Frameworks */ = {
@@ -11927,7 +11996,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DC5DDD83D94D581B12743616 /* [CP] Embed Pods Frameworks */ = {
@@ -12050,7 +12119,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E5AFEE83950E43E67B4A375C /* [CP] Check Pods Manifest.lock */ = {
@@ -12068,7 +12137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E81906120FA9FB302ECC51C5 /* [CP] Copy Pods Resources */ = {
@@ -12202,7 +12271,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F35153A9F6AF04007D0C426F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F911C010D45D6F57474CA3CD /* [CP] Copy Pods Resources */ = {
@@ -13106,229 +13190,227 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				938860F320379B8300DFEA3A /* SearchResult.swift in Sources */,
 				936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */,
 				930084402016717500DBFC0E /* BlurredViewController.swift in Sources */,
+				938861382037E2D400DFEA3A /* Unit.swift in Sources */,
+				9388613B2037E30A00DFEA3A /* Progress+CoreDataProperties.swift in Sources */,
+				9388614B2037E68200DFEA3A /* LastStep+CoreDataProperties.swift in Sources */,
 				93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */,
-				1BB4ECD51FA3DF43001CDE99 /* Video+CoreDataProperties.swift in Sources */,
 				93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */,
-				1BB4ECBF1FA3DEC3001CDE99 /* CodeSample+CoreDataProperties.swift in Sources */,
-				1BB4ECC81FA3DF43001CDE99 /* Profile.swift in Sources */,
-				1BB4ECD11FA3DF43001CDE99 /* Assignment+CoreDataProperties.swift in Sources */,
-				1BB3D2561FA79471000B2FAA /* AnalyticsEvents.swift in Sources */,
-				1BB4ECBB1FA3DEC3001CDE99 /* User.swift in Sources */,
-				1BB4ECD91FA3DF6E001CDE99 /* Session.swift in Sources */,
-				1BB3D24D1FA3EC98000B2FAA /* FillBlanksDataset.swift in Sources */,
 				1B3BB0701FE6DE71002DDD9A /* TVIconButton.swift in Sources */,
 				936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */,
-				1BB3D2481FA3EB9C000B2FAA /* NSDateExtensions.swift in Sources */,
 				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
-				1BB3D2471FA3EB89000B2FAA /* UIColorExtensions.swift in Sources */,
+				938861252037E05C00DFEA3A /* FillBlanksReply.swift in Sources */,
+				938861162037DF5A00DFEA3A /* DiscussionProxiesAPI.swift in Sources */,
 				936351C3202A0D6D00DFC7EE /* SearchResultsPresenter.swift in Sources */,
 				93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */,
+				9388610F20379F1B00DFEA3A /* CoreDataHelper.swift in Sources */,
+				938861592037E9BC00DFEA3A /* CacheManager.swift in Sources */,
 				93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */,
-				1BB4ECB61FA3DEC3001CDE99 /* Section+CoreDataProperties.swift in Sources */,
-				1BB4ECAD1FA3DE46001CDE99 /* CourseReviewSummariesAPI.swift in Sources */,
+				938860FD20379C7100DFEA3A /* PathManager.swift in Sources */,
 				9335E36B2008FF10001BDFA8 /* CatalogMenuView.swift in Sources */,
-				1BB4ECD21FA3DF43001CDE99 /* Assignment.swift in Sources */,
+				938860F120379B7300DFEA3A /* SearchResultsAPI.swift in Sources */,
+				9388611120379F3E00DFEA3A /* CourseReviewSummary.swift in Sources */,
+				938860F420379B8E00DFEA3A /* ChoiceDataset.swift in Sources */,
 				1B3BB0B81FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift in Sources */,
-				1BB4ECC71FA3DF43001CDE99 /* Notification+FetchMethods.swift in Sources */,
-				1BB4ECC21FA3DED8001CDE99 /* CoreDataHelper.swift in Sources */,
+				9388612C2037E12900DFEA3A /* Certificate+CoreDataProperties.swift in Sources */,
+				9388612D2037E19800DFEA3A /* Device.swift in Sources */,
 				1B3BB0B31FE6E170002DDD9A /* MajorCollectionRowViewCell.swift in Sources */,
 				1B3BB0951FE6E118002DDD9A /* AuthorizationViewController.swift in Sources */,
-				1BB4ECA91FA3DE46001CDE99 /* SearchResultsAPI.swift in Sources */,
-				1BB4ECEC1FA3E6A7001CDE99 /* FreeAnswerReply.swift in Sources */,
-				1BB4ECD31FA3DF43001CDE99 /* Progress+CoreDataProperties.swift in Sources */,
 				93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */,
 				1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */,
+				938861342037E23700DFEA3A /* StepOptions.swift in Sources */,
 				93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */,
 				93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */,
+				938861182037DF8600DFEA3A /* RecommendationsAPI.swift in Sources */,
+				9388610C20379DB300DFEA3A /* ApplicationInfo.swift in Sources */,
 				1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */,
+				938861362037E28500DFEA3A /* StepOptions+CoreDataProperties.swift in Sources */,
+				938861322037E1FC00DFEA3A /* CodeLanguages.swift in Sources */,
+				938861262037E06F00DFEA3A /* FreeAnswerReply.swift in Sources */,
+				938861282037E0A500DFEA3A /* MathReply.swift in Sources */,
 				93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */,
+				9388611F2037DFF600DFEA3A /* AssignmentsAPI.swift in Sources */,
 				93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */,
-				1BB3D23D1FA3EB2D000B2FAA /* VotesAPI.swift in Sources */,
 				933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */,
-				1BB4ECCE1FA3DF43001CDE99 /* StepOptions+CoreDataProperties.swift in Sources */,
-				1BB3D24B1FA3EC98000B2FAA /* FreeAnswerDataset.swift in Sources */,
-				1BB4ECBE1FA3DEC3001CDE99 /* CodeSample.swift in Sources */,
+				938861412037E3A600DFEA3A /* CodeLimit+CoreDataProperties.swift in Sources */,
+				938860F520379BB200DFEA3A /* ChoiceReply.swift in Sources */,
 				1B3BB0761FE6DE71002DDD9A /* TVCustomFocusableViews.swift in Sources */,
+				938860E420379A6300DFEA3A /* Course+CoreDataProperties.swift in Sources */,
+				9388610720379D4700DFEA3A /* UserActivity.swift in Sources */,
 				1B3BB0B41FE6E170002DDD9A /* CollectionRowViewProtocol.swift in Sources */,
 				9343534D201A066200DD2F1A /* TVStringQuizViewController.swift in Sources */,
 				1B3BB0601FE6DE48002DDD9A /* LessonStepsCollectionViewController.swift in Sources */,
-				1BB3D2531FA3F068000B2FAA /* ErrorEnums.swift in Sources */,
-				1BB4ECF31FA3E74F001CDE99 /* CoursePlainEntity.swift in Sources */,
-				1BB4ECD71FA3DF68001CDE99 /* Parser.swift in Sources */,
-				1BB4ECB81FA3DEC3001CDE99 /* Course+CoreDataProperties.swift in Sources */,
+				938860FB20379C5600DFEA3A /* VideoDownloadDelegate.swift in Sources */,
 				938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */,
-				1BB4EC9C1FA3DD7C001CDE99 /* Reply.swift in Sources */,
 				9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */,
-				1BB4ECED1FA3E6A7001CDE99 /* MathReply.swift in Sources */,
 				1B3BB0641FE6DE48002DDD9A /* CatalogMenuViewController.swift in Sources */,
-				1BB4ECC41FA3DF10001CDE99 /* StepOptions.swift in Sources */,
 				93C9E302200F950500192091 /* CourseContentView.swift in Sources */,
-				1BB4ECBC1FA3DEC3001CDE99 /* LastStep.swift in Sources */,
-				1BB4EC901FA3DC43001CDE99 /* CoursesAPI.swift in Sources */,
-				1BB4ECA61FA3DE46001CDE99 /* LastStepsAPI.swift in Sources */,
-				1BB3D23A1FA3EB2D000B2FAA /* APIDefaults.swift in Sources */,
-				1BB3D2501FA3EFE9000B2FAA /* StringExtensions.swift in Sources */,
+				9388610D20379E4800DFEA3A /* ErrorEnums.swift in Sources */,
 				93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */,
-				1BB4ECE91FA3E664001CDE99 /* Comment.swift in Sources */,
 				1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */,
-				1BB4ECC61FA3DF43001CDE99 /* Notification+CoreDataProperties.swift in Sources */,
+				9388611E2037DFE100DFEA3A /* ProfilesAPI.swift in Sources */,
+				9388610520379D2900DFEA3A /* Submission.swift in Sources */,
 				9335E3622008DCF0001BDFA8 /* TitleInputAccessoryView.swift in Sources */,
-				1BB4EC981FA3DD55001CDE99 /* Submission.swift in Sources */,
-				1BB4ECC31FA3DEEA001CDE99 /* JSONInitializable.swift in Sources */,
-				1BB4ECA41FA3DE46001CDE99 /* DiscussionProxiesAPI.swift in Sources */,
 				93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */,
-				1BB4EC941FA3DC43001CDE99 /* StepsAPI.swift in Sources */,
-				1BB3D24C1FA3EC98000B2FAA /* MatchingDataset.swift in Sources */,
-				1BB4ECCB1FA3DF43001CDE99 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				1BB4ECCF1FA3DF43001CDE99 /* Certificate.swift in Sources */,
-				1BB4ECB41FA3DEC3001CDE99 /* Unit+CoreDataProperties.swift in Sources */,
+				9388610020379CAB00DFEA3A /* Step.swift in Sources */,
+				938860EB20379B1900DFEA3A /* Video+CoreDataProperties.swift in Sources */,
+				938860EC20379B2B00DFEA3A /* TVNumberQuizViewController.swift in Sources */,
 				BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */,
-				1BB4ECCD1FA3DF43001CDE99 /* CodeLimit+CoreDataProperties.swift in Sources */,
-				1BB4ECAC1FA3DE46001CDE99 /* ProfilesAPI.swift in Sources */,
 				1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */,
 				933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */,
+				938861172037DF7100DFEA3A /* UnitsAPI.swift in Sources */,
+				938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */,
 				93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */,
 				93E5AAFA201641EC00290B4E /* ReplyCache.swift in Sources */,
 				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
-				1BB3D2571FA89B41000B2FAA /* Model.xcdatamodeld in Sources */,
 				938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */,
 				93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */,
 				936E90B52024D3BD009578C2 /* TagCoursesCollectionView.swift in Sources */,
+				9388610620379D3A00DFEA3A /* StepicApplicationsInfo.swift in Sources */,
 				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,
+				9388611020379F2C00DFEA3A /* Certificate.swift in Sources */,
+				9388610120379CBA00DFEA3A /* UIColorExtensions.swift in Sources */,
 				1B3BB0611FE6DE48002DDD9A /* ItemsCollectionViewController.swift in Sources */,
 				BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */,
+				938860F620379BC100DFEA3A /* StepicToken.swift in Sources */,
 				1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */,
+				938861512037E74A00DFEA3A /* UIThreadHelper.swift in Sources */,
+				9388614C2037E69100DFEA3A /* VideoURL+CoreDataProperties.swift in Sources */,
+				938861232037E03800DFEA3A /* CertificatesAPI.swift in Sources */,
 				1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
-				1BB4ECB11FA3DEC3001CDE99 /* Step.swift in Sources */,
+				9388610B20379D8700DFEA3A /* StepicsAPI.swift in Sources */,
 				1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */,
 				9335E3652008DFB9001BDFA8 /* LessonTableViewCell.swift in Sources */,
-				1BB3D2491FA3EC1A000B2FAA /* UIThreadHelper.swift in Sources */,
-				1BB3D2511FA3EFFE000B2FAA /* PathManager.swift in Sources */,
-				1BB3D2371FA3E9E1000B2FAA /* VideosInfo.swift in Sources */,
 				BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */,
-				1BB4ECC01FA3DEC3001CDE99 /* CourseReviewSummary.swift in Sources */,
 				9335E3692008FF07001BDFA8 /* CatalogPresenter.swift in Sources */,
-				1BB4EC991FA3DD5F001CDE99 /* Dataset.swift in Sources */,
+				938860FA20379C4A00DFEA3A /* TCBlobDownload.swift in Sources */,
 				93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */,
+				938861582037E98A00DFEA3A /* MatchingDataset.swift in Sources */,
 				93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */,
+				938861222037E02E00DFEA3A /* CourseReviewSummariesAPI.swift in Sources */,
 				933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */,
+				9388614E2037E6E600DFEA3A /* SortingDataset.swift in Sources */,
+				938860F920379C2D00DFEA3A /* User+CoreDataProperties.swift in Sources */,
+				938861572037E97600DFEA3A /* FreeAnswerDataset.swift in Sources */,
+				938861492037E54600DFEA3A /* Notification+FetchMethods.swift in Sources */,
+				9388613A2037E30500DFEA3A /* Progress.swift in Sources */,
+				9388615A2037E9F500DFEA3A /* StringExtensions.swift in Sources */,
+				938861502037E70B00DFEA3A /* StringDatasetExtension.swift in Sources */,
 				1B3BB0B61FE6E170002DDD9A /* CollectionRowViewCell.swift in Sources */,
-				1BB3D2421FA3EB2D000B2FAA /* RecommendationsAPI.swift in Sources */,
-				1BB4ECD01FA3DF43001CDE99 /* Certificate+CoreDataProperties.swift in Sources */,
+				938861122037DEFC00DFEA3A /* DevicesAPI.swift in Sources */,
+				938861552037E82900DFEA3A /* TabsInfo.swift in Sources */,
 				1B3BB0A51FE6E145002DDD9A /* MajorItemCell.swift in Sources */,
-				1BB4EC911FA3DC43001CDE99 /* SectionsAPI.swift in Sources */,
-				1BB4ECD61FA3DF43001CDE99 /* Video.swift in Sources */,
-				1BB4ECEF1FA3E6A7001CDE99 /* MatchingReply.swift in Sources */,
-				1BB4EC9E1FA3DD84001CDE99 /* TextReply.swift in Sources */,
-				1BB3D23F1FA3EB2D000B2FAA /* UnitsAPI.swift in Sources */,
-				1BB3D2391FA3EA8B000B2FAA /* DeviceInfo.swift in Sources */,
-				1BB4ECB51FA3DEC3001CDE99 /* Unit.swift in Sources */,
-				1BB4ECB21FA3DEC3001CDE99 /* Lesson+CoreDataProperties.swift in Sources */,
+				938860E520379A8000DFEA3A /* Block+CoreDataProperties.swift in Sources */,
+				938860EE20379B4D00DFEA3A /* Reply.swift in Sources */,
 				938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */,
+				938861142037DF3400DFEA3A /* CommentsAPI.swift in Sources */,
+				938861402037E39300DFEA3A /* CodeSample.swift in Sources */,
 				9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */,
+				938861462037E48800DFEA3A /* APIDefaults.swift in Sources */,
 				938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */,
-				1BB4ECEE1FA3E6A7001CDE99 /* SortingReply.swift in Sources */,
+				9388614A2037E5F500DFEA3A /* CodeSample+CoreDataProperties.swift in Sources */,
+				9388613E2037E37800DFEA3A /* CodeTemplate.swift in Sources */,
+				938860FF20379C8700DFEA3A /* Step+CoreDataProperties.swift in Sources */,
+				938861192037DF9500DFEA3A /* SectionsAPI.swift in Sources */,
 				1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */,
-				1BB4ECEB1FA3E670001CDE99 /* SearchResult.swift in Sources */,
-				1BB4ECE81FA3E664001CDE99 /* DiscussionProxy.swift in Sources */,
+				9388611A2037DFA600DFEA3A /* UsersAPI.swift in Sources */,
+				938860F220379B7900DFEA3A /* Meta.swift in Sources */,
+				938861242037E05300DFEA3A /* CodeReply.swift in Sources */,
 				9335E3662008DFBC001BDFA8 /* CourseContentMenuTableViewCell.swift in Sources */,
-				1BB3D23C1FA3EB2D000B2FAA /* ApiUtil.swift in Sources */,
-				1BB4ECE31FA3E571001CDE99 /* TCBlobDownload.swift in Sources */,
+				938861352037E27300DFEA3A /* Parser.swift in Sources */,
+				9388612F2037E1CA00DFEA3A /* Assignment.swift in Sources */,
 				934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */,
+				9388614F2037E6F700DFEA3A /* FillBlanksDataset.swift in Sources */,
+				938860E320379A4B00DFEA3A /* Course.swift in Sources */,
+				938860E720379AB700DFEA3A /* Block.swift in Sources */,
+				938861542037E80200DFEA3A /* TCBlobDownloadManager.swift in Sources */,
 				1B3BB0A61FE6E145002DDD9A /* NarrowItemCell.swift in Sources */,
 				93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */,
+				938861522037E77000DFEA3A /* VideosInfo.swift in Sources */,
+				938861302037E1E300DFEA3A /* Profile.swift in Sources */,
 				93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */,
-				1BB4ECF41FA3E838001CDE99 /* StepicApplicationsInfo.swift in Sources */,
-				1BB4ECF21FA3E73F001CDE99 /* Sorter.swift in Sources */,
-				1BB4ECDB1FA3E285001CDE99 /* VideoURL.swift in Sources */,
-				1BB4ECE21FA3E53C001CDE99 /* DataConvertable.swift in Sources */,
-				1BB4EC921FA3DC43001CDE99 /* LessonsAPI.swift in Sources */,
-				1BB4ECBD1FA3DEC3001CDE99 /* LastStep+CoreDataProperties.swift in Sources */,
 				93E5AAF920163B6200290B4E /* GCDThings.swift in Sources */,
 				93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */,
 				936E90B32024C900009578C2 /* CatalogDetailViewController.swift in Sources */,
+				938861452037E43200DFEA3A /* Comment.swift in Sources */,
+				9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
+				938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */,
+				938861392037E2E800DFEA3A /* Notification.swift in Sources */,
+				938861562037E96100DFEA3A /* DeviceInfo.swift in Sources */,
+				9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */,
+				938860F020379B6600DFEA3A /* ApiDataDownloader.swift in Sources */,
+				9388614D2037E6B100DFEA3A /* Session.swift in Sources */,
 				93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */,
 				93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */,
+				938861442037E42600DFEA3A /* Vote.swift in Sources */,
 				93EF1F9A1FAD20250073B0D1 /* TVTextButton.swift in Sources */,
 				1B3BB09C1FE6E132002DDD9A /* CompilationCollectionViewController.swift in Sources */,
+				938861202037E01900DFEA3A /* QueriesAPI.swift in Sources */,
+				938860E820379AE100DFEA3A /* Section.swift in Sources */,
+				9388611B2037DFBC00DFEA3A /* ViewsAPI.swift in Sources */,
+				9388610320379D0000DFEA3A /* SubmissionsAPI.swift in Sources */,
 				93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */,
-				1BB4ECF11FA3E6A7001CDE99 /* CodeReply.swift in Sources */,
-				1BB4ECEA1FA3E664001CDE99 /* Vote.swift in Sources */,
-				1BB4ECCC1FA3DF43001CDE99 /* CodeLimit.swift in Sources */,
-				1BB4EC9F1FA3DD87001CDE99 /* NumberReply.swift in Sources */,
-				1BB4EC9A1FA3DD62001CDE99 /* ChoiceDataset.swift in Sources */,
-				1BB4ECE01FA3E4F8001CDE99 /* CodeLanguages.swift in Sources */,
 				936E90B12024C88C009578C2 /* TagCoursesCollectionViewController.swift in Sources */,
-				1BB4ECE41FA3E58F001CDE99 /* TCBlobDownloadManager.swift in Sources */,
-				1BB4ECDC1FA3E294001CDE99 /* VideoURL+CoreDataProperties.swift in Sources */,
-				1BB4ECA51FA3DE46001CDE99 /* CommentsAPI.swift in Sources */,
-				1BB3D2461FA3EB6D000B2FAA /* Device.swift in Sources */,
-				1BB4ECCA1FA3DF43001CDE99 /* CodeTemplate.swift in Sources */,
+				938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */,
 				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
+				938860E1203799BA00DFEA3A /* JSONInitializable.swift in Sources */,
+				938860FC20379C6700DFEA3A /* VideoURL.swift in Sources */,
 				936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */,
-				1BB4ECDA1FA3DF79001CDE99 /* DictionarySerializable.swift in Sources */,
+				938861472037E49700DFEA3A /* ApiUtil.swift in Sources */,
+				9388613D2037E36F00DFEA3A /* CodeLimit.swift in Sources */,
+				938861152037DF5200DFEA3A /* LastStepsAPI.swift in Sources */,
+				9388612E2037E1B100DFEA3A /* DiscussionProxy.swift in Sources */,
+				938861422037E3ED00DFEA3A /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */,
-				1BB4EC9B1FA3DD6A001CDE99 /* StringDatasetExtension.swift in Sources */,
 				936CF2462018A53A00186A97 /* StepViewController.swift in Sources */,
-				1BB4ECB91FA3DEC3001CDE99 /* Course.swift in Sources */,
-				1BB3D2401FA3EB2D000B2FAA /* UserActivitiesAPI.swift in Sources */,
+				938860E920379B0000DFEA3A /* Section+CoreDataProperties.swift in Sources */,
 				93BBE5F21FE6B1D6006DEC28 /* UIImageView+SVGDownload.swift in Sources */,
-				1BB4ECC11FA3DEC3001CDE99 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
-				1BB3D2431FA3EB2D000B2FAA /* QueriesAPI.swift in Sources */,
-				1BB3D23B1FA3EB2D000B2FAA /* NotificationsAPI.swift in Sources */,
-				1BB4ECAE1FA3DEC3001CDE99 /* Block+CoreDataProperties.swift in Sources */,
+				938861272037E08600DFEA3A /* SortingReply.swift in Sources */,
 				93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */,
-				1BB4ECAF1FA3DEC3001CDE99 /* Block.swift in Sources */,
-				1BB4ECB01FA3DEC3001CDE99 /* Step+CoreDataProperties.swift in Sources */,
-				1BB4ECD41FA3DF43001CDE99 /* Progress.swift in Sources */,
 				1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */,
 				1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */,
-				1BB4ECDD1FA3E2C1001CDE99 /* Meta.swift in Sources */,
 				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,
+				938861532037E7F300DFEA3A /* NSDateExtensions.swift in Sources */,
 				93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */,
-				1BB3D24A1FA3EC98000B2FAA /* SortingDataset.swift in Sources */,
-				1BB4ECF01FA3E6A7001CDE99 /* FillBlanksReply.swift in Sources */,
+				9388610E20379F0000DFEA3A /* LastStep.swift in Sources */,
+				938860F820379C2500DFEA3A /* User.swift in Sources */,
+				9388610820379D5200DFEA3A /* Attempt.swift in Sources */,
+				938861312037E1EE00DFEA3A /* Profile+CoreDataProperties.swift in Sources */,
 				933563C120126BE30061FE2E /* LessonContentPresenter.swift in Sources */,
-				1BB4ECAA1FA3DE46001CDE99 /* SubmissionsAPI.swift in Sources */,
-				1BB4ECE11FA3E529001CDE99 /* CourseMetainfoEntity.swift in Sources */,
-				1BB4ECAB1FA3DE46001CDE99 /* CertificatesAPI.swift in Sources */,
-				9343534F201A067300DD2F1A /* TVNumberQuizViewController.swift in Sources */,
+				9388612A2037E0DA00DFEA3A /* Alamofire-SwiftyJSON.swift in Sources */,
 				936351C5202A0D9900DFC7EE /* SearchResultsView.swift in Sources */,
-				1BB3D24E1FA3ED69000B2FAA /* TabsInfo.swift in Sources */,
-				1BB4ECA21FA3DE26001CDE99 /* ApiDataDownloader.swift in Sources */,
-				1BB4EC9D1FA3DD80001CDE99 /* ChoiceReply.swift in Sources */,
-				1BB4ECC91FA3DF43001CDE99 /* Profile+CoreDataProperties.swift in Sources */,
-				1BB3D2451FA3EB5D000B2FAA /* UserActivity.swift in Sources */,
 				93FAE2261FE142810094939D /* SQLReply.swift in Sources */,
-				1BB4EC931FA3DC43001CDE99 /* UsersAPI.swift in Sources */,
 				93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */,
+				9388610220379CF500DFEA3A /* TextReply.swift in Sources */,
+				938861212037E02000DFEA3A /* NotificationsAPI.swift in Sources */,
+				938861132037DF0B00DFEA3A /* VotesAPI.swift in Sources */,
+				9388613F2037E38800DFEA3A /* CoursePlainEntity.swift in Sources */,
+				938860EA20379B1200DFEA3A /* Video.swift in Sources */,
+				938861372037E2CF00DFEA3A /* Unit+CoreDataProperties.swift in Sources */,
 				93435355201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift in Sources */,
-				1BB4EC971FA3DD55001CDE99 /* Attempt.swift in Sources */,
-				1BB3D2521FA3F057000B2FAA /* CacheManager.swift in Sources */,
 				936E90AA2024B400009578C2 /* TagCoursesCollectionPresenter.swift in Sources */,
-				1BB4EC951FA3DC43001CDE99 /* AssignmentsAPI.swift in Sources */,
-				1BB4ECC51FA3DF43001CDE99 /* Notification.swift in Sources */,
-				1BB4ECA01FA3DDA2001CDE99 /* APIEndpoint.swift in Sources */,
-				1BB3D23E1FA3EB2D000B2FAA /* StepicsAPI.swift in Sources */,
-				1BB4ECE61FA3E634001CDE99 /* Alamofire-SwiftyJSON.swift in Sources */,
-				1BB4ECE71FA3E64D001CDE99 /* ApplicationInfo.swift in Sources */,
-				1BB4ECA81FA3DE46001CDE99 /* ViewsAPI.swift in Sources */,
-				1BB4ECBA1FA3DEC3001CDE99 /* User+CoreDataProperties.swift in Sources */,
 				93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */,
+				9388610420379D0B00DFEA3A /* UserActivitiesAPI.swift in Sources */,
 				93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */,
+				938860ED20379B3400DFEA3A /* NumberReply.swift in Sources */,
+				938860E620379A8B00DFEA3A /* APIEndpoint.swift in Sources */,
+				938860E2203799D900DFEA3A /* CoursesAPI.swift in Sources */,
+				938861432037E41B00DFEA3A /* Assignment+CoreDataProperties.swift in Sources */,
 				93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */,
 				9335E3642008DCF0001BDFA8 /* AuthorizationAlert.swift in Sources */,
-				1BB4ECB71FA3DEC3001CDE99 /* Section.swift in Sources */,
+				9388611D2037DFD300DFEA3A /* StepsAPI.swift in Sources */,
+				938860F720379BD300DFEA3A /* DictionarySerializable.swift in Sources */,
 				93BBE6261FE6E6AD006DEC28 /* CourseInfoPresenter.swift in Sources */,
+				9388610920379D6100DFEA3A /* CourseMetainfoEntity.swift in Sources */,
+				938861482037E54400DFEA3A /* Notification+CoreDataProperties.swift in Sources */,
+				9388613C2037E36600DFEA3A /* Sorter.swift in Sources */,
 				1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */,
+				9388611C2037DFC600DFEA3A /* LessonsAPI.swift in Sources */,
 				1B3BB05D1FE6DE48002DDD9A /* MenuTableViewController.swift in Sources */,
 				933563BF20126BCD0061FE2E /* LessonContentView.swift in Sources */,
-				1BB4ECD81FA3DF6E001CDE99 /* StepicToken.swift in Sources */,
-				1BB4ECE51FA3E5A8001CDE99 /* VideoDownloadDelegate.swift in Sources */,
-				1BB4ECA31FA3DE46001CDE99 /* DevicesAPI.swift in Sources */,
 				1B3BB05F1FE6DE48002DDD9A /* CourseContentMenuViewController.swift in Sources */,
 				933E3F271FBA61D9005A885D /* Reachability.m in Sources */,
 			);
@@ -16809,7 +16891,7 @@
 		};
 		1BAE13081F93F67700482251 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A563DCFCAB59C8CE5BAE71BF /* Pods-StepikTV.debug.xcconfig */;
+			baseConfigurationReference = A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -16842,7 +16924,7 @@
 		};
 		1BAE13091F93F67700482251 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2607B5745D3DFAFA3A60F3F5 /* Pods-StepikTV.release.xcconfig */;
+			baseConfigurationReference = 5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -16873,7 +16955,7 @@
 		};
 		1BAE130A1F93F67700482251 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F7ED61471D9FBE1AE51C058 /* Pods-StepikTVTests.debug.xcconfig */;
+			baseConfigurationReference = A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -16907,7 +16989,7 @@
 		};
 		1BAE130B1F93F67700482251 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 470147BA7F6957FD9C32ACD1 /* Pods-StepikTVTests.release.xcconfig */;
+			baseConfigurationReference = 47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -17271,7 +17353,7 @@
 		};
 		2CD12BB41F4F34A2001D3C82 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8016516087E572E4D193AE27 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */;
+			baseConfigurationReference = C10545C3657205B9CF673A80 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

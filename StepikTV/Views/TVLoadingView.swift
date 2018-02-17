@@ -81,7 +81,7 @@ class TVLoadingView: UIView {
         activityIndicator.color = colorStyle
 
         titleLabel = UILabel(frame: .zero)
-        titleLabel.font = UIFont.systemFont(ofSize: 38.0, weight: UIFontWeightMedium)
+        titleLabel.font = UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium)
         titleLabel.textColor = colorStyle
 
         self.addSubview(activityIndicator)

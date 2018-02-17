@@ -43,8 +43,7 @@ class TagCoursesCollectionPresenter {
 
         view?.showLoading(isVisible: true)
         requestForCourses(with: listType, forLanguage: listLanguage) {
-            [weak self]
-            _ in
+            [weak self] in
 
             if let items = self?.items {
                 self?.view?.provide(items: items)

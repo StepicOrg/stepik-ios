@@ -25,7 +25,7 @@ class TVStringQuizViewController: TVQuizViewController {
         super.viewDidLoad()
 
         textField.backgroundColor = UIColor.white.withAlphaComponent(0.1)
-        textField.font = UIFont.systemFont(ofSize: 47, weight: UIFontWeightRegular)
+        textField.font = UIFont.systemFont(ofSize: 47, weight: .regular)
         textField.textColor = UIColor.white
         textField.placeholder = textFieldPlaceholder
 

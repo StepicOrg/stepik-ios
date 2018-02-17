@@ -44,21 +44,21 @@ class NarrowItemCell: ImageConvertableCollectionViewCell {
     override func getTextRect(_ text: String) -> CGRect {
         let leading: CGFloat = 17.0
         let width: CGFloat = imageView.bounds.width - leading * 2
-        let height = UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 31, weight: UIFontWeightMedium), width: width, alignment: .center)
+        let height = UILabel.heightForLabelWithText(text, lines: 0, font: UIFont.systemFont(ofSize: 31, weight: .medium), width: width, alignment: .center)
         let top: CGFloat = (imageView.bounds.height - height) / 2
 
         return CGRect(x: leading, y: top, width: width, height: height)
     }
 
-    override func getTextAttributes() -> [String : Any] {
+    override func getTextAttributes() -> [NSAttributedStringKey : Any] {
         let textColor = UIColor.white
-        let textFont = UIFont.systemFont(ofSize: 31.0, weight: UIFontWeightMedium)
+        let textFont = UIFont.systemFont(ofSize: 31.0, weight: .medium)
         let style = NSMutableParagraphStyle()
             style.alignment = .center
             style.lineBreakMode = .byWordWrapping
             style.lineHeightMultiple = 0.95
         let offset = NSNumber(value: 5)
 
-        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style, NSBaselineOffsetAttributeName: offset] as [String : Any]
+        return [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColor, NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.baselineOffset: offset]
     }
 }

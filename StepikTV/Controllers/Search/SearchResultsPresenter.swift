@@ -25,8 +25,7 @@ class SearchResultsPresenter {
 
             view?.showLoading(isVisible: true)
             request(forQuery: filterString, forLanguage: language) {
-                [weak self]
-                _ in
+                [weak self] in
 
                 self?.view?.showLoading(isVisible: false)
             }
@@ -50,7 +49,6 @@ class SearchResultsPresenter {
     }
 
     private func request(forQuery query: String, forLanguage language: ContentLanguage, completion: (() -> Void)? = nil) {
-        print(query)
         view?.provide(items: [])
 
         searchResultsAPI.cancelAllTasks()
@@ -64,7 +62,6 @@ class SearchResultsPresenter {
                 return
             }
 
-            print(courses.count)
             if let courses = strongSelf.buildViewData(from: courses) {
                 strongSelf.appropriateCourses = courses
             }

@@ -28,7 +28,7 @@ class CourseInfoCollectionViewController: BlurredImageCollectionViewController {
         let instructorsNib = UINib(nibName: InstructorsCourseInfoSectionCell.nibName, bundle: nil)
         collectionView?.register(instructorsNib, forCellWithReuseIdentifier: InstructorsCourseInfoSectionCell.reuseIdentifier)
 
-        collectionView?.contentInset = UIEdgeInsetsMake(-20, 0, -50, 0)
+        collectionView?.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: -50, right: 0)
     }
 
     var presenter: CourseInfoPresenter?

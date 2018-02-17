@@ -105,7 +105,6 @@ class CatalogPresenter {
         currentDetailViewInfo = DetailCatalogViewInfo(detailView: detailView, indexPath: indexPath)
 
         if !userCourses.isLoaded { currentDetailViewInfo?.detailView.showLoading(with: width) }
-        //currentDetailViewInfo?.detailView.showLoading(isVisible: !userCourses.isLoaded)
         currentDetailViewInfo?.provideCourses(with: userCourses)
     }
 
@@ -123,10 +122,9 @@ class CatalogPresenter {
                 }
                 return
             }
-            //splitview?.hideMessageOver()
+
             requestEnrolled(updateProgresses: false, language: language) {
-                [weak self]
-                _ in
+                [weak self] in
 
                 self?.userCourses.getCountWithIndexPath().forEach {
                     self?.masterview?.provide(count: $0.value, at: $0.key)

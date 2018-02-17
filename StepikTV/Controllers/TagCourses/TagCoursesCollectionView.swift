@@ -11,5 +11,5 @@ protocol TagCoursesCollectionView: class {
     func showLoading(isVisible: Bool)
 
     func provide(items: [ItemViewData])
-    
+
 }

@@ -52,11 +52,11 @@ class AuthorizationViewController: BlurredViewController {
         profileImage.setRoundedCorners(cornerRadius: profileImage.bounds.height / 2)
     }
 
-    func loginAction(_ sender: UIButton) {
+    @objc func loginAction(_ sender: UIButton) {
         presenter?.loginAction()
     }
 
-    func registerAction(_ sender: UIButton) {
+    @objc func registerAction(_ sender: UIButton) {
         presenter?.registerAction()
     }
 
@@ -64,7 +64,7 @@ class AuthorizationViewController: BlurredViewController {
         presenter?.remoteLoginAction()
     }
 
-    func logoutAction(_ sender: UIButton) {
+    @objc func logoutAction(_ sender: UIButton) {
         presenter?.logoutAction()
     }
 }

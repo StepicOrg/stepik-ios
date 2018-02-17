@@ -24,7 +24,9 @@ class AuthInfo: NSObject {
         if let id = userId {
             if let users = User.fetchById(id) {
                 if users.isEmpty {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                    #if !os(tvOS)
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                    #endif
                 } else {
                     user = users.first
                 }
@@ -45,7 +47,7 @@ class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                #if os(iOS)
+                #if !os(tvOS)
                 //Unregister from notifications
                 NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {

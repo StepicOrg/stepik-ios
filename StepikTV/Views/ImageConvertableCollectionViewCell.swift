@@ -20,7 +20,7 @@ class ImageConvertableCollectionViewCell: UICollectionViewCell {
         return gradient
     }
 
-    func getTextAttributes() -> [String: Any] {
+    func getTextAttributes() -> [NSAttributedStringKey: Any] {
         return [:]
     }
 
@@ -28,7 +28,7 @@ class ImageConvertableCollectionViewCell: UICollectionViewCell {
         return CGRect.zero
     }
 
-    func getAdditionalTextAttributes() -> [String: Any] {
+    func getAdditionalTextAttributes() -> [NSAttributedStringKey: Any] {
         return [:]
     }
 

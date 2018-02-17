@@ -30,7 +30,7 @@ class StepViewController: BlurredViewController {
         super.viewDidLoad()
 
         stepText.textColor = UIColor.white
-        stepText.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightMedium)
+        stepText.font = UIFont.systemFont(ofSize: 40, weight: .medium)
         stepText.setTextWithHTMLString(stepViewData.block.text ?? "")
 
         let selectionAction: (TVFocusableText) -> Void = {
@@ -63,7 +63,6 @@ class StepViewController: BlurredViewController {
     }
 
     override func viewWillLayoutSubviews() {
-        print("\(contentView.bounds.height) \(scrollView.bounds.height)")
         if contentView.bounds.height <= scrollView.bounds.height {
             let insetValue = (scrollView.bounds.height - contentView.bounds.height) / 2
             scrollViewTopInset.constant = insetValue

@@ -54,13 +54,13 @@ class MajorItemCell: ImageConvertableCollectionViewCell {
         return CGRect(x: leading, y: top, width: width, height: height)
     }
 
-    override func getTextAttributes() -> [String : Any] {
+    override func getTextAttributes() -> [NSAttributedStringKey : Any] {
         let textColor = UIColor.white
-        let textFont = UIFont.systemFont(ofSize: 31.0, weight: UIFontWeightHeavy)
+        let textFont = UIFont.systemFont(ofSize: 31.0, weight: .heavy)
         let style = NSMutableParagraphStyle()
             style.lineBreakMode = .byWordWrapping
 
-        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor] as [String : Any]
+        return [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColor]
     }
 
     override func getAdditionalTextRect(_ text: String) -> CGRect {
@@ -72,12 +72,12 @@ class MajorItemCell: ImageConvertableCollectionViewCell {
         return CGRect(x: leading, y: top, width: width, height: height)
     }
 
-    override func getAdditionalTextAttributes() -> [String : Any] {
+    override func getAdditionalTextAttributes() -> [NSAttributedStringKey : Any] {
         let textColor = UIColor.white
         let textFont = UIFont.preferredFont(forTextStyle: .callout)
         let style = NSMutableParagraphStyle()
             style.lineBreakMode = .byWordWrapping
 
-        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style] as [String : Any]
+        return [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColor, NSAttributedStringKey.paragraphStyle: style]
     }
 }

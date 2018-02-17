@@ -52,13 +52,13 @@ class RegularItemCell: ImageConvertableCollectionViewCell {
         return CGRect(x: leading, y: top, width: width, height: height)
     }
 
-    override func getTextAttributes() -> [String : Any] {
+    override func getTextAttributes() -> [NSAttributedStringKey: Any] {
         let textColor = UIColor.white
-        let textFont = UIFont.systemFont(ofSize: 31.0, weight: UIFontWeightHeavy)
+        let textFont = UIFont.systemFont(ofSize: 31.0, weight: .heavy)
         let style = NSMutableParagraphStyle()
             style.lineBreakMode = .byWordWrapping
         let offset = NSNumber(value: 0)
 
-        return [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: style, NSBaselineOffsetAttributeName: offset] as [String : Any]
+        return [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColor, NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.baselineOffset: offset]
     }
 }
