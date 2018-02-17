@@ -92,35 +92,31 @@ class Video: NSManagedObject, JSONInitializable {
 
     var state: VideoState! {
         get {
-            #if os(tvOS)
-                return .online
-            #else
-                if let s = _state {
-                    return s
-                } else {
-                    if PathManager.sharedManager.doesExistVideoWith(id: id) {
-                        if self.cachedQuality != nil && self.cachedQuality != "0" {
-                            _state = .cached
-                        } else {
-                            if self.cachedQuality != nil {
-                                self.cachedQuality = nil
-                                CoreDataHelper.instance.save()
-                            }
-                            do {
-                                let path = try PathManager.sharedManager.getPathForStoredVideoWithName(self.name)
-                                try PathManager.sharedManager.deleteVideoFileAtPath(path)
-                            } catch {
-                                print("error while deleting video")
-                            }
-                            _state = .online
-                        }
+            if let s = _state {
+                return s
+            } else {
+                if PathManager.sharedManager.doesExistVideoWith(id: id) {
+                    if self.cachedQuality != nil && self.cachedQuality != "0" {
+                        _state = .cached
                     } else {
+                        if self.cachedQuality != nil {
+                            self.cachedQuality = nil
+                            CoreDataHelper.instance.save()
+                        }
+                        do {
+                            let path = try PathManager.sharedManager.getPathForStoredVideoWithName(self.name)
+                            try PathManager.sharedManager.deleteVideoFileAtPath(path)
+                        } catch {
+                            print("error while deleting video")
+                        }
                         _state = .online
                     }
-
-                    return _state!
+                } else {
+                    _state = .online
                 }
-            #endif
+
+                return _state!
+            }
         }
         set(value) {
             _state = value

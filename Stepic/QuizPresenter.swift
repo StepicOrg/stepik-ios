@@ -332,7 +332,6 @@ class QuizPresenter {
         }
     }
 
-    #if os(tvOS)
     private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
         let id = attempt!.id!
         performRequest({
@@ -344,41 +343,13 @@ class QuizPresenter {
 
                 guard let s = self else { return }
 
-                s.submission = submission
-                s.checkSubmission(submission.id!, time: 0, completion: completion)
-                }, error: {
-                    errorText in
-                    errorHandler(errorText)
-                    //TODO: test this
-            })
-            }, error: {
-                [weak self]
-                error in
-                if error == PerformRequestError.noAccessToRefreshToken {
-                    self?.view?.logout {
-                        [weak self] in
-                        self?.refreshAttempt()
-                    }
-                }
-        })
-    }
-    #else
-    private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        let id = attempt!.id!
-        performRequest({
-            [weak self] in
-            guard let s = self else { return }
-            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
-                [weak self]
-                submission in
-
-                guard let s = self else { return }
-
+                #if !os(tvOS)
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
                 } else {
                         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                 }
+                #endif
 
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)
@@ -398,7 +369,6 @@ class QuizPresenter {
             }
         })
     }
-    #endif
 
     private func retrySubmission() {
         view?.showLoading(visible: true)
@@ -447,30 +417,19 @@ class QuizPresenter {
             return
         }
 
-        #if os(tvOS)
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
             activity in
             guard activity.currentStreak > 0 else {
                 return
             }
+            #if !os(tvOS)
+                self?.streaksNotificationSuggestionManager.didShowStreakAlert()
+            #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
             }, error: {
                 _ in
         })
-        #else
-        _ = userActivitiesAPI.retrieve(user: user.id, success: {
-            [weak self]
-            activity in
-            guard activity.currentStreak > 0 else {
-                return
-            }
-            self?.streaksNotificationSuggestionManager.didShowStreakAlert()
-            self?.view?.suggestStreak(streak: activity.currentStreak)
-            }, error: {
-                _ in
-        })
-        #endif
     }
 
     private func checkSubmission(_ id: Int, time: Int, completion: (() -> Void)? = nil) {

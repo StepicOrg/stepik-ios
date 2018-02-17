@@ -35,7 +35,7 @@ class CourseSubscriber {
                     }
 
                     #if !os(tvOS)
-                WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
 
                     #endif
 
