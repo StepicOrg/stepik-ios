@@ -34,7 +34,7 @@ class CourseSubscriber {
                         CourseSubscriptionManager.sharedManager.subscribedTo(course: course)
                     }
 
-                    #if os(iOS)
+                    #if !os(tvOS)
                 WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
 
                     #endif

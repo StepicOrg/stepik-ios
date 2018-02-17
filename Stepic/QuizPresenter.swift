@@ -20,7 +20,7 @@ class QuizPresenter {
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
 
-    #if os(iOS)
+    #if !os(tvOS)
     var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager
     #endif
 
@@ -47,9 +47,7 @@ class QuizPresenter {
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
     }
-    #endif
-
-    #if os(iOS)
+    #else
     init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
         self.view = view
         self.step = step
@@ -100,10 +98,10 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
-                    #if os(iOS)
-                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
-                    #else
+                    #if os(tvOS)
                     NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
+                    #else
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
                     #endif
                     DispatchQueue.main.async {
                         [weak self] in
@@ -317,7 +315,7 @@ class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
-        #if os(iOS)
+        #if !os(tvOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: self.view?.submissionAnalyticsParams)
         #endif
         if let reply = self.dataSource?.getReply() {
@@ -364,9 +362,7 @@ class QuizPresenter {
                 }
         })
     }
-    #endif
-
-    #if os(iOS)
+    #else
     private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
         let id = attempt!.id!
         performRequest({
@@ -407,7 +403,7 @@ class QuizPresenter {
     private func retrySubmission() {
         view?.showLoading(visible: true)
 
-        #if os(iOS)
+        #if !os(tvOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
         #endif
 
@@ -436,7 +432,7 @@ class QuizPresenter {
             return nil
         }
 
-        #if os(iOS)
+        #if !os(tvOS)
         if RoutingManager.rate.submittedCorrect() {
             self.view?.showRateAlert()
             return
@@ -451,17 +447,16 @@ class QuizPresenter {
             return
         }
 
-        #if os(iOS)
+        #if os(tvOS)
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
             activity in
             guard activity.currentStreak > 0 else {
                 return
             }
-            self?.streaksNotificationSuggestionManager.didShowStreakAlert()
             self?.view?.suggestStreak(streak: activity.currentStreak)
-        }, error: {
-            _ in
+            }, error: {
+                _ in
         })
         #else
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
@@ -470,6 +465,7 @@ class QuizPresenter {
             guard activity.currentStreak > 0 else {
                 return
             }
+            self?.streaksNotificationSuggestionManager.didShowStreakAlert()
             self?.view?.suggestStreak(streak: activity.currentStreak)
             }, error: {
                 _ in

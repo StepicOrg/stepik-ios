@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-#if os(iOS) || os(watchOS)
+#if !os(tvOS)
     @available(iOS 9.0, *)
     extension WatchSessionSender.Name {
         static let RequestCourses = WatchSessionSender.Name("RequestCourses")

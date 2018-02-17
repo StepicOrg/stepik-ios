@@ -47,7 +47,24 @@ class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                #if !os(tvOS)
+                #if os(tvOS)
+                NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+                UIThread.performUI {
+                    //Delete enrolled information
+                    TabsInfo.myCoursesIds = []
+                    let c = Course.getAllCourses(enrolled: true)
+                    for course in c {
+                        course.enrolled = false
+                    }
+
+                    Progress.deleteAllStoredProgresses()
+
+                    CoreDataHelper.instance.save()
+                    AuthInfo.shared.user = nil
+
+                    self.setTokenValue(nil)
+                }
+                #else
                 //Unregister from notifications
                 NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {
@@ -71,23 +88,6 @@ class AuthInfo: NSObject {
                         self.setTokenValue(nil)
                     }
                 })
-                #else
-                NotificationCenter.default.post(name: .userLoggedOut, object: nil)
-                UIThread.performUI {
-                    //Delete enrolled information
-                    TabsInfo.myCoursesIds = []
-                    let c = Course.getAllCourses(enrolled: true)
-                    for course in c {
-                        course.enrolled = false
-                    }
-
-                    Progress.deleteAllStoredProgresses()
-
-                    CoreDataHelper.instance.save()
-                    AuthInfo.shared.user = nil
-
-                    self.setTokenValue(nil)
-                }
                 #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")

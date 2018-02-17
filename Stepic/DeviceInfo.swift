@@ -39,13 +39,11 @@ class DeviceInfo {
                 patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion)
     }
 
-    var diagonal: Double {
-        #if os(iOS)
+    #if os(iOS)
+        var diagonal: Double {
             return currentDevice.diagonal
-        #else
-            return 0
-        #endif
-    }
+        }
+    #endif
 
     var deviceInfoString: String {
         return "\(currentDevice.model) \(currentDevice.name) \(currentDevice.systemName) \(currentDevice.systemVersion)"
