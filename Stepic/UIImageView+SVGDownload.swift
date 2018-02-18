@@ -23,6 +23,7 @@ extension UIImageView {
     func setImageWithURL(url optionalURL: URL?, placeholder: UIImage, completion: @escaping () -> Void) {
         guard let url = optionalURL else {
             self.image = placeholder
+            completion()
             return
         }
 

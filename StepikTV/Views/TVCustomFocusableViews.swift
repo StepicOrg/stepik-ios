@@ -152,54 +152,19 @@ class FocusableCustomTableViewCell: UITableViewCell, FocusAnimatable {
         self.layer.shadowOpacity = 0.15
     }
 
+    func initStyle() {
+        setRoundedCorners(cornerRadius: 6)
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-         changeToDefault()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        changeToDefault()
-    }
-
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        self.updateFocus(in: context, with: coordinator)
-    }
-}
-
-class FocusableCustomCollectionViewCell: UICollectionViewCell, FocusAnimatable {
-
-    override var canBecomeFocused: Bool {
-        return true
-    }
-
-    func changeToDefault() {
-        self.transform = CGAffineTransform.identity
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 6
-        self.layer.shadowOpacity = 0.0
-    }
-
-    func changeToFocused() {
-        self.transform = CGAffineTransform(scaleX: 1.09, y: 1.09)
-        self.layer.shadowOffset = CGSize(width: 0, height: 40)
-        self.layer.shadowRadius = 30
-        self.layer.shadowOpacity = 0.3
-    }
-
-    func changeToHighlighted() {
-        self.transform = CGAffineTransform.identity
-        self.layer.shadowOffset = CGSize(width: 0, height: 10)
-        self.layer.shadowOpacity = 0.15
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        initStyle()
         changeToDefault()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initStyle()
         changeToDefault()
     }
 

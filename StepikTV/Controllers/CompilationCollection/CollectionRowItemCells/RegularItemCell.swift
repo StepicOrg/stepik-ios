@@ -32,7 +32,7 @@ class RegularItemCell: ImageConvertableCollectionViewCell {
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder) {
             let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
             let image = UIImage(data: data!)!
-            self.imageView.image = self.generateImage(with: item.title, inImage: image)
+            self.imageView.image = self.generateImage(with: item.title, inImage: image).getRoundedCornersImage(cornerRadius: 6.0)
         }
     }
 

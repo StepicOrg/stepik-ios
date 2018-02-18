@@ -33,7 +33,7 @@ class RectangularItemCell: UICollectionViewCell, FocusAnimatable {
 
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder, completion: {
             let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
-            self.imageView.image = UIImage(data: data!)
+            self.imageView.image = UIImage(data: data!)?.getRoundedCornersImage(cornerRadius: 6.0)
         })
     }
 

@@ -31,7 +31,7 @@ class NarrowItemCell: ImageConvertableCollectionViewCell {
         pressAction = item.action
 
         imageView.image = item.placeholder
-        self.imageView.image = generateImage(with: item.title, inImage: item.placeholder)
+        self.imageView.image = generateImage(with: item.title, inImage: item.placeholder).getRoundedCornersImage(cornerRadius: 6.0)
     }
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
