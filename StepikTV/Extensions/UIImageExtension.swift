@@ -12,15 +12,26 @@ extension UIImage {
 
     func imageSizeThatAspectFills(rect: CGRect) -> CGRect {
         let aspect = self.size.width / self.size.height
-
-        if (rect.width / aspect <= rect.height) {
-            let size = CGSize(width: rect.height / aspect, height: rect.height)
-            let point = CGPoint(x: (rect.width - size.width) / 2, y: 0)
-            return CGRect(origin: point, size: size)
+        if rect.size.width / aspect > rect.size.height {
+            let height = rect.size.width / aspect
+            return CGRect(x: 0, y: (rect.size.height - height) / 2, width: rect.size.width, height: height)
         } else {
-            let size = CGSize(width: rect.width, height: rect.width * aspect)
-            let point = CGPoint(x: 0, y: (rect.height - size.height) / 2)
-            return CGRect(origin: point, size: size)
+            let width = rect.size.height * aspect
+            return CGRect(x: (rect.size.width - width) / 2, y: 0, width: width, height: rect.size.height)
         }
+    }
+
+    func getRoundedCornersImage(cornerRadius radius: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
+        let rect = CGRect(origin: .zero, size: self.size)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: radius)
+            path.addClip()
+
+        self.draw(in: rect)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
     }
 }

@@ -62,8 +62,11 @@ class MenuTableViewController: UITableViewController {
 
         guard let focusedCell = context.nextFocusedView as? UITableViewCell, focusedCell.isDescendant(of: tableView) else {
             if let indexPath = lastPerformedIndexPath {
-                let detail = (splitViewController as! MenuSplitViewController).detailViewContoller!
-                self.moveTo(detailViewController: detail, from: indexPath)
+                let detail = (splitViewController as? MenuSplitViewController)?.detailViewContoller
+
+                if let detail = detail {
+                    self.moveTo(detailViewController: detail, from: indexPath)
+                }
             }
             return
         }

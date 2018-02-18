@@ -82,9 +82,9 @@ class IconButton: UIButton {
 
         self.transform = CGAffineTransform(scaleX: scale, y: scale)
         self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 0, height: 20)
-        self.layer.shadowRadius = 20
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOffset = CGSize(width: 0, height: 15)
+        self.layer.shadowRadius = 15
+        self.layer.shadowOpacity = 0.25
         self.imageView?.tintColor = imageColor
         self.backgroundColor = color
     }
@@ -95,13 +95,19 @@ class IconButton: UIButton {
         self.layer.shadowOpacity = 0.15
     }
 
+    func initStyle() {
+        self.setRoundedCorners(cornerRadius: 6)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        initStyle()
         changeToDefault()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initStyle()
         changeToDefault()
     }
 
