@@ -315,9 +315,7 @@ class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
-        #if !os(tvOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: self.view?.submissionAnalyticsParams)
-        #endif
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
             submit(reply: reply, completion: {
@@ -343,13 +341,11 @@ class QuizPresenter {
 
                 guard let s = self else { return }
 
-                #if !os(tvOS)
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
                 } else {
                         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                 }
-                #endif
 
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)
@@ -373,9 +369,7 @@ class QuizPresenter {
     private func retrySubmission() {
         view?.showLoading(visible: true)
 
-        #if !os(tvOS)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
-        #endif
 
         self.delegate?.submissionDidRetry()
 

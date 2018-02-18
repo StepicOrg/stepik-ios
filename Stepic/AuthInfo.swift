@@ -24,9 +24,7 @@ class AuthInfo: NSObject {
         if let id = userId {
             if let users = User.fetchById(id) {
                 if users.isEmpty {
-                    #if !os(tvOS)
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
-                    #endif
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
                 } else {
                     user = users.first
                 }
