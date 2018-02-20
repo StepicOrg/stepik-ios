@@ -38,10 +38,10 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, course: nil, view: view)
         self.achievementsManager.delegate = self
 
-        // Migration
-        if defaultsStorageManager.isRatingOnboardingFinished {
-            storageManager.isAdaptiveOnboardingPassed = true
-        }
+        // For old adaptive app
+        storageManager.migrate()
+        ratingManager.migrate()
+        statsManager.migrate()
     }
 
     override func refresh() {

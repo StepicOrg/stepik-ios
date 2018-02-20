@@ -82,7 +82,7 @@ class AdaptiveStatsManager {
         return date
     }
 
-    private func stringDictToIntDict(_ dict: [String: String]) -> [Int: Int] {
+    internal func stringDictToIntDict(_ dict: [String: String]) -> [Int: Int] {
         var intDict: [Int: Int] = [:]
         for (key, value) in dict {
             if let intKey = Int(key), let intVal = Int(value) {
