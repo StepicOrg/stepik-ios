@@ -76,15 +76,15 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     override func refreshTopCard() {
-        // Onboarding complete -> send event for achievements
-        if storageManager.isAdaptiveOnboardingPassed {
-            achievementsManager.fireEvent(.onboarding)
-        }
-
         // Waiting until user will not be registered/joined to the course
         // But meanwhile we can present onboarding
         if !storageManager.isAdaptiveOnboardingPassed || isInitialActionsFinished {
             super.refreshTopCard()
+        }
+
+        // Onboarding complete -> send event for achievements
+        if storageManager.isAdaptiveOnboardingPassed {
+            achievementsManager.fireEvent(.onboarding)
         }
     }
 
