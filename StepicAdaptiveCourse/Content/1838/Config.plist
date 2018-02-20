@@ -46,8 +46,6 @@
 	<dict>
 		<key>coursesInfoURL</key>
 		<string>https://stepik.org/media/attachments/course/6158</string>
-		<key>mainColor</key>
-		<integer>32896</integer>
 		<key>isAdaptive</key>
 		<true/>
 		<key>supportedCourses</key>

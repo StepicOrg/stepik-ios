@@ -75,6 +75,7 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
         stepWebView.navigationDelegate = self
         stepWebView.scrollView.isScrollEnabled = false
+        stepWebView.scrollView.delegate = self
         scrollView.insertSubview(stepWebView, at: 0)
 
         stepWebViewHeight = stepWebView.constrainHeight("5")
@@ -198,5 +199,12 @@ extension CardStepViewController: WKNavigationDelegate {
         }.catch { _ in
             print("card step: error after webview loading did finish")
         }
+    }
+}
+
+extension CardStepViewController: UIScrollViewDelegate {
+    func viewForZooming(in: UIScrollView) -> UIView? {
+        // Disable zooming
+        return nil
     }
 }
