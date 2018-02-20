@@ -226,7 +226,7 @@ extension CardsStepsViewController: PlaceholderViewDataSource {
 
     func placeholderStyle() -> PlaceholderStyle {
         var style = PlaceholderStyle()
-        style.button.textColor = StepicApplicationsInfo.adaptiveMainColor
+        style.button.textColor = UIColor.mainDark
         return style
     }
 

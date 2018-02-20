@@ -19,7 +19,7 @@ extension RatingProgressViewDelegate {
 class RatingProgressView: UIView {
     weak var delegate: RatingProgressViewDelegate?
 
-    @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
+    @IBInspectable var mainColor: UIColor? = UIColor.mainDark
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
     @IBInspectable var frontLabelColor: UIColor? = UIColor.white

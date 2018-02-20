@@ -23,7 +23,7 @@ class AchievementTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         colorize()
     }
 
@@ -65,7 +65,7 @@ class AchievementTableViewCell: UITableViewCell {
     }
 
     fileprivate func colorize() {
-        progressBar.trackTintColor = StepicApplicationsInfo.adaptiveMainColor.withAlphaComponent(0.3)
-        progressBar.progressTintColor = StepicApplicationsInfo.adaptiveMainColor
+        progressBar.trackTintColor = UIColor.mainDark.withAlphaComponent(0.3)
+        progressBar.progressTintColor = UIColor.mainDark
     }
 }

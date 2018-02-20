@@ -118,7 +118,7 @@ extension AdaptiveCourseSelectViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let courseId = data[indexPath.row].id
-        presenter?.openCourse(id: courseId)
+        presenter?.openCourse(id: courseId, uiColor: data[indexPath.row].mainColor)
     }
 }
 
@@ -162,7 +162,7 @@ extension AdaptiveCourseSelectViewController: PlaceholderViewDataSource {
 
     func placeholderStyle() -> PlaceholderStyle {
         var style = PlaceholderStyle()
-        style.button.textColor = StepicApplicationsInfo.adaptiveMainColor
+        style.button.textColor = UIColor.mainDark
         return style
     }
 

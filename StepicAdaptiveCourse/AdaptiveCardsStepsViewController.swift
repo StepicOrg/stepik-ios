@@ -50,8 +50,8 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
 
         tapProxyView.targetView = trophyButton
         tapBackProxyView.targetView = backButton
-        trophyButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
-        backButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        trophyButton.tintColor = UIColor.mainDark
+        backButton.tintColor = UIColor.mainDark
 
         if !isBackActionAllowed {
             tapBackProxyView.removeFromSuperview()

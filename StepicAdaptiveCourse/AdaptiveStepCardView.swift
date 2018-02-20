@@ -41,9 +41,9 @@ class AdaptiveStepCardView: StepCardView {
     }
 
     override func colorize() {
-        loadingLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
-        controlButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
-        titleButton.superview?.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        loadingLabel.textColor = UIColor.mainDark
+        controlButton.tintColor = UIColor.mainDark
+        titleButton.superview?.tintColor = UIColor.mainDark
     }
 
     enum CardState {

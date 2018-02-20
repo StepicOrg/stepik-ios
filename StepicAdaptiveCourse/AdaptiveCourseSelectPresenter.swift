@@ -121,9 +121,9 @@ class AdaptiveCourseSelectPresenter {
                                                              points: rating,
                                                              learners: course.learnersCount ?? 0,
                                                              level: level,
-                                                             firstColor: StepicApplicationsInfo.adaptiveMainColor,
-                                                             secondColor: StepicApplicationsInfo.adaptiveMainColor,
-                                                             mainColor: StepicApplicationsInfo.adaptiveMainColor))
+                                                             firstColor: StepicApplicationsInfo.Colors.mainDark,
+                                                             secondColor: StepicApplicationsInfo.Colors.mainDark,
+                                                             mainColor: StepicApplicationsInfo.Colors.mainDark))
             }
         }
         view?.set(data: viewData)
@@ -131,7 +131,7 @@ class AdaptiveCourseSelectPresenter {
 
         // If last course saved, open it
         if let lastCourseId = defaultsStorageManager.lastCourseId {
-            openCourse(id: lastCourseId)
+            openCourse(id: lastCourseId, uiColor: adaptiveCoursesInfo.filter({ $0.id == lastCourseId }).first?.mainColor)
             return
         }
     }
@@ -140,9 +140,14 @@ class AdaptiveCourseSelectPresenter {
         refresh()
     }
 
-    func openCourse(id: Int) {
+    func openCourse(id: Int, uiColor: UIColor? = StepicApplicationsInfo.Colors.mainDark) {
         guard let actions = actions else {
             return
+        }
+
+        // Override system color
+        if let uiColor = uiColor {
+            StepicApplicationsInfo.Colors.mainDark = uiColor
         }
 
         guard let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
