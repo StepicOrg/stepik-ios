@@ -1,9 +1,8 @@
 In the new version of the Stepik iOS app we:
 
-• Added possibility to pass adaptive courses
-• Added iPhone X support
-• Changed the app icon so it is black and fashionable now
-• Fixed lots of bugs and improved stability
+• Added support for multiline samples in Code Challenge
+• Added touchable course widgets
+• Fixed multiple bugs and greatly improved stability
 
-Enjoy learning in 2018!
+Enjoy learning!
 Stepik team

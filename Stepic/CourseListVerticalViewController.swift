@@ -58,7 +58,7 @@ class CourseListVerticalViewController: CourseListViewController {
         delegate = self
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.clear
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         updateDescription()
     }
 
@@ -193,6 +193,11 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
 }
 
 extension CourseListVerticalViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didTouchWidget(atIndex: indexPath.row)
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

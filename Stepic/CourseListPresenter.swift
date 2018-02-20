@@ -238,6 +238,19 @@ class CourseListPresenter {
         }
     }
 
+    func didTouchWidget(atIndex index: Int) {
+        let selectedCourse = courses[index]
+        let isAdaptiveMode = adaptiveStorageManager.canOpenInAdaptiveMode(courseId: selectedCourse.id)
+
+        if !isAdaptiveMode {
+            secondaryActionButtonPressed(course: selectedCourse)
+        }
+
+        if isAdaptiveMode {
+            actionButtonPressed(course: selectedCourse)
+        }
+    }
+
     private func displayCachedAsyncIfEmpty() -> Promise<Void> {
         return Promise<Void> {
             [weak self]
@@ -421,6 +434,7 @@ class CourseListPresenter {
             }
             if !oldDisplayedCourses.isEmpty && newDisplayedCourses.isEmpty {
                 self.state = .empty
+                return
             }
             if oldDisplayedCourses.count - deletedIds.count + addedIds.count == newDisplayedCourses.count {
                 view?.update(deletingIds: deletedIds, insertingIds: addedIds, courses: getData(from: newDisplayedCourses))

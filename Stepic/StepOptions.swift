@@ -48,7 +48,7 @@ class StepOptions: NSManagedObject {
         if let samplesArray = json["samples"].array {
             for sampleJSON in samplesArray {
                 if let sampleArray = sampleJSON.arrayObject as? [String] {
-                    samples += [CodeSample(input: sampleArray[0], output: sampleArray[1])]
+                    samples += [CodeSample(input: sampleArray[0].replacingOccurrences(of: "\n", with: "<br>"), output: sampleArray[1].replacingOccurrences(of: "\n", with: "<br>"))]
                 }
             }
         }
