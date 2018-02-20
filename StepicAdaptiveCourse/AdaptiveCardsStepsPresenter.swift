@@ -25,7 +25,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     override var onboardingFirstStepIndex: Int {
-        return 0
+        return StepicApplicationsInfo.adaptiveSupportedCourses.count == 1 ? 0 : 1
     }
 
     override var useRatingSynchronization: Bool {
