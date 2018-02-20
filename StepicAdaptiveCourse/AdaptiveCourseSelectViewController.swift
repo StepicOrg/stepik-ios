@@ -59,7 +59,7 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
 
         loadingLabel.text = NSLocalizedString("AdaptiveCourseSelectLoading", comment: "")
 
-        title = "Select course"
+        title = NSLocalizedString("AdaptiveCourseSelectTitle", comment: "")
         tableView.register(UINib(nibName: "AdaptiveCourseTableViewCell", bundle: nil), forCellReuseIdentifier: AdaptiveCourseTableViewCell.reuseId)
 
         presenter?.refresh()

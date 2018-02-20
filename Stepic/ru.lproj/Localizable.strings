@@ -391,6 +391,10 @@ AdaptivePreferencesTitle = "Адаптивные курсы";
 UseAdaptiveModePreference = "Адаптивный режим";
 AdaptiveOnboardingTitle = "Адаптивный режим";
 AdaptiveCourseSelectLoading = "Загрузка курсов...";
+AdaptiveCourseSelectTitle = "Выберите курс";
+AdaptiveLearnersTitle = "учится";
+AdaptivePointsTitle = "опыта";
+AdaptiveLevelTitle = "уровень";
 
 /* Tooltips */
 ShareCourseTooltip = "Поделитесь ссылкой с друзьями, чтобы проходить курс вместе";

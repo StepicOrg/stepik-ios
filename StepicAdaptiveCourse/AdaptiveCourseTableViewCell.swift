@@ -25,6 +25,11 @@ class AdaptiveCourseTableViewCell: UITableViewCell {
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var levelLabel: UILabel!
 
+    @IBOutlet weak var learnButton: UIButton!
+    @IBOutlet weak var levelTitleLabel: UILabel!
+    @IBOutlet weak var pointsTitleLabel: UILabel!
+    @IBOutlet weak var learnersTitleLabel: UILabel!
+
     var gradient: CAGradientLayer?
 
     override func awakeFromNib() {
@@ -36,6 +41,8 @@ class AdaptiveCourseTableViewCell: UITableViewCell {
         shadowView.layer.shadowOffset = CGSize(width: 0, height: 1)
         shadowView.layer.shadowOpacity = 0.2
         shadowView.layer.shadowRadius = 2.5
+
+        localize()
     }
 
     func setData(imageLink: URL?, name: String, description: String, learners: Int, points: Int, level: Int) {
@@ -63,6 +70,13 @@ class AdaptiveCourseTableViewCell: UITableViewCell {
         shadowView.layer.shadowPath = UIBezierPath(roundedRect: shadowView.bounds, cornerRadius: 10).cgPath
 
         gradient?.frame = colorView.bounds
+    }
+
+    private func localize() {
+        learnButton.setTitle(NSLocalizedString("WidgetButtonLearn", comment: ""), for: .normal)
+        levelTitleLabel.text = NSLocalizedString("AdaptiveLevelTitle", comment: "")
+        pointsTitleLabel.text = NSLocalizedString("AdaptivePointsTitle", comment: "")
+        learnersTitleLabel.text = NSLocalizedString("AdaptiveLearnersTitle", comment: "")
     }
 
     @IBAction func onLearnButtonClick(_ sender: Any) {

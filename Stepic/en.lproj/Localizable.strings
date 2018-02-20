@@ -390,6 +390,10 @@ AdaptivePreferencesTitle = "Adaptive courses";
 UseAdaptiveModePreference = "Adaptive mode";
 AdaptiveOnboardingTitle = "Adaptive mode";
 AdaptiveCourseSelectLoading = "Loading courses...";
+AdaptiveCourseSelectTitle = "Select course";
+AdaptiveLearnersTitle = "learners";
+AdaptivePointsTitle = "points";
+AdaptiveLevelTitle = "level";
 
 /* Tooltips */
 ShareCourseTooltip = "Share the link with your friends to learn together";
