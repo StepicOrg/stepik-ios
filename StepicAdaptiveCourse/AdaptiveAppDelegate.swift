@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         return Promise(value: ())
                     }
                 }.then { _ -> Promise<([Course], [AdaptiveCourseInfo])> in
-                    var locale = Locale.preferredLanguages.first ?? "en"
+                    var locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")
                     if !Bundle.main.localizations.contains(locale) {
                         locale = "en"
                     }
