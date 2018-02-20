@@ -25,7 +25,6 @@ class AdaptiveCoursesInfoAPI: APIEndpoint {
                 case .success(let data):
                     if response.response?.statusCode == 200 {
                         let json = JSON(data)
-                        print(json)
                         let info = json["courses"].arrayValue.map {
                             AdaptiveCourseInfo(id: $0["id"].intValue,
                                 title: $0["title"].stringValue,
