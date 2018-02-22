@@ -35,7 +35,7 @@ class DeepLinkRouter {
         guard let tabController = currentTabBarController else {
             return
         }
-        delay(0.05) {
+        delay(0) {
             tabController.selectedIndex = 1
         }
     }
@@ -44,7 +44,7 @@ class DeepLinkRouter {
         guard let tabController = currentTabBarController else {
             return
         }
-        delay(0.05) {
+        delay(0) {
             tabController.selectedIndex = 4
         }
     }
