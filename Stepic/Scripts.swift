@@ -39,6 +39,10 @@ struct Scripts {
 
     fileprivate static var localJQueryScriptKey: String = "localJQueryScript"
 
+    fileprivate static var audioTagWrapperKey: String = "AudioTagWrapper"
+
+    fileprivate static var audioTagWrapperInitKey: String = "AudioTagWrapperInit"
+
     static var localJQueryScript: String {
         return "\(loadScriptWithKey(localJQueryScriptKey))"
     }
@@ -57,6 +61,14 @@ struct Scripts {
 
     static var clickableImagesScript: String {
         return "\(localJQueryScript)\(loadScriptWithKey(clickableImagesScriptKey))"
+    }
+
+    static var audioTagWrapper: String {
+        return "\(loadScriptWithKey(audioTagWrapperKey))"
+    }
+
+    static var audioTagWrapperInit: String {
+        return "\(loadScriptWithKey(audioTagWrapperInitKey))"
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
