@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -126,6 +126,7 @@
             <constraints>
                 <constraint firstItem="KDB-Pu-KpR" firstAttribute="leading" secondItem="Ueh-cM-Rn8" secondAttribute="trailing" constant="8" id="1wI-dq-TLa"/>
                 <constraint firstItem="Jd2-70-l3f" firstAttribute="top" secondItem="COJ-x4-4ZT" secondAttribute="bottom" constant="20" id="5KP-pU-eCm"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KDB-Pu-KpR" secondAttribute="trailing" constant="20" id="707-61-eWo"/>
                 <constraint firstItem="KUz-e5-2C8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="8CW-07-SGT"/>
                 <constraint firstItem="YeV-RX-eC9" firstAttribute="top" secondItem="Jd2-70-l3f" secondAttribute="bottom" constant="16" id="D2C-x2-ZFk"/>
                 <constraint firstItem="WMg-DU-mGS" firstAttribute="centerY" secondItem="COJ-x4-4ZT" secondAttribute="centerY" id="HMs-4w-fxf"/>
@@ -137,6 +138,7 @@
                 <constraint firstItem="SKx-iz-6Au" firstAttribute="leading" secondItem="WMg-DU-mGS" secondAttribute="trailing" constant="8" id="QQG-5v-6QM"/>
                 <constraint firstItem="Jd2-70-l3f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Rhv-mM-Acr"/>
                 <constraint firstItem="Ueh-cM-Rn8" firstAttribute="leading" secondItem="COJ-x4-4ZT" secondAttribute="trailing" constant="8" id="Yqa-ut-XMJ"/>
+                <constraint firstItem="WMg-DU-mGS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Yvd-4l-c5E"/>
                 <constraint firstAttribute="trailing" secondItem="Jd2-70-l3f" secondAttribute="trailing" constant="20" id="Z6X-Mr-YIM"/>
                 <constraint firstItem="COJ-x4-4ZT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="erp-HU-ggs"/>
                 <constraint firstItem="COJ-x4-4ZT" firstAttribute="centerY" secondItem="SKx-iz-6Au" secondAttribute="centerY" id="fqa-4B-nYY"/>
