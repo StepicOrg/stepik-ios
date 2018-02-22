@@ -52,6 +52,7 @@ class CardsStepsPresenter {
     fileprivate var statsManager: AdaptiveStatsManager
     fileprivate var storageManager: AdaptiveStorageManager
     fileprivate var ratingsAPI: AdaptiveRatingsAPI
+    fileprivate var lastViewedUpdater: LocalProgressLastViewedUpdater
 
     // FIXME: incapsulate/remove this 
     var state: State = .loaded
@@ -87,7 +88,7 @@ class CardsStepsPresenter {
     // Sync
     private var shouldSyncRating = true
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, course: Course, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -97,6 +98,7 @@ class CardsStepsPresenter {
         self.ratingManager = ratingManager
         self.statsManager = statsManager
         self.storageManager = storageManager
+        self.lastViewedUpdater = lastViewedUpdater
 
         self.course = course
         self.view = view
@@ -107,6 +109,10 @@ class CardsStepsPresenter {
 
         let currentLevel = AdaptiveRatingHelper.getLevel(for: rating)
         view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+    }
+
+    func didAppear() {
+        lastViewedUpdater.updateView(for: course)
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {
