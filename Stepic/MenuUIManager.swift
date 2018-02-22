@@ -35,6 +35,11 @@ class MenuUIManager {
         case .titleContentExpandable:
             if let cell = cell as? TitleContentExpandableMenuBlockTableViewCell, let block = block as? TitleContentExpandableMenuBlock {
                 cell.initWithBlock(block: block)
+                cell.updateTableHeightBlock = {
+                    [weak self] in
+                    self?.tableView.beginUpdates()
+                    self?.tableView.endUpdates()
+                }
             }
         case .header:
             if let cell = cell as? HeaderMenuBlockTableViewCell, let block = block as? HeaderMenuBlock {
