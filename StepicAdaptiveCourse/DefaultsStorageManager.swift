@@ -15,6 +15,7 @@ class DefaultsStorageManager {
     private let onboardingRatingFinishedKey = "isRatingOnboardingShown"
     private let accountEmailKey = "account_email"
     private let accountPasswordKey = "account_password"
+    private let lastCourseIdKey = "last_course_id"
     let defaults = UserDefaults.standard
 
     var isOnboardingFinished: Bool {
@@ -50,6 +51,23 @@ class DefaultsStorageManager {
         }
         set {
             return defaults.set(newValue, forKey: accountPasswordKey)
+        }
+    }
+
+    var lastCourseId: Int? {
+        get {
+            if let value = defaults.object(forKey: lastCourseIdKey) as? Int {
+                return value
+            } else {
+                return nil
+            }
+        }
+        set {
+            if newValue == nil {
+                defaults.removeObject(forKey: lastCourseIdKey)
+            } else {
+                defaults.set(newValue, forKey: lastCourseIdKey)
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ extension RatingProgressViewDelegate {
 class RatingProgressView: UIView {
     weak var delegate: RatingProgressViewDelegate?
 
-    @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
+    @IBInspectable var mainColor: UIColor? = UIColor.mainDark
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
     @IBInspectable var frontLabelColor: UIColor? = UIColor.white
@@ -180,6 +180,10 @@ class RatingProgressView: UIView {
         label.font = labelFont
         label.textAlignment = .center
         label.textColor = backLabelColor
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.6
+        label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
 
         // Make progress view (front)
@@ -194,6 +198,10 @@ class RatingProgressView: UIView {
         frontLabel.font = labelFont
         frontLabel.textAlignment = label.textAlignment
         frontLabel.textColor = frontLabelColor
+        frontLabel.adjustsFontSizeToFitWidth = true
+        frontLabel.numberOfLines = 1
+        frontLabel.minimumScaleFactor = 0.6
+        frontLabel.translatesAutoresizingMaskIntoConstraints = false
         frontView.addSubview(frontLabel)
         frontView.clipsToBounds = true
 
@@ -217,6 +225,10 @@ class RatingProgressView: UIView {
         congratulationLabel.font = labelFont
         congratulationLabel.textAlignment = label.textAlignment
         congratulationLabel.textColor = congratulationLabelColor
+        congratulationLabel.adjustsFontSizeToFitWidth = true
+        congratulationLabel.numberOfLines = 1
+        congratulationLabel.minimumScaleFactor = 0.6
+        congratulationLabel.translatesAutoresizingMaskIntoConstraints = false
         congratulationView.addSubview(congratulationLabel)
 
         congratsShadowLayer = CAGradientLayer()
@@ -228,15 +240,28 @@ class RatingProgressView: UIView {
         ]
         congratulationView.layer.addSublayer(congratsShadowLayer)
         self.addSubview(congratulationView)
+
+        // Center all labels
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: label, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
+            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
+
+            NSLayoutConstraint(item: frontLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: frontLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
+            NSLayoutConstraint(item: frontLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: frontLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
+
+            NSLayoutConstraint(item: congratulationLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: congratulationLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
+            NSLayoutConstraint(item: congratulationLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: congratulationLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
+        ])
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        // Recenter (maybe constraints?)
-        label.center.x = center.x
-        frontLabel.center.x = center.x
-        congratulationLabel.center.x = center.x
 
         // Recalculate progress
         frontView.frame.size.width = bounds.width * CGFloat(progress)

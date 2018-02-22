@@ -22,6 +22,12 @@ class RemoteConfig {
     var loadingDoneCallback: (() -> Void)?
     var fetchComplete: Bool = false
 
+    lazy var appDefaults: [String: NSObject] = [
+        RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
+        RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
+        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
+    ]
+
     enum ShowStreaksNotificationTrigger: String {
         case loginAndSubmission = "login_and_submission"
         case submission = "submission"
@@ -59,11 +65,6 @@ class RemoteConfig {
     func setup() {}
 
     private func loadDefaultValues() {
-        let appDefaults: [String: NSObject] = [
-            RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
-            RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
-            RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
-        ]
         FIRRemoteConfig.remoteConfig().setDefaults(appDefaults)
     }
 

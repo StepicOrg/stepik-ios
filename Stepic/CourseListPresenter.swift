@@ -564,7 +564,7 @@ class CourseListPresenter {
     private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
         // FIXME: code duplication, we should use DeepLinkRouter/LastStepRouter here
         if adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id) {
-            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                 return nil
             }
             cardsViewController.hidesBottomBarWhenPushed = true

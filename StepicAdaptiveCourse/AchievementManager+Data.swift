@@ -9,22 +9,16 @@
 import Foundation
 
 extension AchievementManager {
-    static let shared = AchievementManager.createAndRegisterAchievements()
+    static var shared: AchievementManager?
 
-    static func createAndRegisterAchievements() -> AchievementManager {
+    static func createAndRegisterAchievements(currentRating: Int, currentStreak: Int, currentLevel: Int, isOnboardingPassed: Bool) -> AchievementManager {
         let mgr = AchievementManager()
-
-        let isOnboardingPassed = DefaultsStorageManager.shared.isRatingOnboardingFinished
-        let curRating = RatingManager.shared.rating
-        let curStreak = StatsManager.shared.maxStreak
-        let curLevel = RatingHelper.getLevel(for: curRating)
 
         typealias ChallengeAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, pre: ((Int, Int, Int) -> (Bool))?, migration: (() -> Int)?, event: String)
         typealias ProgressAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, maxValue: Int, pre: ((Int, Int, Int) -> (Bool))?, value: ((Int, Int, Int) -> Int)?, migration: (() -> Int)?, event: String)
 
         let challengeAchievements: [ChallengeAchievementDescription] = [
-            (slug: "onboarding", name: NSLocalizedString("AdaptiveAchievementFirstStep", comment: ""), info: NSLocalizedString("AdaptiveAchievementFirstStepDesc", comment: ""), cover: #imageLiteral(resourceName: "onboarding"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding),
-            (slug: "share", name: NSLocalizedString("AdaptiveAchievementShare", comment: ""), info: NSLocalizedString("AdaptiveAchievementShareDesc", comment: ""), cover: #imageLiteral(resourceName: "ashare"), pre: nil, migration: nil, event: AchievementEvent.events.share)
+            (slug: "onboarding", name: NSLocalizedString("AdaptiveAchievementFirstStep", comment: ""), info: NSLocalizedString("AdaptiveAchievementFirstStepDesc", comment: ""), cover: #imageLiteral(resourceName: "onboarding"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding)
         ]
 
         func createExpAchievement(name: String, exp: Int, cover: UIImage) -> ProgressAchievementDescription {
@@ -35,7 +29,7 @@ extension AchievementManager {
                 maxValue: exp,
                 pre: nil,
                 value: { cur, _, value in return cur + value },
-                migration: { return curRating },
+                migration: { return currentRating },
                 event: AchievementEvent.events.exp)
         }
 
@@ -47,7 +41,7 @@ extension AchievementManager {
                 maxValue: streak,
                 pre: { cur, _, value in return value > cur },
                 value: { cur, _, value in return max(cur, value) },
-                migration: { return curStreak },
+                migration: { return currentStreak },
                 event: AchievementEvent.events.streak)
         }
 
@@ -71,7 +65,7 @@ extension AchievementManager {
                 maxValue: level,
                 pre: { cur, _, value in return value > cur },
                 value: { cur, _, value in return max(cur, value) },
-                migration: { return curLevel },
+                migration: { return currentLevel },
                 event: AchievementEvent.events.level)
         }
 
