@@ -251,6 +251,7 @@ extension CardsStepsViewController: PlaceholderViewDelegate {
 extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.submission)
         presenter?.sendReaction(.solved)
         presenter?.updateRatingWhenSuccess()
         topCard?.controlState = .successful
@@ -258,6 +259,7 @@ extension CardsStepsViewController: CardStepDelegate {
 
     func stepSubmissionDidWrong() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.submission)
         presenter?.updateRatingWhenFail()
         topCard?.controlState = .wrong
     }
