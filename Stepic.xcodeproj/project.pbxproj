@@ -2557,6 +2557,20 @@
 		2C35C5001F4DB8F4002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4FC1F4DB8EC002F3BF4 /* step1.html */; };
 		2C35C5051F4DB91A002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C5011F4DB912002F3BF4 /* step1.html */; };
 		2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
+		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF16203DC66D000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF17203DC66D000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF19203DC66E000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF1A203DC66E000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF1C203DC66F000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF1D203DC66F000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF1F203DC66F000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF20203DC66F000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF22203DC66F000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF23203DC66F000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BBF25203DC670000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C4BBF26203DC670000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
@@ -5121,6 +5135,8 @@
 		2C35C5041F4DB915002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1906/en.lproj/step1.html; sourceTree = "<group>"; };
 		2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
+		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
+		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -7371,6 +7387,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C4BBF0B203DC5C9000A4250 /* Plyr */,
 				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
@@ -7536,6 +7553,15 @@
 				2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */,
 			);
 			name = LeaderboardTableViewCell;
+			sourceTree = "<group>";
+		};
+		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
+			isa = PBXGroup;
+			children = (
+				2C4BBF12203DC668000A4250 /* plyr.css */,
+				2C4BBF10203DC668000A4250 /* plyr.js */,
+			);
+			path = Plyr;
 			sourceTree = "<group>";
 		};
 		2C5DF1371FEBDC50003B1177 /* Adaptive steps */ = {
@@ -8665,7 +8691,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8674,7 +8700,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8767,13 +8793,13 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Manual;
+                        ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -8930,6 +8956,7 @@
 				08CBA32F1F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
 				084DB9D51FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2CB62BE72019FD8500B5E336 /* step2.html in Resources */,
+				2C4BBF15203DC668000A4250 /* plyr.css in Resources */,
 				08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9001,6 +9028,7 @@
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
+				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -9082,6 +9110,7 @@
 				2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */,
 				2C1B62681F4C4AEF00236804 /* DiscussionCountView.xib in Resources */,
 				2C1B62691F4C4AEF00236804 /* CongratulationViewController.xib in Resources */,
+				2C4BBF22203DC66F000A4250 /* plyr.css in Resources */,
 				086BE2AF1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C1B626A1F4C4AEF00236804 /* PickerViewController.xib in Resources */,
 				2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */,
@@ -9109,6 +9138,7 @@
 				2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */,
 				2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */,
+				2C4BBF23203DC66F000A4250 /* plyr.js in Resources */,
 				08195A271FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C1B62801F4C4AEF00236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C1B62811F4C4AEF00236804 /* QuizViewController.xib in Resources */,
@@ -9188,6 +9218,7 @@
 				2C1B64781F4C590700236804 /* StepTabView.xib in Resources */,
 				2C1B64791F4C590700236804 /* DiscussionCountView.xib in Resources */,
 				2C1B647A1F4C590700236804 /* CongratulationViewController.xib in Resources */,
+				2C4BBF25203DC670000A4250 /* plyr.css in Resources */,
 				086BE2B01F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C1B647B1F4C590700236804 /* PickerViewController.xib in Resources */,
 				2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */,
@@ -9215,6 +9246,7 @@
 				2C1B648E1F4C590700236804 /* CardOverlayView.xib in Resources */,
 				2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */,
+				2C4BBF26203DC670000A4250 /* plyr.js in Resources */,
 				08195A281FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C1B64E31F4C597F00236804 /* icon.png in Resources */,
 				2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */,
@@ -9343,6 +9375,7 @@
 				2C8654351F4B33DE00D51654 /* FillBlanksInputTableViewCell.xib in Resources */,
 				2C8654361F4B33DE00D51654 /* StepReversedCardView.xib in Resources */,
 				08A9F7181FC3837800640F1F /* CourseTagCollectionViewCell.xib in Resources */,
+				2C4BBF1A203DC66E000A4250 /* plyr.js in Resources */,
 				2C8654371F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C8654391F4B33DE00D51654 /* TeacherCollectionViewCell.xib in Resources */,
 				08CBA3201F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -9358,6 +9391,7 @@
 				08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
+				2C4BBF19203DC66E000A4250 /* plyr.css in Resources */,
 				086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -9450,6 +9484,7 @@
 				2C89AB421F4C290200227C3B /* GoogleService-Info.plist in Resources */,
 				2C89AB1B1F4C289900227C3B /* FillBlanksInputTableViewCell.xib in Resources */,
 				08A9F7191FC3837800640F1F /* CourseTagCollectionViewCell.xib in Resources */,
+				2C4BBF1D203DC66F000A4250 /* plyr.js in Resources */,
 				2C89AB1C1F4C289900227C3B /* StepReversedCardView.xib in Resources */,
 				2C89AB1D1F4C289900227C3B /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08CBA3211F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -9465,6 +9500,7 @@
 				08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
+				2C4BBF1C203DC66F000A4250 /* plyr.css in Resources */,
 				086BE2AD1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -9508,6 +9544,7 @@
 				2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */,
 				2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */,
 				2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */,
+				2C4BBF1F203DC66F000A4250 /* plyr.css in Resources */,
 				086BE2AE1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */,
 				2C9732AD1F4C38F600AC9301 /* DiscussionCountView.xib in Resources */,
@@ -9535,6 +9572,7 @@
 				2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C9732BF1F4C38F600AC9301 /* CardOverlayView.xib in Resources */,
 				2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */,
+				2C4BBF20203DC66F000A4250 /* plyr.js in Resources */,
 				08195A261FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
 				2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */,
@@ -9656,6 +9694,7 @@
 				86AE94711E84511A00F67691 /* StepTabView.xib in Resources */,
 				86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */,
 				2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */,
+				2C4BBF16203DC66D000A4250 /* plyr.css in Resources */,
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				086BE2AB1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
@@ -9683,6 +9722,7 @@
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
 				2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */,
 				2C8652681F4B2FA500D51654 /* step1.html in Resources */,
+				2C4BBF17203DC66D000A4250 /* plyr.js in Resources */,
 				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				08195A231FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
@@ -15771,16 +15811,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15795,15 +15835,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6afc4145-e327-4af9-b19a-0dedfcbd72e9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+                PROVISIONING_PROFILE = "6afc4145-e327-4af9-b19a-0dedfcbd72e9";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15974,10 +16014,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 76;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 77;
+                DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -15985,8 +16025,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16005,10 +16045,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 76;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 77;
+                DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -16016,8 +16056,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "636e8124-b505-48f4-9514-ff6f037a7ce0";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+                PROVISIONING_PROFILE = "636e8124-b505-48f4-9514-ff6f037a7ce0";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -16724,16 +16764,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16753,15 +16793,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4961717c-0bf7-4a77-b45e-d91540553fea";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+                PROVISIONING_PROFILE = "4961717c-0bf7-4a77-b45e-d91540553fea";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -16777,16 +16817,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16803,15 +16843,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = E9KER42773;
+                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+                CODE_SIGN_STYLE = Manual;
+                DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "23acfcb4-1517-485f-b269-7ab3373df952";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+                PROVISIONING_PROFILE = "23acfcb4-1517-485f-b269-7ab3373df952";
+                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;

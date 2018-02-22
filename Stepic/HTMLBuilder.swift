@@ -54,6 +54,16 @@ class HTMLBuilder: NSObject {
 
     func buildHTMLStringWith(head: String, body: String, width: Int? = nil, textColor: UIColor = UIColor.mainText) -> String {
         var res = "<html>\n"
+        var head = head
+        var body = body
+
+        // Include library to customize audio controls
+        if body.contains("<audio") {
+            // Inject to head
+            head = head + Scripts.audioTagWrapper
+            // Inject before closing body tag
+            body = body + Scripts.audioTagWrapperInit
+        }
 
         res += "<head>\n\(stepicStyleString(textColor: textColor) + stepicBaseURLString + head)\n</head>\n"
 

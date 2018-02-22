@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AudioTagWrapperInit</key>
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
+	<key>AudioTagWrapper</key>
+	<string>&lt;link rel=&quot;stylesheet&quot; href=&quot;plyr.css&quot;&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;plyr.js&quot;&gt;&lt;/script&gt;</string>
 	<key>localJQueryScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;</string>
 	<key>ClickableImages</key>
