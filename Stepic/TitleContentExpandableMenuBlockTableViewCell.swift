@@ -18,6 +18,8 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     var labels: [StepikLabel] = []
     var block: TitleContentExpandableMenuBlock?
 
+    var updateTableHeightBlock: (() -> Void)?
+
     var isExpanded: Bool = false
 
     override func awakeFromNib() {
@@ -38,6 +40,12 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
             label.isHidden = true
         }
         block.onExpanded?(!block.isExpanded)
+        if block.isExpanded {
+            expand(block: block)
+        } else {
+            shrink(block: block)
+        }
+        updateTableHeightBlock?()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -139,5 +147,4 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         bottomTitleConstraint?.isActive = true
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_bottom"), for: .normal)
     }
-
 }

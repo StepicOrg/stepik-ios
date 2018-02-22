@@ -95,6 +95,7 @@ class LastStepRouter {
                 navigationController.pushViewController(sectionsVC, animated: false)
                 navigationController.pushViewController(unitsVC, animated: false)
                 navigationController.pushViewController(lessonVC, animated: true)
+                LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
             } else {
                 openSyllabus()

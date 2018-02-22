@@ -35,7 +35,7 @@ class MenuViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.estimatedRowHeight = 44.0
+        tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
         interfaceManager = MenuUIManager(tableView: tableView)
         if #available(iOS 11.0, *) {

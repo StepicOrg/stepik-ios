@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UPCarouselFlowLayout
 
 enum AdaptiveCourseSelectViewState {
     case loading, normal, error

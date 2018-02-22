@@ -15,16 +15,38 @@ class DeepLinkRouter {
     }
 
     private class var currentNavigation: UINavigationController? {
-        if let tabController = window?.rootViewController as? UITabBarController {
-            let cnt = tabController.viewControllers?.count ?? 0
-            let index = tabController.selectedIndex
-            if index < cnt {
-                return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
-            } else {
-                return tabController.viewControllers?[0] as? UINavigationController
-            }
+        guard let tabController = currentTabBarController else {
+            return nil
         }
-        return nil
+        let cnt = tabController.viewControllers?.count ?? 0
+        let index = tabController.selectedIndex
+        if index < cnt {
+            return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
+        } else {
+            return tabController.viewControllers?[0] as? UINavigationController
+        }
+    }
+
+    private class var currentTabBarController: UITabBarController? {
+        return window?.rootViewController as? UITabBarController
+    }
+
+    static func routeToCatalog() {
+        guard let tabController = currentTabBarController else {
+            return
+        }
+        delay(0) {
+            tabController.selectedIndex = 1
+        }
+    }
+
+    static func routeToNotifications() {
+        guard let tabController = currentTabBarController else {
+            return
+        }
+        delay(0) {
+            tabController.selectedIndex = 4
+        }
     }
 
     static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool) {
@@ -86,9 +108,18 @@ class DeepLinkRouter {
         }
 
         let components = link.pathComponents
-            //just a check if everything is OK with the link length
 
-        if components[1].lowercased() == "course" && components.count >= 3 {
+        if components.count == 2 && components[1].lowercased() == "catalog" {
+            routeToCatalog()
+            return
+        }
+
+        if components.count == 2 && components[1].lowercased() == "notifications" {
+            routeToNotifications()
+            return
+        }
+
+        if components.count >= 3 && components[1].lowercased() == "course" {
             guard let courseId = getID(components[2], reversed: true) else {
                 completion([])
                 return
@@ -121,7 +152,7 @@ class DeepLinkRouter {
             return
         }
 
-        if components[1].lowercased() == "lesson" && components.count >= 5 {
+        if components.count >= 5 && components[1].lowercased() == "lesson" {
             guard let lessonId = getID(components[2], reversed: true) else {
                 completion([])
                 return
