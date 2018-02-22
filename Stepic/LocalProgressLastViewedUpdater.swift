@@ -10,9 +10,6 @@ import Foundation
 
 class LocalProgressLastViewedUpdater {
 
-    //Singletons are bad, I know
-    //TODO: Remove this, add dependencies to objects everywhere
-    private init() {}
     static let shared = LocalProgressLastViewedUpdater()
 
     func updateView(for step: Step) {
