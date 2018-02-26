@@ -425,7 +425,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 })
             } else {
                 if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: c.id) {
-                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                         return
                     }
                     cardsViewController.hidesBottomBarWhenPushed = true

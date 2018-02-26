@@ -13,7 +13,7 @@
         <!--Card Step View Controller-->
         <scene sceneID="0gR-Yw-kZD">
             <objects>
-                <viewController storyboardIdentifier="CardStep" id="eJP-Ja-phW" customClass="CardStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardStep" id="eJP-Ja-phW" customClass="CardStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wqO-Jl-YEe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +61,7 @@
         <!--Title-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
-                <viewController storyboardIdentifier="CardsSteps" id="6Dd-WV-Z8n" customClass="CardsStepsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardsSteps" id="6Dd-WV-Z8n" customClass="BaseCardsStepsViewController" customModule="Stepic" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pQd-fo-zuT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -168,7 +168,7 @@
         <!--Adaptive Stats View Controller-->
         <scene sceneID="y0t-pS-F9m">
             <objects>
-                <viewController storyboardIdentifier="Progress" automaticallyAdjustsScrollViewInsets="NO" id="AWG-RN-TTu" customClass="AdaptiveStatsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Progress" automaticallyAdjustsScrollViewInsets="NO" id="AWG-RN-TTu" customClass="AdaptiveStatsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YMM-QG-gdJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,7 +413,7 @@
         <!--Adaptive Stats Pager View Controller-->
         <scene sceneID="CL4-FO-uc7">
             <objects>
-                <viewController storyboardIdentifier="Stats" id="fjQ-pL-dZL" customClass="AdaptiveStatsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Stats" id="fjQ-pL-dZL" customClass="AdaptiveStatsPagerViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rEW-Vo-Pm0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,12 +423,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuN-0j-Djo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6360" y="33"/>
+            <point key="canvasLocation" x="6298" y="34"/>
         </scene>
         <!--Adaptive Ratings View Controller-->
         <scene sceneID="Hkx-av-SNz">
             <objects>
-                <viewController storyboardIdentifier="Ratings" automaticallyAdjustsScrollViewInsets="NO" id="Xqf-wi-d5U" customClass="AdaptiveRatingsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Ratings" automaticallyAdjustsScrollViewInsets="NO" id="Xqf-wi-d5U" customClass="AdaptiveRatingsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Stg-pT-0H9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -511,7 +511,7 @@
         <!--Onboarding Card Step View Controller-->
         <scene sceneID="ZfC-Gm-Hsm">
             <objects>
-                <viewController storyboardIdentifier="OnboardingCardStep" id="yak-BZ-2j6" customClass="OnboardingCardStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingCardStep" id="yak-BZ-2j6" customClass="OnboardingCardStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yW0-6m-cwl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

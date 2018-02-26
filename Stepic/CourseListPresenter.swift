@@ -373,6 +373,13 @@ class CourseListPresenter {
             handleCourseSubscriptionUpdates()
             switch listType {
             case .enrolled:
+                courses = courses.sorted(by: {
+                    guard let lastViewed1 = $0.progress?.lastViewed, let lastViewed2 = $1.progress?.lastViewed else {
+                        return false
+                    }
+                    return lastViewed1 > lastViewed2
+                })
+                self.view?.display(courses: getData(from: displayingCourses))
                 lastStepDataSource?.didLoadWithProgresses(courses: courses)
             default:
                 break
@@ -557,7 +564,7 @@ class CourseListPresenter {
     private func getSectionsController(for course: Course, sourceView: UIView? = nil, didSubscribe: Bool = false) -> UIViewController? {
         // FIXME: code duplication, we should use DeepLinkRouter/LastStepRouter here
         if adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id) {
-            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                 return nil
             }
             cardsViewController.hidesBottomBarWhenPushed = true

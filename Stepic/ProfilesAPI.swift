@@ -9,45 +9,31 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class ProfilesAPI: APIEndpoint {
     override var name: String { return "profiles" }
 
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Profile], refreshMode: RefreshMode, success: @escaping (([Profile]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    func retrieve(ids: [Int], existing: [Profile], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
+        return getObjectsByIds(ids: ids, updating: existing, headers: headers)
     }
 
-    @discardableResult func update(_ profile: Profile, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Profile) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
-        let params: Parameters? = [
-            "profile": profile.json as AnyObject
-        ]
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(profile.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({ response in
-                var error = response.result.error
-                var json: JSON = [:]
-                if response.result.value == nil {
-                    if error == nil {
-                        error = NSError(domain: "", code: -1, userInfo: nil)
-                    }
-                } else {
-                    json = response.result.value!
+    func update(_ profile: Profile, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Profile> {
+        return Promise { fulfill, reject in
+            let params: Parameters? = [
+                "profile": profile.json as AnyObject
+            ]
+
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(profile.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    reject(error) // raw error here
+                case .success(let json):
+                    profile.update(json: json["profiles"].arrayValue[0])
+                    fulfill(profile)
                 }
-                let response = response.response
-
-                if let e = error as NSError? {
-                    errorHandler("PUT profile: error \(e.domain) \(e.code): \(e.localizedDescription)")
-                    return
-                }
-
-                if response?.statusCode != 200 {
-                    errorHandler("PUT profile: bad response status code \(String(describing: response?.statusCode))")
-                    return
-                }
-
-                profile.update(json: json["profiles"].arrayValue[0])
-                success(profile)
-
-                return
             }
-        )
+        }
     }
+
 }

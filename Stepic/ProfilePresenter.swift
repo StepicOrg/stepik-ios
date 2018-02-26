@@ -139,7 +139,7 @@ class ProfilePresenter {
             [weak self]
             isExpanded in
             block.isExpanded = isExpanded
-            self?.menu.update(block: block)
+//            self?.menu.update(block: block)
         }
         return block
     }

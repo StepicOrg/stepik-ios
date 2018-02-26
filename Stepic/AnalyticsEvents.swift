@@ -251,6 +251,7 @@ struct AnalyticsEvents {
     struct Adaptive {
         static let onboardingFinished = "adaptive_onboarding_finished"
         struct Step {
+            static let submission = "adaptive_submission_created"
             static let correctAnswer = "adaptive_correct_answer"
             static let wrongAnswer = "adaptive_wrong_answer"
             static let retry = "adaptive_retry_answer"

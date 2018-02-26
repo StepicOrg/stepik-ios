@@ -37,21 +37,22 @@ enum LocalNotification {
 
         switch self {
         case .tomorrow:
-            let streak = StatsManager.shared.currentDayStreak
-            if streak == 0 {
+            let courses = StepicApplicationsInfo.adaptiveSupportedCourses
+            let statsManagers = courses.map { AdaptiveStatsManager(courseId: $0) }
+            let maxCurrentStreak = statsManagers.map { $0.currentDayStreak }.max() ?? 0
+            if maxCurrentStreak == 0 {
                 // 0 points today, 0 points prev
                 localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
                 localNotification.userInfo = ["type": "yesterday_zero"]
-            } else if streak == 1 {
+            } else if maxCurrentStreak == 1 {
                 // X points today, 0 points prev
-                if let todayXP = StatsManager.shared.getLastDays(count: 1).first {
-                    localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
-                    localNotification.userInfo = ["type": "yesterday"]
-                }
+                let todayXP = statsManagers.flatMap({ $0.getLastDays(count: 1).first }).reduce(0, +)
+                localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
+                localNotification.userInfo = ["type": "yesterday"]
             } else {
                 // X points today, X points prev
-                var streakDays = "\(streak) "
-                switch (streak % 10) {
+                var streakDays = "\(maxCurrentStreak) "
+                switch (maxCurrentStreak % 10) {
                 case 1: streakDays += NSLocalizedString("days1", comment: "")
                 case 2, 3, 4: streakDays += NSLocalizedString("days234", comment: "")
                 default: streakDays += NSLocalizedString("days567890", comment: "")

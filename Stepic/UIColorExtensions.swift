@@ -42,8 +42,15 @@ extension UIColor {
     static let stepicGreen: UIColor = UIColor(hex: 0x66CC66)
 
     static let mainLight: UIColor = UIColor(hex: 0xf6f6f6)
-    static let mainDark: UIColor = StepicApplicationsInfo.Colors.mainDark
-    static let mainText: UIColor = StepicApplicationsInfo.Colors.mainText
+
+    class var mainDark: UIColor {
+        return StepicApplicationsInfo.Colors.mainDark
+    }
+
+    class var mainText: UIColor {
+        return StepicApplicationsInfo.Colors.mainText
+    }
+
     static let thirdColor: UIColor = UIColor(hex: 0x54a2ff)
 
     static let correctQuizBackground: UIColor = UIColor(hex: 0xE9F9E9)

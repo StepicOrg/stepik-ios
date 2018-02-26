@@ -260,6 +260,8 @@ class WebStepViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
         }
 
+        LocalProgressLastViewedUpdater.shared.updateView(for: step)
+
         NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
 
         let stepid = step.id
