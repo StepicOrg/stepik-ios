@@ -124,7 +124,7 @@ platform :ios do
 
     scheme = options[:scheme]
     git_change = options[:git_change]
-    matchscheme(scheme: scheme)
+    matchadhoc(scheme: scheme)
 
     # Ensure that your git status is not dirty
     if git_change
@@ -275,7 +275,7 @@ platform :ios do
     scheme = options[:scheme]
     app_identifier = app_identifiers[scheme][0]
 
-    matchscheme(scheme: scheme)
+    matchrelease(scheme: scheme)
 
     clear_derived_data
     unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
