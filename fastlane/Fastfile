@@ -85,6 +85,7 @@ platform :ios do
   
   desc "Runs all the tests for scheme"
   lane :testscheme do |options|
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
     scheme = options[:scheme]
     scan(scheme:scheme, slack_only_on_failure: true)
   end
