@@ -2479,7 +2479,7 @@
 		2C35C4EA1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2C35C4EB1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2C35C4EC1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
-		2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4ED1F4DB882002F3BF4 /* step1.html */; };
+		2C35C4F11F4DB88E002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4ED1F4DB882002F3BF4 /* step0.html */; };
 		2C35C4F61F4DB8AC002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F21F4DB8A5002F3BF4 /* step1.html */; };
 		2C35C4FB1F4DB8D4002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F71F4DB8CC002F3BF4 /* step0.html */; };
 		2C35C5001F4DB8F4002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4FC1F4DB8EC002F3BF4 /* step1.html */; };
@@ -5153,8 +5153,8 @@
 		2C35C4D21F4DA46A002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/adjectives_m.plist; sourceTree = "<group>"; };
 		2C35C4D31F4DA46E002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_f.plist; sourceTree = "<group>"; };
 		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
-		2C35C4EE1F4DB882002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/3124/ru.lproj/step1.html; sourceTree = "<group>"; };
-		2C35C4F01F4DB885002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3124/en.lproj/step1.html; sourceTree = "<group>"; };
+		2C35C4EE1F4DB882002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/3124/ru.lproj/step0.html; sourceTree = "<group>"; };
+		2C35C4F01F4DB885002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3124/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C35C4F31F4DB8A5002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/3149/ru.lproj/step1.html; sourceTree = "<group>"; };
 		2C35C4F51F4DB8A9002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3149/en.lproj/step1.html; sourceTree = "<group>"; };
 		2C35C4F81F4DB8CC002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/3150/ru.lproj/step0.html; sourceTree = "<group>"; };
@@ -7521,7 +7521,7 @@
 		2C1B64E91F4C5B3100236804 /* Onboarding first page */ = {
 			isa = PBXGroup;
 			children = (
-				2C35C4ED1F4DB882002F3BF4 /* step1.html */,
+				2C35C4ED1F4DB882002F3BF4 /* step0.html */,
 				2C1B64D31F4C595F00236804 /* icon.png */,
 			);
 			name = "Onboarding first page";
@@ -9227,7 +9227,7 @@
 				2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B64B11F4C590700236804 /* Images.xcassets in Resources */,
 				2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */,
-				2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */,
+				2C35C4F11F4DB88E002F3BF4 /* step0.html in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
 				2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C608B5E20457298006870BB /* step1.html in Resources */,
@@ -15541,13 +15541,13 @@
 			name = nouns_m.plist;
 			sourceTree = "<group>";
 		};
-		2C35C4ED1F4DB882002F3BF4 /* step1.html */ = {
+		2C35C4ED1F4DB882002F3BF4 /* step0.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2C35C4EE1F4DB882002F3BF4 /* ru */,
 				2C35C4F01F4DB885002F3BF4 /* en */,
 			);
-			name = step1.html;
+			name = step0.html;
 			sourceTree = "<group>";
 		};
 		2C35C4F21F4DB8A5002F3BF4 /* step1.html */ = {
