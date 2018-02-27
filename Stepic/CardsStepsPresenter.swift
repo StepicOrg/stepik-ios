@@ -414,16 +414,16 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         if let course = course {
             ratingsAPI.update(courseId: course.id, exp: newRating).then {
                 print("cards steps: remote rating updated")
-                }.catch { error in
-                    switch error {
-                    case RatingsAPIError.serverError:
-                        print("cards steps: remote rating update failed: server error")
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
-                    case RatingsAPIError.connectionError(let error):
-                        print("cards steps: remote rating update failed: \(error)")
-                    default:
-                        print("cards steps: remote rating update failed: \(error)")
-                    }
+            }.catch { error in
+                switch error {
+                case RatingsAPIError.serverError:
+                    print("cards steps: remote rating update failed: server error")
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+                case RatingsAPIError.connectionError(let error):
+                    print("cards steps: remote rating update failed: \(error)")
+                default:
+                    print("cards steps: remote rating update failed: \(error)")
+                }
             }
         }
 
