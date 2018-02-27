@@ -32,10 +32,10 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         return false
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, view: CardsStepsView) {
         self.achievementsManager = achievementsManager
 
-        super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, course: nil, view: view)
+        super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, lastViewedUpdater: lastViewedUpdater, course: nil, view: view)
         self.achievementsManager.delegate = self
 
         // For old adaptive app

@@ -162,7 +162,7 @@ class AdaptiveCourseSelectPresenter {
         AchievementManager.shared = achievementsManager
 
         // Init course controller
-        let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: id), statsManager: AdaptiveStatsManager(courseId: id), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), view: vc)
+        let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: id), statsManager: AdaptiveStatsManager(courseId: id), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), view: vc)
         presenter.initialActions = Promise { fulfill, reject in
             checkToken().then { _ -> Promise<Course> in
                 actions.loadCourseAndJoin(courseId: id)

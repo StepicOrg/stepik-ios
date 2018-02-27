@@ -2554,7 +2554,6 @@
 		2C8652631F4B2F7D00D51654 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525D1F4B2F7D00D51654 /* icon.png */; };
 		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
 		2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525F1F4B2F7D00D51654 /* Tokens.plist */; };
-		2C8652681F4B2FA500D51654 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652661F4B2FA500D51654 /* step0.html */; };
 		2C86526E1F4B33DE00D51654 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C86526F1F4B33DE00D51654 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C8652701F4B33DE00D51654 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -3837,6 +3836,7 @@
 		2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
+		2CA6414F204565C1009842D6 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652661F4B2FA500D51654 /* step0.html */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -9431,6 +9431,7 @@
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
+				2CA6414F204565C1009842D6 /* step0.html in Resources */,
 				085EDCC11F99462C00AB3278 /* Notifications.storyboard in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
@@ -9454,8 +9455,6 @@
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
 				2CE1C2B420249A0100722989 /* StepCardView.xib in Resources */,
 				2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */,
-				2C8652681F4B2FA500D51654 /* step0.html in Resources */,
-				2C8652681F4B2FA500D51654 /* step0.html in Resources */,
 				2C4BBF17203DC66D000A4250 /* plyr.js in Resources */,
 				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				08195A231FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
