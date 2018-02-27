@@ -36,7 +36,7 @@ class AdaptiveCourseSelectPresenter {
 
     var defaultsStorageManager: DefaultsStorageManager
 
-    var initialActions: Promise<([Course], [AdaptiveCourseInfo])>?
+    var initialActions: ((((([Course], [AdaptiveCourseInfo])) -> Void)?, ((Error) -> Void)?) -> Void)?
     private var courses: [Course] = []
 
     // Save actions to prevent deallocation
@@ -55,20 +55,20 @@ class AdaptiveCourseSelectPresenter {
 
         DispatchQueue.global().async { [weak self] in
             if let actions = self?.initialActions {
-                actions.then { courses, adaptiveCoursesInfo -> Void in
+                actions({ courses, adaptiveCoursesInfo -> Void in
                     self?.courses = courses
                     self?.reloadData(courses: courses, adaptiveCoursesInfo: adaptiveCoursesInfo)
                     self?.view?.state = .normal
-                }.catch { error in
-                    if let error = error as? AdaptiveCardsStepsError {
-                        switch error {
-                        case .noProfile, .userNotUnregisteredFromEmails:
-                            break
-                        default:
-                            self?.view?.state = .error
-                        }
+                }, { error in
+                    switch error {
+                    case AdaptiveCardsStepsError.noProfile, AdaptiveCardsStepsError.userNotUnregisteredFromEmails:
+                        break
+                    case PerformRequestError.noAccessToRefreshToken:
+                        self?.logout()
+                    default:
+                        self?.view?.state = .error
                     }
-                }
+                })
             }
         }
     }
@@ -140,6 +140,13 @@ class AdaptiveCourseSelectPresenter {
         refresh()
     }
 
+    private func logout() {
+        AuthInfo.shared.token = nil
+        AuthInfo.shared.user = nil
+
+        refresh()
+    }
+
     func openCourse(id: Int, uiColor: UIColor? = StepicApplicationsInfo.Colors.mainDark) {
         guard let actions = actions else {
             return
@@ -163,13 +170,19 @@ class AdaptiveCourseSelectPresenter {
 
         // Init course controller
         let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: id), statsManager: AdaptiveStatsManager(courseId: id), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), view: vc)
-        presenter.initialActions = Promise { fulfill, reject in
-            checkToken().then { _ -> Promise<Course> in
+        presenter.initialActions = { completion, failure in
+            checkToken().then { () -> Promise<Void> in
+                if !AuthInfo.shared.isAuthorized {
+                    return actions.registerNewUser()
+                } else {
+                    return Promise(value: ())
+                }
+            }.then { _ -> Promise<Course> in
                 actions.loadCourseAndJoin(courseId: id)
             }.then { course in
-                fulfill(course)
+                completion?(course)
             }.catch { error in
-                reject(error)
+                failure?(error)
             }
         }
         vc.presenter = presenter

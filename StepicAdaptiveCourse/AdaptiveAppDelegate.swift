@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), view: initialViewController)
 
-            presenter.initialActions = Promise { fulfill, reject in
+            presenter.initialActions = { completion, failure in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
@@ -84,9 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }.then { _ -> Promise<Course> in
                     actions.loadCourseAndJoin(courseId: courseId)
                 }.then { course -> Void in
-                    fulfill(course)
+                    completion?(course)
                 }.catch { error in
-                    reject(error)
+                    failure?(error)
                 }
             }
 
@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             let presenter = AdaptiveCourseSelectPresenter(defaultsStorageManager: DefaultsStorageManager(), view: selectController)
-            presenter.initialActions = Promise { fulfill, reject in
+            presenter.initialActions = { completion, failure in
                 checkToken().then { () -> Promise<Void> in
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
@@ -118,10 +118,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
 
                     return when(fulfilled: actions.loadCourses(ids: supportedCourses), actions.loadAdaptiveCoursesInfo(locale: locale))
-                }.then { courses, adaptiveCoursesInfo -> Void in
-                    fulfill((courses, adaptiveCoursesInfo))
-                }.catch { error in
-                    reject(error)
+                }.then { courses, adaptiveCoursesInfo in
+                    completion?((courses, adaptiveCoursesInfo))
+                }.catch { error -> Void in
+                    failure?(error)
                 }
             }
             selectController.presenter = presenter
