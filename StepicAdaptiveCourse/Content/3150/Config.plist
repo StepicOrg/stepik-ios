@@ -4,6 +4,8 @@
 <dict>
 	<key>colors</key>
 	<dict>
+		<key>mainGreen</key>
+		<integer>27826</integer>
 		<key>mainDark</key>
 		<integer>27826</integer>
 		<key>mainText</key>
