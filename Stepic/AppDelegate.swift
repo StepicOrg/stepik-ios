@@ -8,8 +8,10 @@
 
 import UIKit
 import MediaPlayer
-import Firebase
+import FirebaseCore
 import FirebaseMessaging
+import FirebaseAppIndexing
+import FirebaseInstanceID
 import IQKeyboardManagerSwift
 import SVProgressHUD
 import VK_ios_sdk
@@ -47,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
 
         ExecutionQueues.sharedQueues.setUpQueueObservers()
@@ -189,7 +191,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
-        if let token = FIRInstanceID.instanceID().token() {
+        if let token = InstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized {
                 NotificationRegistrator.shared.registerDevice(token)
             }
