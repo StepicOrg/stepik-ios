@@ -23,11 +23,11 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
-    pod 'Firebase/Core'
-    pod 'Firebase/AppIndexing'
-    pod 'Firebase/Messaging'
-    pod 'Firebase/Analytics'
-    pod 'Firebase/RemoteConfig'
+    pod 'FirebaseCore'
+    pod 'FirebaseAppIndexing'
+    pod 'FirebaseMessaging'
+    pod 'FirebaseAnalytics'
+    pod 'FirebaseRemoteConfig'
     
     pod 'Mixpanel-swift', '2.3.0'
 
