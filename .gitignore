@@ -9,6 +9,7 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+Stepic.xcodeproj/xcuserdata
 xcuserdata
 *.xccheckout
 *.moved-aside
