@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseRemoteConfig
 
 enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
@@ -34,14 +34,14 @@ class RemoteConfig {
     }
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue).stringValue else {
             return defaultShowStreaksNotificationTrigger
         }
         return ShowStreaksNotificationTrigger(rawValue: configValue) ?? defaultShowStreaksNotificationTrigger
     }
 
     var adaptiveBackendUrl: String {
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue).stringValue else {
             return StepicApplicationsInfo.adaptiveRatingURL
         }
 
@@ -49,7 +49,7 @@ class RemoteConfig {
     }
 
     var supportedInAdaptiveModeCourses: [Int] {
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue).stringValue else {
             return StepicApplicationsInfo.adaptiveSupportedCourses
         }
 
@@ -65,7 +65,7 @@ class RemoteConfig {
     func setup() {}
 
     private func loadDefaultValues() {
-        FIRRemoteConfig.remoteConfig().setDefaults(appDefaults)
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(appDefaults)
     }
 
     private func fetchCloudValues() {
@@ -73,7 +73,7 @@ class RemoteConfig {
         #if DEBUG
             activateDebugMode()
         #endif
-        FIRRemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
             [weak self]
             _, error in
 
@@ -82,7 +82,7 @@ class RemoteConfig {
                 return
             }
 
-            FIRRemoteConfig.remoteConfig().activateFetched()
+            FirebaseRemoteConfig.RemoteConfig.remoteConfig().activateFetched()
 
             self?.fetchComplete = true
             self?.loadingDoneCallback?()
@@ -90,7 +90,7 @@ class RemoteConfig {
     }
 
     private func activateDebugMode() {
-        let debugSettings = FIRRemoteConfigSettings(developerModeEnabled: true)
-        FIRRemoteConfig.remoteConfig().configSettings = debugSettings!
+        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings!
     }
 }

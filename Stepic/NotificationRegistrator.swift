@@ -8,7 +8,8 @@
 
 import UIKit
 import FirebaseMessaging
-import Firebase
+import FirebaseCore
+import FirebaseInstanceID
 import PromiseKit
 
 class NotificationRegistrator {
@@ -28,14 +29,14 @@ class NotificationRegistrator {
         }
 
         if AuthInfo.shared.isAuthorized {
-            if let token = FIRInstanceID.instanceID().token() {
+            if let token = InstanceID.instanceID().token() {
                 registerDevice(token)
             }
         }
     }
 
     func getGCMRegistrationToken(deviceToken: Data) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
+        InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.unknown)
     }
 
     var registrationOptions = [String: AnyObject]()
