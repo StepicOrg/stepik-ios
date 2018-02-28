@@ -31,12 +31,15 @@ class ProfilePresenter {
     weak var view: ProfileView?
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
+    private var notificationPermissionManager: NotificationPermissionManager
+    
     var menu: Menu = Menu(blocks: [])
 
-    init(view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI) {
+    init(view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
+        self.notificationPermissionManager = notificationPermissionManager
     }
 
     // MARK: - Menu initialization
@@ -70,6 +73,7 @@ class ProfilePresenter {
             [weak self]
             isOn in
             self?.setStreakNotifications(on: isOn, forBlock: block)
+            
 //            block.hasSeparatorOnBottom = !isOn
         }
 

@@ -14,15 +14,17 @@ import PromiseKit
 
 class NotificationRegistrator {
     static let shared = NotificationRegistrator()
-
+    
+    let notificationPermissionManager = NotificationPermissionManager()
+    
     private init () { }
-
-    func registerForRemoteNotifications() {
-        return registerForRemoteNotifications(UIApplication.shared)
+    
+    func registerForRemoteNotificationsIfPermitted() {
+        return registerForRemoteNotificationsIfPermitted(UIApplication.shared)
     }
 
-    func registerForRemoteNotifications(_ application: UIApplication) {
-        if StepicApplicationsInfo.shouldRegisterNotifications {
+    func registerForRemoteNotificationsIfPermitted(_ application: UIApplication) {
+        if StepicApplicationsInfo.shouldRegisterNotifications && notificationPermissionManager.didAskForPermission {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
@@ -36,7 +38,7 @@ class NotificationRegistrator {
     }
 
     func getGCMRegistrationToken(deviceToken: Data) {
-        InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.unknown)
+        Messaging.messaging().apnsToken = deviceToken
     }
 
     var registrationOptions = [String: AnyObject]()

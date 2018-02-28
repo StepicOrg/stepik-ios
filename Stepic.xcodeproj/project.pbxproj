@@ -214,6 +214,13 @@
 		0829B83B1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
 		0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		0829B83D1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A89002046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A89022046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A89032046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082A89042046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
@@ -4514,6 +4521,7 @@
 		0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_certificates_v15.xcdatamodel; sourceTree = "<group>"; };
 		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionManager.swift; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
@@ -5722,6 +5730,7 @@
 				083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */,
 				0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */,
 				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
+				082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -12134,6 +12143,7 @@
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				2CC351971F683140004255B6 /* EmailAuthViewController.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
+				082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				081959E01FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
@@ -12684,6 +12694,7 @@
 				08EA89D5200E69CB00BCAF44 /* SQLQuizViewController.swift in Sources */,
 				2C1B61DE1F4C4AEF00236804 /* MathReply.swift in Sources */,
 				2C1B61DF1F4C4AEF00236804 /* SortingReply.swift in Sources */,
+				082A89032046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				2C1B61E01F4C4AEF00236804 /* MatchingReply.swift in Sources */,
 				2C1B61E11F4C4AEF00236804 /* FillBlanksReply.swift in Sources */,
 				2C1B61E21F4C4AEF00236804 /* VideoDownloadDelegate.swift in Sources */,
@@ -13119,6 +13130,7 @@
 				08EA89D6200E69CC00BCAF44 /* SQLQuizViewController.swift in Sources */,
 				2C1B63EF1F4C590700236804 /* MathReply.swift in Sources */,
 				2C1B63F01F4C590700236804 /* SortingReply.swift in Sources */,
+				082A89042046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				2C1B63F11F4C590700236804 /* MatchingReply.swift in Sources */,
 				2C1B63F21F4C590700236804 /* FillBlanksReply.swift in Sources */,
 				2C1B63F31F4C590700236804 /* VideoDownloadDelegate.swift in Sources */,
@@ -13554,6 +13566,7 @@
 				08EA89D2200E69C900BCAF44 /* SQLQuizViewController.swift in Sources */,
 				2C86538C1F4B33DE00D51654 /* MathReply.swift in Sources */,
 				2C86538D1F4B33DE00D51654 /* SortingReply.swift in Sources */,
+				082A89002046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				2C86538E1F4B33DE00D51654 /* MatchingReply.swift in Sources */,
 				2C86538F1F4B33DE00D51654 /* FillBlanksReply.swift in Sources */,
 				2C8653901F4B33DE00D51654 /* VideoDownloadDelegate.swift in Sources */,
@@ -13935,6 +13948,7 @@
 				2C89AA441F4C289900227C3B /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C89AA461F4C289900227C3B /* Executable.swift in Sources */,
 				2C89AA471F4C289900227C3B /* ExecutionQueue.swift in Sources */,
+				082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				2C89AA481F4C289900227C3B /* PersistentQueueRecoveryManager.swift in Sources */,
 				2C89AA491F4C289900227C3B /* Queues.plist in Sources */,
 				2C89AA4A1F4C289900227C3B /* ExecutionQueues.swift in Sources */,
@@ -14423,6 +14437,7 @@
 				08EA89D4200E69CB00BCAF44 /* SQLQuizViewController.swift in Sources */,
 				2C9732261F4C38F600AC9301 /* MathReply.swift in Sources */,
 				2C9732271F4C38F600AC9301 /* SortingReply.swift in Sources */,
+				082A89022046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				2C9732281F4C38F600AC9301 /* MatchingReply.swift in Sources */,
 				2C9732291F4C38F600AC9301 /* FillBlanksReply.swift in Sources */,
 				2C97322A1F4C38F600AC9301 /* VideoDownloadDelegate.swift in Sources */,
@@ -14996,6 +15011,7 @@
 				864D67011E83DE03001E8D9E /* Session.swift in Sources */,
 				864D67021E83DE03001E8D9E /* SocialSDKProvider.swift in Sources */,
 				864D67031E83DE03001E8D9E /* VKSocialSDKProvider.swift in Sources */,
+				082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				864D67041E83DE03001E8D9E /* FBSocialSDKProvider.swift in Sources */,
 				864D67051E83DE03001E8D9E /* RequestChain.swift in Sources */,
 				864D67061E83DE03001E8D9E /* ApiRequest.swift in Sources */,
