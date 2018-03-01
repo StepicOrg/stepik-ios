@@ -43,9 +43,9 @@ class CourseInfoPresenter {
     private let subscribeTitle = NSLocalizedString("Subscribing...", comment: "")
     private let unsubscribeTitle = NSLocalizedString("Unsubscribing...", comment: "")
 
-    init(view: CourseInfoView) {
+    init(view: CourseInfoView, subscriber: CourseSubscriber) {
         self.view = view
-        self.subscriber = CourseSubscriber()
+        self.subscriber = subscriber
     }
 
     private func buildSections(with course: Course) -> [CourseInfoSection] {

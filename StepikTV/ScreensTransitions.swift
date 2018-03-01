@@ -14,7 +14,7 @@ class ScreensTransitions {
 
         let destinationViewController = ControllerHelper.instantiateViewController(identifier: "CourseInfoPage", storyboardName: "CourseInfo") as! CourseInfoCollectionViewController
 
-        destinationViewController.presenter = CourseInfoPresenter(view: destinationViewController)
+        destinationViewController.presenter = CourseInfoPresenter(view: destinationViewController, subscriber: CourseSubscriber())
         destinationViewController.presenter?.course = course
 
         viewController.present(destinationViewController, animated: true, completion: {})
