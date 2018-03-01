@@ -13,7 +13,7 @@ class TagCoursesCollectionPresenter {
     weak var view: TagCoursesCollectionView?
     private var coursesAPI: CoursesAPI
     private var progressesAPI: ProgressesAPI
-    private var searchResultsAPI: SearchResultsAPI = SearchResultsAPI()
+    private var searchResultsAPI: SearchResultsAPI
 
     var tag: CourseTag? {
         didSet {
@@ -30,10 +30,11 @@ class TagCoursesCollectionPresenter {
 
     private var items: [ItemViewData]?
 
-    init(view: TagCoursesCollectionView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) {
+    init(view: TagCoursesCollectionView, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, searchResultsAPI: SearchResultsAPI) {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
+        self.searchResultsAPI = searchResultsAPI
     }
 
     func refresh() {

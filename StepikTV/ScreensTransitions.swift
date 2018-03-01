@@ -28,7 +28,7 @@ class ScreensTransitions {
 
         destinationViewController.navigationItem.title = title
 
-        destinationViewController.presenter = TagCoursesCollectionPresenter(view: destinationViewController, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI())
+        destinationViewController.presenter = TagCoursesCollectionPresenter(view: destinationViewController, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), searchResultsAPI: SearchResultsAPI())
         destinationViewController.presenter?.tag = tag
 
         viewController.present(navigationController, animated: true, completion: {})
