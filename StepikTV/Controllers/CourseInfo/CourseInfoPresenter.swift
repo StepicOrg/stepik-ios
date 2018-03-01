@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-let LOADING_CONST: Double = 1.0
+let MinTimeDelayInSeconds: Double = 1.0
 
 class CourseInfoPresenter {
 
@@ -24,7 +24,8 @@ class CourseInfoPresenter {
 
             course.loadAllInstructors {
                 let endLoadTimestamp = Date().timeIntervalSince1970
-                let diff = LOADING_CONST - endLoadTimestamp + beginLoadTimestamp
+                let spendedTime = endLoadTimestamp - beginLoadTimestamp
+                let diff = max(MinTimeDelayInSeconds - spendedTime, 0)
 
                 self.instructors = course.instructors
                 self.view?.provide(sections: self.buildSections(with: course))
