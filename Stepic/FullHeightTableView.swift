@@ -7,10 +7,7 @@
 //
 
 import Foundation
-
-#if os(tvOS)
-    import UIKit
-#endif
+import UIKit
 
 class FullHeightTableView: UITableView {
     override var intrinsicContentSize: CGSize {
