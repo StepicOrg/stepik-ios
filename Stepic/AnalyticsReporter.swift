@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAnalytics
 import Mixpanel
 import YandexMobileMetrica
 
@@ -22,7 +22,7 @@ class AnalyticsReporter {
     }
 
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {
-        FIRAnalytics.logEvent(withName: event, parameters: parameters)
+        Analytics.logEvent(event, parameters: parameters)
     }
 
     private static func reportAppMetricaEvent(_ event: String, parameters: [String: NSObject]?) {
