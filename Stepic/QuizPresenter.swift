@@ -21,7 +21,7 @@ class QuizPresenter {
     var alwaysCreateNewAttemptOnRefresh: Bool
 
     #if !os(tvOS)
-    var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager
+        var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager?
     #endif
 
     var state: QuizState = .nothing {
@@ -37,7 +37,6 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    #if os(tvOS)
     init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.step = step
@@ -47,15 +46,10 @@ class QuizPresenter {
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
     }
-    #else
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
-        self.view = view
-        self.step = step
-        self.dataSource = dataSource
-        self.submissionsAPI = submissionsAPI
-        self.attemptsAPI = attemptsAPI
-        self.userActivitiesAPI = userActivitiesAPI
-        self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
+
+    #if !os(tvOS)
+    convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
+        self.init(view: view, step: step, dataSource: dataSource, alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh, submissionsAPI: submissionsAPI, attemptsAPI: attemptsAPI, userActivitiesAPI: userActivitiesAPI)
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
     #endif
@@ -397,14 +391,14 @@ class QuizPresenter {
         }
 
         #if !os(tvOS)
-        if RoutingManager.rate.submittedCorrect() {
-            self.view?.showRateAlert()
-            return
-        }
+            if RoutingManager.rate.submittedCorrect() {
+                self.view?.showRateAlert()
+                return
+            }
 
-        guard streaksNotificationSuggestionManager.canShowAlert(after: .submission) else {
-            return
-        }
+            guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(after: .submission) else {
+                return
+            }
         #endif
 
         guard let user = AuthInfo.shared.user else {
@@ -418,7 +412,7 @@ class QuizPresenter {
                 return
             }
             #if !os(tvOS)
-                self?.streaksNotificationSuggestionManager.didShowStreakAlert()
+                self?.streaksNotificationSuggestionManager?.didShowStreakAlert()
             #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
             }, error: {
