@@ -45,26 +45,12 @@ class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                #if os(tvOS)
-                NotificationCenter.default.post(name: .userLoggedOut, object: nil)
-                UIThread.performUI {
-                    //Delete enrolled information
-                    TabsInfo.myCoursesIds = []
-                    let c = Course.getAllCourses(enrolled: true)
-                    for course in c {
-                        course.enrolled = false
+                let performLogoutActions = {
+                    [weak self] in
+                    guard let strongSelf = self else {
+                        return
                     }
 
-                    Progress.deleteAllStoredProgresses()
-
-                    CoreDataHelper.instance.save()
-                    AuthInfo.shared.user = nil
-
-                    self.setTokenValue(nil)
-                }
-                #else
-                //Unregister from notifications
-                NotificationRegistrator.shared.unregisterFromNotifications(completion: {
                     UIThread.performUI {
                         //Delete enrolled information
                         NotificationCenter.default.post(name: .didLogout, object: nil)
@@ -77,15 +63,26 @@ class AuthInfo: NSObject {
                         Progress.deleteAllStoredProgresses()
 
                         Notification.deleteAll()
-                        NotificationsBadgesManager.shared.set(number: 0)
+                        #if !os(tvOS)
+                            NotificationsBadgesManager.shared.set(number: 0)
+                        #endif
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
-                        self.setTokenValue(nil)
+                        strongSelf.setTokenValue(nil)
                     }
-                })
+                }
+
+                #if os(tvOS)
+                    NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+                    performLogoutActions()
+                #else
+                    //Unregister from notifications
+                    NotificationRegistrator.shared.unregisterFromNotifications(completion: {
+                        performLogoutActions()
+                    })
                 #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
