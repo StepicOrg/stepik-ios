@@ -146,7 +146,8 @@ class CourseInfoPresenter {
             guard let strongSelf = self else {
                 throw CourseSubscriber.CourseSubscriptionError.error(status: "")
             }
-            return strongSelf.subscriber.join(course: course, delete: delete)
+            let subscriber = strongSelf.subscriber
+            return delete ? subscriber.leave(course: course) : subscriber.join(course: course)
         }.then {
             [weak self]
             course -> Void in
