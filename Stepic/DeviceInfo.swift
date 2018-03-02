@@ -17,20 +17,12 @@ class DeviceInfo {
     private init() { }
 
     var isPad: Bool {
-        #if os(iOS)
-            return currentDevice.isPad
-        #else
-            return false
-        #endif
+        return currentDevice.isPad
     }
 
     var isPlus: Bool {
-        #if os(iOS)
-            return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
+        return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
                    currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
-        #else
-            return false
-        #endif
     }
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
@@ -39,11 +31,9 @@ class DeviceInfo {
                 patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion)
     }
 
-    #if os(iOS)
-        var diagonal: Double {
-            return currentDevice.diagonal
-        }
-    #endif
+    var diagonal: Double {
+        return currentDevice.diagonal
+    }
 
     var deviceInfoString: String {
         return "\(currentDevice.model) \(currentDevice.name) \(currentDevice.systemName) \(currentDevice.systemVersion)"
@@ -53,9 +43,7 @@ class DeviceInfo {
         return currentDevice.model
     }
 
-    #if os(iOS)
-        var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {
-            return (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
-        }
-    #endif
+    var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {
+        return (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
+    }
 }

@@ -377,7 +377,6 @@
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		0856E2562039769F00575394 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
-		0856E257203976A400575394 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
@@ -4569,7 +4568,6 @@
 		938861532037E7F300DFEA3A /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
 		938861542037E80200DFEA3A /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		938861552037E82900DFEA3A /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
-		938861562037E96100DFEA3A /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		938861572037E97600DFEA3A /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
 		938861582037E98A00DFEA3A /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
 		938861592037E9BC00DFEA3A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
@@ -4602,6 +4600,8 @@
 		93CC68302048B79A00F5BE75 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		93CC6831204980C300F5BE75 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
 		93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A741FC76682008E7E6C /* NotificationsStatus.swift */; };
+		93CC68332049866D00F5BE75 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
+		93CC68372049A0CB00F5BE75 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
 		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
 		93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
@@ -13292,6 +13292,7 @@
 				933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */,
 				938861172037DF7100DFEA3A /* UnitsAPI.swift in Sources */,
 				938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */,
+				93CC68372049A0CB00F5BE75 /* AnalyticsReporter.swift in Sources */,
 				93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */,
 				93E5AAFA201641EC00290B4E /* ReplyCache.swift in Sources */,
 				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
@@ -13303,7 +13304,6 @@
 				9388611020379F2C00DFEA3A /* Certificate.swift in Sources */,
 				9388610120379CBA00DFEA3A /* UIColorExtensions.swift in Sources */,
 				1B3BB0611FE6DE48002DDD9A /* ItemsCollectionViewController.swift in Sources */,
-				0856E257203976A400575394 /* AnalyticsReporter.swift in Sources */,
 				BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */,
 				938860F620379BC100DFEA3A /* StepicToken.swift in Sources */,
 				1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */,
@@ -13340,6 +13340,7 @@
 				938861142037DF3400DFEA3A /* CommentsAPI.swift in Sources */,
 				938861402037E39300DFEA3A /* CodeSample.swift in Sources */,
 				9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */,
+				93CC68332049866D00F5BE75 /* DeviceDefaults.swift in Sources */,
 				938861462037E48800DFEA3A /* APIDefaults.swift in Sources */,
 				938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */,
 				9388614A2037E5F500DFEA3A /* CodeSample+CoreDataProperties.swift in Sources */,
@@ -13370,7 +13371,6 @@
 				9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */,
 				938861392037E2E800DFEA3A /* Notification.swift in Sources */,
-				938861562037E96100DFEA3A /* DeviceInfo.swift in Sources */,
 				9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */,
 				938860F020379B6600DFEA3A /* ApiDataDownloader.swift in Sources */,
 				9388614D2037E6B100DFEA3A /* Session.swift in Sources */,
