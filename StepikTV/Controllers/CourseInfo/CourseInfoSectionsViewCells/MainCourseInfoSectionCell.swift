@@ -54,13 +54,19 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
             self.descr.setTextWithHTMLString(descr)
             self.descr.pressAction = selectionAction
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
-            self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
-            self.leftIconButton.pressAction = trailerAction
+            self.setIntro(action: trailerAction)
             self.setSubscribed(enrolled: enrolled, action: subscriptionAction)
             self.setAuthorized(status: section.isAuthorized!)
         default:
             fatalError("Sections data and view dependencies fails")
         }
+    }
+
+    func setIntro(action: (() -> Void)? = nil) {
+        self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
+        self.leftIconButton.pressAction = action
+
+        self.leftIconButton.isEnabled = (action == nil)
     }
 
     func setSubscribed(enrolled: Bool, action: @escaping () -> Void) {

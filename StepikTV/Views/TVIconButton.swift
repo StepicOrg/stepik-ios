@@ -15,7 +15,7 @@ class TVIconButton: UIView, FocusAnimatable {
     @IBOutlet private var button: IconButton!
     @IBOutlet private var label: UILabel!
 
-    var isEnabled: Bool = true {
+    var isEnabled: Bool = false {
         didSet {
             button.isEnabled = isEnabled
             if isEnabled {
