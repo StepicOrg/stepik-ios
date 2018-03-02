@@ -4599,6 +4599,9 @@
 		93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */; };
 		93C9E302200F950500192091 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E301200F950500192091 /* CourseContentView.swift */; };
 		93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E303200F951500192091 /* CourseContentPresenter.swift */; };
+		93CC68302048B79A00F5BE75 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
+		93CC6831204980C300F5BE75 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
+		93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A741FC76682008E7E6C /* NotificationsStatus.swift */; };
 		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
 		93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
@@ -13223,6 +13226,7 @@
 				9388613B2037E30A00DFEA3A /* Progress+CoreDataProperties.swift in Sources */,
 				9388614B2037E68200DFEA3A /* LastStep+CoreDataProperties.swift in Sources */,
 				93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */,
+				93CC6831204980C300F5BE75 /* NotificationStatusesAPI.swift in Sources */,
 				93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */,
 				1B3BB0701FE6DE71002DDD9A /* TVIconButton.swift in Sources */,
 				936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */,
@@ -13381,6 +13385,7 @@
 				9388610320379D0000DFEA3A /* SubmissionsAPI.swift in Sources */,
 				93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */,
 				936E90B12024C88C009578C2 /* TagCoursesCollectionViewController.swift in Sources */,
+				93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */,
 				938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */,
 				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
 				938860E1203799BA00DFEA3A /* JSONInitializable.swift in Sources */,
@@ -13397,6 +13402,7 @@
 				93BBE5F21FE6B1D6006DEC28 /* UIImageView+SVGDownload.swift in Sources */,
 				938861272037E08600DFEA3A /* SortingReply.swift in Sources */,
 				93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */,
+				93CC68302048B79A00F5BE75 /* Model.xcdatamodeld in Sources */,
 				1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */,
 				1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */,
 				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,

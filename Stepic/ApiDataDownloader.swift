@@ -39,9 +39,7 @@ class ApiDataDownloader {
     static let attempts = AttemptsAPI()
     static let progresses = ProgressesAPI()
     static let auth = AuthAPI()
-    #if !os(tvOS)
-        static let notificationsStatusAPI = NotificationStatusesAPI()
-    #endif
+    static let notificationsStatusAPI = NotificationStatusesAPI()
 }
 
 enum RefreshMode {
