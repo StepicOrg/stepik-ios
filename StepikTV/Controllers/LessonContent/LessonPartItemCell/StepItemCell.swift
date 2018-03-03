@@ -28,7 +28,7 @@ class StepItemCell: UICollectionViewCell {
     func setup(with data: StepViewData, index: Int) {
         indexLabel.text = "\(index)"
         iconImageView.image = data.icon
-        bottomDieView.isHidden = !data.isPassed!
+        bottomDieView.isHidden = !data.isPassed
         pressAction = data.action
     }
 

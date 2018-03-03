@@ -69,7 +69,7 @@ struct StepViewData {
     let step: Step
     let stepType: StepType
     let block: Block
-    var isPassed: Bool?
+    var isPassed: Bool
     var action: (() -> Void)?
 
     init(with step: Step) {
@@ -77,7 +77,7 @@ struct StepViewData {
         self.block = step.block
         self.step = step
 
-        self.isPassed = step.progress?.isPassed
+        self.isPassed = step.progress?.isPassed ?? false
     }
 
     mutating func setAction(_ action: @escaping () -> Void) {
@@ -86,7 +86,7 @@ struct StepViewData {
 
     var placeholderColor: UIColor {
         switch (isPassed) {
-        case true? : return UIColor(hex: 0xd8d8d8)
+        case true : return UIColor(hex: 0xd8d8d8)
         default : return UIColor(hex: 0x80c972)
         }
     }

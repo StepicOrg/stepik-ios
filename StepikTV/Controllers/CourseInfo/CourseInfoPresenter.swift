@@ -84,8 +84,11 @@ class CourseInfoPresenter {
         let descr = course.courseDescription
         let imageURL = URL(string: course.coverURLString)
 
-        let trailerAction: () -> Void = {
-            self.playIntro(intro: course.introVideo)
+        var trailerAction: (() -> Void)? = nil
+        if let intro = course.introVideo {
+            trailerAction = {
+                self.playIntro(intro: intro)
+            }
         }
 
         let subscriptionAction: () -> Void = {
@@ -129,9 +132,8 @@ class CourseInfoPresenter {
         return instructorsSection
     }
 
-    private func playIntro(intro: Video?) {
+    private func playIntro(intro: Video) {
         guard let viewController = view as? UIViewController else { fatalError() }
-        guard let intro = intro else { return }
 
         let player = TVPlayerViewController()
             player.video = intro
@@ -174,9 +176,9 @@ class CourseInfoPresenter {
 struct CourseInfoSection {
     let title: String
     let contentType: CourseInfoSectionType
-    var isAuthorized: Bool?
+    var isAuthorized: Bool
 
-    init(_ contentType: CourseInfoSectionType, title: String, isAuthorized: Bool? = nil) {
+    init(_ contentType: CourseInfoSectionType, title: String, isAuthorized: Bool = false) {
         self.contentType = contentType
         self.title = title
         self.isAuthorized = isAuthorized
@@ -184,7 +186,7 @@ struct CourseInfoSection {
 }
 
 enum CourseInfoSectionType {
-    case main(host: String, descr: String, imageURL: URL?, trailerAction: () -> Void, subscriptionAction: () -> Void, selectionAction: (TVFocusableText) -> Void, enrolled: Bool)
+    case main(host: String, descr: String, imageURL: URL?, trailerAction: (() -> Void)?, subscriptionAction: () -> Void, selectionAction: (TVFocusableText) -> Void, enrolled: Bool)
     case text(content: String, selectionAction: (TVFocusableText) -> Void)
     case instructors(items: [ItemViewData])
 

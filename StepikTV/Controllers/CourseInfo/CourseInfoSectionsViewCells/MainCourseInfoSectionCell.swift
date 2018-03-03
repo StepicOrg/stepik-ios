@@ -56,7 +56,7 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
             self.imageView.setImageWithURL(url: imageURL, placeholder: #imageLiteral(resourceName: "placeholder"))
             self.setIntro(action: trailerAction)
             self.setSubscribed(enrolled: enrolled, action: subscriptionAction)
-            self.setAuthorized(status: section.isAuthorized!)
+            self.setAuthorized(status: section.isAuthorized)
         default:
             fatalError("Sections data and view dependencies fails")
         }
@@ -66,7 +66,7 @@ class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProt
         self.leftIconButton.configure(with: #imageLiteral(resourceName: "intro_icon"), introTitle)
         self.leftIconButton.pressAction = action
 
-        self.leftIconButton.isEnabled = (action == nil)
+        self.leftIconButton.isEnabled = !(action == nil)
     }
 
     func setSubscribed(enrolled: Bool, action: @escaping () -> Void) {
