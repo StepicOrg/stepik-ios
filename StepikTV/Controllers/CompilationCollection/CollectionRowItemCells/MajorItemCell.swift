@@ -32,9 +32,14 @@ class MajorItemCell: ImageConvertableCollectionViewCell {
         pressAction = item.action
 
         imageView.setImageWithURL(url: item.backgroundImageURL, placeholder: item.placeholder) {
-            let data = UIImageJPEGRepresentation(self.imageView.image!, 1)
-            let image = UIImage(data: data!)!
-            self.imageView.image = self.generateImage(with: item.title, additionalText: item.subtitle ?? "", inImage: image).getRoundedCornersImage(cornerRadius: 6.0)
+            guard let preJpegImage = self.imageView.image,
+                let jpegData = UIImageJPEGRepresentation(preJpegImage, 1),
+                let jpegImage = UIImage(data:jpegData) else {
+                    print("Problem with converting image: \(self.description)")
+                    return
+            }
+
+            self.imageView.image = self.generateImage(with: item.title, additionalText: item.subtitle ?? "", inImage: jpegImage).getRoundedCornersImage(cornerRadius: 6.0)
         }
     }
 
