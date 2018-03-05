@@ -16,10 +16,11 @@ class BlurredView: UIView {
     private var blurEffectView: UIVisualEffectView!
     private var vibrancyEffectView: UIVisualEffectView!
 
-    init(frame: CGRect, image: UIImage) {
+    init(frame: CGRect, style: UIBlurEffectStyle, image: UIImage? = nil) {
         super.init(frame: frame)
 
         backgroundImage = image
+        blurStyle = style
         addSubviews()
     }
 
@@ -29,7 +30,7 @@ class BlurredView: UIView {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        return nil
+        super.init(coder: aDecoder)
     }
 
     private func addSubviews() {

@@ -43,3 +43,8 @@
 "Workload" = "Workload";
 "Summary" = "Summary";
 "Instructors" = "Instructors";
+"Successfully signed in, but could not get user" = "Successfully signed in, but could not get user";
+"Successfully signed up, but could not get user" = "Successfully signed up, but could not get user";
+"Invalid email or password" = "Invalid email or password";
+"Bad connection to sign in" = "Bad connection to sign in";
+"Bad connection to sign up" = "Bad connection to sign up";

@@ -71,6 +71,36 @@ class AuthorizationViewController: BlurredViewController {
 
 extension AuthorizationViewController: AuthorizationView {
 
+    func showError(message: String) {
+        UIThread.performUI {
+
+            let size = CGSize(width: 600, height: 160)
+            let notificationView = TVAlertView(frame: CGRect(origin: CGPoint.zero, size: size), style: .light)
+
+            notificationView.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+            notificationView.setRoundedCorners(cornerRadius: 6)
+
+            notificationView.setup(title: message)
+            notificationView.alpha = 0.0
+
+            self.view.addSubview(notificationView)
+
+            // animate appearance
+            UIView.animate(withDuration: 0.4) {
+                notificationView.alpha = 1.0
+            }
+
+            // close after
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                // animate hiding
+                UIView.animate(withDuration: 0.4) {
+                    notificationView.alpha = 0
+                }
+                notificationView.removeFromSuperview()
+            }
+        }
+    }
+
     func show(alert: AuthorizationAlert) {
         alert.show(in: self)
     }

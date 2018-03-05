@@ -12,4 +12,5 @@ protocol AuthorizationView: class {
     func show(alert: AuthorizationAlert)
     func showProfile(for user: User)
     func showNoProfile()
+    func showError(message: String)
 }

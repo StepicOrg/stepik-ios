@@ -98,7 +98,6 @@ class AuthorizationAlert: NSObject {
     }
 
     let acceptAction = UIAlertAction(title: acceptButtonTitle, style: .default) { [weak self] _ in
-
       guard let strongSelf = self else { return }
 
       guard

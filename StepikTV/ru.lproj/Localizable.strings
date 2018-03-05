@@ -43,3 +43,8 @@
 "Workload" = "Нагрузка";
 "Summary" = "Сводка";
 "Instructors" = "Преподаватели";
+"Successfully signed in, but could not get user" = "Успешный вход, но не возможно загрузить пользователя";
+"Successfully signed up, but could not get user" = "Успешный вход, но не возможно загрузить пользователя";
+"Invalid email or password" = "Неправильный адрес эл. почты или пароль";
+"Bad connection to sign in" = "Нет соединения с интернетом";
+"Bad connection to sign up" = "Нет соединения с интернетом";

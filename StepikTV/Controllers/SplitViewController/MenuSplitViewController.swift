@@ -65,14 +65,14 @@ class MenuSplitViewController: UISplitViewController {
 extension MenuSplitViewController: MenuSplitView {
 
     func showMessageOver(_ message: String, buttonTitle: String, buttonAction: @escaping () -> Void) {
-        messageView = TVAlertView(frame: self.view.bounds, color: .gray)
+        messageView = TVAlertView(frame: self.view.bounds)
         messageView!.setup(title: message, buttonTitle: buttonTitle, action: buttonAction)
 
         self.view.addSubview(messageView!)
     }
 
     func showMessageOver(_ message: String) {
-        messageView = TVAlertView(frame: self.view.bounds, color: .gray)
+        messageView = TVAlertView(frame: self.view.bounds)
         messageView!.setup(title: message)
 
         self.view.addSubview(messageView!)

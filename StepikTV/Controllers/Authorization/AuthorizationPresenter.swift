@@ -67,19 +67,35 @@ class AuthorizationPresenter {
 
     private func login(email: String, password: String) {
         authAPI.signInWithAccount(email: email, password: password).then { token, authorizationType -> Promise<User> in
-          AuthInfo.shared.token = token
-          AuthInfo.shared.authorizationType = authorizationType
 
-          return self.stepicsAPI.retrieveCurrentUser()
-          }.then { user -> Void in
+            AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
+
+            return self.stepicsAPI.retrieveCurrentUser()
+        }.then { user -> Void in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
             NotificationCenter.default.post(name: .userLoggedIn, object: self)
 
             self.view?.showProfile(for: user)
-          }.catch { _ in
+        }.catch { error in
             //proccess error
+
+            switch error {
+            case is RetrieveError:
+                let message = NSLocalizedString("Successfully signed in, but could not get user", comment: "")
+                self.view?.showError(message: message)
+            case SignInError.invalidEmailAndPassword:
+                let message = NSLocalizedString("Invalid email or password", comment: "")
+                self.view?.showError(message: message)
+            case SignInError.badConnection:
+                let message = NSLocalizedString("Bad connection to sign in", comment: "")
+                self.view?.showError(message: message)
+            default:
+                let message = NSLocalizedString("Error", comment: "")
+                self.view?.showError(message: message)
+            }
         }
     }
 
@@ -100,8 +116,30 @@ class AuthorizationPresenter {
             NotificationCenter.default.post(name: .userLoggedIn, object: self)
 
             self.view?.showProfile(for: user)
-          }.catch { _ in
+          }.catch { error in
             //proccess error
+
+            let errorMessage = NSLocalizedString("Error", comment: "")
+
+            switch error {
+            case PerformRequestError.noAccessToRefreshToken:
+                AuthInfo.shared.token = nil
+                self.view?.showError(message: errorMessage)
+            case PerformRequestError.badConnection, SignInError.badConnection:
+                let message = NSLocalizedString("Bad connection to sign up", comment: "")
+                self.view?.showError(message: message)
+            case is RetrieveError:
+                let message = NSLocalizedString("Successfully signed up, but could not get user", comment: "")
+                self.view?.showError(message: message)
+            case SignUpError.validation(_, _, _, _):
+                if let message = (error as? SignUpError)?.firstError {
+                    self.view?.showError(message: message)
+                } else {
+                    self.view?.showError(message: errorMessage)
+                }
+            default:
+                self.view?.showError(message: errorMessage)
+            }
         }
     }
 }

@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         let searchController = UISearchController(searchResultsController: searchResultsController)
         let rect = UIScreen.main.bounds
-        let view = BlurredView(frame: rect, image: #imageLiteral(resourceName: "background"))
+        let view = BlurredView(frame: rect, style: .extraLight, image: #imageLiteral(resourceName: "background"))
         searchController.view.insertSubview(view, at: 0)
         searchController.searchResultsUpdater = searchResultsController
         searchController.searchBar.placeholder = NSLocalizedString("Enter course name", comment: "")
