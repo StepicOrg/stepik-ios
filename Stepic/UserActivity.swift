@@ -14,6 +14,11 @@ class UserActivity {
     var id: Int
     var pins: [Int]
 
+    init(id: Int) {
+        self.id = id
+        self.pins = Array(repeating: 0, count: 365)
+    }
+
     init(json: JSON) {
         self.id = json["id"].intValue
         self.pins = json["pins"].arrayValue.map({return $0.intValue})

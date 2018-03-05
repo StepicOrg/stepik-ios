@@ -2486,6 +2486,9 @@
 		2C35C5051F4DB91A002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C5011F4DB912002F3BF4 /* step1.html */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
+		2C45339E204DA7790061342A /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45339D204DA7790061342A /* PinsMapView.swift */; };
+		2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
+		2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF16203DC66D000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
@@ -5011,6 +5014,9 @@
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
+		2C45339D204DA7790061342A /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
+		2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
+		2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -6690,6 +6696,7 @@
 		08CBA3091F57558200302154 /* MenuBlockCells */ = {
 			isa = PBXGroup;
 			children = (
+				2C45339F204DB3980061342A /* PinsMapExpandable */,
 				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
 				08DF78C41F5EF02300AEEA85 /* Switch */,
 				08DF78C51F5EF02900AEEA85 /* Transition */,
@@ -7410,8 +7417,18 @@
 			children = (
 				2C453397204D46E90061342A /* PinsMap.swift */,
 				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
+				2C45339D204DA7790061342A /* PinsMapView.swift */,
 			);
 			name = PinsMap;
+			sourceTree = "<group>";
+		};
+		2C45339F204DB3980061342A /* PinsMapExpandable */ = {
+			isa = PBXGroup;
+			children = (
+				2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */,
+				2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */,
+			);
+			name = PinsMapExpandable;
 			sourceTree = "<group>";
 		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
@@ -8758,6 +8775,7 @@
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */,
+				2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -12180,6 +12198,7 @@
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
+				2C45339E204DA7790061342A /* PinsMapView.swift in Sources */,
 				0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */,
@@ -12359,6 +12378,7 @@
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
