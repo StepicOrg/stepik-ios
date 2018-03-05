@@ -12,7 +12,7 @@ import PromiseKit
 
 enum NotificationPermissionStatus {
     case notDetermined, denied, authorized
-    
+
     @available(iOS 10.0, *)
     init(userNotificationAuthStatus: UNAuthorizationStatus) {
         switch userNotificationAuthStatus {
@@ -28,33 +28,22 @@ enum NotificationPermissionStatus {
 
 class NotificationPermissionManager {
     func getCurrentPermissionStatus() -> Promise<NotificationPermissionStatus> {
-        return Promise {
-            fulfill, reject in
+        return Promise<NotificationPermissionStatus> {
+            fulfill, _ in
             if #available(iOS 10.0, *) {
                 let current = UNUserNotificationCenter.current()
                 current.getNotificationSettings(completionHandler: { (settings) in
                     fulfill(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
                 })
             } else {
-                // Fallback on earlier versions
+                // Fallback on earlier versions, we can not determine if we denied push notifications or not
                 if UIApplication.shared.isRegisteredForRemoteNotifications {
                     fulfill(.authorized)
                 } else {
-                    fulfill(didAskForPermission ? .denied : .notDetermined)
+                    fulfill(.notDetermined)
                 }
             }
 
-        }
-    }
-    
-    private let didAskForRemoteNotificationPermissionKey = "didAskForRemoteNotificationPermissionKey"
-    
-    var didAskForPermission: Bool {
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: didAskForRemoteNotificationPermissionKey)
-        }
-        get {
-            return UserDefaults.standard.value(forKey: didAskForRemoteNotificationPermissionKey) as? Bool ?? false
         }
     }
 }

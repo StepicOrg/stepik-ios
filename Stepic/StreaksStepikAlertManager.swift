@@ -32,7 +32,7 @@ class StreaksStepikAlertManager: AlertManager, StreaksAlertPresentationDelegate 
         let alert = StreakAlertViewController(nibName: "StreakAlertViewController", bundle: nil)
         alert.yesAction = {
             [weak self] in
-            self?.presentationManager?.notifyPressed(fromPreferences: false)
+            self?.presentationManager?.notifyPressed()
         }
         alert.noAction = {
             [weak self] in

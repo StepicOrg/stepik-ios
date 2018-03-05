@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if AuthInfo.shared.isAuthorized {
-            NotificationRegistrator.shared.registerForRemoteNotificationsIfPermitted(application)
+            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
         if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {

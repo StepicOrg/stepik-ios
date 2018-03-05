@@ -32,7 +32,7 @@ class ProfilePresenter {
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
     private var notificationPermissionManager: NotificationPermissionManager
-    
+
     var menu: Menu = Menu(blocks: [])
 
     init(view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
@@ -73,7 +73,7 @@ class ProfilePresenter {
             [weak self]
             isOn in
             self?.setStreakNotifications(on: isOn, forBlock: block)
-            
+
 //            block.hasSeparatorOnBottom = !isOn
         }
 
@@ -223,6 +223,7 @@ class ProfilePresenter {
                 PreferencesContainer.notifications.allowStreaksNotifications = false
                 return
             }
+            NotificationRegistrator.shared.registerForRemoteNotifications()
             LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             menu.insert(block: timeSelectionBlock, afterBlockWithId: notificationsSwitchBlockId)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
