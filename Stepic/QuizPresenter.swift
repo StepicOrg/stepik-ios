@@ -415,8 +415,8 @@ class QuizPresenter {
                 self?.streaksNotificationSuggestionManager?.didShowStreakAlert()
             #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
-            }, error: {
-                _ in
+        }, error: {
+            _ in
         })
     }
 
