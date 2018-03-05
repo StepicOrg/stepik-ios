@@ -11,10 +11,10 @@ import UIKit
 class InstructorsCourseInfoSectionCell: CollectionRowViewCell, CourseInfoSectionViewProtocol {
     static var nibName: String { return "InstructorsCourseInfoSectionCell" }
     static var reuseIdentifier: String { return "InstructorsCourseInfoSectionCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 420.0) }
 
     static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
-        return size.height
+        // Fixed cell's height
+        return 420.0
     }
 
     @IBOutlet var title: UILabel!

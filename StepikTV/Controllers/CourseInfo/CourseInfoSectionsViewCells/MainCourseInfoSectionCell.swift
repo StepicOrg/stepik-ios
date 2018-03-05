@@ -11,9 +11,10 @@ import UIKit
 class MainCourseInfoSectionCell: UICollectionViewCell, CourseInfoSectionViewProtocol {
     static var nibName: String { return "MainCourseInfoSectionCell" }
     static var reuseIdentifier: String { return "MainCourseInfoSectionCell" }
-    static var size: CGSize { return CGSize(width: UIScreen.main.bounds.width, height: 787.0) }
 
     static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat {
+        // Hardcoding cell's height according to the income content
+
         guard case let .main(host: host, descr: descr, imageURL: _, trailerAction: _, subscriptionAction: _, selectionAction: _, enrolled: _) = section.contentType else {
             return 35.0
         }

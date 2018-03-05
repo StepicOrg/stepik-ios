@@ -53,12 +53,6 @@ class StepViewController: BlurredViewController {
 
         if hasQuiz {
             NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": stepViewData.step.position])
-
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.stepViewData.step.progress?.isPassed = true
-                CoreDataHelper.instance.save()
-            }
         }
     }
 

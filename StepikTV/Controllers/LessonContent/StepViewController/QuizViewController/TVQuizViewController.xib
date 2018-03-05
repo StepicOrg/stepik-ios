@@ -23,9 +23,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCf-gG-RnJ">
-                    <rect key="frame" x="250" y="189" width="400" height="86"/>
+                    <rect key="frame" x="200" y="189" width="500" height="86"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="400" id="Q9z-56-u2Y"/>
+                        <constraint firstAttribute="width" constant="500" id="Q9z-56-u2Y"/>
                         <constraint firstAttribute="height" constant="86" id="ewK-vW-Dka"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>

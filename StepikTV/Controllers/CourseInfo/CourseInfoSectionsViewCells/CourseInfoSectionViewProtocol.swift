@@ -10,7 +10,6 @@ import UIKit
 
 protocol CourseInfoSectionViewProtocol {
     static var nibName: String { get }
-    static var size: CGSize { get }
     static var reuseIdentifier: String { get }
 
     static func getHeightForCell(section: CourseInfoSection, width: CGFloat) -> CGFloat
