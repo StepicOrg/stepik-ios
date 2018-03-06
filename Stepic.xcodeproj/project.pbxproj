@@ -647,6 +647,17 @@
 		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087D96B91EBB7C7700059408 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087D96B81EBB7C7700059408 /* Tokens.plist */; };
 		087D96BB1EBB7F5500059408 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
+		087E8B23204DE29F00C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B24204DE2A000C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B25204DE2A000C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B26204DE2A100C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B27204DE2A100C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B28204DE2A200C35B66 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		087E8B29204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
@@ -2001,7 +2012,6 @@
 		2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
@@ -2412,7 +2422,6 @@
 		2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
@@ -2934,7 +2943,6 @@
 		2C8654181F4B33DE00D51654 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C8654191F4B33DE00D51654 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C86541B1F4B33DE00D51654 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C86541C1F4B33DE00D51654 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		2C86541D1F4B33DE00D51654 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		2C86541F1F4B33DE00D51654 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C8654211F4B33DE00D51654 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
@@ -3345,7 +3353,6 @@
 		2C89AAFC1F4C289900227C3B /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C89AAFE1F4C289900227C3B /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C89AAFF1F4C289900227C3B /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		2C89AB011F4C289900227C3B /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
@@ -3762,7 +3769,6 @@
 		2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
@@ -4237,7 +4243,6 @@
 		86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
 		86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
 		86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
-		86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
@@ -8905,7 +8910,6 @@
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC41F99462D00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
-				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				088EDCBF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
@@ -8927,6 +8931,7 @@
 				2C4BBF23203DC66F000A4250 /* plyr.js in Resources */,
 				08195A271FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C1B62801F4C4AEF00236804 /* DiscussionsStoryboard.storyboard in Resources */,
+				087E8B26204DE2A100C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C1B62811F4C4AEF00236804 /* QuizViewController.xib in Resources */,
 				08CBA3471F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B62CA1F4C517500236804 /* Config.plist in Resources */,
@@ -9003,7 +9008,6 @@
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC61F99462E00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
-				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				088EDCC01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
@@ -9025,6 +9029,7 @@
 				2C4BBF26203DC670000A4250 /* plyr.js in Resources */,
 				08195A281FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C1B64E31F4C597F00236804 /* icon.png in Resources */,
+				087E8B28204DE2A200C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */,
 				08CBA3481F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */,
@@ -9108,7 +9113,6 @@
 				2C8654191F4B33DE00D51654 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C86541B1F4B33DE00D51654 /* AchievementTableViewCell.xib in Resources */,
 				084DB9D81FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
-				2C86541C1F4B33DE00D51654 /* StreakAlertViewController.xib in Resources */,
 				2C86541D1F4B33DE00D51654 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C8654871F4B3A5000D51654 /* Config.plist in Resources */,
 				2C86541F1F4B33DE00D51654 /* CodeInputAccessoryView.xib in Resources */,
@@ -9157,6 +9161,7 @@
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
 				2C4BBF19203DC66E000A4250 /* plyr.css in Resources */,
 				086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
+				087E8B24204DE2A000C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
 				085EDCC21F99462C00AB3278 /* Notifications.storyboard in Resources */,
@@ -9208,7 +9213,6 @@
 				2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */,
 				084DB9D91FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
 				2C89AAFE1F4C289900227C3B /* AchievementTableViewCell.xib in Resources */,
-				2C89AAFF1F4C289900227C3B /* StreakAlertViewController.xib in Resources */,
 				2C89AB011F4C289900227C3B /* StepicVideoPlayerViewController.xib in Resources */,
 				2C89AB401F4C28FB00227C3B /* Auth.plist in Resources */,
 				2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */,
@@ -9256,6 +9260,7 @@
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
 				2C4BBF1C203DC66F000A4250 /* plyr.css in Resources */,
 				086BE2AD1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
+				087E8B25204DE2A000C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
 				085EDCC31F99462C00AB3278 /* Notifications.storyboard in Resources */,
@@ -9309,7 +9314,6 @@
 				08CB0D3F1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
 				08DF789A1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				08195A0B1FA00FF400E6D6CD /* CourseLists.storyboard in Resources */,
-				2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */,
 				2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */,
 				0885B8DF1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9321,6 +9325,7 @@
 				2C4BBF20203DC66F000A4250 /* plyr.js in Resources */,
 				08195A261FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
+				087E8B27204DE2A100C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */,
 				08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
@@ -9434,6 +9439,7 @@
 				86AE94701E84511A00F67691 /* WarningView.xib in Resources */,
 				86AE94711E84511A00F67691 /* StepTabView.xib in Resources */,
 				86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */,
+				087E8B23204DE29F00C35B66 /* StreakAlertViewController.xib in Resources */,
 				2C4BBF16203DC66D000A4250 /* plyr.css in Resources */,
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				086BE2AB1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
@@ -9442,7 +9448,6 @@
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
 				085EDCC11F99462C00AB3278 /* Notifications.storyboard in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
-				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2CF425312024C115002D7305 /* overlay_simple.png in Resources */,
 				088EDCBB1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
@@ -12578,6 +12583,7 @@
 				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
+				087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
 				2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */,
 				2C1B61811F4C4AEF00236804 /* Sorter.swift in Sources */,
@@ -13014,6 +13020,7 @@
 				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
+				087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
 				2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */,
 				2C1B63921F4C590700236804 /* Sorter.swift in Sources */,
@@ -13450,6 +13457,7 @@
 				2C8653291F4B33DE00D51654 /* PlaybackStatusEntity.swift in Sources */,
 				2C86532A1F4B33DE00D51654 /* HTMLBuilder.swift in Sources */,
 				2C86532B1F4B33DE00D51654 /* UICustomizer.swift in Sources */,
+				087E8B29204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C86532D1F4B33DE00D51654 /* CoreDataHelper.swift in Sources */,
 				2C86532E1F4B33DE00D51654 /* ConnectionHelper.swift in Sources */,
 				2C86532F1F4B33DE00D51654 /* Sorter.swift in Sources */,
@@ -13894,6 +13902,7 @@
 				2C89AA191F4C289900227C3B /* Time.swift in Sources */,
 				2C89AA1A1F4C289900227C3B /* AnalyticsHelper.swift in Sources */,
 				2C89AA1B1F4C289900227C3B /* ControllerHelper.swift in Sources */,
+				087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C89AA1C1F4C289900227C3B /* GCDThings.swift in Sources */,
 				087296E020168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				08A9F7071FC37DD000640F1F /* CourseTagsView.swift in Sources */,
@@ -14321,6 +14330,7 @@
 				2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */,
 				2C9731C41F4C38F600AC9301 /* HTMLBuilder.swift in Sources */,
 				2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */,
+				087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */,
 				2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */,
 				2C9731C91F4C38F600AC9301 /* Sorter.swift in Sources */,

@@ -8,19 +8,21 @@
 
 import UIKit
 import FLKAutoLayout
+import Lottie
 
 class StreakAlertViewController: UIViewController {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageContainerView: UIView!
+    @IBOutlet weak var imageContainerViewHeight: NSLayoutConstraint!
+
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var messageLabel: StepikLabel!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
+
+    let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
+
     var currentStreak: Int = 0
-//    var alertTitle: String = "Congrats!"
-//    var message: String = "You successfully solved your first quiz. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences." 
-//    var image: UIImage = Images.lessonPlaceholderImage.size50x50
-//    
     var yesAction : (() -> Void)?
     var noAction : (() -> Void)?
     var streaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
@@ -30,10 +32,25 @@ class StreakAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)")
+        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 80)")
+
+        addAnimationView()
 
         localize()
-        // Do any additional setup after loading the view.
+    }
+
+    private func addAnimationView() {
+        animationView.contentMode = .scaleAspectFill
+        animationView.isHidden = true
+        animationView.clipsToBounds = false
+        imageContainerView.addSubview(animationView)
+        animationView.align(toView: imageContainerView)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animationView.isHidden = false
+        animationView.play()
     }
 
     func dayLocalizableFor(daysCnt: Int) -> String {
@@ -57,7 +74,6 @@ class StreakAlertViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func noPressed(_ sender: UIButton) {
