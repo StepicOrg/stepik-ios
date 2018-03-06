@@ -20,9 +20,9 @@ enum NotificationRequestAlertContext {
         case .streak:
             return NSLocalizedString("StreakAlertTitle", comment: "")
         case .notificationsTab:
-            return "Stay tuned"
+            return NSLocalizedString("NotificationTabNotificationRequestAlertTitle", comment: "")
         case .courseSubscription:
-            return "Don't miss updates"
+            return NSLocalizedString("CourseSubscriptionNotificationRequestAlertTitle", comment: "")
         }
     }
 
@@ -39,9 +39,9 @@ enum NotificationRequestAlertContext {
             }
 
         case .notificationsTab:
-            return "Notifications tab message"
+            return NSLocalizedString("NotificationTabNotificationRequestAlertMessage", comment: "")
         case .courseSubscription:
-            return "Course subscribtion message"
+            return NSLocalizedString("CourseSubscriptionNotificationRequestAlertMessage", comment: "")
         }
     }
 

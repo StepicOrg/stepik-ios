@@ -401,5 +401,12 @@ LessonDownloadTooltip = "Download lesson ";
 ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
 StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
 
+/* Notification alerts */
+NotificationTabNotificationRequestAlertTitle = "Stay tuned";
+NotificationTabNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow discussions and promptly recieve courses updates?";
+
+CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
+CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly recieve course updates?";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
