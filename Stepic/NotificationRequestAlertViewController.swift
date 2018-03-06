@@ -1,5 +1,5 @@
 //
-//  StreakAlertViewController.swift
+//  NotificationRequestAlertViewController.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 09.12.16.
@@ -10,7 +10,47 @@ import UIKit
 import FLKAutoLayout
 import Lottie
 
-class StreakAlertViewController: UIViewController {
+enum NotificationRequestAlertContext {
+    case streak
+    case notificationsTab
+    case courseSubscription
+
+    var title: String {
+        switch self {
+        case .streak:
+            return NSLocalizedString("StreakAlertTitle", comment: "")
+        case .notificationsTab:
+            return "Stay tuned"
+        case .courseSubscription:
+            return "Don't miss updates"
+        }
+    }
+
+    func message(streak: Int? = nil) -> String {
+        switch self {
+        case .streak:
+            guard let streak = streak else {
+                return ""
+            }
+            if streak > 0 {
+                return String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(streak)", pluralizedDays(count: streak))
+            } else {
+                return NSLocalizedString("StreakAlertMessageNoStreak", comment: "")
+            }
+
+        case .notificationsTab:
+            return "Notifications tab message"
+        case .courseSubscription:
+            return "Course subscribtion message"
+        }
+    }
+
+    private func pluralizedDays(count: Int) -> String {
+        return StringHelper.pluralize(number: count, forms: [NSLocalizedString("days1", comment: ""), NSLocalizedString("days234", comment: ""), NSLocalizedString("days567890", comment: "")])
+    }
+}
+
+class NotificationRequestAlertViewController: UIViewController {
 
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var imageContainerViewHeight: NSLayoutConstraint!
@@ -20,19 +60,21 @@ class StreakAlertViewController: UIViewController {
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
 
+    var messageLabelWidth: NSLayoutConstraint?
     let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
 
-    var currentStreak: Int = 0
     var yesAction : (() -> Void)?
     var noAction : (() -> Void)?
-    var streaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
 
-    var messageLabelWidth: NSLayoutConstraint?
+    var context: NotificationRequestAlertContext!
+
+    //Streaks Context
+    var currentStreak: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 80)")
+        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 64)")
 
         addAnimationView()
 
@@ -53,21 +95,10 @@ class StreakAlertViewController: UIViewController {
         animationView.play()
     }
 
-    func dayLocalizableFor(daysCnt: Int) -> String {
-        switch (daysCnt % 10) {
-        case 1: return NSLocalizedString("days1", comment: "")
-        case 2, 3, 4: return NSLocalizedString("days234", comment: "")
-        default: return NSLocalizedString("days567890", comment: "")
-        }
-    }
-
     func localize() {
-        titleLabel.text = NSLocalizedString("StreakAlertTitle", comment: "")
-        if currentStreak > 0 {
-            messageLabel.text = String(format: NSLocalizedString("StreakAlertMessage", comment: ""), "\(currentStreak)", dayLocalizableFor(daysCnt: currentStreak))
-        } else {
-            messageLabel.text = NSLocalizedString("StreakAlertMessageNoStreak", comment: "")
-        }
+        titleLabel.text = context.title
+        messageLabel.text = context == .streak ? context.message(streak: currentStreak) : context.message()
+
         noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
         yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
     }
@@ -78,21 +109,16 @@ class StreakAlertViewController: UIViewController {
 
     @IBAction func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-        PreferencesContainer.notifications.allowStreaksNotifications = false
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.fail(streaksNotificationSuggestionManager.streakAlertShownCnt), parameters: nil)
         noAction?()
     }
 
     @IBAction func yesPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-        PreferencesContainer.notifications.allowStreaksNotifications = true
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.success(streaksNotificationSuggestionManager.streakAlertShownCnt), parameters: nil)
         yesAction?()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        messageLabelWidth?.constant = UIScreen.main.bounds.height - 48
+        messageLabelWidth?.constant = UIScreen.main.bounds.height - 64
     }
-
 }

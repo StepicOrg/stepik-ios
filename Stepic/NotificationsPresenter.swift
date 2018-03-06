@@ -15,6 +15,7 @@ protocol NotificationsView: class {
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool)
     func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status)
+    func present(alertManager: AlertManager, alert: UIViewController)
 }
 
 enum NotificationsViewState {
@@ -44,7 +45,8 @@ class NotificationsPresenter {
     var notificationsAPI: NotificationsAPI
     var usersAPI: UsersAPI
     var notificationsStatusAPI: NotificationStatusesAPI
-
+    var notificationPermissionManager: NotificationPermissionManager
+    var notificationSuggestionManager: NotificationSuggestionManager
     private var page = 1
     var hasNextPage = true
     private var displayedNotifications: NotificationViewDataStruct = []
@@ -54,11 +56,13 @@ class NotificationsPresenter {
     // Store unread notifications count to pass it to analytics
     private var badgeUnreadCount = 0
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, notificationPermissionManager: NotificationPermissionManager, notificationSuggestionManager: NotificationSuggestionManager, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
         self.notificationsStatusAPI = notificationsStatusAPI
+        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationSuggestionManager = notificationSuggestionManager
         self.view = view
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
@@ -123,6 +127,23 @@ class NotificationsPresenter {
             return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: .read))
         }
         self.view?.set(notifications: self.displayedNotifications, withReload: true)
+    }
+
+    func didAppear() {
+        if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
+            notificationPermissionManager.getCurrentPermissionStatus().then {
+                [weak self]
+                status -> Void in
+                switch status {
+                case .notDetermined:
+                    let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
+                    self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
+                    self?.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
+                default:
+                    break
+                }
+            }
+        }
     }
 
     func refresh() {

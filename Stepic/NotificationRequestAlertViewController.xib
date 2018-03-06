@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StreakAlertViewController" customModule="Adaptive_1838" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationRequestAlertViewController" customModule="Adaptive_1838" customModuleProvider="target">
             <connections>
                 <outlet property="imageContainerView" destination="Eid-5f-bsh" id="3IF-Ig-QW7"/>
                 <outlet property="imageContainerViewHeight" destination="wLy-x3-HWy" id="U22-ik-FQx"/>
@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-6N-g3B" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="16" y="295" width="364" height="39"/>
+                    <rect key="frame" x="16" y="295" width="364" height="25"/>
                     <string key="text">You are solving %d days in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.</string>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                     <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,14 +81,14 @@
                 <constraint firstItem="UE8-6N-g3B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="5Vr-zV-NaA"/>
                 <constraint firstItem="Eid-5f-bsh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="7Vi-AE-AWI"/>
                 <constraint firstItem="J4q-7w-ovw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="BzV-ys-5pL"/>
-                <constraint firstItem="0U4-CN-7kp" firstAttribute="top" secondItem="UE8-6N-g3B" secondAttribute="bottom" priority="999" constant="16" id="EIG-v7-1Dr"/>
+                <constraint firstItem="0U4-CN-7kp" firstAttribute="top" secondItem="UE8-6N-g3B" secondAttribute="bottom" priority="999" constant="30" id="EIG-v7-1Dr"/>
                 <constraint firstItem="0U4-CN-7kp" firstAttribute="leading" secondItem="J4q-7w-ovw" secondAttribute="trailing" constant="8" id="K3u-Mb-64H"/>
                 <constraint firstAttribute="trailing" secondItem="0U4-CN-7kp" secondAttribute="trailing" constant="16" id="Mo3-DX-ljF"/>
                 <constraint firstAttribute="bottom" secondItem="0U4-CN-7kp" secondAttribute="bottom" constant="16" id="Sxf-kw-uRx"/>
                 <constraint firstItem="NZ8-T8-j2i" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YdZ-cM-577"/>
                 <constraint firstAttribute="trailing" secondItem="UE8-6N-g3B" secondAttribute="trailing" constant="16" id="ayn-55-c3u"/>
                 <constraint firstAttribute="bottom" secondItem="J4q-7w-ovw" secondAttribute="bottom" constant="16" id="faL-Vr-x88"/>
-                <constraint firstItem="J4q-7w-ovw" firstAttribute="top" secondItem="UE8-6N-g3B" secondAttribute="bottom" constant="16.5" id="kTX-Sg-ehh"/>
+                <constraint firstItem="J4q-7w-ovw" firstAttribute="top" secondItem="UE8-6N-g3B" secondAttribute="bottom" constant="30" id="kTX-Sg-ehh"/>
                 <constraint firstItem="UE8-6N-g3B" firstAttribute="top" secondItem="NZ8-T8-j2i" secondAttribute="bottom" constant="16" id="nz3-nJ-hH1"/>
                 <constraint firstItem="Eid-5f-bsh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="p3d-2N-6KO"/>
                 <constraint firstItem="0U4-CN-7kp" firstAttribute="width" secondItem="J4q-7w-ovw" secondAttribute="width" id="toY-qj-oDq"/>
