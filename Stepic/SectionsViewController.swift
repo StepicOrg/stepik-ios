@@ -21,7 +21,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     var parentShareBlock: ((UIActivityViewController) -> Void)?
     private var shareBarButtonItem: UIBarButtonItem!
     private var shareTooltip: Tooltip?
-    var shouldShowShareTooltip: Bool = false
+    var didJustSubscribe: Bool = false
+
+    private let notificationSuggestionManager = NotificationSuggestionManager()
+    private let notificationPermissionManager = NotificationPermissionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,10 +104,43 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if shouldShowShareTooltip {
-            shareTooltip = TooltipFactory.sharingCourse
-            shareTooltip?.show(direction: .up, in: nil, from: shareBarButtonItem)
-            shouldShowShareTooltip = false
+
+        let shareTooltipBlock = {
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.shareTooltip = TooltipFactory.sharingCourse
+            strongSelf.shareTooltip?.show(direction: .up, in: nil, from: strongSelf.shareBarButtonItem)
+            strongSelf.didJustSubscribe = false
+        }
+
+        if didJustSubscribe {
+            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
+                notificationPermissionManager.getCurrentPermissionStatus().then {
+                    [weak self]
+                    status -> Void in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    switch status {
+                    case .notDetermined:
+                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
+                        alert.yesAction = {
+                            NotificationRegistrator.shared.registerForRemoteNotifications()
+                            shareTooltipBlock()
+                        }
+                        Alerts.notificationRequest.present(alert: alert, inController: strongSelf)
+                        strongSelf.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+                        return
+                    default:
+                        shareTooltipBlock()
+                        break
+                    }
+                }
+            } else {
+                shareTooltipBlock()
+            }
         }
     }
 

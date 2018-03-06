@@ -569,6 +569,7 @@ class CourseListPresenter {
             }
             cardsViewController.hidesBottomBarWhenPushed = true
             cardsViewController.course = course
+            cardsViewController.didJustSubscribe = didSubscribe
             return cardsViewController
         }
 
@@ -577,7 +578,7 @@ class CourseListPresenter {
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
         courseVC.course = course
-        courseVC.shouldShowShareTooltip = didSubscribe
+        courseVC.didJustSubscribe = didSubscribe
         courseVC.parentShareBlock = {
             [weak self]
             shareVC in

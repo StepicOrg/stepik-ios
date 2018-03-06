@@ -10,7 +10,7 @@ import Foundation
 
 class NotificationSuggestionManager {
     private let defaults = UserDefaults.standard
-    
+
     private let streakAlertShownCntKey = "streakAlertShownCntKey"
 
     private let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
@@ -96,7 +96,7 @@ class NotificationSuggestionManager {
                 return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
             }
         case .notificationsTab, .courseSubscription:
-            return isAlertAvailableNow(context: context)
+            return isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
         }
     }
 }
