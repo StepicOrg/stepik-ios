@@ -14,6 +14,7 @@ class PinsMap {
 
     init(calendar: Calendar = Calendar.current) {
         self.calendar = calendar
+        self.calendar.minimumDaysInFirstWeek = 1
 
         if let utcTimeZone = TimeZone(abbreviation: "UTC") {
             self.calendar.timeZone = utcTimeZone
@@ -41,8 +42,8 @@ class PinsMap {
     class Month {
         var weeks: [Week] = []
 
-        var days: [Int] {
-            return weeks.map { zip($0.allowedPins, $0.pins).flatMap({ isAllowed, pin in isAllowed ? pin : nil }) }.reduce([], +)
+        var days: [(Bool, Int)] {
+            return weeks.map { zip($0.allowedPins, $0.pins) }.reduce([], +)
         }
 
         init(weeks: [Week]) {
@@ -96,9 +97,6 @@ class PinsMap {
                     }
                 } else {
                     weeks[week].allowedPins[day] = false
-                    if day == 6 {
-                        return Month(weeks: Array(weeks[0...week]))
-                    }
                 }
 
                 if day == 6 {
@@ -133,6 +131,10 @@ class PinsMap {
 
             let weekday = calendar.component(.weekday, from: currentDay)
             let weeknum = calendar.component(.weekOfMonth, from: currentDay)
+
+            if weeknum <= 0 || weeknum > weekNumForLastDayOfMonth || weekday <= 0 || weekday >= monthDaysRange.upperBound {
+                throw PinsMapError.badCalendar
+            }
 
             weeks[weeknum - 1].allowedPins[weekday - 1] = true
         }

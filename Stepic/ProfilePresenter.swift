@@ -149,9 +149,9 @@ class ProfilePresenter {
     private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
         let block = PinsMapExpandableMenuBlock(id: pinsMapBlockId, title: "Активность")
 
-        print(activity)
+        block.pins = activity.pins
 
-        block.onExpanded = { [weak self] isExpanded in
+        block.onExpanded = { isExpanded in
             block.isExpanded = isExpanded
         }
         return block

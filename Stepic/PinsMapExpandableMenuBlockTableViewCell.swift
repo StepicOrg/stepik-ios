@@ -12,28 +12,25 @@ class PinsMapExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var mapContainer: UIView!
 
+    var pins: [Int] = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 41, 1, 12, 10, 1, 1, 1, 7, 4, 13, 3, 11, 8, 20, 0, 4, 0, 6, 5, 20, 26, 9, 1, 1, 4, 0, 0, 1, 22, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].reversed()
     var pinsMap: PinsMapView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let map = PinsMap()
+        mapContainer.setRoundedCorners(cornerRadius: 20, borderWidth: 0.5, borderColor: UIColor(hex: 0xcccccc))
 
-        if let month1 = try? map.buildMonth(year: 2018, month: 1),
-           let month2 = try? map.buildMonth(year: 2018, month: 2),
-           let month3 = try? map.buildMonth(year: 2018, month: 3, lastDay: Date()) {
-            pinsMap = PinsMapView(months: [month1, month2, month3])
-        }
+        pinsMap = PinsMapView()
         mapContainer.addSubview(pinsMap)
+        pinsMap.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: mapContainer)
+        pinsMap.buildMonths(pins)
     }
 
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
+        if let block = block as? PinsMapExpandableMenuBlock {
+            pins = block.pins
+        }
         titleLabel.text = block.title
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        pinsMap.frame = mapContainer.bounds
     }
 }

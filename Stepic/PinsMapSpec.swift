@@ -18,7 +18,7 @@ class PinsMapSpec: QuickSpec {
             PinsMap.Week(allowedPins: [false, false, false, false, true, true, true], pins: [0, 0, 0, 0, 5, 3, 2]),
             PinsMap.Week(allowedPins: [true, true, true, true, true, true, false], pins: [1, 2, 1, 0, 1, 1, 0])
         ]
-        let sampleDays = [5, 3, 2, 1, 2, 1, 0, 1, 1]
+        let sampleDays: [(Bool, Int)] = sampleWeeks.map { zip($0.allowedPins, $0.pins) }.reduce([], +)
 
         describe("PinsMap Month") {
             var month: PinsMap.Month!
@@ -32,7 +32,12 @@ class PinsMapSpec: QuickSpec {
                     expect(month.weeks) == sampleWeeks
                 }
                 it("has correct days") {
-                    expect(month.days) == sampleDays
+                    let l1 = month.days.map { $0.0 }
+                    let r1 = sampleDays.map { $0.0 }
+                    let l2 = month.days.map { $0.1 }
+                    let r2 = sampleDays.map { $0.1 }
+                    expect(l1) == r1
+                    expect(l2) == r2
                 }
             }
 
@@ -141,8 +146,8 @@ class PinsMapSpec: QuickSpec {
                             let formatter = DateFormatter()
                             formatter.dateFormat = "yyyy/MM/dd"
                             formatter.timeZone = TimeZone(abbreviation: "UTC")!
-                            let day_05_02_2018 = formatter.date(from: "2018/02/05")
-                            checkIsGivenEqualToReal(2018, 2, day_05_02_2018, 2, [false, false, false, false, true, true, true], [true, true, false, false, false, false, false])
+                            let day_02_02_2018 = formatter.date(from: "2018/02/02")
+                            checkIsGivenEqualToReal(2018, 2, day_02_02_2018, 5, [false, false, false, false, true, true, false], [false, false, false, false, false, false, false])
                         }
                     }
                 }
@@ -169,8 +174,8 @@ class PinsMapSpec: QuickSpec {
                             let formatter = DateFormatter()
                             formatter.dateFormat = "yyyy/MM/dd"
                             formatter.timeZone = TimeZone(abbreviation: "UTC")!
-                            let day_05_02_2018 = formatter.date(from: "2018/02/05")
-                            checkIsGivenEqualToReal(2018, 2, day_05_02_2018, 2, [false, false, false, true, true, true, true], [true, false, false, false, false, false, false])
+                            let day_02_02_2018 = formatter.date(from: "2018/02/02")
+                            checkIsGivenEqualToReal(2018, 2, day_02_02_2018, 5, [false, false, false, true, true, false, false], [false, false, false, false, false, false, false])
                         }
                     }
                 }

@@ -36,7 +36,7 @@ class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
 }
 
 class PinsMapExpandableMenuBlock: ExpandableMenuBlock {
-
+    var pins: [Int] = []
 }
 
 class TransitionMenuBlock: MenuBlock {
