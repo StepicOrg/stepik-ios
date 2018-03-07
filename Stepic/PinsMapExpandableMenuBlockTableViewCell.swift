@@ -54,27 +54,30 @@ class PinsMapExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
 
         block.onExpanded?(!block.isExpanded)
         if block.isExpanded {
-            expand(block: block)
+            expand()
         } else {
-            shrink(block: block)
+            shrink()
         }
         updateTableHeightBlock?()
     }
 
-    func expand(block: PinsMapExpandableMenuBlock) {
+    func expand() {
         bottomTitleConstraint?.isActive = false
-        mapContainer.isHidden = false
+        if let pinsMap = pinsMap {
+            mapContainer.addSubview(pinsMap)
+            pinsMap.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: mapContainer)
+        }
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 
-    func shrink(block: PinsMapExpandableMenuBlock) {
+    func shrink() {
+        pinsMap?.removeFromSuperview()
         if bottomTitleConstraint == nil {
             bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
         } else {
             bottomTitleConstraint?.isActive = true
         }
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_bottom"), for: .normal)
-        mapContainer.isHidden = true
     }
 
 }
