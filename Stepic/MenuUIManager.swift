@@ -44,6 +44,11 @@ class MenuUIManager {
         case .pinsMapExpandable:
             if let cell = cell as? PinsMapExpandableMenuBlockTableViewCell, let block = block as? PinsMapExpandableMenuBlock {
                 cell.initWithBlock(block: block)
+                cell.updateTableHeightBlock = {
+                    [weak self] in
+                    self?.tableView.beginUpdates()
+                    self?.tableView.endUpdates()
+                }
             }
         case .header:
             if let cell = cell as? HeaderMenuBlockTableViewCell, let block = block as? HeaderMenuBlock {
@@ -72,6 +77,10 @@ class MenuUIManager {
             }
         case .titleContentExpandable:
             if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
+                cell.expandPressed()
+            }
+        case .pinsMapExpandable:
+            if let cell = tableView.cellForRow(at: indexPath) as? PinsMapExpandableMenuBlockTableViewCell {
                 cell.expandPressed()
             }
         default:

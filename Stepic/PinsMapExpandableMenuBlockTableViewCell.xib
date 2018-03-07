@@ -33,7 +33,10 @@
                             <constraint firstAttribute="height" constant="32" id="bKg-nI-w5t"/>
                         </constraints>
                         <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                        <state key="normal" image="menu_arrow_bottom"/>
+                        <state key="normal" image="menu_arrow_top"/>
+                        <connections>
+                            <action selector="arrowButtonPressed:" destination="Rh1-me-tRc" eventType="touchUpInside" id="WDm-KV-bqX"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6d-0A-2lq">
                         <rect key="frame" x="24" y="60.5" width="272" height="150"/>
@@ -625,6 +628,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowButton" destination="PT6-fW-YE7" id="IZa-M3-pNG"/>
                 <outlet property="mapContainer" destination="O6d-0A-2lq" id="GRJ-4p-eO9"/>
                 <outlet property="titleLabel" destination="GwN-No-egl" id="Q7I-EG-fWt"/>
             </connections>
@@ -632,6 +636,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="menu_arrow_bottom" width="44" height="44"/>
+        <image name="menu_arrow_top" width="44" height="44"/>
     </resources>
 </document>
