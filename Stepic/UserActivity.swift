@@ -15,7 +15,7 @@ class UserActivity {
 
     init(id: Int) {
         self.id = id
-        self.pins = Array(repeating: 0, count: 365)
+        self.pins = UserActivity.emptyYearPins
     }
 
     init(json: JSON) {
@@ -68,5 +68,9 @@ class UserActivity {
             return false
         }
         return pins[0] == 0 && pins[1] != 0
+    }
+
+    static var emptyYearPins: [Int] {
+        return Array(repeating: 0, count: 365)
     }
 }

@@ -46,6 +46,14 @@ class UserActivitySpec: QuickSpec {
                 }
             }
 
+            context("empty year generator") {
+                it("365 pins and all are 0") {
+                    let pins = UserActivity.emptyYearPins
+                    expect(pins.count) == 365
+                    expect(pins.filter({ $0 == 0 }).count) == 365
+                }
+            }
+
             context("when constructed with data") {
                 it("has currentStreak == 0") {
                     let sampleObj = ["id": 239, "pins": [0, 0, 2, 0, 1, 0]] as [String : Any]

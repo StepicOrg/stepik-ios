@@ -137,11 +137,8 @@ class ProfilePresenter {
 
         block.content = content
 
-        block.onExpanded = {
-            [weak self]
-            isExpanded in
+        block.onExpanded = { isExpanded in
             block.isExpanded = isExpanded
-//            self?.menu.update(block: block)
         }
         return block
     }
@@ -258,7 +255,8 @@ class ProfilePresenter {
     private func updateStreaks(user: User) {
         _ = userActivitiesAPI.retrieve(user: user.id, success: { [weak self] activity in
             self?.view?.set(streaks: StreakData(userActivity: activity))
-            if let pinsBlockId = self?.pinsMapBlockId, let pinsMapBlock = self?.menu.getBlock(id: pinsBlockId) {
+            if let pinsBlockId = self?.pinsMapBlockId, let pinsMapBlock = self?.menu.getBlock(id: pinsBlockId) as? PinsMapExpandableMenuBlock {
+                pinsMapBlock.pins = activity.pins
                 self?.menu.update(block: pinsMapBlock)
             }
         }, error: {

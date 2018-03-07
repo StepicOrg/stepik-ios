@@ -54,9 +54,7 @@ class PinsMapMonthView: NibInitializableView {
         }
     }
 
-    func set(monthTitle: String, days: [Day]) {
-        monthLabel.text = monthTitle
-
+    func set(days: [Day]) {
         var i = 0
         for week in weeksStackView {
             for day in week.subviews {
@@ -67,5 +65,10 @@ class PinsMapMonthView: NibInitializableView {
                 i += 1
             }
         }
+    }
+
+    func set(monthTitle: String, days: [Day]) {
+        monthLabel.text = monthTitle
+        set(days: days)
     }
 }
