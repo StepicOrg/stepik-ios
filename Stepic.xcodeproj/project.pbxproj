@@ -3857,6 +3857,7 @@
 		2CB51F63204ECC510008431C /* PinsMapMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F62204ECC510008431C /* PinsMapMonthView.swift */; };
 		2CB51F65204ECC6B0008431C /* PinsMapMonthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB51F64204ECC6B0008431C /* PinsMapMonthView.xib */; };
 		2CB51F68204ECFEE0008431C /* PinsMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB51F67204ECFEE0008431C /* PinsMapView.xib */; };
+		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */; };
 		2CB62BE42019FD8500B5E336 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
 		2CB62BE52019FD8500B5E336 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
@@ -5116,6 +5117,7 @@
 		2CB51F62204ECC510008431C /* PinsMapMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapMonthView.swift; sourceTree = "<group>"; };
 		2CB51F64204ECC6B0008431C /* PinsMapMonthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapMonthView.xib; sourceTree = "<group>"; };
 		2CB51F67204ECFEE0008431C /* PinsMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapView.xib; sourceTree = "<group>"; };
+		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardStepViewController.swift; sourceTree = "<group>"; };
 		2CB62BDD2019FD8400B5E336 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step3.html; sourceTree = "<group>"; };
 		2CB62BDF2019FD8400B5E336 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step1.html; sourceTree = "<group>"; };
@@ -6110,10 +6112,12 @@
 			children = (
 				085D5CDD1D007F2200092060 /* Info.plist */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
+				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
 				08AB823A1D75AA9300FDEADE /* CookieTests.swift */,
 				081058321E9FB50700FAC30A /* Certificates */,
 				080AA2341EA05BE00079272F /* TestInfo.plist */,
 				080AA2361EA05CD20079272F /* TestConfig.swift */,
+				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -7422,7 +7426,6 @@
 			isa = PBXGroup;
 			children = (
 				2C453397204D46E90061342A /* PinsMap.swift */,
-				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
 				2CB51F69204ECFF60008431C /* PinsMapView */,
 				2CB51F66204ECC700008431C /* PinsMapMonthView */,
 			);
@@ -11532,6 +11535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
 				083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
 				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,

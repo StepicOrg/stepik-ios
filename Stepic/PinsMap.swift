@@ -151,6 +151,31 @@ class PinsMap {
 
         return Month(weeks: weeks)
     }
+
+    func splitPinsIntoMonths(pins: [Int], today: Date = Date()) throws -> [[Int]] {
+        guard pins.count > 0 else {
+            return []
+        }
+
+        var month = calendar.component(.month, from: today), day = today
+        var buckets = [[Int]]()
+        var bucket = [Int]()
+        for pin in pins {
+            let currentMonth = calendar.component(.month, from: day)
+            if month != currentMonth {
+                buckets.append(bucket)
+                bucket.removeAll()
+            }
+            bucket.append(pin)
+            guard let yesterday = calendar.date(byAdding: .day, value: -1, to: day, wrappingComponents: false) else {
+                throw PinsMapError.badCalendar
+            }
+            day = yesterday
+            month = currentMonth
+        }
+        buckets.append(bucket)
+        return buckets
+    }
 }
 
 enum PinsMapError: Error {

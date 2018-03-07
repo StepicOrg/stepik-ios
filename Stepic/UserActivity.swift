@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 
 class UserActivity {
-
     var id: Int
     var pins: [Int]
 

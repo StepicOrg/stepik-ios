@@ -180,6 +180,63 @@ class PinsMapSpec: QuickSpec {
                     }
                 }
             }
+
+            context("when split into months") {
+                var map: PinsMap!
+                var formatter: DateFormatter!
+
+                beforeEach {
+                    map = PinsMap(calendar: Calendar.current)
+
+                    formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy/MM/dd"
+                    formatter.timeZone = TimeZone(abbreviation: "UTC")!
+                }
+
+                context("with empty pins list") {
+                    it("is not throw exception and has empty result") {
+                        var result: [[Int]]!
+                        expect { result = try map.splitPinsIntoMonths(pins: []) }.toNot(throwError())
+                        expect(result.count) == 0
+                    }
+                }
+
+                context("with real data (2018-02-02)") {
+                    it("is not throw exception and has correct result") {
+                        let date = formatter.date(from: "2018/02/02")!
+                        var result: [[Int]]!
+                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
+                        expect(result.count) == 2
+                        expect(result[0]) == [1, 2]
+                        expect(result[1]) == [3, 4, 5, 6, 7]
+                    }
+                }
+
+                context("with real data (2018-01-07)") {
+                    it("is not throw exception and has correct result") {
+                        let date = formatter.date(from: "2018/01/07")!
+                        var result: [[Int]]!
+                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
+                        expect(result.count) == 1
+                        expect(result[0]) == [1, 2, 3, 4, 5, 6, 7]
+                    }
+                }
+
+                context("with real data (2018-01-01)") {
+                    it("is not throw exception and has correct result") {
+                        let date = formatter.date(from: "2018/01/01")!
+                        var result: [[Int]]!
+                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2], today: date) }.toNot(throwError())
+                        expect(result.count) == 2
+                        expect(result[0]) == [1]
+                        expect(result[1]) == [2]
+
+                        expect { result = try map.splitPinsIntoMonths(pins: [1], today: date) }.toNot(throwError())
+                        expect(result.count) == 1
+                        expect(result[0]) == [1]
+                    }
+                }
+            }
         }
     }
 }
