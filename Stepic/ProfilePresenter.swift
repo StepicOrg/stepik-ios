@@ -144,7 +144,7 @@ class ProfilePresenter {
     }
 
     private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
-        let block = PinsMapExpandableMenuBlock(id: pinsMapBlockId, title: "Активность")
+        let block = PinsMapExpandableMenuBlock(id: pinsMapBlockId, title: NSLocalizedString("Activity", comment: ""))
 
         block.pins = activity.pins
 
