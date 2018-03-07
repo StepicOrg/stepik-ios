@@ -21,6 +21,19 @@ class PinsMapView: NibInitializableView {
         return "PinsMapView"
     }
 
+    private var howManyMonthsShouldBeDisplayed: Int {
+        switch DeviceInfo.current.diagonal {
+        case let x where x > 5.8:
+            return DeviceInfo.current.orientation.interface.isPortrait ? 8 : 8
+        case let x where x > 4.7:
+            return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 8
+        case let x where x > 4.0:
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
+        default:
+            return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 8
+        }
+    }
+
     private func buildDays(for month: PinsMap.Month, pins: [Int]) -> [PinsMapMonthView.Day] {
         var days = [PinsMapMonthView.Day]()
         for (isAllowed, pin) in month.filled(pins: pins).days {
@@ -104,9 +117,41 @@ class PinsMapView: NibInitializableView {
     override func setupSubviews() {
         scrollView.delegate = self
     }
+
+    override func layoutSubviews() {
+        layoutIfNeeded()
+        DispatchQueue.main.async {
+            let width = (self.containerView.frame.width - CGFloat(self.howManyMonthsShouldBeDisplayed - 1) * self.monthsStackView.spacing) / CGFloat(self.howManyMonthsShouldBeDisplayed)
+            for monthView in self.storedMonths.map({ $0.1 }).reversed() {
+                monthView.constraints.forEach { constraint in
+                    if constraint.firstAttribute == .width {
+                        constraint.isActive = false
+                    }
+                }
+                monthView.widthAnchor.constraint(equalToConstant: width).isActive = true
+            }
+            self.layoutIfNeeded()
+
+            guard self.howManyMonthsShouldBeDisplayed - 1 >= 0 && self.howManyMonthsShouldBeDisplayed - 1 < self.storedMonths.count else {
+                return
+            }
+            self.scrollView.contentOffset = CGPoint(x: self.storedMonths[self.howManyMonthsShouldBeDisplayed - 1].1.frame.origin.x, y: self.scrollView.contentOffset.y)
+        }
+    }
 }
 
 extension PinsMapView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+
+        guard howManyMonthsShouldBeDisplayed * page < storedMonths.count else {
+            return
+        }
+
+        let shouldBeVisibleX = storedMonths.reversed()[howManyMonthsShouldBeDisplayed * page].1.frame.origin.x
+
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset = CGPoint(x: shouldBeVisibleX, y: self.scrollView.contentOffset.y)
+        }
     }
 }

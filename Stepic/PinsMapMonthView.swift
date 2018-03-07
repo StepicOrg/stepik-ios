@@ -27,10 +27,14 @@ class PinsMapMonthView: NibInitializableView {
                 return UIColor.clear
             case .solved(let pin):
                 switch pin {
-                case let x where x > 5:
+                case let x where x > 24:
+                    return UIColor(hex: 0x70A170)
+                case let x where x > 9:
                     return UIColor(hex: 0x89CC89)
+                case let x where x > 4:
+                    return UIColor(hex: 0xA4D0A4)
                 case let x where x > 0:
-                    return UIColor(hex: 0xB8E0B8)
+                    return UIColor(hex: 0xCAEACA)
                 default:
                     return UIColor(hex: 0xeeeeee)
                 }
