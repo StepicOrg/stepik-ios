@@ -1637,7 +1637,6 @@
 		1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
 		1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
-		1BAE12F91F93F67700482251 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12F71F93F67700482251 /* Main.storyboard */; };
 		1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12FA1F93F67700482251 /* Assets.xcassets */; };
 		1BAE13061F93F67700482251 /* StepikTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE13051F93F67700482251 /* StepikTVTests.swift */; };
 		1C13A4442DAAEABDE3EE0BFB /* Pods_Adaptive_1906.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4729F9B4639AAD9EBFC01D1E /* Pods_Adaptive_1906.framework */; };
@@ -4646,7 +4645,8 @@
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		B2897794E535FA733BEE6945 /* Pods_Adaptive_1906_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */; };
-		BA52CB622035B29D002971B6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA52CB602035B29D002971B6 /* Localizable.strings */; };
+		BA903500205449A000191D0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
+		BA90350220544A5D00191D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA90350120544A5D00191D0A /* Main.storyboard */; };
 		BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
@@ -5340,7 +5340,6 @@
 		1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularCollectionRowViewCell.xib; sourceTree = "<group>"; };
 		1BAE12EF1F93F67700482251 /* StepikTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepikTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAE12F11F93F67700482251 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1BAE12F81F93F67700482251 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1BAE12FA1F93F67700482251 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BAE12FC1F93F67700482251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BAE13011F93F67700482251 /* StepikTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepikTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5685,11 +5684,8 @@
 		A53D37FA4CD8A9B6D7AE2222 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA52CB632035B427002971B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BA895F852035C91E00B4198B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		BA895F872035C92300B4198B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		BA90350120544A5D00191D0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BAA3067633C83C1C28423DCA /* Pods-Adaptive 1906.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.debug.xcconfig"; sourceTree = "<group>"; };
-		BAC391752035C64F0089D6F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BB035CD08BB7AB3FD3A64F49 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C10545C3657205B9CF673A80 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
@@ -7867,10 +7863,9 @@
 				1B3BB0661FE6DE5E002DDD9A /* Views */,
 				1B3BB04F1FE6DE2B002DDD9A /* Controllers */,
 				1BAE12F11F93F67700482251 /* AppDelegate.swift */,
-				1BAE12F71F93F67700482251 /* Main.storyboard */,
+				BA90350120544A5D00191D0A /* Main.storyboard */,
 				1BAE12FA1F93F67700482251 /* Assets.xcassets */,
 				1BAE12FC1F93F67700482251 /* Info.plist */,
-				BA52CB602035B29D002971B6 /* Localizable.strings */,
 			);
 			path = StepikTV;
 			sourceTree = "<group>";
@@ -9671,6 +9666,7 @@
 				933563BC20125AB20061FE2E /* LessonContent.storyboard in Resources */,
 				933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */,
 				1B3BB0BA1FE6E170002DDD9A /* RegularCollectionRowViewCell.xib in Resources */,
+				BA90350220544A5D00191D0A /* Main.storyboard in Resources */,
 				933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */,
 				1B3BB0B71FE6E170002DDD9A /* MajorCollectionRowViewCell.xib in Resources */,
 				9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */,
@@ -9681,7 +9677,7 @@
 				1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */,
 				93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */,
 				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
-				BA52CB622035B29D002971B6 /* Localizable.strings in Resources */,
+				BA903500205449A000191D0A /* Localizable.strings in Resources */,
 				93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */,
 				1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */,
 				1B3BB0A41FE6E145002DDD9A /* RegularItemCell.xib in Resources */,
@@ -9690,7 +9686,6 @@
 				9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */,
 				1B3BB0A81FE6E145002DDD9A /* MajorItemCell.xib in Resources */,
 				1B3BB0A71FE6E145002DDD9A /* NarrowItemCell.xib in Resources */,
-				1BAE12F91F93F67700482251 /* Main.storyboard in Resources */,
 				93BBE5F01FE6A917006DEC28 /* Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -16367,16 +16362,6 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		1BAE12F71F93F67700482251 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1BAE12F81F93F67700482251 /* Base */,
-				BA895F852035C91E00B4198B /* en */,
-				BA895F872035C92300B4198B /* ru */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2C04C1051F160643006B69B3 /* step2.html */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -16602,15 +16587,6 @@
 				08DC5A041E171EA00051B14A /* en */,
 			);
 			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
-		BA52CB602035B29D002971B6 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BA52CB632035B427002971B6 /* en */,
-				BAC391752035C64F0089D6F7 /* ru */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

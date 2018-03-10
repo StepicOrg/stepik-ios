@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabController = window?.rootViewController as? UITabBarController {
             let searchController = packagedSearchController()
             tabController.viewControllers?.append(searchController)
+
+            let viewControllers = tabController.viewControllers!
+            viewControllers[0].title = NSLocalizedString("Featured", comment: "")
+
+            let navigationController : UINavigationController = viewControllers[1] as! UINavigationController
+            navigationController.title = NSLocalizedString("My courses", comment: "")
+            navigationController.viewControllers.first?.title = viewControllers[1].title
+
+            viewControllers[2].title = NSLocalizedString("Profile", comment: "")
+            viewControllers[3].title = NSLocalizedString("Search", comment: "")
         }
         return true
     }
@@ -64,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Contain the `UISearchController` in a `UISearchContainerViewController`.
         let searchContainer = UISearchContainerViewController(searchController: searchController)
-        searchContainer.title = NSLocalizedString("Search", comment: "")
 
         // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
         let searchNavigationController = UINavigationController(rootViewController: searchContainer)

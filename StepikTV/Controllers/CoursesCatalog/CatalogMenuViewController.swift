@@ -37,6 +37,20 @@ class CatalogMenuViewController: MenuTableViewController {
 
         presenter?.setDetailViewToProvideData(vc, width: Float(UIScreen.main.bounds.width - self.view.bounds.width), by: indexPath)
     }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath) as! RightDetailedCustomTableViewCell
+
+        if (indexPath.row == 0) {
+            cell.titleLabel.text = NSLocalizedString("In Progress", comment: "")
+        }
+
+        if (indexPath.row == 1) {
+            cell.titleLabel.text = NSLocalizedString("Passed", comment: "")
+        }
+
+        return cell
+    }
 }
 
 extension CatalogMenuViewController: CatalogMenuView {
