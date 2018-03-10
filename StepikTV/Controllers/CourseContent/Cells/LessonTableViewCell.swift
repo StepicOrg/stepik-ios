@@ -38,6 +38,8 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
     @IBOutlet weak var progressLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var indexLabelWidth: NSLayoutConstraint!
 
+    var progress : Float = 0
+
     private var pressAction: (() -> Void)?
 
     override func awakeFromNib() {
@@ -45,11 +47,52 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
         changeToDefault()
     }
 
+    private func setupProgressLayer(forProgress progress: Float, withTintColor tintColor: UIColor = UIColor.black.withAlphaComponent(0.3)) {
+        guard let progressIcon = self.progressIcon else {
+            return;
+        }
+
+        progressIcon.layer.sublayers?.removeAll()
+
+        let ciColor = CIColor(color: tintColor)
+        let red = ciColor.red
+        let green = ciColor.green
+        let blue = ciColor.blue
+        let alpha = ciColor.alpha
+
+        let tintColor = UIColor(red: red + 1 - alpha, green: green + 1 - alpha, blue: blue + 1 - alpha, alpha: 1)
+
+        let width = progressIcon.frame.width
+
+        var lineWidth = width / 2
+        var circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2,y: width / 2), radius: CGFloat(lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 * progress - Float.pi / 2), clockwise: true)
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = tintColor.cgColor
+        shapeLayer.lineWidth = lineWidth
+
+        lineWidth = width * 0.1;
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2,y: width / 2), radius: CGFloat(width / 2 - lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 - Float.pi / 2), clockwise: true)
+
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = circlePath.cgPath
+        borderLayer.fillColor = shapeLayer.fillColor
+        borderLayer.strokeColor = shapeLayer.strokeColor
+        borderLayer.lineWidth = lineWidth
+
+        progressIcon.layer.addSublayer(shapeLayer)
+        progressIcon.layer.addSublayer(borderLayer)
+    }
+
     func setup(with paragraphIndex: Int, _ lessonIndex: Int, viewData: LessonViewData) {
         self.indexLabel.text = "\(paragraphIndex).\(lessonIndex)."
         self.nameLabel.text = viewData.title
         self.progressLabel.text = viewData.progressText
-        self.progressIcon.image = viewData.progressImage
+
+        progress = Float(viewData.progress.score) / Float(viewData.progress.cost)
+        self.setupProgressLayer(forProgress: progress)
 
         self.pressAction = viewData.action
 
@@ -83,5 +126,6 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
         nameLabel?.textColor = color
         progressLabel?.textColor = color
         progressIcon?.tintColor = color
+        self.setupProgressLayer(forProgress: progress, withTintColor: color)
     }
 }
