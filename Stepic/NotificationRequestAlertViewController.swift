@@ -10,10 +10,10 @@ import UIKit
 import FLKAutoLayout
 import Lottie
 
-enum NotificationRequestAlertContext {
-    case streak
-    case notificationsTab
-    case courseSubscription
+enum NotificationRequestAlertContext: String {
+    case streak = "streak"
+    case notificationsTab = "notifications_tab"
+    case courseSubscription = "course_subscription"
 
     var title: String {
         switch self {
@@ -93,6 +93,7 @@ class NotificationRequestAlertViewController: UIViewController {
         super.viewDidAppear(animated)
         animationView.isHidden = false
         animationView.play()
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.shown(context: context))
     }
 
     func localize() {
@@ -109,11 +110,13 @@ class NotificationRequestAlertViewController: UIViewController {
 
     @IBAction func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.rejected(context: context))
         noAction?()
     }
 
     @IBAction func yesPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.accepted(context: context))
         yesAction?()
     }
 
