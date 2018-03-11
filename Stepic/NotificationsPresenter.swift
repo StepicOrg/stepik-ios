@@ -130,17 +130,19 @@ class NotificationsPresenter {
     }
 
     func didAppear() {
-        if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
-            notificationPermissionManager.getCurrentPermissionStatus().then {
-                [weak self]
-                status -> Void in
-                switch status {
-                case .notDetermined:
-                    let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
-                    self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                    self?.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
-                default:
-                    break
+        if #available(iOS 10.0, *) {
+            if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
+                notificationPermissionManager.getCurrentPermissionStatus().then {
+                    [weak self]
+                    status -> Void in
+                    switch status {
+                    case .notDetermined:
+                        let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
+                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
+                        self?.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
+                    default:
+                        break
+                    }
                 }
             }
         }

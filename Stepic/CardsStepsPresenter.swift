@@ -150,22 +150,23 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func appearedAfterSubscription() {
-        if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-            notificationPermissionManager.getCurrentPermissionStatus().then {
-                [weak self]
-                status -> Void in
+        if #available(iOS 10.0, *) {
+            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
+                notificationPermissionManager.getCurrentPermissionStatus().then {
+                    [weak self]
+                    status -> Void in
 
-                switch status {
-                case .notDetermined:
-                    let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
-                    self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                    self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
-                default:
-                    break
+                    switch status {
+                    case .notDetermined:
+                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
+                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
+                        self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+                    default:
+                        break
+                    }
                 }
             }
         }
-
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {

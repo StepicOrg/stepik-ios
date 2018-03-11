@@ -20,15 +20,19 @@ class NotificationRegistrator {
     private init () { }
 
     func registerForRemoteNotificationsIfAlreadyAsked() {
-        notificationPermissionManager.getCurrentPermissionStatus().then {
-            [weak self]
-            status -> Void in
-            switch status {
-            case .authorized:
-                self?.registerForRemoteNotifications()
-            default:
-                return
+        if #available(iOS 10.0, *) {
+            notificationPermissionManager.getCurrentPermissionStatus().then {
+                [weak self]
+                status -> Void in
+                switch status {
+                case .authorized:
+                    self?.registerForRemoteNotifications()
+                default:
+                    return
+                }
             }
+        } else {
+            registerForRemoteNotifications()
         }
     }
 
