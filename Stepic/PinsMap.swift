@@ -24,8 +24,8 @@ class PinsMap {
     class Week: Equatable {
         // allowedPins[i] == false when the day should be displayed as empty day
         // e. g. a day from previous month
-        var allowedPins: [Bool] = (1...7).map { _ in false }
-        var pins: [Int] = (1...7).map { _ in 0 }
+        var allowedPins: [Bool] = Array(repeating: false, count: 7)
+        var pins: [Int] = Array(repeating: 0, count: 7)
 
         init() { }
 
