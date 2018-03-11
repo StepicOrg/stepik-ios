@@ -50,14 +50,12 @@ class TVFocusableText: UILabel, FocusAnimatable {
 
     func changeToDefault() {
         self.transform = CGAffineTransform.identity
-        //self.substrateView.transform = CGAffineTransform.identity
         self.substrateView.backgroundColor = substrateViewColor.withAlphaComponent(0.0)
         self.textColor = defaultTextColor
     }
 
     func changeToFocused() {
         self.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
-        //self.substrateView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
         self.substrateView.backgroundColor = substrateViewColor
         self.textColor = focusedTextColor
     }
@@ -81,13 +79,13 @@ class TVFocusableText: UILabel, FocusAnimatable {
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesBegan(presses, with: event)
-        guard presses.first!.type != UIPressType.menu else { return }
+        guard presses.first!.type == UIPressType.select else { return }
 
+        guard isAnimatable else { return }
         pressAction?(self)
     }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
         guard isAnimatable else { return }
         self.updateFocus(in: context, with: coordinator)
     }

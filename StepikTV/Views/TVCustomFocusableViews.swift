@@ -20,7 +20,7 @@ extension UIView {
     override open func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesBegan(presses, with: event)
 
-        guard presses.first!.type != UIPressType.menu else {
+        guard presses.first!.type == UIPressType.select else {
             return
         }
 
@@ -32,7 +32,7 @@ extension UIView {
     override open func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesCancelled(presses, with: event)
 
-        guard presses.first!.type != UIPressType.menu else {
+        guard presses.first!.type == UIPressType.select else {
             return
         }
 
@@ -44,7 +44,7 @@ extension UIView {
     override open func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesEnded(presses, with: event)
 
-        guard presses.first!.type != UIPressType.menu else {
+        guard presses.first!.type == UIPressType.select else {
             return
         }
 

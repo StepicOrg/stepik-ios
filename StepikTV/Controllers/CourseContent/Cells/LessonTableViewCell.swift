@@ -49,7 +49,7 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
 
     private func setupProgressLayer(forProgress progress: Float, withTintColor tintColor: UIColor = UIColor.black.withAlphaComponent(0.3)) {
         guard let progressIcon = self.progressIcon else {
-            return;
+            return
         }
 
         progressIcon.layer.sublayers?.removeAll()
@@ -65,7 +65,7 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
         let width = progressIcon.frame.width
 
         var lineWidth = width / 2
-        var circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2,y: width / 2), radius: CGFloat(lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 * progress - Float.pi / 2), clockwise: true)
+        var circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2, y: width / 2), radius: CGFloat(lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 * progress - Float.pi / 2), clockwise: true)
 
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath
@@ -73,8 +73,8 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
         shapeLayer.strokeColor = tintColor.cgColor
         shapeLayer.lineWidth = lineWidth
 
-        lineWidth = width * 0.1;
-        circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2,y: width / 2), radius: CGFloat(width / 2 - lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 - Float.pi / 2), clockwise: true)
+        lineWidth = width * 0.1
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: width / 2, y: width / 2), radius: CGFloat(width / 2 - lineWidth / 2), startAngle: CGFloat(-Float.pi / 2), endAngle:CGFloat(Float.pi * 2 - Float.pi / 2), clockwise: true)
 
         let borderLayer = CAShapeLayer()
         borderLayer.path = circlePath.cgPath
@@ -100,10 +100,10 @@ class LessonTableViewCell: FocusableCustomTableViewCell {
         progressLabelWidth.constant = (progressLabel.textSize?.width ?? 0) + CGFloat(1)
     }
 
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        super.pressesBegan(presses, with: event)
-
-        guard presses.first!.type != UIPressType.menu else { return }
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        super.pressesEnded(presses, with: event)
+        guard presses.first!.type == UIPressType.select else { return }
+        
         pressAction?()
     }
 

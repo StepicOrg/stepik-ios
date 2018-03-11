@@ -34,10 +34,10 @@ class NarrowItemCell: ImageConvertableCollectionViewCell {
         self.imageView.image = generateImage(with: item.title, inImage: item.placeholder).getRoundedCornersImage(cornerRadius: 6.0)
     }
 
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        super.pressesBegan(presses, with: event)
-        guard presses.first!.type != UIPressType.menu else { return }
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        super.pressesEnded(presses, with: event)
 
+        guard presses.first!.type == UIPressType.select else { return }
         pressAction?()
     }
 

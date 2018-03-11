@@ -33,9 +33,10 @@ class TVIconButton: UIView, FocusAnimatable {
         label.text = title
     }
 
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        super.pressesBegan(presses, with: event)
-        guard presses.first!.type != UIPressType.menu else { return }
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        super.pressesEnded(presses, with: event)
+
+        guard presses.first!.type == UIPressType.select else { return }
 
         if isEnabled { pressAction?() }
     }
@@ -52,7 +53,7 @@ class TVIconButton: UIView, FocusAnimatable {
 
     func changeToHighlighted() {
         button.changeToHighlighted()
-        self.changeToFocused()
+        self.label.transform = CGAffineTransform.identity
     }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

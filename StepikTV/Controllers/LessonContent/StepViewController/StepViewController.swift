@@ -51,7 +51,7 @@ class StepViewController: BlurredViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if hasQuiz {
+        if !hasQuiz {
             NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": stepViewData.step.position])
         }
     }
@@ -81,12 +81,13 @@ class StepViewController: BlurredViewController {
 
     private func handleQuizType() {
         guard let quizVC = stepViewData.quizViewController else {
-            hasQuiz = true
+            hasQuiz = false
             adaptStepText()
             scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue)]
             return
         }
 
+        hasQuiz = true
         initQuizController(quizVC)
     }
 }
