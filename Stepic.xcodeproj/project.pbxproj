@@ -2486,7 +2486,6 @@
 		2C35C5051F4DB91A002F3BF4 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C5011F4DB912002F3BF4 /* step1.html */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
-		2C45339E204DA7790061342A /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45339D204DA7790061342A /* PinsMapView.swift */; };
 		2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
 		2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
@@ -3854,9 +3853,6 @@
 		2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
-		2CB51F63204ECC510008431C /* PinsMapMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F62204ECC510008431C /* PinsMapMonthView.swift */; };
-		2CB51F65204ECC6B0008431C /* PinsMapMonthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB51F64204ECC6B0008431C /* PinsMapMonthView.xib */; };
-		2CB51F68204ECFEE0008431C /* PinsMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB51F67204ECFEE0008431C /* PinsMapView.xib */; };
 		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */; };
 		2CB62BE42019FD8500B5E336 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
@@ -3954,6 +3950,7 @@
 		860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
+		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
 		863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
 		864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
@@ -5018,7 +5015,6 @@
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
-		2C45339D204DA7790061342A /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
 		2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
@@ -5114,9 +5110,6 @@
 		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
-		2CB51F62204ECC510008431C /* PinsMapMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapMonthView.swift; sourceTree = "<group>"; };
-		2CB51F64204ECC6B0008431C /* PinsMapMonthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapMonthView.xib; sourceTree = "<group>"; };
-		2CB51F67204ECFEE0008431C /* PinsMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapView.xib; sourceTree = "<group>"; };
 		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardStepViewController.swift; sourceTree = "<group>"; };
 		2CB62BDD2019FD8400B5E336 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step3.html; sourceTree = "<group>"; };
@@ -5196,6 +5189,7 @@
 		84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
+		8622056A2055561F00F14255 /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
 		86226CBE1EBE2FDD0076C82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		86226CC01EBE2FE10076C82E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		863262F81ECFC5AE007A20B3 /* loading_robot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_robot.gif; sourceTree = "<group>"; };
@@ -7426,7 +7420,7 @@
 			isa = PBXGroup;
 			children = (
 				2C453397204D46E90061342A /* PinsMap.swift */,
-				2CB51F69204ECFF60008431C /* PinsMapView */,
+				8622056A2055561F00F14255 /* PinsMapView.swift */,
 				2CB51F66204ECC700008431C /* PinsMapMonthView */,
 			);
 			name = PinsMap;
@@ -7749,19 +7743,8 @@
 		2CB51F66204ECC700008431C /* PinsMapMonthView */ = {
 			isa = PBXGroup;
 			children = (
-				2CB51F62204ECC510008431C /* PinsMapMonthView.swift */,
-				2CB51F64204ECC6B0008431C /* PinsMapMonthView.xib */,
 			);
 			name = PinsMapMonthView;
-			sourceTree = "<group>";
-		};
-		2CB51F69204ECFF60008431C /* PinsMapView */ = {
-			isa = PBXGroup;
-			children = (
-				2C45339D204DA7790061342A /* PinsMapView.swift */,
-				2CB51F67204ECFEE0008431C /* PinsMapView.xib */,
-			);
-			name = PinsMapView;
 			sourceTree = "<group>";
 		};
 		2CB62BF02019FDB300B5E336 /* Adaptive onboarding content */ = {
@@ -8534,7 +8517,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -8543,7 +8526,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -8636,13 +8619,13 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-                        ProvisioningStyle = Manual;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -8806,7 +8789,6 @@
 				2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
-				2CB51F68204ECFEE0008431C /* PinsMapView.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
 				0815661B1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
@@ -8873,7 +8855,6 @@
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
-				2CB51F65204ECC6B0008431C /* PinsMapMonthView.xib in Resources */,
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
@@ -12141,7 +12122,6 @@
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
-				2CB51F63204ECC510008431C /* PinsMapMonthView.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
@@ -12230,7 +12210,6 @@
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
-				2C45339E204DA7790061342A /* PinsMapView.swift in Sources */,
 				0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */,
@@ -12403,6 +12382,7 @@
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				088EDCB11F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.swift in Sources */,
+				8622056B2055561F00F14255 /* PinsMapView.swift in Sources */,
 				088EDCA61F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
@@ -15530,16 +15510,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15554,15 +15534,15 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "6afc4145-e327-4af9-b19a-0dedfcbd72e9";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "6afc4145-e327-4af9-b19a-0dedfcbd72e9";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15733,8 +15713,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
@@ -15744,8 +15724,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -15764,8 +15744,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
@@ -15775,8 +15755,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "636e8124-b505-48f4-9514-ff6f037a7ce0";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "636e8124-b505-48f4-9514-ff6f037a7ce0";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -16485,16 +16465,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16514,15 +16494,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-                PROVISIONING_PROFILE = "4961717c-0bf7-4a77-b45e-d91540553fea";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "4961717c-0bf7-4a77-b45e-d91540553fea";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -16538,16 +16518,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16564,15 +16544,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                "CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-                CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-                PROVISIONING_PROFILE = "23acfcb4-1517-485f-b269-7ab3373df952";
-                PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "23acfcb4-1517-485f-b269-7ab3373df952";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;

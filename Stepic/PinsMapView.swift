@@ -2,24 +2,49 @@
 //  PinsMapView.swift
 //  Stepic
 //
-//  Created by Vladislav Kiryukhin on 05.03.2018.
+//  Created by Vladislav Kiryukhin on 11.03.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import FLKAutoLayout
 
-class PinsMapView: NibInitializableView {
-    @IBOutlet weak var monthsStackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var containerView: UIView!
+class PinsMapView: UIView {
+    enum Day {
+        var color: UIColor {
+            switch self {
+            case .empty:
+                return UIColor.clear
+            case .solved(let pin):
+                switch pin {
+                case let x where x > 24:
+                    return UIColor(hex: 0x578657)
+                case let x where x > 9:
+                    return UIColor(hex: 0x6EB36E)
+                case let x where x > 4:
+                    return UIColor(hex: 0x89CC89)
+                case let x where x > 0:
+                    return UIColor(hex: 0xB8E0B8)
+                default:
+                    return UIColor(hex: 0xEEEEEE)
+                }
+            }
+        }
 
-    var hasMonths: Bool = false
-    var storedMonths: [(PinsMap.Month, PinsMapMonthView)] = []
-
-    override var nibName: String {
-        return "PinsMapView"
+        case empty
+        case solved(pin: Int)
     }
+
+    private let border = CGFloat(18)
+    private let monthSpacing = CGFloat(10)
+    private let labelSpacing = CGFloat(8)
+    private let daySpacing = CGFloat(1.5)
+
+    private let daysInWeek = 7
+    private let weeksInMonth = 5
+    private let monthsInYear = 12
+
+    private let calendar = Calendar.current
 
     private var howManyMonthsShouldBeDisplayed: Int {
         switch DeviceInfo.current.diagonal {
@@ -30,128 +55,203 @@ class PinsMapView: NibInitializableView {
         case let x where x > 4.0:
             return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
         default:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 6
         }
     }
 
-    private func buildDays(for month: PinsMap.Month, pins: [Int]) -> [PinsMapMonthView.Day] {
-        var days = [PinsMapMonthView.Day]()
-        for (isAllowed, pin) in month.filled(pins: pins).days {
-            days.append(isAllowed ? PinsMapMonthView.Day.solved(pin: pin) : PinsMapMonthView.Day.empty)
-        }
-        return days
-    }
+    private var scrollView: UIScrollView?
+    private var containerView: UIView?
+    private var dayLayers: [[CALayer]] = []
 
-    private func buildMonth(_ month: PinsMap.Month, title: String, pins: [Int]) -> PinsMapMonthView {
-        let view = PinsMapMonthView()
-        view.set(monthTitle: title, days: buildDays(for: month, pins: pins))
-        return view
-    }
+    private var cachedPins: [Int]?
 
     func buildMonths(_ pins: [Int]) {
-        let today = Date()
-        let calendar = Calendar.current
+        cachedPins = pins
+        updateMonths()
+    }
 
-        let pinsMap = PinsMap(calendar: calendar)
-        let monthsNames = calendar.standaloneMonthSymbols
-
-        var splittedPins = (try? pinsMap.splitPinsIntoMonths(pins: pins, today: today)) ?? []
-        if hasMonths {
-            // Update existing
-            for (month, view) in storedMonths {
-                var pinsForCurrentMonth = splittedPins.first
-                if pinsForCurrentMonth != nil {
-                    splittedPins = Array(splittedPins.dropFirst())
-                } else {
-                    pinsForCurrentMonth = []
-                }
-
-                view.set(days: buildDays(for: month, pins: pinsForCurrentMonth!.reversed()))
-            }
-            return
+    private func updateMonth(days: [CALayer], month: PinsMap.Month, pins: [Int]) {
+        for (day, (isAllowed, pin)) in zip(days, month.filled(pins: pins).days) {
+            day.backgroundColor = isAllowed ? Day.solved(pin: pin).color.cgColor : Day.empty.color.cgColor
         }
+    }
 
-        // Build new
+    private func getMonthsOfLastYear(today: Date) -> [(Int, Int)] {
         var year = calendar.component(.year, from: today)
         var month = calendar.component(.month, from: today)
         var affectedMonths = [(Int, Int)]()
-        while affectedMonths.count < 12 {
+        while affectedMonths.count < monthsInYear {
             affectedMonths.append((year, month))
             month -= 1
             if month == 0 {
                 year -= 1
-                month = 12
+                month = monthsInYear
             }
         }
 
-        for (year, month) in affectedMonths {
+        return affectedMonths
+    }
+
+    private func updateMonths() {
+        guard let pins = cachedPins else {
+            return
+        }
+
+        let today = Date()
+        let pinsMap = PinsMap(calendar: calendar)
+        var splittedPins = (try? pinsMap.splitPinsIntoMonths(pins: pins, today: today)) ?? []
+
+        let months = getMonthsOfLastYear(today: today)
+        for (daysForCurrentMonth, (year, month)) in zip(dayLayers.reversed(), months) {
             guard let bmonth = try? pinsMap.buildMonth(year: year, month: month, lastDay: today) else {
                 continue
             }
 
-            var pinsForCurrentMonth = splittedPins.last
+            var pinsForCurrentMonth = splittedPins.first
             if pinsForCurrentMonth != nil {
-                _ = splittedPins.dropLast()
+                splittedPins = Array(splittedPins.dropFirst())
             } else {
                 pinsForCurrentMonth = []
             }
 
-            let monthView = buildMonth(bmonth, title: monthsNames[month - 1], pins: pinsForCurrentMonth!.reversed())
-            storedMonths.append((bmonth, monthView))
-        }
-
-        storedMonths.reversed().map({ $0.1 }).forEach { view in
-            monthsStackView.addArrangedSubview(view)
-            self.hasMonths = true
+            updateMonth(days: daysForCurrentMonth, month: bmonth, pins: pinsForCurrentMonth!.reversed())
         }
     }
 
-    func clear() {
-        hasMonths = false
-        monthsStackView.subviews.forEach { view in
-            monthsStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
+    private func initialize() {
+        self.scrollView = UIScrollView()
+
+        guard let scrollView = self.scrollView else {
+            return
         }
+        scrollView.isScrollEnabled = true
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+
+        addSubview(scrollView)
+
+        scrollView.alignTop("\(border)", leading: "\(border - monthSpacing / 2.0)", bottom: "\(-border)", trailing: "\(-border + monthSpacing / 2.0)", toView: self)
     }
 
-    override func setupSubviews() {
-        scrollView.delegate = self
-    }
-
-    override func layoutSubviews() {
-        layoutIfNeeded()
-        DispatchQueue.main.async {
-            let width = (self.containerView.frame.width - CGFloat(self.howManyMonthsShouldBeDisplayed - 1) * self.monthsStackView.spacing) / CGFloat(self.howManyMonthsShouldBeDisplayed)
-            for monthView in self.storedMonths.map({ $0.1 }).reversed() {
-                monthView.constraints.forEach { constraint in
-                    if constraint.firstAttribute == .width {
-                        constraint.isActive = false
-                    }
-                }
-                monthView.widthAnchor.constraint(equalToConstant: width).isActive = true
+    private func findMaxSide(rect: CGSize) -> CGFloat {
+        let rectArea: CGFloat = rect.width * rect.height
+        // Binary search with fixed iterations count
+        let condition: (CGFloat) -> Bool = { (x: CGFloat) -> Bool in
+            return (CGFloat(self.daysInWeek) * x <= rect.height) &&
+                   (CGFloat(self.weeksInMonth) * x <= rect.width) &&
+                   (CGFloat(self.daysInWeek * self.weeksInMonth) * x * x <= rectArea)
+        }
+        var left: CGFloat = 1
+        var right: CGFloat = rect.width / 2
+        for _ in 0..<Int(1e6) {
+            let mid = (left + right) / 2.0
+            if condition(mid) {
+                left = mid
+            } else {
+                right = mid
             }
-            self.layoutIfNeeded()
-
-            guard self.howManyMonthsShouldBeDisplayed - 1 >= 0 && self.howManyMonthsShouldBeDisplayed - 1 < self.storedMonths.count else {
-                return
-            }
-            self.scrollView.contentOffset = CGPoint(x: self.storedMonths[self.howManyMonthsShouldBeDisplayed - 1].1.frame.origin.x, y: self.scrollView.contentOffset.y)
         }
+        return (left + right) / 2.0
     }
-}
 
-extension PinsMapView: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+    private func drawGrid() {
+        let monthNames = Calendar.current.standaloneMonthSymbols
 
-        guard howManyMonthsShouldBeDisplayed * page < storedMonths.count else {
+        // Create scrollView
+        if self.scrollView == nil {
+            initialize()
+        }
+
+        guard let scrollView = self.scrollView else {
+            return
+        }
+        let frame = scrollView.frame
+
+        // Remove old container
+        dayLayers.removeAll(keepingCapacity: true)
+        containerView?.removeFromSuperview()
+
+        containerView = UIView()
+        guard let containerView = containerView else {
             return
         }
 
-        let shouldBeVisibleX = storedMonths.reversed()[howManyMonthsShouldBeDisplayed * page].1.frame.origin.x
+        // Resize container view
+        scrollView.addSubview(containerView)
+        containerView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: scrollView)
+        containerView.frame = CGRect(x: 0, y: 0, width: frame.width * CGFloat(ceil(Double(monthsInYear / howManyMonthsShouldBeDisplayed))), height: frame.height)
+        scrollView.contentSize = CGSize(width: containerView.frame.width, height: containerView.frame.height)
 
-        UIView.animate(withDuration: 0.1) {
-            self.scrollView.contentOffset = CGPoint(x: shouldBeVisibleX, y: self.scrollView.contentOffset.y)
+        // Create and resize month titles
+        var monthsLabels = [StepikLabel]()
+        for i in 0..<monthsInYear {
+            let label = StepikLabel()
+            label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+            label.colorMode = .dark
+            label.text = monthNames[i]
+            label.sizeToFit()
+            monthsLabels.append(label)
+        }
+        let maxLabelHeight = monthsLabels.map({ $0.bounds.height }).max() ?? 0
+
+        // Calculate month size (w/o spacing between months)
+        let oneMonthWidth = (frame.width - CGFloat(howManyMonthsShouldBeDisplayed - 1) * (monthSpacing * 1.5)) / CGFloat(howManyMonthsShouldBeDisplayed)
+        let oneMonthHeight = frame.height - labelSpacing - maxLabelHeight
+        let oneMonthSize = CGSize(width: oneMonthWidth, height: oneMonthHeight)
+
+        // Calculate month size (w/o spacing between months and days)
+        let boundedHeight = CGFloat(oneMonthSize.height - CGFloat(daysInWeek - 1) * daySpacing)
+        let boundedWidth = CGFloat(oneMonthSize.width - CGFloat(weeksInMonth - 1) * daySpacing)
+        let daySide = findMaxSide(rect: CGSize(width: boundedWidth, height: boundedHeight))
+        // We found max side for day-rect, so we should add unaccounted space
+        let widthError = (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2
+
+        let halfSpacing = CGFloat(monthSpacing / 2.0)
+        let monthsNums = getMonthsOfLastYear(today: Date()).reversed().map { $0.1 }
+
+        var x = CGFloat(0)
+        for i in 0..<monthsInYear {
+            x += halfSpacing + widthError
+
+            let labelX = x
+
+            var y = CGFloat(0)
+            var days: [CALayer] = []
+            for week in 0..<weeksInMonth {
+                y = CGFloat(0)
+                for dayOfWeek in 0..<daysInWeek {
+                    let dayRect = CALayer()
+                    dayRect.cornerRadius = 2
+                    dayRect.frame = CGRect(x: x, y: y, width: daySide, height: daySide)
+                    dayRect.backgroundColor = Day.empty.color.cgColor
+                    containerView.layer.addSublayer(dayRect)
+
+                    days.append(dayRect)
+                    y += daySide + (dayOfWeek < daysInWeek - 1 ? daySpacing : 0)
+                }
+                x += daySide + (week < weeksInMonth - 1 ? daySpacing : 0)
+            }
+
+            let labelY = y + labelSpacing
+            let label = monthsLabels[monthsNums[i] - 1]
+            containerView.addSubview(label)
+            label.frame = CGRect(x: labelX, y: labelY, width: label.frame.width, height: label.frame.height)
+
+            x += halfSpacing + widthError
+
+            if i == monthsInYear - howManyMonthsShouldBeDisplayed - 1 {
+                scrollView.contentOffset = CGPoint(x: x, y: scrollView.contentOffset.y)
+            }
+
+            dayLayers.append(days)
+        }
+
+        updateMonths()
+    }
+
+    override func layoutSubviews() {
+        DispatchQueue.main.async {
+            self.drawGrid()
         }
     }
 }
