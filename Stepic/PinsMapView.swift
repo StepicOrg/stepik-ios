@@ -51,7 +51,7 @@ class PinsMapView: UIView {
         case let x where x > 5.8:
             return DeviceInfo.current.orientation.interface.isPortrait ? 8 : 8
         case let x where x > 4.7:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
         case let x where x > 4.0:
             return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
         default:
