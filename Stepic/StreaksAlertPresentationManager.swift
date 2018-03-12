@@ -8,6 +8,7 @@
 
 import Foundation
 import Presentr
+import PromiseKit
 
 protocol StreaksAlertPresentationDelegate: class {
     func didDismiss()
@@ -19,31 +20,23 @@ class StreaksAlertPresentationManager {
 
     var source: StreaksAlertPresentationSource?
     private var didTransitionToSettings = false
+    var notificationPermissionManager: NotificationPermissionManager
 
     enum StreaksAlertPresentationSource: String {
         case login = "login"
         case submission = "submission"
     }
 
-    init(controller: UIViewController, source: StreaksAlertPresentationSource) {
-        NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        self.controller = controller
+    init(source: StreaksAlertPresentationSource, notificationPermissionManager: NotificationPermissionManager = NotificationPermissionManager()) {
         self.source = source
-    }
-
-    init(source: StreaksAlertPresentationSource) {
-        NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        self.source = source
-    }
-
-    init() {
+        self.notificationPermissionManager = notificationPermissionManager
         NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
     @objc func becameActive() {
         if didTransitionToSettings {
             didTransitionToSettings = false
-            self.notifyPressed(fromPreferences: true)
+            cameFromSettings()
         }
     }
 
@@ -96,16 +89,42 @@ class StreaksAlertPresentationManager {
         controller.present(alert, animated: true, completion: nil)
     }
 
-    func notifyPressed(fromPreferences: Bool) {
+    func notifyPressed() {
+        notificationPermissionManager.getCurrentPermissionStatus().then {
+            [weak self]
+            status -> Void in
 
-        guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
-            if !fromPreferences {
-                showStreaksSettingsNotificationAlert()
+            switch status {
+            case .notDetermined:
+                NotificationRegistrator.shared.registerForRemoteNotifications()
+                self?.selectStreakNotificationTime()
+            case .authorized:
+                self?.selectStreakNotificationTime()
+            case .denied:
+                self?.showStreaksSettingsNotificationAlert()
+            }
+            return
+        }
+    }
+
+    func cameFromSettings() {
+        notificationPermissionManager.getCurrentPermissionStatus().then {
+            [weak self]
+            status -> Void in
+
+            switch status {
+            case .notDetermined:
+                // Actually, it should never come here, but just in case
+                NotificationRegistrator.shared.registerForRemoteNotifications()
+            case .authorized:
+                self?.selectStreakNotificationTime()
+            case .denied:
+                //TODO: Add dialog to tell user he should have permitteed the notifications
+                self?.delegate?.didDismiss()
             }
             return
         }
 
-        self.selectStreakNotificationTime()
     }
 
     func suggestStreak(streak: Int) {

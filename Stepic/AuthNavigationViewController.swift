@@ -11,7 +11,7 @@ import UIKit
 class AuthNavigationViewController: UINavigationController {
 
     var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
-    var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager = StreaksNotificationSuggestionManager()
+    var streaksNotificationSuggestionManager: NotificationSuggestionManager = NotificationSuggestionManager()
 
     enum Controller {
         case social
@@ -45,8 +45,8 @@ class AuthNavigationViewController: UINavigationController {
             userActivitiesAPI.retrieve(user: userId)
         }.then {
             userActivity -> Void in
-            if userActivity.didSolveThisWeek && self.streaksNotificationSuggestionManager.canShowAlert(after: .login) {
-                self.streaksNotificationSuggestionManager.didShowStreakAlert()
+            if userActivity.didSolveThisWeek && self.streaksNotificationSuggestionManager.canShowAlert(context: .streak, after: .login) {
+                self.streaksNotificationSuggestionManager.didShowAlert(context: .streak)
                 self.streaksAlertPresentationManager.suggestStreak(streak: userActivity.currentStreak)
             }
         }

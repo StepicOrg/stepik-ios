@@ -49,7 +49,7 @@ class RegistrationPresenter {
             AuthInfo.shared.token = token
             AuthInfo.shared.authorizationType = authorizationType
 
-            NotificationRegistrator.shared.registerForRemoteNotifications()
+            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
 
             return self.stepicsAPI.retrieveCurrentUser()
         }.then { user -> Promise<NotificationsStatus> in

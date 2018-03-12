@@ -352,7 +352,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         if segue.identifier == "showSections" {
             let dvc = segue.destination as! SectionsViewController
             dvc.course = course
-            dvc.shouldShowShareTooltip = true
+            dvc.didJustSubscribe = true
         }
     }
 

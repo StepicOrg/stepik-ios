@@ -27,6 +27,7 @@ protocol CardsStepsView: class {
     func presentDiscussions(stepId: Int, discussionProxyId: String)
     func presentShareDialog(for link: String)
     func refreshCards()
+    func present(alertManager: AlertManager, alert: UIViewController)
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
@@ -38,6 +39,7 @@ protocol CardsStepsPresenter: StepCardViewDelegate {
     var state: CardsStepsPresenterState { get set }
     var course: Course? { get set }
 
+    func appearedAfterSubscription()
     func refresh()
     func refreshTopCard()
     func tryAgain()
@@ -68,6 +70,8 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     internal var storageManager: AdaptiveStorageManager
     internal var ratingsAPI: AdaptiveRatingsAPI
     internal var lastViewedUpdater: LocalProgressLastViewedUpdater
+    internal var notificationSuggestionManager: NotificationSuggestionManager
+    internal var notificationPermissionManager: NotificationPermissionManager
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -115,7 +119,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, course: Course?, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationPermissionManager: NotificationPermissionManager, course: Course?, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -126,6 +130,8 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.statsManager = statsManager
         self.storageManager = storageManager
         self.lastViewedUpdater = lastViewedUpdater
+        self.notificationSuggestionManager = notificationSuggestionManager
+        self.notificationPermissionManager = notificationPermissionManager
 
         self.course = course
         self.view = view
@@ -141,6 +147,26 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     func didAppear() {
         if let course = course {
             lastViewedUpdater.updateView(for: course)
+        }
+    }
+
+    func appearedAfterSubscription() {
+        if #available(iOS 10.0, *) {
+            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
+                notificationPermissionManager.getCurrentPermissionStatus().then {
+                    [weak self]
+                    status -> Void in
+
+                    switch status {
+                    case .notDetermined:
+                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
+                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
+                        self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+                    default:
+                        break
+                    }
+                }
+            }
         }
     }
 

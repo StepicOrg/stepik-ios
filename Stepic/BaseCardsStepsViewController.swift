@@ -23,6 +23,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
 
     // For init View-Presenter via view creating
     var course: Course!
+    var didJustSubscribe: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
         progressBar.progress = 0
 
         if presenter == nil {
-            presenter = BaseCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), storageManager: AdaptiveStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), course: course, view: self)
+            presenter = BaseCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), storageManager: AdaptiveStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), notificationSuggestionManager: NotificationSuggestionManager(), notificationPermissionManager: NotificationPermissionManager(), course: course, view: self)
             presenter?.refresh()
         }
     }
@@ -76,6 +77,14 @@ class BaseCardsStepsViewController: CardsStepsViewController {
 
         if shouldToggleNavigationBar {
             navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if didJustSubscribe {
+            didJustSubscribe = false
+            presenter?.appearedAfterSubscription()
         }
     }
 

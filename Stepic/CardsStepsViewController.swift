@@ -11,6 +11,7 @@ import PromiseKit
 import Koloda
 
 class CardsStepsViewController: UIViewController, CardsStepsView {
+
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
@@ -133,6 +134,10 @@ class CardsStepsViewController: UIViewController, CardsStepsView {
         })
         state = .congratulation
         Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
+    }
+
+    func present(alertManager: AlertManager, alert: UIViewController) {
+        alertManager.present(alert: alert, inController: self)
     }
 }
 

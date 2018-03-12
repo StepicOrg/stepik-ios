@@ -15,7 +15,26 @@ import PromiseKit
 class NotificationRegistrator {
     static let shared = NotificationRegistrator()
 
+    let notificationPermissionManager = NotificationPermissionManager()
+
     private init () { }
+
+    func registerForRemoteNotificationsIfAlreadyAsked() {
+        if #available(iOS 10.0, *) {
+            notificationPermissionManager.getCurrentPermissionStatus().then {
+                [weak self]
+                status -> Void in
+                switch status {
+                case .authorized:
+                    self?.registerForRemoteNotifications()
+                default:
+                    return
+                }
+            }
+        } else {
+            registerForRemoteNotifications()
+        }
+    }
 
     func registerForRemoteNotifications() {
         return registerForRemoteNotifications(UIApplication.shared)
@@ -36,7 +55,7 @@ class NotificationRegistrator {
     }
 
     func getGCMRegistrationToken(deviceToken: Data) {
-        InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.unknown)
+        Messaging.messaging().apnsToken = deviceToken
     }
 
     var registrationOptions = [String: AnyObject]()
