@@ -231,6 +231,7 @@ struct AnalyticsEvents {
 
     struct Profile {
         static let clickSettings = "main_choice_settings"
+        static let interactionWithPinsMap = "pins_map_interaction"
         struct Settings {
             static let clickBanner = "settings_click_banner"
         }
@@ -240,7 +241,7 @@ struct AnalyticsEvents {
         static let markAllAsRead = "notifications_mark_all_as_read"
         static let markAsRead = "notifications_mark_as_read"
     }
-    
+
     struct NotificationRequest {
         static func shown(context: NotificationRequestAlertContext) -> String {
             return "notification_alert_context_\(context.rawValue)_shown"

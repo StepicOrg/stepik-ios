@@ -49,11 +49,11 @@ class PinsMapView: UIView {
     private var howManyMonthsShouldBeDisplayed: Int {
         switch DeviceInfo.current.diagonal {
         case let x where x > 5.8:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 8 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
         case let x where x > 4.7:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         case let x where x > 4.0:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         default:
             return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 6
         }
@@ -63,7 +63,11 @@ class PinsMapView: UIView {
     private var containerView: UIView?
     private var dayLayers: [[CALayer]] = []
 
+    private var lastRenderedFrame: CGRect?
     private var cachedPins: [Int]?
+    private var generatedMonths: [(PinsMap.Month, [CALayer])] = []
+
+    private var didAnalyticsReport = false
 
     func buildMonths(_ pins: [Int]) {
         cachedPins = pins
@@ -93,20 +97,21 @@ class PinsMapView: UIView {
     }
 
     private func updateMonths() {
+        // Split pins and update layers
         guard let pins = cachedPins else {
             return
+        }
+
+        // Generate and save pairs <month, layers> for quick access in the next draw cycle
+        if generatedMonths.isEmpty {
+            generatedMonths = generateMonthsLayout()
         }
 
         let today = Date()
         let pinsMap = PinsMap(calendar: calendar)
         var splittedPins = (try? pinsMap.splitPinsIntoMonths(pins: pins, today: today)) ?? []
 
-        let months = getMonthsOfLastYear(today: today)
-        for (daysForCurrentMonth, (year, month)) in zip(dayLayers.reversed(), months) {
-            guard let bmonth = try? pinsMap.buildMonth(year: year, month: month, lastDay: today) else {
-                continue
-            }
-
+        for month in generatedMonths {
             var pinsForCurrentMonth = splittedPins.first
             if pinsForCurrentMonth != nil {
                 splittedPins = Array(splittedPins.dropFirst())
@@ -114,8 +119,23 @@ class PinsMapView: UIView {
                 pinsForCurrentMonth = []
             }
 
-            updateMonth(days: daysForCurrentMonth, month: bmonth, pins: pinsForCurrentMonth!.reversed())
+            updateMonth(days: month.1, month: month.0, pins: pinsForCurrentMonth!.reversed())
         }
+    }
+
+    private func generateMonthsLayout() -> [(PinsMap.Month, [CALayer])] {
+        let today = Date()
+        let pinsMap = PinsMap(calendar: calendar)
+
+        var generatedMonths = [(PinsMap.Month, [CALayer])]()
+        let months = getMonthsOfLastYear(today: today)
+        for (daysForCurrentMonth, (year, month)) in zip(dayLayers.reversed(), months) {
+            guard let bmonth = try? pinsMap.buildMonth(year: year, month: month, lastDay: today) else {
+                continue
+            }
+            generatedMonths.append((bmonth, daysForCurrentMonth))
+        }
+        return generatedMonths
     }
 
     private func initialize() {
@@ -124,9 +144,12 @@ class PinsMapView: UIView {
         guard let scrollView = self.scrollView else {
             return
         }
+        scrollView.delegate = self
+        scrollView.alpha = 0.0
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(scrollView)
 
@@ -167,9 +190,17 @@ class PinsMapView: UIView {
         }
         let frame = scrollView.frame
 
+        // Prevent multiple drawing
+        if lastRenderedFrame == frame {
+            return
+        } else {
+            lastRenderedFrame = frame
+        }
+
         // Remove old container
         dayLayers.removeAll(keepingCapacity: true)
         containerView?.removeFromSuperview()
+        generatedMonths.removeAll(keepingCapacity: true)
 
         containerView = UIView()
         guard let containerView = containerView else {
@@ -178,9 +209,10 @@ class PinsMapView: UIView {
 
         // Resize container view
         scrollView.addSubview(containerView)
-        containerView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: scrollView)
-        containerView.frame = CGRect(x: 0, y: 0, width: frame.width * CGFloat(ceil(Double(monthsInYear / howManyMonthsShouldBeDisplayed))), height: frame.height)
-        scrollView.contentSize = CGSize(width: containerView.frame.width, height: containerView.frame.height)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.align(toView: scrollView)
+        scrollView.constrainHeight(toView: containerView, predicate: "*1")
+        containerView.constrainWidth("\(frame.width * CGFloat(ceil(Double(monthsInYear) / Double(howManyMonthsShouldBeDisplayed))))")
 
         // Create and resize month titles
         var monthsLabels = [StepikLabel]()
@@ -195,7 +227,7 @@ class PinsMapView: UIView {
         let maxLabelHeight = monthsLabels.map({ $0.bounds.height }).max() ?? 0
 
         // Calculate month size (w/o spacing between months)
-        let oneMonthWidth = (frame.width - CGFloat(howManyMonthsShouldBeDisplayed - 1) * (monthSpacing * 1.5)) / CGFloat(howManyMonthsShouldBeDisplayed)
+        let oneMonthWidth = (frame.width - CGFloat(howManyMonthsShouldBeDisplayed) * monthSpacing) / CGFloat(howManyMonthsShouldBeDisplayed)
         let oneMonthHeight = frame.height - labelSpacing - maxLabelHeight
         let oneMonthSize = CGSize(width: oneMonthWidth, height: oneMonthHeight)
 
@@ -204,7 +236,7 @@ class PinsMapView: UIView {
         let boundedWidth = CGFloat(oneMonthSize.width - CGFloat(weeksInMonth - 1) * daySpacing)
         let daySide = findMaxSide(rect: CGSize(width: boundedWidth, height: boundedHeight))
         // We found max side for day-rect, so we should add unaccounted space
-        let widthError = (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2
+        let widthError = max(0, (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2)
 
         let halfSpacing = CGFloat(monthSpacing / 2.0)
         let monthsNums = getMonthsOfLastYear(today: Date()).reversed().map { $0.1 }
@@ -246,12 +278,27 @@ class PinsMapView: UIView {
             dayLayers.append(days)
         }
 
+        // Delay to prevent 'jumps' when layers not rendered
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            UIView.animate(withDuration: 0.2) {
+                self.scrollView?.alpha = 1.0
+            }
+        }
         updateMonths()
     }
 
     override func layoutSubviews() {
         DispatchQueue.main.async {
             self.drawGrid()
+        }
+    }
+}
+
+extension PinsMapView: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if !didAnalyticsReport {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.interactionWithPinsMap)
+            didAnalyticsReport = true
         }
     }
 }

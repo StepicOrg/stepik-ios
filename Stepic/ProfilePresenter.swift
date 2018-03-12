@@ -57,8 +57,8 @@ class ProfilePresenter {
         blocks = [
             buildNotificationsSwitchBlock(),
             buildNotificationsTimeSelectionBlock(),
-            buildInfoExpandableBlock(user: user),
             buildPinsMapExpandableBlock(activity: userActivity),
+            buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
             buildLogoutBlock()
