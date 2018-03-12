@@ -69,6 +69,11 @@ class AdaptiveUserActions {
     }
 
     internal func registerAdaptiveUser() -> Promise<(email: String, password: String)> {
+        if let savedEmail = defaultsStorageManager.accountEmail,
+           let savedPassword = defaultsStorageManager.accountPassword {
+            return Promise(value: (email: savedEmail, password: savedPassword))
+        }
+
         let firstname = StringHelper.generateRandomString(of: 6)
         let lastname = StringHelper.generateRandomString(of: 6)
         let email = "adaptive_\(StepicApplicationsInfo.adaptiveSupportedCourses.first ?? 0)_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"

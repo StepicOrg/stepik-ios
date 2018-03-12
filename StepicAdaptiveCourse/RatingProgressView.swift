@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 protocol RatingProgressViewDelegate: class {
     func onClick()
@@ -191,7 +192,7 @@ class RatingProgressView: UIView {
         frontFrame.size.width = 0
         frontView = UIView(frame: frontFrame)
         frontView.backgroundColor = mainColor
-        frontView.autoresizingMask = .flexibleWidth
+        frontView.translatesAutoresizingMaskIntoConstraints = false
 
         // Make main label (front)
         frontLabel = UILabel(frame: self.bounds)
@@ -220,7 +221,7 @@ class RatingProgressView: UIView {
         congratulationView = UIView(frame: self.bounds)
         congratulationView.alpha = 0.0
         congratulationView.backgroundColor = congratulationColor
-        congratulationView.autoresizingMask = .flexibleWidth
+        congratulationView.translatesAutoresizingMaskIntoConstraints = false
         congratulationLabel = UILabel(frame: self.bounds)
         congratulationLabel.font = labelFont
         congratulationLabel.textAlignment = label.textAlignment
@@ -241,23 +242,11 @@ class RatingProgressView: UIView {
         congratulationView.layer.addSublayer(congratsShadowLayer)
         self.addSubview(congratulationView)
 
-        // Center all labels
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: label, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
-
-            NSLayoutConstraint(item: frontLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: frontLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: frontLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: frontLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
-
-            NSLayoutConstraint(item: congratulationLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 8),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
-        ])
+        label.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        frontLabel.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        congratulationLabel.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        frontView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self)
+        congratulationView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self)
     }
 
     override func layoutSubviews() {
