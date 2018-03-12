@@ -67,6 +67,8 @@ class PinsMapView: UIView {
     private var cachedPins: [Int]?
     private var generatedMonths: [(PinsMap.Month, [CALayer])] = []
 
+    private var didAnalyticsReport = false
+
     func buildMonths(_ pins: [Int]) {
         cachedPins = pins
         updateMonths()
@@ -142,6 +144,7 @@ class PinsMapView: UIView {
         guard let scrollView = self.scrollView else {
             return
         }
+        scrollView.delegate = self
         scrollView.alpha = 0.0
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
@@ -287,6 +290,15 @@ class PinsMapView: UIView {
     override func layoutSubviews() {
         DispatchQueue.main.async {
             self.drawGrid()
+        }
+    }
+}
+
+extension PinsMapView: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if !didAnalyticsReport {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.interactionWithPinsMap)
+            didAnalyticsReport = true
         }
     }
 }
