@@ -30,13 +30,15 @@ class CardsStepsViewController: UIViewController, CardsStepsView {
             case .connectionError, .coursePassed:
                 self.placeholderView.isHidden = false
                 self.kolodaView.isHidden = true
+
+                self.placeholderView.datasource = self
             default:
                 break
             }
         }
     }
 
-    lazy var placeholderView: UIView = {
+    lazy var placeholderView: PlaceholderView = {
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.align(toView: self.kolodaView)

@@ -18,7 +18,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     // Initial actions (registration, join course, etc)
     // We init presenter w/o course and load it in the initialActions block
     var isInitialActionsFinished = false
-    var initialActions: Promise<Course>?
+    var initialActions: ((((Course) -> Void)?, ((Error) -> Void)?) -> Void)?
 
     override var onboardingLastStepIndex: Int {
         return 4
@@ -32,7 +32,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         return false
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, view: CardsStepsView) {
         self.achievementsManager = achievementsManager
 
         super.init(stepsAPI: stepsAPI, lessonsAPI: lessonsAPI, recommendationsAPI: recommendationsAPI, unitsAPI: unitsAPI, viewsAPI: viewsAPI, ratingsAPI: ratingsAPI, ratingManager: ratingManager, statsManager: statsManager, storageManager: storageManager, lastViewedUpdater: LocalProgressLastViewedUpdater(), notificationSuggestionManager: NotificationSuggestionManager(), notificationPermissionManager: NotificationPermissionManager(), course: nil, view: view)
@@ -51,7 +51,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
 
         DispatchQueue.global().async { [weak self] in
             if let actions = self?.initialActions {
-                actions.then { course -> Void in
+                actions({ course in
                     self?.course = course
 
                     self?.isInitialActionsFinished = true
@@ -59,16 +59,17 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
                     if self?.storageManager.isAdaptiveOnboardingPassed ?? false {
                         self?.view?.refreshCards()
                     }
-                }.catch { error in
-                    if let error = error as? AdaptiveCardsStepsError {
-                        switch error {
-                        case .noProfile, .userNotUnregisteredFromEmails:
-                            break
-                        default:
-                            self?.view?.state = .connectionError
-                        }
+                }, { error in
+                    switch error {
+                    case AdaptiveCardsStepsError.noProfile, AdaptiveCardsStepsError.userNotUnregisteredFromEmails:
+                        break
+                    case PerformRequestError.noAccessToRefreshToken:
+                        self?.logout()
+                    default:
+                        self?.state = .connectionError
+                        self?.view?.state = .connectionError
                     }
-                }
+                })
             } else {
                 self?.isInitialActionsFinished = true
             }
@@ -115,7 +116,7 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
     }
 
     override func tryAgain() {
-        if self.view?.state == .connectionError && !isInitialActionsFinished {
+        if self.state == .connectionError && !isInitialActionsFinished {
             refresh()
             return
         }
@@ -129,6 +130,16 @@ class AdaptiveCardsStepsPresenter: BaseCardsStepsPresenter {
         }
         let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
         view?.presentShareDialog(for: shareLink)
+    }
+
+    override func logout() {
+        AuthInfo.shared.token = nil
+        AuthInfo.shared.user = nil
+
+        cachedRecommendedLessons = []
+        isInitialActionsFinished = false
+
+        refresh()
     }
 }
 
