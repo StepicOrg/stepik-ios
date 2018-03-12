@@ -65,6 +65,7 @@ class PinsMapView: UIView {
 
     private var lastRenderedFrame: CGRect?
     private var cachedPins: [Int]?
+    private var generatedMonths: [(PinsMap.Month, [CALayer])] = []
 
     func buildMonths(_ pins: [Int]) {
         cachedPins = pins
@@ -94,20 +95,21 @@ class PinsMapView: UIView {
     }
 
     private func updateMonths() {
+        // Split pins and update layers
         guard let pins = cachedPins else {
             return
+        }
+
+        // Generate and save pairs <month, layers> for quick access in the next draw cycle
+        if generatedMonths.isEmpty {
+            generatedMonths = generateMonthsLayout()
         }
 
         let today = Date()
         let pinsMap = PinsMap(calendar: calendar)
         var splittedPins = (try? pinsMap.splitPinsIntoMonths(pins: pins, today: today)) ?? []
 
-        let months = getMonthsOfLastYear(today: today)
-        for (daysForCurrentMonth, (year, month)) in zip(dayLayers.reversed(), months) {
-            guard let bmonth = try? pinsMap.buildMonth(year: year, month: month, lastDay: today) else {
-                continue
-            }
-
+        for month in generatedMonths {
             var pinsForCurrentMonth = splittedPins.first
             if pinsForCurrentMonth != nil {
                 splittedPins = Array(splittedPins.dropFirst())
@@ -115,8 +117,23 @@ class PinsMapView: UIView {
                 pinsForCurrentMonth = []
             }
 
-            updateMonth(days: daysForCurrentMonth, month: bmonth, pins: pinsForCurrentMonth!.reversed())
+            updateMonth(days: month.1, month: month.0, pins: pinsForCurrentMonth!.reversed())
         }
+    }
+
+    private func generateMonthsLayout() -> [(PinsMap.Month, [CALayer])] {
+        let today = Date()
+        let pinsMap = PinsMap(calendar: calendar)
+
+        var generatedMonths = [(PinsMap.Month, [CALayer])]()
+        let months = getMonthsOfLastYear(today: today)
+        for (daysForCurrentMonth, (year, month)) in zip(dayLayers.reversed(), months) {
+            guard let bmonth = try? pinsMap.buildMonth(year: year, month: month, lastDay: today) else {
+                continue
+            }
+            generatedMonths.append((bmonth, daysForCurrentMonth))
+        }
+        return generatedMonths
     }
 
     private func initialize() {
@@ -180,6 +197,7 @@ class PinsMapView: UIView {
         // Remove old container
         dayLayers.removeAll(keepingCapacity: true)
         containerView?.removeFromSuperview()
+        generatedMonths.removeAll(keepingCapacity: true)
 
         containerView = UIView()
         guard let containerView = containerView else {
