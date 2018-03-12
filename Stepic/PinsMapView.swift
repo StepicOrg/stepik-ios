@@ -63,6 +63,7 @@ class PinsMapView: UIView {
     private var containerView: UIView?
     private var dayLayers: [[CALayer]] = []
 
+    private var lastRenderedFrame: CGRect?
     private var cachedPins: [Int]?
 
     func buildMonths(_ pins: [Int]) {
@@ -124,6 +125,7 @@ class PinsMapView: UIView {
         guard let scrollView = self.scrollView else {
             return
         }
+        scrollView.alpha = 0.0
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -167,6 +169,13 @@ class PinsMapView: UIView {
             return
         }
         let frame = scrollView.frame
+
+        // Prevent multiple drawing
+        if lastRenderedFrame == frame {
+            return
+        } else {
+            lastRenderedFrame = frame
+        }
 
         // Remove old container
         dayLayers.removeAll(keepingCapacity: true)
@@ -248,6 +257,12 @@ class PinsMapView: UIView {
             dayLayers.append(days)
         }
 
+        // Delay to prevent 'jumps' when layers not rendered
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            UIView.animate(withDuration: 0.2) {
+                self.scrollView?.alpha = 1.0
+            }
+        }
         updateMonths()
     }
 
