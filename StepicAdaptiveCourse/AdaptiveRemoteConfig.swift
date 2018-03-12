@@ -18,9 +18,9 @@ extension RemoteConfig {
         // Dirty way to extend base class: re-import defaults
         var defaults = appDefaults
         defaults[AdaptiveRemoteConfigKeys.coursesInfoUrl.rawValue] = StepicApplicationsInfo.adaptiveCoursesInfoURL as NSObject
-        FIRRemoteConfig.remoteConfig().setDefaults(defaults)
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(defaults)
 
-        guard let configValue = FIRRemoteConfig.remoteConfig().configValue(forKey: AdaptiveRemoteConfigKeys.coursesInfoUrl.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: AdaptiveRemoteConfigKeys.coursesInfoUrl.rawValue).stringValue else {
             return StepicApplicationsInfo.adaptiveCoursesInfoURL
         }
 

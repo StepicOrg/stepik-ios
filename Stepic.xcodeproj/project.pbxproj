@@ -273,6 +273,17 @@
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
+		083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CAE2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CAF2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CB02056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CB12056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CB22056718000B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
+		083C9CB32056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
@@ -12628,6 +12639,7 @@
 				2C1B61E01F4C4AEF00236804 /* MatchingReply.swift in Sources */,
 				2C1B61E11F4C4AEF00236804 /* FillBlanksReply.swift in Sources */,
 				2C1B61E21F4C4AEF00236804 /* VideoDownloadDelegate.swift in Sources */,
+				083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B61E31F4C4AEF00236804 /* Model.xcdatamodeld in Sources */,
 				2C1B61E41F4C4AEF00236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B61E51F4C4AEF00236804 /* CodeLimit.swift in Sources */,
@@ -12675,6 +12687,7 @@
 				08CB0D2E1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				2C1B620C1F4C4AEF00236804 /* QueriesAPI.swift in Sources */,
 				2C1B620D1F4C4AEF00236804 /* AutocompleteWords.swift in Sources */,
+				083C9CB12056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				2C1B620E1F4C4AEF00236804 /* ApiDataDownloader.swift in Sources */,
 				2C1B620F1F4C4AEF00236804 /* Meta.swift in Sources */,
 				2C1B62111F4C4AEF00236804 /* DevicesAPI.swift in Sources */,
@@ -13063,6 +13076,7 @@
 				2C1B63F11F4C590700236804 /* MatchingReply.swift in Sources */,
 				2C1B63F21F4C590700236804 /* FillBlanksReply.swift in Sources */,
 				2C1B63F31F4C590700236804 /* VideoDownloadDelegate.swift in Sources */,
+				083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B63F41F4C590700236804 /* Model.xcdatamodeld in Sources */,
 				2C1B63F51F4C590700236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B63F61F4C590700236804 /* CodeLimit.swift in Sources */,
@@ -13110,6 +13124,7 @@
 				08CB0D2F1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				2C1B641D1F4C590700236804 /* QueriesAPI.swift in Sources */,
 				2C1B641E1F4C590700236804 /* AutocompleteWords.swift in Sources */,
+				083C9CB22056718000B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				2C1B641F1F4C590700236804 /* ApiDataDownloader.swift in Sources */,
 				2C1B64201F4C590700236804 /* Meta.swift in Sources */,
 				2C1B64221F4C590700236804 /* DevicesAPI.swift in Sources */,
@@ -13498,6 +13513,7 @@
 				2C86538E1F4B33DE00D51654 /* MatchingReply.swift in Sources */,
 				2C86538F1F4B33DE00D51654 /* FillBlanksReply.swift in Sources */,
 				2C8653901F4B33DE00D51654 /* VideoDownloadDelegate.swift in Sources */,
+				083C9CB32056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C8653911F4B33DE00D51654 /* Model.xcdatamodeld in Sources */,
 				2C8653921F4B33DE00D51654 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C8653931F4B33DE00D51654 /* CodeLimit.swift in Sources */,
@@ -13545,6 +13561,7 @@
 				08CB0D2B1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				2C8653BA1F4B33DE00D51654 /* QueriesAPI.swift in Sources */,
 				2C8653BB1F4B33DE00D51654 /* AutocompleteWords.swift in Sources */,
+				083C9CAE2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				2C8653BC1F4B33DE00D51654 /* ApiDataDownloader.swift in Sources */,
 				2C8653BD1F4B33DE00D51654 /* Meta.swift in Sources */,
 				2C8653BF1F4B33DE00D51654 /* DevicesAPI.swift in Sources */,
@@ -13628,6 +13645,7 @@
 				2C89A9581F4C289900227C3B /* PagerController.swift in Sources */,
 				2C89A9591F4C289900227C3B /* ShareableController.swift in Sources */,
 				2C89A95A1F4C289900227C3B /* PostViewsExecutableTask.swift in Sources */,
+				083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89A95B1F4C289900227C3B /* Tokens.swift in Sources */,
 				2C89A95C1F4C289900227C3B /* LoadingPaginationView.swift in Sources */,
 				2C89A95D1F4C289900227C3B /* CertificatesAPIPaginatedMock.swift in Sources */,
@@ -13921,6 +13939,7 @@
 				2C89AA6E1F4C289900227C3B /* ChoiceReply.swift in Sources */,
 				2C89AA6F1F4C289900227C3B /* TextReply.swift in Sources */,
 				2C89AA701F4C289900227C3B /* NumberReply.swift in Sources */,
+				083C9CAF2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				08CB0D2C1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				2C89AA711F4C289900227C3B /* FreeAnswerReply.swift in Sources */,
 				08EA89BE200E53CD00BCAF44 /* NotificationsStatus.swift in Sources */,
@@ -14367,6 +14386,7 @@
 				2C9732281F4C38F600AC9301 /* MatchingReply.swift in Sources */,
 				2C9732291F4C38F600AC9301 /* FillBlanksReply.swift in Sources */,
 				2C97322A1F4C38F600AC9301 /* VideoDownloadDelegate.swift in Sources */,
+				083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C97322B1F4C38F600AC9301 /* Model.xcdatamodeld in Sources */,
 				2C97322C1F4C38F600AC9301 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C97322D1F4C38F600AC9301 /* CodeLimit.swift in Sources */,
@@ -14414,6 +14434,7 @@
 				08CB0D2D1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				2C9732541F4C38F600AC9301 /* QueriesAPI.swift in Sources */,
 				2C9732551F4C38F600AC9301 /* AutocompleteWords.swift in Sources */,
+				083C9CB02056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				2C9732561F4C38F600AC9301 /* ApiDataDownloader.swift in Sources */,
 				2C9732571F4C38F600AC9301 /* Meta.swift in Sources */,
 				2C9732591F4C38F600AC9301 /* DevicesAPI.swift in Sources */,
@@ -14756,6 +14777,7 @@
 				2CA2E71D20237E2D001DC410 /* AdaptiveStatsPagerViewController.swift in Sources */,
 				864D67381E83DE76001E8D9E /* DataConvertable.swift in Sources */,
 				864D67391E83DE76001E8D9E /* CoursePlainEntity.swift in Sources */,
+				083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
 				864D673A1E83DE76001E8D9E /* CourseMetainfoEntity.swift in Sources */,
 				864D673B1E83DE76001E8D9E /* PlaybackCommandEntity.swift in Sources */,
 				864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */,
