@@ -47,16 +47,18 @@ class ProfilePresenter {
     let notificationsSwitchBlockId = "notifications_switch"
     private let notificationsTimeSelectionBlockId = "notifications_time_selection"
     private let infoBlockId = "info"
+    private let pinsMapBlockId = "pins_map"
     private let settingsBlockId = "settings"
     private let downloadsBlockId = "downloads"
     private let logoutBlockId = "logout"
 
-    private func buildMenu(user: User) -> Menu {
+    private func buildMenu(user: User, userActivity: UserActivity) -> Menu {
         var blocks: [MenuBlock] = []
         blocks = [
             buildNotificationsSwitchBlock(),
             buildNotificationsTimeSelectionBlock(),
             buildInfoExpandableBlock(user: user),
+            buildPinsMapExpandableBlock(activity: userActivity),
             buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
             buildLogoutBlock()
@@ -139,11 +141,19 @@ class ProfilePresenter {
 
         block.content = content
 
-        block.onExpanded = {
-            [weak self]
-            isExpanded in
+        block.onExpanded = { isExpanded in
             block.isExpanded = isExpanded
-//            self?.menu.update(block: block)
+        }
+        return block
+    }
+
+    private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
+        let block = PinsMapExpandableMenuBlock(id: pinsMapBlockId, title: NSLocalizedString("Activity", comment: ""))
+
+        block.pins = activity.pins
+
+        block.onExpanded = { isExpanded in
+            block.isExpanded = isExpanded
         }
         return block
     }
@@ -248,13 +258,15 @@ class ProfilePresenter {
     // MARK: - Update methods
 
     private func updateStreaks(user: User) {
-        _ = userActivitiesAPI.retrieve(user: user.id, success: {
-            [weak self]
-            activity in
-                self?.view?.set(streaks: StreakData(userActivity: activity))
-            }, error: {
-                _ in
-                self.view?.set(streaks: nil)
+        _ = userActivitiesAPI.retrieve(user: user.id, success: { [weak self] activity in
+            self?.view?.set(streaks: StreakData(userActivity: activity))
+            if let pinsBlockId = self?.pinsMapBlockId, let pinsMapBlock = self?.menu.getBlock(id: pinsBlockId) as? PinsMapExpandableMenuBlock {
+                pinsMapBlock.pins = activity.pins
+                self?.menu.update(block: pinsMapBlock)
+            }
+        }, error: {
+            _ in
+            self.view?.set(streaks: nil)
         })
     }
 
@@ -284,7 +296,7 @@ class ProfilePresenter {
     }
 
     private func setUser(user: User) {
-        self.menu = buildMenu(user: user)
+        self.menu = buildMenu(user: user, userActivity: UserActivity(id: user.id))
         self.view?.set(menu: menu)
         self.view?.set(profile: ProfileData(user: user))
         self.view?.set(state: .authorized)
