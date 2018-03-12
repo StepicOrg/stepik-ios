@@ -63,15 +63,12 @@ class PinsMapExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     func expand() {
         bottomTitleConstraint?.isActive = false
-        if let pinsMap = pinsMap {
-            mapContainer.addSubview(pinsMap)
-            pinsMap.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: mapContainer)
-        }
+        mapContainer.isHidden = false
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 
     func shrink() {
-        pinsMap?.removeFromSuperview()
+        mapContainer.isHidden = true
         if bottomTitleConstraint == nil {
             bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
         } else {
