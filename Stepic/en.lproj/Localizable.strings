@@ -403,10 +403,10 @@ StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
 
 /* Notification alerts */
 NotificationTabNotificationRequestAlertTitle = "Stay tuned";
-NotificationTabNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow discussions and promptly recieve courses updates?";
+NotificationTabNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow discussions and promptly receive courses updates?";
 
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
-CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly recieve course updates?";
+CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

@@ -41,7 +41,6 @@ class NotificationSuggestionManager {
 
     private func setLastAlertShownTime(time: TimeInterval, for context: NotificationRequestAlertContext) {
         defaults.set(time, forKey: lastTimeKey(for: context))
-        defaults.synchronize()
     }
 
     private func updateShownNotificationTime(for context: NotificationRequestAlertContext) {
@@ -64,7 +63,6 @@ class NotificationSuggestionManager {
 
         set(value) {
             defaults.set(value, forKey: streakAlertShownCntKey)
-            defaults.synchronize()
         }
     }
 
