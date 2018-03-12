@@ -44,6 +44,7 @@ protocol CardsStepsPresenter: StepCardViewDelegate {
     func sendReaction(_ reaction: Reaction)
     func updateRatingWhenSuccess()
     func updateRatingWhenFail()
+    func logout()
 }
 
 enum CardsStepsPresenterState {
@@ -195,7 +196,9 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             strongSelf.state = .loading
 
             let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
-            startPromise.then {
+            checkToken().then {
+                startPromise
+            }.then {
                 strongSelf.getNewRecommendation(for: course)
             }.then { lesson -> Promise<Step> in
                 title = lesson.title
@@ -225,14 +228,20 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 switch error {
                 case CardsStepsError.coursePassed:
                     strongSelf.state = .coursePassed
+                    strongSelf.view?.state = .coursePassed
                 case CardsStepsError.recommendationsNotLoaded:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
                 case CardsStepsError.viewNotSent:
                     print("cards steps: view not sent")
                 case CardsStepsError.noStepsInLesson, CardsStepsError.stepNotLoaded:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
+                case PerformRequestError.noAccessToRefreshToken:
+                    strongSelf.logout()
                 default:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
                 }
             }
         }
@@ -250,6 +259,10 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     func tryAgain() {
         view?.state = .normal
         view?.refreshCards()
+    }
+
+    func logout() {
+
     }
 
     fileprivate func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
@@ -414,16 +427,16 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         if let course = course {
             ratingsAPI.update(courseId: course.id, exp: newRating).then {
                 print("cards steps: remote rating updated")
-                }.catch { error in
-                    switch error {
-                    case RatingsAPIError.serverError:
-                        print("cards steps: remote rating update failed: server error")
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
-                    case RatingsAPIError.connectionError(let error):
-                        print("cards steps: remote rating update failed: \(error)")
-                    default:
-                        print("cards steps: remote rating update failed: \(error)")
-                    }
+            }.catch { error in
+                switch error {
+                case RatingsAPIError.serverError:
+                    print("cards steps: remote rating update failed: server error")
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+                case RatingsAPIError.connectionError(let error):
+                    print("cards steps: remote rating update failed: \(error)")
+                default:
+                    print("cards steps: remote rating update failed: \(error)")
+                }
             }
         }
 

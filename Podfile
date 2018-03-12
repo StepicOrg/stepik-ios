@@ -98,13 +98,7 @@ target 'Adaptive 1838' do
     adaptive_pods    
 end
 
-target 'Adaptive 1906' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 3067' do
+target 'Adaptive GMAT' do
     platform :ios, '9.0'
     all_pods
     adaptive_pods
@@ -129,14 +123,6 @@ target 'Adaptive 3124' do
 end
 
 target 'Adaptive 1838 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 1906 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 3067 Screenshots' do
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 

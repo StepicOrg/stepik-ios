@@ -4,6 +4,8 @@
 <dict>
 	<key>colors</key>
 	<dict>
+		<key>mainGreen</key>
+		<integer>27826</integer>
 		<key>mainDark</key>
 		<integer>27826</integer>
 		<key>mainText</key>
@@ -11,6 +13,8 @@
 	</dict>
 	<key>url</key>
 	<dict>
+		<key>adaptiveRating</key>
+		<string>http://52.174.33.220</string>
 		<key>appId</key>
 		<string>1274227392</string>
 		<key>scheme</key>
@@ -42,14 +46,16 @@
 	</dict>
 	<key>adaptive</key>
 	<dict>
-		<key>ratingURL</key>
-		<string>http://52.174.33.220</string>
+		<key>coursesInfoURL</key>
+		<string>https://stepik.org/media/attachments/course/6158</string>
 		<key>mainColor</key>
 		<integer>27826</integer>
 		<key>isAdaptive</key>
 		<true/>
-		<key>courseId</key>
-		<integer>3150</integer>
+		<key>supportedCourses</key>
+		<array>
+			<integer>3150</integer>
+		</array>
 	</dict>
 	<key>rateApp</key>
 	<dict>

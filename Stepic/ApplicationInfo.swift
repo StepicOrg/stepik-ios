@@ -58,6 +58,7 @@ class ApplicationInfo {
         struct Colors {
             static let mainText = "colors.mainText"
             static let mainDark = "colors.mainDark"
+            static let mainGreen = "colors.mainGreen"
         }
         struct Modules {
             static let tabs = "modules.tabs"
