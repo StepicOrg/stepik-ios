@@ -49,11 +49,11 @@ class PinsMapView: UIView {
     private var howManyMonthsShouldBeDisplayed: Int {
         switch DeviceInfo.current.diagonal {
         case let x where x > 5.8:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 8 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
         case let x where x > 4.7:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         case let x where x > 4.0:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 8
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         default:
             return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 6
         }
@@ -127,6 +127,7 @@ class PinsMapView: UIView {
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(scrollView)
 
@@ -178,9 +179,10 @@ class PinsMapView: UIView {
 
         // Resize container view
         scrollView.addSubview(containerView)
-        containerView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: scrollView)
-        containerView.frame = CGRect(x: 0, y: 0, width: frame.width * CGFloat(ceil(Double(monthsInYear / howManyMonthsShouldBeDisplayed))), height: frame.height)
-        scrollView.contentSize = CGSize(width: containerView.frame.width, height: containerView.frame.height)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.align(toView: scrollView)
+        scrollView.constrainHeight(toView: containerView, predicate: "*1")
+        containerView.constrainWidth("\(frame.width * CGFloat(ceil(Double(monthsInYear) / Double(howManyMonthsShouldBeDisplayed))))")
 
         // Create and resize month titles
         var monthsLabels = [StepikLabel]()
