@@ -240,7 +240,7 @@ struct AnalyticsEvents {
         static let markAllAsRead = "notifications_mark_all_as_read"
         static let markAsRead = "notifications_mark_as_read"
     }
-    
+
     struct NotificationRequest {
         static func shown(context: NotificationRequestAlertContext) -> String {
             return "notification_alert_context_\(context.rawValue)_shown"

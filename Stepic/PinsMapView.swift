@@ -195,7 +195,7 @@ class PinsMapView: UIView {
         let maxLabelHeight = monthsLabels.map({ $0.bounds.height }).max() ?? 0
 
         // Calculate month size (w/o spacing between months)
-        let oneMonthWidth = (frame.width - CGFloat(howManyMonthsShouldBeDisplayed - 1) * (monthSpacing * 1.5)) / CGFloat(howManyMonthsShouldBeDisplayed)
+        let oneMonthWidth = (frame.width - CGFloat(howManyMonthsShouldBeDisplayed) * monthSpacing) / CGFloat(howManyMonthsShouldBeDisplayed)
         let oneMonthHeight = frame.height - labelSpacing - maxLabelHeight
         let oneMonthSize = CGSize(width: oneMonthWidth, height: oneMonthHeight)
 
@@ -204,7 +204,7 @@ class PinsMapView: UIView {
         let boundedWidth = CGFloat(oneMonthSize.width - CGFloat(weeksInMonth - 1) * daySpacing)
         let daySide = findMaxSide(rect: CGSize(width: boundedWidth, height: boundedHeight))
         // We found max side for day-rect, so we should add unaccounted space
-        let widthError = (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2
+        let widthError = max(0, (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2)
 
         let halfSpacing = CGFloat(monthSpacing / 2.0)
         let monthsNums = getMonthsOfLastYear(today: Date()).reversed().map { $0.1 }
