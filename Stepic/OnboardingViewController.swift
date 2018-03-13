@@ -190,7 +190,7 @@ class OnboardingViewController: UIViewController {
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
             if let authSource = authSource {
                 RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
             }
