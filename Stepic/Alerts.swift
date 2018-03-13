@@ -14,4 +14,5 @@ import Foundation
 class Alerts {
     static let streaks = StreaksStepikAlertManager()
     static let rate = RateAppAlertManager()
+    static let notificationRequest = NotificationRequestAlertManager()
 }

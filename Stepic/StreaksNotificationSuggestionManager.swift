@@ -1,5 +1,5 @@
 //
-//  StreaksNotificationSuggestionManager.swift
+//  NotificationSuggestionManager.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 30.11.16.
@@ -8,36 +8,47 @@
 
 import Foundation
 
-class StreaksNotificationSuggestionManager {
-    fileprivate let defaults = UserDefaults.standard
+class NotificationSuggestionManager {
+    private let defaults = UserDefaults.standard
 
-    fileprivate let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
-    fileprivate let streakAlertShownCntKey = "streakAlertShownCntKey"
+    private let streakAlertShownCntKey = "streakAlertShownCntKey"
 
-    fileprivate let maxStreakAlertShownCnt = 3
+    private let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
+    private let lastNotificationsTabNotificationRequestShownTimeKey = "lastNotificationsTabNotificationRequestShownTimeKey"
+    private let lastCourseSubscriptionNotificationRequestShownTimeKey = "lastCourseSubscriptionNotificationRequestShownTimeKey"
 
-    fileprivate var lastStreakAlertShownTime: TimeInterval {
-        get {
-            if let time = defaults.value(forKey: lastStreakAlertShownTimeKey) as? TimeInterval {
-                return time
-            } else {
-                self.lastStreakAlertShownTime = 0.0
-                return 0.0
-            }
-        }
-
-        set(value) {
-            defaults.set(value, forKey: lastStreakAlertShownTimeKey)
-            defaults.synchronize()
+    func lastTimeKey(for context: NotificationRequestAlertContext) -> String {
+        switch context {
+        case .streak:
+            return lastStreakAlertShownTimeKey
+        case .courseSubscription:
+            return lastCourseSubscriptionNotificationRequestShownTimeKey
+        case .notificationsTab:
+            return lastNotificationsTabNotificationRequestShownTimeKey
         }
     }
 
-    fileprivate func updateShownNotificationTime() {
-        lastStreakAlertShownTime = Date().timeIntervalSince1970
+    private let maxStreakAlertShownCnt = 3
+
+    private func getLastAlertShownTime(for context: NotificationRequestAlertContext) -> TimeInterval {
+        if let time = defaults.value(forKey: lastTimeKey(for: context)) as? TimeInterval {
+            return time
+        } else {
+            setLastAlertShownTime(time: 0.0, for: context)
+            return 0.0
+        }
     }
 
-    fileprivate var isStreakAlertAvailableNow: Bool {
-        return Date().timeIntervalSince1970 - lastStreakAlertShownTime >= 60 * 60 * 24
+    private func setLastAlertShownTime(time: TimeInterval, for context: NotificationRequestAlertContext) {
+        defaults.set(time, forKey: lastTimeKey(for: context))
+    }
+
+    private func updateShownNotificationTime(for context: NotificationRequestAlertContext) {
+        setLastAlertShownTime(time: Date().timeIntervalSince1970, for: context)
+    }
+
+    private func isAlertAvailableNow(context: NotificationRequestAlertContext) -> Bool {
+        return Date().timeIntervalSince1970 - getLastAlertShownTime(for: context) >= 60 * 60 * 24
     }
 
     var streakAlertShownCnt: Int {
@@ -52,26 +63,38 @@ class StreaksNotificationSuggestionManager {
 
         set(value) {
             defaults.set(value, forKey: streakAlertShownCntKey)
-            defaults.synchronize()
         }
     }
 
-    func didShowStreakAlert() {
-        streakAlertShownCnt = streakAlertShownCnt + 1
-        updateShownNotificationTime()
+    func didShowAlert(context: NotificationRequestAlertContext) {
+        switch context {
+        case .streak:
+            streakAlertShownCnt = streakAlertShownCnt + 1
+        default:
+            break
+        }
+        updateShownNotificationTime(for: context)
     }
 
     enum StreakAlertTrigger {
         case login, submission
     }
 
-    func canShowAlert(after trigger: StreakAlertTrigger) -> Bool {
-        let commonChecks = AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
-        switch trigger {
-        case .login:
-            return commonChecks && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
-        case .submission:
-            return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
+    func canShowAlert(context: NotificationRequestAlertContext, after trigger: StreakAlertTrigger? = nil) -> Bool {
+        switch context {
+        case .streak:
+            guard let trigger = trigger else {
+                return false
+            }
+            let commonChecks = AuthInfo.shared.isAuthorized && isAlertAvailableNow(context: context) && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
+            switch trigger {
+            case .login:
+                return commonChecks && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
+            case .submission:
+                return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
+            }
+        case .notificationsTab, .courseSubscription:
+            return isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
         }
     }
 }

@@ -1,7 +1,7 @@
 In the new version of the Stepik iOS app we:
 
-• Added support for multiline samples in Code Challenge
-• Added touchable course widgets
+• Added cool activity panel in profile
+• Changed the way you get requested about notifications
 • Fixed multiple bugs and greatly improved stability
 
 Enjoy learning!

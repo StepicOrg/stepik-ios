@@ -8,7 +8,7 @@
 
 import UIKit
 import Fabric
-import Firebase
+import FirebaseCore
 import Mixpanel
 import YandexMobileMetrica
 import Crashlytics
@@ -19,7 +19,7 @@ class AnalyticsHelper: NSObject {
 
     func setupAnalytics() {
         Fabric.with([Crashlytics.self])
-        FIRApp.configure()
+        FirebaseApp.configure()
 
         Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
 

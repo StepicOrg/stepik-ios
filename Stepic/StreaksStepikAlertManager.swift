@@ -18,7 +18,9 @@ class StreaksStepikAlertManager: AlertManager, StreaksAlertPresentationDelegate 
 //        controller.present(alert, animated: true, completion: nil)
     }
 
+    //TODO: Add DI here
     var presentationManager: StreaksAlertPresentationManager?
+    var streaksNotificationSuggestionManager = NotificationSuggestionManager()
 
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
@@ -26,17 +28,30 @@ class StreaksStepikAlertManager: AlertManager, StreaksAlertPresentationDelegate 
         return presenter
     }()
 
-    func construct(presentationManager: StreaksAlertPresentationManager) -> StreakAlertViewController {
+    func construct(presentationManager: StreaksAlertPresentationManager) -> NotificationRequestAlertViewController {
         self.presentationManager = presentationManager
         presentationManager.delegate = self
-        let alert = StreakAlertViewController(nibName: "StreakAlertViewController", bundle: nil)
+        let alert = NotificationRequestAlertViewController(nibName: "NotificationRequestAlertViewController", bundle: nil)
+        alert.context = .streak
         alert.yesAction = {
             [weak self] in
-            self?.presentationManager?.notifyPressed(fromPreferences: false)
+            PreferencesContainer.notifications.allowStreaksNotifications = true
+
+            guard let strongSelf = self else {
+                return
+            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.success(strongSelf.streaksNotificationSuggestionManager.streakAlertShownCnt))
+            strongSelf.presentationManager?.notifyPressed()
         }
         alert.noAction = {
             [weak self] in
-            self?.presentationManager = nil
+            PreferencesContainer.notifications.allowStreaksNotifications = false
+
+            guard let strongSelf = self else {
+                return
+            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.fail(strongSelf.streaksNotificationSuggestionManager.streakAlertShownCnt))
+            strongSelf.presentationManager = nil
         }
         return alert
     }

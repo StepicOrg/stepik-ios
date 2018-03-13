@@ -39,7 +39,10 @@ extension UIColor {
     }
 
     static let errorRed: UIColor = UIColor(hex: 0xff0033)
-    static let stepicGreen: UIColor = UIColor(hex: 0x66CC66)
+
+    class var stepicGreen: UIColor {
+        return StepicApplicationsInfo.Colors.mainGreen
+    }
 
     static let mainLight: UIColor = UIColor(hex: 0xf6f6f6)
 

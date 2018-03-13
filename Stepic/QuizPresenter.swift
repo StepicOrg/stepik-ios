@@ -19,7 +19,7 @@ class QuizPresenter {
     var attemptsAPI: AttemptsAPI
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
-    var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager
+    var streaksNotificationSuggestionManager: NotificationSuggestionManager
 
     var state: QuizState = .nothing {
         didSet {
@@ -34,7 +34,7 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
@@ -380,7 +380,7 @@ class QuizPresenter {
             return
         }
 
-        guard streaksNotificationSuggestionManager.canShowAlert(after: .submission) else {
+        guard streaksNotificationSuggestionManager.canShowAlert(context: .streak, after: .submission) else {
             return
         }
 
@@ -394,7 +394,7 @@ class QuizPresenter {
             guard activity.currentStreak > 0 else {
                 return
             }
-            self?.streaksNotificationSuggestionManager.didShowStreakAlert()
+            self?.streaksNotificationSuggestionManager.didShowAlert(context: .streak)
             self?.view?.suggestStreak(streak: activity.currentStreak)
         }, error: {
             _ in

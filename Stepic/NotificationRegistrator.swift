@@ -8,13 +8,33 @@
 
 import UIKit
 import FirebaseMessaging
-import Firebase
+import FirebaseCore
+import FirebaseInstanceID
 import PromiseKit
 
 class NotificationRegistrator {
     static let shared = NotificationRegistrator()
 
+    let notificationPermissionManager = NotificationPermissionManager()
+
     private init () { }
+
+    func registerForRemoteNotificationsIfAlreadyAsked() {
+        if #available(iOS 10.0, *) {
+            notificationPermissionManager.getCurrentPermissionStatus().then {
+                [weak self]
+                status -> Void in
+                switch status {
+                case .authorized:
+                    self?.registerForRemoteNotifications()
+                default:
+                    return
+                }
+            }
+        } else {
+            registerForRemoteNotifications()
+        }
+    }
 
     func registerForRemoteNotifications() {
         return registerForRemoteNotifications(UIApplication.shared)
@@ -28,14 +48,14 @@ class NotificationRegistrator {
         }
 
         if AuthInfo.shared.isAuthorized {
-            if let token = FIRInstanceID.instanceID().token() {
+            if let token = InstanceID.instanceID().token() {
                 registerDevice(token)
             }
         }
     }
 
     func getGCMRegistrationToken(deviceToken: Data) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
+        Messaging.messaging().apnsToken = deviceToken
     }
 
     var registrationOptions = [String: AnyObject]()

@@ -10,9 +10,13 @@ import Foundation
 import SwiftyJSON
 
 class UserActivity {
-
     var id: Int
     var pins: [Int]
+
+    init(id: Int) {
+        self.id = id
+        self.pins = UserActivity.emptyYearPins
+    }
 
     init(json: JSON) {
         self.id = json["id"].intValue
@@ -64,5 +68,9 @@ class UserActivity {
             return false
         }
         return pins[0] == 0 && pins[1] != 0
+    }
+
+    static var emptyYearPins: [Int] {
+        return Array(repeating: 0, count: 365)
     }
 }
