@@ -18,7 +18,7 @@ class StepikPlaceholderView: NibInitializableView {
         static let vertical = CGFloat(500)
     }
 
-    struct imageHeightToFrameHeightRation {
+    struct imageHeightToFrameHeightRatio {
         static let horizontal = CGFloat(0.75)
         static let vertical = CGFloat(0.5)
     }
@@ -33,8 +33,8 @@ class StepikPlaceholderView: NibInitializableView {
 
     lazy private var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
         var idToView: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = [:]
-        for (k, v) in zip(StepikPlaceholder.availablePlaceholders.map({ $0.id }), StepikPlaceholder.availablePlaceholders) {
-            idToView[k] = v
+        for placeholder in StepikPlaceholder.availablePlaceholders {
+            idToView[placeholder.id] = placeholder
         }
         return idToView
     }()
@@ -72,9 +72,9 @@ class StepikPlaceholderView: NibInitializableView {
         var scaleFactor = CGFloat(1.0)
         if hasImage {
             if isVertical {
-                framedImageHeight = min(maxHeight.vertical, bounds.height * imageHeightToFrameHeightRation.vertical)
+                framedImageHeight = min(maxHeight.vertical, bounds.height * imageHeightToFrameHeightRatio.vertical)
             } else {
-                framedImageHeight = min(maxHeight.horizontal, bounds.height * imageHeightToFrameHeightRation.horizontal)
+                framedImageHeight = min(maxHeight.horizontal, bounds.height * imageHeightToFrameHeightRatio.horizontal)
             }
             let elementSizes = allPlaceholders.values.flatMap({ $0.image }).map({ $0.scale * framedImageHeight })
             let currentElementSize = placeholder.image!.scale * framedImageHeight
