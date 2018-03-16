@@ -40,7 +40,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
     @IBOutlet weak var markAllAsReadButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     let refreshControl = UIRefreshControl()
 
@@ -95,6 +95,10 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
 
         self.tableView.tableFooterView = UIView()
+
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyNotifications) { [weak self] in
+            self?.tabBarController?.selectedIndex = 1
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -203,29 +207,5 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
 
             cell.status = .read
         }
-    }
-}
-
-extension NotificationsViewController: DZNEmptyDataSetSource {
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return #imageLiteral(resourceName: "white_pixel")
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text: String = NSLocalizedString("NoNotifications", comment: "")
-
-        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFont.Weight.light))
-            .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
-        return text.styleAll(style).attributedString
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return .white
-    }
-}
-
-extension NotificationsViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
     }
 }
