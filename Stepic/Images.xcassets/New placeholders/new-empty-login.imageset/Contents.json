@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "new-empty-login.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "empty-login@2x.png",
       "scale" : "2x"
     },
     {
