@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 import Atributika
 
 class NotificationsViewController: UIViewController, NotificationsView {
