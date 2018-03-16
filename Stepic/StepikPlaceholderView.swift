@@ -30,7 +30,8 @@ class StepikPlaceholderView: NibInitializableView {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var actionsStackView: UIStackView!
-
+    @IBOutlet weak var imageContainerView: UIView!
+    
     lazy private var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
         var idToView: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = [:]
         for placeholder in StepikPlaceholder.availablePlaceholders {
@@ -68,9 +69,14 @@ class StepikPlaceholderView: NibInitializableView {
         let imageRatio = (placeholder.image?.image.size.width ?? 1) / (placeholder.image?.image.size.height ?? 1)
         stackView.layoutIfNeeded()
 
-        var framedImageHeight = CGFloat(0.0)
-        var scaleFactor = CGFloat(1.0)
         if hasImage {
+            if !stackView.arrangedSubviews.contains(imageContainerView) {
+                stackView.insertArrangedSubview(imageContainerView, at: 0)
+            }
+
+            var framedImageHeight = CGFloat(0.0)
+            var scaleFactor = CGFloat(1.0)
+
             if isVertical {
                 framedImageHeight = min(maxHeight.vertical, bounds.height * imageHeightToFrameHeightRatio.vertical)
             } else {
@@ -80,10 +86,12 @@ class StepikPlaceholderView: NibInitializableView {
             let currentElementSize = placeholder.image!.scale * framedImageHeight
             let minElementSize = elementSizes.min() ?? 0.0
             scaleFactor = currentElementSize > 0 ? minElementSize / currentElementSize : 1
-        }
 
-        imageViewHeightConstraint.constant = scaleFactor * framedImageHeight
-        imageViewWidthConstraint.constant = imageViewHeightConstraint.constant * imageRatio
+            imageViewHeightConstraint.constant = scaleFactor * framedImageHeight
+            imageViewWidthConstraint.constant = imageViewHeightConstraint.constant * imageRatio
+        } else {
+            stackView.removeArrangedSubview(imageContainerView)
+        }
 
         if isVertical {
             stackView.axis = .vertical
