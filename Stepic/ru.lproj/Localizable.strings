@@ -411,3 +411,17 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
+
+/* Placeholders */
+PlaceholderEmptyText = "Ничего нет";
+PlaceholderEmptyButton = "Может быть кнопка поможет";
+PlaceholderNoConnectionText = "Кажется, интернет-соединение потеряно";
+PlaceholderNoConnectionButton = "Повторить";
+PlaceholderEmptyDownloadsText = "Нет загруженных видео";
+PlaceholderEmptyDownloadsButton = "Перейти в каталог";
+PlaceholderLoginText = "Мы встречались раньше?\nВойдите, пожалуйста";
+PlaceholderLoginButton = "Войти";
+PlaceholderEmptyNotificationsText = "Нет уведомлений";
+PlaceholderEmptyNotificationsButton = "Перейти в каталог";
+PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
+PlaceholderEmptySearchButton = "Перейти в каталог";
