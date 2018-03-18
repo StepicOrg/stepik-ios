@@ -73,6 +73,7 @@ class StepikPlaceholderView: NibInitializableView {
             if !stackView.arrangedSubviews.contains(imageContainerView) {
                 stackView.insertArrangedSubview(imageContainerView, at: 0)
             }
+            imageContainerView.isHidden = false
 
             var framedImageHeight = CGFloat(0.0)
             var scaleFactor = CGFloat(1.0)
@@ -91,6 +92,17 @@ class StepikPlaceholderView: NibInitializableView {
             imageViewWidthConstraint.constant = imageViewHeightConstraint.constant * imageRatio
         } else {
             stackView.removeArrangedSubview(imageContainerView)
+            imageContainerView.isHidden = true
+        }
+
+        if placeholder.buttonTitle != nil {
+            if !actionsStackView.arrangedSubviews.contains(actionButton) {
+                actionsStackView.insertArrangedSubview(actionButton, at: 1)
+            }
+            actionButton.isHidden = false
+        } else {
+            actionsStackView.removeArrangedSubview(actionButton)
+            actionButton.isHidden = true
         }
 
         if isVertical {
