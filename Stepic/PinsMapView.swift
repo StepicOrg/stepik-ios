@@ -41,7 +41,7 @@ class PinsMapView: UIView {
     private let daySpacing = CGFloat(1.5)
 
     private let daysInWeek = 7
-    private let weeksInMonth = 5
+    private let weeksInMonth = 6
     private let monthsInYear = 12
 
     private let calendar = Calendar.current
@@ -50,10 +50,9 @@ class PinsMapView: UIView {
         switch DeviceInfo.current.diagonal {
         case let x where x > 5.8:
             return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
-        case let x where x > 4.7:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
-        case let x where x > 4.0:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
+        case let x where x > 4.7 && x < 5.8:
+            // Only Plus-iPhones
+            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 12
         default:
             return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 6
         }
@@ -237,6 +236,7 @@ class PinsMapView: UIView {
         let daySide = findMaxSide(rect: CGSize(width: boundedWidth, height: boundedHeight))
         // We found max side for day-rect, so we should add unaccounted space
         let widthError = max(0, (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2)
+        let heightError = max(0, (oneMonthSize.height - (CGFloat(daysInWeek) * daySide) - (CGFloat(daysInWeek - 1) * daySpacing)) / 2)
 
         let halfSpacing = CGFloat(monthSpacing / 2.0)
         let monthsNums = getMonthsOfLastYear(today: Date()).reversed().map { $0.1 }
@@ -250,7 +250,7 @@ class PinsMapView: UIView {
             var y = CGFloat(0)
             var days: [CALayer] = []
             for week in 0..<weeksInMonth {
-                y = CGFloat(0)
+                y = heightError
                 for dayOfWeek in 0..<daysInWeek {
                     let dayRect = CALayer()
                     dayRect.cornerRadius = 2
