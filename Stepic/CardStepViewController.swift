@@ -61,6 +61,9 @@ class CardStepViewController: UIViewController, CardStepView {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+
+        stepWebView.navigationDelegate = nil
+        stepWebView.scrollView.delegate = nil
         print("card step: deinit vc")
     }
 
