@@ -42,7 +42,7 @@ class APIEndpoint {
         manager = Alamofire.SessionManager(configuration: configuration)
         let retrier = ApiRequestRetrier()
         manager.retrier = retrier
-        manager.adapter = retrier
+//        manager.adapter = retrier
     }
 
     func cancelAllTasks() {

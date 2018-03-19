@@ -10,7 +10,7 @@ import Alamofire
 import PromiseKit
 
 class ApiRequestRetrier: RequestRetrier, RequestAdapter {
-    
+
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
         for (headerField, value) in AuthInfo.shared.initialHTTPHeaders {
@@ -18,7 +18,7 @@ class ApiRequestRetrier: RequestRetrier, RequestAdapter {
         }
         return urlRequest
     }
-    
+
     func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 && request.retryCount == 0 {
             checkToken().then {
