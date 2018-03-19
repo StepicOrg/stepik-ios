@@ -11,8 +11,8 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
-class UserActivitiesAPI {
-    let name = "user-activities"
+class UserActivitiesAPI: APIEndpoint {
+    override var name: String { return "user-activities" }
 
     func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<UserActivity> {
         return Promise<UserActivity> {

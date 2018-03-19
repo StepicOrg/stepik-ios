@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class VotesAPI {
-
+class VotesAPI: APIEndpoint {
+    override var name: String { return "votes" }
+    
     func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         let params: Parameters? = [
             "vote": vote.json as AnyObject

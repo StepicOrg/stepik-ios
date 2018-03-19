@@ -11,8 +11,8 @@ import SwiftyJSON
 import Alamofire
 import PromiseKit
 
-class EnrollmentsAPI {
-    let name = "enrollments"
+class EnrollmentsAPI: APIEndpoint {
+    override var name: String { return "enrollments" }
 
     func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
         return Promise { fulfill, reject in

@@ -40,6 +40,9 @@ class APIEndpoint {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15
         manager = Alamofire.SessionManager(configuration: configuration)
+        let retrier = ApiRequestRetrier()
+        manager.retrier = retrier
+        manager.adapter = retrier
     }
 
     func cancelAllTasks() {

@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class QueriesAPI {
-    let name = "queries"
+class QueriesAPI: APIEndpoint {
+    override var name: String { return "queries" }
 
     @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
 

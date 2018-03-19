@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class DiscussionProxiesAPI {
-    let name = "discussion-proxies"
+class DiscussionProxiesAPI: APIEndpoint {
+    override var name: String { return "discussion-proxies" }
 
     @discardableResult func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((DiscussionProxy) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON({
