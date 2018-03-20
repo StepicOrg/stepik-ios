@@ -682,6 +682,7 @@
 		088E73EB206014B000D458E3 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
 		088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */; };
 		088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */; };
+		088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */; };
 		088EDB501F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB521F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
@@ -4394,6 +4395,7 @@
 		088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestRetrier.swift; sourceTree = "<group>"; };
 		088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRequestMaker.swift; sourceTree = "<group>"; };
 		088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRequestMaker.swift; sourceTree = "<group>"; };
+		088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestMaker.swift; sourceTree = "<group>"; };
 		088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVerticalViewController.swift; sourceTree = "<group>"; };
 		088EDB581F8F5A48009B736E /* CourseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
 		088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListHorizontalViewController.swift; sourceTree = "<group>"; };
@@ -6069,6 +6071,7 @@
 			children = (
 				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
 				088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */,
+				088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */,
 			);
 			name = "Request Makers";
 			sourceTree = "<group>";
@@ -11647,6 +11650,7 @@
 				2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
+				088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,

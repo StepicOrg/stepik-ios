@@ -20,21 +20,23 @@ class Comment: JSONSerializable {
 
     typealias idType = Int
 
-    var id: Int
+    var id: Int = 0
     var parentId: Int?
-    var userId: Int
-    var userRole: UserRole
-    var time: Date
-    var lastTime: Date
-    var text: String
-    var replyCount: Int
-    var isDeleted: Bool
-    var targetStepId: Int
-    var repliesIds: [Int]
-    var isPinned: Bool
-    var voteId: String
-    var epicCount: Int
-    var abuseCount: Int
+    var userId: Int = 0
+    var userRole: UserRole = .Student
+    var time: Date = Date()
+    var lastTime: Date = Date()
+    var text: String = ""
+    var replyCount: Int = 0
+    var isDeleted: Bool = false
+    var targetStepId: Int = 0
+    var repliesIds: [Int] = []
+    var isPinned: Bool = false
+    var voteId: String = ""
+    var epicCount: Int = 0
+    var abuseCount: Int = 0
+    
+    //TODO: Check those "!" marks, they look suspicious
     var userInfo: UserInfo!
     var vote: Vote!
 
@@ -81,9 +83,23 @@ class Comment: JSONSerializable {
     func update(json: JSON) {
         initialize(json)
     }
+    
+    init(parent: Int? = nil, target: Int, text: String) {
+        self.parentId = parent
+        self.targetStepId = target
+        self.text = text
+    }
 
     var json: JSON {
-        return []
+        var dict: JSON = [
+            "target": targetStepId,
+            "text": text
+        ]
+        if let parent = parentId {
+            try! dict.merge(with: ["parent": parent])
+        }
+        
+        return dict
     }
 
     func hasEqualId(json: JSON) -> Bool {

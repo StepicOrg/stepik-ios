@@ -38,6 +38,7 @@ class APIEndpoint {
 
     var update: UpdateRequestMaker
     var delete: DeleteRequestMaker
+    var create: CreateRequestMaker
     
     init() {
         let configuration = URLSessionConfiguration.default
@@ -48,6 +49,8 @@ class APIEndpoint {
         manager.adapter = retrier
 
         update = UpdateRequestMaker()
+        delete = DeleteRequestMaker()
+        create = CreateRequestMaker()
     }
 
     func cancelAllTasks() {

@@ -84,6 +84,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func create(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         let params = ["device": device.json]
 
