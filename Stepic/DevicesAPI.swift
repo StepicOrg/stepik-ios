@@ -52,6 +52,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func update(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         return Promise { fulfill, reject in
             guard let deviceId = device.id else {
