@@ -28,7 +28,7 @@ class ViewsAPI: APIEndpoint {
         }
     }
 
-    //TODO: Do not delete this until handle ViewsCreateError
+    //TODO: Do not delete this until ViewsCreateError is handled correctly
     @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
         var params: Parameters = [:]
 
