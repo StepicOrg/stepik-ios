@@ -70,7 +70,7 @@ class CommentsAPI: APIEndpoint {
 
     func create(_ comment: Comment) -> Promise<Comment> {
         return Promise { fulfill, reject in
-            create.request(requestEndpoint: "comments", paramName: "comment", updatingObject: comment, withManager: manager).then {
+            create.request(requestEndpoint: "comments", paramName: "comment", creatingObject: comment, withManager: manager).then {
                 comment, json -> Void in
                 guard let json = json else {
                     fulfill(comment)

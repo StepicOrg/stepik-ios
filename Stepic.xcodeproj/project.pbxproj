@@ -683,6 +683,7 @@
 		088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */; };
 		088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */; };
 		088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */; };
+		088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F32061BDAA00D458E3 /* StepikModelView.swift */; };
 		088EDB501F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB521F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
@@ -4396,6 +4397,7 @@
 		088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRequestMaker.swift; sourceTree = "<group>"; };
 		088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRequestMaker.swift; sourceTree = "<group>"; };
 		088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestMaker.swift; sourceTree = "<group>"; };
+		088E73F32061BDAA00D458E3 /* StepikModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikModelView.swift; sourceTree = "<group>"; };
 		088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVerticalViewController.swift; sourceTree = "<group>"; };
 		088EDB581F8F5A48009B736E /* CourseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
 		088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListHorizontalViewController.swift; sourceTree = "<group>"; };
@@ -5953,6 +5955,7 @@
 				083749281DE5AE1400144C14 /* Alerts */,
 				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
 				0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */,
+				088E73F32061BDAA00D458E3 /* StepikModelView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -11446,6 +11449,7 @@
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
+				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
