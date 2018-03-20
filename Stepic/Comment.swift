@@ -35,7 +35,7 @@ class Comment: JSONSerializable {
     var voteId: String = ""
     var epicCount: Int = 0
     var abuseCount: Int = 0
-    
+
     //TODO: Check those "!" marks, they look suspicious
     var userInfo: UserInfo!
     var vote: Vote!
@@ -83,7 +83,7 @@ class Comment: JSONSerializable {
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     init(parent: Int? = nil, target: Int, text: String) {
         self.parentId = parent
         self.targetStepId = target
@@ -98,35 +98,11 @@ class Comment: JSONSerializable {
         if let parent = parentId {
             try! dict.merge(with: ["parent": parent])
         }
-        
+
         return dict
     }
 
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].intValue
-    }
-}
-
-struct CommentPostable {
-    var parent: Int?
-    var target: Int
-    var text: String
-
-    init(parent: Int? = nil, target: Int, text: String) {
-        self.parent = parent
-        self.target = target
-        self.text = text
-    }
-
-    var json: [String: AnyObject] {
-        var dict: [String: AnyObject] = [
-            "target": target as AnyObject,
-            "text": text as AnyObject
-        ]
-        if let p = parent {
-            dict["parent"] = p as AnyObject?
-        }
-
-        return dict
     }
 }

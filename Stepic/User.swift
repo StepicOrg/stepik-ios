@@ -75,3 +75,23 @@ class User: NSManagedObject, JSONSerializable {
         }
     }
 }
+
+struct UserInfo {
+    var id: Int
+    var avatarURL: String
+    var firstName: String
+    var lastName: String
+    init(json: JSON) {
+        id = json["id"].intValue
+        avatarURL = json["avatar"].stringValue
+        firstName = json["first_name"].stringValue
+        lastName = json["last_name"].stringValue
+    }
+
+    init(sample: Bool) {
+        id = 10
+        avatarURL = "http://google.com/"
+        firstName = "Sample"
+        lastName = "User"
+    }
+}

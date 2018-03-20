@@ -39,7 +39,7 @@ class APIEndpoint {
     var update: UpdateRequestMaker
     var delete: DeleteRequestMaker
     var create: CreateRequestMaker
-    
+
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15

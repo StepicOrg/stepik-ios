@@ -9,14 +9,15 @@
 import Foundation
 import Alamofire
 import PromiseKit
+import SwiftyJSON
 
 class CreateRequestMaker {
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, updatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<T> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, updatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<(T, JSON?)> {
         return Promise { fulfill, reject in
             let params: Parameters? = [
                 paramName: updatingObject.json.dictionaryObject!
             ]
-            
+
             checkToken().then {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
@@ -24,7 +25,8 @@ class CreateRequestMaker {
                         reject(error)
                     case .success(let json):
                         updatingObject.update(json: json[requestEndpoint].arrayValue[0])
-                        fulfill(updatingObject)
+
+                        fulfill((updatingObject, json))
                     }
                 }
                 }.catch {
@@ -34,4 +36,3 @@ class CreateRequestMaker {
         }
     }
 }
-

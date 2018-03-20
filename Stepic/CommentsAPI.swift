@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class CommentsAPI: APIEndpoint {
     override var name: String { return "comments" }
@@ -67,62 +68,31 @@ class CommentsAPI: APIEndpoint {
         )
     }
 
-    @discardableResult func create(_ comment: CommentPostable, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
-        let params: Parameters = [
-            "comment": comment.json
-        ]
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-                response in
-
-                var error = response.result.error
-                var json: JSON = [:]
-                if response.result.value == nil {
-                    if error == nil {
-                        error = NSError()
-                    }
-                } else {
-                    json = response.result.value!
-                }
-                let response = response.response
-
-                if let e = error as NSError? {
-                    errorHandler("CREATE comments: error \(e.domain) \(e.code): \(e.localizedDescription)")
+    func create(_ comment: Comment) -> Promise<Comment> {
+        return Promise { fulfill, reject in
+            create.request(requestEndpoint: "comments", paramName: "comment", updatingObject: comment, withManager: manager).then {
+                comment, json -> Void in
+                guard let json = json else {
+                    fulfill(comment)
                     return
                 }
-
-                if response?.statusCode != 201 {
-                    errorHandler("CREATE comments: bad response status code \(String(describing: response?.statusCode))")
-                    return
-                }
-
-                let comment: Comment = Comment(json: json["comments"].arrayValue[0])
                 let userInfo = UserInfo(json: json["users"].arrayValue[0])
                 let vote = Vote(json: json["votes"].arrayValue[0])
                 comment.userInfo = userInfo
                 comment.vote = vote
-
-                success(comment)
+                fulfill(comment)
+            }.catch {
+                error in
+                reject(error)
             }
-        )
+        }
     }
 }
 
-struct UserInfo {
-    var id: Int
-    var avatarURL: String
-    var firstName: String
-    var lastName: String
-    init(json: JSON) {
-        id = json["id"].intValue
-        avatarURL = json["avatar"].stringValue
-        firstName = json["first_name"].stringValue
-        lastName = json["last_name"].stringValue
-    }
-
-    init(sample: Bool) {
-        id = 10
-        avatarURL = "http://google.com/"
-        firstName = "Sample"
-        lastName = "User"
+extension CommentsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func create(_ comment: Comment, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        create(comment).then { success($0) }.catch { errorHandler($0.localizedDescription) }
+        return nil
     }
 }
