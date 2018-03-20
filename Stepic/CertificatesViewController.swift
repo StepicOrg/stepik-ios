@@ -10,10 +10,10 @@ import Foundation
 import DZNEmptyDataSet
 
 enum CertificatesEmptyDatasetState {
-    case anonymous, error, empty, refreshing
+    case error, empty, refreshing
 }
 
-class CertificatesViewController: UIViewController, CertificatesView {
+class CertificatesViewController: StepikViewController, CertificatesView {
     @IBOutlet weak var tableView: UITableView!
 
     var presenter: CertificatesPresenter?
@@ -63,6 +63,8 @@ class CertificatesViewController: UIViewController, CertificatesView {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.login), for: .anonymous)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +127,9 @@ class CertificatesViewController: UIViewController, CertificatesView {
 
     func displayAnonymous() {
         refreshControl.endRefreshing()
-        emptyState = .anonymous
+        //emptyState = .anonymous
+
+        showPlaceholder(for: .anonymous)
     }
 
     func displayError() {
@@ -179,9 +183,9 @@ extension CertificatesViewController : DZNEmptyDataSetDelegate {
 
     func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
         switch emptyState {
-        case .anonymous:
-            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
-            break
+//        case .anonymous:
+//            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+//            break
 
         case .empty:
             self.tabBarController?.selectedIndex = 1
@@ -277,8 +281,6 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         //Add correct placeholders here
         switch emptyState {
-        case .anonymous:
-            return Images.placeholders.anonymous
         case .empty:
             return Images.placeholders.certificates
         case .error:
@@ -292,8 +294,6 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         var text: String = ""
 
         switch emptyState {
-        case .anonymous:
-            text = NSLocalizedString("AnonymousCertificatesTitle", comment: "")
         case .empty:
             text = NSLocalizedString("EmptyCertificatesTitle", comment: "")
             break
@@ -315,9 +315,6 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         var text: String = ""
 
         switch emptyState {
-        case .anonymous:
-            text = NSLocalizedString("SignInToHaveCertificates", comment: "")
-            break
         case .empty:
             text = NSLocalizedString("EmptyCertificatesDescription", comment: "")
             break
@@ -343,8 +340,6 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         var text: String = ""
         switch emptyState {
-        case .anonymous:
-            text = NSLocalizedString("SignIn", comment: "")
         case .empty:
             text = NSLocalizedString("ChooseCourse", comment: "")
         case .error:

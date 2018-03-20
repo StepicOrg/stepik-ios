@@ -3927,6 +3927,7 @@
 		86624A731FC76578008E7E6C /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
 		86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A741FC76682008E7E6C /* NotificationsStatus.swift */; };
 		866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
+		866AD0D62061A7D70004C2B2 /* StepikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* StepikViewController.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
@@ -4876,6 +4877,7 @@
 		86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusesAPI.swift; sourceTree = "<group>"; };
 		86624A741FC76682008E7E6C /* NotificationsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsStatus.swift; sourceTree = "<group>"; };
 		866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepikPlaceholderStyle+Placeholders.swift"; sourceTree = "<group>"; };
+		866AD0D52061A7D70004C2B2 /* StepikViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = Stepic/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepCardView.swift; sourceTree = "<group>"; };
 		86BB7C012019538000063538 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
@@ -6502,6 +6504,7 @@
 				08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */,
 				08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */,
 				080F211A2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift */,
+				866AD0D52061A7D70004C2B2 /* StepikViewController.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -11208,6 +11211,7 @@
 				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
+				866AD0D62061A7D70004C2B2 /* StepikViewController.swift in Sources */,
 				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */,
