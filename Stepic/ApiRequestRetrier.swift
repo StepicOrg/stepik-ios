@@ -14,7 +14,7 @@ class ApiRequestRetrier: RequestRetrier, RequestAdapter {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
         for (headerField, value) in AuthInfo.shared.initialHTTPHeaders {
-            urlRequest.addValue(value, forHTTPHeaderField: headerField)
+            urlRequest.setValue(value, forHTTPHeaderField: headerField)
         }
         return urlRequest
     }

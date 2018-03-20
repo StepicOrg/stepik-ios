@@ -35,15 +35,7 @@ enum TokenRefreshError: Error {
     case noAccess, noAppWithCredentials, other
 }
 
-class AuthAPI {
-    let manager: Alamofire.SessionManager
-
-    init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
-        manager = Alamofire.SessionManager(configuration: configuration)
-    }
-
+class AuthAPI: APIEndpoint {
     func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
         return Promise { fulfill, reject in
             guard let socialInfo = StepicApplicationsInfo.social else {

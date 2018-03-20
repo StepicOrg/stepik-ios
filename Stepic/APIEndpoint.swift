@@ -42,7 +42,7 @@ class APIEndpoint {
         manager = Alamofire.SessionManager(configuration: configuration)
         let retrier = ApiRequestRetrier()
         manager.retrier = retrier
-//        manager.adapter = retrier
+        manager.adapter = retrier
     }
 
     func cancelAllTasks() {
@@ -71,7 +71,8 @@ class APIEndpoint {
                 "ids": ids
             ]
 
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, encoding: URLEncoding.default, headers: headers).validate().responseSwiftyJSON { response in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
+//                print(response.request?.allHTTPHeaderFields)
                 switch response.result {
 
                 case .failure(let error):
