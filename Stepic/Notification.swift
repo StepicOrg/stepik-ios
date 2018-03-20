@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Notification: NSManagedObject, JSONInitializable {
+class Notification: NSManagedObject, JSONSerializable {
     typealias idType = Int
 
     convenience required init(json: JSON) {
@@ -41,8 +41,8 @@ class Notification: NSManagedObject, JSONInitializable {
         return id == json["id"].int
     }
 
-    var json: [String: AnyObject] {
-        let dict: [String: AnyObject] = [
+    var json: JSON {
+        return [
             "id": id as AnyObject,
             "html_text": htmlText as AnyObject,
             "is_unread": (status == .unread) as AnyObject,
@@ -53,7 +53,6 @@ class Notification: NSManagedObject, JSONInitializable {
             "level": level as AnyObject,
             "priority": priority as AnyObject
         ]
-        return dict
     }
 }
 

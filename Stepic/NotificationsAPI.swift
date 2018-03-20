@@ -55,22 +55,8 @@ class NotificationsAPI: APIEndpoint {
         }
     }
 
-    func update(_ notification: Notification, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Notification> {
-        return Promise { fulfill, reject in
-            let params: Parameters? = [
-                "notification": notification.json as AnyObject
-            ]
-
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(notification.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    reject(error) // raw error here
-                case .success(let json):
-                    notification.update(json: json["notifications"].arrayValue[0])
-                    fulfill(notification)
-                }
-            }
-        }
+    func update(_ notification: Notification) -> Promise<Notification> {
+        return update.request(requestEndpoint: "notifications", paramName: "notification", updatingObject: notification, withManager: manager)
     }
 
     func markAllAsRead(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<()> {

@@ -16,7 +16,7 @@ enum VideoState {
     case online, downloading, cached
 }
 
-class Video: NSManagedObject, JSONInitializable {
+class Video: NSManagedObject, JSONSerializable {
 
     typealias idType = Int
 
@@ -39,6 +39,10 @@ class Video: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {

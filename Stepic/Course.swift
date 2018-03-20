@@ -12,7 +12,7 @@ import SwiftyJSON
 import PromiseKit
 
 @objc
-class Course: NSManagedObject, JSONInitializable {
+class Course: NSManagedObject, JSONSerializable {
 
 // Insert code here to add functionality to your managed object subclass
 
@@ -56,6 +56,10 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {

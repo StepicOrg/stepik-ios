@@ -15,7 +15,7 @@ class StepsAPI: APIEndpoint {
     override var name: String { return "steps" }
 
     func retrieve(ids: [Int], existing: [Step], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
-        return getObjectsByIds(ids: ids, updating: existing, headers: headers, printOutput: false)
+        return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 }
 

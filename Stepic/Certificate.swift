@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Certificate: NSManagedObject, JSONInitializable {
+class Certificate: NSManagedObject, JSONSerializable {
     typealias idType = Int
 
     convenience required init(json: JSON) {
@@ -36,6 +36,10 @@ class Certificate: NSManagedObject, JSONInitializable {
 
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].int
+    }
+
+    var json: JSON {
+        return []
     }
 
     class func fetch(_ ids: [Int], user userId: Int) -> [Certificate] {

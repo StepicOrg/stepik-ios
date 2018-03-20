@@ -35,7 +35,15 @@ enum TokenRefreshError: Error {
     case noAccess, noAppWithCredentials, other
 }
 
-class AuthAPI: APIEndpoint {
+class AuthAPI {
+    let manager: Alamofire.SessionManager
+
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15
+        manager = Alamofire.SessionManager(configuration: configuration)
+    }
+
     func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
         return Promise { fulfill, reject in
             guard let socialInfo = StepicApplicationsInfo.social else {
@@ -106,7 +114,7 @@ class AuthAPI: APIEndpoint {
                     }
                 case .success(let json):
                     if let r = response.response,
-                       !(200...299 ~= r.statusCode) {
+                        !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 497:
                             reject(SignInError.manyAttempts)
@@ -277,12 +285,12 @@ extension AuthAPI {
         signInWithAccount(email: username, password: password).then { token, authorizationType -> Void in
             AuthInfo.shared.authorizationType = authorizationType
             success(token)
-        }.catch { error in
-            if let typedError = error as? SignInError {
-                failure(typedError)
-            } else {
-                failure(SignInError.other(error: error, code: nil, message: nil))
-            }
+            }.catch { error in
+                if let typedError = error as? SignInError {
+                    failure(typedError)
+                } else {
+                    failure(SignInError.other(error: error, code: nil, message: nil))
+                }
         }
         return nil
     }
@@ -291,12 +299,12 @@ extension AuthAPI {
     @discardableResult func refreshTokenWith(_ refresh_token: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: TokenRefreshError) -> Void) -> Request? {
         refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).then { token in
             success(token)
-        }.catch { error in
-            if let typedError = error as? TokenRefreshError {
-                failure(typedError)
-            } else {
-                failure(TokenRefreshError.other)
-            }
+            }.catch { error in
+                if let typedError = error as? TokenRefreshError {
+                    failure(typedError)
+                } else {
+                    failure(TokenRefreshError.other)
+                }
         }
         return nil
     }

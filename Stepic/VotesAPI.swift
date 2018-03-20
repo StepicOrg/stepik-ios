@@ -9,43 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class VotesAPI: APIEndpoint {
     override var name: String { return "votes" }
 
-    func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote) -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        let params: Parameters? = [
-            "vote": vote.json as AnyObject
-        ]
-        Alamofire.request("\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-                response in
+    func update(_ vote: Vote) -> Promise<Vote> {
+        return update.request(requestEndpoint: "votes", paramName: "vote", updatingObject: vote, withManager: manager)
+    }
 
-                var error = response.result.error
-                var json: JSON = [:]
-                if response.result.value == nil {
-                    if error == nil {
-                        error = NSError()
-                    }
-                } else {
-                    json = response.result.value!
-                }
-                let response = response.response
+}
 
-                if let e = error as NSError? {
-                    errorHandler("PUT vote: error \(e.domain) \(e.code): \(e.localizedDescription)")
-                    return
-                }
-
-                if response?.statusCode != 200 {
-                    errorHandler("PUT vote: bad response status code \(String(describing: response?.statusCode))")
-                    return
-                }
-
-                let retrievedVote = Vote(json: json["votes"].arrayValue[0])
-                success(retrievedVote)
-
-                return
-            }
-        )
+extension VotesAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    func update(_ vote: Vote, success: @escaping ((Vote) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+        update(vote).then { success($0) }.catch { errorHandler($0.localizedDescription) }
     }
 }

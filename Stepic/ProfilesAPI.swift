@@ -15,7 +15,7 @@ class ProfilesAPI: APIEndpoint {
     override var name: String { return "profiles" }
 
     func retrieve(ids: [Int], existing: [Profile], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
-        return getObjectsByIds(ids: ids, updating: existing, headers: headers)
+        return getObjectsByIds(ids: ids, updating: existing)
     }
 
     func update(_ profile: Profile, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Profile> {

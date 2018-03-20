@@ -15,7 +15,7 @@ class LessonsAPI: APIEndpoint {
     override var name: String { return "lessons" }
 
     func retrieve(ids: [Int], existing: [Lesson], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
-        return getObjectsByIds(ids: ids, updating: existing, headers: headers, printOutput: false)
+        return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 }
 

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class LastStep: NSManagedObject, JSONInitializable {
+class LastStep: NSManagedObject, JSONSerializable {
 
     typealias idType = String
 
@@ -39,6 +39,10 @@ class LastStep: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {

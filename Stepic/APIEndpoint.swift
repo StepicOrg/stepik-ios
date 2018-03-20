@@ -36,6 +36,8 @@ class APIEndpoint {
 
     let manager: Alamofire.SessionManager
 
+    var update: UpdateRequestMaker
+
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15
@@ -43,6 +45,8 @@ class APIEndpoint {
         let retrier = ApiRequestRetrier()
         manager.retrier = retrier
         manager.adapter = retrier
+
+        update = UpdateRequestMaker()
     }
 
     func cancelAllTasks() {
@@ -63,7 +67,7 @@ class APIEndpoint {
         return result
     }
 
-    func getObjectsByIds<T: JSONInitializable>(ids: [T.idType], updating: [T], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false) -> Promise<([T])> {
+    func getObjectsByIds<T: JSONSerializable>(ids: [T.idType], updating: [T], printOutput: Bool = false) -> Promise<([T])> {
         let name = self.name
         return Promise<([T])> {
             fulfill, reject in
@@ -98,7 +102,7 @@ class APIEndpoint {
         }
     }
 
-    func getObjectsByIds<T: JSONInitializable>(requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [T.idType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
+    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.idType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
 
         let params: Parameters = [:]
 
@@ -108,7 +112,7 @@ class APIEndpoint {
             return nil
         }
 
-        return manager.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default).responseSwiftyJSON({
             response in
 
             var error = response.result.error

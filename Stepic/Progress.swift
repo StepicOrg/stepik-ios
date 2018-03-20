@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Progress: NSManagedObject, JSONInitializable {
+class Progress: NSManagedObject, JSONSerializable {
 
     typealias idType = String
 
@@ -27,6 +27,18 @@ class Progress: NSManagedObject, JSONInitializable {
         numberOfSteps = json["n_steps"].intValue
         numberOfStepsPassed = json["n_steps_passed"].intValue
         lastViewed = json["last_viewed"].doubleValue
+    }
+
+    var json: JSON {
+        return [
+            "id" : id,
+            "is_passed": isPassed,
+            "score": score,
+            "cost": cost,
+            "n_steps": numberOfSteps,
+            "n_steps_passed": numberOfStepsPassed,
+            "last_viewed": lastViewed
+        ]
     }
 
     func update(json: JSON) {

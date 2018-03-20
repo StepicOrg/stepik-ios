@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class Section: NSManagedObject, JSONInitializable {
+class Section: NSManagedObject, JSONSerializable {
 
     // Insert code here to add functionality to your managed object subclass
     typealias idType = Int
@@ -41,6 +41,10 @@ class Section: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {

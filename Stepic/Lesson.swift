@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Lesson: NSManagedObject, JSONInitializable {
+class Lesson: NSManagedObject, JSONSerializable {
 
     // Insert code here to add functionality to your managed object subclass
     typealias idType = Int
@@ -28,6 +28,10 @@ class Lesson: NSManagedObject, JSONInitializable {
         slug = json["slug"].stringValue
         coverURL = json["cover_url"].string
         stepsArray = json["steps"].arrayObject as! [Int]
+    }
+
+    var json: JSON {
+        return []
     }
 
     static func getLesson(_ id: Int) -> Lesson? {

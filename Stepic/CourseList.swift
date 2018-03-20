@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 import PromiseKit
 
-class CourseList: NSManagedObject, JSONInitializable {
+class CourseList: NSManagedObject, JSONSerializable {
     typealias idType = Int
 
     convenience required init(json: JSON) {
@@ -30,6 +30,10 @@ class CourseList: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {

@@ -1,5 +1,5 @@
 //
-//  JSONInitializable.swift
+//  JSONSerializable.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 09.10.15.
@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-protocol JSONInitializable {
+protocol JSONSerializable {
 
     associatedtype idType: Equatable
 
@@ -17,6 +17,7 @@ protocol JSONInitializable {
     func update(json: JSON)
 
     var id: idType {get set}
+    var json: JSON { get }
 
     func hasEqualId(json: JSON) -> Bool
 }

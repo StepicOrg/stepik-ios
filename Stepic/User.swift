@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class User: NSManagedObject, JSONInitializable {
+class User: NSManagedObject, JSONSerializable {
 
     typealias idType = Int
 
@@ -34,6 +34,10 @@ class User: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    var json: JSON {
+        return []
     }
 
     func hasEqualId(json: JSON) -> Bool {
