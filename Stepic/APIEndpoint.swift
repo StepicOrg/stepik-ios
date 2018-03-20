@@ -37,7 +37,8 @@ class APIEndpoint {
     let manager: Alamofire.SessionManager
 
     var update: UpdateRequestMaker
-
+    var delete: DeleteRequestMaker
+    
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15

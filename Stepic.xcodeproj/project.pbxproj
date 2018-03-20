@@ -681,6 +681,7 @@
 		088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */; };
 		088E73EB206014B000D458E3 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
 		088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */; };
+		088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */; };
 		088EDB501F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB521F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
@@ -4392,6 +4393,7 @@
 		088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKSocialSDKProvider.swift; sourceTree = "<group>"; };
 		088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestRetrier.swift; sourceTree = "<group>"; };
 		088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRequestMaker.swift; sourceTree = "<group>"; };
+		088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRequestMaker.swift; sourceTree = "<group>"; };
 		088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVerticalViewController.swift; sourceTree = "<group>"; };
 		088EDB581F8F5A48009B736E /* CourseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
 		088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListHorizontalViewController.swift; sourceTree = "<group>"; };
@@ -5995,7 +5997,7 @@
 				084F7AAF1E775A410088368A /* API Endpoints */,
 				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
 				0800B8241D0704B6006C987E /* ApiUtil.swift */,
-				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
+				088E73EE20619C7800D458E3 /* Request Makers */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -6060,6 +6062,15 @@
 				08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */,
 			);
 			name = SocialSDKProviders;
+			sourceTree = "<group>";
+		};
+		088E73EE20619C7800D458E3 /* Request Makers */ = {
+			isa = PBXGroup;
+			children = (
+				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
+				088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */,
+			);
+			name = "Request Makers";
 			sourceTree = "<group>";
 		};
 		088EDCAE1F949A2C0098DEC7 /* New Widgets Collection View Cell */ = {
@@ -11600,6 +11611,7 @@
 				08CBA3671F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
+				088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,

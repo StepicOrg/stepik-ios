@@ -24,6 +24,10 @@ class EnrollmentsAPI: APIEndpoint {
         }
     }
 
+    func delete(courseId: Int) -> Promise<Void> {
+        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
+    }
+    
     @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
 

@@ -32,6 +32,5 @@ class UpdateRequestMaker {
                 reject(error)
             }
         }
-
     }
 }

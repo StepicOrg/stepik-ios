@@ -109,6 +109,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
         return Promise { fulfill, reject in
             manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).responseSwiftyJSON { response in
