@@ -34,7 +34,7 @@ class StepikPlaceholderView: NibInitializableView {
     
     lazy private var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
         var idToView: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = [:]
-        for placeholder in StepikPlaceholder.availablePlaceholders {
+        for placeholder in StepikPlaceholderStyle.stepikStyledPlaceholders {
             idToView[placeholder.id] = placeholder
         }
         return idToView
@@ -46,6 +46,11 @@ class StepikPlaceholderView: NibInitializableView {
 
     override var nibName: String {
         return "StepikPlaceholderView"
+    }
+
+    convenience init(placeholder: StepikPlaceholderStyle) {
+        self.init()
+        set(placeholder: placeholder)
     }
 
     @IBAction func onActionButtonClick(_ sender: Any) {
@@ -97,12 +102,12 @@ class StepikPlaceholderView: NibInitializableView {
 
         if placeholder.buttonTitle != nil {
             if !actionsStackView.arrangedSubviews.contains(actionButton) {
-                actionsStackView.insertArrangedSubview(actionButton, at: 1)
+                //actionsStackView.insertArrangedSubview(actionButton, at: 1)
             }
-            actionButton.isHidden = false
+            actionButton.alpha = 1.0
         } else {
-            actionsStackView.removeArrangedSubview(actionButton)
-            actionButton.isHidden = true
+            //actionsStackView.removeArrangedSubview(actionButton)
+            actionButton.alpha = 0.0
         }
 
         if isVertical {
@@ -123,17 +128,14 @@ class StepikPlaceholderView: NibInitializableView {
         }
     }
 
-    func set(id: StepikPlaceholderStyle.PlaceholderId) {
-        guard let placeholderWithId = allPlaceholders[id] else {
-            return
-        }
+    func set(placeholder: StepikPlaceholderStyle) {
+        currentPlaceholder = placeholder
 
-        currentPlaceholder = placeholderWithId
+        imageView.image = placeholder.image?.image
 
-        imageView.image = placeholderWithId.image?.image
-        textLabel.text = placeholderWithId.text
-        actionButton.setTitle(placeholderWithId.buttonTitle, for: .normal)
+        textLabel.text = placeholder.text
+        actionButton.setTitle(placeholder.buttonTitle, for: .normal)
 
-        rebuildConstraints(for: placeholderWithId)
+        rebuildConstraints(for: placeholder)
     }
 }

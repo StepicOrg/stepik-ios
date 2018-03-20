@@ -3926,6 +3926,7 @@
 		864D67D61E83E394001E8D9E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		86624A731FC76578008E7E6C /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
 		86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A741FC76682008E7E6C /* NotificationsStatus.swift */; };
+		866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
@@ -4874,6 +4875,7 @@
 		863262F81ECFC5AE007A20B3 /* loading_robot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_robot.gif; sourceTree = "<group>"; };
 		86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusesAPI.swift; sourceTree = "<group>"; };
 		86624A741FC76682008E7E6C /* NotificationsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsStatus.swift; sourceTree = "<group>"; };
+		866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepikPlaceholderStyle+Placeholders.swift"; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = Stepic/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepCardView.swift; sourceTree = "<group>"; };
 		86BB7C012019538000063538 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
@@ -7553,6 +7555,7 @@
 			children = (
 				2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */,
 				2CF08862205BEEB800FCB9C0 /* StepikPlaceholderView */,
+				866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */,
 			);
 			name = Placeholders;
 			sourceTree = "<group>";
@@ -11284,6 +11287,7 @@
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
+				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
