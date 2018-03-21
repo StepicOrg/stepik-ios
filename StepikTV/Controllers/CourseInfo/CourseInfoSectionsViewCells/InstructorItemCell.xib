@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstructorItemCell" id="Med-sV-CGv" customClass="InstructorItemCell" customModule="StepikTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="326"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="326"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SiP-MA-Blw">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="SiP-MA-Blw" secondAttribute="height" multiplier="1:1" id="fQt-Y4-0Kc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructor Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6S-lv-CaO">
+                        <rect key="frame" x="0.0" y="255" width="250" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="d6S-lv-CaO" secondAttribute="trailing" id="6hH-e0-djm"/>
+                <constraint firstAttribute="trailing" secondItem="SiP-MA-Blw" secondAttribute="trailing" id="ABX-UX-GaM"/>
+                <constraint firstItem="SiP-MA-Blw" firstAttribute="leading" secondItem="Med-sV-CGv" secondAttribute="leading" id="Fkp-LI-Lxg"/>
+                <constraint firstItem="d6S-lv-CaO" firstAttribute="leading" secondItem="Med-sV-CGv" secondAttribute="leading" id="NXm-Tm-ggj"/>
+                <constraint firstItem="d6S-lv-CaO" firstAttribute="top" secondItem="SiP-MA-Blw" secondAttribute="bottom" constant="5" id="k6b-ZN-1bi"/>
+                <constraint firstItem="SiP-MA-Blw" firstAttribute="top" secondItem="Med-sV-CGv" secondAttribute="top" id="pU1-fj-5rw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="xad-AC-ebO"/>
+            <size key="customSize" width="237" height="315"/>
+            <connections>
+                <outlet property="imageView" destination="SiP-MA-Blw" id="hZC-19-ajH"/>
+                <outlet property="titleLabel" destination="d6S-lv-CaO" id="gUd-Fb-ei1"/>
+            </connections>
+            <point key="canvasLocation" x="-14" y="114"/>
+        </collectionViewCell>
+    </objects>
+</document>

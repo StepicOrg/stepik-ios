@@ -22,7 +22,7 @@ class DeviceInfo {
 
     var isPlus: Bool {
         return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
-               currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
+                   currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
     }
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {

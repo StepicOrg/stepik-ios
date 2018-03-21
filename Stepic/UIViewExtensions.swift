@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if os(tvOS)
+    import UIKit
+#endif
 
 extension UIView {
     func setRoundedBounds(width: CGFloat, color: UIColor = UIColor.white) {

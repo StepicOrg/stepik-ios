@@ -20,11 +20,15 @@ struct VideosInfo {
             if let quality = defaults.value(forKey: downloadingVideoQualityKey) as? String {
                 return quality
             } else {
-                if DeviceInfo.current.isPad {
+                #if !os(tvOS)
+                    if DeviceInfo.current.isPad {
+                        return "720"
+                    } else {
+                        return "360"
+                    }
+                #else
                     return "720"
-                } else {
-                    return "360"
-                }
+                #endif
             }
         }
 
@@ -39,11 +43,15 @@ struct VideosInfo {
             if let quality = defaults.value(forKey: watchingVideoQualityKey) as? String {
                 return quality
             } else {
-                if DeviceInfo.current.isPad {
+                #if !os(tvOS)
+                    if DeviceInfo.current.isPad {
+                        return "720"
+                    } else {
+                        return "360"
+                    }
+                #else
                     return "720"
-                } else {
-                    return "360"
-                }
+                #endif
             }
         }
 

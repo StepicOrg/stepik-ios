@@ -11,6 +11,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension Block {
 
