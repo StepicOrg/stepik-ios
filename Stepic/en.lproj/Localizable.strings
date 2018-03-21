@@ -410,3 +410,17 @@ CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learn
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
+
+/* Placeholders */
+PlaceholderEmptyText = "Nothing here";
+PlaceholderEmptyButton = "Maybe button helps you";
+PlaceholderNoConnectionText = "Sorry, it seems like you've lost connection";
+PlaceholderNoConnectionButton = "Retry";
+PlaceholderEmptyDownloadsText = "No downloaded videos";
+PlaceholderEmptyDownloadsButton = "Go to Catalog";
+PlaceholderLoginText = "Sorry, have we met before?\nTry to Sign In";
+PlaceholderLoginButton = "Sign In";
+PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
+PlaceholderEmptyNotificationsButton = "Go to Catalog";
+PlaceholderEmptySearchText = "Some free space to think";
+PlaceholderEmptySearchButton = "Go to Catalog";

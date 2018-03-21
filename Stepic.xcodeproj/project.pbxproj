@@ -206,7 +206,6 @@
 		0829B83D1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
-		082A89002046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89022046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89032046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
@@ -264,12 +263,10 @@
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
-		083C9CAE2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CAF2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB02056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB12056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB22056718000B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
-		083C9CB32056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
@@ -620,12 +617,10 @@
 		087D96B91EBB7C7700059408 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087D96B81EBB7C7700059408 /* Tokens.plist */; };
 		087D96BB1EBB7F5500059408 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
 		087E8B23204DE29F00C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
-		087E8B24204DE2A000C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B25204DE2A000C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B26204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B27204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B28204DE2A200C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
-		087E8B29204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
@@ -1095,7 +1090,6 @@
 		08CBA36E1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
 		08CCAEC1204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
 		08CCAEC2204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
-		08CCAEC3204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
 		08CCAEC4204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
 		08CCAEC5204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
 		08CCAEC6204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */; };
@@ -2692,412 +2686,6 @@
 		2C8652631F4B2F7D00D51654 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525D1F4B2F7D00D51654 /* icon.png */; };
 		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
 		2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525F1F4B2F7D00D51654 /* Tokens.plist */; };
-		2C8652681F4B2FA500D51654 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652661F4B2FA500D51654 /* step0.html */; };
-		2C86526E1F4B33DE00D51654 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
-		2C86526F1F4B33DE00D51654 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
-		2C8652701F4B33DE00D51654 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
-		2C8652711F4B33DE00D51654 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
-		2C8652721F4B33DE00D51654 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
-		2C8652731F4B33DE00D51654 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
-		2C8652741F4B33DE00D51654 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
-		2C8652751F4B33DE00D51654 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
-		2C8652761F4B33DE00D51654 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
-		2C8652771F4B33DE00D51654 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
-		2C8652781F4B33DE00D51654 /* CertificatesViewTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */; };
-		2C8652791F4B33DE00D51654 /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
-		2C86527A1F4B33DE00D51654 /* CertificatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B131E9D8EF800714173 /* CertificatesViewController.swift */; };
-		2C86527B1F4B33DE00D51654 /* CertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B161E9D8F1D00714173 /* CertificatesView.swift */; };
-		2C86527C1F4B33DE00D51654 /* CertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B191E9D920500714173 /* CertificatesPresenter.swift */; };
-		2C86527D1F4B33DE00D51654 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
-		2C86527E1F4B33DE00D51654 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
-		2C86527F1F4B33DE00D51654 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
-		2C8652801F4B33DE00D51654 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
-		2C8652811F4B33DE00D51654 /* CodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */; };
-		2C8652821F4B33DE00D51654 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
-		2C8652831F4B33DE00D51654 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
-		2C8652841F4B33DE00D51654 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
-		2C8652851F4B33DE00D51654 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
-		2C8652861F4B33DE00D51654 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
-		2C8652871F4B33DE00D51654 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
-		2C8652881F4B33DE00D51654 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C8652891F4B33DE00D51654 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
-		2C86528A1F4B33DE00D51654 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
-		2C86528C1F4B33DE00D51654 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
-		2C86528D1F4B33DE00D51654 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
-		2C86528E1F4B33DE00D51654 /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
-		2C86528F1F4B33DE00D51654 /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
-		2C8652901F4B33DE00D51654 /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
-		2C8652911F4B33DE00D51654 /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
-		2C8652921F4B33DE00D51654 /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
-		2C8652931F4B33DE00D51654 /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
-		2C8652941F4B33DE00D51654 /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
-		2C8652951F4B33DE00D51654 /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
-		2C8652961F4B33DE00D51654 /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
-		2C8652971F4B33DE00D51654 /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
-		2C8652981F4B33DE00D51654 /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
-		2C8652991F4B33DE00D51654 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
-		2C86529A1F4B33DE00D51654 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
-		2C86529B1F4B33DE00D51654 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		2C86529C1F4B33DE00D51654 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		2C86529D1F4B33DE00D51654 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
-		2C86529E1F4B33DE00D51654 /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
-		2C86529F1F4B33DE00D51654 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		2C8652A01F4B33DE00D51654 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		2C8652A11F4B33DE00D51654 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		2C8652A21F4B33DE00D51654 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
-		2C8652A31F4B33DE00D51654 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
-		2C8652A41F4B33DE00D51654 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
-		2C8652A51F4B33DE00D51654 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
-		2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
-		2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
-		2C8652A91F4B33DE00D51654 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
-		2C8652AA1F4B33DE00D51654 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
-		2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
-		2C8652AC1F4B33DE00D51654 /* StepOptions+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */; };
-		2C8652AD1F4B33DE00D51654 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
-		2C8652AE1F4B33DE00D51654 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
-		2C8652B21F4B33DE00D51654 /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
-		2C8652B31F4B33DE00D51654 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
-		2C8652B41F4B33DE00D51654 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
-		2C8652B51F4B33DE00D51654 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
-		2C8652B61F4B33DE00D51654 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
-		2C8652B71F4B33DE00D51654 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C8652B81F4B33DE00D51654 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
-		2C8652B91F4B33DE00D51654 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
-		2C8652BA1F4B33DE00D51654 /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA61D175DA00034D86D /* HTMLContentView.swift */; };
-		2C8652BB1F4B33DE00D51654 /* HTMLStringWrapperUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */; };
-		2C8652BC1F4B33DE00D51654 /* HTMLContentViewInteractionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */; };
-		2C8652BE1F4B33DE00D51654 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
-		2C8652BF1F4B33DE00D51654 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2C8652C01F4B33DE00D51654 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		2C8652C11F4B33DE00D51654 /* CellOperationsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E81D0F649700E4F345 /* CellOperationsUtil.swift */; };
-		2C8652C31F4B33DE00D51654 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
-		2C8652C41F4B33DE00D51654 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C8652C51F4B33DE00D51654 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
-		2C8652C61F4B33DE00D51654 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
-		2C8652C71F4B33DE00D51654 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
-		2C8652C81F4B33DE00D51654 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
-		2C8652C91F4B33DE00D51654 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
-		2C8652CA1F4B33DE00D51654 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
-		2C8652CB1F4B33DE00D51654 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
-		2C8652CC1F4B33DE00D51654 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
-		2C8652CD1F4B33DE00D51654 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
-		2C8652CE1F4B33DE00D51654 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
-		2C8652CF1F4B33DE00D51654 /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
-		2C8652D01F4B33DE00D51654 /* StringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859B1C5786DE000165AA /* StringQuizViewController.swift */; };
-		2C8652D11F4B33DE00D51654 /* NumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A11C57987B000165AA /* NumberQuizViewController.swift */; };
-		2C8652D21F4B33DE00D51654 /* FreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */; };
-		2C8652D31F4B33DE00D51654 /* MathQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AB1C580DB3000165AA /* MathQuizViewController.swift */; };
-		2C8652D41F4B33DE00D51654 /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
-		2C8652D51F4B33DE00D51654 /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
-		2C8652D61F4B33DE00D51654 /* MatchingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */; };
-		2C8652D71F4B33DE00D51654 /* FillBlanksTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */; };
-		2C8652D81F4B33DE00D51654 /* FillBlanksInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */; };
-		2C8652D91F4B33DE00D51654 /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
-		2C8652DA1F4B33DE00D51654 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
-		2C8652DB1F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
-		2C8652DC1F4B33DE00D51654 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
-		2C8652DD1F4B33DE00D51654 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C8652DE1F4B33DE00D51654 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C8652DF1F4B33DE00D51654 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C8652E01F4B33DE00D51654 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C8652E11F4B33DE00D51654 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C8652E31F4B33DE00D51654 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C8652E41F4B33DE00D51654 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
-		2C8652E51F4B33DE00D51654 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C8652E61F4B33DE00D51654 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C8652E71F4B33DE00D51654 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C8652E81F4B33DE00D51654 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C8652E91F4B33DE00D51654 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		2C8652EC1F4B33DE00D51654 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
-		2C8652EF1F4B33DE00D51654 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
-		2C8652F01F4B33DE00D51654 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
-		2C8652F11F4B33DE00D51654 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
-		2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
-		2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
-		2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
-		2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
-		2C8652FA1F4B33DE00D51654 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
-		2C8652FC1F4B33DE00D51654 /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
-		2C8652FD1F4B33DE00D51654 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
-		2C8652FE1F4B33DE00D51654 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
-		2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
-		2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
-		2C8653101F4B33DE00D51654 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2C8653121F4B33DE00D51654 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2C8653131F4B33DE00D51654 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2C8653141F4B33DE00D51654 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
-		2C8653151F4B33DE00D51654 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
-		2C8653161F4B33DE00D51654 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2C8653171F4B33DE00D51654 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
-		2C8653181F4B33DE00D51654 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
-		2C8653191F4B33DE00D51654 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2C86531A1F4B33DE00D51654 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
-		2C86531B1F4B33DE00D51654 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
-		2C86531C1F4B33DE00D51654 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
-		2C86531D1F4B33DE00D51654 /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
-		2C86531E1F4B33DE00D51654 /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
-		2C86531F1F4B33DE00D51654 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
-		2C8653201F4B33DE00D51654 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C8653211F4B33DE00D51654 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C8653231F4B33DE00D51654 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C8653241F4B33DE00D51654 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C8653251F4B33DE00D51654 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2C8653261F4B33DE00D51654 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C8653271F4B33DE00D51654 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2C8653281F4B33DE00D51654 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2C8653291F4B33DE00D51654 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2C86532A1F4B33DE00D51654 /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
-		2C86532B1F4B33DE00D51654 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
-		2C86532D1F4B33DE00D51654 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
-		2C86532E1F4B33DE00D51654 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
-		2C86532F1F4B33DE00D51654 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
-		2C8653301F4B33DE00D51654 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
-		2C8653311F4B33DE00D51654 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
-		2C8653321F4B33DE00D51654 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
-		2C8653331F4B33DE00D51654 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
-		2C8653341F4B33DE00D51654 /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
-		2C8653351F4B33DE00D51654 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
-		2C8653361F4B33DE00D51654 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
-		2C8653371F4B33DE00D51654 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
-		2C8653391F4B33DE00D51654 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
-		2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
-		2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
-		2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
-		2C86533D1F4B33DE00D51654 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
-		2C86533E1F4B33DE00D51654 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
-		2C86533F1F4B33DE00D51654 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
-		2C8653401F4B33DE00D51654 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
-		2C8653411F4B33DE00D51654 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		2C8653421F4B33DE00D51654 /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2C8653431F4B33DE00D51654 /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
-		2C8653441F4B33DE00D51654 /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
-		2C8653451F4B33DE00D51654 /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
-		2C8653461F4B33DE00D51654 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
-		2C8653471F4B33DE00D51654 /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
-		2C8653481F4B33DE00D51654 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
-		2C8653491F4B33DE00D51654 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
-		2C86534A1F4B33DE00D51654 /* CodePlaygroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FE431F0D390B001226B4 /* CodePlaygroundManager.swift */; };
-		2C86534B1F4B33DE00D51654 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
-		2C86534C1F4B33DE00D51654 /* Scripts.plist in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
-		2C86534D1F4B33DE00D51654 /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
-		2C86534E1F4B33DE00D51654 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
-		2C86534F1F4B33DE00D51654 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
-		2C8653501F4B33DE00D51654 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
-		2C8653511F4B33DE00D51654 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
-		2C8653521F4B33DE00D51654 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
-		2C8653531F4B33DE00D51654 /* WebControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */; };
-		2C8653541F4B33DE00D51654 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
-		2C8653551F4B33DE00D51654 /* WKWebViewPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */; };
-		2C8653561F4B33DE00D51654 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
-		2C8653571F4B33DE00D51654 /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
-		2C8653581F4B33DE00D51654 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
-		2C8653591F4B33DE00D51654 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
-		2C86535A1F4B33DE00D51654 /* CodeQuizToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E831EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift */; };
-		2C86535B1F4B33DE00D51654 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
-		2C86535C1F4B33DE00D51654 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
-		2C86535D1F4B33DE00D51654 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
-		2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* StreaksNotificationSuggestionManager.swift */; };
-		2C8653601F4B33DE00D51654 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
-		2C8653611F4B33DE00D51654 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
-		2C8653621F4B33DE00D51654 /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
-		2C8653631F4B33DE00D51654 /* Queues.plist in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
-		2C8653641F4B33DE00D51654 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
-		2C8653661F4B33DE00D51654 /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
-		2C8653671F4B33DE00D51654 /* Users.plist in Sources */ = {isa = PBXBuildFile; fileRef = 08AC213B1CDD35DF00FBB9CD /* Users.plist */; };
-		2C8653681F4B33DE00D51654 /* PersistentUserTokenRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */; };
-		2C8653691F4B33DE00D51654 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
-		2C86536A1F4B33DE00D51654 /* Tasks.plist in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21381CDD34C300FBB9CD /* Tasks.plist */; };
-		2C86536B1F4B33DE00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
-		2C86536C1F4B33DE00D51654 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */; };
-		2C86536D1F4B33DE00D51654 /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
-		2C86536F1F4B33DE00D51654 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
-		2C8653701F4B33DE00D51654 /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
-		2C8653711F4B33DE00D51654 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
-		2C8653721F4B33DE00D51654 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
-		2C8653731F4B33DE00D51654 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
-		2C8653741F4B33DE00D51654 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
-		2C8653751F4B33DE00D51654 /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
-		2C8653761F4B33DE00D51654 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
-		2C8653791F4B33DE00D51654 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
-		2C86537B1F4B33DE00D51654 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
-		2C86537C1F4B33DE00D51654 /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
-		2C86537D1F4B33DE00D51654 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
-		2C86537E1F4B33DE00D51654 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
-		2C86537F1F4B33DE00D51654 /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
-		2C8653811F4B33DE00D51654 /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
-		2C8653821F4B33DE00D51654 /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
-		2C8653831F4B33DE00D51654 /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
-		2C8653841F4B33DE00D51654 /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */; };
-		2C8653851F4B33DE00D51654 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
-		2C8653861F4B33DE00D51654 /* SearchQueriesPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */; };
-		2C8653871F4B33DE00D51654 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
-		2C8653881F4B33DE00D51654 /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
-		2C8653891F4B33DE00D51654 /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
-		2C86538A1F4B33DE00D51654 /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
-		2C86538B1F4B33DE00D51654 /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
-		2C86538C1F4B33DE00D51654 /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
-		2C86538D1F4B33DE00D51654 /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
-		2C86538E1F4B33DE00D51654 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
-		2C86538F1F4B33DE00D51654 /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
-		2C8653901F4B33DE00D51654 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
-		2C8653911F4B33DE00D51654 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
-		2C8653921F4B33DE00D51654 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
-		2C8653931F4B33DE00D51654 /* CodeLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */; };
-		2C8653941F4B33DE00D51654 /* CodeSuggestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */; };
-		2C8653951F4B33DE00D51654 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
-		2C8653961F4B33DE00D51654 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
-		2C8653971F4B33DE00D51654 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
-		2C8653981F4B33DE00D51654 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
-		2C8653991F4B33DE00D51654 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
-		2C86539A1F4B33DE00D51654 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
-		2C86539B1F4B33DE00D51654 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
-		2C86539C1F4B33DE00D51654 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
-		2C86539D1F4B33DE00D51654 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
-		2C86539E1F4B33DE00D51654 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
-		2C86539F1F4B33DE00D51654 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
-		2C8653A01F4B33DE00D51654 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
-		2C8653A11F4B33DE00D51654 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
-		2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
-		2C8653A31F4B33DE00D51654 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
-		2C8653A41F4B33DE00D51654 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
-		2C8653A51F4B33DE00D51654 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
-		2C8653A61F4B33DE00D51654 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
-		2C8653A71F4B33DE00D51654 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
-		2C8653A81F4B33DE00D51654 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
-		2C8653A91F4B33DE00D51654 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
-		2C8653AA1F4B33DE00D51654 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
-		2C8653AC1F4B33DE00D51654 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
-		2C8653AD1F4B33DE00D51654 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
-		2C8653AE1F4B33DE00D51654 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
-		2C8653AF1F4B33DE00D51654 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
-		2C8653B11F4B33DE00D51654 /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
-		2C8653B21F4B33DE00D51654 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
-		2C8653B31F4B33DE00D51654 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
-		2C8653B41F4B33DE00D51654 /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
-		2C8653B51F4B33DE00D51654 /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
-		2C8653B61F4B33DE00D51654 /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		2C8653B71F4B33DE00D51654 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
-		2C8653B81F4B33DE00D51654 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
-		2C8653B91F4B33DE00D51654 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
-		2C8653BA1F4B33DE00D51654 /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
-		2C8653BB1F4B33DE00D51654 /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
-		2C8653BC1F4B33DE00D51654 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
-		2C8653BD1F4B33DE00D51654 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
-		2C8653BF1F4B33DE00D51654 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
-		2C8653C01F4B33DE00D51654 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
-		2C8653C21F4B33DE00D51654 /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
-		2C8653C31F4B33DE00D51654 /* SearchQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */; };
-		2C8653C41F4B33DE00D51654 /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
-		2C8653C51F4B33DE00D51654 /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
-		2C8653C61F4B33DE00D51654 /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
-		2C8653C71F4B33DE00D51654 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
-		2C8653C81F4B33DE00D51654 /* CodeQuizToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */; };
-		2C8653C91F4B33DE00D51654 /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
-		2C8653CA1F4B33DE00D51654 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
-		2C8653CB1F4B33DE00D51654 /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		2C8653CE1F4B33DE00D51654 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */; };
-		2C8653CF1F4B33DE00D51654 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
-		2C8653D01F4B33DE00D51654 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
-		2C8653D11F4B33DE00D51654 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
-		2C8653D21F4B33DE00D51654 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
-		2C8653D31F4B33DE00D51654 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
-		2C8653D41F4B33DE00D51654 /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
-		2C8653D51F4B33DE00D51654 /* StepsControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepsControllerRouter.swift */; };
-		2C8653D61F4B33DE00D51654 /* StepsControllerDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */; };
-		2C8653D71F4B33DE00D51654 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
-		2C8653D81F4B33DE00D51654 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749251DE5AE0400144C14 /* Alerts.swift */; };
-		2C8653D91F4B33DE00D51654 /* StreaksAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749291DE5AF8A00144C14 /* StreaksAlertManager.swift */; };
-		2C8653DA1F4B33DE00D51654 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
-		2C8653DB1F4B33DE00D51654 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
-		2C8653DC1F4B33DE00D51654 /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
-		2C8653DD1F4B33DE00D51654 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492C1DE5B07900144C14 /* AlertManager.swift */; };
-		2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */; };
-		2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */; };
-		2C8653E01F4B33DE00D51654 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
-		2C8653E11F4B33DE00D51654 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
-		2C8653E21F4B33DE00D51654 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
-		2C8653E31F4B33DE00D51654 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
-		2C8653E41F4B33DE00D51654 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
-		2C8653E51F4B33DE00D51654 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
-		2C8653E61F4B33DE00D51654 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
-		2C8653E71F4B33DE00D51654 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
-		2C8653E81F4B33DE00D51654 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
-		2C8653E91F4B33DE00D51654 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
-		2C8653EA1F4B33DE00D51654 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
-		2C8653EB1F4B33DE00D51654 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
-		2C8653ED1F4B33DE00D51654 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
-		2C8653EF1F4B33DE00D51654 /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
-		2C8653F01F4B33DE00D51654 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
-		2C8653F11F4B33DE00D51654 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
-		2C8653F21F4B33DE00D51654 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
-		2C8653F41F4B33DE00D51654 /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
-		2C8653F51F4B33DE00D51654 /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
-		2C8653F71F4B33DE00D51654 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
-		2C8653F81F4B33DE00D51654 /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
-		2C8653F91F4B33DE00D51654 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
-		2C8653FF1F4B33DE00D51654 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
-		2C8654001F4B33DE00D51654 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
-		2C8654021F4B33DE00D51654 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
-		2C8654041F4B33DE00D51654 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
-		2C8654051F4B33DE00D51654 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
-		2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
-		2C8654091F4B33DE00D51654 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
-		2C86540E1F4B33DE00D51654 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
-		2C86540F1F4B33DE00D51654 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
-		2C8654101F4B33DE00D51654 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
-		2C8654111F4B33DE00D51654 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
-		2C8654121F4B33DE00D51654 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
-		2C8654131F4B33DE00D51654 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
-		2C8654141F4B33DE00D51654 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
-		2C8654151F4B33DE00D51654 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
-		2C8654171F4B33DE00D51654 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
-		2C8654191F4B33DE00D51654 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
-		2C86541B1F4B33DE00D51654 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C86541D1F4B33DE00D51654 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
-		2C86541F1F4B33DE00D51654 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
-		2C8654211F4B33DE00D51654 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
-		2C8654221F4B33DE00D51654 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C8654231F4B33DE00D51654 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
-		2C8654251F4B33DE00D51654 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
-		2C8654261F4B33DE00D51654 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
-		2C8654291F4B33DE00D51654 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
-		2C86542A1F4B33DE00D51654 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
-		2C86542C1F4B33DE00D51654 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
-		2C86542D1F4B33DE00D51654 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step4.html */; };
-		2C86542E1F4B33DE00D51654 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
-		2C86542F1F4B33DE00D51654 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
-		2C8654301F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
-		2C8654311F4B33DE00D51654 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
-		2C8654321F4B33DE00D51654 /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
-		2C8654331F4B33DE00D51654 /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
-		2C8654341F4B33DE00D51654 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
-		2C8654351F4B33DE00D51654 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
-		2C8654371F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
-		2C8654391F4B33DE00D51654 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		2C86543A1F4B33DE00D51654 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
-		2C86543D1F4B33DE00D51654 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
-		2C86543F1F4B33DE00D51654 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
-		2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
-		2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
-		2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
-		2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
-		2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
-		2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
-		2C86544C1F4B33DE00D51654 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
-		2C8654871F4B3A5000D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
-		2C8654881F4B3A5200D51654 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
-		2C8654891F4B3A5400D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
-		2C86548A1F4B3A5F00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654771F4B39A500D51654 /* Tokens.plist */; };
-		2C86548B1F4B3A6200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654781F4B39A500D51654 /* Icons.xcassets */; };
-		2C86548F1F4B3E1300D51654 /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C89A9561F4C289900227C3B /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -4031,6 +3619,10 @@
 		2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2CE527C82029E1600047EC5F /* AdaptiveAchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
+		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
 		2CF425262024A5EC002D7305 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
 		2CF425272024A5F0002D7305 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2CF425282024A5F3002D7305 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
@@ -5246,6 +4838,10 @@
 		2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsSection.swift; sourceTree = "<group>"; };
 		2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
+		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
+		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
+		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
+		2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikPlaceholderView.swift; sourceTree = "<group>"; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
@@ -6306,6 +5902,7 @@
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
 				089700951F6B2A820041C24E /* NibInitializableView.swift */,
 				08EDB8B91F7C3D100028A9AE /* CourseWidgetView */,
+				2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -6354,6 +5951,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2CF0885B205BECCC00FCB9C0 /* Placeholders */,
 				2C5DF1371FEBDC50003B1177 /* Adaptive steps */,
 				2C2060CB1FDAF71500605C42 /* Onboarding */,
 				08D565C91C5F7CF000DE2B6A /* Quizzes */,
@@ -7950,6 +7548,24 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		2CF0885B205BECCC00FCB9C0 /* Placeholders */ = {
+			isa = PBXGroup;
+			children = (
+				2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */,
+				2CF08862205BEEB800FCB9C0 /* StepikPlaceholderView */,
+			);
+			name = Placeholders;
+			sourceTree = "<group>";
+		};
+		2CF08862205BEEB800FCB9C0 /* StepikPlaceholderView */ = {
+			isa = PBXGroup;
+			children = (
+				2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */,
+				2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */,
+			);
+			name = StepikPlaceholderView;
+			sourceTree = "<group>";
+		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -8855,6 +8471,7 @@
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
+				2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */,
 				2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */,
 				087D96B91EBB7C7700059408 /* Tokens.plist in Resources */,
 				2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */,
@@ -8911,14 +8528,12 @@
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC41F99462D00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
-				2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */,
 				2C608B0D20456966006870BB /* Adaptive.storyboard in Resources */,
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC41F99462D00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C608B38204569EC006870BB /* overlay_simple.png in Resources */,
 				2C608AD6204568E6006870BB /* ProgressTableViewCell.xib in Resources */,
-				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				088EDCBF1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
@@ -9023,14 +8638,12 @@
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC61F99462E00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
-				2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */,
 				2C608B0C20456965006870BB /* Adaptive.storyboard in Resources */,
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				085EDCC61F99462E00AB3278 /* Notifications.storyboard in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C608B39204569ED006870BB /* overlay_simple.png in Resources */,
 				2C608AD5204568E6006870BB /* ProgressTableViewCell.xib in Resources */,
-				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				088EDCC01F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
@@ -9100,103 +8713,6 @@
 				2C1B64BC1F4C590700236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */,
 				2C1B64C01F4C590700236804 /* loading_robot.gif in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C8653FD1F4B33DE00D51654 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C8653FF1F4B33DE00D51654 /* jquery-3.2.1.min.js in Resources */,
-				2C8654001F4B33DE00D51654 /* wysiwyg.css in Resources */,
-				2C8654021F4B33DE00D51654 /* Localizable.strings in Resources */,
-				2C35C4D61F4DA478002F3BF4 /* adjectives_f.plist in Resources */,
-				2C8654041F4B33DE00D51654 /* LoadingPaginationView.xib in Resources */,
-				2C8654051F4B33DE00D51654 /* CertificateTableViewCell.xib in Resources */,
-				08CBA3611F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
-				2C35C4DC1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
-				2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */,
-				2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */,
-				08195A241FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
-				08EDB8D01F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
-				08EDD6231F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
-				2C8654091F4B33DE00D51654 /* RateAppViewController.xib in Resources */,
-				2C86540E1F4B33DE00D51654 /* Main.storyboard in Resources */,
-				2C86540F1F4B33DE00D51654 /* StepCardView.xib in Resources */,
-				2C8654101F4B33DE00D51654 /* CodeSuggestionsTableViewController.xib in Resources */,
-				0885B8DD1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
-				2C8654111F4B33DE00D51654 /* PlaceholderView.storyboard in Resources */,
-				2C35C4E21F4DA486002F3BF4 /* nouns_f.plist in Resources */,
-				2C8654121F4B33DE00D51654 /* VideoDownloadView.xib in Resources */,
-				2C86548B1F4B3A6200D51654 /* Icons.xcassets in Resources */,
-				08CB0D471FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
-				2C8654131F4B33DE00D51654 /* WarningView.xib in Resources */,
-				2C86548F1F4B3E1300D51654 /* MathJax in Resources */,
-				2C8654141F4B33DE00D51654 /* StepTabView.xib in Resources */,
-				2C8654151F4B33DE00D51654 /* DiscussionCountView.xib in Resources */,
-				08CBA3441F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
-				2C8654171F4B33DE00D51654 /* PickerViewController.xib in Resources */,
-				2C35C5051F4DB91A002F3BF4 /* step1.html in Resources */,
-				2C8654191F4B33DE00D51654 /* FullscreenCodeQuizViewController.xib in Resources */,
-				2C86541B1F4B33DE00D51654 /* AchievementTableViewCell.xib in Resources */,
-				084DB9D81FA2A19F0074B11E /* ContinueLearningWidgetView.xib in Resources */,
-				2C86541D1F4B33DE00D51654 /* StepicVideoPlayerViewController.xib in Resources */,
-				2C8654871F4B3A5000D51654 /* Config.plist in Resources */,
-				2C86541F1F4B33DE00D51654 /* CodeInputAccessoryView.xib in Resources */,
-				2C8654211F4B33DE00D51654 /* PlayerTestStoryboard.storyboard in Resources */,
-				2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */,
-				2C8654221F4B33DE00D51654 /* DownloadTableViewCell.xib in Resources */,
-				08DF78981F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
-				2C86548A1F4B3A5F00D51654 /* Tokens.plist in Resources */,
-				2C35C4E81F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
-				2C8654231F4B33DE00D51654 /* DiscussionWebTableViewCell.xib in Resources */,
-				08CB0D3D1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
-				2C8654251F4B33DE00D51654 /* DiscussionTableViewCell.xib in Resources */,
-				2C8654261F4B33DE00D51654 /* DiscussionsViewController.xib in Resources */,
-				2C8654291F4B33DE00D51654 /* LoadMoreTableViewCell.xib in Resources */,
-				08C7CB771FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
-				2C86542A1F4B33DE00D51654 /* DiscussionsStoryboard.storyboard in Resources */,
-				2C86542C1F4B33DE00D51654 /* QuizViewController.xib in Resources */,
-				2C86542D1F4B33DE00D51654 /* step4.html in Resources */,
-				08DF78AB1F5DE66200AEEA85 /* ArtView.xib in Resources */,
-				08A9F6FD1FC37DC100640F1F /* CourseTagsView.xib in Resources */,
-				2C8654891F4B3A5400D51654 /* GoogleService-Info.plist in Resources */,
-				2C86542E1F4B33DE00D51654 /* SearchSuggestionTableViewCell.xib in Resources */,
-				2C86542F1F4B33DE00D51654 /* UnknownTypeQuizViewController.xib in Resources */,
-				2C8654301F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
-				2C8654311F4B33DE00D51654 /* ChoiceQuizTableViewCell.xib in Resources */,
-				2C8654321F4B33DE00D51654 /* SortingQuizTableViewCell.xib in Resources */,
-				2C8654331F4B33DE00D51654 /* CodeQuizToolbarView.xib in Resources */,
-				088EDCBC1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
-				2C8654341F4B33DE00D51654 /* FillBlanksTextTableViewCell.xib in Resources */,
-				2C8654351F4B33DE00D51654 /* FillBlanksInputTableViewCell.xib in Resources */,
-				08A9F7181FC3837800640F1F /* CourseTagCollectionViewCell.xib in Resources */,
-				2C4BBF1A203DC66E000A4250 /* plyr.js in Resources */,
-				2C8654371F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.xib in Resources */,
-				2C8654391F4B33DE00D51654 /* TeacherCollectionViewCell.xib in Resources */,
-				08CBA3201F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
-				2C86543A1F4B33DE00D51654 /* TitleTextTableViewCell.xib in Resources */,
-				2C86543D1F4B33DE00D51654 /* RefreshTableViewCell.xib in Resources */,
-				2C8654881F4B3A5200D51654 /* Auth.plist in Resources */,
-				08195A091FA00FF400E6D6CD /* CourseLists.storyboard in Resources */,
-				08CBA3321F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
-				2C86543F1F4B33DE00D51654 /* SectionTableViewCell.xib in Resources */,
-				2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */,
-				2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */,
-				08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
-				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
-				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
-				2C4BBF19203DC66E000A4250 /* plyr.css in Resources */,
-				086BE2AC1F93A20B00B4BE56 /* LoadingCourseWidgetView.xib in Resources */,
-				087E8B24204DE2A000C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
-				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
-				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
-				085EDCC21F99462C00AB3278 /* Notifications.storyboard in Resources */,
-				2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */,
-				08ED08E51FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
-				2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */,
-				08CBA3571F5A2D9400302154 /* Profile.storyboard in Resources */,
-				2C86544C1F4B33DE00D51654 /* loading_robot.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9343,7 +8859,6 @@
 				2C9732AF1F4C38F600AC9301 /* PickerViewController.xib in Resources */,
 				2C608B37204569EC006870BB /* overlay_simple.png in Resources */,
 				2C608AD7204568E7006870BB /* ProgressTableViewCell.xib in Resources */,
-				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
 				08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				088EDCBE1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -11887,6 +11402,7 @@
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
+				2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */,
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				08C1BF311FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -11951,6 +11467,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				0885B8D21FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
+				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
@@ -12039,6 +11556,7 @@
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
+				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
@@ -13127,443 +12645,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C86526D1F4B33DE00D51654 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C86526E1F4B33DE00D51654 /* CodeLanguagePickerViewController.swift in Sources */,
-				2C86526F1F4B33DE00D51654 /* LessonViewController.swift in Sources */,
-				2C8652701F4B33DE00D51654 /* LessonPresenter.swift in Sources */,
-				2C8652711F4B33DE00D51654 /* LessonView.swift in Sources */,
-				2C8652721F4B33DE00D51654 /* PagerController.swift in Sources */,
-				2C8652731F4B33DE00D51654 /* ShareableController.swift in Sources */,
-				2C8652741F4B33DE00D51654 /* PostViewsExecutableTask.swift in Sources */,
-				2C8652751F4B33DE00D51654 /* Tokens.swift in Sources */,
-				2C8652761F4B33DE00D51654 /* LoadingPaginationView.swift in Sources */,
-				2C8652771F4B33DE00D51654 /* CertificatesAPIPaginatedMock.swift in Sources */,
-				086442BE1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
-				2C8652781F4B33DE00D51654 /* CertificatesViewTestMock.swift in Sources */,
-				2C8652791F4B33DE00D51654 /* CoursesAPIPaginatedMock.swift in Sources */,
-				2C86527A1F4B33DE00D51654 /* CertificatesViewController.swift in Sources */,
-				2C86527B1F4B33DE00D51654 /* CertificatesView.swift in Sources */,
-				086442D31F765013000CC53D /* AuthTextField.swift in Sources */,
-				2C86527C1F4B33DE00D51654 /* CertificatesPresenter.swift in Sources */,
-				2C86527D1F4B33DE00D51654 /* CertificateViewData.swift in Sources */,
-				2C86527E1F4B33DE00D51654 /* CertificateTableViewCell.swift in Sources */,
-				2C86527F1F4B33DE00D51654 /* CodeInputAccessoryView.swift in Sources */,
-				2C8652801F4B33DE00D51654 /* PresentationContainer.swift in Sources */,
-				2C8652811F4B33DE00D51654 /* CodeQuizViewController.swift in Sources */,
-				2C8652821F4B33DE00D51654 /* AchievementsHelper.swift in Sources */,
-				2C8652831F4B33DE00D51654 /* CertificatesPresentationContainer.swift in Sources */,
-				2C8652841F4B33DE00D51654 /* Certificate.swift in Sources */,
-				2C8652851F4B33DE00D51654 /* AnalyticsEvents+Adaptive.swift in Sources */,
-				2C8652861F4B33DE00D51654 /* Certificate+CoreDataProperties.swift in Sources */,
-				2C8652871F4B33DE00D51654 /* CertificatesAPI.swift in Sources */,
-				08DF78BF1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
-				2C8652881F4B33DE00D51654 /* RatingProgressView.swift in Sources */,
-				2C8652891F4B33DE00D51654 /* StreaksView.swift in Sources */,
-				2C86528A1F4B33DE00D51654 /* RateAppViewController.swift in Sources */,
-				08DF78D51F64059900AEEA85 /* StepikLabel.swift in Sources */,
-				081566281F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
-				2C86528C1F4B33DE00D51654 /* LaunchDefaultsContainer.swift in Sources */,
-				2C86528D1F4B33DE00D51654 /* DefaultsContainer.swift in Sources */,
-				2C86528E1F4B33DE00D51654 /* CoursesAPI.swift in Sources */,
-				086442C51F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */,
-				2C86528F1F4B33DE00D51654 /* SectionsAPI.swift in Sources */,
-				2C8652901F4B33DE00D51654 /* LessonsAPI.swift in Sources */,
-				2C8652911F4B33DE00D51654 /* UsersAPI.swift in Sources */,
-				080F211D2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
-				2C8652921F4B33DE00D51654 /* StepsAPI.swift in Sources */,
-				2C8652931F4B33DE00D51654 /* AssignmentsAPI.swift in Sources */,
-				08B062E01FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
-				2C8652941F4B33DE00D51654 /* ProgressesAPI.swift in Sources */,
-				2C8652951F4B33DE00D51654 /* ViewsAPI.swift in Sources */,
-				087585B11FB51D720047A269 /* CourseList.swift in Sources */,
-				2C8652961F4B33DE00D51654 /* SearchResultsAPI.swift in Sources */,
-				2C8652971F4B33DE00D51654 /* AttemptsAPI.swift in Sources */,
-				2C8652981F4B33DE00D51654 /* SubmissionsAPI.swift in Sources */,
-				2C8652991F4B33DE00D51654 /* RateAppAlertManager.swift in Sources */,
-				2C86529A1F4B33DE00D51654 /* Reachability.m in Sources */,
-				2C86529B1F4B33DE00D51654 /* ControllerHelperLaunchExtension.swift in Sources */,
-				2C86529C1F4B33DE00D51654 /* PlaceholderTestViewController.swift in Sources */,
-				2C86529D1F4B33DE00D51654 /* PlaceholderView.swift in Sources */,
-				2C86529E1F4B33DE00D51654 /* CodeSnippetSymbols.swift in Sources */,
-				2C86529F1F4B33DE00D51654 /* PlaceholderViewDataSource.swift in Sources */,
-				2C8652A01F4B33DE00D51654 /* PlaceholderViewDelegate.swift in Sources */,
-				2C8652A11F4B33DE00D51654 /* Styles.swift in Sources */,
-				2C8652A21F4B33DE00D51654 /* PlaceholderStyleExtensions.swift in Sources */,
-				2C8652A31F4B33DE00D51654 /* VideoDownloadView.swift in Sources */,
-				2C8652A41F4B33DE00D51654 /* CodeSample.swift in Sources */,
-				2C8652A51F4B33DE00D51654 /* AdaptiveRatingManager.swift in Sources */,
-				08C02DB61F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
-				2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */,
-				2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */,
-				08CBA36A1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
-				088EDB531F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
-				2C8652A91F4B33DE00D51654 /* StepTabView.swift in Sources */,
-				2C8652AA1F4B33DE00D51654 /* DiscussionCountView.swift in Sources */,
-				2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */,
-				2C8652AC1F4B33DE00D51654 /* StepOptions+CoreDataProperties.swift in Sources */,
-				2C8652AD1F4B33DE00D51654 /* CodeElementsSize.swift in Sources */,
-				087585BA1FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */,
-				2C8652AE1F4B33DE00D51654 /* PickerViewController.swift in Sources */,
-				2C8652B21F4B33DE00D51654 /* StepicVideoPlayerViewController.swift in Sources */,
-				2C8652B31F4B33DE00D51654 /* PlayerTestViewController.swift in Sources */,
-				086FC6AB1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
-				089C88D81FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
-				2C8652B41F4B33DE00D51654 /* Player.swift in Sources */,
-				2C8652B51F4B33DE00D51654 /* VideoRate.swift in Sources */,
-				2C8652B61F4B33DE00D51654 /* DownloadsViewController.swift in Sources */,
-				2C8652B71F4B33DE00D51654 /* DownloadTableViewCell.swift in Sources */,
-				2C8652B81F4B33DE00D51654 /* DiscussionWebTableViewCell.swift in Sources */,
-				086BE2881F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
-				2C8652B91F4B33DE00D51654 /* DiscussionTableViewCell.swift in Sources */,
-				2C8652BA1F4B33DE00D51654 /* HTMLContentView.swift in Sources */,
-				2C8652BB1F4B33DE00D51654 /* HTMLStringWrapperUtil.swift in Sources */,
-				2C8652BC1F4B33DE00D51654 /* HTMLContentViewInteractionDelegate.swift in Sources */,
-				084DB9E11FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
-				2C8652BE1F4B33DE00D51654 /* DiscussionsViewController.swift in Sources */,
-				2C8652BF1F4B33DE00D51654 /* LoadMoreTableViewCell.swift in Sources */,
-				2C8652C01F4B33DE00D51654 /* DiscussionUpdateDelegate.swift in Sources */,
-				08C1BF341FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
-				2C8652C11F4B33DE00D51654 /* CellOperationsUtil.swift in Sources */,
-				088EDB5C1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
-				2C8652C31F4B33DE00D51654 /* DiscussionCellDelegate.swift in Sources */,
-				2C8652C41F4B33DE00D51654 /* WriteCommentViewController.swift in Sources */,
-				2C8652C51F4B33DE00D51654 /* WriteCommentDelegate.swift in Sources */,
-				2C8652C61F4B33DE00D51654 /* DiscussionAlertConstructor.swift in Sources */,
-				2C8652C71F4B33DE00D51654 /* VideoStepViewController.swift in Sources */,
-				2C8652C81F4B33DE00D51654 /* WebStepViewController.swift in Sources */,
-				2C8652C91F4B33DE00D51654 /* CellWebViewHelper.swift in Sources */,
-				2C8652CA1F4B33DE00D51654 /* QuizControllerDelegate.swift in Sources */,
-				2C8652CB1F4B33DE00D51654 /* QuizViewController.swift in Sources */,
-				2C8652CC1F4B33DE00D51654 /* UnknownTypeQuizViewController.swift in Sources */,
-				2C8652CD1F4B33DE00D51654 /* ChoiceQuizViewController.swift in Sources */,
-				2C8652CE1F4B33DE00D51654 /* ChoiceQuizTableViewCell.swift in Sources */,
-				0802177D1F54E91300186245 /* MenuBlocks.swift in Sources */,
-				2C8652CF1F4B33DE00D51654 /* LastStep+CoreDataProperties.swift in Sources */,
-				2C8652D01F4B33DE00D51654 /* StringQuizViewController.swift in Sources */,
-				2C8652D11F4B33DE00D51654 /* NumberQuizViewController.swift in Sources */,
-				2C8652D21F4B33DE00D51654 /* FreeAnswerQuizViewController.swift in Sources */,
-				081959ED1FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */,
-				2C8652D31F4B33DE00D51654 /* MathQuizViewController.swift in Sources */,
-				2C8652D41F4B33DE00D51654 /* SortingQuizViewController.swift in Sources */,
-				2C8652D51F4B33DE00D51654 /* SortingQuizTableViewCell.swift in Sources */,
-				2C8652D61F4B33DE00D51654 /* MatchingQuizViewController.swift in Sources */,
-				086442CC1F765006000CC53D /* AuthButton.swift in Sources */,
-				2C8652D71F4B33DE00D51654 /* FillBlanksTextTableViewCell.swift in Sources */,
-				088EDCB41F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.swift in Sources */,
-				2C8652D81F4B33DE00D51654 /* FillBlanksInputTableViewCell.swift in Sources */,
-				2C8652D91F4B33DE00D51654 /* FillBlanksQuizViewController.swift in Sources */,
-				2C8652DA1F4B33DE00D51654 /* LastStepGlobalContext.swift in Sources */,
-				2C8652DB1F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.swift in Sources */,
-				2C8652DC1F4B33DE00D51654 /* CodeLimit+CoreDataProperties.swift in Sources */,
-				2C8652DD1F4B33DE00D51654 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
-				08A9F7211FC38C9E00640F1F /* CourseTag.swift in Sources */,
-				086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C8652DE1F4B33DE00D51654 /* RGPageViewController.swift in Sources */,
-				2C8652DF1F4B33DE00D51654 /* RGTabBarItem.swift in Sources */,
-				2C8652E01F4B33DE00D51654 /* RGTabView.swift in Sources */,
-				2C8652E11F4B33DE00D51654 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C8652E31F4B33DE00D51654 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C8652E41F4B33DE00D51654 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
-				2C8652E51F4B33DE00D51654 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				2C8652E61F4B33DE00D51654 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C8652E71F4B33DE00D51654 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C8652E81F4B33DE00D51654 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C8652E91F4B33DE00D51654 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */,
-				2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */,
-				08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				2C8652EC1F4B33DE00D51654 /* AdaptiveStatsManager.swift in Sources */,
-				2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */,
-				2C8652EF1F4B33DE00D51654 /* GeneralInfoTableViewCell.swift in Sources */,
-				2C8652F01F4B33DE00D51654 /* TeachersTableViewCell.swift in Sources */,
-				2C8652F11F4B33DE00D51654 /* TeacherCollectionViewCell.swift in Sources */,
-				2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */,
-				2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */,
-				2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */,
-				2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */,
-				2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */,
-				08D5F57A1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
-				2C8652FA1F4B33DE00D51654 /* FullHeightWebView.swift in Sources */,
-				2C8652FC1F4B33DE00D51654 /* NotificationTimePickerViewController.swift in Sources */,
-				2C8652FD1F4B33DE00D51654 /* RefreshTableViewCell.swift in Sources */,
-				08C1BF2B1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
-				2C8652FE1F4B33DE00D51654 /* AdaptiveStepCardView.swift in Sources */,
-				2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */,
-				2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */,
-				2C8653101F4B33DE00D51654 /* SearchQueriesViewController.swift in Sources */,
-				2C8653121F4B33DE00D51654 /* SectionsViewController.swift in Sources */,
-				2C8653131F4B33DE00D51654 /* SectionTableViewCell.swift in Sources */,
-				2C8653141F4B33DE00D51654 /* UnitsViewController.swift in Sources */,
-				2C8653151F4B33DE00D51654 /* AchievementNotificationView.swift in Sources */,
-				2C8653161F4B33DE00D51654 /* FullscreenCodeQuizViewController.swift in Sources */,
-				2C8653171F4B33DE00D51654 /* UnitTableViewCell.swift in Sources */,
-				2C8653181F4B33DE00D51654 /* SectionNavigationDelegate.swift in Sources */,
-				2C8653191F4B33DE00D51654 /* ReplaceLastSegue.swift in Sources */,
-				2C86531A1F4B33DE00D51654 /* StyledNavigationViewController.swift in Sources */,
-				08CBA32A1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
-				2C86531B1F4B33DE00D51654 /* StyledTabBarViewController.swift in Sources */,
-				2C86531C1F4B33DE00D51654 /* CodeReply.swift in Sources */,
-				2C86531D1F4B33DE00D51654 /* TCBlobDownload.swift in Sources */,
-				2C86531E1F4B33DE00D51654 /* TCBlobDownloadManager.swift in Sources */,
-				2C86531F1F4B33DE00D51654 /* Alamofire-SwiftyJSON.swift in Sources */,
-				2C8653201F4B33DE00D51654 /* JSQWebViewController.swift in Sources */,
-				08D5F5831F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
-				2C8653211F4B33DE00D51654 /* WatchSessionManager.swift in Sources */,
-				08A9BD761F8CA02A0085EAF6 /* CourseListPresenter.swift in Sources */,
-				2C8653231F4B33DE00D51654 /* WatchSessionDataObserver.swift in Sources */,
-				2C8653241F4B33DE00D51654 /* WatchSessionSender.swift in Sources */,
-				2C8653251F4B33DE00D51654 /* DataConvertable.swift in Sources */,
-				2C8653261F4B33DE00D51654 /* CoursePlainEntity.swift in Sources */,
-				2C8653271F4B33DE00D51654 /* CourseMetainfoEntity.swift in Sources */,
-				2C8653281F4B33DE00D51654 /* PlaybackCommandEntity.swift in Sources */,
-				2C8653291F4B33DE00D51654 /* PlaybackStatusEntity.swift in Sources */,
-				2C86532A1F4B33DE00D51654 /* HTMLBuilder.swift in Sources */,
-				2C86532B1F4B33DE00D51654 /* UICustomizer.swift in Sources */,
-				087E8B29204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */,
-				2C86532D1F4B33DE00D51654 /* CoreDataHelper.swift in Sources */,
-				2C86532E1F4B33DE00D51654 /* ConnectionHelper.swift in Sources */,
-				2C86532F1F4B33DE00D51654 /* Sorter.swift in Sources */,
-				2C8653301F4B33DE00D51654 /* Messages.swift in Sources */,
-				2C8653311F4B33DE00D51654 /* UIThreadHelper.swift in Sources */,
-				2C8653321F4B33DE00D51654 /* DeviceInfo.swift in Sources */,
-				08CBA3041F57459800302154 /* MenuUIManager.swift in Sources */,
-				2C8653331F4B33DE00D51654 /* Time.swift in Sources */,
-				2C8653341F4B33DE00D51654 /* AnalyticsHelper.swift in Sources */,
-				2C8653351F4B33DE00D51654 /* ControllerHelper.swift in Sources */,
-				2C8653361F4B33DE00D51654 /* GCDThings.swift in Sources */,
-				086D5B4220127A25000F7715 /* Tooltip.swift in Sources */,
-				2C8653371F4B33DE00D51654 /* GlobalFunctions.swift in Sources */,
-				2C8653391F4B33DE00D51654 /* AdaptiveRatingHelper.swift in Sources */,
-				2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */,
-				087296DF20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
-				084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
-				2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */,
-				089700991F6B2A830041C24E /* NibInitializableView.swift in Sources */,
-				2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
-				2C86533D1F4B33DE00D51654 /* ImageTapHelper.swift in Sources */,
-				086BE2B51F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
-				2C86533E1F4B33DE00D51654 /* DeepLinkRouter.swift in Sources */,
-				2C86533F1F4B33DE00D51654 /* SharingHelper.swift in Sources */,
-				2C8653401F4B33DE00D51654 /* AnalyticsEvents.swift in Sources */,
-				2C8653411F4B33DE00D51654 /* AnalyticsReporter.swift in Sources */,
-				2C8653421F4B33DE00D51654 /* WatchDataHelper.swift in Sources */,
-				2C8653431F4B33DE00D51654 /* WatchCoursesDisplayingHelper.swift in Sources */,
-				08DF78901F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
-				2C8653441F4B33DE00D51654 /* HTMLParsingUtil.swift in Sources */,
-				2C8653451F4B33DE00D51654 /* TagDetectionUtil.swift in Sources */,
-				2C8653461F4B33DE00D51654 /* UIImageView+SVGDownload.swift in Sources */,
-				2C8653471F4B33DE00D51654 /* DiscussionProxy.swift in Sources */,
-				2C8653481F4B33DE00D51654 /* Comment.swift in Sources */,
-				2C8653491F4B33DE00D51654 /* Vote.swift in Sources */,
-				2C86534A1F4B33DE00D51654 /* CodePlaygroundManager.swift in Sources */,
-				2C86534B1F4B33DE00D51654 /* Scripts.swift in Sources */,
-				2C86534C1F4B33DE00D51654 /* Scripts.plist in Sources */,
-				08CCAEC3204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
-				2C86534D1F4B33DE00D51654 /* LocalNotificationsHelper.swift in Sources */,
-				2C86534E1F4B33DE00D51654 /* Constants.swift in Sources */,
-				2C86534F1F4B33DE00D51654 /* Images.swift in Sources */,
-				2C8653501F4B33DE00D51654 /* ApplicationInfo.swift in Sources */,
-				2C8653511F4B33DE00D51654 /* PathManager.swift in Sources */,
-				2C8653521F4B33DE00D51654 /* AudioManager.swift in Sources */,
-				2C8653531F4B33DE00D51654 /* WebControllerManager.swift in Sources */,
-				2C8653541F4B33DE00D51654 /* CacheManager.swift in Sources */,
-				2C8653551F4B33DE00D51654 /* WKWebViewPanelManager.m in Sources */,
-				08195A1B1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
-				2C8653561F4B33DE00D51654 /* AchievementManager.swift in Sources */,
-				2C8653571F4B33DE00D51654 /* CourseSubscriptionManager.swift in Sources */,
-				0885B8D51FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
-				2C8653581F4B33DE00D51654 /* RemoteVersionManager.swift in Sources */,
-				087585A61FB50D640047A269 /* CourseListsAPI.swift in Sources */,
-				2C8653591F4B33DE00D51654 /* UpdateChecker.swift in Sources */,
-				2C86535A1F4B33DE00D51654 /* CodeQuizToolbarDelegate.swift in Sources */,
-				2C86535B1F4B33DE00D51654 /* UpdatePreferencesContainer.swift in Sources */,
-				2C86535C1F4B33DE00D51654 /* VersionUpdateAlertConstructor.swift in Sources */,
-				2C86535D1F4B33DE00D51654 /* Version.swift in Sources */,
-				08CB0D501FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				2C86535E1F4B33DE00D51654 /* StreaksNotificationSuggestionManager.swift in Sources */,
-				2C8653601F4B33DE00D51654 /* Executable.swift in Sources */,
-				2C8653611F4B33DE00D51654 /* ExecutionQueue.swift in Sources */,
-				2C8653621F4B33DE00D51654 /* PersistentQueueRecoveryManager.swift in Sources */,
-				085EDCBA1F9945DA00AB3278 /* Notification+CoreDataProperties.swift in Sources */,
-				2C8653631F4B33DE00D51654 /* Queues.plist in Sources */,
-				2C8653641F4B33DE00D51654 /* ExecutionQueues.swift in Sources */,
-				2C8653661F4B33DE00D51654 /* PersistentRecoveryManager.swift in Sources */,
-				2C8653671F4B33DE00D51654 /* Users.plist in Sources */,
-				086FC6A21FE046C300C7DFF4 /* NotificationStatusesAPI.swift in Sources */,
-				2C8653681F4B33DE00D51654 /* PersistentUserTokenRecoveryManager.swift in Sources */,
-				2C8653691F4B33DE00D51654 /* DeleteDeviceExecutableTask.swift in Sources */,
-				2C86536A1F4B33DE00D51654 /* Tasks.plist in Sources */,
-				2C86536B1F4B33DE00D51654 /* AchievementManager+Data.swift in Sources */,
-				2C86536C1F4B33DE00D51654 /* SearchSuggestionTableViewCell.swift in Sources */,
-				2C86536D1F4B33DE00D51654 /* PersistentTaskRecoveryManager.swift in Sources */,
-				088EDCA91F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
-				2C9E3F441F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
-				08CBA33C1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
-				08EA89CB200E688900BCAF44 /* SQLReply.swift in Sources */,
-				2C86536F1F4B33DE00D51654 /* ExecutableTaskTypes.swift in Sources */,
-				2C8653701F4B33DE00D51654 /* DictionarySerializable.swift in Sources */,
-				2C8653711F4B33DE00D51654 /* PersistentTaskManagerProtocol.swift in Sources */,
-				2C8653721F4B33DE00D51654 /* SearchQueriesPresenter.swift in Sources */,
-				087585C31FB524C20047A269 /* ContentLanguage.swift in Sources */,
-				2C8653731F4B33DE00D51654 /* RoutingManager.swift in Sources */,
-				2C8653741F4B33DE00D51654 /* NotificationRegistrator.swift in Sources */,
-				2C8653751F4B33DE00D51654 /* NotificationAlertConstructor.swift in Sources */,
-				2C8653761F4B33DE00D51654 /* DeviceDefaults.swift in Sources */,
-				08DF78A11F5DE64300AEEA85 /* ArtView.swift in Sources */,
-				2C8653791F4B33DE00D51654 /* Notification.swift in Sources */,
-				2C86537B1F4B33DE00D51654 /* Attempt.swift in Sources */,
-				2C86537C1F4B33DE00D51654 /* LastStep.swift in Sources */,
-				2C86537D1F4B33DE00D51654 /* Dataset.swift in Sources */,
-				08EA89C4200E686900BCAF44 /* NotificationsBadgesManager.swift in Sources */,
-				2C86537E1F4B33DE00D51654 /* ChoiceDataset.swift in Sources */,
-				2C86537F1F4B33DE00D51654 /* StringDatasetExtension.swift in Sources */,
-				2C8653811F4B33DE00D51654 /* SortingDataset.swift in Sources */,
-				08C7CB801FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
-				2C8653821F4B33DE00D51654 /* FreeAnswerDataset.swift in Sources */,
-				08EA89B6200E53AB00BCAF44 /* EnrollmentsAPI.swift in Sources */,
-				2C8653831F4B33DE00D51654 /* MatchingDataset.swift in Sources */,
-				2C8653841F4B33DE00D51654 /* FillBlanksDataset.swift in Sources */,
-				2C8653851F4B33DE00D51654 /* Submission.swift in Sources */,
-				2C8653861F4B33DE00D51654 /* SearchQueriesPersistentManager.swift in Sources */,
-				2C8653871F4B33DE00D51654 /* Reply.swift in Sources */,
-				08F8FEB61F4D07B5009F21BA /* ReplyCache.swift in Sources */,
-				08A9F7101FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
-				08A9F7061FC37DD000640F1F /* CourseTagsView.swift in Sources */,
-				2C8653881F4B33DE00D51654 /* ChoiceReply.swift in Sources */,
-				2C8653891F4B33DE00D51654 /* TextReply.swift in Sources */,
-				2C86538A1F4B33DE00D51654 /* NumberReply.swift in Sources */,
-				084C65901FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
-				2C86538B1F4B33DE00D51654 /* FreeAnswerReply.swift in Sources */,
-				08EA89D2200E69C900BCAF44 /* SQLQuizViewController.swift in Sources */,
-				2C86538C1F4B33DE00D51654 /* MathReply.swift in Sources */,
-				2C86538D1F4B33DE00D51654 /* SortingReply.swift in Sources */,
-				082A89002046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
-				2C86538E1F4B33DE00D51654 /* MatchingReply.swift in Sources */,
-				2C86538F1F4B33DE00D51654 /* FillBlanksReply.swift in Sources */,
-				2C8653901F4B33DE00D51654 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB32056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
-				2C8653911F4B33DE00D51654 /* Model.xcdatamodeld in Sources */,
-				2C8653921F4B33DE00D51654 /* Assignment+CoreDataProperties.swift in Sources */,
-				2C8653931F4B33DE00D51654 /* CodeLimit.swift in Sources */,
-				2C8653941F4B33DE00D51654 /* CodeSuggestionsTableViewController.swift in Sources */,
-				08CBA3181F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
-				2C8653951F4B33DE00D51654 /* Assignment.swift in Sources */,
-				2C8653961F4B33DE00D51654 /* Progress+CoreDataProperties.swift in Sources */,
-				2C8653971F4B33DE00D51654 /* Progress.swift in Sources */,
-				2C8653981F4B33DE00D51654 /* Video+CoreDataProperties.swift in Sources */,
-				2C8653991F4B33DE00D51654 /* Video.swift in Sources */,
-				2C86539A1F4B33DE00D51654 /* VideoURL+CoreDataProperties.swift in Sources */,
-				08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
-				2C86539B1F4B33DE00D51654 /* AchievementTableViewCell.swift in Sources */,
-				088FD81A1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
-				2C86539C1F4B33DE00D51654 /* VideoURL.swift in Sources */,
-				2C86539D1F4B33DE00D51654 /* Block+CoreDataProperties.swift in Sources */,
-				2C86539E1F4B33DE00D51654 /* Block.swift in Sources */,
-				2C86539F1F4B33DE00D51654 /* Step+CoreDataProperties.swift in Sources */,
-				2C8653A01F4B33DE00D51654 /* Step.swift in Sources */,
-				2C8653A11F4B33DE00D51654 /* Lesson+CoreDataProperties.swift in Sources */,
-				085EDCB31F9945CD00AB3278 /* Notification+FetchMethods.swift in Sources */,
-				2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */,
-				2C8653A31F4B33DE00D51654 /* Unit+CoreDataProperties.swift in Sources */,
-				2C8653A41F4B33DE00D51654 /* Unit.swift in Sources */,
-				08EDD62D1F7C6785005203E4 /* StepikButton.swift in Sources */,
-				2C8653A51F4B33DE00D51654 /* Section+CoreDataProperties.swift in Sources */,
-				2C8653A61F4B33DE00D51654 /* Section.swift in Sources */,
-				2C8653A71F4B33DE00D51654 /* Course+CoreDataProperties.swift in Sources */,
-				2C8653A81F4B33DE00D51654 /* Course.swift in Sources */,
-				2C8653A91F4B33DE00D51654 /* User+CoreDataProperties.swift in Sources */,
-				2C8653AA1F4B33DE00D51654 /* User.swift in Sources */,
-				2C8653AC1F4B33DE00D51654 /* Parser.swift in Sources */,
-				2C8653AD1F4B33DE00D51654 /* StepicToken.swift in Sources */,
-				2C8653AE1F4B33DE00D51654 /* AuthInfo.swift in Sources */,
-				2C8653AF1F4B33DE00D51654 /* APIEndpoint.swift in Sources */,
-				2C8653B11F4B33DE00D51654 /* AuthRoutingManager.swift in Sources */,
-				2C8653B21F4B33DE00D51654 /* CodeLanguages.swift in Sources */,
-				2C8653B31F4B33DE00D51654 /* Session.swift in Sources */,
-				2C8653B41F4B33DE00D51654 /* SocialSDKProvider.swift in Sources */,
-				2C8653B51F4B33DE00D51654 /* VKSocialSDKProvider.swift in Sources */,
-				2C8653B61F4B33DE00D51654 /* FBSocialSDKProvider.swift in Sources */,
-				2C8653B71F4B33DE00D51654 /* RequestChain.swift in Sources */,
-				2C8653B81F4B33DE00D51654 /* ApiRequest.swift in Sources */,
-				2C8653B91F4B33DE00D51654 /* AuthAPI.swift in Sources */,
-				08CB0D2B1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
-				2C8653BA1F4B33DE00D51654 /* QueriesAPI.swift in Sources */,
-				2C8653BB1F4B33DE00D51654 /* AutocompleteWords.swift in Sources */,
-				083C9CAE2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
-				2C8653BC1F4B33DE00D51654 /* ApiDataDownloader.swift in Sources */,
-				2C8653BD1F4B33DE00D51654 /* Meta.swift in Sources */,
-				2C8653BF1F4B33DE00D51654 /* DevicesAPI.swift in Sources */,
-				08CB0D341FB5F9FC001A1E02 /* ExploreViewController.swift in Sources */,
-				2C8653C01F4B33DE00D51654 /* APIDefaults.swift in Sources */,
-				08CBA2FB1F573F6900302154 /* MenuViewController.swift in Sources */,
-				2C8653C21F4B33DE00D51654 /* DiscussionProxiesAPI.swift in Sources */,
-				2C8653C31F4B33DE00D51654 /* SearchQueriesView.swift in Sources */,
-				2C8653C41F4B33DE00D51654 /* LastStepsAPI.swift in Sources */,
-				2C8653C51F4B33DE00D51654 /* CommentsAPI.swift in Sources */,
-				2C8653C61F4B33DE00D51654 /* ApiUtil.swift in Sources */,
-				2C8653C71F4B33DE00D51654 /* VotesAPI.swift in Sources */,
-				2C8653C81F4B33DE00D51654 /* CodeQuizToolbarView.swift in Sources */,
-				2C8653C91F4B33DE00D51654 /* StepicsAPI.swift in Sources */,
-				086D5B55201283C2000F7715 /* TooltipFactory.swift in Sources */,
-				2C8653CA1F4B33DE00D51654 /* UnitsAPI.swift in Sources */,
-				2C8653CB1F4B33DE00D51654 /* UserActivitiesAPI.swift in Sources */,
-				089C88E11FCF494300003B63 /* CourseListType.swift in Sources */,
-				08CBA34E1F57734900302154 /* ProfileViewController.swift in Sources */,
-				2C8653CE1F4B33DE00D51654 /* JSONInitializable.swift in Sources */,
-				2C8653CF1F4B33DE00D51654 /* TabsInfo.swift in Sources */,
-				0844900C1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
-				2C8653D01F4B33DE00D51654 /* VideosInfo.swift in Sources */,
-				08EA89BD200E53CD00BCAF44 /* NotificationsStatus.swift in Sources */,
-				2C8653D11F4B33DE00D51654 /* VideoDownload.swift in Sources */,
-				2C8653D21F4B33DE00D51654 /* SearchResult.swift in Sources */,
-				2C8653D31F4B33DE00D51654 /* Device.swift in Sources */,
-				2C8653D41F4B33DE00D51654 /* CyrillicURLActivityItemSource.swift in Sources */,
-				2C8653D51F4B33DE00D51654 /* StepsControllerRouter.swift in Sources */,
-				2C8653D61F4B33DE00D51654 /* StepsControllerDeepLinkRouter.swift in Sources */,
-				2C8653D71F4B33DE00D51654 /* UserActivity.swift in Sources */,
-				2C8653D81F4B33DE00D51654 /* Alerts.swift in Sources */,
-				08EDB8C81F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
-				2C8653D91F4B33DE00D51654 /* StreaksAlertManager.swift in Sources */,
-				2C8653DA1F4B33DE00D51654 /* QuizPresenter.swift in Sources */,
-				2C8653DB1F4B33DE00D51654 /* StreaksStepikAlertManager.swift in Sources */,
-				2C8653DC1F4B33DE00D51654 /* InputAccessoryBuilder.swift in Sources */,
-				2C8653DD1F4B33DE00D51654 /* AlertManager.swift in Sources */,
-				08D5F5701F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
-				080217861F55B1B200186245 /* Menu.swift in Sources */,
-				2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */,
-				2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */,
-				2C8653E01F4B33DE00D51654 /* NotificationPreferencesContainer.swift in Sources */,
-				08DF78CA1F60119000AEEA85 /* AvatarImageView.swift in Sources */,
-				2C8653E11F4B33DE00D51654 /* LocalNotificationManager.swift in Sources */,
-				2C8653E21F4B33DE00D51654 /* UIColorExtensions.swift in Sources */,
-				2C8653E31F4B33DE00D51654 /* StandardsExtensions.swift in Sources */,
-				2C8653E41F4B33DE00D51654 /* LabelExtension.swift in Sources */,
-				2C8653E51F4B33DE00D51654 /* ButtonExtension.swift in Sources */,
-				2C8653E61F4B33DE00D51654 /* RecommendationsAPI.swift in Sources */,
-				2C8653E71F4B33DE00D51654 /* UIImageViewExtension.swift in Sources */,
-				2C8653E81F4B33DE00D51654 /* StepicApplicationsInfo.swift in Sources */,
-				2C8653E91F4B33DE00D51654 /* NSDateExtensions.swift in Sources */,
-				2C8653EA1F4B33DE00D51654 /* StringExtensions.swift in Sources */,
-				2C8653EB1F4B33DE00D51654 /* UIViewExtensions.swift in Sources */,
-				2C8653ED1F4B33DE00D51654 /* Profile+CoreDataProperties.swift in Sources */,
-				2C8653EF1F4B33DE00D51654 /* FullHeightTableView.swift in Sources */,
-				085290C91FB5C4550053F22D /* ExplorePresenter.swift in Sources */,
-				2C8653F01F4B33DE00D51654 /* StepOptions.swift in Sources */,
-				2C8653F11F4B33DE00D51654 /* NSAttributedStringExtensions.swift in Sources */,
-				2C8653F21F4B33DE00D51654 /* AlamofireExtensions.swift in Sources */,
-				2C8653F41F4B33DE00D51654 /* ErrorEnums.swift in Sources */,
-				081959E31FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
-				2C8653F51F4B33DE00D51654 /* CodeTemplate.swift in Sources */,
-				2C8653F71F4B33DE00D51654 /* StringHelper.swift in Sources */,
-				2C8653F81F4B33DE00D51654 /* EmptyDatasetState.swift in Sources */,
-				2C8653F91F4B33DE00D51654 /* AdaptiveAppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C89A9531F4C289900227C3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -13607,7 +12688,6 @@
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C6A76372045CE7B00C509A6 /* CardStepViewController.swift in Sources */,
-				2C89A9711F4C289900227C3B /* CurrentBestStreakViewController.swift in Sources */,
 				081566291F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */,
 				08C7CB811FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
