@@ -267,10 +267,6 @@
 		083C9CB02056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB12056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB22056718000B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
-		083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
@@ -622,10 +618,6 @@
 		087E8B26204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B27204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B28204DE2A200C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
-		087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
@@ -2433,6 +2425,16 @@
 		2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C47A16A206284C3003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C47A16B206284E8003E87EC /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		2C4919082062A1CB003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C4919092062A1CB003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190A2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190B2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190C2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190D2062A1EA003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C49190E2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF16203DC66D000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
@@ -2515,9 +2517,6 @@
 		2C608AE720456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2C608AE820456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2C608AE920456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
-		2C608AEA2045690F006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C608AEB20456910006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C608AEC20456910006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		2C608AED2045691A006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C608AEE2045691A006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C608AEF2045691B006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
@@ -2563,9 +2562,6 @@
 		2C608B1820456983006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C608B1920456984006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C608B1A20456984006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
-		2C608B1B20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		2C608B1C20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		2C608B1D20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2C608B1E2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2C608B1F2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2C608B202045698C006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
@@ -2654,7 +2650,6 @@
 		2C6A76302045CE5A00C509A6 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
 		2C6A76312045CE5E00C509A6 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
 		2C6A76322045CE6100C509A6 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
-		2C6A76332045CE6A00C509A6 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		2C6A76342045CE7000C509A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C6A76352045CE7300C509A6 /* StepReversedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14A1FED2C51003B1177 /* StepReversedCardView.swift */; };
 		2C6A76362045CE7500C509A6 /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */; };
@@ -2683,7 +2678,6 @@
 		2C6A764D2045CF1900C509A6 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C6A764E2045CF1C00C509A6 /* AdaptiveAchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */; };
 		2C6A764F2045CF1F00C509A6 /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
-		2C6A76502045CF2500C509A6 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2C6A76512045CF2700C509A6 /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C6A76522045CF2A00C509A6 /* AdaptiveCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */; };
 		2C6A76532045CF3B00C509A6 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
@@ -3673,6 +3667,19 @@
 		2CF4252E2024C10D002D7305 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CF425312024C115002D7305 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CF425322024C211002D7305 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
+		2CF953292062A20A00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532A2062A20A00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532B2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532C2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532D2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532F2062AC9C00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953302062AC9E00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953312062AC9F00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953322062ACA000B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953332062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953342062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953352062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */; };
@@ -12579,7 +12586,6 @@
 				2C1B60C21F4C4AEF00236804 /* LessonPresenter.swift in Sources */,
 				2C1B60C31F4C4AEF00236804 /* LessonView.swift in Sources */,
 				2C1B60C41F4C4AEF00236804 /* PagerController.swift in Sources */,
-				2C608AEB20456910006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C1B60C51F4C4AEF00236804 /* ShareableController.swift in Sources */,
 				2C1B60C61F4C4AEF00236804 /* PostViewsExecutableTask.swift in Sources */,
 				2C1B60C71F4C4AEF00236804 /* Tokens.swift in Sources */,
@@ -12623,6 +12629,7 @@
 				08B062E31FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C1B60E61F4C4AEF00236804 /* ProgressesAPI.swift in Sources */,
 				2C1B60E71F4C4AEF00236804 /* ViewsAPI.swift in Sources */,
+				2CF953352062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B41FB51D720047A269 /* CourseList.swift in Sources */,
 				2C1B60E81F4C4AEF00236804 /* SearchResultsAPI.swift in Sources */,
 				2C1B60E91F4C4AEF00236804 /* AttemptsAPI.swift in Sources */,
@@ -12634,6 +12641,7 @@
 				2C1B60EF1F4C4AEF00236804 /* PlaceholderView.swift in Sources */,
 				2C1B60F01F4C4AEF00236804 /* CodeSnippetSymbols.swift in Sources */,
 				2C1B60F11F4C4AEF00236804 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190B2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF12045691E006870BB /* StepReversedCardView.swift in Sources */,
 				2C1B60F21F4C4AEF00236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA220568BDD0098707D /* PinsMapView.swift in Sources */,
@@ -12780,11 +12788,9 @@
 				2C1B61781F4C4AEF00236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1C20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
-				087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
 				2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */,
 				2C608B1F2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -12848,6 +12854,7 @@
 				2C1B61AA1F4C4AEF00236804 /* RemoteVersionManager.swift in Sources */,
 				087585A91FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B61AB1F4C4AEF00236804 /* UpdateChecker.swift in Sources */,
+				2CF953302062AC9E00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C1B61AC1F4C4AEF00236804 /* CodeQuizToolbarDelegate.swift in Sources */,
 				2C1B61AD1F4C4AEF00236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -12919,7 +12926,6 @@
 				2C1B61E01F4C4AEF00236804 /* MatchingReply.swift in Sources */,
 				2C1B61E11F4C4AEF00236804 /* FillBlanksReply.swift in Sources */,
 				2C1B61E21F4C4AEF00236804 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B61E31F4C4AEF00236804 /* Model.xcdatamodeld in Sources */,
 				2C1B61E41F4C4AEF00236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B61E51F4C4AEF00236804 /* CodeLimit.swift in Sources */,
@@ -12978,6 +12984,7 @@
 				2C1B62121F4C4AEF00236804 /* APIDefaults.swift in Sources */,
 				2C608AD0204568DC006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3F20456A0F006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190E2062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FE1F573F6900302154 /* MenuViewController.swift in Sources */,
 				2C1B62141F4C4AEF00236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B62151F4C4AEF00236804 /* SearchQueriesView.swift in Sources */,
@@ -13007,6 +13014,7 @@
 				2C608B3B20456A04006870BB /* MigrationExtensions.swift in Sources */,
 				2C1B62271F4C4AEF00236804 /* StepsControllerRouter.swift in Sources */,
 				2C1B62281F4C4AEF00236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF9532A2062A20A00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C1B62291F4C4AEF00236804 /* UserActivity.swift in Sources */,
 				2C1B622A1F4C4AEF00236804 /* Alerts.swift in Sources */,
 				08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -13062,7 +13070,6 @@
 				2C1B62D31F4C590700236804 /* LessonPresenter.swift in Sources */,
 				2C1B62D41F4C590700236804 /* LessonView.swift in Sources */,
 				2C1B62D51F4C590700236804 /* PagerController.swift in Sources */,
-				2C608AEC20456910006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C1B62D61F4C590700236804 /* ShareableController.swift in Sources */,
 				2C1B62D71F4C590700236804 /* PostViewsExecutableTask.swift in Sources */,
 				2C1B62D81F4C590700236804 /* Tokens.swift in Sources */,
@@ -13106,6 +13113,7 @@
 				08B062E41FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C1B62F71F4C590700236804 /* ProgressesAPI.swift in Sources */,
 				2C1B62F81F4C590700236804 /* ViewsAPI.swift in Sources */,
+				2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B51FB51D720047A269 /* CourseList.swift in Sources */,
 				2C1B62F91F4C590700236804 /* SearchResultsAPI.swift in Sources */,
 				2C1B62FA1F4C590700236804 /* AttemptsAPI.swift in Sources */,
@@ -13117,6 +13125,7 @@
 				2C1B63001F4C590700236804 /* PlaceholderView.swift in Sources */,
 				2C1B63011F4C590700236804 /* CodeSnippetSymbols.swift in Sources */,
 				2C1B63021F4C590700236804 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190C2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF22045691F006870BB /* StepReversedCardView.swift in Sources */,
 				2C1B63031F4C590700236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA120568BDD0098707D /* PinsMapView.swift in Sources */,
@@ -13263,11 +13272,9 @@
 				2C1B63891F4C590700236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1D20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
-				087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
 				2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */,
 				2C608B202045698C006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -13331,6 +13338,7 @@
 				2C1B63BB1F4C590700236804 /* RemoteVersionManager.swift in Sources */,
 				087585AA1FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B63BC1F4C590700236804 /* UpdateChecker.swift in Sources */,
+				2CF953312062AC9F00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C1B63BD1F4C590700236804 /* CodeQuizToolbarDelegate.swift in Sources */,
 				2C1B63BE1F4C590700236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -13402,7 +13410,6 @@
 				2C1B63F11F4C590700236804 /* MatchingReply.swift in Sources */,
 				2C1B63F21F4C590700236804 /* FillBlanksReply.swift in Sources */,
 				2C1B63F31F4C590700236804 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B63F41F4C590700236804 /* Model.xcdatamodeld in Sources */,
 				2C1B63F51F4C590700236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B63F61F4C590700236804 /* CodeLimit.swift in Sources */,
@@ -13461,6 +13468,7 @@
 				2C1B64231F4C590700236804 /* APIDefaults.swift in Sources */,
 				2C608ACF204568DC006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3E20456A0E006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190D2062A1EA003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FF1F573F6900302154 /* MenuViewController.swift in Sources */,
 				2C1B64251F4C590700236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B64261F4C590700236804 /* SearchQueriesView.swift in Sources */,
@@ -13490,6 +13498,7 @@
 				2C608B3A20456A03006870BB /* MigrationExtensions.swift in Sources */,
 				2C1B64381F4C590700236804 /* StepsControllerRouter.swift in Sources */,
 				2C1B64391F4C590700236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF953292062A20A00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C1B643A1F4C590700236804 /* UserActivity.swift in Sources */,
 				2C1B643B1F4C590700236804 /* Alerts.swift in Sources */,
 				08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -13550,7 +13559,6 @@
 				2C89A9591F4C289900227C3B /* ShareableController.swift in Sources */,
 				2C6A76352045CE7300C509A6 /* StepReversedCardView.swift in Sources */,
 				2C89A95A1F4C289900227C3B /* PostViewsExecutableTask.swift in Sources */,
-				083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89A95B1F4C289900227C3B /* Tokens.swift in Sources */,
 				2C89A95C1F4C289900227C3B /* LoadingPaginationView.swift in Sources */,
 				2C89A95D1F4C289900227C3B /* CertificatesAPIPaginatedMock.swift in Sources */,
@@ -13574,7 +13582,6 @@
 				08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C6A762E2045CE5500C509A6 /* AdaptiveStatsSection.swift in Sources */,
-				2C6A76332045CE6A00C509A6 /* AdaptiveStorageManager.swift in Sources */,
 				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
@@ -13711,7 +13718,6 @@
 				2C89A9E41F4C289900227C3B /* AdaptiveStepCardView.swift in Sources */,
 				2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */,
 				2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C6A76502045CF2500C509A6 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				08C1BF351FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -13729,6 +13735,7 @@
 				08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */,
 				2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */,
+				2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				2C6A76402045CEA100C509A6 /* NotificationsMarkAsReadButton.swift in Sources */,
 				08CBA32B1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C89AA011F4C289900227C3B /* StyledTabBarViewController.swift in Sources */,
@@ -13765,7 +13772,6 @@
 				2C89AA1A1F4C289900227C3B /* AnalyticsHelper.swift in Sources */,
 				2C89AA1B1F4C289900227C3B /* ControllerHelper.swift in Sources */,
 				08CCAEC4204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
-				087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C89AA1C1F4C289900227C3B /* GCDThings.swift in Sources */,
 				087296E020168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				08A9F7071FC37DD000640F1F /* CourseTagsView.swift in Sources */,
@@ -13873,6 +13879,7 @@
 				081959E41FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
 				2C89AA6B1F4C289900227C3B /* Submission.swift in Sources */,
 				2C89AA6C1F4C289900227C3B /* SearchQueriesPersistentManager.swift in Sources */,
+				2CF9532C2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C89AA6D1F4C289900227C3B /* Reply.swift in Sources */,
 				08F8FEB71F4D07B5009F21BA /* ReplyCache.swift in Sources */,
 				2C89AA6E1F4C289900227C3B /* ChoiceReply.swift in Sources */,
@@ -13935,6 +13942,7 @@
 				2C6A762D2045CE5300C509A6 /* AdaptiveStatsPagerViewController.swift in Sources */,
 				2C89AA9A1F4C289900227C3B /* SocialSDKProvider.swift in Sources */,
 				2C89AA9B1F4C289900227C3B /* VKSocialSDKProvider.swift in Sources */,
+				2C4919092062A1CB003E733D /* StepikTableView.swift in Sources */,
 				2C6A76422045CEB900C509A6 /* NotificationsSection.swift in Sources */,
 				2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */,
 				2C89AA9D1F4C289900227C3B /* RequestChain.swift in Sources */,
@@ -13943,6 +13951,7 @@
 				2C89AAA01F4C289900227C3B /* QueriesAPI.swift in Sources */,
 				2C89AAA11F4C289900227C3B /* AutocompleteWords.swift in Sources */,
 				2C89AAA21F4C289900227C3B /* ApiDataDownloader.swift in Sources */,
+				2CF953322062ACA000B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C89AAA31F4C289900227C3B /* Meta.swift in Sources */,
 				2C89AAA51F4C289900227C3B /* DevicesAPI.swift in Sources */,
 				2C89AAA61F4C289900227C3B /* APIDefaults.swift in Sources */,
@@ -14010,6 +14019,7 @@
 				2C89AAD81F4C289900227C3B /* AlamofireExtensions.swift in Sources */,
 				087585B21FB51D720047A269 /* CourseList.swift in Sources */,
 				2C89AADA1F4C289900227C3B /* ErrorEnums.swift in Sources */,
+				2CF953332062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89AADB1F4C289900227C3B /* CodeTemplate.swift in Sources */,
 				2C89AADD1F4C289900227C3B /* StringHelper.swift in Sources */,
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
@@ -14027,7 +14037,6 @@
 				2C97310A1F4C38F600AC9301 /* LessonPresenter.swift in Sources */,
 				2C97310B1F4C38F600AC9301 /* LessonView.swift in Sources */,
 				2C97310C1F4C38F600AC9301 /* PagerController.swift in Sources */,
-				2C608AEA2045690F006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C97310D1F4C38F600AC9301 /* ShareableController.swift in Sources */,
 				2C97310E1F4C38F600AC9301 /* PostViewsExecutableTask.swift in Sources */,
 				2C97310F1F4C38F600AC9301 /* Tokens.swift in Sources */,
@@ -14071,6 +14080,7 @@
 				08B062E21FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C97312E1F4C38F600AC9301 /* ProgressesAPI.swift in Sources */,
 				2C97312F1F4C38F600AC9301 /* ViewsAPI.swift in Sources */,
+				2CF953342062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B31FB51D720047A269 /* CourseList.swift in Sources */,
 				2C9731301F4C38F600AC9301 /* SearchResultsAPI.swift in Sources */,
 				2C9731311F4C38F600AC9301 /* AttemptsAPI.swift in Sources */,
@@ -14082,6 +14092,7 @@
 				2C9731371F4C38F600AC9301 /* PlaceholderView.swift in Sources */,
 				2C9731381F4C38F600AC9301 /* CodeSnippetSymbols.swift in Sources */,
 				2C9731391F4C38F600AC9301 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190A2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF02045691E006870BB /* StepReversedCardView.swift in Sources */,
 				2C97313A1F4C38F600AC9301 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA320568BDE0098707D /* PinsMapView.swift in Sources */,
@@ -14228,11 +14239,9 @@
 				2C9731C01F4C38F600AC9301 /* CoursePlainEntity.swift in Sources */,
 				2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */,
 				2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1B20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */,
 				2C9731C41F4C38F600AC9301 /* HTMLBuilder.swift in Sources */,
 				2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */,
-				087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */,
 				2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */,
 				2C608B1E2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -14367,7 +14376,6 @@
 				2C9732281F4C38F600AC9301 /* MatchingReply.swift in Sources */,
 				2C9732291F4C38F600AC9301 /* FillBlanksReply.swift in Sources */,
 				2C97322A1F4C38F600AC9301 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C97322B1F4C38F600AC9301 /* Model.xcdatamodeld in Sources */,
 				2C97322C1F4C38F600AC9301 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C97322D1F4C38F600AC9301 /* CodeLimit.swift in Sources */,
@@ -14426,7 +14434,9 @@
 				2C97325A1F4C38F600AC9301 /* APIDefaults.swift in Sources */,
 				2C608AD1204568DD006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3D20456A0E006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FD1F573F6900302154 /* MenuViewController.swift in Sources */,
+				2CF9532F2062AC9C00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C97325C1F4C38F600AC9301 /* DiscussionProxiesAPI.swift in Sources */,
 				2C97325D1F4C38F600AC9301 /* SearchQueriesView.swift in Sources */,
 				2C97325E1F4C38F600AC9301 /* LastStepsAPI.swift in Sources */,
@@ -14455,6 +14465,7 @@
 				2C608B3C20456A04006870BB /* MigrationExtensions.swift in Sources */,
 				2C97326F1F4C38F600AC9301 /* StepsControllerRouter.swift in Sources */,
 				2C9732701F4C38F600AC9301 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF9532B2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C9732711F4C38F600AC9301 /* UserActivity.swift in Sources */,
 				2C9732721F4C38F600AC9301 /* Alerts.swift in Sources */,
 				08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -14642,6 +14653,7 @@
 				2CA2E72620237E55001DC410 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C76ACCD1F16496C0077D9D7 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB51F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
+				2CF9532D2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				2CA2E71E20237E31001DC410 /* CongratsView.swift in Sources */,
 				2CE1C2B520249C2B00722989 /* AdaptiveStepCardView.swift in Sources */,
@@ -14805,6 +14817,7 @@
 				089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
+				2C4919082062A1CB003E733D /* StepikTableView.swift in Sources */,
 				086BE2B41F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				864D669F1E83DE03001E8D9E /* DeepLinkRouter.swift in Sources */,
 				864D66A01E83DE03001E8D9E /* SharingHelper.swift in Sources */,
@@ -14841,6 +14854,7 @@
 				0885B8D41FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				864D66B81E83DE03001E8D9E /* RemoteVersionManager.swift in Sources */,
 				087585A51FB50D640047A269 /* CourseListsAPI.swift in Sources */,
+				2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */,
 				864D66B91E83DE03001E8D9E /* UpdateChecker.swift in Sources */,
 				080C5E861EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				864D66BA1E83DE03001E8D9E /* UpdatePreferencesContainer.swift in Sources */,
