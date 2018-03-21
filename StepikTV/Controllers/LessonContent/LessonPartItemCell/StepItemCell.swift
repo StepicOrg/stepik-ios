@@ -35,7 +35,7 @@ class StepItemCell: UICollectionViewCell {
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         super.pressesEnded(presses, with: event)
         guard presses.first!.type == UIPressType.select else { return }
-        
+
         pressAction?()
     }
 

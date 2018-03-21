@@ -47,7 +47,7 @@ class MajorItemCell: ImageConvertableCollectionViewCell {
         super.pressesEnded(presses, with: event)
 
         guard presses.first!.type == UIPressType.select else { return }
-        
+
         pressAction?()
     }
 

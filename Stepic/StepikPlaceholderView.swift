@@ -31,7 +31,7 @@ class StepikPlaceholderView: NibInitializableView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var actionsStackView: UIStackView!
     @IBOutlet weak var imageContainerView: UIView!
-    
+
     lazy private var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
         var idToView: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = [:]
         for placeholder in StepikPlaceholder.availablePlaceholders {
