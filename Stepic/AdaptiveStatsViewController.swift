@@ -42,8 +42,7 @@ class AdaptiveStatsViewController: UIViewController {
         }
     }
 
-    var statsPresenter: AdaptiveStatsPresenter?
-    var ratingsPresenter: AdaptiveRatingsPresenter?
+    var presenter: AdaptiveStatsPresenter?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var progressChart: LineChartView!
@@ -74,12 +73,12 @@ class AdaptiveStatsViewController: UIViewController {
         setUpTable()
         setUpChart()
 
-        statsPresenter?.reloadStats()
+        presenter?.reloadStats()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        statsPresenter?.reloadData(force: data == nil)
+        presenter?.reloadData(force: data == nil)
     }
 
     fileprivate func colorize() {

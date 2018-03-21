@@ -190,6 +190,8 @@ class VideoStepViewController: UIViewController {
             return
         }
 
+        LocalProgressLastViewedUpdater.shared.updateView(for: step)
+
         if !didPresentVideoPlayer {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
         } else {

@@ -2,6 +2,7 @@
 install! 'cocoapods', :deterministic_uuids => false
 source 'https://github.com/CocoaPods/Specs.git'
 
+inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
@@ -26,11 +27,11 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
-    pod 'Firebase/Core'
-    pod 'Firebase/AppIndexing'
-    pod 'Firebase/Messaging'
-    pod 'Firebase/Analytics'
-    pod 'Firebase/RemoteConfig'
+    pod 'FirebaseCore'
+    pod 'FirebaseAppIndexing'
+    pod 'FirebaseMessaging'
+    pod 'FirebaseAnalytics'
+    pod 'FirebaseRemoteConfig'
     
     pod 'Mixpanel-swift', '2.3.0'
 
@@ -101,13 +102,7 @@ target 'Adaptive 1838' do
     adaptive_pods    
 end
 
-target 'Adaptive 1906' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 3067' do
+target 'Adaptive GMAT' do
     platform :ios, '9.0'
     all_pods
     adaptive_pods
@@ -132,14 +127,6 @@ target 'Adaptive 3124' do
 end
 
 target 'Adaptive 1838 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 1906 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 3067 Screenshots' do
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 

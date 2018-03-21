@@ -352,7 +352,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         if segue.identifier == "showSections" {
             let dvc = segue.destination as! SectionsViewController
             dvc.course = course
-            dvc.shouldShowShareTooltip = true
+            dvc.didJustSubscribe = true
         }
     }
 
@@ -425,7 +425,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 })
             } else {
                 if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: c.id) {
-                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                         return
                     }
                     cardsViewController.hidesBottomBarWhenPushed = true

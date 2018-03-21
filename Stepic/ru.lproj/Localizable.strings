@@ -158,8 +158,8 @@ ExamTitle = "Экзамен";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
 StreakNotificationAlertBody = "Не забудь решить задачу сегодня, чтобы улучшить личный рекорд!";
 No = "Нет";
-StreakAlertTitle = "Ура!";
-StreakAlertMessage = "Вы решаете задачи уже %@ %@ подряд. Решайте каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
+StreakAlertTitle = "Учись каждый день";
+StreakAlertMessage = "Текущий рекорд - %@ %@ без перерыва. Решай задачи каждый день и улучшай личный рекорд! Получать уведомления, чтобы не забывать учиться?";
 Select = "Выбрать";
 SelectTimeTitle = "Выберите время";
 NotifyAboutStreaksPreference = "Уведомления о занятиях";
@@ -390,12 +390,24 @@ AdaptiveProgressByWeeks = "Прогресс по неделям";
 AdaptivePreferencesTitle = "Адаптивные курсы";
 UseAdaptiveModePreference = "Адаптивный режим";
 AdaptiveOnboardingTitle = "Адаптивный режим";
+AdaptiveCourseSelectLoading = "Загрузка курсов...";
+AdaptiveCourseSelectTitle = "Выберите курс";
+AdaptiveLearnersTitle = "учится";
+AdaptivePointsTitle = "опыта";
+AdaptiveLevelTitle = "уровень";
 
 /* Tooltips */
 ShareCourseTooltip = "Поделитесь ссылкой с друзьями, чтобы проходить курс вместе";
 LessonDownloadTooltip = "Загрузите урок, чтобы смотреть видео оффлайн";
 ContinueLearningWidgetTooltip = "Нажмите, чтобы перейти к тому месту, где закончили в прошлый раз";
 StreaksSwitchTooltip = "Включите, чтобы получать новую порцию знаний каждый день";
+
+/* Notification alerts */
+NotificationTabNotificationRequestAlertTitle = "Следи за обновлениями";
+NotificationTabNotificationRequestAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Разрешить уведомления, чтобы следить за дискуссиями и оперативно получать обновления в курсах?";
+
+CourseSubscriptionNotificationRequestAlertTitle = "Следи за обновлениями";
+CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Разрешить уведомления, чтобы следить за дедлайнами и оперативно получать обновления по курсу?";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
@@ -448,3 +460,17 @@ ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 "Bad connection to sign up" = "Нет соединения с интернетом";
 "In Progress" = "В процессе";
 "Passed" = "Пройденные";
+
+/* Placeholders */
+PlaceholderEmptyText = "Ничего нет";
+PlaceholderEmptyButton = "Может быть кнопка поможет";
+PlaceholderNoConnectionText = "Кажется, интернет-соединение потеряно";
+PlaceholderNoConnectionButton = "Повторить";
+PlaceholderEmptyDownloadsText = "Нет загруженных видео";
+PlaceholderEmptyDownloadsButton = "Перейти в каталог";
+PlaceholderLoginText = "Мы встречались раньше?\nВойдите, пожалуйста";
+PlaceholderLoginButton = "Войти";
+PlaceholderEmptyNotificationsText = "Нет уведомлений";
+PlaceholderEmptyNotificationsButton = "Перейти в каталог";
+PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
+PlaceholderEmptySearchButton = "Перейти в каталог";

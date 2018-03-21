@@ -61,6 +61,9 @@ class CardStepViewController: UIViewController, CardStepView {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+
+        stepWebView.navigationDelegate = nil
+        stepWebView.scrollView.delegate = nil
         print("card step: deinit vc")
     }
 
@@ -75,6 +78,7 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
         stepWebView.navigationDelegate = self
         stepWebView.scrollView.isScrollEnabled = false
+        stepWebView.scrollView.delegate = self
         scrollView.insertSubview(stepWebView, at: 0)
 
         stepWebViewHeight = stepWebView.constrainHeight("5")
@@ -148,6 +152,8 @@ extension CardStepViewController: WKNavigationDelegate {
     func alignImages(in webView: WKWebView) -> Promise<Void> {
         // Disable WebKit callout on long press
         var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
+        // Change color for audio control
+        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepicGreen.hexString)');"
         // Center images
         jsCode += "var imgs = document.getElementsByTagName('img');"
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
@@ -201,5 +207,12 @@ extension CardStepViewController: WKNavigationDelegate {
         }.catch { _ in
             print("card step: error after webview loading did finish")
         }
+    }
+}
+
+extension CardStepViewController: UIScrollViewDelegate {
+    func viewForZooming(in: UIScrollView) -> UIView? {
+        // Disable zooming
+        return nil
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 protocol RatingProgressViewDelegate: class {
     func onClick()
@@ -19,7 +20,7 @@ extension RatingProgressViewDelegate {
 class RatingProgressView: UIView {
     weak var delegate: RatingProgressViewDelegate?
 
-    @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
+    @IBInspectable var mainColor: UIColor? = UIColor.mainDark
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
     @IBInspectable var frontLabelColor: UIColor? = UIColor.white
@@ -180,6 +181,10 @@ class RatingProgressView: UIView {
         label.font = labelFont
         label.textAlignment = .center
         label.textColor = backLabelColor
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.6
+        label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
 
         // Make progress view (front)
@@ -187,13 +192,17 @@ class RatingProgressView: UIView {
         frontFrame.size.width = 0
         frontView = UIView(frame: frontFrame)
         frontView.backgroundColor = mainColor
-        frontView.autoresizingMask = .flexibleWidth
+        frontView.translatesAutoresizingMaskIntoConstraints = false
 
         // Make main label (front)
         frontLabel = UILabel(frame: self.bounds)
         frontLabel.font = labelFont
         frontLabel.textAlignment = label.textAlignment
         frontLabel.textColor = frontLabelColor
+        frontLabel.adjustsFontSizeToFitWidth = true
+        frontLabel.numberOfLines = 1
+        frontLabel.minimumScaleFactor = 0.6
+        frontLabel.translatesAutoresizingMaskIntoConstraints = false
         frontView.addSubview(frontLabel)
         frontView.clipsToBounds = true
 
@@ -212,11 +221,15 @@ class RatingProgressView: UIView {
         congratulationView = UIView(frame: self.bounds)
         congratulationView.alpha = 0.0
         congratulationView.backgroundColor = congratulationColor
-        congratulationView.autoresizingMask = .flexibleWidth
+        congratulationView.translatesAutoresizingMaskIntoConstraints = false
         congratulationLabel = UILabel(frame: self.bounds)
         congratulationLabel.font = labelFont
         congratulationLabel.textAlignment = label.textAlignment
         congratulationLabel.textColor = congratulationLabelColor
+        congratulationLabel.adjustsFontSizeToFitWidth = true
+        congratulationLabel.numberOfLines = 1
+        congratulationLabel.minimumScaleFactor = 0.6
+        congratulationLabel.translatesAutoresizingMaskIntoConstraints = false
         congratulationView.addSubview(congratulationLabel)
 
         congratsShadowLayer = CAGradientLayer()
@@ -228,15 +241,16 @@ class RatingProgressView: UIView {
         ]
         congratulationView.layer.addSublayer(congratsShadowLayer)
         self.addSubview(congratulationView)
+
+        label.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        frontLabel.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        congratulationLabel.alignTop("0", leading: "8", bottom: "0", trailing: "8", toView: self)
+        frontView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self)
+        congratulationView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        // Recenter (maybe constraints?)
-        label.center.x = center.x
-        frontLabel.center.x = center.x
-        congratulationLabel.center.x = center.x
 
         // Recalculate progress
         frontView.frame.size.width = bounds.width * CGFloat(progress)

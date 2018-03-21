@@ -158,7 +158,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
 
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager())
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities, streaksNotificationSuggestionManager: NotificationSuggestionManager())
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }

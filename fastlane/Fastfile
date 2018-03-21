@@ -27,16 +27,13 @@ platform :ios do
 
   app_identifiers = {
     "Stepic" => [
-      "com.AlexKarpov.Stepic", 
-      "com.AlexKarpov.Stepic.watchkitapp", 
+      "com.AlexKarpov.Stepic",
+      "com.AlexKarpov.Stepic.watchkitapp",
       "com.AlexKarpov.Stepic.watchkitapp.watchkitextension",
       "com.AlexKarpov.Stepic.StickerPackExtension"
-    ], 
+    ],
     "Adaptive 1838" => [
       "org.stepik.ios.adaptive.1838"
-    ],
-    "Adaptive 1906" => [
-      "org.stepik.ios.adaptive.1906"
     ],
     "Adaptive 3150" => [
       "org.stepik.ios.adaptive.3150"
@@ -47,19 +44,18 @@ platform :ios do
     "Adaptive 3124" => [
       "org.stepik.ios.adaptive.3124"
     ],
-    "Adaptive 3067" => [
-      "org.stepik.ios.adaptive.3067"
+    "Adaptive GMAT" => [
+      "org.stepik.ios.adaptive.gmat"
     ]
   }
 
   all_schemes = [
     "Stepic",
     "Adaptive 1838",
-    "Adaptive 1906",
     "Adaptive 3150",
     "Adaptive 3149",
     "Adaptive 3124",
-    "Adaptive 3067"
+    "Adaptive GMAT"
   ]
 
   test_schemes = [
@@ -77,14 +73,15 @@ platform :ios do
   }
 
   # Test
-  lane :test do 
+  lane :test do
     for scheme in test_schemes
       testscheme(scheme: scheme)
     end
   end
-  
+
   desc "Runs all the tests for scheme"
   lane :testscheme do |options|
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
     scheme = options[:scheme]
     scan(scheme:scheme, slack_only_on_failure: true)
   end
@@ -92,7 +89,7 @@ platform :ios do
   # Beta
   lane :beta do |options|
     git_change = options[:git_change]
-    
+
     if git_change
       # Ensure that your git status is not dirty
       ensure_git_status_clean
@@ -124,7 +121,7 @@ platform :ios do
 
     scheme = options[:scheme]
     git_change = options[:git_change]
-    matchscheme(scheme: scheme)
+    matchadhoc(scheme: scheme)
 
     # Ensure that your git status is not dirty
     if git_change
@@ -158,13 +155,13 @@ platform :ios do
                 notifications: true,
                 groups: "all-ios-testers")
     slack(
-          message: "Successfully released iOS beta #{scheme} #{version_string(get_version_number, get_build_number)}", 
+          message: "Successfully released iOS beta #{scheme} #{version_string(get_version_number, get_build_number)}",
           channel: "#ios-ci")
   end
 
   # Certificates
   desc "Match all certificates for all schemes"
-  lane :matchall do 
+  lane :matchall do
     for scheme in all_schemes do
       matchscheme(scheme: scheme)
     end
@@ -180,21 +177,21 @@ platform :ios do
   lane :matchdev do |options|
     scheme = options[:scheme]
     identifiers = app_identifiers[scheme]
-    match(type: "development", force_for_new_devices: true, 
+    match(type: "development", force_for_new_devices: true,
           app_identifier: identifiers)
   end
 
   lane :matchadhoc do |options|
     scheme = options[:scheme]
     identifiers = app_identifiers[scheme]
-    match(type: "adhoc", force_for_new_devices: true, 
+    match(type: "adhoc", force_for_new_devices: true,
           app_identifier: identifiers)
   end
 
   lane :matchrelease do |options|
     scheme = options[:scheme]
     identifiers = app_identifiers[scheme]
-    match(type: "appstore", force_for_new_devices: true, 
+    match(type: "appstore", force_for_new_devices: true,
           app_identifier: identifiers)
   end
 
@@ -263,7 +260,7 @@ platform :ios do
   end
 
   # Release
-  lane :release do 
+  lane :release do
     for scheme in all_schemes do
       releasescheme(scheme: scheme)
     end
@@ -275,7 +272,7 @@ platform :ios do
     scheme = options[:scheme]
     app_identifier = app_identifiers[scheme][0]
 
-    matchscheme(scheme: scheme)
+    matchrelease(scheme: scheme)
 
     clear_derived_data
     unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
@@ -291,12 +288,12 @@ platform :ios do
     screenpath = "./fastlane/screenshots/#{scheme}"
     deliver(metadata_path: metapath, screenshots_path: screenpath, app_identifier: app_identifier)
     slack(
-          message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}", 
+          message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}",
           channel: "#ios-ci")
   end
 
   # Enterprise export
-  lane :sb do 
+  lane :sb do
     import_certificate(
       certificate_path: "cert/cert.p12",
       certificate_password: ENV["SB_UNI_CERT_PASSWORD"],
@@ -317,7 +314,7 @@ platform :ios do
         include_bitcode: true,
         export_method: "enterprise")
     slack(
-      message: "Successfully generated SB artefacts #{version_string(get_version_number, get_build_number)}", 
+      message: "Successfully generated SB artefacts #{version_string(get_version_number, get_build_number)}",
       channel: "#ios-ci")
   end
 

@@ -35,6 +35,20 @@ class MenuUIManager {
         case .titleContentExpandable:
             if let cell = cell as? TitleContentExpandableMenuBlockTableViewCell, let block = block as? TitleContentExpandableMenuBlock {
                 cell.initWithBlock(block: block)
+                cell.updateTableHeightBlock = {
+                    [weak self] in
+                    self?.tableView.beginUpdates()
+                    self?.tableView.endUpdates()
+                }
+            }
+        case .pinsMapExpandable:
+            if let cell = cell as? PinsMapExpandableMenuBlockTableViewCell, let block = block as? PinsMapExpandableMenuBlock {
+                cell.initWithBlock(block: block)
+                cell.updateTableHeightBlock = {
+                    [weak self] in
+                    self?.tableView.beginUpdates()
+                    self?.tableView.endUpdates()
+                }
             }
         case .header:
             if let cell = cell as? HeaderMenuBlockTableViewCell, let block = block as? HeaderMenuBlock {
@@ -63,6 +77,10 @@ class MenuUIManager {
             }
         case .titleContentExpandable:
             if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
+                cell.expandPressed()
+            }
+        case .pinsMapExpandable:
+            if let cell = tableView.cellForRow(at: indexPath) as? PinsMapExpandableMenuBlockTableViewCell {
                 cell.expandPressed()
             }
         default:
@@ -110,11 +128,13 @@ enum SupportedMenuBlockType {
     case transition
     case titleContentExpandable
     case header
+    case pinsMapExpandable
 
     static var all: [SupportedMenuBlockType] = [
         .switchBlock,
         .transition,
         .titleContentExpandable,
+        .pinsMapExpandable,
         .header
     ]
 
@@ -126,6 +146,8 @@ enum SupportedMenuBlockType {
             return "TransitionMenuBlockTableViewCell"
         case .titleContentExpandable:
             return "TitleContentExpandableMenuBlockTableViewCell"
+        case .pinsMapExpandable:
+            return "PinsMapExpandableMenuBlockTableViewCell"
         case .header:
             return "HeaderMenuBlockTableViewCell"
         }
@@ -142,6 +164,10 @@ enum SupportedMenuBlockType {
         }
         if block is TitleContentExpandableMenuBlock {
             self = .titleContentExpandable
+            return
+        }
+        if block is PinsMapExpandableMenuBlock {
+            self = .pinsMapExpandable
             return
         }
         if block is TransitionMenuBlock {

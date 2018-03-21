@@ -21,7 +21,7 @@ class QuizPresenter {
     var alwaysCreateNewAttemptOnRefresh: Bool
 
     #if !os(tvOS)
-        var streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager?
+        var streaksNotificationSuggestionManager: NotificationSuggestionManager?
     #endif
 
     var state: QuizState = .nothing {
@@ -48,7 +48,7 @@ class QuizPresenter {
     }
 
     #if !os(tvOS)
-    convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: StreaksNotificationSuggestionManager) {
+    convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
         self.init(view: view, step: step, dataSource: dataSource, alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh, submissionsAPI: submissionsAPI, attemptsAPI: attemptsAPI, userActivitiesAPI: userActivitiesAPI)
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
@@ -396,10 +396,10 @@ class QuizPresenter {
                 return
             }
 
-            guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(after: .submission) else {
+            guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(context: .streak, after: .submission) else {
                 return
             }
-        #endif
+	#endif
 
         guard let user = AuthInfo.shared.user else {
             return
@@ -411,8 +411,9 @@ class QuizPresenter {
             guard activity.currentStreak > 0 else {
                 return
             }
+
             #if !os(tvOS)
-                self?.streaksNotificationSuggestionManager?.didShowStreakAlert()
+                self?.streaksNotificationSuggestionManager?.didShowAlert(context: .streak)
             #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
         }, error: {

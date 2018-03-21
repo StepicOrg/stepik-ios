@@ -32,8 +32,8 @@ class ApplicationInfo {
         struct Adaptive {
             static let supportedCourses = "adaptive.supportedCourses"
             static let isAdaptive = "adaptive.isAdaptive"
-            static let courseId = "adaptive.courseId"
             static let mainColor = "adaptive.mainColor"
+            static let coursesInfoURL = "adaptive.coursesInfoURL"
         }
         struct RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"
@@ -60,6 +60,7 @@ class ApplicationInfo {
         struct Colors {
             static let mainText = "colors.mainText"
             static let mainDark = "colors.mainDark"
+            static let mainGreen = "colors.mainGreen"
         }
         struct Modules {
             static let tabs = "modules.tabs"

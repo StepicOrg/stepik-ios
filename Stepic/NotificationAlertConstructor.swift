@@ -13,21 +13,6 @@ class NotificationAlertConstructor {
     fileprivate init() {}
     static let sharedConstructor = NotificationAlertConstructor()
 
-    func getNotificationAlertController() -> UIAlertController {
-        let alert = UIAlertController(title: NSLocalizedString("EnableNotificationsTitle", comment: ""), message: NSLocalizedString("EnableNotificationsMessage", comment: ""), preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
-            _ in
-            NotificationRegistrator.shared.registerForRemoteNotifications(UIApplication.shared)
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .cancel, handler: {
-            _ in
-        }))
-
-        return alert
-    }
-
     func getOpenCommentNotificationViaSafariAlertController(_ success: @escaping (() -> Void)) -> UIAlertController {
         let alert = UIAlertController(title: NSLocalizedString("NewCommentAlertTitle", comment: ""), message: NSLocalizedString("NewCommentAlertMessage", comment: ""), preferredStyle: .alert)
 

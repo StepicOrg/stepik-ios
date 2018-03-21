@@ -231,6 +231,7 @@ struct AnalyticsEvents {
 
     struct Profile {
         static let clickSettings = "main_choice_settings"
+        static let interactionWithPinsMap = "pins_map_interaction"
         struct Settings {
             static let clickBanner = "settings_click_banner"
         }
@@ -239,6 +240,18 @@ struct AnalyticsEvents {
     struct Notifications {
         static let markAllAsRead = "notifications_mark_all_as_read"
         static let markAsRead = "notifications_mark_as_read"
+    }
+
+    struct NotificationRequest {
+        static func shown(context: NotificationRequestAlertContext) -> String {
+            return "notification_alert_context_\(context.rawValue)_shown"
+        }
+        static func accepted(context: NotificationRequestAlertContext) -> String {
+            return "notification_alert_context_\(context.rawValue)_accepted"
+        }
+        static func rejected(context: NotificationRequestAlertContext) -> String {
+            return "notification_alert_context_\(context.rawValue)_rejected"
+        }
     }
 
     struct Onboarding {
@@ -251,6 +264,7 @@ struct AnalyticsEvents {
     struct Adaptive {
         static let onboardingFinished = "adaptive_onboarding_finished"
         struct Step {
+            static let submission = "adaptive_submission_created"
             static let correctAnswer = "adaptive_correct_answer"
             static let wrongAnswer = "adaptive_wrong_answer"
             static let retry = "adaptive_retry_answer"

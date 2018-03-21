@@ -25,37 +25,58 @@ protocol CardsStepsView: class {
     func updateTopCardContent(stepViewController: CardStepViewController)
     func updateTopCardTitle(title: String, showControls: Bool)
     func presentDiscussions(stepId: Int, discussionProxyId: String)
+    func presentShareDialog(for link: String)
     func refreshCards()
+    func present(alertManager: AlertManager, alert: UIViewController)
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
     func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)?)
 }
 
-class CardsStepsPresenter {
-    enum State {
-        case loading, loaded, coursePassed, connectionError
-    }
+protocol CardsStepsPresenter: StepCardViewDelegate {
+    var canSwipeCard: Bool { get }
+    var state: CardsStepsPresenterState { get set }
+    var course: Course? { get set }
 
+    func appearedAfterSubscription()
+    func refresh()
+    func refreshTopCard()
+    func tryAgain()
+    func sendReaction(_ reaction: Reaction)
+    func updateRatingWhenSuccess()
+    func updateRatingWhenFail()
+    func logout()
+}
+
+enum CardsStepsPresenterState {
+    case loading, loaded, coursePassed, connectionError
+}
+
+class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     var recommendationsBatchSize: Int { return 6 }
     var nextRecommendationsBatchThreshold: Int { return 4 }
 
     weak var view: CardsStepsView?
     var currentStepPresenter: CardStepPresenter?
 
-    fileprivate var stepsAPI: StepsAPI
-    fileprivate var lessonsAPI: LessonsAPI
-    fileprivate var recommendationsAPI: RecommendationsAPI
-    fileprivate var unitsAPI: UnitsAPI
-    fileprivate var viewsAPI: ViewsAPI
-    fileprivate var ratingManager: AdaptiveRatingManager
-    fileprivate var statsManager: AdaptiveStatsManager
-    fileprivate var storageManager: AdaptiveStorageManager
-    fileprivate var ratingsAPI: AdaptiveRatingsAPI
+    internal var stepsAPI: StepsAPI
+    internal var lessonsAPI: LessonsAPI
+    internal var recommendationsAPI: RecommendationsAPI
+    internal var unitsAPI: UnitsAPI
+    internal var viewsAPI: ViewsAPI
+    internal var ratingManager: AdaptiveRatingManager
+    internal var statsManager: AdaptiveStatsManager
+    internal var storageManager: AdaptiveStorageManager
+    internal var ratingsAPI: AdaptiveRatingsAPI
+    internal var lastViewedUpdater: LocalProgressLastViewedUpdater
+    internal var notificationSuggestionManager: NotificationSuggestionManager
+    internal var notificationPermissionManager: NotificationPermissionManager
 
     // FIXME: incapsulate/remove this 
-    var state: State = .loaded
-    private(set) var course: Course
+    var state: CardsStepsPresenterState = .loaded
+    // We can init this class w/o course (for adaptive app)
+    internal(set) var course: Course?
 
     var cachedRecommendedLessons: [Lesson] = []
     var canSwipeCard: Bool {
@@ -82,12 +103,23 @@ class CardsStepsPresenter {
 
     // Onboarding
     private var lastOnboardingStep: Int?
-    private var onboardingStepsCount = 3
+
+    var onboardingLastStepIndex: Int {
+        return 3
+    }
+
+    var onboardingFirstStepIndex: Int {
+        return 1
+    }
 
     // Sync
     private var shouldSyncRating = true
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, course: Course, view: CardsStepsView) {
+    var useRatingSynchronization: Bool {
+        return true
+    }
+
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationPermissionManager: NotificationPermissionManager, course: Course?, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -97,6 +129,9 @@ class CardsStepsPresenter {
         self.ratingManager = ratingManager
         self.statsManager = statsManager
         self.storageManager = storageManager
+        self.lastViewedUpdater = lastViewedUpdater
+        self.notificationSuggestionManager = notificationSuggestionManager
+        self.notificationPermissionManager = notificationPermissionManager
 
         self.course = course
         self.view = view
@@ -107,6 +142,32 @@ class CardsStepsPresenter {
 
         let currentLevel = AdaptiveRatingHelper.getLevel(for: rating)
         view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+    }
+
+    func didAppear() {
+        if let course = course {
+            lastViewedUpdater.updateView(for: course)
+        }
+    }
+
+    func appearedAfterSubscription() {
+        if #available(iOS 10.0, *) {
+            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
+                notificationPermissionManager.getCurrentPermissionStatus().then {
+                    [weak self]
+                    status -> Void in
+
+                    switch status {
+                    case .notDetermined:
+                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
+                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
+                        self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {
@@ -137,11 +198,11 @@ class CardsStepsPresenter {
     func refreshTopCard() {
 
         if !storageManager.isAdaptiveOnboardingPassed {
-            let stepIndex = (lastOnboardingStep ?? 0) + 1
+            let stepIndex = lastOnboardingStep ?? onboardingFirstStepIndex
 
-            if stepIndex <= onboardingStepsCount {
+            if stepIndex <= onboardingLastStepIndex {
                 refreshTopCardForOnboarding(stepIndex: stepIndex)
-                lastOnboardingStep = stepIndex
+                lastOnboardingStep = stepIndex + 1
                 return
             } else {
                 storageManager.isAdaptiveOnboardingPassed = true
@@ -153,12 +214,18 @@ class CardsStepsPresenter {
                 return
             }
 
+            guard let course = strongSelf.course else {
+                return
+            }
+
             var title = ""
             strongSelf.state = .loading
 
-            let startPromise = strongSelf.shouldSyncRating ? strongSelf.syncRatingAndStreak(for: strongSelf.course) : Promise(value: ())
-            startPromise.then {
-                strongSelf.getNewRecommendation(for: strongSelf.course)
+            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
+            checkToken().then {
+                startPromise
+            }.then {
+                strongSelf.getNewRecommendation(for: course)
             }.then { lesson -> Promise<Step> in
                 title = lesson.title
                 return strongSelf.getStep(for: lesson)
@@ -187,14 +254,20 @@ class CardsStepsPresenter {
                 switch error {
                 case CardsStepsError.coursePassed:
                     strongSelf.state = .coursePassed
+                    strongSelf.view?.state = .coursePassed
                 case CardsStepsError.recommendationsNotLoaded:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
                 case CardsStepsError.viewNotSent:
                     print("cards steps: view not sent")
                 case CardsStepsError.noStepsInLesson, CardsStepsError.stepNotLoaded:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
+                case PerformRequestError.noAccessToRefreshToken:
+                    strongSelf.logout()
                 default:
                     strongSelf.state = .connectionError
+                    strongSelf.view?.state = .connectionError
                 }
             }
         }
@@ -212,6 +285,10 @@ class CardsStepsPresenter {
     func tryAgain() {
         view?.state = .normal
         view?.refreshCards()
+    }
+
+    func logout() {
+
     }
 
     fileprivate func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
@@ -373,17 +450,19 @@ class CardsStepsPresenter {
         statsManager.maxStreak = curStreak
 
         // Send rating
-        ratingsAPI.update(courseId: course.id, exp: newRating).then {
-            print("cards steps: remote rating updated")
-        }.catch { error in
-            switch error {
-            case RatingsAPIError.serverError:
-                print("cards steps: remote rating update failed: server error")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
-            case RatingsAPIError.connectionError(let error):
-                print("cards steps: remote rating update failed: \(error)")
-            default:
-                print("cards steps: remote rating update failed: \(error)")
+        if let course = course {
+            ratingsAPI.update(courseId: course.id, exp: newRating).then {
+                print("cards steps: remote rating updated")
+            }.catch { error in
+                switch error {
+                case RatingsAPIError.serverError:
+                    print("cards steps: remote rating update failed: server error")
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+                case RatingsAPIError.connectionError(let error):
+                    print("cards steps: remote rating update failed: \(error)")
+                default:
+                    print("cards steps: remote rating update failed: \(error)")
+                }
             }
         }
 
@@ -402,9 +481,7 @@ class CardsStepsPresenter {
             streak = 1
         }
     }
-}
 
-extension CardsStepsPresenter: StepCardViewDelegate {
     func onControlButtonClick() {
         // Onboarding -> just skip card
         if !storageManager.isAdaptiveOnboardingPassed {
@@ -431,8 +508,8 @@ extension CardsStepsPresenter: StepCardViewDelegate {
 
     func onTitleButtonClick() {
         guard let stepId = currentStepPresenter?.step.id,
-              let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
-            return
+            let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
+                return
         }
 
         view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 import Atributika
 
 class NotificationsViewController: UIViewController, NotificationsView {
@@ -40,7 +39,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
     @IBOutlet weak var markAllAsReadButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     let refreshControl = UIRefreshControl()
 
@@ -75,7 +74,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), view: self)
+        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), notificationPermissionManager: NotificationPermissionManager(), notificationSuggestionManager: NotificationSuggestionManager(), view: self)
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
@@ -95,14 +94,24 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
 
         self.tableView.tableFooterView = UIView()
+
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyNotifications) { [weak self] in
+            self?.tabBarController?.selectedIndex = 1
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        presenter?.didAppear()
+
         if data.isEmpty {
             presenter?.loadInitial()
         }
+    }
+
+    func present(alertManager: AlertManager, alert: UIViewController) {
+        alertManager.present(alert: alert, inController: self)
     }
 
     @objc func refreshNotifications() {
@@ -197,29 +206,5 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
 
             cell.status = .read
         }
-    }
-}
-
-extension NotificationsViewController: DZNEmptyDataSetSource {
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return #imageLiteral(resourceName: "white_pixel")
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text: String = NSLocalizedString("NoNotifications", comment: "")
-
-        let style = Style.font(.systemFont(ofSize: 18.0, weight: UIFont.Weight.light))
-            .foregroundColor(UIColor.mainDark.withAlphaComponent(0.4))
-        return text.styleAll(style).attributedString
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return .white
-    }
-}
-
-extension NotificationsViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
     }
 }

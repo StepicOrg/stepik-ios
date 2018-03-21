@@ -35,6 +35,10 @@ class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
     var content: [TitleContent] = []
 }
 
+class PinsMapExpandableMenuBlock: ExpandableMenuBlock {
+    var pins: [Int] = []
+}
+
 class TransitionMenuBlock: MenuBlock {
     var subtitle: String?
     var onTouch: (() -> Void)?

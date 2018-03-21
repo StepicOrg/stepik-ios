@@ -38,7 +38,7 @@ class LastStepRouter {
 
     private static func navigate(for course: Course, using navigationController: UINavigationController) {
         if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id) {
-            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? CardsStepsViewController else {
+            guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                 return
             }
             cardsViewController.hidesBottomBarWhenPushed = true
@@ -95,6 +95,7 @@ class LastStepRouter {
                 navigationController.pushViewController(sectionsVC, animated: false)
                 navigationController.pushViewController(unitsVC, animated: false)
                 navigationController.pushViewController(lessonVC, animated: true)
+                LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
             } else {
                 openSyllabus()

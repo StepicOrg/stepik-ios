@@ -8,22 +8,24 @@
 
 import UIKit
 import Mixpanel
-import VK_ios_sdk
-import FBSDKCoreKit
 import Fabric
 import Crashlytics
+import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // We should store link to actions to prevent deallocating
+    var actions: AdaptiveUserActions?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         if !DefaultsContainer.launch.didLaunch {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.firstOpen, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
         }
 
@@ -31,11 +33,104 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
             if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+                AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.localNotification, parameters: ["type": notificationType])
             }
         }
 
+        launchViewController()
+
         return true
+    }
+
+    func launchViewController() {
+        let supportedCourses = StepicApplicationsInfo.adaptiveSupportedCourses
+
+        var startViewController: UIViewController!
+
+        actions = AdaptiveUserActions(coursesAPI: CoursesAPI(), authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), enrollmentsAPI: EnrollmentsAPI(), adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI(), defaultsStorageManager: DefaultsStorageManager())
+
+        guard let actions = actions else {
+            return
+        }
+
+        if supportedCourses.count == 1 {
+            // One course -> skip course select
+            guard let courseId = supportedCourses.first else {
+                return
+            }
+
+            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveCardsSteps", storyboardName: "AdaptiveMain") as? AdaptiveCardsStepsViewController else {
+                return
+            }
+
+            // Init achievements
+            // Use shared object to get access from view (cause we don't have a router layer) and have only one instance per app
+            let rating = AdaptiveRatingManager(courseId: courseId).rating
+            let streak = AdaptiveRatingManager(courseId: courseId).streak
+            // Migration from old version
+            let isOnboardingPassed = AdaptiveStorageManager.shared.isAdaptiveOnboardingPassed || DefaultsStorageManager.shared.isRatingOnboardingFinished
+            let achievementsManager = AchievementManager.createAndRegisterAchievements(currentRating: rating, currentStreak: streak, currentLevel: AdaptiveRatingHelper.getLevel(for: rating), isOnboardingPassed: isOnboardingPassed)
+            AchievementManager.shared = achievementsManager
+
+            let presenter = AdaptiveCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: courseId), statsManager: AdaptiveStatsManager(courseId: courseId), storageManager: AdaptiveStorageManager(), achievementsManager: achievementsManager, defaultsStorageManager: DefaultsStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), view: initialViewController)
+
+            presenter.initialActions = { completion, failure in
+                checkToken().then { () -> Promise<Void> in
+                    if !AuthInfo.shared.isAuthorized {
+                        return actions.registerNewUser()
+                    } else {
+                        return Promise(value: ())
+                    }
+                }.then { _ -> Promise<Course> in
+                    actions.loadCourseAndJoin(courseId: courseId)
+                }.then { course -> Void in
+                    completion?(course)
+                }.catch { error in
+                    failure?(error)
+                }
+            }
+
+            initialViewController.presenter = presenter
+            initialViewController.isBackActionAllowed = false
+            startViewController = initialViewController
+        } else if supportedCourses.count > 1 {
+            // Multiple courses -> present course select
+            guard let initialViewController = ControllerHelper.instantiateViewController(identifier: "CourseSelect", storyboardName: "AdaptiveMain") as? UINavigationController else {
+                return
+            }
+
+            guard let selectController = initialViewController.childViewControllers.first as? AdaptiveCourseSelectViewController else {
+                return
+            }
+
+            let presenter = AdaptiveCourseSelectPresenter(defaultsStorageManager: DefaultsStorageManager(), view: selectController)
+            presenter.initialActions = { completion, failure in
+                checkToken().then { () -> Promise<Void> in
+                    if !AuthInfo.shared.isAuthorized {
+                        return actions.registerNewUser()
+                    } else {
+                        return Promise(value: ())
+                    }
+                }.then { _ -> Promise<([Course], [AdaptiveCourseInfo])> in
+                    var locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")
+                    if !Bundle.main.localizations.contains(locale) {
+                        locale = "en"
+                    }
+
+                    return when(fulfilled: actions.loadCourses(ids: supportedCourses), actions.loadAdaptiveCoursesInfo(locale: locale))
+                }.then { courses, adaptiveCoursesInfo in
+                    completion?((courses, adaptiveCoursesInfo))
+                }.catch { error -> Void in
+                    failure?(error)
+                }
+            }
+            selectController.presenter = presenter
+            startViewController = initialViewController
+        }
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = startViewController
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -45,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.localNotification, parameters: ["type": notificationType])
         }
     }
 
@@ -68,15 +163,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
-        if VKSdk.processOpen(url, fromApplication: sourceApplication) {
-            return true
-        }
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
-            return true
-        }
-        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
-            return true
-        }
         if let code = Parser.sharedParser.codeFromURL(url) {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])
         } else {

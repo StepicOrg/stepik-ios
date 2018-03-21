@@ -41,7 +41,7 @@ class AdaptiveRatingsViewController: UIViewController {
         }
     }
 
-    var ratingsPresenter: AdaptiveRatingsPresenter?
+    var presenter: AdaptiveRatingsPresenter?
     var daysCount: Int? = 1
 
     @IBOutlet weak var tableView: UITableView!
@@ -60,7 +60,7 @@ class AdaptiveRatingsViewController: UIViewController {
         ]
         daysCount = sections[ratingSegmentedControl.selectedSegmentIndex] ?? 1
         state = .loading
-        ratingsPresenter?.reloadData(days: daysCount, force: false)
+        presenter?.reloadData(days: daysCount, force: false)
     }
 
     override func viewDidLoad() {
@@ -70,7 +70,7 @@ class AdaptiveRatingsViewController: UIViewController {
         localize()
 
         setUpTable()
-        ratingsPresenter?.reloadData(days: daysCount, force: true)
+        presenter?.reloadData(days: daysCount, force: true)
 
         state = .loading
     }

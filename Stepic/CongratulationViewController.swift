@@ -13,6 +13,8 @@ class CongratulationViewController: UIViewController {
     enum CongratulationType {
         var image: UIImage {
             switch self {
+            case .achievement(_, _, let cover):
+                return cover
             case .level(_):
                 return Images.placeholders.coursePassed
             }
@@ -22,16 +24,21 @@ class CongratulationViewController: UIViewController {
             switch self {
             case .level(let level):
                 return String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(level)")
+            case .achievement(let name, _, _):
+                return String(format: NSLocalizedString("AchievementCongratulationText", comment: ""), "\(name)")
             }
         }
         var shareText: String {
             switch self {
             case .level(let level):
                 return String(format: NSLocalizedString("NewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
+            case .achievement(let name, _, _):
+                return String(format: NSLocalizedString("AchievementCongratulationShareText", comment: ""), "\(name)", "\(CongratulationViewController.shareAppName)")
             }
         }
 
         case level(level: Int)
+        case achievement(name: String, info: String, cover: UIImage)
     }
 
     private static let shareAppName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Stepik"

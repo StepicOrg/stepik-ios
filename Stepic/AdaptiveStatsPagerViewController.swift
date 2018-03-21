@@ -9,21 +9,10 @@
 import UIKit
 
 class AdaptiveStatsPagerViewController: PagerController {
-    enum Section {
-        var localizedName: String {
-            switch self {
-            case .progress:
-                return NSLocalizedString("AdaptiveProgress", comment: "")
-            case .rating:
-                return NSLocalizedString("AdaptiveRating", comment: "")
-            }
-        }
 
-        case progress
-        case rating
+    var sections: [AdaptiveStatsSection] {
+        return [.progress, .rating]
     }
-
-    var sections: [Section] = [.progress, .rating]
 
     var statsManager: AdaptiveStatsManager?
     var ratingsManager: AdaptiveRatingManager?
@@ -59,6 +48,25 @@ class AdaptiveStatsPagerViewController: PagerController {
             navigationController?.delegate = nil
         }
     }
+
+    internal func controllerForSection(_ section: AdaptiveStatsSection) -> UIViewController {
+        guard let statsManager = self.statsManager, let ratingsManager = self.ratingsManager else {
+            return UIViewController()
+        }
+
+        switch section {
+        case .progress:
+            let vc = ControllerHelper.instantiateViewController(identifier: "Progress", storyboardName: "Adaptive") as! AdaptiveStatsViewController
+            vc.presenter = AdaptiveStatsPresenter(statsManager: statsManager, ratingManager: ratingsManager, view: vc)
+            return vc
+        case .rating:
+            let vc = ControllerHelper.instantiateViewController(identifier: "Ratings", storyboardName: "Adaptive") as! AdaptiveRatingsViewController
+            vc.presenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), ratingManager: ratingsManager, view: vc)
+            return vc
+        default:
+            return UIViewController()
+        }
+    }
 }
 
 extension AdaptiveStatsPagerViewController: PagerDataSource {
@@ -76,20 +84,7 @@ extension AdaptiveStatsPagerViewController: PagerDataSource {
     }
 
     func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        guard let statsManager = self.statsManager, let ratingsManager = self.ratingsManager else {
-            return UIViewController()
-        }
-
-        switch sections[index] {
-        case .progress:
-            let vc = ControllerHelper.instantiateViewController(identifier: "Progress", storyboardName: "Adaptive") as! AdaptiveStatsViewController
-            vc.statsPresenter = AdaptiveStatsPresenter(statsManager: statsManager, ratingManager: ratingsManager, view: vc)
-            return vc
-        case .rating:
-            let vc = ControllerHelper.instantiateViewController(identifier: "Ratings", storyboardName: "Adaptive") as! AdaptiveRatingsViewController
-            vc.ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), ratingManager: ratingsManager, view: vc)
-            return vc
-        }
+        return controllerForSection(sections[index])
     }
 }
 

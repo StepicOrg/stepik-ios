@@ -389,12 +389,24 @@ AdaptiveProgressByWeeks = "Progress by weeks";
 AdaptivePreferencesTitle = "Adaptive courses";
 UseAdaptiveModePreference = "Adaptive mode";
 AdaptiveOnboardingTitle = "Adaptive mode";
+AdaptiveCourseSelectLoading = "Loading courses...";
+AdaptiveCourseSelectTitle = "Select course";
+AdaptiveLearnersTitle = "learners";
+AdaptivePointsTitle = "points";
+AdaptiveLevelTitle = "level";
 
 /* Tooltips */
 ShareCourseTooltip = "Share the link with your friends to learn together";
-LessonDownloadTooltip = "Download lesson ";
+LessonDownloadTooltip = "Download lesson to watch lectures offline";
 ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
 StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
+
+/* Notification alerts */
+NotificationTabNotificationRequestAlertTitle = "Stay tuned";
+NotificationTabNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow discussions and promptly receive courses updates?";
+
+CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
+CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
@@ -447,3 +459,17 @@ ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 "Bad connection to sign up" = "Bad connection to sign up";
 "In Progress" = "In Progress";
 "Passed" = "Passed";
+
+/* Placeholders */
+PlaceholderEmptyText = "Nothing here";
+PlaceholderEmptyButton = "Maybe button helps you";
+PlaceholderNoConnectionText = "Sorry, it seems like you've lost connection";
+PlaceholderNoConnectionButton = "Retry";
+PlaceholderEmptyDownloadsText = "No downloaded videos";
+PlaceholderEmptyDownloadsButton = "Go to Catalog";
+PlaceholderLoginText = "Sorry, have we met before?\nTry to Sign In";
+PlaceholderLoginButton = "Sign In";
+PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
+PlaceholderEmptyNotificationsButton = "Go to Catalog";
+PlaceholderEmptySearchText = "Some free space to think";
+PlaceholderEmptySearchButton = "Go to Catalog";
