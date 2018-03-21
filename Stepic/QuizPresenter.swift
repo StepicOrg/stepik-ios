@@ -92,6 +92,7 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
+                    // FIXME: Replace two different notifications with one from NSNotification.Name extension
                     #if os(tvOS)
                     NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
                     #else
