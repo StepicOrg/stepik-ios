@@ -34,7 +34,9 @@ class CertificatesViewController: StepikViewController, CertificatesView {
             }
             RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
         }), for: .anonymous)
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+            self?.presenter?.checkStatus()
+        }), for: .connectionError)
 
         title = NSLocalizedString("Certificates", comment: "")
 
@@ -136,6 +138,7 @@ class CertificatesViewController: StepikViewController, CertificatesView {
     func displayEmpty() {
         refreshControl.endRefreshing()
         tableView.reloadData()
+        self.isPlaceholderShown = false
     }
 
     func displayRefreshing() {
