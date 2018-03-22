@@ -54,12 +54,12 @@ extension StepikTableView {
         handlePlaceholder(isHidden: isHidden)
     }
 
-    func showLoadingPlaceholder() {
+    func showLoadingPlaceholder(force: Bool = false) {
         if let p = loadingPlaceholder {
             placeholderView.set(placeholder: p.style)
             placeholderView.delegate = self
         }
-        handlePlaceholder(isHidden: false)
+        handlePlaceholder(isHidden: !force && hasContent)
     }
 
     private func updatePlaceholderLayout() {
