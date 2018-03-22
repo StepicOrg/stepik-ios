@@ -62,8 +62,11 @@ class CardStepViewController: UIViewController, CardStepView {
     deinit {
         NotificationCenter.default.removeObserver(self)
 
-        stepWebView.navigationDelegate = nil
-        stepWebView.scrollView.delegate = nil
+        if stepWebView != nil {
+            // If WKWebView is not deallocated, we should reset its delegate (iOS 9 crash)
+            stepWebView.navigationDelegate = nil
+            stepWebView.scrollView.delegate = nil
+        }
         print("card step: deinit vc")
     }
 
