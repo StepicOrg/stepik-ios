@@ -32,6 +32,8 @@ class StepikViewController: UIViewController {
     }
 
     private var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
+    private var currentPlaceholderButtonAction: (() -> Void)?
+
     lazy private var placeholderView: StepikPlaceholderView = {
         let view = StepikPlaceholderView()
         return view
@@ -54,6 +56,9 @@ class StepikViewController: UIViewController {
 
         updatePlaceholderLayout()
         placeholderView.set(placeholder: placeholder.style)
+        placeholderView.delegate = self
+        currentPlaceholderButtonAction = placeholder.buttonAction
+
         isPlaceholderShown = true
     }
 
@@ -69,5 +74,11 @@ class StepikViewController: UIViewController {
             placeholderView.layoutIfNeeded()
         }
         view.bringSubview(toFront: placeholderView)
+    }
+}
+
+extension StepikViewController: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        currentPlaceholderButtonAction?()
     }
 }

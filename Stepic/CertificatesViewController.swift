@@ -7,24 +7,14 @@
 //
 
 import Foundation
-import DZNEmptyDataSet
-
-enum CertificatesEmptyDatasetState {
-    case error, empty, refreshing
-}
 
 class CertificatesViewController: StepikViewController, CertificatesView {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     var presenter: CertificatesPresenter?
 
     var certificates: [CertificateViewData] = []
     var showNextPageFooter: Bool = false
-    var emptyState: CertificatesEmptyDatasetState = .empty {
-        didSet {
-            tableView.reloadEmptyDataSet()
-        }
-    }
 
     let refreshControl = UIRefreshControl()
 
@@ -33,13 +23,23 @@ class CertificatesViewController: StepikViewController, CertificatesView {
         tableView.delegate = self
         tableView.dataSource = self
 
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificates) { [weak self] in
+            self?.tabBarController?.selectedIndex = 1
+        }
+        tableView.loadingPlaceholder = StepikPlaceholder(.emptyCertificatesLoading)
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
+        }), for: .anonymous)
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+
         title = NSLocalizedString("Certificates", comment: "")
 
         presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses, presentationContainer: PresentationContainer.certificates, view: self)
         presenter?.view = self
-
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
 
         tableView.register(UINib(nibName: "CertificateTableViewCell", bundle: nil), forCellReuseIdentifier: "CertificateTableViewCell")
 
@@ -63,8 +63,6 @@ class CertificatesViewController: StepikViewController, CertificatesView {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
-
-        registerPlaceholder(placeholder: StepikPlaceholder(.login), for: .anonymous)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -127,23 +125,22 @@ class CertificatesViewController: StepikViewController, CertificatesView {
 
     func displayAnonymous() {
         refreshControl.endRefreshing()
-        //emptyState = .anonymous
-
         showPlaceholder(for: .anonymous)
     }
 
     func displayError() {
         refreshControl.endRefreshing()
-        emptyState = .error
+        showPlaceholder(for: .connectionError)
     }
 
     func displayEmpty() {
         refreshControl.endRefreshing()
-        emptyState = .empty
+        tableView.reloadData()
     }
 
     func displayRefreshing() {
-        emptyState = .refreshing
+        tableView.showLoadingPlaceholder()
+        self.isPlaceholderShown = false
     }
 
     func displayLoadNextPageError() {
@@ -172,30 +169,6 @@ class CertificatesViewController: StepikViewController, CertificatesView {
         if segue.identifier == "showProfile" {
             let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
-        }
-    }
-}
-
-extension CertificatesViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
-    }
-
-    func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
-        switch emptyState {
-//        case .anonymous:
-//            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
-//            break
-
-        case .empty:
-            self.tabBarController?.selectedIndex = 1
-            break
-
-        case .error:
-            break
-
-        case .refreshing:
-            break
         }
     }
 }
@@ -274,89 +247,5 @@ extension CertificatesViewController : UITableViewDataSource {
         }
 
         return cell
-    }
-}
-
-extension CertificatesViewController : DZNEmptyDataSetSource {
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        //Add correct placeholders here
-        switch emptyState {
-        case .empty:
-            return Images.placeholders.certificates
-        case .error:
-            return Images.placeholders.connectionError
-        case .refreshing:
-            return Images.placeholders.certificates
-        }
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch emptyState {
-        case .empty:
-            text = NSLocalizedString("EmptyCertificatesTitle", comment: "")
-            break
-        case .error:
-            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("Refreshing", comment: "")
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch emptyState {
-        case .empty:
-            text = NSLocalizedString("EmptyCertificatesDescription", comment: "")
-            break
-        case .error:
-            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("RefreshingDescription", comment: "")
-            break
-        }
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                          NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        var text: String = ""
-        switch emptyState {
-        case .empty:
-            text = NSLocalizedString("ChooseCourse", comment: "")
-        case .error:
-            text = ""
-            break
-        case .refreshing:
-            text = ""
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.mainDark]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.groupTableViewBackground
     }
 }
