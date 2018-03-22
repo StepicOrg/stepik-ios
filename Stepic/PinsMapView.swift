@@ -41,7 +41,7 @@ class PinsMapView: UIView {
     private let daySpacing = CGFloat(1.5)
 
     private let daysInWeek = 7
-    private let weeksInMonth = 5
+    private let weeksInMonth = 6
     private let monthsInYear = 12
 
     private let calendar = Calendar.current
@@ -50,9 +50,8 @@ class PinsMapView: UIView {
         switch DeviceInfo.current.diagonal {
         case let x where x > 5.8:
             return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
-        case let x where x > 4.7:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
-        case let x where x > 4.0:
+        case let x where x > 4.7 && x < 5.8:
+            // Only Plus-iPhones
             return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         default:
             return DeviceInfo.current.orientation.interface.isPortrait ? 3 : 6
@@ -61,6 +60,7 @@ class PinsMapView: UIView {
 
     private var scrollView: UIScrollView?
     private var containerView: UIView?
+    private var pageControl: UIPageControl?
     private var dayLayers: [[CALayer]] = []
 
     private var lastRenderedFrame: CGRect?
@@ -139,6 +139,23 @@ class PinsMapView: UIView {
     }
 
     private func initialize() {
+        self.pageControl = UIPageControl()
+
+        guard let pageControl = self.pageControl else {
+            return
+        }
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(pageControl)
+
+        pageControl.alignBottomEdge(withView: self, predicate: "-8")
+        pageControl.alignLeading("0", trailing: "0", toView: self)
+        pageControl.alignCenterX(withView: self, predicate: "0")
+        pageControl.constrainHeight("8")
+        pageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+
+        pageControl.currentPageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
+        pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.4)
+
         self.scrollView = UIScrollView()
 
         guard let scrollView = self.scrollView else {
@@ -153,7 +170,9 @@ class PinsMapView: UIView {
 
         addSubview(scrollView)
 
-        scrollView.alignTop("\(border)", leading: "\(border - monthSpacing / 2.0)", bottom: "\(-border)", trailing: "\(-border + monthSpacing / 2.0)", toView: self)
+        scrollView.alignLeading("\(border - monthSpacing / 2.0)", trailing: "\(-border + monthSpacing / 2.0)", toView: self)
+        scrollView.alignTopEdge(withView: self, predicate: "\(border)")
+        scrollView.alignBottomEdge(withView: pageControl, predicate: "\(-border)")
     }
 
     private func findMaxSide(rect: CGSize) -> CGFloat {
@@ -207,6 +226,9 @@ class PinsMapView: UIView {
             return
         }
 
+        // Update pagecontrol
+        pageControl?.numberOfPages = monthsInYear / howManyMonthsShouldBeDisplayed
+
         // Resize container view
         scrollView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -237,6 +259,7 @@ class PinsMapView: UIView {
         let daySide = findMaxSide(rect: CGSize(width: boundedWidth, height: boundedHeight))
         // We found max side for day-rect, so we should add unaccounted space
         let widthError = max(0, (oneMonthSize.width - (CGFloat(weeksInMonth) * daySide) - (CGFloat(weeksInMonth - 1) * daySpacing)) / 2)
+        let heightError = max(0, (oneMonthSize.height - (CGFloat(daysInWeek) * daySide) - (CGFloat(daysInWeek - 1) * daySpacing)) / 2)
 
         let halfSpacing = CGFloat(monthSpacing / 2.0)
         let monthsNums = getMonthsOfLastYear(today: Date()).reversed().map { $0.1 }
@@ -250,7 +273,7 @@ class PinsMapView: UIView {
             var y = CGFloat(0)
             var days: [CALayer] = []
             for week in 0..<weeksInMonth {
-                y = CGFloat(0)
+                y = heightError
                 for dayOfWeek in 0..<daysInWeek {
                     let dayRect = CALayer()
                     dayRect.cornerRadius = 2
@@ -273,6 +296,9 @@ class PinsMapView: UIView {
 
             if i == monthsInYear - howManyMonthsShouldBeDisplayed - 1 {
                 scrollView.contentOffset = CGPoint(x: x, y: scrollView.contentOffset.y)
+                if let pageControl = pageControl {
+                    pageControl.currentPage = pageControl.numberOfPages - 1
+                }
             }
 
             dayLayers.append(days)
@@ -296,6 +322,9 @@ class PinsMapView: UIView {
 
 extension PinsMapView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl?.currentPage = max(0, min(page, pageControl?.numberOfPages ?? monthsInYear))
+
         if !didAnalyticsReport {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.interactionWithPinsMap)
             didAnalyticsReport = true

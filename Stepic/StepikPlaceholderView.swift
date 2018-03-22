@@ -101,12 +101,8 @@ class StepikPlaceholderView: NibInitializableView {
         }
 
         if placeholder.buttonTitle != nil {
-            if !actionsStackView.arrangedSubviews.contains(actionButton) {
-                //actionsStackView.insertArrangedSubview(actionButton, at: 1)
-            }
             actionButton.alpha = 1.0
         } else {
-            //actionsStackView.removeArrangedSubview(actionButton)
             actionButton.alpha = 0.0
         }
 

@@ -267,10 +267,6 @@
 		083C9CB02056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB12056717F00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CB22056718000B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
-		083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
@@ -383,6 +379,7 @@
 		085290CD1FB5C4550053F22D /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085290C51FB5C4550053F22D /* ExplorePresenter.swift */; };
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
+		0856E2562039769F00575394 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
@@ -621,10 +618,6 @@
 		087E8B26204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B27204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
 		087E8B28204DE2A200C35B66 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
-		087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
@@ -1527,10 +1520,43 @@
 		0E2B1455D0480FA8DEDE5288 /* Pods_Adaptive_1838_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */; };
 		1B0A8439D733F3D0B65D47AC /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */; };
 		1B3296DFD6BAA51FAAB6C3D0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */; };
+		1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */; };
+		1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */; };
+		1B3BB05D1FE6DE48002DDD9A /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */; };
+		1B3BB05F1FE6DE48002DDD9A /* CourseContentMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0541FE6DE47002DDD9A /* CourseContentMenuViewController.swift */; };
+		1B3BB0601FE6DE48002DDD9A /* LessonStepsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0551FE6DE47002DDD9A /* LessonStepsCollectionViewController.swift */; };
+		1B3BB0611FE6DE48002DDD9A /* ItemsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0561FE6DE47002DDD9A /* ItemsCollectionViewController.swift */; };
+		1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0571FE6DE48002DDD9A /* SectionTableViewController.swift */; };
+		1B3BB0641FE6DE48002DDD9A /* CatalogMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */; };
+		1B3BB0701FE6DE71002DDD9A /* TVIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0681FE6DE70002DDD9A /* TVIconButton.swift */; };
+		1B3BB0761FE6DE71002DDD9A /* TVCustomFocusableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB06E1FE6DE71002DDD9A /* TVCustomFocusableViews.swift */; };
+		1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */; };
+		1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */; };
+		1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */; };
+		1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */; };
+		1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */; };
+		1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */; };
+		1B3BB0951FE6E118002DDD9A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */; };
+		1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */; };
+		1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */; };
+		1B3BB09C1FE6E132002DDD9A /* CompilationCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0991FE6E131002DDD9A /* CompilationCollectionViewController.swift */; };
+		1B3BB0A41FE6E145002DDD9A /* RegularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB09E1FE6E144002DDD9A /* RegularItemCell.xib */; };
+		1B3BB0A51FE6E145002DDD9A /* MajorItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB09F1FE6E144002DDD9A /* MajorItemCell.swift */; };
+		1B3BB0A61FE6E145002DDD9A /* NarrowItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A01FE6E144002DDD9A /* NarrowItemCell.swift */; };
+		1B3BB0A71FE6E145002DDD9A /* NarrowItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A11FE6E144002DDD9A /* NarrowItemCell.xib */; };
+		1B3BB0A81FE6E145002DDD9A /* MajorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A21FE6E145002DDD9A /* MajorItemCell.xib */; };
+		1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0A31FE6E145002DDD9A /* RegularItemCell.swift */; };
+		1B3BB0B31FE6E170002DDD9A /* MajorCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */; };
+		1B3BB0B41FE6E170002DDD9A /* CollectionRowViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */; };
+		1B3BB0B51FE6E170002DDD9A /* NarrowCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AD1FE6E16F002DDD9A /* NarrowCollectionRowViewCell.xib */; };
+		1B3BB0B61FE6E170002DDD9A /* CollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */; };
+		1B3BB0B71FE6E170002DDD9A /* MajorCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */; };
+		1B3BB0B81FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B01FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift */; };
+		1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B11FE6E170002DDD9A /* RegularCollectionRowViewCell.swift */; };
+		1B3BB0BA1FE6E170002DDD9A /* RegularCollectionRowViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */; };
+		1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585BF1FB524C20047A269 /* ContentLanguage.swift */; };
+		1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
-		1BAE12F41F93F67700482251 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F31F93F67700482251 /* FirstViewController.swift */; };
-		1BAE12F61F93F67700482251 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F51F93F67700482251 /* SecondViewController.swift */; };
-		1BAE12F91F93F67700482251 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12F71F93F67700482251 /* Main.storyboard */; };
 		1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12FA1F93F67700482251 /* Assets.xcassets */; };
 		1BAE13061F93F67700482251 /* StepikTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE13051F93F67700482251 /* StepikTVTests.swift */; };
 		1F125E9042A2210C7C204239 /* Pods_Adaptive_3149.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C173F98D6CDBFD82F42D2D1 /* Pods_Adaptive_3149.framework */; };
@@ -2390,6 +2416,25 @@
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
 		2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
 		2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */; };
+		2C47A16120628420003E87EC /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A16020628420003E87EC /* AnalyticsReporter.swift */; };
+		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A165206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A166206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A167206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A168206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A16A206284C3003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47A16B206284E8003E87EC /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		2C4919082062A1CB003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C4919092062A1CB003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190A2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190B2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190C2062A1CC003E733D /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
+		2C49190D2062A1EA003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C49190E2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF16203DC66D000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
@@ -2472,9 +2517,6 @@
 		2C608AE720456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2C608AE820456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2C608AE920456903006870BB /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
-		2C608AEA2045690F006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C608AEB20456910006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C608AEC20456910006870BB /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		2C608AED2045691A006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C608AEE2045691A006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C608AEF2045691B006870BB /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
@@ -2520,9 +2562,6 @@
 		2C608B1820456983006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C608B1920456984006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C608B1A20456984006870BB /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
-		2C608B1B20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		2C608B1C20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
-		2C608B1D20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2C608B1E2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2C608B1F2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2C608B202045698C006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
@@ -2611,7 +2650,6 @@
 		2C6A76302045CE5A00C509A6 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
 		2C6A76312045CE5E00C509A6 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
 		2C6A76322045CE6100C509A6 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
-		2C6A76332045CE6A00C509A6 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		2C6A76342045CE7000C509A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C6A76352045CE7300C509A6 /* StepReversedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14A1FED2C51003B1177 /* StepReversedCardView.swift */; };
 		2C6A76362045CE7500C509A6 /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */; };
@@ -2640,7 +2678,6 @@
 		2C6A764D2045CF1900C509A6 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C6A764E2045CF1C00C509A6 /* AdaptiveAchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */; };
 		2C6A764F2045CF1F00C509A6 /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
-		2C6A76502045CF2500C509A6 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2C6A76512045CF2700C509A6 /* AdaptiveUserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */; };
 		2C6A76522045CF2A00C509A6 /* AdaptiveCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */; };
 		2C6A76532045CF3B00C509A6 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
@@ -3630,12 +3667,26 @@
 		2CF4252E2024C10D002D7305 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CF425312024C115002D7305 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CF425322024C211002D7305 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
+		2CF953292062A20A00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532A2062A20A00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532B2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532C2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532D2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF9532F2062AC9C00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953302062AC9E00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953312062AC9F00B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953322062ACA000B9617A /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2CF953332062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953342062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953352062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */; };
 		6CE42CA60425E8BFDE0CC9C1 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */; };
 		7E6ECF7D5E3928A2D8BC5789 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */; };
 		7F84D4D43CE1BD915C1039AE /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */; };
+		81BD99CCA5CEC93725F4659B /* Pods_StepikTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
 		860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
@@ -3972,6 +4023,213 @@
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		92688AAC4BD0741FF7F01BE8 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47CB98C00BEE01915CD88F5 /* Pods_Adaptive_3150.framework */; };
+		9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9300843D201663C100DBFC0E /* TVQuizViewController.xib */; };
+		930084402016717500DBFC0E /* BlurredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300843F2016717500DBFC0E /* BlurredViewController.swift */; };
+		933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */; };
+		933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */; };
+		933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
+		933563BC20125AB20061FE2E /* LessonContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933563BB20125AB20061FE2E /* LessonContent.storyboard */; };
+		933563BF20126BCD0061FE2E /* LessonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933563BE20126BCD0061FE2E /* LessonContentView.swift */; };
+		933563C120126BE30061FE2E /* LessonContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933563C020126BE30061FE2E /* LessonContentPresenter.swift */; };
+		9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */; };
+		9335E3622008DCF0001BDFA8 /* TitleInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */; };
+		9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */; };
+		9335E3642008DCF0001BDFA8 /* AuthorizationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */; };
+		9335E3652008DFB9001BDFA8 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */; };
+		9335E3662008DFBC001BDFA8 /* CourseContentMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB08D1FE6E0FC002DDD9A /* CourseContentMenuTableViewCell.swift */; };
+		9335E3692008FF07001BDFA8 /* CatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E3682008FF07001BDFA8 /* CatalogPresenter.swift */; };
+		9335E36B2008FF10001BDFA8 /* CatalogMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335E36A2008FF10001BDFA8 /* CatalogMenuView.swift */; };
+		933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */; };
+		933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */; };
+		933E3F271FBA61D9005A885D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
+		9343534D201A066200DD2F1A /* TVStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343534C201A066200DD2F1A /* TVStringQuizViewController.swift */; };
+		93435353201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93435352201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib */; };
+		93435355201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */; };
+		934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */; };
+		936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B62024D8F500DFC7EE /* StringExtension.swift */; };
+		936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351B920263A4800DFC7EE /* ScreensTransitions.swift */; };
+		936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C02029116B00DFC7EE /* NotificationNameExtension.swift */; };
+		936351C3202A0D6D00DFC7EE /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */; };
+		936351C5202A0D9900DFC7EE /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351C4202A0D9900DFC7EE /* SearchResultsView.swift */; };
+		93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585B61FB51D840047A269 /* CourseList+CoreDataProperties.swift */; };
+		936CF2442018A06800186A97 /* StepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936CF2432018A06800186A97 /* StepViewController.storyboard */; };
+		936CF2462018A53A00186A97 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CF2452018A53A00186A97 /* StepViewController.swift */; };
+		936E90AA2024B400009578C2 /* TagCoursesCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */; };
+		936E90AF2024C1A8009578C2 /* TagCourses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936E90AE2024C1A8009578C2 /* TagCourses.storyboard */; };
+		936E90B12024C88C009578C2 /* TagCoursesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E90B02024C88C009578C2 /* TagCoursesCollectionViewController.swift */; };
+		936E90B32024C900009578C2 /* CatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E90B22024C900009578C2 /* CatalogDetailViewController.swift */; };
+		936E90B52024D3BD009578C2 /* TagCoursesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E90B42024D3BD009578C2 /* TagCoursesCollectionView.swift */; };
+		937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
+		9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4521FA3819100705195 /* CourseInfo.storyboard */; };
+		9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9386A4541FA3820600705195 /* CourseContent.storyboard */; };
+		938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D12030A58D00DFEA3A /* UIImageExtension.swift */; };
+		938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */; };
+		938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */; };
+		938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860DA2037471900DFEA3A /* VideoStepViewController.swift */; };
+		938860E1203799BA00DFEA3A /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */; };
+		938860E2203799D900DFEA3A /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		938860E320379A4B00DFEA3A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
+		938860E420379A6300DFEA3A /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
+		938860E520379A8000DFEA3A /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
+		938860E620379A8B00DFEA3A /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
+		938860E720379AB700DFEA3A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
+		938860E820379AE100DFEA3A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
+		938860E920379B0000DFEA3A /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
+		938860EA20379B1200DFEA3A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
+		938860EB20379B1900DFEA3A /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
+		938860EC20379B2B00DFEA3A /* TVNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343534E201A067300DD2F1A /* TVNumberQuizViewController.swift */; };
+		938860ED20379B3400DFEA3A /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
+		938860EE20379B4D00DFEA3A /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
+		938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
+		938860F020379B6600DFEA3A /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		938860F120379B7300DFEA3A /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		938860F220379B7900DFEA3A /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
+		938860F320379B8300DFEA3A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		938860F420379B8E00DFEA3A /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
+		938860F520379BB200DFEA3A /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
+		938860F620379BC100DFEA3A /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
+		938860F720379BD300DFEA3A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
+		938860F820379C2500DFEA3A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
+		938860F920379C2D00DFEA3A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
+		938860FA20379C4A00DFEA3A /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
+		938860FB20379C5600DFEA3A /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
+		938860FC20379C6700DFEA3A /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
+		938860FD20379C7100DFEA3A /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
+		938860FF20379C8700DFEA3A /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
+		9388610020379CAB00DFEA3A /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
+		9388610120379CBA00DFEA3A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
+		9388610220379CF500DFEA3A /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
+		9388610320379D0000DFEA3A /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
+		9388610420379D0B00DFEA3A /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
+		9388610520379D2900DFEA3A /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
+		9388610620379D3A00DFEA3A /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		9388610720379D4700DFEA3A /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
+		9388610820379D5200DFEA3A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
+		9388610920379D6100DFEA3A /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
+		9388610B20379D8700DFEA3A /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
+		9388610C20379DB300DFEA3A /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
+		9388610D20379E4800DFEA3A /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
+		9388610E20379F0000DFEA3A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
+		9388610F20379F1B00DFEA3A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
+		9388611020379F2C00DFEA3A /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
+		9388611120379F3E00DFEA3A /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		938861122037DEFC00DFEA3A /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
+		938861132037DF0B00DFEA3A /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
+		938861142037DF3400DFEA3A /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		938861152037DF5200DFEA3A /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
+		938861162037DF5A00DFEA3A /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		938861172037DF7100DFEA3A /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
+		938861182037DF8600DFEA3A /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
+		938861192037DF9500DFEA3A /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		9388611A2037DFA600DFEA3A /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		9388611B2037DFBC00DFEA3A /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		9388611C2037DFC600DFEA3A /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		9388611D2037DFD300DFEA3A /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		9388611E2037DFE100DFEA3A /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		9388611F2037DFF600DFEA3A /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		938861202037E01900DFEA3A /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
+		938861212037E02000DFEA3A /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
+		938861222037E02E00DFEA3A /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		938861232037E03800DFEA3A /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
+		938861242037E05300DFEA3A /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
+		938861252037E05C00DFEA3A /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
+		938861262037E06F00DFEA3A /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
+		938861272037E08600DFEA3A /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
+		938861282037E0A500DFEA3A /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
+		938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
+		9388612A2037E0DA00DFEA3A /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		9388612C2037E12900DFEA3A /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		9388612D2037E19800DFEA3A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
+		9388612E2037E1B100DFEA3A /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		9388612F2037E1CA00DFEA3A /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
+		938861302037E1E300DFEA3A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
+		938861312037E1EE00DFEA3A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
+		938861322037E1FC00DFEA3A /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
+		938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
+		938861342037E23700DFEA3A /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
+		938861352037E27300DFEA3A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
+		938861362037E28500DFEA3A /* StepOptions+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */; };
+		938861372037E2CF00DFEA3A /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
+		938861382037E2D400DFEA3A /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
+		938861392037E2E800DFEA3A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
+		9388613A2037E30500DFEA3A /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
+		9388613B2037E30A00DFEA3A /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
+		9388613C2037E36600DFEA3A /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
+		9388613D2037E36F00DFEA3A /* CodeLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */; };
+		9388613E2037E37800DFEA3A /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
+		9388613F2037E38800DFEA3A /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		938861402037E39300DFEA3A /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
+		938861412037E3A600DFEA3A /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
+		938861422037E3ED00DFEA3A /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
+		938861432037E41B00DFEA3A /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
+		938861442037E42600DFEA3A /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		938861452037E43200DFEA3A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		938861462037E48800DFEA3A /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
+		938861472037E49700DFEA3A /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		938861482037E54400DFEA3A /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
+		938861492037E54600DFEA3A /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
+		9388614A2037E5F500DFEA3A /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
+		9388614B2037E68200DFEA3A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
+		9388614C2037E69100DFEA3A /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
+		9388614D2037E6B100DFEA3A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
+		9388614E2037E6E600DFEA3A /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
+		9388614F2037E6F700DFEA3A /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */; };
+		938861502037E70B00DFEA3A /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
+		938861512037E74A00DFEA3A /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
+		938861522037E77000DFEA3A /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
+		938861532037E7F300DFEA3A /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		938861542037E80200DFEA3A /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
+		938861552037E82900DFEA3A /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
+		938861572037E97600DFEA3A /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
+		938861582037E98A00DFEA3A /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
+		938861592037E9BC00DFEA3A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
+		9388615A2037E9F500DFEA3A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
+		93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
+		93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */; };
+		93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
+		93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7F1D52003E090006B9934 /* TVFocusableText.swift */; };
+		93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
+		93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
+		93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
+		93BBE5F01FE6A917006DEC28 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
+		93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth.plist */; };
+		93BBE5F21FE6B1D6006DEC28 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
+		93BBE6261FE6E6AD006DEC28 /* CourseInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */; };
+		93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */; };
+		93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */; };
+		93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
+		93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */; };
+		93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
+		93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1E92020B2000040BD1D /* TVLoadingView.swift */; };
+		93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */; };
+		93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */; };
+		93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F0202106750040BD1D /* MenuSplitView.swift */; };
+		93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */; };
+		93C9E302200F950500192091 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E301200F950500192091 /* CourseContentView.swift */; };
+		93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9E303200F951500192091 /* CourseContentPresenter.swift */; };
+		93CC68302048B79A00F5BE75 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
+		93CC6831204980C300F5BE75 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
+		93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A741FC76682008E7E6C /* NotificationsStatus.swift */; };
+		93CC68332049866D00F5BE75 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
+		93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5AAF120161ED300290B4E /* TVQuizViewController.swift */; };
+		93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
+		93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
+		93E5AAF920163B6200290B4E /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
+		93E5AAFA201641EC00290B4E /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		93EF1F9A1FAD20250073B0D1 /* TVTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF1F981FAD20240073B0D1 /* TVTextButton.swift */; };
+		93FAE2201FE03E320094939D /* CourseListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C88DD1FCF494300003B63 /* CourseListType.swift */; };
+		93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585A21FB50D640047A269 /* CourseListsAPI.swift */; };
+		93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB0D271FB5CD5E001A1E02 /* CourseListsCache.swift */; };
+		93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
+		93FAE2261FE142810094939D /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
+		93FAE2291FE148020094939D /* CourseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585AD1FB51D720047A269 /* CourseList.swift */; };
+		93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */; };
+		93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B67200537330058B94D /* InstructorItemCell.xib */; };
+		93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF4B6920053A170058B94D /* InstructorItemCell.swift */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -4000,8 +4258,13 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
+		BA903500205449A000191D0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
+		BA90350220544A5D00191D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA90350120544A5D00191D0A /* Main.storyboard */; };
+		BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
+		BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
 		C9144FDA6B99F2DED2616956 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */; };
-		D030F90E329766F21066395B /* Pods_StepikTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C17FA1CA4937F3CEEA611 /* Pods_StepikTV.framework */; };
+		D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */; };
 		DA44536FA7369C2A913661D8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */; };
 /* End PBXBuildFile section */
 
@@ -4638,13 +4901,46 @@
 		08FEFC201F127470005CA0FB /* AutocompleteWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteWords.swift; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
 		0D24DF74966B1953145A4BA9 /* Pods-Adaptive 3124.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.release.xcconfig"; sourceTree = "<group>"; };
-		112E8E44AFC42F38284E3EDC /* Pods-Adaptive 3067.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.debug.xcconfig"; sourceTree = "<group>"; };
 		18A116DAAAF6FF9135E043C7 /* Pods_Adaptive_3067.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseInfoCollectionViewController.swift; path = StepikTV/Controllers/CourseInfo/CourseInfoCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSplitViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuSplitViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0541FE6DE47002DDD9A /* CourseContentMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseContentMenuViewController.swift; path = StepikTV/Controllers/CourseContent/CourseContentMenuViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0551FE6DE47002DDD9A /* LessonStepsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonStepsCollectionViewController.swift; path = StepikTV/Controllers/LessonContent/LessonStepsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0561FE6DE47002DDD9A /* ItemsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemsCollectionViewController.swift; path = StepikTV/Controllers/ItemsCollection/ItemsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0571FE6DE48002DDD9A /* SectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionTableViewController.swift; path = StepikTV/Controllers/CourseContent/SectionTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatalogMenuViewController.swift; path = StepikTV/Controllers/CoursesCatalog/CatalogMenuViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0681FE6DE70002DDD9A /* TVIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TVIconButton.swift; path = StepikTV/Views/TVIconButton.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB06E1FE6DE71002DDD9A /* TVCustomFocusableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TVCustomFocusableViews.swift; path = StepikTV/Views/TVCustomFocusableViews.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StepItemCell.xib; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.xib; sourceTree = SOURCE_ROOT; };
+		1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepItemCell.swift; path = StepikTV/Controllers/LessonContent/LessonPartItemCell/StepItemCell.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RectangularItemCell.swift; path = StepikTV/Controllers/ItemsCollection/RectangularItemCell/RectangularItemCell.swift; sourceTree = SOURCE_ROOT; };
+		1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RectangularItemCell.xib; path = StepikTV/Controllers/ItemsCollection/RectangularItemCell/RectangularItemCell.xib; sourceTree = SOURCE_ROOT; };
+		1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCourseInfoSectionCell.swift; sourceTree = "<group>"; };
+		1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
+		1B3BB08D1FE6E0FC002DDD9A /* CourseContentMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseContentMenuTableViewCell.swift; sourceTree = "<group>"; };
+		1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCourseInfoSectionCell.swift; sourceTree = "<group>"; };
+		1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionPresenter.swift; sourceTree = "<group>"; };
+		1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionView.swift; sourceTree = "<group>"; };
+		1B3BB0991FE6E131002DDD9A /* CompilationCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilationCollectionViewController.swift; sourceTree = "<group>"; };
+		1B3BB09E1FE6E144002DDD9A /* RegularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularItemCell.xib; sourceTree = "<group>"; };
+		1B3BB09F1FE6E144002DDD9A /* MajorItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MajorItemCell.swift; sourceTree = "<group>"; };
+		1B3BB0A01FE6E144002DDD9A /* NarrowItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NarrowItemCell.swift; sourceTree = "<group>"; };
+		1B3BB0A11FE6E144002DDD9A /* NarrowItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NarrowItemCell.xib; sourceTree = "<group>"; };
+		1B3BB0A21FE6E145002DDD9A /* MajorItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorItemCell.xib; sourceTree = "<group>"; };
+		1B3BB0A31FE6E145002DDD9A /* RegularItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularItemCell.swift; sourceTree = "<group>"; };
+		1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MajorCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRowViewProtocol.swift; sourceTree = "<group>"; };
+		1B3BB0AD1FE6E16F002DDD9A /* NarrowCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NarrowCollectionRowViewCell.xib; sourceTree = "<group>"; };
+		1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRowViewCell.swift; sourceTree = "<group>"; };
+		1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MajorCollectionRowViewCell.xib; sourceTree = "<group>"; };
+		1B3BB0B01FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NarrowCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		1B3BB0B11FE6E170002DDD9A /* RegularCollectionRowViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularCollectionRowViewCell.swift; sourceTree = "<group>"; };
+		1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegularCollectionRowViewCell.xib; sourceTree = "<group>"; };
 		1BAE12EF1F93F67700482251 /* StepikTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepikTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAE12F11F93F67700482251 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1BAE12F31F93F67700482251 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		1BAE12F51F93F67700482251 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		1BAE12F81F93F67700482251 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1BAE12FA1F93F67700482251 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BAE12FC1F93F67700482251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BAE13011F93F67700482251 /* StepikTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepikTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4654,7 +4950,6 @@
 		1FFF7988186C86846F0ECF48 /* Pods-Adaptive GMAT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.release.xcconfig"; sourceTree = "<group>"; };
 		2063E36B4EC96399AAB6ABC9 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		210D872D0B8EC9F0380D3EF9 /* Pods-Adaptive GMAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.debug.xcconfig"; sourceTree = "<group>"; };
-		2607B5745D3DFAFA3A60F3F5 /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -4703,6 +4998,8 @@
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
+		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
+		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -4852,20 +5149,18 @@
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BEF79D32646AF1AAA1044 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
-		3D9C17FA1CA4937F3CEEA611 /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		470147BA7F6957FD9C32ACD1 /* Pods-StepikTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.release.xcconfig"; sourceTree = "<group>"; };
 		4729F9B4639AAD9EBFC01D1E /* Pods_Adaptive_1906.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		492DD97BAFC352B77663BCE7 /* Pods-Adaptive 3067.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.release.xcconfig"; sourceTree = "<group>"; };
+		47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.release.xcconfig"; sourceTree = "<group>"; };
 		5003B355F9C103E512D8A2A2 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		523264B4C39A4383B77E3294 /* Pods_Adaptive_3067_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_GMAT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6148D39767518C0599A3 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		6E380C5B32834C4523AC836F /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
-		6F7ED61471D9FBE1AE51C058 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
@@ -4890,7 +5185,63 @@
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
 		894CF0BBB58CB38AFE4FB6F1 /* Pods-Adaptive 3150.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.debug.xcconfig"; sourceTree = "<group>"; };
-		9BB7DFEA3B42E4DB3EFCD558 /* Pods-Adaptive 1906.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.release.xcconfig"; sourceTree = "<group>"; };
+		9300843D201663C100DBFC0E /* TVQuizViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVQuizViewController.xib; sourceTree = "<group>"; };
+		9300843F2016717500DBFC0E /* BlurredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredViewController.swift; sourceTree = "<group>"; };
+		933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSectionViewProtocol.swift; sourceTree = "<group>"; };
+		933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorsCourseInfoSectionCell.swift; sourceTree = "<group>"; };
+		933563BB20125AB20061FE2E /* LessonContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LessonContent.storyboard; sourceTree = "<group>"; };
+		933563BE20126BCD0061FE2E /* LessonContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContentView.swift; sourceTree = "<group>"; };
+		933563C020126BE30061FE2E /* LessonContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContentPresenter.swift; sourceTree = "<group>"; };
+		9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationView.swift; path = StepikTV/Controllers/Authorization/AuthorizationView.swift; sourceTree = SOURCE_ROOT; };
+		9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleInputAccessoryView.swift; path = StepikTV/Controllers/Authorization/TitleInputAccessoryView.swift; sourceTree = SOURCE_ROOT; };
+		9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationPresenter.swift; path = StepikTV/Controllers/Authorization/AuthorizationPresenter.swift; sourceTree = SOURCE_ROOT; };
+		9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationAlert.swift; path = StepikTV/Controllers/Authorization/AuthorizationAlert.swift; sourceTree = SOURCE_ROOT; };
+		9335E3682008FF07001BDFA8 /* CatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogPresenter.swift; sourceTree = "<group>"; };
+		9335E36A2008FF10001BDFA8 /* CatalogMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogMenuView.swift; sourceTree = "<group>"; };
+		933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCourseInfoSectionCell.xib; sourceTree = "<group>"; };
+		933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
+		9343534C201A066200DD2F1A /* TVStringQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVStringQuizViewController.swift; sourceTree = "<group>"; };
+		9343534E201A067300DD2F1A /* TVNumberQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVNumberQuizViewController.swift; sourceTree = "<group>"; };
+		93435352201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
+		93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
+		934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChoiceQuizViewController.swift; sourceTree = "<group>"; };
+		936351B62024D8F500DFC7EE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		936351B920263A4800DFC7EE /* ScreensTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensTransitions.swift; sourceTree = "<group>"; };
+		936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		936351C02029116B00DFC7EE /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsPresenter.swift; sourceTree = "<group>"; };
+		936351C4202A0D9900DFC7EE /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		936CF2432018A06800186A97 /* StepViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepViewController.storyboard; sourceTree = "<group>"; };
+		936CF2452018A53A00186A97 /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
+		936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionPresenter.swift; sourceTree = "<group>"; };
+		936E90AE2024C1A8009578C2 /* TagCourses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TagCourses.storyboard; sourceTree = "<group>"; };
+		936E90B02024C88C009578C2 /* TagCoursesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionViewController.swift; sourceTree = "<group>"; };
+		936E90B22024C900009578C2 /* CatalogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDetailViewController.swift; sourceTree = "<group>"; };
+		936E90B42024D3BD009578C2 /* TagCoursesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoursesCollectionView.swift; sourceTree = "<group>"; };
+		9386A4521FA3819100705195 /* CourseInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseInfo.storyboard; sourceTree = "<group>"; };
+		9386A4541FA3820600705195 /* CourseContent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseContent.storyboard; sourceTree = "<group>"; };
+		938860D12030A58D00DFEA3A /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConvertableCollectionViewCell.swift; sourceTree = "<group>"; };
+		938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightDetailedCustomTableViewCell.swift; sourceTree = "<group>"; };
+		938860DA2037471900DFEA3A /* VideoStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
+		93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		93B7F1D52003E090006B9934 /* TVFocusableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVFocusableText.swift; sourceTree = "<group>"; };
+		93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
+		93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoView.swift; sourceTree = "<group>"; };
+		93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVUnavailableQuizViewController.swift; sourceTree = "<group>"; };
+		93C3C1E92020B2000040BD1D /* TVLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVLoadingView.swift; sourceTree = "<group>"; };
+		93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredView.swift; sourceTree = "<group>"; };
+		93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAlertView.swift; sourceTree = "<group>"; };
+		93C3C1F0202106750040BD1D /* MenuSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSplitView.swift; sourceTree = "<group>"; };
+		93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPlayerViewController.swift; sourceTree = "<group>"; };
+		93C9E301200F950500192091 /* CourseContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentView.swift; sourceTree = "<group>"; };
+		93C9E303200F951500192091 /* CourseContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentPresenter.swift; sourceTree = "<group>"; };
+		93E5AAF120161ED300290B4E /* TVQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVQuizViewController.swift; sourceTree = "<group>"; };
+		93EF1F981FAD20240073B0D1 /* TVTextButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TVTextButton.swift; path = StepikTV/Views/TVTextButton.swift; sourceTree = SOURCE_ROOT; };
+		93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorsCourseInfoSectionCell.xib; sourceTree = "<group>"; };
+		93FF4B67200537330058B94D /* InstructorItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructorItemCell.xib; sourceTree = "<group>"; };
+		93FF4B6920053A170058B94D /* InstructorItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorItemCell.swift; sourceTree = "<group>"; };
+		9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C173F98D6CDBFD82F42D2D1 /* Pods_Adaptive_3149.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
@@ -4915,11 +5266,12 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
+		A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
+		A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A53D37FA4CD8A9B6D7AE2222 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
-		A563DCFCAB59C8CE5BAE71BF /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
 		A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAA3067633C83C1C28423DCA /* Pods-Adaptive 1906.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.debug.xcconfig"; sourceTree = "<group>"; };
+		BA90350120544A5D00191D0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BB035CD08BB7AB3FD3A64F49 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3141665863D4EB5882EF1AC /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
@@ -4967,7 +5319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D030F90E329766F21066395B /* Pods_StepikTV.framework in Frameworks */,
+				81BD99CCA5CEC93725F4659B /* Pods_StepikTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4976,6 +5328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E6ECF7D5E3928A2D8BC5789 /* Pods_StepikTVTests.framework in Frameworks */,
+				D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5867,6 +6220,7 @@
 			children = (
 				084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */,
 				08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */,
+				2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */,
 			);
 			name = Streaks;
 			sourceTree = "<group>";
@@ -6454,6 +6808,7 @@
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
 				15A6EA0367C62E2E49D43D22 /* Pods */,
+				938860E02037994800DFEA3A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -6884,10 +7239,6 @@
 				6E380C5B32834C4523AC836F /* Pods-Adaptive 1838.release.xcconfig */,
 				D0AEEC9A301A3A82D07888A3 /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */,
 				FCF43FC15E3F7136F29091DE /* Pods-Adaptive 1838 Screenshots.release.xcconfig */,
-				BAA3067633C83C1C28423DCA /* Pods-Adaptive 1906.debug.xcconfig */,
-				9BB7DFEA3B42E4DB3EFCD558 /* Pods-Adaptive 1906.release.xcconfig */,
-				112E8E44AFC42F38284E3EDC /* Pods-Adaptive 3067.debug.xcconfig */,
-				492DD97BAFC352B77663BCE7 /* Pods-Adaptive 3067.release.xcconfig */,
 				C56E1AFEE69481800B794FE4 /* Pods-Adaptive 3124.debug.xcconfig */,
 				0D24DF74966B1953145A4BA9 /* Pods-Adaptive 3124.release.xcconfig */,
 				611F6148D39767518C0599A3 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */,
@@ -6906,14 +7257,127 @@
 				67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */,
 				C5CC7ADFCE6AA65DDEFF282C /* Pods-StepicTests.debug.xcconfig */,
 				A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */,
-				A563DCFCAB59C8CE5BAE71BF /* Pods-StepikTV.debug.xcconfig */,
-				2607B5745D3DFAFA3A60F3F5 /* Pods-StepikTV.release.xcconfig */,
-				6F7ED61471D9FBE1AE51C058 /* Pods-StepikTVTests.debug.xcconfig */,
-				470147BA7F6957FD9C32ACD1 /* Pods-StepikTVTests.release.xcconfig */,
+				A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */,
+				5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */,
+				A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */,
+				47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */,
 				210D872D0B8EC9F0380D3EF9 /* Pods-Adaptive GMAT.debug.xcconfig */,
 				1FFF7988186C86846F0ECF48 /* Pods-Adaptive GMAT.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1B3BB04F1FE6DE2B002DDD9A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				936351BF20279F9E00DFC7EE /* Search */,
+				1B3BB0931FE6E110002DDD9A /* Authorization */,
+				936E90AD2024B8A6009578C2 /* ItemsCollection */,
+				93BBE6241FE6E63C006DEC28 /* CourseInfo */,
+				93C9E300200F941600192091 /* CourseContent */,
+				936E90A82024B3CF009578C2 /* TagCourses */,
+				9335E3672008E51D001BDFA8 /* CoursesCatalog */,
+				1B3BB0961FE6E123002DDD9A /* CompilationCollection */,
+				933563BD20125AC00061FE2E /* LessonContent */,
+				938860DC20374D2700DFEA3A /* SplitViewController */,
+				9300843F2016717500DBFC0E /* BlurredViewController.swift */,
+				93C3C1F42023C65E0040BD1D /* TVPlayerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1B3BB0661FE6DE5E002DDD9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB06E1FE6DE71002DDD9A /* TVCustomFocusableViews.swift */,
+				1B3BB0681FE6DE70002DDD9A /* TVIconButton.swift */,
+				93EF1F981FAD20240073B0D1 /* TVTextButton.swift */,
+				93C3C1E92020B2000040BD1D /* TVLoadingView.swift */,
+				93C3C1EE2020F2B60040BD1D /* TVAlertView.swift */,
+				93B7F1D52003E090006B9934 /* TVFocusableText.swift */,
+				938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */,
+				93C3C1EB2020B4DB0040BD1D /* BlurredView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B3BB0771FE6DFCA002DDD9A /* RectangularItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0861FE6E0D7002DDD9A /* RectangularItemCell.swift */,
+				1B3BB0871FE6E0D7002DDD9A /* RectangularItemCell.xib */,
+			);
+			path = RectangularItemCell;
+			sourceTree = "<group>";
+		};
+		1B3BB07D1FE6E057002DDD9A /* LessonPartItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0831FE6E0C8002DDD9A /* StepItemCell.swift */,
+				1B3BB0821FE6E0C8002DDD9A /* StepItemCell.xib */,
+			);
+			path = LessonPartItemCell;
+			sourceTree = "<group>";
+		};
+		1B3BB08A1FE6E0EE002DDD9A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB08C1FE6E0FC002DDD9A /* LessonTableViewCell.swift */,
+				1B3BB08D1FE6E0FC002DDD9A /* CourseContentMenuTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1B3BB0931FE6E110002DDD9A /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				9335E3602008DCEF001BDFA8 /* AuthorizationAlert.swift */,
+				9335E35D2008DCEE001BDFA8 /* AuthorizationView.swift */,
+				9335E35E2008DCEE001BDFA8 /* TitleInputAccessoryView.swift */,
+				1B3BB0941FE6E118002DDD9A /* AuthorizationViewController.swift */,
+				9335E35F2008DCEF001BDFA8 /* AuthorizationPresenter.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		1B3BB0961FE6E123002DDD9A /* CompilationCollection */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0981FE6E131002DDD9A /* CompilationCollectionView.swift */,
+				1B3BB0991FE6E131002DDD9A /* CompilationCollectionViewController.swift */,
+				1B3BB0971FE6E131002DDD9A /* CompilationCollectionPresenter.swift */,
+				1B3BB0AA1FE6E14B002DDD9A /* CollectionRowViewCells */,
+				1B3BB09D1FE6E134002DDD9A /* CollectionRowItemCells */,
+			);
+			path = CompilationCollection;
+			sourceTree = "<group>";
+		};
+		1B3BB09D1FE6E134002DDD9A /* CollectionRowItemCells */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB09F1FE6E144002DDD9A /* MajorItemCell.swift */,
+				1B3BB0A21FE6E145002DDD9A /* MajorItemCell.xib */,
+				1B3BB0A01FE6E144002DDD9A /* NarrowItemCell.swift */,
+				1B3BB0A11FE6E144002DDD9A /* NarrowItemCell.xib */,
+				1B3BB0A31FE6E145002DDD9A /* RegularItemCell.swift */,
+				1B3BB09E1FE6E144002DDD9A /* RegularItemCell.xib */,
+			);
+			path = CollectionRowItemCells;
+			sourceTree = "<group>";
+		};
+		1B3BB0AA1FE6E14B002DDD9A /* CollectionRowViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0AC1FE6E16F002DDD9A /* CollectionRowViewProtocol.swift */,
+				1B3BB0AE1FE6E16F002DDD9A /* CollectionRowViewCell.swift */,
+				1B3BB0AB1FE6E16F002DDD9A /* MajorCollectionRowViewCell.swift */,
+				1B3BB0AF1FE6E16F002DDD9A /* MajorCollectionRowViewCell.xib */,
+				1B3BB0B01FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift */,
+				1B3BB0AD1FE6E16F002DDD9A /* NarrowCollectionRowViewCell.xib */,
+				1B3BB0B11FE6E170002DDD9A /* RegularCollectionRowViewCell.swift */,
+				1B3BB0B21FE6E170002DDD9A /* RegularCollectionRowViewCell.xib */,
+			);
+			path = CollectionRowViewCells;
 			sourceTree = "<group>";
 		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
@@ -6944,8 +7408,8 @@
 				60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */,
 				9DEC4FAD5F7ACA1C893F5BB3 /* Pods_Stepic.framework */,
 				2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */,
-				3D9C17FA1CA4937F3CEEA611 /* Pods_StepikTV.framework */,
-				CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */,
+				19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */,
+				9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */,
 				5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */,
 			);
 			name = Frameworks;
@@ -6954,12 +7418,15 @@
 		1BAE12F01F93F67700482251 /* StepikTV */ = {
 			isa = PBXGroup;
 			children = (
+				936351B920263A4800DFC7EE /* ScreensTransitions.swift */,
+				936351B82025FB2600DFC7EE /* Extensions */,
+				1B3BB0661FE6DE5E002DDD9A /* Views */,
+				1B3BB04F1FE6DE2B002DDD9A /* Controllers */,
 				1BAE12F11F93F67700482251 /* AppDelegate.swift */,
-				1BAE12F31F93F67700482251 /* FirstViewController.swift */,
-				1BAE12F51F93F67700482251 /* SecondViewController.swift */,
-				1BAE12F71F93F67700482251 /* Main.storyboard */,
+				BA90350120544A5D00191D0A /* Main.storyboard */,
 				1BAE12FA1F93F67700482251 /* Assets.xcassets */,
 				1BAE12FC1F93F67700482251 /* Info.plist */,
+				2C47A16020628420003E87EC /* AnalyticsReporter.swift */,
 			);
 			path = StepikTV;
 			sourceTree = "<group>";
@@ -7659,6 +8126,173 @@
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
 		};
+		933437DE1FE6F32D00140AD2 /* CourseInfoSectionsViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */,
+				93FF4B6920053A170058B94D /* InstructorItemCell.swift */,
+				93FF4B67200537330058B94D /* InstructorItemCell.xib */,
+				933437DF1FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift */,
+				93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */,
+				1B3BB08B1FE6E0FB002DDD9A /* MainCourseInfoSectionCell.swift */,
+				933CD48920065AB500BC5641 /* MainCourseInfoSectionCell.xib */,
+				1B3BB08E1FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift */,
+				933CD48B20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib */,
+			);
+			path = CourseInfoSectionsViewCells;
+			sourceTree = "<group>";
+		};
+		933563BD20125AC00061FE2E /* LessonContent */ = {
+			isa = PBXGroup;
+			children = (
+				933563BB20125AB20061FE2E /* LessonContent.storyboard */,
+				933563BE20126BCD0061FE2E /* LessonContentView.swift */,
+				1B3BB0551FE6DE47002DDD9A /* LessonStepsCollectionViewController.swift */,
+				933563C020126BE30061FE2E /* LessonContentPresenter.swift */,
+				93E5AAEE20161CFD00290B4E /* StepViewController */,
+				1B3BB07D1FE6E057002DDD9A /* LessonPartItemCell */,
+			);
+			path = LessonContent;
+			sourceTree = "<group>";
+		};
+		9335E3672008E51D001BDFA8 /* CoursesCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				9335E36A2008FF10001BDFA8 /* CatalogMenuView.swift */,
+				1B3BB0591FE6DE48002DDD9A /* CatalogMenuViewController.swift */,
+				936E90B22024C900009578C2 /* CatalogDetailViewController.swift */,
+				9335E3682008FF07001BDFA8 /* CatalogPresenter.swift */,
+				938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */,
+			);
+			path = CoursesCatalog;
+			sourceTree = "<group>";
+		};
+		93435356201B52EC00DD2F1A /* TVChoiceQuizTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				93435352201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib */,
+				93435354201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift */,
+			);
+			path = TVChoiceQuizTableViewCell;
+			sourceTree = "<group>";
+		};
+		936351B82025FB2600DFC7EE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				93A6A4C32018CD5C004C0797 /* UIViewExtension.swift */,
+				938860D12030A58D00DFEA3A /* UIImageExtension.swift */,
+				936351B62024D8F500DFC7EE /* StringExtension.swift */,
+				936351C02029116B00DFC7EE /* NotificationNameExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		936351BF20279F9E00DFC7EE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				936351C4202A0D9900DFC7EE /* SearchResultsView.swift */,
+				936351BD20279F1100DFC7EE /* SearchResultsViewController.swift */,
+				936351C2202A0D6D00DFC7EE /* SearchResultsPresenter.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		936E90A82024B3CF009578C2 /* TagCourses */ = {
+			isa = PBXGroup;
+			children = (
+				936E90AE2024C1A8009578C2 /* TagCourses.storyboard */,
+				936E90B42024D3BD009578C2 /* TagCoursesCollectionView.swift */,
+				936E90B02024C88C009578C2 /* TagCoursesCollectionViewController.swift */,
+				936E90A92024B400009578C2 /* TagCoursesCollectionPresenter.swift */,
+			);
+			path = TagCourses;
+			sourceTree = "<group>";
+		};
+		936E90AD2024B8A6009578C2 /* ItemsCollection */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0561FE6DE47002DDD9A /* ItemsCollectionViewController.swift */,
+				1B3BB0771FE6DFCA002DDD9A /* RectangularItemCell */,
+			);
+			path = ItemsCollection;
+			sourceTree = "<group>";
+		};
+		938860DC20374D2700DFEA3A /* SplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */,
+				93C3C1F0202106750040BD1D /* MenuSplitView.swift */,
+				1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */,
+			);
+			path = SplitViewController;
+			sourceTree = "<group>";
+		};
+		938860E02037994800DFEA3A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		93BBE6241FE6E63C006DEC28 /* CourseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				9386A4521FA3819100705195 /* CourseInfo.storyboard */,
+				93BBE6271FE6E6B8006DEC28 /* CourseInfoView.swift */,
+				1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */,
+				93BBE6251FE6E6AD006DEC28 /* CourseInfoPresenter.swift */,
+				933437DE1FE6F32D00140AD2 /* CourseInfoSectionsViewCells */,
+			);
+			path = CourseInfo;
+			sourceTree = "<group>";
+		};
+		93C3C1E3201BA0830040BD1D /* QuizTypesViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				934638B920167C7B00DC4A5A /* TVChoiceQuizViewController.swift */,
+				93435356201B52EC00DD2F1A /* TVChoiceQuizTableViewCell */,
+				9343534C201A066200DD2F1A /* TVStringQuizViewController.swift */,
+				9343534E201A067300DD2F1A /* TVNumberQuizViewController.swift */,
+				93C3C1E1201B9F560040BD1D /* TVUnavailableQuizViewController.swift */,
+			);
+			path = QuizTypesViewControllers;
+			sourceTree = "<group>";
+		};
+		93C9E300200F941600192091 /* CourseContent */ = {
+			isa = PBXGroup;
+			children = (
+				9386A4541FA3820600705195 /* CourseContent.storyboard */,
+				93C9E301200F950500192091 /* CourseContentView.swift */,
+				1B3BB0541FE6DE47002DDD9A /* CourseContentMenuViewController.swift */,
+				1B3BB0571FE6DE48002DDD9A /* SectionTableViewController.swift */,
+				93C9E303200F951500192091 /* CourseContentPresenter.swift */,
+				1B3BB08A1FE6E0EE002DDD9A /* Cells */,
+			);
+			path = CourseContent;
+			sourceTree = "<group>";
+		};
+		93E5AAEE20161CFD00290B4E /* StepViewController */ = {
+			isa = PBXGroup;
+			children = (
+				936CF2432018A06800186A97 /* StepViewController.storyboard */,
+				936CF2452018A53A00186A97 /* StepViewController.swift */,
+				938860DA2037471900DFEA3A /* VideoStepViewController.swift */,
+				93E5AAEF20161D2700290B4E /* QuizViewController */,
+			);
+			path = StepViewController;
+			sourceTree = "<group>";
+		};
+		93E5AAEF20161D2700290B4E /* QuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				93C3C1E3201BA0830040BD1D /* QuizTypesViewControllers */,
+				93E5AAF120161ED300290B4E /* TVQuizViewController.swift */,
+				9300843D201663C100DBFC0E /* TVQuizViewController.xib */,
+			);
+			path = QuizViewController;
+			sourceTree = "<group>";
+		};
 		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -7712,6 +8346,7 @@
 			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
 			buildPhases = (
 				017B714BD9D996178EA110BD /* [CP] Check Pods Manifest.lock */,
+				2C47A16C206297D0003E87EC /* ShellScript */,
 				085D5CD51D007F2100092060 /* Sources */,
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
@@ -7795,13 +8430,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BAE130C1F93F67700482251 /* Build configuration list for PBXNativeTarget "StepikTV" */;
 			buildPhases = (
-				9577C30FD5B0CD024AAB29A1 /* [CP] Check Pods Manifest.lock */,
+				C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */,
 				1BAE12EB1F93F67700482251 /* Sources */,
 				1BAE12EC1F93F67700482251 /* Frameworks */,
 				1BAE12ED1F93F67700482251 /* Resources */,
 				1B6F294F1FA138EF004A5D4B /* Swift Lint */,
-				915993A996C90352AD184522 /* [CP] Embed Pods Frameworks */,
-				C0541596D51E881565A0DF8B /* [CP] Copy Pods Resources */,
+				56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */,
+				F35153A9F6AF04007D0C426F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8153,7 +8788,7 @@
 					};
 					1BAE12EE1F93F67700482251 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = GFNJS2X8DC;
+						DevelopmentTeam = PEYKHN6GF6;
 						ProvisioningStyle = Automatic;
 					};
 					1BAE13001F93F67700482251 = {
@@ -8490,8 +9125,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933563BC20125AB20061FE2E /* LessonContent.storyboard in Resources */,
+				933CD48A20065AB500BC5641 /* MainCourseInfoSectionCell.xib in Resources */,
+				1B3BB0BA1FE6E170002DDD9A /* RegularCollectionRowViewCell.xib in Resources */,
+				BA90350220544A5D00191D0A /* Main.storyboard in Resources */,
+				933CD48C20065D1000BC5641 /* DetailsCourseInfoSectionCell.xib in Resources */,
+				1B3BB0B71FE6E170002DDD9A /* MajorCollectionRowViewCell.xib in Resources */,
+				9386A4531FA3819100705195 /* CourseInfo.storyboard in Resources */,
+				936CF2442018A06800186A97 /* StepViewController.storyboard in Resources */,
+				936E90AF2024C1A8009578C2 /* TagCourses.storyboard in Resources */,
+				93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */,
+				1B3BB0891FE6E0D7002DDD9A /* RectangularItemCell.xib in Resources */,
+				1B3BB0841FE6E0C9002DDD9A /* StepItemCell.xib in Resources */,
+				93BBE5F11FE6A925006DEC28 /* Auth.plist in Resources */,
+				9386A4551FA3820600705195 /* CourseContent.storyboard in Resources */,
+				BA903500205449A000191D0A /* Localizable.strings in Resources */,
+				93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */,
 				1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */,
-				1BAE12F91F93F67700482251 /* Main.storyboard in Resources */,
+				1B3BB0A41FE6E145002DDD9A /* RegularItemCell.xib in Resources */,
+				93435353201B500A00DD2F1A /* TVChoiceQuizTableViewCell.xib in Resources */,
+				1B3BB0B51FE6E170002DDD9A /* NarrowCollectionRowViewCell.xib in Resources */,
+				9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */,
+				1B3BB0A81FE6E145002DDD9A /* MajorItemCell.xib in Resources */,
+				1B3BB0A71FE6E145002DDD9A /* NarrowItemCell.xib in Resources */,
+				93BBE5F01FE6A917006DEC28 /* Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9179,14 +9836,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -9200,7 +9857,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
@@ -9407,14 +10064,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -9428,7 +10085,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
@@ -9586,6 +10243,19 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
+		2C47A16C206297D0003E87EC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/xcrun simctl uninstall booted com.AlexKarpov.Stepic\n\n";
+		};
 		2C89AB331F4C289900227C3B /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -9651,14 +10321,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -9672,7 +10342,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
@@ -9742,7 +10412,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-tvOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-tvOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-tvOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-tvOS/Nimble.framework",
@@ -9751,7 +10424,10 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
@@ -9819,14 +10495,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -9840,7 +10516,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
@@ -10024,6 +10700,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-tvOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-tvOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-tvOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5F19E2747F5D6629C8FEF5E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10111,30 +10817,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		915993A996C90352AD184522 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		91A02346CA5C3E187154BF03 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10166,24 +10848,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9577C30FD5B0CD024AAB29A1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StepikTV-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C7D4843CF72B9D22D976747 /* [CP] Copy Pods Resources */ = {
@@ -10243,14 +10907,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -10264,7 +10928,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
@@ -10334,19 +10998,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0541596D51E881565A0DF8B /* [CP] Copy Pods Resources */ = {
+		C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StepikTV-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D1C2410F5D8E8E1ED8B9C470 /* [CP] Embed Pods Frameworks */ = {
@@ -10358,14 +11025,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -10379,7 +11046,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
@@ -10509,14 +11176,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -10530,7 +11197,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
@@ -10674,14 +11341,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -10695,7 +11362,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
@@ -10777,6 +11444,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F35153A9F6AF04007D0C426F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -11517,6 +12199,7 @@
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				2C5DF1431FED2758003B1177 /* CardStepDelegate.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
+				2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
 				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
@@ -11675,9 +12358,236 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BAE12F61F93F67700482251 /* SecondViewController.swift in Sources */,
+				938860F320379B8300DFEA3A /* SearchResult.swift in Sources */,
+				936351BA20263A4800DFC7EE /* ScreensTransitions.swift in Sources */,
+				930084402016717500DBFC0E /* BlurredViewController.swift in Sources */,
+				938861382037E2D400DFEA3A /* Unit.swift in Sources */,
+				9388613B2037E30A00DFEA3A /* Progress+CoreDataProperties.swift in Sources */,
+				9388614B2037E68200DFEA3A /* LastStep+CoreDataProperties.swift in Sources */,
+				93C3C1F52023C65E0040BD1D /* TVPlayerViewController.swift in Sources */,
+				93CC6831204980C300F5BE75 /* NotificationStatusesAPI.swift in Sources */,
+				93C3C1E0201B69AB0040BD1D /* FullHeightTableView.swift in Sources */,
+				1B3BB0701FE6DE71002DDD9A /* TVIconButton.swift in Sources */,
+				936351B72024D8F500DFC7EE /* StringExtension.swift in Sources */,
+				1B3BB09A1FE6E132002DDD9A /* CompilationCollectionPresenter.swift in Sources */,
+				938861252037E05C00DFEA3A /* FillBlanksReply.swift in Sources */,
+				938861162037DF5A00DFEA3A /* DiscussionProxiesAPI.swift in Sources */,
+				936351C3202A0D6D00DFC7EE /* SearchResultsPresenter.swift in Sources */,
+				93C3C1E4201BD19F0040BD1D /* UIViewExtensions.swift in Sources */,
+				9388610F20379F1B00DFEA3A /* CoreDataHelper.swift in Sources */,
+				938861592037E9BC00DFEA3A /* CacheManager.swift in Sources */,
+				2C47A16A206284C3003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				93C3C1EA2020B2000040BD1D /* TVLoadingView.swift in Sources */,
+				938860FD20379C7100DFEA3A /* PathManager.swift in Sources */,
+				9335E36B2008FF10001BDFA8 /* CatalogMenuView.swift in Sources */,
+				938860F120379B7300DFEA3A /* SearchResultsAPI.swift in Sources */,
+				9388611120379F3E00DFEA3A /* CourseReviewSummary.swift in Sources */,
+				938860F420379B8E00DFEA3A /* ChoiceDataset.swift in Sources */,
+				1B3BB0B81FE6E170002DDD9A /* NarrowCollectionRowViewCell.swift in Sources */,
+				9388612C2037E12900DFEA3A /* Certificate+CoreDataProperties.swift in Sources */,
+				9388612D2037E19800DFEA3A /* Device.swift in Sources */,
+				1B3BB0B31FE6E170002DDD9A /* MajorCollectionRowViewCell.swift in Sources */,
+				1B3BB0951FE6E118002DDD9A /* AuthorizationViewController.swift in Sources */,
+				93BBE5E71FE697BA006DEC28 /* ProgressesAPI.swift in Sources */,
+				1B3BB0851FE6E0C9002DDD9A /* StepItemCell.swift in Sources */,
+				938861342037E23700DFEA3A /* StepOptions.swift in Sources */,
+				93FAE2221FE09A540094939D /* CourseListsAPI.swift in Sources */,
+				93B7F1D42003E021006B9934 /* LabelExtension.swift in Sources */,
+				938861182037DF8600DFEA3A /* RecommendationsAPI.swift in Sources */,
+				9388610C20379DB300DFEA3A /* ApplicationInfo.swift in Sources */,
+				1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */,
+				938861362037E28500DFEA3A /* StepOptions+CoreDataProperties.swift in Sources */,
+				938861322037E1FC00DFEA3A /* CodeLanguages.swift in Sources */,
+				938861262037E06F00DFEA3A /* FreeAnswerReply.swift in Sources */,
+				938861282037E0A500DFEA3A /* MathReply.swift in Sources */,
+				93BBE5E81FE697EB006DEC28 /* AttemptsAPI.swift in Sources */,
+				9388611F2037DFF600DFEA3A /* AssignmentsAPI.swift in Sources */,
+				93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */,
+				933437E11FE6FF5400140AD2 /* ControllerHelper.swift in Sources */,
+				938861412037E3A600DFEA3A /* CodeLimit+CoreDataProperties.swift in Sources */,
+				938860F520379BB200DFEA3A /* ChoiceReply.swift in Sources */,
+				1B3BB0761FE6DE71002DDD9A /* TVCustomFocusableViews.swift in Sources */,
+				938860E420379A6300DFEA3A /* Course+CoreDataProperties.swift in Sources */,
+				9388610720379D4700DFEA3A /* UserActivity.swift in Sources */,
+				1B3BB0B41FE6E170002DDD9A /* CollectionRowViewProtocol.swift in Sources */,
+				9343534D201A066200DD2F1A /* TVStringQuizViewController.swift in Sources */,
+				1B3BB0601FE6DE48002DDD9A /* LessonStepsCollectionViewController.swift in Sources */,
+				938860FB20379C5600DFEA3A /* VideoDownloadDelegate.swift in Sources */,
+				938860D22030A58D00DFEA3A /* UIImageExtension.swift in Sources */,
+				9335E3612008DCF0001BDFA8 /* AuthorizationView.swift in Sources */,
+				1B3BB0641FE6DE48002DDD9A /* CatalogMenuViewController.swift in Sources */,
+				93C9E302200F950500192091 /* CourseContentView.swift in Sources */,
+				9388610D20379E4800DFEA3A /* ErrorEnums.swift in Sources */,
+				93C3C1F1202106750040BD1D /* MenuSplitView.swift in Sources */,
+				1B3BB0881FE6E0D7002DDD9A /* RectangularItemCell.swift in Sources */,
+				9388611E2037DFE100DFEA3A /* ProfilesAPI.swift in Sources */,
+				9388610520379D2900DFEA3A /* Submission.swift in Sources */,
+				9335E3622008DCF0001BDFA8 /* TitleInputAccessoryView.swift in Sources */,
+				93635F3C1FE2A87D0062D712 /* CourseList+CoreDataProperties.swift in Sources */,
+				9388610020379CAB00DFEA3A /* Step.swift in Sources */,
+				938860EB20379B1900DFEA3A /* Video+CoreDataProperties.swift in Sources */,
+				2C47A16B206284E8003E87EC /* StringHelper.swift in Sources */,
+				938860EC20379B2B00DFEA3A /* TVNumberQuizViewController.swift in Sources */,
+				BAF1F3992027945000C5918C /* CourseSubscriber.swift in Sources */,
+				1B3BB09B1FE6E132002DDD9A /* CompilationCollectionView.swift in Sources */,
+				933437E01FE6F62500140AD2 /* InstructorsCourseInfoSectionCell.swift in Sources */,
+				938861172037DF7100DFEA3A /* UnitsAPI.swift in Sources */,
+				938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */,
+				93FAE2231FE09A600094939D /* CourseListsCache.swift in Sources */,
+				93E5AAFA201641EC00290B4E /* ReplyCache.swift in Sources */,
+				93FAE2291FE148020094939D /* CourseList.swift in Sources */,
+				938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */,
+				93B7F1D62003E091006B9934 /* TVFocusableText.swift in Sources */,
+				936E90B52024D3BD009578C2 /* TagCoursesCollectionView.swift in Sources */,
+				9388610620379D3A00DFEA3A /* StepicApplicationsInfo.swift in Sources */,
+				93BBE5E91FE69837006DEC28 /* AuthAPI.swift in Sources */,
+				9388611020379F2C00DFEA3A /* Certificate.swift in Sources */,
+				9388610120379CBA00DFEA3A /* UIColorExtensions.swift in Sources */,
+				1B3BB0611FE6DE48002DDD9A /* ItemsCollectionViewController.swift in Sources */,
+				BAF1F39C202796AC00C5918C /* CourseSubscriptionManager.swift in Sources */,
+				938860F620379BC100DFEA3A /* StepicToken.swift in Sources */,
+				1B3BB0621FE6DE48002DDD9A /* SectionTableViewController.swift in Sources */,
+				938861512037E74A00DFEA3A /* UIThreadHelper.swift in Sources */,
+				9388614C2037E69100DFEA3A /* VideoURL+CoreDataProperties.swift in Sources */,
+				938861232037E03800DFEA3A /* CertificatesAPI.swift in Sources */,
+				1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */,
 				1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */,
-				1BAE12F41F93F67700482251 /* FirstViewController.swift in Sources */,
+				9388610B20379D8700DFEA3A /* StepicsAPI.swift in Sources */,
+				1B3BB0921FE6E0FC002DDD9A /* DetailsCourseInfoSectionCell.swift in Sources */,
+				9335E3652008DFB9001BDFA8 /* LessonTableViewCell.swift in Sources */,
+				BAF1F39B202796A100C5918C /* GlobalFunctions.swift in Sources */,
+				9335E3692008FF07001BDFA8 /* CatalogPresenter.swift in Sources */,
+				938860FA20379C4A00DFEA3A /* TCBlobDownload.swift in Sources */,
+				93C3C1E2201B9F560040BD1D /* TVUnavailableQuizViewController.swift in Sources */,
+				938861582037E98A00DFEA3A /* MatchingDataset.swift in Sources */,
+				93A6A4C42018CD5C004C0797 /* UIViewExtension.swift in Sources */,
+				938861222037E02E00DFEA3A /* CourseReviewSummariesAPI.swift in Sources */,
+				933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */,
+				9388614E2037E6E600DFEA3A /* SortingDataset.swift in Sources */,
+				938860F920379C2D00DFEA3A /* User+CoreDataProperties.swift in Sources */,
+				938861572037E97600DFEA3A /* FreeAnswerDataset.swift in Sources */,
+				938861492037E54600DFEA3A /* Notification+FetchMethods.swift in Sources */,
+				9388613A2037E30500DFEA3A /* Progress.swift in Sources */,
+				9388615A2037E9F500DFEA3A /* StringExtensions.swift in Sources */,
+				938861502037E70B00DFEA3A /* StringDatasetExtension.swift in Sources */,
+				1B3BB0B61FE6E170002DDD9A /* CollectionRowViewCell.swift in Sources */,
+				938861122037DEFC00DFEA3A /* DevicesAPI.swift in Sources */,
+				938861552037E82900DFEA3A /* TabsInfo.swift in Sources */,
+				1B3BB0A51FE6E145002DDD9A /* MajorItemCell.swift in Sources */,
+				938860E520379A8000DFEA3A /* Block+CoreDataProperties.swift in Sources */,
+				938860EE20379B4D00DFEA3A /* Reply.swift in Sources */,
+				938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */,
+				938861142037DF3400DFEA3A /* CommentsAPI.swift in Sources */,
+				938861402037E39300DFEA3A /* CodeSample.swift in Sources */,
+				9335E3632008DCF0001BDFA8 /* AuthorizationPresenter.swift in Sources */,
+				93CC68332049866D00F5BE75 /* DeviceDefaults.swift in Sources */,
+				938861462037E48800DFEA3A /* APIDefaults.swift in Sources */,
+				938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */,
+				9388614A2037E5F500DFEA3A /* CodeSample+CoreDataProperties.swift in Sources */,
+				9388613E2037E37800DFEA3A /* CodeTemplate.swift in Sources */,
+				938860FF20379C8700DFEA3A /* Step+CoreDataProperties.swift in Sources */,
+				938861192037DF9500DFEA3A /* SectionsAPI.swift in Sources */,
+				1B3BB0A91FE6E145002DDD9A /* RegularItemCell.swift in Sources */,
+				9388611A2037DFA600DFEA3A /* UsersAPI.swift in Sources */,
+				938860F220379B7900DFEA3A /* Meta.swift in Sources */,
+				938861242037E05300DFEA3A /* CodeReply.swift in Sources */,
+				9335E3662008DFBC001BDFA8 /* CourseContentMenuTableViewCell.swift in Sources */,
+				938861352037E27300DFEA3A /* Parser.swift in Sources */,
+				9388612F2037E1CA00DFEA3A /* Assignment.swift in Sources */,
+				934638BB20167C8100DC4A5A /* TVChoiceQuizViewController.swift in Sources */,
+				9388614F2037E6F700DFEA3A /* FillBlanksDataset.swift in Sources */,
+				938860E320379A4B00DFEA3A /* Course.swift in Sources */,
+				938860E720379AB700DFEA3A /* Block.swift in Sources */,
+				938861542037E80200DFEA3A /* TCBlobDownloadManager.swift in Sources */,
+				1B3BB0A61FE6E145002DDD9A /* NarrowItemCell.swift in Sources */,
+				93BBE6281FE6E6B8006DEC28 /* CourseInfoView.swift in Sources */,
+				938861522037E77000DFEA3A /* VideosInfo.swift in Sources */,
+				938861302037E1E300DFEA3A /* Profile.swift in Sources */,
+				93C3C1EF2020F2B60040BD1D /* TVAlertView.swift in Sources */,
+				93E5AAF920163B6200290B4E /* GCDThings.swift in Sources */,
+				93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */,
+				936E90B32024C900009578C2 /* CatalogDetailViewController.swift in Sources */,
+				938861452037E43200DFEA3A /* Comment.swift in Sources */,
+				9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
+				938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */,
+				938861392037E2E800DFEA3A /* Notification.swift in Sources */,
+				9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */,
+				938860F020379B6600DFEA3A /* ApiDataDownloader.swift in Sources */,
+				9388614D2037E6B100DFEA3A /* Session.swift in Sources */,
+				93E5AAF7201625F000290B4E /* QuizPresenter.swift in Sources */,
+				93C9E304200F951500192091 /* CourseContentPresenter.swift in Sources */,
+				938861442037E42600DFEA3A /* Vote.swift in Sources */,
+				93EF1F9A1FAD20250073B0D1 /* TVTextButton.swift in Sources */,
+				1B3BB09C1FE6E132002DDD9A /* CompilationCollectionViewController.swift in Sources */,
+				938861202037E01900DFEA3A /* QueriesAPI.swift in Sources */,
+				938860E820379AE100DFEA3A /* Section.swift in Sources */,
+				2C47A16120628420003E87EC /* AnalyticsReporter.swift in Sources */,
+				9388611B2037DFBC00DFEA3A /* ViewsAPI.swift in Sources */,
+				9388610320379D0000DFEA3A /* SubmissionsAPI.swift in Sources */,
+				93BBE5E61FE69768006DEC28 /* Lesson.swift in Sources */,
+				936E90B12024C88C009578C2 /* TagCoursesCollectionViewController.swift in Sources */,
+				93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */,
+				938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */,
+				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
+				938860E1203799BA00DFEA3A /* JSONInitializable.swift in Sources */,
+				938860FC20379C6700DFEA3A /* VideoURL.swift in Sources */,
+				936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */,
+				938861472037E49700DFEA3A /* ApiUtil.swift in Sources */,
+				9388613D2037E36F00DFEA3A /* CodeLimit.swift in Sources */,
+				938861152037DF5200DFEA3A /* LastStepsAPI.swift in Sources */,
+				9388612E2037E1B100DFEA3A /* DiscussionProxy.swift in Sources */,
+				938861422037E3ED00DFEA3A /* CodeTemplate+CoreDataProperties.swift in Sources */,
+				1B3BB08F1FE6E0FC002DDD9A /* MainCourseInfoSectionCell.swift in Sources */,
+				936CF2462018A53A00186A97 /* StepViewController.swift in Sources */,
+				938860E920379B0000DFEA3A /* Section+CoreDataProperties.swift in Sources */,
+				93BBE5F21FE6B1D6006DEC28 /* UIImageView+SVGDownload.swift in Sources */,
+				938861272037E08600DFEA3A /* SortingReply.swift in Sources */,
+				93C222FF202A7CF000B5F2CE /* SearchResultsViewController.swift in Sources */,
+				93CC68302048B79A00F5BE75 /* Model.xcdatamodeld in Sources */,
+				1B3BB0B91FE6E170002DDD9A /* RegularCollectionRowViewCell.swift in Sources */,
+				1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */,
+				93FAE2201FE03E320094939D /* CourseListType.swift in Sources */,
+				938861532037E7F300DFEA3A /* NSDateExtensions.swift in Sources */,
+				93C3C1EC2020B4DB0040BD1D /* BlurredView.swift in Sources */,
+				9388610E20379F0000DFEA3A /* LastStep.swift in Sources */,
+				938860F820379C2500DFEA3A /* User.swift in Sources */,
+				9388610820379D5200DFEA3A /* Attempt.swift in Sources */,
+				938861312037E1EE00DFEA3A /* Profile+CoreDataProperties.swift in Sources */,
+				933563C120126BE30061FE2E /* LessonContentPresenter.swift in Sources */,
+				9388612A2037E0DA00DFEA3A /* Alamofire-SwiftyJSON.swift in Sources */,
+				936351C5202A0D9900DFC7EE /* SearchResultsView.swift in Sources */,
+				93FAE2261FE142810094939D /* SQLReply.swift in Sources */,
+				93FAE2241FE13B260094939D /* ApiRequest.swift in Sources */,
+				9388610220379CF500DFEA3A /* TextReply.swift in Sources */,
+				938861212037E02000DFEA3A /* NotificationsAPI.swift in Sources */,
+				938861132037DF0B00DFEA3A /* VotesAPI.swift in Sources */,
+				9388613F2037E38800DFEA3A /* CoursePlainEntity.swift in Sources */,
+				938860EA20379B1200DFEA3A /* Video.swift in Sources */,
+				938861372037E2CF00DFEA3A /* Unit+CoreDataProperties.swift in Sources */,
+				93435355201B52E600DD2F1A /* TVChoiceQuizTableViewCell.swift in Sources */,
+				936E90AA2024B400009578C2 /* TagCoursesCollectionPresenter.swift in Sources */,
+				93E5AAF82016340900290B4E /* QuizControllerDelegate.swift in Sources */,
+				9388610420379D0B00DFEA3A /* UserActivitiesAPI.swift in Sources */,
+				93E5AAF220161ED300290B4E /* TVQuizViewController.swift in Sources */,
+				0856E2562039769F00575394 /* AnalyticsEvents.swift in Sources */,
+				938860ED20379B3400DFEA3A /* NumberReply.swift in Sources */,
+				938860E620379A8B00DFEA3A /* APIEndpoint.swift in Sources */,
+				938860E2203799D900DFEA3A /* CoursesAPI.swift in Sources */,
+				938861432037E41B00DFEA3A /* Assignment+CoreDataProperties.swift in Sources */,
+				93BBE5E51FE69676006DEC28 /* AuthInfo.swift in Sources */,
+				9335E3642008DCF0001BDFA8 /* AuthorizationAlert.swift in Sources */,
+				9388611D2037DFD300DFEA3A /* StepsAPI.swift in Sources */,
+				938860F720379BD300DFEA3A /* DictionarySerializable.swift in Sources */,
+				93BBE6261FE6E6AD006DEC28 /* CourseInfoPresenter.swift in Sources */,
+				9388610920379D6100DFEA3A /* CourseMetainfoEntity.swift in Sources */,
+				938861482037E54400DFEA3A /* Notification+CoreDataProperties.swift in Sources */,
+				9388613C2037E36600DFEA3A /* Sorter.swift in Sources */,
+				1B4310BA1FBF89EF006679CF /* ContentLanguage.swift in Sources */,
+				9388611C2037DFC600DFEA3A /* LessonsAPI.swift in Sources */,
+				1B3BB05D1FE6DE48002DDD9A /* MenuTableViewController.swift in Sources */,
+				933563BF20126BCD0061FE2E /* LessonContentView.swift in Sources */,
+				1B3BB05F1FE6DE48002DDD9A /* CourseContentMenuViewController.swift in Sources */,
+				933E3F271FBA61D9005A885D /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11698,7 +12608,6 @@
 				2C1B60C21F4C4AEF00236804 /* LessonPresenter.swift in Sources */,
 				2C1B60C31F4C4AEF00236804 /* LessonView.swift in Sources */,
 				2C1B60C41F4C4AEF00236804 /* PagerController.swift in Sources */,
-				2C608AEB20456910006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C1B60C51F4C4AEF00236804 /* ShareableController.swift in Sources */,
 				2C1B60C61F4C4AEF00236804 /* PostViewsExecutableTask.swift in Sources */,
 				2C1B60C71F4C4AEF00236804 /* Tokens.swift in Sources */,
@@ -11742,6 +12651,7 @@
 				08B062E31FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C1B60E61F4C4AEF00236804 /* ProgressesAPI.swift in Sources */,
 				2C1B60E71F4C4AEF00236804 /* ViewsAPI.swift in Sources */,
+				2CF953352062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B41FB51D720047A269 /* CourseList.swift in Sources */,
 				2C1B60E81F4C4AEF00236804 /* SearchResultsAPI.swift in Sources */,
 				2C1B60E91F4C4AEF00236804 /* AttemptsAPI.swift in Sources */,
@@ -11753,6 +12663,7 @@
 				2C1B60EF1F4C4AEF00236804 /* PlaceholderView.swift in Sources */,
 				2C1B60F01F4C4AEF00236804 /* CodeSnippetSymbols.swift in Sources */,
 				2C1B60F11F4C4AEF00236804 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190B2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF12045691E006870BB /* StepReversedCardView.swift in Sources */,
 				2C1B60F21F4C4AEF00236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA220568BDD0098707D /* PinsMapView.swift in Sources */,
@@ -11777,6 +12688,7 @@
 				2C1B61051F4C4AEF00236804 /* PlayerTestViewController.swift in Sources */,
 				086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DB1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
+				2C47A168206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
 				2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */,
 				2C1B61081F4C4AEF00236804 /* DownloadsViewController.swift in Sources */,
@@ -11898,11 +12810,9 @@
 				2C1B61781F4C4AEF00236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1C20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
-				087E8B2C204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
 				2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */,
 				2C608B1F2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -11966,6 +12876,7 @@
 				2C1B61AA1F4C4AEF00236804 /* RemoteVersionManager.swift in Sources */,
 				087585A91FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B61AB1F4C4AEF00236804 /* UpdateChecker.swift in Sources */,
+				2CF953302062AC9E00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C1B61AC1F4C4AEF00236804 /* CodeQuizToolbarDelegate.swift in Sources */,
 				2C1B61AD1F4C4AEF00236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -12037,7 +12948,6 @@
 				2C1B61E01F4C4AEF00236804 /* MatchingReply.swift in Sources */,
 				2C1B61E11F4C4AEF00236804 /* FillBlanksReply.swift in Sources */,
 				2C1B61E21F4C4AEF00236804 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB62056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B61E31F4C4AEF00236804 /* Model.xcdatamodeld in Sources */,
 				2C1B61E41F4C4AEF00236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B61E51F4C4AEF00236804 /* CodeLimit.swift in Sources */,
@@ -12096,6 +13006,7 @@
 				2C1B62121F4C4AEF00236804 /* APIDefaults.swift in Sources */,
 				2C608AD0204568DC006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3F20456A0F006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190E2062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FE1F573F6900302154 /* MenuViewController.swift in Sources */,
 				2C1B62141F4C4AEF00236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B62151F4C4AEF00236804 /* SearchQueriesView.swift in Sources */,
@@ -12125,6 +13036,7 @@
 				2C608B3B20456A04006870BB /* MigrationExtensions.swift in Sources */,
 				2C1B62271F4C4AEF00236804 /* StepsControllerRouter.swift in Sources */,
 				2C1B62281F4C4AEF00236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF9532A2062A20A00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C1B62291F4C4AEF00236804 /* UserActivity.swift in Sources */,
 				2C1B622A1F4C4AEF00236804 /* Alerts.swift in Sources */,
 				08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -12180,7 +13092,6 @@
 				2C1B62D31F4C590700236804 /* LessonPresenter.swift in Sources */,
 				2C1B62D41F4C590700236804 /* LessonView.swift in Sources */,
 				2C1B62D51F4C590700236804 /* PagerController.swift in Sources */,
-				2C608AEC20456910006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C1B62D61F4C590700236804 /* ShareableController.swift in Sources */,
 				2C1B62D71F4C590700236804 /* PostViewsExecutableTask.swift in Sources */,
 				2C1B62D81F4C590700236804 /* Tokens.swift in Sources */,
@@ -12224,6 +13135,7 @@
 				08B062E41FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C1B62F71F4C590700236804 /* ProgressesAPI.swift in Sources */,
 				2C1B62F81F4C590700236804 /* ViewsAPI.swift in Sources */,
+				2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B51FB51D720047A269 /* CourseList.swift in Sources */,
 				2C1B62F91F4C590700236804 /* SearchResultsAPI.swift in Sources */,
 				2C1B62FA1F4C590700236804 /* AttemptsAPI.swift in Sources */,
@@ -12235,6 +13147,7 @@
 				2C1B63001F4C590700236804 /* PlaceholderView.swift in Sources */,
 				2C1B63011F4C590700236804 /* CodeSnippetSymbols.swift in Sources */,
 				2C1B63021F4C590700236804 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190C2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF22045691F006870BB /* StepReversedCardView.swift in Sources */,
 				2C1B63031F4C590700236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA120568BDD0098707D /* PinsMapView.swift in Sources */,
@@ -12259,6 +13172,7 @@
 				2C1B63161F4C590700236804 /* PlayerTestViewController.swift in Sources */,
 				086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DC1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
+				2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
 				2C1B63181F4C590700236804 /* VideoRate.swift in Sources */,
 				2C1B63191F4C590700236804 /* DownloadsViewController.swift in Sources */,
@@ -12380,11 +13294,9 @@
 				2C1B63891F4C590700236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1D20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
 				2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
-				087E8B2D204DE2B300C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
 				2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */,
 				2C608B202045698C006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -12448,6 +13360,7 @@
 				2C1B63BB1F4C590700236804 /* RemoteVersionManager.swift in Sources */,
 				087585AA1FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				2C1B63BC1F4C590700236804 /* UpdateChecker.swift in Sources */,
+				2CF953312062AC9F00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C1B63BD1F4C590700236804 /* CodeQuizToolbarDelegate.swift in Sources */,
 				2C1B63BE1F4C590700236804 /* UpdatePreferencesContainer.swift in Sources */,
 				2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -12519,7 +13432,6 @@
 				2C1B63F11F4C590700236804 /* MatchingReply.swift in Sources */,
 				2C1B63F21F4C590700236804 /* FillBlanksReply.swift in Sources */,
 				2C1B63F31F4C590700236804 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB72056727000B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C1B63F41F4C590700236804 /* Model.xcdatamodeld in Sources */,
 				2C1B63F51F4C590700236804 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C1B63F61F4C590700236804 /* CodeLimit.swift in Sources */,
@@ -12578,6 +13490,7 @@
 				2C1B64231F4C590700236804 /* APIDefaults.swift in Sources */,
 				2C608ACF204568DC006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3E20456A0E006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190D2062A1EA003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FF1F573F6900302154 /* MenuViewController.swift in Sources */,
 				2C1B64251F4C590700236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B64261F4C590700236804 /* SearchQueriesView.swift in Sources */,
@@ -12607,6 +13520,7 @@
 				2C608B3A20456A03006870BB /* MigrationExtensions.swift in Sources */,
 				2C1B64381F4C590700236804 /* StepsControllerRouter.swift in Sources */,
 				2C1B64391F4C590700236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF953292062A20A00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C1B643A1F4C590700236804 /* UserActivity.swift in Sources */,
 				2C1B643B1F4C590700236804 /* Alerts.swift in Sources */,
 				08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -12667,7 +13581,6 @@
 				2C89A9591F4C289900227C3B /* ShareableController.swift in Sources */,
 				2C6A76352045CE7300C509A6 /* StepReversedCardView.swift in Sources */,
 				2C89A95A1F4C289900227C3B /* PostViewsExecutableTask.swift in Sources */,
-				083C9CB42056726E00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89A95B1F4C289900227C3B /* Tokens.swift in Sources */,
 				2C89A95C1F4C289900227C3B /* LoadingPaginationView.swift in Sources */,
 				2C89A95D1F4C289900227C3B /* CertificatesAPIPaginatedMock.swift in Sources */,
@@ -12691,7 +13604,6 @@
 				08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C6A762E2045CE5500C509A6 /* AdaptiveStatsSection.swift in Sources */,
-				2C6A76332045CE6A00C509A6 /* AdaptiveStorageManager.swift in Sources */,
 				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
@@ -12828,7 +13740,6 @@
 				2C89A9E41F4C289900227C3B /* AdaptiveStepCardView.swift in Sources */,
 				2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */,
 				2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */,
-				2C6A76502045CF2500C509A6 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				08C1BF351FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -12846,6 +13757,7 @@
 				08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */,
 				2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */,
+				2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				2C6A76402045CEA100C509A6 /* NotificationsMarkAsReadButton.swift in Sources */,
 				08CBA32B1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C89AA011F4C289900227C3B /* StyledTabBarViewController.swift in Sources */,
@@ -12882,7 +13794,6 @@
 				2C89AA1A1F4C289900227C3B /* AnalyticsHelper.swift in Sources */,
 				2C89AA1B1F4C289900227C3B /* ControllerHelper.swift in Sources */,
 				08CCAEC4204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
-				087E8B2A204DE2B100C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C89AA1C1F4C289900227C3B /* GCDThings.swift in Sources */,
 				087296E020168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
 				08A9F7071FC37DD000640F1F /* CourseTagsView.swift in Sources */,
@@ -12990,6 +13901,7 @@
 				081959E41FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
 				2C89AA6B1F4C289900227C3B /* Submission.swift in Sources */,
 				2C89AA6C1F4C289900227C3B /* SearchQueriesPersistentManager.swift in Sources */,
+				2CF9532C2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C89AA6D1F4C289900227C3B /* Reply.swift in Sources */,
 				08F8FEB71F4D07B5009F21BA /* ReplyCache.swift in Sources */,
 				2C89AA6E1F4C289900227C3B /* ChoiceReply.swift in Sources */,
@@ -13052,6 +13964,7 @@
 				2C6A762D2045CE5300C509A6 /* AdaptiveStatsPagerViewController.swift in Sources */,
 				2C89AA9A1F4C289900227C3B /* SocialSDKProvider.swift in Sources */,
 				2C89AA9B1F4C289900227C3B /* VKSocialSDKProvider.swift in Sources */,
+				2C4919092062A1CB003E733D /* StepikTableView.swift in Sources */,
 				2C6A76422045CEB900C509A6 /* NotificationsSection.swift in Sources */,
 				2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */,
 				2C89AA9D1F4C289900227C3B /* RequestChain.swift in Sources */,
@@ -13060,6 +13973,7 @@
 				2C89AAA01F4C289900227C3B /* QueriesAPI.swift in Sources */,
 				2C89AAA11F4C289900227C3B /* AutocompleteWords.swift in Sources */,
 				2C89AAA21F4C289900227C3B /* ApiDataDownloader.swift in Sources */,
+				2CF953322062ACA000B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C89AAA31F4C289900227C3B /* Meta.swift in Sources */,
 				2C89AAA51F4C289900227C3B /* DevicesAPI.swift in Sources */,
 				2C89AAA61F4C289900227C3B /* APIDefaults.swift in Sources */,
@@ -13085,6 +13999,7 @@
 				0844900D1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C89AAB61F4C289900227C3B /* VideosInfo.swift in Sources */,
 				2C89AAB71F4C289900227C3B /* VideoDownload.swift in Sources */,
+				2C47A166206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C89AAB81F4C289900227C3B /* SearchResult.swift in Sources */,
 				2C89AAB91F4C289900227C3B /* Device.swift in Sources */,
 				2C89AABA1F4C289900227C3B /* CyrillicURLActivityItemSource.swift in Sources */,
@@ -13126,6 +14041,7 @@
 				2C89AAD81F4C289900227C3B /* AlamofireExtensions.swift in Sources */,
 				087585B21FB51D720047A269 /* CourseList.swift in Sources */,
 				2C89AADA1F4C289900227C3B /* ErrorEnums.swift in Sources */,
+				2CF953332062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C89AADB1F4C289900227C3B /* CodeTemplate.swift in Sources */,
 				2C89AADD1F4C289900227C3B /* StringHelper.swift in Sources */,
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
@@ -13143,7 +14059,6 @@
 				2C97310A1F4C38F600AC9301 /* LessonPresenter.swift in Sources */,
 				2C97310B1F4C38F600AC9301 /* LessonView.swift in Sources */,
 				2C97310C1F4C38F600AC9301 /* PagerController.swift in Sources */,
-				2C608AEA2045690F006870BB /* AdaptiveStorageManager.swift in Sources */,
 				2C97310D1F4C38F600AC9301 /* ShareableController.swift in Sources */,
 				2C97310E1F4C38F600AC9301 /* PostViewsExecutableTask.swift in Sources */,
 				2C97310F1F4C38F600AC9301 /* Tokens.swift in Sources */,
@@ -13187,6 +14102,7 @@
 				08B062E21FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C97312E1F4C38F600AC9301 /* ProgressesAPI.swift in Sources */,
 				2C97312F1F4C38F600AC9301 /* ViewsAPI.swift in Sources */,
+				2CF953342062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				087585B31FB51D720047A269 /* CourseList.swift in Sources */,
 				2C9731301F4C38F600AC9301 /* SearchResultsAPI.swift in Sources */,
 				2C9731311F4C38F600AC9301 /* AttemptsAPI.swift in Sources */,
@@ -13198,6 +14114,7 @@
 				2C9731371F4C38F600AC9301 /* PlaceholderView.swift in Sources */,
 				2C9731381F4C38F600AC9301 /* CodeSnippetSymbols.swift in Sources */,
 				2C9731391F4C38F600AC9301 /* PlaceholderViewDataSource.swift in Sources */,
+				2C49190A2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF02045691E006870BB /* StepReversedCardView.swift in Sources */,
 				2C97313A1F4C38F600AC9301 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA320568BDE0098707D /* PinsMapView.swift in Sources */,
@@ -13222,6 +14139,7 @@
 				2C97314D1F4C38F600AC9301 /* PlayerTestViewController.swift in Sources */,
 				086FC6AD1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DA1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
+				2C47A167206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C97314E1F4C38F600AC9301 /* Player.swift in Sources */,
 				2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */,
 				2C9731501F4C38F600AC9301 /* DownloadsViewController.swift in Sources */,
@@ -13343,11 +14261,9 @@
 				2C9731C01F4C38F600AC9301 /* CoursePlainEntity.swift in Sources */,
 				2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */,
 				2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */,
-				2C608B1B20456987006870BB /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */,
 				2C9731C41F4C38F600AC9301 /* HTMLBuilder.swift in Sources */,
 				2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */,
-				087E8B2B204DE2B200C35B66 /* AdaptiveStorageManager.swift in Sources */,
 				2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */,
 				2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */,
 				2C608B1E2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
@@ -13482,7 +14398,6 @@
 				2C9732281F4C38F600AC9301 /* MatchingReply.swift in Sources */,
 				2C9732291F4C38F600AC9301 /* FillBlanksReply.swift in Sources */,
 				2C97322A1F4C38F600AC9301 /* VideoDownloadDelegate.swift in Sources */,
-				083C9CB52056726F00B2CC78 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				2C97322B1F4C38F600AC9301 /* Model.xcdatamodeld in Sources */,
 				2C97322C1F4C38F600AC9301 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C97322D1F4C38F600AC9301 /* CodeLimit.swift in Sources */,
@@ -13541,7 +14456,9 @@
 				2C97325A1F4C38F600AC9301 /* APIDefaults.swift in Sources */,
 				2C608AD1204568DD006870BB /* LeaderboardTableViewCell.swift in Sources */,
 				2C608B3D20456A0E006870BB /* DefaultsStorageManager.swift in Sources */,
+				2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				08CBA2FD1F573F6900302154 /* MenuViewController.swift in Sources */,
+				2CF9532F2062AC9C00B9617A /* AdaptiveStorageManager.swift in Sources */,
 				2C97325C1F4C38F600AC9301 /* DiscussionProxiesAPI.swift in Sources */,
 				2C97325D1F4C38F600AC9301 /* SearchQueriesView.swift in Sources */,
 				2C97325E1F4C38F600AC9301 /* LastStepsAPI.swift in Sources */,
@@ -13570,6 +14487,7 @@
 				2C608B3C20456A04006870BB /* MigrationExtensions.swift in Sources */,
 				2C97326F1F4C38F600AC9301 /* StepsControllerRouter.swift in Sources */,
 				2C9732701F4C38F600AC9301 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				2CF9532B2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				2C9732711F4C38F600AC9301 /* UserActivity.swift in Sources */,
 				2C9732721F4C38F600AC9301 /* Alerts.swift in Sources */,
 				08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
@@ -13702,6 +14620,7 @@
 				860BC33B1EAA1E520058F440 /* CoursesAPIPaginatedMock.swift in Sources */,
 				860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */,
 				860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */,
+				2C47A165206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				086442D21F765012000CC53D /* AuthTextField.swift in Sources */,
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
@@ -13756,6 +14675,7 @@
 				2CA2E72620237E55001DC410 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C76ACCD1F16496C0077D9D7 /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB51F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
+				2CF9532D2062A20B00B9617A /* StepikPlaceholderView.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				2CA2E71E20237E31001DC410 /* CongratsView.swift in Sources */,
 				2CE1C2B520249C2B00722989 /* AdaptiveStepCardView.swift in Sources */,
@@ -13919,6 +14839,7 @@
 				089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
+				2C4919082062A1CB003E733D /* StepikTableView.swift in Sources */,
 				086BE2B41F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				864D669F1E83DE03001E8D9E /* DeepLinkRouter.swift in Sources */,
 				864D66A01E83DE03001E8D9E /* SharingHelper.swift in Sources */,
@@ -13955,6 +14876,7 @@
 				0885B8D41FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				864D66B81E83DE03001E8D9E /* RemoteVersionManager.swift in Sources */,
 				087585A51FB50D640047A269 /* CourseListsAPI.swift in Sources */,
+				2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */,
 				864D66B91E83DE03001E8D9E /* UpdateChecker.swift in Sources */,
 				080C5E861EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				864D66BA1E83DE03001E8D9E /* UpdatePreferencesContainer.swift in Sources */,
@@ -14269,14 +15191,6 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		1BAE12F71F93F67700482251 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1BAE12F81F93F67700482251 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */ = {
@@ -14720,7 +15634,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 80;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -14751,7 +15665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 80;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -14771,7 +15685,7 @@
 		};
 		1BAE13081F93F67700482251 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A563DCFCAB59C8CE5BAE71BF /* Pods-StepikTV.debug.xcconfig */;
+			baseConfigurationReference = A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -14786,14 +15700,17 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GFNJS2X8DC;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
@@ -14804,7 +15721,7 @@
 		};
 		1BAE13091F93F67700482251 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2607B5745D3DFAFA3A60F3F5 /* Pods-StepikTV.release.xcconfig */;
+			baseConfigurationReference = 5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -14819,13 +15736,16 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GFNJS2X8DC;
+				DEVELOPMENT_TEAM = PEYKHN6GF6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = StepikTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -14835,7 +15755,7 @@
 		};
 		1BAE130A1F93F67700482251 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F7ED61471D9FBE1AE51C058 /* Pods-StepikTVTests.debug.xcconfig */;
+			baseConfigurationReference = A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -14869,7 +15789,7 @@
 		};
 		1BAE130B1F93F67700482251 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 470147BA7F6957FD9C32ACD1 /* Pods-StepikTVTests.release.xcconfig */;
+			baseConfigurationReference = 47AABB125002C92F6CC39E5E /* Pods-StepikTVTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

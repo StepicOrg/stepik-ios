@@ -26,6 +26,10 @@ class OnboardingViewController: UIViewController {
     private var scrollView: UIScrollView!
     fileprivate var pages: [OnboardingPageView] = []
 
+    var authSource: UIViewController? {
+        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
+    }
+
     private var backgroundGradient: CAGradientLayer = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
 
     private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "")}
@@ -187,6 +191,9 @@ class OnboardingViewController: UIViewController {
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
             dismiss(animated: true, completion: nil)
+            if let authSource = authSource {
+                RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
+            }
         }
     }
 }
