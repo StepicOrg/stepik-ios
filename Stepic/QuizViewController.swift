@@ -9,7 +9,8 @@
 import UIKit
 import Presentr
 
-class QuizViewController: StepikViewController, QuizView, QuizControllerDataSource {
+class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!

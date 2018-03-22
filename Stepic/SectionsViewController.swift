@@ -9,7 +9,8 @@
 import UIKit
 import DownloadButton
 
-class SectionsViewController: StepikViewController, ShareableController, UIViewControllerPreviewingDelegate {
+class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
 

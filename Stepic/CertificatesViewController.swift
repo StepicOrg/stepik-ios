@@ -8,7 +8,10 @@
 
 import Foundation
 
-class CertificatesViewController: StepikViewController, CertificatesView {
+class CertificatesViewController: UIViewController, CertificatesView, ControllerWithStepikPlaceholder {
+
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+
     @IBOutlet weak var tableView: StepikTableView!
 
     var presenter: CertificatesPresenter?

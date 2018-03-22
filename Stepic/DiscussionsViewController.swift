@@ -37,7 +37,8 @@ struct DiscussionsCellInfo {
     }
 }
 
-class DiscussionsViewController: StepikViewController {
+class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     var discussionProxyId: String!
     var target: Int!

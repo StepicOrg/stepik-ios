@@ -9,7 +9,8 @@
 import UIKit
 import Presentr
 
-class ProfileViewController: MenuViewController, ProfileView {
+class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?

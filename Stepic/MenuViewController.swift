@@ -9,7 +9,7 @@
 import UIKit
 import FLKAutoLayout
 
-class MenuViewController: StepikViewController {
+class MenuViewController: UIViewController {
 
     let tableView: StepikTableView = StepikTableView()
 
