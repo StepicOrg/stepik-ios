@@ -1,5 +1,5 @@
 //
-//  StepikViewController.swift
+//  ControllerWithStepikPlaceholder.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 20.03.2018.
@@ -7,20 +7,6 @@
 //
 
 import UIKit
-
-protocol PropertyStoring {
-    associatedtype T
-    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T
-}
-
-extension PropertyStoring {
-    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T {
-        guard let value = objc_getAssociatedObject(self, key) as? T else {
-            return defaultValue
-        }
-        return value
-    }
-}
 
 typealias StepikPlaceholderControllerState = StepikPlaceholderControllerContainer.PlaceholderState
 
