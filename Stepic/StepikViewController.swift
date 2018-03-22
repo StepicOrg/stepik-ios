@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias StepikViewControllPlaceholderState = StepikViewController.PlaceholderState
+
 class StepikViewController: UIViewController {
 
     class PlaceholderState: Equatable, Hashable {
@@ -19,6 +21,7 @@ class StepikViewController: UIViewController {
 
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
+        static let refreshing = PlaceholderState(id: "refreshing")
 
         var hashValue: Int {
             get {
