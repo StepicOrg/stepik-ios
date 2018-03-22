@@ -65,6 +65,14 @@ extension StepikPlaceholder.Style {
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("Refreshing", comment: ""),
                                           buttonTitle: nil)
+    static let emptyUnits = StepikPlaceholderStyle(id: "emptyUnits",
+                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+                                          text: NSLocalizedString("PullToRefreshUnitsTitle", comment: ""),
+                                          buttonTitle: nil)
+    static let emptyUnitsLoading = StepikPlaceholderStyle(id: "emptyUnitsLoading",
+                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+                                          text: NSLocalizedString("Refreshing", comment: ""),
+                                          buttonTitle: nil)
 }
 
 extension StepikPlaceholder.Style {

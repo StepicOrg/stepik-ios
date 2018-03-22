@@ -8,11 +8,10 @@
 
 import UIKit
 import DownloadButton
-import DZNEmptyDataSet
 
-class UnitsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate {
+class UnitsViewController: StepikViewController, ShareableController, UIViewControllerPreviewingDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     /*
      There are 2 ways of instantiating the controller
@@ -36,6 +35,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+
         updateTitle()
         self.navigationItem.backBarButtonItem?.title = " "
 
@@ -54,8 +55,9 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
         refreshControl.layoutIfNeeded()
 
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyUnits)
+        tableView.loadingPlaceholder = StepikPlaceholder(.emptyUnitsLoading)
+
         refreshControl.beginRefreshing()
 
         refreshUnits()
@@ -208,8 +210,15 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     var emptyDatasetState: EmptyDatasetState = .empty {
         didSet {
-            UIThread.performUI {
-                self.tableView.reloadEmptyDataSet()
+            switch emptyDatasetState {
+            case .refreshing:
+                isPlaceholderShown = false
+                tableView.showLoadingPlaceholder()
+            case .empty:
+                isPlaceholderShown = false
+                tableView.reloadData()
+            case .connectionError:
+                showPlaceholder(for: .connectionError)
             }
         }
     }
@@ -661,80 +670,5 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.pending:
             break
         }
-    }
-}
-
-extension UnitsViewController : DZNEmptyDataSetSource {
-
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        switch emptyDatasetState {
-        case .empty:
-            return Images.emptyCoursesPlaceholder
-        case .connectionError:
-            return Images.noWifiImage.size250x250
-        case .refreshing:
-            return Images.emptyCoursesPlaceholder
-        }
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("PullToRefreshUnitsTitle", comment: "")
-            break
-        case .connectionError:
-            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("Refreshing", comment: "")
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
-            break
-        case .connectionError:
-            text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("RefreshingDescription", comment: "")
-            break
-        }
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-            NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.white
-    }
-
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
-        return 44
-    }
-}
-
-extension UnitsViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
     }
 }
