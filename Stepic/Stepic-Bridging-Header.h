@@ -8,6 +8,4 @@
 
 #import <TSMessages/TSMessage.h>
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-
 #import "WKWebViewPanelManager.h"
