@@ -83,7 +83,7 @@ extension StepikTableView {
 
     override func endUpdates() {
         super.endUpdates()
-        handleEmptySetView(isHidden: hasContent)
+        handleEmptySetPlaceholder(isHidden: hasContent)
     }
 }
 

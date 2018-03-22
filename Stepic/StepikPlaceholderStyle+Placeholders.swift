@@ -45,10 +45,18 @@ extension StepikPlaceholder.Style {
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("Refreshing", comment: ""),
                                           buttonTitle: nil)
+    static let emptyDiscussions = StepikPlaceholderStyle(id: "emptyDiscussions",
+                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+                                          text: NSLocalizedString("NoDiscussionsTitle", comment: ""),
+                                          buttonTitle: nil)
+    static let emptyDiscussionsLoading = StepikPlaceholderStyle(id: "emptyDiscussionsLoading",
+                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+                                          text: NSLocalizedString("Refreshing", comment: ""),
+                                          buttonTitle: nil)
 }
 
 extension StepikPlaceholder.Style {
     class var stepikStyledPlaceholders: [StepikPlaceholderStyle] {
-        return [StepikPlaceholderStyle.empty, StepikPlaceholderStyle.noConnection, StepikPlaceholderStyle.login, StepikPlaceholderStyle.emptyDownloads, StepikPlaceholderStyle.emptyNotifications, StepikPlaceholderStyle.emptySearch, StepikPlaceholderStyle.emptyCertificates]
+        return [StepikPlaceholderStyle.empty, StepikPlaceholderStyle.noConnection, StepikPlaceholderStyle.login, StepikPlaceholderStyle.emptyDownloads, StepikPlaceholderStyle.emptyNotifications, StepikPlaceholderStyle.emptySearch, StepikPlaceholderStyle.emptyCertificates, StepikPlaceholderStyle.emptyDiscussions]
     }
 }
