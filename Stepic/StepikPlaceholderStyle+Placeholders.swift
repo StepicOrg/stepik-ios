@@ -73,10 +73,14 @@ extension StepikPlaceholder.Style {
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("Refreshing", comment: ""),
                                           buttonTitle: nil)
+    static let noConnectionQuiz = StepikPlaceholderStyle(id: "noConnectionQuiz",
+                                          image: nil,
+                                          text: NSLocalizedString("ConnectionErrorText", comment: ""),
+                                          buttonTitle: NSLocalizedString("TryAgain", comment: ""))
 }
 
 extension StepikPlaceholder.Style {
     class var stepikStyledPlaceholders: [StepikPlaceholderStyle] {
-        return [StepikPlaceholderStyle.empty, StepikPlaceholderStyle.noConnection, StepikPlaceholderStyle.login, StepikPlaceholderStyle.emptyDownloads, StepikPlaceholderStyle.emptyNotifications, StepikPlaceholderStyle.emptySearch, StepikPlaceholderStyle.emptyCertificates, StepikPlaceholderStyle.emptyDiscussions, StepikPlaceholderStyle.emptyProfileLoading, StepikPlaceholderStyle.emptySections]
+        return [StepikPlaceholderStyle.empty, StepikPlaceholderStyle.noConnection, StepikPlaceholderStyle.login, StepikPlaceholderStyle.emptyDownloads, StepikPlaceholderStyle.emptyNotifications, StepikPlaceholderStyle.emptySearch, StepikPlaceholderStyle.emptyCertificates, StepikPlaceholderStyle.emptyDiscussions, StepikPlaceholderStyle.emptyProfileLoading, StepikPlaceholderStyle.emptySections, StepikPlaceholderStyle.emptyUnits]
     }
 }

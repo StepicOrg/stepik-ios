@@ -9,7 +9,7 @@
 import UIKit
 import Presentr
 
-class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
+class QuizViewController: StepikViewController, QuizView, QuizControllerDataSource {
 
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
@@ -50,21 +50,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
     private let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
     private let peerReviewText: String = NSLocalizedString("PeerReviewText", comment: "")
-    fileprivate let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
-
-    private var warningView: UIView?
-    private func initWarningView() -> UIView {
-        //TODO: change warning image!
-        let v = PlaceholderView()
-        self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(toView: self.view)
-        v.constrainHeight("150")
-        v.delegate = self
-        v.datasource = self
-        v.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000.0), for: UILayoutConstraintAxis.vertical)
-        v.backgroundColor = UIColor.white
-        return v
-    }
 
     private var activityView: UIView?
     private func initActivityView() -> UIView {
@@ -106,20 +91,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     private var doesPresentWarningView: Bool = false {
         didSet {
             if doesPresentWarningView {
-                DispatchQueue.main.async {
-                    [weak self] in
-                    if self?.warningView == nil {
-                        self?.warningView = self?.initWarningView()
-                    }
-                    self?.warningView?.isHidden = false
-                }
+                showPlaceholder(for: .connectionError)
                 self.presenter?.delegate?.didWarningPlaceholderShow()
             } else {
-                DispatchQueue.main.async {
-                    [weak self] in
-                    self?.warningView?.removeFromSuperview()
-                    self?.warningView = nil
-                }
+                isPlaceholderShown = false
             }
         }
     }
@@ -138,6 +113,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
+            self?.presenter?.refreshAttempt()
+        }), for: .connectionError)
 
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView)
@@ -461,34 +440,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
     func getReply() -> Reply? {
         return nil
-    }
-}
-
-extension QuizViewController : PlaceholderViewDataSource {
-    func placeholderImage() -> UIImage? {
-        return Images.noWifiImage.size100x100
-    }
-
-    func placeholderButtonTitle() -> String? {
-        return NSLocalizedString("TryAgain", comment: "")
-    }
-
-    func placeholderDescription() -> String? {
-        return nil
-    }
-
-    func placeholderStyle() -> PlaceholderStyle {
-        return stepicPlaceholderStyle
-    }
-
-    func placeholderTitle() -> String? {
-        return warningViewTitle
-    }
-}
-
-extension QuizViewController : PlaceholderViewDelegate {
-    func placeholderButtonDidPress() {
-        self.presenter?.refreshAttempt()
     }
 }
 
