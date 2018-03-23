@@ -1,7 +1,8 @@
 In the new version of the Stepik iOS app we:
 
-• Added cool activity panel in profile
-• Changed the way you get requested about notifications
+• Changed empty states to make every tiny thing nice and shiny
+• Gave you a chance to understand that activity panel in profile is scrollable
+• Improved onboarding for new users
 • Fixed multiple bugs and greatly improved stability
 
 Enjoy learning!
