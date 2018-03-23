@@ -756,13 +756,6 @@
 		0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
 		0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
 		0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
-		08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
-		08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		08970ED21C6A326900846119 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
-		08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		0899842A1ECDE188005C0B27 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -1098,9 +1091,7 @@
 		08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
 		08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
-		08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		08D1207F1C937B2200A54ABC /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
-		08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AB1C580DB3000165AA /* MathQuizViewController.swift */; };
 		08D120821C937B2200A54ABC /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
 		08D120831C937B2200A54ABC /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
@@ -1125,12 +1116,10 @@
 		08D120981C937B2200A54ABC /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
 		08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
 		08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
-		08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
 		08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
 		08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
-		08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
 		08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
 		08D120A31C937B2200A54ABC /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
@@ -1167,7 +1156,6 @@
 		08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
 		08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
-		08D120CC1C937B2200A54ABC /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
 		08D120CD1C937B2200A54ABC /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08D120CE1C937B2200A54ABC /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
 		08D120CF1C937B2200A54ABC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
@@ -1201,7 +1189,6 @@
 		08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08D120F11C937B2200A54ABC /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
 		08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
-		08D120F41C937B2200A54ABC /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
 		08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
 		08D120F61C937B2200A54ABC /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
@@ -1227,7 +1214,6 @@
 		08D121161C937B2200A54ABC /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
 		08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		08D121181C937B2200A54ABC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
-		08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
 		08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
@@ -1613,13 +1599,7 @@
 		2C1B60EB1F4C4AEF00236804 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
 		2C1B60EC1F4C4AEF00236804 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		2C1B60ED1F4C4AEF00236804 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		2C1B60EE1F4C4AEF00236804 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		2C1B60EF1F4C4AEF00236804 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		2C1B60F01F4C4AEF00236804 /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
-		2C1B60F11F4C4AEF00236804 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		2C1B60F21F4C4AEF00236804 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		2C1B60F31F4C4AEF00236804 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		2C1B60F41F4C4AEF00236804 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C1B60F51F4C4AEF00236804 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C1B60F61F4C4AEF00236804 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
 		2C1B60F71F4C4AEF00236804 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
@@ -1927,7 +1907,6 @@
 		2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
 		2C1B62611F4C4AEF00236804 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
-		2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		2C1B62651F4C4AEF00236804 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
@@ -2018,13 +1997,7 @@
 		2C1B62FC1F4C590700236804 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
 		2C1B62FD1F4C590700236804 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		2C1B62FE1F4C590700236804 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		2C1B62FF1F4C590700236804 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		2C1B63001F4C590700236804 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		2C1B63011F4C590700236804 /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
-		2C1B63021F4C590700236804 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		2C1B63031F4C590700236804 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		2C1B63041F4C590700236804 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		2C1B63051F4C590700236804 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C1B63061F4C590700236804 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C1B63071F4C590700236804 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
 		2C1B63081F4C590700236804 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
@@ -2332,7 +2305,6 @@
 		2C1B64701F4C590700236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B64711F4C590700236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
 		2C1B64721F4C590700236804 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
-		2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		2C1B64761F4C590700236804 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C1B64781F4C590700236804 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
@@ -2768,13 +2740,7 @@
 		2C89A97F1F4C289900227C3B /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
 		2C89A9801F4C289900227C3B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		2C89A9811F4C289900227C3B /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		2C89A9821F4C289900227C3B /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		2C89A9831F4C289900227C3B /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		2C89A9841F4C289900227C3B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
-		2C89A9851F4C289900227C3B /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		2C89A9861F4C289900227C3B /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		2C89A9871F4C289900227C3B /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		2C89A9881F4C289900227C3B /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C89A9891F4C289900227C3B /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C89A98A1F4C289900227C3B /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
 		2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
@@ -3081,7 +3047,6 @@
 		2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
 		2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
-		2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		2C89AAF61F4C289900227C3B /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C89AAF71F4C289900227C3B /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
@@ -3178,13 +3143,7 @@
 		2C9731331F4C38F600AC9301 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
 		2C9731341F4C38F600AC9301 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		2C9731351F4C38F600AC9301 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		2C9731361F4C38F600AC9301 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		2C9731371F4C38F600AC9301 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		2C9731381F4C38F600AC9301 /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
-		2C9731391F4C38F600AC9301 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		2C97313A1F4C38F600AC9301 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		2C97313B1F4C38F600AC9301 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		2C97313C1F4C38F600AC9301 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		2C97313D1F4C38F600AC9301 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		2C97313E1F4C38F600AC9301 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
 		2C97313F1F4C38F600AC9301 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
@@ -3492,7 +3451,6 @@
 		2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
 		2C9732A61F4C38F600AC9301 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
-		2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
@@ -3893,12 +3851,6 @@
 		864D673E1E83DE8A001E8D9E /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		864D67401E83DE8A001E8D9E /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		864D67411E83E08E001E8D9E /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
-		864D67431E83E08E001E8D9E /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
-		864D67441E83E08E001E8D9E /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
-		864D67451E83E08E001E8D9E /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
-		864D67461E83E08E001E8D9E /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
-		864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -3999,7 +3951,6 @@
 		86A1C3382065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		86A1C3392065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		86A1C33A2065173900D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
-		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		86AE94701E84511A00F67691 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		86AE94711E84511A00F67691 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
@@ -4698,13 +4649,6 @@
 		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeepLinkRouter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueriesAPI.swift; sourceTree = "<group>"; };
 		089700951F6B2A820041C24E /* NibInitializableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializableView.swift; sourceTree = "<group>"; };
-		08970ECA1C6A326900846119 /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
-		08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDataSource.swift; sourceTree = "<group>"; };
-		08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
-		08970ECD1C6A326900846119 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderStyleExtensions.swift; sourceTree = "<group>"; };
-		08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTestViewController.swift; sourceTree = "<group>"; };
-		08970ED61C6A36E500846119 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
 		089984281ECDE188005C0B27 /* LessonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonViewController.swift; sourceTree = "<group>"; };
 		0899842B1ECDE194005C0B27 /* LessonPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPresenter.swift; sourceTree = "<group>"; };
 		0899842E1ECDE19E005C0B27 /* LessonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
@@ -6265,7 +6209,6 @@
 				2C453396204D46B70061342A /* PinsMap */,
 				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 				08F476201E82C12B0018E82C /* StreaksView */,
-				08970EC91C6A325600846119 /* PlaceholderView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
@@ -6467,28 +6410,6 @@
 				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
 			);
 			name = Step;
-			sourceTree = "<group>";
-		};
-		08970EC91C6A325600846119 /* PlaceholderView */ = {
-			isa = PBXGroup;
-			children = (
-				08970ED41C6A369200846119 /* PlaceholderViewTesting */,
-				08970ECA1C6A326900846119 /* PlaceholderView.swift */,
-				08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */,
-				08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */,
-				08970ECD1C6A326900846119 /* Styles.swift */,
-				08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */,
-			);
-			name = PlaceholderView;
-			sourceTree = "<group>";
-		};
-		08970ED41C6A369200846119 /* PlaceholderViewTesting */ = {
-			isa = PBXGroup;
-			children = (
-				08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */,
-				08970ED61C6A36E500846119 /* PlaceholderView.storyboard */,
-			);
-			name = PlaceholderViewTesting;
 			sourceTree = "<group>";
 		};
 		089F58871D22BD44000CD540 /* DiscussionCountView */ = {
@@ -8988,7 +8909,6 @@
 				08ED08E31FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				08DF78A91F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
-				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08CBA31E1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				08FEFC1F1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -9094,7 +9014,6 @@
 				08CB0D3A1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
 				2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
-				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
@@ -9193,7 +9112,6 @@
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
 				2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */,
 				2C1B62611F4C4AEF00236804 /* CodeSuggestionsTableViewController.xib in Resources */,
-				2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */,
 				2C1B62651F4C4AEF00236804 /* WarningView.xib in Resources */,
 				2C608B602045729C006870BB /* step2.html in Resources */,
@@ -9304,7 +9222,6 @@
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
 				2C1B64711F4C590700236804 /* StepCardView.xib in Resources */,
 				2C1B64721F4C590700236804 /* CodeSuggestionsTableViewController.xib in Resources */,
-				2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */,
 				2C1B64761F4C590700236804 /* WarningView.xib in Resources */,
 				2C608B5F2045729B006870BB /* step2.html in Resources */,
@@ -9423,7 +9340,6 @@
 				2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */,
 				2C35C4E31F4DA487002F3BF4 /* nouns_f.plist in Resources */,
 				2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */,
-				2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */,
 				08CB0D481FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C6A762B2045CE4E00C509A6 /* ProgressTableViewCell.xib in Resources */,
 				2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */,
@@ -9528,7 +9444,6 @@
 				2C9732A61F4C38F600AC9301 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C608B612045729D006870BB /* step2.html in Resources */,
 				2C35C4EA1F4DA48F002F3BF4 /* nouns_m.plist in Resources */,
-				2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */,
 				2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */,
 				2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */,
 				2C4BBF1F203DC66F000A4250 /* plyr.css in Resources */,
@@ -9674,7 +9589,6 @@
 				2C8652601F4B2F7D00D51654 /* Config.plist in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				085E9E711F138C3F00D6A4BC /* CodeSuggestionsTableViewController.xib in Resources */,
-				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
 				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
 				86AE94701E84511A00F67691 /* WarningView.xib in Resources */,
 				86AE94711E84511A00F67691 /* StepTabView.xib in Resources */,
@@ -11514,12 +11428,10 @@
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
 				08E8F9681F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				0859AEA21E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
-				08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */,
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
-				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -11604,7 +11516,6 @@
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08E8F9751F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
 				088EDCA71F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
-				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */,
 				084F7AA81E76EF690088368A /* LastStep.swift in Sources */,
 				0860D9161F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
@@ -11622,7 +11533,6 @@
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				082BE3B31E67686B006BC60F /* RoutingManager.swift in Sources */,
 				080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
-				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				0888D10A1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
@@ -11725,7 +11635,6 @@
 				0846B1161EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				08CB0D321FB5F9FC001A1E02 /* ExploreViewController.swift in Sources */,
 				089504841F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
-				08D120CC1C937B2200A54ABC /* PlaceholderTestViewController.swift in Sources */,
 				08D120CD1C937B2200A54ABC /* StepicVideoPlayerViewController.swift in Sources */,
 				0829B83B1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08D120CE1C937B2200A54ABC /* StringDatasetExtension.swift in Sources */,
@@ -11821,7 +11730,6 @@
 				0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
-				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				08C1BF321FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				080217841F55B1B200186245 /* Menu.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
@@ -11915,12 +11823,10 @@
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
 				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
-				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				08E8F96C1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
 				0895A13B1E43836B00FE22DD /* FillBlanksReply.swift in Sources */,
-				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				088FD8171FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
@@ -12031,7 +11937,6 @@
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
-				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
 				2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */,
 				2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */,
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
@@ -12053,7 +11958,6 @@
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
-				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
@@ -12181,7 +12085,6 @@
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
-				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
@@ -12275,7 +12178,6 @@
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
-				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
 				2CA9D9852010EEA2007AA743 /* AdaptiveRatingsAPI.swift in Sources */,
@@ -12663,16 +12565,10 @@
 				2C1B60EB1F4C4AEF00236804 /* RateAppAlertManager.swift in Sources */,
 				2C1B60EC1F4C4AEF00236804 /* Reachability.m in Sources */,
 				2C1B60ED1F4C4AEF00236804 /* ControllerHelperLaunchExtension.swift in Sources */,
-				2C1B60EE1F4C4AEF00236804 /* PlaceholderTestViewController.swift in Sources */,
-				2C1B60EF1F4C4AEF00236804 /* PlaceholderView.swift in Sources */,
 				2C1B60F01F4C4AEF00236804 /* CodeSnippetSymbols.swift in Sources */,
-				2C1B60F11F4C4AEF00236804 /* PlaceholderViewDataSource.swift in Sources */,
 				2C49190B2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF12045691E006870BB /* StepReversedCardView.swift in Sources */,
-				2C1B60F21F4C4AEF00236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA220568BDD0098707D /* PinsMapView.swift in Sources */,
-				2C1B60F31F4C4AEF00236804 /* Styles.swift in Sources */,
-				2C1B60F41F4C4AEF00236804 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C1B60F51F4C4AEF00236804 /* VideoDownloadView.swift in Sources */,
 				2C1B60F61F4C4AEF00236804 /* CodeSample.swift in Sources */,
 				2C1B60F71F4C4AEF00236804 /* AdaptiveRatingManager.swift in Sources */,
@@ -13149,16 +13045,10 @@
 				2C1B62FC1F4C590700236804 /* RateAppAlertManager.swift in Sources */,
 				2C1B62FD1F4C590700236804 /* Reachability.m in Sources */,
 				2C1B62FE1F4C590700236804 /* ControllerHelperLaunchExtension.swift in Sources */,
-				2C1B62FF1F4C590700236804 /* PlaceholderTestViewController.swift in Sources */,
-				2C1B63001F4C590700236804 /* PlaceholderView.swift in Sources */,
 				2C1B63011F4C590700236804 /* CodeSnippetSymbols.swift in Sources */,
-				2C1B63021F4C590700236804 /* PlaceholderViewDataSource.swift in Sources */,
 				2C49190C2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF22045691F006870BB /* StepReversedCardView.swift in Sources */,
-				2C1B63031F4C590700236804 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA120568BDD0098707D /* PinsMapView.swift in Sources */,
-				2C1B63041F4C590700236804 /* Styles.swift in Sources */,
-				2C1B63051F4C590700236804 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C1B63061F4C590700236804 /* VideoDownloadView.swift in Sources */,
 				2C1B63071F4C590700236804 /* CodeSample.swift in Sources */,
 				2C1B63081F4C590700236804 /* AdaptiveRatingManager.swift in Sources */,
@@ -13634,13 +13524,7 @@
 				2C89A97F1F4C289900227C3B /* RateAppAlertManager.swift in Sources */,
 				2C89A9801F4C289900227C3B /* Reachability.m in Sources */,
 				2C89A9811F4C289900227C3B /* ControllerHelperLaunchExtension.swift in Sources */,
-				2C89A9821F4C289900227C3B /* PlaceholderTestViewController.swift in Sources */,
-				2C89A9831F4C289900227C3B /* PlaceholderView.swift in Sources */,
 				2C89A9841F4C289900227C3B /* CodeSnippetSymbols.swift in Sources */,
-				2C89A9851F4C289900227C3B /* PlaceholderViewDataSource.swift in Sources */,
-				2C89A9861F4C289900227C3B /* PlaceholderViewDelegate.swift in Sources */,
-				2C89A9871F4C289900227C3B /* Styles.swift in Sources */,
-				2C89A9881F4C289900227C3B /* PlaceholderStyleExtensions.swift in Sources */,
 				2C89A9891F4C289900227C3B /* VideoDownloadView.swift in Sources */,
 				2C89A98A1F4C289900227C3B /* CodeSample.swift in Sources */,
 				2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */,
@@ -14120,16 +14004,10 @@
 				2C9731331F4C38F600AC9301 /* RateAppAlertManager.swift in Sources */,
 				2C9731341F4C38F600AC9301 /* Reachability.m in Sources */,
 				2C9731351F4C38F600AC9301 /* ControllerHelperLaunchExtension.swift in Sources */,
-				2C9731361F4C38F600AC9301 /* PlaceholderTestViewController.swift in Sources */,
-				2C9731371F4C38F600AC9301 /* PlaceholderView.swift in Sources */,
 				2C9731381F4C38F600AC9301 /* CodeSnippetSymbols.swift in Sources */,
-				2C9731391F4C38F600AC9301 /* PlaceholderViewDataSource.swift in Sources */,
 				2C49190A2062A1CC003E733D /* StepikTableView.swift in Sources */,
 				2C608AF02045691E006870BB /* StepReversedCardView.swift in Sources */,
-				2C97313A1F4C38F600AC9301 /* PlaceholderViewDelegate.swift in Sources */,
 				2C715DA320568BDE0098707D /* PinsMapView.swift in Sources */,
-				2C97313B1F4C38F600AC9301 /* Styles.swift in Sources */,
-				2C97313C1F4C38F600AC9301 /* PlaceholderStyleExtensions.swift in Sources */,
 				2C97313D1F4C38F600AC9301 /* VideoDownloadView.swift in Sources */,
 				2C97313E1F4C38F600AC9301 /* CodeSample.swift in Sources */,
 				2C97313F1F4C38F600AC9301 /* AdaptiveRatingManager.swift in Sources */,
@@ -14675,13 +14553,7 @@
 				864514F41E9FD4F6007F73BE /* RateAppAlertManager.swift in Sources */,
 				864D67D61E83E394001E8D9E /* Reachability.m in Sources */,
 				864D67D51E83E23B001E8D9E /* ControllerHelperLaunchExtension.swift in Sources */,
-				864D67411E83E08E001E8D9E /* PlaceholderTestViewController.swift in Sources */,
-				864D67431E83E08E001E8D9E /* PlaceholderView.swift in Sources */,
 				085E9E6B1F138C1A00D6A4BC /* CodeSnippetSymbols.swift in Sources */,
-				864D67441E83E08E001E8D9E /* PlaceholderViewDataSource.swift in Sources */,
-				864D67451E83E08E001E8D9E /* PlaceholderViewDelegate.swift in Sources */,
-				864D67461E83E08E001E8D9E /* Styles.swift in Sources */,
-				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				2CA2E72620237E55001DC410 /* AdaptiveRatingsViewController.swift in Sources */,
