@@ -23,6 +23,7 @@ class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
         static let refreshing = PlaceholderState(id: "refreshing")
+        static let adaptiveCoursePassed = PlaceholderState(id: "adaptiveCoursePassed")
 
         var hashValue: Int {
             get {
