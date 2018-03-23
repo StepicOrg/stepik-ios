@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ControllerHelper {
     static func getTopViewController() -> UIViewController? {

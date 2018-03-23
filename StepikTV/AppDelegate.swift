@@ -14,7 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Add a search view controller to the root `UITabBarController`.
+        if let tabController = window?.rootViewController as? UITabBarController {
+            let searchController = packagedSearchController()
+            tabController.viewControllers?.append(searchController)
+
+            let viewControllers = tabController.viewControllers!
+            viewControllers[0].title = NSLocalizedString("Featured", comment: "")
+
+            let navigationController : UINavigationController = viewControllers[1] as! UINavigationController
+            navigationController.title = NSLocalizedString("My courses", comment: "")
+            navigationController.viewControllers.first?.title = viewControllers[1].title
+
+            viewControllers[2].title = NSLocalizedString("Profile", comment: "")
+            viewControllers[3].title = NSLocalizedString("Search", comment: "")
+        }
         return true
     }
 
@@ -38,6 +53,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func packagedSearchController() -> UIViewController {
+        // Load a `SearchResultsViewController` from its storyboard.
+        let flowLayout = UICollectionViewFlowLayout()
+            flowLayout.scrollDirection = .vertical
+        let searchResultsController = SearchResultsViewController(collectionViewLayout: flowLayout)
+
+        /*
+         Create a UISearchController, passing the `searchResultsController` to
+         use to display search results.
+         */
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        let rect = UIScreen.main.bounds
+        let view = BlurredView(frame: rect, style: .extraLight, image: #imageLiteral(resourceName: "background"))
+        searchController.view.insertSubview(view, at: 0)
+        searchController.searchResultsUpdater = searchResultsController
+        searchController.searchBar.placeholder = NSLocalizedString("Enter course name", comment: "")
+
+        // Contain the `UISearchController` in a `UISearchContainerViewController`.
+        let searchContainer = UISearchContainerViewController(searchController: searchController)
+
+        // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
+        let searchNavigationController = UINavigationController(rootViewController: searchContainer)
+        return searchNavigationController
     }
 
 }

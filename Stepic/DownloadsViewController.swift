@@ -9,11 +9,10 @@
 import UIKit
 import DownloadButton
 import SVProgressHUD
-import DZNEmptyDataSet
 
 class DownloadsViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     var downloading: [Video] = []
     var stored: [Video] = []
@@ -23,9 +22,9 @@ class DownloadsViewController: UIViewController {
 
         tableView.register(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
 
-        self.tableView.emptyDataSetDelegate = self
-        self.tableView.emptyDataSetSource = self
-
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDownloads) { [weak self] in
+            self?.tabBarController?.selectedIndex = 1
+        }
         self.tableView.tableFooterView = UIView()
 
         if #available(iOS 11.0, *) {
@@ -231,9 +230,11 @@ extension DownloadsViewController : UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if downloading == [] && stored == [] {
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
             return 0
         }
 
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
         if downloading != [] && stored != [] {
             return 2
         }
@@ -355,50 +356,5 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
             print("Unsupported states")
             break
         }
-    }
-}
-
-extension DownloadsViewController : DZNEmptyDataSetSource {
-
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return Images.emptyDownloadsPlaceholder
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-
-        let text = NSLocalizedString("EmptyDownloadsTitle", comment: "")
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.white
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-
-        let text = NSLocalizedString("EmptyDownloadsDescription", comment: "")
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-            NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
-
-extension DownloadsViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-
-    func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
-        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }

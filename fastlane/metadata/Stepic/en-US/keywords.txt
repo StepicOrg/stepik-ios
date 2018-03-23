@@ -1,1 +1,2 @@
-stepik,education,online education,learn,courses,stepik.org, mooc,stepic
+code,learn,programming,python,java,cpp,kotlin,edu,online,toefl,mooc,data science,courses
+

@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-145" y="83"/>
         </scene>
-        <!--Empty Data Set Delegate-->
+        <!--Notifications View Controller-->
         <scene sceneID="OCT-sI-xvn">
             <objects>
                 <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY" customClass="StepikTableView" customModule="Stepic">
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <viewLayoutGuide key="safeArea" id="AR3-Yp-bpK"/>
@@ -41,8 +41,6 @@
                                 <connections>
                                     <outlet property="dataSource" destination="zmb-v1-FSp" id="adO-MK-ZT4"/>
                                     <outlet property="delegate" destination="zmb-v1-FSp" id="qMf-fd-Uxs"/>
-                                    <outlet property="emptyDataSetDelegate" destination="zmb-v1-FSp" id="TcX-8b-BN1"/>
-                                    <outlet property="emptyDataSetSource" destination="zmb-v1-FSp" id="rVU-KG-mzn"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nd0-dE-vdS" customClass="NotificationsMarkAsReadButton" customModule="Adaptive_1838" customModuleProvider="target">
