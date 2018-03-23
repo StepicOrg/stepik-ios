@@ -3984,6 +3984,21 @@
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
+		86A1C3262065157C00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		86A1C3272065157D00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		86A1C3292065157E00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		86A1C32A2065157F00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		86A1C32B2065158000D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
+		86A1C331206515B200D0914C /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
+		86A1C332206515B200D0914C /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
+		86A1C333206515B300D0914C /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
+		86A1C334206515B300D0914C /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
+		86A1C335206515B400D0914C /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
+		86A1C3362065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
+		86A1C3372065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
+		86A1C3382065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
+		86A1C3392065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
+		86A1C33A2065173900D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		86AE94701E84511A00F67691 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
@@ -9227,6 +9242,7 @@
 				08C7CB7A1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
+				86A1C32A2065157F00D0914C /* StepikPlaceholderView.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C608AC6204568C5006870BB /* CongratulationViewController.xib in Resources */,
@@ -9337,6 +9353,7 @@
 				08C7CB7B1FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B64961F4C590700236804 /* step4.html in Resources */,
+				86A1C3292065157E00D0914C /* StepikPlaceholderView.xib in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C608AC5204568C5006870BB /* CongratulationViewController.xib in Resources */,
@@ -9436,6 +9453,7 @@
 				2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */,
 				2C6A76532045CF3B00C509A6 /* overlay_hard.png in Resources */,
 				2C89AB101F4C289900227C3B /* DiscussionsStoryboard.storyboard in Resources */,
+				86A1C3272065157D00D0914C /* StepikPlaceholderView.xib in Resources */,
 				08C7CB781FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				2C89AB111F4C289900227C3B /* QuizViewController.xib in Resources */,
 				2C89AB121F4C289900227C3B /* step4.html in Resources */,
@@ -9543,6 +9561,7 @@
 				08195A261FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
 				087E8B27204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
+				86A1C32B2065158000D0914C /* StepikPlaceholderView.xib in Resources */,
 				2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */,
 				08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
@@ -9692,6 +9711,7 @@
 				2C4BBF17203DC66D000A4250 /* plyr.js in Resources */,
 				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				08195A231FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
+				86A1C3262065157C00D0914C /* StepikPlaceholderView.xib in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
 				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
 				08CBA3431F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
@@ -12673,6 +12693,7 @@
 				086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DB1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				2C47A168206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				86A1C3392065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
 				2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */,
 				2C1B61081F4C4AEF00236804 /* DownloadsViewController.swift in Sources */,
@@ -12866,6 +12887,7 @@
 				2C1B61AE1F4C4AEF00236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B61AF1F4C4AEF00236804 /* Version.swift in Sources */,
 				08CB0D531FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
+				86A1C334206515B300D0914C /* ControllerWithStepikPlaceholder.swift in Sources */,
 				2C1B61B01F4C4AEF00236804 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C1B61B21F4C4AEF00236804 /* Executable.swift in Sources */,
 				2C608B282045699C006870BB /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -13157,6 +13179,7 @@
 				086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DC1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				86A1C33A2065173900D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
 				2C1B63181F4C590700236804 /* VideoRate.swift in Sources */,
 				2C1B63191F4C590700236804 /* DownloadsViewController.swift in Sources */,
@@ -13350,6 +13373,7 @@
 				2C1B63BF1F4C590700236804 /* VersionUpdateAlertConstructor.swift in Sources */,
 				2C1B63C01F4C590700236804 /* Version.swift in Sources */,
 				08CB0D541FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
+				86A1C335206515B400D0914C /* ControllerWithStepikPlaceholder.swift in Sources */,
 				2C1B63C11F4C590700236804 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C1B63C31F4C590700236804 /* Executable.swift in Sources */,
 				2C608B272045699C006870BB /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -13696,6 +13720,7 @@
 				2C89A9C91F4C289900227C3B /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				2C89A9CA1F4C289900227C3B /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C89A9CB1F4C289900227C3B /* CodeTemplate+CoreDataProperties.swift in Sources */,
+				86A1C3372065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				088EDCAA1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C6A76392045CE8200C509A6 /* CardStepDelegate.swift in Sources */,
 				2C89A9CC1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
@@ -13935,6 +13960,7 @@
 				2C89AA8F1F4C289900227C3B /* User+CoreDataProperties.swift in Sources */,
 				2C89AA901F4C289900227C3B /* User.swift in Sources */,
 				2C89AA921F4C289900227C3B /* Parser.swift in Sources */,
+				86A1C332206515B200D0914C /* ControllerWithStepikPlaceholder.swift in Sources */,
 				089C88E21FCF494300003B63 /* CourseListType.swift in Sources */,
 				2C89AA931F4C289900227C3B /* StepicToken.swift in Sources */,
 				2C89AA941F4C289900227C3B /* AuthInfo.swift in Sources */,
@@ -14124,6 +14150,7 @@
 				086FC6AD1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DA1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				2C47A167206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				86A1C3382065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C97314E1F4C38F600AC9301 /* Player.swift in Sources */,
 				2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */,
 				2C9731501F4C38F600AC9301 /* DownloadsViewController.swift in Sources */,
@@ -14317,6 +14344,7 @@
 				2C9731F71F4C38F600AC9301 /* Version.swift in Sources */,
 				08CB0D521FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				2C9731F81F4C38F600AC9301 /* StreaksNotificationSuggestionManager.swift in Sources */,
+				86A1C333206515B300D0914C /* ControllerWithStepikPlaceholder.swift in Sources */,
 				2C9731FA1F4C38F600AC9301 /* Executable.swift in Sources */,
 				2C608B292045699C006870BB /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				2C9731FB1F4C38F600AC9301 /* ExecutionQueue.swift in Sources */,
@@ -14684,6 +14712,7 @@
 				864D675B1E83E08E001E8D9E /* Player.swift in Sources */,
 				2CA2E72320237E4A001DC410 /* AdaptiveStatsPresenter.swift in Sources */,
 				864D675C1E83E08E001E8D9E /* VideoRate.swift in Sources */,
+				86A1C3362065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				864D675D1E83E08E001E8D9E /* DownloadsViewController.swift in Sources */,
 				864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */,
 				864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */,
@@ -15003,6 +15032,7 @@
 				864D67111E83DE03001E8D9E /* StepicsAPI.swift in Sources */,
 				086D5B54201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				2CA2E71720237E0E001DC410 /* StepReversedCardView.swift in Sources */,
+				86A1C331206515B200D0914C /* ControllerWithStepikPlaceholder.swift in Sources */,
 				864D67121E83DE03001E8D9E /* UnitsAPI.swift in Sources */,
 				864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */,
 				089C88E01FCF494300003B63 /* CourseListType.swift in Sources */,

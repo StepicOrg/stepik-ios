@@ -77,7 +77,7 @@ extension StepikPlaceholder.Style {
                                           image: nil,
                                           text: NSLocalizedString("ConnectionErrorText", comment: ""),
                                           buttonTitle: NSLocalizedString("TryAgain", comment: ""))
-    static let adaptiveCoursePassed = StepikPlaceholderStyle(id: "noConnectionQuiz",
+    static let adaptiveCoursePassed = StepikPlaceholderStyle(id: "adaptiveCoursePassed",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("NoRecommendations", comment: ""),
                                           buttonTitle: nil)
