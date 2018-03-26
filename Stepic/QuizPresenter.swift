@@ -113,8 +113,7 @@ class QuizPresenter {
     var attempt: Attempt? {
         didSet {
             guard let attempt = attempt,
-                let dataset = attempt.dataset,
-                let id = attempt.id else {
+                let dataset = attempt.dataset else {
                 print("Attempt should never be nil")
                 return
             }
@@ -122,7 +121,7 @@ class QuizPresenter {
             self.state = .attempt
             self.view?.update(limit: submissionLimit)
             view?.display(dataset: dataset)
-            if let cachedReply = ReplyCache.shared.getReply(forStepId: step.id, attemptId: id) {
+            if let cachedReply = ReplyCache.shared.getReply(forStepId: step.id, attemptId: attempt.id) {
                 view?.display(reply: cachedReply)
             }
             checkSubmissionRestrictions()
@@ -184,7 +183,7 @@ class QuizPresenter {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
-                    _ = s.submissionsAPI.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
+                    _ = s.submissionsAPI.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id, success: {
                         [weak self]
                         submissions, _ in
                         guard let s = self else { return }
@@ -312,7 +311,7 @@ class QuizPresenter {
     }
 
     private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        let id = attempt!.id!
+        let id = attempt!.id
         performRequest({
             [weak self] in
             guard let s = self else { return }
@@ -328,7 +327,7 @@ class QuizPresenter {
                 }
 
                 s.submission = submission
-                s.checkSubmission(submission.id!, time: 0, completion: completion)
+                s.checkSubmission(submission.id, time: 0, completion: completion)
             }, error: {
                 errorText in
                 errorHandler(errorText)

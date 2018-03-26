@@ -33,9 +33,7 @@ class CookieTests: XCTestCase {
                         print("retrieved user \(user.id) \(user.firstName) \(user.lastName)")
                         ApiDataDownloader.attempts.create(stepName: "choice", stepId: 115260, success: {
                                 attempt in
-                                if let id = attempt.id {
-                                    print("created attempt \(id)")
-                                }
+                                print("created attempt \(attempt.id)")
                                 expectation.fulfill()
                             }, error: {
                                 errorMsg in

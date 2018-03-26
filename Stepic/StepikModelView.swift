@@ -13,16 +13,16 @@ class StepikModelView: JSONSerializable {
     var id: Int = 0
     var step: Int = 0
     var assignment: Int?
-    
+
     required init(json: JSON) {
         update(json: json)
     }
-    
+
     func update(json: JSON) {
         self.step = json["step"].intValue
         self.assignment = json["assignment"].int
     }
-    
+
     var json: JSON {
         var dict: JSON = ["step": step]
         if let assignment = assignment {
@@ -30,9 +30,9 @@ class StepikModelView: JSONSerializable {
         }
         return dict
     }
-    
+
     typealias idType = Int
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return false
     }

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class SubmissionsAPI: APIEndpoint {
     override var name: String { return "submissions" }
@@ -105,45 +106,36 @@ class SubmissionsAPI: APIEndpoint {
         })
     }
 
-    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-
-        let params: Parameters = [
-            "submission": [
-                "attempt": "\(attemptId)",
-                "reply": reply.dictValue
-            ]
-        ]
-
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
+    func create(stepName: String, attemptId: Int, reply: Reply) -> Promise<Submission> {
+        let submission = Submission(attempt: attemptId, reply: reply)
+        return Promise { fulfill, reject in
+            create.request(requestEndpoint: "submissions", paramName: "submission", creatingObject: submission, withManager: manager).then {
+                submission, json -> Void in
+                guard let json = json else {
+                    fulfill(submission)
+                    return
                 }
-            } else {
-                json = response.result.value!
+                submission.initReply(json: json["submission"]["reply"], stepName: stepName)
+                fulfill(submission)
+            }.catch {
+                error in
+                reject(error)
             }
-            let response = response.response
+        }
+    }
+}
 
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-
-            if response?.statusCode == 201 {
-                let submission = Submission(json: json["submissions"].arrayValue[0], stepName: stepName)
-                success(submission)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
-                return
-            }
-        })
+extension SubmissionsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        self.create(stepName: stepName, attemptId: attemptId, reply: reply).then {
+            submission in
+            success(submission)
+        }.catch {
+            error in
+            errorHandler(error.localizedDescription)
+        }
+        return nil
     }
 
 }

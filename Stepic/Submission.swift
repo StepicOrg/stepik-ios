@@ -9,21 +9,54 @@
 import UIKit
 import SwiftyJSON
 
-class Submission: NSObject {
-    var id: Int?
+class Submission: JSONSerializable {
+
+    typealias idType = Int
+
+    var id: Int = 0
     var status: String?
     var reply: Reply?
-    var attempt: Int?
+    var attempt: Int = 0
     var hint: String?
 
     init(json: JSON, stepName: String) {
-        id = json["id"].int
+        id = json["id"].intValue
         status = json["status"].string
-        attempt = json["attempt"].int
+        attempt = json["attempt"].intValue
         hint = json["hint"].string
         reply = nil
-        super.init()
         reply = getReplyFromJSON(json["reply"], stepName: stepName)
+    }
+
+    init(attempt: Int, reply: Reply) {
+        self.attempt = attempt
+        self.reply = reply
+    }
+
+    required init(json: JSON) {
+        update(json: json)
+    }
+
+    func update(json: JSON) {
+        id = json["id"].intValue
+        status = json["status"].string
+        attempt = json["attempt"].intValue
+        hint = json["hint"].string
+    }
+
+    func initReply(json: JSON, stepName: String) {
+        reply = getReplyFromJSON(json, stepName: stepName)
+    }
+
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].int
+    }
+
+    var json: JSON {
+        return [
+            "attempt": attempt,
+            "reply": reply?.dictValue ?? ""
+        ]
     }
 
     fileprivate func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
