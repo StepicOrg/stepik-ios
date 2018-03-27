@@ -455,6 +455,7 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863B9662069A41A0023A182 /* RetrieveRequestMaker.swift */; };
 		086442B51F764F67000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		086442B81F764F69000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
@@ -4320,6 +4321,7 @@
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
+		0863B9662069A41A0023A182 /* RetrieveRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveRequestMaker.swift; sourceTree = "<group>"; };
 		086494841E8C753B0083E0BE /* SberbankUniversity-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "SberbankUniversity-Info.plist"; path = "Sb/SberbankUniversity-Info.plist"; sourceTree = "<group>"; };
 		086494851E8C753B0083E0BE /* SberbankUniversity.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = SberbankUniversity.xcassets; path = Sb/SberbankUniversity.xcassets; sourceTree = "<group>"; };
 		086494861E8C753B0083E0BE /* SberbankUniversity.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = SberbankUniversity.entitlements; path = Sb/SberbankUniversity.entitlements; sourceTree = "<group>"; };
@@ -6075,6 +6077,7 @@
 				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
 				088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */,
 				088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */,
+				0863B9662069A41A0023A182 /* RetrieveRequestMaker.swift */,
 			);
 			name = "Request Makers";
 			sourceTree = "<group>";
@@ -11455,6 +11458,7 @@
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
+				0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08E8F9671F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
