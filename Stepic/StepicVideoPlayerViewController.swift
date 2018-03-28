@@ -238,6 +238,8 @@ class StepicVideoPlayerViewController: UIViewController {
         WatchSessionSender.sendPlaybackStatus(.available)
 
         NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: NSNotification.Name.AVAudioSessionRouteChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidBecomeActive(_:)), name: .UIApplicationDidBecomeActive, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: .UIApplicationDidEnterBackground, object: UIApplication.shared)
 
         topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: UIControlState())
 
@@ -275,7 +277,18 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpInside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControlEvents.touchDown)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
-//        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand.addTarget(self, action: #selector(togglePlayStop(_:)));
+    }
+
+    @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        if !RemoteConfig.shared.allowVideoInBackground {
+            MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
+        }
+    }
+
+    @objc internal func handleApplicationDidBecomeActive(_ aNotification: Notification) {
+        if !RemoteConfig.shared.allowVideoInBackground {
+            MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
+        }
     }
 
     @objc func togglePlayPause() {
