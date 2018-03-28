@@ -64,4 +64,59 @@ class RetrieveRequestMaker {
         }
     }
 
+    func requestWithFetching<T: IDFetchable>(requestEndpoint: String, paramName: String, params: Parameters, withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
+        return Promise { fulfill, reject in
+            checkToken().then {
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        reject(error)
+                    case .success(let json):
+                        let ids = json[paramName].arrayValue.flatMap {T.getId(json: $0)}
+                        T.fetchAsync(ids: ids).then {
+                            existingObjects -> Void in
+                            var resultArray: [T] = []
+                            for objectJSON in json[paramName].arrayValue {
+                                let existing = existingObjects.filter { obj in obj.hasEqualId(json: objectJSON) }
+
+                                switch existing.count {
+                                case 0:
+                                    resultArray.append(T(json: objectJSON))
+                                default:
+                                    let obj = existing[0]
+                                    obj.update(json: objectJSON)
+                                    resultArray.append(obj)
+                                }
+                            }
+
+                            CoreDataHelper.instance.save()
+
+                            let meta = Meta(json: json["meta"])
+                            fulfill((resultArray, meta, json))
+                            CoreDataHelper.instance.save()
+                        }.catch {
+                            error in
+                            reject(error)
+                        }
+                    }
+                }
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
+    }
+
+    func requestWithFetching<T: IDFetchable>(requestEndpoint: String, paramName: String, params: Parameters, withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta)> {
+        return Promise { fulfill, reject in
+            requestWithFetching(requestEndpoint: requestEndpoint, paramName: paramName, params: params, withManager: manager).then {
+                objects, meta, _ in
+                fulfill((objects, meta))
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
+    }
+
 }

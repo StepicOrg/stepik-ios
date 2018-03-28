@@ -9,8 +9,10 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import PromiseKit
 
-class Notification: NSManagedObject, JSONSerializable {
+final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
+
     typealias idType = Int
 
     convenience required init(json: JSON) {
@@ -53,6 +55,14 @@ class Notification: NSManagedObject, JSONSerializable {
             "level": level as AnyObject,
             "priority": priority as AnyObject
         ]
+    }
+
+    static func getId(json: JSON) -> Int? {
+        return json["id"].int
+    }
+
+    static func fetchAsync(ids: [Int]) -> Promise<[Notification]> {
+        return DatabaseFetchService.fetchAsync(entityName: "Notification", ids: ids)
     }
 }
 

@@ -226,9 +226,9 @@ class NotificationsPresenter {
     fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
         return Promise { fulfill, reject in
             var hasNext: Bool = false
-            checkToken().then { _ -> Promise<(Meta, [Notification])> in
+            checkToken().then { _ -> Promise<([Notification], Meta)> in
                 self.notificationsAPI.retrieve(page: page, notificationType: section.notificationType)
-            }.then { meta, result -> Promise<NotificationViewDataStruct> in
+            }.then { result, meta -> Promise<NotificationViewDataStruct> in
                 hasNext = meta.hasNext
 
                 return self.merge(old: self.displayedNotifications, new: result)

@@ -1274,6 +1274,7 @@
 		08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D9E98C206C243D002F41D3 /* AsyncFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D9E98B206C243D002F41D3 /* AsyncFetchService.swift */; };
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -4548,6 +4549,7 @@
 		08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummariesAPI.swift; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
+		08D9E98B206C243D002F41D3 /* AsyncFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFetchService.swift; sourceTree = "<group>"; };
 		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
@@ -5958,6 +5960,7 @@
 				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
 				0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */,
 				088E73F32061BDAA00D458E3 /* StepikModelView.swift */,
+				08D9E98B206C243D002F41D3 /* AsyncFetchService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -11443,6 +11446,7 @@
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				081959E01FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
+				08D9E98C206C243D002F41D3 /* AsyncFetchService.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,

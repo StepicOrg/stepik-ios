@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import PromiseKit
 
 protocol JSONSerializable {
 
@@ -20,4 +21,9 @@ protocol JSONSerializable {
     var json: JSON { get }
 
     func hasEqualId(json: JSON) -> Bool
+}
+
+protocol IDFetchable: JSONSerializable {
+    static func getId(json: JSON) -> idType?
+    static func fetchAsync(ids: [idType]) -> Promise<[Self]>
 }
