@@ -52,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
 
+        application.beginReceivingRemoteControlEvents()
+
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
         ExecutionQueues.sharedQueues.executeConnectionAvailableQueue()

@@ -389,9 +389,14 @@ class StepicVideoPlayerViewController: UIViewController {
 
 extension StepicVideoPlayerViewController : PlayerDelegate {
     func playerReady(_ player: Player) {
+        guard player.playbackState == .stopped else {
+            return
+        }
+
         print("player is ready to display")
         activityIndicator.isHidden = true
         setTimeParametersAfterPlayerIsReady()
+
         player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
         player.rate = currentRate.rawValue
