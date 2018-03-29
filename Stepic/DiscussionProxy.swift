@@ -9,15 +9,26 @@
 import Foundation
 import SwiftyJSON
 
-class DiscussionProxy {
+class DiscussionProxy: JSONSerializable {
+    var discussionIds: [Int] = []
+    var id: String = ""
 
-    var discussionIds: [Int]
-    var id: String
+    required init(json: JSON) {
+        update(json: json)
+    }
 
-    init(json: JSON) {
+    func update(json: JSON) {
         discussionIds = json["discussions"].arrayValue.flatMap {
             $0.int
         }
         id = json["id"].stringValue
+    }
+
+    var json: JSON {
+        return []
+    }
+
+    func hasEqualId(json: JSON) -> Bool {
+        return json["id"].string == id
     }
 }

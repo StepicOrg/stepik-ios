@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
+//TODO: Refactor this after DeviceError refactoring
 class DevicesAPI: APIEndpoint {
     override var name: String { return "devices" }
 

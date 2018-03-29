@@ -23,7 +23,7 @@ class RetrieveRequestMaker {
                         if updatingObject != nil {
                             updatingObject?.update(json: json[paramName].arrayValue[0])
                         } else {
-                            fulfill(T(json: json))
+                            fulfill(T(json: json[paramName].arrayValue[0]))
                         }
                     }
                 }

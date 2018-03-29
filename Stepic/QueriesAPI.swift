@@ -9,7 +9,9 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
+//TODO: Refactor this by adding class Query: JSONSerializable
 class QueriesAPI: APIEndpoint {
     override var name: String { return "queries" }
 
