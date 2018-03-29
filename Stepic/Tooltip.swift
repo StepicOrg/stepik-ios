@@ -12,6 +12,7 @@ import EasyTipView
 protocol Tooltip {
     init(text: String, shouldDismissAfterTime: Bool, color: TooltipColor)
     func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView)
+    func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView, isArrowVisible: Bool)
     func show(direction: TooltipDirection, in inView: UIView?, from fromItem: UIBarButtonItem)
     func dismiss()
 }
@@ -85,8 +86,18 @@ class EasyTipTooltip: Tooltip {
         preferences.drawing.borderColor = color.borderColor
     }
 
-    private func setupTooltip(direction: TooltipDirection) {
+    private func setupTooltip(direction: TooltipDirection, isArrowVisible: Bool) {
         preferences.drawing.arrowPosition = easyTipDirectionFromTooltipDirection(direction: direction)
+
+        if !isArrowVisible {
+            switch direction {
+            case .up, .down:
+                preferences.drawing.arrowWidth = CGFloat(0)
+            case .left, .right:
+                preferences.drawing.arrowHeight = CGFloat(0)
+            }
+        }
+
         easyTip = EasyTipView(text: text, preferences: preferences, delegate: nil)
     }
 
@@ -101,13 +112,17 @@ class EasyTipTooltip: Tooltip {
     }
 
     func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView) {
-        setupTooltip(direction: direction)
+        show(direction: direction, in: inView, from: fromView, isArrowVisible: true)
+    }
+
+    func show(direction: TooltipDirection, in inView: UIView?, from fromView: UIView, isArrowVisible: Bool) {
+        setupTooltip(direction: direction, isArrowVisible: isArrowVisible)
         easyTip.show(forView: fromView, withinSuperview: inView)
         setupDisappear()
     }
 
     func show(direction: TooltipDirection, in inView: UIView?, from fromItem: UIBarButtonItem) {
-        setupTooltip(direction: direction)
+        setupTooltip(direction: direction, isArrowVisible: true)
         easyTip.show(forItem: fromItem, withinSuperView: inView)
         setupDisappear()
     }

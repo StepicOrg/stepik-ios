@@ -400,6 +400,7 @@ ShareCourseTooltip = "Share the link with your friends to learn together";
 LessonDownloadTooltip = "Download lesson to watch lectures offline";
 ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
 StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
+VideoInBackgroundTooltip = "You can play video in background";
 
 /* Notification alerts */
 NotificationTabNotificationRequestAlertTitle = "Stay tuned";

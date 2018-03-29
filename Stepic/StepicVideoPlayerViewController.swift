@@ -230,6 +230,7 @@ class StepicVideoPlayerViewController: UIViewController {
     fileprivate var player: Player!
 
     var video: Video!
+    var videoInBackgroundTooltip: Tooltip?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -277,6 +278,22 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpInside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControlEvents.touchDown)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if RemoteConfig.shared.allowVideoInBackground && TooltipDefaultsManager.shared.shouldShowInVideoPlayer {
+            delay(2.0) { [weak self] in
+                guard let s = self else {
+                    return
+                }
+
+                s.videoInBackgroundTooltip = TooltipFactory.videoInBackground
+                s.videoInBackgroundTooltip?.show(direction: .down, in: s.view, from: s.fullscreenPlayButton, isArrowVisible: false)
+                TooltipDefaultsManager.shared.didShowInVideoPlayer = true
+            }
+        }
     }
 
     @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
