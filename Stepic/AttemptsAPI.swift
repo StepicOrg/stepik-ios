@@ -23,7 +23,7 @@ class AttemptsAPI: APIEndpoint {
                     fulfill(attempt)
                     return
                 }
-                attempt.initDataset(json: json["attempt"]["dataset"], stepName: stepName)
+                attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepName: stepName)
                 fulfill(attempt)
             }.catch {
                 error in

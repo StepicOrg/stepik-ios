@@ -115,7 +115,7 @@ class SubmissionsAPI: APIEndpoint {
                     fulfill(submission)
                     return
                 }
-                submission.initReply(json: json["submission"]["reply"], stepName: stepName)
+                submission.initReply(json: json["submissions"].arrayValue[0]["reply"], stepName: stepName)
                 fulfill(submission)
             }.catch {
                 error in
