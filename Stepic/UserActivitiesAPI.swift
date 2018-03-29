@@ -14,26 +14,8 @@ import PromiseKit
 class UserActivitiesAPI: APIEndpoint {
     override var name: String { return "user-activities" }
 
-    func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<UserActivity> {
-        return Promise<UserActivity> {
-            fulfill, reject in
-            Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(userId)", headers: headers).responseSwiftyJSON {
-                response in
-
-                switch response.result {
-                case .failure(let error):
-                    reject(RetrieveError(error: error))
-                    return
-                case .success(let json):
-                    guard let userActivityJSON = json["user-activities"].arrayValue.first else {
-                        reject(RetrieveError.parsingError)
-                        return
-                    }
-                    let userActivity = UserActivity(json: userActivityJSON)
-                    fulfill(userActivity)
-                }
-            }
-        }
+    func retrieve(user userId: Int) -> Promise<UserActivity> {
+        return retrieve.request(requestEndpoint: "user-activities", paramName: "user-activities", id: userId, withManager: manager)
     }
 }
 
@@ -78,7 +60,7 @@ extension UserActivitiesAPI {
     }
 }
 
-//TODO: Add parameters
+//TODO: This is never used, remove
 @available(*, deprecated, message: "Use RetrieveError instead")
 enum UserRetrieveError: Error {
     case connectionError, badStatus
