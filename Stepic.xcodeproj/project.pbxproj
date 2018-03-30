@@ -8340,6 +8340,7 @@
 			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
 			buildPhases = (
 				017B714BD9D996178EA110BD /* [CP] Check Pods Manifest.lock */,
+				2C47A16C206297D0003E87EC /* ShellScript */,
 				085D5CD51D007F2100092060 /* Sources */,
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
@@ -10235,6 +10236,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+		};
+		2C47A16C206297D0003E87EC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/xcrun simctl uninstall booted com.AlexKarpov.Stepic\n\n";
 		};
 		2C89AB331F4C289900227C3B /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
