@@ -14,6 +14,10 @@ import PromiseKit
 class CommentsAPI: APIEndpoint {
     override var name: String { return "comments" }
 
+    func retrieve(ids: [Int]) -> Promise<[Comment]> {
+        return getObjectsByIds(ids: ids, updating: Array<Comment>())
+    }
+
     @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON({

@@ -119,4 +119,50 @@ class RetrieveRequestMaker {
         }
     }
 
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.idType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], JSON)> {
+        let params: Parameters = [
+            "ids": ids
+        ]
+        return Promise {
+            fulfill, reject in
+            checkToken().then {
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
+                    switch response.result {
+
+                    case .failure(let error):
+                        reject(RetrieveError(error: error))
+
+                    case .success(let json):
+                        let jsonArray: [JSON] = json[paramName].array ?? []
+                        let resultArray: [T] = jsonArray.map {
+                            objectJSON in
+                            if let recoveredIndex = updating.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                                updating[recoveredIndex].update(json: objectJSON)
+                                return updating[recoveredIndex]
+                            } else {
+                                return T(json: objectJSON)
+                            }
+                        }
+
+                        CoreDataHelper.instance.save()
+                        fulfill((resultArray, json))
+                    }
+                }
+            }
+        }
+    }
+
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.idType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<[T]> {
+        return Promise {
+            fulfill, reject in
+            request(requestEndpoint: requestEndpoint, paramName: paramName, ids: ids, updating: updating, withManager: manager).then {
+                objects, _ in
+                fulfill(objects)
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
+    }
+
 }
