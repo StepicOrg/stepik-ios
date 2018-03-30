@@ -285,12 +285,12 @@ extension AuthAPI {
         signInWithAccount(email: username, password: password).then { token, authorizationType -> Void in
             AuthInfo.shared.authorizationType = authorizationType
             success(token)
-            }.catch { error in
-                if let typedError = error as? SignInError {
-                    failure(typedError)
-                } else {
-                    failure(SignInError.other(error: error, code: nil, message: nil))
-                }
+        }.catch { error in
+            if let typedError = error as? SignInError {
+                failure(typedError)
+            } else {
+                failure(SignInError.other(error: error, code: nil, message: nil))
+            }
         }
         return nil
     }
@@ -299,12 +299,12 @@ extension AuthAPI {
     @discardableResult func refreshTokenWith(_ refresh_token: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: TokenRefreshError) -> Void) -> Request? {
         refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).then { token in
             success(token)
-            }.catch { error in
-                if let typedError = error as? TokenRefreshError {
-                    failure(typedError)
-                } else {
-                    failure(TokenRefreshError.other)
-                }
+        }.catch { error in
+            if let typedError = error as? TokenRefreshError {
+                failure(typedError)
+            } else {
+                failure(TokenRefreshError.other)
+            }
         }
         return nil
     }
