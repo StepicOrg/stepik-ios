@@ -15,7 +15,34 @@ class CommentsAPI: APIEndpoint {
     override var name: String { return "comments" }
 
     func retrieve(ids: [Int]) -> Promise<[Comment]> {
-        return getObjectsByIds(ids: ids, updating: Array<Comment>())
+        return Promise {
+            fulfill, reject in
+            retrieve.request(requestEndpoint: "comments", paramName: "comments", ids: ids, updating: Array<Comment>(), withManager: manager).then {
+                comments, json -> Void in
+                var usersDict: [Int : UserInfo] = [Int: UserInfo]()
+
+                json["users"].arrayValue.forEach {
+                    let user = UserInfo(json: $0)
+                    usersDict[user.id] = user
+                }
+
+                var votesDict: [String: Vote] = [String: Vote]()
+
+                json["votes"].arrayValue.forEach({
+                    let vote = Vote(json: $0)
+                    votesDict[vote.id] = vote
+                })
+
+                for comment in comments {
+                    comment.userInfo = usersDict[comment.userId]
+                    comment.vote = votesDict[comment.voteId]
+                }
+                fulfill(comments)
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
     }
 
     @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
