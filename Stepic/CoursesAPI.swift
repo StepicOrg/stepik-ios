@@ -14,63 +14,6 @@ import PromiseKit
 class CoursesAPI: APIEndpoint {
     override var name: String { return "courses" }
 
-    @discardableResult func retrieveDisplayedIds(featured: Bool?, enrolled: Bool?, isPublic: Bool?, order: String?, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success : @escaping ([Int], Meta) -> Void, failure : @escaping (_ error: Error) -> Void) -> Request? {
-
-        var params = Parameters()
-
-        if let f = featured {
-            params["is_featured"] = f ? "true" : "false"
-        }
-
-        if let e = enrolled {
-            params["enrolled"] = e ? "true" : "false"
-        }
-
-        if let p = isPublic {
-            params["is_public"] = p ? "true" : "false"
-        }
-
-        if let o = order {
-            params["order"] = o
-        }
-
-        if let p = page {
-            params["page"] = p
-        }
-
-        params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
-
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/courses", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
-            }
-//            let response = response.response
-
-            //TODO: Remove from here
-            if let e = error {
-                print(e)
-                failure(e)
-                return
-            }
-
-            let meta = Meta(json: json["meta"])
-            var res: [Int] = []
-
-            for objectJSON in json["courses"].arrayValue {
-                res += [objectJSON["id"].intValue]
-            }
-            success(res, meta)
-        })
-    }
-
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course], refreshMode: RefreshMode, success: @escaping (([Course]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }
@@ -145,7 +88,6 @@ class CoursesAPI: APIEndpoint {
         })
     }
 
-    //Could wrap retrieveDisplayedIds 
     @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([Course], Meta)> {
         return Promise { fulfill, reject in
             retrieve(tag: tag, featured: featured, enrolled: enrolled, excludeEnded: excludeEnded, isPublic: isPublic, order: order, language: language, page: page, headers: headers, success: {
@@ -157,4 +99,8 @@ class CoursesAPI: APIEndpoint {
             })
         }
     }
+
+//    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([Course], Meta)> {
+//        retrieve.request
+//    }
 }

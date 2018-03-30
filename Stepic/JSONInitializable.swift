@@ -27,3 +27,9 @@ protocol IDFetchable: JSONSerializable {
     static func getId(json: JSON) -> idType?
     static func fetchAsync(ids: [idType]) -> Promise<[Self]>
 }
+
+extension IDFetchable {
+    static func fetchAsync(ids: [idType]) -> Promise<[Self]> {
+        return DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
+    }
+}

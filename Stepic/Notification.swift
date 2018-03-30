@@ -60,10 +60,6 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
     static func getId(json: JSON) -> Int? {
         return json["id"].int
     }
-
-    static func fetchAsync(ids: [Int]) -> Promise<[Notification]> {
-        return DatabaseFetchService.fetchAsync(entityName: "Notification", ids: ids)
-    }
 }
 
 enum NotificationStatus: String {

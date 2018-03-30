@@ -72,8 +72,7 @@ extension CommentsAPI {
         create(comment).then { success($0) }.catch { errorHandler($0.localizedDescription) }
         return nil
     }
-    
-    
+
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         retrieve(ids: ids).then {

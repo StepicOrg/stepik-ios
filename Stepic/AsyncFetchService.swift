@@ -12,12 +12,12 @@ import SwiftyJSON
 import CoreData
 
 class DatabaseFetchService {
-    static func fetchAsync<T: IDFetchable>(entityName: String, ids: [Int]) -> Promise<[T]> {
+    static func fetchAsync<T: IDFetchable>(entityName: String, ids: [T.idType]) -> Promise<[T]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+            NSPredicate(format: "managedId == %@", $0 as? NSNumber ?? $0 as! String)
         }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
 
