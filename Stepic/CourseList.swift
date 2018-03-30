@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 import PromiseKit
 
-class CourseList: NSManagedObject, JSONSerializable {
+final class CourseList: NSManagedObject, IDFetchable {
     typealias idType = Int
 
     convenience required init(json: JSON) {
