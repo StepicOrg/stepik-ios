@@ -37,7 +37,7 @@ class RetrieveRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
         return Promise { fulfill, reject in
             checkToken().then {
-                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         reject(error)
@@ -57,9 +57,9 @@ class RetrieveRequestMaker {
                         CoreDataHelper.instance.save()
                     }
                 }
-                }.catch {
-                    error in
-                    reject(error)
+            }.catch {
+                error in
+                reject(error)
             }
         }
     }
