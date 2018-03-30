@@ -39,7 +39,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6d-0A-2lq">
-                        <rect key="frame" x="24" y="60.5" width="272" height="150"/>
+                        <rect key="frame" x="24" y="60.5" width="272" height="166"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yXd-rR-5qS">
                                 <rect key="frame" x="16" y="16" width="240" height="118"/>
@@ -605,7 +605,7 @@
                             <constraint firstItem="yXd-rR-5qS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O6d-0A-2lq" secondAttribute="leading" constant="16" id="2cH-cB-eSQ"/>
                             <constraint firstItem="yXd-rR-5qS" firstAttribute="centerX" secondItem="O6d-0A-2lq" secondAttribute="centerX" id="3e4-1N-YFq"/>
                             <constraint firstAttribute="bottom" secondItem="yXd-rR-5qS" secondAttribute="bottom" constant="16" id="QW1-jf-TAv"/>
-                            <constraint firstAttribute="height" constant="150" id="YoR-bc-Wpe"/>
+                            <constraint firstAttribute="height" constant="166" id="YoR-bc-Wpe"/>
                             <constraint firstItem="yXd-rR-5qS" firstAttribute="top" secondItem="O6d-0A-2lq" secondAttribute="top" constant="16" id="s34-jT-JtM"/>
                         </constraints>
                         <variation key="default">

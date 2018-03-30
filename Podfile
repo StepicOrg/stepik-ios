@@ -7,11 +7,14 @@ use_frameworks!
 
 def shared_pods
     pod 'Alamofire', '~> 4.4'
+    pod 'Atributika', '~> 4.0'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
     pod 'Crashlytics', '~> 3.9'
+    pod 'DeviceKit', '~> 1.0'
+    pod 'PromiseKit', '~> 4.4'
 end
 
 def all_pods
@@ -34,7 +37,7 @@ def all_pods
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'master'
+    pod 'Kanna', '~> 4.0.0'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     

@@ -119,8 +119,8 @@ class BaseCardsStepsViewController: CardsStepsViewController {
         levelLabel.text = String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
 
         let newProgress = Float(rating - prevMaxRating) / Float(maxRating - prevMaxRating)
-        let shouldFulfill = progressBar.progress > newProgress
         let progressAddition: Float = 0.005
+        let shouldFulfill = progressBar.progress - progressAddition > newProgress
 
         guard !progressBar.progress.isEqual(to: newProgress + progressAddition) else {
             return

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MajorCollectionRowViewCell" id="DcC-q0-h9P" customClass="MajorCollectionRowViewCell" customModule="StepikTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="938" height="192"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="938" height="192"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5sK-u6-fJE">
+                        <rect key="frame" x="0.0" y="0.0" width="938" height="192"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="0.0" id="r3d-7o-due">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5sK-u6-fJE" firstAttribute="top" secondItem="DcC-q0-h9P" secondAttribute="top" id="7SI-7x-yOE"/>
+                <constraint firstAttribute="trailing" secondItem="5sK-u6-fJE" secondAttribute="trailing" id="AWv-uV-IvS"/>
+                <constraint firstAttribute="bottom" secondItem="5sK-u6-fJE" secondAttribute="bottom" id="FsO-OP-4ss"/>
+                <constraint firstItem="5sK-u6-fJE" firstAttribute="leading" secondItem="DcC-q0-h9P" secondAttribute="leading" id="NXT-Xe-KPy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="UZW-cf-Gi5"/>
+            <size key="customSize" width="938" height="192"/>
+            <connections>
+                <outlet property="collectionView" destination="5sK-u6-fJE" id="U5n-0R-gf8"/>
+            </connections>
+            <point key="canvasLocation" x="-279" y="1130"/>
+        </collectionViewCell>
+    </objects>
+</document>

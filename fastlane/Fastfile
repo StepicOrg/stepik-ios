@@ -18,7 +18,7 @@ default_platform :ios
 platform :ios do
 
   before_all do
-    cocoapods
+    cocoapods(repo_update: true)
   end
 
   def version_string(version_number, build_number)

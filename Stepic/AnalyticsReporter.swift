@@ -13,7 +13,6 @@ import YandexMobileMetrica
 
 class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
-
         let params = parameters as? [String: NSObject]
 
         reportFirebaseEvent(event, parameters: params)

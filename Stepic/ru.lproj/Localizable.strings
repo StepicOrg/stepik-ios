@@ -411,3 +411,66 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
+
+/* Stepik TV */
+"Featured" = "Подборка";
+"My courses" = "Мои курсы";
+"Profile" = "Профиль";
+"Search" = "Поиск";
+"Subjects" = "Предметы";
+"Enter course name" = "Введите название курса";
+"Authorization" = "Авторизация";
+"Registration" = "Регистрация";
+"Name" = "Имя";
+"Enter your name" = "Введите имя";
+"Email" = "Email";
+"Enter your email address" = "Введите Email";
+"Password" = "Пароль";
+"Enter your password" = "Введите пароль";
+"Sign In" = "Войти";
+"Sign Up" = "Зарегистрироваться";
+"Settings" = "Настройки";
+"Exit" = "Выйти";
+"Subscribing..." = "Подписка...";
+"Unsubscribing..." = "Отписка...";
+"Intro" = "Вступление";
+"Subscribe"= "Подписаться";
+"Leave"= "Отписаться";
+"Please, log in to see the user courses catalog" = "Пожалуйста, войдите, чтобы увидеть вышии курсы";
+"Answer" = "Ответ";
+"This quiz is unavailable on AppleTV" = "Это задание недоступно на AppleTV";
+"Submit" = "Подтвердить";
+"Try Again" = "Попробовать снова";
+"Correct" = "Верно";
+"Wrong" = "Неверно";
+"No Submissions Left" = "Попыток не осталось";
+"triesLeft1" = "%@ попытка осталась";
+"triesLeft234" = "%@ попытки осталось";
+"triesLeft567890" = "%@ попыток осталось";
+"Audience" = "Целевая аудитория";
+"Certificate" = "Сертификат";
+"Requirements" = "Требования";
+"Workload" = "Нагрузка";
+"Summary" = "Сводка";
+"Instructors" = "Преподаватели";
+"Successfully signed in, but could not get user" = "Успешный вход, но не возможно загрузить пользователя";
+"Successfully signed up, but could not get user" = "Успешный вход, но не возможно загрузить пользователя";
+"Invalid email or password" = "Неправильный адрес эл. почты или пароль";
+"Bad connection to sign in" = "Нет соединения с интернетом";
+"Bad connection to sign up" = "Нет соединения с интернетом";
+"In Progress" = "В процессе";
+"Passed" = "Пройденные";
+
+/* Placeholders */
+PlaceholderEmptyText = "Ничего нет";
+PlaceholderEmptyButton = "Может быть кнопка поможет";
+PlaceholderNoConnectionText = "Кажется, интернет-соединение потеряно";
+PlaceholderNoConnectionButton = "Повторить";
+PlaceholderEmptyDownloadsText = "Нет загруженных видео";
+PlaceholderEmptyDownloadsButton = "Перейти в каталог";
+PlaceholderLoginText = "Мы встречались раньше?\nВойдите, пожалуйста";
+PlaceholderLoginButton = "Войти";
+PlaceholderEmptyNotificationsText = "Нет уведомлений";
+PlaceholderEmptyNotificationsButton = "Перейти в каталог";
+PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
+PlaceholderEmptySearchButton = "Перейти в каталог";

@@ -45,8 +45,12 @@ class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                //Unregister from notifications
-                NotificationRegistrator.shared.unregisterFromNotifications(completion: {
+                let performLogoutActions = {
+                    [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
                     UIThread.performUI {
                         //Delete enrolled information
                         NotificationCenter.default.post(name: .didLogout, object: nil)
@@ -59,15 +63,27 @@ class AuthInfo: NSObject {
                         Certificate.deleteAll()
                         Progress.deleteAllStoredProgresses()
                         Notification.deleteAll()
-                        NotificationsBadgesManager.shared.set(number: 0)
+                        #if !os(tvOS)
+                            NotificationsBadgesManager.shared.set(number: 0)
+                        #endif
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
-                        self.setTokenValue(nil)
+                        strongSelf.setTokenValue(nil)
                     }
-                })
+                }
+
+                #if os(tvOS)
+                    NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+                    performLogoutActions()
+                #else
+                    //Unregister from notifications
+                    NotificationRegistrator.shared.unregisterFromNotifications(completion: {
+                        performLogoutActions()
+                    })
+                #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true

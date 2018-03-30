@@ -19,7 +19,10 @@ class QuizPresenter {
     var attemptsAPI: AttemptsAPI
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
-    var streaksNotificationSuggestionManager: NotificationSuggestionManager
+
+    #if !os(tvOS)
+        var streaksNotificationSuggestionManager: NotificationSuggestionManager?
+    #endif
 
     var state: QuizState = .nothing {
         didSet {
@@ -34,7 +37,7 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
@@ -42,8 +45,14 @@ class QuizPresenter {
         self.attemptsAPI = attemptsAPI
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
+    }
+
+    #if !os(tvOS)
+    convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
+        self.init(view: view, step: step, dataSource: dataSource, alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh, submissionsAPI: submissionsAPI, attemptsAPI: attemptsAPI, userActivitiesAPI: userActivitiesAPI)
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
+    #endif
 
     private var submissionLimit: SubmissionLimitation? {
         var limit: SubmissionLimitation?
@@ -83,7 +92,12 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
+                    // FIXME: Replace two different notifications with one from NSNotification.Name extension
+                    #if os(tvOS)
+                    NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
+                    #else
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
+                    #endif
                     DispatchQueue.main.async {
                         [weak self] in
                         self?.step.progress?.isPassed = true
@@ -318,12 +332,13 @@ class QuizPresenter {
             _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
                 [weak self]
                 submission in
+
                 guard let s = self else { return }
 
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
                 } else {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                 }
 
                 s.submission = submission
@@ -347,6 +362,7 @@ class QuizPresenter {
 
     private func retrySubmission() {
         view?.showLoading(visible: true)
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
 
         self.delegate?.submissionDidRetry()
@@ -374,14 +390,16 @@ class QuizPresenter {
             return nil
         }
 
-        if RoutingManager.rate.submittedCorrect() {
-            self.view?.showRateAlert()
-            return
-        }
+        #if !os(tvOS)
+            if RoutingManager.rate.submittedCorrect() {
+                self.view?.showRateAlert()
+                return
+            }
 
-        guard streaksNotificationSuggestionManager.canShowAlert(context: .streak, after: .submission) else {
-            return
-        }
+            guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(context: .streak, after: .submission) else {
+                return
+            }
+	#endif
 
         guard let user = AuthInfo.shared.user else {
             return
@@ -393,7 +411,10 @@ class QuizPresenter {
             guard activity.currentStreak > 0 else {
                 return
             }
-            self?.streaksNotificationSuggestionManager.didShowAlert(context: .streak)
+
+            #if !os(tvOS)
+                self?.streaksNotificationSuggestionManager?.didShowAlert(context: .streak)
+            #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
         }, error: {
             _ in
