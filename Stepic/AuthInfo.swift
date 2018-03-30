@@ -56,8 +56,8 @@ class AuthInfo: NSObject {
                             course.enrolled = false
                         }
 
+                        Certificate.deleteAll()
                         Progress.deleteAllStoredProgresses()
-
                         Notification.deleteAll()
                         NotificationsBadgesManager.shared.set(number: 0)
                         CoreDataHelper.instance.save()

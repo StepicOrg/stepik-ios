@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Certificate: NSManagedObject, JSONSerializable {
+@objc
+final class Certificate: NSManagedObject, IDFetchable {
     typealias idType = Int
 
     convenience required init(json: JSON) {
@@ -58,6 +59,19 @@ class Certificate: NSManagedObject, JSONSerializable {
             return results as! [Certificate]
         } catch {
             return []
+        }
+    }
+
+    //TODO: Refactor this action to protocol extension when refactoring CoreData
+    static func deleteAll() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request) as? [Certificate]
+            for obj in results ?? [] {
+                CoreDataHelper.instance.deleteFromStore(obj)
+            }
+        } catch {
+            print("certificate: couldn't delete all certificates!")
         }
     }
 }
