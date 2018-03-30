@@ -12,7 +12,7 @@ import SwiftyJSON
 import PromiseKit
 
 @objc
-class Course: NSManagedObject, JSONSerializable {
+final class Course: NSManagedObject, IDFetchable {
 
 // Insert code here to add functionality to your managed object subclass
 

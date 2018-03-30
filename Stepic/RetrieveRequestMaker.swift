@@ -15,7 +15,7 @@ class RetrieveRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, id: T.idType, updatingObject: T? = nil, withManager manager: Alamofire.SessionManager) -> Promise<T> {
         return Promise { fulfill, reject in
             checkToken().then {
-                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)", method: .get, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)", method: .get, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         reject(error)
@@ -37,7 +37,7 @@ class RetrieveRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
         return Promise { fulfill, reject in
             checkToken().then {
-                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/", method: .get, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         reject(error)
@@ -67,7 +67,7 @@ class RetrieveRequestMaker {
     func requestWithFetching<T: IDFetchable>(requestEndpoint: String, paramName: String, params: Parameters, withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
         return Promise { fulfill, reject in
             checkToken().then {
-                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
+                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         reject(error)

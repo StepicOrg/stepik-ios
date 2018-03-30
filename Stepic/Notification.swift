@@ -56,10 +56,6 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
             "priority": priority as AnyObject
         ]
     }
-
-    static func getId(json: JSON) -> Int? {
-        return json["id"].int
-    }
 }
 
 enum NotificationStatus: String {

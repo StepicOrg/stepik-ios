@@ -23,12 +23,34 @@ protocol JSONSerializable {
     func hasEqualId(json: JSON) -> Bool
 }
 
+extension JSONSerializable {
+    func hasEqualId(json: JSON) -> Bool {
+        if idType.self == Int.self {
+            return (json["id"].int as? Self.idType) == self.id
+        }
+        if idType.self == String.self {
+            return (json["id"].string as? Self.idType) == self.id
+        }
+        return false
+    }
+}
+
 protocol IDFetchable: JSONSerializable {
     static func getId(json: JSON) -> idType?
     static func fetchAsync(ids: [idType]) -> Promise<[Self]>
 }
 
 extension IDFetchable {
+    static func getId(json: JSON) -> idType? {
+        if idType.self == Int.self {
+            return json["id"].int as? Self.idType
+        }
+        if idType.self == String.self {
+            return json["id"].string as? Self.idType
+        }
+        return nil
+    }
+
     static func fetchAsync(ids: [idType]) -> Promise<[Self]> {
         return DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
     }
