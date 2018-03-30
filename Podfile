@@ -37,7 +37,7 @@ def all_pods
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna'
+    pod 'Kanna', '~> 4.0.0'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     
