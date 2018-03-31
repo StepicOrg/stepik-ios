@@ -35,17 +35,22 @@ class NotificationsAPI: APIEndpoint {
 
     func markAllAsRead(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<()> {
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)/mark-as-read", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    reject(error)
-                case .success(_):
-                    if response.response?.statusCode != 204 {
-                        reject(NotificationsAPIError.invalidStatus)
-                    } else {
-                        fulfill(())
+            checkToken().then {
+                self.manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/mark-as-read", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        reject(error)
+                    case .success(_):
+                        if response.response?.statusCode != 204 {
+                            reject(NotificationsAPIError.invalidStatus)
+                        } else {
+                            fulfill(())
+                        }
                     }
                 }
+            }.catch {
+                error in
+                reject(error)
             }
         }
     }
