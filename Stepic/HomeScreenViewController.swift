@@ -167,7 +167,7 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
                         return
                     }
                     strongSelf.continueLearningTooltip = TooltipFactory.continueLearningWidget
-                    strongSelf.continueLearningTooltip?.show(direction: .up, in: nil, from: strongSelf.continueLearningWidget.continueLearningButton)
+                    strongSelf.continueLearningTooltip?.show(direction: .up, in: strongSelf.continueLearningWidget, from: strongSelf.continueLearningWidget.continueLearningButton)
                     TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = true
                     strongSelf.viewWillAppearBlock = nil
                 }
