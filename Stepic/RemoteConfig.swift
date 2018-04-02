@@ -13,10 +13,12 @@ enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
     case adaptiveBackendUrl = "adaptive_backend_url"
     case supportedInAdaptiveModeCourses = "adaptive_courses_ios"
+    case allowVideoInBackground = "allow_video_in_background"
 }
 
 class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+    private let defaultAllowVideoInBackground = false
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -25,7 +27,8 @@ class RemoteConfig {
     lazy var appDefaults: [String: NSObject] = [
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
         RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
-        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
+        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject,
+        RemoteConfigKeys.allowVideoInBackground.rawValue: defaultAllowVideoInBackground as NSObject
     ]
 
     enum ShowStreaksNotificationTrigger: String {
@@ -55,6 +58,14 @@ class RemoteConfig {
 
         let ids = configValue.components(separatedBy: ",").flatMap { Int($0) }
         return ids
+    }
+
+    var allowVideoInBackground: Bool {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.allowVideoInBackground.rawValue).stringValue else {
+            return defaultAllowVideoInBackground
+        }
+
+        return configValue == "true"
     }
 
     init() {

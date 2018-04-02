@@ -24,4 +24,8 @@ struct TooltipFactory {
     static var streaksTooltip: Tooltip {
         return EasyTipTooltip(text: NSLocalizedString("StreaksSwitchTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
+
+    static var videoInBackground: Tooltip {
+        return EasyTipTooltip(text: NSLocalizedString("VideoInBackgroundTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
+    }
 }
