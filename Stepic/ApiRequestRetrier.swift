@@ -23,9 +23,9 @@ class ApiRequestRetrier: RequestRetrier, RequestAdapter {
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 && request.retryCount == 0 {
             checkToken().then {
                 completion(true, 0.0)
-                }.catch {
-                    _ in
-                    completion(false, 0.0)
+            }.catch {
+                _ in
+                completion(false, 0.0)
             }
         } else {
             completion(false, 0.0)
