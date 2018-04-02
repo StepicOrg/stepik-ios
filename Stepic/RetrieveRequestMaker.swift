@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 class RetrieveRequestMaker {
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, id: T.idType, updatingObject: T? = nil, withManager manager: Alamofire.SessionManager) -> Promise<T> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, id: T.IdType, updatingObject: T? = nil, withManager manager: Alamofire.SessionManager) -> Promise<T> {
         return Promise { fulfill, reject in
             checkToken().then {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)", method: .get, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
@@ -131,7 +131,7 @@ class RetrieveRequestMaker {
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.idType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], JSON)> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.IdType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], JSON)> {
         let params: Parameters = [
             "ids": ids
         ]
@@ -164,7 +164,7 @@ class RetrieveRequestMaker {
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.idType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<[T]> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.IdType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<[T]> {
         return Promise {
             fulfill, reject in
             request(requestEndpoint: requestEndpoint, paramName: paramName, ids: ids, updating: updating, withManager: manager).then {

@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class LastStep: NSManagedObject, JSONSerializable {
 
-    typealias idType = String
+    typealias IdType = String
 
     convenience required init(json: JSON) {
         self.init()

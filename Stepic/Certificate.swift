@@ -12,7 +12,7 @@ import SwiftyJSON
 
 @objc
 final class Certificate: NSManagedObject, IDFetchable {
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()

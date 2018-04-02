@@ -13,7 +13,7 @@ import SwiftyJSON
 @objc
 class User: NSManagedObject, JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()

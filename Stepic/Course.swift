@@ -16,7 +16,7 @@ final class Course: NSManagedObject, IDFetchable {
 
 // Insert code here to add functionality to your managed object subclass
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()

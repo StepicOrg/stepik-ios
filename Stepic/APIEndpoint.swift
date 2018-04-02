@@ -74,11 +74,11 @@ class APIEndpoint {
     }
 
     //TODO: Remove this in next refactoring iterations
-    func getObjectsByIds<T: JSONSerializable>(ids: [T.idType], updating: [T], printOutput: Bool = false) -> Promise<([T])> {
+    func getObjectsByIds<T: JSONSerializable>(ids: [T.IdType], updating: [T], printOutput: Bool = false) -> Promise<([T])> {
         return retrieve.request(requestEndpoint: name, paramName: name, ids: ids, updating: updating, withManager: manager)
     }
 
-    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.idType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
+    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.IdType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
         getObjectsByIds(ids: ids, updating: deleteObjects).then {
             objects in
             success?(objects)

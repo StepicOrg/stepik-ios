@@ -14,7 +14,7 @@ import SwiftyJSON
 class Section: NSManagedObject, JSONSerializable {
 
     // Insert code here to add functionality to your managed object subclass
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()

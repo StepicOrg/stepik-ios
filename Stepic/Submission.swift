@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class Submission: JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     var id: Int = 0
     var status: String?

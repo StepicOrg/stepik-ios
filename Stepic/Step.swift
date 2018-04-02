@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class Step: NSManagedObject, JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     var canEdit: Bool = false
 

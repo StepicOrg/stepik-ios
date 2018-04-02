@@ -12,7 +12,7 @@ import SwiftyJSON
 import CoreData
 
 class DatabaseFetchService {
-    static func fetchAsync<T: IDFetchable>(entityName: String, ids: [T.idType]) -> Promise<[T]> {
+    static func fetchAsync<T: IDFetchable>(entityName: String, ids: [T.IdType]) -> Promise<[T]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 

@@ -31,7 +31,7 @@ class StepikModelView: JSONSerializable {
         return dict
     }
 
-    typealias idType = Int
+    typealias IdType = Int
 
     func hasEqualId(json: JSON) -> Bool {
         return false

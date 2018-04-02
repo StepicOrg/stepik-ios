@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct Sorter {
-    static func sort<T: JSONSerializable>(_ array: [T], byIds ids: [T.idType], canMissElements: Bool = false) -> [T] {
+    static func sort<T: JSONSerializable>(_ array: [T], byIds ids: [T.IdType], canMissElements: Bool = false) -> [T] {
         var res: [T] = []
 
         for id in ids {

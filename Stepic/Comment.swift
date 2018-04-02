@@ -18,7 +18,7 @@ enum UserRole: String {
  */
 class Comment: JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     var id: Int = 0
     var parentId: Int?

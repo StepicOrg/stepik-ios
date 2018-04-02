@@ -13,7 +13,7 @@ import PromiseKit
 
 final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
