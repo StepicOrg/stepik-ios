@@ -43,14 +43,6 @@ class Section: NSManagedObject, JSONSerializable {
         initialize(json)
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
     class func getSections(_ id: Int) throws -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
 

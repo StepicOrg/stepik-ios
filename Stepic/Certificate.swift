@@ -35,14 +35,6 @@ final class Certificate: NSManagedObject, IDFetchable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
-
-    var json: JSON {
-        return []
-    }
-
     class func fetch(_ ids: [Int], user userId: Int) -> [Certificate] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
 

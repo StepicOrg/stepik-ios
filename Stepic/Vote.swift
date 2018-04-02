@@ -17,10 +17,6 @@ class Vote: JSONSerializable {
         }
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].string
-    }
-
     var id: String
     var value: VoteValue?
 

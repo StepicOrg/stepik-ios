@@ -260,10 +260,6 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
-        if ContentLanguage.sharedContentLanguage != language {
-            throw LanguageError.wrongLanguageError
-        }
-
         didRefreshOnce = true
         courseListsAPI.retrieve(language: language, page: 1).then {
             [weak self]

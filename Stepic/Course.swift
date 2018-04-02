@@ -58,14 +58,6 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
     var metaInfo: String {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {

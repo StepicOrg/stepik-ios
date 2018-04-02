@@ -30,10 +30,6 @@ class Lesson: NSManagedObject, JSONSerializable {
         stepsArray = json["steps"].arrayObject as! [Int]
     }
 
-    var json: JSON {
-        return []
-    }
-
     static func getLesson(_ id: Int) -> Lesson? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
 
@@ -53,10 +49,6 @@ class Lesson: NSManagedObject, JSONSerializable {
 
     func update(json: JSON) {
         initialize(json)
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
     }
 
     func loadSteps(completion: @escaping (() -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {

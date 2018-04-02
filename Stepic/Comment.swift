@@ -101,8 +101,4 @@ class Comment: JSONSerializable {
 
         return dict
     }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
 }

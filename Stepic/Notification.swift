@@ -39,10 +39,6 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
-
     var json: JSON {
         return [
             "id": id as AnyObject,

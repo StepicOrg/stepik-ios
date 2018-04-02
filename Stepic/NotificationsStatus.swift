@@ -28,10 +28,6 @@ class NotificationsStatus: JSONSerializable {
         self.totalCount = json["total"].intValue
     }
 
-    var json: JSON {
-        return []
-    }
-
     required init(json: JSON) {
         self.id = json["id"].intValue
         self.learnCount = json["learn"].intValue

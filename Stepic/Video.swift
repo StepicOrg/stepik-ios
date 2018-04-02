@@ -16,6 +16,7 @@ enum VideoState {
     case online, downloading, cached
 }
 
+@objc
 class Video: NSManagedObject, JSONSerializable {
 
     typealias idType = Int
@@ -39,14 +40,6 @@ class Video: NSManagedObject, JSONSerializable {
 
     func update(json: JSON) {
         initialize(json)
-    }
-
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
     }
 
     static func getNearestDefault(to quality: String) -> String {

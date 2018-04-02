@@ -40,13 +40,4 @@ class LastStep: NSManagedObject, JSONSerializable {
     func update(json: JSON) {
         initialize(json)
     }
-
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].stringValue
-    }
-
 }

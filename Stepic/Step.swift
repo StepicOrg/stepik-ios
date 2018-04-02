@@ -57,14 +57,6 @@ class Step: NSManagedObject, JSONSerializable {
         block.update(json: json["block"])
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
     var hasReview: Bool = false
 
     static func getStepWithId(_ id: Int, unitId: Int? = nil) -> Step? {

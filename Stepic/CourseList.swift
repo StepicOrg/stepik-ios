@@ -32,14 +32,6 @@ final class CourseList: NSManagedObject, IDFetchable {
         initialize(json)
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
-
     var language: ContentLanguage {
         return ContentLanguage(languageString: languageString)
     }

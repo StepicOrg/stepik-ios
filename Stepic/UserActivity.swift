@@ -24,14 +24,6 @@ class UserActivity: JSONSerializable {
         self.pins = json["pins"].arrayValue.map({return $0.intValue})
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return json["id"].int == id
-    }
-
     required init(json: JSON) {
         self.id = json["id"].intValue
         self.pins = json["pins"].arrayValue.map({return $0.intValue})

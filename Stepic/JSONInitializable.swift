@@ -33,6 +33,10 @@ extension JSONSerializable {
         }
         return false
     }
+
+    var json: JSON {
+        return []
+    }
 }
 
 protocol IDFetchable: JSONSerializable {

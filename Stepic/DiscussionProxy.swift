@@ -23,12 +23,4 @@ class DiscussionProxy: JSONSerializable {
         }
         id = json["id"].stringValue
     }
-
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return json["id"].string == id
-    }
 }

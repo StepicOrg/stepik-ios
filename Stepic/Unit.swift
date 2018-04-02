@@ -38,14 +38,6 @@ class Unit: NSManagedObject, JSONSerializable {
         initialize(json)
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
     func loadAssignments(_ completion: @escaping (() -> Void), errorHandler: @escaping (() -> Void)) {
         _ = ApiDataDownloader.assignments.retrieve(ids: self.assignmentsArray, existing: self.assignments, refreshMode: .update, success: {
             newAssignments in

@@ -45,10 +45,6 @@ class Progress: NSManagedObject, JSONSerializable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].stringValue
-    }
-
     var percentPassed: Float {
         return numberOfSteps != 0 ? Float(numberOfStepsPassed) / Float(numberOfSteps) * 100 : 100.0
     }

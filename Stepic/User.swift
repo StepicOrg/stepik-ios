@@ -36,14 +36,6 @@ class User: NSManagedObject, JSONSerializable {
         initialize(json)
     }
 
-    var json: JSON {
-        return []
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
     var isGuest: Bool {
         return level == 0
     }
@@ -86,12 +78,5 @@ struct UserInfo {
         avatarURL = json["avatar"].stringValue
         firstName = json["first_name"].stringValue
         lastName = json["last_name"].stringValue
-    }
-
-    init(sample: Bool) {
-        id = 10
-        avatarURL = "http://google.com/"
-        firstName = "Sample"
-        lastName = "User"
     }
 }

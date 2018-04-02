@@ -330,7 +330,6 @@ class NotificationsPresenter {
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        
         notificationsAPI.markAllAsRead().then { _ -> Void in
             Notification.markAllAsRead()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAllAsRead, parameters: ["badge": self.badgeUnreadCount])
