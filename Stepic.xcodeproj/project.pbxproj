@@ -192,7 +192,7 @@
 		0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
 		0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
 		0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
-		0828FF831BC800C0000AFEA7 /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
@@ -1199,7 +1199,7 @@
 		08D120E81C937B2200A54ABC /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		08D120E91C937B2200A54ABC /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
-		08D120EB1C937B2200A54ABC /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		08D120EB1C937B2200A54ABC /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		08D120EC1C937B2200A54ABC /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
 		08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
 		08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
@@ -1883,7 +1883,7 @@
 		2C1B621B1F4C4AEF00236804 /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		2C1B621C1F4C4AEF00236804 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		2C1B621D1F4C4AEF00236804 /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		2C1B62201F4C4AEF00236804 /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		2C1B62201F4C4AEF00236804 /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		2C1B62211F4C4AEF00236804 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C1B62221F4C4AEF00236804 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		2C1B62231F4C4AEF00236804 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
@@ -2287,7 +2287,7 @@
 		2C1B642C1F4C590700236804 /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		2C1B642D1F4C590700236804 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		2C1B642E1F4C590700236804 /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		2C1B64311F4C590700236804 /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		2C1B64311F4C590700236804 /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		2C1B64321F4C590700236804 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C1B64331F4C590700236804 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		2C1B64341F4C590700236804 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
@@ -3035,7 +3035,7 @@
 		2C89AAAF1F4C289900227C3B /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		2C89AAB01F4C289900227C3B /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		2C89AAB11F4C289900227C3B /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		2C89AAB41F4C289900227C3B /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		2C89AAB41F4C289900227C3B /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		2C89AAB51F4C289900227C3B /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C89AAB61F4C289900227C3B /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		2C89AAB71F4C289900227C3B /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
@@ -3445,7 +3445,7 @@
 		2C9732631F4C38F600AC9301 /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		2C9732641F4C38F600AC9301 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		2C9732651F4C38F600AC9301 /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		2C9732681F4C38F600AC9301 /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		2C9732681F4C38F600AC9301 /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		2C9732691F4C38F600AC9301 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C97326A1F4C38F600AC9301 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		2C97326B1F4C38F600AC9301 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
@@ -3855,7 +3855,7 @@
 		864D67111E83DE03001E8D9E /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		864D67121E83DE03001E8D9E /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
-		864D67151E83DE03001E8D9E /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		864D67151E83DE03001E8D9E /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		864D67161E83DE03001E8D9E /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		864D67171E83DE03001E8D9E /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		864D67181E83DE03001E8D9E /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
@@ -4066,7 +4066,7 @@
 		938860D42030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D32030E60500DFEA3A /* ImageConvertableCollectionViewCell.swift */; };
 		938860D92036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860D82036571B00DFEA3A /* RightDetailedCustomTableViewCell.swift */; };
 		938860DB2037471900DFEA3A /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938860DA2037471900DFEA3A /* VideoStepViewController.swift */; };
-		938860E1203799BA00DFEA3A /* JSONSrializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */; };
+		938860E1203799BA00DFEA3A /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */; };
 		938860E2203799D900DFEA3A /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
 		938860E320379A4B00DFEA3A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
 		938860E420379A6300DFEA3A /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
@@ -4466,7 +4466,7 @@
 		0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSrializable.swift; sourceTree = "<group>"; };
+		0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializable.swift; sourceTree = "<group>"; };
 		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
@@ -6302,7 +6302,7 @@
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				080F74621BD921130064AAEA /* Stepic */,
 				0885F84B1BA8376D00F2A188 /* Network */,
-				0828FF821BC800C0000AFEA7 /* JSONSrializable.swift */,
+				0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */,
 				080F74601BD8159F0064AAEA /* TabsInfo.swift */,
 				080F74631BD9213D0064AAEA /* VideosInfo.swift */,
 				0857AA201BECDA640044B505 /* VideoDownload.swift */,
@@ -11810,7 +11810,7 @@
 				083749311DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */,
 				082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
-				08D120EB1C937B2200A54ABC /* JSONSrializable.swift in Sources */,
+				08D120EB1C937B2200A54ABC /* JSONSerializable.swift in Sources */,
 				08D120EC1C937B2200A54ABC /* UIImageViewExtension.swift in Sources */,
 				0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
@@ -12271,7 +12271,7 @@
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
-				0828FF831BC800C0000AFEA7 /* JSONSrializable.swift in Sources */,
+				0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,
 				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
@@ -12552,7 +12552,7 @@
 				93CC6832204980C900F5BE75 /* NotificationsStatus.swift in Sources */,
 				938860EF20379B5B00DFEA3A /* Dataset.swift in Sources */,
 				937E1CFB1FDD766800F34045 /* CourseTag.swift in Sources */,
-				938860E1203799BA00DFEA3A /* JSONSrializable.swift in Sources */,
+				938860E1203799BA00DFEA3A /* JSONSerializable.swift in Sources */,
 				938860FC20379C6700DFEA3A /* VideoURL.swift in Sources */,
 				936351C12029116B00DFC7EE /* NotificationNameExtension.swift in Sources */,
 				938861472037E49700DFEA3A /* ApiUtil.swift in Sources */,
@@ -13046,7 +13046,7 @@
 				2C608B5520456BD6006870BB /* NotificationDataExtractor.swift in Sources */,
 				089C88E41FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3511F57734900302154 /* ProfileViewController.swift in Sources */,
-				2C1B62201F4C4AEF00236804 /* JSONSrializable.swift in Sources */,
+				2C1B62201F4C4AEF00236804 /* JSONSerializable.swift in Sources */,
 				2C1B62211F4C4AEF00236804 /* TabsInfo.swift in Sources */,
 				0844900F1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C1B62221F4C4AEF00236804 /* VideosInfo.swift in Sources */,
@@ -13529,7 +13529,7 @@
 				2C608B5320456BD5006870BB /* NotificationDataExtractor.swift in Sources */,
 				089C88E51FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3521F57734900302154 /* ProfileViewController.swift in Sources */,
-				2C1B64311F4C590700236804 /* JSONSrializable.swift in Sources */,
+				2C1B64311F4C590700236804 /* JSONSerializable.swift in Sources */,
 				2C1B64321F4C590700236804 /* TabsInfo.swift in Sources */,
 				084490101F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C1B64331F4C590700236804 /* VideosInfo.swift in Sources */,
@@ -14015,7 +14015,7 @@
 				2C89AAB11F4C289900227C3B /* UserActivitiesAPI.swift in Sources */,
 				08CBA34F1F57734900302154 /* ProfileViewController.swift in Sources */,
 				08B062E11FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
-				2C89AAB41F4C289900227C3B /* JSONSrializable.swift in Sources */,
+				2C89AAB41F4C289900227C3B /* JSONSerializable.swift in Sources */,
 				2C89AAB51F4C289900227C3B /* TabsInfo.swift in Sources */,
 				0844900D1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C89AAB61F4C289900227C3B /* VideosInfo.swift in Sources */,
@@ -14494,7 +14494,7 @@
 				2C608B5420456BD5006870BB /* NotificationDataExtractor.swift in Sources */,
 				089C88E31FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA3501F57734900302154 /* ProfileViewController.swift in Sources */,
-				2C9732681F4C38F600AC9301 /* JSONSrializable.swift in Sources */,
+				2C9732681F4C38F600AC9301 /* JSONSerializable.swift in Sources */,
 				2C9732691F4C38F600AC9301 /* TabsInfo.swift in Sources */,
 				0844900E1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C97326A1F4C38F600AC9301 /* VideosInfo.swift in Sources */,
@@ -15042,7 +15042,7 @@
 				864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */,
 				089C88E01FCF494300003B63 /* CourseListType.swift in Sources */,
 				08CBA34D1F57734900302154 /* ProfileViewController.swift in Sources */,
-				864D67151E83DE03001E8D9E /* JSONSrializable.swift in Sources */,
+				864D67151E83DE03001E8D9E /* JSONSerializable.swift in Sources */,
 				864D67161E83DE03001E8D9E /* TabsInfo.swift in Sources */,
 				0844900B1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				864D67171E83DE03001E8D9E /* VideosInfo.swift in Sources */,

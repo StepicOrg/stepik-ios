@@ -10,7 +10,8 @@ import Foundation
 import SwiftyJSON
 import PromiseKit
 
-protocol IDFetchable: JSONSerializable {
+protocol IDFetchable: JSONSerializable where IdType: CoreDataRepresentable {
+
     static func getId(json: JSON) -> IdType?
     static func fetchAsync(ids: [IdType]) -> Promise<[Self]>
 }
@@ -25,8 +26,24 @@ extension IDFetchable {
         }
         return nil
     }
-    
+
     static func fetchAsync(ids: [IdType]) -> Promise<[Self]> {
         return DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
+    }
+}
+
+protocol CoreDataRepresentable {
+    var fetchValue: CVarArg { get }
+}
+
+extension String: CoreDataRepresentable {
+    var fetchValue: CVarArg {
+        return self
+    }
+}
+
+extension Int: CoreDataRepresentable {
+    var fetchValue: CVarArg {
+        return self as NSNumber
     }
 }

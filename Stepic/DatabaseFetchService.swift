@@ -17,7 +17,7 @@ class DatabaseFetchService {
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as? NSNumber ?? $0 as! String)
+            NSPredicate(format: "managedId == %@", $0.fetchValue)
         }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
 
