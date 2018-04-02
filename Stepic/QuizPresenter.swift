@@ -325,7 +325,7 @@ class QuizPresenter {
     }
 
     private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        let id = attempt!.id
+        guard let id = attempt?.id else { return }
         performRequest({
             [weak self] in
             guard let s = self else { return }
