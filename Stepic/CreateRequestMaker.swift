@@ -15,7 +15,7 @@ class CreateRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, creatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<(T, JSON?)> {
         return Promise { fulfill, reject in
             let params: Parameters? = [
-                paramName: creatingObject.json.dictionaryObject!
+                paramName: creatingObject.json.dictionaryObject ?? ""
             ]
 
             checkToken().then {
