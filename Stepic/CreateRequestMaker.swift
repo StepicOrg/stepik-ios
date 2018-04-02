@@ -49,8 +49,8 @@ class CreateRequestMaker {
         return Promise { fulfill, reject in
             request(requestEndpoint: requestEndpoint, paramName: paramName, creatingObject: creatingObject, withManager: manager).then { _, _ in
                 fulfill(())
-                }.catch { error in
-                    reject(error)
+            }.catch { error in
+                reject(error)
             }
         }
     }
