@@ -47,6 +47,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
 
+        state = .refreshing
+
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
@@ -56,8 +58,6 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }
 
         self.title = NSLocalizedString("Profile", comment: "")
-
-        state = .refreshing
     }
 
     @objc func shareButtonPressed() {

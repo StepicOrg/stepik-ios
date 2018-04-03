@@ -102,8 +102,10 @@ class StepikPlaceholderView: NibInitializableView {
 
         if placeholder.buttonTitle != nil {
             actionButton.alpha = 1.0
+            actionButton.isHidden = false
         } else {
             actionButton.alpha = 0.0
+            actionButton.isHidden = !isVertical
         }
 
         if isVertical {

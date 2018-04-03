@@ -61,8 +61,8 @@ protocol ControllerWithStepikPlaceholder: class {
 extension ControllerWithStepikPlaceholder where Self: UIViewController {
     var isPlaceholderShown: Bool {
         set {
-            placeholderContainer.placeholderView.isHidden = !isPlaceholderShown
-            placeholderContainer.isPlaceholderShown = isPlaceholderShown
+            placeholderContainer.placeholderView.isHidden = !newValue
+            placeholderContainer.isPlaceholderShown = newValue
         }
         get {
             return placeholderContainer.isPlaceholderShown
