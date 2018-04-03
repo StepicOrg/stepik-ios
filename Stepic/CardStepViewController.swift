@@ -23,6 +23,9 @@ class CardStepViewController: UIViewController, CardStepView {
     @IBOutlet weak var quizPlaceholderView: UIView!
     var stepWebViewHeight: NSLayoutConstraint!
 
+    // For updates after rotation only when controller not presented
+    var shouldRefreshOnAppear: Bool = false
+
     var baseScrollView: UIScrollView {
         get {
             return scrollView
@@ -42,14 +45,8 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 
     @objc func didScreenRotate() {
-        alignImages(in: stepWebView).then {
-            self.getContentHeight(self.stepWebView)
-        }.then { height -> Void in
-            self.resetWebViewHeight(Float(height))
-            self.scrollView.layoutIfNeeded()
-        }.catch { _ in
-            print("card step: error after rotation")
-        }
+        refreshWebView()
+        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +54,15 @@ class CardStepViewController: UIViewController, CardStepView {
 
         view.setNeedsLayout()
         view.layoutIfNeeded()
+
+        if shouldRefreshOnAppear {
+            refreshWebView()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shouldRefreshOnAppear = false
     }
 
     deinit {
@@ -85,6 +91,7 @@ class CardStepViewController: UIViewController, CardStepView {
         scrollView.insertSubview(stepWebView, at: 0)
 
         stepWebViewHeight = stepWebView.constrainHeight("5")
+        stepWebView.translatesAutoresizingMaskIntoConstraints = false
         stepWebView.constrainBottomSpace(toView: quizPlaceholderView, predicate: "0")
         stepWebView.alignLeadingEdge(withView: scrollView, predicate: "2")
         stepWebView.alignTrailingEdge(withView: scrollView, predicate: "-2")
@@ -128,6 +135,34 @@ class CardStepViewController: UIViewController, CardStepView {
                 }
             }
         }
+    }
+
+    private func refreshWebView() {
+        resetWebViewHeight(5.0)
+
+        func reloadContent() -> Promise<Void> {
+            return Promise { fulfill, reject in
+                self.stepWebView.evaluateJavaScript("location.reload();", completionHandler: { _, error in
+                    if let error = error {
+                        return reject(error)
+                    }
+
+                    fulfill(())
+                })
+            }
+        }
+
+        reloadContent().then {
+            self.alignImages(in: self.stepWebView)
+        }.then {
+            self.getContentHeight(self.stepWebView)
+        }.then { height -> Void in
+            self.resetWebViewHeight(Float(height))
+            self.scrollView.layoutIfNeeded()
+        }.catch { _ in
+            print("card step: error while refreshing")
+        }
+
     }
 }
 

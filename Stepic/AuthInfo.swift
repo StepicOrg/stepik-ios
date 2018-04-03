@@ -60,8 +60,8 @@ class AuthInfo: NSObject {
                             course.enrolled = false
                         }
 
+                        Certificate.deleteAll()
                         Progress.deleteAllStoredProgresses()
-
                         Notification.deleteAll()
                         #if !os(tvOS)
                             NotificationsBadgesManager.shared.set(number: 0)

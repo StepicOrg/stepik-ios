@@ -226,9 +226,7 @@ class NotificationsPresenter {
     fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
         return Promise { fulfill, reject in
             var hasNext: Bool = false
-            checkToken().then { _ -> Promise<(Meta, [Notification])> in
-                self.notificationsAPI.retrieve(page: page, notificationType: section.notificationType)
-            }.then { meta, result -> Promise<NotificationViewDataStruct> in
+            notificationsAPI.retrieve(page: page, notificationType: section.notificationType).then { result, meta -> Promise<NotificationViewDataStruct> in
                 hasNext = meta.hasNext
 
                 return self.merge(old: self.displayedNotifications, new: result)
@@ -303,9 +301,7 @@ class NotificationsPresenter {
 
         // Try to load user avatars and group notifications
         return Promise { fulfill, _ in
-            checkToken().then { _ -> Promise<[User]> in
-                self.usersAPI.retrieve(ids: Array(usersQuery), existing: [])
-            }.then { users -> Void in
+            usersAPI.retrieve(ids: Array(usersQuery), existing: []).then { users -> Void in
                 users.forEach { user in
                     userAvatars[user.id] = URL(string: user.avatarURL)
                 }
@@ -323,9 +319,7 @@ class NotificationsPresenter {
         }
 
         notification.status = status
-        checkToken().then { _ -> Promise<Notification> in
-            self.notificationsAPI.update(notification)
-        }.then { _ -> Void in
+        self.notificationsAPI.update(notification).then { _ -> Void in
             CoreDataHelper.instance.save()
             NotificationCenter.default.post(name: .notificationUpdated, object: self, userInfo: ["section": self.section, "id": id, "status": status])
         }.catch { error in
@@ -336,9 +330,7 @@ class NotificationsPresenter {
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        checkToken().then { _ -> Promise<()> in
-            self.notificationsAPI.markAllAsRead()
-        }.then { _ -> Void in
+        notificationsAPI.markAllAsRead().then { _ -> Void in
             Notification.markAllAsRead()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAllAsRead, parameters: ["badge": self.badgeUnreadCount])
 

@@ -306,8 +306,6 @@ class CourseListPresenter {
         displayCachedAsyncIfEmpty().then {
             self.updateState()
         }.then {
-            checkToken()
-        }.then {
             [weak self] in
             self?.refreshCourses()
         }.catch {

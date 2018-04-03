@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Profile: NSManagedObject, JSONInitializable {
-    typealias idType = Int
+class Profile: NSManagedObject, JSONSerializable {
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -29,17 +29,12 @@ class Profile: NSManagedObject, JSONInitializable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
-
-    var json: [String: AnyObject] {
-        let dict: [String: AnyObject] = [
+    var json: JSON {
+        return [
             "id": id as AnyObject,
             "first_name": firstName as AnyObject,
             "last_name": lastName as AnyObject,
             "subscribed_for_mail": subscribedForMail as AnyObject
         ]
-        return dict
     }
 }

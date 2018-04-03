@@ -9,12 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-class DiscussionProxy {
+class DiscussionProxy: JSONSerializable {
+    var discussionIds: [Int] = []
+    var id: String = ""
 
-    var discussionIds: [Int]
-    var id: String
+    required init(json: JSON) {
+        update(json: json)
+    }
 
-    init(json: JSON) {
+    func update(json: JSON) {
         discussionIds = json["discussions"].arrayValue.flatMap {
             $0.int
         }
