@@ -83,7 +83,7 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
         placeholderContainer.placeholderView.delegate = placeholderContainer
         placeholderContainer.currentPlaceholderButtonAction = placeholder.buttonAction
 
-        placeholderContainer.isPlaceholderShown = true
+        isPlaceholderShown = true
     }
 
     private func updatePlaceholderLayout() {
