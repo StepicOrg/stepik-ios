@@ -43,7 +43,7 @@ class DiscussionsViewController: UIViewController {
     var discussionProxyId: String!
     var target: Int!
 
-    // This var uses only for incrementing discussions count
+    // This var is used only for incrementing discussions count
     var step: Step?
 
     @IBOutlet weak var tableView: UITableView!
