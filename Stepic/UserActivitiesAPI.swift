@@ -25,8 +25,8 @@ extension UserActivitiesAPI {
     @discardableResult func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((UserActivity) -> Void), error errorHandler: @escaping ((Error) -> Void)) -> Request? {
 
         retrieve(user: userId).then {
-            UserActivity in
-            success(UserActivity)
+            userActivity in
+            success(userActivity)
         }.catch {
             error in
             errorHandler(error)
