@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Progress: NSManagedObject, JSONInitializable {
+class Progress: NSManagedObject, JSONSerializable {
 
-    typealias idType = String
+    typealias IdType = String
 
     convenience required init(json: JSON) {
         self.init()
@@ -29,12 +29,20 @@ class Progress: NSManagedObject, JSONInitializable {
         lastViewed = json["last_viewed"].doubleValue
     }
 
-    func update(json: JSON) {
-        initialize(json)
+    var json: JSON {
+        return [
+            "id" : id,
+            "is_passed": isPassed,
+            "score": score,
+            "cost": cost,
+            "n_steps": numberOfSteps,
+            "n_steps_passed": numberOfStepsPassed,
+            "last_viewed": lastViewed
+        ]
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].stringValue
+    func update(json: JSON) {
+        initialize(json)
     }
 
     var percentPassed: Float {

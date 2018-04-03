@@ -22,6 +22,6 @@ class UsersAPI: APIEndpoint {
 extension UsersAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [User], refreshMode: RefreshMode, success: @escaping (([User]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+        return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }
 }

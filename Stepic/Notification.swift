@@ -9,9 +9,11 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import PromiseKit
 
-class Notification: NSManagedObject, JSONInitializable {
-    typealias idType = Int
+final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
+
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -37,12 +39,8 @@ class Notification: NSManagedObject, JSONInitializable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
-
-    var json: [String: AnyObject] {
-        let dict: [String: AnyObject] = [
+    var json: JSON {
+        return [
             "id": id as AnyObject,
             "html_text": htmlText as AnyObject,
             "is_unread": (status == .unread) as AnyObject,
@@ -53,7 +51,6 @@ class Notification: NSManagedObject, JSONInitializable {
             "level": level as AnyObject,
             "priority": priority as AnyObject
         ]
-        return dict
     }
 }
 

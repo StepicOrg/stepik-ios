@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
+//TODO: Refactor this class into two separate API classes
 class RecommendationsAPI: APIEndpoint {
     override var name: String { return "recommendations" }
     var reactionName: String { return "recommendation-reactions" }

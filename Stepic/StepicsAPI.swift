@@ -11,16 +11,8 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
-class StepicsAPI {
-    let name = "stepics"
-    let manager: Alamofire.SessionManager
-
-    init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
-        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        manager = Alamofire.SessionManager(configuration: configuration)
-    }
+class StepicsAPI: APIEndpoint {
+    override var name: String { return "stepics" }
 
     func retrieveCurrentUser() -> Promise<User> {
         return Promise { fulfill, reject in

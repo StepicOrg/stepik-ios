@@ -9,15 +9,24 @@
 import Foundation
 import SwiftyJSON
 
-class Vote {
-    var id: String
-    var value: VoteValue?
-
-    init(json: JSON) {
+class Vote: JSONSerializable {
+    func update(json: JSON) {
         id = json["id"].stringValue
         if let v = json["value"].string {
             value = VoteValue(rawValue: v)
         }
+    }
+
+    var id: String
+    var value: VoteValue?
+
+    private init() {
+        id = ""
+    }
+
+    convenience required init(json: JSON) {
+        self.init()
+        update(json: json)
     }
 
     init(id: String, value: VoteValue?) {
@@ -25,12 +34,11 @@ class Vote {
         self.value = value
     }
 
-    var json: [String: AnyObject] {
-        let dict: [String: AnyObject] = [
-            "id": id as AnyObject,
-            "value": value?.rawValue as AnyObject? ?? NSNull()
+    var json: JSON {
+        return [
+            "id": id,
+            "value": value?.rawValue ?? NSNull()
         ]
-        return dict
     }
 }
 

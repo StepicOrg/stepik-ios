@@ -16,25 +16,27 @@ enum UserRole: String {
 /*
  Comment model, without voting
  */
-class Comment: JSONInitializable {
+class Comment: JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
-    var id: Int
+    var id: Int = 0
     var parentId: Int?
-    var userId: Int
-    var userRole: UserRole
-    var time: Date
-    var lastTime: Date
-    var text: String
-    var replyCount: Int
-    var isDeleted: Bool
-    var targetStepId: Int
-    var repliesIds: [Int]
-    var isPinned: Bool
-    var voteId: String
-    var epicCount: Int
-    var abuseCount: Int
+    var userId: Int = 0
+    var userRole: UserRole = .Student
+    var time: Date = Date()
+    var lastTime: Date = Date()
+    var text: String = ""
+    var replyCount: Int = 0
+    var isDeleted: Bool = false
+    var targetStepId: Int = 0
+    var repliesIds: [Int] = []
+    var isPinned: Bool = false
+    var voteId: String = ""
+    var epicCount: Int = 0
+    var abuseCount: Int = 0
+
+    //TODO: Check those "!" marks, they look suspicious
     var userInfo: UserInfo!
     var vote: Vote!
 
@@ -82,52 +84,19 @@ class Comment: JSONInitializable {
         initialize(json)
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
-    }
-
-//    
-//    init(sampleId: Int) {
-//        id = sampleId
-//        parentId = nil
-//        userId = 10
-//        userRole = .Student
-//        time = NSDate()
-//        lastTime = NSDate()
-//        
-//        let latexStrings = [
-//            "Here is a simple LaTeX $x^2 + 3*x - 10/(y*z^3)$",
-//            "A bit easier $x$ and it became really long long long long looooooong long long long long",
-//            "The best string with LaTeX $(x*a*b + 2*x/(z^2))/(200*y^6 + x/z)$",
-//        ]
-//        
-//        text = latexStrings[min(sampleId, 2)]
-//        replyCount = 0
-//        isDeleted = false
-//        targetStepId = 0
-//        repliesIds = []
-//        isPinned = false
-//    }
-}
-
-struct CommentPostable {
-    var parent: Int?
-    var target: Int
-    var text: String
-
     init(parent: Int? = nil, target: Int, text: String) {
-        self.parent = parent
-        self.target = target
+        self.parentId = parent
+        self.targetStepId = target
         self.text = text
     }
 
-    var json: [String: AnyObject] {
-        var dict: [String: AnyObject] = [
-            "target": target as AnyObject,
-            "text": text as AnyObject
+    var json: JSON {
+        var dict: JSON = [
+            "target": targetStepId,
+            "text": text
         ]
-        if let p = parent {
-            dict["parent"] = p as AnyObject?
+        if let parent = parentId {
+            try! dict.merge(with: ["parent": parent])
         }
 
         return dict

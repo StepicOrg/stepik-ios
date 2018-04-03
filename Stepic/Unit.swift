@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Unit: NSManagedObject, JSONInitializable {
+class Unit: NSManagedObject, JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -36,10 +36,6 @@ class Unit: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
     }
 
     func loadAssignments(_ completion: @escaping (() -> Void), errorHandler: @escaping (() -> Void)) {

@@ -118,6 +118,11 @@
 			<key>orderHint</key>
 			<integer>86</integer>
 		</dict>
+		<key>Adaptive GMAT.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>95</integer>
+		</dict>
 		<key>SberbankUniversity.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -154,7 +159,7 @@
 		<key>StepikTV.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>87</integer>
+			<integer>96</integer>
 		</dict>
 		<key>StickerPackExtension.xcscheme</key>
 		<dict>

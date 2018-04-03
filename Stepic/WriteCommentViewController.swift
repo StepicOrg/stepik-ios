@@ -97,7 +97,7 @@ class WriteCommentViewController: UIViewController {
     }
 
     func sendComment() {
-        let comment = CommentPostable(parent: parentId, target: target, text: htmlText)
+        let comment = Comment(parent: parentId, target: target, text: htmlText)
 
         request = ApiDataDownloader.comments.create(comment, success: {
                 [weak self]

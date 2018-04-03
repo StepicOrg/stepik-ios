@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
+//TODO: Better refactor this to two classes
 class AdaptiveRatingsAPI: APIEndpoint {
     override var name: String { return "rating" }
     var restoreName: String { return "rating-restore" }

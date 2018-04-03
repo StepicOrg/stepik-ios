@@ -12,11 +12,11 @@ import SwiftyJSON
 import PromiseKit
 
 @objc
-class Course: NSManagedObject, JSONInitializable {
+final class Course: NSManagedObject, IDFetchable {
 
 // Insert code here to add functionality to your managed object subclass
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -56,10 +56,6 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
     }
 
     var metaInfo: String {

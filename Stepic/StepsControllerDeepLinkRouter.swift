@@ -109,9 +109,7 @@ class StepsControllerDeepLinkRouter: NSObject {
             }
         }
 
-        checkToken().then { _ -> Promise<Unit> in
-            fetchOrLoadUnit(for: lesson)
-        }.then { unit -> Promise<Section> in
+        fetchOrLoadUnit(for: lesson).then { unit -> Promise<Section> in
             fetchOrLoadSection(for: unit)
         }.then { section -> Promise<Course> in
             fetchOrLoadCourse(for: section)
