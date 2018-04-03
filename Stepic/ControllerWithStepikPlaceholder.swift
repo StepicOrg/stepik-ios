@@ -36,11 +36,11 @@ class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
         }
     }
 
-    internal var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
-    internal var currentPlaceholderButtonAction: (() -> Void)?
-    internal var isPlaceholderShown: Bool = false
+    var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
+    var currentPlaceholderButtonAction: (() -> Void)?
+    var isPlaceholderShown: Bool = false
 
-    lazy internal var placeholderView: StepikPlaceholderView = {
+    lazy var placeholderView: StepikPlaceholderView = {
         let view = StepikPlaceholderView()
         return view
     }()
