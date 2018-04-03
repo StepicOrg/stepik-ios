@@ -270,7 +270,6 @@
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E49DC2072B684004896C0 /* IDFetchable.swift */; };
-		083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */; };
 		083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
 		083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
 		083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B131E9D8EF800714173 /* CertificatesViewController.swift */; };
@@ -4511,7 +4510,6 @@
 		083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationInfo.swift; sourceTree = "<group>"; };
 		083E49DC2072B684004896C0 /* IDFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFetchable.swift; sourceTree = "<group>"; };
-		083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesAPITest.swift; sourceTree = "<group>"; };
 		083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CertificatesStoryboard.storyboard; sourceTree = "<group>"; };
 		083F2B131E9D8EF800714173 /* CertificatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesViewController.swift; sourceTree = "<group>"; };
 		083F2B161E9D8F1D00714173 /* CertificatesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesView.swift; sourceTree = "<group>"; };
@@ -5609,7 +5607,6 @@
 		081058321E9FB50700FAC30A /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
-				083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */,
 				080AA22F1EA017FB0079272F /* CertificateSpec.swift */,
 			);
 			name = Certificates;
@@ -11487,7 +11484,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
-				083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
 				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
