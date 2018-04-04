@@ -42,7 +42,9 @@ class DiscussionsViewController: UIViewController {
 
     var discussionProxyId: String!
     var target: Int!
-    var step: Step!
+
+    // This var is used only for incrementing discussions count
+    var step: Step?
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -725,7 +727,7 @@ extension DiscussionsViewController : WriteCommentDelegate {
             discussionIds.loaded.insert(comment.id, at: 0)
             discussions.insert(comment, at: 0)
             reloadTableData()
-            step.discussionsCount? += 1
+            step?.discussionsCount? += 1
         }
     }
 }

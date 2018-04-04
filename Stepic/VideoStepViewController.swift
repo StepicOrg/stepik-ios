@@ -165,6 +165,10 @@ class VideoStepViewController: UIViewController {
         let downloadItem = UIBarButtonItem(customView: itemView)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem, downloadItem]
+
+        if let discussionCount = step.discussionsCount {
+            discussionCountView.commentsCount = discussionCount
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -253,6 +257,7 @@ class VideoStepViewController: UIViewController {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
             vc.discussionProxyId = discussionProxyId
             vc.target = self.step.id
+            vc.step = self.step
             nController?.pushViewController(vc, animated: true)
         } else {
             //TODO: Load comments here
