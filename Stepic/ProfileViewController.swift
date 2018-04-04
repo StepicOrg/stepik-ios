@@ -21,10 +21,14 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             case .refreshing:
                 showPlaceholder(for: .refreshing)
             case .anonymous:
+                navigationItem.rightBarButtonItem = nil
                 showPlaceholder(for: .anonymous)
             case .error:
                 showPlaceholder(for: .connectionError)
             case .authorized:
+                if let button = shareBarButtonItem {
+                    navigationItem.rightBarButtonItem = button
+                }
                 isPlaceholderShown = false
             }
         }
