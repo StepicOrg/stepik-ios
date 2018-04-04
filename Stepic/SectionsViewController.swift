@@ -345,7 +345,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showSection(section: indexPath.row)
-        //        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
