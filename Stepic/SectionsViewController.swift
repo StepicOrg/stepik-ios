@@ -101,7 +101,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         super.viewDidAppear(animated)
 
         if isFirstLoad {
-            isFirstLoad = true
+            isFirstLoad = false
             refreshSections()
         }
 
