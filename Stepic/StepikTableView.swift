@@ -24,6 +24,7 @@ class StepikTableView: UITableView {
 
     // Trick with removing cell separators: we should store previous footer to restore
     private var savedFooterView: UIView?
+    private var hasSavedFooter: Bool = false
 }
 
 extension StepikTableView {
@@ -33,7 +34,11 @@ extension StepikTableView {
 
     private func handlePlaceholder(isHidden: Bool) {
         if isHidden {
-            tableFooterView = savedFooterView
+            if hasSavedFooter {
+                tableFooterView = savedFooterView
+                savedFooterView = nil
+                hasSavedFooter = false
+            }
             placeholderView.isHidden = true
             return
         }
@@ -42,6 +47,8 @@ extension StepikTableView {
 
         // Remove cell separators
         savedFooterView = self.tableFooterView
+        hasSavedFooter = true
+        
         tableFooterView = UIView()
         placeholderView.isHidden = false
     }
