@@ -2,6 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>python</key>
+	<array>
+        <string>False</string>
+        <string>class</string>
+        <string>finally</string>
+        <string>is</string>
+        <string>return</string>
+        <string>None</string>
+        <string>continue</string>
+        <string>for</string>
+        <string>lambda</string>
+        <string>try</string>
+        <string>True</string>
+        <string>def</string>
+        <string>from</string>
+        <string>nonlocal</string>
+        <string>while</string>
+        <string>and</string>
+        <string>del</string>
+        <string>global</string>
+        <string>not</string>
+        <string>with</string>
+        <string>as</string>
+        <string>elif</string>
+        <string>if</string>
+        <string>or</string>
+        <string>yield</string>
+        <string>assert</string>
+        <string>else</string>
+        <string>import</string>
+        <string>pass</string>
+        <string>print</string>
+        <string>break</string>
+        <string>except</string>
+        <string>in</string>
+        <string>raise</string>
+    </array>
 	<key>cpp</key>
 	<array>
 		<string>bool</string>
