@@ -24,7 +24,6 @@ def all_pods
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
     pod 'FirebaseCore'

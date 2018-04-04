@@ -8,24 +8,50 @@
 
 import UIKit
 import Presentr
-import DZNEmptyDataSet
 
-class ProfileViewController: MenuViewController, ProfileView {
+class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?
 
-    var state: ProfileState = .refreshing
+    var state: ProfileState = .refreshing {
+        didSet {
+            switch state {
+            case .refreshing:
+                showPlaceholder(for: .refreshing)
+            case .anonymous:
+                showPlaceholder(for: .anonymous)
+            case .error:
+                showPlaceholder(for: .connectionError)
+            case .authorized:
+                isPlaceholderShown = false
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
+        }), for: .anonymous)
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+            self?.presenter?.updateProfile()
+        }), for: .connectionError)
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
+
+        state = .refreshing
+
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
-
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
@@ -202,115 +228,5 @@ class ProfileViewController: MenuViewController, ProfileView {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         streaksTooltip?.dismiss()
-    }
-}
-
-extension ProfileViewController : DZNEmptyDataSetDelegate {
-    @objc func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return false
-    }
-
-    @objc func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
-        switch state {
-        case .anonymous:
-            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
-            break
-        case .error:
-            presenter?.updateProfile()
-            break
-        default:
-            break
-        }
-    }
-}
-
-extension ProfileViewController : DZNEmptyDataSetSource {
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        switch state {
-        case .anonymous:
-            return Images.placeholders.anonymous
-        case .error:
-            return Images.placeholders.connectionError
-        case .refreshing:
-            return Images.placeholders.anonymous
-        default:
-            return UIImage()
-        }
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch state {
-        case .anonymous:
-            text = NSLocalizedString("ProfileAnonymousTitle", comment: "")
-        case .error:
-            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("Refreshing", comment: "")
-            break
-        default:
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch state {
-        case .anonymous:
-            text = NSLocalizedString("ProfileAnonymousSubtitle", comment: "")
-            break
-        case .error:
-            text = ""
-            break
-        case .refreshing:
-            text = NSLocalizedString("RefreshingDescription", comment: "")
-            break
-        default:
-            break
-        }
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                          NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
-        var text: String = ""
-
-        switch self.state {
-        case .anonymous:
-            text = NSLocalizedString("SignIn", comment: "")
-        case .error:
-            text = NSLocalizedString("TryAgain", comment: "")
-            break
-        case .refreshing:
-            text = ""
-            break
-        default:
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.mainDark]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.groupTableViewBackground
     }
 }

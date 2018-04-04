@@ -11,7 +11,7 @@ import FLKAutoLayout
 
 class MenuViewController: UIViewController {
 
-    let tableView: UITableView = UITableView()
+    let tableView: StepikTableView = StepikTableView()
 
     var interfaceManager: MenuUIManager?
     var menu: Menu? {

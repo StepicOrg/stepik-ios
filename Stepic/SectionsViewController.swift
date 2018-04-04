@@ -8,11 +8,11 @@
 
 import UIKit
 import DownloadButton
-import DZNEmptyDataSet
 
-class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate {
+class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: StepikTableView!
 
     let refreshControl = UIRefreshControl()
     var didRefresh = false
@@ -29,6 +29,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+
         LastStepGlobalContext.context.course = course
 
         self.navigationItem.title = course.title
@@ -42,6 +44,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
 
         tableView.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptySections)
+        tableView.loadingPlaceholder = StepikPlaceholder(.emptySectionsLoading)
 
         refreshControl.addTarget(self, action: #selector(SectionsViewController.refreshSections), for: .valueChanged)
         if #available(iOS 10.0, *) {
@@ -52,9 +56,6 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         refreshControl.layoutIfNeeded()
         refreshControl.beginRefreshing()
         refreshSections()
-
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
 
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -155,8 +156,15 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     var emptyDatasetState: EmptyDatasetState = .empty {
         didSet {
-            UIThread.performUI {
-                self.tableView.reloadEmptyDataSet()
+            switch emptyDatasetState {
+            case .refreshing:
+                isPlaceholderShown = false
+                tableView.showLoadingPlaceholder()
+            case .empty:
+                isPlaceholderShown = false
+                tableView.reloadData()
+            case .connectionError:
+                showPlaceholder(for: .connectionError)
             }
         }
     }
@@ -465,80 +473,5 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.pending:
             break
         }
-    }
-}
-
-extension SectionsViewController : DZNEmptyDataSetSource {
-
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        switch emptyDatasetState {
-        case .empty:
-            return Images.emptyCoursesPlaceholder
-        case .connectionError:
-            return Images.noWifiImage.size250x250
-        case .refreshing:
-            return Images.emptyCoursesPlaceholder
-        }
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("EmptyTitle", comment: "")
-            break
-        case .connectionError:
-            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("Refreshing", comment: "")
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-            NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
-            break
-        case .connectionError:
-            text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
-            break
-        case .refreshing:
-            text = NSLocalizedString("RefreshingDescription", comment: "")
-            break
-        }
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-            NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.white
-    }
-
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
-        return 44
-    }
-}
-
-extension SectionsViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
     }
 }
