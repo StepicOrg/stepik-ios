@@ -22,6 +22,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     var section: Section?
     var unitId: Int?
 
+    var isFirstLoad = true
     var didRefresh = false
     let refreshControl = UIRefreshControl()
 
@@ -61,14 +62,21 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         refreshControl.beginRefreshing()
 
-        refreshUnits()
-
         if(traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: view)
         }
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if isFirstLoad {
+            isFirstLoad = false
+            refreshUnits()
         }
     }
 
@@ -242,7 +250,6 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
-                self.emptyDatasetState = EmptyDatasetState.empty
             })
             self.didRefresh = true
             success?()

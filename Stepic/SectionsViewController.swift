@@ -23,6 +23,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     private var shareTooltip: Tooltip?
     var didJustSubscribe: Bool = false
 
+    var isFirstLoad: Bool = true
+
     private let notificationSuggestionManager = NotificationSuggestionManager()
     private let notificationPermissionManager = NotificationPermissionManager()
 
@@ -55,7 +57,6 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
         refreshControl.layoutIfNeeded()
         refreshControl.beginRefreshing()
-        refreshSections()
 
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -88,23 +89,28 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
-        tableView.reloadData()
         if(self.refreshControl.isRefreshing) {
             let offset = self.tableView.contentOffset
             self.refreshControl.endRefreshing()
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
-        if didRefresh {
-            course.loadProgressesForSections(sections: course.sections, success: {
-                [weak self] in
-                self?.tableView.reloadData()
-            }, error: {})
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        if isFirstLoad {
+            isFirstLoad = false
+            refreshSections()
+        }
+
+        if didRefresh {
+            course.loadProgressesForSections(sections: course.sections, success: {
+                [weak self] in
+                self?.tableView.reloadData()
+                }, error: {})
+        }
 
         let shareTooltipBlock = {
             [weak self] in
@@ -154,7 +160,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         shareTooltip?.dismiss()
     }
 
-    var emptyDatasetState: EmptyDatasetState = .empty {
+    var emptyDatasetState: EmptyDatasetState = .refreshing {
         didSet {
             switch emptyDatasetState {
             case .refreshing:
@@ -175,7 +181,6 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         course.loadAllSections(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.empty
                 self.tableView.reloadData()
                 if let m = self.moduleId {
                     if (1...self.course.sectionsArray.count ~= m) && (self.isReachable(section: m - 1)) {
@@ -340,7 +345,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showSection(section: indexPath.row)
-        //        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
