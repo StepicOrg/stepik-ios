@@ -1,8 +1,8 @@
 In the new version of the Stepik iOS app we:
 
-• Changed empty states to make every tiny thing nice and shiny
-• Gave you a chance to understand that activity panel in profile is scrollable
-• Improved onboarding for new users
+• Changed all empty states. It's all perfectly beautiful now, check it out
+• Added autocomplete for Kotlin, R and Haskell
+• Sometimes app crashed after writing a comment. Now it doesn't
 • Fixed multiple bugs and greatly improved stability
 
 Enjoy learning!
