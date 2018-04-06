@@ -24,7 +24,6 @@ def all_pods
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'DZNEmptyDataSet'
     pod 'YandexMobileMetrica/Dynamic'
     
     pod 'FirebaseCore'
@@ -37,7 +36,7 @@ def all_pods
 
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'master'
+    pod 'Kanna', '~> 4.0.0'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     

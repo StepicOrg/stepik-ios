@@ -12,7 +12,15 @@ enum AdaptiveCourseSelectViewState {
     case loading, normal, error
 }
 
-class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelectView {
+extension StepikPlaceholder.Style {
+    static let noConnectionAdaptive = StepikPlaceholderStyle(id: "noConnectionAdaptive",
+                                         image: nil,
+                                         text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
+                                         buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: ""))
+}
+
+class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelectView, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingContainerView: UIView!
@@ -21,32 +29,20 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
     var data: [AdaptiveCourseSelectViewData] = []
     var didControllerDisplayBefore = false
 
-    lazy var placeholderView: PlaceholderView = {
-        let v = PlaceholderView()
-        self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(toView: self.view)
-        v.delegate = self
-        v.backgroundColor = self.view.backgroundColor
-        return v
-    }()
-
     var presenter: AdaptiveCourseSelectPresenter?
     var state: AdaptiveCourseSelectViewState = .normal {
         didSet {
             switch state {
             case .normal:
-                self.placeholderView.isHidden = true
+                isPlaceholderShown = false
                 self.tableView.isHidden = false
                 self.loadingContainerView.isHidden = true
             case .error:
-                self.placeholderView.isHidden = false
+                showPlaceholder(for: .connectionError)
                 self.tableView.isHidden = true
                 self.loadingContainerView.isHidden = true
-
-                // Refresh placeholder state
-                self.placeholderView.datasource = self
             case .loading:
-                self.placeholderView.isHidden = true
+                isPlaceholderShown = false
                 self.tableView.isHidden = true
                 self.loadingContainerView.isHidden = false
             }
@@ -55,6 +51,10 @@ class AdaptiveCourseSelectViewController: UIViewController, AdaptiveCourseSelect
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionAdaptive, action: { [weak self] in
+            self?.presenter?.tryAgain()
+        }), for: .connectionError)
 
         loadingLabel.text = NSLocalizedString("AdaptiveCourseSelectLoading", comment: "")
 
@@ -128,55 +128,5 @@ extension AdaptiveCourseSelectViewController: AdaptiveCourseTableViewCellDelegat
         }
 
         tableView(tableView, didSelectRowAt: indexPath)
-    }
-}
-
-extension AdaptiveCourseSelectViewController: PlaceholderViewDataSource {
-    func placeholderImage() -> UIImage? {
-        switch state {
-        case .error:
-            return Images.placeholders.connectionError
-        default:
-            return nil
-        }
-    }
-
-    func placeholderButtonTitle() -> String? {
-        switch state {
-        case .error:
-            return NSLocalizedString("TryAgain", comment: "")
-        default:
-            return nil
-        }
-    }
-
-    func placeholderDescription() -> String? {
-        switch state {
-        case .error:
-            return nil
-        default:
-            return nil
-        }
-    }
-
-    func placeholderStyle() -> PlaceholderStyle {
-        var style = PlaceholderStyle()
-        style.button.textColor = UIColor.mainDark
-        return style
-    }
-
-    func placeholderTitle() -> String? {
-        switch state {
-        case .error:
-            return NSLocalizedString("ConnectionErrorText", comment: "")
-        default:
-            return nil
-        }
-    }
-}
-
-extension AdaptiveCourseSelectViewController: PlaceholderViewDelegate {
-    func placeholderButtonDidPress() {
-        presenter?.tryAgain()
     }
 }

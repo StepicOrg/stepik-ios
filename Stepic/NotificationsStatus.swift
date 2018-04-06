@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class NotificationsStatus: NSObject {
+class NotificationsStatus: JSONSerializable {
     var id: Int
     var learnCount: Int
     var reviewCount: Int
@@ -18,7 +18,7 @@ class NotificationsStatus: NSObject {
     var defaultCount: Int
     var totalCount: Int
 
-    init(json: JSON) {
+    func update(json: JSON) {
         self.id = json["id"].intValue
         self.learnCount = json["learn"].intValue
         self.reviewCount = json["review"].intValue
@@ -26,6 +26,15 @@ class NotificationsStatus: NSObject {
         self.teachCount = json["teach"].intValue
         self.defaultCount = json["default"].intValue
         self.totalCount = json["total"].intValue
-        super.init()
+    }
+
+    required init(json: JSON) {
+        self.id = json["id"].intValue
+        self.learnCount = json["learn"].intValue
+        self.reviewCount = json["review"].intValue
+        self.commentsCount = json["comments"].intValue
+        self.teachCount = json["teach"].intValue
+        self.defaultCount = json["default"].intValue
+        self.totalCount = json["total"].intValue
     }
 }

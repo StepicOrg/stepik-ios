@@ -114,7 +114,7 @@ class AuthAPI {
                     }
                 case .success(let json):
                     if let r = response.response,
-                       !(200...299 ~= r.statusCode) {
+                        !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 497:
                             reject(SignInError.manyAttempts)

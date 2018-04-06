@@ -28,7 +28,6 @@ class NotificationsViewController: UIViewController, NotificationsView {
             case .empty:
                 self.refreshControl.endRefreshing()
                 self.tableView.tableFooterView = UIView()
-                self.tableView.reloadEmptyDataSet()
             }
         }
     }

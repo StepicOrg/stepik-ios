@@ -276,7 +276,6 @@ extension DownloadsViewController : VideoDownloadDelegate {
                 tableView.deleteSections(IndexSet(integer: 0), with: .automatic)
             }
             self.tableView.endUpdates()
-            self.tableView.reloadEmptyDataSet()
         }
     }
 
@@ -302,7 +301,6 @@ extension DownloadsViewController : VideoDownloadDelegate {
                 tableView.deleteSections(IndexSet(integer: (isSectionDownloading(0) ? 1 : 0)), with: .automatic)
             }
             self.tableView.endUpdates()
-            self.tableView.reloadEmptyDataSet()
         }
     }
 

@@ -10,8 +10,9 @@ import Foundation
 import PromiseKit
 import Koloda
 
-class CardsStepsViewController: UIViewController, CardsStepsView {
+class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWithStepikPlaceholder {
 
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
@@ -25,32 +26,30 @@ class CardsStepsViewController: UIViewController, CardsStepsView {
         didSet {
             switch state {
             case .normal:
-                self.placeholderView.isHidden = true
-                self.kolodaView.isHidden = false
-            case .connectionError, .coursePassed:
-                self.placeholderView.isHidden = false
-                self.kolodaView.isHidden = true
-
-                self.placeholderView.datasource = self
+                isPlaceholderShown = false
+            case .connectionError:
+                showPlaceholder(for: .connectionError)
+            case .coursePassed:
+                showPlaceholder(for: .adaptiveCoursePassed)
             default:
                 break
             }
         }
     }
 
-    lazy var placeholderView: PlaceholderView = {
-        let v = PlaceholderView()
-        self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(toView: self.kolodaView)
-        v.delegate = self
-        v.datasource = self
-        v.backgroundColor = self.view.backgroundColor
-        return v
-    }()
-
     // Can be overriden in the children classes (for adaptive app)
     var cardView: StepCardView {
         return StepCardView()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+            self?.presenter?.tryAgain()
+        }), for: .connectionError)
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
     }
 
     func refreshCards() {
@@ -196,62 +195,6 @@ extension CardsStepsViewController: KolodaViewDataSource {
 
     func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
         return CardOverlayView()
-    }
-}
-
-extension CardsStepsViewController: PlaceholderViewDataSource {
-    func placeholderImage() -> UIImage? {
-        switch state {
-        case .connectionError:
-            return Images.placeholders.connectionError
-        case .coursePassed:
-            return Images.placeholders.coursePassed
-        default:
-            return nil
-        }
-    }
-
-    func placeholderButtonTitle() -> String? {
-        switch state {
-        case .connectionError:
-            return NSLocalizedString("TryAgain", comment: "")
-        default:
-            return nil
-        }
-    }
-
-    func placeholderDescription() -> String? {
-        switch state {
-        case .connectionError:
-            return nil
-        case .coursePassed:
-            return NSLocalizedString("NoRecommendations", comment: "")
-        default:
-            return nil
-        }
-    }
-
-    func placeholderStyle() -> PlaceholderStyle {
-        var style = PlaceholderStyle()
-        style.button.textColor = UIColor.mainDark
-        return style
-    }
-
-    func placeholderTitle() -> String? {
-        switch state {
-        case .connectionError:
-            return NSLocalizedString("ConnectionErrorText", comment: "")
-        case .coursePassed:
-            return NSLocalizedString("CoursePassed", comment: "")
-        default:
-            return nil
-        }
-    }
-}
-
-extension CardsStepsViewController: PlaceholderViewDelegate {
-    func placeholderButtonDidPress() {
-        presenter?.tryAgain()
     }
 }
 

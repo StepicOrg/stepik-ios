@@ -9,9 +9,11 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
-class QueriesAPI {
-    let name = "queries"
+//TODO: Refactor this by adding class Query: JSONSerializable
+class QueriesAPI: APIEndpoint {
+    override var name: String { return "queries" }
 
     @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
 

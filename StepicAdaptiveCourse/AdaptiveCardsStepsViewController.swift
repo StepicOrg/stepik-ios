@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension StepikPlaceholder.Style {
+    static let adaptiveCoursePassedAdaptive = StepikPlaceholderStyle(id: "adaptiveCoursePassedAdaptive",
+                                                                     image: nil,
+                                                                     text: NSLocalizedString("NoRecommendations", comment: ""),
+                                                                     buttonTitle: nil)
+}
+
 class AdaptiveCardsStepsViewController: CardsStepsViewController {
     @IBOutlet weak var levelProgress: RatingProgressView!
     @IBOutlet weak var tapProxyView: TapProxyView!
@@ -47,6 +54,8 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassedAdaptive), for: .adaptiveCoursePassed)
 
         tapProxyView.targetView = trophyButton
         tapBackProxyView.targetView = backButton

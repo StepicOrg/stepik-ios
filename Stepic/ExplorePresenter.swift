@@ -260,19 +260,8 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
-        checkToken().then {
-            [weak self]
-            () -> Promise<([CourseList], Meta)> in
-            guard let strongSelf = self else {
-                throw WeakSelfError.noStrong
-            }
-            if ContentLanguage.sharedContentLanguage != language {
-                throw LanguageError.wrongLanguageError
-            }
-
-            strongSelf.didRefreshOnce = true
-            return strongSelf.courseListsAPI.retrieve(language: language, page: 1)
-        }.then {
+        didRefreshOnce = true
+        courseListsAPI.retrieve(language: language, page: 1).then {
             [weak self]
             lists, _ -> Void in
             guard let strongSelf = self else {

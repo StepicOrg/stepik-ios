@@ -11,9 +11,9 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class User: NSManagedObject, JSONInitializable {
+class User: NSManagedObject, JSONSerializable {
 
-    typealias idType = Int
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -34,10 +34,6 @@ class User: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].intValue
     }
 
     var isGuest: Bool {
@@ -69,5 +65,18 @@ class User: NSManagedObject, JSONInitializable {
             }
             CoreDataHelper.instance.save()
         }
+    }
+}
+
+struct UserInfo {
+    var id: Int
+    var avatarURL: String
+    var firstName: String
+    var lastName: String
+    init(json: JSON) {
+        id = json["id"].intValue
+        avatarURL = json["avatar"].stringValue
+        firstName = json["first_name"].stringValue
+        lastName = json["last_name"].stringValue
     }
 }

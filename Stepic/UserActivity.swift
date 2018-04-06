@@ -9,7 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class UserActivity {
+class UserActivity: JSONSerializable {
+
     var id: Int
     var pins: [Int]
 
@@ -18,7 +19,12 @@ class UserActivity {
         self.pins = UserActivity.emptyYearPins
     }
 
-    init(json: JSON) {
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.pins = json["pins"].arrayValue.map({return $0.intValue})
+    }
+
+    required init(json: JSON) {
         self.id = json["id"].intValue
         self.pins = json["pins"].arrayValue.map({return $0.intValue})
     }

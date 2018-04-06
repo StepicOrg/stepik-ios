@@ -293,6 +293,15 @@ public class Player: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        if RemoteConfig.shared.allowVideoInBackground {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                print("failed to set up background playing: \(error)")
+            }
+        }
+
         self.playerView.layer.addObserver(self, forKeyPath: PlayerReadyForDisplayKey, options: ([.new, .old]), context: &PlayerLayerObserverContext)
         self.timeObserver = self.avplayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 100), queue: DispatchQueue.main, using: { [weak self] _ in
             guard let strongSelf = self else { return }
@@ -468,28 +477,41 @@ extension Player {
     // UIApplication
 
     internal func addApplicationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: UIApplication.shared)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: UIApplication.shared)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: .UIApplicationWillResignActive, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidBecomeActive(_:)), name: .UIApplicationDidBecomeActive, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: .UIApplicationDidEnterBackground, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillEnterForeground(_:)), name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
     }
 
     internal func removeApplicationObservers() {
     }
 
-    @objc internal func applicationWillResignActive(_ aNotification: NSNotification) {
-        if self.playbackState == .playing {
+    @objc internal func handleApplicationWillResignActive(_ aNotification: Notification) {
+        if !RemoteConfig.shared.allowVideoInBackground && self.playbackState == .playing {
             self.pause()
         }
     }
 
-    @objc internal func applicationDidEnterBackground(_ aNotification: NSNotification) {
-        if self.playbackState == .playing {
-            self.pause()
+    @objc internal func handleApplicationDidBecomeActive(_ aNotification: Notification) {
+        if RemoteConfig.shared.allowVideoInBackground {
+            // Attach AVPlayer to AVPlayerLayer again
+            playerView.player = self.avplayer
         }
     }
 
-    @objc internal func applicationWillEnterForeground(_ aNoticiation: NSNotification) {
-        if self.playbackState == .paused {
+    @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        if RemoteConfig.shared.allowVideoInBackground {
+            // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
+            playerView.player = nil
+        } else {
+            if self.playbackState == .playing {
+                self.pause()
+            }
+        }
+    }
+
+    @objc internal func handleApplicationWillEnterForeground(_ aNoticiation: Notification) {
+        if !RemoteConfig.shared.allowVideoInBackground && self.playbackState == .paused {
             self.playFromCurrentTime()
         }
     }
@@ -622,21 +644,17 @@ extension Player {
 
 internal class PlayerView: UIView {
 
-    var player: AVPlayer! {
+    var player: AVPlayer? {
         get {
-            return (self.layer as! AVPlayerLayer).player
+            return playerLayer.player
         }
         set {
-            if (self.layer as! AVPlayerLayer).player != newValue {
-                (self.layer as! AVPlayerLayer).player = newValue
-            }
+            playerLayer.player = newValue
         }
     }
 
     var playerLayer: AVPlayerLayer {
-        get {
-            return self.layer as! AVPlayerLayer
-        }
+        return layer as! AVPlayerLayer
     }
 
     var fillMode: String {

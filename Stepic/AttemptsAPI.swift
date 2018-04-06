@@ -9,52 +9,27 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class AttemptsAPI: APIEndpoint {
     override var name: String { return "attempts" }
 
-    @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-
-        let params: Parameters = [
-            "attempt": [
-                "step": "\(stepId)"
-            ]
-        ]
-
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/attempts", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
+    func create(stepName: String, stepId: Int) -> Promise<Attempt> {
+        let attempt = Attempt(step: stepId)
+        return Promise { fulfill, reject in
+            create.request(requestEndpoint: "attempts", paramName: "attempt", creatingObject: attempt, withManager: manager).then {
+                attempt, json -> Void in
+                guard let json = json else {
+                    fulfill(attempt)
+                    return
                 }
-            } else {
-                json = response.result.value!
+                attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepName: stepName)
+                fulfill(attempt)
+            }.catch {
+                error in
+                reject(error)
             }
-            let request = response.request
-            let response = response.response
-
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-
-            print("request headers: \(String(describing: request?.allHTTPHeaderFields))")
-
-            if response?.statusCode == 201 {
-                let attempt = Attempt(json: json["attempts"].arrayValue[0], stepName: stepName)
-                success(attempt)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
-                return
-            }
-
-        })
+        }
     }
 
     @discardableResult func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
@@ -101,5 +76,19 @@ class AttemptsAPI: APIEndpoint {
             }
 
         })
+    }
+}
+
+extension AttemptsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        create(stepName: stepName, stepId: stepId).then {
+            attempt in
+            success(attempt)
+        }.catch {
+            error in
+            errorHandler(error.localizedDescription)
+        }
+        return nil
     }
 }

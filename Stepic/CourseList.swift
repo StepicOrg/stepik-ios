@@ -11,8 +11,8 @@ import CoreData
 import SwiftyJSON
 import PromiseKit
 
-class CourseList: NSManagedObject, JSONInitializable {
-    typealias idType = Int
+final class CourseList: NSManagedObject, IDFetchable {
+    typealias IdType = Int
 
     convenience required init(json: JSON) {
         self.init()
@@ -30,10 +30,6 @@ class CourseList: NSManagedObject, JSONInitializable {
 
     func update(json: JSON) {
         initialize(json)
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
     }
 
     var language: ContentLanguage {

@@ -8,20 +8,23 @@
 
 import Foundation
 import PromiseKit
+import Alamofire
 
 class NotificationStatusesAPI: APIEndpoint {
     override var name: String { return "notification-statuses" }
 
     func retrieve() -> Promise<NotificationsStatus> {
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: nil, headers: AuthInfo.shared.initialHTTPHeaders).responseSwiftyJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    reject(RetrieveError(error: error))
-                case .success(let json):
-                    let ns = NotificationsStatus(json: json["notification-statuses"].arrayValue[0])
-                    fulfill(ns)
+            retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: Array<NotificationsStatus>(), withManager: manager).then {
+                notificationStatuses, _, _ -> Void in
+                guard let status = notificationStatuses.first else {
+                    reject(RetrieveError.parsingError)
+                    return
                 }
+                fulfill(status)
+            }.catch {
+                error in
+                reject(error)
             }
         }
     }

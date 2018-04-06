@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import DZNEmptyDataSet
 
 enum DiscussionsEmptyDataSetState {
     case error, empty, none
@@ -38,13 +37,16 @@ struct DiscussionsCellInfo {
     }
 }
 
-class DiscussionsViewController: UIViewController {
+class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     var discussionProxyId: String!
     var target: Int!
-    var step: Step!
 
-    @IBOutlet weak var tableView: UITableView!
+    // This var is used only for incrementing discussions count
+    var step: Step?
+
+    @IBOutlet weak var tableView: StepikTableView!
 
     var refreshControl: UIRefreshControl? = UIRefreshControl()
 
@@ -52,7 +54,16 @@ class DiscussionsViewController: UIViewController {
 
     var emptyDatasetState: DiscussionsEmptyDataSetState = .none {
         didSet {
-            tableView.reloadEmptyDataSet()
+            switch emptyDatasetState {
+            case .none:
+                isPlaceholderShown = false
+                tableView.showLoadingPlaceholder()
+            case .empty:
+                isPlaceholderShown = false
+                tableView.reloadData()
+            case .error:
+                showPlaceholder(for: .connectionError)
+            }
         }
     }
 
@@ -61,10 +72,15 @@ class DiscussionsViewController: UIViewController {
 
         print("did load")
 
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+            self?.reloadDiscussions()
+        }), for: .connectionError)
+
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
+        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDiscussions)
+        tableView.loadingPlaceholder = StepikPlaceholder(.emptyDiscussionsLoading)
+
         emptyDatasetState = .none
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -272,10 +288,7 @@ class DiscussionsViewController: UIViewController {
         UIThread.performUI({
             [weak self] in
             if self?.cellsInfo.count == 0 {
-                self?.tableView.emptyDataSetSource = self
                 self?.emptyDatasetState = emptyState
-            } else {
-                self?.tableView.emptyDataSetSource = nil
             }
             self?.tableView.reloadData()
         })
@@ -725,75 +738,7 @@ extension DiscussionsViewController : WriteCommentDelegate {
             discussionIds.loaded.insert(comment.id, at: 0)
             discussions.insert(comment, at: 0)
             reloadTableData()
-            step.discussionsCount? += 1
+            step?.discussionsCount? += 1
         }
-    }
-}
-
-extension DiscussionsViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        switch emptyDatasetState {
-        case .empty:
-            return Images.noCommentsWhite.size200x200
-        case .error:
-            return Images.noWifiImage.white
-        case .none:
-            return Images.noCommentsWhite.size200x200
-        }
-    }
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("NoDiscussionsTitle", comment: "")
-            break
-        case .error:
-            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
-            break
-        case .none:
-            text = ""
-            break
-        }
-
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
-
-        switch emptyDatasetState {
-        case .empty:
-            text = NSLocalizedString("NoDiscussionsDescription", comment: "")
-            break
-        case .error:
-            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
-            break
-        case .none:
-            text = NSLocalizedString("RefreshingDiscussions", comment: "")
-            break
-        }
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-                          NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                          NSAttributedStringKey.paragraphStyle: paragraph]
-
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
-        return 0
-    }
-
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
     }
 }

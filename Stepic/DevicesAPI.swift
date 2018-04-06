@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import PromiseKit
 
+//TODO: Refactor this after DeviceError refactoring
 class DevicesAPI: APIEndpoint {
     override var name: String { return "devices" }
 
@@ -52,6 +53,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func update(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         return Promise { fulfill, reject in
             guard let deviceId = device.id else {
@@ -83,6 +85,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func create(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         let params = ["device": device.json]
 
@@ -108,6 +111,7 @@ class DevicesAPI: APIEndpoint {
         }
     }
 
+    //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
     func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
         return Promise { fulfill, reject in
             manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).responseSwiftyJSON { response in
