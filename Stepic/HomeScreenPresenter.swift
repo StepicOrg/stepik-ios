@@ -153,9 +153,10 @@ class CourseListBlock {
         self.onlyLocal = onlyLocal
         self.listType = listType
         self.horizontalController = ControllerHelper.instantiateViewController(identifier: "CourseListHorizontalViewController", storyboardName: "CourseLists") as! CourseListHorizontalViewController
-        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, ID: ID, limit: horizontalLimit, listType: listType, colorMode: colorMode, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager())
+        self.horizontalController.presenter = CourseListPresenter(view: horizontalController, id: ID, limit: horizontalLimit, listType: listType, onlyLocal: onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager())
         self.horizontalController.presenter?.lastStepDataSource = lastStepWidgetDataSource
         self.horizontalController.presenter?.couseListCountDelegate = courseListCountDelegate
+        self.horizontalController.colorMode = colorMode
         self.showVerticalBlock = {
             [weak self]
             count in
@@ -167,8 +168,9 @@ class CourseListBlock {
             verticalController.descriptionView.colorStyle = strongSelf.colorStyle
             verticalController.courseCount = count
             verticalController.listDescription = strongSelf.description
-            verticalController.presenter = CourseListPresenter(view: verticalController, ID: ID, limit: nil, listType: strongSelf.listType, colorMode: strongSelf.colorMode, onlyLocal: strongSelf.onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager())
+            verticalController.presenter = CourseListPresenter(view: verticalController, id: ID, limit: nil, listType: strongSelf.listType, onlyLocal: strongSelf.onlyLocal, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager())
             verticalController.presenter?.couseListCountDelegate = verticalController
+            verticalController.colorMode = strongSelf.colorMode
             showControllerBlock(verticalController)
         }
     }
