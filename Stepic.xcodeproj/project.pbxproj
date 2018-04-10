@@ -481,16 +481,6 @@
 		086442D51F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		086442D61F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		086442D71F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
-		0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */; };
-		0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */; };
-		0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */; };
-		0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086494881E8C753B0083E0BE /* SbAppDelegate.swift */; };
-		0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948B1E8C753B0083E0BE /* SbEntranceViewController.swift */; };
-		086494A11E8C7A060083E0BE /* SberbankUniversity.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086494851E8C753B0083E0BE /* SberbankUniversity.xcassets */; };
-		086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086494871E8C753B0083E0BE /* GoogleService-Info.plist */; };
-		086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086494891E8C753B0083E0BE /* SbAuth.storyboard */; };
-		086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0864948C1E8C753B0083E0BE /* SbEntranceViewController.xib */; };
-		086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0864948D1E8C753B0083E0BE /* SbLaunchScreen.xib */; };
 		086538381EB02716003A8415 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086538371EB02716003A8415 /* Stickers.xcassets */; };
 		0865383C1EB02716003A8415 /* StickerPackExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 086538351EB02715003A8415 /* StickerPackExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
@@ -4551,18 +4541,6 @@
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
 		0863B9662069A41A0023A182 /* RetrieveRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveRequestMaker.swift; sourceTree = "<group>"; };
-		086494841E8C753B0083E0BE /* SberbankUniversity-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "SberbankUniversity-Info.plist"; path = "Sb/SberbankUniversity-Info.plist"; sourceTree = "<group>"; };
-		086494851E8C753B0083E0BE /* SberbankUniversity.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = SberbankUniversity.xcassets; path = Sb/SberbankUniversity.xcassets; sourceTree = "<group>"; };
-		086494861E8C753B0083E0BE /* SberbankUniversity.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = SberbankUniversity.entitlements; path = Sb/SberbankUniversity.entitlements; sourceTree = "<group>"; };
-		086494871E8C753B0083E0BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Sb/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		086494881E8C753B0083E0BE /* SbAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbAppDelegate.swift; path = Sb/SbAppDelegate.swift; sourceTree = "<group>"; };
-		086494891E8C753B0083E0BE /* SbAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SbAuth.storyboard; path = Sb/SbAuth.storyboard; sourceTree = "<group>"; };
-		0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbControllerHelperLaunchExtension.swift; path = Sb/SbControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
-		0864948B1E8C753B0083E0BE /* SbEntranceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbEntranceViewController.swift; path = Sb/SbEntranceViewController.swift; sourceTree = "<group>"; };
-		0864948C1E8C753B0083E0BE /* SbEntranceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SbEntranceViewController.xib; path = Sb/SbEntranceViewController.xib; sourceTree = "<group>"; };
-		0864948D1E8C753B0083E0BE /* SbLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SbLaunchScreen.xib; path = Sb/SbLaunchScreen.xib; sourceTree = "<group>"; };
-		0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbSocialNetworks.swift; path = Sb/SbSocialNetworks.swift; sourceTree = "<group>"; };
-		0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbStepicApplicationsInfo.swift; path = Sb/SbStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		086538351EB02715003A8415 /* StickerPackExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StickerPackExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		086538371EB02716003A8415 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		086538391EB02716003A8415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -6709,25 +6687,6 @@
 			name = Analytics;
 			sourceTree = "<group>";
 		};
-		08D121261C93882400A54ABC /* Sb */ = {
-			isa = PBXGroup;
-			children = (
-				086494841E8C753B0083E0BE /* SberbankUniversity-Info.plist */,
-				086494851E8C753B0083E0BE /* SberbankUniversity.xcassets */,
-				086494861E8C753B0083E0BE /* SberbankUniversity.entitlements */,
-				086494871E8C753B0083E0BE /* GoogleService-Info.plist */,
-				086494881E8C753B0083E0BE /* SbAppDelegate.swift */,
-				086494891E8C753B0083E0BE /* SbAuth.storyboard */,
-				0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */,
-				0864948B1E8C753B0083E0BE /* SbEntranceViewController.swift */,
-				0864948C1E8C753B0083E0BE /* SbEntranceViewController.xib */,
-				0864948D1E8C753B0083E0BE /* SbLaunchScreen.xib */,
-				0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */,
-				0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */,
-			);
-			name = Sb;
-			sourceTree = "<group>";
-		};
 		08D565C91C5F7CF000DE2B6A /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
@@ -6764,7 +6723,6 @@
 				1BAE13041F93F67700482251 /* StepikTVTests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
-				08D121261C93882400A54ABC /* Sb */,
 				15A6EA0367C62E2E49D43D22 /* Pods */,
 				938860E02037994800DFEA3A /* Recovered References */,
 			);
@@ -8907,7 +8865,6 @@
 				08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				08CB0D451FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
-				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				0815661C1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				08C6E31F1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib in Resources */,
 				085EDCC01F99462B00AB3278 /* Notifications.storyboard in Resources */,
@@ -8916,12 +8873,10 @@
 				080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08EDB8B21F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
-				086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
 				08D121151C937B2200A54ABC /* Images.xcassets in Resources */,
 				083F2B271E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
-				086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */,
 				088EDCBA1F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				08EDD6211F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				0860D91C1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
@@ -8939,7 +8894,6 @@
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
 				0888D0FA1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
-				086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */,
 				08CBA3421F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				080C5E731EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				08CBA3301F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
@@ -8953,7 +8907,6 @@
 				08E8F97E1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
 				08CB0D3B1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
-				086494A11E8C7A060083E0BE /* SberbankUniversity.xcassets in Resources */,
 				08C7CB751FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
 				0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
@@ -11438,7 +11391,6 @@
 				2CD846481F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
-				0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08EA89BB200E53B200BCAF44 /* EnrollmentsAPI.swift in Sources */,
@@ -11456,7 +11408,6 @@
 				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
-				0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
 				08B062DE1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
@@ -11578,7 +11529,6 @@
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				0860D9131F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
-				0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */,
 				089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				08CBA3281F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -11704,7 +11654,6 @@
 				0885B8D31FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				081959EB1FA007D800E6D6CD /* HomeScreenViewController.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
-				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
 				083540681CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				087039311CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				08EDD62B1F7C6785005203E4 /* StepikButton.swift in Sources */,
@@ -11731,7 +11680,6 @@
 				082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				08D120EB1C937B2200A54ABC /* JSONSerializable.swift in Sources */,
 				08D120EC1C937B2200A54ABC /* UIImageViewExtension.swift in Sources */,
-				0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
