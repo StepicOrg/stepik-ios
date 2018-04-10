@@ -25,6 +25,20 @@ class BaseCardsStepsViewController: CardsStepsViewController {
     var course: Course!
     var didJustSubscribe: Bool = false
 
+    override var state: CardsStepsViewState {
+        set {
+            super.state = newValue
+            if newValue != .normal {
+                bringElementsToFront()
+            } else {
+                sendElementsToBack()
+            }
+        }
+        get {
+            return super.state
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,12 +52,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
             view.insertSubview(padView, at: 0)
         }
 
-        trophyButton.layer.zPosition = kolodaView.layer.zPosition - 1
-        backButton.layer.zPosition = kolodaView.layer.zPosition - 1
-        statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
-        progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
-        labelsStackView.layer.zPosition = kolodaView.layer.zPosition - 1
-        shadowView.layer.zPosition = kolodaView.layer.zPosition - 1
+        sendElementsToBack()
 
         progressBar.progress = 0
 
@@ -170,4 +179,26 @@ class BaseCardsStepsViewController: CardsStepsViewController {
         shouldToggleNavigationBar = true
         super.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
     }
+
+    private func bringElementsToFront() {
+        backButton.superview?.bringSubview(toFront: backButton)
+        trophyButton.superview?.bringSubview(toFront: trophyButton)
+
+        trophyButton.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        backButton.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        statusBarPad?.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        progressBar.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        labelsStackView.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        shadowView.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+    }
+
+    private func sendElementsToBack() {
+        trophyButton.layer.zPosition = kolodaView.layer.zPosition - 1
+        backButton.layer.zPosition = kolodaView.layer.zPosition - 1
+        statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
+        progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
+        labelsStackView.layer.zPosition = kolodaView.layer.zPosition - 1
+        shadowView.layer.zPosition = kolodaView.layer.zPosition - 1
+    }
+
 }
