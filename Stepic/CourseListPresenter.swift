@@ -71,7 +71,8 @@ class CourseListPresenter {
 
     private var reachabilityManager: Alamofire.NetworkReachabilityManager?
 
-    private var didRefreshOnce: Bool = false
+    private var didRefreshOnce = false
+    private var canUpdateCache = false
 
     private var state: CourseListState = .empty {
         didSet {
@@ -91,8 +92,10 @@ class CourseListPresenter {
 
     private var courses: [Course] = [] {
         didSet {
-            listType.cachedListCourseIds = courses.map({ $0.id })
-            print("\(id): cached courses with ids: \(listType.cachedListCourseIds)")
+            if canUpdateCache {
+                listType.cachedListCourseIds = courses.map({ $0.id })
+                print("\(id): cached courses with ids: \(listType.cachedListCourseIds)")
+            }
             if let limit = limit {
                 displayingCourses = [Course](courses.prefix(limit))
             } else {
@@ -256,6 +259,7 @@ class CourseListPresenter {
                     }
 
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
+                    strongSelf.canUpdateCache = true
                     strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
                     fulfill(())
                 }.catch { error in
@@ -336,6 +340,9 @@ class CourseListPresenter {
     func willAppear() {
         if lastUser != AuthInfo.shared.user || shouldRefreshLanguage {
             courses = []
+            listType.cachedListCourseIds.removeAll()
+            canUpdateCache = false
+
             self.view?.display(courses: [])
             lastUser = AuthInfo.shared.user
             lastLanguage = ContentLanguage.sharedContentLanguage
@@ -503,7 +510,9 @@ class CourseListPresenter {
             }
         case .enrolled:
             if !AuthInfo.shared.isAuthorized {
+                self.listType.cachedListCourseIds.removeAll()
                 self.courses = []
+                self.canUpdateCache = false
                 self.view?.display(courses: [])
                 self.lastStepDataSource?.didLoadWithProgresses(courses: courses)
                 self.state = .emptyAnonymous
