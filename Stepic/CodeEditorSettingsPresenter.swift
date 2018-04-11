@@ -6,6 +6,9 @@ import Foundation
 
 protocol CodeEditorSettingsView: class {
     func setMenu(menu: Menu)
+
+    func chooseEditorTheme(current: String)
+    func chooseFontSize(current: Int)
 }
 
 class CodeEditorSettingsPresenter {
@@ -45,6 +48,7 @@ class CodeEditorSettingsPresenter {
 
         block.onTouch = {
             [weak self] in
+            self?.view?.chooseEditorTheme(current: "androidstudio")
         }
 
         return block
@@ -56,6 +60,7 @@ class CodeEditorSettingsPresenter {
 
         block.onTouch = {
             [weak self] in
+            self?.view?.chooseFontSize(current: 14)
         }
 
         return block

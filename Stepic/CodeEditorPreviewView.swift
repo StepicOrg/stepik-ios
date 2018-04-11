@@ -20,13 +20,16 @@ class CodeEditorPreviewView: NibInitializableView {
     @IBOutlet weak var previewContainer: UIView!
     var previewTextView: UITextView!
 
+    var highlightr: Highlightr?
+
     override func setupSubviews() {
         translatesAutoresizingMaskIntoConstraints = false
 
         let textStorage = CodeAttributedString()
         textStorage.language = "Java"
 
-        textStorage.highlightr.setTheme(to: "Androidstudio")
+        highlightr = textStorage.highlightr
+        highlightr?.setTheme(to: "Androidstudio")
 
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
