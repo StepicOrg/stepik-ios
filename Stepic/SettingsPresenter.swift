@@ -11,6 +11,7 @@ import Foundation
 protocol SettingsView: class {
     func setMenu(menu: Menu)
     func changeVideoQuality(action: VideoQualityChoiceAction)
+    func changeCodeEditorSettings()
 }
 
 class SettingsPresenter {
@@ -30,7 +31,9 @@ class SettingsPresenter {
             buildLoadedVideoQualityBlock(),
             buildOnlineVideoQualityBlock(),
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
-            buildAdaptiveModeSwitchBlock()
+            buildAdaptiveModeSwitchBlock(),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: "Code Editor"),
+            buildCodeEditorSettingsBlock()
         ]
         return Menu(blocks: blocks)
     }
@@ -43,6 +46,8 @@ class SettingsPresenter {
     private let onlineVideoQualityBlockId = "online_video_quality"
     private let adaptiveHeaderBlockId = "adaptive_header"
     private let adaptiveModeSwitchBlockId = "use_adaptive_mode"
+    private let codeEditorSettingsHeaderBlockId = "code_editor_header"
+    private let codeEditorSettingsBlockId = "code_editor_settings"
 
     private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock {
         return HeaderMenuBlock(id: id, title: title)
@@ -92,4 +97,14 @@ class SettingsPresenter {
         return block
     }
 
+    private func buildCodeEditorSettingsBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(id: codeEditorSettingsBlockId, title: "Code editor settings")
+
+        block.onTouch = {
+            [weak self] in
+            self?.view?.changeCodeEditorSettings()
+        }
+
+        return block
+    }
 }

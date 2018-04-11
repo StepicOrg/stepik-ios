@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CodeEditorPreviewView" customModule="Stepic" customModuleProvider="target">
+            <connections>
+                <outlet property="languageButton" destination="yTL-Bv-G8S" id="GQp-o4-bwE"/>
+                <outlet property="previewContainer" destination="hsS-3G-BjZ" id="e22-6w-sBd"/>
+                <outlet property="titleLabel" destination="7a9-Cd-Y7Q" id="Vw3-zS-sYz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ccr-r3-8Kc">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="268"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Предпросмотр" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a9-Cd-Y7Q">
+                    <rect key="frame" x="24" y="16" width="121" height="21.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21.5" id="dnd-lX-fK4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsS-3G-BjZ">
+                    <rect key="frame" x="24" y="53" width="327" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="4xW-Qv-mIH"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTL-Bv-G8S">
+                    <rect key="frame" x="319" y="11.5" width="32" height="30"/>
+                    <state key="normal" title="Java">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yTL-Bv-G8S" secondAttribute="trailing" priority="999" constant="24" id="E6L-Bn-X81"/>
+                <constraint firstItem="7a9-Cd-Y7Q" firstAttribute="leading" secondItem="ccr-r3-8Kc" secondAttribute="leading" priority="999" constant="24" id="FnI-Ov-YNP"/>
+                <constraint firstItem="yTL-Bv-G8S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7a9-Cd-Y7Q" secondAttribute="trailing" priority="999" constant="16" id="KGe-5H-6YK"/>
+                <constraint firstItem="hsS-3G-BjZ" firstAttribute="leading" secondItem="ccr-r3-8Kc" secondAttribute="leading" priority="999" constant="24" id="TIX-yI-783"/>
+                <constraint firstAttribute="trailing" secondItem="hsS-3G-BjZ" secondAttribute="trailing" priority="999" constant="24" id="WDa-t0-Juh"/>
+                <constraint firstItem="hsS-3G-BjZ" firstAttribute="firstBaseline" secondItem="7a9-Cd-Y7Q" secondAttribute="baseline" constant="20" id="X8J-Al-sF1"/>
+                <constraint firstItem="yTL-Bv-G8S" firstAttribute="centerY" secondItem="7a9-Cd-Y7Q" secondAttribute="centerY" id="aZL-YJ-9fP"/>
+                <constraint firstItem="hsS-3G-BjZ" firstAttribute="centerX" secondItem="bbf-yc-KOm" secondAttribute="centerX" id="ddp-0e-m3S"/>
+                <constraint firstItem="bbf-yc-KOm" firstAttribute="bottom" secondItem="hsS-3G-BjZ" secondAttribute="bottom" constant="15" id="dof-Xv-Rve"/>
+                <constraint firstItem="7a9-Cd-Y7Q" firstAttribute="top" secondItem="ccr-r3-8Kc" secondAttribute="top" constant="16" id="reN-qm-8BO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="bbf-yc-KOm"/>
+            <point key="canvasLocation" x="23.5" y="-161"/>
+        </view>
+    </objects>
+</document>

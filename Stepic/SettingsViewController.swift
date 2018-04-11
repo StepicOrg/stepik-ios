@@ -52,6 +52,14 @@ class SettingsViewController: MenuViewController, SettingsView {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    func changeCodeEditorSettings() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
+            return
+        }
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
