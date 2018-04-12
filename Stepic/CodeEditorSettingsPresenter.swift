@@ -35,7 +35,7 @@ class CodeEditorSettingsPresenter {
 
     func updateFontSize(with newSize: Int) {
         PreferencesContainer.codeEditor.fontSize = newSize
-        fontSizeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentFontSize", comment: ""), newSize)
+        fontSizeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentFontSize", comment: ""), "\(newSize)")
         view?.updatePreview(fontSize: newSize)
     }
 
