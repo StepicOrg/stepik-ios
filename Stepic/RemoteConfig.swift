@@ -14,11 +14,13 @@ enum RemoteConfigKeys: String {
     case adaptiveBackendUrl = "adaptive_backend_url"
     case supportedInAdaptiveModeCourses = "adaptive_courses_ios"
     case allowVideoInBackground = "allow_video_in_background"
+    case allowCodeEditorSettings = "allow_code_editor_settings"
 }
 
 class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
     private let defaultAllowVideoInBackground = false
+    private let defaultAllowCodeEditorSettings = false
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -28,7 +30,8 @@ class RemoteConfig {
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
         RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
         RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject,
-        RemoteConfigKeys.allowVideoInBackground.rawValue: defaultAllowVideoInBackground as NSObject
+        RemoteConfigKeys.allowVideoInBackground.rawValue: defaultAllowVideoInBackground as NSObject,
+        RemoteConfigKeys.allowCodeEditorSettings.rawValue: defaultAllowCodeEditorSettings as NSObject
     ]
 
     enum ShowStreaksNotificationTrigger: String {
@@ -63,6 +66,14 @@ class RemoteConfig {
     var allowVideoInBackground: Bool {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.allowVideoInBackground.rawValue).stringValue else {
             return defaultAllowVideoInBackground
+        }
+
+        return configValue == "true"
+    }
+
+    var allowCodeEditorSettings: Bool {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.allowCodeEditorSettings.rawValue).stringValue else {
+            return defaultAllowCodeEditorSettings
         }
 
         return configValue == "true"
