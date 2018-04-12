@@ -37,6 +37,7 @@ class CodeEditorPreviewView: NibInitializableView {
     }
 
     override func setupSubviews() {
+        titleLabel.text = NSLocalizedString("PreviewTitle", comment: "")
         translatesAutoresizingMaskIntoConstraints = false
     }
 

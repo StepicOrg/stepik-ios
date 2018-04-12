@@ -35,7 +35,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             return
         }
 
-        ActionSheetStringPicker.show(withTitle: "Тема",
+        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorTheme", comment: ""),
             rows: hl.availableThemes(),
             initialSelection: currentThemeIndex,
             doneBlock: { _, _, value in
@@ -56,7 +56,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             return
         }
 
-        ActionSheetStringPicker.show(withTitle: "Размер шрифта",
+        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorFontSize", comment: ""),
             rows: availableSizes.map { "\($0)" },
             initialSelection: currentSizeIndex,
             doneBlock: { _, _, value in
@@ -113,7 +113,7 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
         let availableLanguages = Array(Set(CodeLanguage.allLanguages.map { $0.humanReadableName }))
 
-        ActionSheetStringPicker.show(withTitle: "Язык",
+        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorLanguage", comment: ""),
             rows: availableLanguages,
             initialSelection: availableLanguages.index(of: previewLanguage.humanReadableName)!,
             doneBlock: { _, _, value in

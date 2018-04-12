@@ -32,7 +32,7 @@ class SettingsPresenter {
             buildOnlineVideoQualityBlock(),
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
             buildAdaptiveModeSwitchBlock(),
-            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: "Code Editor"),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
             buildCodeEditorSettingsBlock()
         ]
         return Menu(blocks: blocks)
@@ -98,7 +98,7 @@ class SettingsPresenter {
     }
 
     private func buildCodeEditorSettingsBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: codeEditorSettingsBlockId, title: "Code editor settings")
+        let block = TransitionMenuBlock(id: codeEditorSettingsBlockId, title: NSLocalizedString("CodeEditorSettingsTitle", comment: ""))
 
         block.onTouch = {
             [weak self] in

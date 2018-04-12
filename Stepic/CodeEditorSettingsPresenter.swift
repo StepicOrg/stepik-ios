@@ -29,21 +29,21 @@ class CodeEditorSettingsPresenter {
 
     func updateTheme(with newTheme: String) {
         PreferencesContainer.codeEditor.theme = newTheme
-        themeBlock?.subtitle = "Используется: \(newTheme)"
+        themeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""), newTheme)
         view?.updatePreview(theme: newTheme)
     }
 
     func updateFontSize(with newSize: Int) {
         PreferencesContainer.codeEditor.fontSize = newSize
-        fontSizeBlock?.subtitle = "Используется: \(newSize)pt"
+        fontSizeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentFontSize", comment: ""), newSize)
         view?.updatePreview(fontSize: newSize)
     }
 
     private func buildSettingsMenu() -> Menu {
         let blocks = [
-            buildTitleMenuBlock(id: colorsHeaderBlockId, title: "Цвет"),
+            buildTitleMenuBlock(id: colorsHeaderBlockId, title: NSLocalizedString("CodeEditorColor", comment: "")),
             buildThemeBlock(),
-            buildTitleMenuBlock(id: colorsHeaderBlockId, title: "Шрифт"),
+            buildTitleMenuBlock(id: colorsHeaderBlockId, title: NSLocalizedString("CodeEditorFont", comment: "")),
             buildFontSizeBlock()
         ]
         return Menu(blocks: blocks)
@@ -61,8 +61,8 @@ class CodeEditorSettingsPresenter {
     }
 
     private func buildThemeBlock() -> TransitionMenuBlock {
-        themeBlock = TransitionMenuBlock(id: themeBlockId, title: "Тема редактора")
-        themeBlock!.subtitle = "Используется: \(PreferencesContainer.codeEditor.theme)"
+        themeBlock = TransitionMenuBlock(id: themeBlockId, title: NSLocalizedString("CodeEditorTheme", comment: ""))
+        themeBlock!.subtitle = String(format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""), PreferencesContainer.codeEditor.theme)
 
         themeBlock!.onTouch = {
             [weak self] in
@@ -73,8 +73,8 @@ class CodeEditorSettingsPresenter {
     }
 
     private func buildFontSizeBlock() -> TransitionMenuBlock {
-        fontSizeBlock = TransitionMenuBlock(id: themeBlockId, title: "Размер шрифта")
-        fontSizeBlock!.subtitle = "Используется: \(PreferencesContainer.codeEditor.fontSize)pt"
+        fontSizeBlock = TransitionMenuBlock(id: themeBlockId, title: NSLocalizedString("CodeEditorFontSize", comment: ""))
+        fontSizeBlock!.subtitle = String(format: NSLocalizedString("CodeEditorCurrentFontSize", comment: ""), "\(PreferencesContainer.codeEditor.fontSize)")
 
         fontSizeBlock!.onTouch = {
             [weak self] in
