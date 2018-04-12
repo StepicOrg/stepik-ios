@@ -114,7 +114,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         }
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
-        highlightr.setTheme(to: "Androidstudio")
+        highlightr.setTheme(to: PreferencesContainer.codeEditor.theme)
         let theme = highlightr.theme!
         theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
         highlightr.theme = theme
