@@ -41,10 +41,13 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTL-Bv-G8S">
-                    <rect key="frame" x="319" y="11.5" width="32" height="30"/>
-                    <state key="normal" title="Java">
+                    <rect key="frame" x="321" y="11.5" width="30" height="30"/>
+                    <state key="normal">
                         <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="onLanguageButtonClick:" destination="-1" eventType="touchUpInside" id="MzQ-dF-pWW"/>
+                    </connections>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-b7-EHa">
                     <rect key="frame" x="177" y="143" width="20" height="20"/>

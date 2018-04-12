@@ -10,10 +10,16 @@ import UIKit
 import Highlightr
 import FLKAutoLayout
 
+protocol CodeEditorPreviewViewDelegate: class {
+    func languageButtonDidClick()
+}
+
 class CodeEditorPreviewView: NibInitializableView {
     override var nibName: String {
         return "CodeEditorPreviewView"
     }
+
+    weak var delegate: CodeEditorPreviewViewDelegate?
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,17 +27,22 @@ class CodeEditorPreviewView: NibInitializableView {
     @IBOutlet weak var previewContainer: UIView!
     var previewTextView: UITextView!
 
-    var highlightr: Highlightr?
+    var textStorage: CodeAttributedString?
+    var highlightr: Highlightr? {
+        return textStorage?.highlightr
+    }
+
+    @IBAction func onLanguageButtonClick(_ sender: Any) {
+        delegate?.languageButtonDidClick()
+    }
 
     override func setupSubviews() {
         translatesAutoresizingMaskIntoConstraints = false
     }
 
-    func setupPreview(with theme: String, fontSize: Int) {
+    func setupPreview(with theme: String, fontSize: Int, language: CodeLanguage) {
         let textStorage = CodeAttributedString()
-        textStorage.language = "Java"
-
-        highlightr = textStorage.highlightr
+        self.textStorage = textStorage
 
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
@@ -43,13 +54,14 @@ class CodeEditorPreviewView: NibInitializableView {
         previewTextView = UITextView(frame: previewContainer.frame, textContainer: textContainer)
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
         previewTextView.setRoundedCorners(cornerRadius: 5, borderWidth: 1.0, borderColor: .lightGray)
+        previewTextView.isEditable = false
+        previewTextView.isSelectable = false
         previewContainer.addSubview(previewTextView)
         previewTextView.align(toView: previewContainer)
 
-        previewTextView.text = "/* Comment */"
-
         updateTheme(with: theme)
         updateFontSize(with: fontSize)
+        updateLanguage(with: language)
     }
 
     func updateTheme(with newTheme: String) {
@@ -65,9 +77,7 @@ class CodeEditorPreviewView: NibInitializableView {
         highlightr.setTheme(to: newTheme)
         previewTextView.backgroundColor = highlightr.theme.themeBackgroundColor
 
-        if savedFontSize != nil {
-            updateFontSize(with: Int(savedFontSize))
-        }
+        updateFontSize(with: Int(savedFontSize))
     }
 
     func updateFontSize(with fontSize: Int) {
@@ -77,5 +87,11 @@ class CodeEditorPreviewView: NibInitializableView {
 
         theme.setCodeFont(UIFont(name: "Courier", size: CGFloat(fontSize))!)
         hl.theme = theme
+    }
+
+    func updateLanguage(with language: CodeLanguage) {
+        textStorage?.language = language.highlightr
+        languageButton.setTitle(language.humanReadableName, for: .normal)
+        previewTextView.text = language.highlightrSample
     }
 }

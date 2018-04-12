@@ -11,11 +11,13 @@ import ActionSheetPicker_3_0
 class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsView {
     var presenter: CodeEditorSettingsPresenter?
     var previewView: CodeEditorPreviewView!
+    var previewLanguage = CodeLanguage.python
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         previewView = CodeEditorPreviewView()
+        previewView.delegate = self
         tableView.tableHeaderView = previewView
         layoutTableHeaderView()
 
@@ -24,7 +26,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        previewView.setupPreview(with: PreferencesContainer.codeEditor.theme, fontSize: PreferencesContainer.codeEditor.fontSize)
+        previewView.setupPreview(with: PreferencesContainer.codeEditor.theme, fontSize: PreferencesContainer.codeEditor.fontSize, language: previewLanguage)
     }
 
     func chooseEditorTheme(current: String) {
@@ -104,5 +106,24 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
         headerView.removeConstraint(widthConstraint)
         headerView.translatesAutoresizingMaskIntoConstraints = true
         tableView.tableHeaderView = headerView
+    }
+}
+
+extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
+    func languageButtonDidClick() {
+        let availableLanguages = Array(Set(CodeLanguage.allLanguages.map { $0.humanReadableName }))
+
+        ActionSheetStringPicker.show(withTitle: "Язык",
+            rows: availableLanguages,
+            initialSelection: availableLanguages.index(of: previewLanguage.humanReadableName)!,
+            doneBlock: { _, _, value in
+                if let value = value as? String {
+                    self.previewLanguage = CodeLanguage.allLanguages.first(where: { $0.humanReadableName == value }) ?? self.previewLanguage
+                    self.previewView.updateLanguage(with: self.previewLanguage)
+                }
+            },
+            cancel: { _ in return
+            },
+            origin: tableView)
     }
 }
