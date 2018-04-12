@@ -45,14 +45,13 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             },
             cancel: { _ in return
             },
-            origin: tableView)
+            origin: previewView)
     }
 
     func chooseFontSize(current: Int) {
         let availableSizes = (10...23).map { Int($0) }
 
-        guard let hl = previewView.highlightr,
-              let currentSizeIndex = availableSizes.index(of: current) else {
+        guard let currentSizeIndex = availableSizes.index(of: current) else {
             return
         }
 
@@ -66,7 +65,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             },
             cancel: { _ in return
             },
-            origin: tableView)
+            origin: previewView)
     }
 
     func updatePreview(theme: String) {
@@ -124,6 +123,6 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
             },
             cancel: { _ in return
             },
-            origin: tableView)
+            origin: previewView.languageButton)
     }
 }
