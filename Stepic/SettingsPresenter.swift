@@ -25,16 +25,19 @@ class SettingsPresenter {
     }
 
     private func buildSettingsMenu() -> Menu {
-        let blocks = [
+        var blocks = [
             buildTitleMenuBlock(id: videoHeaderBlockId, title: NSLocalizedString("Video", comment: "")),
             buildOnlyWifiSwitchBlock(),
             buildLoadedVideoQualityBlock(),
             buildOnlineVideoQualityBlock(),
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
-            buildAdaptiveModeSwitchBlock(),
-            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
-            buildCodeEditorSettingsBlock()
+            buildAdaptiveModeSwitchBlock()
         ]
+
+        if RemoteConfig.shared.allowCodeEditorSettings {
+            blocks.append(contentsOf: [buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
+                                       buildCodeEditorSettingsBlock()])
+        }
         return Menu(blocks: blocks)
     }
 
