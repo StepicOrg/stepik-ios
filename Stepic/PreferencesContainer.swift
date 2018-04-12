@@ -13,4 +13,5 @@ import Foundation
  */
 class PreferencesContainer {
     static let notifications = NotificationPreferencesContainer()
+    static let codeEditor = CodeEditorPreferencesContainer()
 }

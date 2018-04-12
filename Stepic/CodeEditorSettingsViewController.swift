@@ -42,7 +42,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     }
 
     func chooseFontSize(current: Int) {
-        let availableSizes = (10...20).map { Int($0) }
+        let availableSizes = (max(10, current - 5)...min(20, current + 5)).map { Int($0) }
 
         guard let hl = previewView.highlightr,
               let currentSizeIndex = availableSizes.index(of: current) else {
@@ -53,8 +53,8 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             rows: availableSizes.map { "\($0)" },
             initialSelection: currentSizeIndex,
             doneBlock: { _, _, value in
-                if let value = value as? Int {
-                    self.presenter?.updateFontSize(with: value)
+                if let value = value as? String, let intValue = Int(value) {
+                    self.presenter?.updateFontSize(with: intValue)
                 }
             },
             cancel: { _ in return

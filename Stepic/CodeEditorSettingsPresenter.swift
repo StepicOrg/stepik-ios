@@ -25,13 +25,13 @@ class CodeEditorSettingsPresenter {
     }
 
     func updateTheme(with newTheme: String) {
-        print(themeBlock?.subtitle ?? "nil")
+        PreferencesContainer.codeEditor.theme = newTheme
         themeBlock?.subtitle = "Используется: \(newTheme)"
-        print(themeBlock?.subtitle ?? "nil")
     }
 
     func updateFontSize(with newSize: Int) {
-
+        PreferencesContainer.codeEditor.fontSize = newSize
+        fontSizeBlock?.subtitle = "Используется: \(newSize)pt"
     }
 
     private func buildSettingsMenu() -> Menu {
@@ -57,11 +57,11 @@ class CodeEditorSettingsPresenter {
 
     private func buildThemeBlock() -> TransitionMenuBlock {
         themeBlock = TransitionMenuBlock(id: themeBlockId, title: "Тема редактора")
-        themeBlock!.subtitle = "Используется: Androidstudio"
+        themeBlock!.subtitle = "Используется: \(PreferencesContainer.codeEditor.theme)"
 
         themeBlock!.onTouch = {
             [weak self] in
-            self?.view?.chooseEditorTheme(current: "androidstudio")
+            self?.view?.chooseEditorTheme(current: PreferencesContainer.codeEditor.theme)
         }
 
         return themeBlock!
@@ -69,11 +69,11 @@ class CodeEditorSettingsPresenter {
 
     private func buildFontSizeBlock() -> TransitionMenuBlock {
         fontSizeBlock = TransitionMenuBlock(id: themeBlockId, title: "Размер шрифта")
-        fontSizeBlock!.subtitle = "Используется: 14pt"
+        fontSizeBlock!.subtitle = "Используется: \(PreferencesContainer.codeEditor.fontSize)pt"
 
         fontSizeBlock!.onTouch = {
             [weak self] in
-            self?.view?.chooseFontSize(current: 14)
+            self?.view?.chooseFontSize(current: PreferencesContainer.codeEditor.fontSize)
         }
 
         return fontSizeBlock!
