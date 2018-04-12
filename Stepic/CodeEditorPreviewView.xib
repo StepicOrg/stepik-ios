@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CodeEditorPreviewView" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="languageButton" destination="yTL-Bv-G8S" id="GQp-o4-bwE"/>
+                <outlet property="loadingIndicator" destination="Rfa-b7-EHa" id="bys-CP-FvJ"/>
                 <outlet property="previewContainer" destination="hsS-3G-BjZ" id="e22-6w-sBd"/>
                 <outlet property="titleLabel" destination="7a9-Cd-Y7Q" id="Vw3-zS-sYz"/>
             </connections>
@@ -45,9 +46,14 @@
                         <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-b7-EHa">
+                    <rect key="frame" x="177" y="143" width="20" height="20"/>
+                    <color key="color" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Rfa-b7-EHa" firstAttribute="centerY" secondItem="hsS-3G-BjZ" secondAttribute="centerY" id="1mZ-ro-bSg"/>
                 <constraint firstAttribute="trailing" secondItem="yTL-Bv-G8S" secondAttribute="trailing" priority="999" constant="24" id="E6L-Bn-X81"/>
                 <constraint firstItem="7a9-Cd-Y7Q" firstAttribute="leading" secondItem="ccr-r3-8Kc" secondAttribute="leading" priority="999" constant="24" id="FnI-Ov-YNP"/>
                 <constraint firstItem="yTL-Bv-G8S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7a9-Cd-Y7Q" secondAttribute="trailing" priority="999" constant="16" id="KGe-5H-6YK"/>
@@ -57,6 +63,7 @@
                 <constraint firstItem="yTL-Bv-G8S" firstAttribute="centerY" secondItem="7a9-Cd-Y7Q" secondAttribute="centerY" id="aZL-YJ-9fP"/>
                 <constraint firstItem="hsS-3G-BjZ" firstAttribute="centerX" secondItem="bbf-yc-KOm" secondAttribute="centerX" id="ddp-0e-m3S"/>
                 <constraint firstItem="bbf-yc-KOm" firstAttribute="bottom" secondItem="hsS-3G-BjZ" secondAttribute="bottom" constant="15" id="dof-Xv-Rve"/>
+                <constraint firstItem="Rfa-b7-EHa" firstAttribute="centerX" secondItem="hsS-3G-BjZ" secondAttribute="centerX" id="qf8-ZZ-0fm"/>
                 <constraint firstItem="7a9-Cd-Y7Q" firstAttribute="top" secondItem="ccr-r3-8Kc" secondAttribute="top" constant="16" id="reN-qm-8BO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

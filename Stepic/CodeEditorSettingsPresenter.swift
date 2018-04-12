@@ -9,6 +9,9 @@ protocol CodeEditorSettingsView: class {
 
     func chooseEditorTheme(current: String)
     func chooseFontSize(current: Int)
+
+    func updatePreview(theme: String)
+    func updatePreview(fontSize: Int)
 }
 
 class CodeEditorSettingsPresenter {
@@ -27,11 +30,13 @@ class CodeEditorSettingsPresenter {
     func updateTheme(with newTheme: String) {
         PreferencesContainer.codeEditor.theme = newTheme
         themeBlock?.subtitle = "Используется: \(newTheme)"
+        view?.updatePreview(theme: newTheme)
     }
 
     func updateFontSize(with newSize: Int) {
         PreferencesContainer.codeEditor.fontSize = newSize
         fontSizeBlock?.subtitle = "Используется: \(newSize)pt"
+        view?.updatePreview(fontSize: newSize)
     }
 
     private func buildSettingsMenu() -> Menu {

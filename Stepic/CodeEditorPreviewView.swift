@@ -15,6 +15,7 @@ class CodeEditorPreviewView: NibInitializableView {
         return "CodeEditorPreviewView"
     }
 
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var languageButton: UIButton!
     @IBOutlet weak var previewContainer: UIView!
@@ -24,18 +25,20 @@ class CodeEditorPreviewView: NibInitializableView {
 
     override func setupSubviews() {
         translatesAutoresizingMaskIntoConstraints = false
+    }
 
+    func setupPreview(with theme: String, fontSize: Int) {
         let textStorage = CodeAttributedString()
         textStorage.language = "Java"
 
         highlightr = textStorage.highlightr
-        highlightr?.setTheme(to: "Androidstudio")
 
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
-
         let textContainer = NSTextContainer(size: previewContainer.bounds.size)
         layoutManager.addTextContainer(textContainer)
+
+        loadingIndicator.stopAnimating()
 
         previewTextView = UITextView(frame: previewContainer.frame, textContainer: textContainer)
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +46,36 @@ class CodeEditorPreviewView: NibInitializableView {
         previewContainer.addSubview(previewTextView)
         previewTextView.align(toView: previewContainer)
 
-        previewTextView.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
         previewTextView.text = "/* Comment */"
+
+        updateTheme(with: theme)
+        updateFontSize(with: fontSize)
+    }
+
+    func updateTheme(with newTheme: String) {
+        guard let highlightr = highlightr else {
+            return
+        }
+
+        guard highlightr.availableThemes().contains(newTheme) else {
+            return
+        }
+
+        let savedFontSize = highlightr.theme.codeFont.pointSize
+        highlightr.setTheme(to: newTheme)
+        previewTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+
+        if savedFontSize != nil {
+            updateFontSize(with: Int(savedFontSize))
+        }
+    }
+
+    func updateFontSize(with fontSize: Int) {
+        guard let hl = highlightr, let theme = hl.theme else {
+            return
+        }
+
+        theme.setCodeFont(UIFont(name: "Courier", size: CGFloat(fontSize))!)
+        hl.theme = theme
     }
 }

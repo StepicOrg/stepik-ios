@@ -22,6 +22,11 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
         presenter = CodeEditorSettingsPresenter(view: self)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        previewView.setupPreview(with: PreferencesContainer.codeEditor.theme, fontSize: PreferencesContainer.codeEditor.fontSize)
+    }
+
     func chooseEditorTheme(current: String) {
         guard let hl = previewView.highlightr,
               let currentThemeIndex = hl.availableThemes().index(of: current) else {
@@ -42,7 +47,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     }
 
     func chooseFontSize(current: Int) {
-        let availableSizes = (max(10, current - 5)...min(20, current + 5)).map { Int($0) }
+        let availableSizes = (10...23).map { Int($0) }
 
         guard let hl = previewView.highlightr,
               let currentSizeIndex = availableSizes.index(of: current) else {
@@ -62,12 +67,16 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             origin: tableView)
     }
 
-    func setMenu(menu: Menu) {
-        self.menu = menu
+    func updatePreview(theme: String) {
+        previewView?.updateTheme(with: theme)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func updatePreview(fontSize: Int) {
+        previewView?.updateFontSize(with: fontSize)
+    }
+
+    func setMenu(menu: Menu) {
+        self.menu = menu
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
