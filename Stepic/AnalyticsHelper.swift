@@ -12,13 +12,14 @@ import FirebaseCore
 import Mixpanel
 import YandexMobileMetrica
 import Crashlytics
+import Appsee
 
 class AnalyticsHelper: NSObject {
     static var sharedHelper = AnalyticsHelper()
     fileprivate override init() {super.init()}
 
     func setupAnalytics() {
-        Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self, Appsee.self])
         FirebaseApp.configure()
 
         Mixpanel.initialize(token: Tokens.shared.mixpanelToken)

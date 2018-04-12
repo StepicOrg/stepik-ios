@@ -60,6 +60,15 @@
 		<key>Kits</key>
 		<array>
 			<dict>
+				<key>KitName</key>
+				<string>Appsee</string>
+				<key>KitInfo</key>
+				<dict>
+					<key>apikey</key>
+					<string>143019982d394799be5bc6b09698946b</string>
+				</dict>
+			</dict>
+			<dict>
 				<key>KitInfo</key>
 				<dict/>
 				<key>KitName</key>
