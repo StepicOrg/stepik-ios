@@ -23,13 +23,18 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     }
 
     func chooseEditorTheme(current: String) {
-        guard let hl = previewView.highlightr else { return }
+        guard let hl = previewView.highlightr,
+              let currentThemeIndex = hl.availableThemes().index(of: current) else {
+            return
+        }
 
-        ActionSheetStringPicker.show(withTitle: "Выберите тему",
+        ActionSheetStringPicker.show(withTitle: "Тема",
             rows: hl.availableThemes(),
-            initialSelection: hl.availableThemes().index(of: current)!,
-            doneBlock: { _, _, _ in
-
+            initialSelection: currentThemeIndex,
+            doneBlock: { _, _, value in
+                if let value = value as? String {
+                    self.presenter?.updateTheme(with: value)
+                }
             },
             cancel: { _ in return
             },
@@ -37,13 +42,20 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     }
 
     func chooseFontSize(current: Int) {
-        guard let hl = previewView.highlightr else { return }
+        let availableSizes = (10...20).map { Int($0) }
 
-        ActionSheetStringPicker.show(withTitle: "Выберите размер шрифта",
-            rows: (10...20).map { "\($0)"},
-            initialSelection: 5,
-            doneBlock: { _, _, _ in
+        guard let hl = previewView.highlightr,
+              let currentSizeIndex = availableSizes.index(of: current) else {
+            return
+        }
 
+        ActionSheetStringPicker.show(withTitle: "Размер шрифта",
+            rows: availableSizes.map { "\($0)" },
+            initialSelection: currentSizeIndex,
+            doneBlock: { _, _, value in
+                if let value = value as? Int {
+                    self.presenter?.updateFontSize(with: value)
+                }
             },
             cancel: { _ in return
             },

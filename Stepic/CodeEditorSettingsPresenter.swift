@@ -13,12 +13,25 @@ protocol CodeEditorSettingsView: class {
 
 class CodeEditorSettingsPresenter {
     weak var view: CodeEditorSettingsView?
+
+    var themeBlock: TransitionMenuBlock?
+    var fontSizeBlock: TransitionMenuBlock?
     var menu: Menu = Menu(blocks: [])
 
     init(view: CodeEditorSettingsView) {
         self.view = view
         self.menu = buildSettingsMenu()
         view.setMenu(menu: self.menu)
+    }
+
+    func updateTheme(with newTheme: String) {
+        print(themeBlock?.subtitle ?? "nil")
+        themeBlock?.subtitle = "Используется: \(newTheme)"
+        print(themeBlock?.subtitle ?? "nil")
+    }
+
+    func updateFontSize(with newSize: Int) {
+
     }
 
     private func buildSettingsMenu() -> Menu {
@@ -43,26 +56,26 @@ class CodeEditorSettingsPresenter {
     }
 
     private func buildThemeBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: themeBlockId, title: "Тема редактора")
-        block.subtitle = "Используется: Androidstudio"
+        themeBlock = TransitionMenuBlock(id: themeBlockId, title: "Тема редактора")
+        themeBlock!.subtitle = "Используется: Androidstudio"
 
-        block.onTouch = {
+        themeBlock!.onTouch = {
             [weak self] in
             self?.view?.chooseEditorTheme(current: "androidstudio")
         }
 
-        return block
+        return themeBlock!
     }
 
     private func buildFontSizeBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: themeBlockId, title: "Размер шрифта")
-        block.subtitle = "Используется: 14pt"
+        fontSizeBlock = TransitionMenuBlock(id: themeBlockId, title: "Размер шрифта")
+        fontSizeBlock!.subtitle = "Используется: 14pt"
 
-        block.onTouch = {
+        fontSizeBlock!.onTouch = {
             [weak self] in
             self?.view?.chooseFontSize(current: 14)
         }
 
-        return block
+        return fontSizeBlock!
     }
 }
