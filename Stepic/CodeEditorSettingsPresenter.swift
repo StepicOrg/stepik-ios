@@ -1,6 +1,9 @@
 //
-// Created by jetbrains on 11/04/2018.
-// Copyright (c) 2018 Alex Karpov. All rights reserved.
+//  CodeEditorSettingsPresenter.swift
+//  Stepic
+//
+//  Created by Vladislav Kiryukhin on 11.04.2018.
+//  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 import Foundation
 

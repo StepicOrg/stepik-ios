@@ -2,7 +2,7 @@
 //  CodeEditorSettingsViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 11.04.18.
+//  Created by Vladislav Kiryukhin on 11.04.18.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 import UIKit

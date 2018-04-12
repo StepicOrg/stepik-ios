@@ -2,7 +2,7 @@
 //  CodeEditorPreferencesContainer.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 12.04.2018.
+//  Created by Vladislav Kiryukhin on 12.04.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
