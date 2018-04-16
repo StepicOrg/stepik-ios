@@ -117,23 +117,35 @@ class StepikPlaceholderView: NibInitializableView {
         }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        DispatchQueue.main.async { [weak self] in
-            if let currentPlaceholder = self?.currentPlaceholder {
-                self?.rebuildConstraints(for: currentPlaceholder)
-            }
+    override func updateConstraints() {
+        super.updateConstraints()
+        if let currentPlaceholder = self.currentPlaceholder {
+            self.rebuildConstraints(for: currentPlaceholder)
         }
     }
 
-    func set(placeholder: StepikPlaceholderStyle) {
-        currentPlaceholder = placeholder
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setNeedsUpdateConstraints()
+        updateConstraintsIfNeeded()
+    }
 
+    func set(placeholder: StepikPlaceholderStyle) {
         imageView.image = placeholder.image?.image
 
         textLabel.text = placeholder.text
-        actionButton.setTitle(placeholder.buttonTitle, for: .normal)
 
+        // If it's first load prevent button title change animation
+        if currentPlaceholder == nil {
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(placeholder.buttonTitle, for: .normal)
+                self.actionButton.layoutIfNeeded()
+            }
+        } else {
+            actionButton.setTitle(placeholder.buttonTitle, for: .normal)
+        }
+
+        currentPlaceholder = placeholder
         rebuildConstraints(for: placeholder)
     }
 }
