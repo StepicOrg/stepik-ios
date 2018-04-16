@@ -29,7 +29,7 @@ class SubmissionsAPI: APIEndpoint {
             params["user"] = user
         }
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
@@ -74,7 +74,7 @@ class SubmissionsAPI: APIEndpoint {
 
         let params: Parameters = [:]
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error

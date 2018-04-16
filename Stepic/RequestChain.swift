@@ -25,7 +25,7 @@ class RequestChain {
 
     func start(_ completionHandler: @escaping CompletionHandler) {
         if let request = requests.first {
-            Alamofire.request(request as! URLRequestConvertible).response {
+            AlamofireDefaultSessionManager.shared.request(request as! URLRequestConvertible).response {
                 response in
                 if response.error != nil {
                     completionHandler(false, ErrorResult(request: response.request, error: response.error))

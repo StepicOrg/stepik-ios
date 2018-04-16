@@ -25,7 +25,7 @@ extension UIImageView {
         guard url.pathExtension != "svg" else {
             #if !os(tvOS)
                 self.image = placeholder
-                Alamofire.request(url).responseData(completionHandler: {
+                AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: {
                     response in
                     if response.result.error != nil {
                         return

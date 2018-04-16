@@ -39,7 +39,7 @@ class EnrollmentsAPI: APIEndpoint {
         ]
 
         if !delete {
-            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+            return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
 
                 var error = response.result.error
@@ -69,7 +69,7 @@ class EnrollmentsAPI: APIEndpoint {
                 }
             })
         } else {
-            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
 
                 var error = response.result.error

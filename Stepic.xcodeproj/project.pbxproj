@@ -3643,6 +3643,19 @@
 		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
+		62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98400F19C6E781027F2A7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E9879A89A2EFFA5CCAED86 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98873E98E4598D8F1ACB0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98967D33DB824B8BF27E0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */; };
+		62E98AF2CF2F93395EBBBC11 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98C975482E46A95E173AB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98FFF555F4E6C888EB561 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */; };
 		6CE42CA60425E8BFDE0CC9C1 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */; };
 		7E6ECF7D5E3928A2D8BC5789 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */; };
@@ -5125,6 +5138,9 @@
 		5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6148D39767518C0599A3 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
+		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
+		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
@@ -6114,6 +6130,7 @@
 				080AA2341EA05BE00079272F /* TestInfo.plist */,
 				080AA2361EA05CD20079272F /* TestConfig.swift */,
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
+				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -6819,6 +6836,8 @@
 				08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */,
 				080F211A2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift */,
 				866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */,
+				62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */,
+				62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -11322,6 +11341,7 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-iOS/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick-iOS/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -11364,6 +11384,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11418,6 +11439,7 @@
 				0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */,
 				2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
+				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12288,6 +12310,8 @@
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
+				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13012,6 +13036,8 @@
 				2C1B62491F4C4AEF00236804 /* StringHelper.swift in Sources */,
 				2C1B624A1F4C4AEF00236804 /* EmptyDatasetState.swift in Sources */,
 				2C1B624B1F4C4AEF00236804 /* AdaptiveAppDelegate.swift in Sources */,
+				62E98873E98E4598D8F1ACB0 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13491,6 +13517,8 @@
 				2C1B645A1F4C590700236804 /* StringHelper.swift in Sources */,
 				2C1B645B1F4C590700236804 /* EmptyDatasetState.swift in Sources */,
 				2C1B645C1F4C590700236804 /* AdaptiveAppDelegate.swift in Sources */,
+				62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E98400F19C6E781027F2A7 /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13969,6 +13997,8 @@
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
 				086FC6AC1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C89AADF1F4C289900227C3B /* AdaptiveAppDelegate.swift in Sources */,
+				62E9879A89A2EFFA5CCAED86 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E98C975482E46A95E173AB /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14448,6 +14478,8 @@
 				2C9732911F4C38F600AC9301 /* StringHelper.swift in Sources */,
 				2C9732921F4C38F600AC9301 /* EmptyDatasetState.swift in Sources */,
 				2C9732931F4C38F600AC9301 /* AdaptiveAppDelegate.swift in Sources */,
+				62E98967D33DB824B8BF27E0 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E98FFF555F4E6C888EB561 /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14987,6 +15019,8 @@
 				2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
+				62E98AF2CF2F93395EBBBC11 /* StepikURLSessionConfiguration.swift in Sources */,
+				62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@ class Session {
         let stepicURL = URL(string: stepicURLString)!
         delete()
 
-        return Alamofire.request(stepicURLString, parameters: nil, encoding: URLEncoding.default).response {
+        return AlamofireDefaultSessionManager.shared.request(stepicURLString, parameters: nil, encoding: URLEncoding.default).response {
             response in
 
             let error = response.error
