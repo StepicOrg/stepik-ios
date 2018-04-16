@@ -28,7 +28,7 @@ extension StepikPlaceholder.Style {
     static let emptyNotifications = StepikPlaceholderStyle(id: "emptyNotifications",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-notifications"), scale: 0.48),
                                           text: NSLocalizedString("PlaceholderEmptyNotificationsText", comment: ""),
-                                          buttonTitle: NSLocalizedString("PlaceholderEmptyNotificationsButton", comment: ""))
+                                          buttonTitle: nil)
     static let emptyNotificationsLoading = StepikPlaceholderStyle(id: "emptyNotificationsLoading",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-notifications"), scale: 0.48),
                                           text: NSLocalizedString("Refreshing", comment: ""),
