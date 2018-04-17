@@ -345,6 +345,7 @@ courses234 = "courses";
 courses567890 = "courses";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
+TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
 ChooseSearchLanguage = "Choose search language";
 Catalog = "Catalog";
 CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
