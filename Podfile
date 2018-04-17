@@ -35,7 +35,10 @@ def all_pods
     pod 'Mixpanel-swift', '2.3.0'
 
     pod 'BEMCheckBox'
-    pod 'IQKeyboardManagerSwift'
+
+    # actual version - 6.x, we should test it before update
+    pod 'IQKeyboardManagerSwift', '~> 5.0'
+
     pod 'Kanna', '~> 4.0.0'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
