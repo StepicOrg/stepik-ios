@@ -183,6 +183,8 @@ class CourseListViewController: UIViewController, CourseListView {
                     emptyPlaceholder.text = NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
                 case .search(query: _):
                     emptyPlaceholder.text = NSLocalizedString("SearchPlaceholderError", comment: "")
+                case .tag:
+                    emptyPlaceholder.text = NSLocalizedString("TagPlaceholderError", comment: "")
                 default:
                     emptyPlaceholder.text = "Error"
                     break

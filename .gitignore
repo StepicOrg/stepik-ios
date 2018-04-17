@@ -40,3 +40,6 @@ Preview.html
 Carthage/Build
 
 .DS_Store
+
+# AppCode
+.idea/

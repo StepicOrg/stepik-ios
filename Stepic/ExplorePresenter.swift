@@ -67,12 +67,12 @@ class ExplorePresenter: CourseListCountDelegate {
             [weak self]
             tag in
             if let controller = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController {
+                controller.colorMode = .light
                 controller.presenter = CourseListPresenter(
                     view: controller,
-                    ID: "Tag_\(tag.ID)",
+                    id: "Tag_\(tag.ID)",
                     limit: nil,
                     listType:  CourseListType.tag(id: tag.ID) ,
-                    colorMode: .light,
                     onlyLocal: false,
                     subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager()
                 )

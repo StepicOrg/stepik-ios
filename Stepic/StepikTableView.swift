@@ -48,7 +48,7 @@ extension StepikTableView {
         // Remove cell separators
         savedFooterView = self.tableFooterView
         hasSavedFooter = true
-        
+
         tableFooterView = UIView()
         placeholderView.isHidden = false
     }
