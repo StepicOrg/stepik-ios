@@ -292,32 +292,6 @@ platform :ios do
           channel: "#ios-ci")
   end
 
-  # Enterprise export
-  lane :sb do
-    import_certificate(
-      certificate_path: "cert/cert.p12",
-      certificate_password: ENV["SB_UNI_CERT_PASSWORD"],
-      keychain_name: "login")
-    import_certificate(
-        certificate_path: "cert/stepic_push.p12",
-        certificate_password: ENV["SB_UNI_PUSH_CERT_PASSWORD"],
-        keychain_name: "login")
-    update_project_provisioning(
-        xcodeproj: "Stepic.xcodeproj",
-        profile: "cert/Step.mobileprovision", # optional if you use sigh
-        target_filter: "SberbankUniversity", # matches name or type of a target
-        build_configuration: "Release")
-    gym(
-        scheme: "SberbankUniversity",
-        output_directory: "artefacts",
-        output_name: "SberbankUniversity.ipa",
-        include_bitcode: true,
-        export_method: "enterprise")
-    slack(
-      message: "Successfully generated SB artefacts #{version_string(get_version_number, get_build_number)}",
-      channel: "#ios-ci")
-  end
-
   after_all do |lane|
     # This block is called, only if the executed lane was successful
   end

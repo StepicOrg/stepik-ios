@@ -93,11 +93,6 @@ target 'StepikTV' do
     end
 end
 
-target 'SberbankUniversity' do 
-    platform :ios, '9.0'
-    all_pods
-end
-
 target 'Adaptive 1838' do
     platform :ios, '9.0'
     all_pods
