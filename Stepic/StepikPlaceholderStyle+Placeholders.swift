@@ -14,7 +14,7 @@ extension StepikPlaceholder.Style {
                                           text: NSLocalizedString("PlaceholderEmptyText", comment: ""),
                                           buttonTitle: NSLocalizedString("PlaceholderEmptyButton", comment: ""))
     static let noConnection = StepikPlaceholderStyle(id: "noConnection",
-                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-noconnection"), scale: 0.35),
+                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-noconnection"), scale: 0.49),
                                           text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
                                           buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: ""))
     static let emptyDownloads = StepikPlaceholderStyle(id: "emptyDownloads",

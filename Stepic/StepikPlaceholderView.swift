@@ -111,9 +111,11 @@ class StepikPlaceholderView: NibInitializableView {
         if isVertical {
             stackView.axis = .vertical
             stackView.distribution = .equalCentering
+            stackView.alignment = .fill
         } else {
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.alignment = .center
         }
     }
 
