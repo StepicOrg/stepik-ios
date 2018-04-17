@@ -19,7 +19,7 @@ class QueriesAPI: APIEndpoint {
 
         let params: Parameters = ["query": query]
 
-        return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error

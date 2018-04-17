@@ -500,8 +500,6 @@
 		0868C17E1F375A1200D77C5F /* SearchQueriesPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */; };
 		0868C17F1F375A1200D77C5F /* SearchQueriesPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */; };
 		0868C1801F375A1200D77C5F /* SearchQueriesPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */; };
-		0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
-		086953101D747DC0003857A2 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		086953121D748303003857A2 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		086953131D748304003857A2 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */; };
@@ -1844,7 +1842,6 @@
 		2C1B62061F4C4AEF00236804 /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C1B62071F4C4AEF00236804 /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C1B62081F4C4AEF00236804 /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		2C1B62091F4C4AEF00236804 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		2C1B620A1F4C4AEF00236804 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		2C1B620B1F4C4AEF00236804 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		2C1B620C1F4C4AEF00236804 /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
@@ -2241,7 +2238,6 @@
 		2C1B64171F4C590700236804 /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C1B64181F4C590700236804 /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C1B64191F4C590700236804 /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		2C1B641A1F4C590700236804 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		2C1B641B1F4C590700236804 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		2C1B641C1F4C590700236804 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		2C1B641D1F4C590700236804 /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
@@ -2982,7 +2978,6 @@
 		2C89AA9A1F4C289900227C3B /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C89AA9B1F4C289900227C3B /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		2C89AA9D1F4C289900227C3B /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		2C89AA9E1F4C289900227C3B /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		2C89AA9F1F4C289900227C3B /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		2C89AAA01F4C289900227C3B /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
@@ -3385,7 +3380,6 @@
 		2C97324E1F4C38F600AC9301 /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C97324F1F4C38F600AC9301 /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C9732501F4C38F600AC9301 /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		2C9732511F4C38F600AC9301 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		2C9732521F4C38F600AC9301 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		2C9732531F4C38F600AC9301 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		2C9732541F4C38F600AC9301 /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
@@ -3812,7 +3806,6 @@
 		864D67021E83DE03001E8D9E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		864D67031E83DE03001E8D9E /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		864D67041E83DE03001E8D9E /* FBSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */; };
-		864D67051E83DE03001E8D9E /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
 		864D67061E83DE03001E8D9E /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
 		864D67071E83DE03001E8D9E /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		864D67081E83DE03001E8D9E /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
@@ -4585,7 +4578,6 @@
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesPersistentManager.swift; sourceTree = "<group>"; };
-		0869530E1D747DC0003857A2 /* RequestChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestChain.swift; sourceTree = "<group>"; };
 		086953111D748303003857A2 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentQueueRecoveryManager.swift; sourceTree = "<group>"; };
 		0869F6D41CE229C800F8A6DB /* Queues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Queues.plist; sourceTree = "<group>"; };
@@ -6335,7 +6327,6 @@
 			isa = PBXGroup;
 			children = (
 				088E58BF1DE34E140009B9CE /* SocialSDKProviders */,
-				0869530E1D747DC0003857A2 /* RequestChain.swift */,
 				086953111D748303003857A2 /* ApiRequest.swift */,
 				08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */,
 				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
@@ -11480,7 +11471,6 @@
 				08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
-				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
 				08B062DE1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				08E59AC01E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				087585AF1FB51D720047A269 /* CourseList.swift in Sources */,
@@ -12086,7 +12076,6 @@
 				08E8F97A1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				2CC351971F683140004255B6 /* EmailAuthViewController.swift in Sources */,
-				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				081959E01FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
 				08D9E98C206C243D002F41D3 /* DatabaseFetchService.swift in Sources */,
@@ -12947,7 +12936,6 @@
 				2C1B62061F4C4AEF00236804 /* SocialSDKProvider.swift in Sources */,
 				2C1B62071F4C4AEF00236804 /* VKSocialSDKProvider.swift in Sources */,
 				2C1B62081F4C4AEF00236804 /* FBSocialSDKProvider.swift in Sources */,
-				2C1B62091F4C4AEF00236804 /* RequestChain.swift in Sources */,
 				2C1B620A1F4C4AEF00236804 /* ApiRequest.swift in Sources */,
 				2C1B620B1F4C4AEF00236804 /* AuthAPI.swift in Sources */,
 				08CB0D2E1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
@@ -13428,7 +13416,6 @@
 				2C1B64171F4C590700236804 /* SocialSDKProvider.swift in Sources */,
 				2C1B64181F4C590700236804 /* VKSocialSDKProvider.swift in Sources */,
 				2C1B64191F4C590700236804 /* FBSocialSDKProvider.swift in Sources */,
-				2C1B641A1F4C590700236804 /* RequestChain.swift in Sources */,
 				2C1B641B1F4C590700236804 /* ApiRequest.swift in Sources */,
 				2C1B641C1F4C590700236804 /* AuthAPI.swift in Sources */,
 				08CB0D2F1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
@@ -13918,7 +13905,6 @@
 				2C4919092062A1CB003E733D /* StepikTableView.swift in Sources */,
 				2C6A76422045CEB900C509A6 /* NotificationsSection.swift in Sources */,
 				2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */,
-				2C89AA9D1F4C289900227C3B /* RequestChain.swift in Sources */,
 				2C89AA9E1F4C289900227C3B /* ApiRequest.swift in Sources */,
 				2C89AA9F1F4C289900227C3B /* AuthAPI.swift in Sources */,
 				2C89AAA01F4C289900227C3B /* QueriesAPI.swift in Sources */,
@@ -14388,7 +14374,6 @@
 				2C97324E1F4C38F600AC9301 /* SocialSDKProvider.swift in Sources */,
 				2C97324F1F4C38F600AC9301 /* VKSocialSDKProvider.swift in Sources */,
 				2C9732501F4C38F600AC9301 /* FBSocialSDKProvider.swift in Sources */,
-				2C9732511F4C38F600AC9301 /* RequestChain.swift in Sources */,
 				2C9732521F4C38F600AC9301 /* ApiRequest.swift in Sources */,
 				2C9732531F4C38F600AC9301 /* AuthAPI.swift in Sources */,
 				08CB0D2D1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
@@ -14938,7 +14923,6 @@
 				864D67031E83DE03001E8D9E /* VKSocialSDKProvider.swift in Sources */,
 				082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */,
 				864D67041E83DE03001E8D9E /* FBSocialSDKProvider.swift in Sources */,
-				864D67051E83DE03001E8D9E /* RequestChain.swift in Sources */,
 				864D67061E83DE03001E8D9E /* ApiRequest.swift in Sources */,
 				864D67071E83DE03001E8D9E /* AuthAPI.swift in Sources */,
 				08CB0D2A1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,

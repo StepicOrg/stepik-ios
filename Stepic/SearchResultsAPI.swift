@@ -31,7 +31,7 @@ class SearchResultsAPI: APIEndpoint {
             params["language"] = l.languageString
         }
 
-        return AlamofireDefaultSessionManager.shared.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
