@@ -180,25 +180,24 @@ class BaseCardsStepsViewController: CardsStepsViewController {
         super.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
     }
 
+    private func changeZPositionForElements(change: CGFloat, relativeTo layer: CALayer) {
+        trophyButton.layer.zPosition = layer.zPosition + change
+        backButton.layer.zPosition = layer.zPosition + change
+        statusBarPad?.layer.zPosition = layer.zPosition + change
+        progressBar.layer.zPosition = layer.zPosition + change
+        labelsStackView.layer.zPosition = layer.zPosition + change
+        shadowView.layer.zPosition = layer.zPosition + change
+    }
+
     private func bringElementsToFront() {
         backButton.superview?.bringSubview(toFront: backButton)
         trophyButton.superview?.bringSubview(toFront: trophyButton)
 
-        trophyButton.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
-        backButton.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
-        statusBarPad?.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
-        progressBar.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
-        labelsStackView.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
-        shadowView.layer.zPosition = placeholderContainer.placeholderView.layer.zPosition + 1
+        changeZPositionForElements(change: 1.0, relativeTo: placeholderContainer.placeholderView.layer)
     }
 
     private func sendElementsToBack() {
-        trophyButton.layer.zPosition = kolodaView.layer.zPosition - 1
-        backButton.layer.zPosition = kolodaView.layer.zPosition - 1
-        statusBarPad?.layer.zPosition = kolodaView.layer.zPosition - 1
-        progressBar.layer.zPosition = kolodaView.layer.zPosition - 1
-        labelsStackView.layer.zPosition = kolodaView.layer.zPosition - 1
-        shadowView.layer.zPosition = kolodaView.layer.zPosition - 1
+        changeZPositionForElements(change: -1.0, relativeTo: kolodaView.layer)
     }
 
 }
