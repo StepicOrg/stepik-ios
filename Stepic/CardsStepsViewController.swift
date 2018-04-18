@@ -45,7 +45,7 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
             self?.presenter?.tryAgain()
         }), for: .connectionError)
 
