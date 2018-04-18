@@ -2452,6 +2452,13 @@
 		2C5F77BF1F90EE3F00E8E175 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
+		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
+		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C604E22207E460E001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C604E23207E460E001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C604E24207E460F001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C604E25207E460F001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C604E26207E460F001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
 		2C608ABF20456891006870BB /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		2C608AC020456891006870BB /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		2C608AC120456892006870BB /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
@@ -3643,6 +3650,18 @@
 		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
+		62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E98BC4B9330D5A2FFBC9B5 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98D1D5AE08AC53898A59B /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98DC371227AE0EDF94038 /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98E53B559035BD0E4D903 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
 		6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */; };
 		6CE42CA60425E8BFDE0CC9C1 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */; };
 		7E6ECF7D5E3928A2D8BC5789 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2A138F0DB9843ED42F3412 /* Pods_StepikTVTests.framework */; };
@@ -4983,6 +5002,8 @@
 		2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
 		2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+FetchMethods.swift"; sourceTree = "<group>"; };
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
+		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
+		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
 		2C6640C91F2F35E60033A274 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2C6640CE1F2F47A90033A274 /* AchievementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
@@ -5125,6 +5146,9 @@
 		5DCCD997D895737CAC62FE20 /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		60775FB2AF00F82D3077ABE1 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6148D39767518C0599A3 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorPreferencesContainer.swift; sourceTree = "<group>"; };
+		62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsPresenter.swift; sourceTree = "<group>"; };
+		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
@@ -5764,6 +5788,7 @@
 			children = (
 				0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */,
 				083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */,
+				62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -6528,6 +6553,7 @@
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
+				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -7598,6 +7624,15 @@
 			name = NotificationsMarkAsReadButton;
 			sourceTree = "<group>";
 		};
+		2C604E1D207E458B001588FB /* CodeEditorPreview */ = {
+			isa = PBXGroup;
+			children = (
+				2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */,
+				2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */,
+			);
+			name = CodeEditorPreview;
+			sourceTree = "<group>";
+		};
 		2C6640CB1F2F36E80033A274 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
@@ -8013,6 +8048,16 @@
 				2C97041A1F3B0B7200C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
+			sourceTree = "<group>";
+		};
+		62E981DA2B38C5236528165D /* CodeEditorSettings */ = {
+			isa = PBXGroup;
+			children = (
+				2C604E1D207E458B001588FB /* CodeEditorPreview */,
+				62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */,
+				62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */,
+			);
+			name = CodeEditorSettings;
 			sourceTree = "<group>";
 		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
@@ -9039,6 +9084,7 @@
 				08CB0D3A1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
 				2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
+				2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
@@ -9793,6 +9839,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -9837,6 +9884,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10019,6 +10067,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -10063,6 +10112,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10274,6 +10324,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -10314,6 +10365,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10446,6 +10498,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -10490,6 +10543,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10856,6 +10910,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -10900,6 +10955,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -10972,6 +11028,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -11016,6 +11073,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -11121,6 +11179,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -11161,6 +11220,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -11284,6 +11344,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
@@ -11326,6 +11387,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
@@ -12032,6 +12094,7 @@
 				08C1BF311FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
+				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
 				084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
@@ -12288,6 +12351,9 @@
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
+				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
+				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
+				62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12649,6 +12715,7 @@
 				2C1B611A1F4C4AEF00236804 /* WebStepViewController.swift in Sources */,
 				2C1B611B1F4C4AEF00236804 /* CellWebViewHelper.swift in Sources */,
 				2C1B611C1F4C4AEF00236804 /* QuizControllerDelegate.swift in Sources */,
+				2C604E25207E460F001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2C1B611D1F4C4AEF00236804 /* QuizViewController.swift in Sources */,
 				2C1B611E1F4C4AEF00236804 /* UnknownTypeQuizViewController.swift in Sources */,
 				2C1B611F1F4C4AEF00236804 /* ChoiceQuizViewController.swift in Sources */,
@@ -13128,6 +13195,7 @@
 				2C1B632B1F4C590700236804 /* WebStepViewController.swift in Sources */,
 				2C1B632C1F4C590700236804 /* CellWebViewHelper.swift in Sources */,
 				2C1B632D1F4C590700236804 /* QuizControllerDelegate.swift in Sources */,
+				2C604E26207E460F001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2C1B632E1F4C590700236804 /* QuizViewController.swift in Sources */,
 				2C1B632F1F4C590700236804 /* UnknownTypeQuizViewController.swift in Sources */,
 				2C1B63301F4C590700236804 /* ChoiceQuizViewController.swift in Sources */,
@@ -13573,6 +13641,7 @@
 				2C89A9981F4C289900227C3B /* StepicVideoPlayerViewController.swift in Sources */,
 				2C6A76282045CE4300C509A6 /* CongratsView.swift in Sources */,
 				2C6A76312045CE5E00C509A6 /* AdaptiveRatingsPresenter.swift in Sources */,
+				2C604E23207E460E001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */,
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
@@ -13969,6 +14038,9 @@
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
 				086FC6AC1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C89AADF1F4C289900227C3B /* AdaptiveAppDelegate.swift in Sources */,
+				62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */,
+				62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */,
+				62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14123,6 +14195,7 @@
 				2C608AFC2045694D006870BB /* CardStepDelegate.swift in Sources */,
 				2C9731801F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				2C9731811F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
+				2C604E24207E460F001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2C9731821F4C38F600AC9301 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
@@ -14448,6 +14521,9 @@
 				2C9732911F4C38F600AC9301 /* StringHelper.swift in Sources */,
 				2C9732921F4C38F600AC9301 /* EmptyDatasetState.swift in Sources */,
 				2C9732931F4C38F600AC9301 /* AdaptiveAppDelegate.swift in Sources */,
+				62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */,
+				62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */,
+				62E98D1D5AE08AC53898A59B /* CodeEditorPreferencesContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14705,6 +14781,7 @@
 				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
+				2C604E22207E460E001588FB /* CodeEditorPreviewView.swift in Sources */,
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,
 				864D67C71E83E08F001E8D9E /* StyledNavigationViewController.swift in Sources */,
 				08CBA3291F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -14987,6 +15064,9 @@
 				2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
+				62E98BC4B9330D5A2FFBC9B5 /* CodeEditorSettingsViewController.swift in Sources */,
+				62E98E53B559035BD0E4D903 /* CodeEditorSettingsPresenter.swift in Sources */,
+				62E98DC371227AE0EDF94038 /* CodeEditorPreferencesContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

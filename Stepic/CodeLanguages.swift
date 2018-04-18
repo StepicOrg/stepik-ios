@@ -35,6 +35,11 @@ enum CodeLanguage: String {
     case perl = "perl"
     case sql = "sql"
 
+    static let allLanguages: [CodeLanguage] = [.python, .cpp11, .cpp, .c, .haskell, .haskell7,
+                               .haskell8, .java, .java8, .octave, .asm32, .asm64,
+                               .shell, .rust, .r, .ruby, .clojure, .cs, .javascript,
+                               .scala, .kotlin, .go, .pascal, .perl, .sql]
+
     var highlightr: String {
         switch self {
         case .python:
@@ -78,7 +83,93 @@ enum CodeLanguage: String {
         }
     }
 
+    var humanReadableName: String {
+        switch self {
+        case .python:
+            return "Python"
+        case .cpp, .cpp11, .c:
+            return "C++"
+        case .haskell, .haskell7, .haskell8:
+            return "Haskell"
+        case .java, .java8:
+            return "Java"
+        case .octave:
+            return "Octave"
+        case .asm32, .asm64:
+            return "ASM"
+        case .shell:
+            return "Shell"
+        case .rust:
+            return "Rust"
+        case .r:
+            return "R"
+        case .ruby:
+            return "Ruby"
+        case .clojure:
+            return "Clojure"
+        case .cs:
+            return "C#"
+        case .javascript:
+            return "Javascript"
+        case .scala:
+            return "Scala"
+        case .kotlin:
+            return "Kotlin"
+        case .go:
+            return "Go"
+        case .pascal:
+            return "Delphi"
+        case .perl:
+            return "Perl"
+        case .sql:
+            return "SQL"
+        }
+    }
+
     var displayName: String {
         return rawValue
+    }
+
+    var highlightrSample: String {
+        switch self {
+        case .python:
+            return "# comment\nprint(\"Hello World\")"
+        case .cpp, .cpp11, .c:
+            return "// comment\n\n#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Hello World!\" << std::endl;\n}"
+        case .haskell, .haskell7, .haskell8:
+            return "-- comment\n\nmain = putStrLn \"Hello World\""
+        case .java, .java8:
+            return "// comment\n\nclass HelloWorld {\n\tstatic public void main(String args[]) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}"
+        case .octave:
+            return "# comment\nprintf(\"Hello World\\n\");"
+        case .asm32, .asm64:
+            return "; comment\n\nmov ax,cs\nmov ds,ax\nmov ah,9\nmov dx, offset Hello\nint 21h\nxor ax,ax\nint 21h\n\nHello:\n db \"Hello World!\",13,10,\"$\""
+        case .shell:
+            return "# comment\necho Hello World"
+        case .rust:
+            return "// comment\nfn main() {\n\tprintln!(\"Hello World!\");\n}"
+        case .r:
+            return "# comment\ncat(\"Hello world\\n\")"
+        case .ruby:
+            return "# comment\nputs \"Hello World!\""
+        case .clojure:
+            return "; comment\n\n(defn hello []\n  (println \"Hello world!\"))\n\n(hello)"
+        case .cs:
+            return "// comment\nclass HelloWorld\n{\n\tstatic void Main()\n\t{\n\t\tSystem.Console.WriteLine(\"Hello, World!\");\n\t}\n}"
+        case .javascript:
+            return "// comment\n\nconsole.log(\"Hello World\");"
+        case .scala:
+            return "// comment\n\nobject HelloWorld extends App {\n  println(\"Hello world!\")\n}"
+        case .kotlin:
+            return "// comment\n\nfun main(args: Array<String>) {\n\tprintln(\"Hello, world!\")\n}"
+        case .go:
+            return "// comment\n\npackage main\nimport \"fmt\"\nfunc main() {\n\tfmt.Printf(\"Hello World\\n\")\n}"
+        case .pascal:
+            return "// comment\nProgram Hello_World;\n\n{$APPTYPE CONSOLE}\n\nBegin\n  WriteLn('Hello World');\nEnd."
+        case .perl:
+            return "# comment\nprint \"Hello World!\\n\";"
+        case .sql:
+            return "# comment\n\nSELECT 'Hello World';"
+        }
     }
 }

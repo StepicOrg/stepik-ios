@@ -474,3 +474,15 @@ PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
 PlaceholderEmptySearchText = "Some free space to think";
 PlaceholderEmptySearchButton = "Go to Catalog";
+
+/* Code Editor settings */
+CodeEditorTitle = "Code editor";
+CodeEditorSettingsTitle = "Code editor settings";
+PreviewTitle = "Preview";
+CodeEditorTheme = "Editor theme";
+CodeEditorFontSize = "Font size";
+CodeEditorLanguage = "Language";
+CodeEditorFont = "Font";
+CodeEditorColor = "Colors";
+CodeEditorCurrentTheme = "Current: %@";
+CodeEditorCurrentFontSize = "Current: %@pt";

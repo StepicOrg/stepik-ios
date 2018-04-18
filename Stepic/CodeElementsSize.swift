@@ -49,9 +49,9 @@ enum EditorSize {
     var realSizes: SizeParams {
         switch self {
         case .small:
-            return (editorHeight: 200, fontSize: 13)
+            return (editorHeight: 200, fontSize: CGFloat(PreferencesContainer.codeEditor.fontSize))
         case .big:
-            return (editorHeight: 400, fontSize: 17)
+            return (editorHeight: 400, fontSize: CGFloat(PreferencesContainer.codeEditor.fontSize))
         }
     }
 }
