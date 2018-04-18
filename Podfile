@@ -61,6 +61,7 @@ def all_pods
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
     pod 'Appsee'
+    pod 'ActionSheetPicker-3.0'
 end
 
 def testing_pods

@@ -55,6 +55,8 @@ class MenuUIManager {
                 cell.initWithBlock(block: block)
             }
         }
+
+        block.cell = cell
     }
 
     func getCell(forblock block: MenuBlock, indexPath: IndexPath) -> UITableViewCell {

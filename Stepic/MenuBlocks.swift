@@ -16,6 +16,8 @@ class MenuBlock {
     var isSelectable = false
     var titleColor: UIColor = UIColor.mainText
 
+    weak var cell: UITableViewCell?
+
     init(id: String, title: String) {
         self.title = title
         self.id = id
@@ -40,7 +42,11 @@ class PinsMapExpandableMenuBlock: ExpandableMenuBlock {
 }
 
 class TransitionMenuBlock: MenuBlock {
-    var subtitle: String?
+    var subtitle: String? {
+        didSet {
+            (cell as? TransitionMenuBlockTableViewCell)?.subtitleLabel.text = subtitle
+        }
+    }
     var onTouch: (() -> Void)?
     var onCameBack: (() -> Void)?
 

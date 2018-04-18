@@ -475,3 +475,15 @@ PlaceholderEmptyNotificationsText = "Нет уведомлений";
 PlaceholderEmptyNotificationsButton = "Перейти в каталог";
 PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
 PlaceholderEmptySearchButton = "Перейти в каталог";
+
+/* Code Editor settings */
+CodeEditorTitle = "Редактор кода";
+CodeEditorSettingsTitle = "Настройки редактора кода";
+PreviewTitle = "Предпросмотр";
+CodeEditorTheme = "Тема редактора";
+CodeEditorFontSize = "Размер шрифта";
+CodeEditorLanguage = "Язык";
+CodeEditorFont = "Шрифт";
+CodeEditorColor = "Цвет";
+CodeEditorCurrentTheme = "Используется: %@";
+CodeEditorCurrentFontSize = "Используется: %@pt";
