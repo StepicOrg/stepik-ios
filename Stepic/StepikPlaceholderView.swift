@@ -63,7 +63,7 @@ class StepikPlaceholderView: NibInitializableView {
         actionButton.layer.borderWidth = 0.5
         actionButton.layer.borderColor = UIColor(red: 204 / 255, green: 204 / 255, blue: 204 / 255, alpha: 1.0).cgColor
 
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 14.0, left: 25.0, bottom: 14.0, right: 25.0)
+        actionButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
         actionButton.setTitleColor(UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), for: .normal)
     }
 
@@ -111,29 +111,43 @@ class StepikPlaceholderView: NibInitializableView {
         if isVertical {
             stackView.axis = .vertical
             stackView.distribution = .equalCentering
+            stackView.alignment = .fill
         } else {
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.alignment = .center
+        }
+    }
+
+    override func updateConstraints() {
+        super.updateConstraints()
+        if let currentPlaceholder = self.currentPlaceholder {
+            self.rebuildConstraints(for: currentPlaceholder)
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        DispatchQueue.main.async { [weak self] in
-            if let currentPlaceholder = self?.currentPlaceholder {
-                self?.rebuildConstraints(for: currentPlaceholder)
-            }
-        }
+        setNeedsUpdateConstraints()
+        updateConstraintsIfNeeded()
     }
 
     func set(placeholder: StepikPlaceholderStyle) {
-        currentPlaceholder = placeholder
-
         imageView.image = placeholder.image?.image
 
         textLabel.text = placeholder.text
-        actionButton.setTitle(placeholder.buttonTitle, for: .normal)
 
+        // If it's first load prevent button title change animation
+        if currentPlaceholder == nil {
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(placeholder.buttonTitle, for: .normal)
+                self.actionButton.layoutIfNeeded()
+            }
+        } else {
+            actionButton.setTitle(placeholder.buttonTitle, for: .normal)
+        }
+
+        currentPlaceholder = placeholder
         rebuildConstraints(for: placeholder)
     }
 }

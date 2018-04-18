@@ -60,6 +60,7 @@ def all_pods
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
+    pod 'Appsee'
 end
 
 def testing_pods
@@ -91,11 +92,6 @@ target 'StepikTV' do
         shared_pods
         testing_pods
     end
-end
-
-target 'SberbankUniversity' do 
-    platform :ios, '9.0'
-    all_pods
 end
 
 target 'Adaptive 1838' do
