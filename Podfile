@@ -60,6 +60,7 @@ def all_pods
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
+    pod 'Appsee'
 end
 
 def testing_pods
