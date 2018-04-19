@@ -46,6 +46,9 @@ platform :ios do
     ],
     "Adaptive GMAT" => [
       "org.stepik.ios.adaptive.gmat"
+    ],
+    "Adaptive 8290" => [
+      "org.stepik.ios.adaptive.8290"
     ]
   }
 

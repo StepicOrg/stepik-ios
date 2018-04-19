@@ -125,6 +125,12 @@ target 'Adaptive 3124' do
     adaptive_pods
 end
 
+target 'Adaptive 8290' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
 target 'Adaptive 1838 Screenshots' do
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
