@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class StringQuizViewController: QuizViewController {
 
-    var textView = UITextView()
+    var textView = IQTextView()
 
     var dataset: String?
     var reply: TextReply?
