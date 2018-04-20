@@ -11,6 +11,7 @@ import Mixpanel
 import Fabric
 import Crashlytics
 import PromiseKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AnalyticsReporter.reportEvent(AnalyticsEvents.AdaptiveApp.firstOpen, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
         }
+
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         LocalNotificationsHelper.registerNotifications()
 
