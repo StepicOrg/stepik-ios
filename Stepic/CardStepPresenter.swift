@@ -54,10 +54,12 @@ class CardStepPresenter {
             quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
         case "string":
             let vc = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+            vc.useSmallPadding = true
             vc.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
         case "number":
             let vc = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+            vc.useSmallPadding = true
             vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
         default: break

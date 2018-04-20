@@ -18,6 +18,9 @@ class StringQuizViewController: QuizViewController {
 
     let textViewHeight = 64
 
+    // Hack for adaptive mode (ugly layout when child quiz has padding)
+    var useSmallPadding: Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,12 +30,13 @@ class StringQuizViewController: QuizViewController {
 
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
-                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: useSmallPadding ? 8 : 16),
+                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: useSmallPadding ? -8 : -16)
             ])
         } else {
-            textView.alignLeading("16", trailing: "-16", toView: containerView)
+            textView.alignLeading(useSmallPadding ? "8" : "16", trailing: useSmallPadding ? "-8" : "-16", toView: containerView)
         }
+
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)

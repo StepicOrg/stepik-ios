@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 16
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         LocalNotificationsHelper.registerNotifications()
