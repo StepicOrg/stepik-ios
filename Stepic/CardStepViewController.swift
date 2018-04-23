@@ -137,7 +137,7 @@ class CardStepViewController: UIViewController, CardStepView {
         }
     }
 
-    private func refreshWebView() {
+    func refreshWebView() {
         resetWebViewHeight(5.0)
 
         func reloadContent() -> Promise<Void> {

@@ -28,6 +28,19 @@ class OnboardingCardStepViewController: CardStepViewController {
         stepWebView.loadHTMLString(html, baseURL: step.baseURL)
     }
 
+    override func refreshWebView() {
+        // Workaround for strange encoding bug
+        // Skip refreshing for onboarding
+        alignImages(in: self.stepWebView).then {
+            self.getContentHeight(self.stepWebView)
+        }.then { height -> Void in
+            self.resetWebViewHeight(Float(height))
+            self.scrollView.layoutIfNeeded()
+        }.catch { _ in
+            print("onboarding card step: error while refreshing")
+        }
+    }
+
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         delegate?.contentLoadingDidComplete()
