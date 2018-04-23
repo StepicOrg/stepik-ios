@@ -18,6 +18,9 @@ class NumberQuizViewController: QuizViewController {
     var dataset: String?
     var reply: NumberReply?
 
+    // Hack for adaptive mode (ugly layout when child quiz has padding)
+    var useSmallPadding: Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,11 +30,11 @@ class NumberQuizViewController: QuizViewController {
 
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                textField.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+                textField.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: useSmallPadding ? 8 : 16),
+                textField.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: useSmallPadding ? -8 : -16)
             ])
         } else {
-            textField.alignLeading("16", trailing: "-16", toView: containerView)
+            textField.alignLeading(useSmallPadding ? "8" : "16", trailing: useSmallPadding ? "-8" : "-16", toView: containerView)
         }
 
         textField.borderStyle = UITextBorderStyle.roundedRect

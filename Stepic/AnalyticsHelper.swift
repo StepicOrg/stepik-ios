@@ -12,14 +12,22 @@ import FirebaseCore
 import Mixpanel
 import YandexMobileMetrica
 import Crashlytics
-import Appsee
+
+#if ENABLE_APPSEE
+    import Appsee
+#endif
 
 class AnalyticsHelper: NSObject {
     static var sharedHelper = AnalyticsHelper()
     fileprivate override init() {super.init()}
 
     func setupAnalytics() {
-        Fabric.with([Crashlytics.self, Appsee.self])
+        #if ENABLE_APPSEE
+            Fabric.with([Crashlytics.self, Appsee.self])
+        #else
+            Fabric.with([Crashlytics.self])
+        #endif
+
         FirebaseApp.configure()
 
         Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
