@@ -42,9 +42,7 @@ class APIEndpoint {
     var retrieve: RetrieveRequestMaker
 
     init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
-        manager = Alamofire.SessionManager(configuration: configuration)
+        manager = Alamofire.SessionManager(configuration: StepikURLSessionConfiguration.default)
         let retrier = ApiRequestRetrier()
         manager.retrier = retrier
         manager.adapter = retrier

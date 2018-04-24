@@ -49,7 +49,7 @@ class AvatarImageView: UIImageView {
         if url.pathExtension != "svg" {
             self.sd_setImage(with: url, placeholderImage: self.image)
         } else {
-            Alamofire.request(url).responseData(completionHandler: { response in
+            AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: { response in
                 if response.result.error != nil {
                     return
                 }

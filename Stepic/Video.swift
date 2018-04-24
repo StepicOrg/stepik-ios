@@ -340,7 +340,7 @@ class Video: NSManagedObject, JSONSerializable {
         }
         let url = getUrlForQuality(quality)
 
-        Alamofire.request(url, method: .head).responseSwiftyJSON({
+        AlamofireDefaultSessionManager.shared.request(url, method: .head).responseSwiftyJSON({
             response in
 
             var error = response.result.error

@@ -33,7 +33,7 @@ class CardStepPresenter {
         return step.lesson
     }
 
-    var quizViewController: ChoiceQuizViewController?
+    var quizViewController: QuizViewController?
 
     init(view: CardStepView, step: Step) {
         self.step = step
@@ -49,7 +49,22 @@ class CardStepPresenter {
         view?.updateProblem(with: step.block.text ?? "")
 
         // Set up quiz view controller
-        quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+        switch step.block.name {
+        case "choice":
+            quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+        case "string":
+            let vc = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+            vc.useSmallPadding = true
+            vc.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
+            quizViewController = vc
+        case "number":
+            let vc = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+            vc.useSmallPadding = true
+            vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
+            quizViewController = vc
+        default: break
+        }
+
         guard let quizViewController = quizViewController else {
             print("card step: quiz vc init failed")
             delegate?.contentLoadingDidFail()
@@ -69,9 +84,15 @@ class CardStepPresenter {
     }
 
     func submit() {
-        // TODO: this check only for choices
         var isSelected = false
-        quizViewController?.choices.forEach { isSelected = isSelected || $0 }
+
+        switch step.block.name {
+        case "choice":
+            (quizViewController as? ChoiceQuizViewController)?.choices.forEach { isSelected = isSelected || $0 }
+        case "string", "number":
+            isSelected = true
+        default: break
+        }
 
         if isSelected {
             quizViewController?.submitPressed()

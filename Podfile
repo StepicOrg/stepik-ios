@@ -24,7 +24,7 @@ def all_pods
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic'
+    pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
     
     pod 'FirebaseCore'
     pod 'FirebaseAppIndexing'
@@ -35,7 +35,10 @@ def all_pods
     pod 'Mixpanel-swift', '2.3.0'
 
     pod 'BEMCheckBox'
-    pod 'IQKeyboardManagerSwift'
+
+    # actual version - 6.x, we should test it before update
+    pod 'IQKeyboardManagerSwift', '~> 5.0'
+
     pod 'Kanna', '~> 4.0.0'
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
@@ -65,8 +68,11 @@ def testing_pods
     pod 'Nimble'
 end
 
+def main_pods
+    pod 'Appsee'
+end
+
 def adaptive_pods
-    pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
     pod 'NotificationBannerSwift', '1.5.2' 
 end
@@ -77,6 +83,7 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        main_pods
         testing_pods
     end
 end
@@ -89,11 +96,6 @@ target 'StepikTV' do
         shared_pods
         testing_pods
     end
-end
-
-target 'SberbankUniversity' do 
-    platform :ios, '9.0'
-    all_pods
 end
 
 target 'Adaptive 1838' do
@@ -121,6 +123,12 @@ target 'Adaptive 3149' do
 end
 
 target 'Adaptive 3124' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 8290' do
     platform :ios, '9.0'
     all_pods
     adaptive_pods

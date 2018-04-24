@@ -19,10 +19,13 @@ class AnalyticsHelper: NSObject {
 
     func setupAnalytics() {
         Fabric.with([Crashlytics.self])
+
         FirebaseApp.configure()
 
         Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
 
-        YMMYandexMetrica.activate(withApiKey: Tokens.shared.appMetricaToken)
+        if let config = YMMYandexMetricaConfiguration(apiKey: Tokens.shared.appMetricaToken) {
+            YMMYandexMetrica.activate(with: config)
+        }
     }
 }
