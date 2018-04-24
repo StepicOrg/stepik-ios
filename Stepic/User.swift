@@ -66,6 +66,23 @@ class User: NSManagedObject, JSONSerializable {
             CoreDataHelper.instance.save()
         }
     }
+
+    static func fetch(_ ids: [Int]) -> [User] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        do {
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [User] else {
+                return []
+            }
+            return results
+        } catch {
+            return []
+        }
+    }
 }
 
 struct UserInfo {

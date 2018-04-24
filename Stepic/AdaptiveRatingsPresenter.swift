@@ -32,6 +32,7 @@ class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
     fileprivate var ratingsAPI: AdaptiveRatingsAPI
+    fileprivate var usersAPI: UsersAPI
     fileprivate var ratingManager: AdaptiveRatingManager
 
     private var scoreboard: [Int: ScoreboardViewData] = [:]
@@ -40,10 +41,11 @@ class AdaptiveRatingsPresenter {
     private var nouns: [(String, String)] = []
     private var adjs: [(String, String)] = []
 
-    init(ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, view: AdaptiveRatingsView) {
+    init(ratingsAPI: AdaptiveRatingsAPI, usersAPI: UsersAPI, ratingManager: AdaptiveRatingManager, view: AdaptiveRatingsView) {
         self.view = view
         self.ratingManager = ratingManager
         self.ratingsAPI = ratingsAPI
+        self.usersAPI = usersAPI
 
         loadNamesFromFiles()
     }
@@ -78,15 +80,32 @@ class AdaptiveRatingsPresenter {
     fileprivate func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
         return Promise { fulfill, reject in
             let currentUser = AuthInfo.shared.userId
+            var usersForDeanonIds = [Int]()
+            var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard? = nil
 
             ratingsAPI.cancelAllTasks()
-            ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Void in
-                var curLeaders: [RatingViewData] = []
-                scoreboard.leaders.forEach { record in
-                    curLeaders.append(RatingViewData(position: record.rank, exp: record.exp, name: self.generateNameBy(userId: record.userId), me: currentUser == record.userId))
+            ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Promise<[User]> in
+                loadedScoreboard = scoreboard
+                usersForDeanonIds = scoreboard.leaders.filter({ !$0.isFake }).map { $0.userId }
+
+                let cachedUsers = User.fetch(usersForDeanonIds)
+                return self.usersAPI.retrieve(ids: usersForDeanonIds, existing: cachedUsers)
+            }.recover { _ -> Promise<[User]> in
+                // Unable to fetch users -> recover with empty array
+                return Promise(value: [])
+            }.then { users -> Void in
+                var userNames: [Int: String] = [:]
+                users.forEach { user in
+                    userNames[user.id] = "\(user.firstName) \(user.lastName)"
                 }
 
-                let curScoreboard = ScoreboardViewData(allCount: scoreboard.allCount, leaders: curLeaders)
+                var curLeaders: [RatingViewData] = []
+                loadedScoreboard?.leaders.forEach { record in
+                    let name = userNames[record.userId] ?? self.generateNameBy(userId: record.userId)
+                    curLeaders.append(RatingViewData(position: record.rank, exp: record.exp, name: name, me: currentUser == record.userId))
+                }
+
+                let curScoreboard = ScoreboardViewData(allCount: loadedScoreboard?.allCount ?? 0, leaders: curLeaders)
                 fulfill(curScoreboard)
             }.catch { error in
                 reject(error)
