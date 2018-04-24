@@ -95,8 +95,13 @@ class AdaptiveRatingsPresenter {
                 return Promise(value: [])
             }.then { users -> Void in
                 var userNames: [Int: String] = [:]
+                let locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")
                 users.forEach { user in
-                    userNames[user.id] = "\(user.firstName) \(user.lastName)"
+                    if ["ru", "ua"].contains(locale) {
+                        userNames[user.id] = "\(user.firstName) \(user.lastName)"
+                    } else {
+                        userNames[user.id] = StringHelper.cyrillicToLatin("\(user.firstName) \(user.lastName)")
+                    }
                 }
 
                 var curLeaders: [RatingViewData] = []
