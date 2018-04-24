@@ -110,8 +110,12 @@ class ChoiceQuizViewController: QuizViewController {
         self.view.layoutIfNeeded()
     }
 
-    override func getReply() -> Reply {
-        return ChoiceReply(choices: self.choices)
+    override func getReply() -> Reply? {
+        if self.choices.contains(true) || dataset?.isMultipleChoice == true {
+            return ChoiceReply(choices: self.choices)
+        } else {
+            return nil
+        }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
