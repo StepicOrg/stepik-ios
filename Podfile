@@ -69,8 +69,11 @@ def testing_pods
     pod 'Nimble'
 end
 
+def main_pods
+    pod 'Appsee'
+end
+
 def adaptive_pods
-    pod 'Koloda', '4.3.1'
     pod 'SDWebImage/GIF'
     pod 'NotificationBannerSwift', '1.5.2' 
 end
@@ -81,6 +84,7 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        main_pods
         testing_pods
     end
 end
@@ -120,6 +124,12 @@ target 'Adaptive 3149' do
 end
 
 target 'Adaptive 3124' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 8290' do
     platform :ios, '9.0'
     all_pods
     adaptive_pods
