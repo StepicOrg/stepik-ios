@@ -9,9 +9,14 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class SectionsAPI: APIEndpoint {
     override var name: String { return "sections" }
+
+    func retrieve(ids: [Int], existing: [Section], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Section]> {
+        return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
+    }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Section], refreshMode: RefreshMode, success: @escaping (([Section]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
