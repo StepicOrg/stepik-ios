@@ -18,8 +18,9 @@ struct CourseViewData {
     var progress: Float?
     var action: (() -> Void)?
     var secondaryAction: (() -> Void)?
+    var isAdaptive: Bool
 
-    init(course: Course, action: @escaping () -> Void, secondaryAction: @escaping () -> Void) {
+    init(course: Course, isAdaptive: Bool, action: @escaping () -> Void, secondaryAction: @escaping () -> Void) {
         self.id = course.id
         self.title = course.title
         self.isEnrolled = course.enrolled
@@ -29,5 +30,6 @@ struct CourseViewData {
         self.progress = course.enrolled ? course.progress?.percentPassed : nil
         self.action = action
         self.secondaryAction = secondaryAction
+        self.isAdaptive = isAdaptive
     }
 }

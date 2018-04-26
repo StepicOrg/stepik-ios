@@ -18,6 +18,7 @@
                 <outlet property="courseStatsCollectionView" destination="o6G-uM-Uld" id="KuA-mO-2Jl"/>
                 <outlet property="courseStatsCollectionViewFlowLayout" destination="H6t-HR-gtO" id="C0K-Kp-qWX"/>
                 <outlet property="courseTitleLabel" destination="qgP-av-mN5" id="cJt-TN-Mr5"/>
+                <outlet property="isAdaptiveLabel" destination="dZl-97-oV5" id="UHL-CS-9Cw"/>
                 <outlet property="loadingWidgetView" destination="e0u-me-rvn" id="hak-XC-L1r"/>
                 <outlet property="secondaryActionButton" destination="lDu-oh-6xv" id="Pg7-YA-3tl"/>
             </connections>
@@ -41,8 +42,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlU-Dn-SHa">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="АДАПТИВНЫЙ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-97-oV5">
-                            <rect key="frame" x="4" y="56" width="72" height="16"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="АДАПТИВНЫЙ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-97-oV5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                            <rect key="frame" x="4" y="58" width="72" height="16"/>
                             <color key="backgroundColor" red="0.92156862745098034" green="0.94901960784313721" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="rZi-Pw-Kco"/>
@@ -59,7 +60,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="dZl-97-oV5" secondAttribute="bottom" constant="8" id="ES9-Zz-9gt"/>
+                        <constraint firstAttribute="bottom" secondItem="dZl-97-oV5" secondAttribute="bottom" constant="6" id="ES9-Zz-9gt"/>
                         <constraint firstItem="dZl-97-oV5" firstAttribute="leading" secondItem="vlU-Dn-SHa" secondAttribute="leading" constant="4" id="SKA-aY-fw1"/>
                         <constraint firstItem="dZl-97-oV5" firstAttribute="centerX" secondItem="vlU-Dn-SHa" secondAttribute="centerX" id="XTG-g1-AeL"/>
                         <constraint firstAttribute="trailing" secondItem="dZl-97-oV5" secondAttribute="trailing" constant="4" id="n2o-B7-lp6"/>
