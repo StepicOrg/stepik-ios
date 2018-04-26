@@ -185,6 +185,8 @@ class CourseWidgetView: NibInitializableView {
         courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
         courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
         view.backgroundColor = UIColor.clear
+
+        isAdaptiveLabel.text = NSLocalizedString("WidgetAdaptiveLabel", comment: "")
     }
 
     override func layoutSubviews() {

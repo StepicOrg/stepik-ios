@@ -42,9 +42,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlU-Dn-SHa">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                     <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-0m-eYK">
+                            <rect key="frame" x="7" y="58" width="66.5" height="16"/>
+                            <color key="backgroundColor" red="0.92156862750000001" green="0.94901960780000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="АДАПТИВНЫЙ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-97-oV5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                            <rect key="frame" x="4" y="58" width="72" height="16"/>
-                            <color key="backgroundColor" red="0.92156862745098034" green="0.94901960784313721" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="12" y="58" width="56.5" height="16"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="rZi-Pw-Kco"/>
                             </constraints>
@@ -61,9 +70,13 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="dZl-97-oV5" secondAttribute="bottom" constant="6" id="ES9-Zz-9gt"/>
-                        <constraint firstItem="dZl-97-oV5" firstAttribute="leading" secondItem="vlU-Dn-SHa" secondAttribute="leading" constant="4" id="SKA-aY-fw1"/>
+                        <constraint firstItem="8nK-0m-eYK" firstAttribute="width" secondItem="dZl-97-oV5" secondAttribute="width" constant="10" id="O1N-vu-J0E"/>
+                        <constraint firstItem="dZl-97-oV5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vlU-Dn-SHa" secondAttribute="leading" constant="8" id="SKA-aY-fw1"/>
                         <constraint firstItem="dZl-97-oV5" firstAttribute="centerX" secondItem="vlU-Dn-SHa" secondAttribute="centerX" id="XTG-g1-AeL"/>
-                        <constraint firstAttribute="trailing" secondItem="dZl-97-oV5" secondAttribute="trailing" constant="4" id="n2o-B7-lp6"/>
+                        <constraint firstItem="8nK-0m-eYK" firstAttribute="height" secondItem="dZl-97-oV5" secondAttribute="height" id="cLa-6z-r8g"/>
+                        <constraint firstItem="8nK-0m-eYK" firstAttribute="centerY" secondItem="dZl-97-oV5" secondAttribute="centerY" id="gng-cV-R21"/>
+                        <constraint firstItem="8nK-0m-eYK" firstAttribute="centerX" secondItem="dZl-97-oV5" secondAttribute="centerX" id="jtQ-m0-Ka1"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dZl-97-oV5" secondAttribute="trailing" constant="8" id="n2o-B7-lp6"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="800" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-av-mN5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
