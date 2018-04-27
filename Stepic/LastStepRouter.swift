@@ -84,7 +84,7 @@ class LastStepRouter {
         }
 
         func navigateToStep(in unit: Unit) {
-            // If last step does not exists then take first step in unit
+            // If last step does not exist then take first step in unit
             unitsVC.unitId = course.lastStep?.unitId ?? unit.id
 
             let stepIdPromise = Promise<Int> { fulfill, reject in
@@ -92,8 +92,12 @@ class LastStepRouter {
                     fulfill(stepId)
                 } else {
                     let cachedLesson = Lesson.getLesson(unit.lessonId)
-                    ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).then { lesson -> Void in
-                        if let firstStepId = lesson.first?.stepsArray.first {
+                    ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).then { lessons -> Void in
+                        if let lesson = lessons.first {
+                            unit.lesson = lesson
+                        }
+
+                        if let firstStepId = lessons.first?.stepsArray.first {
                             fulfill(firstStepId)
                         } else {
                             reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
@@ -160,7 +164,7 @@ class LastStepRouter {
         }
 
         guard let unitId = course.lastStep?.unitId else {
-            // If last step does not exists then take first section and its first unit
+            // If last step does not exist then take first section and its first unit
             guard let sectionId = course.sectionsArray.first,
                   let sections = try? Section.getSections(sectionId),
                   let cachedSection = sections.first else {

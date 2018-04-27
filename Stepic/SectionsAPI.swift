@@ -14,7 +14,7 @@ import PromiseKit
 class SectionsAPI: APIEndpoint {
     override var name: String { return "sections" }
 
-    func retrieve(ids: [Int], existing: [Section], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Section]> {
+    func retrieve(ids: [Int], existing: [Section]) -> Promise<[Section]> {
         return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 
