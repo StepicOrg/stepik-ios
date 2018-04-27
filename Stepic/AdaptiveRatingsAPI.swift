@@ -16,7 +16,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
     override var name: String { return "rating" }
     var restoreName: String { return "rating-restore" }
 
-    typealias RatingRecord = (userId: Int, exp: Int, rank: Int)
+    typealias RatingRecord = (userId: Int, exp: Int, rank: Int, isFake: Bool)
     typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])
 
     func update(courseId: Int, exp: Int) -> Promise<Void> {
@@ -66,7 +66,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
                     reject(error)
                 case .success(let json):
                     if response.response?.statusCode == 200 {
-                        let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue) }
+                        let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue, isFake: !$0["is_not_fake"].boolValue) }
                         fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
                     } else {
                         reject(RatingsAPIError.serverError)
