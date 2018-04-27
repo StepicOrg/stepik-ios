@@ -185,8 +185,8 @@ class CourseListPresenter {
         }.then { [weak self] course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
 
-            if let controller = self?.getSectionsController(for: course, didSubscribe: true) {
-                self?.view?.show(controller: controller)
+            if let navigation = self?.view?.getNavigationController() {
+                LastStepRouter.continueLearning(for: course, using: navigation)
             }
         }.catch { [weak self] error in
             guard let error = error as? CourseSubscriber.CourseSubscriptionError else {

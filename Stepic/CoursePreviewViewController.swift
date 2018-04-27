@@ -23,6 +23,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
     var video: Video!
     var moviePlayer: MPMoviePlayerController?
     var parentShareBlock: ((UIActivityViewController) -> Void)?
+    let subscriber = CourseSubscriber()
 
     var course: Course? = nil {
         didSet {
@@ -160,20 +161,16 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 [weak self] in
                 SVProgressHUD.show()
                 button.isEnabled = false
-                _ = ApiDataDownloader.enrollments.joinCourse(c, delete: true, success : {
-                    SVProgressHUD.showSuccess(withStatus: "")
+                self?.subscriber.leave(course: c).then { [weak self] course -> Void in
                     button.isEnabled = true
-                    c.enrolled = false
-                    CoreDataHelper.instance.save()
-                    CourseSubscriptionManager.sharedManager.unsubscribedFrom(course: c)
-                    WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    self?.initBarButtonItems(dropAvailable: c.enrolled)
+                    SVProgressHUD.showSuccess(withStatus: "")
+                    self?.course = course
+                    self?.initBarButtonItems(dropAvailable: course.enrolled)
                     _ = self?.navigationController?.popToRootViewController(animated: true)
-                    }, error: {
-                        status in
-                        SVProgressHUD.showError(withStatus: status)
-                        button.isEnabled = true
-                })
+                }.catch { _ in
+                    SVProgressHUD.showError(withStatus: "")
+                    button.isEnabled = true
+                }
             })
         }))
 
@@ -385,44 +382,21 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             if !c.enrolled {
                 SVProgressHUD.show()
                 sender.isEnabled = false
-                _ = ApiDataDownloader.enrollments.joinCourse(c, success : {
-                    [weak self] in
 
-                    let successBlock = {
-                        [weak self] in
-                        SVProgressHUD.showSuccess(withStatus: "")
-                        sender.isEnabled = true
-                        sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
-                        self?.course?.enrolled = true
-                        CoreDataHelper.instance.save()
-                        CourseSubscriptionManager.sharedManager.subscribedTo(course: c)
-                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                        self?.performSegue(withIdentifier: "showSections", sender: nil)
-                        self?.initBarButtonItems(dropAvailable: c.enrolled)
+                subscriber.join(course: c).then { [weak self] course -> Void in
+                    SVProgressHUD.showSuccess(withStatus: "")
+                    sender.isEnabled = true
+                    sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
+                    self?.course = course
+                    self?.initBarButtonItems(dropAvailable: course.enrolled)
+
+                    if let navigation = self?.navigationController {
+                        LastStepRouter.continueLearning(for: course, using: navigation)
                     }
-
-                    guard let progressId = c.progressId else {
-                        successBlock()
-                        return
-                    }
-
-                    ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: c.progress != nil ? [c.progress!] : [], refreshMode: .update, success: {
-                        progresses in
-                        guard let progress = progresses.first else {
-                            return
-                        }
-                        c.progress = progress
-                        successBlock()
-                    }, error: {
-                        _ in
-                        successBlock()
-                    })
-
-                    }, error: {
-                        status in
-                        SVProgressHUD.showError(withStatus: status)
-                        sender.isEnabled = true
-                })
+                }.catch { _ in
+                    SVProgressHUD.showError(withStatus: "")
+                    sender.isEnabled = true
+                }
             } else {
                 if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: c.id) {
                     guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {

@@ -83,21 +83,42 @@ class LastStepRouter {
             }
         }
 
-        func navigateToStep() {
-            unitsVC.unitId = course.lastStep?.unitId
-            lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
+        func navigateToStep(in unit: Unit) {
+            // If last step does not exist then take first step in unit
+            unitsVC.unitId = course.lastStep?.unitId ?? unit.id
 
-            //For prev-next step buttons navigation
-            lessonVC.sectionNavigationDelegate = unitsVC
+            let stepIdPromise = Promise<Int> { fulfill, reject in
+                if let stepId = course.lastStep?.stepId {
+                    fulfill(stepId)
+                } else {
+                    let cachedLesson = unit.lesson ?? Lesson.getlesson(unit.lessonId)
+                    ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).then { lessons -> Void in
+                        if let lesson = lessons.first {
+                            unit.lesson = lesson
+                        }
 
-            if course.lastStep?.stepId != nil {
+                        if let firstStepId = lessons.first?.stepsArray.first {
+                            fulfill(firstStepId)
+                        } else {
+                            reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
+                        }
+                    }.catch { _ in
+                        reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
+                    }
+                }
+            }
+
+            stepIdPromise.then { targetStepId -> Void in
+                lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
+                lessonVC.sectionNavigationDelegate = unitsVC
+
                 SVProgressHUD.showSuccess(withStatus: "")
                 navigationController.pushViewController(sectionsVC, animated: false)
                 navigationController.pushViewController(unitsVC, animated: false)
                 navigationController.pushViewController(lessonVC, animated: true)
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
-            } else {
+            }.catch { _ in
                 openSyllabus()
             }
         }
@@ -116,7 +137,7 @@ class LastStepRouter {
                     CoreDataHelper.instance.save()
 
                     if section.isReachable {
-                        navigateToStep()
+                        navigateToStep(in: unit)
                     } else {
                         openSyllabus()
                     }
@@ -135,7 +156,7 @@ class LastStepRouter {
 
                 print("last step router: using cached section")
                 if section.isReachable {
-                    navigateToStep()
+                    navigateToStep(in: unit)
                 } else {
                     openSyllabus()
                 }
@@ -143,7 +164,24 @@ class LastStepRouter {
         }
 
         guard let unitId = course.lastStep?.unitId else {
-            openSyllabus()
+            // If last step does not exist then take first section and its first unit
+            guard let sectionId = course.sectionsArray.first,
+                  let sections = try? Section.getSections(sectionId),
+                  let cachedSection = sections.first else {
+                openSyllabus()
+                return
+            }
+
+            ApiDataDownloader.sections.retrieve(ids: [sectionId], existing: [cachedSection]).then { section -> Void in
+                guard let unitId = section.first?.unitsArray.first else {
+                    print("last step router: section has no units")
+                    return
+                }
+                checkUnitAndNavigate(for: unitId)
+            }.catch { _ in
+                print("last step router: unable to load section when last step does not exists")
+                openSyllabus()
+            }
             return
         }
 

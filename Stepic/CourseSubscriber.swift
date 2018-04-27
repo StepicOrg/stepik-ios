@@ -36,6 +36,7 @@ class CourseSubscriber {
 
                 let success: (Course) -> Void = {
                     course in
+                    course.enrolled = !unsubscribe
                     CoreDataHelper.instance.save()
 
                     if unsubscribe {
