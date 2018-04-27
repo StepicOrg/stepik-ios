@@ -88,8 +88,9 @@ class AdaptiveRatingsPresenter {
                 loadedScoreboard = scoreboard
                 usersForDeanonIds = scoreboard.leaders.filter({ !$0.isFake }).map { $0.userId }
 
-                let cachedUsers = User.fetch(usersForDeanonIds)
-                return self.usersAPI.retrieve(ids: usersForDeanonIds, existing: cachedUsers)
+                return User.fetchAsync(ids: usersForDeanonIds)
+            }.then { cachedUsers -> Promise<[User]> in
+                self.usersAPI.retrieve(ids: usersForDeanonIds, existing: cachedUsers)
             }.recover { _ -> Promise<[User]> in
                 // Unable to fetch users -> recover with empty array
                 return Promise(value: [])
