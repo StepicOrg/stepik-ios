@@ -22,7 +22,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     let prefferedDate = Date(timeIntervalSinceNow: (1 * 60 * 60))
     let userInfo: [String: Any] = ["lastUpdated": Date(),
                                   "reason": "New deadlines update"]
-    WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: prefferedDate, userInfo: userInfo as NSSecureCoding) { error in
+    WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: prefferedDate, userInfo: userInfo as NSDictionary) { error in
       if let error = error {
         print("Error scheduling next refresh: \(error.localizedDescription)")
       }

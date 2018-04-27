@@ -1,8 +1,7 @@
 In the new version of the Stepik iOS app we:
 
-• Changed all empty states. It's all perfectly beautiful now, check it out
-• Added autocomplete for Kotlin, R and Haskell
-• Sometimes app crashed after writing a comment. Now it doesn't
+• Fixed bug, when courses were not available without internet connection. Now we made offline mode great again, so you can learn anywhere anytime, just like you did
+• Fixed some bad localizations
 • Fixed multiple bugs and greatly improved stability
 
 Enjoy learning!

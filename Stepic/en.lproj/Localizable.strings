@@ -357,6 +357,7 @@ WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
+WidgetAdaptiveLabel = "ADAPTIVE";
 
 EnterSQLQuery = "Enter SQL query:";
 
