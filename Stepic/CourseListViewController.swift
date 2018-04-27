@@ -60,7 +60,6 @@ class CourseListViewController: UIViewController, CourseListView {
         super.viewDidLoad()
 
         delegate?.setupContentView()
-        setup3dTouch()
         if refreshEnabled {
             delegate?.setupRefresh()
         }
@@ -70,10 +69,9 @@ class CourseListViewController: UIViewController, CourseListView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.willAppear()
-    }
 
-    private func setup3dTouch() {
-        if(traitCollection.forceTouchCapability == .available) {
+        // Setup 3D touch
+        if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
         }
     }
