@@ -12,7 +12,7 @@ import FirebaseRemoteConfig
 enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
     case adaptiveBackendUrl = "adaptive_backend_url"
-    case supportedInAdaptiveModeCourses = "adaptive_courses_ios"
+    case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
     case allowVideoInBackground = "allow_video_in_background"
     case allowCodeEditorSettings = "allow_code_editor_settings"
 }
@@ -59,8 +59,25 @@ class RemoteConfig {
             return StepicApplicationsInfo.adaptiveSupportedCourses
         }
 
-        let ids = configValue.components(separatedBy: ",").flatMap { Int($0) }
-        return ids
+        let courses = configValue.components(separatedBy: ",")
+        var supportedCourses = [String]()
+        for course in courses {
+            let parts = course.components(separatedBy: "-")
+            if parts.count == 1 {
+                let courseId = parts[0]
+                supportedCourses.append(courseId)
+            } else if parts.count == 2 {
+                let courseId = parts[0]
+                if let build = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String,
+                   let buildNum = Int(build),
+                   let minimalBuild = Int(parts[1]) {
+                   if buildNum >= minimalBuild {
+                       supportedCourses.append(courseId)
+                   }
+                }
+            }
+        }
+        return supportedCourses.flatMap { Int($0) }
     }
 
     var allowVideoInBackground: Bool {
