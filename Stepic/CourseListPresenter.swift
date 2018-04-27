@@ -163,11 +163,14 @@ class CourseListPresenter {
 
     func getData(from courses: [Course]) -> [CourseViewData] {
         return courses.map { course in
-            CourseViewData(course: course, action: { [weak self] in
-                self?.actionButtonPressed(course: course)
-            }, secondaryAction: { [weak self] in
-                self?.secondaryActionButtonPressed(course: course)
-            })
+            CourseViewData(course: course,
+                           isAdaptive: adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id),
+                           action: { [weak self] in
+                               self?.actionButtonPressed(course: course)
+                           },
+                           secondaryAction: { [weak self] in
+                               self?.secondaryActionButtonPressed(course: course)
+                           })
         }
     }
 
