@@ -91,7 +91,7 @@ class LastStepRouter {
                 if let stepId = course.lastStep?.stepId {
                     fulfill(stepId)
                 } else {
-                    let cachedLesson = unit.lesson ?? Lesson.getlesson(unit.lessonId)
+                    let cachedLesson = unit.lesson ?? Lesson.getLesson(unit.lessonId)
                     ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).then { lessons -> Void in
                         if let lesson = lessons.first {
                             unit.lesson = lesson
