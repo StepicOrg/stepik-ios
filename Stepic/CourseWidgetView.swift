@@ -16,6 +16,7 @@ class CourseWidgetView: NibInitializableView {
     @IBOutlet weak var courseStatsCollectionView: UICollectionView!
     @IBOutlet weak var actionButton: StepikButton!
     @IBOutlet weak var secondaryActionButton: StepikButton!
+    @IBOutlet weak var isAdaptiveLabel: StepikLabel!
 
     @IBOutlet weak var courseStatsCollectionViewFlowLayout: UICollectionViewFlowLayout!
 
@@ -184,6 +185,8 @@ class CourseWidgetView: NibInitializableView {
         courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
         courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
         view.backgroundColor = UIColor.clear
+
+        isAdaptiveLabel.text = NSLocalizedString("WidgetAdaptiveLabel", comment: "")
     }
 
     override func layoutSubviews() {
@@ -203,6 +206,13 @@ class CourseWidgetView: NibInitializableView {
         progress = course.progress
         self.colorMode = colorMode
         isLoading = false
+
+        if course.isAdaptive {
+            secondaryActionButtonState = .info
+            isAdaptiveLabel.superview?.isHidden = false
+        } else {
+            isAdaptiveLabel.superview?.isHidden = true
+        }
     }
 
     @IBAction func actionButtonPressed(_ sender: Any) {
@@ -212,7 +222,6 @@ class CourseWidgetView: NibInitializableView {
     @IBAction func secondaryActionButtonPressed(_ sender: Any) {
         secondaryAction?()
     }
-
 }
 
 extension CourseWidgetView: UICollectionViewDelegate {

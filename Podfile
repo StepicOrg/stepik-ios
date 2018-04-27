@@ -24,7 +24,7 @@ def all_pods
     pod 'SVProgressHUD'
     pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic'
+    pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
     
     pod 'FirebaseCore'
     pod 'FirebaseAppIndexing'
@@ -60,7 +60,6 @@ def all_pods
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
-    pod 'Appsee'
     pod 'ActionSheetPicker-3.0'
 end
 
