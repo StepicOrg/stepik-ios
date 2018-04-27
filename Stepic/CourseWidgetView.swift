@@ -92,6 +92,7 @@ class CourseWidgetView: NibInitializableView {
         courseStatsCollectionView.isHidden = hidden
         actionButton.isHidden = hidden
         secondaryActionButton.isHidden = hidden
+        isAdaptiveLabel.superview?.isHidden = hidden
     }
 
     var isLoading: Bool = false {
