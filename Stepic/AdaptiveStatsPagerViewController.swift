@@ -61,7 +61,7 @@ class AdaptiveStatsPagerViewController: PagerController {
             return vc
         case .rating:
             let vc = ControllerHelper.instantiateViewController(identifier: "Ratings", storyboardName: "Adaptive") as! AdaptiveRatingsViewController
-            vc.presenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), ratingManager: ratingsManager, view: vc)
+            vc.presenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), usersAPI: UsersAPI(), ratingManager: ratingsManager, view: vc)
             return vc
         default:
             return UIViewController()

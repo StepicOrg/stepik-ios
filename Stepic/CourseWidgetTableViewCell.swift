@@ -33,23 +33,7 @@ class CourseWidgetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func initWithCourse(_ course: Course, action: (() -> Void)?) {
-        widgetView.title = course.title
-        widgetView.action = action
-        widgetView.actionButtonState = course.enrolled ? .continueLearning : .join
-        widgetView.secondaryActionButtonState = course.enrolled ? .syllabus : .info
-        widgetView.imageURL = URL(string: course.coverURLString)
-        widgetView.rating = course.reviewSummary?.average
-        widgetView.learners = course.learnersCount
-        widgetView.progress = course.enrolled ? course.progress?.percentPassed : nil
-        isLoading = false
-    }
-
     func setup(courseViewData course: CourseViewData, colorMode: CourseListColorMode) {
         widgetView.setup(courseViewData: course, colorMode: colorMode)
-
-        if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id) {
-            widgetView.secondaryActionButtonState = .info
-        }
     }
 }

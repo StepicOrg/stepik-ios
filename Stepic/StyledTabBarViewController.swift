@@ -31,6 +31,9 @@ class StyledTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         tabBar.tintColor = UIColor.mainDark
+        if #available(iOS 10.0, *) {
+            tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
+        }
         tabBar.isTranslucent = false
 
         self.setViewControllers(items.map {

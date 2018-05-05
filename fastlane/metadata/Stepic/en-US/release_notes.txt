@@ -1,8 +1,10 @@
 In the new version of the Stepik iOS app we:
 
-• Fixed bug, when courses were not available without internet connection. Now we made offline mode great again, so you can learn anywhere anytime, just like you did
-• Fixed some bad localizations
-• Fixed multiple bugs and greatly improved stability
+• Made adaptive courses more distinctive
+• Deanonymized adaptive leaderboards
+• Improved "continue course" feature
+• Fixed 3D Touch for courses
+• Fixed some more bugs
 
 Enjoy learning!
 Stepik team

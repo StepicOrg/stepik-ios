@@ -163,11 +163,14 @@ class CourseListPresenter {
 
     func getData(from courses: [Course]) -> [CourseViewData] {
         return courses.map { course in
-            CourseViewData(course: course, action: { [weak self] in
-                self?.actionButtonPressed(course: course)
-            }, secondaryAction: { [weak self] in
-                self?.secondaryActionButtonPressed(course: course)
-            })
+            CourseViewData(course: course,
+                           isAdaptive: adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id),
+                           action: { [weak self] in
+                               self?.actionButtonPressed(course: course)
+                           },
+                           secondaryAction: { [weak self] in
+                               self?.secondaryActionButtonPressed(course: course)
+                           })
         }
     }
 
@@ -182,8 +185,8 @@ class CourseListPresenter {
         }.then { [weak self] course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
 
-            if let controller = self?.getSectionsController(for: course, didSubscribe: true) {
-                self?.view?.show(controller: controller)
+            if let navigation = self?.view?.getNavigationController() {
+                LastStepRouter.continueLearning(for: course, using: navigation)
             }
         }.catch { [weak self] error in
             guard let error = error as? CourseSubscriber.CourseSubscriptionError else {
