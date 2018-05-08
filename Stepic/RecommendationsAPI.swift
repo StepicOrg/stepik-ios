@@ -46,7 +46,7 @@ class RecommendationsAPI: APIEndpoint {
             manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).validate(statusCode: [201]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(error)
+                    reject(NetworkError(error: error))
                 case .success(_):
                     fulfill(())
                 }
