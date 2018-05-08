@@ -14,6 +14,17 @@ import PromiseKit
 class EnrollmentsAPI: APIEndpoint {
     override var name: String { return "enrollments" }
 
+    func delete(courseId: Int) -> Promise<Void> {
+        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
+    }
+
+    func create(enrollment: Enrollment) -> Promise<Void> {
+        return create.request(requestEndpoint: "enrollments", paramName: "enrollment", creatingObject: enrollment, withManager: manager)
+    }
+}
+
+extension EnrollmentsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
     func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
         return Promise { fulfill, reject in
             joinCourse(course, delete: delete, success: {
@@ -23,25 +34,20 @@ class EnrollmentsAPI: APIEndpoint {
             })
         }
     }
-
-    func delete(courseId: Int) -> Promise<Void> {
-        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
-    }
-
-    //TODO: Refactor this to create() and delete() methods
+    
+    @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
-
         let params: Parameters = [
             "enrollment": [
                 "course": "\(course.id)"
             ]
         ]
-
+        
         if !delete {
             return manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
-
+                
                 var error = response.result.error
                 var json : JSON = [:]
                 if response.result.value == nil {
@@ -52,7 +58,7 @@ class EnrollmentsAPI: APIEndpoint {
                     json = response.result.value!
                 }
                 let response = response.response
-
+                
                 if let r = response {
                     if r.statusCode >= 200 && r.statusCode <= 299 {
                         if let courseJSON = json["courses"].array?[0] {
@@ -71,7 +77,7 @@ class EnrollmentsAPI: APIEndpoint {
         } else {
             return manager.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
-
+                
                 var error = response.result.error
                 //                var json : JSON = [:]
                 if response.result.value == nil {
@@ -82,23 +88,22 @@ class EnrollmentsAPI: APIEndpoint {
                     //                    json = response.result.value!
                 }
                 let response = response.response
-
+                
                 if let r = response {
                     if r.statusCode >= 200 && r.statusCode <= 299 {
                         success()
                         return
                     }
                 }
-
+                
                 let s = NSLocalizedString("Error", comment: "")
                 errorHandler(s)
             })
-
         }
-
     }
 }
 
+@available(*, deprecated, message: "Legacy error")
 enum EnrollmentsAPIError: Error {
     case joinCourseFailed
 }
