@@ -43,16 +43,12 @@ class RecommendationsAPI: APIEndpoint {
         ]
 
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).validate(statusCode: [201]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     reject(error)
                 case .success(_):
-                    if response.response?.statusCode != 201 {
-                        reject(RecommendationsAPIError.invalidStatus)
-                    } else {
-                        fulfill(())
-                    }
+                    fulfill(())
                 }
             }
         }
@@ -71,10 +67,6 @@ extension RecommendationsAPI {
         retrieve(course: courseId, count: count, headers: headers).then { ids -> Void in success(ids) }.catch { error in errorHandler(error.localizedDescription) }
         return nil
     }
-}
-
-enum RecommendationsAPIError: Error {
-    case invalidStatus
 }
 
 enum Reaction: Int {
