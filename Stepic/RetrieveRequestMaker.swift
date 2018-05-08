@@ -142,7 +142,7 @@ class RetrieveRequestMaker {
                     switch response.result {
 
                     case .failure(let error):
-                        reject(RetrieveError(error: error))
+                        reject(NetworkError(error: error))
 
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []

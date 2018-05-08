@@ -69,7 +69,7 @@ class RegistrationPresenter {
                 self.view?.update(with: .error)
             case PerformRequestError.badConnection, SignInError.badConnection:
                 self.view?.update(with: .badConnection)
-            case is RetrieveError:
+            case is NetworkError:
                 print("registration: successfully signed in, but could not get user")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
                 self.view?.update(with: .success)

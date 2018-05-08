@@ -34,7 +34,7 @@ class DevicesAPI: APIEndpoint {
             manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)", parameters: [:], headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(RetrieveError(error: error))
+                    reject(NetworkError(error: error))
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
@@ -140,7 +140,7 @@ class DevicesAPI: APIEndpoint {
             manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: params, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(RetrieveError(error: error))
+                    reject(NetworkError(error: error))
                 case .success(let json):
                     if let r = response.response,
                        !(200...299 ~= r.statusCode) {

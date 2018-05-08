@@ -60,7 +60,7 @@ class EmailAuthPresenter {
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
-            case is RetrieveError:
+            case is NetworkError:
                 print("email auth: successfully signed in, but could not get user")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
                 self.view?.update(with: .success)

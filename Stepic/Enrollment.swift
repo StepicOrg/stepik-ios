@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Enrollment: JSONSerializable {
     var id: Int = 0

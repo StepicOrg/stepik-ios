@@ -21,8 +21,8 @@ class LessonsAPI: APIEndpoint {
 
 extension LessonsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Lesson], refreshMode: RefreshMode, success: @escaping (([Lesson]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-        retrieve(ids: ids, existing: existing, headers: headers).then { success($0) }.catch { errorHandler(RetrieveError(error: $0)) }
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Lesson], refreshMode: RefreshMode, success: @escaping (([Lesson]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
+        retrieve(ids: ids, existing: existing, headers: headers).then { success($0) }.catch { errorHandler(NetworkError(error: $0)) }
         return nil
     }
 }

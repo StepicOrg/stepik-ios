@@ -15,7 +15,7 @@ import PromiseKit
 class QueriesAPI: APIEndpoint {
     override var name: String { return "queries" }
 
-    @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+    @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
 
         let params: Parameters = ["query": query]
 
