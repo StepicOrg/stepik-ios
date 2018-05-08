@@ -64,7 +64,6 @@ extension UnitsAPI {
     }
 }
 
-//TODO: Add parameters
 enum UnitRetrieveError: Error {
-    case connectionError, badStatus, noUnits
+    case noUnits
 }
