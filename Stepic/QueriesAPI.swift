@@ -19,8 +19,8 @@ class QueriesAPI: APIEndpoint {
         let params: Parameters = ["query": query]
         return Promise {
             fulfill, reject in
-            retrieve.request(requestEndpoint: "queries", paramName: "query", params: params, updatingObjects: Array<Query>(), withManager: manager).then {
-                queries, meta in
+            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).then {
+                queries, _ in
                 fulfill(queries.map {$0.text})
             }.catch {
                 error in
@@ -28,9 +28,9 @@ class QueriesAPI: APIEndpoint {
             }
         }
     }
-    
+
     @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        
+
         retrieve(query: query).then {
             queries in
             success(queries)
@@ -38,23 +38,24 @@ class QueriesAPI: APIEndpoint {
             error in
             guard let e = error as? NetworkError else {
                 errorHandler(NetworkError.other(error))
+                return
             }
             errorHandler(e)
         }
-        
+
         return nil
     }
-    
-    
+
 }
 
 class Query: JSONSerializable {
     var id: Int = 0
     var text: String
-    
+
     required init(json: JSON) {
-        self.update(json: json)
+        self.text = json["text"].stringValue
     }
+
     func update(json: JSON) {
         self.text = json["text"].stringValue
     }

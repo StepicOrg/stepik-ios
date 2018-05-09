@@ -34,7 +34,7 @@ extension EnrollmentsAPI {
             })
         }
     }
-    
+
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
@@ -43,11 +43,11 @@ extension EnrollmentsAPI {
                 "course": "\(course.id)"
             ]
         ]
-        
+
         if !delete {
             return manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
-                
+
                 var error = response.result.error
                 var json : JSON = [:]
                 if response.result.value == nil {
@@ -58,7 +58,7 @@ extension EnrollmentsAPI {
                     json = response.result.value!
                 }
                 let response = response.response
-                
+
                 if let r = response {
                     if r.statusCode >= 200 && r.statusCode <= 299 {
                         if let courseJSON = json["courses"].array?[0] {
@@ -77,7 +77,7 @@ extension EnrollmentsAPI {
         } else {
             return manager.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
                 response in
-                
+
                 var error = response.result.error
                 //                var json : JSON = [:]
                 if response.result.value == nil {
@@ -88,14 +88,14 @@ extension EnrollmentsAPI {
                     //                    json = response.result.value!
                 }
                 let response = response.response
-                
+
                 if let r = response {
                     if r.statusCode >= 200 && r.statusCode <= 299 {
                         success()
                         return
                     }
                 }
-                
+
                 let s = NSLocalizedString("Error", comment: "")
                 errorHandler(s)
             })
