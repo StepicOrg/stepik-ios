@@ -18,17 +18,11 @@ class ViewsAPI: APIEndpoint {
         return create.request(requestEndpoint: "views", paramName: "view", creatingObject: view, withManager: manager)
     }
 
-    func create(step stepId: Int, assignment assignmentId: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Void> {
-        return Promise { fulfill, reject in
-            create(stepId: stepId, assignment: assignmentId, headers: headers, success: {
-                fulfill(())
-            }, error: { error in
-                reject(error)
-            })
-        }
+    func create(step stepId: Int, assignment assignmentId: Int?) -> Promise<Void> {
+        return create(view: StepikModelView(step: stepId, assignment: assignmentId))
     }
 
-    //TODO: Do not delete this until ViewsCreateError is handled correctly
+    //TODO: Do not delete this until ViewsCreateError is handled correctly & device executable tasks are improved
     @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
         var params: Parameters = [:]
 
