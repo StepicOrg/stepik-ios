@@ -18,7 +18,7 @@ class RetrieveRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)", method: .get, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(let json):
                         if updatingObject != nil {
                             updatingObject?.update(json: json[paramName].arrayValue[0])
@@ -40,7 +40,7 @@ class RetrieveRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map {
@@ -82,7 +82,7 @@ class RetrieveRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(let json):
                         let ids = json[paramName].arrayValue.flatMap {T.getId(json: $0)}
                         T.fetchAsync(ids: ids).then {

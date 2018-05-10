@@ -22,7 +22,7 @@ class CreateRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(let json):
                         creatingObject.update(json: json[requestEndpoint].arrayValue[0])
                         fulfill((creatingObject, json))
