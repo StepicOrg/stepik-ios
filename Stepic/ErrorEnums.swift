@@ -9,15 +9,6 @@
 import Foundation
 import Alamofire
 
-enum FetchError: Error {
-    case requestExecution
-}
-
-
-enum WeakSelfError: Error {
-    case noStrong
-}
-
 //Is used for handling errors in network requests
 enum NetworkError: Error {
     case badStatus(Int)

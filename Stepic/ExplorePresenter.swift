@@ -265,7 +265,7 @@ class ExplorePresenter: CourseListCountDelegate {
             [weak self]
             lists, _ -> Void in
             guard let strongSelf = self else {
-                throw WeakSelfError.noStrong
+                throw UnwrappingError.optionalError
             }
             if ContentLanguage.sharedContentLanguage != language {
                 throw LanguageError.wrongLanguageError
