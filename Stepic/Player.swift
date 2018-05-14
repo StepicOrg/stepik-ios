@@ -293,13 +293,11 @@ public class Player: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if RemoteConfig.shared.allowVideoInBackground {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-                try AVAudioSession.sharedInstance().setActive(true)
-            } catch {
-                print("failed to set up background playing: \(error)")
-            }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("failed to set up background playing: \(error)")
         }
 
         self.playerView.layer.addObserver(self, forKeyPath: PlayerReadyForDisplayKey, options: ([.new, .old]), context: &PlayerLayerObserverContext)
@@ -486,36 +484,15 @@ extension Player {
     internal func removeApplicationObservers() {
     }
 
-    @objc internal func handleApplicationWillResignActive(_ aNotification: Notification) {
-        if !RemoteConfig.shared.allowVideoInBackground && self.playbackState == .playing {
-            self.pause()
-        }
-    }
-
     @objc internal func handleApplicationDidBecomeActive(_ aNotification: Notification) {
-        if RemoteConfig.shared.allowVideoInBackground {
-            // Attach AVPlayer to AVPlayerLayer again
-            playerView.player = self.avplayer
-        }
+        // Attach AVPlayer to AVPlayerLayer again
+        playerView.player = self.avplayer
     }
 
     @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
-        if RemoteConfig.shared.allowVideoInBackground {
-            // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
-            playerView.player = nil
-        } else {
-            if self.playbackState == .playing {
-                self.pause()
-            }
-        }
+        // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
+        playerView.player = nil
     }
-
-    @objc internal func handleApplicationWillEnterForeground(_ aNoticiation: Notification) {
-        if !RemoteConfig.shared.allowVideoInBackground && self.playbackState == .paused {
-            self.playFromCurrentTime()
-        }
-    }
-
 }
 
 // MARK: - KVO
