@@ -8,6 +8,7 @@
 
 import UIKit
 import DownloadButton
+import FLKAutoLayout
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -78,6 +79,19 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
+    //Widget here
+    lazy var personalDeadlinesWidgetView: UIView = {
+        let widget = PersonalDeadlinesSuggestionWidgetView()
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        backgroundView.addSubview(widget)
+        widget.frame.size = widget.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
+        widget.layoutSubviews()
+        backgroundView.frame.size = backgroundView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        return backgroundView
+    }()
+
     @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         share(popoverSourceItem: button, popoverView: nil, fromParent: false)
     }
@@ -95,6 +109,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
+        tableView.tableHeaderView = personalDeadlinesWidgetView
     }
 
     override func viewDidAppear(_ animated: Bool) {
