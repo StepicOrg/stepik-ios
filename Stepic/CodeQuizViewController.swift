@@ -321,16 +321,6 @@ class CodeQuizViewController: QuizViewController {
             codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
@@ -342,6 +332,18 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         if options.languages.count > 1 {
             showPicker()
         }
+    }
+
+    func settingsPressed() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
+            return
+        }
+
+        let presenter = CodeEditorSettingsPresenter(view: vc)
+        vc.presenter = presenter
+
+        let navVC = StyledNavigationViewController(rootViewController: vc)
+        present(navVC, animated: true)
     }
 
     func fullscreenPressed() {

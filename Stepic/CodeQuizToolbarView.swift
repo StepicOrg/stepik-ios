@@ -45,4 +45,7 @@ class CodeQuizToolbarView: NibInitializableView {
         delegate?.resetPressed()
     }
 
+    @IBAction func settingsPressed(_ sender: Any) {
+        delegate?.settingsPressed()
+    }
 }
