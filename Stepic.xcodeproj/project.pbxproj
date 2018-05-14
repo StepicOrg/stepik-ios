@@ -162,6 +162,9 @@
 		082A89022046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89032046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89042046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */; };
+		082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */; };
+		082B54D320AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
 		082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
@@ -4583,6 +4586,9 @@
 		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionManager.swift; sourceTree = "<group>"; };
+		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
+		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
+		082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderLayoutExtension.swift; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
@@ -5830,6 +5836,15 @@
 			name = Units;
 			sourceTree = "<group>";
 		};
+		082B54CD20A9DCF200144817 /* Personal Deadlines */ = {
+			isa = PBXGroup;
+			children = (
+				082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */,
+				082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */,
+			);
+			name = "Personal Deadlines";
+			sourceTree = "<group>";
+		};
 		082BE3B01E676856006BC60F /* RoutingManagers */ = {
 			isa = PBXGroup;
 			children = (
@@ -6435,6 +6450,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				082B54CD20A9DCF200144817 /* Personal Deadlines */,
 				2CF0885B205BECCC00FCB9C0 /* Placeholders */,
 				2C5DF1371FEBDC50003B1177 /* Adaptive steps */,
 				2C2060CB1FDAF71500605C42 /* Onboarding */,
@@ -7158,6 +7174,7 @@
 				08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */,
 				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
 				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
+				082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -9115,6 +9132,7 @@
 				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
+				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
@@ -11758,6 +11776,7 @@
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
+				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
@@ -11948,6 +11967,7 @@
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
+				082B54D320AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift in Sources */,
 				08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */,
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08195A181FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,

@@ -69,6 +69,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
+
+        tableView.tableHeaderView = personalDeadlinesWidgetView
     }
 
     var url: String {
@@ -81,14 +83,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     //Widget here
     lazy var personalDeadlinesWidgetView: UIView = {
-        let widget = PersonalDeadlinesSuggestionWidgetView()
+        let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         backgroundView.addSubview(widget)
-        widget.frame.size = widget.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
-        widget.layoutSubviews()
-        backgroundView.frame.size = backgroundView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         return backgroundView
     }()
 
@@ -109,7 +108,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
-        tableView.tableHeaderView = personalDeadlinesWidgetView
+        tableView.layoutTableHeaderView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
