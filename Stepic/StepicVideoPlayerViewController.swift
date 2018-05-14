@@ -239,8 +239,6 @@ class StepicVideoPlayerViewController: UIViewController {
         WatchSessionSender.sendPlaybackStatus(.available)
 
         NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: NSNotification.Name.AVAudioSessionRouteChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidBecomeActive(_:)), name: .UIApplicationDidBecomeActive, object: UIApplication.shared)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: .UIApplicationDidEnterBackground, object: UIApplication.shared)
 
         topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: UIControlState())
 
