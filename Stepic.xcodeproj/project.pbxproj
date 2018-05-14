@@ -1009,8 +1009,6 @@
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
-		08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
-		08F476221E82C1480018E82C /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -1127,7 +1125,6 @@
 		2C1B60D81F4C4AEF00236804 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C1B60D91F4C4AEF00236804 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -1446,7 +1443,6 @@
 		2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -1523,7 +1519,6 @@
 		2C1B62E91F4C590700236804 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C1B62EA1F4C590700236804 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -1842,7 +1837,6 @@
 		2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C1B64701F4C590700236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B64711F4C590700236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -2270,7 +2264,6 @@
 		2C89A96C1F4C289900227C3B /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C89A96D1F4C289900227C3B /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C89A9731F4C289900227C3B /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -2588,7 +2581,6 @@
 		2C89AAE81F4C289900227C3B /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -2671,7 +2663,6 @@
 		2C9731201F4C38F600AC9301 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C9731211F4C38F600AC9301 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -2990,7 +2981,6 @@
 		2C97329C1F4C38F600AC9301 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -3115,7 +3105,6 @@
 		2CA8D15A2088D9C000E105E9 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		2CA8D15B2088D9C000E105E9 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2CA8D15C2088D9C000E105E9 /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
-		2CA8D15D2088D9C000E105E9 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
 		2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
@@ -3573,7 +3562,6 @@
 		2CA8D3282088D9C000E105E9 /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		2CA8D3292088D9C000E105E9 /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
 		2CA8D32A2088D9C000E105E9 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
-		2CA8D32B2088D9C000E105E9 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2CA8D32C2088D9C000E105E9 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2CA8D32D2088D9C000E105E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2CA8D32E2088D9C000E105E9 /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
@@ -3823,7 +3811,6 @@
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
 		863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
-		864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -4086,7 +4073,6 @@
 		866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
-		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		86A1C3262065157C00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -4969,8 +4955,6 @@
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F261201E79DD0B00AC908B /* APIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
-		08F4761D1E82C11C0018E82C /* StreaksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreaksView.xib; sourceTree = "<group>"; };
-		08F476211E82C1480018E82C /* StreaksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksView.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		08F485971C5752D0000165AA /* UIViewLoadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewLoadExtension.swift; sourceTree = "<group>"; };
@@ -6386,7 +6370,6 @@
 			children = (
 				2C453396204D46B70061342A /* PinsMap */,
 				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
-				08F476201E82C12B0018E82C /* StreaksView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
@@ -7163,15 +7146,6 @@
 				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		08F476201E82C12B0018E82C /* StreaksView */ = {
-			isa = PBXGroup;
-			children = (
-				08F4761D1E82C11C0018E82C /* StreaksView.xib */,
-				08F476211E82C1480018E82C /* StreaksView.swift */,
-			);
-			name = StreaksView;
 			sourceTree = "<group>";
 		};
 		08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */ = {
@@ -9141,7 +9115,6 @@
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
-				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
@@ -9231,7 +9204,6 @@
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */,
 				2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */,
-				2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */,
 				2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */,
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
 				2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */,
@@ -9341,7 +9313,6 @@
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */,
 				2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */,
-				2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */,
 				2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */,
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
 				2C1B64711F4C590700236804 /* StepCardView.xib in Resources */,
@@ -9456,7 +9427,6 @@
 				08195A251FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
-				2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */,
 				2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */,
 				2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */,
 				0885B8DE1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9561,7 +9531,6 @@
 				2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */,
 				2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */,
 				2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */,
-				2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */,
 				2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */,
 				2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */,
 				2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */,
@@ -9670,7 +9639,6 @@
 				2CA8D3282088D9C000E105E9 /* HorizontalCoursesView.xib in Resources */,
 				2CA8D3292088D9C000E105E9 /* CourseStatCollectionViewCell.xib in Resources */,
 				2CA8D32A2088D9C000E105E9 /* CourseWidgetTableViewCell.xib in Resources */,
-				2CA8D32B2088D9C000E105E9 /* StreaksView.xib in Resources */,
 				2CA8D32C2088D9C000E105E9 /* RateAppViewController.xib in Resources */,
 				2CA8D32D2088D9C000E105E9 /* Main.storyboard in Resources */,
 				2CA8D32E2088D9C000E105E9 /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9816,7 +9784,6 @@
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
-				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
 				2C8652631F4B2F7D00D51654 /* icon.png in Resources */,
 				2C8652601F4B2F7D00D51654 /* Config.plist in Resources */,
@@ -11736,7 +11703,6 @@
 				08A500501F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
-				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
 				08A9F71E1FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
@@ -12425,7 +12391,6 @@
 				2C1B60D91F4C4AEF00236804 /* CertificatesAPI.swift in Sources */,
 				08DF78C21F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */,
-				2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */,
 				2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */,
 				08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -12906,7 +12871,6 @@
 				2C1B62EA1F4C590700236804 /* CertificatesAPI.swift in Sources */,
 				08DF78C31F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */,
-				2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */,
 				2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */,
 				08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -13390,7 +13354,6 @@
 				08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C6A762E2045CE5500C509A6 /* AdaptiveStatsSection.swift in Sources */,
-				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C6A76372045CE7B00C509A6 /* CardStepViewController.swift in Sources */,
@@ -13871,7 +13834,6 @@
 				2C9731211F4C38F600AC9301 /* CertificatesAPI.swift in Sources */,
 				08DF78C11F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */,
-				2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */,
 				2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */,
 				08DF78D71F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -14367,7 +14329,6 @@
 				2CA8D15A2088D9C000E105E9 /* MenuBlockTableViewCell.swift in Sources */,
 				2CA8D15B2088D9C000E105E9 /* RatingProgressView.swift in Sources */,
 				2CA8D15C2088D9C000E105E9 /* AdaptiveStatsSection.swift in Sources */,
-				2CA8D15D2088D9C000E105E9 /* StreaksView.swift in Sources */,
 				2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */,
 				2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */,
 				2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */,
@@ -14918,7 +14879,6 @@
 				08DF78BE1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2CA2E72820237E5E001DC410 /* CongratulationViewController.swift in Sources */,
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
-				864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,
 				08DF78D41F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				081566271F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
