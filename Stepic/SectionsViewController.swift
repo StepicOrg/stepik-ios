@@ -9,6 +9,7 @@
 import UIKit
 import DownloadButton
 import FLKAutoLayout
+import Presentr
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -84,6 +85,24 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     //Widget here
     lazy var personalDeadlinesWidgetView: UIView = {
         let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
+        widget.noAction = {
+            DefaultsContainer.personalDeadlines.declinedWidget(for: self.course.id)
+            self.tableView.beginUpdates()
+            self.tableView.tableHeaderView = nil
+            self.tableView.endUpdates()
+        }
+        widget.yesAction = {
+            [weak self] in
+            let presentr: Presentr = {
+                let presenter = Presentr(presentationType: .dynamic(center: .center))
+                presenter.roundCorners = true
+                return presenter
+            }()
+
+            let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines")
+
+            self?.customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
+        }
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         backgroundView.addSubview(widget)

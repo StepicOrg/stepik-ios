@@ -165,6 +165,10 @@
 		082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */; };
 		082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */; };
 		082B54D320AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */; };
+		082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */; };
+		082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */; };
+		082B54D920AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */; };
+		082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54DA20AA445C00144817 /* DeadlineMode.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
 		082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
@@ -4589,6 +4593,10 @@
 		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
 		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
 		082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewHeaderLayoutExtension.swift; sourceTree = "<group>"; };
+		082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesDefaultsContainer.swift; sourceTree = "<group>"; };
+		082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineModeCollectionViewCell.swift; sourceTree = "<group>"; };
+		082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlineModeCollectionViewCell.xib; sourceTree = "<group>"; };
+		082B54DA20AA445C00144817 /* DeadlineMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineMode.swift; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
@@ -5698,6 +5706,7 @@
 			children = (
 				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
 				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+				082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */,
 			);
 			name = Defaults;
 			sourceTree = "<group>";
@@ -5841,6 +5850,9 @@
 			children = (
 				082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */,
 				082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */,
+				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
+				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
+				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
 			);
 			name = "Personal Deadlines";
 			sourceTree = "<group>";
@@ -9076,6 +9088,7 @@
 				2CB62BE72019FD8500B5E336 /* step2.html in Resources */,
 				2C4BBF15203DC668000A4250 /* plyr.css in Resources */,
 				08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
+				082B54D920AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */,
@@ -11740,6 +11753,7 @@
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
+				082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
 				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */,
@@ -11850,6 +11864,7 @@
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
+				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
@@ -11961,6 +11976,7 @@
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
+				082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */,
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
