@@ -14,6 +14,17 @@ import PromiseKit
 class EnrollmentsAPI: APIEndpoint {
     override var name: String { return "enrollments" }
 
+    func delete(courseId: Int) -> Promise<Void> {
+        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
+    }
+
+    func create(enrollment: Enrollment) -> Promise<Void> {
+        return create.request(requestEndpoint: "enrollments", paramName: "enrollment", creatingObject: enrollment, withManager: manager)
+    }
+}
+
+extension EnrollmentsAPI {
+    @available(*, deprecated, message: "Legacy method with callbacks")
     func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
         return Promise { fulfill, reject in
             joinCourse(course, delete: delete, success: {
@@ -24,14 +35,9 @@ class EnrollmentsAPI: APIEndpoint {
         }
     }
 
-    func delete(courseId: Int) -> Promise<Void> {
-        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
-    }
-
-    //TODO: Refactor this to create() and delete() methods
+    @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
-
         let params: Parameters = [
             "enrollment": [
                 "course": "\(course.id)"
@@ -93,12 +99,11 @@ class EnrollmentsAPI: APIEndpoint {
                 let s = NSLocalizedString("Error", comment: "")
                 errorHandler(s)
             })
-
         }
-
     }
 }
 
+@available(*, deprecated, message: "Legacy error")
 enum EnrollmentsAPIError: Error {
     case joinCourseFailed
 }

@@ -13,7 +13,7 @@ import SwiftyJSON
 class ProgressesAPI: APIEndpoint {
     override var name: String { return "progresses" }
 
-    @discardableResult func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Progress], refreshMode: RefreshMode, success: @escaping (([Progress]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+    @discardableResult func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Progress], refreshMode: RefreshMode, success: @escaping (([Progress]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }
 }

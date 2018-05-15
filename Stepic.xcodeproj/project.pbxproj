@@ -544,6 +544,7 @@
 		089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
 		089504851F27C5C600EEC939 /* FullHeightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089504821F27C5C600EEC939 /* FullHeightTableView.swift */; };
 		089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
+		089587F520A20C5D003BAFB3 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089587F420A20C5D003BAFB3 /* Enrollment.swift */; };
 		0895A13B1E43836B00FE22DD /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
 		089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
 		08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
@@ -4790,6 +4791,7 @@
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
 		089504821F27C5C600EEC939 /* FullHeightTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullHeightTableView.swift; sourceTree = "<group>"; };
 		089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SVGDownload.swift"; sourceTree = "<group>"; };
+		089587F420A20C5D003BAFB3 /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksReply.swift; sourceTree = "<group>"; };
 		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeepLinkRouter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueriesAPI.swift; sourceTree = "<group>"; };
@@ -6440,6 +6442,7 @@
 				088E73F32061BDAA00D458E3 /* StepikModelView.swift */,
 				08D9E98B206C243D002F41D3 /* DatabaseFetchService.swift */,
 				083E49DC2072B684004896C0 /* IDFetchable.swift */,
+				089587F420A20C5D003BAFB3 /* Enrollment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -11867,6 +11870,7 @@
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
+				089587F520A20C5D003BAFB3 /* Enrollment.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
 				081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,

@@ -172,6 +172,7 @@ struct AnalyticsEvents {
         static let registerDevice = "error_register_device"
         static let adaptiveRatingServer = "error_adaptive_rating_server"
         static let authInfoNoUserOnInit = "error_AuthInfo_no_user_on_init"
+        static let unknownNetworkError = "unknown_network_error"
     }
 
     struct Continue {

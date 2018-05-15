@@ -19,7 +19,7 @@ class StepicsAPI: APIEndpoint {
             manager.request("\(StepicApplicationsInfo.apiURL)/\(name)/1", parameters: nil, encoding: URLEncoding.default, headers: AuthInfo.shared.initialHTTPHeaders).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(RetrieveError(error: error))
+                    reject(NetworkError(error: error))
                 case .success(let json):
                     let user = User(json: json["users"].arrayValue[0])
                     fulfill(user)

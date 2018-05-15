@@ -13,7 +13,7 @@ import SwiftyJSON
 class AssignmentsAPI: APIEndpoint {
     override var name: String { return "assignments" }
 
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Assignment], refreshMode: RefreshMode, success: @escaping (([Assignment]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Assignment], refreshMode: RefreshMode, success: @escaping (([Assignment]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }
 }

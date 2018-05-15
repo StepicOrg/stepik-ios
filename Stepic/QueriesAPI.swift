@@ -15,49 +15,48 @@ import PromiseKit
 class QueriesAPI: APIEndpoint {
     override var name: String { return "queries" }
 
-    @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
-
+    func retrieve(query: String) -> Promise<[String]> {
         let params: Parameters = ["query": query]
-
-        return manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
+        return Promise {
+            fulfill, reject in
+            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).then {
+                queries, _ in
+                fulfill(queries.map {$0.text})
+            }.catch {
+                error in
+                reject(error)
             }
-            let response = response.response
-
-            if let e = error as NSError? {
-                print("RETRIEVE \(self.name)/\(query): error \(e.domain) \(e.code): \(e.localizedDescription)")
-                if e.code == -999 {
-                    errorHandler(.cancelled)
-                    return
-                } else {
-                    errorHandler(.connectionError)
-                    return
-                }
-            }
-
-            if response?.statusCode != 200 {
-                print("RETRIEVE \(self.name)/\(query): bad response status code \(String(describing: response?.statusCode))")
-                errorHandler(.badStatus)
-                return
-            }
-
-            let queries = json["queries"].arrayValue.flatMap {
-                $0["text"].string
-            }
-
-            success(queries)
-
-            return
-        })
+        }
     }
 
+    @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
+
+        retrieve(query: query).then {
+            queries in
+            success(queries)
+        }.catch {
+            error in
+            guard let e = error as? NetworkError else {
+                errorHandler(NetworkError.other(error))
+                return
+            }
+            errorHandler(e)
+        }
+
+        return nil
+    }
+
+}
+
+class Query: JSONSerializable {
+    var id: Int = 0
+    var text: String
+
+    required init(json: JSON) {
+        self.text = json["text"].stringValue
+    }
+
+    func update(json: JSON) {
+        self.text = json["text"].stringValue
+    }
 }

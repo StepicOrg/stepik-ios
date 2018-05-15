@@ -14,6 +14,11 @@ class StepikModelView: JSONSerializable {
     var step: Int = 0
     var assignment: Int?
 
+    init(step: Int, assignment: Int?) {
+        self.step = step
+        self.assignment = assignment
+    }
+
     required init(json: JSON) {
         update(json: json)
     }
