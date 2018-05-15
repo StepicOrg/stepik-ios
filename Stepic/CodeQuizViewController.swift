@@ -113,6 +113,15 @@ class CodeQuizViewController: QuizViewController {
         return params
     }
 
+    fileprivate func setupTheme() {
+        highlightr = textStorage.highlightr
+        highlightr.setTheme(to: PreferencesContainer.codeEditor.theme)
+        let theme = highlightr.theme!
+        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
+        highlightr.theme = theme
+        codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+    }
+
     fileprivate func setupConstraints() {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
@@ -159,12 +168,8 @@ class CodeQuizViewController: QuizViewController {
             codeTextView.smartQuotesType = .no
         }
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
-        highlightr = textStorage.highlightr
-        highlightr.setTheme(to: PreferencesContainer.codeEditor.theme)
-        let theme = highlightr.theme!
-        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
-        highlightr.theme = theme
-        codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+
+        setupTheme()
         setupConstraints()
 
         toolbarView.delegate = self
@@ -342,7 +347,9 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         let presenter = CodeEditorSettingsPresenter(view: vc)
         vc.presenter = presenter
 
-        let navVC = StyledNavigationViewController(rootViewController: vc)
+        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: "Settings", onDismiss: { [weak self] in
+            self?.setupTheme()
+        })
         present(navVC, animated: true)
     }
 
