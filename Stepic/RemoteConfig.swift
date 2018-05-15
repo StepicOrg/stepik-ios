@@ -130,6 +130,6 @@ class RemoteConfig {
 
     private func activateDebugMode() {
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
-        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings!
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 }
