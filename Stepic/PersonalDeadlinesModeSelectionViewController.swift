@@ -12,7 +12,6 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
     @IBOutlet weak var questionLabel: StepikLabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var selectButton: StepikButton!
     @IBOutlet weak var cancelButton: UIButton!
 
     let modes: [DeadlineMode] = [.hobby, .standard, .extreme]
@@ -60,9 +59,21 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
             strongSelf.collectionView.layoutIfNeeded()
         })
     }
+
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func didSelectMode(mode: DeadlineMode) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension PersonalDeadlinesModeSelectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectMode(mode: modes[indexPath.item])
+    }
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

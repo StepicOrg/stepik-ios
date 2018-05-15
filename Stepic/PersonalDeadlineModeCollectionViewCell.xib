@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Хобби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-fQ-HrZ" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                        <rect key="frame" x="8" y="20" width="247" height="18"/>
+                        <rect key="frame" x="109" y="20" width="45" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="755" text="3 часа в неделю" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rD-W8-Jj4" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                        <rect key="frame" x="8" y="234" width="247" height="18"/>
+                        <rect key="frame" x="73" y="234" width="117" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -41,15 +41,13 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="aPK-fQ-HrZ" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="4Hr-N5-cQI"/>
+                <constraint firstItem="1rD-W8-Jj4" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="8qU-Wv-aO2"/>
                 <constraint firstItem="aPK-fQ-HrZ" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="20" id="A5x-iI-scA"/>
                 <constraint firstItem="1hk-hr-hh7" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="Dxj-Em-q0d"/>
                 <constraint firstItem="1hk-hr-hh7" firstAttribute="top" secondItem="aPK-fQ-HrZ" secondAttribute="bottom" constant="12" id="H3s-Jd-vb4"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="aPK-fQ-HrZ" secondAttribute="trailing" constant="8" id="MjE-Rd-hHP"/>
-                <constraint firstItem="aPK-fQ-HrZ" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="Q5g-Os-kHa"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="1rD-W8-Jj4" secondAttribute="bottom" priority="999" constant="20" id="ei5-sz-4Fd"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="1rD-W8-Jj4" secondAttribute="trailing" constant="8" id="fHw-DZ-pBG"/>
                 <constraint firstItem="1rD-W8-Jj4" firstAttribute="top" secondItem="1hk-hr-hh7" secondAttribute="bottom" constant="12" id="gL2-55-1jD"/>
-                <constraint firstItem="1rD-W8-Jj4" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="lNW-T9-Z5f"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="263" height="272"/>
