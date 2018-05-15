@@ -17,7 +17,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
     let modes: [DeadlineMode] = [.hobby, .standard, .extreme]
 
     private var modeButtonSize: CGSize {
-        let width = CGFloat(Int((collectionView.bounds.width - (CGFloat(modes.count) - 1) * 12) / 3))
+        let width = CGFloat(Int((collectionView.bounds.width - CGFloat(modes.count - 1) * 12) / CGFloat(modes.count)))
         let height = width + 44
         return CGSize(width: width, height: height)
     }
@@ -27,18 +27,32 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
         self.collectionView.register(UINib(nibName: "PersonalDeadlineModeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PersonalDeadlineModeCollectionViewCell")
 
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.constrainHeight("\(modeButtonSize.height)")
         questionLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.layoutSubviews()
+        collectionView.constrainHeight("\(modeButtonSize.height)")
+        collectionView.invalidateIntrinsicContentSize()
+        collectionView.layoutIfNeeded()
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
+        collectionView.invalidateIntrinsicContentSize()
+        collectionView.layoutIfNeeded()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionView.invalidateIntrinsicContentSize()
+        collectionView.layoutIfNeeded()
+//        collectionView.constrainHeight("\(modeButtonSize.height)")
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
         collectionView.invalidateIntrinsicContentSize()
         collectionView.layoutIfNeeded()
     }
@@ -47,18 +61,18 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: nil, completion: {
-            [weak self]
-            _ in
-            guard let strongSelf = self else {
-                return
-            }
-            (strongSelf.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = strongSelf.modeButtonSize
-            strongSelf.collectionView.invalidateIntrinsicContentSize()
-            strongSelf.collectionView.layoutIfNeeded()
-        })
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        coordinator.animate(alongsideTransition: nil, completion: {
+//            [weak self]
+//            _ in
+//            guard let strongSelf = self else {
+//                return
+//            }
+//            (strongSelf.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = strongSelf.modeButtonSize
+//            strongSelf.collectionView.invalidateIntrinsicContentSize()
+//            strongSelf.collectionView.layoutIfNeeded()
+//        })
+//    }
 
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

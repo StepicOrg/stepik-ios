@@ -23,7 +23,7 @@ class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
 
     override var isHighlighted: Bool {
         didSet {
-            let animationOffset : CGFloat = 5
+            let animationOffset : CGFloat = 2
             UIView.animate(withDuration: 0.1) {
                 self.contentView.frame = CGRect(x: self.isHighlighted ? self.contentView.frame.origin.x + animationOffset : self.contentView.frame.origin.x - animationOffset,
                                     y: self.isHighlighted ? self.contentView.frame.origin.y + animationOffset : self.contentView.frame.origin.y - animationOffset,

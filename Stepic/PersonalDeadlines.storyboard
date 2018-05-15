@@ -60,10 +60,10 @@
                             <constraint firstItem="eBe-L5-Cqh" firstAttribute="top" secondItem="dp5-od-xBC" secondAttribute="bottom" constant="20" id="Iiq-UW-jB6"/>
                             <constraint firstItem="5V1-TP-EB6" firstAttribute="top" secondItem="eBe-L5-Cqh" secondAttribute="bottom" constant="12" id="JEH-XJ-8Cg"/>
                             <constraint firstItem="dp5-od-xBC" firstAttribute="leading" secondItem="24W-km-KQ1" secondAttribute="leading" constant="20" id="NAH-9M-EiO"/>
-                            <constraint firstItem="eBe-L5-Cqh" firstAttribute="leading" secondItem="24W-km-KQ1" secondAttribute="leading" constant="20" id="OF3-WZ-lbU"/>
+                            <constraint firstItem="eBe-L5-Cqh" firstAttribute="leading" secondItem="5Vy-ih-QAd" secondAttribute="leading" constant="20" id="OF3-WZ-lbU"/>
                             <constraint firstItem="24W-km-KQ1" firstAttribute="bottom" secondItem="5V1-TP-EB6" secondAttribute="bottom" constant="20" id="irp-ZI-TEp"/>
                             <constraint firstItem="dp5-od-xBC" firstAttribute="top" secondItem="24W-km-KQ1" secondAttribute="top" constant="20" id="jZm-wD-A1q"/>
-                            <constraint firstItem="24W-km-KQ1" firstAttribute="trailing" secondItem="eBe-L5-Cqh" secondAttribute="trailing" constant="20" id="mP3-Aa-hC0"/>
+                            <constraint firstAttribute="trailing" secondItem="eBe-L5-Cqh" secondAttribute="trailing" constant="20" id="mP3-Aa-hC0"/>
                             <constraint firstItem="24W-km-KQ1" firstAttribute="trailing" secondItem="dp5-od-xBC" secondAttribute="trailing" constant="20" id="ndr-QD-gQg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24W-km-KQ1"/>

@@ -20,20 +20,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="263" height="272"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Хобби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-fQ-HrZ" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                        <rect key="frame" x="109" y="20" width="45" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Хобби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-fQ-HrZ" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                        <rect key="frame" x="109" y="12" width="45" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="253" verticalCompressionResistancePriority="749" image="25-science-growth-sprout" translatesAutoresizingMaskIntoConstraints="NO" id="1hk-hr-hh7">
-                        <rect key="frame" x="46" y="50" width="172" height="172"/>
+                        <rect key="frame" x="38" y="42" width="188" height="188"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="1hk-hr-hh7" secondAttribute="height" multiplier="1:1" id="OsR-jN-3xE"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="755" text="3 часа в неделю" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rD-W8-Jj4" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
-                        <rect key="frame" x="73" y="234" width="117" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="755" text="3 часа в неделю" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="1rD-W8-Jj4" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                        <rect key="frame" x="73" y="242" width="117" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,10 +43,14 @@
             <constraints>
                 <constraint firstItem="aPK-fQ-HrZ" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="4Hr-N5-cQI"/>
                 <constraint firstItem="1rD-W8-Jj4" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="8qU-Wv-aO2"/>
-                <constraint firstItem="aPK-fQ-HrZ" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="20" id="A5x-iI-scA"/>
+                <constraint firstItem="aPK-fQ-HrZ" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="12" id="A5x-iI-scA"/>
                 <constraint firstItem="1hk-hr-hh7" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="Dxj-Em-q0d"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1rD-W8-Jj4" secondAttribute="trailing" constant="4" id="EZg-yT-RLo"/>
+                <constraint firstItem="aPK-fQ-HrZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="4" id="GBR-7I-mSM"/>
                 <constraint firstItem="1hk-hr-hh7" firstAttribute="top" secondItem="aPK-fQ-HrZ" secondAttribute="bottom" constant="12" id="H3s-Jd-vb4"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="1rD-W8-Jj4" secondAttribute="bottom" priority="999" constant="20" id="ei5-sz-4Fd"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aPK-fQ-HrZ" secondAttribute="trailing" constant="4" id="MWi-O4-cCF"/>
+                <constraint firstItem="1rD-W8-Jj4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="4" id="T0N-Va-UXa"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="1rD-W8-Jj4" secondAttribute="bottom" priority="999" constant="12" id="ei5-sz-4Fd"/>
                 <constraint firstItem="1rD-W8-Jj4" firstAttribute="top" secondItem="1hk-hr-hh7" secondAttribute="bottom" constant="12" id="gL2-55-1jD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
