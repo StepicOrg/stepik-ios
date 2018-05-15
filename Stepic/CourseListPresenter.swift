@@ -437,9 +437,9 @@ class CourseListPresenter {
 
     private func handleRefreshError(error: Error) {
         print("Error while refreshing collection")
-        if let error = error as? RetrieveError {
+        if let error = error as? NetworkError {
             switch error {
-            case .badStatus:
+            case .badStatus(_):
                 guard !AuthInfo.shared.isAuthorized else {
                     break
                 }

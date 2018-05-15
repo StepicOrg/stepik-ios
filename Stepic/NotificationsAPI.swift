@@ -39,10 +39,10 @@ class NotificationsAPI: APIEndpoint {
                 self.manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/mark-as-read", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(_):
                         if response.response?.statusCode != 204 {
-                            reject(NotificationsAPIError.invalidStatus)
+                            reject(NetworkError.badStatus(204))
                         } else {
                             fulfill(())
                         }
@@ -54,9 +54,4 @@ class NotificationsAPI: APIEndpoint {
             }
         }
     }
-}
-
-// TODO: replace this class by generic error class
-enum NotificationsAPIError: Error {
-    case invalidStatus
 }

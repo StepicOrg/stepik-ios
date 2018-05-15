@@ -59,7 +59,7 @@ class Section: NSManagedObject, JSONSerializable {
             let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Section]
         } catch {
-            throw FetchError.requestExecution
+            throw DatabaseError.fetchFailed
         }
     }
 

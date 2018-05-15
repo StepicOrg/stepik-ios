@@ -68,7 +68,7 @@ class SearchResultsAPI: APIEndpoint {
                 fulfill((searchResults, meta))
             }, error: {
                 error in
-                reject(RetrieveError(error: error))
+                reject(NetworkError(error: error))
             })
         }
     }

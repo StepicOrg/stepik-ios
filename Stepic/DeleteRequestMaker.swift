@@ -17,7 +17,7 @@ class DeleteRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(deletingId)", method: .delete, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(_):
                         fulfill(())
                     }

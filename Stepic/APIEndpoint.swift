@@ -12,22 +12,6 @@ import SwiftyJSON
 import CoreData
 import PromiseKit
 
-enum RetrieveError: Error {
-    case connectionError, badStatus, cancelled, parsingError
-
-    init(error: Error) {
-        guard let error = error as? NSError else {
-            self = .connectionError
-            return
-        }
-        switch error.code {
-        case -6003: self = .badStatus
-        case -999: self = .cancelled
-        default: self = .connectionError
-        }
-    }
-}
-
 class APIEndpoint {
 
     var name: String {
@@ -76,14 +60,14 @@ class APIEndpoint {
         return retrieve.request(requestEndpoint: name, paramName: name, ids: ids, updating: updating, withManager: manager)
     }
 
-    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.IdType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: RetrieveError) -> Void) -> Request? {
+    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.IdType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: NetworkError) -> Void) -> Request? {
         getObjectsByIds(ids: ids, updating: deleteObjects).then {
             objects in
             success?(objects)
         }.catch {
             error in
-            guard let e = error as? RetrieveError else {
-                failure(RetrieveError(error: error))
+            guard let e = error as? NetworkError else {
+                failure(NetworkError(error: error))
                 return
             }
             failure(e)

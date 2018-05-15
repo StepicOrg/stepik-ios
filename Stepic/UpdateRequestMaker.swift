@@ -21,7 +21,7 @@ class UpdateRequestMaker {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(updatingObject.id)", method: .put, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(error)
+                        reject(NetworkError(error: error))
                     case .success(let json):
                         updatingObject.update(json: json[requestEndpoint].arrayValue[0])
                         fulfill(updatingObject)
