@@ -13,7 +13,7 @@ class WrappingNavigationViewController: StyledNavigationViewController {
     convenience init(wrappedViewController: UIViewController, title: String? = nil, onDismiss: (() -> Void)? = nil) {
         self.init(rootViewController: wrappedViewController)
 
-        wrappedViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPressed))
+        wrappedViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelPressed))
         wrappedViewController.navigationItem.title = title
 
         onDismissAction = onDismiss
