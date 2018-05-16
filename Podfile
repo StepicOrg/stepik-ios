@@ -26,11 +26,11 @@ def all_pods
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
     
-    pod 'FirebaseCore'
-    pod 'FirebaseAppIndexing'
-    pod 'FirebaseMessaging'
-    pod 'FirebaseAnalytics'
-    pod 'FirebaseRemoteConfig'
+    pod 'FirebaseCore', '5.0.0'
+    pod 'FirebaseAppIndexing', '1.2.0'
+    pod 'FirebaseMessaging', '3.0.0'
+    pod 'FirebaseAnalytics', '5.0.0'
+    pod 'FirebaseRemoteConfig', '3.0.0'
     
     pod 'Mixpanel-swift', '2.3.0'
 
