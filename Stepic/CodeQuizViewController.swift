@@ -359,7 +359,7 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         let presenter = CodeEditorSettingsPresenter(view: vc)
         vc.presenter = presenter
 
-        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: "Settings", onDismiss: { [weak self] in
+        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: NSLocalizedString("Settings", comment: ""), onDismiss: { [weak self] in
             self?.setupTheme()
         })
         present(navVC, animated: true)
