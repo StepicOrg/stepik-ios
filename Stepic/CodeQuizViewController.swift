@@ -81,6 +81,18 @@ class CodeQuizViewController: QuizViewController {
 
             toolbarView.language = language.displayName
 
+            if TooltipDefaultsManager.shared.shouldShowForCodeEditor {
+                delay(2.0) { [weak self] in
+                    guard let s = self else {
+                        return
+                    }
+
+                    let tooltip = TooltipFactory.codeEditorSettings
+                    tooltip.show(direction: .down, in: s.view, from: s.toolbarView.settingsButton)
+                    TooltipDefaultsManager.shared.didShowForCodeEditor = true
+                }
+            }
+
             setupAccessoryView(editable: submissionStatus != .correct)
 
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
