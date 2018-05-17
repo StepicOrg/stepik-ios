@@ -13,14 +13,10 @@ enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
     case adaptiveBackendUrl = "adaptive_backend_url"
     case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-    case allowVideoInBackground = "allow_video_in_background"
-    case allowCodeEditorSettings = "allow_code_editor_settings"
 }
 
 class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
-    private let defaultAllowVideoInBackground = false
-    private let defaultAllowCodeEditorSettings = false
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -29,9 +25,7 @@ class RemoteConfig {
     lazy var appDefaults: [String: NSObject] = [
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
         RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
-        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject,
-        RemoteConfigKeys.allowVideoInBackground.rawValue: defaultAllowVideoInBackground as NSObject,
-        RemoteConfigKeys.allowCodeEditorSettings.rawValue: defaultAllowCodeEditorSettings as NSObject
+        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
     ]
 
     enum ShowStreaksNotificationTrigger: String {
@@ -78,22 +72,6 @@ class RemoteConfig {
             }
         }
         return supportedCourses.flatMap { Int($0) }
-    }
-
-    var allowVideoInBackground: Bool {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.allowVideoInBackground.rawValue).stringValue else {
-            return defaultAllowVideoInBackground
-        }
-
-        return configValue == "true"
-    }
-
-    var allowCodeEditorSettings: Bool {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.allowCodeEditorSettings.rawValue).stringValue else {
-            return defaultAllowCodeEditorSettings
-        }
-
-        return configValue == "true"
     }
 
     init() {

@@ -60,15 +60,6 @@
 		<key>Kits</key>
 		<array>
 			<dict>
-				<key>KitName</key>
-				<string>Appsee</string>
-				<key>KitInfo</key>
-				<dict>
-					<key>apikey</key>
-					<string>66bb9d8f3ad7428e9fdc7f2fe0d84988</string>
-				</dict>
-			</dict>
-			<dict>
 				<key>KitInfo</key>
 				<dict/>
 				<key>KitName</key>
@@ -96,6 +87,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

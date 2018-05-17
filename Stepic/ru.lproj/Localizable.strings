@@ -490,3 +490,4 @@ CodeEditorFont = "Шрифт";
 CodeEditorColor = "Цвет";
 CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
+CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
