@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol ProfileView: class {
     //State setting
@@ -32,14 +33,16 @@ class ProfilePresenter {
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
     private var notificationPermissionManager: NotificationPermissionManager
+    private var userId: Int?
 
     var menu: Menu = Menu(blocks: [])
 
-    init(view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
+    init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
         self.notificationPermissionManager = notificationPermissionManager
+        self.userId = userId
     }
 
     // MARK: - Menu initialization
@@ -54,15 +57,20 @@ class ProfilePresenter {
 
     private func buildMenu(user: User, userActivity: UserActivity) -> Menu {
         var blocks: [MenuBlock] = []
-        blocks = [
-            buildNotificationsSwitchBlock(),
-            buildNotificationsTimeSelectionBlock(),
-            buildPinsMapExpandableBlock(activity: userActivity),
-            buildInfoExpandableBlock(user: user),
-            buildSettingsTransitionBlock(),
-            buildDownloadsTransitionBlock(),
-            buildLogoutBlock()
-        ].flatMap { $0 }
+        blocks = (AuthInfo.shared.userId == user.id ?
+            [
+                buildNotificationsSwitchBlock(),
+                buildNotificationsTimeSelectionBlock(),
+                buildPinsMapExpandableBlock(activity: userActivity),
+                buildInfoExpandableBlock(user: user),
+                buildSettingsTransitionBlock(),
+                buildDownloadsTransitionBlock(),
+                buildLogoutBlock()
+            ] :
+            [
+                buildInfoExpandableBlock(user: user),
+                buildPinsMapExpandableBlock(activity: userActivity)
+            ]).flatMap { $0 }
         return Menu(blocks: blocks)
     }
 
@@ -308,7 +316,47 @@ class ProfilePresenter {
         self.view?.set(state: .error)
     }
 
+    fileprivate func loadProfile(userId: Int, isAuthUser: Bool) {
+        self.view?.set(state: .refreshing)
+        User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
+            guard let s = self else { throw UnwrappingError.optionalError }
+
+            return s.usersAPI.retrieve(ids: [userId], existing: users)
+        }.then { [weak self] users -> Void in
+            if let user = users.first {
+                if isAuthUser {
+                    AuthInfo.shared.user = user
+                }
+                self?.setUser(user: user)
+            } else {
+                self?.setError()
+            }
+        }.catch { [weak self] error in
+            switch error {
+            case PerformRequestError.noAccessToRefreshToken: self?.logout()
+            default: self?.setError()
+            }
+        }
+    }
+
     func updateProfile() {
+        if let userId = userId, userId != AuthInfo.shared.userId {
+            loadProfile(userId: userId, isAuthUser: false)
+        } else if AuthInfo.shared.isAuthorized {
+            if let user = AuthInfo.shared.user {
+                self.setUser(user: user)
+                self.updateUser(user: user)
+            } else {
+                if let userId = AuthInfo.shared.userId {
+                    loadProfile(userId: userId, isAuthUser: true)
+                } else {
+                    self.logout()
+                }
+            }
+        } else {
+            self.view?.set(state: .anonymous)
+        }
+
         if AuthInfo.shared.isAuthorized {
             if let user = AuthInfo.shared.user {
                 self.setUser(user: user)

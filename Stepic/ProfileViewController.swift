@@ -15,6 +15,9 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?
 
+    // User ID, if nil then we should use current user
+    var userId: Int?
+
     var state: ProfileState = .refreshing {
         didSet {
             switch state {
@@ -53,7 +56,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         state = .refreshing
 
-        presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
+        presenter = ProfilePresenter(userId: userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
 
