@@ -18,7 +18,7 @@ class NotificationStatusesAPI: APIEndpoint {
             retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: Array<NotificationsStatus>(), withManager: manager).then {
                 notificationStatuses, _, _ -> Void in
                 guard let status = notificationStatuses.first else {
-                    reject(RetrieveError.parsingError)
+                    reject(ParsingError.badData)
                     return
                 }
                 fulfill(status)

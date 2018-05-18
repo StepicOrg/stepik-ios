@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +15,7 @@
                 <outlet property="fullscreenButton" destination="k3C-Yr-XzG" id="npq-wk-MBc"/>
                 <outlet property="languageButton" destination="suB-p4-Ypg" id="UWL-yZ-VFY"/>
                 <outlet property="resetButton" destination="uX2-ZG-muf" id="hBl-LG-wBz"/>
+                <outlet property="settingsButton" destination="DkH-02-TI1" id="eOf-PC-jTK"/>
                 <outlet property="toolbar" destination="TAR-ZS-1C2" id="RBQ-b5-sq2"/>
             </connections>
         </placeholder>
@@ -44,6 +46,11 @@
                                 <action selector="fullscreenPressed:" destination="-1" id="0t6-Qv-fai"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Item" image="icon-settings" style="plain" id="DkH-02-TI1" userLabel="Settings Button">
+                            <connections>
+                                <action selector="settingsPressed:" destination="-1" id="ax8-Gm-i85"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                     <color key="tintColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -62,4 +69,7 @@
             <point key="canvasLocation" x="33.5" y="-226"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-settings" width="25" height="25"/>
+    </resources>
 </document>

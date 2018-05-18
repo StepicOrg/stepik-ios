@@ -32,6 +32,10 @@ class CodeEditorPreviewView: NibInitializableView {
         return textStorage?.highlightr
     }
 
+    private var theme: String?
+    private var fontSize: Int?
+    private var language: CodeLanguage?
+
     @IBAction func onLanguageButtonClick(_ sender: Any) {
         delegate?.languageButtonDidClick()
     }
@@ -61,8 +65,13 @@ class CodeEditorPreviewView: NibInitializableView {
         previewTextView.align(toView: previewContainer)
 
         updateTheme(with: theme)
+        self.theme = theme
+
         updateFontSize(with: fontSize)
+        self.fontSize = fontSize
+
         updateLanguage(with: language)
+        self.language = language
     }
 
     func updateTheme(with newTheme: String) {
@@ -94,5 +103,10 @@ class CodeEditorPreviewView: NibInitializableView {
         textStorage?.language = language.highlightr
         languageButton.setTitle(language.humanReadableName, for: .normal)
         previewTextView.text = language.highlightrSample
+
+        guard let theme = self.theme else {
+            return
+        }
+        updateTheme(with: theme)
     }
 }

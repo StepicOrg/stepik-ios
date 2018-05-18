@@ -18,16 +18,12 @@ class RecommendationsAPI: APIEndpoint {
 
     func retrieve(course courseId: Int, count: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Int]> {
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: ["course": courseId, "count": count], headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: ["course": courseId, "count": count], headers: headers).validate(statusCode: [200]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(RetrieveError(error: error))
+                    reject(NetworkError(error: error))
                 case .success(let json):
-                    if response.response?.statusCode != 200 {
-                        reject(RetrieveError.badStatus)
-                    } else {
-                        fulfill(json["recommendations"].arrayValue.flatMap({ $0["lesson"].int }))
-                    }
+                    fulfill(json["recommendations"].arrayValue.flatMap({ $0["lesson"].int }))
                 }
             }
         }
@@ -43,16 +39,12 @@ class RecommendationsAPI: APIEndpoint {
         ]
 
         return Promise { fulfill, reject in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).validate(statusCode: [201]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(error)
+                    reject(NetworkError(error: error))
                 case .success(_):
-                    if response.response?.statusCode != 201 {
-                        reject(RecommendationsAPIError.invalidStatus)
-                    } else {
-                        fulfill(())
-                    }
+                    fulfill(())
                 }
             }
         }
@@ -71,10 +63,6 @@ extension RecommendationsAPI {
         retrieve(course: courseId, count: count, headers: headers).then { ids -> Void in success(ids) }.catch { error in errorHandler(error.localizedDescription) }
         return nil
     }
-}
-
-enum RecommendationsAPIError: Error {
-    case invalidStatus
 }
 
 enum Reaction: Int {

@@ -25,13 +25,13 @@ class CertificatesAPI: APIEndpoint {
 
     //Cannot move it to extension cause it is used in tests
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(userId: Int, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (RetrieveError) -> Void) -> Request? {
+    @discardableResult func retrieve(userId: Int, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (NetworkError) -> Void) -> Request? {
         retrieve(userId: userId, page: page).then {
             certificates, meta in
             success(meta, certificates)
         }.catch {
             error in
-            errorHandler(RetrieveError(error: error))
+            errorHandler(NetworkError(error: error))
         }
         return nil
     }

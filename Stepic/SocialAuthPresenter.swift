@@ -100,7 +100,7 @@ class SocialAuthPresenter {
             case is SocialSDKError:
                 print("social auth: error while social auth")
                 self.view?.update(with: .error)
-            case is RetrieveError:
+            case is NetworkError:
                 print("social auth: successfully signed in, but could not get user")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
@@ -140,7 +140,7 @@ class SocialAuthPresenter {
             self.view?.update(with: .success)
         }.catch { error in
             switch error {
-            case is RetrieveError:
+            case is NetworkError:
                 print("social auth: successfully signed in, but could not get user")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)

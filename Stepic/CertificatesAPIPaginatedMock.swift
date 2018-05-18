@@ -14,7 +14,7 @@ class CertificatesAPIPaginatedMock: CertificatesAPI {
 
     var reportErrorOnNextRequest = true
 
-    @discardableResult override func retrieve(userId: Int, page: Int, headers: [String : String], success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (RetrieveError) -> Void) -> Request? {
+    @discardableResult override func retrieve(userId: Int, page: Int, headers: [String : String], success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (NetworkError) -> Void) -> Request? {
 
         DispatchQueue.global(qos: .userInitiated).async {
             switch page {

@@ -83,7 +83,7 @@ class AuthorizationPresenter {
             //proccess error
 
             switch error {
-            case is RetrieveError:
+            case is NetworkError:
                 let message = NSLocalizedString("Successfully signed in, but could not get user", comment: "")
                 self.view?.showError(message: message)
             case SignInError.invalidEmailAndPassword:
@@ -128,7 +128,7 @@ class AuthorizationPresenter {
             case PerformRequestError.badConnection, SignInError.badConnection:
                 let message = NSLocalizedString("Bad connection to sign up", comment: "")
                 self.view?.showError(message: message)
-            case is RetrieveError:
+            case is NetworkError:
                 let message = NSLocalizedString("Successfully signed up, but could not get user", comment: "")
                 self.view?.showError(message: message)
             case SignUpError.validation(_, _, _, _):

@@ -38,10 +38,14 @@ class SearchQueriesPresenter {
         }, error: {
             [weak self]
             error in
-            if error != .cancelled {
+            guard let networkError = error as? NetworkError else {
                 self?.view?.setState(state: .error)
-            } else {
+            }
+            switch networkError {
+            case .cancelled:
                 self?.view?.setState(state: .ok)
+            default:
+                self?.view?.setState(state: .error)
             }
         })
     }
