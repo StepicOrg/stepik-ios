@@ -411,25 +411,3 @@ enum ProfileState {
     case error
     case anonymous
 }
-
-struct ProfileData {
-    var avatarURLString: String
-    var firstName: String
-    var lastName: String
-    init(user: User) {
-        self.avatarURLString = user.avatarURL
-        self.firstName = user.firstName
-        self.lastName = user.lastName
-    }
-}
-
-struct StreakData {
-    var didSolveToday: Bool
-    var currentStreak: Int
-    var longestStreak: Int
-    init(userActivity: UserActivity) {
-        self.didSolveToday = userActivity.pins[0] != 0
-        self.currentStreak = userActivity.currentStreak
-        self.longestStreak = userActivity.longestStreak
-    }
-}
