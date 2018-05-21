@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileHeaderInfoView: ProfileInfoView, UIView {
+class ProfileHeaderInfoView: UIView, ProfileInfoView {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatarImageView: AvatarImageView!
 
@@ -18,7 +18,7 @@ class ProfileHeaderInfoView: ProfileInfoView, UIView {
     @IBOutlet weak var currentDaysCountLabel: StepikLabel!
     @IBOutlet weak var maxDayCountLabel: StepikLabel!
     @IBOutlet weak var currentStreakLabel: StepikLabel!
-    @IBOutlet weak var maxStreakLabel: StepikLabel
+    @IBOutlet weak var maxStreakLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

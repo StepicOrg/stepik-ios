@@ -34,7 +34,7 @@ class ProfileInfoPresenter {
 
     func update(with user: User) {
         let avatarUrl = URL(string: user.avatarURL)
-        let profileData = ProfileViewData(firstName: user.firstName, lastName: user.lastName, avatarURL: avatarUrl)
+        let profileData = ProfileViewData(firstName: user.firstName, lastName: user.lastName, avatarUrl: avatarUrl)
         view?.set(profile: profileData)
     }
 

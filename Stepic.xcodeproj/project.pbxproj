@@ -6716,6 +6716,7 @@
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
 				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 				62E981C98BDA0C5DD5100480 /* ProfileInfo */,
+				62E9871E9ADE76771F9158E4 /* StreakNotificationsControl */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -8223,6 +8224,13 @@
 				62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */,
 			);
 			name = CodeEditorSettings;
+			sourceTree = "<group>";
+		};
+		62E9871E9ADE76771F9158E4 /* StreakNotificationsControl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = StreakNotificationsControl;
 			sourceTree = "<group>";
 		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
