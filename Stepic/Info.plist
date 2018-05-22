@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.58</string>
+	<string>1.59</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -52,22 +52,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>88</string>
+	<string>89</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
 		<string>d4016589326f6f7814080b7ff9017e18711a1959</string>
 		<key>Kits</key>
 		<array>
-			<dict>
-				<key>KitName</key>
-				<string>Appsee</string>
-				<key>KitInfo</key>
-				<dict>
-					<key>apikey</key>
-					<string>66bb9d8f3ad7428e9fdc7f2fe0d84988</string>
-				</dict>
-			</dict>
 			<dict>
 				<key>KitInfo</key>
 				<dict/>
@@ -96,6 +87,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

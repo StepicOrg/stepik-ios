@@ -3767,12 +3767,15 @@
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E9808AB6290CFEA48D8471 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
+		62E981AC996C4AA91527B064 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E9822130C1EA241A84DED7 /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
 		62E9831EA7A75D89A3C9EC5B /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
 		62E98400F19C6E781027F2A7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
 		62E986E416361591CE91DE3B /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
@@ -3783,13 +3786,16 @@
 		62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */; };
 		62E98AF2CF2F93395EBBBC11 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E98B4F07F2A40F3D385F5A /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98BC4B9330D5A2FFBC9B5 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
 		62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98C89C492DD7D50D5AB24 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98C975482E46A95E173AB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E98D1D5AE08AC53898A59B /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E98DC371227AE0EDF94038 /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98E207924FBDBAD355E57 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98E53B559035BD0E4D903 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E98E72A85E731394868512 /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
 		62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
@@ -5287,6 +5293,7 @@
 		62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsPresenter.swift; sourceTree = "<group>"; };
 		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
+		62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingNavigationViewController.swift; sourceTree = "<group>"; };
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
@@ -6490,6 +6497,7 @@
 				082348381ECA264000D2CB40 /* ShareableController.swift */,
 				089504821F27C5C600EEC939 /* FullHeightTableView.swift */,
 				08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */,
+				62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -8929,7 +8937,7 @@
 								enabled = 0;
 							};
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -12165,6 +12173,7 @@
 				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */,
+				62E98E207924FBDBAD355E57 /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12890,6 +12899,7 @@
 				2C1B624B1F4C4AEF00236804 /* AdaptiveAppDelegate.swift in Sources */,
 				62E98873E98E4598D8F1ACB0 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */,
+				62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13370,6 +13380,7 @@
 				2C1B645C1F4C590700236804 /* AdaptiveAppDelegate.swift in Sources */,
 				62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98400F19C6E781027F2A7 /* AlamofireDefaultSessionManager.swift in Sources */,
+				62E98C89C492DD7D50D5AB24 /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13853,6 +13864,7 @@
 				62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */,
 				62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */,
+				62E9808AB6290CFEA48D8471 /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14337,6 +14349,7 @@
 				62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98D1D5AE08AC53898A59B /* CodeEditorPreferencesContainer.swift in Sources */,
+				62E98B4F07F2A40F3D385F5A /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15372,6 +15385,7 @@
 				62E98BC4B9330D5A2FFBC9B5 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98E53B559035BD0E4D903 /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98DC371227AE0EDF94038 /* CodeEditorPreferencesContainer.swift in Sources */,
+				62E981AC996C4AA91527B064 /* WrappingNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15897,7 +15911,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -15928,7 +15942,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;

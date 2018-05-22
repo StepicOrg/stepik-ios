@@ -1,10 +1,7 @@
-In the new version of the Stepik iOS app we:
-
-• Made adaptive courses more distinctive
-• Deanonymized adaptive leaderboards
-• Improved "continue course" feature
-• Fixed 3D Touch for courses
-• Fixed some more bugs
+In the new version of Stepik:
+• Background videos
+• Code challenge customization
+• Some bugfixes
 
 Enjoy learning!
 Stepik team

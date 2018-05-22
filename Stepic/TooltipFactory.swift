@@ -28,4 +28,8 @@ struct TooltipFactory {
     static var videoInBackground: Tooltip {
         return EasyTipTooltip(text: NSLocalizedString("VideoInBackgroundTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
+
+    static var codeEditorSettings: Tooltip {
+        return EasyTipTooltip(text: NSLocalizedString("CodeEditorSettingsTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
+    }
 }

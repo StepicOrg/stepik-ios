@@ -81,6 +81,18 @@ class CodeQuizViewController: QuizViewController {
 
             toolbarView.language = language.displayName
 
+            if TooltipDefaultsManager.shared.shouldShowForCodeEditor {
+                delay(2.0) { [weak self] in
+                    guard let s = self else {
+                        return
+                    }
+
+                    let tooltip = TooltipFactory.codeEditorSettings
+                    tooltip.show(direction: .down, in: s.view, from: s.toolbarView.settingsButton)
+                    TooltipDefaultsManager.shared.didShowForCodeEditor = true
+                }
+            }
+
             setupAccessoryView(editable: submissionStatus != .correct)
 
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
@@ -111,6 +123,15 @@ class CodeQuizViewController: QuizViewController {
         }
 
         return params
+    }
+
+    fileprivate func setupTheme() {
+        highlightr = textStorage.highlightr
+        highlightr.setTheme(to: PreferencesContainer.codeEditor.theme)
+        let theme = highlightr.theme!
+        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
+        highlightr.theme = theme
+        codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
     }
 
     fileprivate func setupConstraints() {
@@ -159,12 +180,8 @@ class CodeQuizViewController: QuizViewController {
             codeTextView.smartQuotesType = .no
         }
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
-        highlightr = textStorage.highlightr
-        highlightr.setTheme(to: PreferencesContainer.codeEditor.theme)
-        let theme = highlightr.theme!
-        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
-        highlightr.theme = theme
-        codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+
+        setupTheme()
         setupConstraints()
 
         toolbarView.delegate = self
@@ -321,16 +338,6 @@ class CodeQuizViewController: QuizViewController {
             codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
@@ -342,6 +349,20 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         if options.languages.count > 1 {
             showPicker()
         }
+    }
+
+    func settingsPressed() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
+            return
+        }
+
+        let presenter = CodeEditorSettingsPresenter(view: vc)
+        vc.presenter = presenter
+
+        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: NSLocalizedString("Settings", comment: ""), onDismiss: { [weak self] in
+            self?.setupTheme()
+        })
+        present(navVC, animated: true)
     }
 
     func fullscreenPressed() {

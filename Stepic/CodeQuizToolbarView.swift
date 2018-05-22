@@ -14,6 +14,7 @@ class CodeQuizToolbarView: NibInitializableView {
     @IBOutlet weak var languageButton: UIBarButtonItem!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var fullscreenButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
 
     weak var delegate: CodeQuizToolbarDelegate?
 
@@ -45,4 +46,7 @@ class CodeQuizToolbarView: NibInitializableView {
         delegate?.resetPressed()
     }
 
+    @IBAction func settingsPressed(_ sender: Any) {
+        delegate?.settingsPressed()
+    }
 }

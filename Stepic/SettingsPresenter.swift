@@ -31,13 +31,11 @@ class SettingsPresenter {
             buildLoadedVideoQualityBlock(),
             buildOnlineVideoQualityBlock(),
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
-            buildAdaptiveModeSwitchBlock()
+            buildAdaptiveModeSwitchBlock(),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
+            buildCodeEditorSettingsBlock()
         ]
 
-        if RemoteConfig.shared.allowCodeEditorSettings {
-            blocks.append(contentsOf: [buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
-                                       buildCodeEditorSettingsBlock()])
-        }
         return Menu(blocks: blocks)
     }
 

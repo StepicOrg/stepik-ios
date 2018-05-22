@@ -12,4 +12,5 @@ protocol CodeQuizToolbarDelegate: class {
     func changeLanguagePressed()
     func fullscreenPressed()
     func resetPressed()
+    func settingsPressed()
 }
