@@ -11,6 +11,7 @@ import Foundation
 class ProfileHeaderInfoView: UIView, ProfileInfoView {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatarImageView: AvatarImageView!
+    @IBOutlet weak var placeholderAvatarView: UIView!
 
     @IBOutlet weak var firstNameLabel: StepikLabel!
     @IBOutlet weak var lastNameLabel: StepikLabel!
@@ -20,10 +21,18 @@ class ProfileHeaderInfoView: UIView, ProfileInfoView {
     @IBOutlet weak var currentStreakLabel: StepikLabel!
     @IBOutlet weak var maxStreakLabel: StepikLabel!
 
+    var isLoading: Bool = false {
+        didSet {
+            ([firstNameLabel, lastNameLabel, lightningImageView, currentDaysCountLabel,
+            maxDayCountLabel, currentStreakLabel, maxStreakLabel, avatarImageView] as? [UIView])?.forEach { $0.isHidden = isLoading }
+            placeholderAvatarView.isHidden = !isLoading
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         containerView.setRoundedCorners(cornerRadius: 12)
-        setStreaks(hidden: true)
+        placeholderAvatarView.setRoundedBounds(width: 0)
         localize()
     }
 
@@ -42,21 +51,12 @@ class ProfileHeaderInfoView: UIView, ProfileInfoView {
         lightningImageView.image = streaks.didSolveToday ?
                                     #imageLiteral(resourceName: "lightning_green") :
                                     #imageLiteral(resourceName: "lightning_gray")
-
-        setStreaks(hidden: false)
     }
 
     private func pluralizedDays(count: Int) -> String {
         return StringHelper.pluralize(number: count, forms: [NSLocalizedString("days1", comment: ""),
                                                              NSLocalizedString("days234", comment: ""),
                                                              NSLocalizedString("days567890", comment: "")])
-    }
-
-    private func setStreaks(hidden: Bool) {
-        currentStreakLabel.isHidden = hidden
-        maxStreakLabel.isHidden = hidden
-        maxDayCountLabel.isHidden = hidden
-        currentDaysCountLabel.isHidden = hidden
     }
 
     private func localize() {

@@ -21,6 +21,8 @@ struct StreakViewData {
 }
 
 protocol ProfileInfoView: class {
+    var isLoading: Bool { get set }
+
     func set(profile: ProfileViewData)
     func set(streaks: StreakViewData)
 }
@@ -30,6 +32,8 @@ class ProfileInfoPresenter {
 
     init(view: ProfileInfoView) {
         self.view = view
+
+        showLoading()
     }
 
     func update(with user: User) {
@@ -41,5 +45,13 @@ class ProfileInfoPresenter {
     func update(with userActivity: UserActivity) {
         let streakData = StreakViewData(didSolveToday: userActivity.didSolveToday, currentStreak: userActivity.currentStreak, longestStreak: userActivity.longestStreak)
         view?.set(streaks: streakData)
+    }
+
+    func showLoading() {
+        view?.isLoading = true
+    }
+
+    func hideLoading() {
+        view?.isLoading = false
     }
 }
