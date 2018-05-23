@@ -10,26 +10,27 @@ import Foundation
 import PromiseKit
 
 protocol ProfileView: class {
-    //State setting
     func set(state: ProfileState)
 
-    //Alerts
-    func showNotificationSettingsAlert(completion: (() -> Void)?)
-    func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?)
-    func showShareProfileAlert(url: URL)
+    func requestNotificationsPermissions()
+    func showStreakTimeSelection(startHour: Int)
 
-    //Navigation
-    func logout(onBack:(() -> Void)?)
-    func navigateToSettings()
-    func navigateToDownloads()
+    func getView(for block: ProfileMenuBlock) -> Any?
+}
 
-    func getHeader() -> ProfileInfoView?
+enum ProfileMenuBlock: String {
+    case infoHeader
+    case notificationsSwitch
+    case notificationsTimeSelection
+    case description
+    case pinsMap
 }
 
 class ProfilePresenter {
     weak var view: ProfileView?
 
     private var headerInfoPresenter: ProfileInfoPresenter?
+    private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -53,8 +54,16 @@ class ProfilePresenter {
         // All presenters here should be passive
 
         // Header (name, avatar, streaks)
-        if let attachedView = view?.getHeader() {
+        if let attachedView = view?.getView(for: .infoHeader) as? ProfileInfoView {
             headerInfoPresenter = ProfileInfoPresenter(view: attachedView)
+        }
+
+        // Notifications control
+        if let attachedView = view?.getView(for: .notificationsSwitch) as? StreakNotificationsControlView {
+            streakNotificationsPresenter = StreakNotificationsControlPresenter(view: attachedView)
+            if let streakNotificationsPresenter = streakNotificationsPresenter {
+                attachedView.attachPresenter(streakNotificationsPresenter)
+            }
         }
     }
 
