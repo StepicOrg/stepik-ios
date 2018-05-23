@@ -66,3 +66,9 @@ class SwitchMenuBlock: MenuBlock {
         super.init(id: id, title: title)
     }
 }
+
+class PlaceholderMenuBlock: MenuBlock {
+    func animate() {
+        (cell as? PlaceholderTableViewCell)?.startAnimating()
+    }
+}

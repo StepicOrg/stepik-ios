@@ -54,6 +54,10 @@ class MenuUIManager {
             if let cell = cell as? HeaderMenuBlockTableViewCell, let block = block as? HeaderMenuBlock {
                 cell.initWithBlock(block: block)
             }
+        case .placeholder:
+            if let cell = cell as? PlaceholderTableViewCell, let block = block as? PlaceholderMenuBlock {
+                cell.initWithBlock(block: block)
+            }
         }
 
         block.cell = cell
@@ -131,13 +135,15 @@ enum SupportedMenuBlockType {
     case titleContentExpandable
     case header
     case pinsMapExpandable
+    case placeholder
 
     static var all: [SupportedMenuBlockType] = [
         .switchBlock,
         .transition,
         .titleContentExpandable,
         .pinsMapExpandable,
-        .header
+        .header,
+        .placeholder
     ]
 
     var nibName: String {
@@ -152,6 +158,8 @@ enum SupportedMenuBlockType {
             return "PinsMapExpandableMenuBlockTableViewCell"
         case .header:
             return "HeaderMenuBlockTableViewCell"
+        case .placeholder:
+            return "PlaceholderTableViewCell"
         }
     }
 
@@ -178,6 +186,10 @@ enum SupportedMenuBlockType {
         }
         if block is HeaderMenuBlock {
             self = .header
+            return
+        }
+        if block is PlaceholderMenuBlock {
+            self = .placeholder
             return
         }
         return nil

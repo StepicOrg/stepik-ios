@@ -136,11 +136,26 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     private func buildMenu() -> Menu {
         var blocks: [MenuBlock] = []
         blocks = [
-            buildNotificationsSwitchBlock()
+            buildPlaceholderBlock(num: 1),
+            buildPlaceholderBlock(num: 2),
+            buildPlaceholderBlock(num: 3)
+            //buildNotificationsSwitchBlock()
 //            buildPinsMapExpandableBlock(),
 //            buildInfoExpandableBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)
+    }
+
+    private func buildPlaceholderBlock(num: Int) -> PlaceholderMenuBlock {
+        let block = PlaceholderMenuBlock(id: "placeholderBlock\(num)", title: "")
+        block.hasSeparatorOnBottom = false
+        block.onAppearance = {
+            // We should run this code with delay cause to prevent detached cell
+            delay(0.1) {
+                block.animate()
+            }
+        }
+        return block
     }
 
     private func buildNotificationsSwitchBlock() -> SwitchMenuBlock {
@@ -164,6 +179,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
         // Tooltip "enable notifications for bla-bla"
         if TooltipDefaultsManager.shared.shouldShowOnStreaksSwitchInProfile {
+            // We should run this code with delay cause to prevent detached cell
             delay(0.1) { [weak self] in
                 guard let s = self else {
                     return
