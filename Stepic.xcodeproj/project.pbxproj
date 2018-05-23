@@ -173,6 +173,8 @@
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
 		082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35AD20B55691006E28F9 /* StorageRecord.swift */; };
+		082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35AF20B5B14A006E28F9 /* StorageData.swift */; };
 		082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		082E5E101F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
@@ -4608,6 +4610,8 @@
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
 		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
+		082E35AD20B55691006E28F9 /* StorageRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecord.swift; sourceTree = "<group>"; };
+		082E35AF20B5B14A006E28F9 /* StorageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageData.swift; sourceTree = "<group>"; };
 		082E5E0D1F46379100F41426 /* ReplyCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCache.swift; sourceTree = "<group>"; };
 		082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v9.xcdatamodel; sourceTree = "<group>"; };
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
@@ -5895,6 +5899,15 @@
 			name = Discussions;
 			sourceTree = "<group>";
 		};
+		082E35AC20B5567A006E28F9 /* Storage Records */ = {
+			isa = PBXGroup;
+			children = (
+				082E35AD20B55691006E28F9 /* StorageRecord.swift */,
+				082E35AF20B5B14A006E28F9 /* StorageData.swift */,
+			);
+			name = "Storage Records";
+			sourceTree = "<group>";
+		};
 		0834C4741E2CEC55002F8516 /* MatchingQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -6437,6 +6450,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				082E35AC20B5567A006E28F9 /* Storage Records */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08E542071C6CD59A00DEC38E /* Managers */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
@@ -11743,6 +11757,7 @@
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
@@ -11854,6 +11869,7 @@
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
+				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
