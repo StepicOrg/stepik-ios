@@ -146,7 +146,7 @@ class Section: NSManagedObject, JSONSerializable {
         })
     }
 
-    func loadLessonsForUnits(units: [Unit], completion: @escaping (() -> Void)) {
+    func loadLessonsForUnits(units: [Unit], completion: @escaping (() -> Void), error errorHandler: (() -> Void)? = nil) {
         var lessonIds: [Int] = []
         var lessons: [Lesson] = []
         for unit in units {
@@ -170,6 +170,7 @@ class Section: NSManagedObject, JSONSerializable {
             }, error: {
                 _ in
                 print("Error while downloading units")
+                errorHandler?()
         })
     }
 

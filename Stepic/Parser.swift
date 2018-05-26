@@ -47,7 +47,7 @@ class Parser: NSObject {
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.string(from: date)
     }
-    
+
     func codeFromURL(_ url: URL) -> String? {
         return url.getKeyVals()?["code"]
     }

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 enum StorageKind {
     case deadline(courseID: Int)
-    
+
     init?(string: String) {
         if string.hasPrefix("deadline_") {
             let courseIDString = String(string.dropFirst(9))
@@ -21,7 +21,7 @@ enum StorageKind {
         }
         return nil
     }
-    
+
     func getName() -> String {
         switch self {
         case .deadline(courseID: let courseID):
@@ -31,18 +31,18 @@ enum StorageKind {
 }
 
 class StorageRecord: JSONSerializable {
-    
+
     var id: Int = 0
     var user: Int?
     var data: StorageData?
     var kind: StorageKind?
     var createDate: Date?
     var updateDate: Date?
-    
+
     required init(json: JSON) {
         update(json: json)
     }
-    
+
     func update(json: JSON) {
         id = json["id"].int ?? 0
         kind = StorageKind(string: json["kind"].stringValue)
@@ -51,19 +51,19 @@ class StorageRecord: JSONSerializable {
         data = getStorageData(from: json["data"], withKind: kind)
         user = json["user"].int
     }
-    
+
     var json: JSON {
         return [
             "kind": kind?.getName() ?? "",
             "data": data?.dictValue ?? ""
         ]
     }
-    
+
     private func getStorageData(from json: JSON, withKind kind: StorageKind?) -> StorageData? {
         guard let kind = kind else {
             return nil
         }
-        
+
         switch kind {
         case .deadline(courseID: _):
             return DeadlineStorageData(json: json)

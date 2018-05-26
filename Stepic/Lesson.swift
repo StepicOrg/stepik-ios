@@ -27,6 +27,7 @@ class Lesson: NSManagedObject, JSONSerializable {
         isPublic = json["is_public"].boolValue
         slug = json["slug"].stringValue
         coverURL = json["cover_url"].string
+        timeToComplete = json["time_to_complete"].doubleValue
         stepsArray = json["steps"].arrayObject as! [Int]
     }
 

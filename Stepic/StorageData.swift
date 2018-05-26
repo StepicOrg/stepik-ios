@@ -16,35 +16,34 @@ protocol StorageData {
     }
 }
 
-class DeadlineStorageData: StorageData {
-    
-    struct SectionDeadline {
-        var section: Int
-        var deadlineDate: Date
-        init(section: Int, deadlineDate: Date) {
-            self.section = section
-            self.deadlineDate = deadlineDate
-        }
-        
-        init?(json: JSON) {
-            guard let section = json["section"].int, let deadlineDate = Parser.sharedParser.dateFromTimedateJSON(json["deadline"]) else {
-                return nil
-            }
-            self.section = section
-            self.deadlineDate = deadlineDate
-        }
-        
-        var dictValue: [String : Any] {
-            return [
-                "section": section,
-                "deadline": Parser.sharedParser.timedateStringFromDate(date: deadlineDate)
-            ]
-        }
+struct SectionDeadline {
+    var section: Int
+    var deadlineDate: Date
+    init(section: Int, deadlineDate: Date) {
+        self.section = section
+        self.deadlineDate = deadlineDate
     }
-    
+
+    init?(json: JSON) {
+        guard let section = json["section"].int, let deadlineDate = Parser.sharedParser.dateFromTimedateJSON(json["deadline"]) else {
+            return nil
+        }
+        self.section = section
+        self.deadlineDate = deadlineDate
+    }
+
+    var dictValue: [String : Any] {
+        return [
+            "section": section,
+            "deadline": Parser.sharedParser.timedateStringFromDate(date: deadlineDate)
+        ]
+    }
+}
+
+class DeadlineStorageData: StorageData {
     var courseID: Int
     var deadlines: [SectionDeadline]
-    
+
     required init(json: JSON) {
         courseID = json["course"].intValue
         deadlines = []
@@ -54,7 +53,7 @@ class DeadlineStorageData: StorageData {
             }
         }
     }
-    
+
     var dictValue: [String : Any] {
         return [:]
     }

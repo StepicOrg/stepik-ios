@@ -10,27 +10,31 @@ import Foundation
 
 struct DeadlineModeInfo {
     var title: String
-    var load: Int
+    var weeklyLoadHours: Int
     var image: UIImage
 
-    init(title: String, load: Int, image: UIImage) {
+    init(title: String, weeklyLoadHours: Int, image: UIImage) {
         self.title = title
-        self.load = load
+        self.weeklyLoadHours = weeklyLoadHours
         self.image = image
+    }
+
+    var dailyLoadSeconds: Int {
+        return weeklyLoadHours * 60 * 60 / 7
     }
 }
 
 enum DeadlineMode {
     case hobby, standard, extreme
 
-    func getMode() -> DeadlineModeInfo {
+    func getModeInfo() -> DeadlineModeInfo {
         switch self {
         case .hobby:
-            return DeadlineModeInfo(title: "Hobby", load: 3, image: #imageLiteral(resourceName: "25-science-growth-sprout"))
+            return DeadlineModeInfo(title: "Hobby", weeklyLoadHours: 3, image: #imageLiteral(resourceName: "25-science-growth-sprout"))
         case .standard:
-            return DeadlineModeInfo(title: "Standard", load: 7, image: #imageLiteral(resourceName: "27-science-study-learn-graduate"))
+            return DeadlineModeInfo(title: "Standard", weeklyLoadHours: 7, image: #imageLiteral(resourceName: "27-science-study-learn-graduate"))
         case .extreme:
-            return DeadlineModeInfo(title: "Extreme", load: 15, image: #imageLiteral(resourceName: "1-science-rocket-spaceship-rocket-launch"))
+            return DeadlineModeInfo(title: "Extreme", weeklyLoadHours: 15, image: #imageLiteral(resourceName: "1-science-rocket-spaceship-rocket-launch"))
         }
     }
 }

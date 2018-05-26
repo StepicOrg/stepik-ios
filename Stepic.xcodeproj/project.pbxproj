@@ -99,6 +99,7 @@
 		0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
+		08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */; };
 		081959E01FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
 		081959E21FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
 		081959E41FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
@@ -4565,6 +4566,8 @@
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		0815661A1F69C3910082B359 /* CustomSearchBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomSearchBar.xib; sourceTree = "<group>"; };
 		081566241F69C3AD0082B359 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineCounter.swift; sourceTree = "<group>"; };
+		08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_timetocomplete_v22.xcdatamodel; sourceTree = "<group>"; };
 		081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		08195A051FA00FF400E6D6CD /* CourseLists.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseLists.storyboard; sourceTree = "<group>"; };
@@ -5868,6 +5871,7 @@
 				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
 				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
 				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
+				08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */,
 			);
 			name = "Personal Deadlines";
 			sourceTree = "<group>";
@@ -11849,6 +11853,7 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
+				08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
@@ -16971,6 +16976,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */,
 				2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */,
 				087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */,
 				084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */,
@@ -16994,7 +17000,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */;
+			currentVersion = 08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

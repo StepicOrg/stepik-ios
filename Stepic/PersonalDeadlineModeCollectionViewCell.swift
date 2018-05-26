@@ -15,9 +15,9 @@ class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var modeImage: UIImageView!
 
     func setup(deadlineMode: DeadlineMode) {
-        let modeInfo = deadlineMode.getMode()
+        let modeInfo = deadlineMode.getModeInfo()
         titleLabel.text = modeInfo.title
-        loadLabel.text = "\(modeInfo.load) hrs/week"
+        loadLabel.text = "\(modeInfo.weeklyLoadHours) hrs/week"
         modeImage.image = modeInfo.image
     }
 
