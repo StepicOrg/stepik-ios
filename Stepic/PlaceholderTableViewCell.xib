@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6iW-v5-F5F">
-                        <rect key="frame" x="32" y="32" width="248" height="11"/>
+                        <rect key="frame" x="40" y="32" width="240" height="11"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="Tj9-3X-MeI"/>
@@ -33,7 +33,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6iW-v5-F5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="0zt-g0-MtB"/>
+                    <constraint firstItem="6iW-v5-F5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="0zt-g0-MtB"/>
                     <constraint firstAttribute="trailing" secondItem="6iW-v5-F5F" secondAttribute="trailing" constant="40" id="m17-NZ-niR"/>
                     <constraint firstItem="6iW-v5-F5F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qu4-I0-f1s"/>
                 </constraints>
@@ -41,6 +41,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="placeholderView" destination="6iW-v5-F5F" id="Hlo-Ga-1Rj"/>
+                <outlet property="rightConstraint" destination="m17-NZ-niR" id="Ipz-lt-SGi"/>
             </connections>
             <point key="canvasLocation" x="25" y="67.5"/>
         </tableViewCell>

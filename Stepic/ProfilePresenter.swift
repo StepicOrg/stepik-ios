@@ -16,14 +16,40 @@ protocol ProfileView: class {
     func showStreakTimeSelection(startHour: Int)
 
     func getView(for block: ProfileMenuBlock) -> Any?
+    func setMenu(blocks: [ProfileMenuBlock])
 }
 
-enum ProfileMenuBlock: String {
+enum ProfileMenuBlock: RawRepresentable, Equatable {
+    typealias RawValue = String
+
     case infoHeader
-    case notificationsSwitch
+    case notificationsSwitch(isOn: Bool)
     case notificationsTimeSelection
     case description
     case pinsMap
+
+    init?(rawValue: RawValue) {
+        fatalError("init with raw value has not been implemented")
+    }
+
+    var rawValue: RawValue {
+        switch self {
+        case .infoHeader:
+            return "infoHeader"
+        case .notificationsSwitch(_):
+            return "notificationsSwitch"
+        case .notificationsTimeSelection:
+            return "notificationsTimeSelection"
+        case .description:
+            return "description"
+        case .pinsMap:
+            return "pinsMap"
+        }
+    }
+
+    static func ==(lhs: ProfileMenuBlock, rhs: ProfileMenuBlock) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
 }
 
 class ProfilePresenter {
@@ -38,7 +64,9 @@ class ProfilePresenter {
 
     private var userId: Int?
 
-    var menu: Menu = Menu(blocks: [])
+    private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
+                                                           .notificationsSwitch(isOn: false)]
+    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader]
 
     init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
@@ -46,11 +74,9 @@ class ProfilePresenter {
         self.usersAPI = usersAPI
         self.notificationPermissionManager = notificationPermissionManager
         self.userId = userId
-
-        initChildModules()
     }
 
-    private func initChildModules() {
+    private func initChildModules(user: User, activity: UserActivity) {
         // All presenters here should be passive
 
         // Header (name, avatar, streaks)
@@ -59,12 +85,17 @@ class ProfilePresenter {
         }
 
         // Notifications control
-        if let attachedView = view?.getView(for: .notificationsSwitch) as? StreakNotificationsControlView {
+        if let attachedView = view?.getView(for: .notificationsSwitch(isOn: false)) as? StreakNotificationsControlView {
             streakNotificationsPresenter = StreakNotificationsControlPresenter(view: attachedView)
             if let streakNotificationsPresenter = streakNotificationsPresenter {
                 attachedView.attachPresenter(streakNotificationsPresenter)
+                streakNotificationsPresenter.refreshStreakNotificationTime()
             }
         }
+
+        refreshUser(with: user)
+        refreshStreak(with: activity)
+        headerInfoPresenter?.hideLoading()
     }
 
     private func refreshUser(with user: User) {
@@ -75,21 +106,54 @@ class ProfilePresenter {
         headerInfoPresenter?.update(with: userActivity)
     }
 
+    private func buildSelfUserMenu(blocks: [ProfileMenuBlock]) -> [ProfileMenuBlock] {
+        var blocks = blocks
+        let isNotificationOn = PreferencesContainer.notifications.allowStreaksNotifications
+
+        for i in 0..<blocks.count {
+            if case let ProfileMenuBlock.notificationsSwitch(isOn) = blocks[i] {
+                blocks[i] = ProfileMenuBlock.notificationsSwitch(isOn: isNotificationOn)
+
+                if i + 1 < blocks.count && blocks[i + 1] == ProfileMenuBlock.notificationsTimeSelection {
+                    blocks.remove(at: i + 1)
+                }
+
+                if isNotificationOn {
+                    blocks.insert(.notificationsTimeSelection, at: i + 1)
+                }
+            }
+        }
+
+        return blocks
+    }
+
     func refresh() {
         guard let userId = self.userId else {
             self.view?.set(state: .error)
             return
         }
 
-        loadProfile(userId: userId).then { [weak self] user in
-            self?.refreshUser(with: user)
-        }.catch { [weak self] error in
-            print("profile presenter: error while user refreshing = \(error)")
-            self?.view?.set(state: .error)
-        }
+        var user: User?
+        loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<UserActivity> in
+            user = loadedUser
 
-        userActivitiesAPI.retrieve(user: userId).then { [weak self] activity in
-            self?.refreshStreak(with: activity)
+            guard let strongSelf = self else {
+                throw UnwrappingError.optionalError
+            }
+
+            return strongSelf.userActivitiesAPI.retrieve(user: userId)
+        }.then { [weak self] activity -> Void in
+            guard let strongSelf = self else {
+                throw UnwrappingError.optionalError
+            }
+
+            let menu = userId == AuthInfo.shared.userId ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
+                                                        : ProfilePresenter.otherUserMenu
+
+            if let user = user {
+                strongSelf.view?.setMenu(blocks: menu)
+                strongSelf.initChildModules(user: user, activity: activity)
+            }
         }.catch { [weak self] error in
             print("profile presenter: error while streaks refreshing = \(error)")
         }
@@ -97,9 +161,11 @@ class ProfilePresenter {
 
     private func loadProfile(userId: Int) -> Promise<User> {
         return User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
-            guard let s = self else { throw UnwrappingError.optionalError }
+            guard let strongSelf = self else {
+                throw UnwrappingError.optionalError
+            }
 
-            return s.usersAPI.retrieve(ids: [userId], existing: users)
+            return strongSelf.usersAPI.retrieve(ids: [userId], existing: users)
         }.then { users -> Promise<User> in
             if let user = users.first {
                 return Promise(value: user)

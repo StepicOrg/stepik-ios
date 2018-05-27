@@ -10,10 +10,6 @@ import UIKit
 import Presentr
 
 class ProfileViewController: MenuViewController, ProfileView, StreakNotificationsControlView, ControllerWithStepikPlaceholder {
-    func showStreakTimeSelectionAlert(startHour: Int) {
-
-    }
-
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
     var presenterNotifications: StreakNotificationsControlPresenter?
@@ -23,6 +19,21 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
     func set(state: ProfileState) {
 
+    }
+
+    func setMenu(blocks: [ProfileMenuBlock]) {
+        var menuBlocks = [MenuBlock?]()
+        for block in blocks {
+            switch block {
+            case .notificationsSwitch(let isOn):
+                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
+            case .notificationsTimeSelection:
+                menuBlocks.append(buildNotificationsTimeSelectionBlock())
+            default:
+                break
+            }
+        }
+        menu = Menu(blocks: menuBlocks.flatMap { $0 })
     }
 
     func attachPresenter(_ presenter: StreakNotificationsControlPresenter) {
@@ -70,6 +81,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         }
     }
 
+    var profileStreaksView: ProfileHeaderInfoView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,9 +100,6 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
         registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
 
-        presenter = ProfilePresenter(userId: AuthInfo.shared.userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
-        presenter?.refresh()
-
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
 
@@ -99,9 +109,13 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
         self.title = NSLocalizedString("Profile", comment: "")
 
-        menu = buildMenu()
-        refreshProfileStreaksView()
+        menu = buildLoadingMenu()
+
+        profileStreaksView = ProfileHeaderInfoView.fromNib()
         tableView.tableHeaderView = profileStreaksView
+
+        presenter = ProfilePresenter(userId: AuthInfo.shared.userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
+        presenter?.refresh()
     }
 
     @objc func shareButtonPressed() {
@@ -111,37 +125,23 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     func getView(for block: ProfileMenuBlock) -> Any? {
         switch block {
         case .infoHeader:
-            profileStreaksView = ProfileHeaderInfoView.fromNib()
-            guard let profileStreaksView = profileStreaksView else {
+            guard let profileStreaksView = self.profileStreaksView else {
                 return nil
             }
             return profileStreaksView
-        case .notificationsTimeSelection, .notificationsSwitch:
+        case .notificationsTimeSelection, .notificationsSwitch(_):
             return self
         default:
             return nil
         }
     }
 
-    var profileStreaksView: ProfileHeaderInfoView?
-
-    func refreshProfileStreaksView() {
-        guard let view = profileStreaksView else {
-            return
-        }
-
-        view.frame.size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-    }
-
-    private func buildMenu() -> Menu {
+    private func buildLoadingMenu() -> Menu {
         var blocks: [MenuBlock] = []
         blocks = [
             buildPlaceholderBlock(num: 1),
             buildPlaceholderBlock(num: 2),
             buildPlaceholderBlock(num: 3)
-            //buildNotificationsSwitchBlock()
-//            buildPinsMapExpandableBlock(),
-//            buildInfoExpandableBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)
     }
@@ -158,8 +158,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         return block
     }
 
-    private func buildNotificationsSwitchBlock() -> SwitchMenuBlock {
-        let block: SwitchMenuBlock = SwitchMenuBlock(id: ProfileMenuBlock.notificationsSwitch.rawValue, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: true)
+    private func buildNotificationsSwitchBlock(isOn: Bool) -> SwitchMenuBlock {
+        let block: SwitchMenuBlock = SwitchMenuBlock(id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: isOn)
 
         block.onSwitch = { [weak self] isOn in
             self?.presenterNotifications?.setStreakNotifications(on: isOn) { [weak self] status in
@@ -169,7 +169,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
                         return
                     }
 
-                    self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch.rawValue)
+                    self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
                     self?.presenterNotifications?.refreshStreakNotificationTime()
                 } else {
                     self?.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
@@ -185,7 +185,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
                     return
                 }
 
-                let tooltip = TooltipFactory.streaksTooltip
+                self?.streaksTooltip = TooltipFactory.streaksTooltip
                 if let cell = block.cell as? SwitchMenuBlockTableViewCell {
                     if !cell.blockSwitch.isOn {
                         let oldOnSwitch = block.onSwitch
@@ -193,7 +193,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
                             self?.streaksTooltip?.dismiss()
                             oldOnSwitch?(isOn)
                         }
-                        tooltip.show(direction: .up, in: s.tableView, from: cell.blockSwitch)
+                        self?.streaksTooltip?.show(direction: .up, in: s.tableView, from: cell.blockSwitch)
                         TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile = true
                     }
                 }

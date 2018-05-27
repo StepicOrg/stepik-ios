@@ -11,10 +11,14 @@ import SkeletonView
 
 class PlaceholderTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var placeholderView: UIView!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         placeholderView.isSkeletonable = true
+
+        let margin = Double(arc4random()) / 0xFFFFFFFF * 20.0
+        rightConstraint.constant = rightConstraint.constant + CGFloat(margin)
     }
 
     func startAnimating() {

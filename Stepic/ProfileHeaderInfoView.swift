@@ -34,6 +34,9 @@ class ProfileHeaderInfoView: UIView, ProfileInfoView {
         containerView.setRoundedCorners(cornerRadius: 12)
         placeholderAvatarView.setRoundedBounds(width: 0)
         localize()
+
+        // Default state after init – loading with placeholders
+        isLoading = true
     }
 
     func set(profile: ProfileViewData) {
