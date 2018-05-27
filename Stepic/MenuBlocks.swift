@@ -32,13 +32,13 @@ class ExpandableMenuBlock: MenuBlock {
     var isExpanded: Bool = false
 }
 
-class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
-    typealias TitleContent = (title: String, content: String)
-    var content: [TitleContent] = []
-}
+class ContentExpandableMenuBlock: ExpandableMenuBlock {
+    weak var contentView: UIView?
 
-class PinsMapExpandableMenuBlock: ExpandableMenuBlock {
-    var pins: [Int] = []
+    convenience init(id: String, title: String, contentView: UIView?) {
+        self.init(id: id, title: title)
+        self.contentView = contentView
+    }
 }
 
 class TransitionMenuBlock: MenuBlock {

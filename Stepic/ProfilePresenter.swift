@@ -57,6 +57,7 @@ class ProfilePresenter {
 
     private var headerInfoPresenter: ProfileInfoPresenter?
     private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
+    private var descriptionPresenter: ProfileDescriptionPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -65,7 +66,8 @@ class ProfilePresenter {
     private var userId: Int?
 
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
-                                                           .notificationsSwitch(isOn: false)]
+                                                           .notificationsSwitch(isOn: false),
+                                                           .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader]
 
     init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
@@ -93,6 +95,11 @@ class ProfilePresenter {
             }
         }
 
+        // Description
+        if let attachedView = view?.getView(for: .description) as? ProfileDescriptionView {
+            descriptionPresenter = ProfileDescriptionPresenter(view: attachedView)
+        }
+
         refreshUser(with: user)
         refreshStreak(with: activity)
         headerInfoPresenter?.hideLoading()
@@ -100,6 +107,7 @@ class ProfilePresenter {
 
     private func refreshUser(with user: User) {
         headerInfoPresenter?.update(with: user)
+        descriptionPresenter?.update(with: user)
     }
 
     private func refreshStreak(with userActivity: UserActivity) {
@@ -111,7 +119,7 @@ class ProfilePresenter {
         let isNotificationOn = PreferencesContainer.notifications.allowStreaksNotifications
 
         for i in 0..<blocks.count {
-            if case let ProfileMenuBlock.notificationsSwitch(isOn) = blocks[i] {
+            if case ProfileMenuBlock.notificationsSwitch(_) = blocks[i] {
                 blocks[i] = ProfileMenuBlock.notificationsSwitch(isOn: isNotificationOn)
 
                 if i + 1 < blocks.count && blocks[i + 1] == ProfileMenuBlock.notificationsTimeSelection {
@@ -154,7 +162,7 @@ class ProfilePresenter {
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
             }
-        }.catch { [weak self] error in
+        }.catch { error in
             print("profile presenter: error while streaks refreshing = \(error)")
         }
     }

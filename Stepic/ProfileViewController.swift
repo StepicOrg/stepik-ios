@@ -29,6 +29,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
                 menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
             case .notificationsTimeSelection:
                 menuBlocks.append(buildNotificationsTimeSelectionBlock())
+            case .description:
+                menuBlocks.append(buildInfoExpandableBlock())
             default:
                 break
             }
@@ -82,6 +84,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     }
 
     var profileStreaksView: ProfileHeaderInfoView?
+    var profileDescriptionView: ProfileDescriptionContentView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,12 +128,11 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     func getView(for block: ProfileMenuBlock) -> Any? {
         switch block {
         case .infoHeader:
-            guard let profileStreaksView = self.profileStreaksView else {
-                return nil
-            }
-            return profileStreaksView
+            return self.profileStreaksView
         case .notificationsTimeSelection, .notificationsSwitch(_):
             return self
+        case .description:
+            return self.profileDescriptionView
         default:
             return nil
         }
@@ -247,39 +249,32 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         return block
     }
 
-    private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock? {
-        var content: [TitleContentExpandableMenuBlock.TitleContent] = []
-        if user.bio.count > 0 {
-            content += [(title: NSLocalizedString("ShortBio", comment: ""), content: user.bio)]
-        }
-        if user.details.count > 0 {
-            content += [(title: NSLocalizedString("Info", comment: ""), content: user.details)]
-        }
+    private func buildInfoExpandableBlock() -> ContentExpandableMenuBlock? {
+        profileDescriptionView = ProfileDescriptionContentView.fromNib()
+        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
 
-        guard content.count > 0 else {
-            return nil
-        }
-
-        let block: TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))")
-
-        block.content = content
-
-        block.onExpanded = { isExpanded in
+        block.onExpanded = { [weak self] isExpanded in
+            if !isExpanded {
+                block.title = "\(NSLocalizedString("ShortBio", comment: ""))"
+            } else {
+                block.title = "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))"
+            }
+            self?.menu?.update(block: block)
             block.isExpanded = isExpanded
         }
         return block
     }
 
-    private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
-        let block = PinsMapExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""))
-
-        block.pins = activity.pins
-
-        block.onExpanded = { isExpanded in
-            block.isExpanded = isExpanded
-        }
-        return block
-    }
+//    private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
+//        let block = PinsMapExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""))
+//
+//        block.pins = activity.pins
+//
+//        block.onExpanded = { isExpanded in
+//            block.isExpanded = isExpanded
+//        }
+//        return block
+//    }
 
     var streaksTooltip: Tooltip?
 

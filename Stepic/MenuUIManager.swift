@@ -32,17 +32,8 @@ class MenuUIManager {
             if let cell = cell as? TransitionMenuBlockTableViewCell, let block = block as? TransitionMenuBlock {
                 cell.initWithBlock(block: block)
             }
-        case .titleContentExpandable:
-            if let cell = cell as? TitleContentExpandableMenuBlockTableViewCell, let block = block as? TitleContentExpandableMenuBlock {
-                cell.initWithBlock(block: block)
-                cell.updateTableHeightBlock = {
-                    [weak self] in
-                    self?.tableView.beginUpdates()
-                    self?.tableView.endUpdates()
-                }
-            }
-        case .pinsMapExpandable:
-            if let cell = cell as? PinsMapExpandableMenuBlockTableViewCell, let block = block as? PinsMapExpandableMenuBlock {
+        case .contentExpandable:
+            if let cell = cell as? ContentExpandableMenuBlockTableViewCell, let block = block as? ContentExpandableMenuBlock {
                 cell.initWithBlock(block: block)
                 cell.updateTableHeightBlock = {
                     [weak self] in
@@ -81,12 +72,8 @@ class MenuUIManager {
             if let block = block as? TransitionMenuBlock {
                 block.onTouch?()
             }
-        case .titleContentExpandable:
-            if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
-                cell.expandPressed()
-            }
-        case .pinsMapExpandable:
-            if let cell = tableView.cellForRow(at: indexPath) as? PinsMapExpandableMenuBlockTableViewCell {
+        case .contentExpandable:
+            if let cell = tableView.cellForRow(at: indexPath) as? ContentExpandableMenuBlockTableViewCell {
                 cell.expandPressed()
             }
         default:
@@ -111,8 +98,8 @@ class MenuUIManager {
             return false
         }
         switch type {
-        case .titleContentExpandable:
-            if let block = block as? TitleContentExpandableMenuBlock {
+        case .contentExpandable:
+            if let block = block as? ContentExpandableMenuBlock {
                 return !block.isExpanded
             } else {
                 return false
@@ -132,16 +119,14 @@ class MenuUIManager {
 enum SupportedMenuBlockType {
     case switchBlock
     case transition
-    case titleContentExpandable
+    case contentExpandable
     case header
-    case pinsMapExpandable
     case placeholder
 
     static var all: [SupportedMenuBlockType] = [
         .switchBlock,
         .transition,
-        .titleContentExpandable,
-        .pinsMapExpandable,
+        .contentExpandable,
         .header,
         .placeholder
     ]
@@ -152,10 +137,8 @@ enum SupportedMenuBlockType {
             return "SwitchMenuBlockTableViewCell"
         case .transition:
             return "TransitionMenuBlockTableViewCell"
-        case .titleContentExpandable:
-            return "TitleContentExpandableMenuBlockTableViewCell"
-        case .pinsMapExpandable:
-            return "PinsMapExpandableMenuBlockTableViewCell"
+        case .contentExpandable:
+            return "ContentExpandableMenuBlockTableViewCell"
         case .header:
             return "HeaderMenuBlockTableViewCell"
         case .placeholder:
@@ -172,12 +155,8 @@ enum SupportedMenuBlockType {
             self = .switchBlock
             return
         }
-        if block is TitleContentExpandableMenuBlock {
-            self = .titleContentExpandable
-            return
-        }
-        if block is PinsMapExpandableMenuBlock {
-            self = .pinsMapExpandable
+        if block is ContentExpandableMenuBlock {
+            self = .contentExpandable
             return
         }
         if block is TransitionMenuBlock {
