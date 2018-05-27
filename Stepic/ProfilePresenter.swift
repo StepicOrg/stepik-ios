@@ -68,7 +68,7 @@ class ProfilePresenter {
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
                                                            .description]
-    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader]
+    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .description]
 
     init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
