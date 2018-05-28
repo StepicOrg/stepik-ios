@@ -70,4 +70,14 @@ class SettingsViewController: MenuViewController, SettingsView {
         }
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
     }
+
+    func navigateToDownloads() {
+        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func presentAuth() {
+        navigationController?.popToRootViewController(animated: false)
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
 }

@@ -14,7 +14,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     var presenter: ProfilePresenter?
     var presenterNotifications: StreakNotificationsControlPresenter?
 
-    var shareBarButtonItem: UIBarButtonItem?
+    var settingsButton: UIBarButtonItem?
+
     var userId: Int?
 
     func set(state: ProfileState) {
@@ -72,14 +73,10 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             case .refreshing:
                 showPlaceholder(for: .refreshing)
             case .anonymous:
-                navigationItem.rightBarButtonItem = nil
                 showPlaceholder(for: .anonymous)
             case .error:
                 showPlaceholder(for: .connectionError)
             case .authorized:
-                if let button = shareBarButtonItem {
-                    navigationItem.rightBarButtonItem = button
-                }
                 isPlaceholderShown = false
             }
         }
@@ -106,8 +103,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
         registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
 
-        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
-        self.navigationItem.rightBarButtonItem = shareBarButtonItem!
+        settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
@@ -120,12 +116,26 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         profileStreaksView = ProfileHeaderInfoView.fromNib()
         tableView.tableHeaderView = profileStreaksView
 
-        presenter = ProfilePresenter(userId: AuthInfo.shared.userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
-        presenter?.refresh()
+        if let userId = userId ?? AuthInfo.shared.userId {
+            presenter = ProfilePresenter(userId: userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
+            presenter?.refresh()
+        }
     }
 
-    @objc func shareButtonPressed() {
-        //presenter?.sharePressed()
+    func manageSettingsTransitionControl(isHidden: Bool) {
+        if isHidden {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = settingsButton!
+        }
+    }
+
+    @objc func settingsButtonPressed() {
+        // Bad route injection :(
+        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
+            let presenter = SettingsPresenter(view: vc)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     func getView(for block: ProfileMenuBlock) -> Any? {
@@ -283,12 +293,11 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     var streaksTooltip: Tooltip?
 
     func onAppear() {
-        //self.presenter?.updateProfile()
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         tableView.layoutIfNeeded()
         tableView.layoutTableHeaderView()
     }

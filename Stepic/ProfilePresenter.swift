@@ -17,6 +17,8 @@ protocol ProfileView: class {
 
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
+
+    func manageSettingsTransitionControl(isHidden: Bool)
 }
 
 enum ProfileMenuBlock: RawRepresentable, Equatable {
@@ -64,7 +66,7 @@ class ProfilePresenter {
     private var usersAPI: UsersAPI
     private var notificationPermissionManager: NotificationPermissionManager
 
-    private var userId: Int?
+    private var userId: Int
 
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
@@ -72,7 +74,7 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .description]
 
-    init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
+    init(userId: Int, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
@@ -144,10 +146,8 @@ class ProfilePresenter {
     }
 
     func refresh() {
-        guard let userId = self.userId else {
-            self.view?.set(state: .error)
-            return
-        }
+        let isMe = userId == AuthInfo.shared.userId
+        view?.manageSettingsTransitionControl(isHidden: !isMe)
 
         var user: User?
         loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<UserActivity> in
@@ -157,13 +157,13 @@ class ProfilePresenter {
                 throw UnwrappingError.optionalError
             }
 
-            return strongSelf.userActivitiesAPI.retrieve(user: userId)
+            return strongSelf.userActivitiesAPI.retrieve(user: strongSelf.userId)
         }.then { [weak self] activity -> Void in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }
 
-            let menu = userId == AuthInfo.shared.userId ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
+            let menu = isMe ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
                                                         : ProfilePresenter.otherUserMenu
 
             if let user = user {
