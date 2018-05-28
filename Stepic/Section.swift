@@ -108,7 +108,13 @@ class Section: NSManagedObject, JSONSerializable {
                 self.loadProgressesForUnits(units: newUnits, completion: {
                     self.loadLessonsForUnits(units: newUnits, completion: {
                         idsDownloaded(newUnits)
+                    }, error: {
+                        print("Error while downloading units")
+                        errorWhileDownloading()
                     })
+                }, error: {
+                    print("Error while downloading units")
+                    errorWhileDownloading()
                 })
                 }, error: {
                     _ in
@@ -118,7 +124,7 @@ class Section: NSManagedObject, JSONSerializable {
         }
     }
 
-    func loadProgressesForUnits(units: [Unit], completion: @escaping (() -> Void)) {
+    func loadProgressesForUnits(units: [Unit], completion: @escaping (() -> Void), error errorHandler: (() -> Void)? = nil) {
         var progressIds: [String] = []
         var progresses: [Progress] = []
         for unit in units {
@@ -142,6 +148,7 @@ class Section: NSManagedObject, JSONSerializable {
             completion()
             }, error: {
                 (_) -> Void in
+                errorHandler?()
                 print("Error while dowloading progresses")
         })
     }

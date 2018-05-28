@@ -58,7 +58,15 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    var sectionDeadlines: [SectionDeadline]?
+    var sectionDeadlines: [SectionDeadline]? {
+        didSet {
+            if #available(iOS 10.0, *) {
+                DeadlineNotificationsManager.shared.updateDeadlineNotificationsFor(course: self)
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
 
     var metaInfo: String {
         //percent of completion = n_steps_passed/n_steps
