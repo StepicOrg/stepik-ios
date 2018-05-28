@@ -8,6 +8,8 @@
 
 import UIKit
 import FLKAutoLayout
+import SVProgressHUD
+
 class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
     @IBOutlet weak var questionLabel: StepikLabel!
@@ -15,6 +17,8 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
 
     let modes: [DeadlineMode] = [.hobby, .standard, .extreme]
+    var course: Course?
+    var onDeadlineSelected: (() -> Void)?
 
     private var modeButtonSize: CGSize {
         let width = CGFloat(Int((collectionView.bounds.width - CGFloat(modes.count - 1) * 12) / CGFloat(modes.count)))
@@ -49,7 +53,6 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         super.viewWillLayoutSubviews()
         collectionView.invalidateIntrinsicContentSize()
         collectionView.layoutIfNeeded()
-//        collectionView.constrainHeight("\(modeButtonSize.height)")
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
@@ -61,25 +64,30 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            [weak self]
-//            _ in
-//            guard let strongSelf = self else {
-//                return
-//            }
-//            (strongSelf.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = strongSelf.modeButtonSize
-//            strongSelf.collectionView.invalidateIntrinsicContentSize()
-//            strongSelf.collectionView.layoutIfNeeded()
-//        })
-//    }
-
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 
     func didSelectMode(mode: DeadlineMode) {
-        self.dismiss(animated: true, completion: nil)
+        guard let course = course else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+
+        SVProgressHUD.show()
+        PersonalDeadlineCounter.shared.countDeadlines(mode: mode, for: course).then {
+            sectionDeadlines -> Void in
+            SVProgressHUD.dismiss()
+            course.sectionDeadlines = sectionDeadlines
+            for deadline in sectionDeadlines {
+                print("section: \(deadline.section) date: \(deadline.deadlineDate.getStepicFormatString(withTime: true))")
+            }
+            self.onDeadlineSelected?()
+            self.dismiss(animated: true, completion: nil)
+        }.catch {
+            _ in
+            SVProgressHUD.showError(withStatus: nil)
+        }
     }
 }
 

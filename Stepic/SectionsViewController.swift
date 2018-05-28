@@ -93,15 +93,26 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
         widget.yesAction = {
             [weak self] in
+
+            guard let strongSelf = self else {
+                return
+            }
+
             let presentr: Presentr = {
                 let presenter = Presentr(presentationType: .dynamic(center: .center))
                 presenter.roundCorners = true
                 return presenter
             }()
 
-            let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines")
-
-            self?.customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
+            guard let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlinesModeSelectionViewController else {
+                return
+            }
+            modesVC.course = strongSelf.course
+            modesVC.onDeadlineSelected = {
+                [weak self] in
+                self?.tableView.reloadData()
+            }
+            strongSelf.customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
         }
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
@@ -400,7 +411,8 @@ extension SectionsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
 
-        cell.initWithSection(course.sections[indexPath.row], delegate: self)
+        let section = course.sections[indexPath.row]
+        cell.initWithSection(section, sectionDeadline: course.sectionDeadlines?.first(where: {$0.section == section.id}), delegate: self)
 
         return cell
     }

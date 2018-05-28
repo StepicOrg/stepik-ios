@@ -11,6 +11,8 @@ import PromiseKit
 
 class PersonalDeadlineCounter {
 
+    static let shared = PersonalDeadlineCounter()
+
     enum DeadlineCountError: Error {
         case noSectionInfo
     }
@@ -53,7 +55,7 @@ class PersonalDeadlineCounter {
     }
 
     private func getDeadlineDateForSection(since startDate: Date, daysToComplete: Int) -> Date {
-        let endDate = startDate.addingTimeInterval(TimeInterval(daysToComplete * 60 * 60))
+        let endDate = startDate.addingTimeInterval(TimeInterval(daysToComplete * 60 * 60 * 24))
         return Calendar.current.startOfDay(for: endDate).addingTimeInterval(23 * 60 * 60 + 59 * 60)
     }
 
@@ -67,6 +69,7 @@ class PersonalDeadlineCounter {
                     for unit in section.units {
                         sectionTimeToComplete += unit.lesson?.timeToComplete ?? 0
                     }
+                    print("time to complete section \(section.id) = \(sectionTimeToComplete)")
                     fulfill((section.id, sectionTimeToComplete))
                 }, error: {
                     //TODO: Add error handling here
