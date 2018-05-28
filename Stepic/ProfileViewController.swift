@@ -31,6 +31,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
                 menuBlocks.append(buildNotificationsTimeSelectionBlock())
             case .description:
                 menuBlocks.append(buildInfoExpandableBlock())
+            case .pinsMap:
+                menuBlocks.append(buildPinsMapExpandableBlock())
             default:
                 break
             }
@@ -85,6 +87,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
     var profileStreaksView: ProfileHeaderInfoView?
     var profileDescriptionView: ProfileDescriptionContentView?
+    var pinsMapContentView: PinsMapBlockContentView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +136,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             return self
         case .description:
             return self.profileDescriptionView
+        case .pinsMap:
+            return self.pinsMapContentView
         default:
             return nil
         }
@@ -265,16 +270,15 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         return block
     }
 
-//    private func buildPinsMapExpandableBlock(activity: UserActivity) -> PinsMapExpandableMenuBlock? {
-//        let block = PinsMapExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""))
-//
-//        block.pins = activity.pins
-//
-//        block.onExpanded = { isExpanded in
-//            block.isExpanded = isExpanded
-//        }
-//        return block
-//    }
+    private func buildPinsMapExpandableBlock() -> ContentExpandableMenuBlock? {
+        pinsMapContentView = PinsMapBlockContentView()
+        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
+
+        block.onExpanded = { isExpanded in
+            block.isExpanded = isExpanded
+        }
+        return block
+    }
 
     var streaksTooltip: Tooltip?
 

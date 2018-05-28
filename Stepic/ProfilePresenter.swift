@@ -58,6 +58,7 @@ class ProfilePresenter {
     private var headerInfoPresenter: ProfileInfoPresenter?
     private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
     private var descriptionPresenter: ProfileDescriptionPresenter?
+    private var pinsMapPresenter: PinsMapPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -67,8 +68,9 @@ class ProfilePresenter {
 
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
+                                                           .pinsMap,
                                                            .description]
-    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .description]
+    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .description]
 
     init(userId: Int?, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
@@ -100,6 +102,11 @@ class ProfilePresenter {
             descriptionPresenter = ProfileDescriptionPresenter(view: attachedView)
         }
 
+        // Pins map
+        if let attachedView = view?.getView(for: .pinsMap) as? PinsMapContentView {
+            pinsMapPresenter = PinsMapPresenter(view: attachedView)
+        }
+
         refreshUser(with: user)
         refreshStreak(with: activity)
         headerInfoPresenter?.hideLoading()
@@ -112,6 +119,7 @@ class ProfilePresenter {
 
     private func refreshStreak(with userActivity: UserActivity) {
         headerInfoPresenter?.update(with: userActivity)
+        pinsMapPresenter?.update(with: userActivity)
     }
 
     private func buildSelfUserMenu(blocks: [ProfileMenuBlock]) -> [ProfileMenuBlock] {
