@@ -17,6 +17,12 @@ class PersonalDeadlineNotificationsManager {
 
     func updateDeadlineNotifications(for course: Course) {
         if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: {
+                requests in
+                print("pending \(requests.count) requests")
+                print(requests)
+            })
+
             removeNotificationsFor(course: course)
             guard let deadlines = course.sectionDeadlines else {
                 return

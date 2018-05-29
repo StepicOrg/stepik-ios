@@ -42,10 +42,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         self.navigationItem.backBarButtonItem?.title = " "
 
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
-        let infoBtn = UIButton(type: UIButtonType.infoDark)
-        infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), for: UIControlEvents.touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
-        self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
+
+        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "dots_dark"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SectionsViewController.moreButtonPressed(_:)))
+
+        self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
 
         tableView.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
         tableView.emptySetPlaceholder = StepikPlaceholder(.emptySections)
@@ -82,6 +82,24 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
+    func requestDeadlines() {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.roundCorners = true
+            return presenter
+        }()
+
+        guard let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlinesModeSelectionViewController else {
+            return
+        }
+        modesVC.course = course
+        modesVC.onDeadlineSelected = {
+            [weak self] in
+            self?.tableView.reloadData()
+        }
+        customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
+    }
+
     //Widget here
     lazy var personalDeadlinesWidgetView: UIView = {
         let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
@@ -93,26 +111,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
         widget.yesAction = {
             [weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-
-            let presentr: Presentr = {
-                let presenter = Presentr(presentationType: .dynamic(center: .center))
-                presenter.roundCorners = true
-                return presenter
-            }()
-
-            guard let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlinesModeSelectionViewController else {
-                return
-            }
-            modesVC.course = strongSelf.course
-            modesVC.onDeadlineSelected = {
-                [weak self] in
-                self?.tableView.reloadData()
-            }
-            strongSelf.customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
+            self?.requestDeadlines()
         }
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
@@ -120,6 +119,44 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
         return backgroundView
     }()
+
+    @objc func moreButtonPressed(_ button: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: course.title, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Course Info", style: .default, handler: {
+            _ in
+            self.performSegue(withIdentifier: "showCourse", sender: nil)
+        }))
+        if course.sectionDeadlines != nil {
+            alert.addAction(UIAlertAction(title: "Delete deadlines", style: .destructive, handler: {
+                [weak self]
+                _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                SVProgressHUD.show()
+                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).then {
+                    [weak self]
+                    () -> Void in
+                    SVProgressHUD.dismiss()
+                    self?.tableView.reloadData()
+                }.catch {
+                    _ in
+                    SVProgressHUD.showError(withStatus: nil)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Change deadlines", style: .default, handler: {
+                _ in
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Set deadlines", style: .default, handler: {
+                [weak self]
+                _ in
+                self?.requestDeadlines()
+            }))
+        }
+        present(alert, animated: true, completion: nil)
+    }
 
     @objc func shareButtonPressed(_ button: UIBarButtonItem) {
         share(popoverSourceItem: button, popoverView: nil, fromParent: false)
