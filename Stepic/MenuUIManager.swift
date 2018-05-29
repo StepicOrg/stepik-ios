@@ -99,11 +99,7 @@ class MenuUIManager {
         }
         switch type {
         case .contentExpandable:
-            if let block = block as? ContentExpandableMenuBlock {
-                return !block.isExpanded
-            } else {
-                return false
-            }
+            return true
         default:
             return block.isSelectable
         }

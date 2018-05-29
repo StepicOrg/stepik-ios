@@ -17,6 +17,10 @@ class MenuBlockTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        let selectedView = UIView()
+        selectedView.backgroundColor = UIColor.mainLight.withAlphaComponent(0.75)
+        self.selectedBackgroundView = selectedView
+
         separator.isHidden = false
         separator.backgroundColor = UIColor(hex: 0x535366).withAlphaComponent(0.05)
         self.contentView.addSubview(separator)

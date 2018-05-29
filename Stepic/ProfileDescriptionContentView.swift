@@ -11,7 +11,7 @@ import UIKit
 class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
     @IBOutlet weak var shortBioTextLabel: StepikLabel!
     @IBOutlet weak var infoHeaderLabel: StepikLabel!
-    @IBOutlet weak var infoTextLabel: StepikLabel
+    @IBOutlet weak var infoTextLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
