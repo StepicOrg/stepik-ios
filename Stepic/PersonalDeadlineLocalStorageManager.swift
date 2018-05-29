@@ -20,10 +20,10 @@ class PersonalDeadlineLocalStorageManager {
         let key = defaultsKey(for: course)
         defaults.setValue(nil, forKey: key)
     }
-    
+
     func set(storageRecord: StorageRecord, for course: Course) {
         let key = defaultsKey(for: course)
-        defaults.setValue(storageRecord.json.rawString(), forKey: key)
+        defaults.setValue(storageRecord.json.rawString(.utf8, options: .init(rawValue: 0)), forKey: key)
     }
 
     func getRecord(for course: Course) -> StorageRecord? {
@@ -31,7 +31,7 @@ class PersonalDeadlineLocalStorageManager {
         guard let jsonString = defaults.value(forKey: key) as? String else {
             return nil
         }
-        let json: JSON = JSON(jsonString)
+        let json: JSON = JSON(parseJSON: jsonString)
         return StorageRecord(json: json)
     }
 }

@@ -17,6 +17,7 @@ enum StorageKind {
             let courseIDString = String(string.dropFirst(9))
             if let courseID = Int(courseIDString) {
                 self = .deadline(courseID: courseID)
+                return
             }
         }
         return nil

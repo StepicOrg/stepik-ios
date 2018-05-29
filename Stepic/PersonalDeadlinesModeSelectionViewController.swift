@@ -75,18 +75,11 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         }
 
         SVProgressHUD.show()
-        PersonalDeadlineCounter.shared.countDeadlines(mode: mode, for: course).then {
-            sectionDeadlines -> Void in
+        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).then {
+            () -> Void in
             SVProgressHUD.dismiss()
-            course.sectionDeadlines = sectionDeadlines
-            for deadline in sectionDeadlines {
-                print("section: \(deadline.section) date: \(deadline.deadlineDate.getStepicFormatString(withTime: true))")
-            }
             self.onDeadlineSelected?()
             self.dismiss(animated: true, completion: nil)
-        }.catch {
-            _ in
-            SVProgressHUD.showError(withStatus: nil)
         }
     }
 }

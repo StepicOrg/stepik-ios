@@ -59,12 +59,8 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     var sectionDeadlines: [SectionDeadline]? {
-        didSet {
-            if #available(iOS 10.0, *) {
-                PersonalDeadlineNotificationsManager.shared.updateDeadlineNotificationsFor(course: self)
-            } else {
-                // Fallback on earlier versions
-            }
+        get {
+            return (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
         }
     }
 

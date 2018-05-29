@@ -60,6 +60,9 @@ class DeadlineStorageData: StorageData {
     }
 
     var dictValue: [String : Any] {
-        return [:]
+        return [
+            "course": courseID,
+            "deadlines": deadlines.map { $0.dictValue }
+        ]
     }
 }

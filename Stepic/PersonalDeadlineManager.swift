@@ -15,6 +15,8 @@ class PersonalDeadlineManager {
     var localStorageManager: PersonalDeadlineLocalStorageManager
     var notificationManager: PersonalDeadlineNotificationsManager
 
+    static let shared = PersonalDeadlineManager(counter: PersonalDeadlineCounter(), storageRecordsAPI: StorageRecordsAPI(), localStorageManager: PersonalDeadlineLocalStorageManager(), notificationManager: PersonalDeadlineNotificationsManager())
+
     init(counter: PersonalDeadlineCounter, storageRecordsAPI: StorageRecordsAPI, localStorageManager: PersonalDeadlineLocalStorageManager, notificationManager: PersonalDeadlineNotificationsManager) {
         self.counter = counter
         self.storageRecordsAPI = storageRecordsAPI
@@ -41,12 +43,12 @@ class PersonalDeadlineManager {
             }
         }
     }
-    
+
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void> {
         return Promise {
             fulfill, reject in
             storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).then {
-                storageRecords, meta -> Void in
+                storageRecords, _ -> Void in
                 guard let storageRecord = storageRecords.first else {
                     fulfill(())
                     return
@@ -60,7 +62,7 @@ class PersonalDeadlineManager {
             }
         }
     }
-    
+
     func deleteDeadline(for course: Course) -> Promise<Void> {
         return Promise {
             fulfill, reject in
@@ -79,5 +81,5 @@ class PersonalDeadlineManager {
             }
         }
     }
-    
+
 }
