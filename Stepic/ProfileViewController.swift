@@ -9,63 +9,21 @@
 import UIKit
 import Presentr
 
-class ProfileViewController: MenuViewController, ProfileView, StreakNotificationsControlView, ControllerWithStepikPlaceholder {
+class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
+
+    var profileStreaksView: ProfileHeaderInfoView?
+    var profileDescriptionView: ProfileDescriptionContentView?
+    var pinsMapContentView: PinsMapBlockContentView?
+
+    // Implementation of StreakNotificationsControlView in extension
     var presenterNotifications: StreakNotificationsControlPresenter?
 
+    var streaksTooltip: Tooltip?
     var settingsButton: UIBarButtonItem?
 
     var otherUserId: Int?
-
-    func set(state: ProfileState) {
-        self.state = state
-    }
-
-    func setMenu(blocks: [ProfileMenuBlock]) {
-        var menuBlocks = [MenuBlock?]()
-        for block in blocks {
-            switch block {
-            case .notificationsSwitch(let isOn):
-                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
-            case .notificationsTimeSelection:
-                menuBlocks.append(buildNotificationsTimeSelectionBlock())
-            case .description:
-                menuBlocks.append(buildInfoExpandableBlock())
-            case .pinsMap:
-                menuBlocks.append(buildPinsMapExpandableBlock())
-            default:
-                break
-            }
-        }
-        menu = Menu(blocks: menuBlocks.flatMap { $0 })
-    }
-
-    func attachPresenter(_ presenter: StreakNotificationsControlPresenter) {
-        self.presenterNotifications = presenter
-    }
-
-    func showStreakTimeSelection(startHour: Int) {
-        // FIXME: strange picker injection. this vc logic should be in the presenter, i think
-        let streakTimePickerPresentr = Presentr(presentationType: .bottomHalf)
-        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
-        vc.startHour = startHour
-        vc.selectedBlock = { [weak self] in
-            self?.presenterNotifications?.refreshStreakNotificationTime()
-        }
-        customPresentViewController(streakTimePickerPresentr, viewController: vc, animated: true, completion: nil)
-    }
-
-    func requestNotificationsPermissions() {
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        self.present(alert, animated: true)
-    }
 
     private var state: ProfileState = .normal {
         didSet {
@@ -79,10 +37,6 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             }
         }
     }
-
-    var profileStreaksView: ProfileHeaderInfoView?
-    var profileDescriptionView: ProfileDescriptionContentView?
-    var pinsMapContentView: PinsMapBlockContentView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,16 +69,48 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         initPresenter()
     }
 
-    private func initPresenter() {
-        // Init only with other/anonymous seed
-        // Presenter check anonymous seed and load self profile if we have logged user
-        var seed: ProfilePresenter.UserSeed = .anonymous
-        if let userId = otherUserId {
-            seed = .other(id: userId)
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onAppear()
+    }
 
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.layoutIfNeeded()
+        tableView.layoutTableHeaderView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        streaksTooltip?.dismiss()
+    }
+
+    func onAppear() {
         presenter?.refresh()
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+    }
+
+    func set(state: ProfileState) {
+        self.state = state
+    }
+
+    func setMenu(blocks: [ProfileMenuBlock]) {
+        var menuBlocks = [MenuBlock?]()
+        for block in blocks {
+            switch block {
+            case .notificationsSwitch(let isOn):
+                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
+            case .notificationsTimeSelection:
+                menuBlocks.append(buildNotificationsTimeSelectionBlock())
+            case .description:
+                menuBlocks.append(buildInfoExpandableBlock())
+            case .pinsMap:
+                menuBlocks.append(buildPinsMapExpandableBlock())
+            default:
+                break
+            }
+        }
+        menu = Menu(blocks: menuBlocks.flatMap { $0 })
     }
 
     func manageSettingsTransitionControl(isHidden: Bool) {
@@ -132,14 +118,6 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             navigationItem.rightBarButtonItem = nil
         } else {
             navigationItem.rightBarButtonItem = settingsButton!
-        }
-    }
-
-    @objc func settingsButtonPressed() {
-        // Bad route injection :(
-        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
-            let presenter = SettingsPresenter(view: vc)
-            navigationController?.pushViewController(vc, animated: true)
         }
     }
 
@@ -155,6 +133,26 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             return self.pinsMapContentView
         default:
             return nil
+        }
+    }
+
+    private func initPresenter() {
+        // Init only with other/anonymous seed
+        // Presenter check anonymous seed and load self profile if we have logged user
+        var seed: ProfilePresenter.UserSeed = .anonymous
+        if let userId = otherUserId {
+            seed = .other(id: userId)
+        }
+
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
+        presenter?.refresh()
+    }
+
+    @objc func settingsButtonPressed() {
+        // Bad route injection :(
+        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
+            let presenter = SettingsPresenter(view: vc)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 
@@ -225,24 +223,6 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         return block
     }
 
-    func updateDisplayedStreakTime(startHour: Int) {
-        func getDisplayingStreakTimeInterval(startHour: Int) -> String {
-            let startInterval = TimeInterval((startHour % 24) * 60 * 60)
-            let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
-            let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60)
-            let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .none
-            return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
-        }
-
-        if let block = menu?.getBlock(id: ProfileMenuBlock.notificationsTimeSelection.rawValue) {
-            block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(getDisplayingStreakTimeInterval(startHour: startHour))"
-            menu?.update(block: block)
-        }
-    }
-
     private func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
         var currentZone00UTC: String {
             let date = Date(timeIntervalSince1970: 0)
@@ -293,29 +273,6 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
             block.isExpanded = isExpanded
         }
         return block
-    }
-
-    var streaksTooltip: Tooltip?
-
-    func onAppear() {
-        presenter?.refresh()
-        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        onAppear()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.layoutIfNeeded()
-        tableView.layoutTableHeaderView()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        streaksTooltip?.dismiss()
     }
 }
 
