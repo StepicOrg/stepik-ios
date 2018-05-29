@@ -50,6 +50,8 @@ class PersonalDeadlineManager {
             storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).then {
                 storageRecords, _ -> Void in
                 guard let storageRecord = storageRecords.first else {
+                    self.localStorageManager.deleteRecord(for: course)
+                    self.notificationManager.updateDeadlineNotifications(for: course)
                     fulfill(())
                     return
                 }
