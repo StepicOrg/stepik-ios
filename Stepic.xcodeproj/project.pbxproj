@@ -772,18 +772,6 @@
 		08CBA3341F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */; };
 		08CBA3351F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */; };
 		08CBA3361F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */; };
-		08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA33B1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA33D1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA33E1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA33F1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA3401F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
-		08CBA3411F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
-		08CBA3431F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
-		08CBA3451F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
-		08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
-		08CBA3471F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
-		08CBA3481F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
 		08CBA34B1F57734900302154 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* ProfileViewController.swift */; };
 		08CBA34D1F57734900302154 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* ProfileViewController.swift */; };
 		08CBA34F1F57734900302154 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* ProfileViewController.swift */; };
@@ -1917,8 +1905,6 @@
 		2C35C4FB1F4DB8D4002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F71F4DB8CC002F3BF4 /* step0.html */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
-		2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
-		2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */; };
 		2C47A16120628420003E87EC /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A16020628420003E87EC /* AnalyticsReporter.swift */; };
 		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C47A165206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
@@ -2197,11 +2183,6 @@
 		2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
 		2C6E9CD51FED6ADD001821A2 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
-		2C715D9720568BC70098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
-		2C715D9820568BCA0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
-		2C715D9920568BCA0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
-		2C715D9A20568BCB0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
-		2C715D9B20568BCB0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
 		2C715D9C20568BD80098707D /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C715D9D20568BD80098707D /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C715D9E20568BD90098707D /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
@@ -3134,7 +3115,6 @@
 		2CA8D1762088D9C000E105E9 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
 		2CA8D1772088D9C000E105E9 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
 		2CA8D1782088D9C000E105E9 /* CourseTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F70B1FC3837800640F1F /* CourseTagCollectionViewCell.swift */; };
-		2CA8D1792088D9C000E105E9 /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */; };
 		2CA8D17A2088D9C000E105E9 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2CA8D17B2088D9C000E105E9 /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
 		2CA8D17D2088D9C000E105E9 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
@@ -3367,7 +3347,6 @@
 		2CA8D2602088D9C000E105E9 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */; };
 		2CA8D2612088D9C000E105E9 /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		2CA8D2622088D9C000E105E9 /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
-		2CA8D2632088D9C000E105E9 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */; };
 		2CA8D2642088D9C000E105E9 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		2CA8D2652088D9C000E105E9 /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
 		2CA8D2662088D9C000E105E9 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
@@ -3577,7 +3556,6 @@
 		2CA8D3372088D9C000E105E9 /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2CA8D3382088D9C000E105E9 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		2CA8D3392088D9C000E105E9 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
-		2CA8D33A2088D9C000E105E9 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */; };
 		2CA8D33B2088D9C000E105E9 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
 		2CA8D33C2088D9C000E105E9 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
 		2CA8D33D2088D9C000E105E9 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
@@ -4949,8 +4927,6 @@
 		08CBA3141F57562A00302154 /* SwitchMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08CBA3251F57563C00302154 /* TransitionMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransitionMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
-		08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleContentExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
-		08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08CBA34A1F57734900302154 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		08CBA3531F5A2D9400302154 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		08CCAEC0204F0B2D002B4544 /* NotificationRequestAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertManager.swift; sourceTree = "<group>"; };
@@ -5162,8 +5138,6 @@
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
-		2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
-		2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinsMapExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
@@ -6914,11 +6888,9 @@
 			children = (
 				2CB2393B20BB455200F0FE3B /* GenericContent */,
 				2C92669420B5C78900525AFC /* PlaceholderCell */,
-				2C45339F204DB3980061342A /* PinsMapExpandable */,
 				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
 				08DF78C41F5EF02300AEEA85 /* Switch */,
 				08DF78C51F5EF02900AEEA85 /* Transition */,
-				08DF78C61F5EF02F00AEEA85 /* TitleContentExpandable */,
 				08DF78C71F5EF03B00AEEA85 /* Header */,
 			);
 			name = MenuBlockCells;
@@ -7087,15 +7059,6 @@
 				08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */,
 			);
 			name = Transition;
-			sourceTree = "<group>";
-		};
-		08DF78C61F5EF02F00AEEA85 /* TitleContentExpandable */ = {
-			isa = PBXGroup;
-			children = (
-				08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */,
-				08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */,
-			);
-			name = TitleContentExpandable;
 			sourceTree = "<group>";
 		};
 		08DF78C71F5EF03B00AEEA85 /* Header */ = {
@@ -7728,15 +7691,6 @@
 				8622056A2055561F00F14255 /* PinsMapView.swift */,
 			);
 			name = PinsMap;
-			sourceTree = "<group>";
-		};
-		2C45339F204DB3980061342A /* PinsMapExpandable */ = {
-			isa = PBXGroup;
-			children = (
-				2C4533A0204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift */,
-				2C4533A1204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib */,
-			);
-			name = PinsMapExpandable;
 			sourceTree = "<group>";
 		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
@@ -9192,7 +9146,6 @@
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */,
-				2C4533A3204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.xib in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -9215,7 +9168,6 @@
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				088EDCB91F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
-				08CBA3411F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
@@ -9397,7 +9349,6 @@
 				2C1B62801F4C4AEF00236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				087E8B26204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
 				2C1B62811F4C4AEF00236804 /* QuizViewController.xib in Resources */,
-				08CBA3471F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B62CA1F4C517500236804 /* Config.plist in Resources */,
 				08ED08E81FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				2C1B62821F4C4AEF00236804 /* step4.html in Resources */,
@@ -9507,7 +9458,6 @@
 				2C1B64E31F4C597F00236804 /* icon.png in Resources */,
 				087E8B28204DE2A200C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
 				2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */,
-				08CBA3481F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				08ED08E91FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				2C1B64941F4C590700236804 /* QuizViewController.xib in Resources */,
@@ -9591,7 +9541,6 @@
 				2C89AAF71F4C289900227C3B /* MathJax in Resources */,
 				2C89AAF81F4C289900227C3B /* StepTabView.xib in Resources */,
 				2C89AAF91F4C289900227C3B /* DiscussionCountView.xib in Resources */,
-				08CBA3451F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C6A763E2045CE9200C509A6 /* Adaptive.storyboard in Resources */,
 				2C89AAFB1F4C289900227C3B /* PickerViewController.xib in Resources */,
 				2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -9722,7 +9671,6 @@
 				087E8B27204DE2A100C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
 				86A1C32B2065158000D0914C /* StepikPlaceholderView.xib in Resources */,
 				2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */,
-				08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
 				08ED08E71FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				2C9732C51F4C38F600AC9301 /* QuizViewController.xib in Resources */,
@@ -9806,7 +9754,6 @@
 				2CA8D3382088D9C000E105E9 /* StepTabView.xib in Resources */,
 				2CE1134B208E104000293EAE /* Config.plist in Resources */,
 				2CA8D3392088D9C000E105E9 /* DiscussionCountView.xib in Resources */,
-				2CA8D33A2088D9C000E105E9 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2CA8D33B2088D9C000E105E9 /* Adaptive.storyboard in Resources */,
 				2CA8D33C2088D9C000E105E9 /* PickerViewController.xib in Resources */,
 				2CA8D33D2088D9C000E105E9 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -9981,7 +9928,6 @@
 				86A1C3262065157C00D0914C /* StepikPlaceholderView.xib in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
 				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
-				08CBA3431F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				2C0AF18A203C606E000EA3B6 /* arrow_right.svg in Resources */,
 				08ED08E41FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
@@ -11607,7 +11553,6 @@
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
-				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
@@ -11972,7 +11917,6 @@
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
-				2C4533A2204DB3D00061342A /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
 				088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */,
@@ -12477,7 +12421,6 @@
 				0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B618E1F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B618F1F4C4AEF00236804 /* ImageTapHelper.swift in Sources */,
-				2C715D9B20568BCB0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				086BE2B81F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C608B2B2045699F006870BB /* AdaptiveCourseSelectViewController.swift in Sources */,
 				2C1B61901F4C4AEF00236804 /* DeepLinkRouter.swift in Sources */,
@@ -12540,7 +12483,6 @@
 				2C1B61BF1F4C4AEF00236804 /* PersistentTaskRecoveryManager.swift in Sources */,
 				088EDCAC1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C9E3F431F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
-				08CBA33F1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08EA89CE200E688A00BCAF44 /* SQLReply.swift in Sources */,
 				2C1B61C11F4C4AEF00236804 /* ExecutableTaskTypes.swift in Sources */,
 				2C1B61C21F4C4AEF00236804 /* DictionarySerializable.swift in Sources */,
@@ -12966,7 +12908,6 @@
 				0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B639F1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B63A01F4C590700236804 /* ImageTapHelper.swift in Sources */,
-				2C715D9A20568BCB0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				086BE2B91F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C608B2C204569A0006870BB /* AdaptiveCourseSelectViewController.swift in Sources */,
 				2C1B63A11F4C590700236804 /* DeepLinkRouter.swift in Sources */,
@@ -13029,7 +12970,6 @@
 				2C1B63D01F4C590700236804 /* PersistentTaskRecoveryManager.swift in Sources */,
 				088EDCAD1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C9E3F401F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
-				08CBA3401F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08EA89CF200E688B00BCAF44 /* SQLReply.swift in Sources */,
 				2C1B63D21F4C590700236804 /* ExecutableTaskTypes.swift in Sources */,
 				2C1B63D31F4C590700236804 /* DictionarySerializable.swift in Sources */,
@@ -13285,7 +13225,6 @@
 				2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				08A9F7111FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
-				2C715D9820568BCA0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */,
 				2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */,
 				2C89A98F1F4C289900227C3B /* StepTabView.swift in Sources */,
@@ -13518,7 +13457,6 @@
 				2C89AA521F4C289900227C3B /* SearchSuggestionTableViewCell.swift in Sources */,
 				2C89AA531F4C289900227C3B /* PersistentTaskRecoveryManager.swift in Sources */,
 				2C9E3F3F1F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
-				08CBA33D1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C89AA551F4C289900227C3B /* ExecutableTaskTypes.swift in Sources */,
 				2C89AA561F4C289900227C3B /* DictionarySerializable.swift in Sources */,
 				2C89AA571F4C289900227C3B /* PersistentTaskManagerProtocol.swift in Sources */,
@@ -13947,7 +13885,6 @@
 				0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C9731D61F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C9731D71F4C38F600AC9301 /* ImageTapHelper.swift in Sources */,
-				2C715D9920568BCA0098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				086BE2B71F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C608B2A2045699F006870BB /* AdaptiveCourseSelectViewController.swift in Sources */,
 				2C9731D81F4C38F600AC9301 /* DeepLinkRouter.swift in Sources */,
@@ -14009,7 +13946,6 @@
 				2C9732071F4C38F600AC9301 /* PersistentTaskRecoveryManager.swift in Sources */,
 				088EDCAB1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C9E3F451F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
-				08CBA33E1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08EA89CD200E688A00BCAF44 /* SQLReply.swift in Sources */,
 				2C9732091F4C38F600AC9301 /* ExecutableTaskTypes.swift in Sources */,
 				2C97320A1F4C38F600AC9301 /* DictionarySerializable.swift in Sources */,
@@ -14278,7 +14214,6 @@
 				2CA8D1762088D9C000E105E9 /* AdaptiveRatingManager.swift in Sources */,
 				2CA8D1772088D9C000E105E9 /* ProfilePresenter.swift in Sources */,
 				2CA8D1782088D9C000E105E9 /* CourseTagCollectionViewCell.swift in Sources */,
-				2CA8D1792088D9C000E105E9 /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				2CA8D17A2088D9C000E105E9 /* WarningView.swift in Sources */,
 				2CA8D17B2088D9C000E105E9 /* UIViewLoadExtension.swift in Sources */,
 				2CA8D17D2088D9C000E105E9 /* StepTabView.swift in Sources */,
@@ -14511,7 +14446,6 @@
 				2CA8D2602088D9C000E105E9 /* SearchSuggestionTableViewCell.swift in Sources */,
 				2CA8D2612088D9C000E105E9 /* PersistentTaskRecoveryManager.swift in Sources */,
 				2CA8D2622088D9C000E105E9 /* NotificationsAPI.swift in Sources */,
-				2CA8D2632088D9C000E105E9 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2CA8D2642088D9C000E105E9 /* ExecutableTaskTypes.swift in Sources */,
 				2CA8D2652088D9C000E105E9 /* DictionarySerializable.swift in Sources */,
 				2CA8D2662088D9C000E105E9 /* PersistentTaskManagerProtocol.swift in Sources */,
@@ -15069,7 +15003,6 @@
 				088EDCA81F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C9E3F421F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */,
 				08EA89CA200E688900BCAF44 /* SQLReply.swift in Sources */,
-				08CBA33B1F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */,
 				864D66CB1E83DE03001E8D9E /* DictionarySerializable.swift in Sources */,
 				2C9294FE2035CE2D0058D18C /* CAGradientLayer+Init.swift in Sources */,
@@ -15232,7 +15165,6 @@
 				864D67311E83DE03001E8D9E /* NSAttributedStringExtensions.swift in Sources */,
 				864D67321E83DE03001E8D9E /* AlamofireExtensions.swift in Sources */,
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
-				2C715D9720568BC70098707D /* PinsMapExpandableMenuBlockTableViewCell.swift in Sources */,
 				2CA2E71C20237E1F001DC410 /* AdaptiveStorageManager.swift in Sources */,
 				081959E21FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */,
 				0846B1171EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
