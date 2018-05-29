@@ -77,7 +77,9 @@ class SettingsViewController: MenuViewController, SettingsView {
     }
 
     func presentAuth() {
-        navigationController?.popToRootViewController(animated: false)
-        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: false)
+            RoutingManager.auth.routeFrom(controller: navigationController, success: nil, cancel: nil)
+        }
     }
 }

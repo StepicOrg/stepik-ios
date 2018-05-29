@@ -55,6 +55,23 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
 }
 
 class ProfilePresenter {
+    enum UserSeed {
+        case other(id: Int)
+        case `self`(id: Int)
+        case anonymous
+
+        var isMe: Bool {
+            if case let UserSeed.`self`(_) = self { return true }
+            return false
+        }
+
+        var userId: Int? {
+            if case let UserSeed.`self`(id) = self { return id }
+            if case let UserSeed.other(id) = self { return id }
+            return nil
+        }
+    }
+
     weak var view: ProfileView?
 
     private var headerInfoPresenter: ProfileInfoPresenter?
@@ -66,7 +83,7 @@ class ProfilePresenter {
     private var usersAPI: UsersAPI
     private var notificationPermissionManager: NotificationPermissionManager
 
-    private var userId: Int
+    private var userSeed: UserSeed
 
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
@@ -74,12 +91,12 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .description]
 
-    init(userId: Int, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
+    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
         self.notificationPermissionManager = notificationPermissionManager
-        self.userId = userId
+        self.userSeed = userSeed
     }
 
     private func initChildModules(user: User, activity: UserActivity) {
@@ -146,7 +163,28 @@ class ProfilePresenter {
     }
 
     func refresh() {
-        let isMe = userId == AuthInfo.shared.userId
+        if case let UserSeed.anonymous = userSeed {
+            // Check case when we've init Profile for anonymous but now have logged user
+            if AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId {
+                userSeed = UserSeed.`self`(id: userId)
+            } else {
+                view?.manageSettingsTransitionControl(isHidden: true)
+                view?.set(state: .anonymous)
+                return
+            }
+        }
+
+        // We handle anonymous case (when userId is nil) above
+        var userId = userSeed.userId!
+        var isMe = userSeed.isMe
+
+        // Check logout case
+        if isMe && !AuthInfo.shared.isAuthorized {
+            userSeed = .anonymous
+            return refresh()
+        }
+
+        view?.set(state: .normal)
         view?.manageSettingsTransitionControl(isHidden: !isMe)
 
         var user: User?
@@ -157,7 +195,7 @@ class ProfilePresenter {
                 throw UnwrappingError.optionalError
             }
 
-            return strongSelf.userActivitiesAPI.retrieve(user: strongSelf.userId)
+            return strongSelf.userActivitiesAPI.retrieve(user: userId)
         }.then { [weak self] activity -> Void in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
@@ -170,8 +208,9 @@ class ProfilePresenter {
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
             }
-        }.catch { error in
+        }.catch { [weak self] error in
             print("profile presenter: error while streaks refreshing = \(error)")
+            self?.view?.set(state: .error)
         }
     }
 

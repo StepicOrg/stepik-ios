@@ -205,7 +205,7 @@ class DeepLinkRouter {
             return
         }
 
-        vc.userId = userId
+        vc.otherUserId = userId
         completion([vc])
     }
 

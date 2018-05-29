@@ -16,10 +16,10 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 
     var settingsButton: UIBarButtonItem?
 
-    var userId: Int?
+    var otherUserId: Int?
 
     func set(state: ProfileState) {
-
+        self.state = state
     }
 
     func setMenu(blocks: [ProfileMenuBlock]) {
@@ -67,16 +67,14 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         self.present(alert, animated: true)
     }
 
-    var state: ProfileState = .refreshing {
+    private var state: ProfileState = .normal {
         didSet {
             switch state {
-            case .refreshing:
-                showPlaceholder(for: .refreshing)
             case .anonymous:
                 showPlaceholder(for: .anonymous)
             case .error:
                 showPlaceholder(for: .connectionError)
-            case .authorized:
+            case .normal:
                 isPlaceholderShown = false
             }
         }
@@ -98,10 +96,8 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         }), for: .anonymous)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            //self?.presenter?.updateProfile()
+            self?.presenter?.refresh()
         }), for: .connectionError)
-
-        registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
 
         settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
 
@@ -116,10 +112,19 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
         profileStreaksView = ProfileHeaderInfoView.fromNib()
         tableView.tableHeaderView = profileStreaksView
 
-        if let userId = userId ?? AuthInfo.shared.userId {
-            presenter = ProfilePresenter(userId: userId, view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
-            presenter?.refresh()
+        initPresenter()
+    }
+
+    private func initPresenter() {
+        // Init only with other/anonymous seed
+        // Presenter check anonymous seed and load self profile if we have logged user
+        var seed: ProfilePresenter.UserSeed = .anonymous
+        if let userId = otherUserId {
+            seed = .other(id: userId)
         }
+
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
+        presenter?.refresh()
     }
 
     func manageSettingsTransitionControl(isHidden: Bool) {
@@ -293,7 +298,13 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
     var streaksTooltip: Tooltip?
 
     func onAppear() {
+        presenter?.refresh()
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onAppear()
     }
 
     override func viewDidLayoutSubviews() {
@@ -309,8 +320,7 @@ class ProfileViewController: MenuViewController, ProfileView, StreakNotification
 }
 
 enum ProfileState {
-    case authorized
-    case refreshing
+    case normal
     case error
     case anonymous
 }
