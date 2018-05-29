@@ -50,7 +50,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }), for: .anonymous)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            self?.presenter?.refresh()
+            self?.presenter?.refresh(shouldReload: true)
         }), for: .connectionError)
 
         settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
@@ -69,8 +69,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         initPresenter()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         onAppear()
     }
 
@@ -145,7 +145,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }
 
         presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
-        presenter?.refresh()
+        presenter?.refresh(shouldReload: true)
     }
 
     @objc func settingsButtonPressed() {
@@ -250,7 +250,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     private func buildInfoExpandableBlock() -> ContentExpandableMenuBlock? {
-        profileDescriptionView = ProfileDescriptionContentView.fromNib()
+        profileDescriptionView = profileDescriptionView ?? ProfileDescriptionContentView.fromNib()
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
 
         block.onExpanded = { [weak self] isExpanded in
@@ -266,8 +266,9 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     private func buildPinsMapExpandableBlock() -> ContentExpandableMenuBlock? {
-        pinsMapContentView = PinsMapBlockContentView()
+        pinsMapContentView = pinsMapContentView ?? PinsMapBlockContentView()
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
+        block.isExpanded = true
 
         block.onExpanded = { isExpanded in
             block.isExpanded = isExpanded

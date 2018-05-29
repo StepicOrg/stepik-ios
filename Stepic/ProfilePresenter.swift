@@ -21,39 +21,6 @@ protocol ProfileView: class {
     func manageSettingsTransitionControl(isHidden: Bool)
 }
 
-enum ProfileMenuBlock: RawRepresentable, Equatable {
-    typealias RawValue = String
-
-    case infoHeader
-    case notificationsSwitch(isOn: Bool)
-    case notificationsTimeSelection
-    case description
-    case pinsMap
-
-    init?(rawValue: RawValue) {
-        fatalError("init with raw value has not been implemented")
-    }
-
-    var rawValue: RawValue {
-        switch self {
-        case .infoHeader:
-            return "infoHeader"
-        case .notificationsSwitch(_):
-            return "notificationsSwitch"
-        case .notificationsTimeSelection:
-            return "notificationsTimeSelection"
-        case .description:
-            return "description"
-        case .pinsMap:
-            return "pinsMap"
-        }
-    }
-
-    static func ==(lhs: ProfileMenuBlock, rhs: ProfileMenuBlock) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
-}
-
 class ProfilePresenter {
     enum UserSeed {
         case other(id: Int)
@@ -162,7 +129,7 @@ class ProfilePresenter {
         return blocks
     }
 
-    func refresh() {
+    func refresh(shouldReload: Bool = false) {
         if case let UserSeed.anonymous = userSeed {
             // Check case when we've init Profile for anonymous but now have logged user
             if AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId {
@@ -186,6 +153,10 @@ class ProfilePresenter {
 
         view?.set(state: .normal)
         view?.manageSettingsTransitionControl(isHidden: !isMe)
+
+        guard shouldReload else {
+            return
+        }
 
         var user: User?
         loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<UserActivity> in
