@@ -189,9 +189,11 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                         return
                     }
 
+                    block.isOn = true
                     self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
                     self?.presenterNotifications?.refreshStreakNotificationTime()
                 } else {
+                    block.isOn = false
                     self?.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
                 }
             }
@@ -254,13 +256,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
 
         block.onExpanded = { [weak self] isExpanded in
-            if !isExpanded {
+            if isExpanded {
                 block.title = "\(NSLocalizedString("ShortBio", comment: ""))"
             } else {
                 block.title = "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))"
             }
-            self?.menu?.update(block: block)
             block.isExpanded = isExpanded
+            self?.menu?.update(block: block)
         }
         return block
     }
