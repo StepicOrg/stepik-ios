@@ -1,5 +1,5 @@
 //
-//  DeadlineNotificationsManager.swift
+//  PersonalDeadlineNotificationsManager.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 28.05.2018.
@@ -9,27 +9,30 @@
 import Foundation
 import UserNotifications
 
-@available(iOS 10.0, *)
-class DeadlineNotificationsManager {
+class PersonalDeadlineNotificationsManager {
 
-    static var shared = DeadlineNotificationsManager()
+    static var shared = PersonalDeadlineNotificationsManager()
 
-    let hoursBeforeDeadlineForNotification: [Int] = [12, 36]
+    private let hoursBeforeDeadlineForNotification: [Int] = [12, 36]
 
-    func updateDeadlineNotificationsFor(course: Course) {
-        removeNotificationsFor(course: course)
-        guard let deadlines = course.sectionDeadlines else {
-            return
-        }
-
-        for deadline in deadlines {
-            guard let section = course.sections.first(where: {$0.id == deadline.section}) else {
-                continue
+    func updateDeadlineNotifications(for course: Course) {
+        if #available(iOS 10.0, *) {
+            removeNotificationsFor(course: course)
+            guard let deadlines = course.sectionDeadlines else {
+                return
             }
-            for hoursBeforeDeadline in hoursBeforeDeadlineForNotification {
-                let fireDate = deadline.deadlineDate.addingTimeInterval(-Double(hoursBeforeDeadline) * 60 * 60) //Date().addingTimeInterval(60) //
-                scheduleNotificationWith(course: course, section: section, fireDate: fireDate, hoursBeforeDeadline: hoursBeforeDeadline)
+
+            for deadline in deadlines {
+                guard let section = course.sections.first(where: {$0.id == deadline.section}) else {
+                    continue
+                }
+                for hoursBeforeDeadline in hoursBeforeDeadlineForNotification {
+                    let fireDate = deadline.deadlineDate.addingTimeInterval(-Double(hoursBeforeDeadline) * 60 * 60) //Date().addingTimeInterval(60) //
+                    scheduleNotificationWith(course: course, section: section, fireDate: fireDate, hoursBeforeDeadline: hoursBeforeDeadline)
+                }
             }
+        } else {
+            //TODO: Add analytics on non supported deadline notifications
         }
     }
 
@@ -37,6 +40,7 @@ class DeadlineNotificationsManager {
         return "personaldeadline_section_\(section)_hours_\(hoursBeforeDeadline)"
     }
 
+    @available(iOS 10.0, *)
     private func removeNotificationsFor(course: Course) {
         var identifiers: [String] = []
         for hours in hoursBeforeDeadlineForNotification {
@@ -47,6 +51,7 @@ class DeadlineNotificationsManager {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 
+    @available(iOS 10.0, *)
     private func scheduleNotificationWith(course: Course, section: Section, fireDate: Date, hoursBeforeDeadline: Int) {
         let content = UNMutableNotificationContent()
         content.title = "\(course.title)"

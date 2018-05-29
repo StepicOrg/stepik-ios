@@ -44,6 +44,11 @@ class DeadlineStorageData: StorageData {
     var courseID: Int
     var deadlines: [SectionDeadline]
 
+    init(courseID: Int, deadlines: [SectionDeadline]) {
+        self.courseID = courseID
+        self.deadlines = deadlines
+    }
+
     required init(json: JSON) {
         courseID = json["course"].intValue
         deadlines = []

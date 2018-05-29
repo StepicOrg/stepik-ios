@@ -39,6 +39,11 @@ class StorageRecord: JSONSerializable {
     var createDate: Date?
     var updateDate: Date?
 
+    init(data: StorageData, kind: StorageKind?) {
+        self.kind = kind
+        self.data = data
+    }
+
     required init(json: JSON) {
         update(json: json)
     }
@@ -54,6 +59,7 @@ class StorageRecord: JSONSerializable {
 
     var json: JSON {
         return [
+            "id": id,
             "kind": kind?.getName() ?? "",
             "data": data?.dictValue ?? ""
         ]
