@@ -11,7 +11,12 @@ import UIKit
 class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
     @IBOutlet weak var shortBioTextLabel: StepikLabel!
     @IBOutlet weak var infoHeaderLabel: StepikLabel!
-    @IBOutlet weak var infoTextLabel: StepikLabel!
+    @IBOutlet weak var infoTextLabel: StepikLabel
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        infoHeaderLabel.text = NSLocalizedString("ShortBio", comment: "")
+    }
 
     func set(shortBio: String?, info: String?) {
         shortBioTextLabel.setTextWithHTMLString(shortBio ?? "")
