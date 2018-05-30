@@ -34,7 +34,7 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
         }
     }
 
-    static func ==(lhs: ProfileMenuBlock, rhs: ProfileMenuBlock) -> Bool {
+    static func == (lhs: ProfileMenuBlock, rhs: ProfileMenuBlock) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }
 }

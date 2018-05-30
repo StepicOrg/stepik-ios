@@ -15,7 +15,7 @@ class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        infoHeaderLabel.text = NSLocalizedString("ShortBio", comment: "")
+        infoHeaderLabel.text = NSLocalizedString("Info", comment: "")
     }
 
     func set(shortBio: String?, info: String?) {

@@ -110,7 +110,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 break
             }
         }
-        menu = Menu(blocks: menuBlocks.flatMap { $0 })
+        menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
     func manageSettingsTransitionControl(isHidden: Bool) {
@@ -131,8 +131,6 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             return self.profileDescriptionView
         case .pinsMap:
             return self.pinsMapContentView
-        default:
-            return nil
         }
     }
 
@@ -152,6 +150,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         // Bad route injection :(
         if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
             let presenter = SettingsPresenter(view: vc)
+            vc.presenter = presenter
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -162,7 +161,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             buildPlaceholderBlock(num: 1),
             buildPlaceholderBlock(num: 2),
             buildPlaceholderBlock(num: 3)
-        ].flatMap { $0 }
+        ].compactMap { $0 }
         return Menu(blocks: blocks)
     }
 
@@ -270,7 +269,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     private func buildPinsMapExpandableBlock() -> ContentExpandableMenuBlock? {
         pinsMapContentView = pinsMapContentView ?? PinsMapBlockContentView()
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
-        block.isExpanded = true
+        //block.isExpanded = true
 
         block.onExpanded = { isExpanded in
             block.isExpanded = isExpanded

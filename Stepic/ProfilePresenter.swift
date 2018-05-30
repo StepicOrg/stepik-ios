@@ -28,7 +28,7 @@ class ProfilePresenter {
         case anonymous
 
         var isMe: Bool {
-            if case let UserSeed.`self`(_) = self { return true }
+            if case UserSeed.`self`(_) = self { return true }
             return false
         }
 
@@ -130,7 +130,7 @@ class ProfilePresenter {
     }
 
     func refresh(shouldReload: Bool = false) {
-        if case let UserSeed.anonymous = userSeed {
+        if case UserSeed.anonymous = userSeed {
             // Check case when we've init Profile for anonymous but now have logged user
             if AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId {
                 userSeed = UserSeed.`self`(id: userId)
@@ -142,8 +142,8 @@ class ProfilePresenter {
         }
 
         // We handle anonymous case (when userId is nil) above
-        var userId = userSeed.userId!
-        var isMe = userSeed.isMe
+        let userId = userSeed.userId!
+        let isMe = userSeed.isMe
 
         // Check logout case
         if isMe && !AuthInfo.shared.isAuthorized {

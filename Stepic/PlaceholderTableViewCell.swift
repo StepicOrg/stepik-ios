@@ -17,7 +17,7 @@ class PlaceholderTableViewCell: MenuBlockTableViewCell {
         super.awakeFromNib()
         placeholderView.isSkeletonable = true
 
-        let margin = Double(arc4random()) / 0xFFFFFFFF * 20.0
+        let margin = CGFloat(arc4random()) / CGFloat(UInt32.max) * 20.0
         rightConstraint.constant = rightConstraint.constant + CGFloat(margin)
     }
 
