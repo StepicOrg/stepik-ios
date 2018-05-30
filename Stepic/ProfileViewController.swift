@@ -90,6 +90,11 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        (self.navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
+    }
+
     func set(state: ProfileState) {
         self.state = state
     }
@@ -160,7 +165,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         blocks = [
             buildPlaceholderBlock(num: 1),
             buildPlaceholderBlock(num: 2),
-            buildPlaceholderBlock(num: 3)
+            buildPlaceholderBlock(num: 3),
+            buildPlaceholderBlock(num: 4)
         ].compactMap { $0 }
         return Menu(blocks: blocks)
     }
@@ -168,10 +174,10 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     private func buildPlaceholderBlock(num: Int) -> PlaceholderMenuBlock {
         let block = PlaceholderMenuBlock(id: "placeholderBlock\(num)", title: "")
         block.hasSeparatorOnBottom = false
-        block.onAppearance = {
+        block.onAppearance = { [weak block] in
             // We should run this code with delay cause to prevent detached cell
             delay(0.1) {
-                block.animate()
+                block?.animate()
             }
         }
         return block
@@ -254,14 +260,18 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         profileDescriptionView = profileDescriptionView ?? ProfileDescriptionContentView.fromNib()
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
 
-        block.onExpanded = { [weak self] isExpanded in
-            if isExpanded {
-                block.title = "\(NSLocalizedString("ShortBio", comment: ""))"
-            } else {
-                block.title = "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))"
+        block.onExpanded = { [weak self, weak block] isExpanded in
+            guard let strongBlock = block else {
+                return
             }
-            block.isExpanded = isExpanded
-            self?.menu?.update(block: block)
+
+            if isExpanded {
+                strongBlock.title = "\(NSLocalizedString("ShortBio", comment: ""))"
+            } else {
+                strongBlock.title = "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))"
+            }
+            strongBlock.isExpanded = isExpanded
+            self?.menu?.update(block: strongBlock)
         }
         return block
     }
@@ -271,8 +281,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
         //block.isExpanded = true
 
-        block.onExpanded = { isExpanded in
-            block.isExpanded = isExpanded
+        block.onExpanded = { [weak block] isExpanded in
+            block?.isExpanded = isExpanded
         }
         return block
     }
