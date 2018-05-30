@@ -11,25 +11,35 @@ import Presentr
 
 class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
-
     var presenter: ProfilePresenter?
-    var shareBarButtonItem: UIBarButtonItem?
 
-    var state: ProfileState = .refreshing {
+    var profileStreaksView: ProfileHeaderInfoView?
+    var profileDescriptionView: ProfileDescriptionContentView?
+    var pinsMapContentView: PinsMapBlockContentView?
+
+    // Implementation of StreakNotificationsControlView in extension
+    var presenterNotifications: StreakNotificationsControlPresenter?
+
+    var streaksTooltip: Tooltip?
+    var settingsButton: UIBarButtonItem?
+
+    var otherUserId: Int?
+
+    private var state: ProfileState = .normal {
         didSet {
             switch state {
-            case .refreshing:
-                showPlaceholder(for: .refreshing)
             case .anonymous:
-                navigationItem.rightBarButtonItem = nil
                 showPlaceholder(for: .anonymous)
             case .error:
                 showPlaceholder(for: .connectionError)
-            case .authorized:
-                if let button = shareBarButtonItem {
-                    navigationItem.rightBarButtonItem = button
-                }
+            case .normal:
                 isPlaceholderShown = false
+            case .loading:
+                isPlaceholderShown = false
+                if oldValue != .loading {
+                    profileStreaksView?.isLoading = true
+                    menu = buildLoadingMenu()
+                }
             }
         }
     }
@@ -46,182 +56,23 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }), for: .anonymous)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            self?.presenter?.updateProfile()
+            self?.presenter?.refresh(shouldReload: true)
         }), for: .connectionError)
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.emptyProfileLoading), for: .refreshing)
-
-        state = .refreshing
-
-        presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users, notificationPermissionManager: NotificationPermissionManager())
-        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
-        self.navigationItem.rightBarButtonItem = shareBarButtonItem!
+        settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
 
         self.title = NSLocalizedString("Profile", comment: "")
-    }
 
-    @objc func shareButtonPressed() {
-        presenter?.sharePressed()
-    }
+        profileStreaksView = ProfileHeaderInfoView.fromNib()
+        tableView.tableHeaderView = profileStreaksView
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        state = .loading
 
-    var profile: ProfileData? {
-        didSet {
-            profileStreaksView?.profile = profile
-        }
-    }
-    var streaks: StreakData? {
-        didSet {
-            profileStreaksView?.streaks = streaks
-        }
-    }
-
-    var profileStreaksView: ProfileStreaksView?
-
-    func refreshProfileStreaksView() {
-        profileStreaksView = ProfileStreaksView(frame: CGRect.zero)
-        guard let profileStreaksView = profileStreaksView else {
-            return
-        }
-        profileStreaksView.profile = profile
-        profileStreaksView.streaks = streaks
-        profileStreaksView.frame.size = profileStreaksView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-    }
-
-    func setEmpty() {
-        self.tableView.tableHeaderView = nil
-        self.menu = Menu(blocks: [])
-        self.profile = nil
-        self.streaks = nil
-    }
-
-    // MARK: - ProfileView
-
-    func set(state: ProfileState) {
-        self.state = state
-        switch state {
-        case .authorized:
-            self.menu = presenter?.menu
-            refreshProfileStreaksView()
-            tableView.tableHeaderView = profileStreaksView
-            break
-        default:
-            setEmpty()
-            break
-        }
-    }
-
-    func set(profile: ProfileData?) {
-        self.profile = profile
-    }
-
-    func set(streaks: StreakData?) {
-        self.streaks = streaks
-    }
-
-    var streaksTooltip: Tooltip?
-
-    func set(menu: Menu) {
-        self.menu = menu
-
-        guard let presenter = presenter else {
-            return
-        }
-
-        guard let blockIndex = menu.getBlockIndex(id: presenter.notificationsSwitchBlockId),
-            let block = menu.getBlock(id: presenter.notificationsSwitchBlockId) as? SwitchMenuBlock else {
-            return
-        }
-
-        if TooltipDefaultsManager.shared.shouldShowOnStreaksSwitchInProfile {
-            delay(0.1) {
-                [weak self] in
-                guard let s = self else {
-                    return
-                }
-                if let cell = s.tableView.cellForRow(at: IndexPath(row: blockIndex, section: 0)) as? SwitchMenuBlockTableViewCell {
-                    if !cell.blockSwitch.isOn {
-                        let oldOnSwitch = block.onSwitch
-                        block.onSwitch = {
-                            [weak self]
-                            isOn in
-                            self?.streaksTooltip?.dismiss()
-                            oldOnSwitch?(isOn)
-                        }
-                        s.streaksTooltip = TooltipFactory.streaksTooltip
-                        s.streaksTooltip?.show(direction: .up, in: s.tableView, from: cell.blockSwitch)
-                        TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile = true
-                    }
-                }
-            }
-        }
-    }
-
-    func showNotificationSettingsAlert(completion: (() -> Void)?) {
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
-            _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        self.present(alert, animated: true, completion: {
-            completion?()
-        })
-    }
-
-    private let streakTimePickerPresenter: Presentr = {
-        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
-        return streakTimePickerPresenter
-    }()
-
-    func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?) {
-        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
-        vc.startHour = startHour
-        vc.selectedBlock = {
-            selectedBlock?()
-        }
-        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
-    }
-
-    func showShareProfileAlert(url: URL) {
-        DispatchQueue.global(qos: .background).async {
-            [weak self] in
-            let shareVC = SharingHelper.getSharingController(url.absoluteString)
-            shareVC.popoverPresentationController?.barButtonItem = self?.shareBarButtonItem
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.present(shareVC, animated: true, completion: nil)
-            }
-        }
-    }
-
-    func logout(onBack: (() -> Void)?) {
-        AuthInfo.shared.token = nil
-        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
-    }
-
-    func navigateToSettings() {
-        self.performSegue(withIdentifier: "showSettings", sender: nil)
-    }
-
-    func navigateToDownloads() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func onAppear() {
-        self.presenter?.updateProfile()
-        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+        initPresenter()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -229,8 +80,223 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         onAppear()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.layoutIfNeeded()
+        tableView.layoutTableHeaderView()
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         streaksTooltip?.dismiss()
     }
+
+    func onAppear() {
+        presenter?.refresh()
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        (self.navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
+    }
+
+    func set(state: ProfileState) {
+        self.state = state
+    }
+
+    func setMenu(blocks: [ProfileMenuBlock]) {
+        var menuBlocks = [MenuBlock?]()
+        for block in blocks {
+            switch block {
+            case .notificationsSwitch(let isOn):
+                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
+            case .notificationsTimeSelection:
+                menuBlocks.append(buildNotificationsTimeSelectionBlock())
+            case .description:
+                menuBlocks.append(buildInfoExpandableBlock())
+            case .pinsMap:
+                menuBlocks.append(buildPinsMapExpandableBlock())
+            default:
+                break
+            }
+        }
+        menu = Menu(blocks: menuBlocks.compactMap { $0 })
+    }
+
+    func manageSettingsTransitionControl(isHidden: Bool) {
+        if isHidden {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = settingsButton!
+        }
+    }
+
+    func getView(for block: ProfileMenuBlock) -> Any? {
+        switch block {
+        case .infoHeader:
+            return self.profileStreaksView
+        case .notificationsTimeSelection, .notificationsSwitch(_):
+            return self
+        case .description:
+            return self.profileDescriptionView
+        case .pinsMap:
+            return self.pinsMapContentView
+        }
+    }
+
+    private func initPresenter() {
+        // Init only with other/anonymous seed
+        // Presenter check anonymous seed and load self profile if we have logged user
+        var seed: ProfilePresenter.UserSeed = .anonymous
+        if let userId = otherUserId {
+            seed = .other(id: userId)
+        }
+
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
+        presenter?.refresh(shouldReload: true)
+    }
+
+    @objc func settingsButtonPressed() {
+        // Bad route injection :(
+        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
+            let presenter = SettingsPresenter(view: vc)
+            vc.presenter = presenter
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+    private func buildLoadingMenu() -> Menu {
+        var blocks: [MenuBlock] = []
+        blocks = [
+            buildPlaceholderBlock(num: 1),
+            buildPlaceholderBlock(num: 2),
+            buildPlaceholderBlock(num: 3),
+            buildPlaceholderBlock(num: 4)
+        ].compactMap { $0 }
+        return Menu(blocks: blocks)
+    }
+
+    private func buildPlaceholderBlock(num: Int) -> PlaceholderMenuBlock {
+        let block = PlaceholderMenuBlock(id: "placeholderBlock\(num)", title: "")
+        block.hasSeparatorOnBottom = false
+        block.onAppearance = { [weak block] in
+            // We should run this code with delay cause to prevent detached cell
+            delay(0.1) {
+                block?.animate()
+            }
+        }
+        return block
+    }
+
+    private func buildNotificationsSwitchBlock(isOn: Bool) -> SwitchMenuBlock {
+        let block: SwitchMenuBlock = SwitchMenuBlock(id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: isOn)
+
+        block.onSwitch = { [weak self] isOn in
+            self?.presenterNotifications?.setStreakNotifications(on: isOn) { [weak self] status in
+                if status {
+                    guard let timeSelectionBlock = self?.buildNotificationsTimeSelectionBlock() else {
+                        self?.presenterNotifications?.setStreakNotifications(on: !isOn)
+                        return
+                    }
+
+                    block.isOn = true
+                    self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
+                    self?.presenterNotifications?.refreshStreakNotificationTime()
+                } else {
+                    block.isOn = false
+                    self?.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
+                }
+            }
+        }
+
+        // Tooltip "enable notifications for bla-bla"
+        if TooltipDefaultsManager.shared.shouldShowOnStreaksSwitchInProfile {
+            // We should run this code with delay cause to prevent detached cell
+            delay(0.1) { [weak self] in
+                guard let s = self else {
+                    return
+                }
+
+                self?.streaksTooltip = TooltipFactory.streaksTooltip
+                if let cell = block.cell as? SwitchMenuBlockTableViewCell {
+                    if !cell.blockSwitch.isOn {
+                        let oldOnSwitch = block.onSwitch
+                        block.onSwitch = { [weak self] isOn in
+                            self?.streaksTooltip?.dismiss()
+                            oldOnSwitch?(isOn)
+                        }
+                        self?.streaksTooltip?.show(direction: .up, in: s.tableView, from: cell.blockSwitch)
+                        TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile = true
+                    }
+                }
+            }
+        }
+
+        return block
+    }
+
+    private func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
+        var currentZone00UTC: String {
+            let date = Date(timeIntervalSince1970: 0)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .short
+            dateFormatter.timeZone = TimeZone.current
+            return dateFormatter.string(from: date)
+        }
+
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: ProfileMenuBlock.notificationsTimeSelection.rawValue, title: "")
+
+        let notificationTimeSubtitle = "\(NSLocalizedString("StreaksAreUpdated", comment: "")) \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
+        block.subtitle = notificationTimeSubtitle
+
+        block.onTouch = { [weak self] in
+            self?.presenterNotifications?.selectStreakNotificationTime()
+        }
+
+        block.onAppearance = { [weak self] in
+            self?.presenterNotifications?.refreshStreakNotificationTime()
+        }
+
+        return block
+    }
+
+    private func buildInfoExpandableBlock() -> ContentExpandableMenuBlock? {
+        profileDescriptionView = profileDescriptionView ?? ProfileDescriptionContentView.fromNib()
+        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
+
+        block.onExpanded = { [weak self, weak block] isExpanded in
+            guard let strongBlock = block else {
+                return
+            }
+
+            if isExpanded {
+                strongBlock.title = "\(NSLocalizedString("ShortBio", comment: ""))"
+            } else {
+                strongBlock.title = "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))"
+            }
+            strongBlock.isExpanded = isExpanded
+            self?.menu?.update(block: strongBlock)
+        }
+        return block
+    }
+
+    private func buildPinsMapExpandableBlock() -> ContentExpandableMenuBlock? {
+        pinsMapContentView = pinsMapContentView ?? PinsMapBlockContentView()
+        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
+        //block.isExpanded = true
+
+        block.onExpanded = { [weak block] isExpanded in
+            block?.isExpanded = isExpanded
+        }
+        return block
+    }
+}
+
+enum ProfileState {
+    case normal
+    case loading
+    case error
+    case anonymous
 }

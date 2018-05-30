@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileStreaksView" customModule="Adaptive_1838" customModuleProvider="target">
-            <connections>
-                <outlet property="avatarImageView" destination="3Oh-cT-dOF" id="DcX-va-OMD"/>
-                <outlet property="containerView" destination="ECP-UP-U74" id="X0a-Wl-3wS"/>
-                <outlet property="currentDaysCountLabel" destination="MEK-pa-lwi" id="A46-yO-pHg"/>
-                <outlet property="currentStreakLabel" destination="Tvp-fT-4hc" id="935-5g-XZW"/>
-                <outlet property="firstNameLabel" destination="2vX-eo-8NP" id="kAn-ae-8ex"/>
-                <outlet property="lastNameLabel" destination="5g2-c6-WyB" id="FeF-5J-DhG"/>
-                <outlet property="lightningImageView" destination="wD9-xU-iGl" id="c3V-k0-2nd"/>
-                <outlet property="maxDayCountLabel" destination="k2D-m5-L2a" id="8kF-e0-4HZ"/>
-                <outlet property="maxStreakLabel" destination="o9X-4V-4rV" id="smR-1L-B0g"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileStreaksView" customModule="Adaptive_1838" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileHeaderInfoView" customModule="Adaptive_1838" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="345" height="308"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -111,20 +100,40 @@
                         <constraint firstAttribute="width" priority="900" constant="90" id="x0W-1J-4Wz"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwX-4g-1JH">
+                    <rect key="frame" x="128" y="24" width="89.5" height="90"/>
+                    <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="rwX-4g-1JH" firstAttribute="centerX" secondItem="3Oh-cT-dOF" secondAttribute="centerX" id="CPU-Qn-QhO"/>
+                <constraint firstItem="rwX-4g-1JH" firstAttribute="centerY" secondItem="3Oh-cT-dOF" secondAttribute="centerY" id="GdV-c2-FPQ"/>
                 <constraint firstItem="3Oh-cT-dOF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IcZ-iP-g5e"/>
                 <constraint firstItem="3Oh-cT-dOF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="999" constant="24" id="Uyl-ef-kud"/>
+                <constraint firstItem="rwX-4g-1JH" firstAttribute="width" secondItem="3Oh-cT-dOF" secondAttribute="width" id="VNG-n0-cCe"/>
                 <constraint firstItem="ECP-UP-U74" firstAttribute="leading" secondItem="pHQ-hH-CJM" secondAttribute="leading" constant="24" id="bpI-bh-8gD"/>
                 <constraint firstItem="ECP-UP-U74" firstAttribute="top" secondItem="3Oh-cT-dOF" secondAttribute="bottom" constant="-45" id="hYO-bQ-mug"/>
                 <constraint firstItem="pHQ-hH-CJM" firstAttribute="trailing" secondItem="ECP-UP-U74" secondAttribute="trailing" priority="999" constant="24" id="hqE-eD-DPG"/>
                 <constraint firstAttribute="bottom" secondItem="ECP-UP-U74" secondAttribute="bottom" constant="24" id="oU5-TI-61h"/>
                 <constraint firstItem="2vX-eo-8NP" firstAttribute="top" secondItem="3Oh-cT-dOF" secondAttribute="bottom" constant="12" id="ovV-Je-bXI"/>
+                <constraint firstItem="rwX-4g-1JH" firstAttribute="height" secondItem="3Oh-cT-dOF" secondAttribute="height" id="pM6-CB-3Tn"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="pHQ-hH-CJM"/>
+            <connections>
+                <outlet property="avatarImageView" destination="3Oh-cT-dOF" id="af4-WY-FhN"/>
+                <outlet property="containerView" destination="ECP-UP-U74" id="FOZ-82-ecj"/>
+                <outlet property="currentDaysCountLabel" destination="MEK-pa-lwi" id="otS-Sd-Rv0"/>
+                <outlet property="currentStreakLabel" destination="Tvp-fT-4hc" id="YMv-Ny-WOV"/>
+                <outlet property="firstNameLabel" destination="2vX-eo-8NP" id="cET-Hr-QDK"/>
+                <outlet property="lastNameLabel" destination="5g2-c6-WyB" id="hvO-0p-Jju"/>
+                <outlet property="lightningImageView" destination="wD9-xU-iGl" id="0dQ-Bt-2me"/>
+                <outlet property="maxDayCountLabel" destination="k2D-m5-L2a" id="Jn1-9A-qEm"/>
+                <outlet property="maxStreakLabel" destination="o9X-4V-4rV" id="utY-1Y-z6O"/>
+                <outlet property="placeholderAvatarView" destination="rwX-4g-1JH" id="U1L-HO-uiy"/>
+            </connections>
             <point key="canvasLocation" x="87.5" y="49"/>
         </view>
     </objects>

@@ -1,11 +1,10 @@
 //
-//  UITableViewHeaderLayoutExtension.swift
+//  UITableView+TableHeaderLayout.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 14.05.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-
 import Foundation
 
 extension UITableView {
