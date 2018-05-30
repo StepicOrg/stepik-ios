@@ -670,6 +670,7 @@ extension DiscussionsViewController : UITableViewDataSource {
 
                 cell.initWithComment(comment, separatorType: cellsInfo[(indexPath as NSIndexPath).row].separatorType)
 
+                cell.delegate = self
                 return cell
 //            } else {
 //                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
@@ -739,6 +740,17 @@ extension DiscussionsViewController : WriteCommentDelegate {
             discussions.insert(comment, at: 0)
             reloadTableData()
             step?.discussionsCount? += 1
+        }
+    }
+}
+
+extension DiscussionsViewController: DiscussionTableViewCellDelegate {
+    func didOpenProfile(for userWithId: Int) {
+        DeepLinkRouter.routeToProfileWithId(userWithId) { [weak self] viewControllers in
+            if var stack = self?.navigationController?.viewControllers {
+                stack.append(contentsOf: viewControllers)
+                self?.navigationController?.setViewControllers(stack, animated: true)
+            }
         }
     }
 }

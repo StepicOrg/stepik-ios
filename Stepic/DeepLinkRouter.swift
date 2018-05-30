@@ -119,6 +119,16 @@ class DeepLinkRouter {
             return
         }
 
+        if components.count == 3 && components[1].lowercased() == "users" {
+            guard let userId = getID(components[2], reversed: false) else {
+                completion([])
+                return
+            }
+
+            routeToProfileWithId(userId, completion: completion)
+            return
+        }
+
         if components.count >= 3 && components[1].lowercased() == "course" {
             guard let courseId = getID(components[2], reversed: true) else {
                 completion([])
@@ -187,6 +197,16 @@ class DeepLinkRouter {
 
         completion([])
         return
+    }
+
+    static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "ProfileViewController", storyboardName: "Profile") as? ProfileViewController else {
+            completion([])
+            return
+        }
+
+        vc.otherUserId = userId
+        completion([vc])
     }
 
     fileprivate static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
