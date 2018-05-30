@@ -65,6 +65,35 @@ class PersonalDeadlineManager {
         }
     }
 
+    enum DeadlineChangeError: Error {
+        case noLocalRecord
+    }
+
+    func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void> {
+        return Promise {
+            fulfill, reject in
+            guard let record = localStorageManager.getRecord(for: course) else {
+                reject(DeadlineChangeError.noLocalRecord)
+                return
+            }
+            guard let dataToChange = record.data as? DeadlineStorageData else {
+                reject(DeadlineChangeError.noLocalRecord)
+                return
+            }
+            dataToChange.deadlines = newDeadlines
+            record.data = dataToChange
+            storageRecordsAPI.update(record: record).then {
+                updatedRecord -> Void in
+                self.localStorageManager.set(storageRecord: updatedRecord, for: course)
+                self.notificationManager.updateDeadlineNotifications(for: course)
+                fulfill(())
+            }.catch {
+                error in
+                reject(error)
+            }
+        }
+    }
+
     func deleteDeadline(for course: Course) -> Promise<Void> {
         return Promise {
             fulfill, reject in

@@ -82,6 +82,24 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
+    func editSchedule() {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: PresentationType.popup)
+            presenter.roundCorners = true
+            return presenter
+        }()
+
+        guard let editVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlineEditScheduleViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlineEditScheduleViewController else {
+            return
+        }
+        editVC.course = course
+        editVC.onSavePressed = {
+            [weak self] in
+            self?.tableView.reloadData()
+        }
+        customPresentViewController(presentr, viewController: editVC, animated: true, completion: nil)
+    }
+
     func requestDeadlines() {
         let presentr: Presentr = {
             let presenter = Presentr(presentationType: .dynamic(center: .center))
@@ -128,7 +146,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.performSegue(withIdentifier: "showCourse", sender: nil)
         }))
         if course.sectionDeadlines != nil {
-            alert.addAction(UIAlertAction(title: "Delete deadlines", style: .destructive, handler: {
+            alert.addAction(UIAlertAction(title: "Delete schedule", style: .destructive, handler: {
                 [weak self]
                 _ in
                 guard let strongSelf = self else {
@@ -145,11 +163,13 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                     SVProgressHUD.showError(withStatus: nil)
                 }
             }))
-            alert.addAction(UIAlertAction(title: "Change deadlines", style: .default, handler: {
+            alert.addAction(UIAlertAction(title: "Edit schedule", style: .default, handler: {
+                [weak self]
                 _ in
+                self?.editSchedule()
             }))
         } else {
-            alert.addAction(UIAlertAction(title: "Set deadlines", style: .default, handler: {
+            alert.addAction(UIAlertAction(title: "Create personal schedule", style: .default, handler: {
                 [weak self]
                 _ in
                 self?.requestDeadlines()

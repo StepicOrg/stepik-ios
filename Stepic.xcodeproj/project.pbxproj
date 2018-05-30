@@ -130,6 +130,9 @@
 		08195A261FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		08195A271FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		08195A281FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
+		0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */; };
+		0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */; };
+		0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */; };
 		081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
@@ -4622,6 +4625,9 @@
 		08195A051FA00FF400E6D6CD /* CourseLists.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseLists.storyboard; sourceTree = "<group>"; };
 		08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCoursesView.swift; sourceTree = "<group>"; };
 		08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCoursesView.xib; sourceTree = "<group>"; };
+		0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineEditScheduleViewController.swift; sourceTree = "<group>"; };
+		0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineTableViewCell.swift; sourceTree = "<group>"; };
+		0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlineTableViewCell.xib; sourceTree = "<group>"; };
 		081A7DA81C56625F00583728 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuizViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
@@ -5937,6 +5943,9 @@
 				08AA11BA20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift */,
 				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
 				083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */,
+				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
+				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
+				0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */,
 			);
 			name = "Personal Deadlines";
 			sourceTree = "<group>";
@@ -9043,15 +9052,14 @@
 					};
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					08DE94101B8C58AC00D278AB = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -9142,15 +9150,13 @@
 					};
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -9265,6 +9271,7 @@
 				2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */,
 				2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
@@ -11842,6 +11849,7 @@
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				086BE2B21F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
+				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
@@ -11878,6 +11886,7 @@
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
@@ -15851,9 +15860,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
@@ -15875,14 +15884,14 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6af65af7-8036-4359-8aa1-64faac9f28ff";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -16010,7 +16019,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -16021,8 +16030,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DENABLE_APPSEE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4d463302-25ad-41a0-8af0-316c07d98fd7";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16052,8 +16061,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DENABLE_APPSEE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "36ff4140-4f90-4c9d-8888-c8c128db4e12";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -16767,7 +16776,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = StepicWatch_Extension;
@@ -16796,14 +16805,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "08917ec0-e043-46ec-be37-8bcc7e379f6c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -16821,7 +16830,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
@@ -16846,17 +16855,17 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "d295a6cf-4e9b-4dfc-8e4d-94c1bca41e91";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
