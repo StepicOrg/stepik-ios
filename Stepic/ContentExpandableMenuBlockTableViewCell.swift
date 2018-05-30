@@ -64,7 +64,9 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     func expand() {
         bottomTitleConstraint?.isActive = false
         container.isHidden = false
-        arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
+        UIView.animate(withDuration: 0.3) {
+            self.arrowButton.transform = CGAffineTransform.identity
+        }
     }
 
     func shrink() {
@@ -74,7 +76,9 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         } else {
             bottomTitleConstraint?.isActive = true
         }
-        arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_bottom"), for: .normal)
+        UIView.animate(withDuration: 0.3) {
+            self.arrowButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
     }
 
 }
