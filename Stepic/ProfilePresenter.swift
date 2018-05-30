@@ -134,6 +134,7 @@ class ProfilePresenter {
             // Check case when we've init Profile for anonymous but now have logged user
             if AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId {
                 userSeed = UserSeed.`self`(id: userId)
+                return refresh(shouldReload: true)
             } else {
                 view?.manageSettingsTransitionControl(isHidden: true)
                 view?.set(state: .anonymous)
@@ -179,9 +180,9 @@ class ProfilePresenter {
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
             }
-        }.catch { [weak self] error in
+        }.catch { error in
             print("profile presenter: error while streaks refreshing = \(error)")
-            self?.view?.set(state: .error)
+            self.view?.set(state: .error)
         }
     }
 
