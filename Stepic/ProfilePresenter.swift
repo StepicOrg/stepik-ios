@@ -152,12 +152,12 @@ class ProfilePresenter {
             return refresh()
         }
 
-        view?.set(state: .normal)
         view?.manageSettingsTransitionControl(isHidden: !isMe)
 
         guard shouldReload else {
             return
         }
+        view?.set(state: .loading)
 
         var user: User?
         loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<UserActivity> in
@@ -177,6 +177,7 @@ class ProfilePresenter {
                                                         : ProfilePresenter.otherUserMenu
 
             if let user = user {
+                strongSelf.view?.set(state: .normal)
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
             }

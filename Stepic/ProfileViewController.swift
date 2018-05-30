@@ -34,6 +34,12 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 showPlaceholder(for: .connectionError)
             case .normal:
                 isPlaceholderShown = false
+            case .loading:
+                isPlaceholderShown = false
+                if oldValue != .loading {
+                    profileStreaksView?.isLoading = true
+                    menu = buildLoadingMenu()
+                }
             }
         }
     }
@@ -61,10 +67,10 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         self.title = NSLocalizedString("Profile", comment: "")
 
-        menu = buildLoadingMenu()
-
         profileStreaksView = ProfileHeaderInfoView.fromNib()
         tableView.tableHeaderView = profileStreaksView
+
+        state = .loading
 
         initPresenter()
     }
@@ -290,6 +296,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
 enum ProfileState {
     case normal
+    case loading
     case error
     case anonymous
 }
