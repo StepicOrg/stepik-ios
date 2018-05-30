@@ -7271,12 +7271,8 @@
 				08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */,
 				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
 				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
-<<<<<<< HEAD
-				082B54D220AA1BC200144817 /* UITableViewHeaderLayoutExtension.swift */,
-=======
 				62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */,
 				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
->>>>>>> dev
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -9283,11 +9279,8 @@
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
-<<<<<<< HEAD
-=======
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */,
->>>>>>> dev
 				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
@@ -15797,17 +15790,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-<<<<<<< HEAD
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
-				DEVELOPMENT_TEAM = "";
-=======
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = E9KER42773;
->>>>>>> dev
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -15836,15 +15822,9 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-<<<<<<< HEAD
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 89;
-				DEVELOPMENT_TEAM = "";
-=======
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = E9KER42773;
->>>>>>> dev
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
