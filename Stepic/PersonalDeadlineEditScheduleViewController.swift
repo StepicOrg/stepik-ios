@@ -77,12 +77,14 @@ extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
             guard let date = value as? Date else {
                 return
             }
+            self?.tableView.deselectRow(at: indexPath, animated: true)
             self?.sectionDeadlinesData[indexPath.row].deadline = date
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }, cancel: {
+            [weak self]
             _ in return
+            self?.tableView.deselectRow(at: indexPath, animated: true)
         }, origin: tableView.cellForRow(at: indexPath))
-
     }
 }
 

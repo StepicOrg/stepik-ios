@@ -16,6 +16,8 @@ class PersonalDeadlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        deadlineLabel.colorMode = .blue
+        titleLabel.colorMode = .dark
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

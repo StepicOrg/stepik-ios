@@ -146,6 +146,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.performSegue(withIdentifier: "showCourse", sender: nil)
         }))
         if course.sectionDeadlines != nil {
+            alert.addAction(UIAlertAction(title: "Edit schedule", style: .default, handler: {
+                [weak self]
+                _ in
+                self?.editSchedule()
+            }))
             alert.addAction(UIAlertAction(title: "Delete schedule", style: .destructive, handler: {
                 [weak self]
                 _ in
@@ -158,15 +163,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                     () -> Void in
                     SVProgressHUD.dismiss()
                     self?.tableView.reloadData()
-                }.catch {
-                    _ in
-                    SVProgressHUD.showError(withStatus: nil)
+                    }.catch {
+                        _ in
+                        SVProgressHUD.showError(withStatus: nil)
                 }
-            }))
-            alert.addAction(UIAlertAction(title: "Edit schedule", style: .default, handler: {
-                [weak self]
-                _ in
-                self?.editSchedule()
             }))
         } else {
             alert.addAction(UIAlertAction(title: "Create personal schedule", style: .default, handler: {
@@ -175,6 +175,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 self?.requestDeadlines()
             }))
         }
+
+        alert.popoverPresentationController?.barButtonItem = button
         present(alert, animated: true, completion: nil)
     }
 
