@@ -199,7 +199,7 @@ class DeepLinkRouter {
         return
     }
 
-    fileprivate static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
+    static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
         guard let vc = ControllerHelper.instantiateViewController(identifier: "ProfileViewController", storyboardName: "Profile") as? ProfileViewController else {
             completion([])
             return

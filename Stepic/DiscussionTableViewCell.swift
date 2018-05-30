@@ -10,7 +10,12 @@ import UIKit
 import FLKAutoLayout
 import SDWebImage
 
+protocol DiscussionTableViewCellDelegate: class {
+    func didOpenProfile(for userWithId: Int)
+}
+
 class DiscussionTableViewCell: UITableViewCell {
+    weak var delegate: DiscussionTableViewCellDelegate?
 
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
     @IBOutlet weak var nameLabel: StepikLabel!
@@ -145,6 +150,22 @@ class DiscussionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
+
+        let tapActionNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
+        nameLabel?.isUserInteractionEnabled = true
+        nameLabel?.addGestureRecognizer(tapActionNameLabel)
+
+        let tapActionAvatarView = UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
+        userAvatarImageView?.isUserInteractionEnabled = true
+        userAvatarImageView?.addGestureRecognizer(tapActionAvatarView)
+    }
+
+    @objc func actionUserTapped() {
+        guard let userId = comment?.userInfo.id else {
+            return
+        }
+
+        delegate?.didOpenProfile(for: userId)
     }
 
     override func prepareForReuse() {

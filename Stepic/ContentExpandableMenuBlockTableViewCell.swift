@@ -35,9 +35,9 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
             }
 
             if block.isExpanded {
-                expand()
+                expand(shouldAnimate: false)
             } else {
-                shrink()
+                shrink(shouldAnimate: false)
             }
         }
     }
@@ -61,23 +61,35 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         updateTableHeightBlock?()
     }
 
-    func expand() {
+    func expand(shouldAnimate: Bool = true) {
         bottomTitleConstraint?.isActive = false
         container.isHidden = false
-        UIView.animate(withDuration: 0.3) {
-            self.arrowButton.transform = CGAffineTransform.identity
+
+        let animationBlock: () -> Void = { [weak self] in
+            self?.arrowButton.transform = CGAffineTransform.identity
+        }
+        if shouldAnimate {
+            UIView.animate(withDuration: 0.3, animations: animationBlock)
+        } else {
+            animationBlock()
         }
     }
 
-    func shrink() {
+    func shrink(shouldAnimate: Bool = true) {
         container.isHidden = true
         if bottomTitleConstraint == nil {
             bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
         } else {
             bottomTitleConstraint?.isActive = true
         }
-        UIView.animate(withDuration: 0.3) {
-            self.arrowButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+
+        let animationBlock: () -> Void = { [weak self] in
+            self?.arrowButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+        if shouldAnimate {
+            UIView.animate(withDuration: 0.3, animations: animationBlock)
+        } else {
+            animationBlock()
         }
     }
 
