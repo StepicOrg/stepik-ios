@@ -20,12 +20,6 @@ class PersonalDeadlineTableViewCell: UITableViewCell {
         titleLabel.colorMode = .dark
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     func initWith(data: SectionDeadlineData) {
         titleLabel.text = data.title
         deadlineLabel.text = "\(NSLocalizedString("PersonalDeadline", comment: "")) \(data.deadline.getStepicFormatString(withTime: true))"
