@@ -42,7 +42,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         questionLabel.text = NSLocalizedString("DeadlineModeQuestion", comment: "")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.layoutSubviews()

@@ -14,7 +14,7 @@ class PersonalDeadlineCounter {
     static let shared = PersonalDeadlineCounter()
 
     enum DeadlineCountError: Error {
-        case noSectionInfo
+        case noSectionInfo, unitsLoadError
     }
 
     let sectionTimeMultiplier = 1.3
@@ -58,10 +58,10 @@ class PersonalDeadlineCounter {
         let endDate = startDate.addingTimeInterval(TimeInterval(daysToComplete * 60 * 60 * 24))
         return Calendar.current.startOfDay(for: endDate).addingTimeInterval(23 * 60 * 60 + 59 * 60)
     }
-
+    
     private func countTimeToComplete(section: Section) -> Promise<(Int, TimeInterval)> {
         return Promise {
-            fulfill, _ in
+            fulfill, reject in
             section.loadUnits(success: {
                 var sectionTimeToComplete: Double = 0
                 for unit in section.units {
@@ -69,7 +69,7 @@ class PersonalDeadlineCounter {
                 }
                 fulfill((section.id, sectionTimeToComplete))
             }, error: {
-                //TODO: Add error handling here
+                reject(DeadlineCountError.unitsLoadError)
             })
         }
     }
