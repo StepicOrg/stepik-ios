@@ -11,9 +11,7 @@ import SwiftyJSON
 
 protocol StorageData {
     init(json: JSON)
-    var dictValue: [String : Any] {
-        get
-    }
+    var dictValue: [String : Any] { get }
 }
 
 struct SectionDeadline {

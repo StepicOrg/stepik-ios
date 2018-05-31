@@ -29,7 +29,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
         tableView.register(UINib(nibName: "PersonalDeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: "PersonalDeadlineTableViewCell")
         initSectionDeadlinesData()
         tableView.reloadData()
-        saveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor(hex: 0x45B0FF))
+        saveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.lightBlue)
         localize()
     }
 

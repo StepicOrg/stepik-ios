@@ -59,7 +59,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         collectionView.invalidateIntrinsicContentSize()
         collectionView.layoutIfNeeded()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         updateCollectionLayout()
