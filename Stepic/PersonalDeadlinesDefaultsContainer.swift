@@ -9,19 +9,35 @@
 import Foundation
 
 class PersonalDeadlinesDefaultsContainer {
-    fileprivate let defaults = UserDefaults.standard
 
-    fileprivate let declinedWidgetKey = "declinedWidget"
+    enum WidgetAction {
+        case declined, accepted
 
-    private func key(for course: Int) -> String {
-        return "\(declinedWidgetKey)_\(course)"
+        var key: String {
+            switch self {
+            case .declined:
+                return "declinedWidget"
+            case .accepted:
+                return "acceptedWidget"
+            }
+        }
+
+        func key(for course: Int) -> String {
+            return "\(key)_\(course)"
+        }
     }
 
+    fileprivate let defaults = UserDefaults.standard
+
     func declinedWidget(for course: Int) {
-        defaults.set(true, forKey: key(for: course))
+        defaults.set(true, forKey: WidgetAction.declined.key(for: course))
+    }
+
+    func acceptedWidget(for course: Int) {
+        defaults.set(true, forKey: WidgetAction.accepted.key(for: course))
     }
 
     func canShowWidget(for course: Int) -> Bool {
-        return (defaults.value(forKey: key(for: course)) as? Bool) != true
+        return (defaults.value(forKey: WidgetAction.declined.key(for: course)) as? Bool) != true && (defaults.value(forKey: WidgetAction.accepted.key(for: course)) as? Bool) != true
     }
 }

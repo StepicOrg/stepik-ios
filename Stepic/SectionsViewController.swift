@@ -71,7 +71,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
 
-        tableView.tableHeaderView = personalDeadlinesWidgetView
+        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) {
+            tableView.tableHeaderView = personalDeadlinesWidgetView
+        }
     }
 
     var url: String {
@@ -122,14 +124,22 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     lazy var personalDeadlinesWidgetView: UIView = {
         let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
         widget.noAction = {
-            DefaultsContainer.personalDeadlines.declinedWidget(for: self.course.id)
-            self.tableView.beginUpdates()
-            self.tableView.tableHeaderView = nil
-            self.tableView.endUpdates()
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            DefaultsContainer.personalDeadlines.declinedWidget(for: strongSelf.course.id)
+            strongSelf.tableView.beginUpdates()
+            strongSelf.tableView.tableHeaderView = nil
+            strongSelf.tableView.endUpdates()
         }
         widget.yesAction = {
             [weak self] in
-            self?.requestDeadlines()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.requestDeadlines()
+            DefaultsContainer.personalDeadlines.acceptedWidget(for: strongSelf.course.id)
         }
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
