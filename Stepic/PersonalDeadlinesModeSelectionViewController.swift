@@ -47,6 +47,10 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         super.viewWillAppear(animated)
         self.view.layoutSubviews()
         collectionView.constrainHeight("\(modeButtonSize.height)")
+        updateCollectionLayout()
+    }
+
+    private func updateCollectionLayout() {
         collectionView.invalidateIntrinsicContentSize()
         collectionView.layoutIfNeeded()
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
@@ -55,16 +59,10 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         collectionView.invalidateIntrinsicContentSize()
         collectionView.layoutIfNeeded()
     }
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        collectionView.invalidateIntrinsicContentSize()
-        collectionView.layoutIfNeeded()
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
-        collectionView.invalidateIntrinsicContentSize()
-        collectionView.layoutIfNeeded()
+        updateCollectionLayout()
     }
 
     override func didReceiveMemoryWarning() {
