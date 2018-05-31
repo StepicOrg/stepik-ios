@@ -140,6 +140,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             }
             strongSelf.requestDeadlines()
             DefaultsContainer.personalDeadlines.acceptedWidget(for: strongSelf.course.id)
+            strongSelf.tableView.beginUpdates()
+            strongSelf.tableView.tableHeaderView = nil
+            strongSelf.tableView.endUpdates()
         }
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
@@ -151,17 +154,17 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     @objc func moreButtonPressed(_ button: UIBarButtonItem) {
         let alert = UIAlertController(title: nil, message: course.title, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Course Info", style: .default, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("CourseInfo", comment: ""), style: .default, handler: {
             _ in
             self.performSegue(withIdentifier: "showCourse", sender: nil)
         }))
         if course.sectionDeadlines != nil {
-            alert.addAction(UIAlertAction(title: "Edit schedule", style: .default, handler: {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("EditSchedule", comment: ""), style: .default, handler: {
                 [weak self]
                 _ in
                 self?.editSchedule()
             }))
-            alert.addAction(UIAlertAction(title: "Delete schedule", style: .destructive, handler: {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("DeleteSchedule", comment: ""), style: .destructive, handler: {
                 [weak self]
                 _ in
                 guard let strongSelf = self else {
@@ -179,7 +182,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }
             }))
         } else {
-            alert.addAction(UIAlertAction(title: "Create personal schedule", style: .default, handler: {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("CreateSchedule", comment: ""), style: .default, handler: {
                 [weak self]
                 _ in
                 self?.requestDeadlines()

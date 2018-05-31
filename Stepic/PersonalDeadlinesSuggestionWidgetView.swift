@@ -25,6 +25,12 @@ class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
         self.view.setRoundedCorners(cornerRadius: 8)
         yesButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor(hex: 0x45B0FF))
         //TODO: Do not forget to localize text and buttons here
+        localize()
+    }
+
+    func localize() {
+        noButton.setTitle(NSLocalizedString("PersonalDeadlineWidgetNoButtonTitle", comment: ""), for: .normal)
+        yesButton.setTitle(NSLocalizedString("PersonalDeadlineWidgetYesButtonTitle", comment: ""), for: .normal)
     }
 
     @IBAction func noPressed(_ sender: Any) {

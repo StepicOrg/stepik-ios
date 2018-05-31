@@ -34,8 +34,14 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         questionLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
+        localize()
     }
 
+    private func localize() {
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        questionLabel.text = NSLocalizedString("DeadlineModeQuestion", comment: "")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.layoutSubviews()

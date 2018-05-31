@@ -86,7 +86,7 @@ class SectionTableViewCell: UITableViewCell {
         datesLabel.colorMode = .gray
 
         if let sectionDeadline = sectionDeadline {
-            datesLabel.text = "Personal deadline \(sectionDeadline.deadlineDate.getStepicFormatString(withTime: true))"
+            datesLabel.text = "\(NSLocalizedString("PersonalDeadline", comment: "")) \(sectionDeadline.deadlineDate.getStepicFormatString(withTime: true))"
         } else {
             datesLabel.text = SectionTableViewCell.getTextFromSection(section)
         }

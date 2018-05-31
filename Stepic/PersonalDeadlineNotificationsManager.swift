@@ -55,7 +55,7 @@ class PersonalDeadlineNotificationsManager {
     private func scheduleNotificationWith(course: Course, section: Section, fireDate: Date, hoursBeforeDeadline: Int) {
         let content = UNMutableNotificationContent()
         content.title = "\(course.title)"
-        content.body = "Deadline for module \(section.title) is in \(hoursBeforeDeadline) hours. Don't miss it!"
+        content.body = String(format: NSLocalizedString("PersonalDeadlineNotificationBody", comment: ""), "\(section.title)", "\(hoursBeforeDeadline)")
         content.sound = UNNotificationSound.default()
         let components = Calendar.current.dateComponents(in: TimeZone.current, from: fireDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)

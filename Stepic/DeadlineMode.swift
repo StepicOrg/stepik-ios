@@ -30,11 +30,11 @@ enum DeadlineMode {
     func getModeInfo() -> DeadlineModeInfo {
         switch self {
         case .hobby:
-            return DeadlineModeInfo(title: "Hobby", weeklyLoadHours: 3, image: #imageLiteral(resourceName: "25-science-growth-sprout"))
+            return DeadlineModeInfo(title: NSLocalizedString("HobbyDeadlineMode", comment: ""), weeklyLoadHours: 3, image: #imageLiteral(resourceName: "25-science-growth-sprout"))
         case .standard:
-            return DeadlineModeInfo(title: "Standard", weeklyLoadHours: 7, image: #imageLiteral(resourceName: "27-science-study-learn-graduate"))
+            return DeadlineModeInfo(title: NSLocalizedString("StandardDeadlineMode", comment: ""), weeklyLoadHours: 7, image: #imageLiteral(resourceName: "27-science-study-learn-graduate"))
         case .extreme:
-            return DeadlineModeInfo(title: "Extreme", weeklyLoadHours: 15, image: #imageLiteral(resourceName: "1-science-rocket-spaceship-rocket-launch"))
+            return DeadlineModeInfo(title: NSLocalizedString("ExtremeDeadlineMode", comment: ""), weeklyLoadHours: 15, image: #imageLiteral(resourceName: "1-science-rocket-spaceship-rocket-launch"))
         }
     }
 }

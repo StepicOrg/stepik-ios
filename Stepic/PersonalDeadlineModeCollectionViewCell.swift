@@ -17,7 +17,7 @@ class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
     func setup(deadlineMode: DeadlineMode) {
         let modeInfo = deadlineMode.getModeInfo()
         titleLabel.text = modeInfo.title
-        loadLabel.text = "\(modeInfo.weeklyLoadHours) hrs/week"
+        loadLabel.text = "\(modeInfo.weeklyLoadHours) \(NSLocalizedString("HrsPerWeek", comment: ""))"
         modeImage.image = modeInfo.image
     }
 

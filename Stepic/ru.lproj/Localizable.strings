@@ -491,3 +491,19 @@ CodeEditorColor = "Цвет";
 CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
+
+/* Personal deadlines */
+CourseInfo = "Инфо о курсе";
+EditSchedule = "Редактировать расписание";
+DeleteSchedule = "Удалить расписание";
+CreateSchedule = "Создать расписание";
+PersonalDeadlineWidgetYesButtonTitle = "Создать";
+PersonalDeadlineWidgetNoButtonTitle = "Нет, спасибо";
+HrsPerWeek = "ч/неделю";
+HobbyDeadlineMode = "Хобби";
+StandardDeadlineMode = "Стандарт";
+ExtremeDeadlineMode = "Экстрим";
+PersonalDeadlineNotificationBody = "Дедлайн для модуля %@ наступит через %@ часов. Не пропустите!";
+Save = "Сохранить";
+PersonalDeadline = "Персональный дедлайн";
+DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";

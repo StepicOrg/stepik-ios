@@ -28,6 +28,6 @@ class PersonalDeadlineTableViewCell: UITableViewCell {
 
     func initWith(data: SectionDeadlineData) {
         titleLabel.text = data.title
-        deadlineLabel.text = "Personal deadline \(data.deadline.getStepicFormatString(withTime: true))"
+        deadlineLabel.text = "\(NSLocalizedString("PersonalDeadline", comment: "")) \(data.deadline.getStepicFormatString(withTime: true))"
     }
 }

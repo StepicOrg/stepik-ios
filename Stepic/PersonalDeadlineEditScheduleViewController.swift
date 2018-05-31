@@ -30,6 +30,13 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
         initSectionDeadlinesData()
         tableView.reloadData()
         saveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor(hex: 0x45B0FF))
+        localize()
+    }
+
+    private func localize() {
+        titleLabel.text = NSLocalizedString("EditSchedule", comment: "")
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        saveButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
     }
 
     private func initSectionDeadlinesData() {
@@ -71,7 +78,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
 
 extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ActionSheetDatePicker.show(withTitle: "Pick time", datePickerMode: UIDatePickerMode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60 * 60 * 24 * 30 * 365), doneBlock: {
+        ActionSheetDatePicker.show(withTitle: NSLocalizedString("SelectTimeTitle", comment: ""), datePickerMode: UIDatePickerMode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60 * 60 * 24 * 30 * 365), doneBlock: {
             [weak self]
             _, value, _ in
             guard let date = value as? Date else {

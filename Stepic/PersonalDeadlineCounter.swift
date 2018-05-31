@@ -63,12 +63,10 @@ class PersonalDeadlineCounter {
         return Promise {
             fulfill, _ in
             section.loadUnits(success: {
-                [weak self] in
                 var sectionTimeToComplete: Double = 0
                 for unit in section.units {
                     sectionTimeToComplete += unit.lesson?.timeToComplete ?? 0
                 }
-                print("time to complete section \(section.id) = \(sectionTimeToComplete)")
                 fulfill((section.id, sectionTimeToComplete))
             }, error: {
                 //TODO: Add error handling here
