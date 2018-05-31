@@ -80,7 +80,8 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
 extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.opened)
-        ActionSheetDatePicker.show(withTitle: NSLocalizedString("SelectTimeTitle", comment: ""), datePickerMode: UIDatePickerMode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60 * 60 * 24 * 30 * 365), doneBlock: {
+        let approximateYearInSeconds: Double = 60 * 60 * 24 * 30 * 365
+        ActionSheetDatePicker.show(withTitle: NSLocalizedString("SelectTimeTitle", comment: ""), datePickerMode: UIDatePickerMode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(approximateYearInSeconds), doneBlock: {
             [weak self]
             _, value, _ in
             guard let date = value as? Date else {
@@ -92,8 +93,8 @@ extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }, cancel: {
             [weak self]
-            _ in return
-                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.closed)
+            _ in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.closed)
             self?.tableView.deselectRow(at: indexPath, animated: true)
         }, origin: tableView.cellForRow(at: indexPath))
     }

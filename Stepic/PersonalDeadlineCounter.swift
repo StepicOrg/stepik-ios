@@ -55,8 +55,9 @@ class PersonalDeadlineCounter {
     }
 
     private func getDeadlineDateForSection(since startDate: Date, daysToComplete: Int) -> Date {
-        let endDate = startDate.addingTimeInterval(TimeInterval(daysToComplete * 60 * 60 * 24))
-        return Calendar.current.startOfDay(for: endDate).addingTimeInterval(23 * 60 * 60 + 59 * 60)
+        let secondsInDay: Double = 60 * 60 * 24
+        let endDate = startDate.addingTimeInterval(TimeInterval(daysToComplete * secondsInDay))
+        return Calendar.current.startOfDay(for: endDate).addingTimeInterval(secondsInDay - 60)
     }
     
     private func countTimeToComplete(section: Section) -> Promise<(Int, TimeInterval)> {
