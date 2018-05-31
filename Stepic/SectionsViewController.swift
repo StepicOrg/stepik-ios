@@ -73,6 +73,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
         if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) {
             tableView.tableHeaderView = personalDeadlinesWidgetView
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.shown, parameters: ["course": course.id])
         }
     }
 
@@ -128,6 +129,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             guard let strongSelf = self else {
                 return
             }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.hidden, parameters: ["course": strongSelf.course.id])
             DefaultsContainer.personalDeadlines.declinedWidget(for: strongSelf.course.id)
             strongSelf.tableView.beginUpdates()
             strongSelf.tableView.tableHeaderView = nil
@@ -138,6 +140,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             guard let strongSelf = self else {
                 return
             }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.clicked, parameters: ["course": strongSelf.course.id])
             strongSelf.requestDeadlines()
             DefaultsContainer.personalDeadlines.acceptedWidget(for: strongSelf.course.id)
             strongSelf.tableView.beginUpdates()
@@ -162,6 +165,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             alert.addAction(UIAlertAction(title: NSLocalizedString("EditSchedule", comment: ""), style: .default, handler: {
                 [weak self]
                 _ in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.changePressed)
                 self?.editSchedule()
             }))
             alert.addAction(UIAlertAction(title: NSLocalizedString("DeleteSchedule", comment: ""), style: .destructive, handler: {
@@ -170,6 +174,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 guard let strongSelf = self else {
                     return
                 }
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
                 SVProgressHUD.show()
                 PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).then {
                     [weak self]

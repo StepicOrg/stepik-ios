@@ -35,6 +35,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         collectionView.dataSource = self
         questionLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
         localize()
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.opened)
     }
 
     private func localize() {
@@ -72,6 +73,8 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.closed)
+
     }
 
     func didSelectMode(mode: DeadlineMode) {
@@ -80,6 +83,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
             return
         }
 
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
         SVProgressHUD.show()
         PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).then {
             () -> Void in

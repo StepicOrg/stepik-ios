@@ -56,6 +56,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             return
         }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.saved)
         let newDeadlines = sectionDeadlinesData.map { $0.sectionDeadline }
         SVProgressHUD.show()
         PersonalDeadlineManager.shared.changeDeadline(for: course, newDeadlines: newDeadlines).then {
@@ -78,18 +79,21 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
 
 extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.opened)
         ActionSheetDatePicker.show(withTitle: NSLocalizedString("SelectTimeTitle", comment: ""), datePickerMode: UIDatePickerMode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60 * 60 * 24 * 30 * 365), doneBlock: {
             [weak self]
             _, value, _ in
             guard let date = value as? Date else {
                 return
             }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
             self?.tableView.deselectRow(at: indexPath, animated: true)
             self?.sectionDeadlinesData[indexPath.row].deadline = date
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }, cancel: {
             [weak self]
             _ in return
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.closed)
             self?.tableView.deselectRow(at: indexPath, animated: true)
         }, origin: tableView.cellForRow(at: indexPath))
     }

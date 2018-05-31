@@ -275,4 +275,29 @@ struct AnalyticsEvents {
             static let hard = "adaptive_reaction_hard"
         }
     }
+    
+    struct PersonalDeadlines {
+        struct Widget {
+            static let shown = "personal_deadlines_widget_shown"
+            static let clicked = "personal_deadlines_widget_clicked"
+            static let hidden = "personal_deadlines_widget_hidden"
+        }
+        
+        struct Mode {
+            static let opened = "personal_deadline_mode_opened"
+            static let chosen = "personal_deadline_mode_chosen"
+            static let closed = "personal_deadline_mode_closed"
+        }
+        
+        struct EditSchedule {
+            static let changePressed = "personal_deadline_change_pressed"
+            struct Time {
+                static let opened = "personal_deadline_time_opened"
+                static let closed = "personal_deadline_time_closed"
+                static let saved = "personal_deadline_time_saved"
+            }
+            static let saved = "personal_deadline_change_saved"
+        }
+        static let deleted = "personal_deadline_deleted"
+    }
 }
