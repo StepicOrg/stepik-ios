@@ -56,7 +56,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             return
         }
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.saved)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
         let newDeadlines = sectionDeadlinesData.map { $0.sectionDeadline }
         SVProgressHUD.show()
         PersonalDeadlineManager.shared.changeDeadline(for: course, newDeadlines: newDeadlines).then {
@@ -87,7 +87,6 @@ extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
             guard let date = value as? Date else {
                 return
             }
-            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
             self?.tableView.deselectRow(at: indexPath, animated: true)
             self?.sectionDeadlinesData[indexPath.row].deadline = date
             tableView.reloadRows(at: [indexPath], with: .automatic)

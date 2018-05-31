@@ -296,8 +296,8 @@ struct AnalyticsEvents {
                 static let closed = "personal_deadline_time_closed"
                 static let saved = "personal_deadline_time_saved"
             }
-            static let saved = "personal_deadline_change_saved"
         }
         static let deleted = "personal_deadline_deleted"
+        static let notSupportedNotification = "personal_deadline_not_supported_notification_scheduled"
     }
 }

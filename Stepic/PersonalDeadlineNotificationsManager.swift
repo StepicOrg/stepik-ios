@@ -32,7 +32,7 @@ class PersonalDeadlineNotificationsManager {
                 }
             }
         } else {
-            //TODO: Add analytics on non supported deadline notifications
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.notSupportedNotification)
         }
     }
 
