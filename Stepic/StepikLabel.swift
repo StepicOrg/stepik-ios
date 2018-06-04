@@ -24,7 +24,7 @@ enum StepikLabelStyle {
 }
 
 enum StepikLabelColorMode {
-    case dark, gray, light
+    case dark, gray, light, blue
 
     var textColor: UIColor {
         switch self {
@@ -34,6 +34,8 @@ enum StepikLabelColorMode {
             return UIColor.white
         case .gray:
             return UIColor.lightGray
+        case .blue:
+            return UIColor.lightBlue
         }
     }
 }

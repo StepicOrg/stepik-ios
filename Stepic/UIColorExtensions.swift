@@ -40,6 +40,8 @@ extension UIColor {
 
     static let errorRed: UIColor = UIColor(hex: 0xff0033)
 
+    static let lightBlue: UIColor = UIColor(hex: 0x45B0FF)
+
     class var stepicGreen: UIColor {
         return StepicApplicationsInfo.Colors.mainGreen
     }

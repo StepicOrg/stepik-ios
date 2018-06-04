@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Personal Deadlines Mode Selection View Controller-->
+        <scene sceneID="vQC-Ei-73n">
+            <objects>
+                <viewController storyboardIdentifier="PersonalDeadlinesModeSelectionViewController" id="BsR-CH-z6z" customClass="PersonalDeadlinesModeSelectionViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Vy-ih-QAd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How much time would you like to spend studying on this course?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dp5-od-xBC" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                                <rect key="frame" x="20" y="40" width="335" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eBe-L5-Cqh">
+                                <rect key="frame" x="20" y="96" width="335" height="509"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Im7-Lr-9xg">
+                                    <size key="itemSize" width="113" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="G1x-bm-2eM">
+                                        <rect key="frame" x="0.0" y="0.0" width="113" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="113" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V1-TP-EB6">
+                                <rect key="frame" x="163.5" y="617" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="BsR-CH-z6z" eventType="touchUpInside" id="uk3-ID-J5n"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5V1-TP-EB6" firstAttribute="centerX" secondItem="24W-km-KQ1" secondAttribute="centerX" id="Fze-sq-cmG"/>
+                            <constraint firstItem="eBe-L5-Cqh" firstAttribute="top" secondItem="dp5-od-xBC" secondAttribute="bottom" constant="20" id="Iiq-UW-jB6"/>
+                            <constraint firstItem="5V1-TP-EB6" firstAttribute="top" secondItem="eBe-L5-Cqh" secondAttribute="bottom" constant="12" id="JEH-XJ-8Cg"/>
+                            <constraint firstItem="dp5-od-xBC" firstAttribute="leading" secondItem="24W-km-KQ1" secondAttribute="leading" constant="20" id="NAH-9M-EiO"/>
+                            <constraint firstItem="eBe-L5-Cqh" firstAttribute="leading" secondItem="5Vy-ih-QAd" secondAttribute="leading" constant="20" id="OF3-WZ-lbU"/>
+                            <constraint firstItem="24W-km-KQ1" firstAttribute="bottom" secondItem="5V1-TP-EB6" secondAttribute="bottom" constant="20" id="irp-ZI-TEp"/>
+                            <constraint firstItem="dp5-od-xBC" firstAttribute="top" secondItem="24W-km-KQ1" secondAttribute="top" constant="20" id="jZm-wD-A1q"/>
+                            <constraint firstAttribute="trailing" secondItem="eBe-L5-Cqh" secondAttribute="trailing" constant="20" id="mP3-Aa-hC0"/>
+                            <constraint firstItem="24W-km-KQ1" firstAttribute="trailing" secondItem="dp5-od-xBC" secondAttribute="trailing" constant="20" id="ndr-QD-gQg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="24W-km-KQ1"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="5V1-TP-EB6" id="awc-w2-PtX"/>
+                        <outlet property="collectionView" destination="eBe-L5-Cqh" id="H0b-Sk-T0P"/>
+                        <outlet property="questionLabel" destination="dp5-od-xBC" id="RIk-mt-hN9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCF-XL-WZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-170.40000000000001" y="155.17241379310346"/>
+        </scene>
+        <!--Personal Deadline Edit Schedule View Controller-->
+        <scene sceneID="XoH-gM-W1o">
+            <objects>
+                <viewController storyboardIdentifier="PersonalDeadlineEditScheduleViewController" id="BJN-7z-SrS" customClass="PersonalDeadlineEditScheduleViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wOy-h8-sb1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit schedule" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JK-WT-TUk" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isGray" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-Tp-efo">
+                                <rect key="frame" x="0.0" y="53" width="375" height="242"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YY-gq-5vM">
+                                <rect key="frame" x="117" y="303" width="140" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="RaP-ST-lgi"/>
+                                    <constraint firstAttribute="height" constant="40" id="ee1-aZ-Rpr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.27058823529999998" green="0.69019607839999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePressed:" destination="BJN-7z-SrS" eventType="touchUpInside" id="67q-fw-Ilm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-95-6j1">
+                                <rect key="frame" x="164.5" y="351" width="45" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="BJN-7z-SrS" eventType="touchUpInside" id="5Qo-xy-QOi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vTc-XI-6Cg" firstAttribute="bottom" secondItem="PbD-95-6j1" secondAttribute="bottom" constant="20" id="543-Qo-YY1"/>
+                            <constraint firstItem="PbD-95-6j1" firstAttribute="centerX" secondItem="vTc-XI-6Cg" secondAttribute="centerX" id="8BL-Cl-kRm"/>
+                            <constraint firstItem="2JK-WT-TUk" firstAttribute="leading" secondItem="vTc-XI-6Cg" secondAttribute="leading" constant="16" id="9bD-Uh-YiG"/>
+                            <constraint firstItem="0YY-gq-5vM" firstAttribute="top" secondItem="Ug1-Tp-efo" secondAttribute="bottom" constant="8" id="Bka-Om-z2B"/>
+                            <constraint firstItem="0YY-gq-5vM" firstAttribute="centerX" secondItem="vTc-XI-6Cg" secondAttribute="centerX" id="G8f-9j-i2l"/>
+                            <constraint firstItem="2JK-WT-TUk" firstAttribute="top" secondItem="vTc-XI-6Cg" secondAttribute="top" constant="20" id="I9V-yv-PHO"/>
+                            <constraint firstItem="vTc-XI-6Cg" firstAttribute="trailing" secondItem="Ug1-Tp-efo" secondAttribute="trailing" id="Mhi-Jw-kJf"/>
+                            <constraint firstItem="Ug1-Tp-efo" firstAttribute="leading" secondItem="vTc-XI-6Cg" secondAttribute="leading" id="ULP-P1-duK"/>
+                            <constraint firstItem="PbD-95-6j1" firstAttribute="top" secondItem="0YY-gq-5vM" secondAttribute="bottom" constant="8" id="cqj-SE-6Tg"/>
+                            <constraint firstItem="Ug1-Tp-efo" firstAttribute="top" secondItem="2JK-WT-TUk" secondAttribute="bottom" constant="12" id="hEa-9E-T2O"/>
+                            <constraint firstItem="vTc-XI-6Cg" firstAttribute="trailing" secondItem="2JK-WT-TUk" secondAttribute="trailing" constant="16" id="yOZ-qq-brE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vTc-XI-6Cg"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="400"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="PbD-95-6j1" id="7QR-02-kAq"/>
+                        <outlet property="saveButton" destination="0YY-gq-5vM" id="oUi-dI-VDI"/>
+                        <outlet property="tableView" destination="Ug1-Tp-efo" id="8As-P1-ctO"/>
+                        <outlet property="titleLabel" destination="2JK-WT-TUk" id="swm-mG-4Wq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ND7-Rj-A8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="808.79999999999995" y="161.91904047976013"/>
+        </scene>
+    </scenes>
+</document>

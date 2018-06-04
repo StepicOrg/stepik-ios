@@ -81,10 +81,15 @@ class SectionTableViewCell: UITableViewCell {
         }
     }
 
-    func initWithSection(_ section: Section, delegate: PKDownloadButtonDelegate) {
+    func initWithSection(_ section: Section, sectionDeadline: SectionDeadline? = nil, delegate: PKDownloadButtonDelegate) {
         titleLabel.text = "\(section.position). \(section.title)"
+        datesLabel.colorMode = .gray
 
-        datesLabel.text = SectionTableViewCell.getTextFromSection(section)
+        if let sectionDeadline = sectionDeadline {
+            datesLabel.text = "\(NSLocalizedString("PersonalDeadline", comment: "")) \(sectionDeadline.deadlineDate.getStepicFormatString(withTime: true))"
+        } else {
+            datesLabel.text = SectionTableViewCell.getTextFromSection(section)
+        }
 
         if let progress = section.progress {
             if progress.cost == 0 {

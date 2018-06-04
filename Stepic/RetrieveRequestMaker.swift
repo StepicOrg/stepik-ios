@@ -34,7 +34,7 @@ class RetrieveRequestMaker {
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T] = [], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
         return Promise { fulfill, reject in
             checkToken().then {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
@@ -64,7 +64,7 @@ class RetrieveRequestMaker {
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta)> {
+    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T] = [], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta)> {
         return Promise { fulfill, reject in
             request(requestEndpoint: requestEndpoint, paramName: paramName, params: params, updatingObjects: updatingObjects, withManager: manager).then {
                 objects, meta, _ in
