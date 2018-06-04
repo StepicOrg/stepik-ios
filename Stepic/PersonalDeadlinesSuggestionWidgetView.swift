@@ -30,6 +30,7 @@ class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
     func localize() {
         noButton.setTitle(NSLocalizedString("PersonalDeadlineWidgetNoButtonTitle", comment: ""), for: .normal)
         yesButton.setTitle(NSLocalizedString("PersonalDeadlineWidgetYesButtonTitle", comment: ""), for: .normal)
+        textLabel.text = NSLocalizedString("PersonalDeadlineWidgetSuggestionText", comment: "")
     }
 
     @IBAction func noPressed(_ sender: Any) {

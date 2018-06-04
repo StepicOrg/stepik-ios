@@ -57,8 +57,9 @@ class PersonalDeadlineNotificationsManager {
         content.title = "\(course.title)"
         content.body = String(format: NSLocalizedString("PersonalDeadlineNotificationBody", comment: ""), "\(section.title)", "\(hoursBeforeDeadline)")
         content.sound = UNNotificationSound.default()
-        let components = Calendar.current.dateComponents(in: TimeZone.current, from: fireDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        let donorComponents = Calendar.current.dateComponents(in: TimeZone(identifier: "UTC")!, from: fireDate)
+        let components = DateComponents(calendar: Calendar.current, timeZone: TimeZone(identifier: "UTC")!, year: donorComponents.year, month: donorComponents.month, day: donorComponents.day, hour: donorComponents.hour, minute: donorComponents.minute, second: donorComponents.minute)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         let request = UNNotificationRequest(identifier: notificationIdentifier(section: section.id, hoursBeforeDeadline: hoursBeforeDeadline), content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: {
             error in

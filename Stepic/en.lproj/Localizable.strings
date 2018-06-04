@@ -507,3 +507,4 @@ PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't
 Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
+PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, ыщ way you'll never forget to study!";
