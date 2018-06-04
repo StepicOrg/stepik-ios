@@ -69,6 +69,10 @@ class UserActivity: JSONSerializable {
         return thisWeekPins.index(where: { $0 > 0 }) != nil
     }
 
+    var didSolveToday: Bool {
+        return pins[0] != 0
+    }
+
     var needsToSolveToday: Bool {
         guard pins.count > 1 else {
             return false

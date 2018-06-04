@@ -12,6 +12,9 @@ protocol SettingsView: class {
     func setMenu(menu: Menu)
     func changeVideoQuality(action: VideoQualityChoiceAction)
     func changeCodeEditorSettings()
+
+    func presentAuth()
+    func navigateToDownloads()
 }
 
 class SettingsPresenter {
@@ -33,7 +36,10 @@ class SettingsPresenter {
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")),
             buildAdaptiveModeSwitchBlock(),
             buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: NSLocalizedString("CodeEditorTitle", comment: "")),
-            buildCodeEditorSettingsBlock()
+            buildCodeEditorSettingsBlock(),
+            buildTitleMenuBlock(id: adaptiveHeaderBlockId, title: ""),
+            buildDownloadsTransitionBlock(),
+            buildLogoutBlock()
         ]
 
         return Menu(blocks: blocks)
@@ -49,6 +55,8 @@ class SettingsPresenter {
     private let adaptiveModeSwitchBlockId = "use_adaptive_mode"
     private let codeEditorSettingsHeaderBlockId = "code_editor_header"
     private let codeEditorSettingsBlockId = "code_editor_settings"
+    private let downloadsBlockId = "downloads"
+    private let logoutBlockId = "logout"
 
     private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock {
         return HeaderMenuBlock(id: id, title: title)
@@ -107,5 +115,33 @@ class SettingsPresenter {
         }
 
         return block
+    }
+
+    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: downloadsBlockId, title: NSLocalizedString("Downloads", comment: ""))
+
+        block.onTouch = {
+            [weak self] in
+            self?.view?.navigateToDownloads()
+        }
+
+        return block
+    }
+
+    private func buildLogoutBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: logoutBlockId, title: NSLocalizedString("Logout", comment: ""))
+
+        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+        block.onTouch = {
+            [weak self] in
+            self?.logout()
+        }
+
+        return block
+    }
+
+    private func logout() {
+        AuthInfo.shared.token = nil
+        view?.presentAuth()
     }
 }

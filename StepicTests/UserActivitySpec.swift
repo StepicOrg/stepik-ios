@@ -104,6 +104,20 @@ class UserActivitySpec: QuickSpec {
                     expect(ua.didSolveThisWeek) == true
                 }
 
+                it("did solve today") {
+                    let sampleObj = ["id": 239, "pins": [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let ua = UserActivity(json: JSON(sampleObj))
+
+                    expect(ua.didSolveToday) == true
+                }
+
+                it("didn't solve today") {
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let ua = UserActivity(json: JSON(sampleObj))
+
+                    expect(ua.didSolveToday) == false
+                }
+
                 it("needs to solve today") {
                     let sampleObj = ["id": 239, "pins": [0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
                     let ua = UserActivity(json: JSON(sampleObj))

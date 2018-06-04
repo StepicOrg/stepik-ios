@@ -8,6 +8,8 @@
 
 import UIKit
 import DownloadButton
+import FLKAutoLayout
+import Presentr
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -40,10 +42,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         self.navigationItem.backBarButtonItem?.title = " "
 
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
-        let infoBtn = UIButton(type: UIButtonType.infoDark)
-        infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), for: UIControlEvents.touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
-        self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
+
+        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "dots_dark"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SectionsViewController.moreButtonPressed(_:)))
+
+        self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
 
         tableView.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
         tableView.emptySetPlaceholder = StepikPlaceholder(.emptySections)
@@ -68,6 +70,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
+
+        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) {
+            tableView.tableHeaderView = personalDeadlinesWidgetView
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.shown, parameters: ["course": course.id])
+        }
     }
 
     var url: String {
@@ -76,6 +83,119 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         } else {
             return ""
         }
+    }
+
+    func editSchedule() {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: PresentationType.popup)
+            presenter.roundCorners = true
+            return presenter
+        }()
+
+        guard let editVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlineEditScheduleViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlineEditScheduleViewController else {
+            return
+        }
+        editVC.course = course
+        editVC.onSavePressed = {
+            [weak self] in
+            self?.tableView.reloadData()
+        }
+        customPresentViewController(presentr, viewController: editVC, animated: true, completion: nil)
+    }
+
+    func requestDeadlines() {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.roundCorners = true
+            return presenter
+        }()
+
+        guard let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlinesModeSelectionViewController else {
+            return
+        }
+        modesVC.course = course
+        modesVC.onDeadlineSelected = {
+            [weak self] in
+            self?.tableView.reloadData()
+        }
+        customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
+    }
+
+    //Widget here
+    lazy var personalDeadlinesWidgetView: UIView = {
+        let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
+        widget.noAction = {
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.hidden, parameters: ["course": strongSelf.course.id])
+            DefaultsContainer.personalDeadlines.declinedWidget(for: strongSelf.course.id)
+            strongSelf.tableView.beginUpdates()
+            strongSelf.tableView.tableHeaderView = nil
+            strongSelf.tableView.endUpdates()
+        }
+        widget.yesAction = {
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.clicked, parameters: ["course": strongSelf.course.id])
+            strongSelf.requestDeadlines()
+            DefaultsContainer.personalDeadlines.acceptedWidget(for: strongSelf.course.id)
+            strongSelf.tableView.beginUpdates()
+            strongSelf.tableView.tableHeaderView = nil
+            strongSelf.tableView.endUpdates()
+        }
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        backgroundView.addSubview(widget)
+        widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
+        return backgroundView
+    }()
+
+    @objc func moreButtonPressed(_ button: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: course.title, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("CourseInfo", comment: ""), style: .default, handler: {
+            _ in
+            self.performSegue(withIdentifier: "showCourse", sender: nil)
+        }))
+        if course.sectionDeadlines != nil {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("EditSchedule", comment: ""), style: .default, handler: {
+                [weak self]
+                _ in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.changePressed)
+                self?.editSchedule()
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("DeleteSchedule", comment: ""), style: .destructive, handler: {
+                [weak self]
+                _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
+                SVProgressHUD.show()
+                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).then {
+                    [weak self]
+                    () -> Void in
+                    SVProgressHUD.dismiss()
+                    self?.tableView.reloadData()
+                    }.catch {
+                        _ in
+                        SVProgressHUD.showError(withStatus: nil)
+                }
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("CreateSchedule", comment: ""), style: .default, handler: {
+                [weak self]
+                _ in
+                self?.requestDeadlines()
+            }))
+        }
+
+        alert.popoverPresentationController?.barButtonItem = button
+        present(alert, animated: true, completion: nil)
     }
 
     @objc func shareButtonPressed(_ button: UIBarButtonItem) {
@@ -95,6 +215,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
+        tableView.layoutTableHeaderView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -367,7 +488,8 @@ extension SectionsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
 
-        cell.initWithSection(course.sections[indexPath.row], delegate: self)
+        let section = course.sections[indexPath.row]
+        cell.initWithSection(section, sectionDeadline: course.sectionDeadlines?.first(where: {$0.section == section.id}), delegate: self)
 
         return cell
     }
