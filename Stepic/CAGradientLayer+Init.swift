@@ -9,9 +9,10 @@
 import Foundation
 
 extension CAGradientLayer {
-    convenience init(colors: [UIColor], rotationAngle: CGFloat) {
+    convenience init(colors: [UIColor], locations: [NSNumber]? = nil, rotationAngle: CGFloat) {
         self.init()
         self.colors = colors.map { $0.cgColor }
+        self.locations = locations
 
         let angle: Float = Float(rotationAngle) / (2 * Float.pi)
         let startPointX = powf(sinf(2 * Float.pi * ((angle + 0.75) / 2)), 2)
