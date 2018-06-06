@@ -163,6 +163,7 @@
 		0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
 		0829ED9520C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */; };
 		0829ED9620C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */; };
+		0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */; };
 		082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
@@ -4663,6 +4664,7 @@
 		0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsViewController.swift; sourceTree = "<group>"; };
 		0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguagePreferenceTableViewCell.swift; sourceTree = "<group>"; };
 		0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentLanguagePreferenceTableViewCell.xib; sourceTree = "<group>"; };
+		0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDefaultsContainer.swift; sourceTree = "<group>"; };
 		082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionManager.swift; sourceTree = "<group>"; };
 		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
 		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
@@ -5799,6 +5801,7 @@
 				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
 				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
 				082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */,
+				0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */,
 			);
 			name = Defaults;
 			sourceTree = "<group>";
@@ -11889,6 +11892,7 @@
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */,
+				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
 				0859AEAD1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,

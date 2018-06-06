@@ -12,6 +12,8 @@ class LanguageSettingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    var selectedIndex: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -21,14 +23,33 @@ class LanguageSettingsViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectedIndex = ContentLanguage.supportedLanguages.index(of: ContentLanguage.sharedContentLanguage)
+        selectLanguage(selectedLanguage: ContentLanguage.sharedContentLanguage)
+    }
+
     func selectLanguage(selectedLanguage: ContentLanguage) {
         ContentLanguage.sharedContentLanguage = selectedLanguage
+
+        if let selectedIndex = selectedIndex {
+            let deselectIndexPath = IndexPath(row: selectedIndex, section: 0)
+            let cellToDeselect = tableView.cellForRow(at: deselectIndexPath)
+            cellToDeselect?.accessoryType = .none
+        }
+        if let selectedIndex = ContentLanguage.supportedLanguages.index(of: selectedLanguage) {
+            self.selectedIndex = selectedIndex
+            let selectIndexPath = IndexPath(row: selectedIndex, section: 0)
+            let cellToSelect = tableView.cellForRow(at: selectIndexPath)
+            cellToSelect?.accessoryType = .checkmark
+        }
     }
 }
 
 extension LanguageSettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ContentLanguage.sharedContentLanguage = ContentLanguage.supportedLanguages[indexPath.row]
+        selectLanguage(selectedLanguage: ContentLanguage.supportedLanguages[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SaG-SC-tA2">
-                    <rect key="frame" x="0.0" y="48" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="47" width="375" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="999" constant="40" id="yLe-Fl-i6W"/>
@@ -37,14 +37,14 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Df-Uu-cul" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" text="This can be also changed in preferences" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aps-oZ-dhi" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="108" width="375" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="0.0" y="107" width="375" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>

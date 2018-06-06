@@ -42,10 +42,21 @@ class ExplorePresenter: CourseListCountDelegate {
     private var blocks: [CourseListBlock] = []
     private var didRefreshOnce: Bool = false
 
+    private var currentLanguage: ContentLanguage = ContentLanguage.sharedContentLanguage
+
     init(view: ExploreView, courseListsAPI: CourseListsAPI, courseListsCache: CourseListsCache) {
         self.view = view
         self.courseListsAPI = courseListsAPI
         self.courseListsCache = courseListsCache
+    }
+
+    func willAppear() {
+        DefaultsContainer.explore.shouldDisplayContentLanguageWidget = false
+        if currentLanguage != ContentLanguage.sharedContentLanguage {
+            currentLanguage = ContentLanguage.sharedContentLanguage
+            view?.updateTagsLanguage(language: currentLanguage)
+            refresh()
+        }
     }
 
     func initLanguagesWidget() {
@@ -54,6 +65,7 @@ class ExplorePresenter: CourseListCountDelegate {
             selectedLanguage in
             if selectedLanguage != ContentLanguage.sharedContentLanguage {
                 ContentLanguage.sharedContentLanguage = selectedLanguage
+                self?.currentLanguage = selectedLanguage
                 self?.view?.updateTagsLanguage(language: selectedLanguage)
                 self?.refresh()
             }
