@@ -52,6 +52,13 @@ class SettingsViewController: MenuViewController, SettingsView {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    func changeContentLanguageSettings() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "LanguageSettingsViewController", storyboardName: "Profile") as? LanguageSettingsViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     func changeCodeEditorSettings() {
         guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
             return

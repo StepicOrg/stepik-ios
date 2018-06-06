@@ -44,6 +44,36 @@
             </objects>
             <point key="canvasLocation" x="617" y="150"/>
         </scene>
+        <!--Language Settings View Controller-->
+        <scene sceneID="sNN-If-jv8">
+            <objects>
+                <viewController storyboardIdentifier="LanguageSettingsViewController" id="OOS-j1-nxw" customClass="LanguageSettingsViewController" customModule="Stepic" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l3S-ur-xQh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o8N-sQ-VXs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0G9-Az-Ayx" firstAttribute="trailing" secondItem="o8N-sQ-VXs" secondAttribute="trailing" id="BAP-vg-lu6"/>
+                            <constraint firstItem="0G9-Az-Ayx" firstAttribute="top" secondItem="o8N-sQ-VXs" secondAttribute="top" id="VPA-lg-Gqn"/>
+                            <constraint firstItem="o8N-sQ-VXs" firstAttribute="leading" secondItem="0G9-Az-Ayx" secondAttribute="leading" id="cGk-tz-f0r"/>
+                            <constraint firstItem="0G9-Az-Ayx" firstAttribute="bottom" secondItem="o8N-sQ-VXs" secondAttribute="bottom" id="hMI-st-0Ce"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0G9-Az-Ayx"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="o8N-sQ-VXs" id="Zcf-su-M3g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vTQ-Ul-0Vt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1392.8" y="-515.8920539730135"/>
+        </scene>
         <!--Video quality-->
         <scene sceneID="paO-sY-Hcf">
             <objects>

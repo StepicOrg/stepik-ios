@@ -42,8 +42,6 @@ class ExplorePresenter: CourseListCountDelegate {
     private var blocks: [CourseListBlock] = []
     private var didRefreshOnce: Bool = false
 
-    let supportedLanguages : [ContentLanguage] = [.russian, .english]
-
     init(view: ExploreView, courseListsAPI: CourseListsAPI, courseListsCache: CourseListsCache) {
         self.view = view
         self.courseListsAPI = courseListsAPI
@@ -51,7 +49,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     func initLanguagesWidget() {
-        view?.setLanguages(withLanguages: supportedLanguages, initialLanguage: ContentLanguage.sharedContentLanguage, onSelected: {
+        view?.setLanguages(withLanguages: ContentLanguage.supportedLanguages, initialLanguage: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]
             selectedLanguage in
             if selectedLanguage != ContentLanguage.sharedContentLanguage {

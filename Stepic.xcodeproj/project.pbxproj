@@ -160,6 +160,9 @@
 		0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
 		0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
+		0829ED9520C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */; };
+		0829ED9620C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */; };
 		082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
@@ -4657,6 +4660,9 @@
 		0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_certificates_v15.xcdatamodel; sourceTree = "<group>"; };
 		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsViewController.swift; sourceTree = "<group>"; };
+		0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguagePreferenceTableViewCell.swift; sourceTree = "<group>"; };
+		0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentLanguagePreferenceTableViewCell.xib; sourceTree = "<group>"; };
 		082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionManager.swift; sourceTree = "<group>"; };
 		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
 		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
@@ -5931,6 +5937,16 @@
 			name = Units;
 			sourceTree = "<group>";
 		};
+		0829ED9020C863910018E6FF /* LanguageSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */,
+				0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */,
+				0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */,
+			);
+			name = LanguageSettings;
+			sourceTree = "<group>";
+		};
 		082B54CD20A9DCF200144817 /* Personal Deadlines */ = {
 			isa = PBXGroup;
 			children = (
@@ -6108,6 +6124,8 @@
 		08448FFE1F5CE13D00D01940 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0829ED9020C863910018E6FF /* LanguageSettings */,
+				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 				08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */,
 				084490081F5D67E300D01940 /* SettingsViewController.swift */,
 			);
@@ -6810,7 +6828,6 @@
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
-				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 				62E981C98BDA0C5DD5100480 /* ProfileInfo */,
 				62E9871E9ADE76771F9158E4 /* StreakNotificationsControl */,
 				62E98E1032DDB6DD34A6D5D6 /* ProfileDescription */,
@@ -9296,6 +9313,7 @@
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
+				0829ED9620C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */,
@@ -12188,6 +12206,7 @@
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
+				0829ED9520C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
@@ -12239,6 +12258,7 @@
 				62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E9870AFED7781931340685 /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */,
+				0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */,
 				62E981858E2E696693A1AB87 /* PinsMapBlockContentView.swift in Sources */,
 				62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */,
