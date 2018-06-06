@@ -14,6 +14,7 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
     case notificationsTimeSelection
     case description
     case pinsMap
+    case achievements
 
     init?(rawValue: RawValue) {
         fatalError("init with raw value has not been implemented")
@@ -31,6 +32,8 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
             return "description"
         case .pinsMap:
             return "pinsMap"
+        case .achievements:
+            return "achievements"
         }
     }
 

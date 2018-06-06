@@ -55,6 +55,7 @@ class ProfilePresenter {
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
                                                            .pinsMap,
+                                                           .achievements,
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .description]
 

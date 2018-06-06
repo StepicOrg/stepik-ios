@@ -41,6 +41,15 @@ class ContentExpandableMenuBlock: ExpandableMenuBlock {
     }
 }
 
+class ContentMenuBlock: MenuBlock {
+    weak var contentView: UIView?
+
+    convenience init(id: String, title: String, contentView: UIView?) {
+        self.init(id: id, title: title)
+        self.contentView = contentView
+    }
+}
+
 class TransitionMenuBlock: MenuBlock {
     var subtitle: String? {
         didSet {

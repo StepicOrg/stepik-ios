@@ -16,6 +16,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     var profileStreaksView: ProfileHeaderInfoView?
     var profileDescriptionView: ProfileDescriptionContentView?
     var pinsMapContentView: PinsMapBlockContentView?
+    var profileAchievementsView: ProfileAchievementsContentView?
 
     // Implementation of StreakNotificationsControlView in extension
     var presenterNotifications: StreakNotificationsControlPresenter?
@@ -117,6 +118,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 menuBlocks.append(buildInfoExpandableBlock())
             case .pinsMap:
                 menuBlocks.append(buildPinsMapExpandableBlock())
+            case .achievements:
+                menuBlocks.append(buildAchievementsBlock())
             default:
                 break
             }
@@ -142,6 +145,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             return self.profileDescriptionView
         case .pinsMap:
             return self.pinsMapContentView
+        case .achievements:
+            return nil
         }
     }
 
@@ -290,6 +295,12 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         block.onExpanded = { [weak block] isExpanded in
             block?.isExpanded = isExpanded
         }
+        return block
+    }
+
+    private func buildAchievementsBlock() -> ContentMenuBlock? {
+        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView()
+        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue, title: "Достижения", contentView: profileAchievementsView)
         return block
     }
 }
