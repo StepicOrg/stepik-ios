@@ -300,7 +300,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     private func buildAchievementsBlock() -> ContentMenuBlock? {
         profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView()
-        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue, title: "Достижения", contentView: profileAchievementsView)
+        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue, title: "Achievements", contentView: profileAchievementsView)
         return block
     }
 }

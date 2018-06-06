@@ -20,11 +20,22 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
         }
 
         isInit = true
-        let stackView = UIView()
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
 
         addSubview(stackView)
         stackView.alignLeading("24", trailing: "-24", toView: self)
-        stackView.alignTop("0", bottom: "0", toView: self)
+        stackView.alignTop("10", bottom: "-8", toView: self)
         stackView.constrainHeight("80")
+
+        for x in 0..<4 {
+            let achievementView: AchievementBadgeView = AchievementBadgeView.fromNib()
+            achievementView.translatesAutoresizingMaskIntoConstraints = false
+
+            let seed = AchievementBadgeViewData(completedLevel: 2, maxLevel: 4, stageProgress: 0.3)
+            achievementView.data = seed
+
+            stackView.addArrangedSubview(achievementView)
+        }
     }
 }

@@ -20,7 +20,7 @@ class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
         titleLabel.text = block.title
-        actionButton.setTitle("Все", for: .normal)
+        actionButton.setTitle("All", for: .normal)
 
         if let block = block as? ContentMenuBlock {
             if let contentView = block.contentView {
