@@ -45,6 +45,7 @@ class ProfilePresenter {
     private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
     private var descriptionPresenter: ProfileDescriptionPresenter?
     private var pinsMapPresenter: PinsMapPresenter?
+    private var achievementsPresenter: ProfileAchievementsPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -92,6 +93,11 @@ class ProfilePresenter {
         // Pins map
         if let attachedView = view?.getView(for: .pinsMap) as? PinsMapContentView {
             pinsMapPresenter = PinsMapPresenter(view: attachedView)
+        }
+
+        // Achievements
+        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView {
+            achievementsPresenter = ProfileAchievementsPresenter(view: attachedView)
         }
 
         refreshUser(with: user)

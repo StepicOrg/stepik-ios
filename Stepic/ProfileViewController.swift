@@ -146,7 +146,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         case .pinsMap:
             return self.pinsMapContentView
         case .achievements:
-            return nil
+            return self.profileAchievementsView
         }
     }
 

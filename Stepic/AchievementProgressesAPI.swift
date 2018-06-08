@@ -24,15 +24,16 @@ enum ApiOrder {
     }
 }
 
-class AchievementsProgressesAPI: APIEndpoint {
+class AchievementProgressesAPI: APIEndpoint {
     override var name: String { return "achievement-progresses" }
 
-    func retrieve(kind: String? = nil, page: Int = 1, order: ApiOrder? = nil) -> Promise<([AchievementProgress], Meta)> {
+    func retrieve(user: Int, kind: String? = nil, order: ApiOrder? = nil, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {
         return Promise { fulfill, reject in
             var params = Parameters()
             if let kind = kind {
                 params["kind"] = kind
             }
+            params["user"] = user
             params["page"] = page
             if let order = order {
                 params["order"] = order.parameter
