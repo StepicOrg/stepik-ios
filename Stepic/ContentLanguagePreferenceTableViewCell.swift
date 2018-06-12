@@ -12,17 +12,6 @@ class ContentLanguagePreferenceTableViewCell: UITableViewCell {
 
     @IBOutlet weak var languageLabel: StepikLabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     func setup(contentLanguage: ContentLanguage) {
         self.languageLabel.text = contentLanguage.fullString
     }
