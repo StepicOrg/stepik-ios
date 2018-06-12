@@ -96,13 +96,18 @@ class ProfilePresenter {
         }
 
         // Achievements
-        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView {
-            achievementsPresenter = ProfileAchievementsPresenter(view: attachedView)
+        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView,
+           let userId = userSeed.userId {
+            achievementsPresenter = ProfileAchievementsPresenter(userId: userId,
+                                                                 view: attachedView,
+                                                                 achievementsAPI: AchievementsAPI(),
+                                                                 achievementProgressesAPI: AchievementProgressesAPI())
         }
 
         refreshUser(with: user)
         refreshStreak(with: activity)
         headerInfoPresenter?.hideLoading()
+        achievementsPresenter?.loadLastAchievements()
     }
 
     private func refreshUser(with user: User) {

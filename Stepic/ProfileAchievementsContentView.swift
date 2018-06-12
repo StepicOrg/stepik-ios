@@ -10,32 +10,42 @@ import UIKit
 import FLKAutoLayout
 
 class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
-    var isInit: Bool = false
+    private var achievementsStackView: UIStackView?
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if isInit {
-            return
+        if achievementsStackView == nil {
+            achievementsStackView = UIStackView()
+            if let achievementsStackView = achievementsStackView {
+                self.addSubview(achievementsStackView)
+                achievementsStackView.distribution = .fillEqually
+
+                achievementsStackView.alignLeading("24", trailing: "-24", toView: self)
+                achievementsStackView.alignTop("10", bottom: "-8", toView: self)
+                achievementsStackView.constrainHeight("80")
+            }
+        }
+    }
+
+    func set(badges: [AchievementBadgeViewData]) {
+        var badges = badges
+        for view in achievementsStackView?.arrangedSubviews ?? [] {
+            achievementsStackView?.removeArrangedSubview(view)
         }
 
-        isInit = true
-        let stackView = UIStackView()
-        stackView.distribution = .fillEqually
+        // FIXME: extract variable
+        let badgesCountInRow = 4
+        for i in 0..<max(0, badgesCountInRow - badges.count) {
+            badges.append(AchievementBadgeViewData.empty)
+        }
 
-        addSubview(stackView)
-        stackView.alignLeading("24", trailing: "-24", toView: self)
-        stackView.alignTop("10", bottom: "-8", toView: self)
-        stackView.constrainHeight("80")
-
-        for x in 0..<4 {
+        for i in 0..<min(badges.count, badgesCountInRow) {
+            let badge = badges[i]
             let achievementView: AchievementBadgeView = AchievementBadgeView.fromNib()
             achievementView.translatesAutoresizingMaskIntoConstraints = false
-
-            let seed = AchievementBadgeViewData(completedLevel: 2, maxLevel: 4, stageProgress: 0.3)
-            achievementView.data = seed
-
-            stackView.addArrangedSubview(achievementView)
+            achievementView.data = badge
+            achievementsStackView?.addArrangedSubview(achievementView)
         }
     }
 }

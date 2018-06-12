@@ -10,55 +10,88 @@ import Foundation
 import PromiseKit
 
 protocol ProfileAchievementsView: class {
-
+    func set(badges: [AchievementBadgeViewData])
 }
 
 class ProfileAchievementsPresenter {
     weak var view: ProfileAchievementsView?
 
-    init(view: ProfileAchievementsView) {
-        self.view = view
+    private static let maxProfileAchievementsCount = 5
 
-        loadAchievementProgresses()
+    private var userId: Int
+    private var achievementsAPI: AchievementsAPI
+    private var achievementProgressesAPI: AchievementProgressesAPI
+    private var achievementsRetriever: AchievementsRetriever
+
+    init(userId: Int, view: ProfileAchievementsView, achievementsAPI: AchievementsAPI, achievementProgressesAPI: AchievementProgressesAPI) {
+        self.view = view
+        self.userId = userId
+        self.achievementsAPI = achievementsAPI
+        self.achievementProgressesAPI = achievementProgressesAPI
+
+        self.achievementsRetriever = AchievementsRetriever(userId: userId,
+                                                           achievementsAPI: achievementsAPI,
+                                                           achievementProgressesAPI: achievementProgressesAPI)
     }
 
-    var achievementsAPI = AchievementsAPI()
-    var achievementProgressesAPI = AchievementProgressesAPI()
-
-    func loadAchievementProgresses() {
+    func loadLastAchievements() {
         var uniqueKinds: Set<String> = Set()
-        achievementProgressesAPI.retrieve(user: AuthInfo.shared.userId ?? 1, order: .desc(param: "obtain_date")).then { (progresses, _) -> Void in
-            var noObtained = false
-            for p in progresses {
-                if p.obtainDate != nil {
-                    if !uniqueKinds.contains(p.kind) {
-                        uniqueKinds.insert(p.kind)
-                    }
 
-                    if uniqueKinds.count == 4 {
-                        break
+        func loadProgress(page: Int) -> Promise<[String]> {
+            return Promise { fulfill, _ in
+                achievementProgressesAPI.retrieve(user: userId, order: .desc(param: "obtain_date")).then { (progresses, _) -> Void in
+                    var kinds: Set<String> = Set()
+                    for p in progresses {
+                        if p.obtainDate != nil {
+                            kinds.insert(p.kind)
+                        }
                     }
+                    fulfill(Array(kinds))
+                }.catch { _ in
+                    fulfill([])
+                }
+            }
+        }
+
+        func collectProgress(max: Int) -> Promise<[String]> {
+            var page = 1
+            return loadProgress(page: 1).then { progresses -> Promise<[String]> in
+                for p in progresses {
+                    uniqueKinds.insert(p)
+                }
+
+                if uniqueKinds.count < max {
+                    page += 1
+                    return loadProgress(page: page)
                 } else {
-                    noObtained = true
-                    break
+                    return Promise(value: Array(uniqueKinds))
                 }
+            }.catch { _ in }
+        }
+
+        collectProgress(max: ProfileAchievementsPresenter.maxProfileAchievementsCount).then { kinds -> Void in
+            let promises = kinds.compactMap { [weak self] kind in
+                self?.achievementsRetriever.loadAchievementProgress(for: kind)
             }
 
-            if uniqueKinds.count < 4 && !noObtained {
-                // should recursive load on the next page
-            } else {
-                print(uniqueKinds)
-            }
+            when(fulfilled: promises).then { [weak self] progressData -> Void in
+                let viewData: [AchievementBadgeViewData] = progressData.compactMap { data in
+                    let kindDescription = AchievementKind(rawValue: data.kind)
+                    guard let badge = kindDescription?.getBadge(for: data.currentLevel) else {
+                        return nil
+                    }
 
-            for x in Array(uniqueKinds) {
-                self.loadAchievements(kind: x).then { data in
-                    print(data)
-                }.catch { error in
-                    print(error)
+                    return AchievementBadgeViewData(completedLevel: data.currentLevel,
+                                                    maxLevel: data.maxLevel,
+                                                    stageProgress: Float(data.currentScore) / Float(data.maxScore),
+                                                    badge: badge)
                 }
+                self?.view?.set(badges: viewData)
+            }.catch { error in
+                print("profile achievements: error while loading = \(error)")
             }
         }.catch { error in
-            print(error)
+            print("profile achievements: error while loading = \(error)")
         }
     }
 }

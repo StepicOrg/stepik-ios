@@ -5,7 +5,7 @@
 //  Created by Vladislav Kiryukhin on 08.06.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-
+import PromiseKit
 import Foundation
 
 class AchievementsRetriever {
@@ -16,10 +16,12 @@ class AchievementsRetriever {
 
     init(userId: Int, achievementsAPI: AchievementsAPI, achievementProgressesAPI: AchievementProgressesAPI) {
         self.userId = userId
+        self.achievementsAPI = achievementsAPI
+        self.achievementProgressesAPI = achievementProgressesAPI
     }
 
     func loadAchievementProgress(for achievement: Achievement) -> Promise<AchievementProgressData> {
-        return loadBadgeInfo(for: achievement.kind)
+        return loadAchievementProgress(for: achievement.kind)
     }
 
     func loadAchievementProgress(for kind: String) -> Promise<AchievementProgressData> {
@@ -57,7 +59,8 @@ class AchievementsRetriever {
                         fulfill(AchievementProgressData(currentScore: progress.score,
                                                         maxScore: idToTargetScore[progress.achievement] ?? 0,
                                                         currentLevel: levelCount,
-                                                        maxLevel: achievements.count))
+                                                        maxLevel: achievements.count,
+                                                        kind: kind))
                         return
                     }
                     levelCount += 1
@@ -65,7 +68,8 @@ class AchievementsRetriever {
                 fulfill(AchievementProgressData(currentScore: progressesSortedByMaxScore.last?.score ?? 0,
                                                 maxScore: progressesSortedByMaxScore.last?.score ?? 0,
                                                 currentLevel: achievements.count,
-                                                maxLevel: achievements.count))
+                                                maxLevel: achievements.count,
+                                                kind: kind))
             }.catch { error in
                 reject(error)
             }
@@ -78,4 +82,5 @@ struct AchievementProgressData {
     var maxScore: Int
     var currentLevel: Int
     var maxLevel: Int
+    var kind: String
 }
