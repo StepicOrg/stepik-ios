@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AchievementsListTableViewCell" rowHeight="111" id="KGk-i7-Jjw" customClass="AchievementsListTableViewCell" customModule="Stepic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="110.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flu-MW-5js">
+                        <rect key="frame" x="16" y="16" width="61" height="75"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="75" id="11B-32-EL6"/>
+                            <constraint firstAttribute="width" constant="61" id="UoM-pn-hDv"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="tre-OR-PuM">
+                        <rect key="frame" x="93" y="27" width="195" height="35.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-3W-8vI">
+                                <rect key="frame" x="0.0" y="0.0" width="195" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTA-Mq-SyB">
+                                <rect key="frame" x="0.0" y="19.5" width="195" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bTA-Mq-SyB" firstAttribute="top" secondItem="Nbg-3W-8vI" secondAttribute="bottom" id="1BM-wE-iVT"/>
+                            <constraint firstAttribute="bottom" secondItem="bTA-Mq-SyB" secondAttribute="bottom" id="3dj-ar-BjQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Nbg-3W-8vI" secondAttribute="trailing" id="L22-il-lFc"/>
+                            <constraint firstAttribute="trailing" secondItem="bTA-Mq-SyB" secondAttribute="trailing" id="L8Z-7y-GwD"/>
+                            <constraint firstItem="bTA-Mq-SyB" firstAttribute="top" secondItem="Nbg-3W-8vI" secondAttribute="bottom" id="Mmo-6M-7rA"/>
+                            <constraint firstItem="Nbg-3W-8vI" firstAttribute="top" secondItem="tre-OR-PuM" secondAttribute="top" id="RmU-hj-hVO"/>
+                            <constraint firstItem="bTA-Mq-SyB" firstAttribute="leading" secondItem="tre-OR-PuM" secondAttribute="leading" id="Tha-MY-0SJ"/>
+                            <constraint firstItem="Nbg-3W-8vI" firstAttribute="leading" secondItem="tre-OR-PuM" secondAttribute="leading" id="c53-WL-eRY"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="flu-MW-5js" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="34d-94-keP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tre-OR-PuM" secondAttribute="trailing" constant="16" id="FWW-hw-yES"/>
+                    <constraint firstAttribute="bottom" secondItem="flu-MW-5js" secondAttribute="bottom" constant="16" id="Py9-ds-Dyl"/>
+                    <constraint firstItem="tre-OR-PuM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="WOO-sM-7lF"/>
+                    <constraint firstItem="flu-MW-5js" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="WjU-qp-QdA"/>
+                    <constraint firstItem="tre-OR-PuM" firstAttribute="leading" secondItem="flu-MW-5js" secondAttribute="trailing" constant="16" id="xpp-hS-xvV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tre-OR-PuM" secondAttribute="bottom" constant="16" id="xvn-O3-dYl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="achievementDescription" destination="bTA-Mq-SyB" id="yI8-6e-Etg"/>
+                <outlet property="achievementName" destination="Nbg-3W-8vI" id="niu-LJ-lgY"/>
+                <outlet property="badgeContainer" destination="flu-MW-5js" id="MNV-cr-R7j"/>
+            </connections>
+            <point key="canvasLocation" x="22" y="114.5"/>
+        </tableViewCell>
+    </objects>
+</document>

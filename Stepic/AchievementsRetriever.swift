@@ -65,11 +65,22 @@ class AchievementsRetriever {
                     }
                     levelCount += 1
                 }
-                fulfill(AchievementProgressData(currentScore: progressesSortedByMaxScore.last?.score ?? 0,
-                                                maxScore: progressesSortedByMaxScore.last?.score ?? 0,
-                                                currentLevel: achievements.count,
-                                                maxLevel: achievements.count,
-                                                kind: kind))
+
+                if let lastProgress = progressesSortedByMaxScore.last {
+                    // Fulfilled achievement
+                    fulfill(AchievementProgressData(currentScore: lastProgress.score,
+                        maxScore: lastProgress.score,
+                        currentLevel: achievements.count,
+                        maxLevel: achievements.count,
+                        kind: kind))
+                } else {
+                    // Empty achievement
+                    fulfill(AchievementProgressData(currentScore: 0,
+                        maxScore: 0,
+                        currentLevel: 0,
+                        maxLevel: achievements.count,
+                        kind: kind))
+                }
             }.catch { error in
                 reject(error)
             }

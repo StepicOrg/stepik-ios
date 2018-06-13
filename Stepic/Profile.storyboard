@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PjG-kv-YKT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PjG-kv-YKT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -178,6 +178,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESk-0Z-ZLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2168.8000000000002" y="149.77511244377811"/>
+        </scene>
+        <!--Achievements List View Controller-->
+        <scene sceneID="gIj-ED-FgU">
+            <objects>
+                <viewController storyboardIdentifier="AchievementsListViewController" id="m2i-fb-YBR" customClass="AchievementsListViewController" customModule="Stepic" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E2L-yF-4BM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wvn-cn-cS3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="m2i-fb-YBR" id="Q0l-es-PCO"/>
+                                    <outlet property="delegate" destination="m2i-fb-YBR" id="lpl-lt-Hrx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Wvn-cn-cS3" firstAttribute="top" secondItem="Kyv-lf-clo" secondAttribute="top" id="0AX-fv-f8y"/>
+                            <constraint firstAttribute="trailing" secondItem="Wvn-cn-cS3" secondAttribute="trailing" id="51Q-fN-AjX"/>
+                            <constraint firstItem="Wvn-cn-cS3" firstAttribute="leading" secondItem="Kyv-lf-clo" secondAttribute="leading" id="5gV-hb-J1M"/>
+                            <constraint firstItem="Kyv-lf-clo" firstAttribute="bottom" secondItem="Wvn-cn-cS3" secondAttribute="bottom" id="oj6-Ri-1gR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Kyv-lf-clo"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Wvn-cn-cS3" id="bKW-dm-thR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z1Z-lq-TDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2954" y="153"/>
         </scene>
     </scenes>
 </document>

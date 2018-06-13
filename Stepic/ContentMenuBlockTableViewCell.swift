@@ -14,15 +14,20 @@ class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var container: UIView!
 
+    var onButtonClickAction: (() -> Void)?
+
     @IBAction func onActionButtonClick(_ sender: Any) {
+        onButtonClickAction?()
     }
 
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
         titleLabel.text = block.title
-        actionButton.setTitle("All", for: .normal)
 
         if let block = block as? ContentMenuBlock {
+            actionButton.setTitle(block.buttonTitle, for: .normal)
+            onButtonClickAction = block.onButtonClick
+
             if let contentView = block.contentView {
                 container.addSubview(contentView)
                 contentView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: container)

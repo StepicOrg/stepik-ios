@@ -300,7 +300,22 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     private func buildAchievementsBlock() -> ContentMenuBlock? {
         profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView()
-        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue, title: "Achievements", contentView: profileAchievementsView)
+        let onButtonClick = { [weak self] in
+            if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
+               let vc = ControllerHelper.instantiateViewController(identifier: "AchievementsListViewController", storyboardName: "Profile") as? AchievementsListViewController {
+                // FIXME: API injection :((
+                let retriever = AchievementsRetriever(userId: userId, achievementsAPI: AchievementsAPI(), achievementProgressesAPI: AchievementProgressesAPI())
+                let presenter = AchievementsListPresenter(userId: userId, view: vc, achievementsAPI: AchievementsAPI(), achievementsRetriever: retriever)
+                vc.presenter = presenter
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
+        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue,
+                                     title: "Achievements",
+                                     contentView: profileAchievementsView,
+                                     buttonTitle: "All",
+                                     onButtonClick: onButtonClick)
         return block
     }
 }
