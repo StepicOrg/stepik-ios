@@ -30,29 +30,58 @@ enum AchievementKind: String {
     func getName() -> String {
         switch self {
         case .stepsSolved:
-            return "Главное – количество"
+            return NSLocalizedString("AchievementsStepsSolvedKindTitle", comment: "")
         case .stepsSolvedChoice:
-            return "Я выбираю"
+            return NSLocalizedString("AchievementsStepsSolvedChoiceKindTitle", comment: "")
         case .stepsSolvedCode:
-            return "Компьютерный мастер"
+            return NSLocalizedString("AchievementsStepsSolvedCodeKindTitle", comment: "")
         case .stepsSolvedNumber:
-            return "Ещё одно достижение"
+            return NSLocalizedString("AchievementsStepsSolvedNumberKindTitle", comment: "")
         case .codeQuizzesSolvedPython:
-            return "Укротитель змей"
+            return NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindTitle", comment: "")
         case .codeQuizzesSolvedJava:
-            return "Немного кофе?"
+            return NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindTitle", comment: "")
         case .codeQuizzesSolvedCPP:
-            return "Developer.cpp"
+            return NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindTitle", comment: "")
         case .certificatesRegularCount:
-            return "Выпускник"
+            return NSLocalizedString("AchievementsCertificatesRegularCountKindTitle", comment: "")
         case .certificatesDistinctionCount:
-            return "Отличник"
+            return NSLocalizedString("AchievementsCertificatesDistinctionCountKindTitle", comment: "")
         case .courseReviewsCount:
-            return "Критик"
+            return NSLocalizedString("AchievementsCourseReviewsCountKindTitle", comment: "")
         case .stepsSolvedStreak:
-            return "Сапёр"
+            return NSLocalizedString("AchievementsStepsSolvedStreakKindTitle", comment: "")
         case .activeDaysStreak:
-            return "Постоянный пользователь"
+            return NSLocalizedString("AchievementsActiveDaysStreakKindTitle", comment: "")
+        }
+    }
+
+    func getDescription(for score: Int) -> String {
+        switch self {
+        case .stepsSolved:
+            return String(format: NSLocalizedString("AchievementsStepsSolvedKindDescription", comment: ""), "\(score)")
+        case .stepsSolvedChoice:
+            return String(format: NSLocalizedString("AchievementsStepsSolvedChoiceKindDescription", comment: ""), "\(score)")
+        case .stepsSolvedCode:
+            return String(format: NSLocalizedString("AchievementsStepsSolvedCodeKindDescription", comment: ""), "\(score)")
+        case .stepsSolvedNumber:
+            return String(format: NSLocalizedString("AchievementsStepsSolvedNumberKindDescription", comment: ""), "\(score)")
+        case .codeQuizzesSolvedPython:
+            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindDescription", comment: ""), "\(score)")
+        case .codeQuizzesSolvedJava:
+            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindDescription", comment: ""), "\(score)")
+        case .codeQuizzesSolvedCPP:
+            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindDescription", comment: ""), "\(score)")
+        case .certificatesRegularCount:
+            return String(format: NSLocalizedString("AchievementsCertificatesRegularCountKindDescription", comment: ""), "\(score)")
+        case .certificatesDistinctionCount:
+            return String(format: NSLocalizedString("AchievementsCertificatesDistinctionCountKindDescription", comment: ""), "\(score)")
+        case .courseReviewsCount:
+            return String(format: NSLocalizedString("AchievementsCourseReviewsCountKindDescription", comment: ""), "\(score)")
+        case .stepsSolvedStreak:
+            return String(format: NSLocalizedString("AchievementsStepsSolvedStreakKindDescription", comment: ""), "\(score)")
+        case .activeDaysStreak:
+            return String(format: NSLocalizedString("AchievementsActiveDaysStreakKindDescription", comment: ""), "\(score)")
         }
     }
 }

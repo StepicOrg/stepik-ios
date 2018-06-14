@@ -491,3 +491,20 @@ CodeEditorColor = "Colors";
 CodeEditorCurrentTheme = "Current: %@";
 CodeEditorCurrentFontSize = "Current: %@pt";
 CodeEditorSettingsTooltip = "You can customize code editor";
+
+/* Achievements */
+Achievements = "Achievements";
+AchievementsStepsSolvedKindTitle = "Quantity matters";
+AchievementsStepsSolvedChoiceKindTitle = "I choose";
+AchievementsStepsSolvedCodeKindTitle = "Computer master";
+AchievementsStepsSolvedNumberKindTitle = "One more achievement";
+AchievementsCodeQuizzesSolvedPythonKindTitle = "Snake tamer";
+AchievementsCodeQuizzesSolvedJavaKindTitle = "Some coffee?";
+AchievementsCodeQuizzesSolvedCppKindTitle = "Developer.cpp";
+AchievementsCertificatesRegularCountKindTitle = "Graduate";
+AchievementsCertificatesDistinctionCountKindTitle = "Distinct student";
+AchievementsCourseReviewsCountKindTitle = "Critic";
+AchievementsStepsSolvedStreakKindTitle = "Sapper";
+AchievementsActiveDaysStreakKindTitle = "Regular user";
+AchievementsLockedTitle = "Wow, what's that?";
+AchievementsLockedDescription = "Complete more challenges to find out";

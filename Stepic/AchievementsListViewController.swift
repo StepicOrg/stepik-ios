@@ -18,7 +18,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Achievements"
+        title = NSLocalizedString("Achievements", comment: "")
         tableView.isSkeletonable = true
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 

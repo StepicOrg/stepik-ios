@@ -42,7 +42,7 @@ class AchievementsListTableViewCell: UITableViewCell {
             achievementDescription.textColor = UIColor.white.withAlphaComponent(0.5)
         } else {
             achievementName.textColor = UIColor.mainText
-            achievementDescription.textColor = UIColor.mainText
+            achievementDescription.textColor = UIColor.mainText.withAlphaComponent(0.7)
         }
     }
 

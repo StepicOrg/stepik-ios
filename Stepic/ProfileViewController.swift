@@ -312,9 +312,9 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }
 
         let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue,
-                                     title: "Achievements",
+                                     title: NSLocalizedString("Achievements", comment: ""),
                                      contentView: profileAchievementsView,
-                                     buttonTitle: "All",
+                                     buttonTitle: NSLocalizedString("ShowAll", comment: ""),
                                      onButtonClick: onButtonClick)
         return block
     }

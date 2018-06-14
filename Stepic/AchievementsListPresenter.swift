@@ -15,7 +15,10 @@ struct AchievementViewData {
     var isEmpty: Bool
 
     static var empty: AchievementViewData {
-        return AchievementViewData(name: "Вау, что это?", description: "Complete more challenges to find out", badgeData: AchievementBadgeViewData.empty, isEmpty: true)
+        return AchievementViewData(name: NSLocalizedString("AchievementsLockedTitle", comment: ""),
+                                   description: NSLocalizedString("AchievementsLockedDescription", comment: ""),
+                                   badgeData: AchievementBadgeViewData.empty,
+                                   isEmpty: true)
     }
 }
 
@@ -75,7 +78,8 @@ class AchievementsListPresenter {
             let viewData: [AchievementViewData] = progressData.compactMap { data in
                 let kindDescription = AchievementKind(rawValue: data.kind)
                 guard let badge = kindDescription?.getBadge(for: data.currentLevel),
-                      let name = kindDescription?.getName() else {
+                      let name = kindDescription?.getName(),
+                      let description = kindDescription?.getDescription(for: data.maxScore) else {
                     return nil
                 }
 
@@ -84,7 +88,7 @@ class AchievementsListPresenter {
                     stageProgress: Float(data.currentScore) / Float(data.maxScore),
                     badge: badge)
 
-                return AchievementViewData(name: name, description: "Some description", badgeData: badgeData, isEmpty: false)
+                return AchievementViewData(name: name, description: description, badgeData: badgeData, isEmpty: false)
             }
             self?.view?.set(count: kinds.count, achievements: viewData)
         }.catch { error in
