@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SkeletonView
 
 class AchievementsListViewController: UIViewController, AchievementsListView {
     @IBOutlet weak var tableView: UITableView!
@@ -18,9 +19,16 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         super.viewDidLoad()
 
         title = "Achievements"
+        tableView.isSkeletonable = true
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 
         presenter?.refresh()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight),
+                                          animation: GradientDirection.leftRight.slidingAnimation())
     }
 
     func set(count: Int, achievements: [AchievementViewData]) {
@@ -30,6 +38,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
             data.append(AchievementViewData.empty)
         }
 
+        view.hideSkeleton()
         tableView.reloadData()
     }
 }
@@ -47,5 +56,15 @@ extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSo
 
         cell.update(with: viewData)
         return cell
+    }
+}
+
+extension AchievementsListViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 25
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdenfierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "AchievementsListTableViewCell"
     }
 }
