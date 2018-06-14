@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTA-Mq-SyB">
-                        <rect key="frame" x="89" y="46" width="215" height="16"/>
+                        <rect key="frame" x="89" y="42" width="215" height="16"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                     <constraint firstAttribute="trailing" secondItem="Nbg-3W-8vI" secondAttribute="trailing" constant="16" id="Ap3-g5-SNP"/>
                     <constraint firstAttribute="trailing" secondItem="bTA-Mq-SyB" secondAttribute="trailing" constant="16" id="RRw-YN-oFv"/>
                     <constraint firstItem="flu-MW-5js" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="16" id="SKc-BN-LI3"/>
-                    <constraint firstItem="bTA-Mq-SyB" firstAttribute="top" secondItem="Nbg-3W-8vI" secondAttribute="bottom" constant="8" id="WOh-EX-J2c"/>
+                    <constraint firstItem="bTA-Mq-SyB" firstAttribute="top" secondItem="Nbg-3W-8vI" secondAttribute="bottom" constant="4" id="WOh-EX-J2c"/>
                     <constraint firstItem="flu-MW-5js" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Wh0-Mx-u46"/>
                     <constraint firstItem="Nbg-3W-8vI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="WwW-Ma-ZRS"/>
                     <constraint firstItem="flu-MW-5js" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XjI-Ve-RfZ"/>
