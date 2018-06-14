@@ -26,8 +26,11 @@ class ExploreViewController: UIViewController, ExploreView {
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
-        presenter?.initLanguagesWidget()
+        //Initialized in reverse order to be inserted in correct way
         presenter?.initTagsWidget()
+        if DefaultsContainer.explore.shouldDisplayContentLanguageWidget {
+            presenter?.initLanguagesWidget()
+        }
     }
 
     private func setupStackView() {
@@ -148,6 +151,13 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.isHidden = false
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+
+        let separatorView = UIView()
+        separatorView.constrainHeight("0.5")
+        separatorView.backgroundColor = UIColor(red: 83 / 255.0, green: 83 / 255.0, blue: 102 / 255.0, alpha: 0.3)
+        widgetBackgroundView.addSubview(separatorView)
+        separatorView.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        separatorView.alignBottomEdge(withView: widgetBackgroundView, predicate: "0.5")
     }
 
     var tagsWidget: CourseTagsView?
@@ -172,14 +182,7 @@ class ExploreViewController: UIViewController, ExploreView {
         tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
         widgetBackgroundView.isHidden = false
 
-        let separatorView = UIView()
-        separatorView.constrainHeight("0.5")
-        separatorView.backgroundColor = UIColor(red: 83 / 255.0, green: 83 / 255.0, blue: 102 / 255.0, alpha: 0.3)
-        widgetBackgroundView.addSubview(separatorView)
-        separatorView.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
-        separatorView.alignTopEdge(withView: widgetBackgroundView, predicate: "8")
-
-        stackView.insertArrangedSubview(widgetBackgroundView, at: 1)
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
         widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
         tagsWidget.tags = tags
         tagsWidget.language = language
@@ -279,6 +282,7 @@ class ExploreViewController: UIViewController, ExploreView {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        presenter?.willAppear()
         navigationController?.delegate = self
     }
 

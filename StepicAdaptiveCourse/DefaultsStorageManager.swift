@@ -16,6 +16,7 @@ class DefaultsStorageManager {
     private let accountEmailKey = "account_email"
     private let accountPasswordKey = "account_password"
     private let lastCourseIdKey = "last_course_id"
+
     let defaults = UserDefaults.standard
 
     var isOnboardingFinished: Bool {
