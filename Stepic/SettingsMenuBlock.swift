@@ -8,9 +8,7 @@
 
 import Foundation
 
-enum SettingsMenuBlock: String, Equatable {
-    typealias RawValue = String
-
+enum SettingsMenuBlock: String {
     case videoHeader = "video_header"
     case onlyWifiSwitch = "only_wifi_switch"
     case loadedVideoQuality = "loaded_video_quality"
@@ -24,8 +22,4 @@ enum SettingsMenuBlock: String, Equatable {
     case emptyHeader = "empty_header"
     case languageSettingsHeader = "language_settings"
     case contentLanguage = "content_language_settings"
-
-    static func == (lhs: SettingsMenuBlock, rhs: SettingsMenuBlock) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
 }
