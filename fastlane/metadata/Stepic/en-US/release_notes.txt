@@ -1,7 +1,6 @@
 In the new version of Stepik:
-• Background videos
-• Code challenge customization
-• Some bugfixes
+• Smart course schedule generation. Try it to find additional motivation for learning!
+• Profile can be opened by clicking on user's image in discussions
 
 Enjoy learning!
 Stepik team

@@ -13,6 +13,7 @@ class ContentLanguagesView: NibInitializableView {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
     @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var descriptionLabel: StepikLabel!
 
     var languages: [ContentLanguage] = [] {
         didSet {
@@ -38,6 +39,7 @@ class ContentLanguagesView: NibInitializableView {
         flowLayout.minimumLineSpacing = 12
         titleLabel.colorMode = .gray
         titleLabel.text = NSLocalizedString("ChooseSearchLanguage", comment: "")
+        descriptionLabel.text = "\(NSLocalizedString("ContentLanguageDescription", comment: "")) \(NSLocalizedString("CanBeChangedInSettings", comment: ""))"
     }
 }
 

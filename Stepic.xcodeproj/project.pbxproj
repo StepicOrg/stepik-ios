@@ -64,6 +64,7 @@
 		080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
 		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */; };
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
@@ -99,6 +100,7 @@
 		0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
+		08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */; };
 		081959E01FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
 		081959E21FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
 		081959E41FA0032E00E6D6CD /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */; };
@@ -129,6 +131,9 @@
 		08195A261FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		08195A271FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		08195A281FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
+		0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */; };
+		0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */; };
+		0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */; };
 		081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
@@ -156,16 +161,29 @@
 		0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
 		0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
+		0829ED9520C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */; };
+		0829ED9620C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */; };
+		0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */; };
 		082A88FE2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A88FF2046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89012046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89022046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89032046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
 		082A89042046F0460079F038 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
+		082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */; };
+		082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */; };
+		082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */; };
+		082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */; };
+		082B54D920AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */; };
+		082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54DA20AA445C00144817 /* DeadlineMode.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
 		082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35AD20B55691006E28F9 /* StorageRecord.swift */; };
+		082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35AF20B5B14A006E28F9 /* StorageData.swift */; };
+		082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35B120B5F1E4006E28F9 /* StorageRecordsAPI.swift */; };
 		082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		082E5E101F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
@@ -188,6 +206,8 @@
 		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
+		083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */; };
+		083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CAF2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
@@ -618,6 +638,7 @@
 		08A9F7231FC38C9E00640F1F /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		08A9F7241FC38C9E00640F1F /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		08A9F7251FC38C9E00640F1F /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
+		08AA11BB20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AA11BA20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift */; };
 		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		08AB82381D74C44100FDEADE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
 		08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB823A1D75AA9300FDEADE /* CookieTests.swift */; };
@@ -821,6 +842,8 @@
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
+		08DDF90D20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DDF90C20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib */; };
+		08DDF91020A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDF90F20A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
@@ -986,8 +1009,6 @@
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
-		08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
-		08F476221E82C1480018E82C /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -1104,7 +1125,6 @@
 		2C1B60D81F4C4AEF00236804 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C1B60D91F4C4AEF00236804 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -1423,7 +1443,6 @@
 		2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -1500,7 +1519,6 @@
 		2C1B62E91F4C590700236804 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C1B62EA1F4C590700236804 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -1819,7 +1837,6 @@
 		2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C1B64701F4C590700236804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C1B64711F4C590700236804 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -2240,7 +2257,6 @@
 		2C89A96C1F4C289900227C3B /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C89A96D1F4C289900227C3B /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C89A9731F4C289900227C3B /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -2558,7 +2574,6 @@
 		2C89AAE81F4C289900227C3B /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -2643,7 +2658,6 @@
 		2C9731201F4C38F600AC9301 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		2C9731211F4C38F600AC9301 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -2962,7 +2976,6 @@
 		2C97329C1F4C38F600AC9301 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
-		2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7911EB8DC13001E3E42 /* StepCardView.xib */; };
@@ -3087,7 +3100,6 @@
 		2CA8D15A2088D9C000E105E9 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		2CA8D15B2088D9C000E105E9 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2CA8D15C2088D9C000E105E9 /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
-		2CA8D15D2088D9C000E105E9 /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
 		2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
@@ -3541,7 +3553,6 @@
 		2CA8D3282088D9C000E105E9 /* HorizontalCoursesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */; };
 		2CA8D3292088D9C000E105E9 /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
 		2CA8D32A2088D9C000E105E9 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
-		2CA8D32B2088D9C000E105E9 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2CA8D32C2088D9C000E105E9 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2CA8D32D2088D9C000E105E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		2CA8D32E2088D9C000E105E9 /* ContentLanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885B8D11FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib */; };
@@ -3894,7 +3905,6 @@
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
 		863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
-		864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
@@ -4157,7 +4167,6 @@
 		866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
-		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		86A1C3262065157C00D0914C /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -4614,6 +4623,7 @@
 		080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptsAPI.swift; sourceTree = "<group>"; };
 		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuBlock.swift; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
 		080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCodeQuizViewController.swift; sourceTree = "<group>"; };
 		080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenCodeQuizViewController.xib; sourceTree = "<group>"; };
@@ -4631,11 +4641,16 @@
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		0815661A1F69C3910082B359 /* CustomSearchBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomSearchBar.xib; sourceTree = "<group>"; };
 		081566241F69C3AD0082B359 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineCounter.swift; sourceTree = "<group>"; };
+		08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_timetocomplete_v22.xcdatamodel; sourceTree = "<group>"; };
 		081959DF1FA0032E00E6D6CD /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		081959E91FA007D800E6D6CD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		08195A051FA00FF400E6D6CD /* CourseLists.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CourseLists.storyboard; sourceTree = "<group>"; };
 		08195A171FA0AF1200E6D6CD /* HorizontalCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCoursesView.swift; sourceTree = "<group>"; };
 		08195A201FA0AF2A00E6D6CD /* HorizontalCoursesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCoursesView.xib; sourceTree = "<group>"; };
+		0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineEditScheduleViewController.swift; sourceTree = "<group>"; };
+		0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineTableViewCell.swift; sourceTree = "<group>"; };
+		0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlineTableViewCell.xib; sourceTree = "<group>"; };
 		081A7DA81C56625F00583728 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuizViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
@@ -4665,11 +4680,24 @@
 		0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_certificates_v15.xcdatamodel; sourceTree = "<group>"; };
 		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsViewController.swift; sourceTree = "<group>"; };
+		0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguagePreferenceTableViewCell.swift; sourceTree = "<group>"; };
+		0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentLanguagePreferenceTableViewCell.xib; sourceTree = "<group>"; };
+		0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDefaultsContainer.swift; sourceTree = "<group>"; };
 		082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionManager.swift; sourceTree = "<group>"; };
+		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
+		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
+		082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesDefaultsContainer.swift; sourceTree = "<group>"; };
+		082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineModeCollectionViewCell.swift; sourceTree = "<group>"; };
+		082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlineModeCollectionViewCell.xib; sourceTree = "<group>"; };
+		082B54DA20AA445C00144817 /* DeadlineMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineMode.swift; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
 		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
+		082E35AD20B55691006E28F9 /* StorageRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecord.swift; sourceTree = "<group>"; };
+		082E35AF20B5B14A006E28F9 /* StorageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageData.swift; sourceTree = "<group>"; };
+		082E35B120B5F1E4006E28F9 /* StorageRecordsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecordsAPI.swift; sourceTree = "<group>"; };
 		082E5E0D1F46379100F41426 /* ReplyCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCache.swift; sourceTree = "<group>"; };
 		082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v9.xcdatamodel; sourceTree = "<group>"; };
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
@@ -4695,6 +4723,8 @@
 		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineLocalStorageManager.swift; sourceTree = "<group>"; };
+		083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineManager.swift; sourceTree = "<group>"; };
 		083B164C1C2AF27700250B37 /* JSQWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQWebViewController.swift; sourceTree = "<group>"; };
 		083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v3.xcdatamodel; sourceTree = "<group>"; };
 		083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicApplicationsInfo.swift; sourceTree = "<group>"; };
@@ -4889,6 +4919,7 @@
 		08A9F70B1FC3837800640F1F /* CourseTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		08A9F70C1FC3837800640F1F /* CourseTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		08A9F71D1FC38C9E00640F1F /* CourseTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTag.swift; sourceTree = "<group>"; };
+		08AA11BA20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineNotificationsManager.swift; sourceTree = "<group>"; };
 		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
 		08AB82371D74C44100FDEADE /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08AB823A1D75AA9300FDEADE /* CookieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieTests.swift; sourceTree = "<group>"; };
@@ -4982,6 +5013,8 @@
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
 		08DC5A021E171C730051B14A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Interface.strings; sourceTree = "<group>"; };
 		08DC5A041E171EA00051B14A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		08DDF90C20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlinesSuggestionWidgetView.xib; sourceTree = "<group>"; };
+		08DDF90F20A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesSuggestionWidgetView.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -5037,8 +5070,6 @@
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F261201E79DD0B00AC908B /* APIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
-		08F4761D1E82C11C0018E82C /* StreaksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreaksView.xib; sourceTree = "<group>"; };
-		08F476211E82C1480018E82C /* StreaksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksView.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		08F485971C5752D0000165AA /* UIViewLoadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewLoadExtension.swift; sourceTree = "<group>"; };
@@ -5805,6 +5836,8 @@
 			children = (
 				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
 				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+				082B54D420AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift */,
+				0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */,
 			);
 			name = Defaults;
 			sourceTree = "<group>";
@@ -5943,6 +5976,35 @@
 			name = Units;
 			sourceTree = "<group>";
 		};
+		0829ED9020C863910018E6FF /* LanguageSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */,
+				0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */,
+				0829ED9420C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib */,
+			);
+			name = LanguageSettings;
+			sourceTree = "<group>";
+		};
+		082B54CD20A9DCF200144817 /* Personal Deadlines */ = {
+			isa = PBXGroup;
+			children = (
+				082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */,
+				082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */,
+				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
+				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
+				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
+				08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */,
+				08AA11BA20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift */,
+				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
+				083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */,
+				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
+				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
+				0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */,
+			);
+			name = "Personal Deadlines";
+			sourceTree = "<group>";
+		};
 		082BE3B01E676856006BC60F /* RoutingManagers */ = {
 			isa = PBXGroup;
 			children = (
@@ -5970,6 +6032,15 @@
 				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
 			);
 			name = Discussions;
+			sourceTree = "<group>";
+		};
+		082E35AC20B5567A006E28F9 /* Storage Records */ = {
+			isa = PBXGroup;
+			children = (
+				082E35AD20B55691006E28F9 /* StorageRecord.swift */,
+				082E35AF20B5B14A006E28F9 /* StorageData.swift */,
+			);
+			name = "Storage Records";
 			sourceTree = "<group>";
 		};
 		0834C4741E2CEC55002F8516 /* MatchingQuizViewController */ = {
@@ -6092,8 +6163,11 @@
 		08448FFE1F5CE13D00D01940 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0829ED9020C863910018E6FF /* LanguageSettings */,
+				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 				08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */,
 				084490081F5D67E300D01940 /* SettingsViewController.swift */,
+				080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -6262,6 +6336,7 @@
 		084F7AAF1E775A410088368A /* API Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				082E35B120B5F1E4006E28F9 /* StorageRecordsAPI.swift */,
 				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				086A8B271D21796800F45C45 /* VotesAPI.swift */,
 				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
@@ -6491,7 +6566,6 @@
 				2CE8390F20C80FF200FE3672 /* AchievementBadge */,
 				2C453396204D46B70061342A /* PinsMap */,
 				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
-				08F476201E82C12B0018E82C /* StreaksView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
@@ -6502,6 +6576,7 @@
 				089700951F6B2A820041C24E /* NibInitializableView.swift */,
 				08EDB8B91F7C3D100028A9AE /* CourseWidgetView */,
 				2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */,
+				08DDF90E20A9B2D0004ECC11 /* PersonalDeadlinesSuggestionWidgetView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -6518,6 +6593,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				082E35AC20B5567A006E28F9 /* Storage Records */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08E542071C6CD59A00DEC38E /* Managers */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
@@ -6555,6 +6631,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				082B54CD20A9DCF200144817 /* Personal Deadlines */,
 				2CF0885B205BECCC00FCB9C0 /* Placeholders */,
 				2C5DF1371FEBDC50003B1177 /* Adaptive steps */,
 				2C2060CB1FDAF71500605C42 /* Onboarding */,
@@ -6796,7 +6873,6 @@
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
-				62E981DA2B38C5236528165D /* CodeEditorSettings */,
 				62E981C98BDA0C5DD5100480 /* ProfileInfo */,
 				62E9871E9ADE76771F9158E4 /* StreakNotificationsControl */,
 				62E98E1032DDB6DD34A6D5D6 /* ProfileDescription */,
@@ -6994,6 +7070,15 @@
 				08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */,
 			);
 			name = CourseReviewSummary;
+			sourceTree = "<group>";
+		};
+		08DDF90E20A9B2D0004ECC11 /* PersonalDeadlinesSuggestionWidgetView */ = {
+			isa = PBXGroup;
+			children = (
+				08DDF90C20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib */,
+				08DDF90F20A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift */,
+			);
+			name = PersonalDeadlinesSuggestionWidgetView;
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -7262,15 +7347,6 @@
 				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		08F476201E82C12B0018E82C /* StreaksView */ = {
-			isa = PBXGroup;
-			children = (
-				08F4761D1E82C11C0018E82C /* StreaksView.xib */,
-				08F476211E82C1480018E82C /* StreaksView.swift */,
-			);
-			name = StreaksView;
 			sourceTree = "<group>";
 		};
 		08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */ = {
@@ -8687,6 +8763,7 @@
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
 				EC002295004D731864259190 /* [CP] Embed Pods Frameworks */,
+				9495706D30E0DFAB090269FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8727,6 +8804,7 @@
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				DC5DDD83D94D581B12743616 /* [CP] Embed Pods Frameworks */,
+				17761272EF3EF7BFABBEDB0F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8749,6 +8827,7 @@
 				1BAE12ED1F93F67700482251 /* Resources */,
 				1B6F294F1FA138EF004A5D4B /* Swift Lint */,
 				56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */,
+				BB575350DAB6BB051F775F18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8768,6 +8847,7 @@
 				1BAE12FE1F93F67700482251 /* Frameworks */,
 				1BAE12FF1F93F67700482251 /* Resources */,
 				3F82A4676256445CD63EB8B3 /* [CP] Embed Pods Frameworks */,
+				5FAB9038D9C72CE20965FCDB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8790,6 +8870,7 @@
 				2C1B62A71F4C4AEF00236804 /* Fabric Script */,
 				2C1B62A81F4C4AEF00236804 /* SwiftLint Script */,
 				AE396512FD00963C45F806DD /* [CP] Embed Pods Frameworks */,
+				97B3917CEFA8A716A2861719 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8811,6 +8892,7 @@
 				2C1B64C11F4C590700236804 /* Fabric Script */,
 				2C1B64C21F4C590700236804 /* SwiftLint Script */,
 				D1C2410F5D8E8E1ED8B9C470 /* [CP] Embed Pods Frameworks */,
+				4AED9F7D0FCAF9DD1346B363 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8832,6 +8914,7 @@
 				2C89AB331F4C289900227C3B /* Fabric Script */,
 				2C89AB341F4C289900227C3B /* SwiftLint Script */,
 				0794AF059F12A84403C70065 /* [CP] Embed Pods Frameworks */,
+				29D5312392346E5D962ACFC3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8854,6 +8937,7 @@
 				2C9732E81F4C38F600AC9301 /* SwiftLint Script */,
 				0916B78D8ABF51F768B46CA1 /* [CP] Check Pods Manifest.lock */,
 				4B054D1D0F5C295F5BE4931A /* [CP] Embed Pods Frameworks */,
+				74079E8EC340C59925C8784B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8875,6 +8959,7 @@
 				2CA8D3802088D9C000E105E9 /* Fabric Script */,
 				2CA8D3812088D9C000E105E9 /* SwiftLint Script */,
 				2CA8D3822088D9C000E105E9 /* [CP] Embed Pods Frameworks */,
+				10B867A5F2A532719D949D72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8894,6 +8979,7 @@
 				2CD12B821F4ED1F4001D3C82 /* Frameworks */,
 				2CD12B831F4ED1F4001D3C82 /* Resources */,
 				08DB2D6354939DE948ED5639 /* [CP] Embed Pods Frameworks */,
+				2E2EAAC015F45B84FFA7E629 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8949,6 +9035,7 @@
 				2CD12BBF1F4F34AE001D3C82 /* Frameworks */,
 				2CD12BC01F4F34AE001D3C82 /* Resources */,
 				1B71EA4E17E70513F7694386 /* [CP] Embed Pods Frameworks */,
+				83A6E3048F53511190EBF2FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8969,6 +9056,7 @@
 				2CD12BCE1F4F34BD001D3C82 /* Frameworks */,
 				2CD12BCF1F4F34BD001D3C82 /* Resources */,
 				AB5E962B0AD41C11219C9B32 /* [CP] Embed Pods Frameworks */,
+				EA2DA7BFE11BA394A4EC8C72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8989,6 +9077,7 @@
 				2CD12BDD1F4F34CC001D3C82 /* Frameworks */,
 				2CD12BDE1F4F34CC001D3C82 /* Resources */,
 				D59D5B355E819E9DA5062B96 /* [CP] Embed Pods Frameworks */,
+				9BD9129BAC4CC992F5FCA927 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9011,6 +9100,7 @@
 				08A947FE1EB2B1A5001EC02D /* Fabric Script */,
 				08983F251F3E4131008199B1 /* SwiftLint Script */,
 				13FD40DAA032234A82A4C0D1 /* [CP] Embed Pods Frameworks */,
+				BB10AC21AFE1EB67410A2D41 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9076,7 +9166,6 @@
 					};
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
@@ -9175,13 +9264,11 @@
 					};
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
@@ -9252,6 +9339,7 @@
 				2CB62BE72019FD8500B5E336 /* step2.html in Resources */,
 				2C4BBF15203DC668000A4250 /* plyr.css in Resources */,
 				08C7CB741FA7ACB9001D8241 /* CourseListEmptyPlaceholder.xib in Resources */,
+				082B54D920AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				0885B8DA1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
 				86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */,
@@ -9290,12 +9378,14 @@
 				087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
+				08DDF90D20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */,
 				2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
@@ -9306,6 +9396,7 @@
 				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
+				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
@@ -9319,10 +9410,10 @@
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
+				0829ED9620C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
-				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */,
 				08CB0D441FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
@@ -9416,7 +9507,6 @@
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */,
 				2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */,
-				2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */,
 				2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */,
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
 				2C1B62601F4C4AEF00236804 /* StepCardView.xib in Resources */,
@@ -9525,7 +9615,6 @@
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */,
 				2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */,
-				2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */,
 				2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */,
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
 				2C1B64711F4C590700236804 /* StepCardView.xib in Resources */,
@@ -9638,7 +9727,6 @@
 				08195A251FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
 				08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
-				2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */,
 				2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */,
 				2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */,
 				0885B8DE1FB64452005A7B2E /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9743,7 +9831,6 @@
 				2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */,
 				2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */,
 				2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */,
-				2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */,
 				2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */,
 				2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */,
 				2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */,
@@ -9850,7 +9937,6 @@
 				2CA8D3282088D9C000E105E9 /* HorizontalCoursesView.xib in Resources */,
 				2CA8D3292088D9C000E105E9 /* CourseStatCollectionViewCell.xib in Resources */,
 				2CA8D32A2088D9C000E105E9 /* CourseWidgetTableViewCell.xib in Resources */,
-				2CA8D32B2088D9C000E105E9 /* StreaksView.xib in Resources */,
 				2CA8D32C2088D9C000E105E9 /* RateAppViewController.xib in Resources */,
 				2CA8D32D2088D9C000E105E9 /* Main.storyboard in Resources */,
 				2CA8D32E2088D9C000E105E9 /* ContentLanguageCollectionViewCell.xib in Resources */,
@@ -9996,7 +10082,6 @@
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
-				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
 				2C8652631F4B2F7D00D51654 /* icon.png in Resources */,
 				2C8652601F4B2F7D00D51654 /* Config.plist in Resources */,
@@ -10322,6 +10407,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		10B867A5F2A532719D949D72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		13FD40DAA032234A82A4C0D1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10424,6 +10524,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		17761272EF3EF7BFABBEDB0F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1B6F294F1FA138EF004A5D4B /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10454,6 +10569,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		29D5312392346E5D962ACFC3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
@@ -10729,6 +10859,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2E2EAAC015F45B84FFA7E629 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3F82A4676256445CD63EB8B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10779,6 +10924,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4AED9F7D0FCAF9DD1346B363 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4B054D1D0F5C295F5BE4931A /* [CP] Embed Pods Frameworks */ = {
@@ -10949,6 +11109,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5FAB9038D9C72CE20965FCDB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		65C535413C69ED00939DCAD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10985,6 +11160,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		74079E8EC340C59925C8784B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83A6E3048F53511190EBF2FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		85E907A1A287863152512762 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11019,6 +11224,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9495706D30E0DFAB090269FA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97B3917CEFA8A716A2861719 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BD9129BAC4CC992F5FCA927 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AB5E962B0AD41C11219C9B32 /* [CP] Embed Pods Frameworks */ = {
@@ -11139,6 +11389,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB10AC21AFE1EB67410A2D41 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB575350DAB6BB051F775F18 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */ = {
@@ -11427,6 +11707,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EA2DA7BFE11BA394A4EC8C72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EC002295004D731864259190 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11617,6 +11912,7 @@
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
@@ -11634,11 +11930,11 @@
 				08A500501F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
-				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
 				08A9F71E1FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
+				082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
 				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */,
@@ -11671,9 +11967,11 @@
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				086BE2B21F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
+				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
+				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
@@ -11690,6 +11988,8 @@
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
+				083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */,
+				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
 				0859AEAD1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
@@ -11703,7 +12003,9 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
+				08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
@@ -11726,6 +12028,7 @@
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
+				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
@@ -11748,6 +12051,7 @@
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
+				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
@@ -11799,6 +12103,7 @@
 				086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
+				080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */,
 				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
 				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
@@ -11860,6 +12165,7 @@
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
+				082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */,
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
@@ -11910,6 +12216,7 @@
 				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
+				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				2C7FEE7D1FDFCE5300B2B4F1 /* OnboardingPageView.swift in Sources */,
@@ -11964,9 +12271,11 @@
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
+				08DDF91020A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
+				083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
@@ -11998,9 +12307,11 @@
 				084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
+				08AA11BB20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
+				0829ED9520C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
@@ -12054,6 +12365,7 @@
 				62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E9870AFED7781931340685 /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */,
+				0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */,
 				62E981858E2E696693A1AB87 /* PinsMapBlockContentView.swift in Sources */,
 				62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */,
@@ -12348,7 +12660,6 @@
 				2C1B60D91F4C4AEF00236804 /* CertificatesAPI.swift in Sources */,
 				08DF78C21F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */,
-				2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */,
 				2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */,
 				08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -12837,7 +13148,6 @@
 				2C1B62EA1F4C590700236804 /* CertificatesAPI.swift in Sources */,
 				08DF78C31F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */,
-				2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */,
 				2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */,
 				08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -13329,7 +13639,6 @@
 				08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C6A762E2045CE5500C509A6 /* AdaptiveStatsSection.swift in Sources */,
-				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C6A76372045CE7B00C509A6 /* CardStepViewController.swift in Sources */,
@@ -13818,7 +14127,6 @@
 				2C9731211F4C38F600AC9301 /* CertificatesAPI.swift in Sources */,
 				08DF78C11F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */,
-				2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */,
 				2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */,
 				08DF78D71F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -14322,7 +14630,6 @@
 				2CA8D15A2088D9C000E105E9 /* MenuBlockTableViewCell.swift in Sources */,
 				2CA8D15B2088D9C000E105E9 /* RatingProgressView.swift in Sources */,
 				2CA8D15C2088D9C000E105E9 /* AdaptiveStatsSection.swift in Sources */,
-				2CA8D15D2088D9C000E105E9 /* StreaksView.swift in Sources */,
 				2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */,
 				2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */,
 				2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */,
@@ -14880,7 +15187,6 @@
 				08DF78BE1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2CA2E72820237E5E001DC410 /* CongratulationViewController.swift in Sources */,
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
-				864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,
 				08DF78D41F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				081566271F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
@@ -15689,16 +15995,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9ec1fae-f8ce-4f32-b356-5cd3fede8cc5";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15712,7 +16018,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -15720,8 +16026,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6afc4145-e327-4af9-b19a-0dedfcbd72e9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				PROVISIONING_PROFILE = "6af65af7-8036-4359-8aa1-64faac9f28ff";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.StickerPackExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -15849,7 +16155,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -15860,8 +16166,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DENABLE_APPSEE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1b78f6cb-2443-4479-8828-77bb34275cb0";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "4d463302-25ad-41a0-8af0-316c07d98fd7";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -15879,7 +16185,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 90;
@@ -15891,8 +16197,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DENABLE_APPSEE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "636e8124-b505-48f4-9514-ff6f037a7ce0";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "36ff4140-4f90-4c9d-8888-c8c128db4e12";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -16605,16 +16911,16 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ef25a5f-052b-473a-85da-c8b50ea92f1c";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16632,8 +16938,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -16641,8 +16947,8 @@
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4961717c-0bf7-4a77-b45e-d91540553fea";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "08917ec0-e043-46ec-be37-8bcc7e379f6c";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -16658,16 +16964,17 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "6fd1fd0b-92ce-4fa4-9d8b-ff57fbe23dee";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -16684,6 +16991,8 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -16691,8 +17000,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "23acfcb4-1517-485f-b269-7ab3373df952";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "d295a6cf-4e9b-4dfc-8e4d-94c1bca41e91";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -16891,6 +17200,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */,
 				2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */,
 				087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */,
 				084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */,
@@ -16914,7 +17224,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */;
+			currentVersion = 08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -11,6 +11,7 @@ import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
 import PromiseKit
+import UserNotifications
 
 class NotificationRegistrator {
     static let shared = NotificationRegistrator()
@@ -42,9 +43,14 @@ class NotificationRegistrator {
 
     func registerForRemoteNotifications(_ application: UIApplication) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
+            if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in})
+            } else {
+                let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                application.registerUserNotificationSettings(settings)
+                application.registerForRemoteNotifications()
+            }
+
         }
 
         if AuthInfo.shared.isAuthorized {

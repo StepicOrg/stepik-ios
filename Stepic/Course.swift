@@ -58,6 +58,12 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
+    var sectionDeadlines: [SectionDeadline]? {
+        get {
+            return (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
+        }
+    }
+
     var metaInfo: String {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {
@@ -72,13 +78,6 @@ final class Course: NSManagedObject, IDFetchable {
 
     var metaInfoContainer: CourseMetainfoContainer {
         var metaArr = [CourseMetainfoEntity]()
-
-//        if summary != "" {
-//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Summary", comment: ""), subtitle: summary)]
-//        }
-//        if courseDescription != "" {
-//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Description", comment: ""), subtitle: courseDescription)]
-//        }
         if workload != "" {
             metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""), subtitle: workload)]
         }
@@ -91,10 +90,6 @@ final class Course: NSManagedObject, IDFetchable {
         if format != "" {
             metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Format", comment: ""), subtitle: format)]
         }
-//        if requirements != "" {
-//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Requirements", comment: ""), subtitle: requirements)]
-//        }
-//        
         return CourseMetainfoContainer(courseId: id, metainfo: metaArr)
     }
 
@@ -132,22 +127,6 @@ final class Course: NSManagedObject, IDFetchable {
         initialize(json)
     }
 
-//    func loadLastStep(success: @escaping ((Void) -> Void)) {
-//        guard let id = self.lastStepId else { 
-//            return 
-//        }
-//        _ = ApiDataDownloader.lastSteps.retrieve(ids: [id], success: {
-//            [weak self]
-//            lastSteps in
-//            
-//            self?.changeLastStepTo(lastStep: lastSteps.first!)
-//            success()
-//        }, error: {
-//            error in
-//            print("error while loading last step")
-//        })
-//    }
-
     func loadAllInstructors(success: @escaping (() -> Void)) {
         _ = ApiDataDownloader.users.retrieve(ids: self.instructorsArray, existing: self.instructors, refreshMode: .update, success: {
             users in
@@ -178,7 +157,6 @@ final class Course: NSManagedObject, IDFetchable {
             idsArray[dimCount - 1].append(sectionId)
         }
 
-//            let sectionsToDownload = idsArray.count
         var downloadedSections = [Section]()
 
         let idsDownloaded: ([Section]) -> Void = {
@@ -237,7 +215,6 @@ final class Course: NSManagedObject, IDFetchable {
             return
         }
 
-//        print("progress ids array -> \(progressIds)")
         _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
             newProgresses -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
@@ -362,7 +339,6 @@ final class Course: NSManagedObject, IDFetchable {
         } catch {
             print("Error while getting courses")
             return []
-//            throw FetchError.RequestExecution
         }
     }
 
@@ -385,12 +361,4 @@ final class Course: NSManagedObject, IDFetchable {
             return sections.filter({ $0.id == nextId }).first
         }
     }
-
-//    func changeLastStepTo(lastStep: LastStep?) {
-//        let objectToDelete = self.lastStep
-//        self.lastStep = lastStep
-//        if let deletingObject = objectToDelete { 
-//            CoreDataHelper.instance.deleteFromStore(deletingObject, save: true)
-//        }
-//    }
 }

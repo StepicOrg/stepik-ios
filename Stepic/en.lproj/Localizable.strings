@@ -6,6 +6,7 @@
   Copyright © 2015 Alex Karpov. All rights reserved.
 */
 
+/* Common phrases */
 SignedIn = "Signed in!";
 FailedToSignIn = "Failed to sign in";
 RemoveVideoTitle = "Remove cached videos";
@@ -262,36 +263,6 @@ RetentionNotificationYesterday = "You scored %@ XP yesterday. Go back and improv
 RetentionNotificationYesterdayZero = "You didn't score any points for yesterday. Improve your score today!";
 RetentionNotificationYesterdayStreak = "You have been learning %@ in a row. Go back and keep learning!";
 RetentionNotificationWeekly = "You haven't done it for a long time. Go back and keep learning!";
-AdaptiveProgressWeeksEmpty = "You have no solved tasks";
-AdaptiveRatingFooterText1 = "%@ user in the table";
-AdaptiveRatingFooterText234 = "%@ users in the table";
-AdaptiveRatingFooterText567890 = "%@ users in the table";
-AdaptiveRatingYou = "You";
-AdaptiveRatingLoadError = "Rating is unavailable now";
-AdaptiveAchievementFirstStep = "First steps";
-AdaptiveAchievementFirstStepDesc = "Complete tutorial";
-AdaptiveAchievementShare = "Sociable";
-AdaptiveAchievementShareDesc = "Share your achievement";
-AdaptiveAchievementExpDesc = "Gain %@ XP";
-AdaptiveAchievementExp1 = "Learner";
-AdaptiveAchievementExp2 = "Student";
-AdaptiveAchievementExp3 = "Experienced";
-AdaptiveAchievementExp4 = "Professional";
-AdaptiveAchievementExp5 = "Guru";
-AdaptiveAchievementStreakDesc = "Make %@ correct answers in a row";
-AdaptiveAchievementStreak1 = "Combo";
-AdaptiveAchievementStreak2 = "That's was easy";
-AdaptiveAchievementStreak3 = "Exactly!";
-AdaptiveAchievementStreak4 = "Clairvoyant";
-AdaptiveAchievementDaysStreakDesc = "Study for %@ days in a row";
-AdaptiveAchievementDaysStreak1 = "Enthusiast";
-AdaptiveAchievementDaysStreak2 = "Workweek";
-AdaptiveAchievementDaysStreak3 = "Addicted";
-AdaptiveAchievementDaysStreak4 = "Workaholic";
-AdaptiveAchievementDaysStreak5 = "Hero";
-AdaptiveAchievementLevelDesc = "Reach %@ level";
-AdaptiveAchievementLevel1 = "Expert";
-AdaptiveAchievementLevel2 = "Leader";
 NotSupportedLanguage = "The language is not supported in the application yet";
 StreaksAreUpdated = "Streaks are updated at";
 Settings = "Settings";
@@ -348,7 +319,7 @@ courses567890 = "courses";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
-ChooseSearchLanguage = "Choose search language";
+ChooseSearchLanguage = "Choose content language";
 Catalog = "Catalog";
 CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
 TrendingTopics = "Trending topics";
@@ -359,11 +330,14 @@ WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
 WidgetAdaptiveLabel = "ADAPTIVE";
 
+CanBeChangedInSettings = "It can be changed in settings.";
+
 EnterSQLQuery = "Enter SQL query:";
 
 SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
 SolveSomethingToday = "Solve anything today to increase your streak.";
 
+/* Onboarding */
 OnboardingTitle1 = "Choose";
 OnboardingTitle2 = "Download";
 OnboardingTitle3 = "Solve";
@@ -377,6 +351,7 @@ OnboardingStartButton = "Start";
 
 StreakAlertMessageNoStreak = "Solve quizzes every day and improve your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 
+/* Adaptive */
 AdaptiveProgress = "Progress";
 AdaptiveAchievements = "Achievements";
 AdaptiveRating = "Rating";
@@ -398,6 +373,36 @@ AdaptiveCourseSelectTitle = "Select course";
 AdaptiveLearnersTitle = "learners";
 AdaptivePointsTitle = "points";
 AdaptiveLevelTitle = "level";
+AdaptiveProgressWeeksEmpty = "You have no solved tasks";
+AdaptiveRatingFooterText1 = "%@ user in the table";
+AdaptiveRatingFooterText234 = "%@ users in the table";
+AdaptiveRatingFooterText567890 = "%@ users in the table";
+AdaptiveRatingYou = "You";
+AdaptiveRatingLoadError = "Rating is unavailable now";
+AdaptiveAchievementFirstStep = "First steps";
+AdaptiveAchievementFirstStepDesc = "Complete tutorial";
+AdaptiveAchievementShare = "Sociable";
+AdaptiveAchievementShareDesc = "Share your achievement";
+AdaptiveAchievementExpDesc = "Gain %@ XP";
+AdaptiveAchievementExp1 = "Learner";
+AdaptiveAchievementExp2 = "Student";
+AdaptiveAchievementExp3 = "Experienced";
+AdaptiveAchievementExp4 = "Professional";
+AdaptiveAchievementExp5 = "Guru";
+AdaptiveAchievementStreakDesc = "Make %@ correct answers in a row";
+AdaptiveAchievementStreak1 = "Combo";
+AdaptiveAchievementStreak2 = "That's was easy";
+AdaptiveAchievementStreak3 = "Exactly!";
+AdaptiveAchievementStreak4 = "Clairvoyant";
+AdaptiveAchievementDaysStreakDesc = "Study for %@ days in a row";
+AdaptiveAchievementDaysStreak1 = "Enthusiast";
+AdaptiveAchievementDaysStreak2 = "Workweek";
+AdaptiveAchievementDaysStreak3 = "Addicted";
+AdaptiveAchievementDaysStreak4 = "Workaholic";
+AdaptiveAchievementDaysStreak5 = "Hero";
+AdaptiveAchievementLevelDesc = "Reach %@ level";
+AdaptiveAchievementLevel1 = "Expert";
+AdaptiveAchievementLevel2 = "Leader";
 
 /* Tooltips */
 ShareCourseTooltip = "Share the link with your friends to learn together";
@@ -479,6 +484,11 @@ PlaceholderEmptyNotificationsButton = "Go to Catalog";
 PlaceholderEmptySearchText = "Some free space to think";
 PlaceholderEmptySearchButton = "Go to Catalog";
 
+/* Content Language settings */
+ContentLanguageDescription = "The language of displayed courses.";
+ContentLanguagePreference = "Content language";
+LanguageSettingsTitle = "Language settings";
+
 /* Code Editor settings */
 CodeEditorTitle = "Code editor";
 CodeEditorSettingsTitle = "Code editor settings";
@@ -508,3 +518,20 @@ AchievementsStepsSolvedStreakKindTitle = "Sapper";
 AchievementsActiveDaysStreakKindTitle = "Regular user";
 AchievementsLockedTitle = "Wow, what's that?";
 AchievementsLockedDescription = "Complete more challenges to find out";
+
+/* Personal deadlines */
+CourseInfo = "Course Info";
+EditSchedule = "Edit schedule";
+DeleteSchedule = "Delete schedule";
+CreateSchedule = "Create schedule";
+PersonalDeadlineWidgetYesButtonTitle = "Create";
+PersonalDeadlineWidgetNoButtonTitle = "No, thanks";
+HrsPerWeek = "hrs/week";
+HobbyDeadlineMode = "Hobby";
+StandardDeadlineMode = "Standard";
+ExtremeDeadlineMode = "Extreme";
+PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't miss it!";
+Save = "Save";
+PersonalDeadline = "Personal deadline";
+DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
+PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, ыщ way you'll never forget to study!";
