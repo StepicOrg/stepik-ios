@@ -132,6 +132,7 @@ class AchievementBadgeView: UIView {
 
         for v in starsStackView.arrangedSubviews {
             starsStackView.removeArrangedSubview(v)
+            v.removeFromSuperview()
         }
 
         if completedLevel != 0 {

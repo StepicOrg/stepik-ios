@@ -15,6 +15,7 @@ class AchievementsListTableViewCell: UITableViewCell {
     @IBOutlet weak var achievementDescription: UILabel!
 
     private var badgeView: AchievementBadgeView?
+    private var gradient: CAGradientLayer?
 
     static let reuseId = "AchievementsListTableViewCell"
 
@@ -31,5 +32,28 @@ class AchievementsListTableViewCell: UITableViewCell {
         }
 
         badgeView?.data = viewData.badgeData
+
+        if viewData.isEmpty {
+            let gradient = CAGradientLayer(colors: [UIColor(hex: 0x795BA3), UIColor.black], rotationAngle: 105.0)
+            contentView.layer.insertSublayer(gradient, at: 0)
+            self.gradient = gradient
+
+            achievementName.textColor = UIColor.white
+            achievementDescription.textColor = UIColor.white.withAlphaComponent(0.5)
+        } else {
+            achievementName.textColor = UIColor.mainText
+            achievementDescription.textColor = UIColor.mainText
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient?.frame = contentView.bounds
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        gradient?.removeFromSuperlayer()
     }
 }

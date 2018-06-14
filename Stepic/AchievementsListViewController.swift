@@ -17,8 +17,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.estimatedRowHeight = 111.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        title = "Achievements"
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 
         presenter?.refresh()

@@ -12,9 +12,10 @@ struct AchievementViewData {
     var name: String
     var description: String
     var badgeData: AchievementBadgeViewData
+    var isEmpty: Bool
 
     static var empty: AchievementViewData {
-        return AchievementViewData(name: "Вау, что это?", description: "Complete more challenges to find out", badgeData: AchievementBadgeViewData.empty)
+        return AchievementViewData(name: "Вау, что это?", description: "Complete more challenges to find out", badgeData: AchievementBadgeViewData.empty, isEmpty: true)
     }
 }
 
@@ -83,7 +84,7 @@ class AchievementsListPresenter {
                     stageProgress: Float(data.currentScore) / Float(data.maxScore),
                     badge: badge)
 
-                return AchievementViewData(name: name, description: "Some description", badgeData: badgeData)
+                return AchievementViewData(name: name, description: "Some description", badgeData: badgeData, isEmpty: false)
             }
             self?.view?.set(count: kinds.count, achievements: viewData)
         }.catch { error in
