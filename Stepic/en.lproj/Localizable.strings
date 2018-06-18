@@ -516,8 +516,6 @@ AchievementsCertificatesDistinctionCountKindTitle = "Distinct student";
 AchievementsCourseReviewsCountKindTitle = "Critic";
 AchievementsStepsSolvedStreakKindTitle = "Sapper";
 AchievementsActiveDaysStreakKindTitle = "Regular user";
-AchievementsLockedTitle = "Wow, what's that?";
-AchievementsLockedDescription = "Complete more challenges to find out";
 
 /* Personal deadlines */
 CourseInfo = "Course Info";

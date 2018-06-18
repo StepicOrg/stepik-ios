@@ -54,8 +54,11 @@ class AchievementsRetriever {
                     let rhs = idToTargetScore[b.achievement] ?? 0
                     return lhs < rhs
                 })
+
+                // Sort achievements by progress and find first non-obtained
                 for progress in progressesSortedByMaxScore {
                     if progress.obtainDate == nil {
+                        // Non-completed achievement, but have progress object
                         fulfill(AchievementProgressData(currentScore: progress.score,
                                                         maxScore: idToTargetScore[progress.achievement] ?? 0,
                                                         currentLevel: levelCount,
@@ -66,6 +69,7 @@ class AchievementsRetriever {
                     levelCount += 1
                 }
 
+                // No non-obtained achievements were found
                 if let lastProgress = progressesSortedByMaxScore.last {
                     // Fulfilled achievement
                     fulfill(AchievementProgressData(currentScore: lastProgress.score,
@@ -74,9 +78,10 @@ class AchievementsRetriever {
                         maxLevel: achievements.count,
                         kind: kind))
                 } else {
-                    // Empty achievement
+                    let maxScoreForFirstLevel = achievements.sorted(by: { $0.targetScore < $1.targetScore }).first?.targetScore
+                    // Non-completed achievement, empty progress
                     fulfill(AchievementProgressData(currentScore: 0,
-                        maxScore: 0,
+                        maxScore: maxScoreForFirstLevel ?? 0,
                         currentLevel: 0,
                         maxLevel: achievements.count,
                         kind: kind))

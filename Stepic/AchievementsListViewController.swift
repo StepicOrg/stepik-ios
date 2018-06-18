@@ -27,19 +27,21 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight),
-                                          animation: GradientDirection.leftRight.slidingAnimation())
+
+        if data.isEmpty {
+            self.startSkeleton()
+        }
     }
 
     func set(count: Int, achievements: [AchievementViewData]) {
         data = achievements
 
-        for _ in 0..<(count - achievements.count) {
-            data.append(AchievementViewData.empty)
-        }
-
         view.hideSkeleton()
         tableView.reloadData()
+    }
+
+    private func startSkeleton() {
+        view.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight), animation: GradientDirection.leftRight.slidingAnimation())
     }
 }
 

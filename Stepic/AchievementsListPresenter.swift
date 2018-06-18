@@ -13,13 +13,6 @@ struct AchievementViewData {
     var description: String
     var badgeData: AchievementBadgeViewData
     var isEmpty: Bool
-
-    static var empty: AchievementViewData {
-        return AchievementViewData(name: NSLocalizedString("AchievementsLockedTitle", comment: ""),
-                                   description: NSLocalizedString("AchievementsLockedDescription", comment: ""),
-                                   badgeData: AchievementBadgeViewData.empty,
-                                   isEmpty: true)
-    }
 }
 
 protocol AchievementsListView: class {
@@ -77,10 +70,13 @@ class AchievementsListPresenter {
         }.then { [weak self] progressData -> Void in
             let viewData: [AchievementViewData] = progressData.compactMap { data in
                 let kindDescription = AchievementKind(rawValue: data.kind)
-                guard let badge = kindDescription?.getBadge(for: data.currentLevel),
-                      let name = kindDescription?.getName(),
+                guard let name = kindDescription?.getName(),
                       let description = kindDescription?.getDescription(for: data.maxScore) else {
                     return nil
+                }
+
+                guard let badge = kindDescription?.getBadge(for: data.currentLevel) else {
+                    return AchievementViewData(name: name, description: description, badgeData: AchievementBadgeViewData.empty, isEmpty: data.currentLevel == 0)
                 }
 
                 let badgeData = AchievementBadgeViewData(completedLevel: data.currentLevel,
@@ -88,9 +84,10 @@ class AchievementsListPresenter {
                     stageProgress: Float(data.currentScore) / Float(data.maxScore),
                     badge: badge)
 
-                return AchievementViewData(name: name, description: description, badgeData: badgeData, isEmpty: false)
+                return AchievementViewData(name: name, description: description, badgeData: badgeData, isEmpty: data.currentLevel == 0)
             }
-            self?.view?.set(count: kinds.count, achievements: viewData)
+
+            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { $0.isEmpty != $1.isEmpty }))
         }.catch { error in
             print("achievements list: error while loading = \(error)")
         }

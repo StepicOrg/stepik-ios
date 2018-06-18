@@ -169,9 +169,11 @@ class AchievementBadgeView: UIView {
     private func updateProgress() {
         if let data = data {
             if data.completedLevel == 0 {
+                badgeImageView.alpha = 0.3
                 circleViewGradientLayer?.isHidden = true
                 circleProgressLayer?.isHidden = true
             } else {
+                badgeImageView.alpha = 1.0
                 circleViewGradientLayer?.isHidden = false
                 circleProgressLayer?.isHidden = false
 
