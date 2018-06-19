@@ -4636,6 +4636,7 @@
 		0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineTableViewCell.swift; sourceTree = "<group>"; };
 		0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlineTableViewCell.xib; sourceTree = "<group>"; };
 		081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeAnalyticsEvents.swift; sourceTree = "<group>"; };
+		081A150020D975E20016364E /* Model_joindate_v23.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_joindate_v23.xcdatamodel; sourceTree = "<group>"; };
 		081A7DA81C56625F00583728 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuizViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
@@ -16875,6 +16876,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				081A150020D975E20016364E /* Model_joindate_v23.xcdatamodel */,
 				08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */,
 				2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */,
 				087585AB1FB50E220047A269 /* Model_courselists_v21.xcdatamodel */,
@@ -16899,7 +16901,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */;
+			currentVersion = 081A150020D975E20016364E /* Model_joindate_v23.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -17,7 +17,7 @@ struct AmplitudeAnalyticsEvents {
     struct Onboarding {
         static let screenOpened = "Onboarding screen opened"
         static let closed = "Onboarding closed"
-        static let passed = "Onboarding passed"
+        static let completed = "Onboarding completed"
     }
 
     struct SignIn {
