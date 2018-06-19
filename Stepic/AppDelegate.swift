@@ -16,7 +16,6 @@ import IQKeyboardManagerSwift
 import SVProgressHUD
 import VK_ios_sdk
 import FBSDKCoreKit
-import Mixpanel
 import YandexMobileMetrica
 import Presentr
 import SwiftyJSON
@@ -45,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-        AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 

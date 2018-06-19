@@ -8,8 +8,8 @@
 
 import Foundation
 import FirebaseAnalytics
-import Mixpanel
 import YandexMobileMetrica
+import Amplitude_iOS
 
 class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
@@ -17,7 +17,10 @@ class AnalyticsReporter {
 
         reportFirebaseEvent(event, parameters: params)
         reportAppMetricaEvent(event, parameters: params)
-        reportMixpanelEvent(event, parameters: parameters)
+    }
+
+    static func reportAmplitudeEvent(_ event: String, parameters: [String: Any]? = nil) {
+        Amplitude.instance().logEvent(event, withEventProperties: parameters)
     }
 
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {
@@ -26,17 +29,5 @@ class AnalyticsReporter {
 
     private static func reportAppMetricaEvent(_ event: String, parameters: [String: NSObject]?) {
         YMMYandexMetrica.reportEvent(event, parameters: parameters, onFailure: nil)
-    }
-
-    static func reportMixpanelEvent(_ event: String, parameters: [String: Any]?) {
-        var transformedParameters: Properties = [:]
-        if let p = parameters {
-            for (key, value) in p {
-                if let v = value as? MixpanelType {
-                    transformedParameters[key] = v
-                }
-            }
-        }
-        Mixpanel.mainInstance().track(event: event, properties: transformedParameters)
     }
 }

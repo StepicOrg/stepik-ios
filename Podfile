@@ -32,8 +32,8 @@ def all_pods
     pod 'FirebaseAnalytics', '5.0.0'
     pod 'FirebaseRemoteConfig', '3.0.0'
     
-    pod 'Mixpanel-swift', '2.3.0'
-
+    pod 'Amplitude-iOS', '~> 4.0.4'
+    
     pod 'BEMCheckBox'
 
     # actual version - 6.x, we should test it before update

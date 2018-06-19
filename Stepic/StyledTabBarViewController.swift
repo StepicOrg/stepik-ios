@@ -58,11 +58,13 @@ class StyledTabBarViewController: UITabBarController {
 
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.firstTime)
             DefaultsContainer.launch.didLaunch = true
 
             let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
             present(onboardingVC, animated: true, completion: nil)
         }
+        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
     }
 
     deinit {

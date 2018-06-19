@@ -15,5 +15,4 @@ class AnalyticsReporter {
 
     private static func reportAppMetricaEvent(_ event: String, parameters: [String: NSObject]?) { }
 
-    static func reportMixpanelEvent(_ event: String, parameters: [String: Any]?) { }
 }
