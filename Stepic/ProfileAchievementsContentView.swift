@@ -14,8 +14,17 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     private var achievementsStackView: UIStackView?
     private var isSet = false
 
-    // FIXME: check screen resolution
-    let badgesCountInRow = 4
+    private var badgesCountInRow: Int {
+        if DeviceInfo.current.diagonal <= 4.0 {
+            return 3
+        }
+
+        if DeviceInfo.current.isPad || DeviceInfo.current.isPlus {
+            return 5
+        }
+
+        return 4
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()

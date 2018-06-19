@@ -44,7 +44,7 @@ class AchievementPopupViewController: UIViewController {
         achievementBadgeImageView.image = data.badgeData.badge
 
         if data.badgeData.completedLevel == data.badgeData.maxLevel {
-            progressLabel.isHidden = true
+            progressLabel.alpha = 0.0
         } else {
             progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.badgeData.maxScore - data.badgeData.score)")
         }

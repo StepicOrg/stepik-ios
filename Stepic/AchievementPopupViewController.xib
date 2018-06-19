@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,14 +29,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="achievement-1-4" translatesAutoresizingMaskIntoConstraints="NO" id="tg6-q5-mG8">
-                    <rect key="frame" x="137" y="16" width="100" height="100"/>
+                    <rect key="frame" x="125" y="16" width="125" height="124.5"/>
                     <constraints>
-                        <constraint firstAttribute="height" priority="999" constant="100" id="QsM-ds-BEp"/>
-                        <constraint firstAttribute="width" secondItem="tg6-q5-mG8" secondAttribute="height" multiplier="1:1" id="r7H-Ns-YAy"/>
+                        <constraint firstAttribute="width" secondItem="tg6-q5-mG8" secondAttribute="height" multiplier="1:1" id="N9t-GY-OtX"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Длинное название бейджа" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Gck-yv-Go7">
-                    <rect key="frame" x="69" y="118" width="238" height="21.5"/>
+                    <rect key="frame" x="69" y="142.5" width="238" height="21.5"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="Aoz-1u-tob"/>
                     </constraints>
@@ -44,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" text="Решите правильно 200 заданий с выбором ответа" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="8PM-BO-ZAy">
-                    <rect key="frame" x="59" y="147.5" width="257.5" height="38.5"/>
+                    <rect key="frame" x="59.5" y="172" width="257.5" height="38.5"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="jTh-vM-L69"/>
                     </constraints>
@@ -53,7 +53,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNE-Xw-Np9">
-                    <rect key="frame" x="162.5" y="194" width="50" height="1"/>
+                    <rect key="frame" x="162.5" y="218.5" width="50" height="1"/>
                     <color key="backgroundColor" white="0.67000000000000004" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="6fK-DD-KTR"/>
@@ -61,7 +61,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-R7-Zeq">
-                    <rect key="frame" x="59" y="203" width="257.5" height="36"/>
+                    <rect key="frame" x="59.5" y="227.5" width="257.5" height="36"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Уровень 3 из 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-yl-m9w">
                             <rect key="frame" x="0.0" y="0.0" width="257.5" height="17"/>
@@ -116,6 +116,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8PM-BO-ZAy" secondAttribute="trailing" constant="16" id="QrJ-c4-w7g"/>
                 <constraint firstItem="GNE-1D-jyB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="T1h-2H-d5T"/>
                 <constraint firstItem="8PM-BO-ZAy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Un5-q9-7qP"/>
+                <constraint firstItem="tg6-q5-mG8" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="a5C-Zp-d0Q"/>
                 <constraint firstItem="Gck-yv-Go7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="dUm-G8-0om"/>
                 <constraint firstItem="tg6-q5-mG8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dnN-1i-Mwi"/>
                 <constraint firstItem="Xnp-fU-oIh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gRw-Gw-c7k"/>
