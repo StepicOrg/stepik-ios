@@ -339,6 +339,7 @@ SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!
 SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
 StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
+Close = "Закрыть";
 
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
@@ -529,6 +530,9 @@ AchievementsCertificatesDistinctionCountKindDescription = "Получите %@ �
 AchievementsCourseReviewsCountKindDescription = "Оставьте %@ отзывов о курсах";
 AchievementsStepsSolvedStreakKindDescription = "Решите правильно %@ заданий подряд";
 AchievementsActiveDaysStreakKindDescription = "Решайте как минимум одну задачу на протяжении %@ дней";
+AchievementsNextLevel = "%@ до следующего уровня";
+AchievementsLevel = "Уровень %@ / %@";
+AchievementsLevelNotObtained = "Ещё не получено";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";

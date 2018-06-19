@@ -12,7 +12,6 @@ struct AchievementViewData {
     var name: String
     var description: String
     var badgeData: AchievementBadgeViewData
-    var isEmpty: Bool
 }
 
 protocol AchievementsListView: class {
@@ -76,18 +75,19 @@ class AchievementsListPresenter {
                 }
 
                 guard let badge = kindDescription?.getBadge(for: data.currentLevel) else {
-                    return AchievementViewData(name: name, description: description, badgeData: AchievementBadgeViewData.empty, isEmpty: data.currentLevel == 0)
+                    return AchievementViewData(name: name, description: description, badgeData: AchievementBadgeViewData.empty)
                 }
 
                 let badgeData = AchievementBadgeViewData(completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
-                    stageProgress: Float(data.currentScore) / Float(data.maxScore),
+                    maxScore: data.maxScore,
+                    score: data.currentScore,
                     badge: badge)
 
-                return AchievementViewData(name: name, description: description, badgeData: badgeData, isEmpty: data.currentLevel == 0)
+                return AchievementViewData(name: name, description: description, badgeData: badgeData)
             }
 
-            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { $0.isEmpty != $1.isEmpty }))
+            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { ($0.badgeData.completedLevel == 0) != ($1.badgeData.completedLevel == 0) }))
         }.catch { error in
             print("achievements list: error while loading = \(error)")
         }

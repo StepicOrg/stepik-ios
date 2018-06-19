@@ -82,7 +82,8 @@ class ProfileAchievementsPresenter {
 
                 return AchievementBadgeViewData(completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
-                    stageProgress: Float(data.currentScore) / Float(data.maxScore),
+                    maxScore: data.maxScore,
+                    score: data.currentScore,
                     badge: badge)
             }
             self?.view?.set(badges: viewData)

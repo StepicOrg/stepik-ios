@@ -59,6 +59,18 @@ extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSo
         cell.update(with: viewData)
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let viewData = data[safe: indexPath.row] else {
+            return
+        }
+
+        let alertManager = AchievementPopupAlertManager()
+        let vc = alertManager.construct(with: viewData)
+        alertManager.present(alert: vc, inController: self)
+    }
 }
 
 extension AchievementsListViewController: SkeletonTableViewDataSource {

@@ -10,12 +10,13 @@ import UIKit
 
 struct AchievementBadgeViewData {
     static var empty: AchievementBadgeViewData {
-        return AchievementBadgeViewData(completedLevel: 0, maxLevel: 0, stageProgress: 0.0, badge: #imageLiteral(resourceName: "achievement-0"))
+        return AchievementBadgeViewData(completedLevel: 0, maxLevel: 0, maxScore: 0, score: 0, badge: #imageLiteral(resourceName: "achievement-0"))
     }
 
     let completedLevel: Int
     let maxLevel: Int
-    let stageProgress: Float
+    let maxScore: Int
+    let score: Int
     let badge: UIImage
 }
 
@@ -177,7 +178,7 @@ class AchievementBadgeView: UIView {
                 circleViewGradientLayer?.isHidden = false
                 circleProgressLayer?.isHidden = false
 
-                initStageProgress(value: data.stageProgress)
+                initStageProgress(value: Float(data.score) / Float(data.maxScore))
             }
 
             badgeImageView.image = data.badge
