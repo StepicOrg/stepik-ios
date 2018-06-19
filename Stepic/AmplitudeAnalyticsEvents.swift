@@ -30,6 +30,7 @@ struct AmplitudeAnalyticsEvents {
 
     struct Course {
         static let joined = "Course joined"
+        static let unsubscribed = "Course unsubscribed"
         static let continuePressed = "Continue course pressed"
     }
 

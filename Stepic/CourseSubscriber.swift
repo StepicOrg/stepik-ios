@@ -11,20 +11,24 @@ import PromiseKit
 
 class CourseSubscriber {
 
+    enum CourseSubscriptionSource: String {
+        case widget, preview
+    }
+
     enum CourseSubscriptionError: Error {
         case error(status: String)
         case badResponseFormat
     }
 
-    func join(course: Course) -> Promise<Course> {
-        return performCourseJoinActions(course: course, unsubscribe: false)
+    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
+        return performCourseJoinActions(course: course, unsubscribe: false, source: source)
     }
 
-    func leave(course: Course) -> Promise<Course> {
-        return performCourseJoinActions(course: course, unsubscribe: true)
+    func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
+        return performCourseJoinActions(course: course, unsubscribe: true, source: source)
     }
 
-    private func performCourseJoinActions(course: Course, unsubscribe: Bool) -> Promise<Course> {
+    private func performCourseJoinActions(course: Course, unsubscribe: Bool, source: CourseSubscriptionSource) -> Promise<Course> {
         return Promise<Course> {
             fulfill, reject in
 
@@ -32,6 +36,12 @@ class CourseSubscriber {
                 guard let progressId = course.progressId else {
                     reject(CourseSubscriptionError.badResponseFormat)
                     return
+                }
+
+                if unsubscribe {
+                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.unsubscribed)
+                } else {
+                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.joined, parameters: ["source" : source.rawValue])
                 }
 
                 let success: (Course) -> Void = {

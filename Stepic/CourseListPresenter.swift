@@ -181,7 +181,7 @@ class CourseListPresenter {
             guard let strongSelf = self else {
                 throw CourseSubscriber.CourseSubscriptionError.error(status: "")
             }
-            return strongSelf.subscriber.join(course: course)
+            return strongSelf.subscriber.join(course: course, source: .widget)
         }.then { [weak self] course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
 
