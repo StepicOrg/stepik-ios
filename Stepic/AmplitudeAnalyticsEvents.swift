@@ -42,6 +42,7 @@ struct AmplitudeAnalyticsEvents {
     struct Downloads {
         static let started = "Download started"
         static let cancelled = "Download cancelled"
+        static let deleted = "Download deleted"
     }
 
     struct Search {
