@@ -42,7 +42,7 @@ class OnboardingViewController: UIViewController {
     @IBAction func onCloseButtonClick(_ sender: Any) {
         dismiss(animated: true) {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
-            AnalyticsReporter.reportEvent(AmplitudeAnalyticsEvents.Onboarding.closed, parameters: ["screen": self.currentPageIndex + 1])
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Onboarding.closed, parameters: ["screen": self.currentPageIndex + 1])
         }
     }
 
