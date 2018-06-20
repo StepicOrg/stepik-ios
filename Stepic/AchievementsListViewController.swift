@@ -68,16 +68,9 @@ extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSo
             return
         }
 
-//        let alertManager = AchievementPopupAlertManager()
-//        let vc = alertManager.construct(with: viewData)
-//        alertManager.present(alert: vc, inController: self)
-
-        let view: AchievementNotificationBannerView = AchievementNotificationBannerView.fromNib()
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.data = viewData
-        let banner = NotificationBanner(customView: view)
-        banner.show()
+        let alertManager = AchievementPopupAlertManager()
+        let vc = alertManager.construct(with: viewData)
+        alertManager.present(alert: vc, inController: self)
     }
 }
 
