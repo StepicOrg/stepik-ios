@@ -8,12 +8,6 @@
 import PromiseKit
 import Foundation
 
-struct AchievementViewData {
-    var name: String
-    var description: String
-    var badgeData: AchievementBadgeViewData
-}
-
 protocol AchievementsListView: class {
     func set(count: Int, achievements: [AchievementViewData])
 }
@@ -68,26 +62,20 @@ class AchievementsListPresenter {
             return when(fulfilled: promises)
         }.then { [weak self] progressData -> Void in
             let viewData: [AchievementViewData] = progressData.compactMap { data in
-                let kindDescription = AchievementKind(rawValue: data.kind)
-                guard let name = kindDescription?.getName(),
-                      let description = kindDescription?.getDescription(for: data.maxScore) else {
+                guard let kindDescription = AchievementKind(rawValue: data.kind) else {
                     return nil
                 }
 
-                guard let badge = kindDescription?.getBadge(for: data.currentLevel) else {
-                    return AchievementViewData(name: name, description: description, badgeData: AchievementBadgeViewData.empty)
-                }
-
-                let badgeData = AchievementBadgeViewData(completedLevel: data.currentLevel,
+                return AchievementViewData(title: kindDescription.getName(),
+                    description: kindDescription.getDescription(for: data.maxScore),
+                    badge: kindDescription.getBadge(for: data.currentLevel),
+                    completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
-                    maxScore: data.maxScore,
                     score: data.currentScore,
-                    badge: badge)
-
-                return AchievementViewData(name: name, description: description, badgeData: badgeData)
+                    maxScore: data.maxScore)
             }
 
-            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { ($0.badgeData.completedLevel == 0) != ($1.badgeData.completedLevel == 0) }))
+            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { ($0.completedLevel == 0) != ($1.completedLevel == 0) }))
         }.catch { error in
             print("achievements list: error while loading = \(error)")
         }

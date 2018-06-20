@@ -39,20 +39,20 @@ class AchievementPopupViewController: UIViewController {
     }
 
     private func update(with data: AchievementViewData) {
-        achievementNameLabel.text = data.name
+        achievementNameLabel.text = data.title
         achievementDescriptionLabel.text = data.description
-        achievementBadgeImageView.image = data.badgeData.badge
+        achievementBadgeImageView.image = data.badge
 
-        if data.badgeData.completedLevel == data.badgeData.maxLevel {
+        if data.completedLevel == data.maxLevel {
             progressLabel.alpha = 0.0
         } else {
-            progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.badgeData.maxScore - data.badgeData.score)")
+            progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)")
         }
 
-        if data.badgeData.completedLevel == 0 {
+        if data.completedLevel == 0 {
             levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
         } else {
-            levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.badgeData.completedLevel)", "\(data.badgeData.maxLevel)")
+            levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)")
         }
     }
 }

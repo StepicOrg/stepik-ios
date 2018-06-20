@@ -10,24 +10,10 @@ import Foundation
 import PromiseKit
 import Alamofire
 
-enum ApiOrder {
-    case desc(param: String)
-    case asc(param: String)
-
-    var parameter: String {
-        switch self {
-        case .desc(let p):
-            return "-\(p)"
-        case .asc(let p):
-            return "\(p)"
-        }
-    }
-}
-
 class AchievementProgressesAPI: APIEndpoint {
     override var name: String { return "achievement-progresses" }
 
-    func retrieve(user: Int, kind: String? = nil, order: ApiOrder? = nil, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {
+    func retrieve(user: Int, kind: String? = nil, sortByObtainDateDesc: Bool = false, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {
         return Promise { fulfill, reject in
             var params = Parameters()
             if let kind = kind {
@@ -35,8 +21,8 @@ class AchievementProgressesAPI: APIEndpoint {
             }
             params["user"] = user
             params["page"] = page
-            if let order = order {
-                params["order"] = order.parameter
+            if sortByObtainDateDesc {
+                params["order"] = "-obtain_date"
             }
 
             retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).then { progresses, meta -> Void in

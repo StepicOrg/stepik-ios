@@ -14,6 +14,7 @@ protocol ProfileView: class {
 
     func requestNotificationsPermissions()
     func showStreakTimeSelection(startHour: Int)
+    func showAchievementInfo(viewData: AchievementViewData)
 
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
@@ -102,12 +103,16 @@ class ProfilePresenter {
                                                                  view: attachedView,
                                                                  achievementsAPI: AchievementsAPI(),
                                                                  achievementProgressesAPI: AchievementProgressesAPI())
+            if let achievementsPresenter = achievementsPresenter {
+                attachedView.attachPresenter(achievementsPresenter)
+                achievementsPresenter.delegate = self
+                achievementsPresenter.loadLastAchievements()
+            }
         }
 
         refreshUser(with: user)
         refreshStreak(with: activity)
         headerInfoPresenter?.hideLoading()
-        achievementsPresenter?.loadLastAchievements()
     }
 
     private func refreshUser(with user: User) {
@@ -217,5 +222,11 @@ class ProfilePresenter {
 
     enum ProfileError: Error {
         case noProfile
+    }
+}
+
+extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
+    func achievementInfoShouldPresent(viewData: AchievementViewData) {
+        view?.showAchievementInfo(viewData: viewData)
     }
 }

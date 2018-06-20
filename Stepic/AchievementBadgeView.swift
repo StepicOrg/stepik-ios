@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct AchievementBadgeViewData {
-    static var empty: AchievementBadgeViewData {
-        return AchievementBadgeViewData(completedLevel: 0, maxLevel: 0, maxScore: 0, score: 0, badge: #imageLiteral(resourceName: "achievement-0"))
-    }
+struct AchievementViewData {
+    let title: String
+    let description: String
+
+    let badge: UIImage
 
     let completedLevel: Int
     let maxLevel: Int
-    let maxScore: Int
     let score: Int
-    let badge: UIImage
+    let maxScore: Int
 }
 
 class AchievementBadgeView: UIView {
@@ -44,9 +44,15 @@ class AchievementBadgeView: UIView {
     @IBOutlet weak var circleView: UIView!
     @IBOutlet weak var badgeImageView: UIImageView!
 
-    var data: AchievementBadgeViewData? {
+    var data: AchievementViewData? {
         didSet {
             updateProgress()
+        }
+    }
+
+    var onTap: (() -> Void)? {
+        didSet {
+            self.isUserInteractionEnabled = onTap != nil
         }
     }
 
@@ -57,9 +63,17 @@ class AchievementBadgeView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        onTap = nil
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
+        self.addGestureRecognizer(gestureRecognizer)
+
         clipsToBounds = true
 
         addGradient()
+    }
+
+    @objc func didTap() {
+        onTap?()
     }
 
     private func addGradient() {
@@ -170,17 +184,14 @@ class AchievementBadgeView: UIView {
     private func updateProgress() {
         if let data = data {
             if data.completedLevel == 0 {
-                badgeImageView.alpha = 0.3
+                circleView.alpha = 0.3
                 circleViewGradientLayer?.isHidden = true
-                circleProgressLayer?.isHidden = true
             } else {
-                badgeImageView.alpha = 1.0
+                circleView.alpha = 1.0
                 circleViewGradientLayer?.isHidden = false
-                circleProgressLayer?.isHidden = false
-
-                initStageProgress(value: Float(data.score) / Float(data.maxScore))
             }
 
+            initStageProgress(value: Float(data.score) / Float(data.maxScore))
             badgeImageView.image = data.badge
             initLevelProgress(completedLevel: data.completedLevel, maxLevel: data.maxLevel)
         }

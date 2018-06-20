@@ -10,11 +10,18 @@ import Foundation
 import PromiseKit
 
 protocol ProfileAchievementsView: class {
-    func set(badges: [AchievementBadgeViewData])
+    func set(achievements: [AchievementViewData])
+
+    func attachPresenter(_ presenter: ProfileAchievementsPresenter)
+}
+
+protocol ProfileAchievementsPresenterDelegate: class {
+    func achievementInfoShouldPresent(viewData: AchievementViewData)
 }
 
 class ProfileAchievementsPresenter {
     weak var view: ProfileAchievementsView?
+    weak var delegate: ProfileAchievementsPresenterDelegate?
 
     private static let maxProfileAchievementsCount = 5
 
@@ -35,34 +42,29 @@ class ProfileAchievementsPresenter {
     }
 
     func loadLastAchievements() {
-        var uniqueKinds: Set<String> = Set()
+        // kind -> isObtained
+        var uniqueKinds = [String: Bool]()
 
-        func loadProgress(page: Int) -> Promise<([String], Bool)> {
+        func loadProgress(page: Int) -> Promise<Bool> {
             return Promise { fulfill, _ in
-                achievementProgressesAPI.retrieve(user: userId, order: .desc(param: "obtain_date"), page: page).then { (progresses, meta) -> Void in
-                    var kinds: Set<String> = Set()
+                achievementProgressesAPI.retrieve(user: userId, sortByObtainDateDesc: true, page: page).then { (progresses, meta) -> Void in
                     for p in progresses {
-                        if p.obtainDate != nil {
-                            kinds.insert(p.kind)
-                        }
+                        uniqueKinds[p.kind] = (uniqueKinds[p.kind] ?? false) || (p.obtainDate != nil)
                     }
-                    fulfill((Array(kinds), meta.hasNext))
+                    fulfill(meta.hasNext)
                 }.catch { _ in
-                    fulfill(([], false))
+                    fulfill(false)
                 }
             }
         }
 
         func collectProgress(max: Int, page: Int) -> Promise<[String]> {
-            return loadProgress(page: page).then { progresses, hasNext -> Promise<[String]> in
-                for p in progresses {
-                    uniqueKinds.insert(p)
-                }
-
+            return loadProgress(page: page).then { hasNext -> Promise<[String]> in
                 if uniqueKinds.count < max && hasNext {
                     return collectProgress(max: max, page: page + 1)
                 } else {
-                    return Promise(value: Array(uniqueKinds))
+                    let kinds = uniqueKinds.map { k, v in (k, v) }
+                    return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
                 }
             }.catch { _ in }
         }
@@ -74,21 +76,26 @@ class ProfileAchievementsPresenter {
 
             return when(fulfilled: promises)
         }.then { [weak self] progressData -> Void in
-            let viewData: [AchievementBadgeViewData] = progressData.compactMap { data in
-                let kindDescription = AchievementKind(rawValue: data.kind)
-                guard let badge = kindDescription?.getBadge(for: data.currentLevel) else {
+            let viewData: [AchievementViewData] = progressData.compactMap { data in
+                guard let kindDescription = AchievementKind(rawValue: data.kind) else {
                     return nil
                 }
 
-                return AchievementBadgeViewData(completedLevel: data.currentLevel,
+                return AchievementViewData(title: kindDescription.getName(),
+                    description: kindDescription.getDescription(for: data.maxScore),
+                    badge: kindDescription.getBadge(for: data.currentLevel),
+                    completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
-                    maxScore: data.maxScore,
                     score: data.currentScore,
-                    badge: badge)
+                    maxScore: data.maxScore)
             }
-            self?.view?.set(badges: viewData)
+            self?.view?.set(achievements: viewData)
         }.catch { error in
             print("profile achievements: error while loading = \(error)")
         }
+    }
+
+    func openAchievementInfo(with data: AchievementViewData) {
+        delegate?.achievementInfoShouldPresent(viewData: data)
     }
 }

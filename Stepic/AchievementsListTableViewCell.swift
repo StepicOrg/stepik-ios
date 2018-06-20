@@ -19,7 +19,7 @@ class AchievementsListTableViewCell: UITableViewCell {
     static let reuseId = "AchievementsListTableViewCell"
 
     func update(with viewData: AchievementViewData) {
-        achievementName.text = viewData.name
+        achievementName.text = viewData.title
         achievementDescription.text = viewData.description
 
         if badgeView == nil {
@@ -30,7 +30,7 @@ class AchievementsListTableViewCell: UITableViewCell {
             self.badgeView = badgeView
         }
 
-        badgeView?.data = viewData.badgeData
+        badgeView?.data = viewData
     }
 
     override func prepareForReuse() {

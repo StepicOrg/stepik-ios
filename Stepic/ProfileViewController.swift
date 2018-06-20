@@ -150,6 +150,12 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }
     }
 
+    func showAchievementInfo(viewData: AchievementViewData) {
+        let alertManager = AchievementPopupAlertManager()
+        let vc = alertManager.construct(with: viewData)
+        alertManager.present(alert: vc, inController: self)
+    }
+
     private func initPresenter() {
         // Init only with other/anonymous seed
         // Presenter check anonymous seed and load self profile if we have logged user

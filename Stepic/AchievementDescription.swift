@@ -9,7 +9,8 @@
 import Foundation
 
 enum AchievementKind: String {
-    // Cases should be declared in correct order
+    // Cases should be declared in correct order,
+    // cause getBadge method uses hashValue
     case stepsSolved = "steps_solved"
     case stepsSolvedStreak = "steps_solved_streak"
     case stepsSolvedChoice = "steps_solved_choice"
@@ -23,8 +24,8 @@ enum AchievementKind: String {
     case certificatesDistinctionCount = "certificates_distinction_count"
     case courseReviewsCount = "course_reviews_count"
 
-    func getBadge(for level: Int) -> UIImage? {
-        return UIImage(named: "achievement-\(self.hashValue + 1)-\(level)")
+    func getBadge(for level: Int) -> UIImage {
+        return UIImage(named: "achievement-\(self.hashValue + 1)-\(level)") ?? #imageLiteral(resourceName: "achievement-0")
     }
 
     func getName() -> String {
@@ -53,6 +54,8 @@ enum AchievementKind: String {
             return NSLocalizedString("AchievementsStepsSolvedStreakKindTitle", comment: "")
         case .activeDaysStreak:
             return NSLocalizedString("AchievementsActiveDaysStreakKindTitle", comment: "")
+        default:
+            return NSLocalizedString("AchievementsUnknownKindTitle", comment: "")
         }
     }
 
@@ -82,6 +85,8 @@ enum AchievementKind: String {
             return String(format: NSLocalizedString("AchievementsStepsSolvedStreakKindDescription", comment: ""), "\(score)")
         case .activeDaysStreak:
             return String(format: NSLocalizedString("AchievementsActiveDaysStreakKindDescription", comment: ""), "\(score)")
+        default:
+            return NSLocalizedString("AchievementsUnknownKindDescription", comment: "")
         }
     }
 }

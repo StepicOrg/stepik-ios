@@ -35,7 +35,7 @@ class AchievementNotificationBannerView: UIView {
         if containerViewGradient.superlayer == nil {
             badgeContainerView.layer.insertSublayer(containerViewGradient, at: 0)
 
-            badgeImageView.image = data?.badgeData.badge
+            badgeImageView.image = data?.badge
         }
 
         containerViewGradient.frame = badgeContainerView.bounds

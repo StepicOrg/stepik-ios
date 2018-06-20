@@ -13,8 +13,9 @@ import SkeletonView
 class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     private var achievementsStackView: UIStackView?
     private var isSet = false
+    private var presenter: ProfileAchievementsPresenter?
 
-    private var badgesCountInRow: Int {
+    private var achievementsCountInRow: Int {
         if DeviceInfo.current.diagonal <= 4.0 {
             return 3
         }
@@ -45,7 +46,7 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     }
 
     private func addPlaceholdersView() {
-        for _ in 0..<badgesCountInRow {
+        for _ in 0..<achievementsCountInRow {
             let placeholderView = UIView()
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
             placeholderView.isSkeletonable = true
@@ -61,7 +62,7 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
         }
     }
 
-    func set(badges: [AchievementBadgeViewData]) {
+    func set(achievements: [AchievementViewData]) {
         // Remove placeholders at first set
         if !isSet {
             for v in achievementsStackView?.arrangedSubviews ?? [] {
@@ -71,21 +72,26 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
             isSet = true
         }
 
-        var badges = badges
+        var achievements = achievements
         for view in achievementsStackView?.arrangedSubviews ?? [] {
             achievementsStackView?.removeArrangedSubview(view)
         }
 
-        for _ in 0..<max(0, badgesCountInRow - badges.count) {
-            badges.append(AchievementBadgeViewData.empty)
-        }
+        for i in 0..<min(achievements.count, achievementsCountInRow) {
+            let data = achievements[i]
 
-        for i in 0..<min(badges.count, badgesCountInRow) {
-            let badge = badges[i]
             let achievementView: AchievementBadgeView = AchievementBadgeView.fromNib()
             achievementView.translatesAutoresizingMaskIntoConstraints = false
-            achievementView.data = badge
+            achievementView.data = data
+            achievementView.onTap = { [weak self] in
+                self?.presenter?.openAchievementInfo(with: data)
+            }
+
             achievementsStackView?.addArrangedSubview(achievementView)
         }
+    }
+
+    func attachPresenter(_ presenter: ProfileAchievementsPresenter) {
+        self.presenter = presenter
     }
 }
