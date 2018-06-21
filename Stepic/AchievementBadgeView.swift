@@ -205,10 +205,6 @@ class AchievementBadgeView: UIView {
         super.layoutSubviews()
 
         if previousBadgeFrame != self.bounds {
-            if self.bounds.width != self.bounds.height {
-                print("achievement badge view: target size is not square, content would be clipped!")
-            }
-
             previousBadgeFrame = self.bounds
 
             circleViewGradientLayer?.frame = self.bounds
