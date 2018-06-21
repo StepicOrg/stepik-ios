@@ -915,6 +915,7 @@
 		08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */; };
 		08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
 		08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
+		08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		08E8F9671F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		08E8F9691F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		08E8F96C1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */; };
@@ -5030,6 +5031,7 @@
 		08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksDataset.swift; sourceTree = "<group>"; };
 		08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivitiesAPI.swift; sourceTree = "<group>"; };
 		08E6BB6A1DC8EB45006622EC /* UserActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivity.swift; sourceTree = "<group>"; };
+		08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUserProperties.swift; sourceTree = "<group>"; };
 		08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesPresenter.swift; sourceTree = "<group>"; };
 		08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesView.swift; sourceTree = "<group>"; };
 		08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesViewController.swift; sourceTree = "<group>"; };
@@ -7010,6 +7012,7 @@
 				08D035201D65A252003515C6 /* AnalyticsEvents.swift */,
 				08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */,
 				081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */,
+				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
@@ -11859,6 +11862,7 @@
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
+				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,

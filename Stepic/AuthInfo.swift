@@ -174,6 +174,7 @@ class AuthInfo: NSObject {
         didSet {
             print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
             userId = user?.id
+            
         }
     }
 
