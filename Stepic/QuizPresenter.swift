@@ -342,6 +342,7 @@ class QuizPresenter {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                     AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.submissionMade, parameters: ["type": s.step.block.name])
                 }
+                AnalyticsUserProperties.shared.incrementSubmissionsMade()
 
                 s.submission = submission
                 s.checkSubmission(submission.id, time: 0, completion: completion)

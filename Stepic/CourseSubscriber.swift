@@ -40,8 +40,10 @@ class CourseSubscriber {
 
                 if unsubscribe {
                     AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.unsubscribed)
+                    AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
                     AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.joined, parameters: ["source" : source.rawValue])
+                    AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 
                 let success: (Course) -> Void = {

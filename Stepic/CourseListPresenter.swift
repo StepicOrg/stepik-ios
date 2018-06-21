@@ -526,6 +526,7 @@ class CourseListPresenter {
                 guard let strongSelf = self else {
                     return
                 }
+                AnalyticsUserProperties.shared.setCoursesCount(count: strongSelf.courses.count)
                 strongSelf.lastStepDataSource?.didLoadWithProgresses(courses: strongSelf.courses)
                 if let userID = AuthInfo.shared.userId {
                     for course in strongSelf.courses {
