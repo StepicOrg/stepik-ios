@@ -75,7 +75,11 @@ class AchievementsListPresenter {
                     maxScore: data.maxScore)
             }
 
-            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { ($0.completedLevel == 0) != ($1.completedLevel == 0) }))
+            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { a, b in
+                let aScore = !a.isLocked ? 1 : (a.score > 0 ? 2 : 3)
+                let bScore = !b.isLocked != 0 ? 1 : (b.score > 0 ? 2 : 3)
+                return aScore < bScore
+            }))
         }.catch { error in
             print("achievements list: error while loading = \(error)")
         }

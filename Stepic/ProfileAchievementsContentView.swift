@@ -51,7 +51,7 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
             placeholderView.isSkeletonable = true
             placeholderView.clipsToBounds = true
-            placeholderView.layer.cornerRadius = 5.0
+            placeholderView.layer.cornerRadius = 40
 
             achievementsStackView?.addArrangedSubview(placeholderView)
 

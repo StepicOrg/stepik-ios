@@ -49,7 +49,7 @@ class AchievementPopupViewController: UIViewController {
             progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)")
         }
 
-        if data.completedLevel == 0 {
+        if data.isLocked {
             levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
         } else {
             levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)")

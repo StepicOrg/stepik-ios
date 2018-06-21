@@ -18,6 +18,10 @@ struct AchievementViewData {
     let maxLevel: Int
     let score: Int
     let maxScore: Int
+
+    var isLocked: Bool {
+        return completedLevel == 0
+    }
 }
 
 class AchievementBadgeView: UIView {
@@ -183,7 +187,7 @@ class AchievementBadgeView: UIView {
 
     private func updateProgress() {
         if let data = data {
-            if data.completedLevel == 0 {
+            if data.isLocked {
                 circleView.alpha = 0.3
                 circleViewGradientLayer?.isHidden = true
             } else {

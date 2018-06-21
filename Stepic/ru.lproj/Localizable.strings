@@ -533,6 +533,8 @@ AchievementsActiveDaysStreakKindDescription = "Решайте как миним�
 AchievementsNextLevel = "%@ до следующего уровня";
 AchievementsLevel = "Уровень %@ / %@";
 AchievementsLevelNotObtained = "Ещё не получено";
+AchievementsUnknownKindTitle = "Неизвестное достижение";
+AchievementsUnknownKindDescription = "Решайте больше заданий, чтобы открыть";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";

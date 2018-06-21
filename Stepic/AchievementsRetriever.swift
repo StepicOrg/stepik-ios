@@ -73,7 +73,7 @@ class AchievementsRetriever {
                 if let lastProgress = progressesSortedByMaxScore.last {
                     // Fulfilled achievement
                     fulfill(AchievementProgressData(currentScore: lastProgress.score,
-                        maxScore: lastProgress.score,
+                        maxScore: idToTargetScore[lastProgress.achievement] ?? 0,
                         currentLevel: achievements.count,
                         maxLevel: achievements.count,
                         kind: kind))

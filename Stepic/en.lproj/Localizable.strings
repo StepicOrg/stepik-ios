@@ -532,6 +532,8 @@ AchievementsActiveDaysStreakKindDescription = "Solve at least one task at %@ day
 AchievementsNextLevel = "%@ for the next level";
 AchievementsLevel = "Level %@ / %@";
 AchievementsLevelNotObtained = "Not obtained yet";
+AchievementsUnknownKindTitle = "Unknown achievement";
+AchievementsUnknownKindDescription = "Complete more challenges to unlock";
 
 /* Personal deadlines */
 CourseInfo = "Course Info";
