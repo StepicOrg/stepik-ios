@@ -150,9 +150,9 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }
     }
 
-    func showAchievementInfo(viewData: AchievementViewData) {
+    func showAchievementInfo(viewData: AchievementViewData, canShare: Bool) {
         let alertManager = AchievementPopupAlertManager()
-        let vc = alertManager.construct(with: viewData)
+        let vc = alertManager.construct(with: viewData, canShare: canShare)
         alertManager.present(alert: vc, inController: self)
     }
 

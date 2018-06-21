@@ -19,8 +19,17 @@ class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
 
     var data: AchievementViewData?
+    var canShare: Bool = true
 
     @IBAction func onShareButtonClick(_ sender: Any) {
+        guard let data = data else {
+            return
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [data.badge, "Получено достижение \(data.title)"], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.popoverPresentationController?.sourceView = shareButton
+        present(activityVC, animated: true)
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
@@ -32,6 +41,11 @@ class AchievementPopupViewController: UIViewController {
 
         shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
         closeButton.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
+
+        if !canShare {
+            shareButton.isEnabled = false
+            shareButton.alpha = 0.45
+        }
 
         if let data = data {
             update(with: data)

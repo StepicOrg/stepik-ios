@@ -27,9 +27,10 @@ class AchievementPopupAlertManager: AlertManager {
         return presentr
     }()
 
-    func construct(with data: AchievementViewData) -> AchievementPopupViewController {
+    func construct(with data: AchievementViewData, canShare: Bool = false) -> AchievementPopupViewController {
         let alert = AchievementPopupViewController(nibName: "AchievementPopupViewController", bundle: nil)
         alert.data = data
+        alert.canShare = canShare
         return alert
     }
 }

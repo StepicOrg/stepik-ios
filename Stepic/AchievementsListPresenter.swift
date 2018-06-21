@@ -10,6 +10,7 @@ import Foundation
 
 protocol AchievementsListView: class {
     func set(count: Int, achievements: [AchievementViewData])
+    func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 }
 
 class AchievementsListPresenter {
@@ -77,11 +78,15 @@ class AchievementsListPresenter {
 
             self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { a, b in
                 let aScore = !a.isLocked ? 1 : (a.score > 0 ? 2 : 3)
-                let bScore = !b.isLocked != 0 ? 1 : (b.score > 0 ? 2 : 3)
+                let bScore = !b.isLocked ? 1 : (b.score > 0 ? 2 : 3)
                 return aScore < bScore
             }))
         }.catch { error in
             print("achievements list: error while loading = \(error)")
         }
+    }
+
+    func achievementSelected(with viewData: AchievementViewData) {
+        view?.showAchievementInfo(viewData: viewData, canShare: userId == AuthInfo.shared.userId)
     }
 }

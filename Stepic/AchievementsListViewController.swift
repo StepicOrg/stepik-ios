@@ -41,6 +41,12 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         tableView.reloadData()
     }
 
+    func showAchievementInfo(viewData: AchievementViewData, canShare: Bool) {
+        let alertManager = AchievementPopupAlertManager()
+        let vc = alertManager.construct(with: viewData, canShare: canShare)
+        alertManager.present(alert: vc, inController: self)
+    }
+
     private func startSkeleton() {
         view.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight), animation: GradientDirection.leftRight.slidingAnimation())
     }
@@ -68,9 +74,7 @@ extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSo
             return
         }
 
-        let alertManager = AchievementPopupAlertManager()
-        let vc = alertManager.construct(with: viewData)
-        alertManager.present(alert: vc, inController: self)
+        self.presenter?.achievementSelected(with: viewData)
     }
 }
 
