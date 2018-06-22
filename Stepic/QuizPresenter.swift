@@ -334,7 +334,7 @@ class QuizPresenter {
                 submission in
 
                 guard let s = self else { return }
-
+                AnalyticsUserProperties.shared.incrementSubmissionsMade()
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
                     AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.submissionMade, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
@@ -342,7 +342,6 @@ class QuizPresenter {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
                     AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.submissionMade, parameters: ["type": s.step.block.name])
                 }
-                AnalyticsUserProperties.shared.incrementSubmissionsMade()
 
                 s.submission = submission
                 s.checkSubmission(submission.id, time: 0, completion: completion)

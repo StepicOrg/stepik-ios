@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
-
+        AnalyticsUserProperties.shared.updateUserID()
+        
         WatchSessionManager.sharedManager.startSession()
 
         NotificationsBadgesManager.shared.setup()
@@ -59,6 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.firstTime)
+        } else {
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
+        }
         
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
@@ -80,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         rotated()
-        
+
         return true
     }
 
@@ -342,7 +350,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func rotated() {
         AnalyticsUserProperties.shared.setScreenOrientation(isPortrait: UIDevice.current.orientation.isPortrait)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

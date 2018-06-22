@@ -148,9 +148,11 @@ class AuthInfo: NSObject {
                 if user.isGuest {
                     print("setting anonymous user id \(String(describing: id))")
                     anonymousUserId = id
+                    AnalyticsUserProperties.shared.setUserID(to: nil)
                     return
                 }
             }
+            AnalyticsUserProperties.shared.setUserID(to: user?.id)
             print("setting user id \(String(describing: id))")
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()
@@ -175,7 +177,6 @@ class AuthInfo: NSObject {
         didSet {
             print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
             userId = user?.id
-            AnalyticsUserProperties.shared.setUserID(to: user?.id)
         }
     }
 
