@@ -11,6 +11,8 @@ import Amplitude_iOS
 
 class AnalyticsUserProperties {
 
+    static let shared = AnalyticsUserProperties()
+
     private func setAmplitudeProperty(key: String, value: Any?) {
         if let v = value {
             Amplitude.instance().setUserProperties([key: v])
@@ -24,8 +26,6 @@ class AnalyticsUserProperties {
         let identify = AMPIdentify().add(key, value: value as NSObject)
         Amplitude.instance().identify(identify)
     }
-
-    static let shared = AnalyticsUserProperties()
 
     func clearUserDependentProperties() {
         setAmplitudeProperty(key: "user_id", value: nil)
