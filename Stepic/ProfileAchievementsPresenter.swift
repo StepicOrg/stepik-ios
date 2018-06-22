@@ -43,33 +43,61 @@ class ProfileAchievementsPresenter {
 
     func loadLastAchievements() {
         // kind -> isObtained
-        var uniqueKinds = [String: Bool]()
+        var allUniqueKinds = [String: Bool]()
 
-        func loadProgress(page: Int) -> Promise<Bool> {
-            return Promise { fulfill, _ in
-                achievementProgressesAPI.retrieve(user: userId, sortByObtainDateDesc: true, page: page).then { (progresses, meta) -> Void in
-                    for p in progresses {
-                        uniqueKinds[p.kind] = (uniqueKinds[p.kind] ?? false) || (p.obtainDate != nil)
-                    }
-                    fulfill(meta.hasNext)
-                }.catch { _ in
-                    fulfill(false)
+        // Load achievements while we have less kinds than maxProfileAchievementsCount (+kinds from allUniqueKinds)
+        let achievementsBreakCondition: ([Achievement]) -> Bool = { achievements -> Bool in
+            // kind -> isObtained
+            var uniqueKinds = Set<String>()
+
+            for a in achievements {
+                if allUniqueKinds[a.kind] == nil {
+                    uniqueKinds.insert(a.kind)
                 }
+            }
+
+            return allUniqueKinds.count + uniqueKinds.count >= ProfileAchievementsPresenter.maxProfileAchievementsCount
+        }
+
+        // Load progresses while we have less unique kinds than maxProfileAchievementsCount
+        let progressesBreakCondition: ([AchievementProgress]) -> Bool = { progresses -> Bool in
+            // kind -> isObtained
+            var uniqueKinds = [String: Bool]()
+
+            for p in progresses {
+                uniqueKinds[p.kind] = (uniqueKinds[p.kind] ?? false) || (p.obtainDate != nil)
+            }
+
+            return uniqueKinds.count >= ProfileAchievementsPresenter.maxProfileAchievementsCount
+        }
+
+        func extractMoreKinds() -> Promise<[String]> {
+            return self.achievementsRetriever.loadAllAchievements(breakCondition: achievementsBreakCondition).then { allAchievements -> Promise<[String]> in
+                for a in allAchievements {
+                    allUniqueKinds[a.kind] = false
+                    if allUniqueKinds.count >= ProfileAchievementsPresenter.maxProfileAchievementsCount {
+                        break
+                    }
+                }
+
+                let kinds = allUniqueKinds.map { k, v in (k, v) }
+                return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
             }
         }
 
-        func collectProgress(max: Int, page: Int) -> Promise<[String]> {
-            return loadProgress(page: page).then { hasNext -> Promise<[String]> in
-                if uniqueKinds.count < max && hasNext {
-                    return collectProgress(max: max, page: page + 1)
-                } else {
-                    let kinds = uniqueKinds.map { k, v in (k, v) }
-                    return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
-                }
-            }.catch { _ in }
-        }
+        self.achievementsRetriever.loadAllAchievementProgresses(breakCondition: progressesBreakCondition).then { allProgresses -> Promise<[String]> in
+            for p in allProgresses {
+                allUniqueKinds[p.kind] = (allUniqueKinds[p.kind] ?? false) || (p.obtainDate != nil)
+            }
 
-        collectProgress(max: ProfileAchievementsPresenter.maxProfileAchievementsCount, page: 1).then { kinds -> Promise<[AchievementProgressData]> in
+            if allUniqueKinds.count < ProfileAchievementsPresenter.maxProfileAchievementsCount {
+                // We should load more achievements with unknown progress
+                return extractMoreKinds()
+            } else {
+                let kinds = allUniqueKinds.map { k, v in (k, v) }
+                return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
+            }
+        }.then { kinds -> Promise<[AchievementProgressData]> in
             let promises = kinds.compactMap { [weak self] kind in
                 self?.achievementsRetriever.loadAchievementProgress(for: kind)
             }

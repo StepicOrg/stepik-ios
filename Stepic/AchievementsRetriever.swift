@@ -20,6 +20,60 @@ class AchievementsRetriever {
         self.achievementProgressesAPI = achievementProgressesAPI
     }
 
+    func loadAllAchievements(breakCondition: @escaping ([Achievement]) -> Bool) -> Promise<[Achievement]> {
+        var allAchievements = [Achievement]()
+
+        func load(page: Int) -> Promise<Bool> {
+            return Promise { fulfill, _ in
+                achievementsAPI.retrieve(page: page).then { (achievements, meta) -> Void in
+                    allAchievements.append(contentsOf: achievements)
+                    fulfill(meta.hasNext)
+                }.catch { _ in
+                    fulfill(false)
+                }
+            }
+        }
+
+        func collect(page: Int) -> Promise<[Achievement]> {
+            return load(page: page).then { hasNext -> Promise<[Achievement]> in
+                if !breakCondition(allAchievements) && hasNext {
+                    return collect(page: page + 1)
+                } else {
+                    return Promise(value: allAchievements)
+                }
+            }
+        }
+
+        return collect(page: 1)
+    }
+
+    func loadAllAchievementProgresses(breakCondition: @escaping ([AchievementProgress]) -> Bool) -> Promise<[AchievementProgress]> {
+        var allProgresses = [AchievementProgress]()
+
+        func load(page: Int) -> Promise<Bool> {
+            return Promise { fulfill, _ in
+                achievementProgressesAPI.retrieve(user: userId, sortByObtainDateDesc: true, page: page).then { (progresses, meta) -> Void in
+                    allProgresses.append(contentsOf: progresses)
+                    fulfill(meta.hasNext)
+                }.catch { _ in
+                    fulfill(false)
+                }
+            }
+        }
+
+        func collect(page: Int) -> Promise<[AchievementProgress]> {
+            return load(page: page).then { hasNext -> Promise<[AchievementProgress]> in
+                if !breakCondition(allProgresses) && hasNext {
+                    return collect(page: page + 1)
+                } else {
+                    return Promise(value: allProgresses)
+                }
+            }
+        }
+
+        return collect(page: 1)
+    }
+
     func loadAchievementProgress(for achievement: Achievement) -> Promise<AchievementProgressData> {
         return loadAchievementProgress(for: achievement.kind)
     }

@@ -34,7 +34,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         }
     }
 
-    func set(count: Int, achievements: [AchievementViewData]) {
+    func set(achievements: [AchievementViewData]) {
         data = achievements
 
         view.hideSkeleton()

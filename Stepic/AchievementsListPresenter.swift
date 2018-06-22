@@ -9,7 +9,7 @@ import PromiseKit
 import Foundation
 
 protocol AchievementsListView: class {
-    func set(count: Int, achievements: [AchievementViewData])
+    func set(achievements: [AchievementViewData])
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 }
 
@@ -28,33 +28,9 @@ class AchievementsListPresenter {
     }
 
     func refresh() {
-        // kind -> isObtained
-        var kinds = Set<String>()
+        self.achievementsRetriever.loadAllAchievements(breakCondition: { _ in return false }).then { achievements -> Promise<[AchievementProgressData]> in
+            let kinds = Set<String>(achievements.map { $0.kind })
 
-        func loadAllAchievements(page: Int) -> Promise<Bool> {
-            return Promise { fulfill, _ in
-                achievementsAPI.retrieve(page: page).then { (achievements, meta) -> Void in
-                    for p in achievements {
-                        kinds.insert(p.kind)
-                    }
-                    fulfill(meta.hasNext)
-                }.catch { _ in
-                    fulfill(false)
-                }
-            }
-        }
-
-        func collectAllAchievements(page: Int) -> Promise<Bool> {
-            return loadAllAchievements(page: page).then { hasNext -> Promise<Bool> in
-                if hasNext {
-                    return collectAllAchievements(page: page + 1)
-                } else {
-                    return Promise(value: false)
-                }
-            }.catch { _ in }
-        }
-
-        collectAllAchievements(page: 1).then { _ -> Promise<[AchievementProgressData]> in
             var promises = [Promise<AchievementProgressData>]()
             for kind in Array(kinds) {
                 promises.append(self.achievementsRetriever.loadAchievementProgress(for: kind))
@@ -76,7 +52,7 @@ class AchievementsListPresenter {
                     maxScore: data.maxScore)
             }
 
-            self?.view?.set(count: kinds.count, achievements: viewData.sorted(by: { a, b in
+            self?.view?.set(achievements: viewData.sorted(by: { a, b in
                 let aScore = !a.isLocked ? 1 : (a.score > 0 ? 2 : 3)
                 let bScore = !b.isLocked ? 1 : (b.score > 0 ? 2 : 3)
                 return aScore < bScore
