@@ -535,6 +535,7 @@ AchievementsLevel = "Уровень %@ / %@";
 AchievementsLevelNotObtained = "Ещё не получено";
 AchievementsUnknownKindTitle = "Неизвестное достижение";
 AchievementsUnknownKindDescription = "Решайте больше заданий, чтобы открыть";
+AchievementsShareText = "Я получил достижение «%@» на Stepik.org. Попробуй обогнать!";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";
