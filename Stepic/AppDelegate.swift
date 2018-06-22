@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
-        
+
         WatchSessionManager.sharedManager.startSession()
 
         NotificationsBadgesManager.shared.setup()
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
         }
-        
+
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
         }

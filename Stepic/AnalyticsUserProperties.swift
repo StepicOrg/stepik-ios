@@ -21,7 +21,7 @@ class AnalyticsUserProperties {
     }
 
     private func incrementAmplitudeProperty(key: String, value: Int = 1) {
-        let identify = AMPIdentify().add(key, value: 1 as NSObject)
+        let identify = AMPIdentify().add(key, value: value as NSObject)
         Amplitude.instance().identify(identify)
     }
 
