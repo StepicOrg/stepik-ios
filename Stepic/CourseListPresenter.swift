@@ -205,7 +205,7 @@ class CourseListPresenter {
     private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
-                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.continuePressed)
+                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.continuePressed, parameters: ["source": "course_widget", "course": course.id])
                 LastStepRouter.continueLearning(for: course, using: navigation)
             }
         } else {

@@ -39,10 +39,10 @@ class CourseSubscriber {
                 }
 
                 if unsubscribe {
-                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.unsubscribed)
+                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.unsubscribed, parameters: ["course": course.id])
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
-                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.joined, parameters: ["source" : source.rawValue])
+                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.joined, parameters: ["source" : source.rawValue, "course": course.id])
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 
