@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Mixpanel
 import Fabric
 import Crashlytics
 import PromiseKit
