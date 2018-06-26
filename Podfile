@@ -61,7 +61,6 @@ def all_pods
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
     pod 'ActionSheetPicker-3.0'
-    pod 'SkeletonView'
     pod 'NotificationBannerSwift'
 end
 

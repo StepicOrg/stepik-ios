@@ -1886,6 +1886,14 @@
 		2C1B64E01F4C596500236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CE1F4C595F00236804 /* Config.plist */; };
 		2C1B64E31F4C597F00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D31F4C595F00236804 /* icon.png */; };
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
+		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
+		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
+		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
+		2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042920E277F60060117A /* Skeletonable+UIView.swift */; };
+		2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */; };
+		2C22043020E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */; };
+		2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */; };
+		2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
@@ -5182,6 +5190,14 @@
 		2C1B64D11F4C595F00236804 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/3124/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C1B64D31F4C595F00236804 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3124/icon.png; sourceTree = "<group>"; };
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
+		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
+		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
+		2C22042920E277F60060117A /* Skeletonable+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UIView.swift"; sourceTree = "<group>"; };
+		2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UITableView.swift"; sourceTree = "<group>"; };
+		2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCellSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
+		2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
+		2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementListSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
@@ -6577,6 +6593,7 @@
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C22042320E277980060117A /* Skeleton */,
 				2CE8390F20C80FF200FE3672 /* AchievementBadge */,
 				2C453396204D46B70061342A /* PinsMap */,
 				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
@@ -7813,6 +7830,29 @@
 				2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		2C22042320E277980060117A /* Skeleton */ = {
+			isa = PBXGroup;
+			children = (
+				2C22042E20E27E120060117A /* Views */,
+				2C22042420E277B40060117A /* Skeletonable.swift */,
+				2C22042620E277E50060117A /* SkeletonView.swift */,
+				2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */,
+				2C22042920E277F60060117A /* Skeletonable+UIView.swift */,
+				2C22042820E277F60060117A /* SkeletonViewAnimation.swift */,
+			);
+			name = Skeleton;
+			sourceTree = "<group>";
+		};
+		2C22042E20E27E120060117A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
+				2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */,
+				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
@@ -9405,6 +9445,7 @@
 				2CF4252E2024C10D002D7305 /* overlay_simple.png in Resources */,
 				2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2CF4252D2024C10D002D7305 /* overlay_hard.png in Resources */,
+				2C22043020E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib in Resources */,
 				2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */,
 				087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
@@ -9429,6 +9470,7 @@
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */,
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,
@@ -9482,6 +9524,7 @@
 				2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
+				2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */,
 				62E9815A6AAC6C12E9B9D862 /* ProfileHeaderInfoView.xib in Resources */,
 				2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */,
 				2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */,
@@ -10284,7 +10327,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -10330,7 +10372,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -10478,7 +10519,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -10524,7 +10564,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -10783,7 +10822,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -10829,7 +10867,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -10937,7 +10974,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -10983,7 +11019,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -11195,7 +11230,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -11241,7 +11275,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -11315,7 +11348,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -11361,7 +11393,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -11453,7 +11484,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -11498,7 +11528,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -11589,7 +11618,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
@@ -11636,7 +11664,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
@@ -11741,6 +11768,7 @@
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
+				2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
@@ -11887,6 +11915,7 @@
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
+				2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */,
 				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
@@ -11976,6 +12005,7 @@
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08E8F9671F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
+				2C22042720E277E50060117A /* SkeletonView.swift in Sources */,
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0899842F1ECDE19E005C0B27 /* LessonView.swift in Sources */,
@@ -12013,6 +12043,7 @@
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08195A181FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
+				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
@@ -12157,6 +12188,7 @@
 				08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				08CB0D311FB5F9FC001A1E02 /* ExploreViewController.swift in Sources */,
+				2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */,
 				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,

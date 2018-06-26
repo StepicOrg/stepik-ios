@@ -26,27 +26,18 @@
                             <constraint firstAttribute="height" constant="75" id="11B-32-EL6"/>
                             <constraint firstAttribute="width" constant="61" id="UoM-pn-hDv"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-3W-8vI">
                         <rect key="frame" x="89" y="18" width="215" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTA-Mq-SyB">
                         <rect key="frame" x="89" y="43" width="215" height="17"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
                 <constraints>
@@ -63,15 +54,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="achievementDescription" destination="bTA-Mq-SyB" id="yI8-6e-Etg"/>
                 <outlet property="achievementName" destination="Nbg-3W-8vI" id="niu-LJ-lgY"/>
                 <outlet property="badgeContainer" destination="flu-MW-5js" id="MNV-cr-R7j"/>
             </connections>
-            <point key="canvasLocation" x="22" y="114.5"/>
+            <point key="canvasLocation" x="-2509" y="103"/>
         </tableViewCell>
     </objects>
 </document>

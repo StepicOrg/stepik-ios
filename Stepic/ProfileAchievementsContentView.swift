@@ -8,7 +8,6 @@
 
 import UIKit
 import FLKAutoLayout
-import SkeletonView
 
 class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     private var achievementsStackView: UIStackView?
@@ -49,16 +48,10 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
         for _ in 0..<achievementsCountInRow {
             let placeholderView = UIView()
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
-            placeholderView.isSkeletonable = true
-            placeholderView.clipsToBounds = true
-            placeholderView.layer.cornerRadius = 40
 
             achievementsStackView?.addArrangedSubview(placeholderView)
-
-            DispatchQueue.main.async {
-                placeholderView.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight),
-                                                             animation: GradientDirection.leftRight.slidingAnimation())
-            }
+            placeholderView.skeleton.viewBuilder = { return UIView.fromNib(named: "AchievementSkeletonPlaceholderView") }
+            placeholderView.skeleton.show()
         }
     }
 

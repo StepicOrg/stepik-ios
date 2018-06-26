@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SkeletonView
 import NotificationBannerSwift
 
 class AchievementsListViewController: UIViewController, AchievementsListView {
@@ -20,24 +19,19 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         super.viewDidLoad()
 
         title = NSLocalizedString("Achievements", comment: "")
-        tableView.isSkeletonable = true
+
+        tableView.skeleton.viewBuilder = { return UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
+        tableView.skeleton.show()
+
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 
         presenter?.refresh()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if data.isEmpty {
-            self.startSkeleton()
-        }
-    }
-
     func set(achievements: [AchievementViewData]) {
         data = achievements
 
-        view.hideSkeleton()
+        tableView.skeleton.hide()
         tableView.reloadData()
     }
 
@@ -45,10 +39,6 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         let alertManager = AchievementPopupAlertManager()
         let vc = alertManager.construct(with: viewData, canShare: canShare)
         alertManager.present(alert: vc, inController: self)
-    }
-
-    private func startSkeleton() {
-        view.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: UIColor.mainLight), animation: GradientDirection.leftRight.slidingAnimation())
     }
 }
 
@@ -75,15 +65,5 @@ extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSo
         }
 
         self.presenter?.achievementSelected(with: viewData)
-    }
-}
-
-extension AchievementsListViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
-    }
-
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdenfierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "AchievementsListTableViewCell"
     }
 }
