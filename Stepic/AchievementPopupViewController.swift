@@ -14,9 +14,10 @@ class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementBadgeImageView: UIImageView!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
-
     @IBOutlet weak var shareButton: StepikButton!
     @IBOutlet weak var closeButton: UIButton!
+
+    var widthConstraint: NSLayoutConstraint?
 
     var data: AchievementViewData?
     var canShare: Bool = true
@@ -39,6 +40,8 @@ class AchievementPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        achievementDescriptionLabel.constrainWidth("==\(UIScreen.main.bounds.width - 64)")
+
         shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
         closeButton.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
 
@@ -46,8 +49,7 @@ class AchievementPopupViewController: UIViewController {
             update(with: data)
 
             if !canShare || data.isLocked {
-                shareButton.isEnabled = false
-                shareButton.alpha = 0.45
+                shareButton.alpha = 0.0
             }
         }
     }

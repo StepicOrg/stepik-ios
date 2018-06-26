@@ -15,14 +15,7 @@ class AchievementPopupAlertManager: AlertManager {
     }
 
     let presentr: Presentr = {
-        var presentationType = PresentationType.popup
-        if DeviceInfo.current.isPad {
-            // For phone screens use default popup size
-            // For pad screens use dynamic size
-            presentationType = .dynamic(center: .center)
-        }
-
-        let presentr = Presentr(presentationType: presentationType)
+        let presentr = Presentr(presentationType: .dynamic(center: .center))
         presentr.roundCorners = true
         return presentr
     }()
