@@ -305,7 +305,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     private func buildAchievementsBlock() -> ContentMenuBlock? {
-        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView()
+        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView.fromNib()
         let onButtonClick = { [weak self] in
             if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
                let vc = ControllerHelper.instantiateViewController(identifier: "AchievementsListViewController", storyboardName: "Profile") as? AchievementsListViewController {

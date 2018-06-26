@@ -10,8 +10,9 @@ import UIKit
 import FLKAutoLayout
 
 class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
-    private var achievementsStackView: UIStackView?
-    private var isSet = false
+    @IBOutlet weak var achievementsStackView: UIStackView!
+    @IBOutlet weak var refreshButton: UIButton!
+
     private var presenter: ProfileAchievementsPresenter?
 
     private var achievementsCountInRow: Int {
@@ -26,25 +27,34 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
         return 4
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    @IBAction func onRefreshButtonClick(_ sender: Any) {
+        refresh()
+        self.presenter?.loadLastAchievements()
+    }
 
-        if achievementsStackView == nil {
-            let achievementsStackView = UIStackView()
-            self.achievementsStackView = achievementsStackView
-            self.addSubview(achievementsStackView)
-            achievementsStackView.distribution = .fillEqually
+    override func awakeFromNib() {
+        super.awakeFromNib()
 
-            achievementsStackView.alignLeading("24", trailing: "-24", toView: self)
-            achievementsStackView.alignTop("10", bottom: "-8", toView: self)
-            achievementsStackView.constrainHeight("80")
-            achievementsStackView.spacing = 8.0
+        refreshButton.setTitle(NSLocalizedString("Refresh", comment: ""), for: .normal)
+        refreshButton.clipsToBounds = true
+        refreshButton.layer.cornerRadius = 8
+        refreshButton.layer.borderWidth = 0.5
+        refreshButton.layer.borderColor = UIColor(red: 204 / 255, green: 204 / 255, blue: 204 / 255, alpha: 1.0).cgColor
 
-            addPlaceholdersView()
-        }
+        refreshButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
+        refreshButton.setTitleColor(UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), for: .normal)
+
+        achievementsStackView?.alpha = 0.0
+
+        refresh()
     }
 
     private func addPlaceholdersView() {
+        for v in achievementsStackView.arrangedSubviews {
+            achievementsStackView.removeArrangedSubview(v)
+            v.removeFromSuperview()
+        }
+
         for _ in 0..<achievementsCountInRow {
             let placeholderView = UIView()
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,18 +66,10 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     }
 
     func set(achievements: [AchievementViewData]) {
-        // Remove placeholders at first set
-        if !isSet {
-            for v in achievementsStackView?.arrangedSubviews ?? [] {
-                achievementsStackView?.removeArrangedSubview(v)
-                v.removeFromSuperview()
-            }
-            isSet = true
-        }
-
         var achievements = achievements
-        for view in achievementsStackView?.arrangedSubviews ?? [] {
-            achievementsStackView?.removeArrangedSubview(view)
+        for view in achievementsStackView.arrangedSubviews {
+            achievementsStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
         }
 
         for i in 0..<min(achievements.count, achievementsCountInRow) {
@@ -86,5 +88,16 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
 
     func attachPresenter(_ presenter: ProfileAchievementsPresenter) {
         self.presenter = presenter
+    }
+
+    func showLoadingError() {
+        achievementsStackView.alpha = 0.0
+        refreshButton.isHidden = false
+    }
+
+    private func refresh() {
+        achievementsStackView.alpha = 1.0
+        refreshButton.isHidden = true
+        addPlaceholdersView()
     }
 }

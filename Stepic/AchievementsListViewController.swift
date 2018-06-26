@@ -9,8 +9,10 @@
 import Foundation
 import NotificationBannerSwift
 
-class AchievementsListViewController: UIViewController, AchievementsListView {
+class AchievementsListViewController: UIViewController, AchievementsListView, ControllerWithStepikPlaceholder {
     @IBOutlet weak var tableView: UITableView!
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     var presenter: AchievementsListPresenter?
     private var data: [AchievementViewData] = []
@@ -20,12 +22,15 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
 
         title = NSLocalizedString("Achievements", comment: "")
 
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+            self?.refresh()
+        }), for: .connectionError)
+
         tableView.skeleton.viewBuilder = { return UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
-        tableView.skeleton.show()
 
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 
-        presenter?.refresh()
+        refresh()
     }
 
     func set(achievements: [AchievementViewData]) {
@@ -39,6 +44,16 @@ class AchievementsListViewController: UIViewController, AchievementsListView {
         let alertManager = AchievementPopupAlertManager()
         let vc = alertManager.construct(with: viewData, canShare: canShare)
         alertManager.present(alert: vc, inController: self)
+    }
+
+    func showLoadingError() {
+        showPlaceholder(for: .connectionError)
+    }
+
+    private func refresh() {
+        isPlaceholderShown = false
+        tableView.skeleton.show()
+        presenter?.refresh()
     }
 }
 

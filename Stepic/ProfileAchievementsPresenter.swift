@@ -11,7 +11,7 @@ import PromiseKit
 
 protocol ProfileAchievementsView: class {
     func set(achievements: [AchievementViewData])
-
+    func showLoadingError()
     func attachPresenter(_ presenter: ProfileAchievementsPresenter)
 }
 
@@ -118,8 +118,9 @@ class ProfileAchievementsPresenter {
                     maxScore: data.maxScore)
             }
             self?.view?.set(achievements: viewData)
-        }.catch { error in
+        }.catch { [weak self] error in
             print("profile achievements: error while loading = \(error)")
+            self?.view?.showLoadingError()
         }
     }
 

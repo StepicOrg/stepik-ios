@@ -31,7 +31,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfk-qH-x5W">
-                    <rect key="frame" x="29" y="300.5" width="230" height="29.5"/>
+                    <rect key="frame" x="34.5" y="300.5" width="219.5" height="29.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -45,7 +45,7 @@
                 <constraint firstItem="yfk-qH-x5W" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.09" id="A8T-gL-k2E"/>
                 <constraint firstItem="KZg-Hh-Boo" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Bvi-7Q-9dt"/>
                 <constraint firstItem="KZg-Hh-Boo" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.83" id="CKk-Jy-hzD"/>
-                <constraint firstItem="yfk-qH-x5W" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="dVt-PM-QgE"/>
+                <constraint firstItem="yfk-qH-x5W" firstAttribute="width" secondItem="KZg-Hh-Boo" secondAttribute="width" multiplier="0.8" id="EY7-4K-QcX"/>
                 <constraint firstItem="KZg-Hh-Boo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="o4O-eE-Ay2"/>
                 <constraint firstAttribute="bottom" secondItem="yfk-qH-x5W" secondAttribute="bottom" id="ySg-dp-ioo"/>
                 <constraint firstItem="yfk-qH-x5W" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="zhF-T3-eJZ"/>

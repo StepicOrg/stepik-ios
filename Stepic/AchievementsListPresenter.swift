@@ -10,6 +10,7 @@ import Foundation
 
 protocol AchievementsListView: class {
     func set(achievements: [AchievementViewData])
+    func showLoadingError()
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 }
 
@@ -57,8 +58,9 @@ class AchievementsListPresenter {
                 let bScore = !b.isLocked ? 1 : (b.score > 0 ? 2 : 3)
                 return aScore < bScore
             }))
-        }.catch { error in
+        }.catch { [weak self] error in
             print("achievements list: error while loading = \(error)")
+            self?.view?.showLoadingError()
         }
     }
 

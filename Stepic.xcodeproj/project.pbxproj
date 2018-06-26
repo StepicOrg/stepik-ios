@@ -1894,6 +1894,7 @@
 		2C22043020E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */; };
 		2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */; };
 		2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */; };
+		2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
@@ -5198,6 +5199,7 @@
 		2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCellSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementListSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
+		2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAchievementsContentView.xib; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
@@ -8424,6 +8426,7 @@
 				2C6B2F9E20D95B1500F7C976 /* AchievementNotificationBanner */,
 				2C6B2F9520D7F1C000F7C976 /* AchievementAlert */,
 				2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */,
+				2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */,
 				2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */,
 				62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */,
 				62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */,
@@ -9517,6 +9520,7 @@
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
+				2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */,
 				2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */,
