@@ -42,6 +42,7 @@ class OnboardingViewController: UIViewController {
     @IBAction func onCloseButtonClick(_ sender: Any) {
         dismiss(animated: true) {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Onboarding.closed, parameters: ["screen": self.currentPageIndex + 1])
         }
     }
 
@@ -87,7 +88,7 @@ class OnboardingViewController: UIViewController {
         reloadPages()
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
-
+        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Onboarding.screenOpened, parameters: ["screen": currentPageIndex + 1])
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.animatedView.start()
         }
@@ -190,6 +191,7 @@ class OnboardingViewController: UIViewController {
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Onboarding.completed)
             dismiss(animated: true, completion: nil)
             if let authSource = authSource {
                 RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
@@ -220,6 +222,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
         if page != currentPageIndex {
             currentPageIndex = page
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Onboarding.screenOpened, parameters: ["screen": currentPageIndex + 1])
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 

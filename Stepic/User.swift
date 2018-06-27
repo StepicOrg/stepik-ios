@@ -30,6 +30,7 @@ final class User: NSManagedObject, IDFetchable {
         lastName = json["last_name"].stringValue
         avatarURL = json["avatar"].stringValue
         level = json["level"].intValue
+        joinDate = Parser.sharedParser.dateFromTimedateJSON(json["join_date"])
     }
 
     func update(json: JSON) {
@@ -38,6 +39,14 @@ final class User: NSManagedObject, IDFetchable {
 
     var isGuest: Bool {
         return level == 0
+    }
+
+    //Returns true if joinDate is less than in 5 minutes from now
+    var didJustRegister: Bool {
+        guard let joinDate = joinDate else {
+            return false
+        }
+        return Date().timeIntervalSince(joinDate) < 5 * 60
     }
 
     static func fetchById(_ id: Int) -> [User]? {

@@ -63,6 +63,7 @@ class AuthInfo: NSObject {
                         Certificate.deleteAll()
                         Progress.deleteAllStoredProgresses()
                         Notification.deleteAll()
+                        AnalyticsUserProperties.shared.clearUserDependentProperties()
                         #if !os(tvOS)
                             NotificationsBadgesManager.shared.set(number: 0)
                         #endif
@@ -147,9 +148,11 @@ class AuthInfo: NSObject {
                 if user.isGuest {
                     print("setting anonymous user id \(String(describing: id))")
                     anonymousUserId = id
+                    AnalyticsUserProperties.shared.setUserID(to: nil)
                     return
                 }
             }
+            AnalyticsUserProperties.shared.setUserID(to: user?.id)
             print("setting user id \(String(describing: id))")
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()

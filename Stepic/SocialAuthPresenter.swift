@@ -40,6 +40,8 @@ class SocialAuthPresenter {
     var authAPI: AuthAPI
     var notificationStatusesAPI: NotificationStatusesAPI
 
+    var pendingAuthProviderInfo: SocialProviderInfo?
+
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
@@ -66,6 +68,8 @@ class SocialAuthPresenter {
             return
         }
 
+        self.pendingAuthProviderInfo = provider
+
         guard let SDKProvider = provider.socialSDKProvider else {
             view?.presentWebController(with: provider.registerURL)
             return
@@ -89,7 +93,9 @@ class SocialAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
+            AnalyticsReporter.reportAmplitudeEvent(user.didJustRegister ? AmplitudeAnalyticsEvents.SignUp.registered : AmplitudeAnalyticsEvents.SignIn.loggedIn, parameters: ["source": provider.amplitudeName])
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+            self.pendingAuthProviderInfo = nil
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
@@ -132,12 +138,20 @@ class SocialAuthPresenter {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
 
             return self.stepicsAPI.retrieveCurrentUser()
-        }.then { user -> Void in
+        }.then { user -> Promise<NotificationsStatus> in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+            if let name = self.pendingAuthProviderInfo?.amplitudeName {
+                AnalyticsReporter.reportAmplitudeEvent(user.didJustRegister ? AmplitudeAnalyticsEvents.SignUp.registered : AmplitudeAnalyticsEvents.SignIn.loggedIn, parameters: ["source": name])
+            }
+            self.pendingAuthProviderInfo = nil
+
             self.view?.update(with: .success)
+            return self.notificationStatusesAPI.retrieve()
+        }.then { result -> Void in
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
             case is NetworkError:

@@ -9,23 +9,22 @@
 import UIKit
 import Fabric
 import FirebaseCore
-import Mixpanel
 import YandexMobileMetrica
 import Crashlytics
+import Amplitude_iOS
 
-class AnalyticsHelper: NSObject {
+class AnalyticsHelper {
     static var sharedHelper = AnalyticsHelper()
-    fileprivate override init() {super.init()}
 
     func setupAnalytics() {
         Fabric.with([Crashlytics.self])
 
         FirebaseApp.configure()
 
-        Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
-
         if let config = YMMYandexMetricaConfiguration(apiKey: Tokens.shared.appMetricaToken) {
             YMMYandexMetrica.activate(with: config)
         }
+
+        Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)
     }
 }

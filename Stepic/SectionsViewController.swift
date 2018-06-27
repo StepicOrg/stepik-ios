@@ -541,6 +541,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.startDownload :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.started, parameters: ["content": "section"])
 
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -565,6 +566,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.downloading :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "section"])
 
             downloadButton.state = PKDownloadButtonState.pending
 
@@ -580,6 +582,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
             askForRemove(okHandler: {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
+                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.deleted, parameters: ["content": "section"])
 
                 downloadButton.state = PKDownloadButtonState.pending
 
