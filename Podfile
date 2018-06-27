@@ -61,7 +61,7 @@ def all_pods
     pod 'Charts', '3.0.4'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
     pod 'ActionSheetPicker-3.0'
-    pod 'SkeletonView'
+    pod 'NotificationBannerSwift'
 end
 
 def testing_pods
@@ -69,13 +69,8 @@ def testing_pods
     pod 'Nimble'
 end
 
-def main_pods
-    pod 'Appsee'
-end
-
 def adaptive_pods
     pod 'SDWebImage/GIF'
-    pod 'NotificationBannerSwift', '1.5.2' 
 end
 
 target 'Stepic' do
@@ -84,7 +79,6 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
-        main_pods
         testing_pods
     end
 end

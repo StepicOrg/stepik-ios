@@ -16,6 +16,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     var profileStreaksView: ProfileHeaderInfoView?
     var profileDescriptionView: ProfileDescriptionContentView?
     var pinsMapContentView: PinsMapBlockContentView?
+    var profileAchievementsView: ProfileAchievementsContentView?
 
     // Implementation of StreakNotificationsControlView in extension
     var presenterNotifications: StreakNotificationsControlPresenter?
@@ -117,6 +118,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 menuBlocks.append(buildInfoExpandableBlock())
             case .pinsMap:
                 menuBlocks.append(buildPinsMapExpandableBlock())
+            case .achievements:
+                menuBlocks.append(buildAchievementsBlock())
             default:
                 break
             }
@@ -142,7 +145,15 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             return self.profileDescriptionView
         case .pinsMap:
             return self.pinsMapContentView
+        case .achievements:
+            return self.profileAchievementsView
         }
+    }
+
+    func showAchievementInfo(viewData: AchievementViewData, canShare: Bool) {
+        let alertManager = AchievementPopupAlertManager()
+        let vc = alertManager.construct(with: viewData, canShare: canShare)
+        alertManager.present(alert: vc, inController: self)
     }
 
     private func initPresenter() {
@@ -290,6 +301,27 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         block.onExpanded = { [weak block] isExpanded in
             block?.isExpanded = isExpanded
         }
+        return block
+    }
+
+    private func buildAchievementsBlock() -> ContentMenuBlock? {
+        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView.fromNib()
+        let onButtonClick = { [weak self] in
+            if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
+               let vc = ControllerHelper.instantiateViewController(identifier: "AchievementsListViewController", storyboardName: "Profile") as? AchievementsListViewController {
+                // FIXME: API injection :((
+                let retriever = AchievementsRetriever(userId: userId, achievementsAPI: AchievementsAPI(), achievementProgressesAPI: AchievementProgressesAPI())
+                let presenter = AchievementsListPresenter(userId: userId, view: vc, achievementsAPI: AchievementsAPI(), achievementsRetriever: retriever)
+                vc.presenter = presenter
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
+        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue,
+                                     title: NSLocalizedString("Achievements", comment: ""),
+                                     contentView: profileAchievementsView,
+                                     buttonTitle: NSLocalizedString("ShowAll", comment: ""),
+                                     onButtonClick: onButtonClick)
         return block
     }
 }

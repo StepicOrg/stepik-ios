@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="176" id="KGk-i7-Jjw" customClass="ContentMenuBlockTableViewCell" customModule="Stepic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="176"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="175.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itt-qw-M86">
+                        <rect key="frame" x="24" y="24" width="33" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgD-Xk-KYx">
+                        <rect key="frame" x="245" y="17.5" width="51" height="33"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onActionButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8t5-wD-QoQ"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-vC-IjJ">
+                        <rect key="frame" x="0.0" y="53" width="320" height="106.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="LQY-vC-IjJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6Gq-yT-KSV"/>
+                    <constraint firstAttribute="bottom" secondItem="LQY-vC-IjJ" secondAttribute="bottom" constant="16" id="HMD-sj-0fh"/>
+                    <constraint firstItem="itt-qw-M86" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="IXs-b4-IWL"/>
+                    <constraint firstItem="LQY-vC-IjJ" firstAttribute="top" secondItem="itt-qw-M86" secondAttribute="bottom" constant="8" id="LPN-3v-31J"/>
+                    <constraint firstItem="RgD-Xk-KYx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="itt-qw-M86" secondAttribute="trailing" constant="8" id="Szd-LP-OYI"/>
+                    <constraint firstAttribute="trailing" secondItem="RgD-Xk-KYx" secondAttribute="trailing" constant="24" id="Xgt-CG-oH1"/>
+                    <constraint firstItem="itt-qw-M86" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="fPc-wF-IzC"/>
+                    <constraint firstAttribute="trailing" secondItem="LQY-vC-IjJ" secondAttribute="trailing" id="mB8-DE-ksf"/>
+                    <constraint firstItem="RgD-Xk-KYx" firstAttribute="centerY" secondItem="itt-qw-M86" secondAttribute="centerY" id="pn9-9f-MYH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="actionButton" destination="RgD-Xk-KYx" id="saN-u1-ldz"/>
+                <outlet property="container" destination="LQY-vC-IjJ" id="PQT-dh-RPU"/>
+                <outlet property="titleLabel" destination="itt-qw-M86" id="4qv-rX-OZE"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="118"/>
+        </tableViewCell>
+    </objects>
+</document>

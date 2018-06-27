@@ -339,6 +339,7 @@ SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!
 SolveSomethingToday = "Решите что-нибудь сегодня, чтобы улучшить свой рекорд.";
 
 StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
+Close = "Закрыть";
 
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
@@ -502,6 +503,39 @@ CodeEditorColor = "Цвет";
 CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
+
+/* Achievements */
+Achievements = "Достижения";
+AchievementsStepsSolvedKindTitle = "Главное – количество";
+AchievementsStepsSolvedChoiceKindTitle = "Я выбираю";
+AchievementsStepsSolvedCodeKindTitle = "Компьютерный мастер";
+AchievementsStepsSolvedNumberKindTitle = "Ещё одно достижение";
+AchievementsCodeQuizzesSolvedPythonKindTitle = "Укротитель змей";
+AchievementsCodeQuizzesSolvedJavaKindTitle = "Немного кофе?";
+AchievementsCodeQuizzesSolvedCppKindTitle = "Developer.cpp";
+AchievementsCertificatesRegularCountKindTitle = "Выпускник";
+AchievementsCertificatesDistinctionCountKindTitle = "Отличник";
+AchievementsCourseReviewsCountKindTitle = "Критик";
+AchievementsStepsSolvedStreakKindTitle = "Сапёр";
+AchievementsActiveDaysStreakKindTitle = "Постоянный пользователь";
+AchievementsStepsSolvedKindDescription = "Решите правильно %@ заданий";
+AchievementsStepsSolvedChoiceKindDescription = "Решите правильно %@ заданий с выбором ответа";
+AchievementsStepsSolvedCodeKindDescription = "Решите правильно %@ заданий на программирование";
+AchievementsStepsSolvedNumberKindDescription = "Решите правильно %@ заданий с числами";
+AchievementsCodeQuizzesSolvedPythonKindDescription = "Решите правильно %@ задач на Python";
+AchievementsCodeQuizzesSolvedJavaKindDescription = "Решите правильно %@ задач на Java";
+AchievementsCodeQuizzesSolvedCppKindDescription = "Решите правильно %@ задач на C++";
+AchievementsCertificatesRegularCountKindDescription = "Получите %@ сертификатов";
+AchievementsCertificatesDistinctionCountKindDescription = "Получите %@ сертификатов с отличием";
+AchievementsCourseReviewsCountKindDescription = "Оставьте %@ отзывов о курсах";
+AchievementsStepsSolvedStreakKindDescription = "Решите правильно %@ заданий подряд";
+AchievementsActiveDaysStreakKindDescription = "Решайте как минимум одну задачу на протяжении %@ дней";
+AchievementsNextLevel = "%@ до следующего уровня";
+AchievementsLevel = "Уровень %@ / %@";
+AchievementsLevelNotObtained = "Ещё не получено";
+AchievementsUnknownKindTitle = "Неизвестное достижение";
+AchievementsUnknownKindDescription = "Решайте больше заданий, чтобы открыть";
+AchievementsShareText = "Я получил достижение «%@» на Stepik.org. Попробуй обогнать!";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";
