@@ -22,9 +22,10 @@ def all_pods
     shared_pods
     pod "DownloadButton"
     pod 'SVProgressHUD'
-    pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
+
+    pod 'SnapKit', '~> 4.0.0'
     
     pod 'FirebaseCore', '5.0.0'
     pod 'FirebaseAppIndexing', '1.2.0'
