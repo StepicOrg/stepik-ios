@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import Highlightr
 
 class CodeQuizViewController: QuizViewController {

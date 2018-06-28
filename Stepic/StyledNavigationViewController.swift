@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class StyledNavigationViewController: UINavigationController {
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class AchievementsListTableViewCell: UITableViewCell {
     @IBOutlet weak var badgeContainer: UIView!

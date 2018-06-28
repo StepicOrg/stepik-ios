@@ -7,7 +7,6 @@
 //
 import Foundation
 import UIKit.UITableView
-import FLKAutoLayout
 
 // MARK: - Pager Enums
 //Enum for the location of the tab bar

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FLKAutoLayout
 
 class CourseListHorizontalViewController: CourseListViewController {
     var collectionView: UICollectionView!

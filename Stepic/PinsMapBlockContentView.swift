@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class PinsMapBlockContentView: UIView, PinsMapContentView {
     lazy var mapView: PinsMapView = {

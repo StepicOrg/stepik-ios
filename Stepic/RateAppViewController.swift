@@ -9,7 +9,6 @@
 import UIKit
 import MessageUI
 import Presentr
-import FLKAutoLayout
 import StoreKit
 
 class RateAppViewController: UIViewController {

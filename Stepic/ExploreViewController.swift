@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FLKAutoLayout
 
 class ExploreViewController: UIViewController, ExploreView {
     var presenter: ExplorePresenter?

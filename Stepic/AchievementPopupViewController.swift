@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementNameLabel: UILabel!
@@ -40,7 +41,7 @@ class AchievementPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        achievementDescriptionLabel.constrainWidth("==\(UIScreen.main.bounds.width - 64)")
+        achievementDescriptionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 64) }
 
         shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
         closeButton.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)

@@ -8,7 +8,6 @@
 
 import UIKit
 import DownloadButton
-import FLKAutoLayout
 import Presentr
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {

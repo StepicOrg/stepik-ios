@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 /*
  Some custom cell operation util functions
@@ -20,10 +20,10 @@ class CellOperationsUtil {
         v.backgroundColor = backgroundColor
         let ind = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         v.addSubview(ind)
-        ind.alignCenter(withView: v)
+        ind.snp.makeConstraints { $0.center.equalTo(v) }
         ind.startAnimating()
         view.addSubview(v)
-        v.align(toView: view)
+        v.snp.makeConstraints { $0.edges.equalTo(view) }
         return v
     }
 

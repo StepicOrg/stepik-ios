@@ -8,7 +8,6 @@
 
 import UIKit
 import BEMCheckBox
-import FLKAutoLayout
 
 class ChoiceQuizTableViewCell: UITableViewCell {
 

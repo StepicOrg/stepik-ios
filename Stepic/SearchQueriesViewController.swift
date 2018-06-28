@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FLKAutoLayout
 
 protocol SearchQueriesViewControllerDelegate: class {
     func didSelectSuggestion(suggestion: String, position: Int)
@@ -52,7 +51,7 @@ class SearchQueriesViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         self.view.addSubview(tableView)
-        tableView.align(toView: self.view)
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.view) }
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
         presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries, persistentManager: SearchQueriesPersistentManager())
         tableView.tableFooterView = UIView()

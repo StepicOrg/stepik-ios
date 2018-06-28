@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class WarningView: NibInitializableView {
     @IBOutlet weak var imageView: UIImageView!

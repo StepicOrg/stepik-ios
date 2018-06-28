@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import Highlightr
 import Presentr
 import IQKeyboardManagerSwift
+import SnapKit
 
 class FullscreenCodeQuizViewController: UIViewController {
 
@@ -93,9 +93,11 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     fileprivate func setupConstraints() {
         self.view.addSubview(codeTextView)
-        codeTextView.alignLeading("0", trailing: "0", toView: self.view)
-        codeTextView.alignBottomEdge(withView: self.view, predicate: "0")
-        codeTextView.constrainTopSpace(toView: self.toolbar, predicate: "0")
+
+        codeTextView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.bottom.equalTo(self.view)
+            make.top.equalTo(self.toolbar)
+        }
     }
 
     override func viewDidLoad() {

@@ -9,7 +9,6 @@
 import UIKit
 import AVKit
 import AVFoundation
-import FLKAutoLayout
 import MediaPlayer
 
 @available(iOS 9.0, *)

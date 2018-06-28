@@ -51,14 +51,12 @@ class MatchingQuizViewController: QuizViewController {
         self.containerView.addSubview(secondTableView)
 
         firstTableView.snp.makeConstraints { make -> Void in
-            make.top.bottom.equalTo(self.containerView).offset(0)
-            make.leading.equalTo(self.containerView).offset(0)
+            make.top.bottom.leading.equalTo(self.containerView)
             make.width.equalTo(self.containerView.snp.width).multipliedBy(0.5)
         }
 
         secondTableView.snp.makeConstraints { make -> Void in
-            make.top.bottom.equalTo(self.containerView).offset(0)
-            make.leading.equalTo(self.containerView).offset(0)
+            make.top.bottom.trailing.equalTo(self.containerView)
             make.width.equalTo(self.containerView.snp.width).multipliedBy(0.5)
         }
 

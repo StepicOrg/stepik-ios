@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FLKAutoLayout
 
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FLKAutoLayout
+import SnapKit
 
 class CodeInputAccessoryView: NibInitializableView {
 
@@ -47,7 +47,7 @@ class CodeInputAccessoryView: NibInitializableView {
         self.size = size
         self.hideKeyboardAction = hideKeyboardAction
         self.buttons = buttons
-        self.constrainHeight("\(size.realSizes.viewHeight)")
+        self.snp.makeConstraints { $0.height.equalTo(size.realSizes.viewHeight) }
     }
 }
 

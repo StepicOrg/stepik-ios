@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FLKAutoLayout
 
 class HomeScreenViewController: UIViewController, HomeScreenView {
     var presenter: HomeScreenPresenter?

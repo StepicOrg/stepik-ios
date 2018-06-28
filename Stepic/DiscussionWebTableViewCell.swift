@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import SDWebImage
 import WebKit
+import SnapKit
 
 class DiscussionWebTableViewCell: UITableViewCell {
 
@@ -81,7 +81,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         contentView.translatesAutoresizingMaskIntoConstraints = true
 
         webContainerView.addSubview(commentWebView!)
-        _ = commentWebView?.align(toView: webContainerView)
+        commentWebView?.snp.makeConstraints { $0.edges.equalTo(webContainerView) }
     }
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {

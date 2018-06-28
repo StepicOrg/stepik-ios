@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class MenuViewController: UIViewController {
 
@@ -27,7 +27,7 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         view.addSubview(tableView)
-        tableView.align(toView: view)
+        tableView.snp.makeConstraints { $0.edges.equalTo(view) }
 
         tableView.separatorStyle = .none
 

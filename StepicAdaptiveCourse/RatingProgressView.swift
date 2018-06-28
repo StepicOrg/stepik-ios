@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 protocol RatingProgressViewDelegate: class {
     func onClick()

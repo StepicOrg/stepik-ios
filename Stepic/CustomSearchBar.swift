@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FLKAutoLayout
 
 protocol CustomSearchBarDelegate: class {
     func changedText(in searchBar: CustomSearchBar, to text: String)
