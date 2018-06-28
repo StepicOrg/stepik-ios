@@ -38,12 +38,12 @@ class AnalyticsUserProperties {
     }
 
     func setUserID(to id: Int?) {
-        setAmplitudeProperty(key: "user_id", value: id)
-        setCrashlyticsProperty(key: "user_id", value: id)
+        setAmplitudeProperty(key: "stepik_id", value: id)
+        setCrashlyticsProperty(key: "stepik_id", value: id)
     }
 
-    func incrementSubmissionsMade() {
-        incrementAmplitudeProperty(key: "submissions_made")
+    func incrementSubmissionsCount() {
+        incrementAmplitudeProperty(key: "submissions_count")
     }
 
     func decrementCoursesCount() {
