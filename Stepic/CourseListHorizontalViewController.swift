@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class CourseListHorizontalViewController: CourseListViewController {
     var collectionView: UICollectionView!
@@ -49,7 +50,8 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         layout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         self.view.addSubview(collectionView)
-        collectionView.align(toView: self.view)
+
+        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view) }
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.bounces = true
         collectionView.backgroundColor = UIColor.clear

@@ -30,7 +30,7 @@ class FillBlanksQuizViewController: QuizViewController {
         tableView.tableFooterView = UIView()
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
-        tableView.align(toView: self.containerView)
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.containerView) }
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self

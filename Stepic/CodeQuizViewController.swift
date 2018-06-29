@@ -8,6 +8,7 @@
 
 import UIKit
 import Highlightr
+import SnapKit
 
 class CodeQuizViewController: QuizViewController {
 
@@ -137,16 +138,25 @@ class CodeQuizViewController: QuizViewController {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
         self.containerView.addSubview(codeTextView)
-        limitsLabel.alignTopEdge(withView: self.containerView, predicate: "8")
-        limitsLabel.alignLeading("8", trailing: "0", toView: self.containerView)
-        limitsLabel.constrainHeight("\(limitsLabelHeight)")
-        toolbarView.constrainTopSpace(toView: self.limitsLabel, predicate: "8")
-        toolbarView.alignLeading("0", trailing: "0", toView: self.containerView)
-        toolbarView.constrainBottomSpace(toView: self.codeTextView, predicate: "8")
-        toolbarView.constrainHeight("\(toolbarHeight)")
-        codeTextView.alignLeading("0", trailing: "0", toView: self.containerView)
-        codeTextView.alignBottomEdge(withView: self.containerView, predicate: "0")
-        codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
+
+        limitsLabel.snp.makeConstraints { make -> Void in
+            make.top.leading.equalTo(self.containerView).offset(8)
+            make.trailing.equalTo(self.containerView)
+            make.height.equalTo(limitsLabelHeight)
+        }
+
+        toolbarView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.limitsLabel).offset(8)
+            make.leading.trailing.equalTo(self.containerView)
+            make.bottomMargin.equalTo(self.codeTextView).offset(8)
+            make.height.equalTo(toolbarHeight)
+        }
+
+        codeTextView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.containerView)
+            make.bottom.equalTo(self.containerView)
+            make.height.equalTo(size.elements.editor.realSizes.editorHeight)
+        }
     }
 
     fileprivate func setLimits(time: Double, memory: Double) {
@@ -214,7 +224,7 @@ class CodeQuizViewController: QuizViewController {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
         view.addSubview(languagePicker.view)
-        languagePicker.view.align(toView: containerView)
+        languagePicker.snp.makeConstraints { $0.edges.equalTo(containerView) }
         languagePicker.backButton.isHidden = true
         languagePicker.selectedBlock = {
             [weak self] in
@@ -299,9 +309,9 @@ class CodeQuizViewController: QuizViewController {
         unsupportedLabel.font = UIFont.systemFont(ofSize: 15)
         unsupportedLabel.textColor = UIColor.gray
         v.addSubview(unsupportedLabel)
-        unsupportedLabel.align(toView: v)
+        unsupportedLabel.snp.makeConstraints { $0.edges.equalTo(v) }
         self.containerView.addSubview(v)
-        v.align(toView: self.containerView)
+        v.snp.makeConstraints { $0.edges.equalTo(self.containerView) }
     }
 
     fileprivate func setQuizControls(enabled: Bool) {

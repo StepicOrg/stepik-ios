@@ -39,7 +39,8 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         optionWebView = FullHeightWebView()
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
-        optionWebView.align(toView: textContainerView)
+        optionWebView.align(toView: optionWebView)
+        optionWebView.snp.makeConstraints { $0.edges.equalTo(optionWebView) }
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }

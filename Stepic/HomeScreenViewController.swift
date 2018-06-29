@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class HomeScreenViewController: UIViewController, HomeScreenView {
     var presenter: HomeScreenPresenter?
@@ -58,11 +59,12 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         scrollView.align(toView: self.view)
+        scrollView.snp.makeConstraints { $0.edges.equalTo(self.view) }
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         scrollView.addSubview(stackView)
-        stackView.align(toView: scrollView)
+        stackView.snp.makeConstraints { $0.edges.equalTo(scrollView) }
         stackView.alignment = .fill
     }
 

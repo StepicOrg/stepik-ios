@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SnapKit
 
 class NotificationRequestAlertViewController: UIViewController {
 
@@ -45,7 +46,7 @@ class NotificationRequestAlertViewController: UIViewController {
         animationView.isHidden = true
         animationView.clipsToBounds = false
         imageContainerView.addSubview(animationView)
-        animationView.align(toView: imageContainerView)
+        animationView.snp.makeConstraints { $0.edges.equalTo(imageContainerView) }
     }
 
     override func viewDidAppear(_ animated: Bool) {

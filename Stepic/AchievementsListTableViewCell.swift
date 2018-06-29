@@ -25,7 +25,7 @@ class AchievementsListTableViewCell: UITableViewCell {
             let badgeView: AchievementBadgeView = AchievementBadgeView.fromNib()
             badgeView.translatesAutoresizingMaskIntoConstraints = false
             badgeContainer.addSubview(badgeView)
-            badgeView.align(toView: badgeContainer)
+            badgeView.snp.makeConstraints { $0.edges.equalTo(badgeContainer) }
             self.badgeView = badgeView
         }
 

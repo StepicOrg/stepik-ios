@@ -84,7 +84,7 @@ class HorizontalCoursesView: NibInitializableView {
         courseCountLabel.colorMode = .gray
         courseCountLabel.isHidden = !shouldShowCount
         courseListContainerView.addSubview(block.horizontalController.view)
-        block.horizontalController.view.align(toView: courseListContainerView)
+        block.horizontalController.view.snp.makeConstraints { $0.edges.equalTo(courseListContainerView) }
         showAllButton.setTitleColor(UIColor.lightGray, for: .normal)
         switch block.colorMode {
         case .dark:

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
@@ -119,7 +120,8 @@ class StepCardView: NibInitializableView {
 
     func addContentSubview(_ view: UIView) {
         contentView.addSubview(view)
-        view.align(toView: contentView)
+
+        view.snp.makeConstraints { $0.edges.equalTo(contentView) }
 
         setNeedsLayout()
         layoutIfNeeded()

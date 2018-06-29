@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class StyledNavigationViewController: UINavigationController {
 
@@ -42,10 +43,15 @@ class StyledNavigationViewController: UINavigationController {
         let v = UIView()
         navigationBar.addSubview(v)
         v.backgroundColor = UIColor.lightGray
-        _ = v.constrainHeight("0.5")
-        _ = v.alignBottomEdge(withView: navigationBar, predicate: "0.5")
-        self.customShadowLeading = v.alignLeadingEdge(withView: navigationBar, predicate: "0")
-        self.customShadowTrailing = v.alignTrailingEdge(withView: navigationBar, predicate: "0")
+
+        v.snp.makeConstraints { make -> Void in
+            make.height.toEqual(0.5)
+            make.bottom.equalTo(navigationBar).offset(0.5)
+
+            self.customShadowLeading = make.leading.equalTo(navigationBar)
+            self.customShadowTrailing = make.trailing.equalTo(navigationBar)
+        }
+
         customShadowView = v
         customShadowView?.alpha = 1
     }

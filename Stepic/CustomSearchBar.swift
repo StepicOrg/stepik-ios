@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 protocol CustomSearchBarDelegate: class {
     func changedText(in searchBar: CustomSearchBar, to text: String)
@@ -78,8 +79,11 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         self.view.addSubview(v)
         v.backgroundColor = UIColor.lightGray
         v.alignLeading("0", trailing: "0", toView: self.view)
-        v.alignBottomEdge(withView: self.view, predicate: "0")
-        v.constrainHeight("0.5")
+        v.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.view)
+            make.bottom.equalTo(self.view)
+            make.height.equalTo(0.5)
+        }
         return v
     }()
 
@@ -91,8 +95,12 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         let glassImage = UIImageView(image: #imageLiteral(resourceName: "search_glass"))
         glassImage.contentMode = .scaleAspectFit
         v.addSubview(glassImage)
-        glassImage.constrainWidth("\(imageSize)", height: "\(imageSize)")
-        glassImage.alignTop("0", leading: "\(horizontalInset)", bottom: "0", trailing: "-\(horizontalInset)", toView: v)
+        glassImage.snp.makeConstraints { make -> Void in
+            make.width.height.equalTo(imageSize)
+            make.top.bottom.equalTo(v)
+            make.leading.equalTo(v).offset(horizontalInset)
+            make.trailing.equalTo(v).offset(-horizontalInset)
+        }
         return v
     }()
 

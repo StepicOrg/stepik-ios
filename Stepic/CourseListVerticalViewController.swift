@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
@@ -88,7 +89,8 @@ class CourseListVerticalViewController: CourseListViewController {
 extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     func setupContentView() {
         self.view.addSubview(tableView)
-        tableView.align(toView: self.view)
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.view) }
+
         tableView.register(UINib(nibName: "CourseWidgetTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseWidgetTableViewCell")
 
         tableView.tableFooterView = UIView()

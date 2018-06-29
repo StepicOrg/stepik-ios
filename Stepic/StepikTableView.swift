@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class StepikTableView: UITableView {
 
@@ -74,6 +75,11 @@ extension StepikTableView {
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
             addSubview(placeholderView)
+
+            placeholderView.snp.makeConstraints { make -> Void in
+                make.edges.equalTo(self)
+                make.center.equalTo(self)
+            }
             placeholderView.alignCenter(withView: self)
             placeholderView.align(toView: self)
 
