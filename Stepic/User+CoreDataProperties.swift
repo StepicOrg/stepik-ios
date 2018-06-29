@@ -23,6 +23,7 @@ extension User {
     @NSManaged var managedLastName: String?
     @NSManaged var managedAvatarURL: String?
     @NSManaged var managedLevel: NSNumber?
+    @NSManaged var managedJoinDate: Date?
 
     @NSManaged var managedInstructedCourses: NSSet?
 
@@ -49,6 +50,15 @@ extension User {
         }
         get {
             return managedProfile?.intValue ?? 0
+        }
+    }
+
+    var joinDate: Date? {
+        set(value) {
+            managedJoinDate = value
+        }
+        get {
+            return managedJoinDate
         }
     }
 

@@ -16,7 +16,6 @@ import IQKeyboardManagerSwift
 import SVProgressHUD
 import VK_ios_sdk
 import FBSDKCoreKit
-import Mixpanel
 import YandexMobileMetrica
 import Presentr
 import SwiftyJSON
@@ -30,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
+        AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
+        AnalyticsUserProperties.shared.updateUserID()
 
         WatchSessionManager.sharedManager.startSession()
 
@@ -45,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-        AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
@@ -60,6 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.firstTime)
+        } else {
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
+        }
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
@@ -78,6 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         checkNotificationsCount()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        rotated()
 
         return true
     }
@@ -335,6 +345,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.window != nil {
             self.window!.rootViewController = rootController
         }
+    }
+
+    @objc func rotated() {
+        AnalyticsUserProperties.shared.setScreenOrientation(isPortrait: DeviceInfo.current.orientation.interface.isPortrait)
     }
 
     deinit {

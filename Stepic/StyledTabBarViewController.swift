@@ -57,7 +57,6 @@ class StyledTabBarViewController: UITabBarController {
         super.viewDidAppear(animated)
 
         if !DefaultsContainer.launch.didLaunch {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
 
             let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")

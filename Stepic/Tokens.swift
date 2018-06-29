@@ -10,7 +10,7 @@ import Foundation
 
 class Tokens {
 
-    var mixpanelToken: String = ""
+    var amplitudeToken: String = ""
     var appMetricaToken: String = ""
     var firebaseId: UInt = 0
 
@@ -20,8 +20,8 @@ class Tokens {
         self.init(plist: "Tokens")!
     }
 
-    private init(mixpanelToken: String, appMetricaToken: String, firebaseId: UInt) {
-        self.mixpanelToken = mixpanelToken
+    private init(amplitudeToken: String, appMetricaToken: String, firebaseId: UInt) {
+        self.amplitudeToken = amplitudeToken
         self.appMetricaToken = appMetricaToken
         self.firebaseId = firebaseId
     }
@@ -34,12 +34,12 @@ class Tokens {
         guard let dic = NSDictionary(contentsOfFile: path) as? [String: Any] else {
             return nil
         }
-        guard let mp = dic["Mixpanel"] as? String,
-            let appm = dic["AppMetrica"] as? String,
+        guard let amplitude = dic["Amplitude"] as? String,
+            let appmetrica = dic["AppMetrica"] as? String,
             let firebase = dic["FirebaseAppID"] as? UInt else {
             return nil
         }
-        self.init(mixpanelToken: mp, appMetricaToken: appm, firebaseId: firebase)
+        self.init(amplitudeToken: amplitude, appMetricaToken: appmetrica, firebaseId: firebase)
     }
 
 }

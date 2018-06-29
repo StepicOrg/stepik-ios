@@ -14,6 +14,7 @@ protocol ProfileView: class {
 
     func requestNotificationsPermissions()
     func showStreakTimeSelection(startHour: Int)
+    func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
@@ -45,6 +46,7 @@ class ProfilePresenter {
     private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
     private var descriptionPresenter: ProfileDescriptionPresenter?
     private var pinsMapPresenter: PinsMapPresenter?
+    private var achievementsPresenter: ProfileAchievementsPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -55,8 +57,9 @@ class ProfilePresenter {
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
                                                            .pinsMap,
+                                                           .achievements,
                                                            .description]
-    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .description]
+    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
 
     init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
         self.view = view
@@ -91,6 +94,20 @@ class ProfilePresenter {
         // Pins map
         if let attachedView = view?.getView(for: .pinsMap) as? PinsMapContentView {
             pinsMapPresenter = PinsMapPresenter(view: attachedView)
+        }
+
+        // Achievements
+        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView,
+           let userId = userSeed.userId {
+            achievementsPresenter = ProfileAchievementsPresenter(userId: userId,
+                                                                 view: attachedView,
+                                                                 achievementsAPI: AchievementsAPI(),
+                                                                 achievementProgressesAPI: AchievementProgressesAPI())
+            if let achievementsPresenter = achievementsPresenter {
+                attachedView.attachPresenter(achievementsPresenter)
+                achievementsPresenter.delegate = self
+                achievementsPresenter.loadLastAchievements()
+            }
         }
 
         refreshUser(with: user)
@@ -205,5 +222,11 @@ class ProfilePresenter {
 
     enum ProfileError: Error {
         case noProfile
+    }
+}
+
+extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
+    func achievementInfoShouldPresent(viewData: AchievementViewData) {
+        view?.showAchievementInfo(viewData: viewData, canShare: userSeed.isMe)
     }
 }

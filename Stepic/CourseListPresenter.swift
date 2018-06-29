@@ -181,7 +181,7 @@ class CourseListPresenter {
             guard let strongSelf = self else {
                 throw CourseSubscriber.CourseSubscriptionError.error(status: "")
             }
-            return strongSelf.subscriber.join(course: course)
+            return strongSelf.subscriber.join(course: course, source: .widget)
         }.then { [weak self] course -> Void in
             self?.view?.finishProgressHUD(success: true, message: "")
 
@@ -205,6 +205,7 @@ class CourseListPresenter {
     private func actionButtonPressed(course: Course) {
         if course.enrolled {
             if let navigation = view?.getNavigationController() {
+                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Course.continuePressed, parameters: ["source": "course_widget", "course": course.id])
                 LastStepRouter.continueLearning(for: course, using: navigation)
             }
         } else {
@@ -525,6 +526,7 @@ class CourseListPresenter {
                 guard let strongSelf = self else {
                     return
                 }
+                AnalyticsUserProperties.shared.setCoursesCount(count: strongSelf.courses.count)
                 strongSelf.lastStepDataSource?.didLoadWithProgresses(courses: strongSelf.courses)
                 if let userID = AuthInfo.shared.userId {
                     for course in strongSelf.courses {
