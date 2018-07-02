@@ -78,7 +78,6 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         let v = UIView()
         self.view.addSubview(v)
         v.backgroundColor = UIColor.lightGray
-        v.alignLeading("0", trailing: "0", toView: self.view)
         v.snp.makeConstraints { make -> Void in
             make.leading.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
@@ -91,7 +90,12 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         let v = UIView()
         let imageSize: Int = 16
         let horizontalInset: Int = 8
-        v.constrainWidth("\(imageSize + 2 * horizontalInset)", height: "\(imageSize)")
+        v.snp.makeConstraints { make -> Void in
+            make.width.equalTo(imageSize + 2 * horizontalInset)
+            make.height.equalTo(imageSize)
+        }
+
+
         let glassImage = UIImageView(image: #imageLiteral(resourceName: "search_glass"))
         glassImage.contentMode = .scaleAspectFit
         v.addSubview(glassImage)

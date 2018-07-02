@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class NumberQuizViewController: QuizViewController {
 
@@ -25,20 +26,26 @@ class NumberQuizViewController: QuizViewController {
 
         self.containerView.addSubview(textField)
 
-        textField.alignTop("8", bottom: "0", toView: self.containerView)
+        textField.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.containerView).offset(8)
+            make.bottom.equalTo(self.containerView)
+            make.height.equalTo(textFieldHeight)
+        }
 
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: useSmallPadding ? 8 : 16),
-                textField.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: useSmallPadding ? -8 : -16)
-            ])
+            textField.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
+                make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
+            }
         } else {
-            textField.alignLeading(useSmallPadding ? "8" : "16", trailing: useSmallPadding ? "-8" : "-16", toView: containerView)
+            textField.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView).offset(useSmallPadding ? 8 : 16)
+                make.trailing.equalTo(containerView).offset(useSmallPadding ? -8 : -16)
+            }
         }
 
         textField.borderStyle = UITextBorderStyle.roundedRect
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
-        textField.constrainHeight("\(textFieldHeight)")
         textField.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))

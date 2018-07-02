@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class ExploreViewController: UIViewController, ExploreView {
     var presenter: ExplorePresenter?
@@ -36,14 +37,16 @@ class ExploreViewController: UIViewController, ExploreView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
 
-        scrollView.alignLeading("0", trailing: "0", toView: self.view)
-        scrollView.constrainTopSpace(toView: searchBar, predicate: "0")
-        scrollView.alignBottomEdge(withView: self.view, predicate: "0")
+        scrollView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.view)
+            make.top.equalTo(searchBar)
+            make.bottom.equalTo(self.view)
+        }
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         scrollView.addSubview(stackView)
-        stackView.align(toView: scrollView)
+        stackView.snp.makeConstraints { $0.edges.equalTo(scrollView) }
         stackView.alignment = .fill
     }
 
@@ -71,7 +74,10 @@ class ExploreViewController: UIViewController, ExploreView {
                 courseListView.courseCount = count
             }
             stackView.addArrangedSubview(courseListView)
-            courseListView.alignLeading("0", trailing: "0", toView: self.view)
+            courseListView.snp.makeConstraints { make -> Void in
+                make.leading.trailing.equalTo(self.view)
+            }
+
             removeBlockForID[block.ID] = {
                 courseListView.isHidden = true
                 courseListView.removeFromSuperview()
@@ -138,25 +144,34 @@ class ExploreViewController: UIViewController, ExploreView {
         let widgetBackgroundView = UIView()
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(languagesWidget)
-        languagesWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        languagesWidget.snp.makeConstraints { make -> Void in
+            make.top.equalTo(widgetBackgroundView).offset(16)
+            make.bottom.equalTo(widgetBackgroundView).offset(-8)
+        }
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                languagesWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                languagesWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-                ])
+            languagesWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.leading).offset(16)
+                make.trailing.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            }
         } else {
-            languagesWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+            languagesWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView).offset(16)
+                make.trailing.equalTo(widgetBackgroundView).offset(-16)
+            }
         }
         widgetBackgroundView.isHidden = false
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
-        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+
+        widgetBackgroundView.snp.makeConstraints { $0.leading.trailing.equalTo(self.view) }
 
         let separatorView = UIView()
-        separatorView.constrainHeight("0.5")
         separatorView.backgroundColor = UIColor(red: 83 / 255.0, green: 83 / 255.0, blue: 102 / 255.0, alpha: 0.3)
         widgetBackgroundView.addSubview(separatorView)
-        separatorView.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
-        separatorView.alignBottomEdge(withView: widgetBackgroundView, predicate: "0.5")
+        separatorView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(widgetBackgroundView)
+            make.height.equalTo(0.5)
+            make.bottom.equalTo(widgetBackgroundView).offset(0.5)
+        }
     }
 
     var tagsWidget: CourseTagsView?
@@ -169,20 +184,31 @@ class ExploreViewController: UIViewController, ExploreView {
         let widgetBackgroundView = UIView()
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(tagsWidget)
-        tagsWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                tagsWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-                tagsWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: 0)
-                ])
-        } else {
-            tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+
+        tagsWidget.snp.makeConstraints { make -> Void in
+            make.top.equalTo(widgetBackgroundView).offset(16)
+            make.bottom.equalTo(widgetBackgroundView).offset(-8)
         }
-        tagsWidget.alignLeading("0", trailing: "0", toView: widgetBackgroundView)
+        if #available(iOS 11.0, *) {
+            tagsWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.leading)
+                make.trailing.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.trailing)
+            }
+        } else {
+            tagsWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView)
+                make.trailing.equalTo(widgetBackgroundView)
+            }
+        }
+
         widgetBackgroundView.isHidden = false
 
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
-        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+
+        widgetBackgroundView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.view)
+        }
+
         tagsWidget.tags = tags
         tagsWidget.language = language
         tagsWidget.tagSelectedAction = onSelected
@@ -219,9 +245,11 @@ class ExploreViewController: UIViewController, ExploreView {
         searchController = vc
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
-        vc.view.alignLeading("0", trailing: "0", toView: self.view)
-        vc.view.constrainTopSpace(toView: searchBar, predicate: "0")
-        vc.view.alignBottomEdge(withView: self.view, predicate: "0")
+
+        vc.view.snp.makeConstraints { make -> Void in
+            make.leading.trailing.bottom.equalTo(self.view)
+            make.top.equalTo(searchBar)
+        }
     }
 
     func setSearch(hidden: Bool) {
@@ -240,8 +268,11 @@ class ExploreViewController: UIViewController, ExploreView {
         let v = UIView()
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         v.addSubview(placeholder)
-        placeholder.alignTop("16", leading: "0", bottom: "0", trailing: "0", toView: v)
-        placeholder.constrainHeight("100")
+        placeholder.snp.makeConstraints { make -> Void in
+            make.top.equalTo(v).offset(16)
+            make.leading.bottom.trailing.equalTo(v)
+            make.height.equalTo(100)
+        }
         placeholder.isHidden = false
         placeholder.text = NSLocalizedString("CatalogPlaceholderError", comment: "")
         placeholder.onTap = {
@@ -273,10 +304,13 @@ class ExploreViewController: UIViewController, ExploreView {
         searchBar.textField.textColor = UIColor.mainText
 
         self.view.addSubview(searchBar)
-        searchBar.constrainHeight("44")
+
         searchBar.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 800), for: .vertical)
-        searchBar.alignTopEdge(withView: self.view, predicate: "0")
-        searchBar.alignLeading("0", trailing: "0", toView: self.view)
+        searchBar.snp.makeConstraints { make -> Void in
+            make.height.equalTo(44)
+            make.top.equalTo(self.view)
+            make.leading.trailing.equalTo(self.view)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

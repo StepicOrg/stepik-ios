@@ -8,6 +8,7 @@
 
 import UIKit
 import Presentr
+import SnapKit
 
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -57,14 +58,14 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         let v = UIView()
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        ai.constrainWidth("50", height: "50")
+        ai.snp.makeConstraints { $0.width.height.equalTo(50) }
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenter(withView: v)
+        ai.snp.makeConstraints { $0.center.equalTo(v) }
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(toView: self.view)
+        v.snp.makeConstraints { $0.edges.equalTo(self.view) }
         v.isHidden = false
         return v
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class HorizontalCoursesView: NibInitializableView {
 
@@ -53,7 +54,7 @@ class HorizontalCoursesView: NibInitializableView {
 //                self.courseListDescriptionHeight.constant = courseListPlaceholderHeight
                 self.titleDescriptionSpacing.constant = 16
             } else {
-                self.courseListDescriptionView.constrainHeight("0")
+                self.courseListDescriptionView.snp.makeConstraints { $0.height.equalTo(0) }
 //                self.courseListDescriptionHeight.constant = 0
                 self.titleDescriptionSpacing.constant = 0
             }

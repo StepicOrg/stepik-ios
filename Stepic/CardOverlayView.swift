@@ -8,6 +8,7 @@
 
 import UIKit
 import Koloda
+import SnapKit
 
 class CardOverlayView: OverlayView {
 
@@ -17,9 +18,10 @@ class CardOverlayView: OverlayView {
     lazy var overlayImageView: UIImageView! = { [unowned self] in
         var imageView = UIImageView(frame: self.bounds)
         self.addSubview(imageView)
-        imageView.constrainWidth("180")
-        imageView.constrainHeight("180")
-        imageView.alignTopEdge(withView: self, predicate: "10")
+        imageView.snp.makeConstraints { make -> Void in
+            make.width.height.equalTo(180)
+            make.top.equalTo(self).offset(10)
+        }
         self.leadingConstraint = imageView.alignLeadingEdge(withView: self, predicate: "10")
         self.trailingConstraint = imageView.alignTrailingEdge(withView: self, predicate: "-10")
         self.trailingConstraint.isActive = false

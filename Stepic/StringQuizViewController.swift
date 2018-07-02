@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import SnapKit
 
 class StringQuizViewController: QuizViewController {
 
@@ -26,21 +27,27 @@ class StringQuizViewController: QuizViewController {
 
         self.containerView.addSubview(textView)
 
-        textView.alignTop("8", bottom: "0", toView: self.containerView)
+        textView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.containerView).offset(8)
+            make.bottom.equalTo(self.containerView).offset(0)
+        }
 
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: useSmallPadding ? 8 : 16),
-                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: useSmallPadding ? -8 : -16)
-            ])
+            textView.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
+                make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
+            }
         } else {
-            textView.alignLeading(useSmallPadding ? "8" : "16", trailing: useSmallPadding ? "-8" : "-16", toView: containerView)
+            textView.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView).offset(useSmallPadding ? 8 : 16)
+                make.trailing.equalTo(containerView).offset(useSmallPadding ? -8 : -16)
+            }
         }
 
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
-        _ = textView.constrainHeight("\(textViewHeight)")
+        textView.snp.makeConstraints { $0.height.equalTo(textViewHeight) }
         textView.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))

@@ -45,7 +45,7 @@ class StyledNavigationViewController: UINavigationController {
         v.backgroundColor = UIColor.lightGray
 
         v.snp.makeConstraints { make -> Void in
-            make.height.toEqual(0.5)
+            make.height.equalTo(0.5)
             make.bottom.equalTo(navigationBar).offset(0.5)
 
             self.customShadowLeading = make.leading.equalTo(navigationBar)

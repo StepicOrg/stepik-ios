@@ -224,7 +224,7 @@ class CodeQuizViewController: QuizViewController {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
         view.addSubview(languagePicker.view)
-        languagePicker.snp.makeConstraints { $0.edges.equalTo(containerView) }
+        languagePicker.view.snp.makeConstraints { $0.edges.equalTo(containerView) }
         languagePicker.backButton.isHidden = true
         languagePicker.selectedBlock = {
             [weak self] in

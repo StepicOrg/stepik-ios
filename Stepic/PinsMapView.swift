@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class PinsMapView: UIView {
     enum Day {
@@ -146,10 +147,12 @@ class PinsMapView: UIView {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         addSubview(pageControl)
 
-        pageControl.alignBottomEdge(withView: self, predicate: "-8")
-        pageControl.alignLeading("0", trailing: "0", toView: self)
-        pageControl.alignCenterX(withView: self, predicate: "0")
-        pageControl.constrainHeight("8")
+        pageControl.snp.makeConstraints { make -> Void in
+            make.bottom.equalTo(self).offset(-8)
+            make.leading.trailing.equalTo(self)
+            make.centerX.equalTo(self)
+            make.height.equalTo(8)
+        }
         pageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
 
         pageControl.currentPageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
@@ -169,9 +172,12 @@ class PinsMapView: UIView {
 
         addSubview(scrollView)
 
-        scrollView.alignLeading("\(border - monthSpacing / 2.0)", trailing: "\(-border + monthSpacing / 2.0)", toView: self)
-        scrollView.alignTopEdge(withView: self, predicate: "\(border)")
-        scrollView.alignBottomEdge(withView: pageControl, predicate: "\(-border)")
+        scrollView.snp.makeConstraints { make -> Void in
+            make.leading.equalTo(self).offset(border - monthSpacing / 2.0)
+            make.trailing.equalTo(self).offset(-border + monthSpacing / 2.0)
+            make.top.equalTo(self).offset(border)
+            make.bottom.equalTo(self).offset(-border)
+        }
     }
 
     private func findMaxSide(rect: CGSize) -> CGFloat {
@@ -231,9 +237,11 @@ class PinsMapView: UIView {
         // Resize container view
         scrollView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.align(toView: scrollView)
-        scrollView.constrainHeight(toView: containerView, predicate: "*1")
-        containerView.constrainWidth("\(frame.width * CGFloat(ceil(Double(monthsInYear) / Double(howManyMonthsShouldBeDisplayed))))")
+        containerView.snp.makeConstraints { make -> Void in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(frame.width * CGFloat(ceil(Double(monthsInYear) / Double(howManyMonthsShouldBeDisplayed))))
+        }
+        scrollView.snp.makeConstraints { $0.height.equalTo(containerView.snp.height) }
 
         // Create and resize month titles
         var monthsLabels = [StepikLabel]()
