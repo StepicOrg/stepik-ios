@@ -1965,6 +1965,13 @@
 		2C4BBF25203DC670000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF26203DC670000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
+		2C59F02A20EB8AC800666EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F02920EB8AC800666EE0 /* AppDelegate.swift */; };
+		2C59F02C20EB8AC800666EE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F02B20EB8AC800666EE0 /* ViewController.swift */; };
+		2C59F02F20EB8AC800666EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F02D20EB8AC800666EE0 /* Main.storyboard */; };
+		2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
+		2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */; };
+		2C59F03F20EB8ACA00666EE0 /* ExamEGERussianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */; };
+		2C59F04A20EB8ACA00666EE0 /* ExamEGERussianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C5D515B202468D100B9D932 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
@@ -4507,6 +4514,20 @@
 			remoteGlobalIDString = 1BAE12EE1F93F67700482251;
 			remoteInfo = StepikTV;
 		};
+		2C59F03B20EB8ACA00666EE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C59F02620EB8AC800666EE0;
+			remoteInfo = ExamEGERussian;
+		};
+		2C59F04620EB8ACA00666EE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C59F02620EB8AC800666EE0;
+			remoteInfo = ExamEGERussian;
+		};
 		2CD12B8A1F4ED1F4001D3C82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
@@ -5235,6 +5256,19 @@
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
+		2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamEGERussian.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C59F02920EB8AC800666EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C59F02B20EB8AC800666EE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C59F02E20EB8AC800666EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C59F03020EB8AC900666EE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C59F03320EB8AC900666EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C59F03520EB8AC900666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEGERussianTests.swift; sourceTree = "<group>"; };
+		2C59F04020EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEGERussianUITests.swift; sourceTree = "<group>"; };
+		2C59F04B20EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -5632,6 +5666,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F02420EB8AC800666EE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F03720EB8ACA00666EE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F04220EB8ACA00666EE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7135,6 +7190,9 @@
 				086538361EB02716003A8415 /* StickerPackExtension */,
 				1BAE12F01F93F67700482251 /* StepikTV */,
 				1BAE13041F93F67700482251 /* StepikTVTests */,
+				2C59F02820EB8AC800666EE0 /* ExamEGERussian */,
+				2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */,
+				2C59F04820EB8ACA00666EE0 /* ExamEGERussianUITests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				15A6EA0367C62E2E49D43D22 /* Pods */,
@@ -7164,6 +7222,9 @@
 				1BAE12EF1F93F67700482251 /* StepikTV.app */,
 				1BAE13011F93F67700482251 /* StepikTVTests.xctest */,
 				2CA8D3872088D9C000E105E9 /* Adaptive 8290.app */,
+				2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */,
+				2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */,
+				2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -7899,6 +7960,125 @@
 				2C4BBF10203DC668000A4250 /* plyr.js */,
 			);
 			path = Plyr;
+			sourceTree = "<group>";
+		};
+		2C59F02820EB8AC800666EE0 /* ExamEGERussian */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F05E20EB98D400666EE0 /* Resources */,
+				2C59F05D20EB98CA00666EE0 /* Sources */,
+				2C59F05A20EB8E5C00666EE0 /* SupportingFiles */,
+			);
+			path = ExamEGERussian;
+			sourceTree = "<group>";
+		};
+		2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */,
+				2C59F06020EB99C400666EE0 /* SupportingFiles */,
+			);
+			path = ExamEGERussianTests;
+			sourceTree = "<group>";
+		};
+		2C59F04820EB8ACA00666EE0 /* ExamEGERussianUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */,
+				2C59F06120EB99FE00666EE0 /* SupportingFiles */,
+			);
+			path = ExamEGERussianUITests;
+			sourceTree = "<group>";
+		};
+		2C59F05520EB8D1A00666EE0 /* ApplicationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F05620EB8D2500666EE0 /* AppDelegate */,
+			);
+			path = ApplicationLayer;
+			sourceTree = "<group>";
+		};
+		2C59F05620EB8D2500666EE0 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F02920EB8AC800666EE0 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2C59F05820EB8E3700666EE0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F02B20EB8AC800666EE0 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2C59F05A20EB8E5C00666EE0 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F03520EB8AC900666EE0 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		2C59F05B20EB8EB700666EE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F02D20EB8AC800666EE0 /* Main.storyboard */,
+				2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C59F05C20EB8F0D00666EE0 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F05820EB8E3700666EE0 /* ViewControllers */,
+				2C59F05B20EB8EB700666EE0 /* Views */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		2C59F05D20EB98CA00666EE0 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F05520EB8D1A00666EE0 /* ApplicationLayer */,
+				2C59F05C20EB8F0D00666EE0 /* PresentationLayer */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		2C59F05E20EB98D400666EE0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F05F20EB98E800666EE0 /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2C59F05F20EB98E800666EE0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F03020EB8AC900666EE0 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2C59F06020EB99C400666EE0 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F04020EB8ACA00666EE0 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		2C59F06120EB99FE00666EE0 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F04B20EB8ACA00666EE0 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		2C5DF1371FEBDC50003B1177 /* Adaptive steps */ = {
@@ -8992,6 +9172,59 @@
 			productReference = 2C1B64C81F4C590700236804 /* Adaptive 3124.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2C59F02620EB8AC800666EE0 /* ExamEGERussian */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C59F05220EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussian" */;
+			buildPhases = (
+				2C59F02320EB8AC800666EE0 /* Sources */,
+				2C59F02420EB8AC800666EE0 /* Frameworks */,
+				2C59F02520EB8AC800666EE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExamEGERussian;
+			productName = ExamEGERussian;
+			productReference = 2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C59F03920EB8ACA00666EE0 /* ExamEGERussianTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C59F05320EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianTests" */;
+			buildPhases = (
+				2C59F03620EB8ACA00666EE0 /* Sources */,
+				2C59F03720EB8ACA00666EE0 /* Frameworks */,
+				2C59F03820EB8ACA00666EE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C59F03C20EB8ACA00666EE0 /* PBXTargetDependency */,
+			);
+			name = ExamEGERussianTests;
+			productName = ExamEGERussianTests;
+			productReference = 2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2C59F04420EB8ACA00666EE0 /* ExamEGERussianUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C59F05420EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianUITests" */;
+			buildPhases = (
+				2C59F04120EB8ACA00666EE0 /* Sources */,
+				2C59F04220EB8ACA00666EE0 /* Frameworks */,
+				2C59F04320EB8ACA00666EE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C59F04720EB8ACA00666EE0 /* PBXTargetDependency */,
+			);
+			name = ExamEGERussianUITests;
+			productName = ExamEGERussianUITests;
+			productReference = 2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		2C89A9511F4C289900227C3B /* Adaptive GMAT */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C89AB371F4C289900227C3B /* Build configuration list for PBXNativeTarget "Adaptive GMAT" */;
@@ -9234,7 +9467,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
@@ -9295,6 +9528,23 @@
 					2C1B62CE1F4C590700236804 = {
 						DevelopmentTeam = E9KER42773;
 						ProvisioningStyle = Manual;
+					};
+					2C59F02620EB8AC800666EE0 = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = 6UNHY8UY6E;
+						ProvisioningStyle = Automatic;
+					};
+					2C59F03920EB8ACA00666EE0 = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = 6UNHY8UY6E;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2C59F02620EB8AC800666EE0;
+					};
+					2C59F04420EB8ACA00666EE0 = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = 6UNHY8UY6E;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2C59F02620EB8AC800666EE0;
 					};
 					2C89A9511F4C289900227C3B = {
 						DevelopmentTeam = E9KER42773;
@@ -9391,6 +9641,9 @@
 				1BAE12EE1F93F67700482251 /* StepikTV */,
 				1BAE13001F93F67700482251 /* StepikTVTests */,
 				2CA8D1392088D9C000E105E9 /* Adaptive 8290 */,
+				2C59F02620EB8AC800666EE0 /* ExamEGERussian */,
+				2C59F03920EB8ACA00666EE0 /* ExamEGERussianTests */,
+				2C59F04420EB8ACA00666EE0 /* ExamEGERussianUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -9796,6 +10049,30 @@
 				2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */,
 				2C1B64C01F4C590700236804 /* loading_robot.gif in Resources */,
 				62E98D07F2F12EF7A3CB3E09 /* ProfileHeaderInfoView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F02520EB8AC800666EE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */,
+				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
+				2C59F02F20EB8AC800666EE0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F03820EB8ACA00666EE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F04320EB8ACA00666EE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13490,6 +13767,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C59F02320EB8AC800666EE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C59F02C20EB8AC800666EE0 /* ViewController.swift in Sources */,
+				2C59F02A20EB8AC800666EE0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F03620EB8ACA00666EE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C59F03F20EB8ACA00666EE0 /* ExamEGERussianTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C59F04120EB8ACA00666EE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C59F04A20EB8ACA00666EE0 /* ExamEGERussianUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C89A9531F4C289900227C3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -15564,6 +15866,16 @@
 			target = 1BAE12EE1F93F67700482251 /* StepikTV */;
 			targetProxy = 1BAE13021F93F67700482251 /* PBXContainerItemProxy */;
 		};
+		2C59F03C20EB8ACA00666EE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C59F02620EB8AC800666EE0 /* ExamEGERussian */;
+			targetProxy = 2C59F03B20EB8ACA00666EE0 /* PBXContainerItemProxy */;
+		};
+		2C59F04720EB8ACA00666EE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C59F02620EB8AC800666EE0 /* ExamEGERussian */;
+			targetProxy = 2C59F04620EB8ACA00666EE0 /* PBXContainerItemProxy */;
+		};
 		2CD12B8B1F4ED1F4001D3C82 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86EF29331E83CEA900F8D214 /* Adaptive 1838 */;
@@ -15699,6 +16011,22 @@
 				2C35C4FA1F4DB8D0002F3BF4 /* en */,
 			);
 			name = step0.html;
+			sourceTree = "<group>";
+		};
+		2C59F02D20EB8AC800666EE0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C59F02E20EB8AC800666EE0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C59F03320EB8AC900666EE0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */ = {
@@ -16324,6 +16652,176 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.stepik.ios.adaptive.3124";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		2C59F04C20EB8ACA00666EE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C59F04D20EB8ACA00666EE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2C59F04E20EB8ACA00666EE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExamEGERussianTests/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExamEGERussian.app/ExamEGERussian";
+			};
+			name = Debug;
+		};
+		2C59F04F20EB8ACA00666EE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExamEGERussianTests/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExamEGERussian.app/ExamEGERussian";
+			};
+			name = Release;
+		};
+		2C59F05020EB8ACA00666EE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExamEGERussianUITests/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b0c0c092-abaf-46f6-84ee-78eedb9ddac0";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExamEGERussian;
+			};
+			name = Debug;
+		};
+		2C59F05120EB8ACA00666EE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExamEGERussianUITests/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b0c0c092-abaf-46f6-84ee-78eedb9ddac0";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExamEGERussian;
 			};
 			name = Release;
 		};
@@ -16971,6 +17469,33 @@
 			buildConfigurations = (
 				2C1B64C61F4C590700236804 /* Debug */,
 				2C1B64C71F4C590700236804 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C59F05220EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C59F04C20EB8ACA00666EE0 /* Debug */,
+				2C59F04D20EB8ACA00666EE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C59F05320EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C59F04E20EB8ACA00666EE0 /* Debug */,
+				2C59F04F20EB8ACA00666EE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C59F05420EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C59F05020EB8ACA00666EE0 /* Debug */,
+				2C59F05120EB8ACA00666EE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
