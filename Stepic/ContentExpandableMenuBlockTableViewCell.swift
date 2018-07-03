@@ -14,7 +14,7 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var arrowButton: UIButton!
 
-    var bottomTitleConstraint: NSLayoutConstraint?
+    var bottomTitleConstraint: Constraint?
 
     var block: ContentExpandableMenuBlock?
     var updateTableHeightBlock: (() -> Void)?
@@ -63,7 +63,7 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     }
 
     func expand(shouldAnimate: Bool = true) {
-        bottomTitleConstraint?.isActive = false
+        bottomTitleConstraint?.deactivate()
         container.isHidden = false
 
         let animationBlock: () -> Void = { [weak self] in
@@ -80,10 +80,10 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         container.isHidden = true
         if bottomTitleConstraint == nil {
             titleLabel.snp.makeConstraints { make -> Void in
-                bottomTitleConstraint = make.bottom.equalTo(self.contentView).offset(-26)
+                bottomTitleConstraint = make.bottom.equalTo(self.contentView).offset(-26).constraint
             }
         } else {
-            bottomTitleConstraint?.isActive = true
+            bottomTitleConstraint?.activate()
         }
 
         let animationBlock: () -> Void = { [weak self] in

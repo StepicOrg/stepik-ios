@@ -20,7 +20,7 @@ class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
 
-    var messageLabelWidth: NSLayoutConstraint?
+    var messageLabelWidth: Constraint?
     let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
 
     var yesAction : (() -> Void)?
@@ -34,7 +34,9 @@ class NotificationRequestAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 64)")
+        messageLabel.snp.makeConstraints { make -> Void in
+            messageLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 64).constraint
+        }
 
         addAnimationView()
 
@@ -82,6 +84,6 @@ class NotificationRequestAlertViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        messageLabelWidth?.constant = UIScreen.main.bounds.height - 64
+        messageLabelWidth?.update(offset: UIScreen.main.bounds.height - 64)
     }
 }

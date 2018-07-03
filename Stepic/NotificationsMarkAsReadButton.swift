@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class NotificationsMarkAsReadButton: StepikButton {
     enum Status {
@@ -39,7 +40,9 @@ class NotificationsMarkAsReadButton: StepikButton {
         super.awakeFromNib()
 
         addSubview(activityIndicator)
-        activityIndicator.alignCenter(withView: self)
+        activityIndicator.snp.makeConstraints { make -> Void in
+            make.center.equalTo(self)
+        }
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = UIColor.mainDark
     }

@@ -80,8 +80,6 @@ extension StepikTableView {
                 make.edges.equalTo(self)
                 make.center.equalTo(self)
             }
-            placeholderView.alignCenter(withView: self)
-            placeholderView.align(toView: self)
 
             placeholderView.setNeedsLayout()
             placeholderView.layoutIfNeeded()

@@ -36,8 +36,8 @@ class StyledNavigationViewController: UINavigationController {
     }
 
     var customShadowView: UIView?
-    var customShadowTrailing: NSLayoutConstraint?
-    var customShadowLeading: NSLayoutConstraint?
+    var customShadowTrailing: Constraint?
+    var customShadowLeading: Constraint?
 
     func setupShadowView() {
         let v = UIView()
@@ -48,8 +48,8 @@ class StyledNavigationViewController: UINavigationController {
             make.height.equalTo(0.5)
             make.bottom.equalTo(navigationBar).offset(0.5)
 
-            self.customShadowLeading = make.leading.equalTo(navigationBar)
-            self.customShadowTrailing = make.trailing.equalTo(navigationBar)
+            self.customShadowLeading = make.leading.equalTo(navigationBar).constraint
+            self.customShadowTrailing = make.trailing.equalTo(navigationBar).constraint
         }
 
         customShadowView = v
@@ -90,37 +90,37 @@ class StyledNavigationViewController: UINavigationController {
         }
 
         //Saving previous values in case animation is not completed
-        let prevTrailing: CGFloat = customShadowTrailing?.constant ?? 0
-        let prevLeading: CGFloat = customShadowLeading?.constant ?? 0
+        let prevTrailing: CGFloat = customShadowTrailing?.layoutConstraints.first?.constant ?? 0
+        let prevLeading: CGFloat = customShadowLeading?.layoutConstraints.first?.constant ?? 0
 
         //Initializing animation values
         if lastAction == .push && inside {
             //leading: 0, <- trailing
-            customShadowLeading?.constant = 0
-            customShadowTrailing?.constant = 0
+            customShadowLeading?.update(offset: 0)
+            customShadowTrailing?.update(offset: 0)
             navigationBar.layoutSubviews()
-            customShadowTrailing?.constant = -navigationBar.frame.width
+            customShadowTrailing?.update(offset: -navigationBar.frame.width)
         }
         if lastAction == .push && !inside {
             // 0 <- leading, trailing: 0
-            customShadowLeading?.constant = navigationBar.frame.width
-            customShadowTrailing?.constant = 0
+            customShadowLeading?.update(offset: navigationBar.frame.width)
+            customShadowTrailing?.update(offset: 0)
             navigationBar.layoutSubviews()
-            customShadowLeading?.constant = 0
+            customShadowLeading?.update(offset: 0)
         }
         if lastAction == .pop && inside {
             //leading -> trailing: 0
-            customShadowLeading?.constant = 0
-            customShadowTrailing?.constant = 0
+            customShadowLeading?.update(offset: 0)
+            customShadowTrailing?.update(offset: 0)
             navigationBar.layoutSubviews()
-            customShadowLeading?.constant = navigationBar.frame.width
+            customShadowLeading?.update(offset: navigationBar.frame.width)
         }
         if lastAction == .pop && !inside {
             //leading: 0, trailing -> 0
-            customShadowLeading?.constant = 0
-            customShadowTrailing?.constant = -navigationBar.frame.width
+            customShadowLeading?.update(offset: 0)
+            customShadowTrailing?.update(offset: -navigationBar.frame.width)
             navigationBar.layoutSubviews()
-            customShadowTrailing?.constant = 0
+            customShadowTrailing?.update(offset: 0)
         }
 
         //Animate alongside push/pop transition
@@ -132,8 +132,8 @@ class StyledNavigationViewController: UINavigationController {
             [weak self]
             coordinator in
             if coordinator.isCancelled {
-                self?.customShadowTrailing?.constant = prevTrailing
-                self?.customShadowLeading?.constant = prevLeading
+                self?.customShadowTrailing?.update(offset: prevTrailing)
+                self?.customShadowLeading?.update(offset: prevLeading)
                 self?.navigationBar.layoutSubviews()
             }
         })

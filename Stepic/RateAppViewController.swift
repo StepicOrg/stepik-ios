@@ -60,7 +60,7 @@ class RateAppViewController: UIViewController {
         }
     }
 
-    var bottomLabelWidth: NSLayoutConstraint?
+    var bottomLabelWidth: Constraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,7 @@ class RateAppViewController: UIViewController {
         bottomLabel.text = ""
 
         bottomLabel.snp.makeConstraints { make -> Void in
-            bottomLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 48)
+            bottomLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 48).constraint
         }
 
         for star in starImageViews {
@@ -208,7 +208,7 @@ class RateAppViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        bottomLabelWidth?.constant = UIScreen.main.bounds.height - 48
+        bottomLabelWidth?.update(offset: UIScreen.main.bounds.height - 48)
     }
 
 }

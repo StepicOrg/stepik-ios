@@ -95,7 +95,6 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
             make.height.equalTo(imageSize)
         }
 
-
         let glassImage = UIImageView(image: #imageLiteral(resourceName: "search_glass"))
         glassImage.contentMode = .scaleAspectFit
         v.addSubview(glassImage)
