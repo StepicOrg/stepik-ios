@@ -347,7 +347,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc func rotated() {
-        AnalyticsUserProperties.shared.setScreenOrientation(isPortrait: UIDevice.current.orientation.isPortrait)
+        AnalyticsUserProperties.shared.setScreenOrientation(isPortrait: DeviceInfo.current.orientation.interface.isPortrait)
     }
 
     deinit {

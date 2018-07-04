@@ -1,6 +1,6 @@
 In the new version of Stepik:
-• Smart course schedule generation. Try it to find additional motivation for learning!
-• Profile can be opened by clicking on user's image in discussions
+• You can check achievements in profile now. Try to unlock more achievements!
+• Fixed crash after personal deadlines generation
 
 Enjoy learning!
 Stepik team
