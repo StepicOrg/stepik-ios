@@ -23,13 +23,13 @@ class AchievementsRetriever {
     func loadAllAchievements(breakCondition: @escaping ([Achievement]) -> Bool) -> Promise<[Achievement]> {
         var allAchievements = [Achievement]()
 
-        func load(page: Int) -> Promise<Bool> {
-            return Promise { fulfill, _ in
-                achievementsAPI.retrieve(page: page).then { (achievements, meta) -> Void in
+        func load(page: Int) -> Guarantee<Bool> {
+            return Guarantee { seal in
+                achievementsAPI.retrieve(page: page).done { (achievements, meta) in
                     allAchievements.append(contentsOf: achievements)
-                    fulfill(meta.hasNext)
+                    seal(meta.hasNext)
                 }.catch { _ in
-                    fulfill(false)
+                    seal(false)
                 }
             }
         }
@@ -50,13 +50,13 @@ class AchievementsRetriever {
     func loadAllAchievementProgresses(breakCondition: @escaping ([AchievementProgress]) -> Bool) -> Promise<[AchievementProgress]> {
         var allProgresses = [AchievementProgress]()
 
-        func load(page: Int) -> Promise<Bool> {
-            return Promise { fulfill, _ in
-                achievementProgressesAPI.retrieve(user: userId, sortByObtainDateDesc: true, page: page).then { (progresses, meta) -> Void in
+        func load(page: Int) -> Guarantee<Bool> {
+            return Guarantee { seal in
+                achievementProgressesAPI.retrieve(user: userId, sortByObtainDateDesc: true, page: page).done { (progresses, meta) in
                     allProgresses.append(contentsOf: progresses)
-                    fulfill(meta.hasNext)
+                    seal(meta.hasNext)
                 }.catch { _ in
-                    fulfill(false)
+                    seal(false)
                 }
             }
         }
@@ -79,23 +79,23 @@ class AchievementsRetriever {
     }
 
     func loadAchievementProgress(for kind: String) -> Promise<AchievementProgressData> {
-        return Promise { fulfill, reject in
-            let allAchievementsWithKind: Promise<[Achievement]> = Promise { fulfill, reject in
-                achievementsAPI.retrieve(kind: kind).then { achievements, _ -> Void in
-                    fulfill(achievements)
+        return Promise { seal in
+            let allAchievementsWithKind: Promise<[Achievement]> = Promise { seal in
+                achievementsAPI.retrieve(kind: kind).done { achievements, _ in
+                    seal.fulfill(achievements)
                 }.catch { error in
-                    reject(error)
+                    seal.reject(error)
                 }
             }
-            let allProgressesWithKind: Promise<[AchievementProgress]> = Promise { fulfill, reject in
-                achievementProgressesAPI.retrieve(user: userId, kind: kind).then { progresses, _ -> Void in
-                    fulfill(progresses)
+            let allProgressesWithKind: Promise<[AchievementProgress]> = Promise { seal in
+                achievementProgressesAPI.retrieve(user: userId, kind: kind).done { progresses, _ in
+                    seal.fulfill(progresses)
                 }.catch { error in
-                    reject(error)
+                    seal.reject(error)
                 }
             }
 
-            when(fulfilled: allAchievementsWithKind, allProgressesWithKind).then { (achievements, progresses) -> Void in
+            when(fulfilled: allAchievementsWithKind, allProgressesWithKind).done { (achievements, progresses) in
                 // achievement id -> target score
                 var idToTargetScore = [Int: Int]()
                 for achievement in achievements.sorted(by: { $0.targetScore < $1.targetScore }) {
@@ -113,7 +113,7 @@ class AchievementsRetriever {
                 for progress in progressesSortedByMaxScore {
                     if progress.obtainDate == nil {
                         // Non-completed achievement, but have progress object
-                        fulfill(AchievementProgressData(currentScore: progress.score,
+                        seal.fulfill(AchievementProgressData(currentScore: progress.score,
                                                         maxScore: idToTargetScore[progress.achievement] ?? 0,
                                                         currentLevel: levelCount,
                                                         maxLevel: achievements.count,
@@ -126,7 +126,7 @@ class AchievementsRetriever {
                 // No non-obtained achievements were found
                 if let lastProgress = progressesSortedByMaxScore.last {
                     // Fulfilled achievement
-                    fulfill(AchievementProgressData(currentScore: lastProgress.score,
+                    seal.fulfill(AchievementProgressData(currentScore: lastProgress.score,
                         maxScore: idToTargetScore[lastProgress.achievement] ?? 0,
                         currentLevel: achievements.count,
                         maxLevel: achievements.count,
@@ -134,14 +134,14 @@ class AchievementsRetriever {
                 } else {
                     let maxScoreForFirstLevel = achievements.sorted(by: { $0.targetScore < $1.targetScore }).first?.targetScore
                     // Non-completed achievement, empty progress
-                    fulfill(AchievementProgressData(currentScore: 0,
+                    seal.fulfill(AchievementProgressData(currentScore: 0,
                         maxScore: maxScoreForFirstLevel ?? 0,
                         currentLevel: 0,
                         maxLevel: achievements.count,
                         kind: kind))
                 }
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

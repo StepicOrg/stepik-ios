@@ -103,7 +103,7 @@ class ProfileAchievementsPresenter {
             }
 
             return when(fulfilled: promises)
-        }.then { [weak self] progressData -> Void in
+        }.done { [weak self] progressData in
             let viewData: [AchievementViewData] = progressData.compactMap { data in
                 guard let kindDescription = AchievementKind(rawValue: data.kind) else {
                     return nil

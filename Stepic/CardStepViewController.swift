@@ -141,13 +141,13 @@ class CardStepViewController: UIViewController, CardStepView {
         resetWebViewHeight(5.0)
 
         func reloadContent() -> Promise<Void> {
-            return Promise { fulfill, reject in
+            return Promise { seal in
                 self.stepWebView.evaluateJavaScript("location.reload();", completionHandler: { _, error in
                     if let error = error {
-                        return reject(error)
+                        return seal.reject(error)
                     }
 
-                    fulfill(())
+                    seal.fulfill(())
                 })
             }
         }
@@ -156,7 +156,7 @@ class CardStepViewController: UIViewController, CardStepView {
             self.alignImages(in: self.stepWebView)
         }.then {
             self.getContentHeight(self.stepWebView)
-        }.then { height -> Void in
+        }.done { height in
             self.resetWebViewHeight(Float(height))
             self.scrollView.layoutIfNeeded()
         }.catch { _ in
@@ -172,16 +172,16 @@ extension CardStepViewController: WKNavigationDelegate {
     }
 
     func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             webView.evaluateJavaScript("document.body.scrollHeight;", completionHandler: { res, error in
                 if let error = error {
-                    return reject(error)
+                    return seal.reject(error)
                 }
 
                 if let height = res as? Int {
-                    fulfill(height)
+                    seal.fulfill(height)
                 } else {
-                    fulfill(0)
+                    seal.fulfill(0)
                 }
             })
         }
@@ -196,13 +196,13 @@ extension CardStepViewController: WKNavigationDelegate {
         jsCode += "var imgs = document.getElementsByTagName('img');"
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             webView.evaluateJavaScript(jsCode, completionHandler: { _, error in
                 if let error = error {
-                    return reject(error)
+                    return seal.reject(error)
                 }
 
-                fulfill(())
+                seal.fulfill(())
             })
         }
     }
@@ -237,7 +237,7 @@ extension CardStepViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         alignImages(in: webView).then {
             self.getContentHeight(webView)
-        }.then { height -> Void in
+        }.done { height in
             self.resetWebViewHeight(Float(height))
             self.scrollView.layoutIfNeeded()
 

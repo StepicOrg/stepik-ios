@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }.then { _ -> Promise<Course> in
                     actions.loadCourseAndJoin(courseId: courseId)
-                }.then { course -> Void in
+                }.done { course in
                     completion?(course)
                 }.catch { error in
                     failure?(error)

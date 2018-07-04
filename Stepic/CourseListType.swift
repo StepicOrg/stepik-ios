@@ -17,8 +17,7 @@ enum CourseListType {
     case tag(id: Int)
 
     private func requestAllEnrolled(coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI) -> Promise<([Course], Meta)>? {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             loadPageWithProgresses(loadedCourses: [], page: 1, coursesAPI: coursesAPI, progressesAPI: progressesAPI, success: {
                 courses, meta in
                 let res = courses.sorted(by: {
@@ -27,18 +26,17 @@ enum CourseListType {
                     }
                     return lastViewed1 > lastViewed2
                 })
-                fulfill((res, meta))
+                seal.fulfill((res, meta))
             }, error: {
                 error in
-                reject(error)
+                seal.reject(error)
             })
         }
     }
 
     private func loadPageWithProgresses(loadedCourses: [Course], page: Int, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, success: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) {
 
-        coursesAPI.retrieve(enrolled: true, order: "-activity", page: page).then {
-            courses, meta -> Void in
+        coursesAPI.retrieve(enrolled: true, order: "-activity", page: page).done { courses, meta in
 
             guard !courses.isEmpty else {
                 success(loadedCourses, meta)
@@ -57,8 +55,8 @@ enum CourseListType {
             }
 
             //Not calling this in next "then" because courses values are needed to proceed further
-            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).then {
-                newProgresses -> Void in
+            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).done {
+                newProgresses in
                 let progresses = Sorter.sort(newProgresses, byIds: progressIds)
 
                 if progresses.count == 0 {
@@ -104,20 +102,18 @@ enum CourseListType {
         case let .search(query: query):
             var resultMeta: Meta = Meta(hasNext: false, hasPrev: false, page: 1)
             var searchCoursesIDs: [Int] = []
-            return Promise<([Course], Meta)> {
-                fulfill, reject in
+            return Promise<([Course], Meta)> { seal in
                 searchResultsAPI.searchCourse(query: query, language: requestedLanguage, page: page).then {
                     (searchResults, meta) -> Promise<([Course])> in
                     resultMeta = meta
                     searchCoursesIDs = searchResults.flatMap { $0.courseId }
                     return coursesAPI.retrieve(ids: searchCoursesIDs, existing: Course.getCourses(searchCoursesIDs))
-                    }.then {
-                        (courses) -> Void in
+                    }.done { courses in
                         let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)
-                        fulfill((resultCourses, resultMeta))
+                        seal.fulfill((resultCourses, resultMeta))
                     }.catch {
                         error in
-                        reject(error)
+                        seal.reject(error)
                 }
             }
         case let .tag(id: id):

@@ -12,24 +12,24 @@ import PromiseKit
 
 class UpdateRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, updatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<T> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             let params: Parameters? = [
                 paramName: updatingObject.json.dictionaryObject ?? ""
             ]
 
-            checkToken().then {
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(updatingObject.id)", method: .put, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
                     case .success(let json):
                         updatingObject.update(json: json[requestEndpoint].arrayValue[0])
-                        fulfill(updatingObject)
+                        seal.fulfill(updatingObject)
                     }
                 }
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

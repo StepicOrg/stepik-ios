@@ -26,11 +26,11 @@ class EnrollmentsAPI: APIEndpoint {
 extension EnrollmentsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             joinCourse(course, delete: delete, success: {
-                fulfill(())
+                seal.fulfill(())
             }, error: { _ in
-                reject(EnrollmentsAPIError.joinCourseFailed)
+                seal.reject(EnrollmentsAPIError.joinCourseFailed)
             })
         }
     }

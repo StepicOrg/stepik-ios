@@ -17,18 +17,17 @@ class UnitsAPI: APIEndpoint {
     //TODO: Seems like a bug. Fix this when fixing CoreData duplicates
     func retrieve(lesson lessonId: Int) -> Promise<Unit> {
         let params: Parameters = ["lesson": lessonId]
-        return Promise {
-            fulfill, reject in
-            retrieve.request(requestEndpoint: "units", paramName: "units", params: params, updatingObjects: Array<Unit>(), withManager: manager).then {
-                units, _, _ -> Void in
+        return Promise { seal in
+            retrieve.request(requestEndpoint: "units", paramName: "units", params: params, updatingObjects: Array<Unit>(), withManager: manager).done {
+                units, _, _ in
                 guard let unit: Unit = units.first else {
-                    reject(UnitRetrieveError.noUnits)
+                    seal.reject(UnitRetrieveError.noUnits)
                     return
                 }
-                fulfill(unit)
+                seal.fulfill(unit)
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
 //            This is a correct replacement after CoreData duplicates fix for this
 //            retrieve.requestWithFetching(requestEndpoint: "units", paramName: "units", params: params, withManager: manager).then {
@@ -53,7 +52,7 @@ class UnitsAPI: APIEndpoint {
 extension UnitsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((Error) -> Void)) -> Request? {
-        retrieve(lesson: lessonId).then {
+        retrieve(lesson: lessonId).done {
             unit in
             success(unit)
             }.catch {

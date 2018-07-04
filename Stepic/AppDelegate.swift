@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        ApiDataDownloader.notificationsStatusAPI.retrieve().then { result -> Void in
+        ApiDataDownloader.notificationsStatusAPI.retrieve().done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { _ in
             print("notifications: unable to fetch badges count on launch")

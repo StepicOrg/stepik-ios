@@ -24,7 +24,7 @@ extension UserActivitiesAPI {
     @available(*, deprecated, message: "Use retrieve with promises instead")
     @discardableResult func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((UserActivity) -> Void), error errorHandler: @escaping ((Error) -> Void)) -> Request? {
 
-        retrieve(user: userId).then {
+        retrieve(user: userId).done {
             userActivity in
             success(userActivity)
         }.catch {

@@ -22,9 +22,7 @@ class NotificationRegistrator {
 
     func registerForRemoteNotificationsIfAlreadyAsked() {
         if #available(iOS 10.0, *) {
-            notificationPermissionManager.getCurrentPermissionStatus().then {
-                [weak self]
-                status -> Void in
+            notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
                 switch status {
                 case .authorized:
                     self?.registerForRemoteNotifications()
@@ -88,7 +86,7 @@ class NotificationRegistrator {
                 remoteDevice.isBadgesEnabled = true
                 return ApiDataDownloader.devices.update(remoteDevice)
             }
-        }.then { device -> Void in
+        }.done { device -> Void in
             print("notification registrator: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
@@ -106,14 +104,14 @@ class NotificationRegistrator {
         }
     }
 
-    func unregisterFromNotifications() -> Promise<Void> {
-        return Promise { fulfill, _ in
+    func unregisterFromNotifications() -> Guarantee<Void> {
+        return Guarantee { seal in
             UIApplication.shared.unregisterForRemoteNotifications()
 
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
-                ApiDataDownloader.devices.delete(deviceId).then { () -> Void in
+                ApiDataDownloader.devices.delete(deviceId).done { () in
                     print("notification registrator: successfully delete device, id = \(deviceId)")
-                    fulfill(())
+                    seal(())
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
@@ -138,11 +136,11 @@ class NotificationRegistrator {
                             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
                         }
                     }
-                    fulfill(())
+                    seal(())
                 }
             } else {
                 print("notification registrator: no saved device")
-                fulfill(())
+                seal(())
             }
         }
     }
@@ -151,7 +149,7 @@ class NotificationRegistrator {
 extension NotificationRegistrator {
     @available(*, deprecated, message: "Legacy method with callbacks")
     func unregisterFromNotifications(completion: @escaping (() -> Void)) {
-        unregisterFromNotifications().then {
+        unregisterFromNotifications().done {
             completion()
         }.catch { _ in }
     }
