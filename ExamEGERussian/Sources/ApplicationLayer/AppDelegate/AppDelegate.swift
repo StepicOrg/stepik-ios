@@ -17,9 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    private lazy var rootNavigationManager: RootNavigationManager = {
+        return RootNavigationManager(with: self.window, serviceComponents: self.serviceComponents)
+    }()
+    
+    private lazy var serviceComponents: ServiceComponents = {
+        return ServiceComponentsAssembly(
+            authAPI: AuthAPI(),
+            stepicsAPI: StepicsAPI(),
+            profilesAPI: ProfilesAPI(),
+            defaultsStorageManager: DefaultsStorageManager()
+        )
+    }()
+    
     // MARK: - UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        rootNavigationManager.setup()
+        
         return true
     }
     
