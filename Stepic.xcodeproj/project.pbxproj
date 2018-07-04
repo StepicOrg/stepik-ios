@@ -4074,6 +4074,8 @@
 		2CFE247620ECD88800AF1E3D /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
 		2CFE247A20ECDC1900AF1E3D /* UserSubscriptionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE247920ECDC1900AF1E3D /* UserSubscriptionsService.swift */; };
+		2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFE247B20ECF7F700AF1E3D /* Config.plist */; };
+		2CFE248120ED112100AF1E3D /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFE248020ED112100AF1E3D /* Auth.plist */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		51CB17C528DD51B175CC3FA0 /* Pods_ExamEGERussianUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D508E4A02170116945287545 /* Pods_ExamEGERussianUITests.framework */; };
 		62E98002F8F247D1CAC54767 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
@@ -5749,6 +5751,8 @@
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		2CFE247920ECDC1900AF1E3D /* UserSubscriptionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionsService.swift; sourceTree = "<group>"; };
+		2CFE247B20ECF7F700AF1E3D /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		2CFE248020ED112100AF1E3D /* Auth.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
 		37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3873CC770A93C9BD4A7F62AB /* Pods-ExamEGERussianTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A53D8E59267A93612403D59 /* Pods-Adaptive 8290.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 8290.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290.release.xcconfig"; sourceTree = "<group>"; };
@@ -8340,6 +8344,8 @@
 		2C59F05A20EB8E5C00666EE0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				2CFE248020ED112100AF1E3D /* Auth.plist */,
+				2CFE247B20ECF7F700AF1E3D /* Config.plist */,
 				2C59F03520EB8AC900666EE0 /* Info.plist */,
 			);
 			path = SupportingFiles;
@@ -10418,6 +10424,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
+				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 				2C59F02F20EB8AC800666EE0 /* Main.storyboard in Resources */,
