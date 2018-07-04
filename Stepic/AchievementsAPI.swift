@@ -14,17 +14,17 @@ class AchievementsAPI: APIEndpoint {
     override var name: String { return "achievements" }
 
     func retrieve(kind: String? = nil, page: Int = 1) -> Promise<([Achievement], Meta)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             var params = Parameters()
             if let kind = kind {
                 params["kind"] = kind
             }
             params["page"] = page
 
-            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).then { achievements, meta -> Void in
-                fulfill((achievements, meta))
+            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).done { achievements, meta in
+                seal.fulfill((achievements, meta))
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

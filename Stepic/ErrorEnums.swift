@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 //Is used for handling errors in network requests
 enum NetworkError: Error {
@@ -18,7 +19,7 @@ enum NetworkError: Error {
     case other(Error)
 
     private init(AFError error: AFError) {
-        if error.isCancelledError {
+        if error.isCancelled {
             self = .cancelled
             return
         }

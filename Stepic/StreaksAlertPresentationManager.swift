@@ -90,10 +90,7 @@ class StreaksAlertPresentationManager {
     }
 
     func notifyPressed() {
-        notificationPermissionManager.getCurrentPermissionStatus().then {
-            [weak self]
-            status -> Void in
-
+        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
             case .notDetermined:
                 NotificationRegistrator.shared.registerForRemoteNotifications()
@@ -108,10 +105,7 @@ class StreaksAlertPresentationManager {
     }
 
     func cameFromSettings() {
-        notificationPermissionManager.getCurrentPermissionStatus().then {
-            [weak self]
-            status -> Void in
-
+        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
             case .notDetermined:
                 // Actually, it should never come here, but just in case

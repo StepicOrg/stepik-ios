@@ -83,8 +83,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
         SVProgressHUD.show()
-        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).then {
-            () -> Void in
+        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).done {
             SVProgressHUD.dismiss()
             self.onDeadlineSelected?()
             self.dismiss(animated: true, completion: nil)

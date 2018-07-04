@@ -115,7 +115,7 @@ class NotificationsPresenter {
             return
         }
 
-        merge(old: self.displayedNotifications, new: [addedNotification]).then { result -> Void in
+        merge(old: self.displayedNotifications, new: [addedNotification]).done { result in
             self.displayedNotifications = result
             self.view?.set(notifications: self.displayedNotifications, withReload: true)
         }
@@ -132,9 +132,7 @@ class NotificationsPresenter {
     func didAppear() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
-                notificationPermissionManager.getCurrentPermissionStatus().then {
-                    [weak self]
-                    status -> Void in
+                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
                     switch status {
                     case .notDetermined:
                         let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
@@ -154,14 +152,14 @@ class NotificationsPresenter {
         hasNextPage = true
         displayedNotifications = []
 
-        loadData(page: 1, in: self.section).then { hasNextPage, result -> Void in
+        loadData(page: 1, in: self.section).done { hasNextPage, result in
             self.hasNextPage = hasNextPage
 
             self.updateDisplayedNotifications(result)
+        }.ensure {
+            self.view?.state = .normal
         }.catch { error in
             print("notifications: refresh error = \(error)")
-        }.always {
-            self.view?.state = .normal
         }
 
         loadStatuses()
@@ -175,20 +173,20 @@ class NotificationsPresenter {
             self.updateDisplayedNotifications(result)
 
             return self.loadData(page: 1, in: self.section)
-        }.then { hasNextPage, result -> Void in
+        }.done { hasNextPage, result in
             self.hasNextPage = hasNextPage
             self.page += 1
 
             isNotificationsEmpty = result.isEmpty
             self.updateDisplayedNotifications(result)
-        }.catch { error in
-            print("notifications: load initial error = \(error)")
-        }.always {
+        }.ensure {
             if isNotificationsEmpty {
                 self.view?.state = .empty
             } else {
                 self.view?.state = .normal
             }
+        }.catch { error in
+            print("notifications: load initial error = \(error)")
         }
 
         loadStatuses()
@@ -201,12 +199,12 @@ class NotificationsPresenter {
 
         view?.state = .loading
 
-        loadData(page: page, in: section).then { hasNextPage, result -> Void in
+        loadData(page: page, in: section).done { hasNextPage, result in
             self.hasNextPage = hasNextPage
             self.page += 1
 
             self.updateDisplayedNotifications(result)
-        }.always {
+        }.ensure {
             self.view?.state = .normal
         }.catch { error in
             print("notifications: load next page error = \(error)")
@@ -218,25 +216,25 @@ class NotificationsPresenter {
         self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
-    fileprivate func loadCached() -> Promise<NotificationViewDataStruct> {
+    fileprivate func loadCached() -> Guarantee<NotificationViewDataStruct> {
         let notifications = Notification.fetch(type: section.notificationType, offset: 0, limit: 50)
         return merge(old: self.displayedNotifications, new: notifications ?? [])
     }
 
     fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             var hasNext: Bool = false
-            notificationsAPI.retrieve(page: page, notificationType: section.notificationType).then { result, meta -> Promise<NotificationViewDataStruct> in
+            notificationsAPI.retrieve(page: page, notificationType: section.notificationType).then { result, meta -> Guarantee<NotificationViewDataStruct> in
                 hasNext = meta.hasNext
 
                 return self.merge(old: self.displayedNotifications, new: result)
-            }.then { results -> Void in
-                fulfill((hasNext, results))
-            }.catch { reject($0) }
+            }.done { results in
+                seal.fulfill((hasNext, results))
+            }.catch { seal.reject($0) }
         }
     }
 
-    fileprivate func merge(old: NotificationViewDataStruct, new: [Notification]) -> Promise<NotificationViewDataStruct> {
+    fileprivate func merge(old: NotificationViewDataStruct, new: [Notification]) -> Guarantee<NotificationViewDataStruct> {
         // id -> url
         var userAvatars: [Int: URL] = [:]
         var usersQuery: Set<Int> = Set()
@@ -300,14 +298,14 @@ class NotificationsPresenter {
         }
 
         // Try to load user avatars and group notifications
-        return Promise { fulfill, _ in
-            usersAPI.retrieve(ids: Array(usersQuery), existing: []).then { users -> Void in
+        return Guarantee { seal in
+            usersAPI.retrieve(ids: Array(usersQuery), existing: []).done { users in
                 users.forEach { user in
                     userAvatars[user.id] = URL(string: user.avatarURL)
                 }
-                fulfill(groupNotificationsByDate())
+                seal(groupNotificationsByDate())
             }.catch { _ in
-                fulfill(groupNotificationsByDate())
+                seal(groupNotificationsByDate())
             }
         }
     }
@@ -319,7 +317,7 @@ class NotificationsPresenter {
         }
 
         notification.status = status
-        self.notificationsAPI.update(notification).then { _ -> Void in
+        self.notificationsAPI.update(notification).done { _ in
             CoreDataHelper.instance.save()
             NotificationCenter.default.post(name: .notificationUpdated, object: self, userInfo: ["section": self.section, "id": id, "status": status])
         }.catch { error in
@@ -330,7 +328,7 @@ class NotificationsPresenter {
     func markAllAsRead() {
         view?.updateMarkAllAsReadButton(with: .loading)
 
-        notificationsAPI.markAllAsRead().then { _ -> Void in
+        notificationsAPI.markAllAsRead().done { _ in
             Notification.markAllAsRead()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAllAsRead, parameters: ["badge": self.badgeUnreadCount])
 
@@ -351,7 +349,7 @@ class NotificationsPresenter {
     }
 
     private func loadStatuses() {
-        notificationsStatusAPI.retrieve().then { statuses in
+        notificationsStatusAPI.retrieve().done { statuses in
             NotificationsBadgesManager.shared.set(number: statuses.totalCount)
         }.catch { error in
             print("notifications: unable to load statuses, error = \(error)")

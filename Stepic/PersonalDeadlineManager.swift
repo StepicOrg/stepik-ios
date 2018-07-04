@@ -25,42 +25,37 @@ class PersonalDeadlineManager {
     }
 
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void> {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             counter.countDeadlines(mode: mode, for: course).then {
                 sectionDeadlines -> Promise<StorageRecord> in
                 let data = DeadlineStorageData(courseID: course.id, deadlines: sectionDeadlines)
                 let record = StorageRecord(data: data, kind: StorageKind.deadline(courseID: course.id))
                 return self.storageRecordsAPI.create(record: record)
-            }.then {
-                createdRecord -> Void in
+            }.done { createdRecord in
                 self.localStorageManager.set(storageRecord: createdRecord, for: course)
                 self.notificationManager.updateDeadlineNotifications(for: course)
-                fulfill(())
-            }.catch {
-                error in
-                reject(error)
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }
 
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void> {
-        return Promise {
-            fulfill, reject in
-            storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).then {
-                storageRecords, _ -> Void in
+        return Promise { seal in
+            storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).done { storageRecords, _ in
                 guard let storageRecord = storageRecords.first else {
                     self.localStorageManager.deleteRecord(for: course)
                     self.notificationManager.updateDeadlineNotifications(for: course)
-                    fulfill(())
+                    seal.fulfill(())
                     return
                 }
                 self.localStorageManager.set(storageRecord: storageRecord, for: course)
                 self.notificationManager.updateDeadlineNotifications(for: course)
-                fulfill(())
+                seal.fulfill(())
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -70,45 +65,40 @@ class PersonalDeadlineManager {
     }
 
     func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void> {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             guard let record = localStorageManager.getRecord(for: course) else {
-                reject(DeadlineChangeError.noLocalRecord)
+                seal.reject(DeadlineChangeError.noLocalRecord)
                 return
             }
             guard let dataToChange = record.data as? DeadlineStorageData else {
-                reject(DeadlineChangeError.noLocalRecord)
+                seal.reject(DeadlineChangeError.noLocalRecord)
                 return
             }
             dataToChange.deadlines = newDeadlines
             record.data = dataToChange
-            storageRecordsAPI.update(record: record).then {
-                updatedRecord -> Void in
+            storageRecordsAPI.update(record: record).done { updatedRecord in
                 self.localStorageManager.set(storageRecord: updatedRecord, for: course)
                 self.notificationManager.updateDeadlineNotifications(for: course)
-                fulfill(())
-            }.catch {
-                error in
-                reject(error)
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }
 
     func deleteDeadline(for course: Course) -> Promise<Void> {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             guard let record = localStorageManager.getRecord(for: course) else {
-                fulfill(())
+                seal.fulfill(())
                 return
             }
-            storageRecordsAPI.delete(id: record.id).then {
-                () -> Void in
+            storageRecordsAPI.delete(id: record.id).done { _ in
                 self.localStorageManager.deleteRecord(for: course)
                 self.notificationManager.updateDeadlineNotifications(for: course)
-                fulfill(())
+                seal.fulfill(())
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

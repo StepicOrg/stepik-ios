@@ -45,7 +45,7 @@ class AuthAPI {
     }
 
     func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }
@@ -67,23 +67,23 @@ class AuthAPI {
                     if let typedError = error as? URLError {
                         switch typedError.code {
                         case .notConnectedToInternet:
-                            reject(SignInError.badConnection)
+                            seal.reject(SignInError.badConnection)
                         default:
-                            reject(SignInError.other(error: typedError, code: nil, message: nil))
+                            seal.reject(SignInError.other(error: typedError, code: nil, message: nil))
                         }
                     } else {
-                        reject(SignInError.other(error: error, code: nil, message: nil))
+                        seal.reject(SignInError.other(error: error, code: nil, message: nil))
                     }
                 case .success(let json):
                     let token = StepicToken(json: json)
-                    fulfill((token, AuthorizationType.code))
+                    seal.fulfill((token, AuthorizationType.code))
                 }
             }
         }
     }
 
     func signInWithAccount(email: String, password: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             guard let passwordInfo = StepicApplicationsInfo.password else {
                 throw SignInError.noAppWithCredentials
             }
@@ -105,28 +105,28 @@ class AuthAPI {
                     if let typedError = error as? URLError {
                         switch typedError.code {
                         case .notConnectedToInternet:
-                            reject(SignInError.badConnection)
+                            seal.reject(SignInError.badConnection)
                         default:
-                            reject(SignInError.other(error: typedError, code: nil, message: nil))
+                            seal.reject(SignInError.other(error: typedError, code: nil, message: nil))
                         }
                     } else {
-                        reject(SignInError.other(error: error, code: nil, message: nil))
+                        seal.reject(SignInError.other(error: error, code: nil, message: nil))
                     }
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 497:
-                            reject(SignInError.manyAttempts)
+                            seal.reject(SignInError.manyAttempts)
                         case 401:
-                            reject(SignInError.invalidEmailAndPassword)
+                            seal.reject(SignInError.invalidEmailAndPassword)
                         default:
-                            reject(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            seal.reject(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
                         }
                     }
 
                     let token = StepicToken(json: json)
-                    fulfill((token, AuthorizationType.password))
+                    seal.fulfill((token, AuthorizationType.password))
                 }
             }
         }
@@ -140,7 +140,7 @@ class AuthAPI {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
         }
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             var credentials = ""
             switch authorizationType {
             case .none:
@@ -171,26 +171,26 @@ class AuthAPI {
                 switch response.result {
                 case .failure(let error):
                     logRefreshError(statusCode: response.response?.statusCode, message: "Error \(error.localizedDescription) while refreshing")
-                    reject(TokenRefreshError.other)
+                    seal.reject(TokenRefreshError.other)
                 case .success(let json):
                     let token = StepicToken(json: json)
                     if token.accessToken.isEmpty {
                         logRefreshError(statusCode: response.response?.statusCode, message: "Error after getting empty access token")
                         if response.response?.statusCode == 401 {
-                            reject(TokenRefreshError.noAccess)
+                            seal.reject(TokenRefreshError.noAccess)
                         } else {
-                            reject(TokenRefreshError.other)
+                            seal.reject(TokenRefreshError.other)
                         }
                     }
 
-                    fulfill(token)
+                    seal.fulfill(token)
                 }
             }
         }
     }
 
     func signUpWithAccount(firstname: String, lastname: String, email: String, password: String) -> Promise<Void> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             // FIXME: AuthInfo dependency
             let headers = AuthInfo.shared.initialHTTPHeaders
 
@@ -206,26 +206,26 @@ class AuthAPI {
             manager.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(SignUpError.other(error: error, code: nil, message: nil))
+                    seal.reject(SignUpError.other(error: error, code: nil, message: nil))
                 case .success(let json):
                     if let r = response.response,
                         !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 400:
-                            reject(SignUpError.validation(email: json["email"].array?[0].string, firstName: json["first_name"].array?[0].string, lastName: json["last_name"].array?[0].string, password: json["password"].array?[0].string))
+                            seal.reject(SignUpError.validation(email: json["email"].array?[0].string, firstName: json["first_name"].array?[0].string, lastName: json["last_name"].array?[0].string, password: json["password"].array?[0].string))
                         default:
-                            reject(SignUpError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                            seal.reject(SignUpError.other(error: nil, code: r.statusCode, message: json["error"].string))
                         }
                     }
 
-                    fulfill(())
+                    seal.fulfill(())
                 }
             }
         }
     }
 
     func signUpWithToken(socialToken: String, email: String?, provider: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }
@@ -252,25 +252,25 @@ class AuthAPI {
                     if let typedError = error as? URLError {
                         switch typedError.code {
                         case .notConnectedToInternet:
-                            reject(SignInError.badConnection)
+                            seal.reject(SignInError.badConnection)
                         default:
-                            reject(SignInError.other(error: typedError, code: nil, message: nil))
+                            seal.reject(SignInError.other(error: typedError, code: nil, message: nil))
                         }
                     } else {
-                        reject(SignInError.other(error: error, code: nil, message: nil))
+                        seal.reject(SignInError.other(error: error, code: nil, message: nil))
                     }
                 case .success(let json):
                     if json["error"] != JSON.null {
                         switch json["error"].stringValue {
                         case "social_signup_with_existing_email":
-                            reject(SignInError.existingEmail(provider: json["provider"].string, email: json["email"].string))
+                            seal.reject(SignInError.existingEmail(provider: json["provider"].string, email: json["email"].string))
                         default:
-                            reject(SignInError.other(error: nil, code: response.response?.statusCode, message: json["error"].string))
+                            seal.reject(SignInError.other(error: nil, code: response.response?.statusCode, message: json["error"].string))
                         }
                     }
 
                     let token = StepicToken(json: json)
-                    fulfill((token, AuthorizationType.code))
+                    seal.fulfill((token, AuthorizationType.code))
                 }
             }
         }
@@ -282,7 +282,7 @@ class AuthAPI {
 extension AuthAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func logInWithUsername(_ username: String, password: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: SignInError) -> Void) -> Request? {
-        signInWithAccount(email: username, password: password).then { token, authorizationType -> Void in
+        signInWithAccount(email: username, password: password).done { token, authorizationType in
             AuthInfo.shared.authorizationType = authorizationType
             success(token)
         }.catch { error in
@@ -297,7 +297,7 @@ extension AuthAPI {
 
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func refreshTokenWith(_ refresh_token: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error: TokenRefreshError) -> Void) -> Request? {
-        refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).then { token in
+        refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).done { token in
             success(token)
         }.catch { error in
             if let typedError = error as? TokenRefreshError {

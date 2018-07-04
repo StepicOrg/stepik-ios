@@ -27,20 +27,19 @@ enum NotificationPermissionStatus {
 }
 
 class NotificationPermissionManager {
-    func getCurrentPermissionStatus() -> Promise<NotificationPermissionStatus> {
-        return Promise<NotificationPermissionStatus> {
-            fulfill, _ in
+    func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
+        return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
                 let current = UNUserNotificationCenter.current()
                 current.getNotificationSettings(completionHandler: { (settings) in
-                    fulfill(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
+                    seal(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
                 })
             } else {
                 // Fallback on earlier versions, we can not determine if we denied push notifications or not
                 if UIApplication.shared.isRegisteredForRemoteNotifications {
-                    fulfill(.authorized)
+                    seal(.authorized)
                 } else {
-                    fulfill(.notDetermined)
+                    seal(.notDetermined)
                 }
             }
 

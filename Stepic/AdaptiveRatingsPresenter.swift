@@ -59,9 +59,9 @@ class AdaptiveRatingsPresenter {
             if downloadedScoreboard == nil || force {
                 return self.reloadRating(days: days, force: force)
             } else {
-                return Promise(value: downloadedScoreboard!)
+                return .value(downloadedScoreboard!)
             }
-        }.then { scoreboard -> Void in
+        }.done { scoreboard in
             self.scoreboard[days ?? 0] = scoreboard
             self.view?.setRatings(data: scoreboard)
             self.view?.reload()
@@ -78,13 +78,13 @@ class AdaptiveRatingsPresenter {
     }
 
     fileprivate func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             let currentUser = AuthInfo.shared.userId
             var usersForDeanonIds = [Int]()
             var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard? = nil
 
             ratingsAPI.cancelAllTasks()
-            ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Promise<[User]> in
+            ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Guarantee<[User]> in
                 loadedScoreboard = scoreboard
                 usersForDeanonIds = scoreboard.leaders.filter({ !$0.isFake }).map { $0.userId }
 
@@ -93,8 +93,8 @@ class AdaptiveRatingsPresenter {
                 self.usersAPI.retrieve(ids: usersForDeanonIds, existing: cachedUsers)
             }.recover { _ -> Promise<[User]> in
                 // Unable to fetch users -> recover with empty array
-                return Promise(value: [])
-            }.then { users -> Void in
+                return .value([])
+            }.done { users in
                 var userNames: [Int: String] = [:]
                 let locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")
                 users.forEach { user in
@@ -112,9 +112,9 @@ class AdaptiveRatingsPresenter {
                 }
 
                 let curScoreboard = ScoreboardViewData(allCount: loadedScoreboard?.allCount ?? 0, leaders: curLeaders)
-                fulfill(curScoreboard)
+                seal.fulfill(curScoreboard)
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

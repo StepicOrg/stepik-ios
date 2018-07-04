@@ -21,25 +21,25 @@ class FBSocialSDKProvider: NSObject, SocialSDKProvider {
     }
 
     func getAccessInfo() -> Promise<(token: String, email: String?)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             let loginManager = FBSDKLoginManager()
             loginManager.logIn(withReadPermissions: ["email"], from: nil, handler: {
                 result, error in
                 if error != nil {
-                    reject(SocialSDKError.connectionError)
+                    seal.reject(SocialSDKError.connectionError)
                     return
                 }
                 guard let res = result else {
-                    reject(SocialSDKError.connectionError)
+                    seal.reject(SocialSDKError.connectionError)
                     return
                 }
 
                 if res.isCancelled {
-                    reject(SocialSDKError.accessDenied)
+                    seal.reject(SocialSDKError.accessDenied)
                     return
                 }
                 if let t = res.token.tokenString {
-                    fulfill((token: t, email: nil))
+                    seal.fulfill((token: t, email: nil))
                     return
                 }
             })

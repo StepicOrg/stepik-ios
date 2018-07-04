@@ -33,7 +33,7 @@ class OnboardingCardStepViewController: CardStepViewController {
         // Skip refreshing for onboarding
         alignImages(in: self.stepWebView).then {
             self.getContentHeight(self.stepWebView)
-        }.then { height -> Void in
+        }.done { height in
             self.resetWebViewHeight(Float(height))
             self.scrollView.layoutIfNeeded()
         }.catch { _ in

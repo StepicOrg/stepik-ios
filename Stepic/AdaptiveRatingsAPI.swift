@@ -29,16 +29,16 @@ class AdaptiveRatingsAPI: APIEndpoint {
             params["token"] = token
         }
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: nil).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(error)
+                    seal.reject(error)
                 case .success(_):
                     switch response.response?.statusCode ?? 500 {
-                    case 200: fulfill(())
-                    case 401: reject(RatingsAPIError.badRequest)
-                    default: reject(RatingsAPIError.serverError)
+                    case 200: seal.fulfill(())
+                    case 401: seal.reject(RatingsAPIError.badRequest)
+                    default: seal.reject(RatingsAPIError.serverError)
                     }
                 }
             }
@@ -59,17 +59,17 @@ class AdaptiveRatingsAPI: APIEndpoint {
             params["user"] = userId
         }
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(error)
+                    seal.reject(error)
                 case .success(let json):
                     if response.response?.statusCode == 200 {
                         let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue, isFake: !$0["is_not_fake"].boolValue) }
-                        fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
+                        seal.fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
                     } else {
-                        reject(RatingsAPIError.serverError)
+                        seal.reject(RatingsAPIError.serverError)
                     }
                 }
             }
@@ -85,18 +85,18 @@ class AdaptiveRatingsAPI: APIEndpoint {
             params["token"] = token
         }
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(restoreName)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(error)
+                    seal.reject(error)
                 case .success(let json):
                     if response.response?.statusCode == 200 {
                         let exp = json["exp"].intValue
                         let streak = json["streak"].intValue
-                        fulfill((exp: exp, streak: streak))
+                        seal.fulfill((exp: exp, streak: streak))
                     } else {
-                        reject(RatingsAPIError.serverError)
+                        seal.reject(RatingsAPIError.serverError)
                     }
                 }
             }

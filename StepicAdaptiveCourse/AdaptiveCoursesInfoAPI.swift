@@ -17,11 +17,11 @@ class AdaptiveCoursesInfoAPI: APIEndpoint {
     let fileNamePrefix = "courses_"
 
     func retrieve(locale: String) -> Promise<[AdaptiveCourseInfo]> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             manager.request("\(RemoteConfig.shared.adaptiveCoursesInfoUrl)/\(fileNamePrefix)\(locale).json").responseData { response in
                 switch response.result {
                 case .failure(_):
-                    reject(AdaptiveCourseInfoAPIError.retrieve)
+                    seal.reject(AdaptiveCourseInfoAPIError.retrieve)
                 case .success(let data):
                     if response.response?.statusCode == 200 {
                         let json = JSON(data)
@@ -34,9 +34,9 @@ class AdaptiveCoursesInfoAPI: APIEndpoint {
                                 secondColor: UIColor(hex: $0["second_color"].intValue),
                                 mainColor: UIColor(hex: $0["main_color"].intValue))
                         }
-                        fulfill(info)
+                        seal.fulfill(info)
                     } else {
-                        reject(AdaptiveCourseInfoAPIError.badRequest)
+                        seal.reject(AdaptiveCourseInfoAPIError.badRequest)
                     }
                 }
             }
