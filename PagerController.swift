@@ -286,7 +286,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
         self.contentView.snp.makeConstraints { make -> Void in
             make.leading.trailing.equalTo(self.view)
-            make.top.equalTo(self.tabsView!).offset(-22)
+            make.top.equalTo(self.tabsView!.snp.bottom).offset(-22)
             make.bottom.equalTo(self.view).offset(0)
         }
         self.tabsView?.snp.makeConstraints { make -> Void in

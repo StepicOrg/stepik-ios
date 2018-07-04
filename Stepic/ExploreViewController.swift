@@ -39,7 +39,7 @@ class ExploreViewController: UIViewController, ExploreView {
 
         scrollView.snp.makeConstraints { make -> Void in
             make.leading.trailing.equalTo(self.view)
-            make.top.equalTo(searchBar)
+            make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(self.view)
         }
 
@@ -248,7 +248,7 @@ class ExploreViewController: UIViewController, ExploreView {
 
         vc.view.snp.makeConstraints { make -> Void in
             make.leading.trailing.bottom.equalTo(self.view)
-            make.top.equalTo(searchBar)
+            make.top.equalTo(searchBar.snp.bottom)
         }
     }
 
