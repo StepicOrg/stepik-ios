@@ -145,3 +145,17 @@ target 'Adaptive 3150 Screenshots' do
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
+target 'ExamEGERussian' do
+    platform :ios, '9.0'
+    
+    all_pods
+
+    target 'ExamEGERussianTests' do
+        inherit! :search_paths
+    end
+
+    target 'ExamEGERussianUITests' do
+        inherit! :search_paths
+    end
+end
+
