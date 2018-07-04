@@ -14,6 +14,7 @@ import PromiseKit
 enum SignInError: Error {
     case manyAttempts, noAppWithCredentials, invalidEmailAndPassword, badConnection
     case existingEmail(provider: String?, email: String?)
+    case noEmail(provider: String?)
     case other(error: Error?, code: Int?, message: String?)
 }
 
@@ -264,6 +265,8 @@ class AuthAPI {
                         switch json["error"].stringValue {
                         case "social_signup_with_existing_email":
                             reject(SignInError.existingEmail(provider: json["provider"].string, email: json["email"].string))
+                        case "social_signup_without_email":
+                            reject(SignInError.noEmail(provider: json["provider"].string))
                         default:
                             reject(SignInError.other(error: nil, code: response.response?.statusCode, message: json["error"].string))
                         }
