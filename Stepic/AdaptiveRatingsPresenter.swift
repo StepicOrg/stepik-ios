@@ -59,7 +59,7 @@ class AdaptiveRatingsPresenter {
             if downloadedScoreboard == nil || force {
                 return self.reloadRating(days: days, force: force)
             } else {
-                return Promise(value: downloadedScoreboard!)
+                return .value(downloadedScoreboard!)
             }
         }.then { scoreboard -> Void in
             self.scoreboard[days ?? 0] = scoreboard
@@ -93,7 +93,7 @@ class AdaptiveRatingsPresenter {
                 self.usersAPI.retrieve(ids: usersForDeanonIds, existing: cachedUsers)
             }.recover { _ -> Promise<[User]> in
                 // Unable to fetch users -> recover with empty array
-                return Promise(value: [])
+                return .value([])
             }.then { users -> Void in
                 var userNames: [Int: String] = [:]
                 let locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")

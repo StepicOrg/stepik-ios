@@ -185,7 +185,7 @@ class ProfilePresenter {
             }
 
             return strongSelf.userActivitiesAPI.retrieve(user: userId)
-        }.then { [weak self] activity -> Void in
+        }.done { [weak self] activity in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }
@@ -213,7 +213,7 @@ class ProfilePresenter {
             return strongSelf.usersAPI.retrieve(ids: [userId], existing: users)
         }.then { users -> Promise<User> in
             if let user = users.first {
-                return Promise(value: user)
+                return .value(user)
             } else {
                 return Promise(error: ProfileError.noProfile)
             }

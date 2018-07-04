@@ -83,7 +83,7 @@ class NotificationRegistrator {
             }
         }.then { remoteDevice -> Promise<Device> in
             if remoteDevice.isBadgesEnabled {
-                return Promise(value: remoteDevice)
+                return .value(remoteDevice)
             } else {
                 remoteDevice.isBadgesEnabled = true
                 return ApiDataDownloader.devices.update(remoteDevice)

@@ -273,15 +273,13 @@ final class Course: NSManagedObject, IDFetchable {
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
 
-        return Promise<[Course]> {
-            fulfill, _ in
-            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
-                results in
+        return Promise<[Course]> { seal in
+            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: { results in
                 guard let courses = results.finalResult as? [Course] else {
-                    fulfill([])
+                    seal.fulfill([])
                     return
                 }
-                fulfill(courses)
+                seal.fulfill(courses)
             })
             _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
         }

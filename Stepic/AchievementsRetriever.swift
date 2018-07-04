@@ -39,7 +39,7 @@ class AchievementsRetriever {
                 if !breakCondition(allAchievements) && hasNext {
                     return collect(page: page + 1)
                 } else {
-                    return Promise(value: allAchievements)
+                    return .value(allAchievements)
                 }
             }
         }
@@ -66,7 +66,7 @@ class AchievementsRetriever {
                 if !breakCondition(allProgresses) && hasNext {
                     return collect(page: page + 1)
                 } else {
-                    return Promise(value: allProgresses)
+                    return .value(allProgresses)
                 }
             }
         }

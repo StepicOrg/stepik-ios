@@ -49,7 +49,7 @@ class AdaptiveUserActions {
         return Promise { fulfill, reject in
             Course.fetchAsync([courseId]).then { courses -> Promise<[Course]> in
                 if let course = courses.first {
-                    return Promise(value: [course])
+                    return .value([course])
                 } else {
                     return self.coursesAPI.retrieve(ids: [courseId], existing: [])
                 }
@@ -71,7 +71,7 @@ class AdaptiveUserActions {
     internal func registerAdaptiveUser() -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
            let savedPassword = defaultsStorageManager.accountPassword {
-            return Promise(value: (email: savedEmail, password: savedPassword))
+            return .value((email: savedEmail, password: savedPassword))
         }
 
         let firstname = StringHelper.generateRandomString(of: 6)
@@ -133,7 +133,7 @@ class AdaptiveUserActions {
     internal func joinCourse(_ course: Course) -> Promise<Void> {
         if course.enrolled {
             print("adaptive cards steps: already joined course")
-            return Promise(value: ())
+            return .value(())
         }
 
         return Promise { fulfill, reject in
@@ -149,7 +149,7 @@ class AdaptiveUserActions {
         return Promise { fulfill, reject in
             Course.fetchAsync(ids).then { courses -> Promise<[Course]> in
                 if courses.count == ids.count {
-                    return Promise(value: courses)
+                    return .value(courses)
                 } else {
                     return self.coursesAPI.retrieve(ids: ids, existing: [])
                 }

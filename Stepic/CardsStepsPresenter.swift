@@ -221,7 +221,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             var title = ""
             strongSelf.state = .loading
 
-            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
+            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : .value(())
             checkToken().then {
                 startPromise
             }.then {
@@ -295,7 +295,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return Promise { fulfill, reject in
             self.recommendationsAPI.retrieve(course: course.id, count: count).then { lessonsIds -> Promise<[Lesson]> in
                 guard !lessonsIds.isEmpty else {
-                    return Promise(value: [])
+                    return .value([])
                 }
 
                 let cachedLessons = lessonsIds.flatMap { Lesson.getLesson($0) }
@@ -389,7 +389,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             self.unitsAPI.retrieve(lesson: lesson.id).then { unit -> Promise<Void> in
                 guard let assignmentId = unit.assignmentsArray.first else {
                     reject(CardsStepsError.viewNotSent)
-                    return Promise(value: ())
+                    return .value(())
                 }
 
                 return self.viewsAPI.create(step: step.id, assignment: assignmentId)
