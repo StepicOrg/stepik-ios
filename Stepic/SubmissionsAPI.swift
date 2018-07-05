@@ -108,18 +108,18 @@ class SubmissionsAPI: APIEndpoint {
 
     func create(stepName: String, attemptId: Int, reply: Reply) -> Promise<Submission> {
         let submission = Submission(attempt: attemptId, reply: reply)
-        return Promise { fulfill, reject in
-            create.request(requestEndpoint: "submissions", paramName: "submission", creatingObject: submission, withManager: manager).then {
-                submission, json -> Void in
+        return Promise { seal in
+            create.request(requestEndpoint: "submissions", paramName: "submission", creatingObject: submission, withManager: manager).done {
+                submission, json in
                 guard let json = json else {
-                    fulfill(submission)
+                    seal.fulfill(submission)
                     return
                 }
                 submission.initReply(json: json["submissions"].arrayValue[0]["reply"], stepName: stepName)
-                fulfill(submission)
+                seal.fulfill(submission)
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -128,7 +128,7 @@ class SubmissionsAPI: APIEndpoint {
 extension SubmissionsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        self.create(stepName: stepName, attemptId: attemptId, reply: reply).then {
+        self.create(stepName: stepName, attemptId: attemptId, reply: reply).done {
             submission in
             success(submission)
         }.catch {

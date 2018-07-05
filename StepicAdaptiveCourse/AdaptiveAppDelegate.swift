@@ -84,11 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
                     } else {
-                        return Promise(value: ())
+                        return .value(())
                     }
                 }.then { _ -> Promise<Course> in
                     actions.loadCourseAndJoin(courseId: courseId)
-                }.then { course -> Void in
+                }.done { course in
                     completion?(course)
                 }.catch { error in
                     failure?(error)
@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if !AuthInfo.shared.isAuthorized {
                         return actions.registerNewUser()
                     } else {
-                        return Promise(value: ())
+                        return .value(())
                     }
                 }.then { _ -> Promise<([Course], [AdaptiveCourseInfo])> in
                     var locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")

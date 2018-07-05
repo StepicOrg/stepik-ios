@@ -15,13 +15,11 @@ enum PerformRequestError: Error {
 }
 
 func checkToken() -> Promise<()> {
-    return Promise {
-        fulfill, reject in
+    return Promise { seal in
         ApiRequestPerformer.performAPIRequest({
-            fulfill(())
-        }, error: {
-            error in
-            reject(error)
+            seal.fulfill(())
+        }, error: { error in
+            seal.reject(error)
         })
     }
 }

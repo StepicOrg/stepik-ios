@@ -81,7 +81,7 @@ class ProfileAchievementsPresenter {
                 }
 
                 let kinds = allUniqueKinds.map { k, v in (k, v) }
-                return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
+                return .value(kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
             }
         }
 
@@ -95,7 +95,7 @@ class ProfileAchievementsPresenter {
                 return extractMoreKinds()
             } else {
                 let kinds = allUniqueKinds.map { k, v in (k, v) }
-                return Promise(value: kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
+                return .value(kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
             }
         }.then { kinds -> Promise<[AchievementProgressData]> in
             let promises = kinds.compactMap { [weak self] kind in
@@ -103,7 +103,7 @@ class ProfileAchievementsPresenter {
             }
 
             return when(fulfilled: promises)
-        }.then { [weak self] progressData -> Void in
+        }.done { [weak self] progressData in
             let viewData: [AchievementViewData] = progressData.compactMap { data in
                 guard let kindDescription = AchievementKind(rawValue: data.kind) else {
                     return nil

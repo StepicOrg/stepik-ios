@@ -14,7 +14,7 @@ class AchievementProgressesAPI: APIEndpoint {
     override var name: String { return "achievement-progresses" }
 
     func retrieve(user: Int, kind: String? = nil, sortByObtainDateDesc: Bool = false, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             var params = Parameters()
             if let kind = kind {
                 params["kind"] = kind
@@ -25,10 +25,10 @@ class AchievementProgressesAPI: APIEndpoint {
                 params["order"] = "-obtain_date"
             }
 
-            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).then { progresses, meta -> Void in
-                fulfill((progresses, meta))
+            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).done { progresses, meta in
+                seal.fulfill((progresses, meta))
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

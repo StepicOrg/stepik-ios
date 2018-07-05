@@ -14,17 +14,17 @@ class NotificationStatusesAPI: APIEndpoint {
     override var name: String { return "notification-statuses" }
 
     func retrieve() -> Promise<NotificationsStatus> {
-        return Promise { fulfill, reject in
-            retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: Array<NotificationsStatus>(), withManager: manager).then {
-                notificationStatuses, _, _ -> Void in
+        return Promise { seal in
+            retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: Array<NotificationsStatus>(), withManager: manager).done {
+                notificationStatuses, _, _ in
                 guard let status = notificationStatuses.first else {
-                    reject(ParsingError.badData)
+                    seal.reject(ParsingError.badData)
                     return
                 }
-                fulfill(status)
+                seal.fulfill(status)
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

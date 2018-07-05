@@ -15,14 +15,14 @@ class StepicsAPI: APIEndpoint {
     override var name: String { return "stepics" }
 
     func retrieveCurrentUser() -> Promise<User> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             manager.request("\(StepicApplicationsInfo.apiURL)/\(name)/1", parameters: nil, encoding: URLEncoding.default, headers: AuthInfo.shared.initialHTTPHeaders).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    reject(NetworkError(error: error))
+                    seal.reject(NetworkError(error: error))
                 case .success(let json):
                     let user = User(json: json["users"].arrayValue[0])
-                    fulfill(user)
+                    seal.fulfill(user)
                 }
             }
         }
@@ -32,7 +32,7 @@ class StepicsAPI: APIEndpoint {
 extension StepicsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
-        retrieveCurrentUser().then { success($0) }.catch { errorHandler($0) }
+        retrieveCurrentUser().done { success($0) }.catch { errorHandler($0) }
         return nil
     }
 }

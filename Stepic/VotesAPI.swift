@@ -23,6 +23,6 @@ class VotesAPI: APIEndpoint {
 extension VotesAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     func update(_ vote: Vote, success: @escaping ((Vote) -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        update(vote).then { success($0) }.catch { errorHandler($0.localizedDescription) }
+        update(vote).done { success($0) }.catch { errorHandler($0.localizedDescription) }
     }
 }

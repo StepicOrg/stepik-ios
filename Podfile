@@ -14,7 +14,7 @@ def shared_pods
     pod 'Fabric'
     pod 'Crashlytics', '~> 3.9'
     pod 'DeviceKit', '~> 1.0'
-    pod 'PromiseKit', '~> 4.4'
+    pod "PromiseKit", "~> 6.0"
 end
 
 def all_pods
@@ -53,7 +53,6 @@ def all_pods
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
     pod "RFKeyboardToolbar", "~> 1.3"
     pod 'TTTAttributedLabel'
-    pod 'PromiseKit', '~> 4.4'
     pod 'Atributika', '~> 4.0'
     pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'

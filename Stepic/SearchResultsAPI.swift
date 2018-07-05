@@ -61,14 +61,13 @@ class SearchResultsAPI: APIEndpoint {
     }
 
     func searchCourse(query: String, language: ContentLanguage?, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
-        return Promise<([SearchResult], Meta)> {
-            fulfill, reject in
+        return Promise<([SearchResult], Meta)> { seal in
             search(query: query, type: "course", language: language, page: page, headers: headers, success: {
                 searchResults, meta in
-                fulfill((searchResults, meta))
+                seal.fulfill((searchResults, meta))
             }, error: {
                 error in
-                reject(NetworkError(error: error))
+                seal.reject(NetworkError(error: error))
             })
         }
     }

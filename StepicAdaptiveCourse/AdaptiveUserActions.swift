@@ -29,27 +29,27 @@ class AdaptiveUserActions {
     }
 
     func registerNewUser() -> Promise<Void> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             checkToken().then {
                 self.registerAdaptiveUser()
             }.then { email, password -> Promise<User> in
                 self.logInUser(email: email, password: password)
             }.then { user -> Promise<Void> in
                 self.unregisterFromEmail(user: user)
-            }.then { _ -> Void in
-                fulfill(())
+            }.done { _ in
+                seal.fulfill(())
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     func loadCourseAndJoin(courseId: Int) -> Promise<Course> {
         var loadedCourse: Course!
-        return Promise { fulfill, reject in
+        return Promise { seal in
             Course.fetchAsync([courseId]).then { courses -> Promise<[Course]> in
                 if let course = courses.first {
-                    return Promise(value: [course])
+                    return .value([course])
                 } else {
                     return self.coursesAPI.retrieve(ids: [courseId], existing: [])
                 }
@@ -61,9 +61,9 @@ class AdaptiveUserActions {
                     return Promise(error: AdaptiveCardsStepsError.noCourse)
                 }
             }.then { _ in
-                fulfill(loadedCourse)
+                seal.fulfill(loadedCourse)
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -71,7 +71,7 @@ class AdaptiveUserActions {
     internal func registerAdaptiveUser() -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
            let savedPassword = defaultsStorageManager.accountPassword {
-            return Promise(value: (email: savedEmail, password: savedPassword))
+            return .value((email: savedEmail, password: savedPassword))
         }
 
         let firstname = StringHelper.generateRandomString(of: 6)
@@ -79,12 +79,12 @@ class AdaptiveUserActions {
         let email = "adaptive_\(StepicApplicationsInfo.adaptiveSupportedCourses.first ?? 0)_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
         let password = StringHelper.generateRandomString(of: 16)
 
-        return Promise { fulfill, reject in
-            self.authAPI.signUpWithAccount(firstname: firstname, lastname: lastname, email: email, password: password).then { _ -> Void in
-                fulfill((email: email, password: password))
+        return Promise { seal in
+            self.authAPI.signUpWithAccount(firstname: firstname, lastname: lastname, email: email, password: password).done { _ in
+                seal.fulfill((email: email, password: password))
             }.catch { error in
                 print("adaptive cards steps: error while user register, error = \(error)")
-                reject(AdaptiveCardsStepsError.userNotRegistered)
+                seal.reject(AdaptiveCardsStepsError.userNotRegistered)
             }
         }
     }
@@ -93,26 +93,26 @@ class AdaptiveUserActions {
         defaultsStorageManager.accountEmail = email
         defaultsStorageManager.accountPassword = password
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.authAPI.signInWithAccount(email: email, password: password).then { token, authorizationType -> Promise<User> in
                 AuthInfo.shared.token = token
                 AuthInfo.shared.authorizationType = authorizationType
 
                 return self.stepicsAPI.retrieveCurrentUser()
-            }.then { user -> Void in
+            }.done { user in
                 AuthInfo.shared.user = user
                 User.removeAllExcept(user)
 
-                fulfill(user)
+                seal.fulfill(user)
             }.catch { error in
                 print("adaptive cards steps: error while user login, error = \(error)")
-                reject(AdaptiveCardsStepsError.userNotLoggedIn)
+                seal.reject(AdaptiveCardsStepsError.userNotLoggedIn)
             }
         }
     }
 
     internal func unregisterFromEmail(user: User) -> Promise<Void> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.profilesAPI.retrieve(ids: [user.profile], existing: []).then { profiles -> Promise<Profile> in
                 if let profile = profiles.first {
                     profile.subscribedForMail = false
@@ -121,11 +121,11 @@ class AdaptiveUserActions {
                     print("adaptive cards stepts: profile not found")
                     return Promise(error: AdaptiveCardsStepsError.noProfile)
                 }
-            }.then { _ -> Void in
-                fulfill(())
+            }.done { _ in
+                seal.fulfill(())
             }.catch { error in
                 print("adaptive cards steps: error while unregister user from emails, error = \(error)")
-                reject(AdaptiveCardsStepsError.userNotUnregisteredFromEmails)
+                seal.reject(AdaptiveCardsStepsError.userNotUnregisteredFromEmails)
             }
         }
     }
@@ -133,40 +133,40 @@ class AdaptiveUserActions {
     internal func joinCourse(_ course: Course) -> Promise<Void> {
         if course.enrolled {
             print("adaptive cards steps: already joined course")
-            return Promise(value: ())
+            return .value(())
         }
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.enrollmentsAPI.joinCourse(course).then {
-                fulfill(())
+                seal.fulfill(())
             }.catch { _ in
-                reject(AdaptiveCardsStepsError.joinCourseFailed)
+                seal.reject(AdaptiveCardsStepsError.joinCourseFailed)
             }
         }
     }
 
     internal func loadCourses(ids: [Int]) -> Promise<[Course]> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             Course.fetchAsync(ids).then { courses -> Promise<[Course]> in
                 if courses.count == ids.count {
-                    return Promise(value: courses)
+                    return .value(courses)
                 } else {
                     return self.coursesAPI.retrieve(ids: ids, existing: [])
                 }
-            }.then { courses -> Void in
-                fulfill(courses)
+            }.done { courses in
+                seal.fulfill(courses)
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     internal func loadAdaptiveCoursesInfo(locale: String) -> Promise<[AdaptiveCourseInfo]> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             adaptiveCoursesInfoAPI.retrieve(locale: locale).then { info in
-                fulfill(info)
+                seal.fulfill(info)
             }.catch { _ in
-                reject(AdaptiveCardsStepsError.noCoursesInfo)
+                seal.reject(AdaptiveCardsStepsError.noCoursesInfo)
             }
         }
     }

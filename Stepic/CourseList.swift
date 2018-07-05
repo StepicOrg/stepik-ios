@@ -36,7 +36,7 @@ final class CourseList: NSManagedObject, IDFetchable {
         return ContentLanguage(languageString: languageString)
     }
 
-    class func recoverAsync(ids: [Int]) -> Promise<[CourseList]> {
+    class func recoverAsync(ids: [Int]) -> Guarantee<[CourseList]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: true)
 
@@ -48,15 +48,14 @@ final class CourseList: NSManagedObject, IDFetchable {
         request.predicate = idCompoundPredicate
         request.sortDescriptors = [descriptor]
 
-        return Promise<[CourseList]> {
-            fulfill, _ in
+        return Guarantee<[CourseList]> { seal in
             let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
                 results in
                 guard let courseLists = results.finalResult as? [CourseList] else {
-                    fulfill([])
+                    seal([])
                     return
                 }
-                fulfill(courseLists)
+                seal(courseLists)
             })
             _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
         }

@@ -13,34 +13,34 @@ import SwiftyJSON
 
 class RetrieveRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, id: T.IdType, updatingObject: T? = nil, withManager manager: Alamofire.SessionManager) -> Promise<T> {
-        return Promise { fulfill, reject in
-            checkToken().then {
+        return Promise { seal in
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)", method: .get, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
                     case .success(let json):
                         if updatingObject != nil {
                             updatingObject?.update(json: json[paramName].arrayValue[0])
                         } else {
-                            fulfill(T(json: json[paramName].arrayValue[0]))
+                            seal.fulfill(T(json: json[paramName].arrayValue[0]))
                         }
                     }
                 }
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T] = [], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
-        return Promise { fulfill, reject in
-            checkToken().then {
+        return Promise { seal in
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map {
@@ -53,40 +53,40 @@ class RetrieveRequestMaker {
                             }
                         }
                         let meta = Meta(json: json["meta"])
-                        fulfill((resultArray, meta, json))
+                        seal.fulfill((resultArray, meta, json))
                         CoreDataHelper.instance.save()
                     }
                 }
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T] = [], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta)> {
-        return Promise { fulfill, reject in
-            request(requestEndpoint: requestEndpoint, paramName: paramName, params: params, updatingObjects: updatingObjects, withManager: manager).then {
+        return Promise { seal in
+            request(requestEndpoint: requestEndpoint, paramName: paramName, params: params, updatingObjects: updatingObjects, withManager: manager).done {
                 objects, meta, _ in
-                fulfill((objects, meta))
+                seal.fulfill((objects, meta))
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     func requestWithFetching<T: IDFetchable>(requestEndpoint: String, paramName: String, params: Parameters, withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
-        return Promise { fulfill, reject in
-            checkToken().then {
+        return Promise { seal in
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
                     case .success(let json):
                         let ids = json[paramName].arrayValue.flatMap {T.getId(json: $0)}
-                        T.fetchAsync(ids: ids).then {
-                            existingObjects -> Void in
+                        T.fetchAsync(ids: ids).done {
+                            existingObjects in
                             var resultArray: [T] = []
                             for objectJSON in json[paramName].arrayValue {
                                 let existing = existingObjects.filter { obj in obj.hasEqualId(json: objectJSON) }
@@ -104,29 +104,29 @@ class RetrieveRequestMaker {
                             CoreDataHelper.instance.save()
 
                             let meta = Meta(json: json["meta"])
-                            fulfill((resultArray, meta, json))
+                            seal.fulfill((resultArray, meta, json))
                             CoreDataHelper.instance.save()
                         }.catch {
                             error in
-                            reject(error)
+                            seal.reject(error)
                         }
                     }
                 }
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     func requestWithFetching<T: IDFetchable>(requestEndpoint: String, paramName: String, params: Parameters, withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta)> {
-        return Promise { fulfill, reject in
-            requestWithFetching(requestEndpoint: requestEndpoint, paramName: paramName, params: params, withManager: manager).then {
+        return Promise { seal in
+            requestWithFetching(requestEndpoint: requestEndpoint, paramName: paramName, params: params, withManager: manager).done {
                 objects, meta, _ in
-                fulfill((objects, meta))
+                seal.fulfill((objects, meta))
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -135,14 +135,13 @@ class RetrieveRequestMaker {
         let params: Parameters = [
             "ids": ids
         ]
-        return Promise {
-            fulfill, reject in
-            checkToken().then {
+        return Promise { seal in
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
 
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
 
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
@@ -157,7 +156,7 @@ class RetrieveRequestMaker {
                         }
 
                         CoreDataHelper.instance.save()
-                        fulfill((resultArray, json))
+                        seal.fulfill((resultArray, json))
                     }
                 }
             }
@@ -165,14 +164,13 @@ class RetrieveRequestMaker {
     }
 
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, ids: [T.IdType], updating: [T], withManager manager: Alamofire.SessionManager) -> Promise<[T]> {
-        return Promise {
-            fulfill, reject in
-            request(requestEndpoint: requestEndpoint, paramName: paramName, ids: ids, updating: updating, withManager: manager).then {
+        return Promise { seal in
+            request(requestEndpoint: requestEndpoint, paramName: paramName, ids: ids, updating: updating, withManager: manager).done {
                 objects, _ in
-                fulfill(objects)
+                seal.fulfill(objects)
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
