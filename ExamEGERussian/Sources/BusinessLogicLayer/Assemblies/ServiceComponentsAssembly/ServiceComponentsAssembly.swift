@@ -8,11 +8,11 @@
 
 import Foundation
 
-// MARK: ServiceComponentsAssembly: ServiceComponents
-
 final class ServiceComponentsAssembly: ServiceComponents {
     
-    // MARK: Object Initialization
+    let userRegistrationService: UserRegistrationService
+    
+    let userSubscriptionsService: UserSubscriptionsService
     
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
@@ -29,11 +29,5 @@ final class ServiceComponentsAssembly: ServiceComponents {
             defaultsStorageManager: defaultsStorageManager
         )
     }
-    
-    // MARK: - UserRegistrationService
-    
-    let userRegistrationService: UserRegistrationService
-    
-    let userSubscriptionsService: UserSubscriptionsService
     
 }
