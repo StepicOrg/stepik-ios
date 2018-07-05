@@ -101,7 +101,7 @@ class SortingQuizViewController: QuizViewController {
     }
 
     override func getReply() -> Reply? {
-        let r = SortingReply(ordering: orderedOptions.flatMap({return positionForOptionInAttempt[$0]}))
+        let r = SortingReply(ordering: orderedOptions.compactMap { positionForOptionInAttempt[$0] } )
         return r
     }
 

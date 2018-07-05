@@ -34,7 +34,7 @@ class HTMLParsingUtil {
     static func getAllLinksWithText(_ htmlString: String, onlyTags: Bool = true) -> [(link: String, text: String)] {
         var res = [(link: String, text: String)]()
         if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
-            res += doc.css("a").flatMap {
+            res += doc.css("a").compactMap {
                 if let link = $0["href"],
                     let text = $0.text {
                     return (link: link, text: text)
@@ -81,7 +81,7 @@ class HTMLParsingUtil {
     static func getImageSrcLinks(_ htmlString: String) -> [String] {
         if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let imgNodes = doc.css("img")
-            return imgNodes.flatMap({return $0["src"]})
+            return imgNodes.compactMap { $0["src"] }
         } else {
             return []
         }
@@ -90,7 +90,7 @@ class HTMLParsingUtil {
     static func getCodeStrings(_ htmlString: String) -> [String] {
         if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let codeNodes = doc.css("code")
-            return codeNodes.flatMap({return $0.text})
+            return codeNodes.compactMap { $0.text }
         } else {
             return []
         }
@@ -100,7 +100,7 @@ class HTMLParsingUtil {
         if let doc = try? Kanna.HTML(html: "<html><body>\(htmlString)</body></html>", encoding: String.Encoding.utf8) {
             let nodes = doc.css("*")
             // Drop 2 first tags: html, body
-            let tags = Array(nodes.flatMap { $0.tagName }.dropFirst(2))
+            let tags = Array(nodes.compactMap { $0.tagName }.dropFirst(2))
             return tags
         } else {
             return []

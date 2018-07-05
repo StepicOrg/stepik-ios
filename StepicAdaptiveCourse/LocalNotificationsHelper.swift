@@ -46,7 +46,7 @@ enum LocalNotification {
                 localNotification.userInfo = ["type": "yesterday_zero"]
             } else if maxCurrentStreak == 1 {
                 // X points today, 0 points prev
-                let todayXP = statsManagers.flatMap({ $0.getLastDays(count: 1).first }).reduce(0, +)
+                let todayXP = statsManagers.compactMap({ $0.getLastDays(count: 1).first }).reduce(0, +)
                 localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
                 localNotification.userInfo = ["type": "yesterday"]
             } else {

@@ -295,7 +295,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                     return .value([])
                 }
 
-                let cachedLessons = lessonsIds.flatMap { Lesson.getLesson($0) }
+                let cachedLessons = lessonsIds.compactMap { Lesson.getLesson($0) }
                 return self.lessonsAPI.retrieve(ids: lessonsIds, existing: cachedLessons)
             }.done { lessons in
                 seal.fulfill(lessons)
@@ -313,7 +313,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
             let stepId = lesson.stepsArray[index]
 
-            let cachedSteps = [Step.getStepWithId(stepId)].flatMap { $0 }
+            let cachedSteps = [Step.getStepWithId(stepId)].compactMap { $0 }
             self.stepsAPI.retrieve(ids: [stepId], existing: cachedSteps).done { steps in
                 if let step = steps.first {
                     step.lesson = lesson

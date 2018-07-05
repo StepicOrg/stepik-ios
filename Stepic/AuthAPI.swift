@@ -21,7 +21,7 @@ enum SignUpError: Error {
     var firstError: String? {
         switch self {
         case .validation(let email, let firstName, let lastName, let password):
-            return [email, firstName, lastName, password].flatMap { $0 }.first
+            return [email, firstName, lastName, password].compactMap { $0 }.first
         default:
             return nil
         }

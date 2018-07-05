@@ -51,7 +51,7 @@ class Comment: JSONSerializable {
         replyCount = json["reply_count"].intValue
         isDeleted = json["is_deleted"].boolValue
         targetStepId = json["target"].intValue
-        repliesIds = json["replies"].arrayValue.flatMap {
+        repliesIds = json["replies"].arrayValue.compactMap {
             $0.int
         }
         isPinned = json["is_pinned"].boolValue
@@ -71,7 +71,7 @@ class Comment: JSONSerializable {
         replyCount = json["reply_count"].intValue
         isDeleted = json["is_deleted"].boolValue
         targetStepId = json["target"].intValue
-        repliesIds = json["replies"].arrayValue.flatMap {
+        repliesIds = json["replies"].arrayValue.compactMap {
             $0.int
         }
         isPinned = json["is_pinned"].boolValue
