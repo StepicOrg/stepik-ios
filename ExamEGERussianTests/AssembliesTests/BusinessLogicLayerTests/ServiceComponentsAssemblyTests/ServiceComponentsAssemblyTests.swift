@@ -16,12 +16,7 @@ class ServiceComponentsAssemblyTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        serviceComponents = ServiceComponentsAssembly(
-            authAPI: AuthAPI(),
-            stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI(),
-            defaultsStorageManager: DefaultsStorageManager()
-        )
+        serviceComponents = ServiceComponentsAssemblyTestsHelper().serviceComponents
     }
     
     override func tearDown() {

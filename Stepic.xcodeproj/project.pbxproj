@@ -2028,7 +2028,7 @@
 		2C59F02F20EB8AC800666EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F02D20EB8AC800666EE0 /* Main.storyboard */; };
 		2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */; };
-		2C59F03F20EB8ACA00666EE0 /* ExamEGERussianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */; };
+		2C59F03F20EB8ACA00666EE0 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F03E20EB8ACA00666EE0 /* MainViewControllerTests.swift */; };
 		2C59F04A20EB8ACA00666EE0 /* ExamEGERussianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
@@ -2223,6 +2223,7 @@
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */; };
 		2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */; };
+		2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */; };
 		2C6A76222045CE1E00C509A6 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
 		2C6A76232045CE2100C509A6 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2C6A76242045CE2400C509A6 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
@@ -5579,7 +5580,7 @@
 		2C59F03320EB8AC900666EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C59F03520EB8AC900666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEGERussianTests.swift; sourceTree = "<group>"; };
+		2C59F03E20EB8ACA00666EE0 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		2C59F04020EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEGERussianUITests.swift; sourceTree = "<group>"; };
@@ -5608,6 +5609,7 @@
 		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceComponentsAssemblyTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
+		2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceComponentsAssemblyTestsHelper.swift; sourceTree = "<group>"; };
 		2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupViewController.swift; sourceTree = "<group>"; };
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6B2F9F20D95B2800F7C976 /* AchievementNotificationBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationBannerView.swift; sourceTree = "<group>"; };
@@ -8340,8 +8342,8 @@
 			isa = PBXGroup;
 			children = (
 				2C6841BC20EE12590050155F /* AssembliesTests */,
-				2C59F03E20EB8ACA00666EE0 /* ExamEGERussianTests.swift */,
 				2C6841C120EE14AE0050155F /* LogicTests */,
+				2C6841C520EE1D160050155F /* PresentationTests */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -8590,7 +8592,7 @@
 		2C6841BD20EE12AA0050155F /* BusinessLogicLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */,
+				2C6841C820EE1F030050155F /* ServiceComponentsAssemblyTests */,
 			);
 			path = BusinessLogicLayerTests;
 			sourceTree = "<group>";
@@ -8609,6 +8611,39 @@
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
 			path = UserRegistrationServiceTests;
+			sourceTree = "<group>";
+		};
+		2C6841C520EE1D160050155F /* PresentationTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841C620EE1D6B0050155F /* ModulesTests */,
+			);
+			path = PresentationTests;
+			sourceTree = "<group>";
+		};
+		2C6841C620EE1D6B0050155F /* ModulesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841C720EE1D990050155F /* MainModuleTests */,
+			);
+			path = ModulesTests;
+			sourceTree = "<group>";
+		};
+		2C6841C720EE1D990050155F /* MainModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C59F03E20EB8ACA00666EE0 /* MainViewControllerTests.swift */,
+			);
+			path = MainModuleTests;
+			sourceTree = "<group>";
+		};
+		2C6841C820EE1F030050155F /* ServiceComponentsAssemblyTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */,
+				2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */,
+			);
+			path = ServiceComponentsAssemblyTests;
 			sourceTree = "<group>";
 		};
 		2C6B2F9520D7F1C000F7C976 /* AchievementAlert */ = {
@@ -14676,9 +14711,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C59F03F20EB8ACA00666EE0 /* ExamEGERussianTests.swift in Sources */,
+				2C59F03F20EB8ACA00666EE0 /* MainViewControllerTests.swift in Sources */,
 				2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
+				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

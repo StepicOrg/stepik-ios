@@ -14,12 +14,7 @@ class UserRegistrationServiceTests: XCTestCase {
     
     var isAuthorized = false
     
-    private let serviceComponents = ServiceComponentsAssembly(
-        authAPI: AuthAPI(),
-        stepicsAPI: StepicsAPI(),
-        profilesAPI: ProfilesAPI(),
-        defaultsStorageManager: DefaultsStorageManager()
-    )
+    private let serviceComponents = ServiceComponentsAssemblyTestsHelper().serviceComponents
     
     func testUserRegistration() {
         serviceComponents.userRegistrationService.registerNewUser()
