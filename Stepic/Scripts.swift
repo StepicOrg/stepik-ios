@@ -43,8 +43,10 @@ struct Scripts {
 
     fileprivate static var audioTagWrapperInitKey: String = "AudioTagWrapperInit"
 
+    fileprivate static var kotlinRunnableSamplesKey: String = "KotlinRunnableSamples"
+
     static var localJQueryScript: String {
-        return "\(loadScriptWithKey(localJQueryScriptKey))"
+        return loadScriptWithKey(localJQueryScriptKey)
     }
 
     static var localTexScript: String {
@@ -52,11 +54,11 @@ struct Scripts {
     }
 
     static var metaViewport: String {
-        return "\(loadScriptWithKey(metaViewportKey))"
+        return loadScriptWithKey(metaViewportKey)
     }
 
     static var mathJaxFinishedScript: String {
-        return "\(loadScriptWithKey(mathJaxFinishedScriptKey))"
+        return loadScriptWithKey(mathJaxFinishedScriptKey)
     }
 
     static var clickableImagesScript: String {
@@ -64,11 +66,15 @@ struct Scripts {
     }
 
     static var audioTagWrapper: String {
-        return "\(loadScriptWithKey(audioTagWrapperKey))"
+        return loadScriptWithKey(audioTagWrapperKey)
     }
 
     static var audioTagWrapperInit: String {
-        return "\(loadScriptWithKey(audioTagWrapperInitKey))"
+        return loadScriptWithKey(audioTagWrapperInitKey)
+    }
+
+    static var kotlinRunnableSamples: String {
+        return loadScriptWithKey(kotlinRunnableSamplesKey)
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
