@@ -25,7 +25,7 @@ final class RootNavigationManager {
     // MARK: Public API
     
     func setup(with window: UIWindow) {
-        let mainController: MainViewController = MainViewController.fromNib()
+        let mainController = MainViewController()
         mainController.userRegistrationService = serviceComponents.userRegistrationService
         let navigationController = UINavigationController(rootViewController: mainController)
         

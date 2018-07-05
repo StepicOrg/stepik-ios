@@ -1103,10 +1103,8 @@
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
-		2C19661620EE7178003A2277 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19661420EE7178003A2277 /* MainViewController.swift */; };
 		2C19661720EE7178003A2277 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C19661520EE7178003A2277 /* MainViewController.xib */; };
-		2C19661920EE7466003A2277 /* UIViewController+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19661820EE7466003A2277 /* UIViewController+fromNib.swift */; };
-		2C19661A20EE7466003A2277 /* UIViewController+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19661820EE7466003A2277 /* UIViewController+fromNib.swift */; };
+		2C19661B20EE8176003A2277 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19661420EE7178003A2277 /* MainViewController.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C1B60C11F4C4AEF00236804 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C1B60C21F4C4AEF00236804 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -5518,7 +5516,6 @@
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C19661420EE7178003A2277 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2C19661520EE7178003A2277 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		2C19661820EE7466003A2277 /* UIViewController+fromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+fromNib.swift"; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1B62B21F4C4B4300236804 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/3149/Auth.plist; sourceTree = "<group>"; };
 		2C1B62B31F4C4B4300236804 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/3149/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -7776,7 +7773,6 @@
 				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
 				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
 				62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */,
-				2C19661820EE7466003A2277 /* UIViewController+fromNib.swift */,
 				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
 				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
 			);
@@ -12639,7 +12635,6 @@
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
-				2C19661920EE7466003A2277 /* UIViewController+fromNib.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
@@ -14432,7 +14427,6 @@
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
 				2C9499B320ECBAC90049E9A8 /* SortingDataset.swift in Sources */,
 				2C949A7320ECD1850049E9A8 /* SkeletonViewAnimation.swift in Sources */,
-				2C19661620EE7178003A2277 /* MainViewController.swift in Sources */,
 				2C949A2120ECC5BE0049E9A8 /* ProfileInfoPresenter.swift in Sources */,
 				2C9499FD20ECC22D0049E9A8 /* Messages.swift in Sources */,
 				2C33CBE920EC3216009956B0 /* DevicesAPI.swift in Sources */,
@@ -14534,6 +14528,7 @@
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,
 				2C94998D20ECB7350049E9A8 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C33CBEA20EC321E009956B0 /* DiscussionProxiesAPI.swift in Sources */,
+				2C19661B20EE8176003A2277 /* MainViewController.swift in Sources */,
 				2C9499FB20ECC1780049E9A8 /* PostViewsExecutableTask.swift in Sources */,
 				2C949A5320ECCE010049E9A8 /* AuthButton.swift in Sources */,
 				2C9499D320ECBCE10049E9A8 /* MatchingReply.swift in Sources */,
@@ -14574,7 +14569,6 @@
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
 				2C9499DF20ECBDEC0049E9A8 /* StepikURLSessionConfiguration.swift in Sources */,
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
-				2C19661A20EE7466003A2277 /* UIViewController+fromNib.swift in Sources */,
 				2C949A0D20ECC4070049E9A8 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
