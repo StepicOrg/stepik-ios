@@ -14,24 +14,23 @@ final class RootNavigationManager {
     
     // MARK: - Instance Variables
     
-    private weak var mainViewController: MainViewController?
     private unowned let serviceComponents: ServiceComponents
     
     // MARK: Init
     
-    init(with window: UIWindow?, serviceComponents: ServiceComponents) {
-        guard let rootViewController = window?.rootViewController as? MainViewController else {
-            fatalError("RootViewController should be MainViewController")
-        }
-        
-        self.mainViewController = rootViewController
+    init(serviceComponents: ServiceComponents) {
         self.serviceComponents = serviceComponents
     }
     
     // MARK: Public API
     
-    func setup() {
-        mainViewController?.userRegistrationService = serviceComponents.userRegistrationService
+    func setup(with window: UIWindow) {
+        let mainController: MainViewController = MainViewController.fromNib()
+        mainController.userRegistrationService = serviceComponents.userRegistrationService
+        let navigationController = UINavigationController(rootViewController: mainController)
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
     
 }

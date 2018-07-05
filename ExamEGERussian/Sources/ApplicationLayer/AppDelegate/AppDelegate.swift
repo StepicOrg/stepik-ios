@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private lazy var rootNavigationManager: RootNavigationManager = {
-        return RootNavigationManager(with: self.window, serviceComponents: self.serviceComponents)
+        return RootNavigationManager(serviceComponents: self.serviceComponents)
     }()
     
     private lazy var serviceComponents: ServiceComponents = {
@@ -33,7 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        rootNavigationManager.setup()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        guard let window = window else {
+            fatalError("Failed to instantiate window")
+        }
+        
+        rootNavigationManager.setup(with: window)
         
         return true
     }
