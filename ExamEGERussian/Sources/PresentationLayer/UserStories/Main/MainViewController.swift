@@ -30,10 +30,11 @@ final class MainViewController: UIViewController {
     // MARK: Private API
     
     private func checkAccessToken() {
-        checkToken().then { [weak self] _ -> Void in
+        checkToken().done { [weak self] in
             if !AuthInfo.shared.isAuthorized {
-                self?.userRegistrationService?.registerNewUser()
-                    .then  { print($0) }
+                self?.userRegistrationService?
+                    .registerNewUser()
+                    .done  { print($0) }
                     .catch { print($0) }
             }
         }.catch { print($0) }

@@ -20,7 +20,7 @@ final class UserSubscriptionsServiceImplementation: UserSubscriptionsService {
     let profilesAPI: ProfilesAPI
     
     func unregisterFromEmail(user: User) -> Promise<User> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.profilesAPI.retrieve(
                 ids: [user.profile],
                 existing: []
@@ -30,15 +30,13 @@ final class UserSubscriptionsServiceImplementation: UserSubscriptionsService {
                     return self.profilesAPI.update(profile)
                 } else {
                     print("ExamEGERussian: profile not found")
-                    
                     return Promise(error: UserSubscriptionsServiceError.noProfile)
                 }
-            }.then { _ -> Void in
-                fulfill(user)
+            }.done { _ in
+                seal.fulfill(user)
             }.catch { error in
                 print("ExamEGERussian: failed to unregister user from email with error: \(error)")
-                
-                reject(UserSubscriptionsServiceError.userNotUnregisteredFromEmails)
+                seal.reject(UserSubscriptionsServiceError.userNotUnregisteredFromEmails)
             }
         }
     }

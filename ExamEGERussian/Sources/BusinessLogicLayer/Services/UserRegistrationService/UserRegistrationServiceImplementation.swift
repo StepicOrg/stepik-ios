@@ -35,17 +35,17 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
     let stepicsAPI: StepicsAPI
     
     func registerNewUser() -> Promise<User> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             checkToken().then {
                 self.registerUser()
             }.then { email, password -> Promise<User> in
                 self.logInUser(email: email, password: password)
             }.then { user in
                 self.userSubscriptionsService.unregisterFromEmail(user: user)
-            }.then { user -> Void in
-                fulfill(user)
+            }.done { user in
+                seal.fulfill(user)
             }.catch { error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -54,7 +54,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
         defaultsStorageManager.accountEmail = email
         defaultsStorageManager.accountPassword = password
         
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.authAPI.signInWithAccount(
                 email: email,
                 password: password
@@ -63,14 +63,14 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
                 AuthInfo.shared.authorizationType = authorizationType
                 
                 return self.stepicsAPI.retrieveCurrentUser()
-            }.then { user -> Void in
+            }.done { user in
                 AuthInfo.shared.user = user
                 User.removeAllExcept(user)
                 
-                fulfill(user)
+                seal.fulfill(user)
             }.catch { error in
                 print("ExamEgeRussian: failed to login user with error: \(error)")
-                reject(UserRegistrationServiceError.userNotLoggedIn)
+                seal.reject(UserRegistrationServiceError.userNotLoggedIn)
             }
         }
     }
@@ -80,7 +80,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
     private func registerUser() -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
             let savedPassword = defaultsStorageManager.accountPassword {
-            return Promise(value: (email: savedEmail, password: savedPassword))
+            return .value((email: savedEmail, password: savedPassword))
         }
         
         let firstname = StringHelper.generateRandomString(of: 6)
@@ -88,17 +88,17 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
         let email = "exam_ege_russian_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
         let password = StringHelper.generateRandomString(of: 16)
         
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.authAPI.signUpWithAccount(
                 firstname: firstname,
                 lastname: lastname,
                 email: email,
                 password: password
-            ).then { _ -> Void in
-                fulfill((email: email, password: password))
+            ).done {
+                seal.fulfill((email: email, password: password))
             }.catch { error in
                 print("ExamEgeRussian: failed to register new user with error: \(error)")
-                reject(UserRegistrationServiceError.userNotRegistered)
+                seal.reject(UserRegistrationServiceError.userNotRegistered)
             }
         }
     }
