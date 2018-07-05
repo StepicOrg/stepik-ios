@@ -12,6 +12,4 @@ protocol ServiceComponents: class {
     
     var userRegistrationService: UserRegistrationService { get }
     
-    var userSubscriptionsService: UserSubscriptionsService { get }
-    
 }

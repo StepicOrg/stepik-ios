@@ -4078,10 +4078,8 @@
 		2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
 		2CFE247620ECD88800AF1E3D /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
-		2CFE247A20ECDC1900AF1E3D /* UserSubscriptionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE247920ECDC1900AF1E3D /* UserSubscriptionsService.swift */; };
 		2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFE247B20ECF7F700AF1E3D /* Config.plist */; };
 		2CFE247D20ECFC1A00AF1E3D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
-		2CFE247F20ED061A00AF1E3D /* UserSubscriptionsServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE247E20ED061A00AF1E3D /* UserSubscriptionsServiceImplementation.swift */; };
 		2CFE248120ED112100AF1E3D /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFE248020ED112100AF1E3D /* Auth.plist */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		51CB17C528DD51B175CC3FA0 /* Pods_ExamEGERussianUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D508E4A02170116945287545 /* Pods_ExamEGERussianUITests.framework */; };
@@ -5763,9 +5761,7 @@
 		2CF425302024C114002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
-		2CFE247920ECDC1900AF1E3D /* UserSubscriptionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionsService.swift; sourceTree = "<group>"; };
 		2CFE247B20ECF7F700AF1E3D /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		2CFE247E20ED061A00AF1E3D /* UserSubscriptionsServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionsServiceImplementation.swift; sourceTree = "<group>"; };
 		2CFE248020ED112100AF1E3D /* Auth.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
 		37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3873CC770A93C9BD4A7F62AB /* Pods-ExamEGERussianTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -8458,7 +8454,6 @@
 			isa = PBXGroup;
 			children = (
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
-				2CFE247820ECDC0000AF1E3D /* UserSubscriptionsService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -9137,15 +9132,6 @@
 				2C97041A1F3B0B7200C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
-			sourceTree = "<group>";
-		};
-		2CFE247820ECDC0000AF1E3D /* UserSubscriptionsService */ = {
-			isa = PBXGroup;
-			children = (
-				2CFE247920ECDC1900AF1E3D /* UserSubscriptionsService.swift */,
-				2CFE247E20ED061A00AF1E3D /* UserSubscriptionsServiceImplementation.swift */,
-			);
-			path = UserSubscriptionsService;
 			sourceTree = "<group>";
 		};
 		62E981C98BDA0C5DD5100480 /* ProfileInfo */ = {
@@ -14575,7 +14561,6 @@
 				2C949A0320ECC2D70049E9A8 /* NotificationsPresenter.swift in Sources */,
 				2C33CC0820EC33CD009956B0 /* User.swift in Sources */,
 				2C949A5920ECCE800049E9A8 /* SettingsViewController.swift in Sources */,
-				2CFE247A20ECDC1900AF1E3D /* UserSubscriptionsService.swift in Sources */,
 				2C0BD98920ED321B0022C454 /* RootNavigationManager.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
 				2C949A3020ECC6D10049E9A8 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -14684,7 +14669,6 @@
 				2CFE247120ECD80D00AF1E3D /* AlamofireExtensions.swift in Sources */,
 				2C33CBDD20EC2E50009956B0 /* DefaultsStorageManager.swift in Sources */,
 				2C9499A120ECB9430049E9A8 /* WatchSessionManager.swift in Sources */,
-				2CFE247F20ED061A00AF1E3D /* UserSubscriptionsServiceImplementation.swift in Sources */,
 				2C9499DD20ECBDCF0049E9A8 /* TCBlobDownloadManager.swift in Sources */,
 				2C33CC1020EC3418009956B0 /* AmplitudeAnalyticsEvents.swift in Sources */,
 				2C9499F420ECC0C40049E9A8 /* ExecutableTaskTypes.swift in Sources */,

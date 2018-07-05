@@ -12,20 +12,15 @@ final class ServiceComponentsAssembly: ServiceComponents {
     
     let userRegistrationService: UserRegistrationService
     
-    let userSubscriptionsService: UserSubscriptionsService
-    
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
          defaultsStorageManager: DefaultsStorageManager
         ) {
-        self.userSubscriptionsService = UserSubscriptionsServiceImplementation(
-            profilesAPI: profilesAPI
-        )
         self.userRegistrationService = UserRegistrationServiceImplementation(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
-            userSubscriptionsService: userSubscriptionsService,
+            profilesAPI: profilesAPI,
             defaultsStorageManager: defaultsStorageManager
         )
     }

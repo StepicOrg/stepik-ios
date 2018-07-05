@@ -10,29 +10,29 @@ import Foundation
 import PromiseKit
 
 final class UserRegistrationServiceImplementation: UserRegistrationService {
+
+    // MARK: Instance Properties
+
+    let authAPI: AuthAPI
+    let stepicsAPI: StepicsAPI
+    let profilesAPI: ProfilesAPI
+
+    let defaultsStorageManager: DefaultsStorageManager
     
-    let userSubscriptionsService: UserSubscriptionsService
-    
-    // MARK: Initializers
+    // MARK: - Initializers
     
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
-         userSubscriptionsService: UserSubscriptionsService,
+         profilesAPI: ProfilesAPI,
          defaultsStorageManager: DefaultsStorageManager
         ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
-        self.userSubscriptionsService = userSubscriptionsService
+        self.profilesAPI = profilesAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
     
     // MARK: - UserRegistrationService
-    
-    let defaultsStorageManager: DefaultsStorageManager
-    
-    let authAPI: AuthAPI
-    
-    let stepicsAPI: StepicsAPI
     
     func registerNewUser() -> Promise<User> {
         return Promise { seal in
@@ -41,7 +41,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             }.then { email, password -> Promise<User> in
                 self.logInUser(email: email, password: password)
             }.then { user in
-                self.userSubscriptionsService.unregisterFromEmail(user: user)
+                self.unregisterFromEmail(user: user)
             }.done { user in
                 seal.fulfill(user)
             }.catch { error in
@@ -99,6 +99,28 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             }.catch { error in
                 print("ExamEgeRussian: failed to register new user with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notRegistered)
+            }
+        }
+    }
+
+    private func unregisterFromEmail(user: User) -> Promise<User> {
+        return Promise { seal in
+            self.profilesAPI.retrieve(
+                ids: [user.profile],
+                existing: []
+            ).then { profiles -> Promise<Profile> in
+                if let profile = profiles.first {
+                    profile.subscribedForMail = false
+                    return self.profilesAPI.update(profile)
+                } else {
+                    print("ExamEGERussian: profile not found")
+                    return Promise(error: UserRegistrationServiceError.noProfileFound)
+                }
+            }.done { _ in
+                seal.fulfill(user)
+            }.catch { error in
+                print("ExamEGERussian: failed to unregister user from email with error: \(error)")
+                seal.reject(UserRegistrationServiceError.notUnregisteredFromEmails)
             }
         }
     }
