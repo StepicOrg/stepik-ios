@@ -106,7 +106,7 @@ enum CourseListType {
                 searchResultsAPI.searchCourse(query: query, language: requestedLanguage, page: page).then {
                     (searchResults, meta) -> Promise<([Course])> in
                     resultMeta = meta
-                    searchCoursesIDs = searchResults.flatMap { $0.courseId }
+                    searchCoursesIDs = searchResults.compactMap { $0.courseId }
                     return coursesAPI.retrieve(ids: searchCoursesIDs, existing: Course.getCourses(searchCoursesIDs))
                     }.done { courses in
                         let resultCourses = Sorter.sort(courses, byIds: searchCoursesIDs)

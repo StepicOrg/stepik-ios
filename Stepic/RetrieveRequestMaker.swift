@@ -84,7 +84,7 @@ class RetrieveRequestMaker {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
                     case .success(let json):
-                        let ids = json[paramName].arrayValue.flatMap {T.getId(json: $0)}
+                        let ids = json[paramName].arrayValue.compactMap { T.getId(json: $0) }
                         T.fetchAsync(ids: ids).done {
                             existingObjects in
                             var resultArray: [T] = []

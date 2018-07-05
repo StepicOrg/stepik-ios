@@ -216,7 +216,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     private func shouldReloadAll(newLists: [CourseList]) -> Bool {
-        return newLists.map { getId(forList: $0) } != blocks.flatMap {
+        return newLists.map { getId(forList: $0) } != blocks.compactMap {
             switch $0.listType {
             case .collection(ids: _):
                 return $0.ID

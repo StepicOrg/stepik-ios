@@ -98,7 +98,7 @@ class CourseListViewController: UIViewController, CourseListView {
     func add(addedCourses: [CourseViewData], courses: [CourseViewData]) {
         self.courses = courses
         let addedIndexes: [Int] = getChangedIndexes(changedCourses: addedCourses, courses: courses)
-        let addedIndexPaths = addedIndexes.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        let addedIndexPaths = addedIndexes.compactMap { delegate?.indexPathForIndex(index: $0) }
 
         delegate?.addElements(atIndexPaths: addedIndexPaths)
     }
@@ -230,8 +230,8 @@ class CourseListViewController: UIViewController, CourseListView {
             return
         }
         self.courses = courses
-        let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
-        let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        let deletingIndexPaths = deletingIds.compactMap { delegate?.indexPathForIndex(index: $0) }
+        let insertingIndexPaths = insertingIds.compactMap { delegate?.indexPathForIndex(index: $0) }
         delegate?.updateCells(deletingIndexPaths: deletingIndexPaths, insertingIndexPaths: insertingIndexPaths)
     }
 

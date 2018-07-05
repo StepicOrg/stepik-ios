@@ -23,7 +23,7 @@ class RecommendationsAPI: APIEndpoint {
                 case .failure(let error):
                     seal.reject(NetworkError(error: error))
                 case .success(let json):
-                    seal.fulfill(json["recommendations"].arrayValue.flatMap({ $0["lesson"].int }))
+                    seal.fulfill(json["recommendations"].arrayValue.compactMap { $0["lesson"].int })
                 }
             }
         }

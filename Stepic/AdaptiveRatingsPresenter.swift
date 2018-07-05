@@ -146,7 +146,7 @@ class AdaptiveRatingsPresenter {
         }
 
         let noun = nouns[hash(userId) % nouns.count]
-        let adjsByGender = adjs.flatMap { noun.1 == $0.1 ? $0 : nil }
+        let adjsByGender = adjs.compactMap { noun.1 == $0.1 ? $0 : nil }
         let adjNum = hash(userId) / nouns.count
 
         return "\(adjsByGender[adjNum].0.capitalized) \(noun.0)"
