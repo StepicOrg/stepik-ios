@@ -70,7 +70,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
                 seal.fulfill(user)
             }.catch { error in
                 print("ExamEgeRussian: failed to login user with error: \(error)")
-                seal.reject(UserRegistrationServiceError.userNotLoggedIn)
+                seal.reject(UserRegistrationServiceError.notLoggedIn)
             }
         }
     }
@@ -98,7 +98,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
                 seal.fulfill((email: email, password: password))
             }.catch { error in
                 print("ExamEgeRussian: failed to register new user with error: \(error)")
-                seal.reject(UserRegistrationServiceError.userNotRegistered)
+                seal.reject(UserRegistrationServiceError.notRegistered)
             }
         }
     }

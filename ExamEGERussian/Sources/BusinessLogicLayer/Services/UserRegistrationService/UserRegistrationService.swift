@@ -12,8 +12,8 @@ import PromiseKit
 // MARK: UserRegistrationServiceError: Error
 
 enum UserRegistrationServiceError: Error {
-    case userNotRegistered
-    case userNotLoggedIn
+    case notRegistered
+    case notLoggedIn
 }
 
 // MARK: - UserRegistrationService -
