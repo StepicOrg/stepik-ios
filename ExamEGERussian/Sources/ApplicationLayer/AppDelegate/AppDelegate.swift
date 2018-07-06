@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
             profilesAPI: ProfilesAPI(),
-            defaultsStorageManager: DefaultsStorageManager()
+            defaultsStorageManager: DefaultsStorageManager(),
+            randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )
     }()
     

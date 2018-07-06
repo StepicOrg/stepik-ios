@@ -15,13 +15,15 @@ final class ServiceComponentsAssembly: ServiceComponents {
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
-         defaultsStorageManager: DefaultsStorageManager
+         defaultsStorageManager: DefaultsStorageManager,
+         randomCredentialsGenerator: RandomCredentialsGenerator
         ) {
         self.userRegistrationService = UserRegistrationServiceImplementation(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
             profilesAPI: profilesAPI,
-            defaultsStorageManager: defaultsStorageManager
+            defaultsStorageManager: defaultsStorageManager,
+            randomCredentialsGenerator: randomCredentialsGenerator
         )
     }
     

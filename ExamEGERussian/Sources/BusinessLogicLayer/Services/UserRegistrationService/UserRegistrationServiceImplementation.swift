@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 final class UserRegistrationServiceImplementation: UserRegistrationService {
-
+    
     // MARK: Instance Properties
 
     let authAPI: AuthAPI
@@ -19,17 +19,21 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
 
     let defaultsStorageManager: DefaultsStorageManager
     
+    let randomCredentialsGenerator: RandomCredentialsGenerator
+    
     // MARK: - Initializers
     
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
-         defaultsStorageManager: DefaultsStorageManager
+         defaultsStorageManager: DefaultsStorageManager,
+         randomCredentialsGenerator: RandomCredentialsGenerator
         ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
         self.defaultsStorageManager = defaultsStorageManager
+        self.randomCredentialsGenerator = randomCredentialsGenerator
     }
     
     // MARK: - UserRegistrationService
@@ -75,35 +79,31 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
         }
     }
     
-    // MARK: Private API
-    
-    private func registerUser() -> Promise<(email: String, password: String)> {
+    func registerUser() -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
             let savedPassword = defaultsStorageManager.accountPassword {
             return .value((email: savedEmail, password: savedPassword))
         }
-        
-        let firstname = StringHelper.generateRandomString(of: 6)
-        let lastname = StringHelper.generateRandomString(of: 6)
-        let email = "exam_ege_russian_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
-        let password = StringHelper.generateRandomString(of: 16)
+
+        let email = randomCredentialsGenerator.email
+        let password = randomCredentialsGenerator.password
         
         return Promise { seal in
             self.authAPI.signUpWithAccount(
-                firstname: firstname,
-                lastname: lastname,
+                firstname: randomCredentialsGenerator.firstname,
+                lastname: randomCredentialsGenerator.lastname,
                 email: email,
                 password: password
             ).done {
                 seal.fulfill((email: email, password: password))
             }.catch { error in
-                print("ExamEgeRussian: failed to register new user with error: \(error)")
+                print("UserRegistrationService: failed to register new user with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notRegistered)
             }
         }
     }
 
-    private func unregisterFromEmail(user: User) -> Promise<User> {
+    func unregisterFromEmail(user: User) -> Promise<User> {
         return Promise { seal in
             self.profilesAPI.retrieve(
                 ids: [user.profile],
@@ -113,13 +113,13 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
                     profile.subscribedForMail = false
                     return self.profilesAPI.update(profile)
                 } else {
-                    print("ExamEGERussian: profile not found")
+                    print("UserRegistrationService: profile not found")
                     return Promise(error: UserRegistrationServiceError.noProfileFound)
                 }
             }.done { _ in
                 seal.fulfill(user)
             }.catch { error in
-                print("ExamEGERussian: failed to unregister user from email with error: \(error)")
+                print("UserRegistrationService: failed to unregister user from email with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notUnregisteredFromEmails)
             }
         }

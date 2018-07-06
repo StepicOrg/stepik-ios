@@ -4049,6 +4049,32 @@
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
 		2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */; };
+		2CF2246A20EF969F0093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2246D20EF97230093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246C20EF97230093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2246E20EF9D400093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2246F20EF9D400093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2247020EF9D420093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2247120EF9D430093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2247220EF9D440093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2247320EF9D460093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
+		2CF2247420EF9D870093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247520EF9D880093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247620EF9D890093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247720EF9D890093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247820EF9D8A0093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247920EF9D8B0093D844 /* UserRegistrationServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */; };
+		2CF2247A20EF9D960093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2247B20EF9D960093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2247C20EF9D970093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2247D20EF9D980093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2247E20EF9D980093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2247F20EF9D9A0093D844 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */; };
+		2CF2248120EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2248220EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2248320EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2248420EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2248520EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
+		2CF2248620EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */; };
 		2CF425262024A5EC002D7305 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
 		2CF425272024A5F0002D7305 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2CF425282024A5F3002D7305 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
@@ -5757,6 +5783,9 @@
 		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
 		2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikPlaceholderView.swift; sourceTree = "<group>"; };
 		2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceMock.swift; sourceTree = "<group>"; };
+		2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGenerator.swift; sourceTree = "<group>"; };
+		2CF2246C20EF97230093D844 /* RandomCredentialsGeneratorImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGeneratorImplementation.swift; sourceTree = "<group>"; };
+		2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGeneratorImplementation.swift; sourceTree = "<group>"; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
@@ -8170,6 +8199,7 @@
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
 				2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */,
 				2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */,
+				2CF2248020EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -8404,8 +8434,9 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05520EB8D1A00666EE0 /* ApplicationLayer */,
-				2C59F05C20EB8F0D00666EE0 /* PresentationLayer */,
 				2C59F06220EB9FE500666EE0 /* BusinessLogicLayer */,
+				2C59F05C20EB8F0D00666EE0 /* PresentationLayer */,
+				2CF2246820EF96580093D844 /* Helpers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -9111,6 +9142,23 @@
 				2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */,
 			);
 			name = StepikPlaceholderView;
+			sourceTree = "<group>";
+		};
+		2CF2246820EF96580093D844 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2CF2246B20EF97110093D844 /* RandomCredentialsGenerator */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2CF2246B20EF97110093D844 /* RandomCredentialsGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				2CF2246920EF969F0093D844 /* RandomCredentialsGenerator.swift */,
+				2CF2246C20EF97230093D844 /* RandomCredentialsGeneratorImplementation.swift */,
+			);
+			path = RandomCredentialsGenerator;
 			sourceTree = "<group>";
 		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
@@ -13441,6 +13489,7 @@
 				08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */,
+				2CF2247D20EF9D980093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */,
 				2C1B60E01F4C4AEF00236804 /* CoursesAPI.swift in Sources */,
 				086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
@@ -13609,9 +13658,11 @@
 				2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */,
 				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
+				2CF2248420EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
+				2CF2247720EF9D890093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */,
 				2C608B1F2045698B006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
 				2C1B61811F4C4AEF00236804 /* Sorter.swift in Sources */,
@@ -13854,6 +13905,7 @@
 				2C608AEE2045691A006870BB /* StepCardView.swift in Sources */,
 				2C1B62351F4C4AEF00236804 /* StandardsExtensions.swift in Sources */,
 				2C1B62361F4C4AEF00236804 /* LabelExtension.swift in Sources */,
+				2CF2247120EF9D430093D844 /* UserRegistrationService.swift in Sources */,
 				2C1B62371F4C4AEF00236804 /* ButtonExtension.swift in Sources */,
 				2C1B62381F4C4AEF00236804 /* RecommendationsAPI.swift in Sources */,
 				2C1B62391F4C4AEF00236804 /* UIImageViewExtension.swift in Sources */,
@@ -13929,6 +13981,7 @@
 				08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */,
+				2CF2247E20EF9D980093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */,
 				2C1B62F11F4C590700236804 /* CoursesAPI.swift in Sources */,
 				086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */,
@@ -14097,9 +14150,11 @@
 				2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */,
 				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
+				2CF2248520EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
+				2CF2247820EF9D8A0093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */,
 				2C608B202045698C006870BB /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
 				2C1B63921F4C590700236804 /* Sorter.swift in Sources */,
@@ -14342,6 +14397,7 @@
 				2C608AED2045691A006870BB /* StepCardView.swift in Sources */,
 				2C1B64461F4C590700236804 /* StandardsExtensions.swift in Sources */,
 				2C1B64471F4C590700236804 /* LabelExtension.swift in Sources */,
+				2CF2247220EF9D440093D844 /* UserRegistrationService.swift in Sources */,
 				2C1B64481F4C590700236804 /* ButtonExtension.swift in Sources */,
 				2C1B64491F4C590700236804 /* RecommendationsAPI.swift in Sources */,
 				2C1B644A1F4C590700236804 /* UIImageViewExtension.swift in Sources */,
@@ -14490,6 +14546,7 @@
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2C949A0120ECC29B0049E9A8 /* NotificationsBadgesManager.swift in Sources */,
+				2CF2246A20EF969F0093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				2C949A4620ECCA320049E9A8 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
@@ -14639,6 +14696,7 @@
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
 				2C949A1220ECC4930049E9A8 /* NotificationRequestAlertManager.swift in Sources */,
 				2C949A0620ECC3130049E9A8 /* AlertManager.swift in Sources */,
+				2CF2246D20EF97230093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C33CBE420EC3135009956B0 /* StepicToken.swift in Sources */,
 				2C33CBFC20EC32C1009956B0 /* ProfilesAPI.swift in Sources */,
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
@@ -14771,6 +14829,7 @@
 				08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				08A9F7111FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
 				2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */,
+				2CF2248220EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */,
 				2C89A98F1F4C289900227C3B /* StepTabView.swift in Sources */,
 				2C89A9901F4C289900227C3B /* DiscussionCountView.swift in Sources */,
@@ -15100,6 +15159,7 @@
 				2C6A76422045CEB900C509A6 /* NotificationsSection.swift in Sources */,
 				2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */,
 				2C89AA9E1F4C289900227C3B /* ApiRequest.swift in Sources */,
+				2CF2246F20EF9D400093D844 /* UserRegistrationService.swift in Sources */,
 				2C89AA9F1F4C289900227C3B /* AuthAPI.swift in Sources */,
 				2C89AAA01F4C289900227C3B /* QueriesAPI.swift in Sources */,
 				2C89AAA11F4C289900227C3B /* AutocompleteWords.swift in Sources */,
@@ -15175,6 +15235,7 @@
 				2C89AADB1F4C289900227C3B /* CodeTemplate.swift in Sources */,
 				2C89AADD1F4C289900227C3B /* StringHelper.swift in Sources */,
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
+				2CF2247B20EF9D960093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				086FC6AC1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C89AADF1F4C289900227C3B /* AdaptiveAppDelegate.swift in Sources */,
 				62E9879A89A2EFFA5CCAED86 /* StepikURLSessionConfiguration.swift in Sources */,
@@ -15190,6 +15251,7 @@
 				62E985A6228659D32EDE2231 /* StreakNotificationsControlPresenter.swift in Sources */,
 				62E98F967FBB258240185AA0 /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E98F998D66438F26E5A929 /* ProfileDescriptionPresenter.swift in Sources */,
+				2CF2247520EF9D880093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				62E9810B72ACC505856D8329 /* PinsMapPresenter.swift in Sources */,
 				62E98AB201BD9C1AFEAFA88E /* PinsMapBlockContentView.swift in Sources */,
 				62E981DDEADDC9E1E7E21CB3 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
@@ -15243,6 +15305,7 @@
 				2C97312B1F4C38F600AC9301 /* UsersAPI.swift in Sources */,
 				080F211F2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
 				2C608B4620456A7E006870BB /* AdaptiveRatingsAPI.swift in Sources */,
+				2CF2247C20EF9D970093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				2C97312C1F4C38F600AC9301 /* StepsAPI.swift in Sources */,
 				2C97312D1F4C38F600AC9301 /* AssignmentsAPI.swift in Sources */,
 				08B062E21FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
@@ -15384,6 +15447,7 @@
 				2C9731B21F4C38F600AC9301 /* SectionNavigationDelegate.swift in Sources */,
 				2C9731B31F4C38F600AC9301 /* ReplaceLastSegue.swift in Sources */,
 				2C9731B41F4C38F600AC9301 /* StyledNavigationViewController.swift in Sources */,
+				2CF2247620EF9D890093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				08CBA32C1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C9731B51F4C38F600AC9301 /* StyledTabBarViewController.swift in Sources */,
 				2C9731B61F4C38F600AC9301 /* CodeReply.swift in Sources */,
@@ -15420,6 +15484,7 @@
 				2C9731CF1F4C38F600AC9301 /* ControllerHelper.swift in Sources */,
 				2C9731D01F4C38F600AC9301 /* GCDThings.swift in Sources */,
 				086D5B4420127A25000F7715 /* Tooltip.swift in Sources */,
+				2CF2247020EF9D420093D844 /* UserRegistrationService.swift in Sources */,
 				2C9731D11F4C38F600AC9301 /* GlobalFunctions.swift in Sources */,
 				2C608B0020456952006870BB /* OnboardingCardStepViewController.swift in Sources */,
 				2C9731D31F4C38F600AC9301 /* AdaptiveRatingHelper.swift in Sources */,
@@ -15565,6 +15630,7 @@
 				2C608AF92045694A006870BB /* CardStepPresenter.swift in Sources */,
 				08EDD62F1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C97323F1F4C38F600AC9301 /* Section+CoreDataProperties.swift in Sources */,
+				2CF2248320EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C9732401F4C38F600AC9301 /* Section.swift in Sources */,
 				2C9732411F4C38F600AC9301 /* Course+CoreDataProperties.swift in Sources */,
 				2C9732421F4C38F600AC9301 /* Course.swift in Sources */,
@@ -15796,11 +15862,13 @@
 				2CA8D19B2088D9C000E105E9 /* WriteCommentDelegate.swift in Sources */,
 				2CA8D19C2088D9C000E105E9 /* DiscussionAlertConstructor.swift in Sources */,
 				2CA8D19D2088D9C000E105E9 /* VideoStepViewController.swift in Sources */,
+				2CF2248620EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2CA8D19E2088D9C000E105E9 /* WebStepViewController.swift in Sources */,
 				2CA8D19F2088D9C000E105E9 /* LocalProgressLastViewedUpdater.swift in Sources */,
 				2CA8D1A02088D9C000E105E9 /* AdaptiveCardsStepsViewController.swift in Sources */,
 				2CA8D1A12088D9C000E105E9 /* CellWebViewHelper.swift in Sources */,
 				2CA8D1A22088D9C000E105E9 /* QuizControllerDelegate.swift in Sources */,
+				2CF2247F20EF9D9A0093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				2CA8D1A32088D9C000E105E9 /* QuizViewController.swift in Sources */,
 				2CA8D1A42088D9C000E105E9 /* UnknownTypeQuizViewController.swift in Sources */,
 				2CA8D1A52088D9C000E105E9 /* ChoiceQuizViewController.swift in Sources */,
@@ -15883,6 +15951,7 @@
 				2CA8D1F22088D9C000E105E9 /* StepikPlaceholder.swift in Sources */,
 				2CA8D1F32088D9C000E105E9 /* NotificationsMarkAsReadButton.swift in Sources */,
 				2CA8D1F42088D9C000E105E9 /* TransitionMenuBlockTableViewCell.swift in Sources */,
+				2CF2247920EF9D8B0093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				2CA8D1F52088D9C000E105E9 /* StyledTabBarViewController.swift in Sources */,
 				2CA8D1F62088D9C000E105E9 /* CodeReply.swift in Sources */,
 				2CA8D1F72088D9C000E105E9 /* TCBlobDownload.swift in Sources */,
@@ -16092,6 +16161,7 @@
 				2CA8D2C42088D9C000E105E9 /* FBSocialSDKProvider.swift in Sources */,
 				2CA8D2C52088D9C000E105E9 /* ApiRequest.swift in Sources */,
 				2CA8D2C62088D9C000E105E9 /* AuthAPI.swift in Sources */,
+				2CF2247320EF9D460093D844 /* UserRegistrationService.swift in Sources */,
 				2CA8D2C72088D9C000E105E9 /* QueriesAPI.swift in Sources */,
 				2CA8D2C82088D9C000E105E9 /* AutocompleteWords.swift in Sources */,
 				2CA8D2C92088D9C000E105E9 /* ApiDataDownloader.swift in Sources */,
@@ -16348,11 +16418,13 @@
 				86A1C3362065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				864D675D1E83E08E001E8D9E /* DownloadsViewController.swift in Sources */,
 				864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */,
+				2CF2248120EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE2871F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2CA2E71920237E14001DC410 /* StepCardView.swift in Sources */,
 				864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */,
 				864D67641E83E08E001E8D9E /* HTMLContentView.swift in Sources */,
+				2CF2247A20EF9D960093D844 /* RandomCredentialsGenerator.swift in Sources */,
 				864D67651E83E08E001E8D9E /* HTMLStringWrapperUtil.swift in Sources */,
 				864D67661E83E08E001E8D9E /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				084DB9E01FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
@@ -16435,6 +16507,7 @@
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				2CA2E70B20237463001DC410 /* AdaptiveCardsStepsPresenter.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
+				2CF2247420EF9D870093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
 				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
 				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
@@ -16644,6 +16717,7 @@
 				864D67071E83DE03001E8D9E /* AuthAPI.swift in Sources */,
 				08CB0D2A1FB5CD5E001A1E02 /* CourseListsCache.swift in Sources */,
 				08964BCF1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
+				2CF2246E20EF9D400093D844 /* UserRegistrationService.swift in Sources */,
 				085E9E701F138C3B00D6A4BC /* AutocompleteWords.swift in Sources */,
 				864D67081E83DE03001E8D9E /* ApiDataDownloader.swift in Sources */,
 				864D67091E83DE03001E8D9E /* Meta.swift in Sources */,
