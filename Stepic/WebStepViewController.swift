@@ -194,7 +194,7 @@ class WebStepViewController: UIViewController {
         switch step.block.name {
         case "text":
             quizViewController = nil
-            stepWebView.snp.makeConstraints { $0.bottomMargin.equalTo(discussionCountView).offset(8) }
+            stepWebView.snp.makeConstraints { $0.bottom.equalTo(discussionCountView).offset(8) }
             break
         case "choice":
             initQuizController(ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil))

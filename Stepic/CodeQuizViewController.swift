@@ -148,7 +148,7 @@ class CodeQuizViewController: QuizViewController {
         toolbarView.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.limitsLabel).offset(8)
             make.leading.trailing.equalTo(self.containerView)
-            make.bottomMargin.equalTo(self.codeTextView).offset(8)
+            make.bottom.equalTo(self.codeTextView).offset(8)
             make.height.equalTo(toolbarHeight)
         }
 
