@@ -141,6 +141,10 @@ class FillBlanksQuizViewController: QuizViewController {
         self.tableView.isUserInteractionEnabled = true
         answerForComponent = [:]
         self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.invalidateIntrinsicContentSize()
+            self.view.layoutSubviews()
+        }
     }
 
     override func display(reply: Reply, withStatus status: SubmissionStatus) {
@@ -171,6 +175,10 @@ class FillBlanksQuizViewController: QuizViewController {
         }
 
         self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.invalidateIntrinsicContentSize()
+            self.view.layoutSubviews()
+        }
     }
 }
 
