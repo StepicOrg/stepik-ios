@@ -143,7 +143,8 @@ class FillBlanksQuizViewController: QuizViewController {
         self.tableView.reloadData()
         DispatchQueue.main.async {
             self.tableView.invalidateIntrinsicContentSize()
-            self.view.layoutSubviews()
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
     }
 
@@ -177,7 +178,8 @@ class FillBlanksQuizViewController: QuizViewController {
         self.tableView.reloadData()
         DispatchQueue.main.async {
             self.tableView.invalidateIntrinsicContentSize()
-            self.view.layoutSubviews()
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
     }
 }
