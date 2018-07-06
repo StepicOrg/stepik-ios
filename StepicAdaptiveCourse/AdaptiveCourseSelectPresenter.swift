@@ -175,7 +175,7 @@ class AdaptiveCourseSelectPresenter {
                 if !AuthInfo.shared.isAuthorized {
                     return actions.registerNewUser()
                 } else {
-                    return Promise(value: ())
+                    return .value(())
                 }
             }.then { _ -> Promise<Course> in
                 actions.loadCourseAndJoin(courseId: id)

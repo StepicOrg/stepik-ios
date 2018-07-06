@@ -13,7 +13,7 @@ import PromiseKit
 protocol IDFetchable: JSONSerializable where IdType: CoreDataRepresentable {
 
     static func getId(json: JSON) -> IdType?
-    static func fetchAsync(ids: [IdType]) -> Promise<[Self]>
+    static func fetchAsync(ids: [IdType]) -> Guarantee<[Self]>
 }
 
 extension IDFetchable {
@@ -27,7 +27,7 @@ extension IDFetchable {
         return nil
     }
 
-    static func fetchAsync(ids: [IdType]) -> Promise<[Self]> {
+    static func fetchAsync(ids: [IdType]) -> Guarantee<[Self]> {
         return DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
     }
 }

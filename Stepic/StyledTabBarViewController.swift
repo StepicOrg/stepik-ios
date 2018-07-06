@@ -10,7 +10,7 @@ import UIKit
 
 class StyledTabBarViewController: UITabBarController {
 
-    let items = StepicApplicationsInfo.Modules.tabs?.flatMap { TabController(rawValue: $0)?.itemInfo } ?? []
+    let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
     var notificationsBadgeNumber: Int {
         get {

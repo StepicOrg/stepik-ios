@@ -182,7 +182,7 @@ class CourseListPresenter {
                 throw CourseSubscriber.CourseSubscriptionError.error(status: "")
             }
             return strongSelf.subscriber.join(course: course, source: .widget)
-        }.then { [weak self] course -> Void in
+        }.done { [weak self] course in
             self?.view?.finishProgressHUD(success: true, message: "")
 
             if let navigation = self?.view?.getNavigationController() {
@@ -250,51 +250,51 @@ class CourseListPresenter {
     }
 
     private func displayCachedAsyncIfEmpty() -> Promise<Void> {
-        return Promise<Void> { [weak self] fulfill, reject in
+        return Promise<Void> { [weak self] seal in
             guard let strongSelf = self else {
-                reject(PromiseError.noSelf)
+                seal.reject(PromiseError.noSelf)
                 return
             }
             if strongSelf.courses.isEmpty {
-                Course.fetchAsync(strongSelf.listType.cachedListCourseIds).then { [weak self] courses -> Void in
+                Course.fetchAsync(strongSelf.listType.cachedListCourseIds).done { [weak self] courses in
                     guard let strongSelf = self else {
-                        reject(PromiseError.noSelf)
+                        seal.reject(PromiseError.noSelf)
                         return
                     }
 
                     strongSelf.courses = Sorter.sort(courses, byIds: strongSelf.listType.cachedListCourseIds)
                     strongSelf.canUpdateCache = true
                     strongSelf.view?.display(courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                    fulfill(())
+                    seal.fulfill(())
                 }.catch { error in
-                    reject(error)
+                    seal.reject(error)
                 }
             } else {
-                fulfill(())
+                seal.fulfill(())
             }
         }
     }
 
     private func updateState() -> Promise<Void> {
-        return Promise<Void> { [weak self] fulfill, reject in
+        return Promise<Void> { [weak self] seal in
             guard let strongSelf = self else {
-                reject(PromiseError.noSelf)
+                seal.reject(PromiseError.noSelf)
                 return
             }
             if strongSelf.onlyLocal {
                 strongSelf.state = strongSelf.courses.isEmpty ? .empty : .displaying
-                reject(PromiseError.localUpdate)
+                seal.reject(PromiseError.localUpdate)
                 return
             }
             strongSelf.state = strongSelf.courses.isEmpty ? .emptyRefreshing : .displayingWithRefreshing
-            fulfill(())
+            seal.fulfill(())
         }
     }
 
     func refresh() {
         displayCachedAsyncIfEmpty().then {
             self.updateState()
-        }.then { [weak self] in
+        }.done { [weak self] in
             self?.refreshCourses()
         }.catch { [weak self] error in
             guard let strongSelf = self else {
@@ -315,7 +315,7 @@ class CourseListPresenter {
         }
         self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
-        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then { [weak self] (courses, meta) -> Void in
+        listType.request(page: currentPage + 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.done { [weak self] (courses, meta) in
             guard let strongSelf = self else {
                 return
             }
@@ -456,7 +456,7 @@ class CourseListPresenter {
     }
 
     private func requestNonCollection(updateProgresses: Bool, completion: (() -> Void)? = nil) {
-        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.then { [weak self] (courses, meta) -> Void in
+        listType.request(page: 1, language: ContentLanguage.sharedContentLanguage, withAPI: coursesAPI, progressesAPI: progressesAPI, searchResultsAPI: searchResultsAPI)?.done { [weak self] (courses, meta) in
             guard let strongSelf = self else {
                 return
             }
@@ -489,7 +489,7 @@ class CourseListPresenter {
         coursesAPI.cancelAllTasks()
         switch listType {
         case let .collection(ids: ids):
-            listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then { [weak self] courses -> Void in
+            listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.done { [weak self] courses in
                 guard let strongSelf = self else {
                     return
                 }
@@ -599,17 +599,17 @@ class CourseListPresenter {
             }
         }
 
-        return Promise { fulfill, reject in
-            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).then { [weak self] newProgresses -> Void in
+        return Promise { seal in
+            progressesAPI.getObjectsByIds(ids: progressIds, updating: progresses).done { [weak self] newProgresses in
                 guard let strongSelf = self else {
                     return
                 }
                 strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
                 strongSelf.view?.update(updatedCourses: strongSelf.getData(from: strongSelf.getDisplaying(from: courses)), courses: strongSelf.getData(from: strongSelf.displayingCourses))
-                fulfill(strongSelf.courses)
+                seal.fulfill(strongSelf.courses)
             }.catch { error in
                 print("Error while loading progresses")
-                reject(error)
+                seal.reject(error)
             }
         }
     }
@@ -649,7 +649,7 @@ class CourseListPresenter {
             }
         }
 
-        reviewSummariesAPI.getObjectsByIds(ids: reviewIds, updating: reviews).then { [weak self] newReviews -> Void in
+        reviewSummariesAPI.getObjectsByIds(ids: reviewIds, updating: reviews).done { [weak self] newReviews in
             guard let strongSelf = self else {
                 return
             }

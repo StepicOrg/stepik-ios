@@ -99,7 +99,7 @@ class SocialAuthPresenter {
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
-        }.then { result -> Void in
+        }.done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
@@ -152,7 +152,7 @@ class SocialAuthPresenter {
 
             self.view?.update(with: .success)
             return self.notificationStatusesAPI.retrieve()
-        }.then { result -> Void in
+        }.done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {

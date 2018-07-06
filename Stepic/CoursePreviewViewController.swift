@@ -161,7 +161,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 [weak self] in
                 SVProgressHUD.show()
                 button.isEnabled = false
-                self?.subscriber.leave(course: c, source: .preview).then { [weak self] course -> Void in
+                self?.subscriber.leave(course: c, source: .preview).done { [weak self] course in
                     button.isEnabled = true
                     SVProgressHUD.showSuccess(withStatus: "")
                     self?.course = course
@@ -383,7 +383,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 SVProgressHUD.show()
                 sender.isEnabled = false
 
-                subscriber.join(course: c, source: .preview).then { [weak self] course -> Void in
+                subscriber.join(course: c, source: .preview).done { [weak self] course in
                     SVProgressHUD.showSuccess(withStatus: "")
                     sender.isEnabled = true
                     sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)

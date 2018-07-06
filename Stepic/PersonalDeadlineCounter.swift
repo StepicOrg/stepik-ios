@@ -20,17 +20,14 @@ class PersonalDeadlineCounter {
     let sectionTimeMultiplier = 1.3
 
     func countDeadlines(mode: DeadlineMode, for course: Course) -> Promise<[SectionDeadline]> {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             var sectionCounters: [Promise<(Int, TimeInterval)>] = []
             for section in course.sections {
                 sectionCounters += [countTimeToComplete(section: section)]
             }
-            when(fulfilled: sectionCounters).then {
-                [weak self]
-                timeTuples -> Void in
+            when(fulfilled: sectionCounters).done { [weak self] timeTuples in
                 guard let strongSelf = self else {
-                    reject(UnwrappingError.optionalError)
+                    seal.reject(UnwrappingError.optionalError)
                     return
                 }
                 var timeForSection: [Int: TimeInterval] = [:]
@@ -41,7 +38,7 @@ class PersonalDeadlineCounter {
                 var previousDeadline: Date = Date()
                 for sectionId in course.sectionsArray {
                     guard let secondsToCompleteSection = timeForSection[sectionId] else {
-                        reject(DeadlineCountError.noSectionInfo)
+                        seal.reject(DeadlineCountError.noSectionInfo)
                         return
                     }
                     let daysToCompleteSection = Int(ceil(secondsToCompleteSection / Double(mode.getModeInfo().dailyLoadSeconds)))
@@ -49,7 +46,7 @@ class PersonalDeadlineCounter {
                     sectionDeadlines += [SectionDeadline(section: sectionId, deadlineDate: strongSelf.getDeadlineDateForSection(since: previousDeadline, daysToComplete: daysToCompleteSection))]
                     previousDeadline = sectionDeadlines.last?.deadlineDate ?? Date()
                 }
-                fulfill(sectionDeadlines)
+                seal.fulfill(sectionDeadlines)
             }
         }
     }
@@ -61,16 +58,15 @@ class PersonalDeadlineCounter {
     }
 
     private func countTimeToComplete(section: Section) -> Promise<(Int, TimeInterval)> {
-        return Promise {
-            fulfill, reject in
+        return Promise { seal in
             section.loadUnits(success: {
                 var sectionTimeToComplete: Double = 0
                 for unit in section.units {
                     sectionTimeToComplete += unit.lesson?.timeToComplete ?? 0
                 }
-                fulfill((section.id, sectionTimeToComplete))
+                seal.fulfill((section.id, sectionTimeToComplete))
             }, error: {
-                reject(DeadlineCountError.unitsLoadError)
+                seal.reject(DeadlineCountError.unitsLoadError)
             })
         }
     }

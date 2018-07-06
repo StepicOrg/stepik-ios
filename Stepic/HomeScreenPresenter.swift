@@ -36,9 +36,9 @@ class HomeScreenPresenter: LastStepWidgetDataSource, CourseListCountDelegate {
             return
         }
 
-        userActivitiesAPI.retrieve(user: userId).then {
+        userActivitiesAPI.retrieve(user: userId).done {
             [weak self]
-            userActivity -> Void in
+            userActivity in
             if userActivity.currentStreak > 0 {
                 self?.view?.presentStreaksInfo(streakCount: userActivity.currentStreak, shouldSolveToday: userActivity.needsToSolveToday)
             }

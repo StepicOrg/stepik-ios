@@ -20,15 +20,15 @@ class LastStepRouter {
             return
         }
         SVProgressHUD.show()
-        ApiDataDownloader.lastSteps.getObjectsByIds(ids: [lastStepId], updating: course.lastStep != nil ? [course.lastStep!] : []).then {
-            newLastSteps -> Void in
+        ApiDataDownloader.lastSteps.getObjectsByIds(ids: [lastStepId], updating: course.lastStep != nil ? [course.lastStep!] : []).done {
+            newLastSteps in
             guard let newLastStep = newLastSteps.first else {
                 throw LastStepError.multipleLastSteps
             }
 
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
-        }.always {
+        }.ensure {
             navigate(for: course, using: navigationController)
         }.catch {
             _ in
@@ -87,28 +87,28 @@ class LastStepRouter {
             // If last step does not exist then take first step in unit
             unitsVC.unitId = course.lastStep?.unitId ?? unit.id
 
-            let stepIdPromise = Promise<Int> { fulfill, reject in
+            let stepIdPromise = Promise<Int> { seal in
                 if let stepId = course.lastStep?.stepId {
-                    fulfill(stepId)
+                    seal.fulfill(stepId)
                 } else {
                     let cachedLesson = unit.lesson ?? Lesson.getLesson(unit.lessonId)
-                    ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).then { lessons -> Void in
+                    ApiDataDownloader.lessons.retrieve(ids: [unit.lessonId], existing: cachedLesson == nil ? [] : [cachedLesson!]).done { lessons in
                         if let lesson = lessons.first {
                             unit.lesson = lesson
                         }
 
                         if let firstStepId = lessons.first?.stepsArray.first {
-                            fulfill(firstStepId)
+                            seal.fulfill(firstStepId)
                         } else {
-                            reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
+                            seal.reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
                         }
                     }.catch { _ in
-                        reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
+                        seal.reject(NSError(domain: "error", code: 100, userInfo: nil)) // meh.
                     }
                 }
             }
 
-            stepIdPromise.then { targetStepId -> Void in
+            stepIdPromise.done { targetStepId in
                 lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
                 lessonVC.sectionNavigationDelegate = unitsVC
 
@@ -172,7 +172,7 @@ class LastStepRouter {
                 return
             }
 
-            ApiDataDownloader.sections.retrieve(ids: [sectionId], existing: [cachedSection]).then { section -> Void in
+            ApiDataDownloader.sections.retrieve(ids: [sectionId], existing: [cachedSection]).done { section in
                 guard let unitId = section.first?.unitsArray.first else {
                     print("last step router: section has no units")
                     return

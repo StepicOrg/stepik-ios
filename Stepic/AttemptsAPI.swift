@@ -16,18 +16,16 @@ class AttemptsAPI: APIEndpoint {
 
     func create(stepName: String, stepId: Int) -> Promise<Attempt> {
         let attempt = Attempt(step: stepId)
-        return Promise { fulfill, reject in
-            create.request(requestEndpoint: "attempts", paramName: "attempt", creatingObject: attempt, withManager: manager).then {
-                attempt, json -> Void in
+        return Promise { seal in
+            create.request(requestEndpoint: "attempts", paramName: "attempt", creatingObject: attempt, withManager: manager).done { attempt, json in
                 guard let json = json else {
-                    fulfill(attempt)
+                    seal.fulfill(attempt)
                     return
                 }
                 attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepName: stepName)
-                fulfill(attempt)
-            }.catch {
-                error in
-                reject(error)
+                seal.fulfill(attempt)
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }
@@ -82,7 +80,7 @@ class AttemptsAPI: APIEndpoint {
 extension AttemptsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        create(stepName: stepName, stepId: stepId).then {
+        create(stepName: stepName, stepId: stepId).done {
             attempt in
             success(attempt)
         }.catch {

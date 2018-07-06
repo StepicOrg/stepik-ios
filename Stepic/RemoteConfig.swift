@@ -71,7 +71,7 @@ class RemoteConfig {
                 }
             }
         }
-        return supportedCourses.flatMap { Int($0) }
+        return supportedCourses.compactMap { Int($0) }
     }
 
     init() {

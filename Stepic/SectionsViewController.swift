@@ -176,9 +176,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }
                 AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
                 SVProgressHUD.show()
-                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).then {
-                    [weak self]
-                    () -> Void in
+                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).done { [weak self] _ in
                     SVProgressHUD.dismiss()
                     self?.tableView.reloadData()
                     }.catch {
@@ -246,9 +244,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         if didJustSubscribe {
             if #available(iOS 10.0, *) {
                 if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                    notificationPermissionManager.getCurrentPermissionStatus().then {
+                    notificationPermissionManager.getCurrentPermissionStatus().done {
                         [weak self]
-                        status -> Void in
+                        status in
                         guard let strongSelf = self else {
                             return
                         }
