@@ -71,7 +71,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
 
-        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) {
+        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) && course.sectionDeadlines == nil && course.scheduleType == "self_paced" {
             tableView.tableHeaderView = personalDeadlinesWidgetView
             AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.shown, parameters: ["course": course.id])
         }
