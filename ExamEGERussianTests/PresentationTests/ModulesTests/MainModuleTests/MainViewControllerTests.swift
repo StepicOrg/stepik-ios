@@ -12,15 +12,10 @@ import XCTest
 class MainViewControllerTests: XCTestCase {
     
     func testMainScreen() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        XCTAssertNotNil(sb, "Could not instantiate storyboard for main view creation")
+        let vc = MainViewController()
+        vc.userRegistrationService = ServiceComponentsAssemblyTestsHelper().serviceComponents.userRegistrationService
         
-        let identifier = String(describing: MainViewController.self)
-        let vc = sb.instantiateViewController(withIdentifier: identifier) as? MainViewController
-        vc?.userRegistrationService = ServiceComponentsAssemblyTestsHelper().serviceComponents.userRegistrationService
-        
-        XCTAssertNotNil(vc, "Could not instantiate MainViewController")
-        _ = vc?.view
+        XCTAssertNotNil(vc.view, "Could not instantiate MainViewController")
     }
     
 }

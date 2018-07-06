@@ -4048,6 +4048,7 @@
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */; };
 		2CF425262024A5EC002D7305 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
 		2CF425272024A5F0002D7305 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2CF425282024A5F3002D7305 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
@@ -5755,6 +5756,7 @@
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
 		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
 		2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikPlaceholderView.swift; sourceTree = "<group>"; };
+		2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceMock.swift; sourceTree = "<group>"; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
@@ -8579,17 +8581,9 @@
 		2C6841BC20EE12590050155F /* AssembliesTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841BD20EE12AA0050155F /* BusinessLogicLayerTests */,
-			);
-			path = AssembliesTests;
-			sourceTree = "<group>";
-		};
-		2C6841BD20EE12AA0050155F /* BusinessLogicLayerTests */ = {
-			isa = PBXGroup;
-			children = (
 				2C6841C820EE1F030050155F /* ServiceComponentsAssemblyTests */,
 			);
-			path = BusinessLogicLayerTests;
+			path = AssembliesTests;
 			sourceTree = "<group>";
 		};
 		2C6841C120EE14AE0050155F /* LogicTests */ = {
@@ -8603,6 +8597,7 @@
 		2C6841C220EE14CE0050155F /* UserRegistrationServiceTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
 			path = UserRegistrationServiceTests;
@@ -14696,6 +14691,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C59F03F20EB8ACA00666EE0 /* MainViewControllerTests.swift in Sources */,
+				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,

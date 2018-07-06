@@ -12,28 +12,46 @@ import PromiseKit
 
 class UserRegistrationServiceTests: XCTestCase {
     
-    var isAuthorized = false
+    var service: UserRegistrationServiceMock!
     
-    private let serviceComponents = ServiceComponentsAssemblyTestsHelper().serviceComponents
+    override func setUp() {
+        super.setUp()
+        service = UserRegistrationServiceMock()
+    }
     
-    func testUserRegistration() {
-        serviceComponents.userRegistrationService.registerNewUser()
-            .then { user -> Void in
-                self.isAuthorized = true
-            }
-            .catch { error in
-                self.isAuthorized = false
-            }
+    override func tearDown() {
+        super.tearDown()
+        service = nil
+    }
+    
+    func testSuccessfulResponse() {
+        let ex = expectation(description: "\(#function)")
         
-        let predicate = NSPredicate(format: "isAuthorized == %@", NSNumber(value: true))
-        let exp = expectation(for: predicate, evaluatedWith: self, handler: nil)
-        let result = XCTWaiter.wait(for: [exp], timeout: 5.0)
-        
-        if result == XCTWaiter.Result.completed {
-            XCTAssertTrue(isAuthorized, "User not authorized")
-        } else {
-            XCTAssert(false, "The call to register new user ran into some other error")
+        service.user = User()
+        service.registerNewUser().done { _ in
+            XCTAssert(true)
+            ex.fulfill()
+        }.catch { _ in
+            XCTFail()
+            ex.fulfill()
         }
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testFailResponse() {
+        let ex = expectation(description: "\(#function)")
+        
+        service.error = UserRegistrationServiceError.notRegistered
+        service.registerNewUser().done { _ in
+            XCTFail()
+            ex.fulfill()
+        }.catch { _ in
+            XCTAssert(true)
+            ex.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
 }
