@@ -54,10 +54,10 @@ class WarningView: NibInitializableView {
         textLabel.snp.makeConstraints { make -> Void in
             make.leading.equalTo(view).offset(8)
             make.trailing.equalTo(view).offset(-8)
-            make.top.equalTo(centerView).offset(4)
+            make.top.equalTo(centerView.snp.bottom).offset(4)
         }
         textLabel.attributedText = getAttributedDescription(text)
-        tryAgainButton.snp.makeConstraints { $0.top.equalTo(textLabel).offset(8) }
+        tryAgainButton.snp.makeConstraints { $0.top.equalTo(textLabel.snp.bottom).offset(8) }
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }

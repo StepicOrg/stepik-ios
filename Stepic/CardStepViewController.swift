@@ -93,7 +93,7 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
         stepWebView.snp.makeConstraints { make -> Void in
             stepWebViewHeight = make.height.equalTo(5).constraint
-            make.bottom.equalTo(quizPlaceholderView)
+            make.bottom.equalTo(quizPlaceholderView.snp.top)
             make.leading.equalTo(scrollView).offset(2)
             make.trailing.equalTo(scrollView).offset(-2)
             make.top.equalTo(scrollView).offset(5)

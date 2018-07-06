@@ -96,7 +96,7 @@ class FullscreenCodeQuizViewController: UIViewController {
 
         codeTextView.snp.makeConstraints { make -> Void in
             make.leading.trailing.bottom.equalTo(self.view)
-            make.top.equalTo(self.toolbar)
+            make.top.equalTo(self.toolbar.snp.bottom)
         }
     }
 
