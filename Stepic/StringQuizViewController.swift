@@ -29,7 +29,7 @@ class StringQuizViewController: QuizViewController {
 
         textView.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.containerView).offset(8)
-            make.bottom.equalTo(self.containerView).offset(0)
+            make.bottom.equalTo(self.containerView)
         }
 
         if #available(iOS 11.0, *) {

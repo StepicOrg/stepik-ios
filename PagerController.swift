@@ -287,11 +287,10 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         self.contentView.snp.makeConstraints { make -> Void in
             make.leading.trailing.equalTo(self.view)
             make.top.equalTo(self.tabsView!.snp.bottom).offset(-22)
-            make.bottom.equalTo(self.view).offset(0)
+            make.bottom.equalTo(self.view)
         }
         self.tabsView?.snp.makeConstraints { make -> Void in
-            make.top.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
+            make.top.leading.trailing.equalTo(self.view)
             make.height.equalTo(44)
         }
 
@@ -301,7 +300,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         shadowView.snp.makeConstraints { make -> Void in
             make.height.equalTo(0.5)
             make.top.equalTo(contentView).offset(22)
-            make.leading.trailing.equalTo(contentView).offset(0)
+            make.leading.trailing.equalTo(contentView)
         }
 
         // Set setup done
