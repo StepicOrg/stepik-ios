@@ -41,7 +41,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionLabel.snp.makeConstraints { make -> Void in
             make.top.bottom.equalTo(textContainerView)
             make.leading.equalTo(textContainerView).offset(8)
-            make.leading.equalTo(textContainerView).offset(-8)
+            make.trailing.equalTo(textContainerView).offset(-8)
         }
         optionLabel.isHidden = true
     }
