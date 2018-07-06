@@ -166,7 +166,10 @@ class WebStepViewController: UIViewController {
             }
         }
 
-        let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)\(Scripts.kotlinRunnableSamples)"
+        var scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
+        if htmlText.range(of: "kotlin-runnable") != nil {
+            scriptsString += "\(Scripts.kotlinRunnableSamples)"
+        }
         var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
         html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
