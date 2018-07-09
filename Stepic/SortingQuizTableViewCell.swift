@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SortingQuizTableViewCell: UITableViewCell {
 
@@ -36,7 +37,12 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionLabel.textAlignment = NSTextAlignment.natural
         optionLabel.backgroundColor = UIColor.clear
         textContainerView.addSubview(optionLabel)
-        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
+
+        optionLabel.snp.makeConstraints { make -> Void in
+            make.top.bottom.equalTo(textContainerView)
+            make.leading.equalTo(textContainerView).offset(8)
+            make.trailing.equalTo(textContainerView).offset(-8)
+        }
         optionLabel.isHidden = true
     }
 
@@ -45,7 +51,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionWebView = FullHeightWebView()
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
-        optionWebView.align(toView: textContainerView)
+        optionWebView.snp.makeConstraints { $0.edges.equalTo(textContainerView) }
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class MenuBlockTableViewCell: UITableViewCell {
 
@@ -24,10 +24,13 @@ class MenuBlockTableViewCell: UITableViewCell {
         separator.isHidden = false
         separator.backgroundColor = UIColor(hex: 0x535366).withAlphaComponent(0.05)
         self.contentView.addSubview(separator)
-        _ = separator.alignBottomEdge(withView: self.contentView, predicate: "0")
-        _ = separator.constrainHeight("1")
-        _ = separator.alignLeadingEdge(withView: self.contentView, predicate: "24")
-        _ = separator.alignTrailingEdge(withView: self.contentView, predicate: "-24")
+
+        separator.snp.makeConstraints { make -> Void in
+            make.bottom.equalTo(self.contentView)
+            make.leading.equalTo(self.contentView).offset(24)
+            make.trailing.equalTo(self.contentView).offset(-24)
+            make.height.equalTo(1)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,7 +54,7 @@ class MenuBlockTableViewCell: UITableViewCell {
         hidingView.backgroundColor = UIColor.white
         hidingView.alpha = 0
         self.contentView.addSubview(hidingView)
-        hidingView.align(toView: self.contentView)
+        hidingView.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
         UIView.animate(withDuration: 0.2, animations: {
             [weak self] in
             self?.hidingView.alpha = 1

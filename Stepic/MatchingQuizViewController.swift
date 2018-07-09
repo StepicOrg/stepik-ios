@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class MatchingQuizViewController: QuizViewController {
 
@@ -50,13 +50,15 @@ class MatchingQuizViewController: QuizViewController {
         self.containerView.addSubview(firstTableView)
         self.containerView.addSubview(secondTableView)
 
-        firstTableView.alignTop("0", bottom: "0", toView: self.containerView)
-        firstTableView.alignLeadingEdge(withView: self.containerView, predicate: "0")
-        firstTableView.constrainWidth(toView: self.containerView, predicate: "*0.5")
+        firstTableView.snp.makeConstraints { make -> Void in
+            make.top.bottom.leading.equalTo(self.containerView)
+            make.width.equalTo(self.containerView.snp.width).multipliedBy(0.5)
+        }
 
-        secondTableView.alignTop("0", bottom: "0", toView: self.containerView)
-        secondTableView.alignTrailingEdge(withView: self.containerView, predicate: "0")
-        secondTableView.constrainWidth(toView: self.containerView, predicate: "*0.5")
+        secondTableView.snp.makeConstraints { make -> Void in
+            make.top.bottom.trailing.equalTo(self.containerView)
+            make.width.equalTo(self.containerView.snp.width).multipliedBy(0.5)
+        }
 
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")

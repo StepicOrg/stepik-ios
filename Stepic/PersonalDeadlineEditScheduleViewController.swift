@@ -23,7 +23,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
+        titleLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PersonalDeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: "PersonalDeadlineTableViewCell")

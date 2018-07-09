@@ -7,16 +7,21 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class PinsMapBlockContentView: UIView, PinsMapContentView {
     lazy var mapView: PinsMapView = {
         let mapView = PinsMapView() // fromNib initialization
 
         self.addSubview(mapView)
-        mapView.alignTop("0", bottom: "0", toView: self)
-        mapView.alignLeading("16", trailing: "-16", toView: self)
-        mapView.constrainHeight("166")
+
+        mapView.snp.makeConstraints { make -> Void in
+            make.top.bottom.equalTo(self)
+            make.leading.equalTo(self).offset(16)
+            make.trailing.equalTo(self).offset(-16)
+            make.height.equalTo(166)
+        }
+
         mapView.buildMonths(UserActivity.emptyYearPins)
 
         return mapView

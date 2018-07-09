@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import SDWebImage
+import SnapKit
 
 protocol DiscussionTableViewCellDelegate: class {
     func didOpenProfile(for userWithId: Int)
@@ -106,7 +106,7 @@ class DiscussionTableViewCell: UITableViewCell {
     fileprivate func constructLabel() {
         commentLabel = StepikLabel()
         labelContainerView.addSubview(commentLabel!)
-        _ = commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: labelContainerView)
+        commentLabel?.snp.makeConstraints { $0.edges.equalTo(labelContainerView) }
         commentLabel?.numberOfLines = 0
     }
 

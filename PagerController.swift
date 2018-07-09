@@ -7,7 +7,7 @@
 //
 import Foundation
 import UIKit.UITableView
-import FLKAutoLayout
+import SnapKit
 
 // MARK: - Pager Enums
 //Enum for the location of the tab bar
@@ -284,20 +284,24 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             }
         }
 
-        self.contentView.alignLeading("0", trailing: "0", toView: self.view)
-        self.contentView.constrainTopSpace(toView: self.tabsView!, predicate: "-22")
-        self.contentView.alignBottomEdge(withView: self.view, predicate: "0")
-        _ = self.tabsView?.alignTop("0", leading: "0", toView: self.view)
-        _ = self.tabsView?.alignTrailingEdge(withView: self.view, predicate: "0")
-        _ = self.tabsView?.constrainHeight("44")
+        self.contentView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.view)
+            make.top.equalTo(self.tabsView!.snp.bottom).offset(-22)
+            make.bottom.equalTo(self.view)
+        }
+        self.tabsView?.snp.makeConstraints { make -> Void in
+            make.top.leading.trailing.equalTo(self.view)
+            make.height.equalTo(44)
+        }
 
         let shadowView = UIView()
         self.contentView.addSubview(shadowView)
         shadowView.backgroundColor = UIColor.lightGray
-        _ = shadowView.constrainHeight("0.5")
-        _ = shadowView.alignTopEdge(withView: contentView, predicate: "22")
-        _ = shadowView.alignLeadingEdge(withView: contentView, predicate: "0")
-        _ = shadowView.alignTrailingEdge(withView: contentView, predicate: "0")
+        shadowView.snp.makeConstraints { make -> Void in
+            make.height.equalTo(0.5)
+            make.top.equalTo(contentView).offset(22)
+            make.leading.trailing.equalTo(contentView)
+        }
 
         // Set setup done
         self.defaultSetupDone = true

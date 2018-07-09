@@ -258,7 +258,7 @@ class CourseListViewController: UIViewController, CourseListView {
     lazy var emptyPlaceholder: CourseListEmptyPlaceholder = {
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         self.view.addSubview(placeholder)
-        placeholder.align(toView: self.view)
+        placeholder.snp.makeConstraints { $0.edges.equalTo(self.view) }
         placeholder.isHidden = true
         placeholder.colorStyle = .purple
         placeholder.presentationStyle = .bordered

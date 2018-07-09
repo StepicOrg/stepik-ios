@@ -10,7 +10,7 @@ import Foundation
 import Agrume
 import WebKit
 import PromiseKit
-import FLKAutoLayout
+import SnapKit
 
 class CardStepViewController: UIViewController, CardStepView {
     weak var presenter: CardStepPresenter?
@@ -21,7 +21,7 @@ class CardStepViewController: UIViewController, CardStepView {
     @IBOutlet weak var scrollView: UIScrollView!
     var stepWebView: WKWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
-    var stepWebViewHeight: NSLayoutConstraint!
+    var stepWebViewHeight: Constraint!
 
     // For updates after rotation only when controller not presented
     var shouldRefreshOnAppear: Bool = false
@@ -90,12 +90,14 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView.scrollView.delegate = self
         scrollView.insertSubview(stepWebView, at: 0)
 
-        stepWebViewHeight = stepWebView.constrainHeight("5")
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
-        stepWebView.constrainBottomSpace(toView: quizPlaceholderView, predicate: "0")
-        stepWebView.alignLeadingEdge(withView: scrollView, predicate: "2")
-        stepWebView.alignTrailingEdge(withView: scrollView, predicate: "-2")
-        stepWebView.alignTopEdge(withView: scrollView, predicate: "5")
+        stepWebView.snp.makeConstraints { make -> Void in
+            stepWebViewHeight = make.height.equalTo(5).constraint
+            make.bottom.equalTo(quizPlaceholderView.snp.top)
+            make.leading.equalTo(scrollView).offset(2)
+            make.trailing.equalTo(scrollView).offset(-2)
+            make.top.equalTo(scrollView).offset(5)
+        }
     }
 
     func updateProblem(with htmlText: String) {
@@ -112,7 +114,7 @@ class CardStepViewController: UIViewController, CardStepView {
 
         self.addChildViewController(controller)
         quizPlaceholderView.addSubview(quizView!)
-        quizView!.align(toView: quizPlaceholderView)
+        quizView!.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
 
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -168,7 +170,7 @@ class CardStepViewController: UIViewController, CardStepView {
 
 extension CardStepViewController: WKNavigationDelegate {
     func resetWebViewHeight(_ height: Float) {
-        stepWebViewHeight.constant = CGFloat(height)
+        stepWebViewHeight.update(offset: height)
     }
 
     func getContentHeight(_ webView: WKWebView) -> Promise<Int> {

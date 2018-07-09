@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
 
@@ -30,7 +31,7 @@ class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
 
             if let contentView = block.contentView {
                 container.addSubview(contentView)
-                contentView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: container)
+                contentView.snp.makeConstraints { $0.edges.equalTo(container) }
                 layoutIfNeeded()
             }
         }

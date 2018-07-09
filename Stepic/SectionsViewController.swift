@@ -8,8 +8,8 @@
 
 import UIKit
 import DownloadButton
-import FLKAutoLayout
 import Presentr
+import SnapKit
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -150,7 +150,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         backgroundView.addSubview(widget)
-        widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
+
+        widget.snp.makeConstraints { make -> Void in
+            make.top.leading.equalTo(backgroundView).offset(20)
+            make.bottom.trailing.equalTo(backgroundView).offset(-20)
+        }
         return backgroundView
     }()
 

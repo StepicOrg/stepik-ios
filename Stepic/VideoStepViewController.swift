@@ -10,7 +10,7 @@ import UIKit
 import MediaPlayer
 import SVProgressHUD
 import DownloadButton
-import FLKAutoLayout
+import SnapKit
 
 class VideoStepViewController: UIViewController {
 
@@ -159,8 +159,9 @@ class VideoStepViewController: UIViewController {
         super.viewWillAppear(animated)
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), video: video, buttonDelegate: self, downloadDelegate: self)
         if #available(iOS 11.0, *) {
-            itemView.constrainWidth("40")
-            itemView.constrainHeight("40")
+            itemView.snp.makeConstraints { make -> Void in
+                make.width.height.equalTo(40)
+            }
         }
         let downloadItem = UIBarButtonItem(customView: itemView)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))

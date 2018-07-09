@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import MediaPlayer
+import SnapKit
 
 class CoursePreviewViewController: UIViewController, ShareableController {
 
@@ -277,8 +278,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
 
-            _ = self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.contentView)
-            _ = self.moviePlayer?.view.alignTop("0", bottom: "0", toView: self.contentView)
+            self.moviePlayer?.view.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
             self.moviePlayer?.view.isHidden = true
         }
     }

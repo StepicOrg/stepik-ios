@@ -7,19 +7,23 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var subtitleLabel: StepikLabel!
 
-    var titleBottomSpaceConstraint: NSLayoutConstraint?
-    var subtitleBottomSpaceConstraint: NSLayoutConstraint?
+    var titleBottomSpaceConstraint: Constraint?
+    var subtitleBottomSpaceConstraint: Constraint?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
-        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
+        titleLabel.snp.makeConstraints { make -> Void in
+            titleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
+        }
+        subtitleLabel.snp.makeConstraints { make -> Void in
+            subtitleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,11 +39,11 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
         if let subtitle = block.subtitle {
             subtitleLabel.text = subtitle
             subtitleLabel.isHidden = false
-            titleBottomSpaceConstraint?.isActive = false
-            subtitleBottomSpaceConstraint?.isActive = true
+            titleBottomSpaceConstraint?.deactivate()
+            subtitleBottomSpaceConstraint?.activate()
         } else {
-            subtitleBottomSpaceConstraint?.isActive = false
-            titleBottomSpaceConstraint?.isActive = true
+            subtitleBottomSpaceConstraint?.deactivate()
+            titleBottomSpaceConstraint?.activate()
             subtitleLabel.isHidden = true
         }
     }

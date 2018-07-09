@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FLKAutoLayout
+import SnapKit
 
 class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
@@ -45,7 +45,10 @@ class CourseListVerticalViewController: CourseListViewController {
                 }
                 descriptionWidgetView.backgroundColor = UIColor.clear
                 descriptionWidgetView.addSubview(descriptionView)
-                descriptionView.alignTop("0", leading: "0", bottom: "-16", trailing: "0", toView: descriptionWidgetView)
+                descriptionView.snp.makeConstraints { make -> Void in
+                    make.top.leading.trailing.equalTo(descriptionWidgetView)
+                    make.bottom.equalTo(descriptionWidgetView).offset(-16)
+                }
                 descriptionWidgetView.frame.size = descriptionWidgetView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: descriptionWidgetView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
             }
             tableView.tableHeaderView = descriptionWidgetView
@@ -89,7 +92,8 @@ class CourseListVerticalViewController: CourseListViewController {
 extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     func setupContentView() {
         self.view.addSubview(tableView)
-        tableView.align(toView: self.view)
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.view) }
+
         tableView.register(UINib(nibName: "CourseWidgetTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseWidgetTableViewCell")
 
         tableView.tableFooterView = UIView()

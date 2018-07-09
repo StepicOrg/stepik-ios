@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SnapKit
 
 class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var arrowButton: UIButton!
 
-    var bottomTitleConstraint: NSLayoutConstraint?
+    var bottomTitleConstraint: Constraint?
 
     var block: ContentExpandableMenuBlock?
     var updateTableHeightBlock: (() -> Void)?
@@ -30,7 +31,7 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
             self.block = block
             if let contentView = block.contentView {
                 container.addSubview(contentView)
-                contentView.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: container)
+                contentView.snp.makeConstraints { $0.edges.equalTo(container) }
                 layoutIfNeeded()
             }
 
@@ -62,7 +63,7 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     }
 
     func expand(shouldAnimate: Bool = true) {
-        bottomTitleConstraint?.isActive = false
+        bottomTitleConstraint?.deactivate()
         container.isHidden = false
 
         let animationBlock: () -> Void = { [weak self] in
@@ -78,9 +79,11 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     func shrink(shouldAnimate: Bool = true) {
         container.isHidden = true
         if bottomTitleConstraint == nil {
-            bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
+            titleLabel.snp.makeConstraints { make -> Void in
+                bottomTitleConstraint = make.bottom.equalTo(self.contentView).offset(-26).constraint
+            }
         } else {
-            bottomTitleConstraint?.isActive = true
+            bottomTitleConstraint?.activate()
         }
 
         let animationBlock: () -> Void = { [weak self] in
