@@ -25,25 +25,19 @@ struct Scripts {
         return loadScriptWithKey(sizeReportScriptKey)
     }
 
-    fileprivate static var sizeReportScriptKey: String = "SizeReportScript"
-
-    fileprivate static var texScriptKey: String = "TexScript"
-
-    fileprivate static var localTexScriptKey: String = "LocalTexScript"
-
-    fileprivate static var metaViewportKey: String = "MetaViewport"
-
-    fileprivate static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
-
-    fileprivate static var clickableImagesScriptKey: String = "ClickableImages"
-
-    fileprivate static var localJQueryScriptKey: String = "localJQueryScript"
-
-    fileprivate static var audioTagWrapperKey: String = "AudioTagWrapper"
-
-    fileprivate static var audioTagWrapperInitKey: String = "AudioTagWrapperInit"
-
-    fileprivate static var kotlinRunnableSamplesKey: String = "KotlinRunnableSamples"
+    fileprivate static let sizeReportScriptKey: String = "SizeReportScript"
+    fileprivate static let texScriptKey: String = "TexScript"
+    fileprivate static let localTexScriptKey: String = "LocalTexScript"
+    fileprivate static let metaViewportKey: String = "MetaViewport"
+    fileprivate static let mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
+    fileprivate static let clickableImagesScriptKey: String = "ClickableImages"
+    fileprivate static let localJQueryScriptKey: String = "localJQueryScript"
+    fileprivate static let audioTagWrapperKey: String = "AudioTagWrapper"
+    fileprivate static let audioTagWrapperInitKey: String = "AudioTagWrapperInit"
+    fileprivate static let kotlinRunnableSamplesKey: String = "KotlinRunnableSamples"
+    fileprivate static let wysiwygStylesKey: String = "wysiwygCSSWrapper"
+    fileprivate static let commonStylesKey: String = "contentCSSWrapper"
+    fileprivate static let textColorScriptKey: String = "textColorScript"
 
     static var localJQueryScript: String {
         return loadScriptWithKey(localJQueryScriptKey)
@@ -75,6 +69,15 @@ struct Scripts {
 
     static var kotlinRunnableSamples: String {
         return loadScriptWithKey(kotlinRunnableSamplesKey)
+    }
+
+    static var styles: String {
+        return "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
+    }
+
+    static func textColorScript(textColor: UIColor) -> String {
+        let script = loadScriptWithKey(textColorScriptKey)
+        return script.replacingOccurrences(of: "######", with: "#\(textColor.hexString)")
     }
 
     fileprivate static var mathJaxLocalPathScript: String {

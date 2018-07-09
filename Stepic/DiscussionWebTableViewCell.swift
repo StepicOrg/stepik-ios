@@ -98,7 +98,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
 
     fileprivate func loadWebView(_ htmlString: String) {
-        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
+        let wrapped = HTMLProcessor.shared.process(htmlString: htmlString)
         commentWebView?.loadHTMLString(wrapped, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 

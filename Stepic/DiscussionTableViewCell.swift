@@ -111,7 +111,7 @@ class DiscussionTableViewCell: UITableViewCell {
     }
 
     fileprivate func loadLabel(_ htmlString: String) {
-        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
+        let wrapped = HTMLProcessor.shared.process(htmlString: htmlString)
         if let data = wrapped.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             do {
                 let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).attributedStringByTrimmingNewlines()

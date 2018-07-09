@@ -101,11 +101,8 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 
     func updateProblem(with htmlText: String) {
-        problemText = htmlText
 
-        let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
-        var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: problemText!, width: Int(UIScreen.main.bounds.width))
-        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        var html = HTMLProcessor.shared.process(htmlString: htmlText)
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
