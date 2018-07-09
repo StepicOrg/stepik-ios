@@ -10,12 +10,12 @@ import XCTest
 @testable import ExamEGERussian
 
 class MainViewControllerTests: XCTestCase {
-    
+
     func testMainScreen() {
         let vc = MainViewController()
         vc.userRegistrationService = ServiceComponentsAssemblyTestsHelper().serviceComponents.userRegistrationService
-        
+
         XCTAssertNotNil(vc.view, "Could not instantiate MainViewController")
     }
-    
+
 }

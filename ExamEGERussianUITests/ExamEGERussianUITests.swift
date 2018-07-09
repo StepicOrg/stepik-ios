@@ -9,20 +9,20 @@
 import XCTest
 
 class ExamEGERussianUITests: XCTestCase {
-    
+
     private var application: XCUIApplication!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         continueAfterFailure = false
-        
+
         application = XCUIApplication()
         application.launch()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
 }

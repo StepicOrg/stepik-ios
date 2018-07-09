@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 final class UserRegistrationServiceImplementation: UserRegistrationService {
-    
+
     // MARK: Instance Properties
 
     let authAPI: AuthAPI
@@ -18,11 +18,11 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
     let profilesAPI: ProfilesAPI
 
     let defaultsStorageManager: DefaultsStorageManager
-    
+
     let randomCredentialsGenerator: RandomCredentialsGenerator
-    
+
     // MARK: - Initializers
-    
+
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
@@ -35,9 +35,9 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
         self.defaultsStorageManager = defaultsStorageManager
         self.randomCredentialsGenerator = randomCredentialsGenerator
     }
-    
+
     // MARK: - UserRegistrationService
-    
+
     func registerNewUser() -> Promise<User> {
         return Promise { seal in
             checkToken().then {
@@ -53,11 +53,11 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             }
         }
     }
-    
+
     func logInUser(email: String, password: String) -> Promise<User> {
         defaultsStorageManager.accountEmail = email
         defaultsStorageManager.accountPassword = password
-        
+
         return Promise { seal in
             self.authAPI.signInWithAccount(
                 email: email,
@@ -65,12 +65,12 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             ).then { token, authorizationType -> Promise<User> in
                 AuthInfo.shared.token = token
                 AuthInfo.shared.authorizationType = authorizationType
-                
+
                 return self.stepicsAPI.retrieveCurrentUser()
             }.done { user in
                 AuthInfo.shared.user = user
                 User.removeAllExcept(user)
-                
+
                 seal.fulfill(user)
             }.catch { error in
                 print("ExamEgeRussian: failed to login user with error: \(error)")
@@ -78,7 +78,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             }
         }
     }
-    
+
     func registerUser() -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
             let savedPassword = defaultsStorageManager.accountPassword {
@@ -87,7 +87,7 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
 
         let email = randomCredentialsGenerator.email
         let password = randomCredentialsGenerator.password
-        
+
         return Promise { seal in
             self.authAPI.signUpWithAccount(
                 firstname: randomCredentialsGenerator.firstname,
@@ -124,5 +124,5 @@ final class UserRegistrationServiceImplementation: UserRegistrationService {
             }
         }
     }
-    
+
 }
