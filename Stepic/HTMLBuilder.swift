@@ -23,7 +23,7 @@ class HTMLBuilder: NSObject {
         res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #\(colorHexString);}"
         res += "\nimg { max-width: 100%; }"
         res += "\niframe { max-width: 100%; }"
-
+        
 //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 //        res += "\npre { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 
