@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>KotlinRunnableSamples</key>
+	<string>&lt;script src=&quot;https://unpkg.com/kotlin-playground@1&quot; data-selector=&quot;kotlin-runnable&quot;&gt;&lt;/script&gt;</string>
 	<key>AudioTagWrapperInit</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
 	<key>AudioTagWrapper</key>
