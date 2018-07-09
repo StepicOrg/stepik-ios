@@ -14,15 +14,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Instance Properties
-    
+
     var window: UIWindow?
-    
+
     private lazy var rootNavigationManager: RootNavigationManager = {
-        return RootNavigationManager(serviceComponents: self.serviceComponents)
+        RootNavigationManager(serviceComponents: self.serviceComponents)
     }()
-    
+
     private lazy var serviceComponents: ServiceComponents = {
-        return ServiceComponentsAssembly(
+        ServiceComponentsAssembly(
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
             profilesAPI: ProfilesAPI(),
@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )
     }()
-    
+
     // MARK: - UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -38,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else {
             fatalError("Failed to instantiate window")
         }
-        
+
         rootNavigationManager.setup(with: window)
-        
+
         return true
     }
-    
+
 }

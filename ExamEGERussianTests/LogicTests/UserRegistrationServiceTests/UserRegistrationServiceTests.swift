@@ -11,47 +11,47 @@ import PromiseKit
 @testable import ExamEGERussian
 
 class UserRegistrationServiceTests: XCTestCase {
-    
+
     var service: UserRegistrationServiceMock!
-    
+
     override func setUp() {
         super.setUp()
         service = UserRegistrationServiceMock()
     }
-    
+
     override func tearDown() {
         super.tearDown()
         service = nil
     }
-    
+
     func testSuccessfulResponse() {
         let ex = expectation(description: "\(#function)")
-        
+
         service.user = User()
         service.registerNewUser().done { _ in
             XCTAssert(true)
             ex.fulfill()
         }.catch { _ in
-            XCTFail()
+            XCTFail("User should be returned")
             ex.fulfill()
         }
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
     func testFailResponse() {
         let ex = expectation(description: "\(#function)")
-        
+
         service.error = UserRegistrationServiceError.notRegistered
         service.registerNewUser().done { _ in
-            XCTFail()
+            XCTFail("Error should be returned")
             ex.fulfill()
         }.catch { _ in
             XCTAssert(true)
             ex.fulfill()
         }
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
 }

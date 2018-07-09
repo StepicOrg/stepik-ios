@@ -9,9 +9,9 @@
 import Foundation
 
 final class ServiceComponentsAssembly: ServiceComponents {
-    
+
     let userRegistrationService: UserRegistrationService
-    
+
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
@@ -26,5 +26,5 @@ final class ServiceComponentsAssembly: ServiceComponents {
             randomCredentialsGenerator: randomCredentialsGenerator
         )
     }
-    
+
 }

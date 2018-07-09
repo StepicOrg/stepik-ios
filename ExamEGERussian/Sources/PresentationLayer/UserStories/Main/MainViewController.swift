@@ -12,29 +12,29 @@ import PromiseKit
 // MARK: MainViewController: UIViewController
 
 final class MainViewController: UIViewController {
-    
+
     // MARK: - Instance Properties
 
     var userRegistrationService: UserRegistrationService?
-    
+
     // MARK: - UIViewController Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         assert(userRegistrationService != nil, "UserRegistrationService must be initialized")
-        
+
         checkAccessToken()
     }
-    
+
     // MARK: Private API
-    
+
     private func checkAccessToken() {
         checkToken().done { [weak self] in
             if !AuthInfo.shared.isAuthorized {
                 self?.userRegistrationService?
                     .registerNewUser()
-                    .done  { print($0) }
+                    .done { print($0) }
                     .catch { print($0) }
             }
         }.catch { print($0) }

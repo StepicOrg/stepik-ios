@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ServiceComponents: class {
-    
+
     var userRegistrationService: UserRegistrationService { get }
-    
+
 }
