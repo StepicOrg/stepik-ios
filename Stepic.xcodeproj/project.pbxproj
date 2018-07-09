@@ -2306,6 +2306,10 @@
 		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C80C829201A504700ABB312 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
+		2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305E920F38880003D7F9B /* Vertex.swift */; };
+		2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EB20F388B9003D7F9B /* Edge.swift */; };
+		2C8305EE20F388F8003D7F9B /* GraphProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305ED20F388F8003D7F9B /* GraphProtocol.swift */; };
+		2C8305F020F38931003D7F9B /* AdjacencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EF20F38931003D7F9B /* AdjacencyList.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -5652,6 +5656,10 @@
 		2C7FEE791FDAFB4600B2B4F1 /* OnboardingPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingPageView.xib; sourceTree = "<group>"; };
 		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimatedView.swift; sourceTree = "<group>"; };
+		2C8305E920F38880003D7F9B /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		2C8305EB20F388B9003D7F9B /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		2C8305ED20F388F8003D7F9B /* GraphProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphProtocol.swift; sourceTree = "<group>"; };
+		2C8305EF20F38931003D7F9B /* AdjacencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyList.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -8359,8 +8367,8 @@
 		2C59F02820EB8AC800666EE0 /* ExamEGERussian */ = {
 			isa = PBXGroup;
 			children = (
-				2C59F05E20EB98D400666EE0 /* Resources */,
 				2C59F05D20EB98CA00666EE0 /* Sources */,
+				2C59F05E20EB98D400666EE0 /* Resources */,
 				2C59F05A20EB8E5C00666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussian;
@@ -8434,8 +8442,9 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05520EB8D1A00666EE0 /* ApplicationLayer */,
-				2C59F06220EB9FE500666EE0 /* BusinessLogicLayer */,
 				2C59F05C20EB8F0D00666EE0 /* PresentationLayer */,
+				2C59F06220EB9FE500666EE0 /* BusinessLogicLayer */,
+				2C8305E720F38777003D7F9B /* CoreLayer */,
 				2CF2246820EF96580093D844 /* Helpers */,
 			);
 			path = Sources;
@@ -8712,6 +8721,65 @@
 				2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */,
 			);
 			name = OnboardingPageView;
+			sourceTree = "<group>";
+		};
+		2C8305E720F38777003D7F9B /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305E820F38809003D7F9B /* Graph */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		2C8305E820F38809003D7F9B /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F320F38CEC003D7F9B /* ConcreteClasses */,
+				2C8305F120F38CA0003D7F9B /* Model */,
+				2C8305F220F38CC8003D7F9B /* Protocols */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		2C8305F120F38CA0003D7F9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305E920F38880003D7F9B /* Vertex.swift */,
+				2C8305EB20F388B9003D7F9B /* Edge.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C8305F220F38CC8003D7F9B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305ED20F388F8003D7F9B /* GraphProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2C8305F320F38CEC003D7F9B /* ConcreteClasses */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305EF20F38931003D7F9B /* AdjacencyList.swift */,
+			);
+			path = ConcreteClasses;
+			sourceTree = "<group>";
+		};
+		2C8305F420F38DCD003D7F9B /* CoreLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F520F38DEB003D7F9B /* Graph */,
+			);
+			path = CoreLayerTests;
+			sourceTree = "<group>";
+		};
+		2C8305F520F38DEB003D7F9B /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		2C8652561F4B2C2300D51654 /* Content */ = {
@@ -14433,6 +14501,7 @@
 				2C949A0C20ECC3FC0049E9A8 /* StreaksStepikAlertManager.swift in Sources */,
 				2C94999220ECB7E30049E9A8 /* Unit.swift in Sources */,
 				2C9499FF20ECC26F0049E9A8 /* StepOptions+CoreDataProperties.swift in Sources */,
+				2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */,
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
 				2C9499D620ECBCF40049E9A8 /* CodeLanguages.swift in Sources */,
@@ -14457,6 +14526,7 @@
 				2C949A2620ECC60F0049E9A8 /* ProfileHeaderInfoView.swift in Sources */,
 				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C33CBE620EC314E009956B0 /* StepicApplicationsInfo.swift in Sources */,
+				2C8305EE20F388F8003D7F9B /* GraphProtocol.swift in Sources */,
 				2C949A3820ECC7DF0049E9A8 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
@@ -14521,6 +14591,7 @@
 				2C94999120ECB7AA0049E9A8 /* NotificationsStatus.swift in Sources */,
 				2C94998F20ECB7770049E9A8 /* Course.swift in Sources */,
 				2C949A2220ECC5CD0049E9A8 /* StreakNotificationsControlPresenter.swift in Sources */,
+				2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */,
 				2C949A5020ECCDBC0049E9A8 /* ControllerHelperLaunchExtension.swift in Sources */,
 				2C949A3220ECC7020049E9A8 /* AchievementsAPI.swift in Sources */,
 				2C9499E520ECBE960049E9A8 /* CodeLimit+CoreDataProperties.swift in Sources */,
@@ -14612,6 +14683,7 @@
 				2C33CC0120EC3344009956B0 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C9499BF20ECBB5D0049E9A8 /* DeviceInfo.swift in Sources */,
 				2C9499C320ECBBE80049E9A8 /* Section+CoreDataProperties.swift in Sources */,
+				2C8305F020F38931003D7F9B /* AdjacencyList.swift in Sources */,
 				2C33CC0320EC3355009956B0 /* QueriesAPI.swift in Sources */,
 				2C949A5820ECCE570049E9A8 /* AchievementPopupViewController.swift in Sources */,
 				2C9499BD20ECBB440049E9A8 /* Block+CoreDataProperties.swift in Sources */,
