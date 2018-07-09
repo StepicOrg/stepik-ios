@@ -19,7 +19,7 @@ class HTMLProcessor {
         var head = head
         var body = htmlString
 
-        head = "\(Scripts.metaViewport)\(Scripts.localTexScript)\(Scripts.clickableImagesScript)\(Scripts.textColorScript(textColor: textColor))\(Scripts.styles)" + head
+        head = "\(Scripts.metaViewport)\(Scripts.localTexScript)\(Scripts.clickableImagesScript)\(Scripts.styles)" + head
         if body.contains("kotlin-runnable") {
             head += "\(Scripts.kotlinRunnableSamples)"
         }
@@ -32,7 +32,7 @@ class HTMLProcessor {
             body = body + Scripts.audioTagWrapperInit
         }
 
-        res = "<html><head>\(head)</head><body>\(addStepikURLWhereNeeded(body: body))</body></html>"
+        res = "<html><head>\(head)</head><body>\(Scripts.textColorScript(textColor: textColor))\(addStepikURLWhereNeeded(body: body))</body></html>"
         return res.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 
