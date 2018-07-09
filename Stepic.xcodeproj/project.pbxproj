@@ -852,7 +852,6 @@
 		08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
 		08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
 		08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
-		08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
 		08DF788F1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
 		08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
@@ -1253,7 +1252,6 @@
 		2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -1644,7 +1642,6 @@
 		2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -2454,7 +2451,6 @@
 		2C89AA0D1F4C289900227C3B /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2C89AA0E1F4C289900227C3B /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2C89AA0F1F4C289900227C3B /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2C89AA101F4C289900227C3B /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C89AA141F4C289900227C3B /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -3083,7 +3079,6 @@
 		2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2C9731C41F4C38F600AC9301 /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -3562,7 +3557,6 @@
 		2CA8D2022088D9C000E105E9 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2CA8D2032088D9C000E105E9 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2CA8D2042088D9C000E105E9 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		2CA8D2052088D9C000E105E9 /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		2CA8D2062088D9C000E105E9 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CA8D2072088D9C000E105E9 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2CA8D2082088D9C000E105E9 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
@@ -4260,7 +4254,6 @@
 		864514F21E9FD4F6007F73BE /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
 		864514F31E9FD4F6007F73BE /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		864514F41E9FD4F6007F73BE /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
-		864D668F1E83DE03001E8D9E /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		864D66901E83DE03001E8D9E /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		864D66911E83DE03001E8D9E /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		864D66921E83DE03001E8D9E /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -5380,7 +5373,6 @@
 		08DF1D911BDAB93900BA35EA /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		08DF1D931BDADB2D00BA35EA /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		08DF1D951BDADB7A00BA35EA /* Scripts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scripts.plist; sourceTree = "<group>"; };
-		08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLBuilder.swift; sourceTree = "<group>"; };
 		08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08DF789D1F5DE64300AEEA85 /* ArtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
@@ -6162,7 +6154,6 @@
 			isa = PBXGroup;
 			children = (
 				080EBA301EA64A5400C43C93 /* Containers */,
-				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				08E16F281BDBA731004822E1 /* ConnectionHelper.swift */,
@@ -12717,7 +12708,6 @@
 				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
-				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
@@ -13608,7 +13598,6 @@
 				2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */,
 				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
 				2CF2248420EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
-				2C1B617C1F4C4AEF00236804 /* HTMLBuilder.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
 				2CF2247720EF9D890093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
@@ -14097,7 +14086,6 @@
 				2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */,
 				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
 				2CF2248520EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
-				2C1B638D1F4C590700236804 /* HTMLBuilder.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
 				2CF2247820EF9D8A0093D844 /* UserRegistrationServiceImplementation.swift in Sources */,
@@ -14910,7 +14898,6 @@
 				2C89AA0D1F4C289900227C3B /* CourseMetainfoEntity.swift in Sources */,
 				2C89AA0E1F4C289900227C3B /* PlaybackCommandEntity.swift in Sources */,
 				2C89AA0F1F4C289900227C3B /* PlaybackStatusEntity.swift in Sources */,
-				2C89AA101F4C289900227C3B /* HTMLBuilder.swift in Sources */,
 				08EA89CC200E688900BCAF44 /* SQLReply.swift in Sources */,
 				2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */,
 				2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */,
@@ -15407,7 +15394,6 @@
 				2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */,
 				2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */,
 				2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */,
-				2C9731C41F4C38F600AC9301 /* HTMLBuilder.swift in Sources */,
 				2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */,
 				2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */,
 				2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */,
@@ -15905,7 +15891,6 @@
 				2CA8D2022088D9C000E105E9 /* CourseMetainfoEntity.swift in Sources */,
 				2CA8D2032088D9C000E105E9 /* PlaybackCommandEntity.swift in Sources */,
 				2CA8D2042088D9C000E105E9 /* PlaybackStatusEntity.swift in Sources */,
-				2CA8D2052088D9C000E105E9 /* HTMLBuilder.swift in Sources */,
 				2CA8D2062088D9C000E105E9 /* SQLReply.swift in Sources */,
 				2CA8D2072088D9C000E105E9 /* UICustomizer.swift in Sources */,
 				2CA8D2082088D9C000E105E9 /* CoreDataHelper.swift in Sources */,
@@ -16468,7 +16453,6 @@
 				864D673A1E83DE76001E8D9E /* CourseMetainfoEntity.swift in Sources */,
 				864D673B1E83DE76001E8D9E /* PlaybackCommandEntity.swift in Sources */,
 				864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */,
-				864D668F1E83DE03001E8D9E /* HTMLBuilder.swift in Sources */,
 				864D66901E83DE03001E8D9E /* UICustomizer.swift in Sources */,
 				864D66911E83DE03001E8D9E /* CoreDataHelper.swift in Sources */,
 				864D66921E83DE03001E8D9E /* ConnectionHelper.swift in Sources */,
