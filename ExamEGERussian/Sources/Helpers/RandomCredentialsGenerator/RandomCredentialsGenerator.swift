@@ -9,13 +9,13 @@
 import Foundation
 
 protocol RandomCredentialsGenerator {
-    
+
     var firstname: String { get }
-    
+
     var lastname: String { get }
-    
+
     var email: String { get }
-    
+
     var password: String { get }
-    
+
 }
