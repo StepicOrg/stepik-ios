@@ -32,7 +32,7 @@ class UserRegistrationServiceTests: XCTestCase {
             XCTAssert(true)
             ex.fulfill()
         }.catch { _ in
-            XCTFail()
+            XCTFail("User should be returned")
             ex.fulfill()
         }
 
@@ -44,7 +44,7 @@ class UserRegistrationServiceTests: XCTestCase {
 
         service.error = UserRegistrationServiceError.notRegistered
         service.registerNewUser().done { _ in
-            XCTFail()
+            XCTFail("Error should be returned")
             ex.fulfill()
         }.catch { _ in
             XCTAssert(true)
