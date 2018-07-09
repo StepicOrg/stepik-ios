@@ -212,6 +212,3 @@ import WebKit
 //    }
 //}
 //
-struct TextStyle {
-
-}

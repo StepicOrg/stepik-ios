@@ -1044,7 +1044,7 @@
 		08F8FEB81F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		08F8FEB91F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		08F8FEBA1F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
-		08FCC79420F3BAEB008B84B9 /* stepcontent.css in Resources */ = {isa = PBXBuildFile; fileRef = 08FCC79320F3BAEA008B84B9 /* stepcontent.css */; };
+		08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */ = {isa = PBXBuildFile; fileRef = 08FCC79320F3BAEA008B84B9 /* stepikcontent.css */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */; };
 		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -5477,7 +5477,7 @@
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
-		08FCC79320F3BAEA008B84B9 /* stepcontent.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stepcontent.css; sourceTree = "<group>"; };
+		08FCC79320F3BAEA008B84B9 /* stepikcontent.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stepikcontent.css; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthAPI.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionTableViewCell.xib; sourceTree = "<group>"; };
@@ -7625,7 +7625,7 @@
 		08DE94141B8C58AC00D278AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				08FCC79320F3BAEA008B84B9 /* stepcontent.css */,
+				08FCC79320F3BAEA008B84B9 /* stepikcontent.css */,
 				2CB62BF02019FDB300B5E336 /* Adaptive onboarding content */,
 				2CA9D98B20122EAF007AA743 /* Adaptive leaderboards names */,
 				084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */,
@@ -10305,7 +10305,7 @@
 				0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */,
 				62E9815A6AAC6C12E9B9D862 /* ProfileHeaderInfoView.xib in Resources */,
-				08FCC79420F3BAEB008B84B9 /* stepcontent.css in Resources */,
+				08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */,
 				2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */,
 				2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */,
 			);
@@ -12108,7 +12108,6 @@
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
@@ -12153,7 +12152,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",

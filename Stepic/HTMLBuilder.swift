@@ -23,7 +23,7 @@ class HTMLBuilder: NSObject {
         res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #\(colorHexString);}"
         res += "\nimg { max-width: 100%; }"
         res += "\niframe { max-width: 100%; }"
-        
+
 //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 //        res += "\npre { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 
@@ -67,11 +67,11 @@ class HTMLBuilder: NSObject {
 
         res += "<head>\n\(stepicStyleString(textColor: textColor) + stepicBaseURLString + head)\n</head>\n"
 
-        if let width = width {
-            res += "<body style=\"width:\(width))px;\">\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
-        } else {
+//        if let width = width {
+//            res += "<body style=\"width:\(width))px;\">\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
+//        } else {
             res += "<body>\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
-        }
+//        }
 
         res += "</html>"
         return res

@@ -166,7 +166,7 @@ class WebStepViewController: UIViewController {
             }
         }
 
-        var scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
+        var scriptsString = "\(Scripts.metaViewport)\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
         if htmlText.range(of: "kotlin-runnable") != nil {
             scriptsString += "\(Scripts.kotlinRunnableSamples)"
         }
