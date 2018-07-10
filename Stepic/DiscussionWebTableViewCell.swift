@@ -98,8 +98,12 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
 
     fileprivate func loadWebView(_ htmlString: String) {
-        let wrapped = HTMLProcessor.shared.process(htmlString: htmlString)
-        commentWebView?.loadHTMLString(wrapped, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        let processor = HTMLProcessor(html: htmlString)
+        let html = processor
+            .injectDefault()
+            .html
+
+        commentWebView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
     fileprivate func setLeadingConstraints(_ constant: CGFloat) {

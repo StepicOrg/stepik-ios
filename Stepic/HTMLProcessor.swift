@@ -10,33 +10,100 @@ import Foundation
 
 class HTMLProcessor {
 
-    init() {}
+    private var htmlString: String
+    private var headInjections: String = ""
+    private var bodyInjections: String = ""
 
-    static let shared = HTMLProcessor()
-
-    func process(htmlString: String, head: String = "", textColor: UIColor = UIColor.mainText) -> String {
-        var res = "<html>\n"
-        var head = head
-        var body = htmlString
-
-        head = "\(Scripts.metaViewport)\(Scripts.localTexScript)\(Scripts.clickableImagesScript)\(Scripts.styles)" + head
-        if body.contains("kotlin-runnable") {
-            head += "\(Scripts.kotlinRunnableSamples)"
-        }
-
-        // Include library to customize audio controls
-        if body.contains("<audio") {
-            // Inject to head
-            head = head + Scripts.audioTagWrapper
-            // Inject before closing body tag
-            body = body + Scripts.audioTagWrapperInit
-        }
-
-        res = "<html><head>\(head)</head><body>\(Scripts.textColorScript(textColor: textColor))\(addStepikURLWhereNeeded(body: body))</body></html>"
-        return res.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    var html: String {
+        return "<html><head>\(headInjections)</head><body>\(bodyInjections)\(addStepikURLWhereNeeded(body: htmlString))</body></html>"
     }
 
-    func addStepikURLWhereNeeded(body: String) -> String {
+    enum SupportedScripts {
+        case metaViewport
+        case localTex
+        case clickableImages
+        case styles
+        case kotlinRunnableSamples
+        case audio
+        case textColor(color: UIColor)
+        case mathJaxCompletion
+        case customHead(head: String)
+        case customBody(body: String)
+
+        var headInjectionString: String {
+            switch self {
+            case .metaViewport:
+                return Scripts.metaViewport
+            case .localTex:
+                return Scripts.localTexScript
+            case .clickableImages:
+                return Scripts.clickableImagesScript
+            case .styles:
+                return Scripts.styles
+            case .kotlinRunnableSamples:
+                return Scripts.kotlinRunnableSamples
+            case .audio:
+                return Scripts.audioTagWrapper
+            case .mathJaxCompletion:
+                return Scripts.mathJaxFinishedScript
+            case .customHead(head: let customHead):
+                return customHead
+            default:
+                return ""
+            }
+        }
+
+        var bodyInjectionString: String {
+            switch self {
+            case .audio:
+                return Scripts.audioTagWrapperInit
+            case .textColor(color: let color):
+                return Scripts.textColorScript(textColor: color)
+            case .customBody(body: let customBody):
+                return customBody
+            default:
+                return ""
+            }
+        }
+    }
+
+    init(html: String) {
+        self.htmlString = html
+    }
+
+    func injectDefault() -> HTMLProcessor {
+        return self
+            .inject(script: .audio)
+            .inject(script: .clickableImages)
+            .inject(script: .localTex)
+            .inject(script: .styles)
+            .inject(script: .metaViewport)
+            .inject(script: .kotlinRunnableSamples)
+            .inject(script: .textColor(color: UIColor.mainText))
+    }
+
+    func inject(script: SupportedScripts) -> HTMLProcessor {
+        func injectInHTML(script: SupportedScripts) {
+            self.headInjections += script.headInjectionString
+            self.bodyInjections += script.bodyInjectionString
+        }
+
+        switch script {
+        case .kotlinRunnableSamples:
+            if htmlString.contains("kotlin-runnable") {
+                injectInHTML(script: script)
+            }
+        case .audio:
+            if htmlString.contains("<audio") {
+                injectInHTML(script: script)
+            }
+        default:
+            injectInHTML(script: script)
+        }
+        return self
+    }
+
+    private func addStepikURLWhereNeeded(body: String) -> String {
         var body = body
         body = fixProtocolRelativeURLs(html: body)
 
@@ -58,7 +125,7 @@ class HTMLProcessor {
         return newBody
     }
 
-    func fixProtocolRelativeURLs(html: String) -> String {
+    private func fixProtocolRelativeURLs(html: String) -> String {
         return html.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
     }
 }

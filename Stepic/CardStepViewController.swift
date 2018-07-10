@@ -102,7 +102,10 @@ class CardStepViewController: UIViewController, CardStepView {
 
     func updateProblem(with htmlText: String) {
 
-        var html = HTMLProcessor.shared.process(htmlString: htmlText)
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor
+            .injectDefault()
+            .html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 

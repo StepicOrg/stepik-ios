@@ -166,7 +166,10 @@ class WebStepViewController: UIViewController {
             }
         }
 
-        let html = HTMLProcessor.shared.process(htmlString: htmlText)
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor
+            .injectDefault()
+            .html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
