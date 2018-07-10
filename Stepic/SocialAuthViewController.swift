@@ -35,6 +35,8 @@ extension SocialAuthViewController: SocialAuthView {
             } else {
                 SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
             }
+        case .noEmail:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         }
     }
 

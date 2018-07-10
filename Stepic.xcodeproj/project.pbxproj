@@ -9751,6 +9751,7 @@
 				2C59F02320EB8AC800666EE0 /* Sources */,
 				2C59F02420EB8AC800666EE0 /* Frameworks */,
 				2C59F02520EB8AC800666EE0 /* Resources */,
+				2C0D584C20F3C0F400A28252 /* SwiftLint Script */,
 				A75C902C92CF5BD34425B2FD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -11476,6 +11477,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		2C0D584C20F3C0F400A28252 /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;

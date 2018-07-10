@@ -21,21 +21,21 @@ enum UserRegistrationServiceError: Error {
 // MARK: - UserRegistrationService -
 
 protocol UserRegistrationService {
-    
+
     var defaultsStorageManager: DefaultsStorageManager { get }
-    
+
     var authAPI: AuthAPI { get }
-    
+
     var stepicsAPI: StepicsAPI { get }
-    
+
     var randomCredentialsGenerator: RandomCredentialsGenerator { get }
-    
+
     func registerNewUser() -> Promise<User>
-    
+
     func registerUser() -> Promise<(email: String, password: String)>
-    
+
     func logInUser(email: String, password: String) -> Promise<User>
-    
+
     func unregisterFromEmail(user: User) -> Promise<User>
-    
+
 }

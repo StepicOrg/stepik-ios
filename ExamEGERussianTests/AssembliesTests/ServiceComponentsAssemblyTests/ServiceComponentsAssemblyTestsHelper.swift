@@ -10,9 +10,9 @@ import Foundation
 @testable import ExamEGERussian
 
 final class ServiceComponentsAssemblyTestsHelper {
-    
+
     let serviceComponents: ServiceComponents
-    
+
     init() {
         serviceComponents = ServiceComponentsAssembly(
             authAPI: AuthAPI(),
@@ -22,5 +22,5 @@ final class ServiceComponentsAssemblyTestsHelper {
             randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )
     }
-    
+
 }
