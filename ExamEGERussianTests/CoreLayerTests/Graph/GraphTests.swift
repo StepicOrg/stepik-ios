@@ -11,9 +11,19 @@ import XCTest
 
 class GraphTests: XCTestCase {
     
+    var graph: AbstractGraph<Int>!
+    
+    override func setUp() {
+        super.setUp()
+        graph = AdjacencyListGraph()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        graph = nil
+    }
+    
     func testSortedGraphKeysCustomStringConvertible() {
-        let graph = AdjacencyList<Int>()
-        
         let a = graph.createVertex(data: 1)
         let b = graph.createVertex(data: 2)
         
@@ -23,15 +33,13 @@ class GraphTests: XCTestCase {
     }
     
     func testEdgesFromReturnsCorrectEdgeInSingleEdgeDirected() {
-        let graph = AdjacencyList<Int>()
-        
         let a = graph.createVertex(data: 1)
         let b = graph.createVertex(data: 2)
         
         graph.add(from: a, to: b)
         
-        guard let edgesFromA = graph.edges(from: a),
-            let edgesFromB = graph.edges(from: b) else { return XCTFail() }
+        let edgesFromA = graph.edges(from: a)
+        let edgesFromB = graph.edges(from: b)
         
         XCTAssertEqual(edgesFromA.count, 1)
         XCTAssertEqual(edgesFromB.count, 0)
@@ -40,16 +48,14 @@ class GraphTests: XCTestCase {
     }
     
     func testEdgesFromReturnsCorrectEdgeInSingleEdgeUndirected() {
-        let graph = AdjacencyList<Int>()
-        
         let a = graph.createVertex(data: 1)
         let b = graph.createVertex(data: 2)
         
         graph.add(from: a, to: b)
         graph.add(from: b, to: a)
         
-        guard let edgesFromA = graph.edges(from: a),
-            let edgesFromB = graph.edges(from: b) else { return XCTFail() }
+        let edgesFromA = graph.edges(from: a)
+        let edgesFromB = graph.edges(from: b)
         
         XCTAssertEqual(edgesFromA.count, 1)
         XCTAssertEqual(edgesFromB.count, 1)
@@ -59,17 +65,14 @@ class GraphTests: XCTestCase {
     }
     
     func testEdgesFromReturnsNoEdgesInNoEdgeGraph() {
-        let graph = AdjacencyList<Int>()
-        
         let a = graph.createVertex(data: 1)
         let b = graph.createVertex(data: 2)
         
-        XCTAssertEqual(graph.edges(from: a)?.count, 0)
-        XCTAssertEqual(graph.edges(from: b)?.count, 0)
+        XCTAssertEqual(graph.edges(from: a).count, 0)
+        XCTAssertEqual(graph.edges(from: b).count, 0)
     }
     
     func testEdgesFromReturnsCorrectEdgesInBiggerGraph() {
-        let graph = AdjacencyList<Int>()
         let verticesCount = 10
         var vertices: [Vertex<Int>] = []
         
@@ -97,7 +100,7 @@ class GraphTests: XCTestCase {
         }
         
         for i in 0..<verticesCount {
-            let sourceEdges = graph.edges(from: vertices[i])!
+            let sourceEdges = graph.edges(from: vertices[i])
             let destinationVertices = sourceEdges.map { $0.destination }
             
             XCTAssertEqual(sourceEdges.count, verticesCount - i - 1)
@@ -106,6 +109,18 @@ class GraphTests: XCTestCase {
                 XCTAssertTrue(destinationVertices.contains(vertices[j]))
             }
         }
+    }
+    
+    func testSumOfAdjacencyListsIfEqualToEdges() {
+        let a = graph.createVertex(data: 1)
+        let b = graph.createVertex(data: 2)
+        let c = graph.createVertex(data: 3)
+        
+        graph.add(from: a, to: b)
+        graph.add(from: a, to: c)
+        graph.add(from: b, to: c)
+        
+        XCTAssertEqual(graph.edges.count, 3)
     }
     
 }
