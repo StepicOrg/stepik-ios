@@ -29,3 +29,15 @@ extension Array {
         return self.enumerated().sorted(by: { shift($0.offset) < shift($1.offset) }).map { $0.element }
     }
 }
+
+// https://oleb.net/blog/2016/12/optionals-string-interpolation/
+infix operator ???: NilCoalescingPrecedence
+
+public func ??? <T>(optional: T?, defaultValue: @autoclosure () -> String) -> String {
+    switch optional {
+    case let value?:
+        return String(describing: value)
+    case nil:
+        return defaultValue()
+    }
+}
