@@ -4049,6 +4049,7 @@
 		2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */; };
 		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
 		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
+		2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -5789,6 +5790,7 @@
 		2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGraph.swift; sourceTree = "<group>"; };
 		2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
 		2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinder.swift; sourceTree = "<group>"; };
+		2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinderTests.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -8776,6 +8778,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
+				2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -14806,6 +14809,7 @@
 				2C59F03F20EB8ACA00666EE0 /* MainViewControllerTests.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */,
+				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
