@@ -111,8 +111,11 @@ class DiscussionTableViewCell: UITableViewCell {
     }
 
     fileprivate func loadLabel(_ htmlString: String) {
-        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
-        if let data = wrapped.data(using: String.Encoding.unicode, allowLossyConversion: false) {
+        let processor = HTMLProcessor(html: htmlString)
+        let html = processor
+            .injectDefault()
+            .html
+        if let data = html.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             do {
                 let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).attributedStringByTrimmingNewlines()
                 commentLabel?.attributedText = attributedString
