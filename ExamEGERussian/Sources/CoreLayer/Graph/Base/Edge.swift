@@ -24,3 +24,9 @@ extension Edge: Hashable {
     }
     
 }
+
+extension Edge: CustomStringConvertible {
+    public var description: String {
+        return "\(source.description) -> \(destination.description)"
+    }
+}
