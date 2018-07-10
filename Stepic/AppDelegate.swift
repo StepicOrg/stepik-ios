@@ -293,7 +293,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
 
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any?) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
         if VKSdk.processOpen(url, fromApplication: sourceApplication) {
             return true

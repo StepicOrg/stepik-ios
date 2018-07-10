@@ -76,7 +76,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
     // We can init this class w/o course (for adaptive app)
-    internal(set) var course: Course?
+    var course: Course?
 
     var cachedRecommendedLessons: [Lesson] = []
     var canSwipeCard: Bool {

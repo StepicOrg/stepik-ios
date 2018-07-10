@@ -53,7 +53,7 @@ class PathManager: NSObject {
     func doesExistVideoWith(id: Int) -> Bool {
         do {
             let filePath = try getPathForVideoWithId(id: id, andExtension: "mp4")
-            return try FileManager.default.fileExists(atPath: filePath)
+            return FileManager.default.fileExists(atPath: filePath)
         } catch _ as NSError {
             return false
         }

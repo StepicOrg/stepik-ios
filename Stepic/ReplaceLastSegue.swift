@@ -12,7 +12,7 @@ class ReplaceLastSegue: UIStoryboardSegue {
     override func perform() {
         if let vcs = source.navigationController?.viewControllers {
             var controllers = vcs
-            controllers.popLast()
+            _ = controllers.popLast()
             controllers.append(destination)
             source.navigationController?.setViewControllers(controllers, animated: true)
         }
