@@ -35,9 +35,9 @@ class HTMLProcessor {
             case .metaViewport:
                 return Scripts.metaViewport
             case .localTex:
-                return Scripts.localTexScript
+                return Scripts.localTex
             case .clickableImages:
-                return Scripts.clickableImagesScript
+                return Scripts.clickableImages
             case .styles:
                 return Scripts.styles
             case .kotlinRunnableSamples:
@@ -45,7 +45,7 @@ class HTMLProcessor {
             case .audio:
                 return Scripts.audioTagWrapper
             case .mathJaxCompletion:
-                return Scripts.mathJaxFinishedScript
+                return Scripts.mathJaxFinished
             case .customHead(head: let customHead):
                 return customHead
             default:
@@ -58,7 +58,7 @@ class HTMLProcessor {
             case .audio:
                 return Scripts.audioTagWrapperInit
             case .textColor(color: let color):
-                return Scripts.textColorScript(textColor: color)
+                return Scripts.textColor(color: color)
             case .customBody(body: let customBody):
                 return customBody
             default:
@@ -90,7 +90,7 @@ class HTMLProcessor {
 
         switch script {
         case .kotlinRunnableSamples:
-            if htmlString.contains("kotlin-runnable") {
+            if htmlString.contains("<kotlin-runnable") {
                 injectInHTML(script: script)
             }
         case .audio:

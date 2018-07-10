@@ -39,11 +39,11 @@ struct Scripts {
     fileprivate static let commonStylesKey: String = "contentCSSWrapper"
     fileprivate static let textColorScriptKey: String = "textColorScript"
 
-    static var localJQueryScript: String {
+    static var localJQuery: String {
         return loadScriptWithKey(localJQueryScriptKey)
     }
 
-    static var localTexScript: String {
+    static var localTex: String {
         return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
     }
 
@@ -51,12 +51,12 @@ struct Scripts {
         return loadScriptWithKey(metaViewportKey)
     }
 
-    static var mathJaxFinishedScript: String {
+    static var mathJaxFinished: String {
         return loadScriptWithKey(mathJaxFinishedScriptKey)
     }
 
-    static var clickableImagesScript: String {
-        return "\(localJQueryScript)\(loadScriptWithKey(clickableImagesScriptKey))"
+    static var clickableImages: String {
+        return "\(localJQuery)\(loadScriptWithKey(clickableImagesScriptKey))"
     }
 
     static var audioTagWrapper: String {
@@ -75,9 +75,9 @@ struct Scripts {
         return "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
     }
 
-    static func textColorScript(textColor: UIColor) -> String {
+    static func textColor(color: UIColor) -> String {
         let script = loadScriptWithKey(textColorScriptKey)
-        return script.replacingOccurrences(of: "######", with: "#\(textColor.hexString)")
+        return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
