@@ -276,7 +276,9 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             return
         }
 
-        self.sendReaction(reaction, for: lesson, user: user).done { _ in }
+        self.sendReaction(reaction, for: lesson, user: user).catch { error in
+            print("\(#file) \(#function) \(error)")
+        }
     }
 
     func tryAgain() {
