@@ -46,7 +46,7 @@ class HTMLProcessor {
                 return Scripts.audioTagWrapper
             case .mathJaxCompletion:
                 return Scripts.mathJaxFinished
-            case .customHead(head: let customHead):
+            case .customHead(let customHead):
                 return customHead
             default:
                 return ""
@@ -57,9 +57,9 @@ class HTMLProcessor {
             switch self {
             case .audio:
                 return Scripts.audioTagWrapperInit
-            case .textColor(color: let color):
+            case .textColor(let color):
                 return Scripts.textColor(color: color)
-            case .customBody(body: let customBody):
+            case .customBody(let customBody):
                 return customBody
             default:
                 return ""
@@ -107,7 +107,7 @@ class HTMLProcessor {
         var body = body
         body = fixProtocolRelativeURLs(html: body)
 
-        var links = HTMLParsingUtil.getAllLinksWithText(body).map({return $0.link})
+        var links = HTMLParsingUtil.getAllLinksWithText(body).map { $0.link }
         links += HTMLParsingUtil.getImageSrcLinks(body)
         var linkMap = [String: String]()
 

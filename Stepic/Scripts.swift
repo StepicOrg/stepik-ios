@@ -81,11 +81,9 @@ struct Scripts {
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
-//        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
-
         let scriptBeginning = "<script type=\"text/javascript\" src=\"MathJax/MathJax.js"
-        let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>" //
-        let script = "\(scriptBeginning)\(scriptEnding)"//\(path)
+        let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>"
+        let script = "\(scriptBeginning)\(scriptEnding)"
         return script
     }
 }
