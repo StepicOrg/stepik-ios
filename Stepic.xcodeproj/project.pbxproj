@@ -4037,6 +4037,10 @@
 		2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
 		2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
 		2CE527C82029E1600047EC5F /* AdaptiveAchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */; };
+		2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664DF20F520790082F3FE /* Downloader.swift */; };
+		2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */; };
+		2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E120F520790082F3FE /* DownloaderTask.swift */; };
+		2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */; };
 		2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */; };
 		2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */; };
 		2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */; };
@@ -5771,6 +5775,10 @@
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsSection.swift; sourceTree = "<group>"; };
 		2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
+		2CE664DF20F520790082F3FE /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTaskProtocol.swift; sourceTree = "<group>"; };
+		2CE664E120F520790082F3FE /* DownloaderTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTask.swift; sourceTree = "<group>"; };
+		2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderProtocol.swift; sourceTree = "<group>"; };
 		2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAchievementsContentView.swift; sourceTree = "<group>"; };
@@ -7591,6 +7599,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				2CE664DE20F5204D0082F3FE /* Downloader */,
 				088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */,
 				084C658B1FDAAD35006A3E17 /* Remote Config */,
 				08DF78D01F64056B00AEEA85 /* UI Elements */,
@@ -9081,6 +9090,17 @@
 				2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */,
 			);
 			name = Achievements;
+			sourceTree = "<group>";
+		};
+		2CE664DE20F5204D0082F3FE /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				2CE664DF20F520790082F3FE /* Downloader.swift */,
+				2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */,
+				2CE664E120F520790082F3FE /* DownloaderTask.swift */,
+				2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */,
+			);
+			name = Downloader;
 			sourceTree = "<group>";
 		};
 		2CE8390320C7EF5A00FE3672 /* GenericContent */ = {
@@ -12680,6 +12700,7 @@
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
 				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
+				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */,
@@ -12809,6 +12830,7 @@
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
+				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
@@ -12859,6 +12881,7 @@
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */,
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
+				2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
@@ -12929,6 +12952,7 @@
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
 				080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
+				2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */,
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				08E8F97A1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
