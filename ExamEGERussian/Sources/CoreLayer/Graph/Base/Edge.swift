@@ -14,15 +14,15 @@ public struct Edge<T: Hashable> {
 }
 
 extension Edge: Hashable {
-    
+
     public var hashValue: Int {
         return "\(source)\(destination)".hashValue
     }
-    
-    static public func ==(lhs: Edge<T>, rhs: Edge<T>) -> Bool {
+
+    static public func == (lhs: Edge<T>, rhs: Edge<T>) -> Bool {
         return lhs.source == rhs.source && lhs.destination == rhs.destination
     }
-    
+
 }
 
 extension Edge: CustomStringConvertible {

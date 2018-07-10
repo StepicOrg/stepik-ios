@@ -17,7 +17,7 @@ final class UserRegistrationServiceMock: UserRegistrationService {
     let stepicsAPI = StepicsAPI()
 
     let defaultsStorageManager = DefaultsStorageManager()
-    
+
     var randomCredentialsGenerator: RandomCredentialsGenerator {
         return RandomCredentialsGeneratorImplementation()
     }
@@ -30,7 +30,7 @@ final class UserRegistrationServiceMock: UserRegistrationService {
     func registerNewUser() -> Promise<User> {
         return logInUser(email: "email", password: "password")
     }
-    
+
     func registerUser() -> Promise<(email: String, password: String)> {
         let credentials = (randomCredentialsGenerator.email, randomCredentialsGenerator.password)
         return Promise { seal in
@@ -43,7 +43,7 @@ final class UserRegistrationServiceMock: UserRegistrationService {
             seal.resolve(user, error)
         }
     }
-    
+
     func unregisterFromEmail(user: User) -> Promise<User> {
         return .value(user)
     }

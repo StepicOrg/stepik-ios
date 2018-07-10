@@ -13,15 +13,15 @@ public struct Vertex<T: Hashable> {
 }
 
 extension Vertex: Hashable {
-    
+
     public var hashValue: Int {
         return "\(data)".hashValue
     }
-    
-    static public func ==(lhs: Vertex, rhs: Vertex) -> Bool {
+
+    static public func == (lhs: Vertex, rhs: Vertex) -> Bool {
         return lhs.data == rhs.data
     }
-    
+
 }
 
 extension Vertex: CustomStringConvertible {
