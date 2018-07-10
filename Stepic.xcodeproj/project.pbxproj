@@ -4048,6 +4048,7 @@
 		2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */; };
 		2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */; };
 		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
+		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -5787,6 +5788,7 @@
 		2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementBadgeView.swift; sourceTree = "<group>"; };
 		2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGraph.swift; sourceTree = "<group>"; };
 		2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
+		2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinder.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -8757,6 +8759,7 @@
 			isa = PBXGroup;
 			children = (
 				2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */,
+				2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */,
 			);
 			path = ConcreteClasses;
 			sourceTree = "<group>";
@@ -14674,6 +14677,7 @@
 				2C949A0D20ECC4070049E9A8 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
+				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,
 				2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */,
 				2C33CC0120EC3344009956B0 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C9499BF20ECBB5D0049E9A8 /* DeviceInfo.swift in Sources */,
