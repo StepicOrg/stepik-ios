@@ -52,8 +52,12 @@ class NotificationRegistrator {
         }
 
         if AuthInfo.shared.isAuthorized {
-            if let token = InstanceID.instanceID().token() {
-                registerDevice(token)
+            InstanceID.instanceID().instanceID { [weak self] (result, error) in
+                if let error = error {
+                    print("Error fetching Firebase remote instanse ID: \(error)")
+                } else if let result = result {
+                    self?.registerDevice(result.token)
+                }
             }
         }
     }

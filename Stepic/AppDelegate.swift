@@ -198,9 +198,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
-        if let token = InstanceID.instanceID().token() {
-            if AuthInfo.shared.isAuthorized {
-                NotificationRegistrator.shared.registerDevice(token)
+        if AuthInfo.shared.isAuthorized {
+            InstanceID.instanceID().instanceID { (result, error) in
+                if let error = error {
+                    print("Error fetching Firebase remote instanse ID: \(error)")
+                } else if let result = result {
+                    NotificationRegistrator.shared.registerDevice(result.token)
+                }
             }
         }
     }
