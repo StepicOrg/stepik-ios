@@ -2296,6 +2296,9 @@
 		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C80C829201A504700ABB312 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
+		2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305E920F38880003D7F9B /* Vertex.swift */; };
+		2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EB20F388B9003D7F9B /* Edge.swift */; };
+		2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305F620F390F8003D7F9B /* GraphTests.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -4021,6 +4024,10 @@
 		2CE8390E20C8096400FE3672 /* ProfileAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */; };
 		2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */; };
 		2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */; };
+		2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */; };
+		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
+		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
+		2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -5624,6 +5631,9 @@
 		2C7FEE791FDAFB4600B2B4F1 /* OnboardingPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingPageView.xib; sourceTree = "<group>"; };
 		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimatedView.swift; sourceTree = "<group>"; };
+		2C8305E920F38880003D7F9B /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		2C8305EB20F388B9003D7F9B /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		2C8305F620F390F8003D7F9B /* GraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -5749,6 +5759,10 @@
 		2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementBadgeView.xib; sourceTree = "<group>"; };
 		2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementBadgeView.swift; sourceTree = "<group>"; };
+		2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGraph.swift; sourceTree = "<group>"; };
+		2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
+		2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinder.swift; sourceTree = "<group>"; };
+		2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinderTests.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -8321,8 +8335,8 @@
 		2C59F02820EB8AC800666EE0 /* ExamEGERussian */ = {
 			isa = PBXGroup;
 			children = (
-				2C59F05E20EB98D400666EE0 /* Resources */,
 				2C59F05D20EB98CA00666EE0 /* Sources */,
+				2C59F05E20EB98D400666EE0 /* Resources */,
 				2C59F05A20EB8E5C00666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussian;
@@ -8332,6 +8346,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6841BC20EE12590050155F /* AssembliesTests */,
+				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C6841C120EE14AE0050155F /* LogicTests */,
 				2C6841C520EE1D160050155F /* PresentationTests */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
@@ -8396,8 +8411,9 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05520EB8D1A00666EE0 /* ApplicationLayer */,
-				2C59F06220EB9FE500666EE0 /* BusinessLogicLayer */,
 				2C59F05C20EB8F0D00666EE0 /* PresentationLayer */,
+				2C59F06220EB9FE500666EE0 /* BusinessLogicLayer */,
+				2C8305E720F38777003D7F9B /* CoreLayer */,
 				2CF2246820EF96580093D844 /* Helpers */,
 			);
 			path = Sources;
@@ -8674,6 +8690,59 @@
 				2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */,
 			);
 			name = OnboardingPageView;
+			sourceTree = "<group>";
+		};
+		2C8305E720F38777003D7F9B /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305E820F38809003D7F9B /* Graph */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		2C8305E820F38809003D7F9B /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F320F38CEC003D7F9B /* ConcreteClasses */,
+				2C8305F120F38CA0003D7F9B /* Base */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		2C8305F120F38CA0003D7F9B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305E920F38880003D7F9B /* Vertex.swift */,
+				2C8305EB20F388B9003D7F9B /* Edge.swift */,
+				2CE84BDC20F4D29B0069B869 /* AbstractGraph.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		2C8305F320F38CEC003D7F9B /* ConcreteClasses */ = {
+			isa = PBXGroup;
+			children = (
+				2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */,
+				2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */,
+			);
+			path = ConcreteClasses;
+			sourceTree = "<group>";
+		};
+		2C8305F420F38DCD003D7F9B /* CoreLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F520F38DEB003D7F9B /* Graph */,
+			);
+			path = CoreLayerTests;
+			sourceTree = "<group>";
+		};
+		2C8305F520F38DEB003D7F9B /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
+				2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		2C8652561F4B2C2300D51654 /* Content */ = {
@@ -14398,6 +14467,7 @@
 				2C949A0C20ECC3FC0049E9A8 /* StreaksStepikAlertManager.swift in Sources */,
 				2C94999220ECB7E30049E9A8 /* Unit.swift in Sources */,
 				2C9499FF20ECC26F0049E9A8 /* StepOptions+CoreDataProperties.swift in Sources */,
+				2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */,
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
 				2C9499D620ECBCF40049E9A8 /* CodeLanguages.swift in Sources */,
@@ -14453,6 +14523,7 @@
 				2C949A4C20ECCCB80049E9A8 /* AuthNavigationViewController.swift in Sources */,
 				2C9499F720ECC1220049E9A8 /* PersistentQueueRecoveryManager.swift in Sources */,
 				2C9499EE20ECC02A0049E9A8 /* TabsInfo.swift in Sources */,
+				2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */,
 				2C9499E720ECBF880049E9A8 /* CodeTemplate.swift in Sources */,
 				2C949A3C20ECC87A0049E9A8 /* Reachability.m in Sources */,
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
@@ -14486,6 +14557,7 @@
 				2C94999120ECB7AA0049E9A8 /* NotificationsStatus.swift in Sources */,
 				2C94998F20ECB7770049E9A8 /* Course.swift in Sources */,
 				2C949A2220ECC5CD0049E9A8 /* StreakNotificationsControlPresenter.swift in Sources */,
+				2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */,
 				2C949A5020ECCDBC0049E9A8 /* ControllerHelperLaunchExtension.swift in Sources */,
 				2C949A3220ECC7020049E9A8 /* AchievementsAPI.swift in Sources */,
 				2C9499E520ECBE960049E9A8 /* CodeLimit+CoreDataProperties.swift in Sources */,
@@ -14573,6 +14645,7 @@
 				2C949A0D20ECC4070049E9A8 /* StreaksAlertPresentationManager.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
+				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,
 				2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */,
 				2C33CC0120EC3344009956B0 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C9499BF20ECBB5D0049E9A8 /* DeviceInfo.swift in Sources */,
@@ -14586,6 +14659,7 @@
 				2C33CC0920EC33DC009956B0 /* Device.swift in Sources */,
 				2C9499AB20ECBA2A0049E9A8 /* Video.swift in Sources */,
 				2C949A6520ECCFB70049E9A8 /* CodeEditorSettingsViewController.swift in Sources */,
+				2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
 				2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */,
@@ -14700,7 +14774,9 @@
 				2C59F03F20EB8ACA00666EE0 /* MainViewControllerTests.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */,
+				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
+				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
