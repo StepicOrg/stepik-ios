@@ -2931,6 +2931,8 @@
 		2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */; };
 		2C949A7220ECD1820049E9A8 /* Skeletonable+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042920E277F60060117A /* Skeletonable+UIView.swift */; };
 		2C949A7320ECD1850049E9A8 /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
+		2C966D5C20F8078000DECF6D /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C966D5B20F8078000DECF6D /* RoundedButton.swift */; };
+		2C966D6320F8115B00DECF6D /* ClearNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C966D6220F8115B00DECF6D /* ClearNavigationViewController.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step4.html */; };
 		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C9731081F4C38F600AC9301 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
@@ -3980,6 +3982,9 @@
 		2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		2CC7618620F7F78E00A502E8 /* EmptyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC7618420F7F78E00A502E8 /* EmptyAuthViewController.swift */; };
+		2CC7618720F7F78E00A502E8 /* EmptyAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC7618520F7F78E00A502E8 /* EmptyAuthViewController.xib */; };
+		2CC7618920F7FA3C00A502E8 /* HeaderEmptyAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC7618820F7FA3C00A502E8 /* HeaderEmptyAuthView.swift */; };
 		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CCD5D38202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */; };
 		2CCD5D3B202A18A5008ACBC7 /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */; };
@@ -5656,6 +5661,8 @@
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRemoteConfig.swift; sourceTree = "<group>"; };
 		2C9295062035D8FC0058D18C /* AdaptiveCoursesInfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCoursesInfoAPI.swift; sourceTree = "<group>"; };
+		2C966D5B20F8078000DECF6D /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		2C966D6220F8115B00DECF6D /* ClearNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearNavigationViewController.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041F1F3B0B7A00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step4.html; sourceTree = "<group>"; };
@@ -5722,6 +5729,9 @@
 		2CC351961F683140004255B6 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		2CC7618420F7F78E00A502E8 /* EmptyAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAuthViewController.swift; sourceTree = "<group>"; };
+		2CC7618520F7F78E00A502E8 /* EmptyAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyAuthViewController.xib; sourceTree = "<group>"; };
+		2CC7618820F7FA3C00A502E8 /* HeaderEmptyAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderEmptyAuthView.swift; sourceTree = "<group>"; };
 		2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
 		2CCD5D33202A12E3008ACBC7 /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
 		2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -8383,6 +8393,7 @@
 		2C59F05820EB8E3700666EE0 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				2C6ABCD020F7568900E300D3 /* Authentication */,
 				2C59F06420EBA1EB00666EE0 /* Main */,
 			);
 			path = UserStories;
@@ -8402,6 +8413,7 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05820EB8E3700666EE0 /* UserStories */,
+				2C966D5A20F8074F00DECF6D /* Views */,
 				2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */,
 			);
 			path = PresentationLayer;
@@ -8559,6 +8571,15 @@
 			name = NotificationsMarkAsReadButton;
 			sourceTree = "<group>";
 		};
+		2C602E2820F7BF7600B7F33E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C72ED8A20F7C02600E5ED7D /* EmptyAuthViewController */,
+				2C966D6220F8115B00DECF6D /* ClearNavigationViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		2C604E1D207E458B001588FB /* CodeEditorPreview */ = {
 			isa = PBXGroup;
 			children = (
@@ -8645,6 +8666,15 @@
 			path = ServiceComponentsAssemblyTests;
 			sourceTree = "<group>";
 		};
+		2C6ABCD020F7568900E300D3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				2C602E2820F7BF7600B7F33E /* Controllers */,
+				2C966D5720F7FFF600DECF6D /* Views */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		2C6B2F9520D7F1C000F7C976 /* AchievementAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -8670,6 +8700,15 @@
 				2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		2C72ED8A20F7C02600E5ED7D /* EmptyAuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2CC7618420F7F78E00A502E8 /* EmptyAuthViewController.swift */,
+				2CC7618520F7F78E00A502E8 /* EmptyAuthViewController.xib */,
+			);
+			path = EmptyAuthViewController;
 			sourceTree = "<group>";
 		};
 		2C7FEE781FDAF9E100B2B4F1 /* Animations files */ = {
@@ -8801,6 +8840,22 @@
 				2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */,
 			);
 			name = PlaceholderCell;
+			sourceTree = "<group>";
+		};
+		2C966D5720F7FFF600DECF6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CC7618820F7FA3C00A502E8 /* HeaderEmptyAuthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C966D5A20F8074F00DECF6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C966D5B20F8078000DECF6D /* RoundedButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C9732F01F4C390E00AC9301 /* 3150 */ = {
@@ -9571,6 +9626,7 @@
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
 				EC002295004D731864259190 /* [CP] Embed Pods Frameworks */,
+				CB6C76CA4B6FAB42D152C02A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9611,6 +9667,7 @@
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				DC5DDD83D94D581B12743616 /* [CP] Embed Pods Frameworks */,
+				619E5648D283128C8F529B0B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9633,6 +9690,7 @@
 				1BAE12ED1F93F67700482251 /* Resources */,
 				1B6F294F1FA138EF004A5D4B /* Swift Lint */,
 				56AFC79B600342583C25F39D /* [CP] Embed Pods Frameworks */,
+				FAA126243C91FAE9DEDB811C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9652,6 +9710,7 @@
 				1BAE12FE1F93F67700482251 /* Frameworks */,
 				1BAE12FF1F93F67700482251 /* Resources */,
 				3F82A4676256445CD63EB8B3 /* [CP] Embed Pods Frameworks */,
+				23DA13EE5D49AFB4D57B9552 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9674,6 +9733,7 @@
 				2C1B62A71F4C4AEF00236804 /* Fabric Script */,
 				2C1B62A81F4C4AEF00236804 /* SwiftLint Script */,
 				AE396512FD00963C45F806DD /* [CP] Embed Pods Frameworks */,
+				1078875B51EBE9813B528969 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9695,6 +9755,7 @@
 				2C1B64C11F4C590700236804 /* Fabric Script */,
 				2C1B64C21F4C590700236804 /* SwiftLint Script */,
 				D1C2410F5D8E8E1ED8B9C470 /* [CP] Embed Pods Frameworks */,
+				3B33A43C0E8B667EBEE51D54 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9715,6 +9776,7 @@
 				2C59F02520EB8AC800666EE0 /* Resources */,
 				2C0D584C20F3C0F400A28252 /* SwiftLint Script */,
 				A75C902C92CF5BD34425B2FD /* [CP] Embed Pods Frameworks */,
+				4153D9AFAD5A9BC6AE910FB6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9733,6 +9795,8 @@
 				2C59F03620EB8ACA00666EE0 /* Sources */,
 				2C59F03720EB8ACA00666EE0 /* Frameworks */,
 				2C59F03820EB8ACA00666EE0 /* Resources */,
+				A074F79A39293E93631CD0B4 /* [CP] Embed Pods Frameworks */,
+				FF04BA4CF6CB031DDD9E68A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9752,6 +9816,8 @@
 				2C59F04120EB8ACA00666EE0 /* Sources */,
 				2C59F04220EB8ACA00666EE0 /* Frameworks */,
 				2C59F04320EB8ACA00666EE0 /* Resources */,
+				FE47242CD1E94515187EC13C /* [CP] Embed Pods Frameworks */,
+				BB79B0CF961B0EE8DF3F78F8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9774,6 +9840,7 @@
 				2C89AB331F4C289900227C3B /* Fabric Script */,
 				2C89AB341F4C289900227C3B /* SwiftLint Script */,
 				0794AF059F12A84403C70065 /* [CP] Embed Pods Frameworks */,
+				804882EC110A80E539DF0AEF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9796,6 +9863,7 @@
 				2C9732E81F4C38F600AC9301 /* SwiftLint Script */,
 				0916B78D8ABF51F768B46CA1 /* [CP] Check Pods Manifest.lock */,
 				4B054D1D0F5C295F5BE4931A /* [CP] Embed Pods Frameworks */,
+				9B6270CF577B3030A6FC7B0B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9817,6 +9885,7 @@
 				2CA8D3802088D9C000E105E9 /* Fabric Script */,
 				2CA8D3812088D9C000E105E9 /* SwiftLint Script */,
 				2CA8D3822088D9C000E105E9 /* [CP] Embed Pods Frameworks */,
+				7FCD5A5C3080F51AA84EE207 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9836,6 +9905,7 @@
 				2CD12B821F4ED1F4001D3C82 /* Frameworks */,
 				2CD12B831F4ED1F4001D3C82 /* Resources */,
 				08DB2D6354939DE948ED5639 /* [CP] Embed Pods Frameworks */,
+				6A020EF8AFD5C6B07EDAFEE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9891,6 +9961,7 @@
 				2CD12BBF1F4F34AE001D3C82 /* Frameworks */,
 				2CD12BC01F4F34AE001D3C82 /* Resources */,
 				1B71EA4E17E70513F7694386 /* [CP] Embed Pods Frameworks */,
+				65DC1178466E3D4DD822C41D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9911,6 +9982,7 @@
 				2CD12BCE1F4F34BD001D3C82 /* Frameworks */,
 				2CD12BCF1F4F34BD001D3C82 /* Resources */,
 				AB5E962B0AD41C11219C9B32 /* [CP] Embed Pods Frameworks */,
+				C8B0EB479AAD268C3F56B13F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9931,6 +10003,7 @@
 				2CD12BDD1F4F34CC001D3C82 /* Frameworks */,
 				2CD12BDE1F4F34CC001D3C82 /* Resources */,
 				D59D5B355E819E9DA5062B96 /* [CP] Embed Pods Frameworks */,
+				188253D9A54EEEA23D0F96C1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -9953,6 +10026,7 @@
 				08A947FE1EB2B1A5001EC02D /* Fabric Script */,
 				08983F251F3E4131008199B1 /* SwiftLint Script */,
 				13FD40DAA032234A82A4C0D1 /* [CP] Embed Pods Frameworks */,
+				D6B9994A831B948C53DA9E65 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -10599,6 +10673,7 @@
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2C19661720EE7178003A2277 /* MainViewController.xib in Resources */,
 				2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */,
+				2CC7618720F7F78E00A502E8 /* EmptyAuthViewController.xib in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11311,6 +11386,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		1078875B51EBE9813B528969 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		13FD40DAA032234A82A4C0D1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11409,6 +11499,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		188253D9A54EEEA23D0F96C1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1B6F294F1FA138EF004A5D4B /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11439,6 +11544,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23DA13EE5D49AFB4D57B9552 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C0D584C20F3C0F400A28252 /* SwiftLint Script */ = {
@@ -11724,6 +11844,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3B33A43C0E8B667EBEE51D54 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3F82A4676256445CD63EB8B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11756,6 +11891,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4153D9AFAD5A9BC6AE910FB6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		47052B8132B9F4778AD26159 /* [CP] Check Pods Manifest.lock */ = {
@@ -11940,6 +12090,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		619E5648D283128C8F529B0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		65C535413C69ED00939DCAD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11958,6 +12123,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		65DC1178466E3D4DD822C41D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A020EF8AFD5C6B07EDAFEE5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		70EFC192696D5555256659A4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -11974,6 +12169,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FCD5A5C3080F51AA84EE207 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		804882EC110A80E539DF0AEF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		85E907A1A287863152512762 /* [CP] Check Pods Manifest.lock */ = {
@@ -12010,6 +12235,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B6270CF577B3030A6FC7B0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A074F79A39293E93631CD0B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A75C902C92CF5BD34425B2FD /* [CP] Embed Pods Frameworks */ = {
@@ -12224,6 +12479,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BB79B0CF961B0EE8DF3F78F8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussianUITests/Pods-ExamEGERussianUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C2BEE10735A72619CA48060D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12242,6 +12512,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C8B0EB479AAD268C3F56B13F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C99008B7FA62FAA186E3B0E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12258,6 +12543,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB6C76CA4B6FAB42D152C02A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D1C2410F5D8E8E1ED8B9C470 /* [CP] Embed Pods Frameworks */ = {
@@ -12374,6 +12674,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6B9994A831B948C53DA9E65 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D7632816A49B5EB7E7FAA7C1 /* [CP] Check Pods Manifest.lock */ = {
@@ -12678,6 +12993,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAA126243C91FAE9DEDB811C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE47242CD1E94515187EC13C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussianUITests/Pods-ExamEGERussianUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF04BA4CF6CB031DDD9E68A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -14603,11 +14963,13 @@
 				2C33CBEA20EC321E009956B0 /* DiscussionProxiesAPI.swift in Sources */,
 				2C19661B20EE8176003A2277 /* MainViewController.swift in Sources */,
 				2C9499FB20ECC1780049E9A8 /* PostViewsExecutableTask.swift in Sources */,
+				2C966D6320F8115B00DECF6D /* ClearNavigationViewController.swift in Sources */,
 				2C949A5320ECCE010049E9A8 /* AuthButton.swift in Sources */,
 				2C9499D320ECBCE10049E9A8 /* MatchingReply.swift in Sources */,
 				2C9499AE20ECBA670049E9A8 /* LastStep.swift in Sources */,
 				2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */,
 				2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */,
+				2CC7618920F7FA3C00A502E8 /* HeaderEmptyAuthView.swift in Sources */,
 				2C949A3320ECC70D0049E9A8 /* AchievementProgressesAPI.swift in Sources */,
 				2C9499C520ECBC0F0049E9A8 /* PathManager.swift in Sources */,
 				2CFE247420ECD87A00AF1E3D /* UIImageViewExtension.swift in Sources */,
@@ -14663,6 +15025,7 @@
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
 				2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */,
+				2CC7618620F7F78E00A502E8 /* EmptyAuthViewController.swift in Sources */,
 				2C33CC0420EC336B009956B0 /* APIEndpoint.swift in Sources */,
 				2C949A4220ECC9C60049E9A8 /* Images.swift in Sources */,
 				2C949A2B20ECC6630049E9A8 /* ControllerWithStepikPlaceholder.swift in Sources */,
@@ -14706,6 +15069,7 @@
 				2C949A7220ECD1820049E9A8 /* Skeletonable+UIView.swift in Sources */,
 				2C949A0F20ECC4360049E9A8 /* StepikLabel.swift in Sources */,
 				2C9499EB20ECBFE90049E9A8 /* NotificationRegistrator.swift in Sources */,
+				2C966D5C20F8078000DECF6D /* RoundedButton.swift in Sources */,
 				2C33CBFF20EC3336009956B0 /* AttemptsAPI.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
@@ -17667,6 +18031,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -17696,6 +18061,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
