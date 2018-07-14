@@ -10,6 +10,10 @@ import UIKit
 
 final class EmptyAuthViewController: UIViewController {
 
+    // MARK: Instance Properties
+
+    var router: AuthorizationRouter?
+
     private let gradientLayer = CAGradientLayer(
         colors: [UIColor.stepicGreen, UIColor(hex: 0x4CAF50), UIColor(hex: 0x8BC34A)],
         rotationAngle: 0.0
@@ -19,29 +23,7 @@ final class EmptyAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-    }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradientLayer.frame = view.bounds
-    }
-
-    // MARK: Actions
-
-    @IBAction func onSignIn(_ sender: Any) {
-    }
-
-    @IBAction func onSignUp(_ sender: Any) {
-    }
-
-    @IBAction func onLater(_ sender: Any) {
-        dismiss(sender)
-    }
-
-    // MARK: Private API
-
-    private func setup() {
         view.backgroundColor = .clear
         view.layer.insertSublayer(gradientLayer, at: 0)
 
@@ -54,8 +36,27 @@ final class EmptyAuthViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+
+    // MARK: Actions
+
+    @IBAction private func onSignIn(_ sender: Any) {
+        router?.showSignIn()
+    }
+
+    @IBAction private func onSignUp(_ sender: Any) {
+        router?.showSignUp()
+    }
+
+    @IBAction private func onLater(_ sender: Any) {
+        dismiss(sender)
+    }
+
     @objc private func dismiss(_ sender: Any) {
-        dismiss(animated: true)
+        router?.dismiss()
     }
 
 }

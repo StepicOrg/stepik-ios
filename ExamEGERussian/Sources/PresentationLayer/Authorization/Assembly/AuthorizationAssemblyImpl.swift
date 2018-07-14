@@ -10,8 +10,11 @@ import UIKit
 
 final class AuthorizationAssemblyImpl: BaseAssembly, AuthorizationAssembly {
     func module() -> UINavigationController {
-        let controller = EmptyAuthViewController()
-        let navigationController = ClearNavigationViewController(rootViewController: controller)
+        let emptyAuthViewController = EmptyAuthViewController()
+        let navigationController = ClearNavigationViewController(rootViewController: emptyAuthViewController)
+        let router = AuthorizationRouterImpl(assemblyFactory: assemblyFactory,
+                                             navigationController: navigationController)
+        emptyAuthViewController.router = router
 
         return navigationController
     }

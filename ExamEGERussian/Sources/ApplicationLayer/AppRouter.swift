@@ -14,7 +14,7 @@ final class AppRouter: BaseRouter {
 
     init(window: UIWindow, assemblyFactory: AssemblyFactory) {
         let navigationController = AuthInfo.shared.isAuthorized
-            ? UINavigationController()
+            ? UINavigationController(rootViewController: assemblyFactory.mainAssembly().module())
             : assemblyFactory.authorizationAssembly().module()
 
         super.init(assemblyFactory: assemblyFactory, navigationController: navigationController)

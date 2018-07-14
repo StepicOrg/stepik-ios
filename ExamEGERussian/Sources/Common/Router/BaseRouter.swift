@@ -41,3 +41,12 @@ class BaseRouter {
     }
 
 }
+
+// MARK: - BaseRouter: RouterDismissable -
+
+extension BaseRouter: RouterDismissable {
+    // @objc keyword for the ability to override the implementation.
+    @objc func dismiss(completion: (() -> Void)?) {
+        navigationController?.dismiss(animated: true, completion: completion)
+    }
+}

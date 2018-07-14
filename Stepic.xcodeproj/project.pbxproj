@@ -3338,6 +3338,9 @@
 		2C9E3F431F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
 		2C9E3F451F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
+		2CA2C66520FA5C94005EC191 /* RouterDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66420FA5C94005EC191 /* RouterDismissable.swift */; };
+		2CA2C66820FA5D3C005EC191 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66720FA5D3C005EC191 /* AuthorizationRouter.swift */; };
+		2CA2C66A20FA5E72005EC191 /* AuthorizationRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66920FA5E72005EC191 /* AuthorizationRouterImpl.swift */; };
 		2CA2E705202338D8001DC410 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
 		2CA2E70820233E4B001DC410 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2CA2E70B20237463001DC410 /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
@@ -5692,6 +5695,9 @@
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
+		2CA2C66420FA5C94005EC191 /* RouterDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterDismissable.swift; sourceTree = "<group>"; };
+		2CA2C66720FA5D3C005EC191 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
+		2CA2C66920FA5E72005EC191 /* AuthorizationRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationRouterImpl.swift; sourceTree = "<group>"; };
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveUserActions.swift; sourceTree = "<group>"; };
 		2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -8297,6 +8303,7 @@
 			isa = PBXGroup;
 			children = (
 				2C21623920F8F3190063DD57 /* BaseRouter.swift */,
+				2CA2C66420FA5C94005EC191 /* RouterDismissable.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -8682,6 +8689,7 @@
 			isa = PBXGroup;
 			children = (
 				2C21624A20F906C00063DD57 /* Assembly */,
+				2CA2C66620FA5D15005EC191 /* Router */,
 				2C966D5720F7FFF600DECF6D /* View */,
 			);
 			path = Authorization;
@@ -8894,6 +8902,15 @@
 				2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */,
 			);
 			name = Notification;
+			sourceTree = "<group>";
+		};
+		2CA2C66620FA5D15005EC191 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2CA2C66720FA5D3C005EC191 /* AuthorizationRouter.swift */,
+				2CA2C66920FA5E72005EC191 /* AuthorizationRouterImpl.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		2CA5E5A4200E1EC200CE77B0 /* Rating & Stats */ = {
@@ -14860,6 +14877,7 @@
 				2C94999220ECB7E30049E9A8 /* Unit.swift in Sources */,
 				2C9499FF20ECC26F0049E9A8 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */,
+				2CA2C66820FA5D3C005EC191 /* AuthorizationRouter.swift in Sources */,
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
 				2C9499D620ECBCF40049E9A8 /* CodeLanguages.swift in Sources */,
@@ -14884,6 +14902,7 @@
 				2C949A2620ECC60F0049E9A8 /* ProfileHeaderInfoView.swift in Sources */,
 				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C33CBE620EC314E009956B0 /* StepicApplicationsInfo.swift in Sources */,
+				2CA2C66520FA5C94005EC191 /* RouterDismissable.swift in Sources */,
 				2C949A3820ECC7DF0049E9A8 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
@@ -15009,6 +15028,7 @@
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
 				2C949A6820ECCFFF0049E9A8 /* AchievementsListViewController.swift in Sources */,
 				2C9499D020ECBCCE0049E9A8 /* FreeAnswerReply.swift in Sources */,
+				2CA2C66A20FA5E72005EC191 /* AuthorizationRouterImpl.swift in Sources */,
 				2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */,
 				2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
