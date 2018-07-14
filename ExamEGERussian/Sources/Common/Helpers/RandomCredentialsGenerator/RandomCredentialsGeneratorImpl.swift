@@ -8,10 +8,7 @@
 
 import Foundation
 
-struct RandomCredentialsGeneratorImplementation {
-}
-
-extension RandomCredentialsGeneratorImplementation: RandomCredentialsGenerator {
+final class RandomCredentialsGeneratorImpl: RandomCredentialsGenerator {
 
     var firstname: String {
         return StringHelper.generateRandomString(of: 6)

@@ -15,14 +15,17 @@ private struct Theme {
         static let offsetTop: CGFloat = 32.0
         static let offsetBottom: CGFloat = 16.0
     }
+
     struct Subtitle {
         static let fontSize: CGFloat = 17
     }
+
     struct Separator {
         static let height: CGFloat = 1
         static let widthMultiplier: CGFloat = 0.3
         static let offsetTop: CGFloat = 32.0
     }
+
     struct Description {
         static let fontSize: CGFloat = 17
         static let offsetTop: CGFloat = 32.0

@@ -16,7 +16,7 @@ final class EmptyAuthViewController: UIViewController {
     )
 
     // MARK: UIViewController Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -38,7 +38,7 @@ final class EmptyAuthViewController: UIViewController {
     @IBAction func onLater(_ sender: Any) {
         dismiss(sender)
     }
-    
+
     // MARK: Private API
 
     private func setup() {
@@ -55,7 +55,7 @@ final class EmptyAuthViewController: UIViewController {
     }
 
     @objc private func dismiss(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
 
 }

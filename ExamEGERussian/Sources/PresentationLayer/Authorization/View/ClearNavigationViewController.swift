@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClearNavigationViewController: UINavigationController {
+final class ClearNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.shadowImage = UIImage()

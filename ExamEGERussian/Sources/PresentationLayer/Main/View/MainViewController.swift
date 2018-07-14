@@ -15,14 +15,23 @@ final class MainViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    var userRegistrationService: UserRegistrationService?
+    private let userRegistrationService: UserRegistrationService
+
+    // MARK: Init
+
+    init(userRegistrationService: UserRegistrationService) {
+        self.userRegistrationService = userRegistrationService
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        assert(userRegistrationService != nil, "UserRegistrationService must be initialized")
 
         checkAccessToken()
     }
@@ -32,7 +41,7 @@ final class MainViewController: UIViewController {
     private func checkAccessToken() {
         checkToken().done { [weak self] in
             if !AuthInfo.shared.isAuthorized {
-                self?.userRegistrationService?
+                self?.userRegistrationService
                     .registerNewUser()
                     .done { print($0) }
                     .catch { print($0) }

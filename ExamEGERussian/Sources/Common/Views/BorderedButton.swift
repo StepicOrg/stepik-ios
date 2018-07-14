@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class RoundedButton: UIButton {
+public final class BorderedButton: UIButton {
 
     @IBInspectable
     public var cornerRadius: CGFloat {
@@ -85,6 +85,8 @@ public class RoundedButton: UIButton {
         }
     }
 
+    // MARK: - Init
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -94,6 +96,8 @@ public class RoundedButton: UIButton {
         super.init(coder: aDecoder)
         commonInit()
     }
+
+    // MARK: - Private API
 
     private func commonInit() {
         clipsToBounds = true

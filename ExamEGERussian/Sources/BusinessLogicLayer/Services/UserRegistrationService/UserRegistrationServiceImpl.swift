@@ -9,26 +9,23 @@
 import Foundation
 import PromiseKit
 
-final class UserRegistrationServiceImplementation: UserRegistrationService {
+final class UserRegistrationServiceImpl: UserRegistrationService {
 
-    // MARK: Instance Properties
+    // MARK: - Private Properties
 
-    let authAPI: AuthAPI
-    let stepicsAPI: StepicsAPI
-    let profilesAPI: ProfilesAPI
+    private let authAPI: AuthAPI
+    private let stepicsAPI: StepicsAPI
+    private let profilesAPI: ProfilesAPI
+    private let defaultsStorageManager: DefaultsStorageManager
+    private let randomCredentialsGenerator: RandomCredentialsGenerator
 
-    let defaultsStorageManager: DefaultsStorageManager
-
-    let randomCredentialsGenerator: RandomCredentialsGenerator
-
-    // MARK: - Initializers
+    // MARK: - Init
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
          defaultsStorageManager: DefaultsStorageManager,
-         randomCredentialsGenerator: RandomCredentialsGenerator
-        ) {
+         randomCredentialsGenerator: RandomCredentialsGenerator) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI

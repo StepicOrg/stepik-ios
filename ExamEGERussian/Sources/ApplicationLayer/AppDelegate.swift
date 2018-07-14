@@ -17,19 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private lazy var rootNavigationManager: RootNavigationManager = {
-        RootNavigationManager(serviceComponents: self.serviceComponents)
-    }()
-
-    private lazy var serviceComponents: ServiceComponents = {
-        ServiceComponentsAssembly(
-            authAPI: AuthAPI(),
-            stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI(),
-            defaultsStorageManager: DefaultsStorageManager(),
-            randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
-        )
-    }()
+    private var router: AppRouter?
 
     // MARK: - UIApplicationDelegate
 
@@ -39,7 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Failed to instantiate window")
         }
 
-        rootNavigationManager.setup(with: window)
+        let serviceFactory = ServiceFactoryImpl(
+            authAPI: AuthAPI(),
+            stepicsAPI: StepicsAPI(),
+            profilesAPI: ProfilesAPI()
+        )
+        let assemblyFactory = AssemblyFactoryImpl(serviceFactory: serviceFactory)
+
+        router = AppRouter(window: window, assemblyFactory: assemblyFactory)
 
         return true
     }
