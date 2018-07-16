@@ -12,18 +12,19 @@ import IQKeyboardManagerSwift
 import TTTAttributedLabel
 import Atributika
 
+protocol RegistrationViewControllerDelegate: class {
+    func registrationViewControllerOnSuccess(_ registrationViewController: RegistrationViewController)
+    func registrationViewControllerOnClose(_ registrationViewController: RegistrationViewController)
+}
+
 extension RegistrationViewController: RegistrationView {
     func update(with result: RegistrationResult) {
-        guard let navigationController = self.navigationController as? AuthNavigationViewController else {
-            return
-        }
-
         state = .normal
 
         switch result {
         case .success:
             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-            navigationController.dismissAfterSuccess()
+            delegate?.registrationViewControllerOnSuccess(self)
         case .badConnection:
             SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
         case .error:
@@ -34,6 +35,7 @@ extension RegistrationViewController: RegistrationView {
 
 class RegistrationViewController: UIViewController {
     var presenter: RegistrationPresenter?
+    weak var delegate: RegistrationViewControllerDelegate?
 
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
@@ -95,9 +97,7 @@ class RegistrationViewController: UIViewController {
     }
 
     @IBAction func onCloseClick(_ sender: Any) {
-        if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .registration, to: nil)
-        }
+        delegate?.registrationViewControllerOnClose(self)
     }
 
     @IBAction func onRegisterClick(_ sender: Any) {
@@ -114,12 +114,11 @@ class RegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        assert(presenter != nil && delegate != nil)
 
         edgesForExtendedLayout = UIRectEdge.top
 
         localize()
-
-        presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
 
         nameTextField.delegate = self
         emailTextField.delegate = self

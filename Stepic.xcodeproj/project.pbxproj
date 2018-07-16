@@ -2699,6 +2699,11 @@
 		2C89AB421F4C290200227C3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9421F4C285B00227C3B /* GoogleService-Info.plist */; };
 		2C89AB431F4C290500227C3B /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9441F4C285B00227C3B /* Icons.xcassets */; };
 		2C89AB441F4C290800227C3B /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9461F4C285B00227C3B /* Tokens.plist */; };
+		2C8A0F2120FC7AED0009F67E /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
+		2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
+		2C8A0F2320FC7F630009F67E /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
+		2C8A0F2420FC7F720009F67E /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
+		2C8A0F2C20FCA4B70009F67E /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A0F2B20FCA4B70009F67E /* AuthRouter.swift */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
@@ -5671,6 +5676,7 @@
 		2C89A9441F4C285B00227C3B /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/GMAT/Icons.xcassets; sourceTree = "<group>"; };
 		2C89A9461F4C285B00227C3B /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/GMAT/Tokens.plist; sourceTree = "<group>"; };
 		2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive GMAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C8A0F2B20FCA4B70009F67E /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
@@ -6429,6 +6435,7 @@
 				2CC351871F682979004255B6 /* Auth social */,
 				2CC351841F6827BE004255B6 /* Auth.storyboard */,
 				08D674921D78B46900B60963 /* AuthNavigationViewController.swift */,
+				2C8A0F2B20FCA4B70009F67E /* AuthRouter.swift */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -10723,7 +10730,9 @@
 				2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 				62E982D6A7D79E45786B4C8D /* EmptyAuthViewController.xib in Resources */,
+				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
 				62E9869C9438E62640B3B1C0 /* MainViewController.xib in Resources */,
+				2C8A0F2120FC7AED0009F67E /* Auth.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13493,6 +13502,7 @@
 				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
+				2C8A0F2C20FCA4B70009F67E /* AuthRouter.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
@@ -14867,6 +14877,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C949A3920ECC7FE0049E9A8 /* LocalNotificationManager.swift in Sources */,
+				2C8A0F2420FC7F720009F67E /* RegistrationPresenter.swift in Sources */,
 				2C949A5A20ECCE840049E9A8 /* SettingsPresenter.swift in Sources */,
 				2C9499D120ECBCD40049E9A8 /* MathReply.swift in Sources */,
 				2C9499DC20ECBD9D0049E9A8 /* Comment.swift in Sources */,
@@ -14925,6 +14936,7 @@
 				2C949A2020ECC5B40049E9A8 /* ProfileMenuBlock.swift in Sources */,
 				2C949A4D20ECCCD40049E9A8 /* RateAppManager.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,
+				2C8A0F2320FC7F630009F67E /* RegistrationViewController.swift in Sources */,
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
 				2C33CBF520EC327F009956B0 /* UsersAPI.swift in Sources */,
 				2C21624920F906640063DD57 /* BaseAssembly.swift in Sources */,

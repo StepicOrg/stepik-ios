@@ -9,22 +9,25 @@
 import UIKit
 import SVProgressHUD
 
+protocol SocialAuthViewControllerDelegate: class {
+    func socialAuthViewControllerOnSuccess(_ socialAuthViewController: SocialAuthViewController)
+    func socialAuthViewControllerOnClose(_ socialAuthViewController: SocialAuthViewController)
+    func socialAuthViewControllerOnSignInWithEmail(_ socialAuthViewController: SocialAuthViewController)
+    func socialAuthViewControllerOnSignUp(_ socialAuthViewController: SocialAuthViewController)
+}
+
 extension SocialAuthViewController: SocialAuthView {
     func set(providers: [SocialProviderViewData]) {
         self.providers = providers
     }
 
     func update(with result: SocialAuthResult) {
-        guard let navigationController = self.navigationController as? AuthNavigationViewController else {
-            return
-        }
-
         state = .normal
 
         switch result {
         case .success:
             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-            navigationController.dismissAfterSuccess()
+            delegate?.socialAuthViewControllerOnSuccess(self)
         case .badConnection:
             SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
         case .error:
@@ -51,6 +54,7 @@ extension SocialAuthViewController: SocialAuthView {
 
 class SocialAuthViewController: UIViewController {
     var presenter: SocialAuthPresenter?
+    weak var delegate: SocialAuthViewControllerDelegate?
 
     fileprivate let numberOfColumns = 3
     fileprivate let numberOfRows = 2
@@ -81,23 +85,17 @@ class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func onCloseClick(_ sender: Any) {
-        if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .social, to: nil)
-        }
+        delegate?.socialAuthViewControllerOnClose(self)
     }
 
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSocialAuth, parameters: nil)
-        if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .social, to: .email(email: nil))
-        }
+        delegate?.socialAuthViewControllerOnSignInWithEmail(self)
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSocialAuth, parameters: nil)
-        if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .social, to: .registration)
-        }
+        delegate?.socialAuthViewControllerOnSignUp(self)
     }
 
     @IBAction func moreButtonClick(_ sender: Any) {
@@ -114,12 +112,11 @@ class SocialAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        assert(presenter != nil && delegate != nil)
 
         edgesForExtendedLayout = UIRectEdge.top
 
         localize()
-
-        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
         presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default

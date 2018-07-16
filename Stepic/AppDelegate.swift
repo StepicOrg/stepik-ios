@@ -308,7 +308,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Auth redirect with registered email
             let email = (queryDict["email"] ?? "").removingPercentEncoding
             if let topViewController = ControllerHelper.getTopViewController() as? AuthNavigationViewController {
-                topViewController.route(from: .social, to: .email(email: email))
+                topViewController.router.showEmail(email)
             }
         } else {
             // Other actions
