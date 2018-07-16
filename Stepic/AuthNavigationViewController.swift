@@ -22,7 +22,7 @@ final class AuthNavigationViewController: UINavigationController {
     var cancel: (() -> Void)?
 
     lazy var router: AuthRouter = {
-        AuthRouter(navigationController: self, delegate: self)
+        AuthRouter(navigationController: self, delegate: self, assembly: AuthAssemblyImpl())
     }()
 
     // Disable landscape for iPhones with diagonal <= 4.7
@@ -41,9 +41,9 @@ final class AuthNavigationViewController: UINavigationController {
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
 
-        if let topViewController = topViewController as? SocialAuthViewController {
-            topViewController.delegate = router
-            topViewController.presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: topViewController)
+        if let vc = topViewController as? SocialAuthViewController {
+            vc.delegate = router
+            vc.presenter = router.assembly.socialPresenter(view: vc)
         }
     }
 

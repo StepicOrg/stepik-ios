@@ -27,14 +27,17 @@ final class AuthRouter {
 
     // MARK: - Instance Properties
 
+    let assembly: AuthAssembly
     private weak var navigationController: UINavigationController?
     private weak var delegate: AuthRouterDelegate?
 
     // MARK: - Init
 
-    init(navigationController: UINavigationController, delegate: AuthRouterDelegate) {
+    init(navigationController: UINavigationController, delegate: AuthRouterDelegate,
+         assembly: AuthAssembly) {
         self.navigationController = navigationController
         self.delegate = delegate
+        self.assembly = assembly
     }
 
     // MARK: Public API
@@ -72,24 +75,16 @@ final class AuthRouter {
         switch toController! {
         case .registration:
             // Push registration controller
-            guard let vc = ControllerHelper.instantiateViewController(identifier: "Registration", storyboardName: "Auth") as? RegistrationViewController else { return print("Failed to instantiate RegistrationViewController") }
-            vc.presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: vc)
-            vc.delegate = self
+            let vc = assembly.registrationModule(delegate: self)
             navigationController.pushViewController(vc, animated: true)
         case .email(let email):
             // Replace top view controller
-            guard let vc = ControllerHelper.instantiateViewController(identifier: "EmailAuth", storyboardName: "Auth") as? EmailAuthViewController else { return print("Failed to instantiate EmailAuthViewController") }
-            vc.presenter = EmailAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: vc)
-            vc.delegate = self
-
-            vc.prefilledEmail = email
+            let vc = assembly.emailModule(delegate: self, email: email)
             vcs[vcs.count - 1] = vc
             navigationController.setViewControllers(vcs, animated: true)
         case .social:
             // Replace top view controller
-            guard let vc = ControllerHelper.instantiateViewController(identifier: "SocialAuth", storyboardName: "Auth") as? SocialAuthViewController else { return print("Failed to instantiate SocialAuthViewController") }
-            vc.presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: vc)
-            vc.delegate = self
+            let vc = assembly.socialModule(delegate: self)
             vcs[vcs.count - 1] = vc
             navigationController.setViewControllers(vcs, animated: true)
         }
