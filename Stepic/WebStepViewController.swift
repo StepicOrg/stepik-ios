@@ -8,9 +8,9 @@
 
 import UIKit
 import Alamofire
-import FLKAutoLayout
 import SVProgressHUD
 import Agrume
+import SnapKit
 
 class WebStepViewController: UIViewController {
 
@@ -166,9 +166,10 @@ class WebStepViewController: UIViewController {
             }
         }
 
-        let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
-        var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
-        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor
+            .injectDefault()
+            .html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
@@ -181,7 +182,7 @@ class WebStepViewController: UIViewController {
         }
         quizController.step = self.step
         quizPlaceholderView.addSubview(quizController.view)
-        quizController.view.align(toView: quizPlaceholderView)
+        quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
         self.quizViewController?.view.removeFromSuperview()
         self.quizViewController?.removeFromParentViewController()
         self.addChildViewController(quizController)
@@ -194,8 +195,7 @@ class WebStepViewController: UIViewController {
         switch step.block.name {
         case "text":
             quizViewController = nil
-            stepWebView.constrainBottomSpace(toView: discussionCountView, predicate: "8")
-            //            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
+            stepWebView.snp.makeConstraints { $0.bottom.equalTo(discussionCountView.snp.top).offset(8) }
             break
         case "choice":
             initQuizController(ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil))
@@ -233,7 +233,8 @@ class WebStepViewController: UIViewController {
             quizController.stepUrl = self.stepUrl
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
-            quizController.view.align(toView: quizPlaceholderView)
+
+            quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
             self.view.layoutIfNeeded()
         }
     }

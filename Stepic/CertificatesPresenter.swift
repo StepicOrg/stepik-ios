@@ -66,7 +66,7 @@ class CertificatesPresenter {
                     return false
             }
             return index1 < index2
-        }).flatMap {
+        }).compactMap {
             [weak self] in
             self?.certificateViewData(fromCertificate: $0)
         }
@@ -104,7 +104,7 @@ class CertificatesPresenter {
                 guard let s = self else {
                     return
                 }
-                s.view?.setCertificates(certificates: s.certificates.flatMap({
+                s.view?.setCertificates(certificates: s.certificates.compactMap({
                     [weak self] in
                     self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
@@ -191,7 +191,7 @@ class CertificatesPresenter {
                     self?.isGettingNextPage = false
                     return
                 }
-                s.view?.setCertificates(certificates: s.certificates.flatMap({
+                s.view?.setCertificates(certificates: s.certificates.compactMap({
                     [weak self] in
                     self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)

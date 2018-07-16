@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FLKAutoLayout
+import SnapKit
 
 @IBDesignable
 class NibInitializableView: UIView {
@@ -34,7 +34,7 @@ class NibInitializableView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
-        view.align(toView: self)
+        view.snp.makeConstraints { $0.edges.equalTo(self) }
         setupSubviews()
     }
 

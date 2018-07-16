@@ -9,8 +9,8 @@
 import UIKit
 import AVKit
 import AVFoundation
-import FLKAutoLayout
 import MediaPlayer
+import SnapKit
 
 @available(iOS 9.0, *)
 extension StepicVideoPlayerViewController: WatchSessionDataObserver {
@@ -257,7 +257,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
         self.addChildViewController(self.player)
         self.view.insertSubview(self.player.view, at: 0)
-        self.player.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
         self.player.didMove(toParentViewController: self)
 
         //Player Start Time should be set AFTER the currentQualityURL

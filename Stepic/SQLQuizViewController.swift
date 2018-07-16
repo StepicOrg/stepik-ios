@@ -8,7 +8,6 @@
 
 import UIKit
 import Highlightr
-import FLKAutoLayout
 
 class SQLQuizViewController: CodeQuizViewController {
 

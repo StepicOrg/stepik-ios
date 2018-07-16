@@ -61,11 +61,9 @@ class APIEndpoint {
     }
 
     func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.IdType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: NetworkError) -> Void) -> Request? {
-        getObjectsByIds(ids: ids, updating: deleteObjects).then {
-            objects in
+        getObjectsByIds(ids: ids, updating: deleteObjects).done { objects in
             success?(objects)
-        }.catch {
-            error in
+        }.catch { error in
             guard let e = error as? NetworkError else {
                 failure(NetworkError(error: error))
                 return

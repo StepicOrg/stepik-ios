@@ -98,7 +98,7 @@ class CourseListViewController: UIViewController, CourseListView {
     func add(addedCourses: [CourseViewData], courses: [CourseViewData]) {
         self.courses = courses
         let addedIndexes: [Int] = getChangedIndexes(changedCourses: addedCourses, courses: courses)
-        let addedIndexPaths = addedIndexes.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        let addedIndexPaths = addedIndexes.compactMap { delegate?.indexPathForIndex(index: $0) }
 
         delegate?.addElements(atIndexPaths: addedIndexPaths)
     }
@@ -230,8 +230,8 @@ class CourseListViewController: UIViewController, CourseListView {
             return
         }
         self.courses = courses
-        let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
-        let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        let deletingIndexPaths = deletingIds.compactMap { delegate?.indexPathForIndex(index: $0) }
+        let insertingIndexPaths = insertingIds.compactMap { delegate?.indexPathForIndex(index: $0) }
         delegate?.updateCells(deletingIndexPaths: deletingIndexPaths, insertingIndexPaths: insertingIndexPaths)
     }
 
@@ -258,7 +258,7 @@ class CourseListViewController: UIViewController, CourseListView {
     lazy var emptyPlaceholder: CourseListEmptyPlaceholder = {
         let placeholder = CourseListEmptyPlaceholder(frame: CGRect.zero)
         self.view.addSubview(placeholder)
-        placeholder.align(toView: self.view)
+        placeholder.snp.makeConstraints { $0.edges.equalTo(self.view) }
         placeholder.isHidden = true
         placeholder.colorStyle = .purple
         placeholder.presentationStyle = .bordered

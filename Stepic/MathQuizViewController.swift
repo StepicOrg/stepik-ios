@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MathQuizViewController: QuizViewController {
 
@@ -22,19 +23,25 @@ class MathQuizViewController: QuizViewController {
 
         self.containerView.addSubview(textField)
 
-        textField.alignTop("8", bottom: "0", toView: self.containerView)
+        textField.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.containerView).offset(8)
+            make.bottom.equalTo(self.containerView)
+            make.height.equalTo(textFieldHeight)
+        }
 
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                textField.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-                ])
+            textField.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(self.containerView.safeAreaLayoutGuide.snp.leading).offset(16)
+                make.trailing.equalTo(self.containerView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            }
         } else {
-            textField.alignLeading("16", trailing: "-16", toView: containerView)
+            textField.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(self.containerView).offset(16)
+                make.trailing.equalTo(self.containerView).offset(-16)
+            }
         }
 
         textField.borderStyle = UITextBorderStyle.roundedRect
-        textField.constrainHeight("\(textFieldHeight)")
         textField.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))

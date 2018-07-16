@@ -23,7 +23,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
+        titleLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PersonalDeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: "PersonalDeadlineTableViewCell")
@@ -59,9 +59,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
         let newDeadlines = sectionDeadlinesData.map { $0.sectionDeadline }
         SVProgressHUD.show()
-        PersonalDeadlineManager.shared.changeDeadline(for: course, newDeadlines: newDeadlines).then {
-            [weak self]
-            () -> Void in
+        PersonalDeadlineManager.shared.changeDeadline(for: course, newDeadlines: newDeadlines).done { [weak self] _ in
             SVProgressHUD.dismiss()
             self?.onSavePressed?()
             self?.dismiss(animated: true, completion: nil)

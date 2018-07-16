@@ -17,21 +17,20 @@ class QueriesAPI: APIEndpoint {
 
     func retrieve(query: String) -> Promise<[String]> {
         let params: Parameters = ["query": query]
-        return Promise {
-            fulfill, reject in
-            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).then {
+        return Promise { seal in
+            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).done {
                 queries, _ in
-                fulfill(queries.map {$0.text})
+                seal.fulfill(queries.map {$0.text})
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }
 
     @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
 
-        retrieve(query: query).then {
+        retrieve(query: query).done {
             queries in
             success(queries)
         }.catch {

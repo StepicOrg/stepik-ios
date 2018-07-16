@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class LessonViewController: PagerController, ShareableController, LessonView {
 
@@ -27,7 +28,10 @@ class LessonViewController: PagerController, ShareableController, LessonView {
     fileprivate func initWarningView() -> UIView {
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.current.isPad ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+        v.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.view).offset(50)
+            make.leading.bottom.trailing.equalTo(self.view)
+        }
         return v
     }
 
@@ -35,14 +39,19 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        ai.constrainWidth("50", height: "50")
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenter(withView: v)
+        ai.snp.makeConstraints { make -> Void in
+            make.width.height.equalTo(50)
+            make.center.equalTo(v)
+        }
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+        v.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.view).offset(50)
+            make.leading.bottom.trailing.equalTo(self.view)
+        }
         v.isHidden = false
         return v
     }

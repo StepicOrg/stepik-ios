@@ -26,7 +26,7 @@ protocol SocialAuthView: class {
 }
 
 enum SocialAuthResult {
-    case success, error, existingEmail(email: String), badConnection
+    case success, error, existingEmail(email: String), noEmail, badConnection
 }
 
 enum SocialAuthState {
@@ -99,7 +99,7 @@ class SocialAuthPresenter {
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
-        }.then { result -> Void in
+        }.done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
@@ -112,6 +112,8 @@ class SocialAuthPresenter {
                 self.view?.update(with: .success)
             case SignInError.existingEmail(_, let email):
                 self.view?.update(with: .existingEmail(email: email ?? ""))
+            case SignInError.noEmail(provider: _):
+                self.view?.update(with: .noEmail)
             default:
                 self.view?.update(with: .error)
             }
@@ -150,7 +152,7 @@ class SocialAuthPresenter {
 
             self.view?.update(with: .success)
             return self.notificationStatusesAPI.retrieve()
-        }.then { result -> Void in
+        }.done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {

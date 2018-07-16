@@ -64,9 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.firstTime)
-        } else {
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
         }
+        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
@@ -107,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        ApiDataDownloader.notificationsStatusAPI.retrieve().then { result -> Void in
+        ApiDataDownloader.notificationsStatusAPI.retrieve().done { result in
             NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { _ in
             print("notifications: unable to fetch badges count on launch")

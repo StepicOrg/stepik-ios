@@ -9,8 +9,8 @@
 import UIKit
 import MessageUI
 import Presentr
-import FLKAutoLayout
 import StoreKit
+import SnapKit
 
 class RateAppViewController: UIViewController {
 
@@ -60,7 +60,7 @@ class RateAppViewController: UIViewController {
         }
     }
 
-    var bottomLabelWidth: NSLayoutConstraint?
+    var bottomLabelWidth: Constraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +72,9 @@ class RateAppViewController: UIViewController {
         topLabel.text = String(format: NSLocalizedString("HowWouldYouRate", comment: ""), Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Stepik")
         bottomLabel.text = ""
 
-        bottomLabelWidth = bottomLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)")
+        bottomLabel.snp.makeConstraints { make -> Void in
+            bottomLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 48).constraint
+        }
 
         for star in starImageViews {
             print(star.tag)
@@ -206,7 +208,7 @@ class RateAppViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        bottomLabelWidth?.constant = UIScreen.main.bounds.height - 48
+        bottomLabelWidth?.update(offset: UIScreen.main.bounds.height - 48)
     }
 
 }

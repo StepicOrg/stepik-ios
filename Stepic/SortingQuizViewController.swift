@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class SortingQuizViewController: QuizViewController {
 
@@ -32,7 +31,8 @@ class SortingQuizViewController: QuizViewController {
         tableView.tableFooterView = UIView()
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
-        tableView.align(toView: self.containerView)
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.containerView) }
+
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
@@ -101,7 +101,7 @@ class SortingQuizViewController: QuizViewController {
     }
 
     override func getReply() -> Reply? {
-        let r = SortingReply(ordering: orderedOptions.flatMap({return positionForOptionInAttempt[$0]}))
+        let r = SortingReply(ordering: orderedOptions.compactMap { positionForOptionInAttempt[$0] })
         return r
     }
 

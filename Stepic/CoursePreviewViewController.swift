@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import MediaPlayer
+import SnapKit
 
 class CoursePreviewViewController: UIViewController, ShareableController {
 
@@ -161,7 +162,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 [weak self] in
                 SVProgressHUD.show()
                 button.isEnabled = false
-                self?.subscriber.leave(course: c, source: .preview).then { [weak self] course -> Void in
+                self?.subscriber.leave(course: c, source: .preview).done { [weak self] course in
                     button.isEnabled = true
                     SVProgressHUD.showSuccess(withStatus: "")
                     self?.course = course
@@ -277,8 +278,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
 
-            _ = self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.contentView)
-            _ = self.moviePlayer?.view.alignTop("0", bottom: "0", toView: self.contentView)
+            self.moviePlayer?.view.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
             self.moviePlayer?.view.isHidden = true
         }
     }
@@ -383,7 +383,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                 SVProgressHUD.show()
                 sender.isEnabled = false
 
-                subscriber.join(course: c, source: .preview).then { [weak self] course -> Void in
+                subscriber.join(course: c, source: .preview).done { [weak self] course in
                     SVProgressHUD.showSuccess(withStatus: "")
                     sender.isEnabled = true
                     sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)

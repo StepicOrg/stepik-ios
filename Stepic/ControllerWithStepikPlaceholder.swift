@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 typealias StepikPlaceholderControllerState = StepikPlaceholderControllerContainer.PlaceholderState
 
@@ -95,8 +96,8 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
             placeholderContainer.placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
             view.addSubview(placeholderContainer.placeholderView)
-            placeholderContainer.placeholderView.alignCenter(withView: view)
-            placeholderContainer.placeholderView.align(toView: view)
+
+            placeholderContainer.placeholderView.snp.makeConstraints { $0.center.edges.equalTo(view) }
 
             placeholderContainer.placeholderView.setNeedsLayout()
             placeholderContainer.placeholderView.layoutIfNeeded()

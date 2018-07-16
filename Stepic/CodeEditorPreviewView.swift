@@ -8,7 +8,6 @@
 
 import UIKit
 import Highlightr
-import FLKAutoLayout
 
 protocol CodeEditorPreviewViewDelegate: class {
     func languageButtonDidClick()
@@ -62,7 +61,7 @@ class CodeEditorPreviewView: NibInitializableView {
         previewTextView.isEditable = false
         previewTextView.isSelectable = false
         previewContainer.addSubview(previewTextView)
-        previewTextView.align(toView: previewContainer)
+        previewTextView.snp.makeConstraints { $0.edges.equalTo(previewContainer) }
 
         updateTheme(with: theme)
         self.theme = theme

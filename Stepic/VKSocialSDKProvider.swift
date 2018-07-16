@@ -31,11 +31,11 @@ class VKSocialSDKProvider: NSObject, SocialSDKProvider {
     }
 
     func getAccessInfo() -> Promise<(token: String, email: String?)> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             getAccessInfo(success: { token, email in
-                fulfill((token: token, email: email))
+                seal.fulfill((token: token, email: email))
             }, error: { error in
-                reject(error)
+                seal.reject(error)
             })
         }
     }

@@ -174,7 +174,7 @@ class ExplorePresenter: CourseListCountDelegate {
             ]
     }
 
-    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Promise<[CourseList]> {
+    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Guarantee<[CourseList]> {
         let recoveredIds = courseListsCache.get(forLanguage: language)
         return CourseList.recoverAsync(ids: recoveredIds)
     }
@@ -187,18 +187,14 @@ class ExplorePresenter: CourseListCountDelegate {
     func refresh() {
         view?.setConnectionProblemsPlaceholder(hidden: true)
         let listLanguage = ContentLanguage.sharedContentLanguage
-        refreshFromLocalAsync(forLanguage: listLanguage).then {
-            [weak self] in
+        refreshFromLocalAsync(forLanguage: listLanguage).done { [weak self] in
             self?.refreshFromRemote(forLanguage: listLanguage)
         }
     }
 
     private func refreshFromLocalAsync(forLanguage language: ContentLanguage) -> Promise<Void> {
-        return Promise {
-            fulfill, reject in
-            getCachedListsAsync(forLanguage: language).then {
-                [weak self]
-                lists -> Void in
+        return Promise { seal in
+            getCachedListsAsync(forLanguage: language).done { [weak self] lists in
                 guard let strongSelf = self else {
                     return
                 }
@@ -206,10 +202,9 @@ class ExplorePresenter: CourseListCountDelegate {
                 strongSelf.lists = lists
                 strongSelf.blocks = strongSelf.buildBlocks(forLists: lists, onlyLocal: true)
                 strongSelf.view?.presentBlocks(blocks: strongSelf.blocks)
-                fulfill(())
-            }.catch {
-                error in
-                reject(error)
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }
@@ -221,7 +216,7 @@ class ExplorePresenter: CourseListCountDelegate {
     }
 
     private func shouldReloadAll(newLists: [CourseList]) -> Bool {
-        return newLists.map { getId(forList: $0) } != blocks.flatMap {
+        return newLists.map { getId(forList: $0) } != blocks.compactMap {
             switch $0.listType {
             case .collection(ids: _):
                 return $0.ID
@@ -271,9 +266,7 @@ class ExplorePresenter: CourseListCountDelegate {
 
     private func refreshFromRemote(forLanguage language: ContentLanguage) {
         didRefreshOnce = true
-        courseListsAPI.retrieve(language: language, page: 1).then {
-            [weak self]
-            lists, _ -> Void in
+        courseListsAPI.retrieve(language: language, page: 1).done { [weak self] lists, _ in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }

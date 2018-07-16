@@ -70,9 +70,7 @@ class StepOptions: NSManagedObject {
     }
 
     var languages: [CodeLanguage] {
-        return limits.flatMap({
-            $0.language
-        })
+        return limits.compactMap { $0.language }
     }
 
     fileprivate func template(language: String, userGenerated: Bool) -> CodeTemplate? {

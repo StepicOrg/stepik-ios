@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FLKAutoLayout
+import SnapKit
 
 class HomeScreenViewController: UIViewController, HomeScreenView {
     var presenter: HomeScreenPresenter?
@@ -58,12 +58,12 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
     private func setupStackView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
-        scrollView.align(toView: self.view)
+        scrollView.snp.makeConstraints { $0.edges.equalTo(self.view) }
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         scrollView.addSubview(stackView)
-        stackView.align(toView: scrollView)
+        stackView.snp.makeConstraints { $0.edges.equalTo(scrollView) }
         stackView.alignment = .fill
     }
 
@@ -83,7 +83,9 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
                 courseListView.courseCount = count
             }
             stackView.addArrangedSubview(courseListView)
-            courseListView.alignLeading("0", trailing: "0", toView: self.view)
+            courseListView.snp.makeConstraints { make -> Void in
+                make.leading.trailing.equalTo(self.view)
+            }
         }
     }
 
@@ -111,19 +113,30 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
             streaksWidgetView = widget
             streaksWidgetBackgroundView.backgroundColor = UIColor.white
             streaksWidgetBackgroundView.addSubview(widget)
-            widget.alignTop("16", bottom: "-8", toView: streaksWidgetBackgroundView)
+
+            widget.snp.makeConstraints { make -> Void in
+                make.top.equalTo(streaksWidgetBackgroundView).offset(16)
+                make.bottom.equalTo(streaksWidgetBackgroundView).offset(-8)
+            }
+
             if #available(iOS 11.0, *) {
-                NSLayoutConstraint.activate([
-                    widget.leadingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                    widget.trailingAnchor.constraint(equalTo: streaksWidgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-                ])
+                widget.snp.makeConstraints { make -> Void in
+                    make.leading.equalTo(streaksWidgetBackgroundView.safeAreaLayoutGuide.snp.leading).offset(16)
+                    make.trailing.equalTo(streaksWidgetBackgroundView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+                }
             } else {
-                widget.alignLeading("16", trailing: "-16", toView: streaksWidgetBackgroundView)
+                widget.snp.makeConstraints { make -> Void in
+                    make.leading.equalTo(streaksWidgetBackgroundView).offset(16)
+                    make.trailing.equalTo(streaksWidgetBackgroundView).offset(-16)
+                }
             }
             widget.setRoundedCorners(cornerRadius: 8)
             streaksWidgetBackgroundView.isHidden = true
             stackView.insertArrangedSubview(streaksWidgetBackgroundView, at: 0)
-            streaksWidgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+
+            streaksWidgetBackgroundView.snp.makeConstraints { make -> Void in
+                make.leading.trailing.equalTo(self.view)
+            }
         }
 
         streaksWidgetView?.set(streakCount: streakCount, shouldSolveToday: shouldSolveToday)
@@ -142,19 +155,28 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
 
         widgetBackgroundView.backgroundColor = UIColor.white
         widgetBackgroundView.addSubview(continueLearningWidget)
-        continueLearningWidget.alignTop("16", bottom: "-8", toView: widgetBackgroundView)
+        continueLearningWidget.snp.makeConstraints { make -> Void in
+            make.top.equalTo(widgetBackgroundView).offset(16)
+            make.bottom.equalTo(widgetBackgroundView).offset(-8)
+        }
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                continueLearningWidget.leadingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                continueLearningWidget.trailingAnchor.constraint(equalTo: widgetBackgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-                ])
+            continueLearningWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.leading).offset(16)
+                make.trailing.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            }
         } else {
-            continueLearningWidget.alignLeading("16", trailing: "-16", toView: widgetBackgroundView)
+            continueLearningWidget.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView).offset(16)
+                make.trailing.equalTo(widgetBackgroundView).offset(-16)
+            }
         }
         continueLearningWidget.setRoundedCorners(cornerRadius: 8)
         widgetBackgroundView.isHidden = true
         stackView.insertArrangedSubview(widgetBackgroundView, at: streaksWidgetView == nil ? 0 : 1)
-        widgetBackgroundView.alignLeading("0", trailing: "0", toView: self.view)
+
+        widgetBackgroundView.snp.makeConstraints { make -> Void in
+            make.leading.trailing.equalTo(self.view)
+        }
 
         UIView.animate(withDuration: 0.15, animations: {
             self.widgetBackgroundView.isHidden = false

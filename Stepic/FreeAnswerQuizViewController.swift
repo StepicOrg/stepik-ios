@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class FreeAnswerQuizViewController: QuizViewController {
 
@@ -19,20 +20,24 @@ class FreeAnswerQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", bottom: "0", toView: self.containerView)
+        textView.snp.makeConstraints { make -> Void in
+            make.top.bottom.equalTo(self.containerView)
+            make.height.equalTo(textViewHeight)
+        }
 
         if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                textView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                textView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-                ])
+            textView.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(16)
+                make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(-16)
+            }
         } else {
-            textView.alignLeading("16", trailing: "-16", toView: containerView)
+            textView.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(containerView).offset(16)
+                make.trailing.equalTo(containerView).offset(-16)
+            }
         }
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
         textView.textColor = UIColor.mainText
-
-        textView.constrainHeight("\(textViewHeight)")
 
         textView.font = UIFont.systemFont(ofSize: 16)
         // Do any additional setup after loading the view.

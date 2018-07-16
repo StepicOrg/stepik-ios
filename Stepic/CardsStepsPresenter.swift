@@ -153,10 +153,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     func appearedAfterSubscription() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                notificationPermissionManager.getCurrentPermissionStatus().then {
-                    [weak self]
-                    status -> Void in
-
+                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
                     switch status {
                     case .notDetermined:
                         let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
@@ -221,7 +218,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             var title = ""
             strongSelf.state = .loading
 
-            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : Promise(value: ())
+            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : .value(())
             checkToken().then {
                 startPromise
             }.then {
@@ -248,7 +245,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 }
 
                 return strongSelf.sendView(step: step)
-            }.then { _ -> Void in
+            }.done { _ in
                 print("cards steps: view for step created")
             }.catch { error in
                 switch error {
@@ -279,7 +276,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             return
         }
 
-        self.sendReaction(reaction, for: lesson, user: user).then { _ -> Void in }
+        self.sendReaction(reaction, for: lesson, user: user).done { _ in }
     }
 
     func tryAgain() {
@@ -292,40 +289,40 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     fileprivate func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             self.recommendationsAPI.retrieve(course: course.id, count: count).then { lessonsIds -> Promise<[Lesson]> in
                 guard !lessonsIds.isEmpty else {
-                    return Promise(value: [])
+                    return .value([])
                 }
 
-                let cachedLessons = lessonsIds.flatMap { Lesson.getLesson($0) }
+                let cachedLessons = lessonsIds.compactMap { Lesson.getLesson($0) }
                 return self.lessonsAPI.retrieve(ids: lessonsIds, existing: cachedLessons)
-            }.then { lessons -> Void in
-                fulfill(lessons)
+            }.done { lessons in
+                seal.fulfill(lessons)
             }.catch { _ in
-                reject(CardsStepsError.recommendationsNotLoaded)
+                seal.reject(CardsStepsError.recommendationsNotLoaded)
             }
         }
     }
 
     fileprivate func getStep(for lesson: Lesson, index: Int = 0) -> Promise<Step> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             guard lesson.stepsArray.count > index else {
                 throw CardsStepsError.noStepsInLesson
             }
 
             let stepId = lesson.stepsArray[index]
 
-            let cachedSteps = [Step.getStepWithId(stepId)].flatMap { $0 }
-            self.stepsAPI.retrieve(ids: [stepId], existing: cachedSteps).then { steps -> Void in
+            let cachedSteps = [Step.getStepWithId(stepId)].compactMap { $0 }
+            self.stepsAPI.retrieve(ids: [stepId], existing: cachedSteps).done { steps in
                 if let step = steps.first {
                     step.lesson = lesson
-                    fulfill(step)
+                    seal.fulfill(step)
                 } else {
-                    reject(CardsStepsError.noStepsInLesson)
+                    seal.reject(CardsStepsError.noStepsInLesson)
                 }
             }.catch { _ in
-                reject(CardsStepsError.stepNotLoaded)
+                seal.reject(CardsStepsError.stepNotLoaded)
             }
         }
     }
@@ -333,37 +330,37 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     fileprivate func getNewRecommendation(for course: Course) -> Promise<Lesson> {
         print("cards steps: preloaded lessons = \(cachedRecommendedLessons.map {$0.id})")
 
-        return Promise { fulfill, reject in
+        return Promise { seal in
             if self.cachedRecommendedLessons.isEmpty {
                 print("cards steps: recommendations not loaded yet -> loading \(self.recommendationsBatchSize) lessons")
 
-                self.loadRecommendations(for: course, count: self.recommendationsBatchSize).then { lessons -> Void in
+                self.loadRecommendations(for: course, count: self.recommendationsBatchSize).done { lessons in
                     guard let lesson = lessons.first else {
-                        return reject(CardsStepsError.coursePassed)
+                        return seal.reject(CardsStepsError.coursePassed)
                     }
 
                     self.cachedRecommendedLessons = Array(lessons.suffix(from: 1))
 
                     print("cards steps: recommendations -> using lesson = \(lesson.id)")
-                    fulfill(lesson)
+                    seal.fulfill(lesson)
                 }.catch { error in
-                    reject(error)
+                    seal.reject(error)
                 }
             } else {
                 print("cards steps: recommendations loaded (count = \(self.cachedRecommendedLessons.count)), using loaded lesson")
 
                 guard let lesson = self.cachedRecommendedLessons.first else {
-                    return reject(CardsStepsError.coursePassed)
+                    return seal.reject(CardsStepsError.coursePassed)
                 }
 
                 self.cachedRecommendedLessons.remove(at: 0)
 
                 print("cards steps: recommendations -> preloaded lesson = \(lesson.id)")
-                fulfill(lesson)
+                seal.fulfill(lesson)
 
                 if self.cachedRecommendedLessons.count < self.nextRecommendationsBatchThreshold {
                     print("cards steps: recommendations loaded, loading next \(self.recommendationsBatchSize) lessons")
-                    self.loadRecommendations(for: course, count: self.recommendationsBatchSize).then { lessons -> Void in
+                    self.loadRecommendations(for: course, count: self.recommendationsBatchSize).done { lessons in
                         var existingLessons = self.cachedRecommendedLessons.map { $0.id }
                         // Add current lesson cause we should ignore it while merging
                         existingLessons.append(lesson.id)
@@ -381,29 +378,29 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     fileprivate func sendView(step: Step) -> Promise<Void> {
-        return Promise { fulfill, reject in
+        return Promise { seal in
             guard let lesson = step.lesson else {
                 throw CardsStepsError.viewNotSent
             }
 
             self.unitsAPI.retrieve(lesson: lesson.id).then { unit -> Promise<Void> in
                 guard let assignmentId = unit.assignmentsArray.first else {
-                    reject(CardsStepsError.viewNotSent)
-                    return Promise(value: ())
+                    seal.reject(CardsStepsError.viewNotSent)
+                    return .value(())
                 }
 
                 return self.viewsAPI.create(step: step.id, assignment: assignmentId)
-            }.then { _ in
-                fulfill(())
+            }.done { _ in
+                seal.fulfill(())
             }.catch { _ in
-                reject(CardsStepsError.viewNotSent)
+                seal.reject(CardsStepsError.viewNotSent)
             }
         }
     }
 
     fileprivate func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
-        return Promise { fulfill, reject in
-            self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).then { _ -> Void in
+        return Promise { seal in
+            self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).done { _ in
                 // Analytics
                 if let curState = self.currentStepPresenter?.state {
                     switch reaction {
@@ -416,26 +413,26 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 }
 
                 print("cards steps: reaction sent, reaction = \(reaction), lesson = \(lesson.id)")
-                fulfill(())
+                seal.fulfill(())
             }.catch { _ in
-                reject(CardsStepsError.reactionNotSent)
+                seal.reject(CardsStepsError.reactionNotSent)
             }
         }
     }
 
-    fileprivate func syncRatingAndStreak(for course: Course) -> Promise<Void> {
-        return Promise { fulfill, _ in
-            self.ratingsAPI.restore(courseId: course.id).then { exp, streak -> Void in
+    fileprivate func syncRatingAndStreak(for course: Course) -> Guarantee<Void> {
+        return Guarantee { seal in
+            self.ratingsAPI.restore(courseId: course.id).done { exp, streak in
                 self.rating = max(self.rating, exp)
                 self.streak = max(self.streak, streak)
 
                 let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
                 self.view?.updateProgress(rating: self.rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+            }.ensure {
+                self.shouldSyncRating = false
+                seal(())
             }.catch { error in
                 print("cards steps: unable to restore exp and streak, error = \(error)")
-            }.always {
-                self.shouldSyncRating = false
-                fulfill(())
             }
         }
     }
@@ -451,7 +448,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
         // Send rating
         if let course = course {
-            ratingsAPI.update(courseId: course.id, exp: newRating).then {
+            ratingsAPI.update(courseId: course.id, exp: newRating).done {
                 print("cards steps: remote rating updated")
             }.catch { error in
                 switch error {

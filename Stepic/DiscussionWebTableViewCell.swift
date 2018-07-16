@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import SDWebImage
 import WebKit
+import SnapKit
 
 class DiscussionWebTableViewCell: UITableViewCell {
 
@@ -81,7 +81,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         contentView.translatesAutoresizingMaskIntoConstraints = true
 
         webContainerView.addSubview(commentWebView!)
-        _ = commentWebView?.align(toView: webContainerView)
+        commentWebView?.snp.makeConstraints { $0.edges.equalTo(webContainerView) }
     }
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
@@ -98,8 +98,12 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
 
     fileprivate func loadWebView(_ htmlString: String) {
-        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
-        commentWebView?.loadHTMLString(wrapped, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        let processor = HTMLProcessor(html: htmlString)
+        let html = processor
+            .injectDefault()
+            .html
+
+        commentWebView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
     fileprivate func setLeadingConstraints(_ constant: CGFloat) {

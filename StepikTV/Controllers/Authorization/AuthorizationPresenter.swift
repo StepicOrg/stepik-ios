@@ -72,7 +72,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.authorizationType = authorizationType
 
             return self.stepicsAPI.retrieveCurrentUser()
-        }.then { user -> Void in
+        }.done { user in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
@@ -109,7 +109,7 @@ class AuthorizationPresenter {
             AuthInfo.shared.authorizationType = authorizationType
 
             return self.stepicsAPI.retrieveCurrentUser()
-          }.then { user -> Void in
+          }.done { user in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 

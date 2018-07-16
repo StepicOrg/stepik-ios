@@ -8,8 +8,8 @@
 
 import UIKit
 import DownloadButton
-import FLKAutoLayout
 import Presentr
+import SnapKit
 
 class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -71,7 +71,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
 
-        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) {
+        if DefaultsContainer.personalDeadlines.canShowWidget(for: course.id) && course.sectionDeadlines == nil && course.scheduleType == "self_paced" {
             tableView.tableHeaderView = personalDeadlinesWidgetView
             AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Widget.shown, parameters: ["course": course.id])
         }
@@ -150,7 +150,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         backgroundView.addSubview(widget)
-        widget.alignTop("20", leading: "20", bottom: "-20", trailing: "-20", toView: backgroundView)
+
+        widget.snp.makeConstraints { make -> Void in
+            make.top.leading.equalTo(backgroundView).offset(20)
+            make.bottom.trailing.equalTo(backgroundView).offset(-20)
+        }
         return backgroundView
     }()
 
@@ -176,9 +180,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }
                 AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
                 SVProgressHUD.show()
-                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).then {
-                    [weak self]
-                    () -> Void in
+                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).done { [weak self] _ in
                     SVProgressHUD.dismiss()
                     self?.tableView.reloadData()
                     }.catch {
@@ -246,9 +248,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         if didJustSubscribe {
             if #available(iOS 10.0, *) {
                 if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                    notificationPermissionManager.getCurrentPermissionStatus().then {
+                    notificationPermissionManager.getCurrentPermissionStatus().done {
                         [weak self]
-                        status -> Void in
+                        status in
                         guard let strongSelf = self else {
                             return
                         }

@@ -18,9 +18,7 @@ class DiscussionProxy: JSONSerializable {
     }
 
     func update(json: JSON) {
-        discussionIds = json["discussions"].arrayValue.flatMap {
-            $0.int
-        }
+        discussionIds = json["discussions"].arrayValue.compactMap { $0.int }
         id = json["id"].stringValue
     }
 }

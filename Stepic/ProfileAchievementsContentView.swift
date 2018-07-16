@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     @IBOutlet weak var achievementsStackView: UIStackView!

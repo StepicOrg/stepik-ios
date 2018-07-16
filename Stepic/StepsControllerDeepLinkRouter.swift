@@ -47,9 +47,9 @@ class StepsControllerDeepLinkRouter: NSObject {
 
     fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler: @escaping ((UIViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         func fetchOrLoadUnit(for lesson: Lesson) -> Promise<Unit> {
-            return Promise { fulfill, reject in
+            return Promise { seal in
                 if let unit = lesson.unit {
-                    fulfill(unit)
+                    seal.fulfill(unit)
                     return
                 }
 
@@ -57,18 +57,18 @@ class StepsControllerDeepLinkRouter: NSObject {
                     unit.lesson = lesson
                     CoreDataHelper.instance.save()
 
-                    fulfill(unit)
+                    seal.fulfill(unit)
                 }, error: { err in
-                    reject(err)
+                    seal.reject(err)
                 })
             }
         }
 
         func fetchOrLoadSection(for unit: Unit) -> Promise<Section> {
-            return Promise { fulfill, reject in
+            return Promise { seal in
                 if let sections = try? Section.getSections(unit.sectionId),
                    let section = sections.first, section.courseId != 0 {
-                    fulfill(section)
+                    seal.fulfill(section)
                     return
                 }
 
@@ -77,20 +77,20 @@ class StepsControllerDeepLinkRouter: NSObject {
                         unit.section = section
                         CoreDataHelper.instance.save()
 
-                        fulfill(section)
+                        seal.fulfill(section)
                     } else {
-                        reject(NSError(domain: "", code: -1, userInfo: nil)) // no ideas what we should throw here...
+                        seal.reject(NSError(domain: "", code: -1, userInfo: nil)) // no ideas what we should throw here...
                     }
                 }, error: { err in
-                    reject(err)
+                    seal.reject(err)
                 })
             }
         }
 
         func fetchOrLoadCourse(for section: Section) -> Promise<Course> {
-            return Promise { fulfill, reject in
+            return Promise { seal in
                 if let course = Course.getCourses([section.courseId]).first {
-                    fulfill(course)
+                    seal.fulfill(course)
                     return
                 }
 
@@ -99,12 +99,12 @@ class StepsControllerDeepLinkRouter: NSObject {
                         section.course = course
                         CoreDataHelper.instance.save()
 
-                        fulfill(course)
+                        seal.fulfill(course)
                     } else {
-                        reject(NSError(domain: "", code: -1, userInfo: nil))
+                        seal.reject(NSError(domain: "", code: -1, userInfo: nil))
                     }
                 }, error: { err in
-                    reject(err)
+                    seal.reject(err)
                 })
             }
         }
@@ -113,7 +113,7 @@ class StepsControllerDeepLinkRouter: NSObject {
             fetchOrLoadSection(for: unit)
         }.then { section -> Promise<Course> in
             fetchOrLoadCourse(for: section)
-        }.then { course -> Void in
+        }.done { course in
             if lesson.isPublic || course.enrolled {
                 guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
                     errorHandler("Could not instantiate controller")

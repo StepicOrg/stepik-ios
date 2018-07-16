@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import FLKAutoLayout
 import SVProgressHUD
+import SnapKit
 
 class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
@@ -33,7 +33,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        questionLabel.constrainWidth("\(UIScreen.main.bounds.width - 80)")
+        questionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
         localize()
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.opened)
     }
@@ -46,7 +46,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.layoutSubviews()
-        collectionView.constrainHeight("\(modeButtonSize.height)")
+        collectionView.snp.makeConstraints { $0.height.equalTo(modeButtonSize.height) }
         updateCollectionLayout()
     }
 
@@ -83,8 +83,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
         SVProgressHUD.show()
-        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).then {
-            () -> Void in
+        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).done {
             SVProgressHUD.dismiss()
             self.onDeadlineSelected?()
             self.dismiss(animated: true, completion: nil)

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FLKAutoLayout
+import SnapKit
 
 class WarningView: NibInitializableView {
     @IBOutlet weak var imageView: UIImageView!
@@ -51,10 +51,13 @@ class WarningView: NibInitializableView {
         textLabel.textAlignment = NSTextAlignment.center
         textLabel.numberOfLines = 0
         textLabel.font = UIFont.systemFont(ofSize: 14)
-        textLabel.alignLeading("8", trailing: "-8", toView: view)
-        textLabel.constrainTopSpace(toView: centerView, predicate: "4")
+        textLabel.snp.makeConstraints { make -> Void in
+            make.leading.equalTo(view).offset(8)
+            make.trailing.equalTo(view).offset(-8)
+            make.top.equalTo(centerView.snp.bottom).offset(4)
+        }
         textLabel.attributedText = getAttributedDescription(text)
-        tryAgainButton.constrainTopSpace(toView: textLabel, predicate: "8")
+        tryAgainButton.snp.makeConstraints { $0.top.equalTo(textLabel.snp.bottom).offset(8) }
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }

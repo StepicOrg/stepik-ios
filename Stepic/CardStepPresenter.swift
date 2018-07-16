@@ -77,6 +77,7 @@ class CardStepPresenter {
         view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true
+        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.stepOpened, parameters: ["step": step.id, "type": step.block.name])
     }
 
     func problemDidLoad() {

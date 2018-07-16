@@ -29,12 +29,11 @@ class CourseSubscriber {
     }
 
     private func performCourseJoinActions(course: Course, unsubscribe: Bool, source: CourseSubscriptionSource) -> Promise<Course> {
-        return Promise<Course> {
-            fulfill, reject in
+        return Promise<Course> { seal in
 
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: {
                 guard let progressId = course.progressId else {
-                    reject(CourseSubscriptionError.badResponseFormat)
+                    seal.reject(CourseSubscriptionError.badResponseFormat)
                     return
                 }
 
@@ -61,7 +60,7 @@ class CourseSubscriber {
                         WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
                     #endif
 
-                    fulfill(course)
+                    seal.fulfill(course)
                 }
 
                 ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: course.progress != nil ? [course.progress!] : [], refreshMode: .update, success: {
@@ -69,7 +68,7 @@ class CourseSubscriber {
 
                     if (!unsubscribe) {
                         guard let progress = progresses.first else {
-                            reject(CourseSubscriptionError.badResponseFormat)
+                            seal.reject(CourseSubscriptionError.badResponseFormat)
                             return
                         }
                         course.progress = progress
@@ -79,9 +78,8 @@ class CourseSubscriber {
                     _ in
                     success(course)
                 })
-            }, error: {
-                status in
-                reject(CourseSubscriptionError.error(status: status))
+            }, error: { status in
+                seal.reject(CourseSubscriptionError.error(status: status))
             })
         }
     }

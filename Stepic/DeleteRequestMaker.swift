@@ -12,19 +12,19 @@ import PromiseKit
 
 class DeleteRequestMaker {
     func request(requestEndpoint: String, deletingId: Int, withManager manager: Alamofire.SessionManager) -> Promise<Void> {
-        return Promise { fulfill, reject in
-            checkToken().then {
+        return Promise { seal in
+            checkToken().done {
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(deletingId)", method: .delete, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
-                        reject(NetworkError(error: error))
+                        seal.reject(NetworkError(error: error))
                     case .success(_):
-                        fulfill(())
+                        seal.fulfill(())
                     }
                 }
             }.catch {
                 error in
-                reject(error)
+                seal.reject(error)
             }
         }
     }

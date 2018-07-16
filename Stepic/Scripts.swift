@@ -25,58 +25,65 @@ struct Scripts {
         return loadScriptWithKey(sizeReportScriptKey)
     }
 
-    fileprivate static var sizeReportScriptKey: String = "SizeReportScript"
+    fileprivate static let sizeReportScriptKey: String = "SizeReportScript"
+    fileprivate static let texScriptKey: String = "TexScript"
+    fileprivate static let localTexScriptKey: String = "LocalTexScript"
+    fileprivate static let metaViewportKey: String = "MetaViewport"
+    fileprivate static let mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
+    fileprivate static let clickableImagesScriptKey: String = "ClickableImages"
+    fileprivate static let localJQueryScriptKey: String = "localJQueryScript"
+    fileprivate static let audioTagWrapperKey: String = "AudioTagWrapper"
+    fileprivate static let audioTagWrapperInitKey: String = "AudioTagWrapperInit"
+    fileprivate static let kotlinRunnableSamplesKey: String = "KotlinRunnableSamples"
+    fileprivate static let wysiwygStylesKey: String = "wysiwygCSSWrapper"
+    fileprivate static let commonStylesKey: String = "contentCSSWrapper"
+    fileprivate static let textColorScriptKey: String = "textColorScript"
 
-    fileprivate static var texScriptKey: String = "TexScript"
-
-    fileprivate static var localTexScriptKey: String = "LocalTexScript"
-
-    fileprivate static var metaViewportKey: String = "MetaViewport"
-
-    fileprivate static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
-
-    fileprivate static var clickableImagesScriptKey: String = "ClickableImages"
-
-    fileprivate static var localJQueryScriptKey: String = "localJQueryScript"
-
-    fileprivate static var audioTagWrapperKey: String = "AudioTagWrapper"
-
-    fileprivate static var audioTagWrapperInitKey: String = "AudioTagWrapperInit"
-
-    static var localJQueryScript: String {
-        return "\(loadScriptWithKey(localJQueryScriptKey))"
+    static var localJQuery: String {
+        return loadScriptWithKey(localJQueryScriptKey)
     }
 
-    static var localTexScript: String {
+    static var localTex: String {
         return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
     }
 
     static var metaViewport: String {
-        return "\(loadScriptWithKey(metaViewportKey))"
+        return loadScriptWithKey(metaViewportKey)
     }
 
-    static var mathJaxFinishedScript: String {
-        return "\(loadScriptWithKey(mathJaxFinishedScriptKey))"
+    static var mathJaxFinished: String {
+        return loadScriptWithKey(mathJaxFinishedScriptKey)
     }
 
-    static var clickableImagesScript: String {
-        return "\(localJQueryScript)\(loadScriptWithKey(clickableImagesScriptKey))"
+    static var clickableImages: String {
+        return "\(localJQuery)\(loadScriptWithKey(clickableImagesScriptKey))"
     }
 
     static var audioTagWrapper: String {
-        return "\(loadScriptWithKey(audioTagWrapperKey))"
+        return loadScriptWithKey(audioTagWrapperKey)
     }
 
     static var audioTagWrapperInit: String {
-        return "\(loadScriptWithKey(audioTagWrapperInitKey))"
+        return loadScriptWithKey(audioTagWrapperInitKey)
+    }
+
+    static var kotlinRunnableSamples: String {
+        return loadScriptWithKey(kotlinRunnableSamplesKey)
+    }
+
+    static var styles: String {
+        return "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
+    }
+
+    static func textColor(color: UIColor) -> String {
+        let script = loadScriptWithKey(textColorScriptKey)
+        return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
-//        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
-
         let scriptBeginning = "<script type=\"text/javascript\" src=\"MathJax/MathJax.js"
-        let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>" //
-        let script = "\(scriptBeginning)\(scriptEnding)"//\(path)
+        let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>"
+        let script = "\(scriptBeginning)\(scriptEnding)"
         return script
     }
 }

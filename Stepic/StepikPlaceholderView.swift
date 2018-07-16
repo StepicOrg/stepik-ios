@@ -88,7 +88,11 @@ class StepikPlaceholderView: NibInitializableView {
             } else {
                 framedImageHeight = min(maxHeight.horizontal, bounds.height * imageHeightToFrameHeightRatio.horizontal)
             }
-            let elementSizes = allPlaceholders.values.flatMap({ $0.image }).map({ $0.scale * framedImageHeight })
+
+            let elementSizes = allPlaceholders.values
+                .compactMap { $0.image }
+                .map { $0.scale * framedImageHeight }
+
             let currentElementSize = placeholder.image!.scale * framedImageHeight
             let minElementSize = elementSizes.min() ?? 0.0
             scaleFactor = currentElementSize > 0 ? minElementSize / currentElementSize : 1

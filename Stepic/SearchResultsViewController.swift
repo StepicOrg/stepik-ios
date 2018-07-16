@@ -73,7 +73,7 @@ class SearchResultsViewController: UIViewController, SearchResultsView {
         self.addChildViewController(controller)
         self.view.addSubview(controller.view)
         controller.view.isHidden = true
-        controller.view.align(toView: self.view)
+        controller.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
     }
 
     func removeController(forState: CoursesSearchResultsState) {
