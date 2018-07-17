@@ -15,7 +15,7 @@
         <!--Social Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SocialAuth" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SocialAuthViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SocialAuth" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SocialAuthViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,11 +33,11 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="socialAuthHeaderView" id="e75-eK-LDk" customClass="SocialAuthHeaderView" customModule="Stepic" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="socialAuthHeaderView" id="e75-eK-LDk" customClass="SocialAuthHeaderView" customModule="ExamEGERussian" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with social account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlJ-ad-nLa" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with social account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlJ-ad-nLa" customClass="StepikLabel" customModule="ExamEGERussian" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="27"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                             <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,7 +140,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Q9d-gC-NfY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="sFt-p5-h5c">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -171,7 +171,7 @@
         <!--Email Auth View Controller-->
         <scene sceneID="ba5-UR-ZNH">
             <objects>
-                <viewController storyboardIdentifier="EmailAuth" automaticallyAdjustsScrollViewInsets="NO" id="lqO-CD-A0H" customClass="EmailAuthViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailAuth" automaticallyAdjustsScrollViewInsets="NO" id="lqO-CD-A0H" customClass="EmailAuthViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ecb-mE-jfH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -203,7 +203,7 @@
                                     <action selector="onSignUpClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="Cg4-Hz-pNQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqj-F6-Q1k" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqj-F6-Q1k" customClass="StepikLabel" customModule="ExamEGERussian" customModuleProvider="target">
                                 <rect key="frame" x="24" y="93.5" width="272" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -221,7 +221,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-sQ-UuC">
                                 <rect key="frame" x="24" y="137.5" width="272" height="109"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-px-UvI" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-px-UvI" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -240,7 +240,7 @@
                                             <constraint firstAttribute="height" constant="1" id="baT-yf-3Zs"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umg-9h-bV9" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umg-9h-bV9" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -266,7 +266,7 @@
                                 <color key="textColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx" customClass="AuthButton" customModule="ExamEGERussian" customModuleProvider="target">
                                 <rect key="frame" x="24" y="256.5" width="272" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -359,7 +359,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="lpD-Ep-HVB">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="F0p-Ac-pDB">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -398,7 +398,7 @@
         <!--Registration View Controller-->
         <scene sceneID="AG9-5l-rb9">
             <objects>
-                <viewController storyboardIdentifier="Registration" automaticallyAdjustsScrollViewInsets="NO" id="Ezc-h0-bV3" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Registration" automaticallyAdjustsScrollViewInsets="NO" id="Ezc-h0-bV3" customClass="RegistrationViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GB8-Gv-9Jd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,7 +410,7 @@
                                     <constraint firstAttribute="height" constant="48" id="PFF-U7-liF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-i0-02l" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-i0-02l" customClass="StepikLabel" customModule="ExamEGERussian" customModuleProvider="target">
                                 <rect key="frame" x="24" y="66" width="272" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -428,7 +428,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3wd-if-3To">
                                 <rect key="frame" x="24" y="110" width="272" height="164"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c81-1U-sKd" userLabel="Name" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c81-1U-sKd" userLabel="Name" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -447,7 +447,7 @@
                                             <constraint firstAttribute="height" constant="1" id="gRU-SW-zdr"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dPv-EY-XCL" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dPv-EY-XCL" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -466,7 +466,7 @@
                                             <constraint firstAttribute="height" constant="1" id="ga1-FK-AYK"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gng-wJ-E02" customClass="AuthTextField" customModule="Stepic" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gng-wJ-E02" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="110" width="272" height="54"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -492,7 +492,7 @@
                                 <color key="textColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ" customClass="AuthButton" customModule="ExamEGERussian" customModuleProvider="target">
                                 <rect key="frame" x="24" y="284" width="272" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -572,7 +572,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="VBR-hH-yzY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="LZL-zC-DDt">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -612,7 +612,7 @@
         <!--Auth Navigation View Controller-->
         <scene sceneID="SAA-iA-D5h">
             <objects>
-                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="peF-Iz-JYA">
