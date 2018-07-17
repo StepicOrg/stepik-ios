@@ -10,30 +10,22 @@ import UIKit
 
 final class AppRouter: BaseRouter {
 
-    // MARK: Init
-
-    init(window: UIWindow, assemblyFactory: AssemblyFactory) {
-        let navigationController = AuthInfo.shared.isAuthorized
-            ? UINavigationController(rootViewController: assemblyFactory.mainAssembly().module())
-            : assemblyFactory.authorizationAssembly().module()
-
-        super.init(assemblyFactory: assemblyFactory, navigationController: navigationController)
-
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+    weak var window: UIWindow?
+    weak var rootViewController: UIViewController? {
+        return window?.rootViewController ?? navigationController
     }
 
     // MARK: Public API
 
     func showAuthorization(animated: Bool = true) {
         presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authorizationAssembly().module()
+            assemblyFactory.authorizationAssembly().greeting().module()
         }, animated: animated)
     }
 
     func showMain(animated: Bool = true) {
-        pushViewController(derivedFrom: { _ in
-            assemblyFactory.mainAssembly().module()
+        pushViewController(derivedFrom: { navigationController in
+            assemblyFactory.mainAssembly().module(navigationController: navigationController)
         }, animated: animated)
     }
 

@@ -18,6 +18,10 @@ final class AssemblyFactoryImpl: AssemblyFactory {
 
     // MARK: - AssemblyFactory
 
+    func applicationAssembly() -> ApplicationAssembly {
+        return ApplicationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
     func authorizationAssembly() -> AuthorizationAssembly {
         return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }

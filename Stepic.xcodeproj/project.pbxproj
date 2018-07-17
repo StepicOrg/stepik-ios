@@ -3977,6 +3977,9 @@
 		2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296220FDE4700058481C /* ApplicationAssembly.swift */; };
+		2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */; };
+		2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */; };
 		2CAD296F20FE02120058481C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296E20FE02120058481C /* MainViewPresenter.swift */; };
 		2CAD297120FE02690058481C /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297020FE02690058481C /* MainViewRouter.swift */; };
 		2CAD297320FE02DD0058481C /* MainViewPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297220FE02DD0058481C /* MainViewPresenterImpl.swift */; };
@@ -5751,6 +5754,9 @@
 		2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsAPI.swift; sourceTree = "<group>"; };
 		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2CAD296220FDE4700058481C /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
+		2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyImpl.swift; sourceTree = "<group>"; };
+		2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleHolder.swift; sourceTree = "<group>"; };
 		2CAD296E20FE02120058481C /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		2CAD297020FE02690058481C /* MainViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouter.swift; sourceTree = "<group>"; };
 		2CAD297220FE02DD0058481C /* MainViewPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenterImpl.swift; sourceTree = "<group>"; };
@@ -8336,6 +8342,7 @@
 			children = (
 				2C59F02920EB8AC800666EE0 /* AppDelegate.swift */,
 				2C21624120F901DD0063DD57 /* AppRouter.swift */,
+				2CAD296120FDE45D0058481C /* Assembly */,
 			);
 			path = ApplicationLayer;
 			sourceTree = "<group>";
@@ -9125,6 +9132,16 @@
 				2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */,
 			);
 			path = "Adaptive leaderboards names";
+			sourceTree = "<group>";
+		};
+		2CAD296120FDE45D0058481C /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2CAD296220FDE4700058481C /* ApplicationAssembly.swift */,
+				2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */,
+				2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */,
+			);
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 		2CAD296C20FDFA450058481C /* Presenter */ = {
@@ -15092,6 +15109,7 @@
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
 				2C9499B320ECBAC90049E9A8 /* SortingDataset.swift in Sources */,
+				2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */,
 				2C949A7320ECD1850049E9A8 /* SkeletonViewAnimation.swift in Sources */,
 				2C949A2120ECC5BE0049E9A8 /* ProfileInfoPresenter.swift in Sources */,
 				2C9499FD20ECC22D0049E9A8 /* Messages.swift in Sources */,
@@ -15193,6 +15211,7 @@
 				2C9499AD20ECBA3E0049E9A8 /* Lesson+CoreDataProperties.swift in Sources */,
 				2C9499B020ECBAA10049E9A8 /* Notification.swift in Sources */,
 				2C33CBFE20EC332E009956B0 /* ProgressesAPI.swift in Sources */,
+				2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */,
 				2C949A0720ECC3A10049E9A8 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2CAD296F20FE02120058481C /* MainViewPresenter.swift in Sources */,
 				2C9499C020ECBB750049E9A8 /* Progress+CoreDataProperties.swift in Sources */,
@@ -15202,6 +15221,7 @@
 				2C949A1620ECC5100049E9A8 /* RemoteConfig.swift in Sources */,
 				2C9499F520ECC0DC0049E9A8 /* ExecutionQueues.swift in Sources */,
 				2C9499D420ECBCEA0049E9A8 /* FillBlanksReply.swift in Sources */,
+				2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */,
 				2C9499F820ECC1260049E9A8 /* PersistentRecoveryManager.swift in Sources */,
 				2C9499A520ECB9950049E9A8 /* Enrollment.swift in Sources */,
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,

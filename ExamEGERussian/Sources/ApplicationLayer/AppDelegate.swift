@@ -17,24 +17,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private var router: AppRouter?
-
     // MARK: - UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else {
-            fatalError("Failed to instantiate window")
+            fatalError("Could not instantiate window")
         }
 
         let serviceFactory = ServiceFactoryImpl(
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI()
+            profilesAPI: ProfilesAPI(),
+            notificationStatusesAPI: NotificationStatusesAPI()
         )
         let assemblyFactory = AssemblyFactoryImpl(serviceFactory: serviceFactory)
 
-        router = AppRouter(window: window, assemblyFactory: assemblyFactory)
+        guard let router = assemblyFactory.applicationAssembly().module().router else {
+            fatalError("Could not instantiate router")
+        }
+
+        window.rootViewController = router.rootViewController
+        window.makeKeyAndVisible()
+        router.window = window
 
         return true
     }
