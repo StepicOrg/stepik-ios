@@ -14,6 +14,7 @@ protocol AuthRouterDelegate: class {
 }
 
 final class AuthRouter {
+
     enum State {
         case success
         case cancel

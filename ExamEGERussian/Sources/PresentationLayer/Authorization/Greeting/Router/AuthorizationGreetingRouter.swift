@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AuthorizationRouter: RouterDismissable {
+protocol AuthorizationGreetingRouter: RouterDismissable {
     func showSignIn()
     func showSignUp()
 }

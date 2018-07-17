@@ -1,5 +1,5 @@
 //
-//  EmptyAuthViewController.swift
+//  GreetingAuthViewController.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 12/07/2018.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class EmptyAuthViewController: UIViewController {
+final class GreetingAuthViewController: UIViewController {
 
     // MARK: Instance Properties
 
-    var router: AuthorizationRouter?
+    var router: AuthorizationGreetingRouter?
 
     private let gradientLayer = CAGradientLayer(
         colors: [UIColor.stepicGreen, UIColor(hex: 0x4CAF50), UIColor(hex: 0x8BC34A)],
@@ -28,7 +28,7 @@ final class EmptyAuthViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "close"),
+            image: UIImage(named: "Dismiss Auth"),
             style: .plain,
             target: self,
             action: #selector(dismiss(_:))

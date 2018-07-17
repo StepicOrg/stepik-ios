@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AuthAssembly {
+protocol AuthAssembly: class {
     func registrationModule(delegate: RegistrationViewControllerDelegate) -> RegistrationViewController
     func registrationPresenter(view: RegistrationView) -> RegistrationPresenter
     func emailModule(delegate: EmailAuthViewControllerDelegate, email: String?) -> EmailAuthViewController

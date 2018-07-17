@@ -8,6 +8,6 @@
 
 import UIKit.UINavigationController
 
-protocol AuthorizationAssembly: class {
+protocol AuthorizationGreetingAssembly: class {
     func module() -> UINavigationController
 }
