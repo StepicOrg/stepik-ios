@@ -22,7 +22,7 @@ extension AuthInfo {
             let value = UserDefaults.standard.string(forKey: AuthInfo.fakeKey)
             if value == nil || value == FakeStatus.notExist.rawValue {
                 return .notExist
-            } else if value! == FakeStatus.yes.rawValue {
+            } else if value == FakeStatus.yes.rawValue {
                 return .yes
             } else {
                 return .no
