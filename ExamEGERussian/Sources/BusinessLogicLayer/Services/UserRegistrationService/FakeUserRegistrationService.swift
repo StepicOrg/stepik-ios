@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class UserRegistrationServiceImpl: UserRegistrationService {
+final class FakeUserRegistrationService: UserRegistrationService {
 
     // MARK: - Private Properties
 
@@ -62,6 +62,7 @@ final class UserRegistrationServiceImpl: UserRegistrationService {
             ).then { token, authorizationType -> Promise<User> in
                 AuthInfo.shared.token = token
                 AuthInfo.shared.authorizationType = authorizationType
+                AuthInfo.shared.isFake = .yes
 
                 return self.stepicsAPI.retrieveCurrentUser()
             }.done { user in

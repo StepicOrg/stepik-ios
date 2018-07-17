@@ -12,22 +12,25 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     // MARK: - Private properties
 
-    private let authAPI: AuthAPI
-    private let stepicsAPI: StepicsAPI
-    private let profilesAPI: ProfilesAPI
+    let authAPI: AuthAPI
+    let stepicsAPI: StepicsAPI
+    let profilesAPI: ProfilesAPI
+    let notificationStatusesAPI: NotificationStatusesAPI
 
     // MARK: - Init
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI,
+         notificationStatusesAPI: NotificationStatusesAPI) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
     }
 
     // MARK: - ServiceFactory
 
     func userRegistrationService() -> UserRegistrationService {
-        return UserRegistrationServiceImpl(
+        return FakeUserRegistrationService(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
             profilesAPI: profilesAPI,

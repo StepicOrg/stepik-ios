@@ -19,7 +19,7 @@ class AdaptiveUserActions {
     private var adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI
     private let userRegistrationService: UserRegistrationService
 
-    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI, defaultsStorageManager: DefaultsStorageManager) {
+    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI, defaultsStorageManager: DefaultsStorageManager, userRegistrationService: UserRegistrationService? = nil) {
         self.enrollmentsAPI = enrollmentsAPI
         self.profilesAPI = profilesAPI
         self.stepicsAPI = stepicsAPI
@@ -27,7 +27,9 @@ class AdaptiveUserActions {
         self.coursesAPI = coursesAPI
         self.adaptiveCoursesInfoAPI = adaptiveCoursesInfoAPI
         self.defaultsStorageManager = defaultsStorageManager
-        self.userRegistrationService = UserRegistrationServiceImplementation(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager, randomCredentialsGenerator: RandomCredentialsGeneratorImplementation())
+        self.userRegistrationService = userRegistrationService == nil
+            ? FakeUserRegistrationService(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager, randomCredentialsGenerator: RandomCredentialsGeneratorImplementation())
+            : userRegistrationService
     }
 
     func registerNewUser() -> Promise<Void> {

@@ -9,5 +9,10 @@
 import Foundation
 
 protocol ServiceFactory: class {
+    var authAPI: AuthAPI { get }
+    var stepicsAPI: StepicsAPI { get }
+    var profilesAPI: ProfilesAPI { get }
+    var notificationStatusesAPI: NotificationStatusesAPI { get }
+
     func userRegistrationService() -> UserRegistrationService
 }
