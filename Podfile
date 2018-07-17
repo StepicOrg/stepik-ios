@@ -23,7 +23,7 @@ def all_pods
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
+    pod 'YandexMobileMetrica/Dynamic', '~> 3.1.2'
 
     pod 'SnapKit', '~> 4.0.0'
     
