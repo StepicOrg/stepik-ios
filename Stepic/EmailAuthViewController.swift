@@ -38,7 +38,9 @@ extension EmailAuthViewController: EmailAuthView {
 
 class EmailAuthViewController: UIViewController {
     var presenter: EmailAuthPresenter?
-    weak var delegate: EmailAuthViewControllerDelegate?
+    // swiftlint:disable weak_delegate
+    var delegate: EmailAuthViewControllerDelegate?
+    // swiftlint:enable weak_delegate
 
     var prefilledEmail: String?
 

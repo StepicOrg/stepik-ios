@@ -35,7 +35,9 @@ extension RegistrationViewController: RegistrationView {
 
 class RegistrationViewController: UIViewController {
     var presenter: RegistrationPresenter?
-    weak var delegate: RegistrationViewControllerDelegate?
+    // swiftlint:disable weak_delegate
+    var delegate: RegistrationViewControllerDelegate?
+    // swiftlint:enable weak_delegate
 
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
