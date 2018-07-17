@@ -29,6 +29,6 @@ class AnalyticsHelper {
         Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)
 
         AppsFlyerTracker.shared().appsFlyerDevKey = Tokens.shared.appsFlyerDevKey
-        AppsFlyerTracker.shared().appleAppID = "1064581926"
+        AppsFlyerTracker.shared().appleAppID = Tokens.shared.firebaseId
     }
 }
