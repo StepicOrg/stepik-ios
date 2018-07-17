@@ -9,9 +9,12 @@
 import UIKit
 
 final class MainAssemblyImpl: BaseAssembly, MainAssembly {
-    func module() -> UIViewController {
-        let userRegistrationService = serviceFactory.userRegistrationService()
+    func module(navigationController: UINavigationController) -> UIViewController {
+        let controller = MainViewController()
+        let router = MainViewRouterImpl(assemblyFactory: assemblyFactory, navigationController: navigationController)
+        let presenter = MainViewPresenterImpl(view: controller, router: router, userRegistrationService: serviceFactory.userRegistrationService())
+        controller.presenter = presenter
 
-        return MainViewController(userRegistrationService: userRegistrationService)
+        return controller
     }
 }

@@ -2015,6 +2015,7 @@
 		2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4AC86020FE31570085B2B8 /* AuthInfo+FakeUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */; };
 		2C4AC86120FE4E480085B2B8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
@@ -3976,6 +3977,11 @@
 		2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2CAD296F20FE02120058481C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296E20FE02120058481C /* MainViewPresenter.swift */; };
+		2CAD297120FE02690058481C /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297020FE02690058481C /* MainViewRouter.swift */; };
+		2CAD297320FE02DD0058481C /* MainViewPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297220FE02DD0058481C /* MainViewPresenterImpl.swift */; };
+		2CAD297520FE044C0058481C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297420FE044C0058481C /* MainView.swift */; };
+		2CAD297820FE09140058481C /* MainViewRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD297720FE09130058481C /* MainViewRouterImpl.swift */; };
 		2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */; };
 		2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */; };
 		2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */; };
@@ -5628,6 +5634,7 @@
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
+		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -5744,6 +5751,11 @@
 		2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsAPI.swift; sourceTree = "<group>"; };
 		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2CAD296E20FE02120058481C /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
+		2CAD297020FE02690058481C /* MainViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouter.swift; sourceTree = "<group>"; };
+		2CAD297220FE02DD0058481C /* MainViewPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenterImpl.swift; sourceTree = "<group>"; };
+		2CAD297420FE044C0058481C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2CAD297720FE09130058481C /* MainViewRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouterImpl.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
@@ -8333,7 +8345,8 @@
 			children = (
 				2C21624320F902D20063DD57 /* Assembly */,
 				2C21624020F901690063DD57 /* Router */,
-				2C966D5A20F8074F00DECF6D /* Views */,
+				2C966D5A20F8074F00DECF6D /* View */,
+				2C4AC85E20FE31230085B2B8 /* Extensions */,
 				2CF2246820EF96580093D844 /* Helpers */,
 			);
 			path = Common;
@@ -8513,6 +8526,14 @@
 				8622056A2055561F00F14255 /* PinsMapView.swift */,
 			);
 			name = PinsMap;
+			sourceTree = "<group>";
+		};
+		2C4AC85E20FE31230085B2B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
@@ -9106,6 +9127,33 @@
 			path = "Adaptive leaderboards names";
 			sourceTree = "<group>";
 		};
+		2CAD296C20FDFA450058481C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2CAD296E20FE02120058481C /* MainViewPresenter.swift */,
+				2CAD297220FE02DD0058481C /* MainViewPresenterImpl.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2CAD296D20FDFA5E0058481C /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2CAD297020FE02690058481C /* MainViewRouter.swift */,
+				2CAD297720FE09130058481C /* MainViewRouterImpl.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2CAD297620FE04530058481C /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				62E98A25B662C355635F09BC /* MainViewController.swift */,
+				62E986BAA764D9641AC8FC8D /* MainViewController.xib */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
 		2CB2393B20BB455200F0FE3B /* GenericExpandableContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -9458,8 +9506,8 @@
 		62E9843A73D0D49CE9AFB13E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				62E98A25B662C355635F09BC /* MainViewController.swift */,
-				62E986BAA764D9641AC8FC8D /* MainViewController.xib */,
+				2CAD297620FE04530058481C /* MainViewController */,
+				2CAD297420FE044C0058481C /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -15050,6 +15098,7 @@
 				2C34D67420FCD6EC001EF741 /* AuthorizationSignInPresenter.swift in Sources */,
 				2C33CBE920EC3216009956B0 /* DevicesAPI.swift in Sources */,
 				2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */,
+				2C8A0F2F20FCCDDD0009F67E /* AuthRouter.swift in Sources */,
 				2C33CC0F20EC340D009956B0 /* Assignment.swift in Sources */,
 				2C949A4420ECCA000049E9A8 /* TooltipDefaultsManager.swift in Sources */,
 				2C949A2E20ECC6C40049E9A8 /* PlaceholderTableViewCell.swift in Sources */,
@@ -15145,6 +15194,7 @@
 				2C9499B020ECBAA10049E9A8 /* Notification.swift in Sources */,
 				2C33CBFE20EC332E009956B0 /* ProgressesAPI.swift in Sources */,
 				2C949A0720ECC3A10049E9A8 /* StreaksNotificationSuggestionManager.swift in Sources */,
+				2CAD296F20FE02120058481C /* MainViewPresenter.swift in Sources */,
 				2C9499C020ECBB750049E9A8 /* Progress+CoreDataProperties.swift in Sources */,
 				2C33CBF720EC328E009956B0 /* SearchResultsAPI.swift in Sources */,
 				2C9499CF20ECBCCA0049E9A8 /* NumberReply.swift in Sources */,
@@ -15168,6 +15218,7 @@
 				2C9499C520ECBC0F0049E9A8 /* PathManager.swift in Sources */,
 				2CFE247420ECD87A00AF1E3D /* UIImageViewExtension.swift in Sources */,
 				2C9499B920ECBB150049E9A8 /* Certificate+CoreDataProperties.swift in Sources */,
+				2C4AC86020FE31570085B2B8 /* AuthInfo+FakeUser.swift in Sources */,
 				2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
@@ -15195,6 +15246,7 @@
 				2C33CC0820EC33CD009956B0 /* User.swift in Sources */,
 				2C949A5920ECCE800049E9A8 /* SettingsViewController.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
+				2CAD297820FE09140058481C /* MainViewRouterImpl.swift in Sources */,
 				2C949A3020ECC6D10049E9A8 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C949A1420ECC4B20049E9A8 /* NotificationPreferencesContainer.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
@@ -15232,6 +15284,7 @@
 				2C949A4220ECC9C60049E9A8 /* Images.swift in Sources */,
 				2C949A2B20ECC6630049E9A8 /* ControllerWithStepikPlaceholder.swift in Sources */,
 				2C949A3D20ECC90D0049E9A8 /* NotificationTimePickerViewController.swift in Sources */,
+				2CAD297520FE044C0058481C /* MainView.swift in Sources */,
 				2C949A2F20ECC6C70049E9A8 /* MenuBlockTableViewCell.swift in Sources */,
 				2C33CBF820EC32A1009956B0 /* ViewsAPI.swift in Sources */,
 				2CFF9F2820FDD1010023B5D4 /* AuthorizationSignInAssemblyImpl.swift in Sources */,
@@ -15297,6 +15350,7 @@
 				2C33CBFC20EC32C1009956B0 /* ProfilesAPI.swift in Sources */,
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
+				2CAD297320FE02DD0058481C /* MainViewPresenterImpl.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
@@ -15340,6 +15394,7 @@
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
 				62E98119817EFAF2CC853018 /* GreetingAuthViewController.swift in Sources */,
+				2CAD297120FE02690058481C /* MainViewRouter.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
 				2C4303CA20F9F6330097346B /* MainAssembly.swift in Sources */,

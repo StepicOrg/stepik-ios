@@ -9,5 +9,5 @@
 import UIKit
 
 protocol MainAssembly: class {
-    func module() -> UIViewController
+    func module(navigationController: UINavigationController) -> UIViewController
 }
