@@ -8,15 +8,15 @@
 
 import Foundation
 
-enum StepicResult<Value, Error: Swift.Error> {
+enum StepicResult<Value> {
     case success(Value)
-    case error(Error)
+    case failure(Error)
 
     var isSuccess: Bool {
         switch self {
         case .success:
             return true
-        case .error:
+        case .failure:
             return false
         }
     }
@@ -29,7 +29,7 @@ enum StepicResult<Value, Error: Swift.Error> {
         switch self {
         case .success(let value):
             return value
-        case .error:
+        case .failure:
             return nil
         }
     }
@@ -38,7 +38,7 @@ enum StepicResult<Value, Error: Swift.Error> {
         switch self {
         case .success:
             return nil
-        case .error(let error):
+        case .failure(let error):
             return error
         }
     }

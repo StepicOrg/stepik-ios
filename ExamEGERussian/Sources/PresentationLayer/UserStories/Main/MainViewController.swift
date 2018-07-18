@@ -25,6 +25,15 @@ final class MainViewController: UIViewController {
         assert(userRegistrationService != nil, "UserRegistrationService must be initialized")
 
         checkAccessToken()
+
+        GraphServiceImpl().obtainGraph { result in
+            switch result {
+            case .success(let graph):
+                print(graph)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     // MARK: Private API

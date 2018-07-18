@@ -10,9 +10,7 @@ import Foundation
 
 protocol GraphService: class {
     associatedtype Value: Hashable
-    associatedtype Error: Swift.Error
-
-    typealias Handler = (StepicResult<AbstractGraph<Value>, Error>) -> Void
+    typealias Handler = (StepicResult<AbstractGraph<Value>>) -> Void
 
     func obtainGraph(_ completionHandler: @escaping Handler)
 }
