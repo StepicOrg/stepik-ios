@@ -2225,6 +2225,7 @@
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
 		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
+		2C67B22220FF2917005E699B /* AuthInfo+FakeUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */; };
 		2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */; };
 		2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */; };
 		2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */; };
@@ -13431,6 +13432,7 @@
 				085290C61FB5C4550053F22D /* ExplorePresenter.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CourseSubscriptionManager.swift in Sources */,
+				2C67B22220FF2917005E699B /* AuthInfo+FakeUser.swift in Sources */,
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08A9BD731F8CA02A0085EAF6 /* CourseListPresenter.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,

@@ -70,6 +70,7 @@ class AuthInfo: NSObject {
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
+                        AuthInfo.shared.isFake = .notExist
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
                         strongSelf.setTokenValue(nil)

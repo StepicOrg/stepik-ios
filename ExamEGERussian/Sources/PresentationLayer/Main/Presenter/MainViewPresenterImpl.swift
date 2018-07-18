@@ -56,7 +56,6 @@ final class MainViewPresenterImpl: MainViewPresenter {
 
     private func logout() {
         AuthInfo.shared.token = nil
-        AuthInfo.shared.isFake = .notExist
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.update()
         }
