@@ -3361,6 +3361,7 @@
 		2CA2E72720237E5B001DC410 /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		2CA2E72820237E5E001DC410 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
 		2CA2E72920237E61001DC410 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
+		2CA3F55F20FF7A150041E893 /* StepicResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55E20FF7A150041E893 /* StepicResult.swift */; };
 		2CA3F56720FF82970041E893 /* GoalPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56220FF82960041E893 /* GoalPlainObject.swift */; };
 		2CA3F56820FF82970041E893 /* KnowledgeGraphPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56320FF82960041E893 /* KnowledgeGraphPlainObject.swift */; };
 		2CA3F56920FF82970041E893 /* LessonPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56420FF82970041E893 /* LessonPlainObject.swift */; };
@@ -5682,6 +5683,7 @@
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveUserActions.swift; sourceTree = "<group>"; };
 		2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsViewController.swift; sourceTree = "<group>"; };
+		2CA3F55E20FF7A150041E893 /* StepicResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicResult.swift; sourceTree = "<group>"; };
 		2CA3F56220FF82960041E893 /* GoalPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56320FF82960041E893 /* KnowledgeGraphPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56420FF82970041E893 /* LessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
@@ -9290,6 +9292,7 @@
 			isa = PBXGroup;
 			children = (
 				2C16542620FF8A2E00E91F80 /* PlainObjects */,
+				2CA3F55E20FF7A150041E893 /* StepicResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -14734,6 +14737,7 @@
 				2C949A1E20ECC5990049E9A8 /* ProfilePresenter.swift in Sources */,
 				2C33CBE720EC3158009956B0 /* AnalyticsReporter.swift in Sources */,
 				2C33CBEB20EC322A009956B0 /* CommentsAPI.swift in Sources */,
+				2CA3F55F20FF7A150041E893 /* StepicResult.swift in Sources */,
 				2C9499D920ECBD430049E9A8 /* StorageRecord.swift in Sources */,
 				2C33CBF620EC3287009956B0 /* SubmissionsAPI.swift in Sources */,
 				2C9499A220ECB9470049E9A8 /* WatchSessionDataObserver.swift in Sources */,
