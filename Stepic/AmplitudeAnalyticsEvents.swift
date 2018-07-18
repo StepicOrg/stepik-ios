@@ -10,32 +10,100 @@ import Foundation
 
 struct AmplitudeAnalyticsEvents {
     struct Launch {
-        static let firstTime = "Launch first time"
-        static let sessionStart = "Session start"
+        static var firstTime = AnalyticsEvent(name: "Launch first time")
+        static var sessionStart = AnalyticsEvent(name: "Session start")
     }
 
     struct Onboarding {
-        static let screenOpened = "Onboarding screen opened"
-        static let closed = "Onboarding closed"
-        static let completed = "Onboarding completed"
+        static func screenOpened(screen: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Onboarding screen opened",
+                parameters: [
+                    "screen": screen
+                ]
+            )
+        }
+
+        static func closed(screen: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Onboarding closed",
+                parameters: [
+                    "screen": screen
+                ]
+            )
+        }
+
+        static let completed = AnalyticsEvent(name: "Onboarding completed")
     }
 
     struct SignIn {
-        static let loggedIn = "Logged in"
+        static func loggedIn(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Logged in",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
     }
 
     struct SignUp {
-        static let registered = "Registered"
+        static func registered(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Registered",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
     }
 
     struct Course {
-        static let joined = "Course joined"
-        static let unsubscribed = "Course unsubscribed"
-        static let continuePressed = "Continue course pressed"
+        static func joined(source: String, course: Int, courseName: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course joined",
+                parameters: [
+                    "source": source,
+                    "course": course,
+                    "course_name": courseName
+                ]
+            )
+        }
+
+        static func unsubscribed(course: Int, courseName: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course unsubscribed",
+                parameters: [
+                    "course": course,
+                    "course_name": courseName
+                ]
+            )
+        }
+
+        static func continuePressed(source: String, course: Int, courseName: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Continue course pressed",
+                parameters: [
+                    "source": source,
+                    "course": course,
+                    "course_name": courseName
+                ]
+            )
+        }
     }
 
     struct Steps {
-        static let submissionMade = "Submission made"
+        static func submissionMade(step: Int, type: String, language: String? = nil) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Submission made",
+                parameters: [
+                    "step": step,
+                    "type": type,
+                    "language": language as Any
+                ]
+            )
+        }
+//        static let submissionMade = "Submission made"
         static let stepOpened = "Step opened"
     }
 
