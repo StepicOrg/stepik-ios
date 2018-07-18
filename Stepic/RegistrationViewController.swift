@@ -35,9 +35,7 @@ extension RegistrationViewController: RegistrationView {
 
 class RegistrationViewController: UIViewController {
     var presenter: RegistrationPresenter?
-    // swiftlint:disable weak_delegate
-    var delegate: RegistrationViewControllerDelegate?
-    // swiftlint:enable weak_delegate
+    weak var delegate: RegistrationViewControllerDelegate?
 
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
@@ -98,8 +96,6 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-    private(set) var reportAnalytics: Bool = true
-
     @IBAction func onCloseClick(_ sender: Any) {
         delegate?.registrationViewControllerOnClose(self)
     }
@@ -107,7 +103,7 @@ class RegistrationViewController: UIViewController {
     @IBAction func onRegisterClick(_ sender: Any) {
         view.endEditing(true)
 
-        reportAnalyticsEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
 
         let name = nameTextField.text ?? ""
         let email = emailTextField.text ?? ""
@@ -156,7 +152,7 @@ class RegistrationViewController: UIViewController {
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        reportAnalyticsEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
 
         state = .normal
 
@@ -218,11 +214,6 @@ class RegistrationViewController: UIViewController {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
     }
-
-    private func reportAnalyticsEvent(_ event: String, parameters: [String: Any]?) {
-        guard reportAnalytics else { return }
-        AnalyticsReporter.reportEvent(event, parameters: parameters)
-    }
 }
 
 extension RegistrationViewController: TTTAttributedLabelDelegate {
@@ -233,7 +224,7 @@ extension RegistrationViewController: TTTAttributedLabelDelegate {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        reportAnalyticsEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
         // 24 - default value in app (see AppDelegate), 64 - offset with button
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
@@ -252,8 +243,8 @@ extension RegistrationViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            reportAnalyticsEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
-            reportAnalyticsEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
 
             if registerButton.isEnabled {
                 self.onRegisterClick(registerButton)

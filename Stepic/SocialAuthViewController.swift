@@ -54,9 +54,7 @@ extension SocialAuthViewController: SocialAuthView {
 
 class SocialAuthViewController: UIViewController {
     var presenter: SocialAuthPresenter?
-    // swiftlint:disable weak_delegate
-    var delegate: SocialAuthViewControllerDelegate?
-    // swiftlint:enable weak_delegate
+    weak var delegate: SocialAuthViewControllerDelegate?
 
     fileprivate let numberOfColumns = 3
     fileprivate let numberOfRows = 2

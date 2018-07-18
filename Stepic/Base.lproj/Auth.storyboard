@@ -15,7 +15,7 @@
         <!--Social Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SocialAuth" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SocialAuthViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SocialAuth" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SocialAuthViewController" customModule="Stepic" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,7 +140,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Q9d-gC-NfY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="sFt-p5-h5c">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tb4-mS-Y6z">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -171,7 +171,7 @@
         <!--Email Auth View Controller-->
         <scene sceneID="ba5-UR-ZNH">
             <objects>
-                <viewController storyboardIdentifier="EmailAuth" automaticallyAdjustsScrollViewInsets="NO" id="lqO-CD-A0H" customClass="EmailAuthViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailAuth" automaticallyAdjustsScrollViewInsets="NO" id="lqO-CD-A0H" customClass="EmailAuthViewController" customModule="Stepic" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ecb-mE-jfH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,7 +359,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="lpD-Ep-HVB">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="F0p-Ac-pDB">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3zQ-WS-dr9">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -398,7 +398,7 @@
         <!--Registration View Controller-->
         <scene sceneID="AG9-5l-rb9">
             <objects>
-                <viewController storyboardIdentifier="Registration" automaticallyAdjustsScrollViewInsets="NO" id="Ezc-h0-bV3" customClass="RegistrationViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Registration" automaticallyAdjustsScrollViewInsets="NO" id="Ezc-h0-bV3" customClass="RegistrationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GB8-Gv-9Jd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -572,7 +572,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="VBR-hH-yzY">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="LZL-zC-DDt">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Tlk-tX-Vkq">
                                 <rect key="frame" x="16" y="11" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -612,7 +612,7 @@
         <!--Auth Navigation View Controller-->
         <scene sceneID="SAA-iA-D5h">
             <objects>
-                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="ExamEGERussian" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Ffj-k4-fep" customClass="AuthNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="peF-Iz-JYA">

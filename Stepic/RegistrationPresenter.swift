@@ -29,13 +29,11 @@ class RegistrationPresenter {
     var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
     var notificationStatusesAPI: NotificationStatusesAPI
-    private let reportAnalytics: Bool
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: RegistrationView, reportAnalytics: Bool = true) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: RegistrationView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
-        self.reportAnalytics = reportAnalytics
 
         self.view = view
     }
@@ -48,22 +46,23 @@ class RegistrationPresenter {
         }.then { _ -> Promise<(StepicToken, AuthorizationType)> in
             self.authAPI.signInWithAccount(email: email, password: password)
         }.then { token, authorizationType -> Promise<User> in
-            self.handleTokenReceived(token: token, authorizationType: authorizationType)
+            AuthInfo.shared.token = token
+            AuthInfo.shared.authorizationType = authorizationType
+
+            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
+
             return self.stepicsAPI.retrieveCurrentUser()
         }.then { user -> Promise<NotificationsStatus> in
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            if self.reportAnalytics {
-                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.SignUp.registered, parameters: ["source": "email"])
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
-            }
-
+            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.SignUp.registered, parameters: ["source": "email"])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
         }.done { result in
-            self.handleNotificationsStatusReceived(result)
+            NotificationsBadgesManager.shared.set(number: result.totalCount)
         }.catch { error in
             switch error {
             case PerformRequestError.noAccessToRefreshToken:
@@ -73,9 +72,7 @@ class RegistrationPresenter {
                 self.view?.update(with: .badConnection)
             case is NetworkError:
                 print("registration: successfully signed in, but could not get user")
-                if self.reportAnalytics {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
-                }
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
                 self.view?.update(with: .success)
             case SignUpError.validation(_, _, _, _):
                 if let message = (error as? SignUpError)?.firstError {
@@ -87,16 +84,5 @@ class RegistrationPresenter {
                 self.view?.update(with: .error)
             }
         }
-    }
-
-    func handleTokenReceived(token: StepicToken, authorizationType: AuthorizationType) {
-        AuthInfo.shared.token = token
-        AuthInfo.shared.authorizationType = authorizationType
-
-        NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
-    }
-
-    func handleNotificationsStatusReceived(_ notificationsStatus: NotificationsStatus) {
-        NotificationsBadgesManager.shared.set(number: notificationsStatus.totalCount)
     }
 }

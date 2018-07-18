@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AuthNavigationViewController: UINavigationController {
+class AuthNavigationViewController: UINavigationController {
 
     var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
     var streaksNotificationSuggestionManager = NotificationSuggestionManager()
