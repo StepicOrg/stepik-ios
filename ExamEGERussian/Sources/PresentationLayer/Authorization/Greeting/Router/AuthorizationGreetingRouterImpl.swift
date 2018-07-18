@@ -16,8 +16,8 @@ final class AuthorizationGreetingRouterImpl: BaseRouter, AuthorizationGreetingRo
     }
 
     func showSignUp() {
-        pushViewController(derivedFrom: { _ in
-            UIViewController()
+        pushViewController(derivedFrom: { navigationController in
+            assemblyFactory.authorizationAssembly().signUp().module(navigationController: navigationController)
         })
     }
 }

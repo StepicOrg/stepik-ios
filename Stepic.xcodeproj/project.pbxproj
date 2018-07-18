@@ -2225,7 +2225,10 @@
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
 		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
+		2C67B22120FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */; };
 		2C67B22220FF2917005E699B /* AuthInfo+FakeUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */; };
+		2C67B22520FF2DF3005E699B /* AuthorizationSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */; };
+		2C67B22720FF3456005E699B /* AuthorizationSignUpRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */; };
 		2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */; };
 		2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */; };
 		2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */; };
@@ -5675,6 +5678,9 @@
 		2C6640D81F30BC4D0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640DA1F30BC4E0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
+		2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpAssemblyImpl.swift; sourceTree = "<group>"; };
+		2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpViewController.swift; sourceTree = "<group>"; };
+		2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpRouterImpl.swift; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceComponentsAssemblyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceComponentsAssemblyTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
 		2C6841C920EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceComponentsAssemblyTestsHelper.swift; sourceTree = "<group>"; };
@@ -8463,8 +8469,9 @@
 			isa = PBXGroup;
 			children = (
 				2C34D67E20FCE516001EF741 /* Assembly */,
-				2C34D68020FCE523001EF741 /* Router */,
 				2C34D67F20FCE51C001EF741 /* Presenter */,
+				2C34D68020FCE523001EF741 /* Router */,
+				2C67B22320FF2DCD005E699B /* View */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -8499,6 +8506,7 @@
 			isa = PBXGroup;
 			children = (
 				2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */,
+				2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -8515,6 +8523,7 @@
 			isa = PBXGroup;
 			children = (
 				2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */,
+				2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -8785,6 +8794,14 @@
 				2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */,
 			);
 			name = AchievementTableViewCell;
+			sourceTree = "<group>";
+		};
+		2C67B22320FF2DCD005E699B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2C6841BC20EE12590050155F /* AssembliesTests */ = {
@@ -15189,6 +15206,7 @@
 				2C949A4020ECC95E0049E9A8 /* GCDThings.swift in Sources */,
 				2C34D67D20FCE2E5001EF741 /* AuthorizationSignInRouter.swift in Sources */,
 				2C949A7020ECD17B0049E9A8 /* SkeletonView.swift in Sources */,
+				2C67B22720FF3456005E699B /* AuthorizationSignUpRouterImpl.swift in Sources */,
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2C949A0120ECC29B0049E9A8 /* NotificationsBadgesManager.swift in Sources */,
@@ -15336,6 +15354,7 @@
 				2C33CBEB20EC322A009956B0 /* CommentsAPI.swift in Sources */,
 				2C9499D920ECBD430049E9A8 /* StorageRecord.swift in Sources */,
 				2C33CBF620EC3287009956B0 /* SubmissionsAPI.swift in Sources */,
+				2C67B22520FF2DF3005E699B /* AuthorizationSignUpViewController.swift in Sources */,
 				2C9499A220ECB9470049E9A8 /* WatchSessionDataObserver.swift in Sources */,
 				2C94999420ECB8230049E9A8 /* CoreDataHelper.swift in Sources */,
 				2C33CBDE20EC2F25009956B0 /* StringHelper.swift in Sources */,
@@ -15360,6 +15379,7 @@
 				2C949A6B20ECD05A0049E9A8 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C33CBEF20EC3251009956B0 /* UserActivitiesAPI.swift in Sources */,
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
+				2C67B22120FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift in Sources */,
 				2C949A1720ECC5480049E9A8 /* ProfileViewController.swift in Sources */,
 				2C33CBDB20EC2C2E009956B0 /* FakeUserRegistrationService.swift in Sources */,
 				2C34D68920FCF358001EF741 /* AuthorizationSignInViewController.swift in Sources */,

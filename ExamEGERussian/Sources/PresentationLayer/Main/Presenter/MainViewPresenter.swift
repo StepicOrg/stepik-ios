@@ -11,7 +11,6 @@ import Foundation
 protocol MainViewPresenter {
     var router: MainViewRouter { get }
 
-    func viewDidLoad()
     func viewWillAppear()
     func rightBarButtonPressed()
     func titleForRightBarButtonItem() -> String

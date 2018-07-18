@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AuthorizationSignUpAssembly: class {
-
+    func module(navigationController: UINavigationController) -> UIViewController
 }

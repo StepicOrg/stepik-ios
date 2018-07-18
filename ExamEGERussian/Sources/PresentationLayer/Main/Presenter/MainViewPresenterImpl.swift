@@ -30,11 +30,8 @@ final class MainViewPresenterImpl: MainViewPresenter {
 
     // MARK: - MainViewPresenter
 
-    func viewDidLoad() {
-        checkAccessToken()
-    }
-
     func viewWillAppear() {
+        registerIfNeeded()
         update()
     }
 
@@ -81,16 +78,11 @@ final class MainViewPresenterImpl: MainViewPresenter {
             : "\(user.firstName) \(user.lastName)"
     }
 
-    private func checkAccessToken() {
-        checkToken().done { [weak self] in
-            if !AuthInfo.shared.isAuthorized {
-                self?.userRegistrationService
-                    .registerNewUser()
-                    .done { [weak self] _ in
-                        self?.update()
-                    }
-                    .catch { print($0) }
-            }
-        }.catch { print($0) }
+    private func registerIfNeeded() {
+        if !AuthInfo.shared.isAuthorized {
+            self.userRegistrationService.registerNewUser().done { [weak self] _ in
+                self?.update()
+            }.catch { print($0) }
+        }
     }
 }

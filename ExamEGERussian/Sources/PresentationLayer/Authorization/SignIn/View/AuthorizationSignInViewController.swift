@@ -10,6 +10,9 @@ import Foundation
 import SnapKit
 
 final class AuthorizationSignInViewController: EmailAuthViewController {
+    override var reportAnalytics: Bool {
+        return false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,25 +25,8 @@ final class AuthorizationSignInViewController: EmailAuthViewController {
         signUpButton.contentHorizontalAlignment = .center
     }
 
-    // MARK: - Actions
-
-    override func onLogInClick(_ sender: Any) {
-        view.endEditing(true)
-
-        let email = emailTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-
-        presenter?.logIn(with: email, password: password)
-    }
-
     override func onSignInWithSocialClick(_ sender: Any) {
     }
-
-    override func onSignUpClick(_ sender: Any) {
-        delegate?.emailAuthViewControllerOnSignUp(self)
-    }
-
-    // MARK: - Builder
 
     static func make() -> AuthorizationSignInViewController {
         let vc = ControllerHelper.instantiateViewController(identifier: "EmailAuth", storyboardName: "Auth")
@@ -48,5 +34,4 @@ final class AuthorizationSignInViewController: EmailAuthViewController {
 
         return vc as! AuthorizationSignInViewController
     }
-
 }

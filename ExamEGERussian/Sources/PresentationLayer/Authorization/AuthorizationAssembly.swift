@@ -11,7 +11,7 @@ import Foundation
 protocol AuthorizationAssembly {
     func greeting() -> AuthorizationGreetingAssembly
     func signIn() -> AuthorizationSignInAssembly
-    //func signUp() -> AuthorizationSignUpAssembly
+    func signUp() -> AuthorizationSignUpAssembly
 }
 
 final class AuthorizationAssemblyImpl: BaseAssembly, AuthorizationAssembly {
@@ -21,5 +21,9 @@ final class AuthorizationAssemblyImpl: BaseAssembly, AuthorizationAssembly {
 
     func signIn() -> AuthorizationSignInAssembly {
         return AuthorizationSignInAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
+    }
+
+    func signUp() -> AuthorizationSignUpAssembly {
+        return AuthorizationSignUpAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 }

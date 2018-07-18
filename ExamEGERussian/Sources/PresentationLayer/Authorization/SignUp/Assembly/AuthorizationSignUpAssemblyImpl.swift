@@ -6,4 +6,14 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class AuthorizationSignUpAssemblyImpl: BaseAssembly, AuthorizationSignUpAssembly {
+    func module(navigationController: UINavigationController) -> UIViewController {
+        let vc = AuthorizationSignUpViewController.make()
+        vc.presenter = AuthorizationSignUpPresenter(authAPI: serviceFactory.authAPI, stepicsAPI: serviceFactory.stepicsAPI, notificationStatusesAPI: serviceFactory.notificationStatusesAPI, view: vc, reportAnalytics: false)
+        vc.delegate = AuthorizationSignUpRouterImpl(assemblyFactory: assemblyFactory, navigationController: navigationController)
+
+        return vc
+    }
+}

@@ -109,10 +109,12 @@ class EmailAuthViewController: UIViewController {
         }
     }
 
+    private(set) var reportAnalytics: Bool = true
+
     @IBAction func onLogInClick(_ sender: Any) {
         view.endEditing(true)
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
+        reportAnalyticsEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
 
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -125,12 +127,12 @@ class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
+        reportAnalyticsEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
         delegate?.emailAuthViewControllerOnSignInWithSocial(self)
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
+        reportAnalyticsEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
         delegate?.emailAuthViewControllerOnSignUp(self)
     }
 
@@ -180,7 +182,7 @@ class EmailAuthViewController: UIViewController {
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
+        reportAnalyticsEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
 
         state = .normal
 
@@ -219,11 +221,16 @@ class EmailAuthViewController: UIViewController {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
     }
+
+    private func reportAnalyticsEvent(_ event: String, parameters: [String: Any]?) {
+        guard reportAnalytics else { return }
+        AnalyticsReporter.reportEvent(event, parameters: parameters)
+    }
 }
 
 extension EmailAuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+        reportAnalyticsEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
         // 24 - default value in app (see AppDelegate), 60 - offset with button
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
@@ -237,8 +244,8 @@ extension EmailAuthViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
+            reportAnalyticsEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
+            reportAnalyticsEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
 
             if logInButton.isEnabled {
                 self.onLogInClick(logInButton)

@@ -10,10 +10,11 @@ import Foundation
 import PromiseKit
 
 final class AuthorizationSignUpPresenter: RegistrationPresenter {
-    override var reportAnalytics: Bool {
-        return false
+    override func register(with name: String, email: String, password: String) {
+        AuthInfo.shared.clearToken {
+            super.register(with: name, email: email, password: password)
+        }
     }
-
     override func handleTokenReceived(token: StepicToken, authorizationType: AuthorizationType) {
         AuthInfo.shared.token = token
         AuthInfo.shared.authorizationType = authorizationType

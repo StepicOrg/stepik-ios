@@ -30,8 +30,6 @@ final class MainViewController: UIViewController {
             target: self,
             action: #selector(rightBarButtonItemPressed(_:))
         )
-
-        presenter?.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
