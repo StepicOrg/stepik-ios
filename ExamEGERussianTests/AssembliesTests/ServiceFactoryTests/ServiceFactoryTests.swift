@@ -9,24 +9,24 @@
 import XCTest
 @testable import ExamEGERussian
 
-class ServiceComponentsAssemblyTests: XCTestCase {
+class ServiceFactoryTests: XCTestCase {
 
-    private var serviceComponents: ServiceComponents?
+    private var serviceFactory: ServiceFactory?
 
     override func setUp() {
         super.setUp()
 
-        serviceComponents = ServiceComponentsAssemblyTestsHelper().serviceComponents
+        serviceFactory = ServiceFactoryTestsHelper().serviceFactory
     }
 
     override func tearDown() {
         super.tearDown()
 
-        serviceComponents = nil
+        serviceFactory = nil
     }
 
     func testServiceComponentsCreation() {
-        XCTAssertNotNil(serviceComponents, "ServiceComponents doesn't exists")
+        XCTAssertNotNil(serviceFactory, "Could not instantiate ServiceFactory")
     }
 
 }

@@ -13,8 +13,8 @@ class MainViewControllerTests: XCTestCase {
 
     func testMainScreen() {
         let vc = MainViewController()
-        vc.userRegistrationService = ServiceComponentsAssemblyTestsHelper().serviceComponents.userRegistrationService
-
+        let router = MainViewRouterMock()
+        vc.presenter = MainViewPresenterMock(router: router)
         XCTAssertNotNil(vc.view, "Could not instantiate MainViewController")
     }
 

@@ -19,7 +19,7 @@ final class UserRegistrationServiceMock: UserRegistrationService {
     let defaultsStorageManager = DefaultsStorageManager()
 
     var randomCredentialsGenerator: RandomCredentialsGenerator {
-        return RandomCredentialsGeneratorImplementation()
+        return RandomCredentialsGeneratorImpl()
     }
 
     // Properties that enable us to set exactly what User or error
