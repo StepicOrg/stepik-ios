@@ -10,60 +10,51 @@ import Foundation
 
 class DownloaderTask: DownloaderTaskProtocol {
     private(set) var url: URL
+
     private(set) var priority: DownloaderTaskPriority
+
     private(set) var id: Int
 
-    /// Task state
-    private var state: DownloaderTaskState
     /// Current executor
     private(set) weak var executor: DownloaderProtocol?
 
-    var progressReporter: ((_ progress: Float) -> Void)?
+    var progressReporter: ((_ progress: Float?) -> Void)?
+
     var completionReporter: ((_ location: URL) -> Void)?
+
     var failureReporter: ((_ error: Error) -> Void)?
 
-    required init(url: URL, priority: DownloaderTaskPriority = .default) {
+    var stateReporter: ((_ newState: DownloaderTaskState) -> Void)?
+
+    var state: DownloaderTaskState {
+        return executor?.getTaskState(for: self) ?? .detached
+    }
+
+    convenience init(url: URL, priority: DownloaderTaskPriority = .default) {
+        self.init(id: Int(arc4random()), url: url, executor: nil, priority: priority)
+    }
+
+    init(id: Int, url: URL, executor: DownloaderProtocol? = nil, priority: DownloaderTaskPriority) {
+        self.id = id
         self.url = url
         self.priority = priority
-        self.state = .inited
-
-        self.id = url.hashValue &* Date().hashValue
+        self.executor = executor
     }
 
     func add(to executor: DownloaderProtocol) {
-        guard state == .inited else {
-            return
-        }
-
         self.executor = executor
-        executor.add(task: self)
+        try? executor.add(task: self)
     }
 
     func resume() {
-        guard state == .inited || state == .paused || state == .canceled else {
-            return
-        }
-
-        executor?.resume(task: self)
+        try? executor?.resume(task: self)
     }
 
     func pause() {
-        guard state == .active else {
-            return
-        }
-
-        executor?.pause(task: self)
+        try? executor?.pause(task: self)
     }
 
     func cancel() {
-        guard state == .active else {
-            return
-        }
-
-        executor?.cancel(task: self)
-    }
-
-    func set(state: DownloaderTaskState) {
-        self.state = state
+        try? executor?.cancel(task: self)
     }
 }

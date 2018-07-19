@@ -15,11 +15,11 @@ enum DownloaderTaskPriority: Float {
 }
 
 enum DownloaderTaskState {
-    case inited
+    case attached
+    case detached
     case paused
     case active
-    case completed
-    case canceled
+    case stopped
 }
 
 protocol DownloaderTaskProtocol: class {
@@ -29,18 +29,17 @@ protocol DownloaderTaskProtocol: class {
     var url: URL { get }
     /// Download priority
     var priority: DownloaderTaskPriority { get }
+    /// Download state
+    var state: DownloaderTaskState { get }
 
     /// Reporter block with progress 0.0 - 1.0
-    var progressReporter: ((Float) -> Void)? { get set }
+    var progressReporter: ((Float?) -> Void)? { get set }
     /// Reporter block on completion
     var completionReporter: ((URL) -> Void)? { get set }
     /// Reporter block on failure
     var failureReporter: ((Error) -> Void)? { get set }
-
-    init(url: URL, priority: DownloaderTaskPriority)
-
-    /// Update task state
-    func set(state: DownloaderTaskState)
+    /// Reporter on state changed
+    var stateReporter: ((DownloaderTaskState) -> Void)? { get set }
 
     /// Add & run task with given executor
     func start(with executor: DownloaderProtocol)
