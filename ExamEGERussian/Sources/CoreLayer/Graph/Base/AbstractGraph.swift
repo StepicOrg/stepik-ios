@@ -25,8 +25,8 @@ public class AbstractGraph<T: Hashable>: CustomStringConvertible {
     }
 
     /// Utility method to create a vertex.
-    /// - parameter data: Data associated with the vertex.
-    public func createVertex(data: T) -> Vertex<T> {
+    /// - parameter id: ID associated with the vertex.
+    public func createVertex(id: T) -> Vertex<T> {
         fatalError("abstract function called")
     }
 

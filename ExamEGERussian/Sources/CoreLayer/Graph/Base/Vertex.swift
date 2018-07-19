@@ -9,25 +9,25 @@
 import Foundation
 
 public class Vertex<T: Hashable> {
-    public var data: T
+    public let id: T
 
-    init(data: T) {
-        self.data = data
+    public required init(id: T) {
+        self.id = id
     }
 }
 
 extension Vertex: Hashable {
     public var hashValue: Int {
-        return "\(data)".hashValue
+        return "\(id)".hashValue
     }
 
     static public func == (lhs: Vertex, rhs: Vertex) -> Bool {
-        return lhs.data == rhs.data
+        return lhs.id == rhs.id
     }
 }
 
 extension Vertex: CustomStringConvertible {
     public var description: String {
-        return "\(data)"
+        return "\(id)"
     }
 }
