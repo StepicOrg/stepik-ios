@@ -199,7 +199,7 @@ class VideoStepViewController: UIViewController {
 
         if !didPresentVideoPlayer {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.stepOpened, parameters: ["step": step.id, "type": step.block.name, "number": stepId - 1])
+            AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name, number: stepId - 1)
         } else {
             didPresentVideoPlayer = false
         }
@@ -306,7 +306,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
                 return
             }
 
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.started, parameters: ["content": "step"])
+            AmplitudeAnalyticsEvents.Downloads.started(content: "step")
             downloadButton.state = .downloading
             video.store(VideosInfo.downloadingVideoQuality, progress: {
                 prog in
@@ -330,13 +330,13 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
             })
             break
         case .downloaded:
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.deleted, parameters: ["content": "step"])
+            AmplitudeAnalyticsEvents.Downloads.deleted(content: "step")
             if video.removeFromStore() {
                 downloadButton.state = .startDownload
             }
             break
         case .downloading:
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "step"])
+            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "step")
             if video.cancelStore() {
                 downloadButton.state = .startDownload
             }

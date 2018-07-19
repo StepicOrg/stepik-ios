@@ -103,17 +103,58 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
-//        static let submissionMade = "Submission made"
-        static let stepOpened = "Step opened"
+        
+        static func stepOpened(step: Int, type: String, number: Int? = nil) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Step opened",
+                parameters: [
+                    "step": step,
+                    "type": type,
+                    "number": number
+                ]
+            )
+        }
     }
 
     struct Downloads {
-        static let started = "Download started"
-        static let cancelled = "Download cancelled"
-        static let deleted = "Download deleted"
+        static func started(content: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Download started",
+                parameters: [
+                    "content": content
+                ]
+            )
+        }
+
+        static func cancelled(content: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Download cancelled",
+                parameters: [
+                    "content": content
+                ]
+            )
+        }
+        
+        static func deleted(content: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Download deleted",
+                parameters: [
+                    "content": content
+                ]
+            )
+        }
     }
 
     struct Search {
-        static let searched = "Course searched"
+        static func searched(query: String, position: Int, suggestion: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course searched",
+                parameters: [
+                    "query": query,
+                    "position": position,
+                    "suggestion": suggestion
+                ]
+            )
+        }
     }
 }

@@ -622,7 +622,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.startDownload :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.started, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.started(content: "lesson")
 
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -643,7 +643,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 
         case PKDownloadButtonState.downloading :
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson")
 
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
@@ -659,7 +659,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.downloaded :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.deleted(content: "lesson")
 
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
