@@ -8,13 +8,17 @@
 
 import Foundation
 
-public struct Edge<T: Hashable> {
+public class Edge<T: Hashable> {
     public var source: Vertex<T>
     public var destination: Vertex<T>
+
+    init(source: Vertex<T>, destination: Vertex<T>) {
+        self.source = source
+        self.destination = destination
+    }
 }
 
 extension Edge: Hashable {
-
     public var hashValue: Int {
         return "\(source)\(destination)".hashValue
     }
@@ -22,7 +26,6 @@ extension Edge: Hashable {
     static public func == (lhs: Edge<T>, rhs: Edge<T>) -> Bool {
         return lhs.source == rhs.source && lhs.destination == rhs.destination
     }
-
 }
 
 extension Edge: CustomStringConvertible {
