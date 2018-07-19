@@ -9,7 +9,6 @@
 import Foundation
 
 protocol ServiceComponents: class {
-
-    var userRegistrationService: UserRegistrationService { get }
-
+    func userRegistrationService() -> UserRegistrationService
+    func graphService() -> GraphService
 }
