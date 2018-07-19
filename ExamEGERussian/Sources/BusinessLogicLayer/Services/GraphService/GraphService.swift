@@ -9,8 +9,6 @@
 import Foundation
 
 protocol GraphService: class {
-    associatedtype Value: Hashable
-    typealias Handler = (StepicResult<AbstractGraph<Value>>) -> Void
-
+    typealias Handler = (StepicResult<KnowledgeGraphPlainObject>) -> Void
     func obtainGraph(_ completionHandler: @escaping Handler)
 }

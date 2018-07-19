@@ -28,8 +28,8 @@ final class MainViewController: UIViewController {
 
         GraphServiceImpl().obtainGraph { result in
             switch result {
-            case .success(let graph):
-                print(graph)
+            case .success(let responseData):
+                print(responseData)
             case .failure(let error):
                 print(error)
             }
