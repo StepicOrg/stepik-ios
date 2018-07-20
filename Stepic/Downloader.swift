@@ -139,7 +139,9 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func resume(urlSessionTaskId: Int) throws {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         guard taskInfo.state == .attached ||
             taskInfo.state == .paused ||
@@ -165,7 +167,9 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func pause(urlSessionTaskId: Int) throws {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         guard taskInfo.state == .active else {
             throw DownloaderError.incorrectState
@@ -178,7 +182,9 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func cancel(urlSessionTaskId: Int) throws {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         guard taskInfo.state == .active ||
             taskInfo.state == .paused ||
@@ -190,18 +196,23 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func reportOnCompletion(urlSessionTaskId: Int, location: URL) {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         taskInfo.task.completionReporter?(location)
         removeTask(urlSessionTaskId: urlSessionTaskId)
     }
 
     private func reportOnFailure(urlSessionTaskId: Int, error: Error) {
-        getTaskInfo(urlSessionTaskId: urlSessionTaskId).task.failureReporter?(error)
+        getTaskInfo(urlSessionTaskId: urlSessionTaskId)?.task.failureReporter?(error)
     }
 
     private func reportProgress(urlSessionTaskId: Int) {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
+
         let progress = Double(taskInfo.downloadedContentLength) / Double(taskInfo.expectedContentLength)
 
         if taskInfo.state != .active {
@@ -218,29 +229,35 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func updateExpectedContentLength(urlSessionTaskId: Int, length: Int64) {
-        getTaskInfo(urlSessionTaskId: urlSessionTaskId).expectedContentLength = length
+        getTaskInfo(urlSessionTaskId: urlSessionTaskId)?.expectedContentLength = length
     }
 
     private func updateDownloadedContentLength(urlSessionTaskId: Int, length: Int64) {
-        getTaskInfo(urlSessionTaskId: urlSessionTaskId).downloadedContentLength = length
+        getTaskInfo(urlSessionTaskId: urlSessionTaskId)?.downloadedContentLength = length
     }
 
     private func invalidateTask(urlSessionTaskId: Int) {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         taskInfo.state = .stopped
         taskInfo.task.stateReporter?(.stopped)
     }
 
     private func markAsCanBeRestarted(urlSessionTaskId: Int, buffer: Data?) {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         taskInfo.canBeRestarted = true
         taskInfo.resumeDataAfterError = buffer ?? Data(count: 0)
     }
 
     private func removeTask(urlSessionTaskId: Int) {
-        let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId)
+        guard let taskInfo = getTaskInfo(urlSessionTaskId: urlSessionTaskId) else {
+            return
+        }
 
         taskInfo.state = .detached
         taskInfo.task.stateReporter?(.detached)
@@ -252,9 +269,10 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
         cache?.flush()
     }
 
-    private func getTaskInfo(urlSessionTaskId: Int) -> TaskInfo {
+    private func getTaskInfo(urlSessionTaskId: Int) -> TaskInfo? {
         guard let taskInfo = tasks[urlSessionTaskId] else {
-            fatalError("Downloader has no tasks with given ID!")
+            NSLog("Downloader: trying to get info for detached task")
+            return nil
         }
 
         return taskInfo
