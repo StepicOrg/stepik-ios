@@ -1980,6 +1980,7 @@
 		2C35C4F11F4DB88E002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4ED1F4DB882002F3BF4 /* step0.html */; };
 		2C35C4F61F4DB8AC002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F21F4DB8A5002F3BF4 /* step0.html */; };
 		2C35C4FB1F4DB8D4002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F71F4DB8CC002F3BF4 /* step0.html */; };
+		2C3E42B52101D05C009D76DF /* KnowledgeGraphLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E42B42101D05C009D76DF /* KnowledgeGraphLesson.swift */; };
 		2C3E42B82101D6CF009D76DF /* Dictionary+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E42B72101D6CF009D76DF /* Dictionary+Subscript.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
@@ -3999,6 +4000,8 @@
 		2CCB5A5A210089FF0091A605 /* UITableView+Reuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A59210089FF0091A605 /* UITableView+Reuse.swift */; };
 		2CCB5A5C21008C990091A605 /* TopicsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A5B21008C990091A605 /* TopicsPresenterImpl.swift */; };
 		2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */; };
+		2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */; };
+		2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */; };
 		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CCD5D38202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */; };
 		2CCD5D3B202A18A5008ACBC7 /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */; };
@@ -5585,6 +5588,7 @@
 		2C35C4FA1F4DB8D0002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3150/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
+		2C3E42B42101D05C009D76DF /* KnowledgeGraphLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphLesson.swift; sourceTree = "<group>"; };
 		2C3E42B72101D6CF009D76DF /* Dictionary+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Subscript.swift"; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
@@ -5757,6 +5761,8 @@
 		2CCB5A59210089FF0091A605 /* UITableView+Reuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reuse.swift"; sourceTree = "<group>"; };
 		2CCB5A5B21008C990091A605 /* TopicsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsPresenterImpl.swift; sourceTree = "<group>"; };
 		2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceMock.swift; sourceTree = "<group>"; };
+		2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
+		2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphVertex.swift; sourceTree = "<group>"; };
 		2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
 		2CCD5D33202A12E3008ACBC7 /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
 		2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -8381,6 +8387,15 @@
 			sourceTree = "<group>";
 		};
 		2C3E42B92101DE34009D76DF /* KnowledgeGraph */ = {
+			isa = PBXGroup;
+			children = (
+				2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */,
+				2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */,
+				2C3E42B42101D05C009D76DF /* KnowledgeGraphLesson.swift */,
+			);
+			path = KnowledgeGraph;
+			sourceTree = "<group>";
+		};
 		2C453396204D46B70061342A /* PinsMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -8794,6 +8809,7 @@
 			children = (
 				2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */,
 				2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */,
+				2C3E42B92101DE34009D76DF /* KnowledgeGraph */,
 			);
 			path = ConcreteClasses;
 			sourceTree = "<group>";
@@ -14776,6 +14792,7 @@
 				2C9499BC20ECBB400049E9A8 /* Block.swift in Sources */,
 				2C949A3F20ECC92C0049E9A8 /* WebControllerManager.swift in Sources */,
 				2C9499E920ECBFB20049E9A8 /* PlaybackStatusEntity.swift in Sources */,
+				2C3E42B52101D05C009D76DF /* KnowledgeGraphLesson.swift in Sources */,
 				2C94999520ECB8420049E9A8 /* Unit+CoreDataProperties.swift in Sources */,
 				2C0BD98F20ED38690022C454 /* ServiceComponentsAssembly.swift in Sources */,
 				2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */,
@@ -14831,6 +14848,7 @@
 				2C949A1320ECC4AF0049E9A8 /* PreferencesContainer.swift in Sources */,
 				2C949A6920ECD0040049E9A8 /* AchievementsListPresenter.swift in Sources */,
 				2CCB5A462100849A0091A605 /* RandomCredentialsGenerator.swift in Sources */,
+				2CCB5A6221009E160091A605 /* KnowledgeGraphBuilder.swift in Sources */,
 				2C949A0320ECC2D70049E9A8 /* NotificationsPresenter.swift in Sources */,
 				2C33CC0820EC33CD009956B0 /* User.swift in Sources */,
 				2C949A5920ECCE800049E9A8 /* SettingsViewController.swift in Sources */,
@@ -14924,6 +14942,7 @@
 				2C33CBEF20EC3251009956B0 /* UserActivitiesAPI.swift in Sources */,
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
 				2C949A1720ECC5480049E9A8 /* ProfileViewController.swift in Sources */,
+				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
 				2C33CBDB20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
 				2C949A1220ECC4930049E9A8 /* NotificationRequestAlertManager.swift in Sources */,
@@ -14934,6 +14953,7 @@
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
+				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
 				2C33CBE820EC3160009956B0 /* AnalyticsEvents.swift in Sources */,
 				2C949A5120ECCDD10049E9A8 /* EmailAuthViewController.swift in Sources */,

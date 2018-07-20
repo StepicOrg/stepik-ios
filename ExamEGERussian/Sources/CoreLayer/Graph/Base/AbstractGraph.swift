@@ -24,6 +24,10 @@ public class AbstractGraph<T: Hashable>: CustomStringConvertible {
         fatalError("abstract property accessed")
     }
 
+    public func addVertex(_ vertex: Vertex<T>) {
+        fatalError("abstract function called")
+    }
+
     /// Utility method to create a vertex.
     /// - parameter id: ID associated with the vertex.
     public func createVertex(id: T) -> Vertex<T> {

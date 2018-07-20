@@ -17,7 +17,7 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
     }
 
     public override var vertices: [Vertex<T>] {
-        return adjacencies.keys.sorted { $0.id < $1.id }
+        return sortedVertices()
     }
 
     public override var edges: [Edge<T>] {
@@ -34,6 +34,11 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
         return buildDescription(from: vertices)
     }
 
+    public override func addVertex(_ vertex: Vertex<T>) {
+        guard adjacencies[vertex] == nil else { return }
+        adjacencies[vertex] = []
+    }
+
     public func instantiateVertex(id: T) -> Vertex<T> {
         return Vertex(id: id)
     }
@@ -41,10 +46,7 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
     @discardableResult
     public override func createVertex(id: T) -> Vertex<T> {
         let vertex = instantiateVertex(id: id)
-
-        if adjacencies[vertex] == nil {
-            adjacencies[vertex] = []
-        }
+        addVertex(vertex)
 
         return vertex
     }
@@ -64,12 +66,16 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
         return adjacencies[source]?.map { Edge(source: source, destination: $0) } ?? []
     }
 
+    func sortedVertices(_ by: ((Vertex<T>, Vertex<T>) -> Bool) = { $0.id < $1.id }) -> [Vertex<T>] {
+        return adjacencies.keys.sorted(by: by)
+    }
+
     // MARK: Private Helpers
 
     private func buildDescription(from vertices: [Vertex<T>]) -> String {
         var result = ""
 
-        for vertex in vertices {
+        for vertex in sortedVertices() {
             var adjacentString = ""
 
             guard let adjacentVertices = adjacencies[vertex] else {

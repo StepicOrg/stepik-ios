@@ -11,7 +11,7 @@ import Foundation
 public class Vertex<T: Hashable> {
     public let id: T
 
-    public required init(id: T) {
+    public init(id: T) {
         self.id = id
     }
 }
