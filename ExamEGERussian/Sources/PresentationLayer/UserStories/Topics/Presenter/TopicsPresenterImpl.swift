@@ -44,6 +44,10 @@ final class TopicsPresenterImpl: TopicsPresenter {
         print("\(#function) row: \(row)")
     }
 
+    func didPullToRefresh() {
+        fetchGraphData()
+    }
+
     func titleForScene() -> String {
         return "Topics".localized
     }
