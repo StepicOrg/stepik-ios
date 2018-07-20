@@ -67,6 +67,7 @@ end
 def testing_pods
     pod 'Quick'
     pod 'Nimble'
+    pod 'Mockingjay'
 end
 
 def adaptive_pods
