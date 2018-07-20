@@ -44,6 +44,7 @@ final class TopicsTableViewController: UITableViewController {
 
 extension TopicsTableViewController: TopicsView {
     func refreshTopicsView() {
+        assert(Thread.isMainThread)
         tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 

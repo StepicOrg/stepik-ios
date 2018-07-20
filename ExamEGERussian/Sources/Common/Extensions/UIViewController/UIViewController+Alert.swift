@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIViewController {
-
     func presentAlert(withTitle title: String?, message: String? = nil,
                       actionTitle: String? = "Ок".localized,
                       action actionCallback: (() -> Void)? = nil) {
@@ -33,5 +32,4 @@ extension UIViewController {
         })
         present(alert, animated: true, completion: nil)
     }
-
 }

@@ -11,11 +11,18 @@ import Foundation
 final class TopicsPresenterImpl: TopicsPresenter {
 
     private weak var view: TopicsView?
+
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
+    private var graph: KnowledgeGraph = KnowledgeGraph() {
+        didSet {
+            self.view?.refreshTopicsView()
+        }
+    }
+
     var numberOfTopics: Int {
-        return 10
+        return graph.count
     }
 
     init(view: TopicsView, userRegistrationService: UserRegistrationService, graphService: GraphService) {
@@ -30,7 +37,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func configure(cell: TopicCellView, forRow row: Int) {
-        cell.display(title: "Title for row: \(row)")
+        cell.display(title: graph[row].key.title)
     }
 
     func didSelect(row: Int) {
@@ -46,7 +53,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private func checkAuthStatus() {
         if !AuthInfo.shared.isAuthorized {
             userRegistrationService.registerNewUser().done {
-                print("Successfully register user with: \($0.id)")
+                print("Successfully register user with id: \($0.id)")
             }.catch { [weak self] error in
                 self?.displayError(error)
             }
@@ -57,7 +64,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
         graphService.obtainGraph { [weak self] result in
             switch result {
             case .success(let responseModel):
-                print(responseModel)
+                let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
+                guard let graph = builder.build() as? KnowledgeGraph else { return }
+                self?.graph = graph
             case .failure(let error):
                 self?.displayError(error)
             }
