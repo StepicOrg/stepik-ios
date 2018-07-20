@@ -14,7 +14,6 @@ fileprivate extension DownloaderSessionType {
         case .background(let id):
             let identifier = "downloader.\(id)"
             let config = URLSessionConfiguration.background(withIdentifier: identifier)
-            config.waitsForConnectivity = true
             config.isDiscretionary = true
             config.sessionSendsLaunchEvents = true
             return config
@@ -33,7 +32,7 @@ fileprivate extension DownloaderSessionType {
     }
 }
 
-final class Downloader: DownloaderProtocol {
+final class Downloader: RestorableBackgroundDownloaderProtocol {
     // Downloader class can't implement delegate protocols
     // cause it doesn't extend NSObject
     fileprivate final class Delegate: NSObject {
@@ -491,7 +490,7 @@ extension Downloader.Cache {
     }
 }
 
-extension Downloader: RestorableBackgroundDownloaderProtocol {
+extension Downloader {
     var id: String? {
         return session.configuration.identifier
     }
