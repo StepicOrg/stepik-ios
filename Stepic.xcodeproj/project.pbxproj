@@ -3999,6 +3999,8 @@
 		2CCB5A582100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A572100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift */; };
 		2CCB5A5A210089FF0091A605 /* UITableView+Reuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A59210089FF0091A605 /* UITableView+Reuse.swift */; };
 		2CCB5A5C21008C990091A605 /* TopicsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A5B21008C990091A605 /* TopicsPresenterImpl.swift */; };
+		2CCB5A6021009DB70091A605 /* AbstractGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A5F21009DB70091A605 /* AbstractGraphBuilder.swift */; };
+		2CCB5A6221009E160091A605 /* KnowledgeGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A6121009E160091A605 /* KnowledgeGraphBuilder.swift */; };
 		2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */; };
 		2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */; };
 		2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */; };
@@ -5760,6 +5762,8 @@
 		2CCB5A572100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+ReusableCell.swift"; sourceTree = "<group>"; };
 		2CCB5A59210089FF0091A605 /* UITableView+Reuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reuse.swift"; sourceTree = "<group>"; };
 		2CCB5A5B21008C990091A605 /* TopicsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsPresenterImpl.swift; sourceTree = "<group>"; };
+		2CCB5A5F21009DB70091A605 /* AbstractGraphBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGraphBuilder.swift; sourceTree = "<group>"; };
+		2CCB5A6121009E160091A605 /* KnowledgeGraphBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphBuilder.swift; sourceTree = "<group>"; };
 		2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceMock.swift; sourceTree = "<group>"; };
 		2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
 		2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphVertex.swift; sourceTree = "<group>"; };
@@ -9143,6 +9147,7 @@
 		2CCB5A402100849A0091A605 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2CCB5A5D21009D790091A605 /* Builders */,
 				2CCB5A48210084C30091A605 /* Extensions */,
 				2CCB5A49210084D30091A605 /* Helpers */,
 			);
@@ -9218,6 +9223,23 @@
 				2CCB5A572100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift */,
 			);
 			path = UITableViewHeaderFooterView;
+			sourceTree = "<group>";
+		};
+		2CCB5A5D21009D790091A605 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				2CCB5A5E21009DA00091A605 /* AbstractGraphBuilder */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		2CCB5A5E21009DA00091A605 /* AbstractGraphBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				2CCB5A5F21009DB70091A605 /* AbstractGraphBuilder.swift */,
+				2CCB5A6121009E160091A605 /* KnowledgeGraphBuilder.swift */,
+			);
+			path = AbstractGraphBuilder;
 			sourceTree = "<group>";
 		};
 		2CCD5D30202A12B3008ACBC7 /* AdaptiveCourseSelect */ = {
@@ -14698,6 +14720,7 @@
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C94999620ECB86B0049E9A8 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C949A2620ECC60F0049E9A8 /* ProfileHeaderInfoView.swift in Sources */,
+				2CCB5A6021009DB70091A605 /* AbstractGraphBuilder.swift in Sources */,
 				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C33CBE620EC314E009956B0 /* StepicApplicationsInfo.swift in Sources */,
 				2C949A3820ECC7DF0049E9A8 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
