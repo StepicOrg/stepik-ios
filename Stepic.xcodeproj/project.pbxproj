@@ -1980,6 +1980,7 @@
 		2C35C4F11F4DB88E002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4ED1F4DB882002F3BF4 /* step0.html */; };
 		2C35C4F61F4DB8AC002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F21F4DB8A5002F3BF4 /* step0.html */; };
 		2C35C4FB1F4DB8D4002F3BF4 /* step0.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4F71F4DB8CC002F3BF4 /* step0.html */; };
+		2C3E42B82101D6CF009D76DF /* Dictionary+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E42B72101D6CF009D76DF /* Dictionary+Subscript.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
 		2C47A16120628420003E87EC /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A16020628420003E87EC /* AnalyticsReporter.swift */; };
@@ -5584,6 +5585,7 @@
 		2C35C4FA1F4DB8D0002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3150/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C3C8CE2D05F89F06659D716 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
+		2C3E42B72101D6CF009D76DF /* Dictionary+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Subscript.swift"; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
@@ -8370,6 +8372,15 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		2C3E42B62101D6B6009D76DF /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E42B72101D6CF009D76DF /* Dictionary+Subscript.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		2C3E42B92101DE34009D76DF /* KnowledgeGraph */ = {
 		2C453396204D46B70061342A /* PinsMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -9134,6 +9145,7 @@
 		2CCB5A48210084C30091A605 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C3E42B62101D6B6009D76DF /* Dictionary */,
 				2CCB5A4E210085FF0091A605 /* String */,
 				2CCB5A532100890C0091A605 /* UITableView */,
 				2CCB5A4F210088260091A605 /* UITableViewCell */,
@@ -14711,6 +14723,7 @@
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C33CC1120EC3420009956B0 /* ContentLanguage.swift in Sources */,
+				2C3E42B82101D6CF009D76DF /* Dictionary+Subscript.swift in Sources */,
 				2C949A4B20ECCCAF0049E9A8 /* ControllerHelper.swift in Sources */,
 				2C94999820ECB88D0049E9A8 /* Lesson.swift in Sources */,
 				2C949A1F20ECC5A60049E9A8 /* AchievementBadgeView.swift in Sources */,
