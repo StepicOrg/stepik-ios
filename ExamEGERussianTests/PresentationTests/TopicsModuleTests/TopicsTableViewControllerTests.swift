@@ -11,10 +11,11 @@ import XCTest
 
 class TopicsTableViewControllerTests: XCTestCase {
 
-    func testMainScreen() {
+    func testViewInstantiated() {
         let vc = TopicsTableViewController()
         let presenter = TopicsPresenterImpl(
             view: vc,
+            model: KnowledgeGraph(),
             userRegistrationService: UserRegistrationServiceMock(),
             graphService: GraphServiceMock()
         )

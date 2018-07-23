@@ -12,4 +12,10 @@ struct LessonPlainObject: Codable {
     let id: Int
     let type: String
     let course: String
+
+    init(id: Int, type: String, course: String) {
+        self.id = id
+        self.type = type
+        self.course = course
+    }
 }

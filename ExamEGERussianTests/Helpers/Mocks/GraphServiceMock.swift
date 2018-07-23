@@ -14,7 +14,9 @@ final class GraphServiceMock: GraphService {
         case mockError
     }
 
+    var resultToBeReturned: StepicResult<KnowledgeGraphPlainObject>! = .failure(Error.mockError)
+
     func obtainGraph(_ completionHandler: @escaping GraphService.Handler) {
-        completionHandler(.failure(Error.mockError))
+        completionHandler(resultToBeReturned)
     }
 }

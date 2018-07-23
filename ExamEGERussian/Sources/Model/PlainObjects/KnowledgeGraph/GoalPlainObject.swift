@@ -19,6 +19,12 @@ struct GoalPlainObject: Codable {
         case requiredTopics = "required-topics"
     }
 
+    init(title: String, id: String, requiredTopics: [String]) {
+        self.title = title
+        self.id = id
+        self.requiredTopics = requiredTopics
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         title = try container.decode(String.self, forKey: .title)

@@ -19,6 +19,12 @@ struct TopicPlainObject: Codable {
         case requiredFor = "required-for"
     }
 
+    init(id: String, title: String, requiredFor: String?) {
+        self.id = id
+        self.title = title
+        self.requiredFor = requiredFor
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)

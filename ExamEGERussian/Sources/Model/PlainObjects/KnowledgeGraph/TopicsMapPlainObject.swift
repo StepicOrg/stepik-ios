@@ -11,4 +11,9 @@ import Foundation
 struct TopicsMapPlainObject: Codable {
     let id: String
     let lessons: [LessonPlainObject]
+
+    init(id: String, lessons: [LessonPlainObject]) {
+        self.id = id
+        self.lessons = lessons
+    }
 }

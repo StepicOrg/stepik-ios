@@ -3988,6 +3988,9 @@
 		2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		2CC9955E2105C0AD0023EC0C /* TopicsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955D2105C0AD0023EC0C /* TopicsPresenterTests.swift */; };
+		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
+		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */; };
 		2CCB5A3D2100824F0091A605 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */; };
 		2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */; };
 		2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */; };
@@ -5751,6 +5754,9 @@
 		2CC351961F683140004255B6 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		2CC9955D2105C0AD0023EC0C /* TopicsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsPresenterTests.swift; sourceTree = "<group>"; };
+		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
+		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Create.swift"; sourceTree = "<group>"; };
 		2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicTableViewCell.xib; sourceTree = "<group>"; };
 		2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -8435,6 +8441,7 @@
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C6841C120EE14AE0050155F /* LogicTests */,
 				2C6841C520EE1D160050155F /* PresentationTests */,
+				2CC995632105C77C0023EC0C /* Helpers */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -8686,40 +8693,23 @@
 		2C6841C120EE14AE0050155F /* LogicTests */ = {
 			isa = PBXGroup;
 			children = (
-				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
-				2C6841C220EE14CE0050155F /* UserRegistrationServiceTests */,
-			);
-			path = LogicTests;
-			sourceTree = "<group>";
-		};
-		2C6841C220EE14CE0050155F /* UserRegistrationServiceTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
-			path = UserRegistrationServiceTests;
+			path = LogicTests;
 			sourceTree = "<group>";
 		};
 		2C6841C520EE1D160050155F /* PresentationTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841C620EE1D6B0050155F /* ModulesTests */,
-			);
-			path = PresentationTests;
-			sourceTree = "<group>";
-		};
-		2C6841C620EE1D6B0050155F /* ModulesTests */ = {
-			isa = PBXGroup;
-			children = (
 				2C6841C720EE1D990050155F /* TopicsModuleTests */,
 			);
-			path = ModulesTests;
+			path = PresentationTests;
 			sourceTree = "<group>";
 		};
 		2C6841C720EE1D990050155F /* TopicsModuleTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CC9955D2105C0AD0023EC0C /* TopicsPresenterTests.swift */,
 				2C59F03E20EB8ACA00666EE0 /* TopicsTableViewControllerTests.swift */,
 			);
 			path = TopicsModuleTests;
@@ -9124,6 +9114,41 @@
 				2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2CC995632105C77C0023EC0C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2CC995642105C78C0023EC0C /* Creators */,
+				2CC995662105C8020023EC0C /* Mocks */,
+				2CC995652105C7B80023EC0C /* Views */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2CC995642105C78C0023EC0C /* Creators */ = {
+			isa = PBXGroup;
+			children = (
+				2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */,
+			);
+			path = Creators;
+			sourceTree = "<group>";
+		};
+		2CC995652105C7B80023EC0C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2CC995662105C8020023EC0C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
+				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		2CCB5A3A210082210091A605 /* TopicsTableViewController */ = {
@@ -15027,11 +15052,14 @@
 				2C59F03F20EB8ACA00666EE0 /* TopicsTableViewControllerTests.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C6841C020EE133E0050155F /* ServiceComponentsAssemblyTests.swift in Sources */,
+				2CC9955E2105C0AD0023EC0C /* TopicsPresenterTests.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
+				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
+				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,12 @@ struct KnowledgeGraphPlainObject: Codable {
         case topicsMap = "topics-map"
     }
 
+    init(goals: [GoalPlainObject], topics: [TopicPlainObject], topicsMap: [TopicsMapPlainObject]) {
+        self.goals = goals
+        self.topics = topics
+        self.topicsMap = topicsMap
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         goals = try container.decode([GoalPlainObject].self, forKey: .goals)
