@@ -80,6 +80,7 @@ target 'Stepic' do
         inherit! :search_paths
         all_pods
         testing_pods
+	pod 'Mockingjay'
     end
 end
 
