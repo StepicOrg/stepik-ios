@@ -3992,6 +3992,7 @@
 		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
 		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */; };
 		2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995672105C98E0023EC0C /* NSError+Create.swift */; };
+		2CC9956A2105CA5C0023EC0C /* TopicCellViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */; };
 		2CCB5A3D2100824F0091A605 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */; };
 		2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */; };
 		2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */; };
@@ -5759,6 +5760,7 @@
 		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
 		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Create.swift"; sourceTree = "<group>"; };
 		2CC995672105C98E0023EC0C /* NSError+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Create.swift"; sourceTree = "<group>"; };
+		2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCellViewSpy.swift; sourceTree = "<group>"; };
 		2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicTableViewCell.xib; sourceTree = "<group>"; };
 		2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -9140,6 +9142,7 @@
 		2CC995652105C7B80023EC0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */,
 				2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */,
 			);
 			path = Views;
@@ -15060,6 +15063,7 @@
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
+				2CC9956A2105CA5C0023EC0C /* TopicCellViewSpy.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,

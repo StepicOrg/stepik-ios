@@ -47,4 +47,18 @@ class TopicsPresenterTests: XCTestCase {
         XCTAssertEqual(expectedErrorTitle, topicsViewSpy.displayErrorTitle, "Error title doesn't match")
         XCTAssertEqual(expectedErrorMessage, topicsViewSpy.displayErrorMessage, "Error message doesn't match")
     }
+
+    func testConfigureCell() {
+        let resultToBeReturned = KnowledgeGraphPlainObject.createGraph()
+        graphService.resultToBeReturned = .success(resultToBeReturned)
+
+        topicsPresenter.viewDidLoad()
+
+        let expectedDisplayedTitle = "B13 Слитное раздельное написание"
+        let topicCellView = TopicCellViewSpy()
+
+        topicsPresenter.configure(cell: topicCellView, forRow: 1)
+
+        XCTAssertEqual(expectedDisplayedTitle, topicCellView.displayedTitle, "The title we expected was not displayed")
+    }
 }
