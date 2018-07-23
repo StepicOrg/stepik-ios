@@ -28,7 +28,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
         self.randomCredentialsGenerator = randomCredentialsGenerator
     }
 
-    func userRegistrationService() -> UserRegistrationService {
+    var userRegistrationService: UserRegistrationService {
         return UserRegistrationServiceImplementation(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
@@ -38,7 +38,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
         )
     }
 
-    func graphService() -> GraphService {
+    var graphService: GraphService {
         return GraphServiceImpl()
     }
 }
