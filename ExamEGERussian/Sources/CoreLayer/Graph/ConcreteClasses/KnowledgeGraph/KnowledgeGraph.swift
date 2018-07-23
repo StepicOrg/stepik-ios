@@ -20,8 +20,9 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
     }
 
     subscript(index: Int) -> Element {
-        guard let element = adjacencies[index] as? (KnowledgeGraphVertex<String>, [KnowledgeGraphVertex<String>])
-            else { fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
+        let index = adjacencies.index(adjacencies.startIndex, offsetBy: index)
+        guard let element = adjacencies[index] as? Element else {
+            fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
         return element
     }
@@ -32,8 +33,8 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
 
     private func getElement(by id: String) -> Element? {
         guard let index = adjacencies.index(forKey: Vertex(id: id)) else { return nil }
-        guard let element = adjacencies[index] as? (KnowledgeGraphVertex<String>, [KnowledgeGraphVertex<String>])
-            else { fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
+        guard let element = adjacencies[index] as? Element else {
+            fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
         return element
     }
