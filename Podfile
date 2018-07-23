@@ -67,7 +67,6 @@ end
 def testing_pods
     pod 'Quick'
     pod 'Nimble'
-    pod 'Mockingjay'
 end
 
 def adaptive_pods
@@ -81,6 +80,7 @@ target 'Stepic' do
         inherit! :search_paths
         all_pods
         testing_pods
+	pod 'Mockingjay'
     end
 end
 
