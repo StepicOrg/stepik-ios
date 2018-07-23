@@ -8,10 +8,6 @@
 
 import UIKit
 
-final class TopicTableViewCell: UITableViewCell, TopicCellView {
+final class TopicTableViewCell: UITableViewCell {
     @IBOutlet var descriptionTitleLabel: UILabel!
-
-    func display(title: String) {
-        descriptionTitleLabel.text = title
-    }
 }

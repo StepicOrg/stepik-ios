@@ -9,7 +9,17 @@
 import UIKit
 
 final class TopicsTableViewController: UITableViewController {
+
+    // MARK: Instance Properties
+
     var presenter: TopicsPresenter!
+
+    private var topics = [TopicsViewData]() {
+        didSet {
+            tableView.reloadData()
+            topicsRefreshControl.endRefreshing()
+        }
+    }
 
     private lazy var topicsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -18,29 +28,32 @@ final class TopicsTableViewController: UITableViewController {
         return refreshControl
     }()
 
+    // MARK: - UIViewController Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.registerNib(for: TopicTableViewCell.self)
-        presenter.viewDidLoad()
-        title = presenter.titleForScene()
+        title = NSLocalizedString("Topics", comment: "")
 
         if #available(iOS 10.0, *) {
             tableView.refreshControl = topicsRefreshControl
         } else {
             tableView.addSubview(topicsRefreshControl)
         }
+
+        presenter.refresh()
     }
 
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfTopics
+        return topics.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TopicTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        presenter.configure(cell: cell, forRow: indexPath.row)
+        cell.descriptionTitleLabel.text = topics[indexPath.row].title
 
         return cell
     }
@@ -49,23 +62,21 @@ final class TopicsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didSelect(row: indexPath.row)
+        topics[indexPath.row].onTap()
     }
 
     // MARK: - Private API
 
     @objc private func refreshData(_ sender: Any) {
-        presenter.didPullToRefresh()
+        presenter.refresh()
     }
 }
 
 // MARK: - TopicsTableViewController: TopicsView -
 
 extension TopicsTableViewController: TopicsView {
-    func refreshTopicsView() {
-        assert(Thread.isMainThread)
-        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-        topicsRefreshControl.endRefreshing()
+    func setTopics(_ topics: [TopicsViewData]) {
+        self.topics = topics
     }
 
     func displayError(title: String, message: String) {

@@ -9,11 +9,5 @@
 import Foundation
 
 protocol TopicsPresenter: class {
-    var numberOfTopics: Int { get }
-
-    func viewDidLoad()
-    func configure(cell: TopicCellView, forRow row: Int)
-    func didSelect(row: Int)
-    func didPullToRefresh()
-    func titleForScene() -> String
+    func refresh()
 }

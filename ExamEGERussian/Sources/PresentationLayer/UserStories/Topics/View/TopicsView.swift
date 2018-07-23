@@ -8,7 +8,12 @@
 
 import Foundation
 
+struct TopicsViewData {
+    let title: String
+    let onTap: () -> Void
+}
+
 protocol TopicsView: class {
-    func refreshTopicsView()
+    func setTopics(_ topics: [TopicsViewData])
     func displayError(title: String, message: String)
 }

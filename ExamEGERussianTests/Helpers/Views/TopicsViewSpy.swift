@@ -10,16 +10,21 @@ import Foundation
 @testable import ExamEGERussian
 
 final class TopicsViewSpy: TopicsView {
-    var refreshTopicsViewCalled = false
+    var topics: [TopicsViewData]?
     var displayErrorTitle: String?
     var displayErrorMessage: String?
 
-    func refreshTopicsView() {
-        refreshTopicsViewCalled = true
+    var onSet: (() -> Void)?
+    var onError: (() -> Void)?
+
+    func setTopics(_ topics: [TopicsViewData]) {
+        self.topics = topics
+        onSet?()
     }
 
     func displayError(title: String, message: String) {
         displayErrorTitle = title
         displayErrorMessage = message
+        onError?()
     }
 }

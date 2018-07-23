@@ -11,19 +11,9 @@ import Foundation
 final class TopicsPresenterImpl: TopicsPresenter {
 
     private weak var view: TopicsView?
-
+    private var graph: KnowledgeGraph
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
-
-    private var graph: KnowledgeGraph {
-        didSet {
-            self.view?.refreshTopicsView()
-        }
-    }
-
-    var numberOfTopics: Int {
-        return graph.count
-    }
 
     init(view: TopicsView, model: KnowledgeGraph,
          userRegistrationService: UserRegistrationService, graphService: GraphService) {
@@ -33,25 +23,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
         self.graphService = graphService
     }
 
-    func viewDidLoad() {
+    func refresh() {
         checkAuthStatus()
         fetchGraphData()
-    }
-
-    func configure(cell: TopicCellView, forRow row: Int) {
-        cell.display(title: graph[row].key.title)
-    }
-
-    func didSelect(row: Int) {
-        print("\(#function) row: \(row)")
-    }
-
-    func didPullToRefresh() {
-        fetchGraphData()
-    }
-
-    func titleForScene() -> String {
-        return NSLocalizedString("Topics", comment: "")
     }
 
     // MARK: - Private API
@@ -68,9 +42,13 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func fetchGraphData() {
         graphService.obtainGraph().done { [weak self] responseModel in
+            guard let `self` = self else { return }
             let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
             guard let graph = builder.build() as? KnowledgeGraph else { return }
-            self?.graph = graph
+            self.graph = graph
+
+            let vertices = graph.vertices as! [KnowledgeGraphVertex<String>]
+            self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)
         }
@@ -78,5 +56,22 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func displayError(_ error: Swift.Error) {
         view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
+    }
+
+    private func showLessons<T>(_ vertex: KnowledgeGraphVertex<T>) {
+        print("\(#function) for: \(vertex.title)")
+    }
+
+    private func viewTopicsFrom<T>(_ vertices: [KnowledgeGraphVertex<T>]) -> [TopicsViewData] {
+        return vertices.map { viewTopicFromVertex($0) }
+    }
+
+    private func viewTopicFromVertex<T>(_ vertex: KnowledgeGraphVertex<T>) -> TopicsViewData {
+        return TopicsViewData(
+            title: vertex.title,
+            onTap: { [weak self] in
+                self?.showLessons(vertex)
+            }
+        )
     }
 }

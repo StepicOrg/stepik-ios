@@ -3991,7 +3991,6 @@
 		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
 		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */; };
 		2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995672105C98E0023EC0C /* NSError+Create.swift */; };
-		2CC9956A2105CA5C0023EC0C /* TopicCellViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */; };
 		2CCB5A3D2100824F0091A605 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */; };
 		2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */; };
 		2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */; };
@@ -4045,7 +4044,6 @@
 		2CE3C2B421007BAA003AB54A /* TopicsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3C2B321007BAA003AB54A /* TopicsPresenter.swift */; };
 		2CE3C2B921007D3D003AB54A /* TopicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3C2B721007D3D003AB54A /* TopicsTableViewController.swift */; };
 		2CE3C2BA21007D3D003AB54A /* TopicsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE3C2B821007D3D003AB54A /* TopicsTableViewController.xib */; };
-		2CE3C2BC21007DFD003AB54A /* TopicCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3C2BB21007DFD003AB54A /* TopicCellView.swift */; };
 		2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
 		2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
 		2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */; };
@@ -5757,7 +5755,6 @@
 		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
 		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Create.swift"; sourceTree = "<group>"; };
 		2CC995672105C98E0023EC0C /* NSError+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Create.swift"; sourceTree = "<group>"; };
-		2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCellViewSpy.swift; sourceTree = "<group>"; };
 		2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicTableViewCell.xib; sourceTree = "<group>"; };
 		2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -5806,7 +5803,6 @@
 		2CE3C2B321007BAA003AB54A /* TopicsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsPresenter.swift; sourceTree = "<group>"; };
 		2CE3C2B721007D3D003AB54A /* TopicsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsTableViewController.swift; sourceTree = "<group>"; };
 		2CE3C2B821007D3D003AB54A /* TopicsTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsTableViewController.xib; sourceTree = "<group>"; };
-		2CE3C2BB21007DFD003AB54A /* TopicCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCellView.swift; sourceTree = "<group>"; };
 		2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsSection.swift; sourceTree = "<group>"; };
 		2CE527C42029D9780047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
@@ -9130,7 +9126,6 @@
 		2CC995652105C7B80023EC0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2CC995692105CA5C0023EC0C /* TopicCellViewSpy.swift */,
 				2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */,
 			);
 			path = Views;
@@ -9325,7 +9320,6 @@
 			children = (
 				2CCB5A3A210082210091A605 /* TopicsTableViewController */,
 				2CCB5A3F210082580091A605 /* TopicTableViewCell */,
-				2CE3C2BB21007DFD003AB54A /* TopicCellView.swift */,
 				2CE3C2B121007B9D003AB54A /* TopicsView.swift */,
 			);
 			path = View;
@@ -14720,7 +14714,6 @@
 				2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */,
 				2C949A3720ECC7BC0049E9A8 /* Menu.swift in Sources */,
 				2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */,
-				2CE3C2BC21007DFD003AB54A /* TopicCellView.swift in Sources */,
 				2C949A6020ECCEFF0049E9A8 /* LanguageSettingsViewController.swift in Sources */,
 				2CE3C2B921007D3D003AB54A /* TopicsTableViewController.swift in Sources */,
 				2C949A3A20ECC8310049E9A8 /* PagerController.swift in Sources */,
@@ -15039,7 +15032,6 @@
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
-				2CC9956A2105CA5C0023EC0C /* TopicCellViewSpy.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C6841CA20EE1F7D0050155F /* ServiceComponentsAssemblyTestsHelper.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
