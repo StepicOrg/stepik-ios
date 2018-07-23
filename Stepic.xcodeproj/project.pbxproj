@@ -3997,7 +3997,6 @@
 		2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */; };
 		2CCB5A462100849A0091A605 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A432100849A0091A605 /* RandomCredentialsGenerator.swift */; };
 		2CCB5A472100849A0091A605 /* RandomCredentialsGeneratorImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A442100849A0091A605 /* RandomCredentialsGeneratorImplementation.swift */; };
-		2CCB5A4D210085FB0091A605 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A4C210085FB0091A605 /* String+Localized.swift */; };
 		2CCB5A52210088B70091A605 /* UITableViewCell+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A51210088B70091A605 /* UITableViewCell+ReusableCell.swift */; };
 		2CCB5A55210089180091A605 /* UITableView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A54210089180091A605 /* UITableView+Registration.swift */; };
 		2CCB5A582100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A572100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift */; };
@@ -5764,7 +5763,6 @@
 		2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		2CCB5A432100849A0091A605 /* RandomCredentialsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGenerator.swift; sourceTree = "<group>"; };
 		2CCB5A442100849A0091A605 /* RandomCredentialsGeneratorImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGeneratorImplementation.swift; sourceTree = "<group>"; };
-		2CCB5A4C210085FB0091A605 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		2CCB5A51210088B70091A605 /* UITableViewCell+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReusableCell.swift"; sourceTree = "<group>"; };
 		2CCB5A54210089180091A605 /* UITableView+Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Registration.swift"; sourceTree = "<group>"; };
 		2CCB5A572100899A0091A605 /* UITableViewHeaderFooterView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+ReusableCell.swift"; sourceTree = "<group>"; };
@@ -9187,7 +9185,6 @@
 		2CCB5A48210084C30091A605 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2CCB5A4E210085FF0091A605 /* String */,
 				2CCB5A532100890C0091A605 /* UITableView */,
 				2CCB5A4F210088260091A605 /* UITableViewCell */,
 				2CCB5A562100898D0091A605 /* UITableViewHeaderFooterView */,
@@ -9210,14 +9207,6 @@
 				2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */,
 			);
 			path = UIViewController;
-			sourceTree = "<group>";
-		};
-		2CCB5A4E210085FF0091A605 /* String */ = {
-			isa = PBXGroup;
-			children = (
-				2CCB5A4C210085FB0091A605 /* String+Localized.swift */,
-			);
-			path = String;
 			sourceTree = "<group>";
 		};
 		2CCB5A4F210088260091A605 /* UITableViewCell */ = {
@@ -14880,7 +14869,6 @@
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
-				2CCB5A4D210085FB0091A605 /* String+Localized.swift in Sources */,
 				2CCB5A52210088B70091A605 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C949A4520ECCA290049E9A8 /* TooltipFactory.swift in Sources */,
 				2C949A6F20ECD1010049E9A8 /* PinsMap.swift in Sources */,

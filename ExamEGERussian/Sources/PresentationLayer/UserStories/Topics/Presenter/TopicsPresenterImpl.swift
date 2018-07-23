@@ -51,7 +51,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func titleForScene() -> String {
-        return "Topics".localized
+        return NSLocalizedString("Topics", comment: "")
     }
 
     // MARK: - Private API
@@ -77,6 +77,6 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     private func displayError(_ error: Swift.Error) {
-        view?.displayError(title: "Error".localized, message: error.localizedDescription)
+        view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
     }
 }

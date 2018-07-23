@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     func presentAlert(withTitle title: String?, message: String? = nil,
-                      actionTitle: String? = "Ок".localized,
+                      actionTitle: String? = NSLocalizedString("Ок", comment: ""),
                       action actionCallback: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .cancel) { _ in
@@ -20,8 +20,8 @@ extension UIViewController {
     }
 
     func presentConfirmationAlert(withTitle title: String?, message: String? = nil,
-                                  buttonFirstTitle: String? = "Ок".localized,
-                                  buttonSecondTitle: String? = "Cancel".localized,
+                                  buttonFirstTitle: String? = NSLocalizedString("Ок", comment: ""),
+                                  buttonSecondTitle: String? = NSLocalizedString("Cancel", comment: ""),
                                   firstAction: (() -> Void)? = nil, secondAction: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonFirstTitle, style: .default) { _ in
