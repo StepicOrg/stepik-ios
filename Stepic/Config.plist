@@ -22,6 +22,8 @@
 	</dict>
 	<key>url</key>
 	<dict>
+		<key>appId</key>
+		<string>1064581926</string>
 		<key>adaptiveRating</key>
 		<string>http://52.174.33.220</string>
 		<key>scheme</key>
