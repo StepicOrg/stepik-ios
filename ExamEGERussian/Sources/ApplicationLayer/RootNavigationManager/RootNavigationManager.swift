@@ -28,6 +28,7 @@ final class RootNavigationManager {
         let controller = TopicsTableViewController()
         controller.presenter = TopicsPresenterImpl(
             view: controller,
+            model: KnowledgeGraph(),
             userRegistrationService: serviceComponents.userRegistrationService(),
             graphService: serviceComponents.graphService()
         )

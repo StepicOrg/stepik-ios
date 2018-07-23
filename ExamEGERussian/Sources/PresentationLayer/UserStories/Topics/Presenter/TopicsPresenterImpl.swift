@@ -15,7 +15,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
-    private var graph: KnowledgeGraph = KnowledgeGraph() {
+    private var graph: KnowledgeGraph {
         didSet {
             self.view?.refreshTopicsView()
         }
@@ -25,8 +25,10 @@ final class TopicsPresenterImpl: TopicsPresenter {
         return graph.count
     }
 
-    init(view: TopicsView, userRegistrationService: UserRegistrationService, graphService: GraphService) {
+    init(view: TopicsView, model: KnowledgeGraph,
+         userRegistrationService: UserRegistrationService, graphService: GraphService) {
         self.view = view
+        self.graph = model
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
     }
