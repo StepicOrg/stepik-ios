@@ -12,6 +12,8 @@ import Quick
 import XCTest
 import Mockingjay
 
+@testable import Stepic
+
 class DownloaderTaskMock: DownloaderTask {
     var isCompleted = false
 
@@ -214,13 +216,13 @@ class DownloaderSpec: QuickSpec {
                     it("pauses given task") {
                         var didPauseCall = false
                         var states = [DownloaderTaskState]()
-                        let semaphore = DispatchSemaphore(value: 1)
+                        let lock = NSLock()
                         task.progressReporter = { progress in
                             // Some trick: pause task from first call of progress reporter
                             if !didPauseCall {
                                 expect { try self.downloader.pause(task: task) }.notTo(throwError())
                                 didPauseCall = true
-                                semaphore.signal()
+                                lock.unlock()
                             }
                         }
                         task.stateReporter = { newState in
@@ -228,7 +230,7 @@ class DownloaderSpec: QuickSpec {
                         }
                         task.failureReporter = { _ in
                             fail("task should finish correctly")
-                            semaphore.signal()
+                            lock.unlock()
                         }
 
                         waitUntil { done in
@@ -238,10 +240,10 @@ class DownloaderSpec: QuickSpec {
                                 done()
                             }
 
-                            semaphore.wait()
+                            lock.lock()
                             expect { try self.downloader.add(task: task) }.notTo(throwError())
                             expect { try self.downloader.resume(task: task) }.notTo(throwError())
-                            semaphore.wait()
+                            lock.lock()
                             expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
