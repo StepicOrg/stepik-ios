@@ -35,4 +35,16 @@ class TopicsPresenterTests: XCTestCase {
 
         XCTAssertTrue(topicsViewSpy.refreshTopicsViewCalled, "refreshTopicsView was not called")
     }
+
+    func testViewDidLoadFailureDisplayError() {
+        let expectedErrorTitle = "Error"
+        let expectedErrorMessage = "Some error message"
+        let errorToBeReturned = NSError.createError(withMessage: expectedErrorMessage)
+        graphService.resultToBeReturned = .failure(errorToBeReturned)
+
+        topicsPresenter.viewDidLoad()
+
+        XCTAssertEqual(expectedErrorTitle, topicsViewSpy.displayErrorTitle, "Error title doesn't match")
+        XCTAssertEqual(expectedErrorMessage, topicsViewSpy.displayErrorMessage, "Error message doesn't match")
+    }
 }
