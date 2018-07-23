@@ -300,7 +300,7 @@ class DownloaderSpec: QuickSpec {
                     self.downloader = Downloader(session: .foreground)
                 }
 
-                it("finish all tasks correctly") {
+                it("finishes all tasks correctly") {
                     let group = DispatchGroup()
                     let queue = DispatchQueue.global(qos: .default)
 
