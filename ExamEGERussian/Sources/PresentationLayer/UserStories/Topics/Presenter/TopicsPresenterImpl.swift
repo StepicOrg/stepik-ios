@@ -67,15 +67,12 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     private func fetchGraphData() {
-        graphService.obtainGraph { [weak self] result in
-            switch result {
-            case .success(let responseModel):
-                let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
-                guard let graph = builder.build() as? KnowledgeGraph else { return }
-                self?.graph = graph
-            case .failure(let error):
-                self?.displayError(error)
-            }
+        graphService.obtainGraph().done { [weak self] responseModel in
+            let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
+            guard let graph = builder.build() as? KnowledgeGraph else { return }
+            self?.graph = graph
+        }.catch { [weak self] error in
+            self?.displayError(error)
         }
     }
 

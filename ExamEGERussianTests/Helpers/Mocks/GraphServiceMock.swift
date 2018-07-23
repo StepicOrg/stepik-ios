@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 @testable import ExamEGERussian
 
 final class GraphServiceMock: GraphService {
@@ -14,9 +15,9 @@ final class GraphServiceMock: GraphService {
         case mockError
     }
 
-    var resultToBeReturned: StepicResult<KnowledgeGraphPlainObject>! = .failure(Error.mockError)
+    var resultToBeReturned: Promise<KnowledgeGraphPlainObject> = Promise(error: Error.mockError)
 
-    func obtainGraph(_ completionHandler: @escaping GraphService.Handler) {
-        completionHandler(resultToBeReturned)
+    func obtainGraph() -> Promise<KnowledgeGraphPlainObject> {
+        return resultToBeReturned
     }
 }

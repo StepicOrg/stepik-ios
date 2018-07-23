@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol GraphService: class {
-    typealias Handler = (StepicResult<KnowledgeGraphPlainObject>) -> Void
-    func obtainGraph(_ completionHandler: @escaping Handler)
+    func obtainGraph() -> Promise<KnowledgeGraphPlainObject>
 }

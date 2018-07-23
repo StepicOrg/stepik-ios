@@ -1,5 +1,5 @@
 //
-//  Result.swift
+//  StepikResult.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 18/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum StepicResult<Value> {
+enum StepikResult<Value> {
     case success(Value)
     case failure(Error)
 
