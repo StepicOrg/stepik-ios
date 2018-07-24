@@ -1898,6 +1898,10 @@
 		2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
+		2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7782107359E00609621 /* LessonsTableViewController.swift */; };
+		2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD7792107359E00609621 /* LessonsTableViewController.xib */; };
+		2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD77D210735E000609621 /* LessonTableViewCell.swift */; };
+		2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD77E210735E000609621 /* LessonTableViewCell.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -5582,6 +5586,10 @@
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
+		2C2FD7782107359E00609621 /* LessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsTableViewController.swift; sourceTree = "<group>"; };
+		2C2FD7792107359E00609621 /* LessonsTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonsTableViewController.xib; sourceTree = "<group>"; };
+		2C2FD77D210735E000609621 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
+		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
 		2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceImplementation.swift; sourceTree = "<group>"; };
 		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
@@ -8388,6 +8396,41 @@
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
+		2C2FD7762107355D00609621 /* Lessons */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FD7772107357800609621 /* View */,
+			);
+			path = Lessons;
+			sourceTree = "<group>";
+		};
+		2C2FD7772107357800609621 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FD77C210735AE00609621 /* LessonsTableViewController */,
+				2C2FD781210735EB00609621 /* LessonTableViewCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C2FD77C210735AE00609621 /* LessonsTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
+				2C2FD7792107359E00609621 /* LessonsTableViewController.xib */,
+			);
+			path = LessonsTableViewController;
+			sourceTree = "<group>";
+		};
+		2C2FD781210735EB00609621 /* LessonTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FD77D210735E000609621 /* LessonTableViewCell.swift */,
+				2C2FD77E210735E000609621 /* LessonTableViewCell.xib */,
+			);
+			path = LessonTableViewCell;
+			sourceTree = "<group>";
+		};
 		2C32BAEC1F9636520003DD91 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -8475,14 +8518,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		2C59F05820EB8E3700666EE0 /* UserStories */ = {
-			isa = PBXGroup;
-			children = (
-				2C59F06420EBA1EB00666EE0 /* Topics */,
-			);
-			path = UserStories;
-			sourceTree = "<group>";
-		};
 		2C59F05A20EB8E5C00666EE0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -8496,7 +8531,8 @@
 		2C59F05C20EB8F0D00666EE0 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				2C59F05820EB8E3700666EE0 /* UserStories */,
+				2C59F06420EBA1EB00666EE0 /* Topics */,
+				2C2FD7762107355D00609621 /* Lessons */,
 				2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */,
 			);
 			path = PresentationLayer;
@@ -10854,9 +10890,11 @@
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2CE3C2BA21007D3D003AB54A /* TopicsTableViewController.xib in Resources */,
+				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 				2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */,
 				2C1BF0B02107328900EA83CA /* LaunchScreen.storyboard in Resources */,
+				2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14814,6 +14852,7 @@
 				2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */,
 				2C9499F220ECC0BA0049E9A8 /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C33CC0D20EC33FF009956B0 /* CreateRequestMaker.swift in Sources */,
+				2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */,
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,
 				2C9499E220ECBE650049E9A8 /* NSDateExtensions.swift in Sources */,
 				2C9499FA20ECC1690049E9A8 /* PersistentTaskRecoveryManager.swift in Sources */,
@@ -14881,6 +14920,7 @@
 				2C9499D320ECBCE10049E9A8 /* MatchingReply.swift in Sources */,
 				2C9499AE20ECBA670049E9A8 /* LastStep.swift in Sources */,
 				2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */,
+				2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */,
 				2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */,
 				2C949A3320ECC70D0049E9A8 /* AchievementProgressesAPI.swift in Sources */,
 				2C9499C520ECBC0F0049E9A8 /* PathManager.swift in Sources */,

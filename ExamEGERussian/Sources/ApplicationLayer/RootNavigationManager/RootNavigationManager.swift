@@ -8,13 +8,12 @@
 
 import UIKit
 
-// MARK: RootNavigationManager
-
 final class RootNavigationManager {
 
-    // MARK: - Instance Variables
+    // MARK: - Instance Properties
 
     private unowned let serviceComponents: ServiceComponents
+    private weak var navigationController: UINavigationController?
 
     // MARK: Init
 
@@ -29,13 +28,23 @@ final class RootNavigationManager {
         controller.presenter = TopicsPresenterImpl(
             view: controller,
             model: KnowledgeGraph(),
+            router: self,
             userRegistrationService: serviceComponents.userRegistrationService,
             graphService: serviceComponents.graphService
         )
-        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController = UINavigationController(rootViewController: controller)
 
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
 
+}
+
+// MARK: - RootNavigationManager: TopicsRouter -
+
+extension RootNavigationManager: TopicsRouter {
+    func showLessonsForTopicWithId(_ id: String) {
+        let controller = LessonsTableViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }

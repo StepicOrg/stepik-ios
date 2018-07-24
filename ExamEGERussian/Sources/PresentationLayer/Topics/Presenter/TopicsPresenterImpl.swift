@@ -8,17 +8,23 @@
 
 import Foundation
 
+protocol TopicsRouter: class {
+    func showLessonsForTopicWithId(_ id: String)
+}
+
 final class TopicsPresenterImpl: TopicsPresenter {
 
     private weak var view: TopicsView?
+    private weak var router: TopicsRouter?
     private var graph: KnowledgeGraph
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
-    init(view: TopicsView, model: KnowledgeGraph,
+    init(view: TopicsView, model: KnowledgeGraph, router: TopicsRouter,
          userRegistrationService: UserRegistrationService, graphService: GraphService) {
         self.view = view
         self.graph = model
+        self.router = router
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
     }
@@ -30,7 +36,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     func selectTopic(with viewData: TopicsViewData) {
         guard let topic = graph[viewData.id]?.key else { return }
-        showLessons(for: topic)
+        router?.showLessonsForTopicWithId(topic.id)
     }
 
     // MARK: - Private API
@@ -61,10 +67,6 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func displayError(_ error: Swift.Error) {
         view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
-    }
-
-    private func showLessons<T>(for vertex: KnowledgeGraphVertex<T>) {
-        print("\(#function) \(vertex.title)")
     }
 
     private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
