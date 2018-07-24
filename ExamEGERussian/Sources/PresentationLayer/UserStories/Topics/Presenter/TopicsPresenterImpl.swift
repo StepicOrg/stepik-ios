@@ -28,6 +28,11 @@ final class TopicsPresenterImpl: TopicsPresenter {
         fetchGraphData()
     }
 
+    func selectTopic(with viewData: TopicsViewData) {
+        guard let topic = graph[viewData.id]?.key else { return }
+        showLessons(for: topic)
+    }
+
     // MARK: - Private API
 
     private func checkAuthStatus() {
@@ -58,20 +63,15 @@ final class TopicsPresenterImpl: TopicsPresenter {
         view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
     }
 
-    private func showLessons<T>(_ vertex: KnowledgeGraphVertex<T>) {
-        print("\(#function) for: \(vertex.title)")
+    private func showLessons<T>(for vertex: KnowledgeGraphVertex<T>) {
+        print("\(#function) \(vertex.title)")
     }
 
-    private func viewTopicsFrom<T>(_ vertices: [KnowledgeGraphVertex<T>]) -> [TopicsViewData] {
+    private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
         return vertices.map { viewTopicFromVertex($0) }
     }
 
-    private func viewTopicFromVertex<T>(_ vertex: KnowledgeGraphVertex<T>) -> TopicsViewData {
-        return TopicsViewData(
-            title: vertex.title,
-            onTap: { [weak self] in
-                self?.showLessons(vertex)
-            }
-        )
+    private func viewTopicFromVertex(_ vertex: KnowledgeGraphVertex<String>) -> TopicsViewData {
+        return TopicsViewData(id: vertex.id, title: vertex.title)
     }
 }

@@ -9,8 +9,8 @@
 import Foundation
 
 struct TopicsViewData {
+    let id: String
     let title: String
-    let onTap: () -> Void
 }
 
 protocol TopicsView: class {

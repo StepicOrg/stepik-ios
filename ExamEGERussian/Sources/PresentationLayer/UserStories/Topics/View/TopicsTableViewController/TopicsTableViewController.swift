@@ -62,7 +62,7 @@ final class TopicsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        topics[indexPath.row].onTap()
+        presenter.selectTopic(with: topics[indexPath.row])
     }
 
     // MARK: - Private API

@@ -10,4 +10,5 @@ import Foundation
 
 protocol TopicsPresenter: class {
     func refresh()
+    func selectTopic(with viewData: TopicsViewData)
 }
