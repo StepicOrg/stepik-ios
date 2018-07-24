@@ -143,9 +143,13 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+        
+        static var downloadsScreenOpened = AnalyticsEvent(name: "Downloads screen opened")
     }
 
     struct Search {
+        static var started = AnalyticsEvent(name: "Course search started")
+        
         static func searched(query: String, position: Int, suggestion: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course searched",
@@ -156,5 +160,105 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+    }
+    
+    struct Home {
+        static var opened = AnalyticsEvent(name: "Home screen opened")
+    }
+    
+    struct Catalog {
+        static var opened = AnalyticsEvent(name: "Catalog screen opened")
+        struct Category {
+            static func opened(categoryID: Int, categoryNameEn: String) -> AnalyticsEvent {
+                return AnalyticsEvent(
+                    name: "Category opened ",
+                    parameters: [
+                        "category_id": categoryID,
+                        "category_name_en": categoryNameEn
+                    ]
+                )
+            }
+        }
+    }
+    
+    struct CourseList {
+        static func opened(ID: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course list opened",
+                parameters: [
+                    "list_id": ID
+                ]
+            )
+        }
+    }
+    
+    struct Profile {
+        static func opened(stepikID: Int, isPersonal: Bool) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Profile screen opened",
+                parameters: [
+                    "stepik_id": stepikID,
+                    "is_personal": isPersonal
+                ]
+            )
+        }
+    }
+    
+    struct Certificates {
+        static var opened = AnalyticsEvent(name: "Certificates screen opened")
+    }
+    
+    struct Achievements {
+        static func opened(isPersonal: Bool) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Achievements screen opened",
+                parameters: [
+                    "is_personal": isPersonal
+                ]
+            )
+        }
+    }
+
+    struct Settings {
+        static var opened = AnalyticsEvent(name: "Settings screen opened")
+    }
+    
+    struct CoursePreview {
+        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course preview screen opened",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+    }
+    
+    struct Sections {
+        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Sections screen opened",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+    }
+    
+    struct Lessons {
+        static func opened(sectionID: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Lessons screen opened",
+                parameters: [
+                    "section": sectionID
+                ]
+            )
+        }
+    }
+    
+    struct Discussions {
+        static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }
 }
