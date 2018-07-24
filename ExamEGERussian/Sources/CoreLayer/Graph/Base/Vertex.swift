@@ -8,24 +8,26 @@
 
 import Foundation
 
-public struct Vertex<T: Hashable> {
-    var data: T
+public class Vertex<T: Hashable> {
+    public let id: T
+
+    public init(id: T) {
+        self.id = id
+    }
 }
 
 extension Vertex: Hashable {
-
     public var hashValue: Int {
-        return "\(data)".hashValue
+        return "\(id)".hashValue
     }
 
     static public func == (lhs: Vertex, rhs: Vertex) -> Bool {
-        return lhs.data == rhs.data
+        return lhs.id == rhs.id
     }
-
 }
 
 extension Vertex: CustomStringConvertible {
     public var description: String {
-        return "\(data)"
+        return "\(id)"
     }
 }

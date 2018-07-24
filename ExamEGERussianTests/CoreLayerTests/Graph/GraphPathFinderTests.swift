@@ -31,12 +31,12 @@ class GraphPathFinderTests: XCTestCase {
         // E: []
         // F: []
 
-        let a = graph.createVertex(data: "A")
-        let b = graph.createVertex(data: "B")
-        let c = graph.createVertex(data: "C")
-        let d = graph.createVertex(data: "D")
-        let e = graph.createVertex(data: "E")
-        let f = graph.createVertex(data: "F")
+        let a = graph.createVertex(id: "A")
+        let b = graph.createVertex(id: "B")
+        let c = graph.createVertex(id: "C")
+        let d = graph.createVertex(id: "D")
+        let e = graph.createVertex(id: "E")
+        let f = graph.createVertex(id: "F")
 
         graph.add(from: a, to: b)
         graph.add(from: a, to: d)

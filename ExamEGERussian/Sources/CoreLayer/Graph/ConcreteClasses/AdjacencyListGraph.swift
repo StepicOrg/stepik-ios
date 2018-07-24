@@ -17,7 +17,7 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
     }
 
     public override var vertices: [Vertex<T>] {
-        return adjacencies.keys.sorted { $0.data < $1.data }
+        return sortedVertices()
     }
 
     public override var edges: [Edge<T>] {
@@ -34,20 +34,26 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
         return buildDescription(from: vertices)
     }
 
-    @discardableResult
-    public override func createVertex(data: T) -> Vertex<T> {
-        let vertex = Vertex(data: data)
+    public override func addVertex(_ vertex: Vertex<T>) {
+        guard adjacencies[vertex] == nil else { return }
+        adjacencies[vertex] = []
+    }
 
-        if adjacencies[vertex] == nil {
-            adjacencies[vertex] = []
-        }
+    public func instantiateVertex(id: T) -> Vertex<T> {
+        return Vertex(id: id)
+    }
+
+    @discardableResult
+    public override func createVertex(id: T) -> Vertex<T> {
+        let vertex = instantiateVertex(id: id)
+        addVertex(vertex)
 
         return vertex
     }
 
     public override func add(from source: Vertex<T>, to destination: Vertex<T>) {
         if adjacencies[source] == nil {
-            createVertex(data: source.data)
+            createVertex(id: source.id)
         }
 
         guard let adjacentVertices = adjacencies[source],
@@ -60,12 +66,16 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
         return adjacencies[source]?.map { Edge(source: source, destination: $0) } ?? []
     }
 
+    func sortedVertices(_ by: ((Vertex<T>, Vertex<T>) -> Bool) = { $0.id < $1.id }) -> [Vertex<T>] {
+        return adjacencies.keys.sorted(by: by)
+    }
+
     // MARK: Private Helpers
 
     private func buildDescription(from vertices: [Vertex<T>]) -> String {
         var result = ""
 
-        for vertex in vertices {
+        for vertex in sortedVertices() {
             var adjacentString = ""
 
             guard let adjacentVertices = adjacencies[vertex] else {

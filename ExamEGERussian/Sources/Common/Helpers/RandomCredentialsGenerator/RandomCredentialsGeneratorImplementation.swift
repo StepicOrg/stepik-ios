@@ -12,7 +12,6 @@ struct RandomCredentialsGeneratorImplementation {
 }
 
 extension RandomCredentialsGeneratorImplementation: RandomCredentialsGenerator {
-
     var firstname: String {
         return StringHelper.generateRandomString(of: 6)
     }
@@ -28,5 +27,4 @@ extension RandomCredentialsGeneratorImplementation: RandomCredentialsGenerator {
     var password: String {
         return StringHelper.generateRandomString(of: 16)
     }
-
 }
