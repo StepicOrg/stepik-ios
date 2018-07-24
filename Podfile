@@ -35,6 +35,8 @@ def all_pods
     
     pod 'Amplitude-iOS', '~> 4.0.4'
     
+    pod 'AppsFlyerFramework'
+    
     pod 'BEMCheckBox'
 
     # actual version - 6.x, we should test it before update
