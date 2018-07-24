@@ -193,12 +193,11 @@ struct AmplitudeAnalyticsEvents {
     }
     
     struct Profile {
-        static func opened(stepikID: Int, isPersonal: Bool) -> AnalyticsEvent {
+        static func opened(state: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Profile screen opened",
                 parameters: [
-                    "stepik_id": stepikID,
-                    "is_personal": isPersonal
+                    "state": state
                 ]
             )
         }
@@ -248,7 +247,7 @@ struct AmplitudeAnalyticsEvents {
     }
     
     struct Lessons {
-        static func opened(sectionID: Int) -> AnalyticsEvent {
+        static func opened(sectionID: Int?) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Lessons screen opened",
                 parameters: [

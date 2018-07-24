@@ -76,6 +76,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         initPresenter()
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         onAppear()
@@ -99,6 +100,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter?.sendAppearanceEvent()
         (self.navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
     }
 

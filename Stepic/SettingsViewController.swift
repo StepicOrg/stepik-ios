@@ -21,6 +21,11 @@ class SettingsViewController: MenuViewController, SettingsView {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Settings.opened.send()
+    }
 
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)

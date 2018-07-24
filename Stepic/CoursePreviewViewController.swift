@@ -116,6 +116,13 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         didLoad = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let course = course {
+            AmplitudeAnalyticsEvents.CoursePreview.opened(courseID: course.id, courseTitle: course.title).send()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()

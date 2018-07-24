@@ -223,6 +223,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
+        
         if isFirstLoad {
             isFirstLoad = false
             refreshSections()

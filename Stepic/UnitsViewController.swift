@@ -73,7 +73,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        AmplitudeAnalyticsEvents.Lessons.opened(sectionID: section?.id).send()
+        
         if isFirstLoad {
             isFirstLoad = false
             refreshUnits()

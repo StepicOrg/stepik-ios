@@ -38,6 +38,17 @@ class ProfilePresenter {
             if case let UserSeed.other(id) = self { return id }
             return nil
         }
+        
+        var analyticsString: String {
+            switch self {
+            case .anonymous:
+                return "anonymous"
+            case .self(id: _):
+                return "self"
+            case .other(id: _):
+                return "other"
+            }
+        }
     }
 
     weak var view: ProfileView?
@@ -145,7 +156,7 @@ class ProfilePresenter {
 
         return blocks
     }
-
+    
     func refresh(shouldReload: Bool = false) {
         if case UserSeed.anonymous = userSeed {
             // Check case when we've init Profile for anonymous but now have logged user
@@ -222,6 +233,10 @@ class ProfilePresenter {
 
     enum ProfileError: Error {
         case noProfile
+    }
+    
+    func sendAppearanceEvent() {
+        AmplitudeAnalyticsEvents.Profile.opened(state: userSeed.analyticsString).send()
     }
 }
 

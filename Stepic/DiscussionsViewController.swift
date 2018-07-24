@@ -106,6 +106,11 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Discussions.opened.send()
+    }
 
     struct DiscussionIds {
         var all = [Int]()
