@@ -16,14 +16,14 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private weak var view: TopicsView?
     private weak var router: TopicsRouter?
-    private var graph: KnowledgeGraph
+    private let knowledgeGraph: KnowledgeGraph
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
-    init(view: TopicsView, model: KnowledgeGraph, router: TopicsRouter,
+    init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
          userRegistrationService: UserRegistrationService, graphService: GraphService) {
         self.view = view
-        self.graph = model
+        self.knowledgeGraph = knowledgeGraph
         self.router = router
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
@@ -35,7 +35,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = graph[viewData.id]?.key else { return }
+        guard let topic = knowledgeGraph[viewData.id]?.key else { return }
         router?.showLessonsForTopicWithId(topic.id)
     }
 
@@ -56,9 +56,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
             guard let `self` = self else { return }
             let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
             guard let graph = builder.build() as? KnowledgeGraph else { return }
-            self.graph = graph
+            self.knowledgeGraph.adjacencies = graph.adjacencies
 
-            let vertices = graph.vertices as! [KnowledgeGraphVertex<String>]
+            let vertices = self.knowledgeGraph.vertices as! [KnowledgeGraphVertex<String>]
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)

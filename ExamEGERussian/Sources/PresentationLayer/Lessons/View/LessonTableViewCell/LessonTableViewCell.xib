@@ -20,13 +20,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXd-Fv-7te">
-                        <rect key="frame" x="20" y="12" width="33.5" height="21"/>
+                        <rect key="frame" x="20" y="12" width="280" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="JXd-Fv-7te" secondAttribute="trailing" constant="20" symbolic="YES" id="O39-g0-mHv"/>
                     <constraint firstItem="JXd-Fv-7te" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ows-r2-NpN"/>
                     <constraint firstItem="JXd-Fv-7te" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="yD4-mM-C7T"/>
                 </constraints>

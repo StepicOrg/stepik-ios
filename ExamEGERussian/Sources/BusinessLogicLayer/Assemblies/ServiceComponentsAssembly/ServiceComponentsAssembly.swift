@@ -41,4 +41,8 @@ final class ServiceComponentsAssembly: ServiceComponents {
     var graphService: GraphService {
         return GraphServiceImpl()
     }
+
+    var lessonsService: LessonsService {
+        return LessonsServiceImpl()
+    }
 }

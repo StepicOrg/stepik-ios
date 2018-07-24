@@ -1906,6 +1906,9 @@
 		2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7852107453800609621 /* LessonsServiceImpl.swift */; };
 		2C2FD78821074FFD00609621 /* TopicsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78721074FFD00609621 /* TopicsRouterMock.swift */; };
 		2C2FD78A2107507200609621 /* LessonPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7892107507200609621 /* LessonPlainObject.swift */; };
+		2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenter.swift */; };
+		2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */; };
+		2C2FD7912107540500609621 /* LessonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7902107540500609621 /* LessonsView.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -5598,6 +5601,9 @@
 		2C2FD7852107453800609621 /* LessonsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceImpl.swift; sourceTree = "<group>"; };
 		2C2FD78721074FFD00609621 /* TopicsRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterMock.swift; sourceTree = "<group>"; };
 		2C2FD7892107507200609621 /* LessonPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
+		2C2FD78C210753AD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
+		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
+		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C33CBDA20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceImplementation.swift; sourceTree = "<group>"; };
 		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
@@ -8408,6 +8414,7 @@
 		2C2FD7762107355D00609621 /* Lessons */ = {
 			isa = PBXGroup;
 			children = (
+				2C2FD78B2107539700609621 /* Presenter */,
 				2C2FD7772107357800609621 /* View */,
 			);
 			path = Lessons;
@@ -8418,6 +8425,7 @@
 			children = (
 				2C2FD77C210735AE00609621 /* LessonsTableViewController */,
 				2C2FD781210735EB00609621 /* LessonTableViewCell */,
+				2C2FD7902107540500609621 /* LessonsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8447,6 +8455,15 @@
 				2C2FD7852107453800609621 /* LessonsServiceImpl.swift */,
 			);
 			path = LessonsService;
+			sourceTree = "<group>";
+		};
+		2C2FD78B2107539700609621 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FD78C210753AD00609621 /* LessonsPresenter.swift */,
+				2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2C32BAEC1F9636520003DD91 /* Utils */ = {
@@ -14815,6 +14832,7 @@
 				2C949A5520ECCE270049E9A8 /* UITableView+TableHeaderLayout.swift in Sources */,
 				2C9499D220ECBCDB0049E9A8 /* SortingReply.swift in Sources */,
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
+				2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */,
 				2C94999620ECB86B0049E9A8 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C949A2620ECC60F0049E9A8 /* ProfileHeaderInfoView.swift in Sources */,
 				2CCB5A6021009DB70091A605 /* AbstractGraphBuilder.swift in Sources */,
@@ -14856,6 +14874,7 @@
 				2C9499E720ECBF880049E9A8 /* CodeTemplate.swift in Sources */,
 				2C949A3C20ECC87A0049E9A8 /* Reachability.m in Sources */,
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
+				2C2FD7912107540500609621 /* LessonsView.swift in Sources */,
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C33CC1120EC3420009956B0 /* ContentLanguage.swift in Sources */,
@@ -14883,6 +14902,7 @@
 				2C949A0420ECC3000049E9A8 /* NotificationsMarkAsReadButton.swift in Sources */,
 				2C949A6120ECCF1A0049E9A8 /* ContentLanguagePreferenceTableViewCell.swift in Sources */,
 				2CCB5A55210089180091A605 /* UITableView+Registration.swift in Sources */,
+				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
 				2C949A4A20ECCCAC0049E9A8 /* AuthRoutingManager.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,

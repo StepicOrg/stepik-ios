@@ -14,6 +14,7 @@ final class RootNavigationManager {
 
     private unowned let serviceComponents: ServiceComponents
     private weak var navigationController: UINavigationController?
+    private let knowledgeGraph = KnowledgeGraph()
 
     // MARK: Init
 
@@ -27,7 +28,7 @@ final class RootNavigationManager {
         let controller = TopicsTableViewController()
         controller.presenter = TopicsPresenterImpl(
             view: controller,
-            model: KnowledgeGraph(),
+            knowledgeGraph: knowledgeGraph,
             router: self,
             userRegistrationService: serviceComponents.userRegistrationService,
             graphService: serviceComponents.graphService
@@ -45,6 +46,15 @@ final class RootNavigationManager {
 extension RootNavigationManager: TopicsRouter {
     func showLessonsForTopicWithId(_ id: String) {
         let controller = LessonsTableViewController()
+        let presenter = LessonsPresenterImpl(
+            view: controller,
+            topicId: id,
+            knowledgeGraph: knowledgeGraph,
+            lessonsService: serviceComponents.lessonsService
+        )
+        controller.presenter = presenter
+        controller.title = knowledgeGraph[id]?.key.title
+
         navigationController?.pushViewController(controller, animated: true)
     }
 }
