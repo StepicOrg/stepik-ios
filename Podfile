@@ -23,7 +23,7 @@ def all_pods
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic', '~> 3.0.0'
+    pod 'YandexMobileMetrica/Dynamic', '~> 3.1.2'
 
     pod 'SnapKit', '~> 4.0.0'
     
@@ -34,6 +34,8 @@ def all_pods
     pod 'FirebaseRemoteConfig', '3.0.0'
     
     pod 'Amplitude-iOS', '~> 4.0.4'
+    
+    pod 'AppsFlyerFramework'
     
     pod 'BEMCheckBox'
 
@@ -80,6 +82,7 @@ target 'Stepic' do
         inherit! :search_paths
         all_pods
         testing_pods
+	pod 'Mockingjay'
     end
 end
 
@@ -149,6 +152,8 @@ target 'ExamEGERussian' do
     platform :ios, '9.0'
     
     all_pods
+    pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
+    pod 'PromiseKit/Alamofire', '~> 6.0'
 
     target 'ExamEGERussianTests' do
         inherit! :search_paths

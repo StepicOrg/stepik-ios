@@ -24,8 +24,8 @@ class GraphTests: XCTestCase {
     }
 
     func testSortedGraphKeysCustomStringConvertible() {
-        let a = graph.createVertex(data: 1)
-        let b = graph.createVertex(data: 2)
+        let a = graph.createVertex(id: 1)
+        let b = graph.createVertex(id: 2)
 
         graph.add(from: a, to: b)
 
@@ -33,8 +33,8 @@ class GraphTests: XCTestCase {
     }
 
     func testEdgesFromReturnsCorrectEdgeInSingleEdgeDirected() {
-        let a = graph.createVertex(data: 1)
-        let b = graph.createVertex(data: 2)
+        let a = graph.createVertex(id: 1)
+        let b = graph.createVertex(id: 2)
 
         graph.add(from: a, to: b)
 
@@ -48,8 +48,8 @@ class GraphTests: XCTestCase {
     }
 
     func testEdgesFromReturnsCorrectEdgeInSingleEdgeUndirected() {
-        let a = graph.createVertex(data: 1)
-        let b = graph.createVertex(data: 2)
+        let a = graph.createVertex(id: 1)
+        let b = graph.createVertex(id: 2)
 
         graph.add(from: a, to: b)
         graph.add(from: b, to: a)
@@ -65,8 +65,8 @@ class GraphTests: XCTestCase {
     }
 
     func testEdgesFromReturnsNoEdgesInNoEdgeGraph() {
-        let a = graph.createVertex(data: 1)
-        let b = graph.createVertex(data: 2)
+        let a = graph.createVertex(id: 1)
+        let b = graph.createVertex(id: 2)
 
         XCTAssertEqual(graph.edges(from: a).count, 0)
         XCTAssertEqual(graph.edges(from: b).count, 0)
@@ -77,7 +77,7 @@ class GraphTests: XCTestCase {
         var vertices: [Vertex<Int>] = []
 
         for i in 0..<verticesCount {
-            vertices.append(graph.createVertex(data: i))
+            vertices.append(graph.createVertex(id: i))
         }
 
         /*
@@ -112,9 +112,9 @@ class GraphTests: XCTestCase {
     }
 
     func testSumOfAdjacencyListsIfEqualToEdges() {
-        let a = graph.createVertex(data: 1)
-        let b = graph.createVertex(data: 2)
-        let c = graph.createVertex(data: 3)
+        let a = graph.createVertex(id: 1)
+        let b = graph.createVertex(id: 2)
+        let c = graph.createVertex(id: 3)
 
         graph.add(from: a, to: b)
         graph.add(from: a, to: c)

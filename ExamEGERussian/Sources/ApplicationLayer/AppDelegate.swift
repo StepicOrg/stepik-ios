@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireNetworkActivityIndicator
 
 // MARK: AppDelegate: UIResponder, UIApplicationDelegate
 
@@ -37,9 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could not instantiate router")
         }
 
-        window.rootViewController = router.rootViewController
-        window.makeKeyAndVisible()
-        router.window = window
+        rootNavigationManager.setup(with: window)
+        NetworkActivityIndicatorManager.shared.isEnabled = true
 
         return true
     }
