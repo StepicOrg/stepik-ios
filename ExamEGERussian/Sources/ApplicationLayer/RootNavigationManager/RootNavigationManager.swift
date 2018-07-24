@@ -48,6 +48,7 @@ extension RootNavigationManager: TopicsRouter {
         let controller = LessonsTableViewController()
         let presenter = LessonsPresenterImpl(
             view: controller,
+            router: self,
             topicId: id,
             knowledgeGraph: knowledgeGraph,
             lessonsService: serviceComponents.lessonsService
@@ -56,5 +57,13 @@ extension RootNavigationManager: TopicsRouter {
         controller.title = knowledgeGraph[id]?.key.title
 
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - RootNavigationManager: LessonsRouter -
+
+extension RootNavigationManager: LessonsRouter {
+    func showStepsForLessonWith(_ id: Int) {
+        print("\(#function) \(id)")
     }
 }

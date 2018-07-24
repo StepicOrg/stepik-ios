@@ -17,8 +17,16 @@ final class LessonsTableViewController: UITableViewController {
     private var lessons = [LessonsViewData]() {
         didSet {
             tableView.reloadData()
+            topicsRefreshControl.endRefreshing()
         }
     }
+
+    private lazy var topicsRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+
+        return refreshControl
+    }()
 
     // MARK: - UIViewController Lifecycle
 
@@ -26,6 +34,13 @@ final class LessonsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.registerNib(for: LessonTableViewCell.self)
+
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = topicsRefreshControl
+        } else {
+            tableView.addSubview(topicsRefreshControl)
+        }
+
         presenter.refresh()
     }
 
@@ -46,6 +61,13 @@ final class LessonsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectLesson(with: lessons[indexPath.row])
+    }
+
+    // MARK: - Private API
+
+    @objc private func refreshData(_ sender: Any) {
+        presenter.refresh()
     }
 }
 

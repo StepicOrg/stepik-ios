@@ -9,9 +9,14 @@
 import Foundation
 import PromiseKit
 
+protocol LessonsRouter: class {
+    func showStepsForLessonWith(_ id: Int)
+}
+
 final class LessonsPresenterImpl: LessonsPresenter {
 
     private weak var view: LessonsView?
+    private weak var router: LessonsRouter?
     private let topicId: String
     private let knowledgeGraph: KnowledgeGraph
     private var lessons = [LessonPlainObject]()
@@ -22,9 +27,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return topic.lessons.filter { $0.type == .theory }.map { $0.id }
     }
 
-    init(view: LessonsView, topicId: String, knowledgeGraph: KnowledgeGraph,
+    init(view: LessonsView, router: LessonsRouter, topicId: String, knowledgeGraph: KnowledgeGraph,
          lessonsService: LessonsService) {
         self.view = view
+        self.router = router
         self.topicId = topicId
         self.knowledgeGraph = knowledgeGraph
         self.lessonsService = lessonsService
@@ -32,6 +38,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     func refresh() {
         fetchLessons()
+    }
+
+    func selectLesson(with viewData: LessonsViewData) {
+        router?.showStepsForLessonWith(viewData.id)
     }
 
     // MARK: - Private API

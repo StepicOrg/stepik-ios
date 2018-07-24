@@ -10,4 +10,5 @@ import Foundation
 
 protocol LessonsPresenter: class {
     func refresh()
+    func selectLesson(with viewData: LessonsViewData)
 }
