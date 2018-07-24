@@ -9,8 +9,11 @@
 import Foundation
 
 final class ServiceComponentsAssembly: ServiceComponents {
-
-    let userRegistrationService: UserRegistrationService
+    private let authAPI: AuthAPI
+    private let stepicsAPI: StepicsAPI
+    private let profilesAPI: ProfilesAPI
+    private let defaultsStorageManager: DefaultsStorageManager
+    private let randomCredentialsGenerator: RandomCredentialsGenerator
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
@@ -18,7 +21,15 @@ final class ServiceComponentsAssembly: ServiceComponents {
          defaultsStorageManager: DefaultsStorageManager,
          randomCredentialsGenerator: RandomCredentialsGenerator
         ) {
-        self.userRegistrationService = UserRegistrationServiceImplementation(
+        self.authAPI = authAPI
+        self.stepicsAPI = stepicsAPI
+        self.profilesAPI = profilesAPI
+        self.defaultsStorageManager = defaultsStorageManager
+        self.randomCredentialsGenerator = randomCredentialsGenerator
+    }
+
+    var userRegistrationService: UserRegistrationService {
+        return UserRegistrationServiceImplementation(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
             profilesAPI: profilesAPI,
@@ -27,4 +38,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
         )
     }
 
+    var graphService: GraphService {
+        return GraphServiceImpl()
+    }
 }
