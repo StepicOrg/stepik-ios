@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct TopicsMapPlainObject: Codable {
+struct KnowledgeGraphTopicsMapPlainObject: Codable {
     let id: String
-    let lessons: [LessonPlainObject]
+    let lessons: [KnowledgeGraphLessonPlainObject]
 
-    init(id: String, lessons: [LessonPlainObject]) {
+    init(id: String, lessons: [KnowledgeGraphLessonPlainObject]) {
         self.id = id
         self.lessons = lessons
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LessonPlainObject: Codable {
+struct KnowledgeGraphLessonPlainObject: Codable {
     let id: Int
     let type: String
     let course: String

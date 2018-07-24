@@ -9,9 +9,9 @@
 import Foundation
 
 struct KnowledgeGraphPlainObject: Codable {
-    let goals: [GoalPlainObject]
-    let topics: [TopicPlainObject]
-    let topicsMap: [TopicsMapPlainObject]
+    let goals: [KnowledgeGraphGoalPlainObject]
+    let topics: [KnowledgeGraphTopicPlainObject]
+    let topicsMap: [KnowledgeGraphTopicsMapPlainObject]
 
     enum CodingKeys: String, CodingKey {
         case goals
@@ -19,7 +19,7 @@ struct KnowledgeGraphPlainObject: Codable {
         case topicsMap = "topics-map"
     }
 
-    init(goals: [GoalPlainObject], topics: [TopicPlainObject], topicsMap: [TopicsMapPlainObject]) {
+    init(goals: [KnowledgeGraphGoalPlainObject], topics: [KnowledgeGraphTopicPlainObject], topicsMap: [KnowledgeGraphTopicsMapPlainObject]) {
         self.goals = goals
         self.topics = topics
         self.topicsMap = topicsMap
@@ -27,8 +27,8 @@ struct KnowledgeGraphPlainObject: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        goals = try container.decode([GoalPlainObject].self, forKey: .goals)
-        topics = try container.decode([TopicPlainObject].self, forKey: .topics)
-        topicsMap = try container.decode([TopicsMapPlainObject].self, forKey: .topicsMap)
+        goals = try container.decode([KnowledgeGraphGoalPlainObject].self, forKey: .goals)
+        topics = try container.decode([KnowledgeGraphTopicPlainObject].self, forKey: .topics)
+        topicsMap = try container.decode([KnowledgeGraphTopicsMapPlainObject].self, forKey: .topicsMap)
     }
 }

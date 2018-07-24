@@ -23,6 +23,7 @@ class TopicsPresenterTests: XCTestCase {
         topicsPresenter = TopicsPresenterImpl(
             view: topicsViewSpy,
             model: KnowledgeGraph(),
+            router: TopicsRouterMock(),
             userRegistrationService: userRegistrationService,
             graphService: graphService
         )
