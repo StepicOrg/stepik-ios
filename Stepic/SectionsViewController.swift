@@ -520,12 +520,20 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         completedDownloads = 0
 
         let section = course.sections[downloadButton.tag]
-        var videos = [Video]()
-        for lesson in section.units.compactMap({ $0.lesson }) {
-            videos.append(contentsOf: lesson.stepVideos)
+        for unit in section.units {
+            if unit.lesson?.steps.count != 0 {
+                let videos = (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
+                storeVideos(videos, downloadButton: downloadButton)
+            } else {
+                unit.lesson?.loadSteps(completion: {
+                    let videos = (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
+                    self.storeVideos(videos, downloadButton: downloadButton)
+                })
+            }
         }
-        videos = videos.filter { $0.state == .online }
+    }
 
+    fileprivate func storeVideos(_ videos: [Video], downloadButton: PKDownloadButton) {
         let quality = VideosInfo.downloadingVideoQuality
         var tasks = [VideoDownloaderTask]()
         for video in videos {
