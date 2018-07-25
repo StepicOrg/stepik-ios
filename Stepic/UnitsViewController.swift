@@ -73,6 +73,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Lessons.opened(sectionID: section?.id).send()
 
         if isFirstLoad {
             isFirstLoad = false
@@ -622,7 +623,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.startDownload :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.started, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.started(content: "lesson").send()
 
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -643,7 +644,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 
         case PKDownloadButtonState.downloading :
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson").send()
 
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
@@ -659,7 +660,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.downloaded :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "lesson"])
+            AmplitudeAnalyticsEvents.Downloads.deleted(content: "lesson").send()
 
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()

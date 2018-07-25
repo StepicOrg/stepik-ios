@@ -56,7 +56,7 @@ class RegistrationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.SignUp.registered, parameters: ["source": "email"])
+            AmplitudeAnalyticsEvents.SignUp.registered(source: "email").send()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
             self.view?.update(with: .success)
 

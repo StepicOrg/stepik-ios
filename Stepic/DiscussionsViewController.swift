@@ -107,6 +107,11 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Discussions.opened.send()
+    }
+
     struct DiscussionIds {
         var all = [Int]()
         var loaded = [Int]()

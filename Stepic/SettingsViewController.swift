@@ -22,6 +22,11 @@ class SettingsViewController: MenuViewController, SettingsView {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Settings.opened.send()
+    }
+
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
         artView.art = Images.arts.customizeLearningProcess
