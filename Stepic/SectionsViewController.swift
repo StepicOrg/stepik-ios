@@ -524,6 +524,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         for lesson in section.units.compactMap({ $0.lesson }) {
             videos.append(contentsOf: lesson.stepVideos)
         }
+        videos = videos.filter { $0.state == .online }
 
         let quality = VideosInfo.downloadingVideoQuality
         var tasks = [VideoDownloaderTask]()
@@ -550,7 +551,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
                 let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
 
                 UIThread.performUI {
-                    downloadButton.stopDownloadButton.progress = CGFloat(newProgress)
+                    downloadButton.stopDownloadButton.progress = max(CGFloat(newProgress),
+                                                                     downloadButton.stopDownloadButton.progress)
                 }
             }
 

@@ -81,7 +81,8 @@ class SectionTableViewCell: UITableViewCell {
                         let newProgress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
 
                         DispatchQueue.main.async {
-                            self?.downloadButton.stopDownloadButton?.progress = CGFloat(newProgress)
+                            self?.downloadButton.stopDownloadButton?.progress = max(CGFloat(newProgress),
+                                                                                self?.downloadButton.stopDownloadButton?.progress ?? 0)
                         }
                     }
 

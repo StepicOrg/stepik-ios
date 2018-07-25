@@ -593,10 +593,11 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     fileprivate func storeLesson(_ lesson: Lesson?, downloadButton: PKDownloadButton!) {
         completedDownloads = 0
 
-        let videos = lesson?.stepVideos ?? []
+        let videos = (lesson?.stepVideos ?? []).filter { $0.state == .online }
         let quality = VideosInfo.downloadingVideoQuality
         var tasks = [VideoDownloaderTask]()
         for video in videos {
+
             let nearestQuality = video.getNearestQualityToDefault(quality)
             let url = video.getUrlForQuality(nearestQuality)
 
@@ -622,7 +623,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                 let activeTasks = tasks.filter({ $0.state == .active })
                 let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
                 UIThread.performUI {
-                    downloadButton.stopDownloadButton.progress = CGFloat(newProgress)
+                    downloadButton.stopDownloadButton.progress = max(CGFloat(newProgress),
+                                                                     downloadButton.stopDownloadButton.progress)
                 }
             }
 
