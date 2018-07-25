@@ -102,6 +102,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        AmplitudeAnalyticsEvents.Notifications.screenOpened.send()
         presenter?.didAppear()
 
         if data.isEmpty {
