@@ -539,9 +539,13 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
                 self?.completedDownloads += 1
 
+                VideoDownloaderManager.shared.remove(by: task.videoId)
                 if self?.completedDownloads == videos.count {
                     UIThread.performUI({downloadButton.state = .downloaded})
                 }
+            }
+            task.failureReporter = { _ in
+                VideoDownloaderManager.shared.remove(by: task.videoId)
             }
             tasks.append(task)
         }
