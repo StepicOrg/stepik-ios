@@ -15,7 +15,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         }
 
         let navigationController = UINavigationController()
-        let controller = assemblyFactory.mainAssembly.module(navigationController: navigationController)
+        let controller = assemblyFactory.topicsAssembly.module(navigationController: navigationController)
         navigationController.setViewControllers([controller], animated: false)
         let router = AppRouter(assemblyFactory: assemblyFactory, navigationController: navigationController)
 

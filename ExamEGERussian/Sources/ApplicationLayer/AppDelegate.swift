@@ -38,8 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could not instantiate router")
         }
 
-        // FIXME:
-        //rootNavigationManager.setup(with: window)
+        window.rootViewController = router.rootViewController
+        window.makeKeyAndVisible()
+        router.window = window
+
         NetworkActivityIndicatorManager.shared.isEnabled = true
 
         return true
