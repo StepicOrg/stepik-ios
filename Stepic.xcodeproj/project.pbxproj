@@ -1872,8 +1872,6 @@
 		2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */; };
 		2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */; };
 		2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */; };
-		2C2365D52106366C00C99742 /* ModelCachedVideoMapping.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365D42106366C00C99742 /* ModelCachedVideoMapping.xcmappingmodel */; };
-		2C2365D821063A6A00C99742 /* VideoTransformationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365D721063A6A00C99742 /* VideoTransformationPolicy.swift */; };
 		2C2365E02107806800C99742 /* VideoDownloaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365DF2107806800C99742 /* VideoDownloaderManager.swift */; };
 		2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2365E621086F6600C99742 /* VideoDownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */; };
@@ -5496,9 +5494,6 @@
 		2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementListSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAchievementsContentView.xib; sourceTree = "<group>"; };
-		2C2365D321062E4E00C99742 /* Model_video_download_v24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_video_download_v24.xcdatamodel; sourceTree = "<group>"; };
-		2C2365D42106366C00C99742 /* ModelCachedVideoMapping.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ModelCachedVideoMapping.xcmappingmodel; sourceTree = "<group>"; };
-		2C2365D721063A6A00C99742 /* VideoTransformationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationPolicy.swift; sourceTree = "<group>"; };
 		2C2365DF2107806800C99742 /* VideoDownloaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloaderManager.swift; sourceTree = "<group>"; };
 		2C2365E321078CEF00C99742 /* VideoFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFileManager.swift; sourceTree = "<group>"; };
 		2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloaderTask.swift; sourceTree = "<group>"; };
@@ -6990,7 +6985,6 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2C2365D621063A4B00C99742 /* MappingPolicies */,
 				082E35AC20B5567A006E28F9 /* Storage Records */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08E542071C6CD59A00DEC38E /* Managers */,
@@ -6999,7 +6993,6 @@
 				08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */,
 				089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */,
 				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
-				2C2365D42106366C00C99742 /* ModelCachedVideoMapping.xcmappingmodel */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				080F74621BD921130064AAEA /* Stepic */,
@@ -8243,14 +8236,6 @@
 				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		2C2365D621063A4B00C99742 /* MappingPolicies */ = {
-			isa = PBXGroup;
-			children = (
-				2C2365D721063A6A00C99742 /* VideoTransformationPolicy.swift */,
-			);
-			name = MappingPolicies;
 			sourceTree = "<group>";
 		};
 		2C2365E221078CC100C99742 /* Videos */ = {
@@ -12766,7 +12751,6 @@
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
-				2C2365D821063A6A00C99742 /* VideoTransformationPolicy.swift in Sources */,
 				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
@@ -12983,7 +12967,6 @@
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
 				087D96BB1EBB7F5500059408 /* Tokens.swift in Sources */,
-				2C2365D52106366C00C99742 /* ModelCachedVideoMapping.xcmappingmodel in Sources */,
 				087585AE1FB51D720047A269 /* CourseList.swift in Sources */,
 				2C5DF14F1FED2E84003B1177 /* CardOverlayView.swift in Sources */,
 				0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */,
@@ -18548,7 +18531,6 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2C2365D321062E4E00C99742 /* Model_video_download_v24.xcdatamodel */,
 				081A150020D975E20016364E /* Model_joindate_v23.xcdatamodel */,
 				08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */,
 				2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */,
@@ -18574,7 +18556,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C2365D321062E4E00C99742 /* Model_video_download_v24.xcdatamodel */;
+			currentVersion = 081A150020D975E20016364E /* Model_joindate_v23.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
