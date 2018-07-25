@@ -224,7 +224,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         super.viewDidAppear(animated)
 
         AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
-        
+
         if isFirstLoad {
             isFirstLoad = false
             refreshSections()
@@ -545,7 +545,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.startDownload :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
-            AmplitudeAnalyticsEvents.Downloads.started(content: "section")
+            AmplitudeAnalyticsEvents.Downloads.started(content: "section").send()
 
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -570,7 +570,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.downloading :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
-            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section")
+            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section").send()
 
             downloadButton.state = PKDownloadButtonState.pending
 
@@ -586,7 +586,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
             askForRemove(okHandler: {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
-                AmplitudeAnalyticsEvents.Downloads.deleted(content: "section")
+                AmplitudeAnalyticsEvents.Downloads.deleted(content: "section").send()
                 downloadButton.state = PKDownloadButtonState.pending
 
                 self.course.sections[downloadButton.tag].removeFromStore(completion: {

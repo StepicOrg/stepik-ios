@@ -256,7 +256,7 @@ class WebStepViewController: UIViewController {
         super.viewDidAppear(animated)
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject, "stepId": step.id])
-        AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name, number: stepId - 1)
+        AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name, number: stepId - 1).send()
         if step.hasSubmissionRestrictions {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
         }

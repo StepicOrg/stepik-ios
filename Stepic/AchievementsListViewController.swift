@@ -32,7 +32,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView, Co
 
         refresh()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter?.sendAppearanceEvent()

@@ -74,7 +74,7 @@ class CertificatesViewController: UIViewController, CertificatesView, Controller
         super.viewDidAppear(animated)
         AmplitudeAnalyticsEvents.Certificates.opened.send()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStatus()

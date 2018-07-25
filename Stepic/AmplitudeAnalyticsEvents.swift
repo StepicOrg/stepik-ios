@@ -59,34 +59,34 @@ struct AmplitudeAnalyticsEvents {
     }
 
     struct Course {
-        static func joined(source: String, course: Int, courseName: String) -> AnalyticsEvent {
+        static func joined(source: String, course: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course joined",
                 parameters: [
                     "source": source,
                     "course": course,
-                    "course_name": courseName
+                    "title": courseTitle
                 ]
             )
         }
 
-        static func unsubscribed(course: Int, courseName: String) -> AnalyticsEvent {
+        static func unsubscribed(course: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course unsubscribed",
                 parameters: [
                     "course": course,
-                    "course_name": courseName
+                    "title": courseTitle
                 ]
             )
         }
 
-        static func continuePressed(source: String, course: Int, courseName: String) -> AnalyticsEvent {
+        static func continuePressed(source: String, course: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Continue course pressed",
                 parameters: [
                     "source": source,
                     "course": course,
-                    "course_name": courseName
+                    "title": courseTitle
                 ]
             )
         }
@@ -103,7 +103,7 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
-        
+
         static func stepOpened(step: Int, type: String, number: Int? = nil) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Step opened",
@@ -134,7 +134,7 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
-        
+
         static func deleted(content: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Download deleted",
@@ -143,13 +143,13 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
-        
+
         static var downloadsScreenOpened = AnalyticsEvent(name: "Downloads screen opened")
     }
 
     struct Search {
         static var started = AnalyticsEvent(name: "Course search started")
-        
+
         static func searched(query: String, position: Int, suggestion: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course searched",
@@ -161,11 +161,11 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Home {
         static var opened = AnalyticsEvent(name: "Home screen opened")
     }
-    
+
     struct Catalog {
         static var opened = AnalyticsEvent(name: "Catalog screen opened")
         struct Category {
@@ -180,7 +180,7 @@ struct AmplitudeAnalyticsEvents {
             }
         }
     }
-    
+
     struct CourseList {
         static func opened(ID: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -191,7 +191,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Profile {
         static func opened(state: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -202,11 +202,11 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Certificates {
         static var opened = AnalyticsEvent(name: "Certificates screen opened")
     }
-    
+
     struct Achievements {
         static func opened(isPersonal: Bool) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -221,7 +221,7 @@ struct AmplitudeAnalyticsEvents {
     struct Settings {
         static var opened = AnalyticsEvent(name: "Settings screen opened")
     }
-    
+
     struct CoursePreview {
         static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -233,7 +233,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Sections {
         static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -245,7 +245,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Lessons {
         static func opened(sectionID: Int?) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -256,7 +256,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Discussions {
         static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }

@@ -113,7 +113,7 @@ struct ContinueLearningWidgetData {
         imageURL = course.coverURLString
         if let navigation = navigation {
             continueLearningAction = {
-                AmplitudeAnalyticsEvents.Course.continuePressed(source: "home_widget", course: course.id, courseName: course.title).send()
+                AmplitudeAnalyticsEvents.Course.continuePressed(source: "home_widget", course: course.id, courseTitle: course.title).send()
                 LastStepRouter.continueLearning(for: course, using: navigation)
             }
         } else {

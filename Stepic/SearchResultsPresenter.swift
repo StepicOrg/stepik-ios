@@ -78,7 +78,7 @@ class SearchResultsPresenter {
 extension SearchResultsPresenter: SearchQueriesViewControllerDelegate {
     func didSelectSuggestion(suggestion: String, position: Int) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Search.selected, parameters: ["query": self.query.lowercased(), "position": position, "suggestion": suggestion])
-        AmplitudeAnalyticsEvents.Search.searched(query: self.query.lowercased(), position: position, suggestion: suggestion.lowercased())
+        AmplitudeAnalyticsEvents.Search.searched(query: self.query.lowercased(), position: position, suggestion: suggestion.lowercased()).send()
         search(query: suggestion)
         updateQueryBlock?(suggestion)
     }

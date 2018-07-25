@@ -21,7 +21,7 @@ class SettingsViewController: MenuViewController, SettingsView {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AmplitudeAnalyticsEvents.Settings.opened.send()

@@ -67,7 +67,7 @@ class AchievementsListPresenter {
     func achievementSelected(with viewData: AchievementViewData) {
         view?.showAchievementInfo(viewData: viewData, canShare: userId == AuthInfo.shared.userId)
     }
-    
+
     func sendAppearanceEvent() {
         AmplitudeAnalyticsEvents.Achievements.opened(isPersonal: AuthInfo.shared.userId == userId).send()
     }
