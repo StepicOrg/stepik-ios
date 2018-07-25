@@ -14,5 +14,6 @@ protocol ServiceFactory: class {
     var profilesAPI: ProfilesAPI { get }
     var notificationStatusesAPI: NotificationStatusesAPI { get }
 
-    func userRegistrationService() -> UserRegistrationService
+    var userRegistrationService: UserRegistrationService { get }
+    var graphService: GraphService { get }
 }

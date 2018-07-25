@@ -9,27 +9,14 @@
 import Foundation
 
 final class ServiceFactoryImpl: ServiceFactory {
-
-    // MARK: - Private properties
-
     let authAPI: AuthAPI
     let stepicsAPI: StepicsAPI
     let profilesAPI: ProfilesAPI
     let notificationStatusesAPI: NotificationStatusesAPI
 
-    // MARK: - Init
+    // MARK: - ServiceFactory -
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI,
-         notificationStatusesAPI: NotificationStatusesAPI) {
-        self.authAPI = authAPI
-        self.stepicsAPI = stepicsAPI
-        self.profilesAPI = profilesAPI
-        self.notificationStatusesAPI = notificationStatusesAPI
-    }
-
-    // MARK: - ServiceFactory
-
-    func userRegistrationService() -> UserRegistrationService {
+    var userRegistrationService: UserRegistrationService {
         return FakeUserRegistrationService(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
@@ -39,4 +26,19 @@ final class ServiceFactoryImpl: ServiceFactory {
         )
     }
 
+    var graphService: GraphService {
+        return GraphServiceImpl()
+    }
+
+    // MARK: - Init
+
+    init(authAPI: AuthAPI,
+         stepicsAPI: StepicsAPI,
+         profilesAPI: ProfilesAPI,
+         notificationStatusesAPI: NotificationStatusesAPI) {
+        self.authAPI = authAPI
+        self.stepicsAPI = stepicsAPI
+        self.profilesAPI = profilesAPI
+        self.notificationStatusesAPI = notificationStatusesAPI
+    }
 }
