@@ -37,10 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let router = assemblyFactory.applicationAssembly.module().router else {
             fatalError("Could not instantiate router")
         }
-
-        window.rootViewController = router.rootViewController
-        window.makeKeyAndVisible()
-        router.window = window
+        router.start(window)
 
         NetworkActivityIndicatorManager.shared.isEnabled = true
 

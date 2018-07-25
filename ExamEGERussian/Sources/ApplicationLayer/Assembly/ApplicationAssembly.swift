@@ -11,7 +11,7 @@ import UIKit.UIViewController
 struct ApplicationModule {
     var router: AppRouter?
     weak var rootViewController: UIViewController? {
-        return router?.rootViewController
+        return router?.window?.rootViewController
     }
 
     init(router: AppRouter) {

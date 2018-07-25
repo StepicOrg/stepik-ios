@@ -9,13 +9,15 @@
 import UIKit
 
 final class AppRouter: BaseRouter {
-
-    weak var window: UIWindow?
-    weak var rootViewController: UIViewController? {
-        return window?.rootViewController ?? navigationController
-    }
+    private(set) weak var window: UIWindow?
 
     // MARK: Public API
+
+    func start(_ window: UIWindow) {
+        self.window = window
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+    }
 
     func showAuthorization(animated: Bool = true) {
         presentModalNavigationController(derivedFrom: { _ in
@@ -28,5 +30,4 @@ final class AppRouter: BaseRouter {
             assemblyFactory.mainAssembly.module(navigationController: navigationController)
         }, animated: animated)
     }
-
 }
