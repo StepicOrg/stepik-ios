@@ -14,7 +14,7 @@ class Tokens {
     var appMetricaToken: String = ""
     var firebaseId: UInt = 0
     var appsFlyerDevKey: String = ""
-    
+
     static let shared = Tokens()
 
     private convenience init() {

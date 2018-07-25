@@ -518,16 +518,24 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
     fileprivate func storeSection(_ section: Section, downloadButton: PKDownloadButton!) {
         completedDownloads = 0
-
         let section = course.sections[downloadButton.tag]
+        var videosToStore: [Video] = []
+        var queuedUnitsCount: Int = 0
         for unit in section.units {
             if unit.lesson?.steps.count != 0 {
-                let videos = (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
-                storeVideos(videos, downloadButton: downloadButton)
+                videosToStore += (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
+                queuedUnitsCount += 1
+                if queuedUnitsCount == section.units.count {
+                    self.storeVideos(videosToStore, downloadButton: downloadButton)
+                }
             } else {
                 unit.lesson?.loadSteps(completion: {
                     let videos = (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
-                    self.storeVideos(videos, downloadButton: downloadButton)
+                    videosToStore += videos
+                    queuedUnitsCount += 1
+                    if queuedUnitsCount == section.units.count {
+                        self.storeVideos(videosToStore, downloadButton: downloadButton)
+                    }
                 })
             }
         }
@@ -546,6 +554,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
                 CoreDataHelper.instance.save()
 
                 self?.completedDownloads += 1
+                print("Completed task with id \(task.videoId), video \(self?.completedDownloads ?? -1) of \(videos.count)")
 
                 VideoDownloaderManager.shared.remove(by: task.videoId)
                 if self?.completedDownloads == videos.count {
@@ -561,6 +570,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             task.progressReporter = { _ in
                 let activeTasks = tasks.filter({ $0.state == .active })
                 let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
+
+                print("Reported progress \(newProgress), videos count -> \(tasks.count)")
 
                 UIThread.performUI {
                     downloadButton.stopDownloadButton.progress = max(CGFloat(newProgress),
