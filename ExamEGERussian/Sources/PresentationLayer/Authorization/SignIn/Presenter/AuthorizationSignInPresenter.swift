@@ -13,6 +13,5 @@ final class AuthorizationSignInPresenter: EmailAuthPresenter {
     func handleTokenReceived(token: StepicToken, authorizationType: AuthorizationType) {
         AuthInfo.shared.token = token
         AuthInfo.shared.authorizationType = authorizationType
-        AuthInfo.shared.isFake = .no
     }
 }

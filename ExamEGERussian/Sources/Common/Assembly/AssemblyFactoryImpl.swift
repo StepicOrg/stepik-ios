@@ -13,16 +13,12 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return ApplicationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var authorizationAssembly: AuthorizationAssembly {
-        return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
-    var mainAssembly: MainAssembly {
-        return MainAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
     var topicsAssembly: TopicsAssembly {
         return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
+    var authorizationAssembly: AuthorizationAssembly {
+        return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     private let serviceFactory: ServiceFactory

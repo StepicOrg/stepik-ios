@@ -25,9 +25,9 @@ final class AppRouter: BaseRouter {
         }, animated: animated)
     }
 
-    func showMain(animated: Bool = true) {
+    func showTopics(animated: Bool = true) {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.mainAssembly.module(navigationController: navigationController)
+            assemblyFactory.topicsAssembly.module(navigationController: navigationController)
         }, animated: animated)
     }
 }

@@ -62,7 +62,6 @@ final class FakeUserRegistrationService: UserRegistrationService {
             ).then { token, authorizationType -> Promise<User> in
                 AuthInfo.shared.token = token
                 AuthInfo.shared.authorizationType = authorizationType
-                AuthInfo.shared.isFake = .yes
 
                 return self.stepicsAPI.retrieveCurrentUser()
             }.done { user in

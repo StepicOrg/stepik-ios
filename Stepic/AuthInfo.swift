@@ -43,7 +43,48 @@ class AuthInfo: NSObject {
     var token: StepicToken? {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == "" {
-                clearToken()
+                print("\nsetting new token to nil\n")
+
+                let performLogoutActions = {
+                    [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    UIThread.performUI {
+                        //Delete enrolled information
+                        NotificationCenter.default.post(name: .didLogout, object: nil)
+                        TabsInfo.myCoursesIds = []
+                        let c = Course.getAllCourses(enrolled: true)
+                        for course in c {
+                            course.enrolled = false
+                        }
+
+                        Certificate.deleteAll()
+                        Progress.deleteAllStoredProgresses()
+                        Notification.deleteAll()
+                        AnalyticsUserProperties.shared.clearUserDependentProperties()
+                        #if !os(tvOS)
+                            NotificationsBadgesManager.shared.set(number: 0)
+                        #endif
+                        CoreDataHelper.instance.save()
+
+                        AuthInfo.shared.user = nil
+                        DeviceDefaults.sharedDefaults.deviceId = nil
+
+                        strongSelf.setTokenValue(nil)
+                    }
+                }
+
+                #if os(tvOS)
+                    NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+                    performLogoutActions()
+                #else
+                    //Unregister from notifications
+                    NotificationRegistrator.shared.unregisterFromNotifications(completion: {
+                        performLogoutActions()
+                    })
+                #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
@@ -51,6 +92,7 @@ class AuthInfo: NSObject {
                 Session.delete()
             }
         }
+
         get {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
             let refreshToken = defaults.value(forKey: "refresh_token") as? String,
@@ -144,52 +186,6 @@ class AuthInfo: NSObject {
         } else {
             return APIDefaults.headers.bearer
         }
-    }
-
-    func clearToken(_ completionHandler: (() -> Void)? = nil) {
-        print("\nsetting new token to nil\n")
-
-        let performLogoutActions = { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-
-            UIThread.performUI {
-                //Delete enrolled information
-                NotificationCenter.default.post(name: .didLogout, object: nil)
-                TabsInfo.myCoursesIds = []
-                let c = Course.getAllCourses(enrolled: true)
-                for course in c {
-                    course.enrolled = false
-                }
-
-                Certificate.deleteAll()
-                Progress.deleteAllStoredProgresses()
-                Notification.deleteAll()
-                AnalyticsUserProperties.shared.clearUserDependentProperties()
-                #if !os(tvOS)
-                NotificationsBadgesManager.shared.set(number: 0)
-                #endif
-                CoreDataHelper.instance.save()
-
-                AuthInfo.shared.user = nil
-                AuthInfo.shared.isFake = .notExist
-                DeviceDefaults.sharedDefaults.deviceId = nil
-
-                strongSelf.setTokenValue(nil)
-                completionHandler?()
-            }
-        }
-
-        #if os(tvOS)
-            NotificationCenter.default.post(name: .userLoggedOut, object: nil)
-            performLogoutActions()
-        #else
-            //Unregister from notifications
-            NotificationRegistrator.shared.unregisterFromNotifications(completion: {
-                performLogoutActions()
-            })
-        #endif
     }
 }
 
