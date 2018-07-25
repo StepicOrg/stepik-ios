@@ -25,9 +25,14 @@ final class RootNavigationManager {
     // MARK: Public API
 
     func setup(with window: UIWindow) {
-        let mainController = MainViewController()
-        mainController.userRegistrationService = serviceComponents.userRegistrationService
-        let navigationController = UINavigationController(rootViewController: mainController)
+        let controller = TopicsTableViewController()
+        controller.presenter = TopicsPresenterImpl(
+            view: controller,
+            model: KnowledgeGraph(),
+            userRegistrationService: serviceComponents.userRegistrationService,
+            graphService: serviceComponents.graphService
+        )
+        let navigationController = UINavigationController(rootViewController: controller)
 
         window.rootViewController = navigationController
         window.makeKeyAndVisible()

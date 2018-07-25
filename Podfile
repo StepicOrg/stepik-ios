@@ -35,6 +35,8 @@ def all_pods
     
     pod 'Amplitude-iOS', '~> 4.0.4'
     
+    pod 'AppsFlyerFramework'
+    
     pod 'BEMCheckBox'
 
     # actual version - 6.x, we should test it before update
@@ -150,6 +152,8 @@ target 'ExamEGERussian' do
     platform :ios, '9.0'
     
     all_pods
+    pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
+    pod 'PromiseKit/Alamofire', '~> 6.0'
 
     target 'ExamEGERussianTests' do
         inherit! :search_paths
