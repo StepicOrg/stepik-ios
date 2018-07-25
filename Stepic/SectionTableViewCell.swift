@@ -54,30 +54,68 @@ class SectionTableViewCell: UITableViewCell {
         return 46 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107))
     }
 
+    var completedDownloads = 0
+    var failedDownloads = 0
     func updateDownloadButton(_ section: Section) {
         if section.isCached {
             self.downloadButton.state = .downloaded
-        } else if section.isDownloading {
-
-//            print("update download button while downloading")
-            self.downloadButton.state = .downloading
-            self.downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
-
-            section.storeProgress = {
-                prog in
-                UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
-            }
-
-            section.storeCompletion = {
-                if section.isCached {
-                    UIThread.performUI({self.downloadButton.state = .downloaded})
-                } else {
-                    UIThread.performUI({self.downloadButton.state = .startDownload})
-                }
-            }
-
         } else {
-            self.downloadButton.state = .startDownload
+            var videos = [Video]()
+            // FIXME: section may not have units, unit may not have steps
+            for lesson in section.units.compactMap({ $0.lesson }) {
+                videos.append(contentsOf: lesson.stepVideos)
+            }
+            let tasks = videos.compactMap { video in
+                VideoDownloaderManager.shared.get(by: video.id)
+            }
+
+            let progress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
+
+            if progress < 1.0 {
+                self.downloadButton.state = .downloading
+                self.downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+
+                for task in tasks {
+                    task.progressReporter = { [weak self] progress in
+                        // When some task updated then recalculate ALL progresses
+                        let newProgress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
+
+                        self?.downloadButton.stopDownloadButton?.progress = CGFloat(newProgress)
+                    }
+
+                    task.completionReporter = { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        // When some task finished then increment `completed` counter
+                        strongSelf.completedDownloads += 1
+
+                        if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
+                            strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                        }
+
+                        CoreDataHelper.instance.save()
+                    }
+
+                    task.failureReporter = { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        // When some task failed then increment `failed` counter
+                        self?.failedDownloads += 1
+
+                        if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
+                            strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                        }
+
+                        CoreDataHelper.instance.save()
+                    }
+                }
+            } else {
+                downloadButton.state = .startDownload
+            }
         }
     }
 
