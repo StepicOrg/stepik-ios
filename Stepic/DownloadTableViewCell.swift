@@ -92,7 +92,9 @@ class DownloadTableViewCell: UITableViewCell {
             }
 
             task.completionReporter = { [weak self] _ in
-                self?.downloadButton.state = .downloaded
+                UIThread.performUI {
+                    self?.downloadButton.state = .downloaded
+                }
             }
             return
         }

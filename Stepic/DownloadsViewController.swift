@@ -52,12 +52,16 @@ class DownloadsViewController: UIViewController {
 
                 downloading += [video]
                 task.completionReporter = { [weak self] _ in
-                    self?.removeFromDownloading(video)
-                    self?.addToStored(video)
+                    DispatchQueue.main.async {
+                        self?.removeFromDownloading(video)
+                        self?.addToStored(video)
+                    }
                 }
 
                 task.failureReporter = { [weak self] _ in
-                    self?.removeFromDownloading(video)
+                    DispatchQueue.main.async {
+                        self?.removeFromDownloading(video)
+                    }
                 }
             }
             if video.state == VideoState.cached {
