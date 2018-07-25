@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 
 final class AuthorizationSignInViewController: EmailAuthViewController {
-    override var reportAnalytics: Bool {
+    var reportAnalytics: Bool {
         return false
     }
 

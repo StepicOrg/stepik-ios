@@ -9,7 +9,7 @@
 import UIKit
 
 final class AuthorizationSignUpViewController: RegistrationViewController {
-    override var reportAnalytics: Bool {
+    var reportAnalytics: Bool {
         return false
     }
 

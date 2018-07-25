@@ -10,12 +10,9 @@ import Foundation
 import PromiseKit
 
 final class AuthorizationSignInPresenter: EmailAuthPresenter {
-    override func handleTokenReceived(token: StepicToken, authorizationType: AuthorizationType) {
+    func handleTokenReceived(token: StepicToken, authorizationType: AuthorizationType) {
         AuthInfo.shared.token = token
         AuthInfo.shared.authorizationType = authorizationType
         AuthInfo.shared.isFake = .no
-    }
-
-    override func handleNotificationsStatusReceived(_ notificationsStatus: NotificationsStatus) {
     }
 }
