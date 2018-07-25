@@ -2011,6 +2011,8 @@
 		2C49190F2062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
+		2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */; };
+		2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF16203DC66D000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
@@ -5671,6 +5673,8 @@
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
+		2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssembly.swift; sourceTree = "<group>"; };
+		2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
@@ -8622,6 +8626,15 @@
 			name = PinsMap;
 			sourceTree = "<group>";
 		};
+		2C4A1ECC21087CEF00A1D68C /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */,
+				2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
 			isa = PBXGroup;
 			children = (
@@ -9448,8 +9461,8 @@
 			isa = PBXGroup;
 			children = (
 				2CD7994121077CB90054D098 /* BaseAssembly.swift */,
-				2CD7994221077CB90054D098 /* AssemblyFactoryImpl.swift */,
 				2CD7994321077CB90054D098 /* AssemblyFactory.swift */,
+				2CD7994221077CB90054D098 /* AssemblyFactoryImpl.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -9591,6 +9604,7 @@
 		2CD7997721077D010054D098 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				2C4A1ECC21087CEF00A1D68C /* Assembly */,
 				2CD7997821077D010054D098 /* Presenter */,
 				2CD7997B21077D010054D098 /* View */,
 			);
@@ -15187,6 +15201,7 @@
 				2C949A3C20ECC87A0049E9A8 /* Reachability.m in Sources */,
 				2CBC262F21087126004245D6 /* EmailAuthPresenter.swift in Sources */,
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
+				2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */,
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C33CC1120EC3420009956B0 /* ContentLanguage.swift in Sources */,
@@ -15455,6 +15470,7 @@
 				2C949A6D20ECD0750049E9A8 /* PinsMapView.swift in Sources */,
 				2C949A2420ECC5E50049E9A8 /* PinsMapPresenter.swift in Sources */,
 				2C9499C920ECBC7E0049E9A8 /* VideoURL.swift in Sources */,
+				2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */,
 				2C33CBF320EC3270009956B0 /* SectionsAPI.swift in Sources */,
 				2C33CC0020EC333D009956B0 /* EnrollmentsAPI.swift in Sources */,
 				2CD7999C21077E540054D098 /* StepikResult.swift in Sources */,

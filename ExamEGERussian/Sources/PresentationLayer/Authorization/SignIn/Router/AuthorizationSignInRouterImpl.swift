@@ -26,7 +26,7 @@ final class AuthorizationSignInRouterImpl: BaseRouter, AuthorizationSignInRouter
 
     func showSignUp() {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.authorizationAssembly().signUp().module(navigationController: navigationController)
+            assemblyFactory.authorizationAssembly.signUp.module(navigationController: navigationController)
         })
     }
 }

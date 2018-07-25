@@ -9,21 +9,21 @@
 import Foundation
 
 protocol AuthorizationAssembly {
-    func greeting() -> AuthorizationGreetingAssembly
-    func signIn() -> AuthorizationSignInAssembly
-    func signUp() -> AuthorizationSignUpAssembly
+    var greeting: AuthorizationGreetingAssembly { get }
+    var signIn: AuthorizationSignInAssembly { get }
+    var signUp: AuthorizationSignUpAssembly { get }
 }
 
 final class AuthorizationAssemblyImpl: BaseAssembly, AuthorizationAssembly {
-    func greeting() -> AuthorizationGreetingAssembly {
+    var greeting: AuthorizationGreetingAssembly {
         return AuthorizationGreetingAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 
-    func signIn() -> AuthorizationSignInAssembly {
+    var signIn: AuthorizationSignInAssembly {
         return AuthorizationSignInAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 
-    func signUp() -> AuthorizationSignUpAssembly {
+    var signUp: AuthorizationSignUpAssembly {
         return AuthorizationSignUpAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 }

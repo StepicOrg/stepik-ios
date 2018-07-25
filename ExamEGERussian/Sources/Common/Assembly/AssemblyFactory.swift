@@ -10,7 +10,8 @@ import Foundation
 
 /// The AssemblyFactory protocol returns assemblies of each module of the presentation layer.
 protocol AssemblyFactory: class {
-    func applicationAssembly() -> ApplicationAssembly
-    func authorizationAssembly() -> AuthorizationAssembly
-    func mainAssembly() -> MainAssembly
+    var applicationAssembly: ApplicationAssembly { get }
+    var authorizationAssembly: AuthorizationAssembly { get }
+    var mainAssembly: MainAssembly { get }
+    var topicsAssembly: TopicsAssembly { get }
 }

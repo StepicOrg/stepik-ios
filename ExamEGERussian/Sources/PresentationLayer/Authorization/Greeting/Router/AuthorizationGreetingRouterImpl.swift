@@ -11,13 +11,13 @@ import Foundation
 final class AuthorizationGreetingRouterImpl: BaseRouter, AuthorizationGreetingRouter {
     func showSignIn() {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.authorizationAssembly().signIn().module(navigationController: navigationController)
+            assemblyFactory.authorizationAssembly.signIn.module(navigationController: navigationController)
         })
     }
 
     func showSignUp() {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.authorizationAssembly().signUp().module(navigationController: navigationController)
+            assemblyFactory.authorizationAssembly.signUp.module(navigationController: navigationController)
         })
     }
 }

@@ -19,13 +19,13 @@ final class AppRouter: BaseRouter {
 
     func showAuthorization(animated: Bool = true) {
         presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authorizationAssembly().greeting().module()
+            assemblyFactory.authorizationAssembly.greeting.module()
         }, animated: animated)
     }
 
     func showMain(animated: Bool = true) {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.mainAssembly().module(navigationController: navigationController)
+            assemblyFactory.mainAssembly.module(navigationController: navigationController)
         }, animated: animated)
     }
 

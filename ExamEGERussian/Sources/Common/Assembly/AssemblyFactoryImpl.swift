@@ -9,25 +9,25 @@
 import Foundation
 
 final class AssemblyFactoryImpl: AssemblyFactory {
+    var applicationAssembly: ApplicationAssembly {
+        return ApplicationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
+    var authorizationAssembly: AuthorizationAssembly {
+        return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
+    var mainAssembly: MainAssembly {
+        return MainAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
+    var topicsAssembly: TopicsAssembly {
+        return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
 
     private let serviceFactory: ServiceFactory
 
     init(serviceFactory: ServiceFactory) {
         self.serviceFactory = serviceFactory
     }
-
-    // MARK: - AssemblyFactory
-
-    func applicationAssembly() -> ApplicationAssembly {
-        return ApplicationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
-    func authorizationAssembly() -> AuthorizationAssembly {
-        return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
-    func mainAssembly() -> MainAssembly {
-        return MainAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
 }

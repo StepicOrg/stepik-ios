@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         let assemblyFactory = AssemblyFactoryImpl(serviceFactory: serviceFactory)
 
-        guard let router = assemblyFactory.applicationAssembly().module().router else {
+        guard let router = assemblyFactory.applicationAssembly.module().router else {
             fatalError("Could not instantiate router")
         }
 

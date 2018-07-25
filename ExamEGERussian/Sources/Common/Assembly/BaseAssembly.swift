@@ -9,7 +9,6 @@
 import Foundation
 
 class BaseAssembly {
-
     let assemblyFactory: AssemblyFactory
     let serviceFactory: ServiceFactory
 
@@ -17,5 +16,4 @@ class BaseAssembly {
         self.assemblyFactory = assemblyFactory
         self.serviceFactory = serviceFactory
     }
-
 }

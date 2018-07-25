@@ -11,7 +11,7 @@ import Foundation
 final class MainViewRouterImpl: BaseRouter, MainViewRouter {
     func showAuthorizationModule() {
         presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authorizationAssembly().greeting().module()
+            assemblyFactory.authorizationAssembly.greeting.module()
         })
     }
 }
