@@ -526,6 +526,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         }
 
         let quality = VideosInfo.downloadingVideoQuality
+        var tasks = [VideoDownloaderTask]()
         for video in videos {
             let nearestQuality = video.getNearestQualityToDefault(quality)
             let url = video.getUrlForQuality(nearestQuality)
@@ -539,6 +540,17 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
                 if self?.completedDownloads == videos.count {
                     UIThread.performUI({downloadButton.state = .downloaded})
+                }
+            }
+            tasks.append(task)
+        }
+        for task in tasks {
+            task.progressReporter = { _ in
+                let activeTasks = tasks.filter({ $0.state == .active })
+                let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
+
+                UIThread.performUI {
+                    downloadButton.stopDownloadButton.progress = CGFloat(newProgress)
                 }
             }
 

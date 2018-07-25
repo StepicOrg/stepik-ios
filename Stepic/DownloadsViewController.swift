@@ -143,6 +143,8 @@ class DownloadsViewController: UIViewController {
             } else {
                 UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "\(NSLocalizedString("RemovedAllMessage", comment: "")) \(completed) \(NSLocalizedString((completed % 10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
             }
+
+            UIThread.performUI({self.fetchVideos()})
         })
     }
 

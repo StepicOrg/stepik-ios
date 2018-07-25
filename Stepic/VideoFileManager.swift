@@ -58,6 +58,11 @@ class VideoFileManager {
         let destinationURL = videoLocationManager.getURLForVideo(id: videoId, fileExtension: VideoFileManager.fileExtension)
 
         do {
+            // Try to get video folder before
+            if !fileManager.fileExists(atPath: videoLocationManager.videosDirectoryURL.path) {
+                try fileManager.createDirectory(at: videoLocationManager.videosDirectoryURL, withIntermediateDirectories: false, attributes: nil)
+            }
+
             try fileManager.moveItem(at: sourceURL, to: destinationURL)
         } catch {
             throw VideoFileManagerError.unableToMove

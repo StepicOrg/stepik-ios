@@ -63,7 +63,9 @@ class UnitTableViewCell: UITableViewCell {
                             // When some task updated then recalculate ALL progresses
                             let newProgress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
 
-                            self?.downloadButton.stopDownloadButton?.progress = CGFloat(newProgress)
+                            DispatchQueue.main.async {
+                                self?.downloadButton.stopDownloadButton?.progress = CGFloat(newProgress)
+                            }
                         }
 
                         task.completionReporter = { [weak self] _ in
@@ -75,7 +77,9 @@ class UnitTableViewCell: UITableViewCell {
                             strongSelf.completedDownloads += 1
 
                             if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
-                                strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                DispatchQueue.main.async {
+                                    strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                }
                             }
 
                             CoreDataHelper.instance.save()
@@ -90,7 +94,9 @@ class UnitTableViewCell: UITableViewCell {
                             self?.failedDownloads += 1
 
                             if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
-                                strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                DispatchQueue.main.async {
+                                    strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                }
                             }
 
                             CoreDataHelper.instance.save()
