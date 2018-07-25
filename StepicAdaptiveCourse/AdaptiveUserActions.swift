@@ -28,7 +28,7 @@ class AdaptiveUserActions {
         self.adaptiveCoursesInfoAPI = adaptiveCoursesInfoAPI
         self.defaultsStorageManager = defaultsStorageManager
         self.userRegistrationService = userRegistrationService == nil
-            ? FakeUserRegistrationService(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager, randomCredentialsGenerator: RandomCredentialsGeneratorImplementation())
+            ? UserRegistrationServiceImpl(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager, credentialsProvider: RandomCredentialsProvider())
             : userRegistrationService
     }
 

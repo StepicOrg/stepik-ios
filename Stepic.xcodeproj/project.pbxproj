@@ -9438,9 +9438,9 @@
 		2CD7994021077CB90054D098 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7994121077CB90054D098 /* BaseAssembly.swift */,
 				2CD7994321077CB90054D098 /* AssemblyFactory.swift */,
 				2CD7994221077CB90054D098 /* AssemblyFactoryImpl.swift */,
+				2CD7994121077CB90054D098 /* BaseAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
