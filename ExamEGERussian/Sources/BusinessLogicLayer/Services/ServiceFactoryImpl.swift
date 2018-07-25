@@ -16,13 +16,21 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     // MARK: - ServiceFactory -
 
-    var userRegistrationService: UserRegistrationService {
-        return FakeUserRegistrationService(
+    func userRegistrationService(for type: UserRegistrationServiceType) -> UserRegistrationService {
+        let credentialsProvider: UserRegistrationServiceCredentialsProvider
+        switch type {
+        case .real(let provider):
+            credentialsProvider = provider
+        case .fake:
+            credentialsProvider = RandomCredentialsProvider()
+        }
+
+        return UserRegistrationServiceImpl(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
             profilesAPI: profilesAPI,
             defaultsStorageManager: DefaultsStorageManager.shared,
-            randomCredentialsGenerator: RandomCredentialsGeneratorImpl()
+            credentialsProvider: credentialsProvider
         )
     }
 

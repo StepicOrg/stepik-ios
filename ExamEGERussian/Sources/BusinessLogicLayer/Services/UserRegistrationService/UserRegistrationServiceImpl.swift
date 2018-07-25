@@ -9,31 +9,25 @@
 import Foundation
 import PromiseKit
 
-final class FakeUserRegistrationService: UserRegistrationService {
-
-    // MARK: - Private Properties
+final class UserRegistrationServiceImpl: UserRegistrationService {
 
     private let authAPI: AuthAPI
     private let stepicsAPI: StepicsAPI
     private let profilesAPI: ProfilesAPI
     private let defaultsStorageManager: DefaultsStorageManager
-    private let randomCredentialsGenerator: RandomCredentialsGenerator
-
-    // MARK: - Init
+    let credentialsProvider: UserRegistrationServiceCredentialsProvider
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
          defaultsStorageManager: DefaultsStorageManager,
-         randomCredentialsGenerator: RandomCredentialsGenerator) {
+         credentialsProvider: UserRegistrationServiceCredentialsProvider) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
         self.defaultsStorageManager = defaultsStorageManager
-        self.randomCredentialsGenerator = randomCredentialsGenerator
+        self.credentialsProvider = credentialsProvider
     }
-
-    // MARK: - UserRegistrationService
 
     func registerNewUser() -> Promise<User> {
         return Promise { seal in
@@ -47,6 +41,30 @@ final class FakeUserRegistrationService: UserRegistrationService {
                 seal.fulfill(user)
             }.catch { error in
                 seal.reject(error)
+            }
+        }
+    }
+
+    func registerUser() -> Promise<(email: String, password: String)> {
+        if let savedEmail = defaultsStorageManager.accountEmail,
+            let savedPassword = defaultsStorageManager.accountPassword {
+            return .value((email: savedEmail, password: savedPassword))
+        }
+
+        let email = credentialsProvider.email
+        let password = credentialsProvider.password
+
+        return Promise { seal in
+            self.authAPI.signUpWithAccount(
+                firstname: credentialsProvider.firstname,
+                lastname: credentialsProvider.lastname,
+                email: email,
+                password: password
+            ).done {
+                seal.fulfill((email: email, password: password))
+            }.catch { error in
+                print("\(#file): failed to register new user with error: \(error)")
+                seal.reject(UserRegistrationServiceError.notRegistered)
             }
         }
     }
@@ -70,32 +88,8 @@ final class FakeUserRegistrationService: UserRegistrationService {
 
                 seal.fulfill(user)
             }.catch { error in
-                print("ExamEgeRussian: failed to login user with error: \(error)")
+                print("\(#file): failed to login user with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notLoggedIn)
-            }
-        }
-    }
-
-    func registerUser() -> Promise<(email: String, password: String)> {
-        if let savedEmail = defaultsStorageManager.accountEmail,
-            let savedPassword = defaultsStorageManager.accountPassword {
-            return .value((email: savedEmail, password: savedPassword))
-        }
-
-        let email = randomCredentialsGenerator.email
-        let password = randomCredentialsGenerator.password
-
-        return Promise { seal in
-            self.authAPI.signUpWithAccount(
-                firstname: randomCredentialsGenerator.firstname,
-                lastname: randomCredentialsGenerator.lastname,
-                email: email,
-                password: password
-            ).done {
-                seal.fulfill((email: email, password: password))
-            }.catch { error in
-                print("UserRegistrationService: failed to register new user with error: \(error)")
-                seal.reject(UserRegistrationServiceError.notRegistered)
             }
         }
     }
@@ -110,13 +104,13 @@ final class FakeUserRegistrationService: UserRegistrationService {
                     profile.subscribedForMail = false
                     return self.profilesAPI.update(profile)
                 } else {
-                    print("UserRegistrationService: profile not found")
+                    print("\(#file): profile not found")
                     return Promise(error: UserRegistrationServiceError.noProfileFound)
                 }
             }.done { _ in
                 seal.fulfill(user)
             }.catch { error in
-                print("UserRegistrationService: failed to unregister user from email with error: \(error)")
+                print("\(#file): failed to unregister user from email with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notUnregisteredFromEmails)
             }
         }

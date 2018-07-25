@@ -14,7 +14,7 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
         controller.presenter = TopicsPresenterImpl(
             view: controller,
             model: KnowledgeGraph(),
-            userRegistrationService: serviceFactory.userRegistrationService,
+            userRegistrationService: serviceFactory.fakeUserRegistrationService,
             graphService: serviceFactory.graphService
         )
 

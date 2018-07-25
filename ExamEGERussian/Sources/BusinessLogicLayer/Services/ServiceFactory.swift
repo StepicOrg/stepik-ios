@@ -14,6 +14,12 @@ protocol ServiceFactory: class {
     var profilesAPI: ProfilesAPI { get }
     var notificationStatusesAPI: NotificationStatusesAPI { get }
 
-    var userRegistrationService: UserRegistrationService { get }
+    func userRegistrationService(for type: UserRegistrationServiceType) -> UserRegistrationService
     var graphService: GraphService { get }
+}
+
+extension ServiceFactory {
+    var fakeUserRegistrationService: UserRegistrationService {
+        return userRegistrationService(for: .fake)
+    }
 }

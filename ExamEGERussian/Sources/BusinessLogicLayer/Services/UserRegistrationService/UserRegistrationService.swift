@@ -16,7 +16,21 @@ enum UserRegistrationServiceError: Error {
     case notUnregisteredFromEmails
 }
 
+enum UserRegistrationServiceType {
+    case fake
+    case real(UserRegistrationServiceCredentialsProvider)
+}
+
+protocol UserRegistrationServiceCredentialsProvider {
+    var firstname: String { get }
+    var lastname: String { get }
+    var email: String { get }
+    var password: String { get }
+}
+
 protocol UserRegistrationService {
+    var credentialsProvider: UserRegistrationServiceCredentialsProvider { get }
+
     func registerNewUser() -> Promise<User>
     func registerUser() -> Promise<(email: String, password: String)>
     func logInUser(email: String, password: String) -> Promise<User>

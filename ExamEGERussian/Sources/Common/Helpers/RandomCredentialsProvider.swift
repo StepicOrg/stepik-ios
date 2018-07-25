@@ -8,8 +8,7 @@
 
 import Foundation
 
-final class RandomCredentialsGeneratorImpl: RandomCredentialsGenerator {
-
+final class RandomCredentialsProvider: UserRegistrationServiceCredentialsProvider {
     var firstname: String {
         return StringHelper.generateRandomString(of: 6)
     }
@@ -25,5 +24,4 @@ final class RandomCredentialsGeneratorImpl: RandomCredentialsGenerator {
     var password: String {
         return StringHelper.generateRandomString(of: 16)
     }
-
 }
