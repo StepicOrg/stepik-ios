@@ -65,10 +65,6 @@ class CourseListVerticalViewController: CourseListViewController {
         updateDescription()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     lazy var paginationView: LoadingPaginationView = {
         let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         paginationView.refreshAction = {

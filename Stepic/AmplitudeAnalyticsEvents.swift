@@ -59,33 +59,33 @@ struct AmplitudeAnalyticsEvents {
     }
 
     struct Course {
-        static func joined(source: String, course: Int, courseTitle: String) -> AnalyticsEvent {
+        static func joined(source: String, courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course joined",
                 parameters: [
                     "source": source,
-                    "course": course,
+                    "course": courseID,
                     "title": courseTitle
                 ]
             )
         }
 
-        static func unsubscribed(course: Int, courseTitle: String) -> AnalyticsEvent {
+        static func unsubscribed(courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course unsubscribed",
                 parameters: [
-                    "course": course,
+                    "course": courseID,
                     "title": courseTitle
                 ]
             )
         }
 
-        static func continuePressed(source: String, course: Int, courseTitle: String) -> AnalyticsEvent {
+        static func continuePressed(source: String, courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Continue course pressed",
                 parameters: [
                     "source": source,
-                    "course": course,
+                    "course": courseID,
                     "title": courseTitle
                 ]
             )
@@ -110,7 +110,7 @@ struct AmplitudeAnalyticsEvents {
                 parameters: [
                     "step": step,
                     "type": type,
-                    "number": number
+                    "number": number as Any
                 ]
             )
         }
@@ -255,7 +255,7 @@ struct AmplitudeAnalyticsEvents {
             return AnalyticsEvent(
                 name: "Lessons screen opened",
                 parameters: [
-                    "section": sectionID
+                    "section": sectionID as Any
                 ]
             )
         }
