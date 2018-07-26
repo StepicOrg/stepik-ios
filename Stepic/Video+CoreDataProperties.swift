@@ -86,7 +86,6 @@ extension Video {
             } else {
                 managedCachedQuality = nil
             }
-            loadingQuality = value
         }
     }
 

@@ -9,7 +9,6 @@
 import UIKit
 import MediaPlayer
 import SVProgressHUD
-import DownloadButton
 import SnapKit
 
 class VideoStepViewController: UIViewController {
@@ -154,18 +153,11 @@ class VideoStepViewController: UIViewController {
         playVideo()
     }
 
-    var itemView: VideoDownloadView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), video: video, buttonDelegate: self, downloadDelegate: self)
-        if #available(iOS 11.0, *) {
-            itemView.snp.makeConstraints { make -> Void in
-                make.width.height.equalTo(40)
-            }
-        }
-        let downloadItem = UIBarButtonItem(customView: itemView)
+
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
-        nItem.rightBarButtonItems = [shareBarButtonItem, downloadItem]
+        nItem.rightBarButtonItems = [shareBarButtonItem]
 
         if let discussionCount = step.discussionsCount {
             discussionCountView.commentsCount = discussionCount
@@ -287,73 +279,4 @@ class VideoStepViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-}
-
-extension VideoStepViewController : PKDownloadButtonDelegate {
-    func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
-
-        if video.urls.count == 0 {
-            presentNoVideoAlert()
-            return
-        }
-
-        switch downloadButton.state {
-        case .startDownload:
-
-            if !ConnectionHelper.shared.isReachable {
-                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.nController ?? UIViewController())
-                print("Not reachable to download")
-                return
-            }
-
-            AmplitudeAnalyticsEvents.Downloads.started(content: "step").send()
-            downloadButton.state = .downloading
-            video.store(VideosInfo.downloadingVideoQuality, progress: {
-                prog in
-                UIThread.performUI({
-                    downloadButton.stopDownloadButton?.progress = CGFloat(prog)
-                })
-                }, completion: {
-                    completed in
-                    if completed {
-                        UIThread.performUI({
-                            downloadButton.state = .downloaded
-                        })
-                    } else {
-                        UIThread.performUI({
-                            downloadButton.state = .startDownload
-                        })
-                    }
-                }, error: {
-                    _ in
-                    print("Error while downloading video!!!")
-            })
-            break
-        case .downloaded:
-            AmplitudeAnalyticsEvents.Downloads.deleted(content: "step").send()
-            if video.removeFromStore() {
-                downloadButton.state = .startDownload
-            }
-            break
-        case .downloading:
-            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "step").send()
-            if video.cancelStore() {
-                downloadButton.state = .startDownload
-            }
-            break
-        case .pending:
-            break
-        }
-        itemView.updateButton()
-    }
-}
-
-extension VideoStepViewController : VideoDownloadDelegate {
-
-    func didDownload(_ video: Video, cancelled: Bool) {
-    }
-
-    func didGetError(_ video: Video) {
-        itemView.updateButton()
-    }
 }

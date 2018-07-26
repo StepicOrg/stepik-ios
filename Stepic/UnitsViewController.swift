@@ -13,6 +13,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
+    var completedDownloads = 0
 
     /*
      There are 2 ways of instantiating the controller
@@ -591,20 +592,47 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     }
 
     fileprivate func storeLesson(_ lesson: Lesson?, downloadButton: PKDownloadButton!) {
-        lesson?.storeVideos(progress: {
-            progress in
-            UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
-            }, completion: {
-                downloaded, cancelled in
-                if cancelled == 0 {
-                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.downloaded})
-                } else {
-                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.startDownload})
+        completedDownloads = 0
+
+        let videos = (lesson?.stepVideos ?? []).filter { $0.state == .online }
+        let quality = VideosInfo.downloadingVideoQuality
+        var tasks = [VideoDownloaderTask]()
+        for video in videos {
+
+            let nearestQuality = video.getNearestQualityToDefault(quality)
+            let url = video.getUrlForQuality(nearestQuality)
+
+            let task = VideoDownloaderTask(videoId: video.id, url: url)
+            task.completionReporter = { [weak self] _ in
+                video.cachedQuality = nearestQuality
+                CoreDataHelper.instance.save()
+
+                self?.completedDownloads += 1
+
+                if self?.completedDownloads == videos.count {
+                    UIThread.performUI({downloadButton.state = .downloaded})
                 }
-            }, error: {
-                _ in
-                UIThread.performUI({downloadButton.state = PKDownloadButtonState.startDownload})
-        })
+                VideoDownloaderManager.shared.remove(by: task.videoId)
+            }
+            task.failureReporter = { _ in
+                VideoDownloaderManager.shared.remove(by: task.videoId)
+                UIThread.performUI({downloadButton.state = .startDownload})
+            }
+            tasks.append(task)
+        }
+
+        for task in tasks {
+            task.progressReporter = { progress in
+                let activeTasks = tasks.filter({ $0.state == .active })
+                let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
+                UIThread.performUI {
+                    downloadButton.stopDownloadButton.progress = max(CGFloat(newProgress),
+                                                                     downloadButton.stopDownloadButton.progress)
+                }
+            }
+
+            VideoDownloaderManager.shared.start(task: task)
+        }
     }
 
     func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
@@ -649,12 +677,19 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
 
-            section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
+            let videos = section.units[downloadButton.tag].lesson?.stepVideos ?? []
+            for video in videos {
+                if let task = VideoDownloaderManager.shared.get(by: video.id), task.state == .active {
+                    task.cancel()
+                    VideoDownloaderManager.shared.remove(by: video.id)
+                }
+
                 DispatchQueue.main.async(execute: {
                     downloadButton.pendingView?.stopSpin()
                     downloadButton.state = PKDownloadButtonState.startDownload
                 })
-            })
+            }
+
             break
 
         case PKDownloadButtonState.downloaded :
@@ -665,12 +700,24 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {
-                section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
+                let videos = self.section?.units[downloadButton.tag].lesson?.stepVideos ?? []
+                var shouldBeRemovedCount = videos.count
+                for video in videos {
+                    do {
+                        try VideoFileManager().removeVideo(videoId: video.id)
+                        video.cachedQuality = nil
+                        CoreDataHelper.instance.save()
+
+                        shouldBeRemovedCount -= 1
+                    } catch { }
+                }
+
+                if shouldBeRemovedCount == 0 {
                     DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()
                         downloadButton.state = PKDownloadButtonState.startDownload
                     })
-                })
+                }
             }, cancelHandler: {
                 DispatchQueue.main.async(execute: {
                     downloadButton.pendingView?.stopSpin()
