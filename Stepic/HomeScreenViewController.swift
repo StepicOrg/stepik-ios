@@ -39,6 +39,11 @@ class HomeScreenViewController: UIViewController, HomeScreenView {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Home.opened.send()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStreaks()

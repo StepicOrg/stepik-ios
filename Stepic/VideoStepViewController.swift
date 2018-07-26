@@ -191,7 +191,7 @@ class VideoStepViewController: UIViewController {
 
         if !didPresentVideoPlayer {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.stepOpened, parameters: ["step": step.id, "type": step.block.name, "number": stepId - 1])
+            AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name, number: stepId - 1).send()
         } else {
             didPresentVideoPlayer = false
         }
