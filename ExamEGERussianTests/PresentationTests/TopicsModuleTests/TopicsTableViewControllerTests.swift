@@ -15,7 +15,7 @@ class TopicsTableViewControllerTests: XCTestCase {
         let vc = TopicsTableViewController()
         let presenter = TopicsPresenterImpl(
             view: vc,
-            model: KnowledgeGraph(),
+            knowledgeGraph: KnowledgeGraph(),
             router: TopicsRouterMock(),
             userRegistrationService: UserRegistrationServiceMock(),
             graphService: GraphServiceMock()
