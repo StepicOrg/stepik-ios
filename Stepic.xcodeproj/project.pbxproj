@@ -4019,6 +4019,8 @@
 		2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */; };
 		2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */; };
 		2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */; };
+		2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F02109B3A200564D45 /* CourseService.swift */; };
+		2CCC59F82109B92300564D45 /* CourseServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */; };
 		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CCD5D38202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */; };
 		2CCD5D3B202A18A5008ACBC7 /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */; };
@@ -5800,6 +5802,8 @@
 		2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceMock.swift; sourceTree = "<group>"; };
 		2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
 		2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphVertex.swift; sourceTree = "<group>"; };
+		2CCC59F02109B3A200564D45 /* CourseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseService.swift; sourceTree = "<group>"; };
+		2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServiceImpl.swift; sourceTree = "<group>"; };
 		2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
 		2CCD5D33202A12E3008ACBC7 /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
 		2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -8630,6 +8634,7 @@
 		2C59F06320EB9FFA00666EE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2CCC59EF2109B38400564D45 /* CourseService */,
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
@@ -9331,6 +9336,15 @@
 				2CCB5A6121009E160091A605 /* KnowledgeGraphBuilder.swift */,
 			);
 			path = AbstractGraphBuilder;
+			sourceTree = "<group>";
+		};
+		2CCC59EF2109B38400564D45 /* CourseService */ = {
+			isa = PBXGroup;
+			children = (
+				2CCC59F02109B3A200564D45 /* CourseService.swift */,
+				2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */,
+			);
+			path = CourseService;
 			sourceTree = "<group>";
 		};
 		2CCD5D30202A12B3008ACBC7 /* AdaptiveCourseSelect */ = {
@@ -14889,6 +14903,7 @@
 				2C949A3E20ECC9100049E9A8 /* PickerViewController.swift in Sources */,
 				2CFE247D20ECFC1A00AF1E3D /* Model.xcdatamodeld in Sources */,
 				2C33CC0620EC3385009956B0 /* ApplicationInfo.swift in Sources */,
+				2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */,
 				2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */,
 				2C9499F220ECC0BA0049E9A8 /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C33CC0D20EC33FF009956B0 /* CreateRequestMaker.swift in Sources */,
@@ -14990,6 +15005,7 @@
 				2CCB5A462100849A0091A605 /* RandomCredentialsGenerator.swift in Sources */,
 				2CCB5A6221009E160091A605 /* KnowledgeGraphBuilder.swift in Sources */,
 				2C949A0320ECC2D70049E9A8 /* NotificationsPresenter.swift in Sources */,
+				2CCC59F82109B92300564D45 /* CourseServiceImpl.swift in Sources */,
 				2C33CC0820EC33CD009956B0 /* User.swift in Sources */,
 				2C949A5920ECCE800049E9A8 /* SettingsViewController.swift in Sources */,
 				2C0BD98920ED321B0022C454 /* RootNavigationManager.swift in Sources */,

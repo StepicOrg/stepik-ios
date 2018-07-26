@@ -12,18 +12,21 @@ final class ServiceComponentsAssembly: ServiceComponents {
     private let authAPI: AuthAPI
     private let stepicsAPI: StepicsAPI
     private let profilesAPI: ProfilesAPI
+    private let coursesAPI: CoursesAPI
     private let defaultsStorageManager: DefaultsStorageManager
     private let randomCredentialsGenerator: RandomCredentialsGenerator
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
+         coursesAPI: CoursesAPI,
          defaultsStorageManager: DefaultsStorageManager,
          randomCredentialsGenerator: RandomCredentialsGenerator
         ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
+        self.coursesAPI = coursesAPI
         self.defaultsStorageManager = defaultsStorageManager
         self.randomCredentialsGenerator = randomCredentialsGenerator
     }
@@ -44,5 +47,9 @@ final class ServiceComponentsAssembly: ServiceComponents {
 
     var lessonsService: LessonsService {
         return LessonsServiceImpl()
+    }
+
+    var courseService: CourseService {
+        return CourseServiceImpl(coursesAPI: coursesAPI)
     }
 }
