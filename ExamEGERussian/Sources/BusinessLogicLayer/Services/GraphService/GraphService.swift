@@ -10,5 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol GraphService: class {
-    func obtainGraph() -> Promise<KnowledgeGraphPlainObject>
+    /// Method is used to fetch KnowledgeGraphPlainObject object from API.
+    ///
+    /// - Returns: Promise with a result of KnowledgeGraphPlainObject.
+    func fetchGraph() -> Promise<KnowledgeGraphPlainObject>
 }
