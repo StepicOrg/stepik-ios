@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             profilesAPI: ProfilesAPI(),
             coursesAPI: CoursesAPI(),
             enrollmentsAPI: EnrollmentsAPI(),
+            lessonsAPI: LessonsAPI(),
             defaultsStorageManager: DefaultsStorageManager(),
             randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )

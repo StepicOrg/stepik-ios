@@ -20,7 +20,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     private let topicId: String
     private let knowledgeGraph: KnowledgeGraph
-    private var lessons = [LessonPlainObject]()
+    private var lessons = [LessonPlainObject]() {
+        didSet {
+            self.view?.setLessons(viewLessons(from: lessons))
+        }
+    }
 
     private let lessonsService: LessonsService
     private let courseService: CourseService
@@ -49,7 +53,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     func refresh() {
-        fetchLessons()
+        if lessons.isEmpty {
+            obtainLessonsFromCache()
+        } else {
+            fetchLessons()
+        }
         joinCoursesIfNeeded()
     }
 
@@ -82,13 +90,18 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return enrollmentService.joinCourse(course)
     }
 
+    private func obtainLessonsFromCache() {
+        lessonsService.obtainLessons(with: lessonsIds).done { [weak self] lessons in
+            self?.lessons = lessons
+        }.catch { [weak self] error in
+            self?.displayError(error)
+        }
+    }
+
     private func fetchLessons() {
         guard lessonsIds.count > 0 else { return }
-        lessonsService.fetchLessons(with: lessonsIds).done { [weak self] responseModel in
-            guard let `self` = self else { return }
-            self.lessons = responseModel
-            let viewData = self.viewLessons(from: self.lessons)
-            self.view?.setLessons(viewData)
+        lessonsService.fetchLessons(with: lessonsIds).done { [weak self] lessons in
+            self?.lessons = lessons
         }.catch { [weak self] error in
             self?.displayError(error)
         }

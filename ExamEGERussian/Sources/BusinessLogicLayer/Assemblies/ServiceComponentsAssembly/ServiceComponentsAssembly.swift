@@ -14,6 +14,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
     private let profilesAPI: ProfilesAPI
     private let coursesAPI: CoursesAPI
     private let enrollmentsAPI: EnrollmentsAPI
+    private let lessonsAPI: LessonsAPI
     private let defaultsStorageManager: DefaultsStorageManager
     private let randomCredentialsGenerator: RandomCredentialsGenerator
 
@@ -22,6 +23,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
          profilesAPI: ProfilesAPI,
          coursesAPI: CoursesAPI,
          enrollmentsAPI: EnrollmentsAPI,
+         lessonsAPI: LessonsAPI,
          defaultsStorageManager: DefaultsStorageManager,
          randomCredentialsGenerator: RandomCredentialsGenerator
         ) {
@@ -30,6 +32,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
         self.profilesAPI = profilesAPI
         self.coursesAPI = coursesAPI
         self.enrollmentsAPI = enrollmentsAPI
+        self.lessonsAPI = lessonsAPI
         self.defaultsStorageManager = defaultsStorageManager
         self.randomCredentialsGenerator = randomCredentialsGenerator
     }
@@ -49,7 +52,7 @@ final class ServiceComponentsAssembly: ServiceComponents {
     }
 
     var lessonsService: LessonsService {
-        return LessonsServiceImpl()
+        return LessonsServiceImpl(lessonsAPI: lessonsAPI)
     }
 
     var courseService: CourseService {
