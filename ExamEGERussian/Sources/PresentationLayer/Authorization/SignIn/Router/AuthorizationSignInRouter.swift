@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AuthorizationSignInRouter: EmailAuthViewControllerDelegate {
+protocol AuthorizationSignInRouter {
     func showSignUp()
 }

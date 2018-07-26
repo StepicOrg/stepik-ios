@@ -11,21 +11,18 @@ import SVProgressHUD
 import IQKeyboardManagerSwift
 import Atributika
 
-protocol EmailAuthViewControllerDelegate: class {
-    func emailAuthViewControllerOnSuccess(_ emailAuthViewController: EmailAuthViewController)
-    func emailAuthViewControllerOnClose(_ emailAuthViewController: EmailAuthViewController)
-    func emailAuthViewControllerOnSignInWithSocial(_ emailAuthViewController: EmailAuthViewController)
-    func emailAuthViewControllerOnSignUp(_ emailAuthViewController: EmailAuthViewController)
-}
-
 extension EmailAuthViewController: EmailAuthView {
     func update(with result: EmailAuthResult) {
+        guard let navigationController = self.navigationController as? AuthNavigationViewController else {
+            return
+        }
+
         state = .normal
 
         switch result {
         case .success:
             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-            delegate?.emailAuthViewControllerOnSuccess(self)
+            navigationController.dismissAfterSuccess()
         case .badConnection:
             SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
         case .error:
@@ -38,7 +35,6 @@ extension EmailAuthViewController: EmailAuthView {
 
 class EmailAuthViewController: UIViewController {
     var presenter: EmailAuthPresenter?
-    weak var delegate: EmailAuthViewControllerDelegate?
 
     var prefilledEmail: String?
 
@@ -119,17 +115,23 @@ class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onCloseClick(_ sender: Any) {
-        delegate?.emailAuthViewControllerOnClose(self)
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email(email: nil), to: nil)
+        }
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
-        delegate?.emailAuthViewControllerOnSignInWithSocial(self)
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email(email: nil), to: .social)
+        }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
-        delegate?.emailAuthViewControllerOnSignUp(self)
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email(email: nil), to: .registration)
+        }
     }
 
     @IBAction func onRemindPasswordClick(_ sender: Any) {
@@ -138,11 +140,12 @@ class EmailAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        assert(presenter != nil && delegate != nil)
 
         edgesForExtendedLayout = UIRectEdge.top
 
         localize()
+
+        presenter = EmailAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
 
         emailTextField.delegate = self
         passwordTextField.delegate = self

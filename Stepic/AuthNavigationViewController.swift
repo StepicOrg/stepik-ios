@@ -10,8 +10,14 @@ import UIKit
 
 class AuthNavigationViewController: UINavigationController {
 
-    var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
-    var streaksNotificationSuggestionManager = NotificationSuggestionManager()
+    var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
+    var streaksNotificationSuggestionManager: NotificationSuggestionManager = NotificationSuggestionManager()
+
+    enum Controller {
+        case social
+        case email(email: String?)
+        case registration
+    }
 
     weak var source: UIViewController? {
         didSet {
@@ -21,30 +27,13 @@ class AuthNavigationViewController: UINavigationController {
     var success: (() -> Void)?
     var cancel: (() -> Void)?
 
-    lazy var router: AuthRouter = {
-        AuthRouter(navigationController: self, delegate: self, assembly: AuthAssemblyImpl())
-    }()
-
-    // Disable landscape for iPhones with diagonal <= 4.7
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return DeviceInfo.current.diagonal > 4.7 ? .all : .portrait
-    }
-
-    override var shouldAutorotate: Bool {
-        return DeviceInfo.current.diagonal > 4.7
-    }
+    var canDismiss = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         streaksAlertPresentationManager.controller = source
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
-
-        if let vc = topViewController as? SocialAuthViewController {
-            vc.delegate = router
-            vc.presenter = router.assembly.socialPresenter(view: vc)
-        }
     }
 
     private func checkStreaksNotifications() {
@@ -61,26 +50,60 @@ class AuthNavigationViewController: UINavigationController {
             }
         }
     }
-}
 
-// MARK: - AuthNavigationViewController: AuthRouterDelegate -
+    // Maybe create Router layer?
+    func dismissAfterSuccess() {
+        checkStreaksNotifications()
+        self.dismiss(animated: true, completion: { [weak self] in
+            self?.success?()
+        })
+    }
 
-extension AuthNavigationViewController: AuthRouterDelegate {
-    func authRouterWillStartDismiss(_ authRouter: AuthRouter, withState state: AuthRouter.State) {
-        switch state {
-        case .success:
-            checkStreaksNotifications()
-        case .cancel:
-            break
+    func route(from fromController: Controller, to toController: Controller?) {
+        if toController == nil {
+            // Close action
+            switch fromController {
+            case .registration:
+                popViewController(animated: true)
+            default:
+                if canDismiss {
+                    dismiss(animated: true, completion: { [weak self] in
+                        self?.cancel?()
+                    })
+                }
+            }
+
+            return
+        }
+
+        var vcs = viewControllers
+
+        switch toController! {
+        case .registration:
+            // Push registration controller
+            let vc = ControllerHelper.instantiateViewController(identifier: "Registration", storyboardName: "Auth")
+            pushViewController(vc, animated: true)
+        case .email(let email):
+            // Replace top view controller
+            let vc = ControllerHelper.instantiateViewController(identifier: "EmailAuth", storyboardName: "Auth")
+            if let vc = vc as? EmailAuthViewController {
+                vc.prefilledEmail = email
+                vcs[vcs.count - 1] = vc
+                setViewControllers(vcs, animated: true)
+            }
+        case .social:
+            // Replace top view controller
+            vcs[vcs.count - 1] = ControllerHelper.instantiateViewController(identifier: "SocialAuth", storyboardName: "Auth")
+            setViewControllers(vcs, animated: true)
         }
     }
 
-    func authRouterDidEndDismiss(_ authRouter: AuthRouter, withState state: AuthRouter.State) {
-        switch state {
-        case .success:
-            success?()
-        case .cancel:
-            cancel?()
-        }
+    // Disable landscape for iPhones with diagonal <= 4.7
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return DeviceInfo.current.diagonal > 4.7 ? .all : .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return DeviceInfo.current.diagonal > 4.7
     }
 }

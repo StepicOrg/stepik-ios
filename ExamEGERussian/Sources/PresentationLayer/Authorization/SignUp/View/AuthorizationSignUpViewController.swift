@@ -8,17 +8,5 @@
 
 import UIKit
 
-final class AuthorizationSignUpViewController: RegistrationViewController {
-    var reportAnalytics: Bool {
-        return false
-    }
-
-    // MARK: - Builder
-
-    static func make() -> RegistrationViewController {
-        let vc = ControllerHelper.instantiateViewController(identifier: "Registration", storyboardName: "Auth")
-        object_setClass(vc, AuthorizationSignUpViewController.self)
-
-        return vc as! AuthorizationSignUpViewController
-    }
+final class AuthorizationSignUpViewController: UIViewController {
 }

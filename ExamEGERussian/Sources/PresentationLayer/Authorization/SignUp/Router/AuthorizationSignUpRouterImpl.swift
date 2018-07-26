@@ -9,11 +9,4 @@
 import Foundation
 
 final class AuthorizationSignUpRouterImpl: BaseRouter, AuthorizationSignUpRouter {
-    func registrationViewControllerOnSuccess(_ registrationViewController: RegistrationViewController) {
-        dismiss()
-    }
-
-    func registrationViewControllerOnClose(_ registrationViewController: RegistrationViewController) {
-        popToRootViewController()
-    }
 }

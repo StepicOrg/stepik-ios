@@ -10,9 +10,9 @@ import UIKit
 
 final class AuthorizationSignUpAssemblyImpl: BaseAssembly, AuthorizationSignUpAssembly {
     func module(navigationController: UINavigationController) -> UIViewController {
-        let vc = AuthorizationSignUpViewController.make()
-        vc.presenter = AuthorizationSignUpPresenter(authAPI: serviceFactory.authAPI, stepicsAPI: serviceFactory.stepicsAPI, notificationStatusesAPI: serviceFactory.notificationStatusesAPI, view: vc)
-        vc.delegate = AuthorizationSignUpRouterImpl(assemblyFactory: assemblyFactory, navigationController: navigationController)
+        let vc = AuthorizationSignUpViewController()
+//        vc.presenter = AuthorizationSignUpPresenter(authAPI: serviceFactory.authAPI, stepicsAPI: serviceFactory.stepicsAPI, notificationStatusesAPI: serviceFactory.notificationStatusesAPI, view: vc)
+//        vc.delegate = AuthorizationSignUpRouterImpl(assemblyFactory: assemblyFactory, navigationController: navigationController)
 
         return vc
     }

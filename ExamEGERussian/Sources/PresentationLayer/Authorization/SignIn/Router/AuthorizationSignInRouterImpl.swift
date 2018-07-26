@@ -9,21 +9,6 @@
 import Foundation
 
 final class AuthorizationSignInRouterImpl: BaseRouter, AuthorizationSignInRouter {
-    func emailAuthViewControllerOnSuccess(_ emailAuthViewController: EmailAuthViewController) {
-        dismiss()
-    }
-
-    func emailAuthViewControllerOnClose(_ emailAuthViewController: EmailAuthViewController) {
-        popToRootViewController()
-    }
-
-    func emailAuthViewControllerOnSignInWithSocial(_ emailAuthViewController: EmailAuthViewController) {
-    }
-
-    func emailAuthViewControllerOnSignUp(_ emailAuthViewController: EmailAuthViewController) {
-        showSignUp()
-    }
-
     func showSignUp() {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.authorizationAssembly.signUp.module(navigationController: navigationController)

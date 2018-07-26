@@ -8,5 +8,5 @@
 
 import Foundation
 
-protocol AuthorizationSignUpRouter: RegistrationViewControllerDelegate {
+protocol AuthorizationSignUpRouter {
 }
