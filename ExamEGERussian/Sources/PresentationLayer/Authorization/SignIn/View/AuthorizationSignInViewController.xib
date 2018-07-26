@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthorizationSignInViewController" customModule="ExamEGERussian" customModuleProvider="target">
+            <connections>
+                <outlet property="alertBottomLabelConstraint" destination="QEe-R3-Ruo" id="rql-1v-Sx4"/>
+                <outlet property="alertLabel" destination="CNo-Lm-0w4" id="yG1-NB-hY4"/>
+                <outlet property="alertLabelHeightConstraint" destination="qW7-ya-JU7" id="bOt-AV-jq9"/>
+                <outlet property="emailTextField" destination="XDu-Ei-TB1" id="MtJ-Sh-Skg"/>
+                <outlet property="inputGroupPad" destination="FOu-Cc-B4e" id="DOc-ug-pUo"/>
+                <outlet property="logInButton" destination="xjW-QH-IbT" id="B2V-yV-JiE"/>
+                <outlet property="passwordTextField" destination="cXi-jF-3Ga" id="BTz-Iy-Bub"/>
+                <outlet property="remindPasswordButton" destination="36r-7f-jPL" id="VNh-p4-Zva"/>
+                <outlet property="separatorHeight" destination="mPV-mN-08J" id="zHy-Fc-ETq"/>
+                <outlet property="signUpButton" destination="cq7-Oq-FW7" id="KFK-FE-6Kk"/>
+                <outlet property="stepikLogoHeightConstraint" destination="fhm-yF-62R" id="ivW-fG-mtF"/>
+                <outlet property="titleLabel" destination="ciS-nU-pHJ" id="RSs-uH-FC4"/>
+                <outlet property="view" destination="i8E-bw-gf7" id="ryi-Ia-CgF"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="i8E-bw-gf7">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="BSy-cl-dih">
+                    <rect key="frame" x="163.5" y="138" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="BSy-cl-dih" secondAttribute="height" multiplier="1:1" id="OwG-wm-Gze"/>
+                        <constraint firstAttribute="height" constant="48" id="fhm-yF-62R"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cq7-Oq-FW7">
+                    <rect key="frame" x="24" y="619" width="327" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Sign Up">
+                        <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onSignUpClick:" destination="-1" eventType="touchUpInside" id="kiZ-Q2-TAZ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciS-nU-pHJ" customClass="StepikLabel" customModule="ExamEGERussian" customModuleProvider="target">
+                    <rect key="frame" x="24" y="219" width="327" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                    <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FOu-Cc-B4e">
+                    <rect key="frame" x="24" y="263" width="327" height="109"/>
+                    <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xc0-b5-CXT">
+                    <rect key="frame" x="24" y="263" width="327" height="109"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XDu-Ei-TB1" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="Wjm-jh-seL">
+                                    <variation key="heightClass=compact" constant="45"/>
+                                </constraint>
+                            </constraints>
+                            <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-TE-K3t">
+                            <rect key="frame" x="0.0" y="54" width="327" height="1"/>
+                            <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="mPV-mN-08J"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXi-jF-3Ga" customClass="AuthTextField" customModule="ExamEGERussian" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="55" width="327" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="v0V-hg-k47">
+                                    <variation key="heightClass=compact" constant="45"/>
+                                </constraint>
+                            </constraints>
+                            <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="send" secureTextEntry="YES"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="550" id="2Vx-Vp-mkB"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Whoops! The e-mail address and/or password you specified are not correct." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="CNo-Lm-0w4">
+                    <rect key="frame" x="24" y="388" width="327" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="qW7-ya-JU7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                    <color key="textColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjW-QH-IbT" customClass="AuthButton" customModule="ExamEGERussian" customModuleProvider="target">
+                    <rect key="frame" x="24" y="382" width="327" height="44"/>
+                    <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="cRD-mu-XX4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Log in">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="7"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onLogInClick:" destination="-1" eventType="touchUpInside" id="nQf-ka-voo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36r-7f-jPL">
+                    <rect key="frame" x="24" y="434" width="327" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="A4r-ip-pCo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Remind the password">
+                        <color key="titleColor" red="0.2901960784" green="0.56470588239999997" blue="0.80784313730000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onRemindPasswordClick:" destination="-1" eventType="touchUpInside" id="9Ia-dg-GaZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cq7-Oq-FW7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="36r-7f-jPL" secondAttribute="bottom" id="0Rr-Tn-UoP"/>
+                <constraint firstItem="Dyq-mf-uav" firstAttribute="bottom" secondItem="cq7-Oq-FW7" secondAttribute="bottom" constant="16" id="1hP-rW-p3s"/>
+                <constraint firstItem="xjW-QH-IbT" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="4Ii-uR-UCH"/>
+                <constraint firstItem="CNo-Lm-0w4" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="7Py-Ev-L08"/>
+                <constraint firstItem="ciS-nU-pHJ" firstAttribute="leading" secondItem="Dyq-mf-uav" secondAttribute="leading" constant="24" id="8xN-hQ-rsk"/>
+                <constraint firstItem="FOu-Cc-B4e" firstAttribute="leading" secondItem="Xc0-b5-CXT" secondAttribute="leading" id="ADF-dJ-UOm"/>
+                <constraint firstItem="FOu-Cc-B4e" firstAttribute="top" secondItem="Xc0-b5-CXT" secondAttribute="top" id="D81-TH-zQz"/>
+                <constraint firstItem="BSy-cl-dih" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="E05-iW-fdI"/>
+                <constraint firstItem="36r-7f-jPL" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="F2K-pb-6a5"/>
+                <constraint firstItem="cq7-Oq-FW7" firstAttribute="leading" secondItem="XDu-Ei-TB1" secondAttribute="leading" id="GMt-wi-acs"/>
+                <constraint firstItem="FOu-Cc-B4e" firstAttribute="trailing" secondItem="Xc0-b5-CXT" secondAttribute="trailing" id="Ic9-Oa-FIX"/>
+                <constraint firstItem="CNo-Lm-0w4" firstAttribute="width" secondItem="Xc0-b5-CXT" secondAttribute="width" id="Lka-VR-JOt"/>
+                <constraint firstItem="ciS-nU-pHJ" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="MfC-Sc-nls"/>
+                <constraint firstItem="Dyq-mf-uav" firstAttribute="trailing" secondItem="ciS-nU-pHJ" secondAttribute="trailing" constant="24" id="N2s-zX-cyH"/>
+                <constraint firstItem="36r-7f-jPL" firstAttribute="width" secondItem="xjW-QH-IbT" secondAttribute="width" id="Obx-Ne-vo4"/>
+                <constraint firstItem="cq7-Oq-FW7" firstAttribute="centerX" secondItem="i8E-bw-gf7" secondAttribute="centerX" id="PFA-8Y-IY2"/>
+                <constraint firstItem="Dyq-mf-uav" firstAttribute="trailing" secondItem="Xc0-b5-CXT" secondAttribute="trailing" priority="999" constant="24" id="Pn3-xM-Kb2"/>
+                <constraint firstItem="xjW-QH-IbT" firstAttribute="top" secondItem="CNo-Lm-0w4" secondAttribute="bottom" constant="-6" id="QEe-R3-Ruo"/>
+                <constraint firstItem="Dyq-mf-uav" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CNo-Lm-0w4" secondAttribute="trailing" constant="24" id="WF4-fQ-lrj"/>
+                <constraint firstItem="CNo-Lm-0w4" firstAttribute="top" secondItem="Xc0-b5-CXT" secondAttribute="bottom" constant="16" id="bQM-Rc-bCn"/>
+                <constraint firstItem="FOu-Cc-B4e" firstAttribute="bottom" secondItem="Xc0-b5-CXT" secondAttribute="bottom" id="bQz-mI-stJ"/>
+                <constraint firstItem="Xc0-b5-CXT" firstAttribute="centerX" secondItem="Dyq-mf-uav" secondAttribute="centerX" id="c04-oR-T3C"/>
+                <constraint firstItem="Xc0-b5-CXT" firstAttribute="top" secondItem="ciS-nU-pHJ" secondAttribute="bottom" constant="20" id="cr4-Yi-VoI">
+                    <variation key="heightClass=compact" constant="6"/>
+                </constraint>
+                <constraint firstItem="ciS-nU-pHJ" firstAttribute="top" secondItem="Dyq-mf-uav" secondAttribute="top" constant="6" id="fjP-3z-JWB"/>
+                <constraint firstItem="Xc0-b5-CXT" firstAttribute="leading" secondItem="Dyq-mf-uav" secondAttribute="leading" priority="999" constant="24" id="k9f-2Y-GqG"/>
+                <constraint firstItem="cq7-Oq-FW7" firstAttribute="trailing" secondItem="XDu-Ei-TB1" secondAttribute="trailing" id="kms-9T-81i"/>
+                <constraint firstItem="36r-7f-jPL" firstAttribute="top" secondItem="xjW-QH-IbT" secondAttribute="bottom" constant="8" id="lbI-VF-Ghg"/>
+                <constraint firstItem="Xc0-b5-CXT" firstAttribute="centerY" secondItem="i8E-bw-gf7" secondAttribute="centerY" priority="999" constant="-16" id="m7R-jK-p6y"/>
+                <constraint firstItem="CNo-Lm-0w4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dyq-mf-uav" secondAttribute="leading" constant="24" id="mRB-Jl-UmN"/>
+                <constraint firstItem="ciS-nU-pHJ" firstAttribute="top" secondItem="BSy-cl-dih" secondAttribute="bottom" constant="33" id="mYJ-sQ-1aj"/>
+                <constraint firstItem="xjW-QH-IbT" firstAttribute="width" secondItem="Xc0-b5-CXT" secondAttribute="width" id="o78-lb-chl"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Dyq-mf-uav"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="fjP-3z-JWB"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="subviews">
+                    <exclude reference="BSy-cl-dih"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="fjP-3z-JWB"/>
+                    <exclude reference="m7R-jK-p6y"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+    <resources>
+        <image name="stepik_auth_logo" width="72" height="72"/>
+    </resources>
+</document>

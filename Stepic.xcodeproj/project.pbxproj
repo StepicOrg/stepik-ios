@@ -1964,7 +1964,6 @@
 		2C34D68220FCE545001EF741 /* AuthorizationSignUpAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */; };
 		2C34D68420FCE584001EF741 /* AuthorizationSignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */; };
 		2C34D68620FCE59E001EF741 /* AuthorizationSignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68520FCE59E001EF741 /* AuthorizationSignUpPresenter.swift */; };
-		2C34D68920FCF358001EF741 /* AuthorizationSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68820FCF358001EF741 /* AuthorizationSignInViewController.swift */; };
 		2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
 		2C35C4D71F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
@@ -2028,6 +2027,9 @@
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
+		2C4F34032109F5C900E259FE /* AuthorizationSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34012109F5C900E259FE /* AuthorizationSignInViewController.swift */; };
+		2C4F34042109F5C900E259FE /* AuthorizationSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthorizationSignInViewController.xib */; };
+		2C4F3405210A0B6800E259FE /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
 		2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03220EB8AC900666EE0 /* LaunchScreen.storyboard */; };
 		2C59F03F20EB8ACA00666EE0 /* TopicsTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F03E20EB8ACA00666EE0 /* TopicsTableViewControllerTests.swift */; };
@@ -4003,10 +4005,8 @@
 		2CBC262921087056004245D6 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A0F2B20FCA4B70009F67E /* AuthRouter.swift */; };
 		2CBC262A2108708C004245D6 /* AuthAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A0F2D20FCBD9F0009F67E /* AuthAssembly.swift */; };
 		2CBC262B21087096004245D6 /* SocialAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351901F682D47004255B6 /* SocialAuthViewController.swift */; };
-		2CBC262C210870C9004245D6 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
 		2CBC262D210870E0004245D6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CBC262E21087118004245D6 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
-		2CBC262F21087126004245D6 /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
 		2CBC26302108712E004245D6 /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2CBC263121087152004245D6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
 		2CBC263221087160004245D6 /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
@@ -5641,7 +5641,6 @@
 		2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpAssembly.swift; sourceTree = "<group>"; };
 		2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpRouter.swift; sourceTree = "<group>"; };
 		2C34D68520FCE59E001EF741 /* AuthorizationSignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpPresenter.swift; sourceTree = "<group>"; };
-		2C34D68820FCF358001EF741 /* AuthorizationSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignInViewController.swift; sourceTree = "<group>"; };
 		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -5672,6 +5671,8 @@
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
 		2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterImpl.swift; sourceTree = "<group>"; };
+		2C4F34012109F5C900E259FE /* AuthorizationSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignInViewController.swift; sourceTree = "<group>"; };
+		2C4F34022109F5C900E259FE /* AuthorizationSignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizationSignInViewController.xib; sourceTree = "<group>"; };
 		2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamEGERussian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C59F02920EB8AC800666EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C59F03020EB8AC900666EE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -8585,7 +8586,8 @@
 		2C34D68720FCF33F001EF741 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C34D68820FCF358001EF741 /* AuthorizationSignInViewController.swift */,
+				2C4F34012109F5C900E259FE /* AuthorizationSignInViewController.swift */,
+				2C4F34022109F5C900E259FE /* AuthorizationSignInViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -11176,6 +11178,7 @@
 				2C59F03420EB8AC900666EE0 /* LaunchScreen.storyboard in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 				62E982D6A7D79E45786B4C8D /* GreetingAuthViewController.xib in Resources */,
+				2C4F34042109F5C900E259FE /* AuthorizationSignInViewController.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -15124,7 +15127,6 @@
 				2C9499E720ECBF880049E9A8 /* CodeTemplate.swift in Sources */,
 				2C21624220F901DD0063DD57 /* AppRouter.swift in Sources */,
 				2C949A3C20ECC87A0049E9A8 /* Reachability.m in Sources */,
-				2CBC262F21087126004245D6 /* EmailAuthPresenter.swift in Sources */,
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
 				2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */,
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
@@ -15252,6 +15254,7 @@
 				2C949A1320ECC4AF0049E9A8 /* PreferencesContainer.swift in Sources */,
 				2C949A6920ECD0040049E9A8 /* AchievementsListPresenter.swift in Sources */,
 				2CBC262421086DAC004245D6 /* StreaksAlertPresentationManager.swift in Sources */,
+				2C4F3405210A0B6800E259FE /* EmailAuthViewController.swift in Sources */,
 				2C33CC0820EC33CD009956B0 /* User.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
 				2C949A3020ECC6D10049E9A8 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -15286,9 +15289,9 @@
 				2CBC263221087160004245D6 /* SocialAuthProviders.swift in Sources */,
 				2CFF9F2420FDD02F0023B5D4 /* AuthorizationGreetingAssemblyImpl.swift in Sources */,
 				2CD7999E21077E540054D098 /* GoalPlainObject.swift in Sources */,
+				2C4F34032109F5C900E259FE /* AuthorizationSignInViewController.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
-				2CBC262C210870C9004245D6 /* EmailAuthViewController.swift in Sources */,
 				2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */,
 				2C21624C20F906CD0063DD57 /* AuthorizationGreetingAssembly.swift in Sources */,
 				2C33CC0420EC336B009956B0 /* APIEndpoint.swift in Sources */,
@@ -15358,7 +15361,6 @@
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
 				2C67B22120FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift in Sources */,
 				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
-				2C34D68920FCF358001EF741 /* AuthorizationSignInViewController.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
 				2CBC262121086D64004245D6 /* RoutingManager.swift in Sources */,
 				2CBC262D210870E0004245D6 /* RegistrationViewController.swift in Sources */,

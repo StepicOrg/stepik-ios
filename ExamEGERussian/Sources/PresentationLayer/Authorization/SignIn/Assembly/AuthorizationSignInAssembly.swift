@@ -9,12 +9,5 @@
 import Foundation
 
 protocol AuthorizationSignInAssembly: class {
-    func module(navigationController: UINavigationController, router: AuthorizationSignInRouter?) -> UIViewController
-    func router(navigationController: UINavigationController) -> AuthorizationSignInRouter
-}
-
-extension AuthorizationSignInAssembly {
-    func module(navigationController: UINavigationController) -> UIViewController {
-        return module(navigationController: navigationController, router: nil)
-    }
+    func module(navigationController: UINavigationController) -> UIViewController
 }

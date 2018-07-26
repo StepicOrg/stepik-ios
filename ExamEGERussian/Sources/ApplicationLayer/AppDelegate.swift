@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireNetworkActivityIndicator
+import IQKeyboardManagerSwift
 
 // MARK: AppDelegate: UIResponder, UIApplicationDelegate
 
@@ -40,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         router.start(window)
 
         NetworkActivityIndicatorManager.shared.isEnabled = true
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         return true
     }

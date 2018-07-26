@@ -83,7 +83,7 @@ final class TopicsTableViewController: UITableViewController {
             action: #selector(onRightBarButtonItemTouch(_:))
         )
     }
-    
+
     // MARK: Actions
 
     @objc private func refreshData(_ sender: Any) {

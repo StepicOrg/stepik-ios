@@ -9,15 +9,15 @@
 import Foundation
 
 final class AuthorizationSignInAssemblyImpl: BaseAssembly, AuthorizationSignInAssembly {
-    func module(navigationController: UINavigationController, router _router: AuthorizationSignInRouter?) -> UIViewController {
-        let vc = AuthorizationSignInViewController.make()
-        vc.presenter = AuthorizationSignInPresenter(authAPI: serviceFactory.authAPI, stepicsAPI: serviceFactory.stepicsAPI, notificationStatusesAPI: serviceFactory.notificationStatusesAPI, view: vc)
-        vc.delegate = _router != nil ? _router : router(navigationController: navigationController)
+    func module(navigationController: UINavigationController) -> UIViewController {
+        let controller = AuthorizationSignInViewController()
+        controller.presenter = EmailAuthPresenter(
+            authAPI: serviceFactory.authAPI,
+            stepicsAPI: serviceFactory.stepicsAPI,
+            notificationStatusesAPI: serviceFactory.notificationStatusesAPI,
+            view: controller
+        )
 
-        return vc
-    }
-
-    func router(navigationController: UINavigationController) -> AuthorizationSignInRouter {
-        return AuthorizationSignInRouterImpl(assemblyFactory: assemblyFactory, navigationController: navigationController)
+        return controller
     }
 }
