@@ -17,27 +17,40 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     private weak var view: LessonsView?
     private weak var router: LessonsRouter?
+
     private let topicId: String
     private let knowledgeGraph: KnowledgeGraph
     private var lessons = [LessonPlainObject]()
-    private let lessonsService: LessonsService
 
+    private let lessonsService: LessonsService
+    private let courseService: CourseService
+    private let enrollmentService: EnrollmentService
+
+    private var topic: KnowledgeGraphVertex<String> {
+        return knowledgeGraph[topicId]!.key
+    }
     private var lessonsIds: [Int] {
-        guard let topic = knowledgeGraph[topicId]?.key else { return [] }
         return topic.lessons.filter { $0.type == .theory }.map { $0.id }
     }
+    private var coursesIds: [Int] {
+        return topic.lessons.compactMap { Int($0.courseId) }
+    }
 
-    init(view: LessonsView, router: LessonsRouter, topicId: String, knowledgeGraph: KnowledgeGraph,
-         lessonsService: LessonsService) {
+    init(view: LessonsView, router: LessonsRouter, topicId: String,
+         knowledgeGraph: KnowledgeGraph, lessonsService: LessonsService,
+         courseService: CourseService, enrollmentService: EnrollmentService) {
         self.view = view
         self.router = router
         self.topicId = topicId
         self.knowledgeGraph = knowledgeGraph
         self.lessonsService = lessonsService
+        self.courseService = courseService
+        self.enrollmentService = enrollmentService
     }
 
     func refresh() {
         fetchLessons()
+        joinCoursesIfNeeded()
     }
 
     func selectLesson(with viewData: LessonsViewData) {
@@ -45,6 +58,29 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     // MARK: - Private API
+
+    private func joinCoursesIfNeeded() {
+        guard !coursesIds.isEmpty else { return }
+        courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
+            var ids = Set(self.coursesIds)
+            courses.filter { $0.enrolled }.map { $0.id }.forEach { ids.remove($0) }
+            return .value(Array(ids))
+        }.then { ids -> Promise<[Course]> in
+            guard !ids.isEmpty else { return .value([]) }
+            return self.courseService.fetchCourses(with: ids)
+        }.then { courses in
+            when(fulfilled: courses.map { self.joinCourse($0) })
+        }.done { courses in
+            print("Successfully joined courses with ids: \(courses.map { $0.id })")
+        }.catch { [weak self] error in
+            self?.displayError(error)
+        }
+    }
+
+    private func joinCourse(_ course: Course) -> Promise<Course> {
+        guard !course.enrolled else { return .value(course) }
+        return enrollmentService.joinCourse(course)
+    }
 
     private func fetchLessons() {
         guard lessonsIds.count > 0 else { return }
