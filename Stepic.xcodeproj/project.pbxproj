@@ -4021,6 +4021,8 @@
 		2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */; };
 		2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F02109B3A200564D45 /* CourseService.swift */; };
 		2CCC59F82109B92300564D45 /* CourseServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */; };
+		2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FB2109BB4800564D45 /* EnrollmentService.swift */; };
+		2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FD2109BB9800564D45 /* EnrollmentServiceImpl.swift */; };
 		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CCD5D38202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */; };
 		2CCD5D3B202A18A5008ACBC7 /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */; };
@@ -5804,6 +5806,8 @@
 		2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphVertex.swift; sourceTree = "<group>"; };
 		2CCC59F02109B3A200564D45 /* CourseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseService.swift; sourceTree = "<group>"; };
 		2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServiceImpl.swift; sourceTree = "<group>"; };
+		2CCC59FB2109BB4800564D45 /* EnrollmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentService.swift; sourceTree = "<group>"; };
+		2CCC59FD2109BB9800564D45 /* EnrollmentServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceImpl.swift; sourceTree = "<group>"; };
 		2CCD5D31202A12D5008ACBC7 /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
 		2CCD5D33202A12E3008ACBC7 /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
 		2CCD5D36202A1898008ACBC7 /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -8635,6 +8639,7 @@
 			isa = PBXGroup;
 			children = (
 				2CCC59EF2109B38400564D45 /* CourseService */,
+				2CCC59FA2109BB3A00564D45 /* EnrollmentService */,
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
@@ -9345,6 +9350,15 @@
 				2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */,
 			);
 			path = CourseService;
+			sourceTree = "<group>";
+		};
+		2CCC59FA2109BB3A00564D45 /* EnrollmentService */ = {
+			isa = PBXGroup;
+			children = (
+				2CCC59FB2109BB4800564D45 /* EnrollmentService.swift */,
+				2CCC59FD2109BB9800564D45 /* EnrollmentServiceImpl.swift */,
+			);
+			path = EnrollmentService;
 			sourceTree = "<group>";
 		};
 		2CCD5D30202A12B3008ACBC7 /* AdaptiveCourseSelect */ = {
@@ -15101,6 +15115,7 @@
 				2C949A1720ECC5480049E9A8 /* ProfileViewController.swift in Sources */,
 				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
 				2C33CBDB20EC2C2E009956B0 /* UserRegistrationServiceImplementation.swift in Sources */,
+				2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
 				2C949A1220ECC4930049E9A8 /* NotificationRequestAlertManager.swift in Sources */,
 				2C949A0620ECC3130049E9A8 /* AlertManager.swift in Sources */,
@@ -15148,6 +15163,7 @@
 				2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */,
 				2C949A1D20ECC58A0049E9A8 /* MenuUIManager.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
+				2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */,
 				2C949A2320ECC5D60049E9A8 /* ProfileDescriptionPresenter.swift in Sources */,
 				2C9499E820ECBF9B0049E9A8 /* NotificationRequestAlertContext.swift in Sources */,
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,

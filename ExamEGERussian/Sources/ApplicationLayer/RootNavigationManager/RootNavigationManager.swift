@@ -53,6 +53,7 @@ extension RootNavigationManager: TopicsRouter {
             knowledgeGraph: knowledgeGraph,
             lessonsService: serviceComponents.lessonsService,
             courseService: serviceComponents.courseService,
+            enrollmentService: serviceComponents.enrollmentService
         )
         controller.presenter = presenter
         controller.title = knowledgeGraph[id]?.key.title
