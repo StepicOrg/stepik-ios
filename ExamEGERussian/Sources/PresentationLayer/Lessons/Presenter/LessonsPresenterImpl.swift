@@ -84,7 +84,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     private func fetchLessons() {
         guard lessonsIds.count > 0 else { return }
-        lessonsService.obtainLessons(with: lessonsIds).done { [weak self] responseModel in
+        lessonsService.fetchLessons(with: lessonsIds).done { [weak self] responseModel in
             guard let `self` = self else { return }
             self.lessons = responseModel
             let viewData = self.viewLessons(from: self.lessons)

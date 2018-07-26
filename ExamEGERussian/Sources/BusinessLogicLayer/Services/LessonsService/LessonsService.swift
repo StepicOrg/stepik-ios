@@ -10,5 +10,9 @@ import Foundation
 import PromiseKit
 
 protocol LessonsService: class {
-    func obtainLessons(with ids: [Int]) -> Promise<[LessonPlainObject]>
+    /// Method is used to fetch lessons from Stepik API.
+    ///
+    /// - Parameter ids: Lessons ids.
+    /// - Returns: Promise with an array of LessonPlainObjects.
+    func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]>
 }

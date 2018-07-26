@@ -15,7 +15,7 @@ final class LessonsServiceImpl: LessonsService {
         let lessons: [LessonPlainObject]
     }
 
-    func obtainLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
+    func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
         let url = "\(StepicApplicationsInfo.apiURL)/lessons"
         let parameters = ["ids": ids]
         let headers = AuthInfo.shared.initialHTTPHeaders
