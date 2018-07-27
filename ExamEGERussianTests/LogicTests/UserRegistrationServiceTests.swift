@@ -12,7 +12,7 @@ import PromiseKit
 
 class UserRegistrationServiceTests: XCTestCase {
     var service: UserRegistrationServiceMock!
-    let userRegistrationParams = RandomCredentialsProvider().userRegistrationParams
+    let userRegistrationParams = RandomCredentialsGenerator().userRegistrationParams
 
     override func setUp() {
         super.setUp()

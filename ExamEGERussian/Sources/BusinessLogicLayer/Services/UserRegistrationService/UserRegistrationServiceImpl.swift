@@ -27,8 +27,8 @@ final class UserRegistrationServiceImpl: UserRegistrationService {
 
     func register(with params: UserRegistrationParams) -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
-            let savedPassword = defaultsStorageManager.accountPassword,
-            savedEmail == params.email && savedPassword == params.password {
+           let savedPassword = defaultsStorageManager.accountPassword,
+           savedEmail == params.email && savedPassword == params.password {
             return .value((email: savedEmail, password: savedPassword))
         }
 

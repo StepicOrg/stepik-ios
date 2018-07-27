@@ -240,6 +240,7 @@ extension AuthSignUpViewController: UITextFieldDelegate {
                 self.onRegisterClick(registerButton)
             }
         }
+
         return true
     }
 }

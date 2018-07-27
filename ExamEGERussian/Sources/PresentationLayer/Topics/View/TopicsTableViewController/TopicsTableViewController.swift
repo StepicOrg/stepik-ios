@@ -73,14 +73,14 @@ final class TopicsTableViewController: UITableViewController {
             title: NSLocalizedString("Logout", comment: ""),
             style: .plain,
             target: self,
-            action: #selector(onLeftBarButtonItemTouch(_:))
+            action: #selector(onLogoutClick(_:))
         )
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("SignIn", comment: ""),
             style: .plain,
             target: self,
-            action: #selector(onRightBarButtonItemTouch(_:))
+            action: #selector(onSignInClick(_:))
         )
     }
 
@@ -90,11 +90,11 @@ final class TopicsTableViewController: UITableViewController {
         presenter.refresh()
     }
 
-    @objc private func onLeftBarButtonItemTouch(_ sender: Any) {
+    @objc private func onLogoutClick(_ sender: Any) {
         presenter.logout()
     }
 
-    @objc private func onRightBarButtonItemTouch(_ sender: Any) {
+    @objc private func onSignInClick(_ sender: Any) {
         presenter.signIn()
     }
 }

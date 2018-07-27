@@ -34,7 +34,9 @@ public final class BorderedButton: UIButton {
     @IBInspectable
     public var borderColor: UIColor? {
         get {
-            guard let cgColor = layer.borderColor else { return nil }
+            guard let cgColor = layer.borderColor else {
+                return nil
+            }
             return UIColor(cgColor: cgColor)
         }
         set {

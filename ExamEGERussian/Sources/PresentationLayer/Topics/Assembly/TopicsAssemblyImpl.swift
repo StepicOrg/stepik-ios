@@ -11,8 +11,10 @@ import Foundation
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
     func module(navigationController: UINavigationController) -> UIViewController {
         let controller = TopicsTableViewController()
-        let router = TopicsRouterImpl(assemblyFactory: assemblyFactory,
-                                      navigationController: navigationController)
+        let router = TopicsRouterImpl(
+            assemblyFactory: assemblyFactory,
+            navigationController: navigationController
+        )
         controller.presenter = TopicsPresenterImpl(
             view: controller,
             model: KnowledgeGraph(),

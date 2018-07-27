@@ -14,7 +14,7 @@ final class UserRegistrationServiceMock: UserRegistrationService {
     let authAPI = AuthAPI()
     let stepicsAPI = StepicsAPI()
     let defaultsStorageManager = DefaultsStorageManager()
-    let userRegistrationParams = RandomCredentialsProvider().userRegistrationParams
+    let userRegistrationParams = RandomCredentialsGenerator().userRegistrationParams
 
     // Properties that enable us to set exactly what User or error
     // we want our mocked UserRegistrationService to return for request.

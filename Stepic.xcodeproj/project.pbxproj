@@ -4038,7 +4038,7 @@
 		2CD7996021077CBA0054D098 /* UITableView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994B21077CB90054D098 /* UITableView+Registration.swift */; };
 		2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994D21077CB90054D098 /* UITableViewHeaderFooterView+ReusableCell.swift */; };
 		2CD7996321077CBA0054D098 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995021077CB90054D098 /* BorderedButton.swift */; };
-		2CD7996421077CBA0054D098 /* RandomCredentialsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsProvider.swift */; };
+		2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
 		2CD7998B21077D010054D098 /* TopicsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7997921077D010054D098 /* TopicsPresenter.swift */; };
 		2CD7998C21077D010054D098 /* TopicsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7997A21077D010054D098 /* TopicsPresenterImpl.swift */; };
 		2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7997D21077D010054D098 /* TopicTableViewCell.xib */; };
@@ -4216,6 +4216,7 @@
 		62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
 		62E9889B64C038694C9566DE /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E988EA9D5C729ACCE8B386 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
+		62E989085F0A0C8308526B56 /* ThirdPartiesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D420655ABF3EF16CB21 /* ThirdPartiesConfigurator.swift */; };
 		62E98967D33DB824B8BF27E0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9897FBB60991C568BFDBE /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
@@ -5868,7 +5869,7 @@
 		2CD7994B21077CB90054D098 /* UITableView+Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Registration.swift"; sourceTree = "<group>"; };
 		2CD7994D21077CB90054D098 /* UITableViewHeaderFooterView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+ReusableCell.swift"; sourceTree = "<group>"; };
 		2CD7995021077CB90054D098 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
-		2CD7995321077CB90054D098 /* RandomCredentialsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCredentialsProvider.swift; sourceTree = "<group>"; };
+		2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGenerator.swift; sourceTree = "<group>"; };
 		2CD7997921077D010054D098 /* TopicsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsPresenter.swift; sourceTree = "<group>"; };
 		2CD7997A21077D010054D098 /* TopicsPresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsPresenterImpl.swift; sourceTree = "<group>"; };
 		2CD7997D21077D010054D098 /* TopicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicTableViewCell.xib; sourceTree = "<group>"; };
@@ -5978,6 +5979,7 @@
 		62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementProgressesAPI.swift; sourceTree = "<group>"; };
 		62E98C688DF80BD29740D967 /* AchievementProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementProgress.swift; sourceTree = "<group>"; };
 		62E98C84F59654D91C200A81 /* NotificationBannerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBannerType.swift; sourceTree = "<group>"; };
+		62E98D420655ABF3EF16CB21 /* ThirdPartiesConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartiesConfigurator.swift; sourceTree = "<group>"; };
 		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
 		62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableHeaderLayout.swift"; sourceTree = "<group>"; };
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
@@ -8432,9 +8434,10 @@
 		2C21623B20F9002B0063DD57 /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				2CAD296120FDE45D0058481C /* Assembly */,
 				2C59F02920EB8AC800666EE0 /* AppDelegate.swift */,
 				2C21624120F901DD0063DD57 /* AppRouter.swift */,
-				2CAD296120FDE45D0058481C /* Assembly */,
+				62E98D420655ABF3EF16CB21 /* ThirdPartiesConfigurator.swift */,
 			);
 			path = ApplicationLayer;
 			sourceTree = "<group>";
@@ -9534,8 +9537,8 @@
 		2CD7995121077CB90054D098 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7995321077CB90054D098 /* RandomCredentialsProvider.swift */,
 				2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */,
+				2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -15346,7 +15349,7 @@
 				2C33CBE320EC3127009956B0 /* Session.swift in Sources */,
 				2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C9499B820ECBB100049E9A8 /* Certificate.swift in Sources */,
-				2CD7996421077CBA0054D098 /* RandomCredentialsProvider.swift in Sources */,
+				2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */,
 				2C94999920ECB8930049E9A8 /* Progress.swift in Sources */,
 				2C9499BB20ECBB2F0049E9A8 /* Profile+CoreDataProperties.swift in Sources */,
 				2C949A1920ECC54F0049E9A8 /* StepikTableView.swift in Sources */,
@@ -15422,6 +15425,7 @@
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
+				62E989085F0A0C8308526B56 /* ThirdPartiesConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

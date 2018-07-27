@@ -11,5 +11,7 @@ import Foundation
 /// This is a `plug` object to use in the Auth.info.token setter.
 final class NotificationsBadgesManager {
     static let shared = NotificationsBadgesManager()
-    func set(number: Int) {}
+
+    func set(number: Int) {
+    }
 }

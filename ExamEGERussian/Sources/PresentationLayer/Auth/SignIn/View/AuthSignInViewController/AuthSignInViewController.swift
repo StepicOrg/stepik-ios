@@ -144,7 +144,9 @@ final class AuthSignInViewController: UIViewController {
     }
 
     private func prefill() {
-        guard let email = self.prefilledEmail, email != "" else { return }
+        guard let email = self.prefilledEmail, email != "" else {
+            return
+        }
 
         emailTextField.text = email
         state = .existingEmail
@@ -219,15 +221,11 @@ extension AuthSignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
-            return true
-        }
-
-        if textField == passwordTextField {
+        } else if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
             if logInButton.isEnabled {
                 self.onLogInClick(logInButton)
             }
-            return true
         }
 
         return true

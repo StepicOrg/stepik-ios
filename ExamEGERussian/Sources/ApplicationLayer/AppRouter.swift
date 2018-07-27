@@ -11,8 +11,6 @@ import UIKit
 final class AppRouter: BaseRouter {
     private(set) weak var window: UIWindow?
 
-    // MARK: Public API
-
     func start(_ window: UIWindow) {
         self.window = window
         window.rootViewController = navigationController

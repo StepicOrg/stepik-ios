@@ -16,7 +16,9 @@ final class AuthSignInRouterImpl: BaseRouter, AuthSignInRouter {
     }
 
     func showResetPassword() {
-        guard let navigationController = navigationController else { return }
+        guard let navigationController = navigationController else {
+            return
+        }
         WebControllerManager.sharedManager.presentWebControllerWithURLString(
             "\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/",
             inController: navigationController,

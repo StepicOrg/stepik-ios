@@ -10,10 +10,10 @@ import Foundation
 import PromiseKit
 
 final class TopicsPresenterImpl: TopicsPresenter {
-
     private weak var view: TopicsView?
     private let router: TopicsRouter
     private var graph: KnowledgeGraph
+
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
@@ -32,7 +32,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = graph[viewData.id]?.key else { return }
+        guard let topic = graph[viewData.id]?.key else {
+            return
+        }
         showLessons(for: topic)
     }
 
@@ -48,8 +50,8 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func checkAuthStatus() {
         if !AuthInfo.shared.isAuthorized {
-            userRegistrationService.registerAndSignIn(with: RandomCredentialsProvider().userRegistrationParams)
-            .then { [unowned self] user in
+            let params = RandomCredentialsGenerator().userRegistrationParams
+            userRegistrationService.registerAndSignIn(with: params).then { [unowned self] user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
@@ -63,10 +65,12 @@ final class TopicsPresenterImpl: TopicsPresenter {
         graphService.obtainGraph().done { [weak self] responseModel in
             guard let `self` = self else { return }
             let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
-            guard let graph = builder.build() as? KnowledgeGraph else { return }
-            self.graph = graph
+            guard let graph = builder.build() as? KnowledgeGraph,
+                  let vertices = graph.vertices as? [KnowledgeGraphVertex<String>] else {
+                return
+            }
 
-            let vertices = graph.vertices as! [KnowledgeGraphVertex<String>]
+            self.graph = graph
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)

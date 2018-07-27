@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RandomCredentialsProvider {
+struct RandomCredentialsGenerator {
     var firstname: String {
         return StringHelper.generateRandomString(of: 6)
     }
