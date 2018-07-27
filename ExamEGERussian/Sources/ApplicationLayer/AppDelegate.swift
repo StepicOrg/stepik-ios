@@ -30,8 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceFactory = ServiceFactoryImpl(
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI(),
-            notificationStatusesAPI: NotificationStatusesAPI()
+            profilesAPI: ProfilesAPI()
         )
         let assemblyFactory = AssemblyFactoryImpl(serviceFactory: serviceFactory)
 

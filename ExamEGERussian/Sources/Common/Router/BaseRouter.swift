@@ -9,16 +9,19 @@
 import UIKit
 
 class BaseRouter {
-
     typealias DeriveViewControllerClosure = (UINavigationController) -> UIViewController
 
     let assemblyFactory: AssemblyFactory
     weak var navigationController: UINavigationController?
 
+    // MARK: Init
+
     init(assemblyFactory: AssemblyFactory, navigationController: UINavigationController) {
         self.assemblyFactory = assemblyFactory
         self.navigationController = navigationController
     }
+
+    // MARK: Navigation
 
     func pushViewController(derivedFrom deriveViewController: DeriveViewControllerClosure, animated: Bool = true) {
         guard let navigationController = navigationController else {
@@ -43,14 +46,16 @@ class BaseRouter {
     func popToRootViewController(_ animated: Bool = true) {
         navigationController?.popToRootViewController(animated: animated)
     }
-
 }
 
 // MARK: - BaseRouter: RouterDismissable -
 
 extension BaseRouter: RouterDismissable {
-    // @objc keyword for the ability to override the implementation.
-    @objc func dismiss(completion: (() -> Void)?) {
+    func dismiss(completion: (() -> Void)?) {
         navigationController?.dismiss(animated: true, completion: completion)
+    }
+
+    func dismiss() {
+        dismiss(completion: nil)
     }
 }

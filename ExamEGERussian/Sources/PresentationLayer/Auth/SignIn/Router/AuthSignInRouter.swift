@@ -8,6 +8,7 @@
 
 import Foundation
 
-protocol AuthorizationSignInRouter {
+protocol AuthSignInRouter: RouterDismissable {
     func showSignUp()
+    func showResetPassword()
 }

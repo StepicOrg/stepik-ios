@@ -17,8 +17,8 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var authorizationAssembly: AuthorizationAssembly {
-        return AuthorizationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    var authAssembly: AuthAssembly {
+        return AuthAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     private let serviceFactory: ServiceFactory

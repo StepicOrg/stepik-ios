@@ -12,7 +12,6 @@ protocol ServiceFactory: class {
     var authAPI: AuthAPI { get }
     var stepicsAPI: StepicsAPI { get }
     var profilesAPI: ProfilesAPI { get }
-    var notificationStatusesAPI: NotificationStatusesAPI { get }
 
     func userRegistrationService(for type: UserRegistrationServiceType) -> UserRegistrationService
     var graphService: GraphService { get }

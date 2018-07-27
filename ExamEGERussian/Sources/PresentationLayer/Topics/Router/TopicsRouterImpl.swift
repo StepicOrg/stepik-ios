@@ -11,7 +11,7 @@ import Foundation
 final class TopicsRouterImpl: BaseRouter, TopicsRouter {
     func showAuth() {
         presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authorizationAssembly.greeting.module()
+            assemblyFactory.authAssembly.greeting.module()
         })
     }
 }

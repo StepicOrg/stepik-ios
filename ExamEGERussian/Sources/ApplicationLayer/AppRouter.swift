@@ -21,7 +21,7 @@ final class AppRouter: BaseRouter {
 
     func showAuthorization(animated: Bool = true) {
         presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authorizationAssembly.greeting.module()
+            assemblyFactory.authAssembly.greeting.module()
         }, animated: animated)
     }
 

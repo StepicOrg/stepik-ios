@@ -12,7 +12,6 @@ final class ServiceFactoryImpl: ServiceFactory {
     let authAPI: AuthAPI
     let stepicsAPI: StepicsAPI
     let profilesAPI: ProfilesAPI
-    let notificationStatusesAPI: NotificationStatusesAPI
 
     // MARK: - ServiceFactory -
 
@@ -42,11 +41,9 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
-         profilesAPI: ProfilesAPI,
-         notificationStatusesAPI: NotificationStatusesAPI) {
+         profilesAPI: ProfilesAPI) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
-        self.notificationStatusesAPI = notificationStatusesAPI
     }
 }

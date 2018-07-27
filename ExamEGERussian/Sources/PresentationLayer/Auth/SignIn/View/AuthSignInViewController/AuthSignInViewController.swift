@@ -11,26 +11,7 @@ import SVProgressHUD
 import IQKeyboardManagerSwift
 import Atributika
 
-extension AuthorizationSignInViewController: EmailAuthView {
-    func update(with result: EmailAuthResult) {
-        state = .normal
-
-        switch result {
-        case .success:
-            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-//            delegate?.emailAuthViewControllerOnSuccess(self)
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        case .badConnection:
-            SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
-        case .error:
-            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
-        case .manyAttempts:
-            SVProgressHUD.showError(withStatus: NSLocalizedString("TooManyAttemptsSignIn", comment: ""))
-        }
-    }
-}
-
-final class AuthorizationSignInViewController: UIViewController {
+final class AuthSignInViewController: UIViewController {
 
     // MARK: IBOutlets
 
@@ -50,10 +31,10 @@ final class AuthorizationSignInViewController: UIViewController {
 
     // MARK: Instance Properties
 
-    var presenter: EmailAuthPresenter?
+    var presenter: AuthSignInPresenter?
     var prefilledEmail: String?
 
-    var state: EmailAuthState = .normal {
+    var state: AuthSignInState = .normal {
         didSet {
             switch state {
             case .normal:
@@ -106,7 +87,6 @@ final class AuthorizationSignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         localize()
         setup()
     }
@@ -187,25 +167,19 @@ final class AuthorizationSignInViewController: UIViewController {
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
 
-        presenter?.logIn(with: email, password: password)
+        presenter?.signIn(with: email, password: password)
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        //delegate?.emailAuthViewControllerOnSignUp(self)
+        presenter?.signUp()
     }
 
     @IBAction func onRemindPasswordClick(_ sender: Any) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString(
-            "\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/",
-            inController: self,
-            withKey: "reset password",
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        presenter?.resetPassword()
     }
 
     @objc private func onCloseClick(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        presenter?.cancel()
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -217,11 +191,28 @@ final class AuthorizationSignInViewController: UIViewController {
     }
 }
 
+// MARK: - AuthSignInViewController: EmailAuthView -
+
+extension AuthSignInViewController: AuthSignInView {
+    func update(with result: AuthSignInResult) {
+        state = .normal
+        switch result {
+        case .success:
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+        case .badConnection:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("BadConnectionAuth", comment: ""))
+        case .error:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+        case .manyAttempts:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("TooManyAttemptsSignIn", comment: ""))
+        }
+    }
+}
+
 // MARK: - AuthorizationSignInViewController: UITextFieldDelegate -
 
-extension AuthorizationSignInViewController: UITextFieldDelegate {
+extension AuthSignInViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        // 24 - default value in app (see AppDelegate), 60 - offset with button
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
 

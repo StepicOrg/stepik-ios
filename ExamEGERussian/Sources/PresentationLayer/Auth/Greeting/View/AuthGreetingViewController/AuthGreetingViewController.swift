@@ -8,11 +8,8 @@
 
 import UIKit
 
-final class GreetingAuthViewController: UIViewController {
-
-    // MARK: Instance Properties
-
-    var router: AuthorizationGreetingRouter?
+final class AuthGreetingViewController: UIViewController {
+    var router: AuthGreetingRouter?
 
     private let gradientLayer = CAGradientLayer(
         colors: [UIColor.stepicGreen, UIColor(hex: 0x4CAF50), UIColor(hex: 0x8BC34A)],
@@ -58,5 +55,4 @@ final class GreetingAuthViewController: UIViewController {
     @objc private func dismiss(_ sender: Any) {
         router?.dismiss()
     }
-
 }
