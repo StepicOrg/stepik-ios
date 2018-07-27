@@ -11,4 +11,5 @@ import Foundation
 protocol AuthSignInRouter: RouterDismissable {
     func showSignUp()
     func showResetPassword()
+    func pop()
 }

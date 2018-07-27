@@ -10,58 +10,36 @@ import Foundation
 import PromiseKit
 
 final class UserRegistrationServiceImpl: UserRegistrationService {
-
     private let authAPI: AuthAPI
     private let stepicsAPI: StepicsAPI
     private let profilesAPI: ProfilesAPI
     private let defaultsStorageManager: DefaultsStorageManager
-    let credentialsProvider: UserRegistrationServiceCredentialsProvider
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,
          profilesAPI: ProfilesAPI,
-         defaultsStorageManager: DefaultsStorageManager,
-         credentialsProvider: UserRegistrationServiceCredentialsProvider) {
+         defaultsStorageManager: DefaultsStorageManager) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
         self.defaultsStorageManager = defaultsStorageManager
-        self.credentialsProvider = credentialsProvider
     }
 
-    func registerNewUser() -> Promise<User> {
-        return Promise { seal in
-            checkToken().then {
-                self.registerUser()
-            }.then { email, password -> Promise<User> in
-                self.logInUser(email: email, password: password)
-            }.then { user in
-                self.unregisterFromEmail(user: user)
-            }.done { user in
-                seal.fulfill(user)
-            }.catch { error in
-                seal.reject(error)
-            }
-        }
-    }
-
-    func registerUser() -> Promise<(email: String, password: String)> {
+    func register(with params: UserRegistrationParams) -> Promise<(email: String, password: String)> {
         if let savedEmail = defaultsStorageManager.accountEmail,
-            let savedPassword = defaultsStorageManager.accountPassword {
+            let savedPassword = defaultsStorageManager.accountPassword,
+            savedEmail == params.email && savedPassword == params.password {
             return .value((email: savedEmail, password: savedPassword))
         }
 
-        let email = credentialsProvider.email
-        let password = credentialsProvider.password
-
         return Promise { seal in
             self.authAPI.signUpWithAccount(
-                firstname: credentialsProvider.firstname,
-                lastname: credentialsProvider.lastname,
-                email: email,
-                password: password
+                firstname: params.firstname,
+                lastname: params.lastname,
+                email: params.email,
+                password: params.password
             ).done {
-                seal.fulfill((email: email, password: password))
+                seal.fulfill((email: params.email, password: params.password))
             }.catch { error in
                 print("\(#file): failed to register new user with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notRegistered)
@@ -69,7 +47,7 @@ final class UserRegistrationServiceImpl: UserRegistrationService {
         }
     }
 
-    func logInUser(email: String, password: String) -> Promise<User> {
+    func signIn(email: String, password: String) -> Promise<User> {
         defaultsStorageManager.accountEmail = email
         defaultsStorageManager.accountPassword = password
 
@@ -90,6 +68,20 @@ final class UserRegistrationServiceImpl: UserRegistrationService {
             }.catch { error in
                 print("\(#file): failed to login user with error: \(error)")
                 seal.reject(UserRegistrationServiceError.notLoggedIn)
+            }
+        }
+    }
+
+    func registerAndSignIn(with params: UserRegistrationParams) -> Promise<User> {
+        return Promise { seal in
+            checkToken().then {
+                self.register(with: params)
+            }.then { email, password in
+                self.signIn(email: email, password: password)
+            }.done { user in
+                seal.fulfill(user)
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }

@@ -13,31 +13,18 @@ final class ServiceFactoryImpl: ServiceFactory {
     let stepicsAPI: StepicsAPI
     let profilesAPI: ProfilesAPI
 
-    // MARK: - ServiceFactory -
-
-    func userRegistrationService(for type: UserRegistrationServiceType) -> UserRegistrationService {
-        let credentialsProvider: UserRegistrationServiceCredentialsProvider
-        switch type {
-        case .real(let provider):
-            credentialsProvider = provider
-        case .fake:
-            credentialsProvider = RandomCredentialsProvider()
-        }
-
+    var userRegistrationService: UserRegistrationService {
         return UserRegistrationServiceImpl(
             authAPI: authAPI,
             stepicsAPI: stepicsAPI,
             profilesAPI: profilesAPI,
-            defaultsStorageManager: DefaultsStorageManager.shared,
-            credentialsProvider: credentialsProvider
+            defaultsStorageManager: DefaultsStorageManager.shared
         )
     }
 
     var graphService: GraphService {
         return GraphServiceImpl()
     }
-
-    // MARK: - Init
 
     init(authAPI: AuthAPI,
          stepicsAPI: StepicsAPI,

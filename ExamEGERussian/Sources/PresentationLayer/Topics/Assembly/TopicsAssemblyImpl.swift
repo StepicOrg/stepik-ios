@@ -17,7 +17,7 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
             view: controller,
             model: KnowledgeGraph(),
             router: router,
-            userRegistrationService: serviceFactory.fakeUserRegistrationService,
+            userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService
         )
 

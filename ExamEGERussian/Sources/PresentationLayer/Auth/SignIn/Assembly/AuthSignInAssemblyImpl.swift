@@ -18,8 +18,7 @@ final class AuthSignInAssemblyImpl: BaseAssembly, AuthSignInAssembly {
         controller.presenter = AuthSignInPresenterImpl(
             view: controller,
             router: router,
-            authAPI: serviceFactory.authAPI,
-            stepicsAPI: serviceFactory.stepicsAPI
+            userRegistrationService: serviceFactory.userRegistrationService
         )
 
         return controller

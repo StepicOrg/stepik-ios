@@ -26,7 +26,7 @@ final class AuthSignInRouterImpl: BaseRouter, AuthSignInRouter {
         )
     }
 
-    override func dismiss() {
-        popToRootViewController()
+    func pop() {
+        popViewController()
     }
 }

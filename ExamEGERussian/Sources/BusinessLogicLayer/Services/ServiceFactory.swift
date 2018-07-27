@@ -13,12 +13,6 @@ protocol ServiceFactory: class {
     var stepicsAPI: StepicsAPI { get }
     var profilesAPI: ProfilesAPI { get }
 
-    func userRegistrationService(for type: UserRegistrationServiceType) -> UserRegistrationService
+    var userRegistrationService: UserRegistrationService { get }
     var graphService: GraphService { get }
-}
-
-extension ServiceFactory {
-    var fakeUserRegistrationService: UserRegistrationService {
-        return userRegistrationService(for: .fake)
-    }
 }

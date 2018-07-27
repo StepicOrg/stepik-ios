@@ -16,23 +16,42 @@ enum UserRegistrationServiceError: Error {
     case notUnregisteredFromEmails
 }
 
-enum UserRegistrationServiceType {
-    case fake
-    case real(UserRegistrationServiceCredentialsProvider)
-}
-
-protocol UserRegistrationServiceCredentialsProvider {
-    var firstname: String { get }
-    var lastname: String { get }
-    var email: String { get }
-    var password: String { get }
+struct UserRegistrationParams {
+    let firstname: String
+    let lastname: String
+    let email: String
+    let password: String
 }
 
 protocol UserRegistrationService {
-    var credentialsProvider: UserRegistrationServiceCredentialsProvider { get }
-
-    func registerNewUser() -> Promise<User>
-    func registerUser() -> Promise<(email: String, password: String)>
-    func logInUser(email: String, password: String) -> Promise<User>
+    /// Register new user.
+    ///
+    /// - Parameter params: User registration parameters contains of:
+    ///   - firstname
+    ///   - lastname
+    ///   - email
+    ///   - password
+    /// - Returns: Promise object with tuple of email and password.
+    func register(with params: UserRegistrationParams) -> Promise<(email: String, password: String)>
+    /// Signs user into account.
+    ///
+    /// - Parameters:
+    ///   - email: User email address.
+    ///   - password: User account password.
+    /// - Returns: Signed in user account.
+    func signIn(email: String, password: String) -> Promise<User>
+    /// Unregister user from email list notifications.
+    ///
+    /// - Parameter user: User to remove from email notifications.
+    /// - Returns: Updated User object.
     func unregisterFromEmail(user: User) -> Promise<User>
+    /// Sequentially performs registration and sign in actions.
+    ///
+    /// - Parameter params: User registration parameters contains of:
+    ///   - firstname
+    ///   - lastname
+    ///   - email
+    ///   - password
+    /// - Returns: Returns Promise object with newly registered User object.
+    func registerAndSignIn(with params: UserRegistrationParams) -> Promise<User>
 }

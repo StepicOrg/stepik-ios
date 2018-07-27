@@ -46,6 +46,10 @@ class BaseRouter {
     func popToRootViewController(_ animated: Bool = true) {
         navigationController?.popToRootViewController(animated: animated)
     }
+
+    func popViewController(_ animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
+    }
 }
 
 // MARK: - BaseRouter: RouterDismissable -

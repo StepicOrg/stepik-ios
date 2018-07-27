@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class TopicsPresenterImpl: TopicsPresenter {
 
@@ -47,8 +48,11 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func checkAuthStatus() {
         if !AuthInfo.shared.isAuthorized {
-            userRegistrationService.registerNewUser().done {
-                print("Successfully register user with id: \($0.id)")
+            userRegistrationService.registerAndSignIn(with: RandomCredentialsProvider().userRegistrationParams)
+            .then { [unowned self] user in
+                self.userRegistrationService.unregisterFromEmail(user: user)
+            }.done { user in
+                print("Successfully register fake user with id: \(user.id)")
             }.catch { [weak self] error in
                 self?.displayError(error)
             }

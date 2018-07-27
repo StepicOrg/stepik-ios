@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class RandomCredentialsProvider: UserRegistrationServiceCredentialsProvider {
+struct RandomCredentialsProvider {
     var firstname: String {
         return StringHelper.generateRandomString(of: 6)
     }
@@ -23,5 +23,9 @@ final class RandomCredentialsProvider: UserRegistrationServiceCredentialsProvide
 
     var password: String {
         return StringHelper.generateRandomString(of: 16)
+    }
+
+    var userRegistrationParams: UserRegistrationParams {
+        return UserRegistrationParams(firstname: firstname, lastname: lastname, email: email, password: password)
     }
 }

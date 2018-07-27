@@ -17,7 +17,8 @@ final class AuthSignUpAssemblyImpl: BaseAssembly, AuthSignUpAssembly {
         )
         let presenter = AuthSignUpPresenterImpl(
             view: controller,
-            router: router
+            router: router,
+            userRegistrationService: serviceFactory.userRegistrationService
         )
         controller.presenter = presenter
 

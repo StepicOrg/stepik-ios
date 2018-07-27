@@ -12,28 +12,18 @@ import PromiseKit
 final class AuthSignInPresenterImpl: AuthSignInPresenter {
     private weak var view: AuthSignInView?
     private let router: AuthSignInRouter
-    private let authAPI: AuthAPI
-    private let stepicsAPI: StepicsAPI
+    private let userRegistrationService: UserRegistrationService
 
-    init(view: AuthSignInView, router: AuthSignInRouter, authAPI: AuthAPI, stepicsAPI: StepicsAPI) {
+    init(view: AuthSignInView, router: AuthSignInRouter, userRegistrationService: UserRegistrationService) {
         self.view = view
         self.router = router
-        self.authAPI = authAPI
-        self.stepicsAPI = stepicsAPI
+        self.userRegistrationService = userRegistrationService
     }
 
     func signIn(with email: String, password: String) {
         view?.state = .loading
 
-        authAPI.signInWithAccount(email: email, password: password).then { token, authorizationType -> Promise<User> in
-            AuthInfo.shared.token = token
-            AuthInfo.shared.authorizationType = authorizationType
-
-            return self.stepicsAPI.retrieveCurrentUser()
-        }.done { [weak self] user in
-            AuthInfo.shared.user = user
-            User.removeAllExcept(user)
-
+        userRegistrationService.signIn(email: email, password: password).done { [weak self] _ in
             self?.view?.update(with: .success)
             self?.router.dismiss()
         }.catch { [weak self] error in
@@ -62,6 +52,6 @@ final class AuthSignInPresenterImpl: AuthSignInPresenter {
     }
 
     func cancel() {
-        router.dismiss()
+        router.pop()
     }
 }
