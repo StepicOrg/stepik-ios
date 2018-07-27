@@ -8941,9 +8941,9 @@
 		2C8305F320F38CEC003D7F9B /* ConcreteClasses */ = {
 			isa = PBXGroup;
 			children = (
+				2C3E42B92101DE34009D76DF /* KnowledgeGraph */,
 				2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */,
 				2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */,
-				2C3E42B92101DE34009D76DF /* KnowledgeGraph */,
 			);
 			path = ConcreteClasses;
 			sourceTree = "<group>";
@@ -9408,8 +9408,8 @@
 		2CD7993D21077CB90054D098 /* AbstractGraphBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */,
 				2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */,
+				2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */,
 			);
 			path = AbstractGraphBuilder;
 			sourceTree = "<group>";
