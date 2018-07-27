@@ -52,7 +52,7 @@ class EmailAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.SignIn.loggedIn, parameters: ["source": "email"])
+            AmplitudeAnalyticsEvents.SignIn.loggedIn(source: "email").send()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
             self.view?.update(with: .success)
 

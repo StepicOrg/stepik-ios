@@ -313,6 +313,11 @@ class ExploreViewController: UIViewController, ExploreView {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Catalog.opened.send()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.willAppear()
@@ -340,6 +345,7 @@ extension ExploreViewController : CustomSearchBarDelegate {
 
     func startedEditing(in searchBar: CustomSearchBar) {
         self.presenter?.searchStarted()
+        AmplitudeAnalyticsEvents.Search.started.send()
     }
 
     func returnPressed(in searchBar: CustomSearchBar) {

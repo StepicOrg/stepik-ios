@@ -29,7 +29,7 @@ class AchievementsListPresenter {
     }
 
     func refresh() {
-        self.achievementsRetriever.loadAllAchievements(breakCondition: { _ in return false }).then { achievements -> Promise<[AchievementProgressData]> in
+        self.achievementsRetriever.loadAllAchievements(breakCondition: { _ in false }).then { achievements -> Promise<[AchievementProgressData]> in
             let kinds = Set<String>(achievements.map { $0.kind })
 
             var promises = [Promise<AchievementProgressData>]()
@@ -66,5 +66,9 @@ class AchievementsListPresenter {
 
     func achievementSelected(with viewData: AchievementViewData) {
         view?.showAchievementInfo(viewData: viewData, canShare: userId == AuthInfo.shared.userId)
+    }
+
+    func sendAppearanceEvent() {
+        AmplitudeAnalyticsEvents.Achievements.opened(isPersonal: AuthInfo.shared.userId == userId).send()
     }
 }

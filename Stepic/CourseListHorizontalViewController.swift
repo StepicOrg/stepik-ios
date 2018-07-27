@@ -85,7 +85,7 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
     }
 
     func addElements(atIndexPaths indexPaths: [IndexPath]) {
-        collectionView.insertItems(at: indexPaths)
+        collectionView.reloadData()
     }
 
     func widgetForCell(atIndex index: Int) -> CourseWidgetView? {
@@ -93,11 +93,7 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
     }
 
     func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath]) {
-        collectionView.performBatchUpdates({
-            [weak self] in
-            self?.collectionView.deleteItems(at: deletingIndexPaths)
-            self?.collectionView.insertItems(at: insertingIndexPaths)
-        }, completion: nil)
+        collectionView.reloadData()
     }
 
     func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)? {
