@@ -13,6 +13,10 @@ final class ServiceFactoryTestsHelper {
     let serviceFactory: ServiceFactory
 
     init() {
-        serviceFactory = ServiceFactoryImpl(authAPI: AuthAPI(), stepicsAPI: StepicsAPI(), profilesAPI: ProfilesAPI(), notificationStatusesAPI: NotificationStatusesAPI())
+        serviceFactory = ServiceFactoryImpl(
+            authAPI: AuthAPI(),
+            stepicsAPI: StepicsAPI(),
+            profilesAPI: ProfilesAPI()
+        )
     }
 }

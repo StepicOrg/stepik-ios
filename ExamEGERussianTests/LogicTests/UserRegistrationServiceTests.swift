@@ -11,8 +11,8 @@ import PromiseKit
 @testable import ExamEGERussian
 
 class UserRegistrationServiceTests: XCTestCase {
-
     var service: UserRegistrationServiceMock!
+    let userRegistrationParams = RandomCredentialsProvider().userRegistrationParams
 
     override func setUp() {
         super.setUp()
@@ -28,7 +28,7 @@ class UserRegistrationServiceTests: XCTestCase {
         let ex = expectation(description: "\(#function)")
 
         service.user = User()
-        service.registerNewUser().done { _ in
+        service.register(with: userRegistrationParams).done { _ in
             XCTAssert(true)
             ex.fulfill()
         }.catch { _ in
@@ -43,7 +43,7 @@ class UserRegistrationServiceTests: XCTestCase {
         let ex = expectation(description: "\(#function)")
 
         service.error = UserRegistrationServiceError.notRegistered
-        service.registerNewUser().done { _ in
+        service.register(with: userRegistrationParams).done { _ in
             XCTFail("Error should be returned")
             ex.fulfill()
         }.catch { _ in
@@ -53,5 +53,4 @@ class UserRegistrationServiceTests: XCTestCase {
 
         waitForExpectations(timeout: 1, handler: nil)
     }
-
 }

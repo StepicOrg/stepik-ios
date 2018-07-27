@@ -10,7 +10,6 @@ import XCTest
 @testable import ExamEGERussian
 
 class ServiceFactoryTests: XCTestCase {
-
     private var serviceFactory: ServiceFactory?
 
     override func setUp() {
@@ -28,5 +27,4 @@ class ServiceFactoryTests: XCTestCase {
     func testServiceComponentsCreation() {
         XCTAssertNotNil(serviceFactory, "Could not instantiate ServiceFactory")
     }
-
 }
