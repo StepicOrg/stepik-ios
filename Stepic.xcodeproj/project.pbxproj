@@ -1961,9 +1961,9 @@
 		2C34D67620FCD84D001EF741 /* AuthAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D67520FCD84D001EF741 /* AuthAssembly.swift */; };
 		2C34D67A20FCE2B0001EF741 /* AuthSignInAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */; };
 		2C34D67D20FCE2E5001EF741 /* AuthSignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D67C20FCE2E5001EF741 /* AuthSignInRouter.swift */; };
-		2C34D68220FCE545001EF741 /* AuthorizationSignUpAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */; };
-		2C34D68420FCE584001EF741 /* AuthorizationSignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */; };
-		2C34D68620FCE59E001EF741 /* AuthorizationSignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68520FCE59E001EF741 /* AuthorizationSignUpPresenter.swift */; };
+		2C34D68220FCE545001EF741 /* AuthSignUpAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68120FCE545001EF741 /* AuthSignUpAssembly.swift */; };
+		2C34D68420FCE584001EF741 /* AuthSignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68320FCE584001EF741 /* AuthSignUpRouter.swift */; };
+		2C34D68620FCE59E001EF741 /* AuthSignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34D68520FCE59E001EF741 /* AuthSignUpPresenter.swift */; };
 		2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
 		2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
 		2C35C4D71F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
@@ -2225,11 +2225,13 @@
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
 		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
-		2C67B22120FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */; };
-		2C67B22520FF2DF3005E699B /* AuthorizationSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */; };
-		2C67B22720FF3456005E699B /* AuthorizationSignUpRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */; };
+		2C67B22120FF1A93005E699B /* AuthSignUpAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22020FF1A93005E699B /* AuthSignUpAssemblyImpl.swift */; };
 		2C681A00210B00C600C3DDCA /* AuthSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6819FF210B00C600C3DDCA /* AuthSignInView.swift */; };
 		2C681A02210B028B00C3DDCA /* AuthSignInPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A01210B028B00C3DDCA /* AuthSignInPresenterImpl.swift */; };
+		2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A03210B138600C3DDCA /* AuthSignUpPresenterImpl.swift */; };
+		2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A05210B15C400C3DDCA /* AuthSignUpViewController.swift */; };
+		2C681A08210B15C400C3DDCA /* AuthSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C681A06210B15C400C3DDCA /* AuthSignUpViewController.xib */; };
+		2C681A0A210B164A00C3DDCA /* AuthSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A09210B164A00C3DDCA /* AuthSignUpView.swift */; };
 		2C6841C020EE133E0050155F /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */; };
 		2C6841CA20EE1F7D0050155F /* ServiceFactoryTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */; };
@@ -5616,9 +5618,9 @@
 		2C34D67520FCD84D001EF741 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssembly.swift; sourceTree = "<group>"; };
 		2C34D67C20FCE2E5001EF741 /* AuthSignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInRouter.swift; sourceTree = "<group>"; };
-		2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpAssembly.swift; sourceTree = "<group>"; };
-		2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpRouter.swift; sourceTree = "<group>"; };
-		2C34D68520FCE59E001EF741 /* AuthorizationSignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpPresenter.swift; sourceTree = "<group>"; };
+		2C34D68120FCE545001EF741 /* AuthSignUpAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssembly.swift; sourceTree = "<group>"; };
+		2C34D68320FCE584001EF741 /* AuthSignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpRouter.swift; sourceTree = "<group>"; };
+		2C34D68520FCE59E001EF741 /* AuthSignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpPresenter.swift; sourceTree = "<group>"; };
 		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -5685,11 +5687,13 @@
 		2C6640D81F30BC4D0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640DA1F30BC4E0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
-		2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpAssemblyImpl.swift; sourceTree = "<group>"; };
-		2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpViewController.swift; sourceTree = "<group>"; };
-		2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignUpRouterImpl.swift; sourceTree = "<group>"; };
+		2C67B22020FF1A93005E699B /* AuthSignUpAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C6819FF210B00C600C3DDCA /* AuthSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInView.swift; sourceTree = "<group>"; };
 		2C681A01210B028B00C3DDCA /* AuthSignInPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenterImpl.swift; sourceTree = "<group>"; };
+		2C681A03210B138600C3DDCA /* AuthSignUpPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpPresenterImpl.swift; sourceTree = "<group>"; };
+		2C681A05210B15C400C3DDCA /* AuthSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpViewController.swift; sourceTree = "<group>"; };
+		2C681A06210B15C400C3DDCA /* AuthSignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSignUpViewController.xib; sourceTree = "<group>"; };
+		2C681A09210B164A00C3DDCA /* AuthSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpView.swift; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
 		2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTestsHelper.swift; sourceTree = "<group>"; };
@@ -8557,8 +8561,8 @@
 		2C34D67E20FCE516001EF741 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2C34D68120FCE545001EF741 /* AuthorizationSignUpAssembly.swift */,
-				2C67B22020FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift */,
+				2C34D68120FCE545001EF741 /* AuthSignUpAssembly.swift */,
+				2C67B22020FF1A93005E699B /* AuthSignUpAssemblyImpl.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -8566,7 +8570,8 @@
 		2C34D67F20FCE51C001EF741 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2C34D68520FCE59E001EF741 /* AuthorizationSignUpPresenter.swift */,
+				2C34D68520FCE59E001EF741 /* AuthSignUpPresenter.swift */,
+				2C681A03210B138600C3DDCA /* AuthSignUpPresenterImpl.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -8574,8 +8579,7 @@
 		2C34D68020FCE523001EF741 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2C34D68320FCE584001EF741 /* AuthorizationSignUpRouter.swift */,
-				2C67B22620FF3456005E699B /* AuthorizationSignUpRouterImpl.swift */,
+				2C34D68320FCE584001EF741 /* AuthSignUpRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -8864,9 +8868,19 @@
 		2C67B22320FF2DCD005E699B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C67B22420FF2DF3005E699B /* AuthorizationSignUpViewController.swift */,
+				2C681A0B210B165B00C3DDCA /* AuthSignUpViewController */,
+				2C681A09210B164A00C3DDCA /* AuthSignUpView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2C681A0B210B165B00C3DDCA /* AuthSignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C681A05210B15C400C3DDCA /* AuthSignUpViewController.swift */,
+				2C681A06210B15C400C3DDCA /* AuthSignUpViewController.xib */,
+			);
+			path = AuthSignUpViewController;
 			sourceTree = "<group>";
 		};
 		2C6841BC20EE12590050155F /* AssembliesTests */ = {
@@ -11169,6 +11183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C681A08210B15C400C3DDCA /* AuthSignUpViewController.xib in Resources */,
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CD7999021077D010054D098 /* TopicsTableViewController.xib in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
@@ -15107,7 +15122,7 @@
 				2C9499E620ECBEBE0049E9A8 /* StringExtensions.swift in Sources */,
 				2C33CBE520EC313A009956B0 /* DictionarySerializable.swift in Sources */,
 				2C949A2020ECC5B40049E9A8 /* ProfileMenuBlock.swift in Sources */,
-				2C34D68420FCE584001EF741 /* AuthorizationSignUpRouter.swift in Sources */,
+				2C34D68420FCE584001EF741 /* AuthSignUpRouter.swift in Sources */,
 				2C949A4D20ECCCD40049E9A8 /* RateAppManager.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
@@ -15164,7 +15179,6 @@
 				2C949A4020ECC95E0049E9A8 /* GCDThings.swift in Sources */,
 				2C34D67D20FCE2E5001EF741 /* AuthSignInRouter.swift in Sources */,
 				2C949A7020ECD17B0049E9A8 /* SkeletonView.swift in Sources */,
-				2C67B22720FF3456005E699B /* AuthorizationSignUpRouterImpl.swift in Sources */,
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,
@@ -15219,15 +15233,16 @@
 				2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
-				2C34D68220FCE545001EF741 /* AuthorizationSignUpAssembly.swift in Sources */,
+				2C34D68220FCE545001EF741 /* AuthSignUpAssembly.swift in Sources */,
 				2C949A6820ECCFFF0049E9A8 /* AchievementsListViewController.swift in Sources */,
 				2CD799A121077E540054D098 /* TopicPlainObject.swift in Sources */,
-				2C34D68620FCE59E001EF741 /* AuthorizationSignUpPresenter.swift in Sources */,
+				2C34D68620FCE59E001EF741 /* AuthSignUpPresenter.swift in Sources */,
 				2C9499D020ECBCCE0049E9A8 /* FreeAnswerReply.swift in Sources */,
 				2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */,
 				2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2C949A1820ECC54C0049E9A8 /* MenuViewController.swift in Sources */,
+				2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
@@ -15287,6 +15302,7 @@
 				2CD7995B21077CBA0054D098 /* AssemblyFactoryImpl.swift in Sources */,
 				2CFF9F2820FDD1010023B5D4 /* AuthSignInAssemblyImpl.swift in Sources */,
 				2C9499D520ECBCF00049E9A8 /* CodeReply.swift in Sources */,
+				2C681A0A210B164A00C3DDCA /* AuthSignUpView.swift in Sources */,
 				2CD7999F21077E540054D098 /* TopicsMapPlainObject.swift in Sources */,
 				2C949A3B20ECC8660049E9A8 /* JSQWebViewController.swift in Sources */,
 				2C9499C420ECBBFD0049E9A8 /* TCBlobDownload.swift in Sources */,
@@ -15314,7 +15330,6 @@
 				2CD7999121077D010054D098 /* TopicsTableViewController.swift in Sources */,
 				2C9499D920ECBD430049E9A8 /* StorageRecord.swift in Sources */,
 				2C33CBF620EC3287009956B0 /* SubmissionsAPI.swift in Sources */,
-				2C67B22520FF2DF3005E699B /* AuthorizationSignUpViewController.swift in Sources */,
 				2C9499A220ECB9470049E9A8 /* WatchSessionDataObserver.swift in Sources */,
 				2C94999420ECB8230049E9A8 /* CoreDataHelper.swift in Sources */,
 				2C33CBDE20EC2F25009956B0 /* StringHelper.swift in Sources */,
@@ -15334,13 +15349,14 @@
 				2C34D67620FCD84D001EF741 /* AuthAssembly.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
+				2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */,
 				2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */,
 				2C94999B20ECB8C80049E9A8 /* User+CoreDataProperties.swift in Sources */,
 				2C949A3420ECC7120049E9A8 /* AchievementProgress.swift in Sources */,
 				2C949A6B20ECD05A0049E9A8 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C33CBEF20EC3251009956B0 /* UserActivitiesAPI.swift in Sources */,
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
-				2C67B22120FF1A93005E699B /* AuthorizationSignUpAssemblyImpl.swift in Sources */,
+				2C67B22120FF1A93005E699B /* AuthSignUpAssemblyImpl.swift in Sources */,
 				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
 				2C949A1220ECC4930049E9A8 /* NotificationRequestAlertManager.swift in Sources */,

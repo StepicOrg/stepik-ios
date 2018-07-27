@@ -11,5 +11,5 @@ import Foundation
 protocol AuthAssembly {
     var greeting: AuthGreetingAssembly { get }
     var signIn: AuthSignInAssembly { get }
-    var signUp: AuthorizationSignUpAssembly { get }
+    var signUp: AuthSignUpAssembly { get }
 }

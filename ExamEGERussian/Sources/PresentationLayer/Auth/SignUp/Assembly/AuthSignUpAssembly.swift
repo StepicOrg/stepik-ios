@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AuthorizationSignUpAssembly: class {
+protocol AuthSignUpAssembly: class {
     func module(navigationController: UINavigationController) -> UIViewController
 }

@@ -17,7 +17,7 @@ final class AuthAssemblyImpl: BaseAssembly, AuthAssembly {
         return AuthSignInAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 
-    var signUp: AuthorizationSignUpAssembly {
-        return AuthorizationSignUpAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
+    var signUp: AuthSignUpAssembly {
+        return AuthSignUpAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
     }
 }

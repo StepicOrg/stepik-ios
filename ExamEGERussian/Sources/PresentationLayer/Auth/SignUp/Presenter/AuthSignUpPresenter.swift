@@ -1,5 +1,5 @@
 //
-//  AuthorizationSignUpRouter.swift
+//  AuthorizationSignUpPresenter.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 16/07/2018.
@@ -8,5 +8,5 @@
 
 import Foundation
 
-protocol AuthorizationSignUpRouter {
+protocol AuthSignUpPresenter: class {
 }
