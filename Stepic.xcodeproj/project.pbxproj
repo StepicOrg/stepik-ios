@@ -2232,6 +2232,7 @@
 		2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A05210B15C400C3DDCA /* AuthSignUpViewController.swift */; };
 		2C681A08210B15C400C3DDCA /* AuthSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C681A06210B15C400C3DDCA /* AuthSignUpViewController.xib */; };
 		2C681A0A210B164A00C3DDCA /* AuthSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A09210B164A00C3DDCA /* AuthSignUpView.swift */; };
+		2C681A0D210B38D800C3DDCA /* AuthSignUpRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A0C210B38D800C3DDCA /* AuthSignUpRouterImpl.swift */; };
 		2C6841C020EE133E0050155F /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */; };
 		2C6841CA20EE1F7D0050155F /* ServiceFactoryTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */; };
@@ -5694,6 +5695,7 @@
 		2C681A05210B15C400C3DDCA /* AuthSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpViewController.swift; sourceTree = "<group>"; };
 		2C681A06210B15C400C3DDCA /* AuthSignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSignUpViewController.xib; sourceTree = "<group>"; };
 		2C681A09210B164A00C3DDCA /* AuthSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpView.swift; sourceTree = "<group>"; };
+		2C681A0C210B38D800C3DDCA /* AuthSignUpRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpRouterImpl.swift; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
 		2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTestsHelper.swift; sourceTree = "<group>"; };
@@ -8580,6 +8582,7 @@
 			isa = PBXGroup;
 			children = (
 				2C34D68320FCE584001EF741 /* AuthSignUpRouter.swift */,
+				2C681A0C210B38D800C3DDCA /* AuthSignUpRouterImpl.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -15100,6 +15103,7 @@
 				2CD7995E21077CBA0054D098 /* UIViewController+Alert.swift in Sources */,
 				2C33CBE620EC314E009956B0 /* StepicApplicationsInfo.swift in Sources */,
 				2C949A3820ECC7DF0049E9A8 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
+				2C681A0D210B38D800C3DDCA /* AuthSignUpRouterImpl.swift in Sources */,
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,

@@ -8,6 +8,16 @@
 
 import Foundation
 
-protocol AuthSignUpView: class {
+enum AuthSignUpResult {
+    case success, error, badConnection
+}
 
+enum AuthSignUpState {
+    case normal, loading, validationError(message: String)
+}
+
+protocol AuthSignUpView: class {
+    var state: AuthSignUpState { get set }
+
+    func update(with result: AuthSignUpResult)
 }

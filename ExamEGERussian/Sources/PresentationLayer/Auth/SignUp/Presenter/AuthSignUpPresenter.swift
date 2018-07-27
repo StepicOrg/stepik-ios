@@ -9,4 +9,6 @@
 import Foundation
 
 protocol AuthSignUpPresenter: class {
+    func signUp(name: String, email: String, password: String)
+    func cancel()
 }

@@ -9,8 +9,5 @@
 import UIKit.UINavigationController
 
 protocol AuthSignUpRouter: RouterDismissable {
-    var navigationController: UINavigationController? { get }
-}
-
-final class AuthSignUpRouterImpl: BaseRouter, AuthSignUpRouter {
+    func pop()
 }
