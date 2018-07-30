@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,15 +37,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV4-ue-5er">
-                        <rect key="frame" x="28" y="90" width="369" height="1"/>
+                        <rect key="frame" x="28" y="90" width="381" height="1"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="wgI-Pg-Mbo"/>
                         </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="rLm-4h-SDt">
-                        <rect key="frame" x="20" y="64" width="369" height="18"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Last time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmE-el-xJX" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                         <rect key="frame" x="73" y="41" width="49" height="15"/>
@@ -81,29 +78,35 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtJ-hP-Joz" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                        <rect key="frame" x="20" y="64" width="369" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pV4-ue-5er" firstAttribute="top" secondItem="rLm-4h-SDt" secondAttribute="bottom" constant="8" id="0tS-Wr-yR8"/>
-                    <constraint firstItem="rLm-4h-SDt" firstAttribute="top" secondItem="IO2-jl-qQ3" secondAttribute="bottom" priority="750" constant="8" id="5tA-Lx-aZM"/>
+                    <constraint firstItem="qtJ-hP-Joz" firstAttribute="top" secondItem="RmE-el-xJX" secondAttribute="bottom" constant="8" id="1NS-XI-A1i"/>
+                    <constraint firstItem="qtJ-hP-Joz" firstAttribute="top" secondItem="IO2-jl-qQ3" secondAttribute="bottom" priority="999" constant="8" id="8Hz-1u-sLf"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pV4-ue-5er" secondAttribute="bottom" constant="-8" id="8Lt-gZ-xDf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qtJ-hP-Joz" secondAttribute="trailing" id="AYy-W2-jdk"/>
                     <constraint firstAttribute="trailing" secondItem="pV4-ue-5er" secondAttribute="trailing" id="BPc-aI-n4G"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="rLm-4h-SDt" secondAttribute="leading" id="DFi-Wv-pga"/>
                     <constraint firstItem="pV4-ue-5er" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="EJ0-8Z-U7Z"/>
                     <constraint firstItem="JBD-B0-dRF" firstAttribute="leading" secondItem="6YZ-wn-n05" secondAttribute="trailing" constant="8" id="Ezy-d8-v8v"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="top" secondItem="6YZ-wn-n05" secondAttribute="bottom" constant="11" id="KeS-4Q-bkK"/>
+                    <constraint firstItem="pV4-ue-5er" firstAttribute="top" secondItem="qtJ-hP-Joz" secondAttribute="bottom" constant="8" id="Sul-kO-32i"/>
                     <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="bau-Ct-hyr"/>
                     <constraint firstItem="zw9-0v-O3r" firstAttribute="top" secondItem="IO2-jl-qQ3" secondAttribute="top" constant="-11" id="bda-2u-oSh"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="dGs-LU-819"/>
                     <constraint firstItem="eQf-K2-Thw" firstAttribute="centerY" secondItem="0qt-gd-xNy" secondAttribute="centerY" id="dIA-A3-86d"/>
                     <constraint firstItem="JBD-B0-dRF" firstAttribute="centerY" secondItem="6YZ-wn-n05" secondAttribute="centerY" id="dQo-bm-Ocl"/>
+                    <constraint firstItem="qtJ-hP-Joz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eal-E1-aBI"/>
                     <constraint firstAttribute="topMargin" secondItem="6YZ-wn-n05" secondAttribute="top" id="hGi-hC-5dT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0qt-gd-xNy" secondAttribute="trailing" id="hNY-7D-lPM"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RmE-el-xJX" secondAttribute="trailing" id="mnh-Uc-Ujs"/>
                     <constraint firstItem="eQf-K2-Thw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JBD-B0-dRF" secondAttribute="trailing" constant="8" id="pnu-Ka-DJE"/>
                     <constraint firstItem="0qt-gd-xNy" firstAttribute="centerY" secondItem="6YZ-wn-n05" secondAttribute="centerY" id="ubo-f1-C17"/>
                     <constraint firstItem="0qt-gd-xNy" firstAttribute="leading" secondItem="eQf-K2-Thw" secondAttribute="trailing" constant="8" id="upH-Q9-atC"/>
-                    <constraint firstItem="rLm-4h-SDt" firstAttribute="top" secondItem="RmE-el-xJX" secondAttribute="bottom" constant="8" id="w6T-9B-MAY"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="rLm-4h-SDt" secondAttribute="trailing" id="zKV-I4-aGz"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IO2-jl-qQ3" secondAttribute="leading" id="zeC-Ii-ThB"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="zw9-0v-O3r"/>
@@ -113,8 +116,8 @@
             <connections>
                 <outlet property="ImageLeadingConstraint" destination="zeC-Ii-ThB" id="ZcW-0g-gNI"/>
                 <outlet property="badgeLabel" destination="JBD-B0-dRF" id="xD5-za-CIg"/>
-                <outlet property="labelContainerView" destination="rLm-4h-SDt" id="WE3-nE-oam"/>
-                <outlet property="labelLeadingConstraint" destination="DFi-Wv-pga" id="uwV-FK-lD0"/>
+                <outlet property="commentLabel" destination="qtJ-hP-Joz" id="sc7-SB-dp1"/>
+                <outlet property="labelLeadingConstraint" destination="eal-E1-aBI" id="15O-Re-2oa"/>
                 <outlet property="likesImageView" destination="eQf-K2-Thw" id="7Hh-xy-3WI"/>
                 <outlet property="likesLabel" destination="0qt-gd-xNy" id="UQw-MR-Wd0"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
