@@ -18,7 +18,8 @@ final class ServiceComponentsAssemblyTestsHelper {
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
             profilesAPI: ProfilesAPI(),
-            defaultsStorageManager: DefaultsStorageManager()
+            defaultsStorageManager: DefaultsStorageManager(),
+            randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )
     }
 

@@ -1,6 +1,4 @@
-In the new version of Stepik:
-• You can check achievements in profile now. Try to unlock more achievements!
-• Fixed crash after personal deadlines generation
+In the new version of Stepik we fixed some bugs and made stability improvements.
 
 Enjoy learning!
 Stepik team

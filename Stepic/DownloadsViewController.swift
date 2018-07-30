@@ -33,6 +33,11 @@ class DownloadsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Downloads.downloadsScreenOpened.send()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchVideos()
@@ -42,10 +47,27 @@ class DownloadsViewController: UIViewController {
         stored = []
         downloading = []
         let videos = Video.getAllVideos()
+
         for video in videos {
-            if video.state == VideoState.downloading {
+            let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
+            if isVideoLoading {
+                guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
+                    return
+                }
+
                 downloading += [video]
-                video.downloadDelegate = self
+                task.completionReporter = { [weak self] _ in
+                    DispatchQueue.main.async {
+                        self?.removeFromDownloading(video)
+                        self?.addToStored(video)
+                    }
+                }
+
+                task.failureReporter = { [weak self] _ in
+                    DispatchQueue.main.async {
+                        self?.removeFromDownloading(video)
+                    }
+                }
             }
             if video.state == VideoState.cached {
                 stored += [video]
@@ -110,15 +132,28 @@ class DownloadsViewController: UIViewController {
         askForClearCache(remove: {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
             SVProgressHUD.show()
-            CacheManager.sharedManager.clearCache(completion: {
-                completed, errors in
-                if errors != 0 {
-                    UIThread.performUI({SVProgressHUD.showError(withStatus: "\(NSLocalizedString("FailedToRemoveMessage", comment: "")) \(errors)/\(completed + errors) \(NSLocalizedString((completed % 10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
-                } else {
-                    UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "\(NSLocalizedString("RemovedAllMessage", comment: "")) \(completed) \(NSLocalizedString((completed % 10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
-                }
-                UIThread.performUI({self.fetchVideos()})
-            })
+
+            let videos = Video.getAllVideos()
+
+            var shouldBeRemovedCount = videos.count
+            for video in videos {
+                do {
+                    try VideoFileManager().removeVideo(videoId: video.id)
+                    video.cachedQuality = nil
+                    CoreDataHelper.instance.save()
+
+                    shouldBeRemovedCount -= 1
+                } catch { }
+            }
+
+            let completed = videos.count - shouldBeRemovedCount
+            if shouldBeRemovedCount == 0 {
+                UIThread.performUI({SVProgressHUD.showError(withStatus: "\(NSLocalizedString("FailedToRemoveMessage", comment: "")) \(shouldBeRemovedCount)/\(videos.count) \(NSLocalizedString((completed % 10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
+            } else {
+                UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "\(NSLocalizedString("RemovedAllMessage", comment: "")) \(completed) \(NSLocalizedString((completed % 10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
+            }
+
+            UIThread.performUI({self.fetchVideos()})
         })
     }
 
@@ -253,10 +288,10 @@ extension DownloadsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadTableViewCell", for: indexPath) as! DownloadTableViewCell
 
         if isSectionDownloading((indexPath as NSIndexPath).section) {
-            cell.initWith(downloading[(indexPath as NSIndexPath).row], buttonDelegate: self, downloadDelegate: self)
+            cell.initWith(downloading[(indexPath as NSIndexPath).row], buttonDelegate: self)
             cell.downloadButton.tag = downloading[(indexPath as NSIndexPath).row].id
         } else {
-            cell.initWith(stored[(indexPath as NSIndexPath).row], buttonDelegate: self, downloadDelegate: self)
+            cell.initWith(stored[(indexPath as NSIndexPath).row], buttonDelegate: self)
             cell.downloadButton.tag = stored[(indexPath as NSIndexPath).row].id
         }
 
@@ -264,7 +299,7 @@ extension DownloadsViewController : UITableViewDataSource {
     }
 }
 
-extension DownloadsViewController : VideoDownloadDelegate {
+extension DownloadsViewController {
 
     func removeFromDownloading(_ video: Video) {
         if let index = downloading.index(of: video) {
@@ -303,19 +338,6 @@ extension DownloadsViewController : VideoDownloadDelegate {
             self.tableView.endUpdates()
         }
     }
-
-    func didDownload(_ video: Video, cancelled: Bool) {
-        removeFromDownloading(video)
-        if !cancelled {
-            addToStored(video)
-        }
-        video.downloadDelegate = nil
-    }
-
-    func didGetError(_ video: Video) {
-        removeFromDownloading(video)
-        video.downloadDelegate = nil
-    }
 }
 
 extension DownloadsViewController : PKDownloadButtonDelegate {
@@ -334,20 +356,23 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
         switch downloadButton.state {
         case .downloaded:
             if let vid = getVideoById(stored, id: downloadButton.tag) {
-                if vid.removeFromStore() {
+                do {
+                    try VideoFileManager().removeVideo(videoId: vid.id)
                     removeFromStored(vid)
-                } else {
+                } catch {
                     print("error while deleting from the store")
                 }
             }
             break
         case .downloading:
             if let vid = getVideoById(downloading, id: downloadButton.tag) {
-                if vid.cancelStore() {
-                    removeFromDownloading(vid)
-                } else {
-                    print("error while cancelling the store")
+                guard let task = VideoDownloaderManager.shared.get(by: vid.id) else {
+                    return
                 }
+
+                task.cancel()
+                VideoDownloaderManager.shared.remove(by: vid.id)
+                removeFromDownloading(vid)
             }
             break
         case .startDownload, .pending:

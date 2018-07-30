@@ -166,12 +166,10 @@ class WebStepViewController: UIViewController {
             }
         }
 
-        var scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
-        if htmlText.range(of: "kotlin-runnable") != nil {
-            scriptsString += "\(Scripts.kotlinRunnableSamples)"
-        }
-        var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
-        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor
+            .injectDefault()
+            .html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
@@ -258,7 +256,7 @@ class WebStepViewController: UIViewController {
         super.viewDidAppear(animated)
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject, "stepId": step.id])
-        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.stepOpened, parameters: ["step": step.id, "type": step.block.name, "number": stepId - 1])
+        AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name, number: stepId - 1).send()
         if step.hasSubmissionRestrictions {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
         }

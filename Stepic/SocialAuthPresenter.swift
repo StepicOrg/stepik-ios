@@ -93,7 +93,12 @@ class SocialAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AnalyticsReporter.reportAmplitudeEvent(user.didJustRegister ? AmplitudeAnalyticsEvents.SignUp.registered : AmplitudeAnalyticsEvents.SignIn.loggedIn, parameters: ["source": provider.amplitudeName])
+            if user.didJustRegister {
+                AmplitudeAnalyticsEvents.SignUp.registered(source: provider.amplitudeName).send()
+            } else {
+                AmplitudeAnalyticsEvents.SignIn.loggedIn(source: provider.amplitudeName).send()
+            }
+
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
             self.pendingAuthProviderInfo = nil
             self.view?.update(with: .success)
@@ -146,7 +151,11 @@ class SocialAuthPresenter {
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
             if let name = self.pendingAuthProviderInfo?.amplitudeName {
-                AnalyticsReporter.reportAmplitudeEvent(user.didJustRegister ? AmplitudeAnalyticsEvents.SignUp.registered : AmplitudeAnalyticsEvents.SignIn.loggedIn, parameters: ["source": name])
+                if user.didJustRegister {
+                    AmplitudeAnalyticsEvents.SignUp.registered(source: name).send()
+                } else {
+                    AmplitudeAnalyticsEvents.SignIn.loggedIn(source: name).send()
+                }
             }
             self.pendingAuthProviderInfo = nil
 

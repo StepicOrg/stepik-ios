@@ -22,8 +22,12 @@ class OnboardingCardStepViewController: CardStepViewController {
         let step = loadOnboardingStep(from: "step\(stepIndex!)")
 
         // Add small top padding
-        var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "<style>\nbody{padding-top: 8px;}</style>\n", body: step.text ?? "", width: Int(UIScreen.main.bounds.width))
-        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let processor = HTMLProcessor(html: step.text ?? "")
+        let html = processor
+            .injectDefault()
+            .inject(script: .customHead(head: "<style>\nbody{padding-top: 8px;}</style>"))
+            .html
+
         stepWebView.loadHTMLString(html, baseURL: step.baseURL)
     }
 

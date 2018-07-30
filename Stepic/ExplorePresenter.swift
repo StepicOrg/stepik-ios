@@ -76,19 +76,21 @@ class ExplorePresenter: CourseListCountDelegate {
         view?.setTags(withTags: CourseTag.featuredTags, language: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]
             tag in
-            if let controller = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController {
-                controller.colorMode = .light
-                controller.presenter = CourseListPresenter(
-                    view: controller,
-                    id: "Tag_\(tag.ID)",
-                    limit: nil,
-                    listType:  CourseListType.tag(id: tag.ID) ,
-                    onlyLocal: false,
-                    subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager()
-                )
-                controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
-                self?.view?.show(vc: controller)
+            guard let controller = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController else {
+                return
             }
+            AmplitudeAnalyticsEvents.Catalog.Category.opened(categoryID: tag.ID, categoryNameEn: tag.titleForLanguage[.english] ?? "").send()
+            controller.colorMode = .light
+            controller.presenter = CourseListPresenter(
+                view: controller,
+                id: "Tag_\(tag.ID)",
+                limit: nil,
+                listType:  CourseListType.tag(id: tag.ID) ,
+                onlyLocal: false,
+                subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager()
+            )
+            controller.title = tag.titleForLanguage[ContentLanguage.sharedContentLanguage]
+            self?.view?.show(vc: controller)
         })
     }
 

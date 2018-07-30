@@ -188,7 +188,7 @@ class StepicVideoPlayerViewController: UIViewController {
                         [unowned self]
                         _ in
                         self.currentQuality = cachedQuality
-                        self.currentQualityURL = try! URL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(self.video.name))
+                        self.currentQualityURL = VideoFileManager().getVideoURL(videoId: self.video.id)
                 }))
             }
         }
@@ -314,7 +314,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     fileprivate func getInitialURL() -> URL! {
         if video.state == VideoState.cached {
-            return try! URL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.name))
+            return VideoFileManager().getVideoURL(videoId: video.id)
         } else {
             return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
         }

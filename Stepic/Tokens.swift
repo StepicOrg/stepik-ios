@@ -13,6 +13,7 @@ class Tokens {
     var amplitudeToken: String = ""
     var appMetricaToken: String = ""
     var firebaseId: UInt = 0
+    var appsFlyerDevKey: String = ""
 
     static let shared = Tokens()
 
@@ -20,10 +21,11 @@ class Tokens {
         self.init(plist: "Tokens")!
     }
 
-    private init(amplitudeToken: String, appMetricaToken: String, firebaseId: UInt) {
+    private init(amplitudeToken: String, appMetricaToken: String, firebaseId: UInt, appsFlyerDevKey: String) {
         self.amplitudeToken = amplitudeToken
         self.appMetricaToken = appMetricaToken
         self.firebaseId = firebaseId
+        self.appsFlyerDevKey = appsFlyerDevKey
     }
 
     private convenience init?(plist: String) {
@@ -36,10 +38,11 @@ class Tokens {
         }
         guard let amplitude = dic["Amplitude"] as? String,
             let appmetrica = dic["AppMetrica"] as? String,
-            let firebase = dic["FirebaseAppID"] as? UInt else {
+            let firebase = dic["FirebaseAppID"] as? UInt,
+            let appsFlyer = dic["AppsFlyer"] as? String else {
             return nil
         }
-        self.init(amplitudeToken: amplitude, appMetricaToken: appmetrica, firebaseId: firebase)
+        self.init(amplitudeToken: amplitude, appMetricaToken: appmetrica, firebaseId: firebase, appsFlyerDevKey: appsFlyer)
     }
 
 }
