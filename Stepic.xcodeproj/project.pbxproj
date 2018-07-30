@@ -1098,6 +1098,36 @@
 		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
 		2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
+		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107B7210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107B9210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107BA210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107BB210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
+		2C0107BC210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107BD210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107BE210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107BF210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107C0210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107C1210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */; };
+		2C0107C4210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107C5210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107C6210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107C7210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107C8210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107C9210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */; };
+		2C0107CA210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107CB210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107CC210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107CD210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107CE210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107CF210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
+		2C0107D0210F76FB009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0107D1210F76FC009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0107D2210F76FD009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0107D3210F76FD009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0107D4210F76FE009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0107D5210F7700009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C0AF189203C606B000EA3B6 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BED2019FDB100B5E336 /* arrow_left.svg */; };
 		2C0AF18A203C606E000EA3B6 /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BEC2019FDB000B5E336 /* arrow_right.svg */; };
@@ -5511,6 +5541,10 @@
 		2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C0107AC210F42A6009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
 		2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterImpl.swift; sourceTree = "<group>"; };
+		2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
+		2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdaptiveCourseTableViewCell.xib; sourceTree = "<group>"; };
+		2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
+		2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -5769,8 +5803,6 @@
 		2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSectionHeaderView.xib; sourceTree = "<group>"; };
 		2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsTableViewCell.xib; sourceTree = "<group>"; };
-		2CBC260F210866D6004245D6 /* RouterDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterDismissable.swift; sourceTree = "<group>"; };
-		2CBC2610210866D7004245D6 /* BaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		2CBC261321086936004245D6 /* UserRegistrationServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceImpl.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsListTableViewCell.swift; sourceTree = "<group>"; };
@@ -8308,6 +8340,25 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		2C0107B2210F73AD009A53DF /* AdaptiveCourseSelect */ = {
+			isa = PBXGroup;
+			children = (
+				2C0107B3210F73D1009A53DF /* CourseCell */,
+				2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */,
+				2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */,
+			);
+			name = AdaptiveCourseSelect;
+			sourceTree = "<group>";
+		};
+		2C0107B3210F73D1009A53DF /* CourseCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */,
+				2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */,
+			);
+			name = CourseCell;
+			sourceTree = "<group>";
+		};
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -9471,15 +9522,6 @@
 			path = EnrollmentService;
 			sourceTree = "<group>";
 		};
-		2CCD5D30202A12B3008ACBC7 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				2CBC2610210866D7004245D6 /* BaseRouter.swift */,
-				2CBC260F210866D6004245D6 /* RouterDismissable.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
 		2CD12B911F4F3357001D3C82 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -9906,7 +9948,7 @@
 		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2CCD5D30202A12B3008ACBC7 /* Router */,
+				2C0107B2210F73AD009A53DF /* AdaptiveCourseSelect */,
 				2C1649651F2A0823002C9F99 /* AdaptiveStats */,
 				2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */,
 			);
@@ -11107,6 +11149,7 @@
 				2C1B628D1F4C4AEF00236804 /* FillBlanksInputTableViewCell.xib in Resources */,
 				2C1B62CD1F4C518100236804 /* Auth.plist in Resources */,
 				2C608B5B20457294006870BB /* arrow_right.svg in Resources */,
+				2C0107BF210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				2C1B62901F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C1B62911F4C4AEF00236804 /* TeacherCollectionViewCell.xib in Resources */,
 				2C1B62931F4C4AEF00236804 /* TitleTextTableViewCell.xib in Resources */,
@@ -11214,6 +11257,7 @@
 				2C1B64A01F4C590700236804 /* CodeQuizToolbarView.xib in Resources */,
 				2C1B64A11F4C590700236804 /* FillBlanksTextTableViewCell.xib in Resources */,
 				2C608B5A20457294006870BB /* arrow_right.svg in Resources */,
+				2C0107C0210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				2C1B64A21F4C590700236804 /* FillBlanksInputTableViewCell.xib in Resources */,
 				2C1B64A61F4C590700236804 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C1B64A71F4C590700236804 /* TeacherCollectionViewCell.xib in Resources */,
@@ -11357,6 +11401,7 @@
 				08195A0A1FA00FF400E6D6CD /* CourseLists.storyboard in Resources */,
 				08CBA3331F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
 				2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */,
+				2C0107BD210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
 				2C6A76442045CECC00C509A6 /* arrow_left.svg in Resources */,
@@ -11461,6 +11506,7 @@
 				2C9732D11F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C9732D21F4C38F600AC9301 /* TeacherCollectionViewCell.xib in Resources */,
 				2C9732D41F4C38F600AC9301 /* TitleTextTableViewCell.xib in Resources */,
+				2C0107BE210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				08CB0D491FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				2C9732D71F4C38F600AC9301 /* RefreshTableViewCell.xib in Resources */,
 				08A9F71A1FC3837800640F1F /* CourseTagCollectionViewCell.xib in Resources */,
@@ -11565,6 +11611,7 @@
 				2CA8D3692088D9C000E105E9 /* TitleTextTableViewCell.xib in Resources */,
 				2CA8D36A2088D9C000E105E9 /* RefreshTableViewCell.xib in Resources */,
 				2CA8D36B2088D9C000E105E9 /* CourseLists.storyboard in Resources */,
+				2C0107C1210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				2CA8D36C2088D9C000E105E9 /* TransitionMenuBlockTableViewCell.xib in Resources */,
 				2CA8D36D2088D9C000E105E9 /* SectionTableViewCell.xib in Resources */,
 				2CA8D36E2088D9C000E105E9 /* UnitTableViewCell.xib in Resources */,
@@ -11713,6 +11760,7 @@
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
+				2C0107BC210F743D009A53DF /* AdaptiveCourseTableViewCell.xib in Resources */,
 				08CB0D461FB63F74001A1E02 /* ContentLanguagesView.xib in Resources */,
 				08A9F7171FC3837800640F1F /* CourseTagCollectionViewCell.xib in Resources */,
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
@@ -14180,6 +14228,7 @@
 				2C1B60E01F4C4AEF00236804 /* CoursesAPI.swift in Sources */,
 				086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B60E11F4C4AEF00236804 /* SectionsAPI.swift in Sources */,
+				2C0107D3210F76FD009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				2C1B60E21F4C4AEF00236804 /* LessonsAPI.swift in Sources */,
 				2C1B60E31F4C4AEF00236804 /* UsersAPI.swift in Sources */,
 				080F21202034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
@@ -14219,6 +14268,7 @@
 				086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DB1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				2C47A168206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				2C0107CD210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				86A1C3392065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
 				2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */,
@@ -14227,6 +14277,7 @@
 				2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */,
+				2C0107C7210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				2C608AC9204568CE006870BB /* CongratsView.swift in Sources */,
 				084DB9E41FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C608ADC204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
@@ -14610,6 +14661,7 @@
 				62E9834EF86EA5676FD4686E /* ProfileInfoPresenter.swift in Sources */,
 				62E984DD2249530A7BAC3048 /* UIView+fromNib.swift in Sources */,
 				62E988EA9D5C729ACCE8B386 /* StreakNotificationsControlPresenter.swift in Sources */,
+				2C0107B9210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				62E98D7EC355992DB8889003 /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E98FFE75A34B6B29EC9A7E /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98C88FB132BCDFD88F8AE /* PinsMapPresenter.swift in Sources */,
@@ -14661,6 +14713,7 @@
 				2C1B62F11F4C590700236804 /* CoursesAPI.swift in Sources */,
 				086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B62F21F4C590700236804 /* SectionsAPI.swift in Sources */,
+				2C0107D4210F76FE009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				2C1B62F31F4C590700236804 /* LessonsAPI.swift in Sources */,
 				2C1B62F41F4C590700236804 /* UsersAPI.swift in Sources */,
 				080F21212034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
@@ -14700,6 +14753,7 @@
 				086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				089C88DC1FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				2C0107CE210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				86A1C33A2065173900D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
 				2C1B63181F4C590700236804 /* VideoRate.swift in Sources */,
@@ -14708,6 +14762,7 @@
 				2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */,
+				2C0107C8210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				2C608ACA204568CE006870BB /* CongratsView.swift in Sources */,
 				084DB9E51FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				2C608ADD204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
@@ -15091,6 +15146,7 @@
 				62E98CE7008D80E6AA70A5D6 /* ProfileInfoPresenter.swift in Sources */,
 				62E98D42A45F833D1371E4A6 /* UIView+fromNib.swift in Sources */,
 				62E98544284A70FAA434FD51 /* StreakNotificationsControlPresenter.swift in Sources */,
+				2C0107BA210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				62E9897FBB60991C568BFDBE /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E9826D2C6AABDF608C2B57 /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98E2FC787CFDAAF38CB52 /* PinsMapPresenter.swift in Sources */,
@@ -15590,6 +15646,7 @@
 				2C89A9B71F4C289900227C3B /* NumberQuizViewController.swift in Sources */,
 				084C65911FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				2C6A762C2045CE5000C509A6 /* ProgressTableViewCell.swift in Sources */,
+				2C0107D1210F76FC009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				2C89A9B81F4C289900227C3B /* FreeAnswerQuizViewController.swift in Sources */,
 				2C89A9B91F4C289900227C3B /* MathQuizViewController.swift in Sources */,
 				088EDB5D1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
@@ -15835,6 +15892,7 @@
 				2C89AA851F4C289900227C3B /* Step+CoreDataProperties.swift in Sources */,
 				2C89AA861F4C289900227C3B /* Step.swift in Sources */,
 				2C89AA871F4C289900227C3B /* Lesson+CoreDataProperties.swift in Sources */,
+				2C0107CB210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				2C89AA881F4C289900227C3B /* Lesson.swift in Sources */,
 				2C89AA891F4C289900227C3B /* Unit+CoreDataProperties.swift in Sources */,
 				2C89AA8A1F4C289900227C3B /* Unit.swift in Sources */,
@@ -15932,6 +15990,7 @@
 				085290CA1FB5C4550053F22D /* ExplorePresenter.swift in Sources */,
 				2C89AAD51F4C289900227C3B /* FullHeightTableView.swift in Sources */,
 				2C89AAD61F4C289900227C3B /* StepOptions.swift in Sources */,
+				2C0107B7210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				2C89AAD71F4C289900227C3B /* NSAttributedStringExtensions.swift in Sources */,
 				2C89AAD81F4C289900227C3B /* AlamofireExtensions.swift in Sources */,
 				087585B21FB51D720047A269 /* CourseList.swift in Sources */,
@@ -15948,6 +16007,7 @@
 				62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */,
 				62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */,
+				2C0107C5210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				62E9808AB6290CFEA48D8471 /* WrappingNavigationViewController.swift in Sources */,
 				62E98E8C35AE5A7F3A2508E4 /* ProfileHeaderInfoView.swift in Sources */,
 				62E980030A958F54CB76E92E /* ProfileInfoPresenter.swift in Sources */,
@@ -16084,6 +16144,7 @@
 				2C97316D1F4C38F600AC9301 /* MathQuizViewController.swift in Sources */,
 				2C97316E1F4C38F600AC9301 /* SortingQuizViewController.swift in Sources */,
 				2C97316F1F4C38F600AC9301 /* SortingQuizTableViewCell.swift in Sources */,
+				2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				2C9731701F4C38F600AC9301 /* MatchingQuizViewController.swift in Sources */,
 				086442CE1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C9731711F4C38F600AC9301 /* FillBlanksTextTableViewCell.swift in Sources */,
@@ -16215,6 +16276,7 @@
 				2C9731E91F4C38F600AC9301 /* Images.swift in Sources */,
 				2C9731EA1F4C38F600AC9301 /* ApplicationInfo.swift in Sources */,
 				2C9731EC1F4C38F600AC9301 /* AudioManager.swift in Sources */,
+				2C0107D2210F76FD009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				2C9731ED1F4C38F600AC9301 /* WebControllerManager.swift in Sources */,
 				2C9731EF1F4C38F600AC9301 /* WKWebViewPanelManager.m in Sources */,
 				08195A1D1FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
@@ -16378,6 +16440,7 @@
 				2C97326A1F4C38F600AC9301 /* VideosInfo.swift in Sources */,
 				08EA89BF200E53CE00BCAF44 /* NotificationsStatus.swift in Sources */,
 				2C97326C1F4C38F600AC9301 /* SearchResult.swift in Sources */,
+				2C0107C6210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				2C97326D1F4C38F600AC9301 /* Device.swift in Sources */,
 				2C608AF620456926006870BB /* CardStepViewController.swift in Sources */,
 				2C97326E1F4C38F600AC9301 /* CyrillicURLActivityItemSource.swift in Sources */,
@@ -16443,6 +16506,7 @@
 				62E9868BAC8E63E53A9BD0AE /* PinsMapPresenter.swift in Sources */,
 				62E98453212412E864EDDDEF /* PinsMapBlockContentView.swift in Sources */,
 				62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
+				2C0107CC210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				62E98550E592C61C86FBE7FD /* ProfileMenuBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -16480,6 +16544,7 @@
 				2CA8D14E2088D9C000E105E9 /* CertificatesPresenter.swift in Sources */,
 				2CA8D14F2088D9C000E105E9 /* CertificateViewData.swift in Sources */,
 				2CA8D1502088D9C000E105E9 /* CertificateTableViewCell.swift in Sources */,
+				2C0107C9210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				2CA8D1512088D9C000E105E9 /* CodeInputAccessoryView.swift in Sources */,
 				2CA8D1522088D9C000E105E9 /* PresentationContainer.swift in Sources */,
 				2CA8D1532088D9C000E105E9 /* CodeQuizViewController.swift in Sources */,
@@ -16492,6 +16557,7 @@
 				2CA8D15A2088D9C000E105E9 /* MenuBlockTableViewCell.swift in Sources */,
 				2CA8D15B2088D9C000E105E9 /* RatingProgressView.swift in Sources */,
 				2CA8D15C2088D9C000E105E9 /* AdaptiveStatsSection.swift in Sources */,
+				2C0107D5210F7700009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */,
 				2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */,
 				2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */,
@@ -16734,6 +16800,7 @@
 				2CA8D2572088D9C000E105E9 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2CA8D2582088D9C000E105E9 /* PersistentRecoveryManager.swift in Sources */,
 				2CA8D2592088D9C000E105E9 /* Users.plist in Sources */,
+				2C0107BB210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				2CA8D25A2088D9C000E105E9 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2CA8D25B2088D9C000E105E9 /* DeleteDeviceExecutableTask.swift in Sources */,
 				2CA8D25C2088D9C000E105E9 /* Tasks.plist in Sources */,
@@ -16797,6 +16864,7 @@
 				2CA8D2962088D9C000E105E9 /* CodeSuggestionsTableViewController.swift in Sources */,
 				2CA8D2972088D9C000E105E9 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				2CA8D2982088D9C000E105E9 /* Assignment.swift in Sources */,
+				2C0107CF210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				2CA8D2992088D9C000E105E9 /* Progress+CoreDataProperties.swift in Sources */,
 				2CA8D29A2088D9C000E105E9 /* Progress.swift in Sources */,
 				2CA8D29B2088D9C000E105E9 /* ExploreViewController.swift in Sources */,
@@ -17025,6 +17093,7 @@
 				860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */,
 				860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */,
 				2C47A165206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
+				2C0107C4210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
 				086442D21F765012000CC53D /* AuthTextField.swift in Sources */,
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
@@ -17037,6 +17106,7 @@
 				2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
 				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
+				2C0107D0210F76FB009A53DF /* RandomCredentialsGenerator.swift in Sources */,
 				860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */,
 				860BC3451EAA1E520058F440 /* CertificatesAPI.swift in Sources */,
 				08DF78BE1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
@@ -17279,6 +17349,7 @@
 				864D66C01E83DE03001E8D9E /* ExecutionQueue.swift in Sources */,
 				085EDCB91F9945D900AB3278 /* Notification+CoreDataProperties.swift in Sources */,
 				864D66C11E83DE03001E8D9E /* PersistentQueueRecoveryManager.swift in Sources */,
+				2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */,
 				864D66C21E83DE03001E8D9E /* Queues.plist in Sources */,
 				864D66C31E83DE03001E8D9E /* ExecutionQueues.swift in Sources */,
 				864D66C41E83DE03001E8D9E /* PersistentRecoveryManager.swift in Sources */,
@@ -17342,6 +17413,7 @@
 				864D66E71E83DE03001E8D9E /* Model.xcdatamodeld in Sources */,
 				864D66E81E83DE03001E8D9E /* Assignment+CoreDataProperties.swift in Sources */,
 				0846B10E1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
+				2C0107CA210F746B009A53DF /* AdaptiveCourseSelectViewController.swift in Sources */,
 				085E9E6E1F138C3500D6A4BC /* CodeSuggestionsTableViewController.swift in Sources */,
 				08CBA3171F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				864D66E91E83DE03001E8D9E /* Assignment.swift in Sources */,
