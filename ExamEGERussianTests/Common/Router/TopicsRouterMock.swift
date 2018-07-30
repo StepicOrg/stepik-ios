@@ -12,4 +12,7 @@ import Foundation
 final class TopicsRouterMock: TopicsRouter {
     func showAuth() {
     }
+
+    func showLessonsForTopicWithId(_ id: String) {
+    }
 }

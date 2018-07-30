@@ -11,6 +11,7 @@ import Foundation
 /// The AssemblyFactory protocol returns assemblies of each module of the presentation layer.
 protocol AssemblyFactory: class {
     var applicationAssembly: ApplicationAssembly { get }
-    var topicsAssembly: TopicsAssembly { get }
     var authAssembly: AuthAssembly { get }
+    var topicsAssembly: TopicsAssembly { get }
+    var lessonsAssembly: LessonsAssembly { get }
 }

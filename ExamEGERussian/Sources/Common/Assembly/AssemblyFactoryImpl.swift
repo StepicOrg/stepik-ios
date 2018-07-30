@@ -13,17 +13,31 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return ApplicationAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var topicsAssembly: TopicsAssembly {
-        return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
     var authAssembly: AuthAssembly {
         return AuthAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    private let serviceFactory: ServiceFactory
+    var topicsAssembly: TopicsAssembly {
+        return TopicsAssemblyImpl(
+            assemblyFactory: self,
+            serviceFactory: serviceFactory,
+            knowledgeGraph: knowledgeGraph
+        )
+    }
 
-    init(serviceFactory: ServiceFactory) {
+    var lessonsAssembly: LessonsAssembly {
+        return LessonsAssemblyImpl(
+            assemblyFactory: self,
+            serviceFactory: serviceFactory,
+            knowledgeGraph: knowledgeGraph
+        )
+    }
+
+    private let serviceFactory: ServiceFactory
+    private let knowledgeGraph: KnowledgeGraph
+
+    init(serviceFactory: ServiceFactory, knowledgeGraph: KnowledgeGraph) {
         self.serviceFactory = serviceFactory
+        self.knowledgeGraph = knowledgeGraph
     }
 }

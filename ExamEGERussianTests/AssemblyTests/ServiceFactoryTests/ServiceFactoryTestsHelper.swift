@@ -16,7 +16,11 @@ final class ServiceFactoryTestsHelper {
         serviceFactory = ServiceFactoryImpl(
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI()
+            profilesAPI: ProfilesAPI(),
+            coursesAPI: CoursesAPI(),
+            enrollmentsAPI: EnrollmentsAPI(),
+            lessonsAPI: LessonsAPI(),
+            defaultsStorageManager: DefaultsStorageManager.shared
         )
     }
 }

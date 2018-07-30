@@ -14,4 +14,13 @@ final class TopicsRouterImpl: BaseRouter, TopicsRouter {
             assemblyFactory.authAssembly.greeting.module()
         })
     }
+
+    func showLessonsForTopicWithId(_ id: String) {
+        pushViewController(derivedFrom: { navigationController in
+            assemblyFactory.lessonsAssembly.module(
+                navigationController: navigationController,
+                topicId: id
+            )
+        })
+    }
 }

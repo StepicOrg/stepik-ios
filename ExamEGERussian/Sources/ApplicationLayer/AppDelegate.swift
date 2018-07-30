@@ -24,9 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceFactory = ServiceFactoryImpl(
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI()
+            profilesAPI: ProfilesAPI(),
+            coursesAPI: CoursesAPI(),
+            enrollmentsAPI: EnrollmentsAPI(),
+            lessonsAPI: LessonsAPI(),
+            defaultsStorageManager: DefaultsStorageManager.shared
         )
-        let assemblyFactory = AssemblyFactoryImpl(serviceFactory: serviceFactory)
+        let assemblyFactory = AssemblyFactoryImpl(
+            serviceFactory: serviceFactory,
+            knowledgeGraph: KnowledgeGraph()
+        )
 
         guard let router = assemblyFactory.applicationAssembly.module().router else {
             fatalError("Could not instantiate router")
