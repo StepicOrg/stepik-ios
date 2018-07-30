@@ -167,7 +167,10 @@ platform :ios do
         match_adhoc(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
-        disable_automatic_code_signing
+        set_manual_code_signing(
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+            scheme: scheme
+        )
         begin
             gym(
                 scheme: scheme,
@@ -178,7 +181,10 @@ platform :ios do
                 export_method: "ad-hoc"
             )
         ensure
-            enable_automatic_code_signing
+            set_auto_code_signing(
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                scheme: scheme
+            )
             clean_build_artifacts
         end
 
