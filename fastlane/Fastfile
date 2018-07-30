@@ -6,6 +6,7 @@ default_platform :ios
 platform :ios do
     # Config variables
 
+    team_id = ENV["FASTLANE_TEAM_ID"]
     keychain_password = ENV["KEYCHAIN_PASSWORD"]
     crashlytics_api_token = ENV["CRASHLYTICS_API_TOKEN"]
     crashlytics_build_secret = ENV["CRASHLYTICS_BUILD_TOKEN"]
@@ -18,30 +19,30 @@ platform :ios do
     project_metapath = "./fastlane/metadata"
     project_screenpath = "./fastlane/screenshots"
 
-    app_identifiers = {
+    schemes = {
         "Stepic" => [
-            "com.AlexKarpov.Stepic",
-            "com.AlexKarpov.Stepic.watchkitapp", 
-            "com.AlexKarpov.Stepic.watchkitapp.watchkitextension", 
-            "com.AlexKarpov.Stepic.StickerPackExtension"
+            "Stepic",
+            "StepicWatch", 
+            "StepicWatch Extension", 
+            "StickerPackExtension"
         ],
         "Adaptive 1838" => [
-            "org.stepik.ios.adaptive.1838"
+            "Adaptive 1838"
         ],
         "Adaptive 3150" => [
-            "org.stepik.ios.adaptive.3150"
+            "Adaptive 3150"
         ],
         "Adaptive 3149" => [
-            "org.stepik.ios.adaptive.3149"
+            "Adaptive 3149"
         ],
         "Adaptive 3124" => [
-            "org.stepik.ios.adaptive.3124"
+            "Adaptive 3124"
         ],
         "Adaptive GMAT" => [
-            "org.stepik.ios.adaptive.gmat"
+            "Adaptive GMAT"
         ],
         "Adaptive 8290" => [
-            "org.stepik.ios.adaptive.8290"
+            "Adaptive 8290"
         ]
     }
 
@@ -51,11 +52,89 @@ platform :ios do
         "v. #{version_number} (#{build_number})"
     end
 
+    def get_bundle_id(options)
+        project_path = options[:xcodeproj] ? File.join(options[:xcodeproj], '..') : Dir.glob("../*.xcodeproj").first
+        scheme = options[:scheme]
+
+        if project_path
+            project = Xcodeproj::Project.open(project_path)
+        else 
+            UI.user_error("Unable to find xcodeproj file")
+        end
+
+        scheme = project.native_targets.find { |target| target.name == scheme }
+        build_configuration = scheme.build_configurations.first
+
+        if build_configuration.nil?
+            UI.user_error("Unable to find build configuration")
+        end
+
+        build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
+    end
+
     # Private lanes
 
     private_lane :decrypt_keychain do
-        unlock_keychain(path: "login.keychain", password: keychain_password)
+        unlock_keychain(
+            path: "login.keychain", 
+            password: keychain_password
+        )
         sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
+    end
+
+    private_lane :match_scheme do |options|
+        scheme = options[:scheme]
+        type = options[:type]
+        dependent_schemes = schemes[scheme]
+        identifiers = dependent_schemes.map { |scheme| get_bundle_id(scheme: scheme) }
+
+        match(
+            type: type,
+            force_for_new_devices: true,
+            app_identifier: identifiers
+        )
+    end
+
+    private_lane :set_manual_code_signing do |options|
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+        bundle_id_to_scheme = {}
+        dependent_schemes = schemes[scheme]
+        for i in dependent_schemes
+            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
+        end
+
+        provisioning_profile_mapping.each do |key, value|
+            automatic_code_signing(
+                use_automatic_signing: false,
+                targets: [bundle_id_to_scheme[key]],
+                profile_name: value,
+                team_id: team_id,
+                code_sign_identity: "iPhone Distribution"
+            )
+        end
+    end
+
+    private_lane :set_auto_code_signing do |options|
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+        bundle_id_to_scheme = {}
+        dependent_schemes = schemes[scheme]
+        for i in dependent_schemes
+            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
+        end
+
+        provisioning_profile_mapping.each do |key, value|
+            automatic_code_signing(
+                use_automatic_signing: true,
+                targets: [bundle_id_to_scheme[key]],
+                profile_name: "",
+                team_id: team_id,
+                code_sign_identity: "iPhone Developer"
+            )
+        end
     end
 
     # Lanes
@@ -127,39 +206,27 @@ platform :ios do
     desc "Match development certificates for scheme."
     desc "Options: scheme"
     lane :match_dev do |options|
-        scheme = options[:scheme]
-        identifier = app_identifiers[scheme]
-
-        match(
+        match_scheme(
             type: "development",
-            force_for_new_devices: true,
-            app_identifier: identifier
+            scheme: options[:scheme]
         )
     end
 
     desc "Match adhoc certificates for scheme."
     desc "Options: scheme"
     lane :match_adhoc do |options|
-        scheme = options[:scheme]
-        identifier = app_identifiers[scheme]
-
-        match(
+        match_scheme(
             type: "adhoc",
-            force_for_new_devices: true,
-            app_identifier: identifier
+            scheme: options[:scheme]
         )
     end
 
     desc "Match appstore certificates for scheme."
     desc "Options: scheme"
     lane :match_release do |options|
-        scheme = options[:scheme]
-        identifier = app_identifiers[scheme]
-
-        match(
+        match_scheme(
             type: "appstore",
-            force_for_new_devices: true,
-            app_identifier: identifier
+            scheme: options[:scheme]
         )
     end
 
@@ -168,8 +235,8 @@ platform :ios do
         increment_build_number
     end
 
-    desc "Set version"
-
+    desc "Set version."
+    desc "Options: version"
     lane :set_version do |options|
         version = options[:version]
         increment_version_number(version_number: version)
@@ -229,7 +296,10 @@ platform :ios do
         match_release(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
-        disable_automatic_code_signing
+        set_manual_code_signing(
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+            scheme: scheme
+        )
         begin
             gym(
                 scheme: "#{scheme}",
@@ -240,7 +310,10 @@ platform :ios do
                 export_method: "app-store"
             )
         ensure
-            enable_automatic_code_signing
+            set_auto_code_signing(
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                scheme: scheme
+            )
             clean_build_artifacts
         end
 
