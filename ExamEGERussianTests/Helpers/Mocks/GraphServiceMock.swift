@@ -17,7 +17,7 @@ final class GraphServiceMock: GraphService {
 
     var resultToBeReturned: Promise<KnowledgeGraphPlainObject> = Promise(error: Error.mockError)
 
-    func obtainGraph() -> Promise<KnowledgeGraphPlainObject> {
+    func fetchGraph() -> Promise<KnowledgeGraphPlainObject> {
         return resultToBeReturned
     }
 }

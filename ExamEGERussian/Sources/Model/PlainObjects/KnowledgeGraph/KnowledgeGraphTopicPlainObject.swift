@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TopicPlainObject: Codable {
+struct KnowledgeGraphTopicPlainObject: Codable {
     let id: String
     let title: String
     let requiredFor: String?
