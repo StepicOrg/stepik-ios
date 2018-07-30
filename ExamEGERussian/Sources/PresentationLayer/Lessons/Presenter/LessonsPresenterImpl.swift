@@ -68,13 +68,20 @@ final class LessonsPresenterImpl: LessonsPresenter {
     // MARK: - Private API
 
     private func joinCoursesIfNeeded() {
-        guard !coursesIds.isEmpty else { return }
+        guard !coursesIds.isEmpty else {
+            return
+        }
+
         courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
             var ids = Set(self.coursesIds)
             courses.filter { $0.enrolled }.map { $0.id }.forEach { ids.remove($0) }
+
             return .value(Array(ids))
         }.then { ids -> Promise<[Course]> in
-            guard !ids.isEmpty else { return .value([]) }
+            guard !ids.isEmpty else {
+                return .value([])
+            }
+
             return self.courseService.fetchCourses(with: ids)
         }.then { courses in
             when(fulfilled: courses.map { self.joinCourse($0) })
@@ -86,7 +93,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private func joinCourse(_ course: Course) -> Promise<Course> {
-        guard !course.enrolled else { return .value(course) }
+        guard !course.enrolled else {
+            return .value(course)
+        }
+
         return enrollmentService.joinCourse(course)
     }
 
@@ -99,7 +109,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private func fetchLessons() {
-        guard lessonsIds.count > 0 else { return }
+        guard lessonsIds.count > 0 else {
+            return
+        }
+
         lessonsService.fetchLessons(with: lessonsIds).done { [weak self] lessons in
             self?.lessons = lessons
         }.catch { [weak self] error in
