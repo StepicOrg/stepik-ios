@@ -10,10 +10,6 @@ import Foundation
 import PromiseKit
 
 final class EnrollmentServiceImpl: EnrollmentService {
-    private enum EnrollmentServiceError: Error {
-        case joinCourseFailed
-    }
-
     private let enrollmentsAPI: EnrollmentsAPI
 
     init(enrollmentsAPI: EnrollmentsAPI) {
@@ -21,12 +17,8 @@ final class EnrollmentServiceImpl: EnrollmentService {
     }
 
     func joinCourse(_ course: Course) -> Promise<Course> {
-        return Promise { seal in
-            self.enrollmentsAPI.joinCourse(course).done {
-                seal.fulfill(course)
-            }.catch { _ in
-                seal.reject(EnrollmentServiceError.joinCourseFailed)
-            }
+        return enrollmentsAPI.joinCourse(course).then { _ -> Promise<Course> in
+            .value(course)
         }
     }
 }
