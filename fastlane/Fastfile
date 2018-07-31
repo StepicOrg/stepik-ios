@@ -113,7 +113,7 @@ platform :ios do
             scheme, 
             provisioning_profile_mapping
         )
-        
+
         provisioning_profile_mapping.each do |key, value|
             automatic_code_signing(
                 use_automatic_signing: false,
@@ -151,7 +151,7 @@ platform :ios do
 
     # Lanes
 
-    desc "Runs all the tests for scheme."
+    desc "Run all tests for scheme."
     desc "Options: scheme"
     lane :test do |options|
         clear_derived_data
@@ -208,8 +208,6 @@ platform :ios do
         end
 
         crashlytics(
-            api_token: crashlytics_api_token,
-            build_secret: crashlytics_build_secret,
             notifications: true,
             groups: "all-ios-testers"
         )
