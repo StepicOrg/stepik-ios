@@ -79,14 +79,6 @@ platform :ios do
 
     # Private lanes
 
-    private_lane :decrypt_keychain do
-        unlock_keychain(
-            path: "login.keychain", 
-            password: keychain_password
-        )
-        sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
-    end
-
     private_lane :match_scheme do |options|
         scheme = options[:scheme]
         type = options[:type]
@@ -176,7 +168,7 @@ platform :ios do
         clear_derived_data
         cocoapods(repo_update: true)
 
-        decrypt_keychain
+        unlock_keychain
 
         match_adhoc(scheme: scheme)
 
@@ -314,7 +306,7 @@ platform :ios do
         clear_derived_data
         cocoapods(repo_update: true)
 
-        decrypt_keychain
+        unlock_keychain
 
         match_release(scheme: scheme)
 
