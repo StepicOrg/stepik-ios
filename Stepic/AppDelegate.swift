@@ -20,6 +20,7 @@ import YandexMobileMetrica
 import Presentr
 import SwiftyJSON
 import PromiseKit
+import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -63,9 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.firstTime)
+            AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
-        AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Launch.sessionStart)
+        AmplitudeAnalyticsEvents.Launch.sessionStart.send()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
@@ -275,6 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+        AppsFlyerTracker.shared().trackAppLaunch()
     }
 
 //    @available(iOS 8.0, *)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireNetworkActivityIndicator
 
 // MARK: AppDelegate: UIResponder, UIApplicationDelegate
 
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         rootNavigationManager.setup(with: window)
+        NetworkActivityIndicatorManager.shared.isEnabled = true
 
         return true
     }

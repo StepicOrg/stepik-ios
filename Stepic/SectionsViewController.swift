@@ -15,6 +15,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
+    var completedDownloads = 0
 
     let refreshControl = UIRefreshControl()
     var didRefresh = false
@@ -222,6 +223,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
 
         if isFirstLoad {
             isFirstLoad = false
@@ -516,20 +519,70 @@ extension SectionsViewController : PKDownloadButtonDelegate {
     }
 
     fileprivate func storeSection(_ section: Section, downloadButton: PKDownloadButton!) {
-        section.storeVideos(
-            progress: {
-            progress in
-            UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
-            }, completion: {
-                if section.isCached {
-                    UIThread.performUI({downloadButton.state = .downloaded})
-                } else {
-                    UIThread.performUI({downloadButton.state = .startDownload})
+        completedDownloads = 0
+        let section = course.sections[downloadButton.tag]
+        var videosToStore: [Video] = []
+        var queuedUnitsCount: Int = 0
+        for unit in section.units {
+            if unit.lesson?.steps.count != 0 {
+                videosToStore += (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
+                queuedUnitsCount += 1
+                if queuedUnitsCount == section.units.count {
+                    self.storeVideos(videosToStore, downloadButton: downloadButton)
                 }
-            }, error: {
-                _ in
-                UIThread.performUI({downloadButton.state = PKDownloadButtonState.startDownload})
-        })
+            } else {
+                unit.lesson?.loadSteps(completion: {
+                    let videos = (unit.lesson?.stepVideos ?? []).filter { $0.state == .online }
+                    videosToStore += videos
+                    queuedUnitsCount += 1
+                    if queuedUnitsCount == section.units.count {
+                        self.storeVideos(videosToStore, downloadButton: downloadButton)
+                    }
+                })
+            }
+        }
+    }
+
+    fileprivate func storeVideos(_ videos: [Video], downloadButton: PKDownloadButton) {
+        let quality = VideosInfo.downloadingVideoQuality
+        var tasks = [VideoDownloaderTask]()
+        for video in videos {
+            let nearestQuality = video.getNearestQualityToDefault(quality)
+            let url = video.getUrlForQuality(nearestQuality)
+
+            let task = VideoDownloaderTask(videoId: video.id, url: url)
+            task.completionReporter = { [weak self] _ in
+                video.cachedQuality = nearestQuality
+                CoreDataHelper.instance.save()
+
+                self?.completedDownloads += 1
+                print("Completed task with id \(task.videoId), video \(self?.completedDownloads ?? -1) of \(videos.count)")
+
+                VideoDownloaderManager.shared.remove(by: task.videoId)
+                if self?.completedDownloads == videos.count {
+                    UIThread.performUI({downloadButton.state = .downloaded})
+                }
+            }
+            task.failureReporter = { _ in
+                VideoDownloaderManager.shared.remove(by: task.videoId)
+            }
+            tasks.append(task)
+        }
+        for task in tasks {
+            task.progressReporter = { _ in
+                let activeTasks = tasks.filter({ $0.state == .active })
+                let newProgress = activeTasks.map({ $0.progress }).reduce(0.0, +) / Float(activeTasks.count)
+
+                print("Reported progress \(newProgress), videos count -> \(tasks.count)")
+
+                UIThread.performUI {
+                    downloadButton.stopDownloadButton.progress = max(CGFloat(newProgress),
+                                                                     downloadButton.stopDownloadButton.progress)
+                }
+            }
+
+            VideoDownloaderManager.shared.start(task: task)
+        }
     }
 
     func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
@@ -543,7 +596,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.startDownload :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.started, parameters: ["content": "section"])
+            AmplitudeAnalyticsEvents.Downloads.started(content: "section").send()
 
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -568,32 +621,61 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.downloading :
 
             AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
-            AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.cancelled, parameters: ["content": "section"])
+            AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section").send()
 
             downloadButton.state = PKDownloadButtonState.pending
 
-            course.sections[downloadButton.tag].cancelVideoStore(completion: {
+            // Cancelation
+            let section = course.sections[downloadButton.tag]
+            var videos = [Video]()
+            for lesson in section.units.compactMap({ $0.lesson }) {
+                videos.append(contentsOf: lesson.stepVideos)
+            }
+
+            for video in videos {
+                if let task = VideoDownloaderManager.shared.get(by: video.id), task.state == .active {
+                    task.cancel()
+                    VideoDownloaderManager.shared.remove(by: video.id)
+                }
+
                 DispatchQueue.main.async(execute: {
                     downloadButton.pendingView?.stopSpin()
                     downloadButton.state = PKDownloadButtonState.startDownload
                 })
-            })
+            }
             break
 
         case PKDownloadButtonState.downloaded :
 
             askForRemove(okHandler: {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
-                AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Downloads.deleted, parameters: ["content": "section"])
-
+                AmplitudeAnalyticsEvents.Downloads.deleted(content: "section").send()
                 downloadButton.state = PKDownloadButtonState.pending
 
-                self.course.sections[downloadButton.tag].removeFromStore(completion: {
+                let section = self.course.sections[downloadButton.tag]
+                var videos = [Video]()
+                for lesson in section.units.compactMap({ $0.lesson }) {
+                    videos.append(contentsOf: lesson.stepVideos)
+                }
+
+                var shouldBeRemovedCount = videos.count
+                for video in videos {
+                    do {
+                        try VideoFileManager().removeVideo(videoId: video.id)
+                        video.cachedQuality = nil
+                        CoreDataHelper.instance.save()
+
+                        shouldBeRemovedCount -= 1
+                    } catch { }
+                }
+
+                if shouldBeRemovedCount == 0 {
                     DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()
                         downloadButton.state = PKDownloadButtonState.startDownload
                     })
-                })
+                }
+
                 }, cancelHandler: {
                     DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()

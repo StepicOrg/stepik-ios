@@ -44,7 +44,7 @@ class DownloadTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func initWith( _ video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {
+    func initWith( _ video: Video, buttonDelegate: PKDownloadButtonDelegate) {
         thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
 //        lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
 
@@ -58,10 +58,8 @@ class DownloadTableViewCell: UITableViewCell {
         downloadButton.delegate = buttonDelegate
 //        self.downloadDelegate = downloadDelegate
 
-        video.getSize({
-            size in
-            self.sizeLabel.text = "\(size / 1024 / 1024) \(NSLocalizedString("Mb", comment: ""))"
-        })
+        let size = VideoFileManager().fileSize(videoId: video.id) ?? 0
+        self.sizeLabel.text = "\(size / 1024 / 1024) \(NSLocalizedString("Mb", comment: ""))"
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
     }
@@ -74,27 +72,29 @@ class DownloadTableViewCell: UITableViewCell {
             return
         }
 
-        if video.state == VideoState.downloading {
+        let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
+
+        if isVideoLoading {
+            guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
+                return
+            }
+
             downloadButton.state = .downloading
 
-            self.quality = self.video.loadingQuality ?? VideosInfo.downloadingVideoQuality
+            self.quality = VideosInfo.downloadingVideoQuality
 
-            UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
+            UIThread.performUI({
+                self.downloadButton.stopDownloadButton?.progress = CGFloat(task.progress)
+            })
 
-            video.storedProgress = {
-                prog in
-                UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
+            task.progressReporter = { [weak self] progress in
+                UIThread.performUI({self?.downloadButton.stopDownloadButton?.progress = CGFloat(progress ?? 0)})
             }
-            video.storedCompletion = {
-                completed in
-                if completed {
-//                    self.downloadDelegate?.didDownload(self.video)
-                } else {
+
+            task.completionReporter = { [weak self] _ in
+                UIThread.performUI {
+                    self?.downloadButton.state = .downloaded
                 }
-                UIThread.performUI({
-                    self.quality = self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
-//                    self.qualityLabel.text = "\(self.quality.rawString)p"
-                })
             }
             return
         }

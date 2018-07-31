@@ -337,10 +337,10 @@ class QuizPresenter {
                 AnalyticsUserProperties.shared.incrementSubmissionsCount()
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
-                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.submissionMade, parameters: ["step": s.step.id, "type": s.step.block.name, "language": codeReply.languageName])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: s.step.id, type: s.step.block.name, language: codeReply.languageName).send()
                 } else {
                     AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
-                    AnalyticsReporter.reportAmplitudeEvent(AmplitudeAnalyticsEvents.Steps.submissionMade, parameters: ["step": s.step.id, "type": s.step.block.name])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: s.step.id, type: s.step.block.name).send()
                 }
 
                 s.submission = submission

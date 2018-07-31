@@ -158,11 +158,7 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
 
     func addElements(atIndexPaths indexPaths: [IndexPath]) {
         let offsetBefore = tableView.contentOffset
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.insertRows(at: indexPaths, with: .none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        tableView.reloadData()
         tableView.setContentOffset(offsetBefore, animated: false)
     }
 
@@ -189,10 +185,7 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
     }
 
     func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath]) {
-        tableView.beginUpdates()
-        tableView.insertRows(at: insertingIndexPaths, with: .automatic)
-        tableView.deleteRows(at: deletingIndexPaths, with: .automatic)
-        tableView.endUpdates()
+        tableView.reloadData()
     }
 }
 

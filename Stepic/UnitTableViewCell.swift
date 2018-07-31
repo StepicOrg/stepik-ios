@@ -39,32 +39,73 @@ class UnitTableViewCell: UITableViewCell {
 
     }
 
+    var completedDownloads = 0
+    var failedDownloads = 0
+
     func updateDownloadButton(_ unit: Unit) {
         if let lesson = unit.lesson {
             if lesson.isCached {
                 downloadButton.state = .downloaded
-            } else if lesson.isDownloading {
-                print("entered is downloading")
-                downloadButton.state = .downloading
-                downloadButton.stopDownloadButton?.progress = CGFloat(unit.lesson!.goodProgress)
-
-                unit.lesson?.storeProgress = {
-                    prog in
-                    UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
-                    //                    print("lesson store progress")
-                }
-
-                unit.lesson?.storeCompletion = {
-                    downloaded, cancelled in
-                    if cancelled == 0 {
-                        UIThread.performUI({self.downloadButton.state = .downloaded})
-                    } else {
-                        UIThread.performUI({self.downloadButton.state = .startDownload})
-                    }
-                    CoreDataHelper.instance.save()
-                }
             } else {
-                downloadButton.state = .startDownload
+                let videos = lesson.stepVideos
+                let tasks = videos.compactMap { video in
+                    VideoDownloaderManager.shared.get(by: video.id)
+                }
+
+                let progress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
+
+                if progress < 1.0 {
+                    self.downloadButton.state = .downloading
+                    self.downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+
+                    for task in tasks {
+                        task.progressReporter = { [weak self] progress in
+                            // When some task updated then recalculate ALL progresses
+                            let newProgress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)
+
+                            DispatchQueue.main.async {
+                                self?.downloadButton.stopDownloadButton?.progress = max(CGFloat(newProgress),
+                                                                                        self?.downloadButton.stopDownloadButton?.progress ?? 0)
+                            }
+                        }
+
+                        task.completionReporter = { [weak self] _ in
+                            guard let strongSelf = self else {
+                                return
+                            }
+
+                            // When some task finished then increment `completed` counter
+                            strongSelf.completedDownloads += 1
+
+                            if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
+                                DispatchQueue.main.async {
+                                    strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                }
+                            }
+
+                            CoreDataHelper.instance.save()
+                        }
+
+                        task.failureReporter = { [weak self] _ in
+                            guard let strongSelf = self else {
+                                return
+                            }
+
+                            // When some task failed then increment `failed` counter
+                            self?.failedDownloads += 1
+
+                            if strongSelf.completedDownloads + strongSelf.failedDownloads == tasks.count {
+                                DispatchQueue.main.async {
+                                    strongSelf.downloadButton.state = strongSelf.failedDownloads == 0 ? .downloaded : .startDownload
+                                }
+                            }
+
+                            CoreDataHelper.instance.save()
+                        }
+                    }
+                } else {
+                    downloadButton.state = .startDownload
+                }
             }
         }
     }
