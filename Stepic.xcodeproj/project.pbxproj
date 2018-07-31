@@ -2299,6 +2299,7 @@
 		2C83E5DD211044A600A8322D /* VideoLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* VideoLocationManager.swift */; };
 		2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E1211058DE00A8322D /* StepsService.swift */; };
 		2C83E5E421105E8000A8322D /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */; };
+		2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E62110602700A8322D /* StepsViewController.swift */; };
 		2C83E5E9211066CC00A8322D /* StepPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E8211066CC00A8322D /* StepPlainObject.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
@@ -5623,6 +5624,7 @@
 		2C8305F620F390F8003D7F9B /* GraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		2C83E5E1211058DE00A8322D /* StepsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsService.swift; sourceTree = "<group>"; };
 		2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceImpl.swift; sourceTree = "<group>"; };
+		2C83E5E62110602700A8322D /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		2C83E5E8211066CC00A8322D /* StepPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
@@ -8509,6 +8511,7 @@
 			children = (
 				2C59F06420EBA1EB00666EE0 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
+				2C83E5E52110600200A8322D /* Steps */,
 				2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */,
 			);
 			path = PresentationLayer;
@@ -15016,6 +15019,7 @@
 				2C9499EB20ECBFE90049E9A8 /* NotificationRegistrator.swift in Sources */,
 				2C33CBFF20EC3336009956B0 /* AttemptsAPI.swift in Sources */,
 				2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */,
+				2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
 				2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */,

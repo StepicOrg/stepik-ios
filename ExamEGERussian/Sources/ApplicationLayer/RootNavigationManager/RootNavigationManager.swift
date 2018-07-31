@@ -65,7 +65,12 @@ extension RootNavigationManager: TopicsRouter {
 // MARK: - RootNavigationManager: LessonsRouter -
 
 extension RootNavigationManager: LessonsRouter {
-    func showStepsForLessonWith(_ id: Int) {
-        print("\(#function) \(id)")
+    func showStepsForLesson(_ lesson: LessonPlainObject) {
+        let controller = StepsViewController(
+            lesson: lesson,
+            stepsService: serviceComponents.stepsService
+        )
+
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
