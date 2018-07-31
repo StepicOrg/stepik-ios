@@ -2301,6 +2301,18 @@
 		2C83E5E421105E8000A8322D /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */; };
 		2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E62110602700A8322D /* StepsViewController.swift */; };
 		2C83E5E9211066CC00A8322D /* StepPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E8211066CC00A8322D /* StepPlainObject.swift */; };
+		2C83E5ED2110821700A8322D /* CardStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EC2110821700A8322D /* CardStepPresenter.swift */; };
+		2C83E5EF2110839A00A8322D /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EE2110839A00A8322D /* CardStepViewController.swift */; };
+		2C83E5F12110840F00A8322D /* CardStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E5F02110840F00A8322D /* CardStepViewController.xib */; };
+		2C83E5F2211085B000A8322D /* HTMLProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B80520F3909400F64D20 /* HTMLProcessor.swift */; };
+		2C83E5F32110870A00A8322D /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
+		2C83E5F621108A5600A8322D /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
+		2C83E5F7211099BA00A8322D /* stepikcontent.css in Resources */ = {isa = PBXBuildFile; fileRef = 08FCC79320F3BAEA008B84B9 /* stepikcontent.css */; };
+		2C83E5F8211099CF00A8322D /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
+		2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		2C83E5FA211099F900A8322D /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C83E5FB21109A3700A8322D /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
+		2C83E5FC21109C4300A8322D /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -5626,6 +5638,9 @@
 		2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceImpl.swift; sourceTree = "<group>"; };
 		2C83E5E62110602700A8322D /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		2C83E5E8211066CC00A8322D /* StepPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
+		2C83E5EC2110821700A8322D /* CardStepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepPresenter.swift; sourceTree = "<group>"; };
+		2C83E5EE2110839A00A8322D /* CardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepViewController.swift; sourceTree = "<group>"; };
+		2C83E5F02110840F00A8322D /* CardStepViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardStepViewController.xib; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -8859,6 +8874,9 @@
 			isa = PBXGroup;
 			children = (
 				2C83E5E62110602700A8322D /* StepsViewController.swift */,
+				2C83E5EC2110821700A8322D /* CardStepPresenter.swift */,
+				2C83E5EE2110839A00A8322D /* CardStepViewController.swift */,
+				2C83E5F02110840F00A8322D /* CardStepViewController.xib */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -10904,14 +10922,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C83E5FC21109C4300A8322D /* MathJax in Resources */,
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2CE3C2BA21007D3D003AB54A /* TopicsTableViewController.xib in Resources */,
 				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
+				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
 				2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */,
+				2C83E5FA211099F900A8322D /* plyr.js in Resources */,
+				2C83E5F12110840F00A8322D /* CardStepViewController.xib in Resources */,
+				2C83E5F8211099CF00A8322D /* jquery-3.2.1.min.js in Resources */,
 				2C1BF0B02107328900EA83CA /* LaunchScreen.storyboard in Resources */,
+				2C83E5FB21109A3700A8322D /* plyr.css in Resources */,
 				2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */,
+				2C83E5F621108A5600A8322D /* Scripts.plist in Resources */,
+				2C83E5F7211099BA00A8322D /* stepikcontent.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14811,6 +14837,7 @@
 				2C949A6E20ECD0D10049E9A8 /* AchievementsListTableViewCell.swift in Sources */,
 				2C9499B220ECBAC00049E9A8 /* ChoiceDataset.swift in Sources */,
 				2C33CBFA20EC32B0009956B0 /* AssignmentsAPI.swift in Sources */,
+				2C83E5F32110870A00A8322D /* Scripts.swift in Sources */,
 				2C9499F320ECC0BE0049E9A8 /* Executable.swift in Sources */,
 				2C9499E620ECBEBE0049E9A8 /* StringExtensions.swift in Sources */,
 				2C33CBE520EC313A009956B0 /* DictionarySerializable.swift in Sources */,
@@ -14883,6 +14910,7 @@
 				2C9499BC20ECBB400049E9A8 /* Block.swift in Sources */,
 				2C949A3F20ECC92C0049E9A8 /* WebControllerManager.swift in Sources */,
 				2C9499E920ECBFB20049E9A8 /* PlaybackStatusEntity.swift in Sources */,
+				2C83E5F2211085B000A8322D /* HTMLProcessor.swift in Sources */,
 				2C3E42B52101D05C009D76DF /* KnowledgeGraphLesson.swift in Sources */,
 				2C94999520ECB8420049E9A8 /* Unit+CoreDataProperties.swift in Sources */,
 				2C0BD98F20ED38690022C454 /* ServiceComponentsAssembly.swift in Sources */,
@@ -14931,6 +14959,7 @@
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
 				2CCB5A52210088B70091A605 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C949A4520ECCA290049E9A8 /* TooltipFactory.swift in Sources */,
+				2C83E5ED2110821700A8322D /* CardStepPresenter.swift in Sources */,
 				2C949A6F20ECD1010049E9A8 /* PinsMap.swift in Sources */,
 				2C94998E20ECB74D0049E9A8 /* APIDefaults.swift in Sources */,
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
@@ -15040,6 +15069,7 @@
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
+				2C83E5EF2110839A00A8322D /* CardStepViewController.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,

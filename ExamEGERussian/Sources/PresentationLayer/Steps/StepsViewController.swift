@@ -71,7 +71,7 @@ final class StepsViewController: UIViewController {
 
     private func fetchSteps() {
         stepsService.fetchSteps(for: lesson).done { [weak self] steps in
-            self?.steps = steps
+            self?.steps = steps.filter { $0.type == .text }
         }.catch { error in
             print(error)
         }
@@ -94,5 +94,15 @@ extension StepsViewController: UITableViewDataSource {
 extension StepsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let controller = CardStepViewController()
+        let presenter = CardStepPresenter(
+            view: controller,
+            step: steps[indexPath.row],
+            lesson: lesson
+        )
+        controller.presenter = presenter
+
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
