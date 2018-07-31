@@ -67,6 +67,16 @@ platform :ios do
         build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
     end
 
+    def build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
+        bundle_id_to_scheme = {}
+        dependent_schemes = schemes[scheme]
+        for i in dependent_schemes
+            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
+        end
+
+        bundle_id_to_scheme
+    end
+
     # Private lanes
 
     private_lane :decrypt_keychain do
@@ -92,14 +102,13 @@ platform :ios do
     end
 
     private_lane :set_manual_code_signing do |options|
+        if team_id.nil? || team_id.empty?
+            UI.abort_with_message!("Team ID can not be empty!")
+        end
+
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
-
-        bundle_id_to_scheme = {}
-        dependent_schemes = schemes[scheme]
-        for i in dependent_schemes
-            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
-        end
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
 
         provisioning_profile_mapping.each do |key, value|
             automatic_code_signing(
@@ -113,14 +122,13 @@ platform :ios do
     end
 
     private_lane :set_auto_code_signing do |options|
+        if team_id.nil? || team_id.empty?
+            UI.abort_with_message!("Team ID can not be empty!")
+        end
+
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
-
-        bundle_id_to_scheme = {}
-        dependent_schemes = schemes[scheme]
-        for i in dependent_schemes
-            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
-        end
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
 
         provisioning_profile_mapping.each do |key, value|
             automatic_code_signing(
@@ -176,7 +184,12 @@ platform :ios do
                 output_directory: "artefacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
-                export_method: "ad-hoc"
+                skip_profile_detection: true,
+                export_method: "ad-hoc",
+                export_options: {
+                    # use only provisioning profiles from match
+                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                }
             )
         ensure
             set_auto_code_signing(
@@ -311,7 +324,12 @@ platform :ios do
                 output_directory: "artefacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
-                export_method: "app-store"
+                skip_profile_detection: true,
+                export_method: "app-store",
+                export_options: {
+                    # use only provisioning profiles from match
+                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                }
             )
         ensure
             set_auto_code_signing(
