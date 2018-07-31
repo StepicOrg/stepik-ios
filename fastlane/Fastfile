@@ -86,7 +86,7 @@ platform :ios do
         match(
             type: type,
             force_for_new_devices: true,
-            readonly: true
+            readonly: true,
             app_identifier: identifiers
         )
     end
