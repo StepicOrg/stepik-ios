@@ -13,12 +13,32 @@ import PromiseKit
 import SnapKit
 
 class CardStepViewController: UIViewController, CardStepView {
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var placeholderView: UIView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    private var stepWebViewHeight: Constraint!
+
     var presenter: CardStepPresenter?
 
-    var stepWebView: WKWebView!
-    var stepWebViewHeight: Constraint!
+    private lazy var stepWebView: WKWebView = {
+        let stepWebView = WKWebView(frame: .zero, configuration: self.сonfiguration)
+        stepWebView.navigationDelegate = self
+        stepWebView.scrollView.delegate = self
+        stepWebView.translatesAutoresizingMaskIntoConstraints = false
 
-    @IBOutlet var scrollView: UIScrollView!
+        return stepWebView
+    }()
+
+    private lazy var сonfiguration: WKWebViewConfiguration = {
+        let script = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let controller = WKUserContentController()
+        controller.addUserScript(userScript)
+        let сonfiguration = WKWebViewConfiguration()
+        сonfiguration.userContentController = controller
+
+        return сonfiguration
+    }()
 
     // For updates after rotation only when controller not presented
     var shouldRefreshOnAppear: Bool = false
@@ -28,8 +48,10 @@ class CardStepViewController: UIViewController, CardStepView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupWebView()
-        presenter?.refreshStep()
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didScreenRotate),
@@ -37,11 +59,10 @@ class CardStepViewController: UIViewController, CardStepView {
             object: nil
         )
 
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        setupWebView()
 
-        scrollView.alwaysBounceVertical = true
+        activityIndicator.startAnimating()
+        presenter?.refreshStep()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,54 +84,38 @@ class CardStepViewController: UIViewController, CardStepView {
     deinit {
         NotificationCenter.default.removeObserver(self)
 
-        if stepWebView != nil {
-            // If WKWebView is not deallocated, we should reset its delegate (iOS 9 crash)
-            stepWebView.navigationDelegate = nil
-            stepWebView.scrollView.delegate = nil
-        }
+        stepWebView.navigationDelegate = nil
+        stepWebView.scrollView.delegate = nil
     }
 
-    // MARK: - Public API
+    // MARK: - CardStepView
+
+    func updateProblem(with htmlText: String) {
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor.injectDefault().html
+        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+    }
+
+    // MARK: - Private API
 
     @objc func didScreenRotate() {
         refreshWebView()
         shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 
-    func setupWebView() {
-        let script = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
-        let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let controller = WKUserContentController()
-        controller.addUserScript(userScript)
-        let сonfiguration = WKWebViewConfiguration()
-        сonfiguration.userContentController = controller
-
-        stepWebView = WKWebView(frame: .zero, configuration: сonfiguration)
-        stepWebView.navigationDelegate = self
-        stepWebView.scrollView.isScrollEnabled = false
-        stepWebView.scrollView.delegate = self
+    private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
-
-        stepWebView.translatesAutoresizingMaskIntoConstraints = false
         stepWebView.snp.makeConstraints { make in
             stepWebViewHeight = make.height.equalTo(5).constraint
-            make.top.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
-            make.leading.equalToSuperview().offset(2)
-            make.trailing.equalToSuperview().offset(-2)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(placeholderView.snp.top)
+            make.leading.equalTo(scrollView).offset(2)
+            make.trailing.equalTo(scrollView).offset(-2)
+            make.top.equalTo(scrollView).offset(5)
         }
     }
 
-    func updateProblem(with htmlText: String) {
-        let processor = HTMLProcessor(html: htmlText)
-        let html = processor
-            .injectDefault()
-            .html
-        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-    }
-
-    func refreshWebView() {
+    private func refreshWebView() {
+        activityIndicator.startAnimating()
         resetWebViewHeight(5.0)
 
         func reloadContent() -> Promise<Void> {
@@ -132,6 +137,7 @@ class CardStepViewController: UIViewController, CardStepView {
         }.done { height in
             self.resetWebViewHeight(Float(height))
             self.scrollView.layoutIfNeeded()
+            self.animate()
         }.catch { _ in
             print("card step: error while refreshing")
         }
@@ -141,43 +147,15 @@ class CardStepViewController: UIViewController, CardStepView {
 // MARK: - CardStepViewController: WKNavigationDelegate -
 
 extension CardStepViewController: WKNavigationDelegate {
-    func resetWebViewHeight(_ height: Float) {
-        stepWebViewHeight.update(offset: height)
-    }
-
-    func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
-        return Promise { seal in
-            webView.evaluateJavaScript("document.body.scrollHeight;", completionHandler: { res, error in
-                if let error = error {
-                    return seal.reject(error)
-                }
-
-                if let height = res as? Int {
-                    seal.fulfill(height)
-                } else {
-                    seal.fulfill(0)
-                }
-            })
-        }
-    }
-
-    func alignImages(in webView: WKWebView) -> Promise<Void> {
-        // Disable WebKit callout on long press
-        var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
-        // Change color for audio control
-        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepicGreen.hexString)');"
-        // Center images
-        jsCode += "var imgs = document.getElementsByTagName('img');"
-        jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
-
-        return Promise { seal in
-            webView.evaluateJavaScript(jsCode, completionHandler: { _, error in
-                if let error = error {
-                    return seal.reject(error)
-                }
-
-                seal.fulfill(())
-            })
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        alignImages(in: webView).then {
+            self.getContentHeight(webView)
+        }.done { height in
+            self.resetWebViewHeight(Float(height))
+            self.scrollView.layoutIfNeeded()
+            self.animate()
+        }.catch { _ in
+            print("card step: error after webview loading did finish")
         }
     }
 
@@ -201,15 +179,68 @@ extension CardStepViewController: WKNavigationDelegate {
         return decisionHandler(.allow)
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        alignImages(in: webView).then {
-            self.getContentHeight(webView)
-        }.done { height in
-            self.resetWebViewHeight(Float(height))
-            self.scrollView.layoutIfNeeded()
-        }.catch { _ in
-            print("card step: error after webview loading did finish")
+    // MARK: Private Helpers
+
+    private func resetWebViewHeight(_ height: Float) {
+        stepWebViewHeight.update(offset: height)
+    }
+
+    private func resetContentOffset() {
+        firstly {
+            after(seconds: 0.33)
+        }.done {
+            self.scrollView.contentOffset = .zero
+            self.stepWebView.scrollView.contentOffset = .zero
         }
+    }
+
+    private func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
+        return Promise { seal in
+            webView.evaluateJavaScript("document.body.scrollHeight;") { res, error in
+                if let error = error {
+                    return seal.reject(error)
+                }
+
+                if let height = res as? Int {
+                    seal.fulfill(height)
+                } else {
+                    seal.fulfill(0)
+                }
+            }
+        }
+    }
+
+    private func alignImages(in webView: WKWebView) -> Promise<Void> {
+        // Disable WebKit callout on long press
+        var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
+        // Change color for audio control
+        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepicGreen.hexString)');"
+        // Center images
+        jsCode += "var imgs = document.getElementsByTagName('img');"
+        jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
+
+        return Promise { seal in
+            webView.evaluateJavaScript(jsCode, completionHandler: { _, error in
+                if let error = error {
+                    return seal.reject(error)
+                }
+
+                seal.fulfill(())
+            })
+        }
+    }
+
+    private func animate() {
+        stepWebView.alpha = 0.0
+        UIView.animate(withDuration: 0.33, animations: {
+            self.stepWebView.alpha = 1.0
+        }, completion: { finished in
+            guard finished else {
+                return
+            }
+            self.stepWebView.scrollView.contentOffset = .zero
+            self.activityIndicator.stopAnimating()
+        })
     }
 }
 
