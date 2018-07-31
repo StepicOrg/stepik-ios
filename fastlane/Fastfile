@@ -181,7 +181,7 @@ platform :ios do
             gym(
                 scheme: scheme,
                 clean: true,
-                output_directory: "artefacts",
+                output_directory: "artifacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
                 skip_profile_detection: true,
@@ -296,12 +296,13 @@ platform :ios do
     end
 
     desc "Deploy a new version to the App Store."
-    desc "Options: scheme"
+    desc "Options: scheme, should_submit"
     lane :release do |options|
         scheme = options[:scheme]
         app_identifier = app_identifiers[scheme][0]
         metapath = "#{project_metapath}/#{scheme}"
         screenpath = "#{project_screenpath}/#{scheme}"
+        should_submit = options[:should_submit] || false
 
         clear_derived_data
         cocoapods(repo_update: true)
@@ -319,7 +320,7 @@ platform :ios do
             gym(
                 scheme: "#{scheme}",
                 clean: true,
-                output_directory: "artefacts",
+                output_directory: "artifacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
                 skip_profile_detection: true,
@@ -342,7 +343,19 @@ platform :ios do
             metadata_path: metapath,
             screenshots_path: screenpath,
             app_identifier: app_identifier,
-            username: deliver_username
+
+            # submit options 
+            submit_for_review: should_submit,
+            phased_release: true,
+            automatic_release: true,
+            ratings_reset: false,
+            submission_information: {
+                export_compliance_encryption_updated: false,
+                add_id_info_uses_idfa: true,
+                add_id_info_serves_ads: false,
+                add_id_info_tracks_action: true,
+                add_id_info_tracks_install: false
+            }
         )
 
         slack(
