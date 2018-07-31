@@ -196,7 +196,6 @@ platform :ios do
                 provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
                 scheme: scheme
             )
-            clean_build_artifacts
         end
 
         crashlytics(
@@ -335,7 +334,6 @@ platform :ios do
                 provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
                 scheme: scheme
             )
-            clean_build_artifacts
         end
 
         deliver(
@@ -364,7 +362,13 @@ platform :ios do
         )
     end
 
+    after_all do |lane, options|
+        clean_build_artifacts
+    end
+
     error do |lane, exception|
+        clean_build_artifacts
+        
         slack(
             message: exception.message,
             success: false
