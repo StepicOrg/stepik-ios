@@ -86,6 +86,7 @@ platform :ios do
         match(
             type: type,
             force_for_new_devices: true,
+            readonly: true
             app_identifier: identifiers
         )
     end
@@ -172,7 +173,6 @@ platform :ios do
             gym(
                 scheme: scheme,
                 clean: true,
-                readonly: true,
                 output_directory: "artefacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
@@ -308,7 +308,6 @@ platform :ios do
             gym(
                 scheme: "#{scheme}",
                 clean: true,
-                readonly: true,
                 output_directory: "artefacts",
                 output_name: "#{scheme}.ipa",
                 include_bitcode: true,
