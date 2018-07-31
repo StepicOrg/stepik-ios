@@ -67,7 +67,7 @@ platform :ios do
         build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
     end
 
-    def build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
+    def build_bundle_id_to_scheme_mapping(schemes, scheme, provisioning_profile_mapping)
         bundle_id_to_scheme = {}
         dependent_schemes = schemes[scheme]
         for i in dependent_schemes
@@ -108,7 +108,7 @@ platform :ios do
 
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
-        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(schemes, scheme, provisioning_profile_mapping)
 
         provisioning_profile_mapping.each do |key, value|
             automatic_code_signing(
@@ -128,7 +128,7 @@ platform :ios do
 
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
-        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(scheme, provisioning_profile_mapping)
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(schemes, scheme, provisioning_profile_mapping)
 
         provisioning_profile_mapping.each do |key, value|
             automatic_code_signing(
