@@ -8,11 +8,6 @@ platform :ios do
 
     team_id = ENV["FASTLANE_TEAM_ID"]
     keychain_password = ENV["KEYCHAIN_PASSWORD"]
-    crashlytics_api_token = ENV["CRASHLYTICS_API_TOKEN"]
-    crashlytics_build_secret = ENV["CRASHLYTICS_BUILD_TOKEN"]
-    deliver_username = ENV["DELIVER_USERNAME"]
-    match_username = ENV["MATCH_USERNAME"]
-    match_git_url = ENV["MATCH_GIT_URL"]
 
     # Constants
 
