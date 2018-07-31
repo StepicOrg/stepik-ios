@@ -168,7 +168,7 @@ platform :ios do
 
         # Disable automatic code signing -> build -> enable again
         set_manual_code_signing(
-            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
             scheme: scheme
         )
         begin
@@ -182,7 +182,7 @@ platform :ios do
             )
         ensure
             set_auto_code_signing(
-                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
                 scheme: scheme
             )
             clean_build_artifacts
@@ -303,7 +303,7 @@ platform :ios do
 
         # Disable automatic code signing -> build -> enable again
         set_manual_code_signing(
-            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
             scheme: scheme
         )
         begin
@@ -317,7 +317,7 @@ platform :ios do
             )
         ensure
             set_auto_code_signing(
-                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
                 scheme: scheme
             )
             clean_build_artifacts
