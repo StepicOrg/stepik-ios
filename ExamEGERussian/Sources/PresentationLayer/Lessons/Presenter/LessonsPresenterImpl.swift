@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol LessonsRouter: class {
-    func showStepsForLessonWith(_ id: Int)
+    func showStepsForLesson(_ lesson: LessonPlainObject)
 }
 
 final class LessonsPresenterImpl: LessonsPresenter {
@@ -62,7 +62,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     func selectLesson(with viewData: LessonsViewData) {
-        router?.showStepsForLessonWith(viewData.id)
+        guard let lesson = lessons.first(where: { $0.id == viewData.id }) else {
+            return
+        }
+
+        router?.showStepsForLesson(lesson)
     }
 
     // MARK: - Private API

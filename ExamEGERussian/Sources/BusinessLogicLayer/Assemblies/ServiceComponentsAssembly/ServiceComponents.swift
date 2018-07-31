@@ -14,4 +14,5 @@ protocol ServiceComponents: class {
     var lessonsService: LessonsService { get }
     var courseService: CourseService { get }
     var enrollmentService: EnrollmentService { get }
+    var stepsService: StepsService { get }
 }
