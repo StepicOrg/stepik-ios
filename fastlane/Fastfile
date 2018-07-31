@@ -203,8 +203,11 @@ platform :ios do
             groups: "all-ios-testers"
         )
 
+        version = get_version_number(target: scheme)
+        build = get_build_number
+
         slack(
-            message: "Successfully released iOS beta #{scheme} #{version_string(get_version_number, get_build_number)}",
+            message: "Successfully released iOS beta #{scheme} #{version_string(version, build)}",
             channel: "#ios-ci"
         )
     end
@@ -282,7 +285,6 @@ platform :ios do
 
         download_dsyms(params)
         upload_symbols_to_crashlytics
-        clean_build_artifacts
     end
 
     desc "Download dDSYMs for latest version."
@@ -356,8 +358,11 @@ platform :ios do
             }
         )
 
+        version = get_version_number(target: scheme)
+        build = get_build_number
+
         slack(
-            message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}",
+            message: "Successfully released iOS RELEASE #{scheme} #{version_string(version, build)}",
             channel: "#ios-ci"
         )
     end
@@ -368,7 +373,7 @@ platform :ios do
 
     error do |lane, exception|
         clean_build_artifacts
-        
+
         slack(
             message: exception.message,
             success: false
