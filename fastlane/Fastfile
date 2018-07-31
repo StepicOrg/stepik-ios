@@ -54,14 +54,14 @@ platform :ios do
         if project_path
             project = Xcodeproj::Project.open(project_path)
         else 
-            UI.user_error("Unable to find xcodeproj file")
+            UI.user_error!("Unable to find xcodeproj file")
         end
 
         scheme = project.native_targets.find { |target| target.name == scheme }
         build_configuration = scheme.build_configurations.first
 
         if build_configuration.nil?
-            UI.user_error("Unable to find build configuration")
+            UI.user_error!("Unable to find build configuration")
         end
 
         build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
@@ -103,7 +103,7 @@ platform :ios do
 
     private_lane :set_manual_code_signing do |options|
         if team_id.nil? || team_id.empty?
-            UI.abort_with_message!("Team ID can not be empty!")
+            UI.user_error!("Team ID can not be empty!")
         end
 
         scheme = options[:scheme]
@@ -123,7 +123,7 @@ platform :ios do
 
     private_lane :set_auto_code_signing do |options|
         if team_id.nil? || team_id.empty?
-            UI.abort_with_message!("Team ID can not be empty!")
+            UI.user_error!("Team ID can not be empty!")
         end
 
         scheme = options[:scheme]
