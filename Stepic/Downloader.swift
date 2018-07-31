@@ -14,7 +14,6 @@ fileprivate extension DownloaderSessionType {
         case .background(let id):
             let identifier = "downloader.\(id)"
             let config = URLSessionConfiguration.background(withIdentifier: identifier)
-            config.isDiscretionary = true
             config.sessionSendsLaunchEvents = true
             return config
         case .foreground:

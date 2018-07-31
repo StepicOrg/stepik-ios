@@ -35,8 +35,7 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var likesLabel: StepikLabel!
     @IBOutlet weak var likesImageView: UIImageView!
 
-    @IBOutlet weak var labelContainerView: UIView!
-    var commentLabel: StepikLabel?
+    @IBOutlet weak var commentLabel: StepikLabel!
 
     var hasSeparator: Bool = false {
         didSet {
@@ -77,7 +76,6 @@ class DiscussionTableViewCell: UITableViewCell {
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
-        labelContainerView.backgroundColor = UIColor.clear
         timeLabel.text = comment.time.getStepicFormatString(withTime: true)
         setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
         loadLabel(comment.text)
@@ -103,34 +101,13 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
 
-    fileprivate func constructLabel() {
-        commentLabel = StepikLabel()
-        labelContainerView.addSubview(commentLabel!)
-        commentLabel?.snp.makeConstraints { $0.edges.equalTo(labelContainerView) }
-        commentLabel?.numberOfLines = 0
-    }
-
     fileprivate func loadLabel(_ htmlString: String) {
-        let processor = HTMLProcessor(html: htmlString)
-        let html = processor
-            .injectDefault()
-            .html
-        if let data = html.data(using: String.Encoding.unicode, allowLossyConversion: false) {
-            do {
-                let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).attributedStringByTrimmingNewlines()
-                commentLabel?.attributedText = attributedString
-                layoutSubviews()
-                updateConstraints()
-                commentLabel?.textColor = UIColor.mainText
-            } catch {
-                //TODO: throw an exception here, or pass an error
-            }
-        }
+        commentLabel.setTextWithHTMLString(htmlString)
     }
 
     fileprivate func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
-        labelLeadingConstraint.constant = constant
+        labelLeadingConstraint.constant = -constant
         switch self.separatorType {
         case .small:
             separatorLeadingConstraint.constant = -constant
@@ -151,7 +128,6 @@ class DiscussionTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
 
         let tapActionNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
