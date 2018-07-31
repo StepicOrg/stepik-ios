@@ -159,7 +159,7 @@ platform :ios do
         ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
         scheme = options[:scheme]
 
-        cocoapods(repo_update: true)
+        cocoapods(try_repo_update_on_error: true)
 
         scan(
             scheme: scheme,
