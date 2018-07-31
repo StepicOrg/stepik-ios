@@ -268,7 +268,7 @@ platform :ios do
     desc "Options: scheme, version and build"
     lane :refresh_dsyms do |options|
         scheme = options[:scheme]
-        app_identifier = app_identifiers[scheme][0]
+        app_identifier = get_bundle_id(scheme: scheme)
 
         params = [
             "app_identifier": app_identifier
@@ -300,7 +300,7 @@ platform :ios do
     desc "Options: scheme, should_submit"
     lane :release do |options|
         scheme = options[:scheme]
-        app_identifier = app_identifiers[scheme][0]
+        app_identifier = get_bundle_id(scheme: scheme)
         metapath = "#{project_metapath}/#{scheme}"
         screenpath = "#{project_screenpath}/#{scheme}"
         should_submit = options[:should_submit] || false
