@@ -142,6 +142,8 @@ platform :ios do
     desc "Runs all the tests for scheme."
     desc "Options: scheme"
     lane :test do |options|
+        clear_derived_data
+
         ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
         scheme = options[:scheme]
 
