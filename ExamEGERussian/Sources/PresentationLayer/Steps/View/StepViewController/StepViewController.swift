@@ -8,7 +8,6 @@
 
 import Foundation
 import Agrume
-import WebKit
 import PromiseKit
 import SnapKit
 
@@ -25,24 +24,11 @@ class StepViewController: UIViewController, StepView {
 
     var presenter: StepPresenter?
 
-    private lazy var stepWebView: WKWebView = {
-        let stepWebView = WKWebView(frame: .zero, configuration: self.webViewConfiguration)
-        stepWebView.navigationDelegate = self
-        stepWebView.scrollView.delegate = self
+    private lazy var stepWebView: StepWebView = {
+        let stepWebView = StepWebView()
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
 
         return stepWebView
-    }()
-
-    private lazy var webViewConfiguration: WKWebViewConfiguration = {
-        let script = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
-        let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let controller = WKUserContentController()
-        controller.addUserScript(userScript)
-        let configuration = WKWebViewConfiguration()
-        configuration.userContentController = controller
-
-        return configuration
     }()
 
     // For updates after rotation only when controller not presented
@@ -88,9 +74,6 @@ class StepViewController: UIViewController, StepView {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-
-        stepWebView.navigationDelegate = nil
-        stepWebView.scrollView.delegate = nil
     }
 
     // MARK: - StepView
@@ -117,112 +100,50 @@ class StepViewController: UIViewController, StepView {
             make.trailing.equalTo(scrollView).offset(-2)
             make.top.equalTo(scrollView).offset(5)
         }
+
+        stepWebView.didFinishNavigation = { [weak self] _ in
+            guard let `self` = self else {
+                return
+            }
+
+            self.stepWebView.alignImages().then {
+                self.stepWebView.getContentHeight()
+            }.done { [weak self] height in
+                self?.resetWebViewHeight(Float(height))
+                self?.scrollView.layoutIfNeeded()
+                self?.animate()
+            }.catch { error in
+                print("Error after did finish navigation: \(error)")
+            }
+        }
+
+        stepWebView.onOpenImage = { [weak self] imageURL in
+            guard let `self` = self else {
+                return
+            }
+
+            Agrume(imageUrl: imageURL).showFrom(self)
+        }
+    }
+
+    private func resetWebViewHeight(_ height: Float) {
+        stepWebViewHeight.update(offset: height)
     }
 
     private func refreshWebView() {
         activityIndicator.startAnimating()
         resetWebViewHeight(5.0)
 
-        func reloadContent() -> Promise<Void> {
-            return Promise { seal in
-                self.stepWebView.evaluateJavaScript("location.reload();", completionHandler: { _, error in
-                    if let error = error {
-                        return seal.reject(error)
-                    }
-
-                    seal.fulfill(())
-                })
-            }
-        }
-
-        reloadContent().then {
-            self.alignImages(in: self.stepWebView)
+        stepWebView.reloadContent().then {
+            self.stepWebView.alignImages()
         }.then {
-            self.getContentHeight(self.stepWebView)
-        }.done { height in
-            self.resetWebViewHeight(Float(height))
-            self.scrollView.layoutIfNeeded()
-            self.animate()
-        }.catch { _ in
-            print("card step: error while refreshing")
-        }
-    }
-}
-
-// MARK: - StepViewController: WKNavigationDelegate -
-
-extension StepViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        alignImages(in: webView).then {
-            self.getContentHeight(webView)
-        }.done { height in
-            self.resetWebViewHeight(Float(height))
-            self.scrollView.layoutIfNeeded()
-            self.animate()
-        }.catch { _ in
-            print("card step: error after webview loading did finish")
-        }
-    }
-
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard let url = navigationAction.request.url else {
-            return decisionHandler(.cancel)
-        }
-
-        if url.scheme == "openimg" {
-            var urlString = url.absoluteString
-            urlString.removeSubrange(urlString.startIndex..<urlString.index(urlString.startIndex, offsetBy: 10))
-            if let offset = urlString.indexOf("//") {
-                urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
-                if let newUrl = URL(string: urlString) {
-                    let agrume = Agrume(imageUrl: newUrl)
-                    agrume.showFrom(self)
-                }
-            }
-            return decisionHandler(.cancel)
-        }
-        return decisionHandler(.allow)
-    }
-
-    // MARK: Private Helpers
-
-    private func resetWebViewHeight(_ height: Float) {
-        stepWebViewHeight.update(offset: height)
-    }
-
-    private func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
-        return Promise { seal in
-            webView.evaluateJavaScript("document.body.scrollHeight;") { res, error in
-                if let error = error {
-                    return seal.reject(error)
-                }
-
-                if let height = res as? Int {
-                    seal.fulfill(height)
-                } else {
-                    seal.fulfill(0)
-                }
-            }
-        }
-    }
-
-    private func alignImages(in webView: WKWebView) -> Promise<Void> {
-        // Disable WebKit callout on long press
-        var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
-        // Change color for audio control
-        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepicGreen.hexString)');"
-        // Center images
-        jsCode += "var imgs = document.getElementsByTagName('img');"
-        jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
-
-        return Promise { seal in
-            webView.evaluateJavaScript(jsCode, completionHandler: { _, error in
-                if let error = error {
-                    return seal.reject(error)
-                }
-
-                seal.fulfill(())
-            })
+            self.stepWebView.getContentHeight()
+        }.done { [weak self] height in
+            self?.resetWebViewHeight(Float(height))
+            self?.scrollView.layoutIfNeeded()
+            self?.animate()
+        }.catch { error in
+            print("Error while refreshing: \(error)")
         }
     }
 
@@ -237,13 +158,5 @@ extension StepViewController: WKNavigationDelegate {
             self.stepWebView.scrollView.contentOffset = .zero
             self.activityIndicator.stopAnimating()
         })
-    }
-}
-
-// MARK: - StepViewController: UIScrollViewDelegate -
-
-extension StepViewController: UIScrollViewDelegate {
-    func viewForZooming(in: UIScrollView) -> UIView? {
-        return nil
     }
 }

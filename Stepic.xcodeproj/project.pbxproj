@@ -4168,6 +4168,7 @@
 		62E98967D33DB824B8BF27E0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9897FBB60991C568BFDBE /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
+		62E98997447430EA3F2459EE /* StepWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9863AAABC06CDEE98110E /* StepWebView.swift */; };
 		62E989BDE0A04F5A099CE905 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
 		62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */; };
@@ -5853,6 +5854,7 @@
 		62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakNotificationsControlPresenter.swift; sourceTree = "<group>"; };
 		62E9851360F1490A8311EC41 /* AchievementPopupAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementPopupAlertManager.swift; sourceTree = "<group>"; };
 		62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapBlockContentView.swift; sourceTree = "<group>"; };
+		62E9863AAABC06CDEE98110E /* StepWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepWebView.swift; sourceTree = "<group>"; };
 		62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewData.swift; sourceTree = "<group>"; };
 		62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsRetriever.swift; sourceTree = "<group>"; };
 		62E98708CFECD3F1D0AD4120 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -9228,6 +9230,7 @@
 				2C83E5E62110602700A8322D /* StepsViewController.swift */,
 				2CCA14C02111A6050068081A /* StepView.swift */,
 				2CCA14C42111A6E60068081A /* StepViewController */,
+				62E9863AAABC06CDEE98110E /* StepWebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -15156,6 +15159,7 @@
 				2C9499E820ECBF9B0049E9A8 /* NotificationRequestAlertContext.swift in Sources */,
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
+				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
