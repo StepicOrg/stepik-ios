@@ -261,7 +261,7 @@ platform :ios do
         match_scheme(
             type: "development",
             scheme: options[:scheme],
-            read_only: options[:read_only]
+            read_only: options.key?(:read_only) ? options[:read_only] : true
         )
     end
 
@@ -271,7 +271,7 @@ platform :ios do
         match_scheme(
             type: "adhoc",
             scheme: options[:scheme],
-            read_only: options[:read_only]
+            read_only: options.key?(:read_only) ? options[:read_only] : true
         )
     end
 
@@ -281,7 +281,7 @@ platform :ios do
         match_scheme(
             type: "appstore",
             scheme: options[:scheme],
-            read_only: options[:read_only]
+            read_only: options.key?(:read_only) ? options[:read_only] : true
         )
     end
 
