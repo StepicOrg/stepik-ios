@@ -88,7 +88,7 @@ platform :ios do
         match(
             type: type,
             force_for_new_devices: true,
-            readonly: true,
+#            readonly: true,
             app_identifier: identifiers
         )
     end
@@ -348,7 +348,6 @@ platform :ios do
             submit_for_review: should_submit,
             phased_release: true,
             automatic_release: true,
-            ratings_reset: false,
             submission_information: {
                 export_compliance_encryption_updated: false,
                 add_id_info_uses_idfa: true,
