@@ -154,7 +154,6 @@ target 'ExamEGERussian' do
     all_pods
     pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
     pod 'PromiseKit/Alamofire', '~> 6.0'
-    pod 'Pager'
 
     target 'ExamEGERussianTests' do
         inherit! :search_paths
