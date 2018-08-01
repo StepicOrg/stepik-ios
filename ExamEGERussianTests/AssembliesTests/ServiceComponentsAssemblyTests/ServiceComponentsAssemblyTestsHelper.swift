@@ -10,7 +10,6 @@ import Foundation
 @testable import ExamEGERussian
 
 final class ServiceComponentsAssemblyTestsHelper {
-
     let serviceComponents: ServiceComponents
 
     init() {
@@ -18,9 +17,11 @@ final class ServiceComponentsAssemblyTestsHelper {
             authAPI: AuthAPI(),
             stepicsAPI: StepicsAPI(),
             profilesAPI: ProfilesAPI(),
+            coursesAPI: CoursesAPI(),
+            enrollmentsAPI: EnrollmentsAPI(),
+            lessonsAPI: LessonsAPI(),
             defaultsStorageManager: DefaultsStorageManager(),
             randomCredentialsGenerator: RandomCredentialsGeneratorImplementation()
         )
     }
-
 }

@@ -8,17 +8,23 @@
 
 import Foundation
 
+protocol TopicsRouter: class {
+    func showLessonsForTopicWithId(_ id: String)
+}
+
 final class TopicsPresenterImpl: TopicsPresenter {
 
     private weak var view: TopicsView?
-    private var graph: KnowledgeGraph
+    private weak var router: TopicsRouter?
+    private let knowledgeGraph: KnowledgeGraph
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
-    init(view: TopicsView, model: KnowledgeGraph,
+    init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
          userRegistrationService: UserRegistrationService, graphService: GraphService) {
         self.view = view
-        self.graph = model
+        self.knowledgeGraph = knowledgeGraph
+        self.router = router
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
     }
@@ -29,8 +35,8 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = graph[viewData.id]?.key else { return }
-        showLessons(for: topic)
+        guard let topic = knowledgeGraph[viewData.id]?.key else { return }
+        router?.showLessonsForTopicWithId(topic.id)
     }
 
     // MARK: - Private API
@@ -46,13 +52,13 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     private func fetchGraphData() {
-        graphService.obtainGraph().done { [weak self] responseModel in
+        graphService.fetchGraph().done { [weak self] responseModel in
             guard let `self` = self else { return }
             let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
             guard let graph = builder.build() as? KnowledgeGraph else { return }
-            self.graph = graph
+            self.knowledgeGraph.adjacencies = graph.adjacencies
 
-            let vertices = graph.vertices as! [KnowledgeGraphVertex<String>]
+            let vertices = self.knowledgeGraph.vertices as! [KnowledgeGraphVertex<String>]
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)
@@ -61,10 +67,6 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func displayError(_ error: Swift.Error) {
         view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
-    }
-
-    private func showLessons<T>(for vertex: KnowledgeGraphVertex<T>) {
-        print("\(#function) \(vertex.title)")
     }
 
     private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
