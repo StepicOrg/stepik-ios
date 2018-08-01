@@ -88,7 +88,7 @@ platform :ios do
         match(
             type: type,
             force_for_new_devices: true,
-#            readonly: true,
+            readonly: true,
             app_identifier: identifiers
         )
     end
@@ -202,6 +202,9 @@ platform :ios do
             notifications: true,
             groups: "all-ios-testers"
         )
+
+        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+        upload_symbols_to_crashlytics(dsym_path: dsym_path)
 
         version = get_version_number(target: scheme)
         build = get_build_number
