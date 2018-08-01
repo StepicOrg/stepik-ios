@@ -11,7 +11,7 @@ platform :ios do
 
     # Constants
 
-    slack_mentions_beta = ['@vladislav.kiryukhin', '@akarpov']
+    slack_mentions_beta = ['@vladislav.kiryukhin', '@akarpov', "@iulia.liakh"]
     slack_mentions_release = ['@vladislav.kiryukhin', '@akarpov']
     project_metapath = "./fastlane/metadata"
     project_screenpath = "./fastlane/screenshots"
