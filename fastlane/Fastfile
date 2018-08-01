@@ -99,7 +99,7 @@ platform :ios do
 
         UI.user_error!("Wrong parameters") if scheme.nil? || type.nil?
 
-        read_only = options[:read_only] || true
+        read_only = options.key?(:read_only) ? options[:read_only] : true
         dependent_schemes = schemes[scheme]
         identifiers = dependent_schemes.map { |scheme| get_bundle_id(scheme: scheme) }
 
@@ -246,9 +246,9 @@ platform :ios do
     desc "Options: scheme, read_only"
     lane :match_all do |options|
         params = {
-            :scheme => options[:scheme]
+            :scheme => options[:scheme],
+            :read_only => options.key?(:read_only) ? options[:read_only] : true
         }
-        params[:read_only] = options[:read_only] || true
 
         match_dev(params)
         match_adhoc(params)
@@ -352,7 +352,7 @@ platform :ios do
         app_identifier = get_bundle_id(scheme: scheme)
         metapath = "#{project_metapath}/#{scheme}"
         screenpath = "#{project_screenpath}/#{scheme}"
-        should_submit = options[:should_submit] || false
+        should_submit = options.key?(:should_submit) ? options[:should_submit] : false
 
         clear_derived_data
         cocoapods(repo_update: true)
