@@ -2836,7 +2836,6 @@
 		2C949A1420ECC4B20049E9A8 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
 		2C949A1520ECC4B80049E9A8 /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		2C949A1620ECC5100049E9A8 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
-		2C949A1820ECC54C0049E9A8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA2F71F573F6900302154 /* MenuViewController.swift */; };
 		2C949A1920ECC54F0049E9A8 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2C949A1A20ECC5520049E9A8 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
@@ -2866,10 +2865,8 @@
 		2C949A3420ECC7120049E9A8 /* AchievementProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C688DF80BD29740D967 /* AchievementProgress.swift */; };
 		2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98708CFECD3F1D0AD4120 /* Achievement.swift */; };
 		2C949A3620ECC7580049E9A8 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
-		2C949A3720ECC7BC0049E9A8 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080217821F55B1B200186245 /* Menu.swift */; };
 		2C949A3820ECC7DF0049E9A8 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */; };
 		2C949A3920ECC7FE0049E9A8 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
-		2C949A3A20ECC8310049E9A8 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C949A3B20ECC8660049E9A8 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		2C949A3C20ECC87A0049E9A8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		2C949A3D20ECC90D0049E9A8 /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
@@ -2903,8 +2900,6 @@
 		2C949A6120ECCF1A0049E9A8 /* ContentLanguagePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9320C865BB0018E6FF /* ContentLanguagePreferenceTableViewCell.swift */; };
 		2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
-		2C949A6520ECCFB70049E9A8 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
-		2C949A6620ECCFBE0049E9A8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		2C949A6720ECCFC90049E9A8 /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
 		2C949A6A20ECD0400049E9A8 /* AchievementDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */; };
 		2C949A6B20ECD05A0049E9A8 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
@@ -14851,11 +14846,9 @@
 				2C949A0A20ECC3E00049E9A8 /* NotificationsSection.swift in Sources */,
 				2C949A0920ECC3BE0049E9A8 /* HTMLParsingUtil.swift in Sources */,
 				2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */,
-				2C949A3720ECC7BC0049E9A8 /* Menu.swift in Sources */,
 				2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */,
 				2C949A6020ECCEFF0049E9A8 /* LanguageSettingsViewController.swift in Sources */,
 				2CE3C2B921007D3D003AB54A /* TopicsTableViewController.swift in Sources */,
-				2C949A3A20ECC8310049E9A8 /* PagerController.swift in Sources */,
 				2C949A5520ECCE270049E9A8 /* UITableView+TableHeaderLayout.swift in Sources */,
 				2C9499D220ECBCDB0049E9A8 /* SortingReply.swift in Sources */,
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
@@ -14998,7 +14991,6 @@
 				2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */,
 				2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
-				2C949A1820ECC54C0049E9A8 /* MenuViewController.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
@@ -15039,7 +15031,6 @@
 				2C83E5E421105E8000A8322D /* StepsServiceImpl.swift in Sources */,
 				2C949A1520ECC4B80049E9A8 /* CodeEditorPreferencesContainer.swift in Sources */,
 				2C33CC0920EC33DC009956B0 /* Device.swift in Sources */,
-				2C949A6520ECCFB70049E9A8 /* CodeEditorSettingsViewController.swift in Sources */,
 				2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
@@ -15069,7 +15060,6 @@
 				2C83E5DD211044A600A8322D /* VideoLocationManager.swift in Sources */,
 				2C9499B520ECBAD50049E9A8 /* MatchingDataset.swift in Sources */,
 				2C33CBF420EC3278009956B0 /* LessonsAPI.swift in Sources */,
-				2C949A6620ECCFBE0049E9A8 /* CodeEditorSettingsPresenter.swift in Sources */,
 				2C33CBE720EC3158009956B0 /* AnalyticsReporter.swift in Sources */,
 				2C33CBEB20EC322A009956B0 /* CommentsAPI.swift in Sources */,
 				2CA3F55F20FF7A150041E893 /* StepikResult.swift in Sources */,
