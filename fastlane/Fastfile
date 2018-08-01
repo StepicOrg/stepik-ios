@@ -45,8 +45,14 @@ platform :ios do
 
     # Helpers
 
-    def version_string(version_number, build_number)
-        "v. #{version_number} (#{build_number})"
+    def version_string(options)
+        version = options[:version_number]
+        build = options[:build_number]
+
+        UI.user_error!("Wrong version parameter") if version.nil?
+        UI.user_error!("Wrong build parameter") if build.nil?
+
+        "v. #{version} (#{build})"
     end
 
     def get_bundle_id(options)
@@ -62,14 +68,20 @@ platform :ios do
         scheme = project.native_targets.find { |target| target.name == scheme }
         build_configuration = scheme.build_configurations.first
 
-        if build_configuration.nil?
-            UI.user_error!("Unable to find build configuration")
-        end
+        UI.user_error!("Unable to find build configuration") if build_configuration.nil?
 
         build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
     end
 
-    def build_bundle_id_to_scheme_mapping(schemes, scheme, provisioning_profile_mapping)
+    def build_bundle_id_to_scheme_mapping(options)
+        schemes = options[:schemes]
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+        if schemes.nil? || scheme.nil? || provisioning_profile_mapping.nil?
+            UI.user_error!("Wrong parameters")
+        end
+        
         bundle_id_to_scheme = {}
         dependent_schemes = schemes[scheme]
         for i in dependent_schemes
@@ -84,28 +96,33 @@ platform :ios do
     private_lane :match_scheme do |options|
         scheme = options[:scheme]
         type = options[:type]
+
+        UI.user_error!("Wrong parameters") if scheme.nil? || type.nil?
+
+        read_only = options[:read_only] || true
         dependent_schemes = schemes[scheme]
         identifiers = dependent_schemes.map { |scheme| get_bundle_id(scheme: scheme) }
 
         match(
             type: type,
             force_for_new_devices: true,
-            readonly: true,
+            readonly: read_only,
             app_identifier: identifiers
         )
     end
 
     private_lane :set_manual_code_signing do |options|
-        if team_id.nil? || team_id.empty?
-            UI.user_error!("Team ID can not be empty!")
-        end
+        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
 
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
         bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
-            schemes, 
-            scheme, 
-            provisioning_profile_mapping
+            schemes: schemes, 
+            scheme: scheme, 
+            provisioning_profile_mapping: provisioning_profile_mapping
         )
 
         provisioning_profile_mapping.each do |key, value|
@@ -120,16 +137,17 @@ platform :ios do
     end
 
     private_lane :set_auto_code_signing do |options|
-        if team_id.nil? || team_id.empty?
-            UI.user_error!("Team ID can not be empty!")
-        end
+        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
 
         scheme = options[:scheme]
         provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
         bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
-            schemes, 
-            scheme, 
-            provisioning_profile_mapping
+            schemes: schemes, 
+            scheme: scheme, 
+            provisioning_profile_mapping: provisioning_profile_mapping
         )
 
         provisioning_profile_mapping.each do |key, value|
@@ -153,6 +171,8 @@ platform :ios do
         ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
         scheme = options[:scheme]
 
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
         cocoapods(try_repo_update_on_error: true)
 
         scan(
@@ -166,6 +186,8 @@ platform :ios do
     desc "Options: scheme"
     lane :beta do |options|
         scheme = options[:scheme]
+
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
 
         clear_derived_data
         cocoapods(repo_update: true)
@@ -208,48 +230,58 @@ platform :ios do
         dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
         upload_symbols_to_crashlytics(dsym_path: dsym_path)
 
-        version = get_version_number(target: scheme)
-        build = get_build_number
+        vs = version_string(
+            version_number: get_version_number(target: scheme),
+            build_number: get_build_number
+        )
 
         slack(
-            message: "Successfully released iOS beta #{scheme} #{version_string(version, build)}\n#{slack_mentions_beta.join(' ')}",
+            message: "Successfully released iOS BETA #{scheme} #{vs}\n#{slack_mentions_beta.join(' ')}",
             channel: "#ios-ci",
             link_names: true
         )
     end
 
     desc "Match all certificates for scheme."
-    desc "Options: scheme"
+    desc "Options: scheme, read_only"
     lane :match_all do |options|
-        match_dev(scheme: options[:scheme])
-        match_adhoc(scheme: options[:scheme])
-        match_release(scheme: options[:scheme])
+        params = {
+            :scheme => options[:scheme]
+        }
+        params[:read_only] = options[:read_only] || true
+
+        match_dev(params)
+        match_adhoc(params)
+        match_release(params)
     end
 
     desc "Match development certificates for scheme."
-    desc "Options: scheme"
+    desc "Options: scheme, read_only"
     lane :match_dev do |options|
         match_scheme(
             type: "development",
-            scheme: options[:scheme]
+            scheme: options[:scheme],
+            read_only: options[:read_only]
         )
     end
 
     desc "Match adhoc certificates for scheme."
-    desc "Options: scheme"
+    desc "Options: scheme, read_only"
     lane :match_adhoc do |options|
         match_scheme(
             type: "adhoc",
-            scheme: options[:scheme]
+            scheme: options[:scheme],
+            read_only: options[:read_only]
         )
     end
 
     desc "Match appstore certificates for scheme."
-    desc "Options: scheme"
+    desc "Options: scheme, read_only"
     lane :match_release do |options|
         match_scheme(
             type: "appstore",
-            scheme: options[:scheme]
+            scheme: options[:scheme],
+            read_only: options[:read_only]
         )
     end
 
@@ -262,6 +294,9 @@ platform :ios do
     desc "Options: version"
     lane :set_version do |options|
         version = options[:version]
+
+        UI.user_error!("Wrong version parameter") if version.nil?
+
         increment_version_number(version_number: version)
     end
 
@@ -274,18 +309,20 @@ platform :ios do
     desc "Options: scheme, version and build"
     lane :refresh_dsyms do |options|
         scheme = options[:scheme]
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
         app_identifier = get_bundle_id(scheme: scheme)
 
-        params = [
-            "app_identifier": app_identifier
-        ]
+        params = {
+            :app_identifier => app_identifier
+        }
 
-        if options.key?("version")
+        if options[:version]
             version = options[:version]
-            params["version"] = options[:version]
+            params[:version] = options[:version]
 
-            if version != "latest" && options.key?("build")
-                params["build"] = options[:build]
+            if version != "latest" && options[:build]
+                params[:build] = options[:build]
             end
         end
 
@@ -296,8 +333,12 @@ platform :ios do
     desc "Download dDSYMs for latest version."
     desc "Options: scheme"
     lane :refresh_dsyms_for_latest_version do |options|
+        scheme = options[:scheme]
+
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
         refresh_dsyms(
-            scheme: options[:scheme],
+            scheme: scheme,
             version: "latest"
         )
     end
@@ -306,6 +347,8 @@ platform :ios do
     desc "Options: scheme, should_submit"
     lane :release do |options|
         scheme = options[:scheme]
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
         app_identifier = get_bundle_id(scheme: scheme)
         metapath = "#{project_metapath}/#{scheme}"
         screenpath = "#{project_screenpath}/#{scheme}"
@@ -363,11 +406,16 @@ platform :ios do
             }
         )
 
-        version = get_version_number(target: scheme)
-        build = get_build_number
+        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+        upload_symbols_to_crashlytics(dsym_path: dsym_path)
+
+        vs = version_string(
+            version_number: get_version_number(target: scheme),
+            build_number: get_build_number
+        )
 
         slack(
-            message: "Successfully released iOS RELEASE #{scheme} #{version_string(version, build)}\n#{slack_mentions_release.join(' ')}",
+            message: "Successfully released iOS RELEASE #{scheme} #{vs}\n#{slack_mentions_release.join(' ')}",
             channel: "#ios-ci",
             link_names: true
         )
