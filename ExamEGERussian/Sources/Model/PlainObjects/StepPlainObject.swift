@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 struct StepPlainObject {
     enum StepType: String {
@@ -22,6 +23,9 @@ struct StepPlainObject {
         case code
         case sql
         case table
+        case video
+        case dataset
+        case admin
     }
 
     let id: Int
@@ -29,4 +33,17 @@ struct StepPlainObject {
     let position: Int
     let text: String
     let type: StepType
+
+    var image: UIImage {
+        switch type {
+        case .video:
+            return #imageLiteral(resourceName: "ic_video_dark")
+        case .text:
+            return #imageLiteral(resourceName: "ic_theory_dark")
+        case .code, .dataset, .admin, .sql:
+            return #imageLiteral(resourceName: "ic_hard_dark")
+        default:
+            return #imageLiteral(resourceName: "ic_easy_dark")
+        }
+    }
 }

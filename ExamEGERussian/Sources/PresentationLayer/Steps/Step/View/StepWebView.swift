@@ -28,8 +28,6 @@ final class StepWebView: WKWebView {
         super.init(frame: frame, configuration: configuration)
         navigationDelegate = self
         scrollView.delegate = self
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
     }
 
     required init?(coder aDecoder: NSCoder) {

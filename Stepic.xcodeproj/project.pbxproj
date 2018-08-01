@@ -2041,6 +2041,8 @@
 		2C5F77BE1F90EE3F00E8E175 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
+		2C5FDC982111E2540077C15C /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
+		2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
 		2C604E22207E460E001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
@@ -2300,7 +2302,6 @@
 		2C83E5DF2110454C00A8322D /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5DE2110454C00A8322D /* NotificationsBadgesManager.swift */; };
 		2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E1211058DE00A8322D /* StepsService.swift */; };
 		2C83E5E421105E8000A8322D /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */; };
-		2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E62110602700A8322D /* StepsViewController.swift */; };
 		2C83E5E9211066CC00A8322D /* StepPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E8211066CC00A8322D /* StepPlainObject.swift */; };
 		2C83E5ED2110821700A8322D /* StepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EC2110821700A8322D /* StepPresenter.swift */; };
 		2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EE2110839A00A8322D /* StepViewController.swift */; };
@@ -4168,6 +4169,7 @@
 		62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
 		62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */; };
 		62E98AB201BD9C1AFEAFA88E /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
+		62E98AB710647DAE097DC393 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986DC02A0D35791073432 /* StepsViewController.swift */; };
 		62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */; };
 		62E98AF2CF2F93395EBBBC11 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98AF3317A502192C7F571 /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
@@ -5636,7 +5638,6 @@
 		2C83E5DE2110454C00A8322D /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C83E5E1211058DE00A8322D /* StepsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsService.swift; sourceTree = "<group>"; };
 		2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceImpl.swift; sourceTree = "<group>"; };
-		2C83E5E62110602700A8322D /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		2C83E5E8211066CC00A8322D /* StepPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
 		2C83E5EC2110821700A8322D /* StepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenter.swift; sourceTree = "<group>"; };
 		2C83E5EE2110839A00A8322D /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
@@ -5852,6 +5853,7 @@
 		62E9863AAABC06CDEE98110E /* StepWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepWebView.swift; sourceTree = "<group>"; };
 		62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewData.swift; sourceTree = "<group>"; };
 		62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsRetriever.swift; sourceTree = "<group>"; };
+		62E986DC02A0D35791073432 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		62E98708CFECD3F1D0AD4120 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapPresenter.swift; sourceTree = "<group>"; };
 		62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
@@ -8693,6 +8695,15 @@
 			name = NotificationsMarkAsReadButton;
 			sourceTree = "<group>";
 		};
+		2C5FDC962111DEB40077C15C /* Step */ = {
+			isa = PBXGroup;
+			children = (
+				2CCA14C22111A6520068081A /* Presenter */,
+				2CCA14C32111A6C70068081A /* View */,
+			);
+			path = Step;
+			sourceTree = "<group>";
+		};
 		2C604E1D207E458B001588FB /* CodeEditorPreview */ = {
 			isa = PBXGroup;
 			children = (
@@ -8876,8 +8887,8 @@
 		2C83E5E52110600200A8322D /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				2CCA14C22111A6520068081A /* Presenter */,
-				2CCA14C32111A6C70068081A /* View */,
+				62E9814DEE0740A13A67B9BA /* Pager */,
+				2C5FDC962111DEB40077C15C /* Step */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -9222,9 +9233,8 @@
 		2CCA14C32111A6C70068081A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C83E5E62110602700A8322D /* StepsViewController.swift */,
-				2CCA14C02111A6050068081A /* StepView.swift */,
 				2CCA14C42111A6E60068081A /* StepViewController */,
+				2CCA14C02111A6050068081A /* StepView.swift */,
 				62E9863AAABC06CDEE98110E /* StepWebView.swift */,
 			);
 			path = View;
@@ -9557,6 +9567,14 @@
 				2C97041A1F3B0B7200C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
+			sourceTree = "<group>";
+		};
+		62E9814DEE0740A13A67B9BA /* Pager */ = {
+			isa = PBXGroup;
+			children = (
+				62E986DC02A0D35791073432 /* StepsViewController.swift */,
+			);
+			path = Pager;
 			sourceTree = "<group>";
 		};
 		62E981C98BDA0C5DD5100480 /* ProfileInfo */ = {
@@ -10966,6 +10984,7 @@
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2CE3C2BA21007D3D003AB54A /* TopicsTableViewController.xib in Resources */,
+				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
@@ -14851,6 +14870,7 @@
 				2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */,
 				2C949A6020ECCEFF0049E9A8 /* LanguageSettingsViewController.swift in Sources */,
 				2CE3C2B921007D3D003AB54A /* TopicsTableViewController.swift in Sources */,
+				2C5FDC982111E2540077C15C /* StepTabView.swift in Sources */,
 				2C949A5520ECCE270049E9A8 /* UITableView+TableHeaderLayout.swift in Sources */,
 				2C9499D220ECBCDB0049E9A8 /* SortingReply.swift in Sources */,
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
@@ -15086,7 +15106,6 @@
 				2C9499EB20ECBFE90049E9A8 /* NotificationRegistrator.swift in Sources */,
 				2C33CBFF20EC3336009956B0 /* AttemptsAPI.swift in Sources */,
 				2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */,
-				2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
 				2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */,
@@ -15152,6 +15171,7 @@
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
 				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
+				62E98AB710647DAE097DC393 /* StepsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

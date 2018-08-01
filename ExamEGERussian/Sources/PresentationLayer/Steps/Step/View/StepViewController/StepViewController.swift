@@ -16,7 +16,6 @@ class StepViewController: UIViewController, StepView {
     // MARK: IBOutlets
 
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var placeholderView: UIView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     private var stepWebViewHeight: Constraint!
 
@@ -27,12 +26,10 @@ class StepViewController: UIViewController, StepView {
     private lazy var stepWebView: StepWebView = {
         let stepWebView = StepWebView()
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
+        stepWebView.scrollView.isScrollEnabled = false
 
         return stepWebView
     }()
-
-    // For updates after rotation only when controller not presented
-    var shouldRefreshOnAppear: Bool = false
 
     // MARK: - UIViewController Lifecycle
 
@@ -59,17 +56,8 @@ class StepViewController: UIViewController, StepView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        view.setNeedsLayout()
         view.layoutIfNeeded()
-
-        if shouldRefreshOnAppear {
-            refreshWebView()
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        shouldRefreshOnAppear = false
+        refreshWebView()
     }
 
     deinit {
@@ -88,17 +76,14 @@ class StepViewController: UIViewController, StepView {
 
     @objc func didScreenRotate() {
         refreshWebView()
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
             stepWebViewHeight = make.height.equalTo(5).constraint
-            make.bottom.equalTo(placeholderView.snp.top)
-            make.leading.equalTo(scrollView).offset(2)
-            make.trailing.equalTo(scrollView).offset(-2)
-            make.top.equalTo(scrollView).offset(5)
+            make.edges.equalTo(scrollView)
+            make.centerX.equalTo(self.view)
         }
 
         stepWebView.didFinishNavigation = { [weak self] _ in
@@ -110,8 +95,8 @@ class StepViewController: UIViewController, StepView {
                 self.stepWebView.getContentHeight()
             }.done { [weak self] height in
                 self?.resetWebViewHeight(Float(height))
-                self?.scrollView.layoutIfNeeded()
-                self?.animate()
+                self?.view.layoutIfNeeded()
+                self?.activityIndicator.stopAnimating()
             }.catch { error in
                 print("Error after did finish navigation: \(error)")
             }
@@ -131,6 +116,8 @@ class StepViewController: UIViewController, StepView {
     }
 
     private func refreshWebView() {
+        assert(Thread.isMainThread)
+
         activityIndicator.startAnimating()
         resetWebViewHeight(5.0)
 
@@ -140,23 +127,10 @@ class StepViewController: UIViewController, StepView {
             self.stepWebView.getContentHeight()
         }.done { [weak self] height in
             self?.resetWebViewHeight(Float(height))
-            self?.scrollView.layoutIfNeeded()
-            self?.animate()
+            self?.view.layoutIfNeeded()
+            self?.activityIndicator.stopAnimating()
         }.catch { error in
             print("Error while refreshing: \(error)")
         }
-    }
-
-    private func animate() {
-        stepWebView.alpha = 0.0
-        UIView.animate(withDuration: 0.33, animations: {
-            self.stepWebView.alpha = 1.0
-        }, completion: { finished in
-            guard finished else {
-                return
-            }
-            self.stepWebView.scrollView.contentOffset = .zero
-            self.activityIndicator.stopAnimating()
-        })
     }
 }
