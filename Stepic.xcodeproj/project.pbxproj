@@ -2297,12 +2297,13 @@
 		2C83E5DB2110441800A8322D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		2C83E5DC2110447600A8322D /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C83E5DD211044A600A8322D /* VideoLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* VideoLocationManager.swift */; };
+		2C83E5DF2110454C00A8322D /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5DE2110454C00A8322D /* NotificationsBadgesManager.swift */; };
 		2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E1211058DE00A8322D /* StepsService.swift */; };
 		2C83E5E421105E8000A8322D /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */; };
 		2C83E5E72110602700A8322D /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E62110602700A8322D /* StepsViewController.swift */; };
 		2C83E5E9211066CC00A8322D /* StepPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E8211066CC00A8322D /* StepPlainObject.swift */; };
-		2C83E5ED2110821700A8322D /* CardStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EC2110821700A8322D /* CardStepPresenter.swift */; };
-		2C83E5EF2110839A00A8322D /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EE2110839A00A8322D /* CardStepViewController.swift */; };
+		2C83E5ED2110821700A8322D /* StepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EC2110821700A8322D /* StepPresenter.swift */; };
+		2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5EE2110839A00A8322D /* StepViewController.swift */; };
 		2C83E5F2211085B000A8322D /* HTMLProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B80520F3909400F64D20 /* HTMLProcessor.swift */; };
 		2C83E5F32110870A00A8322D /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
 		2C83E5F621108A5600A8322D /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
@@ -2312,7 +2313,7 @@
 		2C83E5FA211099F900A8322D /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C83E5FB21109A3700A8322D /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C83E5FC21109C4300A8322D /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
-		2C83E5FE2110B51A00A8322D /* CardStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E5FD2110B51900A8322D /* CardStepViewController.xib */; };
+		2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E5FD2110B51900A8322D /* StepViewController.xib */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -3962,6 +3963,8 @@
 		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
 		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */; };
 		2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995672105C98E0023EC0C /* NSError+Create.swift */; };
+		2CCA14BF2111A5E90068081A /* StepPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCA14BE2111A5E90068081A /* StepPresenterImpl.swift */; };
+		2CCA14C12111A6050068081A /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCA14C02111A6050068081A /* StepView.swift */; };
 		2CCB5A3D2100824F0091A605 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */; };
 		2CCB5A3E2100824F0091A605 /* TopicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */; };
 		2CCB5A452100849A0091A605 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */; };
@@ -5634,13 +5637,14 @@
 		2C8305E920F38880003D7F9B /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		2C8305EB20F388B9003D7F9B /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		2C8305F620F390F8003D7F9B /* GraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
+		2C83E5DE2110454C00A8322D /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C83E5E1211058DE00A8322D /* StepsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsService.swift; sourceTree = "<group>"; };
 		2C83E5E321105E8000A8322D /* StepsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceImpl.swift; sourceTree = "<group>"; };
 		2C83E5E62110602700A8322D /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		2C83E5E8211066CC00A8322D /* StepPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
-		2C83E5EC2110821700A8322D /* CardStepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepPresenter.swift; sourceTree = "<group>"; };
-		2C83E5EE2110839A00A8322D /* CardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepViewController.swift; sourceTree = "<group>"; };
-		2C83E5FD2110B51900A8322D /* CardStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardStepViewController.xib; sourceTree = "<group>"; };
+		2C83E5EC2110821700A8322D /* StepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenter.swift; sourceTree = "<group>"; };
+		2C83E5EE2110839A00A8322D /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
+		2C83E5FD2110B51900A8322D /* StepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepViewController.xib; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -5741,6 +5745,8 @@
 		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
 		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Create.swift"; sourceTree = "<group>"; };
 		2CC995672105C98E0023EC0C /* NSError+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Create.swift"; sourceTree = "<group>"; };
+		2CCA14BE2111A5E90068081A /* StepPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenterImpl.swift; sourceTree = "<group>"; };
+		2CCA14C02111A6050068081A /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		2CCB5A3C2100824F0091A605 /* TopicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicTableViewCell.xib; sourceTree = "<group>"; };
 		2CCB5A412100849A0091A605 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -8527,7 +8533,6 @@
 				2C59F06420EBA1EB00666EE0 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
 				2C83E5E52110600200A8322D /* Steps */,
-				2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -8549,6 +8554,7 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05F20EB98E800666EE0 /* Assets */,
+				2CCA14C52111A7010068081A /* Storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -8873,10 +8879,8 @@
 		2C83E5E52110600200A8322D /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				2C83E5E62110602700A8322D /* StepsViewController.swift */,
-				2C83E5EC2110821700A8322D /* CardStepPresenter.swift */,
-				2C83E5EE2110839A00A8322D /* CardStepViewController.swift */,
-				2C83E5FD2110B51900A8322D /* CardStepViewController.xib */,
+				2CCA14C22111A6520068081A /* Presenter */,
+				2CCA14C32111A6C70068081A /* View */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -9209,6 +9213,42 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		2CCA14C22111A6520068081A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C83E5EC2110821700A8322D /* StepPresenter.swift */,
+				2CCA14BE2111A5E90068081A /* StepPresenterImpl.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2CCA14C32111A6C70068081A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C83E5E62110602700A8322D /* StepsViewController.swift */,
+				2CCA14C02111A6050068081A /* StepView.swift */,
+				2CCA14C42111A6E60068081A /* StepViewController */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2CCA14C42111A6E60068081A /* StepViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C83E5EE2110839A00A8322D /* StepViewController.swift */,
+				2C83E5FD2110B51900A8322D /* StepViewController.xib */,
+			);
+			path = StepViewController;
+			sourceTree = "<group>";
+		};
+		2CCA14C52111A7010068081A /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		2CCB5A3A210082210091A605 /* TopicsTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -9260,6 +9300,7 @@
 		2CCB5A49210084D30091A605 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C83E5DE2110454C00A8322D /* NotificationsBadgesManager.swift */,
 				2CCB5A422100849A0091A605 /* RandomCredentialsGenerator */,
 			);
 			path = Helpers;
@@ -10922,7 +10963,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C83E5FE2110B51A00A8322D /* CardStepViewController.xib in Resources */,
+				2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */,
 				2C83E5FC21109C4300A8322D /* MathJax in Resources */,
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
@@ -14837,6 +14878,7 @@
 				2C949A6E20ECD0D10049E9A8 /* AchievementsListTableViewCell.swift in Sources */,
 				2C9499B220ECBAC00049E9A8 /* ChoiceDataset.swift in Sources */,
 				2C33CBFA20EC32B0009956B0 /* AssignmentsAPI.swift in Sources */,
+				2C83E5DF2110454C00A8322D /* NotificationsBadgesManager.swift in Sources */,
 				2C83E5F32110870A00A8322D /* Scripts.swift in Sources */,
 				2C9499F320ECC0BE0049E9A8 /* Executable.swift in Sources */,
 				2C9499E620ECBEBE0049E9A8 /* StringExtensions.swift in Sources */,
@@ -14959,7 +15001,7 @@
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
 				2CCB5A52210088B70091A605 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C949A4520ECCA290049E9A8 /* TooltipFactory.swift in Sources */,
-				2C83E5ED2110821700A8322D /* CardStepPresenter.swift in Sources */,
+				2C83E5ED2110821700A8322D /* StepPresenter.swift in Sources */,
 				2C949A6F20ECD1010049E9A8 /* PinsMap.swift in Sources */,
 				2C94998E20ECB74D0049E9A8 /* APIDefaults.swift in Sources */,
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
@@ -15035,6 +15077,7 @@
 				2CCB5A3D2100824F0091A605 /* TopicTableViewCell.swift in Sources */,
 				2C33CBDE20EC2F25009956B0 /* StringHelper.swift in Sources */,
 				2C9499CE20ECBCC40049E9A8 /* TextReply.swift in Sources */,
+				2CCA14C12111A6050068081A /* StepView.swift in Sources */,
 				2C33CBE320EC3127009956B0 /* Session.swift in Sources */,
 				2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C9499B820ECBB100049E9A8 /* Certificate.swift in Sources */,
@@ -15069,7 +15112,7 @@
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
-				2C83E5EF2110839A00A8322D /* CardStepViewController.swift in Sources */,
+				2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
@@ -15109,6 +15152,7 @@
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
 				2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */,
 				2C949A2320ECC5D60049E9A8 /* ProfileDescriptionPresenter.swift in Sources */,
+				2CCA14BF2111A5E90068081A /* StepPresenterImpl.swift in Sources */,
 				2C9499E820ECBF9B0049E9A8 /* NotificationRequestAlertContext.swift in Sources */,
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,

@@ -53,11 +53,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     func refresh() {
-        if lessons.isEmpty {
-            obtainLessonsFromCache()
-        } else {
-            fetchLessons()
-        }
+        getLessons()
         joinCoursesIfNeeded()
     }
 
@@ -104,11 +100,20 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return enrollmentService.joinCourse(course)
     }
 
-    private func obtainLessonsFromCache() {
-        lessonsService.obtainLessons(with: lessonsIds).done { [weak self] lessons in
-            self?.lessons = lessons
-        }.catch { [weak self] error in
-            self?.displayError(error)
+    private func getLessons() {
+        obtainLessonsFromCache().done {
+            self.fetchLessons()
+        }.cauterize()
+    }
+
+    private func obtainLessonsFromCache() -> Promise<Void> {
+        return Promise { seal in
+            self.lessonsService.obtainLessons(with: self.lessonsIds).done { [weak self] lessons in
+                self?.lessons = lessons
+                seal.fulfill(())
+            }.catch { [weak self] error in
+                self?.displayError(error)
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  CardStepViewController.swift
+//  StepViewController.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 31/07/2018.
@@ -12,16 +12,21 @@ import WebKit
 import PromiseKit
 import SnapKit
 
-class CardStepViewController: UIViewController, CardStepView {
+class StepViewController: UIViewController, StepView {
+
+    // MARK: IBOutlets
+
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var placeholderView: UIView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     private var stepWebViewHeight: Constraint!
 
-    var presenter: CardStepPresenter?
+    // MARK: Instance Properties
+
+    var presenter: StepPresenter?
 
     private lazy var stepWebView: WKWebView = {
-        let stepWebView = WKWebView(frame: .zero, configuration: self.сonfiguration)
+        let stepWebView = WKWebView(frame: .zero, configuration: self.webViewConfiguration)
         stepWebView.navigationDelegate = self
         stepWebView.scrollView.delegate = self
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +34,7 @@ class CardStepViewController: UIViewController, CardStepView {
         return stepWebView
     }()
 
-    private lazy var сonfiguration: WKWebViewConfiguration = {
+    private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let script = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let controller = WKUserContentController()
@@ -88,9 +93,9 @@ class CardStepViewController: UIViewController, CardStepView {
         stepWebView.scrollView.delegate = nil
     }
 
-    // MARK: - CardStepView
+    // MARK: - StepView
 
-    func updateProblem(with htmlText: String) {
+    func update(with htmlText: String) {
         let processor = HTMLProcessor(html: htmlText)
         let html = processor.injectDefault().html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
@@ -144,9 +149,9 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 }
 
-// MARK: - CardStepViewController: WKNavigationDelegate -
+// MARK: - StepViewController: WKNavigationDelegate -
 
-extension CardStepViewController: WKNavigationDelegate {
+extension StepViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         alignImages(in: webView).then {
             self.getContentHeight(webView)
@@ -183,15 +188,6 @@ extension CardStepViewController: WKNavigationDelegate {
 
     private func resetWebViewHeight(_ height: Float) {
         stepWebViewHeight.update(offset: height)
-    }
-
-    private func resetContentOffset() {
-        firstly {
-            after(seconds: 0.33)
-        }.done {
-            self.scrollView.contentOffset = .zero
-            self.stepWebView.scrollView.contentOffset = .zero
-        }
     }
 
     private func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
@@ -244,9 +240,9 @@ extension CardStepViewController: WKNavigationDelegate {
     }
 }
 
-// MARK: - CardStepViewController: UIScrollViewDelegate -
+// MARK: - StepViewController: UIScrollViewDelegate -
 
-extension CardStepViewController: UIScrollViewDelegate {
+extension StepViewController: UIScrollViewDelegate {
     func viewForZooming(in: UIScrollView) -> UIView? {
         return nil
     }

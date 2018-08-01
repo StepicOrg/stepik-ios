@@ -95,8 +95,8 @@ extension StepsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let controller = CardStepViewController()
-        let presenter = CardStepPresenter(
+        let controller = StepViewController()
+        let presenter = StepPresenterImpl(
             view: controller,
             step: steps[indexPath.row],
             lesson: lesson

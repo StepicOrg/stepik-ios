@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardStepViewController" customModule="ExamEGERussian" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepViewController" customModule="ExamEGERussian" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="rgC-RC-Wmm" id="tf1-lQ-wEo"/>
                 <outlet property="placeholderView" destination="ehw-dI-SLP" id="Dsz-K0-mHw"/>
