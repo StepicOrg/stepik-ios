@@ -39,10 +39,10 @@ class StepViewController: UIViewController, StepView {
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let controller = WKUserContentController()
         controller.addUserScript(userScript)
-        let сonfiguration = WKWebViewConfiguration()
-        сonfiguration.userContentController = controller
+        let configuration = WKWebViewConfiguration()
+        configuration.userContentController = controller
 
-        return сonfiguration
+        return configuration
     }()
 
     // For updates after rotation only when controller not presented
