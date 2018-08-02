@@ -43,8 +43,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
                     self.presenter?.updateTheme(with: value)
                 }
             },
-            cancel: { _ in return
-            },
+            cancel: { _ in },
             origin: previewView)
     }
 
@@ -63,8 +62,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
                     self.presenter?.updateFontSize(with: intValue)
                 }
             },
-            cancel: { _ in return
-            },
+            cancel: { _ in },
             origin: previewView)
     }
 
@@ -121,8 +119,7 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
                     self.previewView.updateLanguage(with: self.previewLanguage)
                 }
             },
-            cancel: { _ in return
-            },
+            cancel: { _ in },
             origin: previewView.languageButton)
     }
 }
