@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UINavigationController
 
 protocol StepsAssembly: class {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController

@@ -4167,7 +4167,10 @@
 		62E981CC08A57CBEE4878767 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
 		62E981CC646675C80868210C /* ServiceFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */; };
 		62E981DDEADDC9E1E7E21CB3 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
+		62E9820491170A9FF2E00442 /* StepsPagerDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */; };
 		62E9822130C1EA241A84DED7 /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
+		62E9822D92CA621E09BA5995 /* StepsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98849F0870E88D6D8F2E7 /* StepsPagerViewController.swift */; };
+		62E9824D1F33BCAD44C34707 /* StepsPagerPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98778AE17D820A3E7A98B /* StepsPagerPresenterImpl.swift */; };
 		62E9826D2C6AABDF608C2B57 /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
 		62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E982CD54C2C86F14DF84EB /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
@@ -4182,6 +4185,7 @@
 		62E983C7E7B1194D9C809522 /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98400F19C6E781027F2A7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E98401FDC2476D5205E32D /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
+		62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */; };
 		62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E984454A1486C5544028C3 /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
 		62E98453212412E864EDDDEF /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
@@ -4216,6 +4220,7 @@
 		62E987E79C773F8C291F49F3 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E9883EB54C3849E60F905B /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E98873E98E4598D8F1ACB0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E988866D3362A65DC7BFD1 /* StepsPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */; };
 		62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
 		62E9889B64C038694C9566DE /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E988EA9D5C729ACCE8B386 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
@@ -4228,7 +4233,6 @@
 		62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98696D8F1FF253E8BF1D3 /* ClearNavigationViewController.swift */; };
 		62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A35FCB795B26C083C91 /* RouterPoppable.swift */; };
 		62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
-		62E98A25900088A176C0B26A /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E984D6F6E9CED19E4E38B2 /* StepsViewController.swift */; };
 		62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */; };
 		62E98AB201BD9C1AFEAFA88E /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */; };
@@ -4240,6 +4244,7 @@
 		62E98B8919D18CD0F8238F97 /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */; };
 		62E98B94B2E3FE4ABB80AE41 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
 		62E98BB5A0A3D643A07C837B /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
+		62E98BBF77480A2172E6C469 /* StepsPagerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */; };
 		62E98BC4B9330D5A2FFBC9B5 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
 		62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98BEF4DA87C1A4AAAFD15 /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
@@ -4265,6 +4270,7 @@
 		62E98E207924FBDBAD355E57 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98E2FC787CFDAAF38CB52 /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
 		62E98E53B559035BD0E4D903 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
+		62E98E5A0A94A3955427B3D4 /* StepsPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98500A0C0811D21357E27 /* StepsPagerView.swift */; };
 		62E98E72A85E731394868512 /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
 		62E98E72EB42F2A772BF9760 /* AchievementProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */; };
 		62E98E8C35AE5A7F3A2508E4 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
@@ -5982,14 +5988,16 @@
 		62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceFactoryImpl.swift; sourceTree = "<group>"; };
 		62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuBlock.swift; sourceTree = "<group>"; };
 		62E9810DF187ACA3C26F5396 /* CustomNotificationBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNotificationBanner.swift; sourceTree = "<group>"; };
+		62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSource.swift; sourceTree = "<group>"; };
 		62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorPreferencesContainer.swift; sourceTree = "<group>"; };
 		62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoPresenter.swift; sourceTree = "<group>"; };
 		62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+fromNib.swift"; sourceTree = "<group>"; };
 		62E982CD72238277F414FC52 /* AuthGreetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthGreetingViewController.xib; sourceTree = "<group>"; };
+		62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSourceImpl.swift; sourceTree = "<group>"; };
 		62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListViewController.swift; sourceTree = "<group>"; };
 		62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakNotificationsControlPresenter.swift; sourceTree = "<group>"; };
 		62E9848BCD3343E626596F54 /* HeaderEmptyAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderEmptyAuthView.swift; sourceTree = "<group>"; };
-		62E984D6F6E9CED19E4E38B2 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		62E98500A0C0811D21357E27 /* StepsPagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerView.swift; sourceTree = "<group>"; };
 		62E9851360F1490A8311EC41 /* AchievementPopupAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementPopupAlertManager.swift; sourceTree = "<group>"; };
 		62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapBlockContentView.swift; sourceTree = "<group>"; };
 		62E9863AAABC06CDEE98110E /* StepWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepWebView.swift; sourceTree = "<group>"; };
@@ -5999,8 +6007,10 @@
 		62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsRetriever.swift; sourceTree = "<group>"; };
 		62E98708CFECD3F1D0AD4120 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapPresenter.swift; sourceTree = "<group>"; };
+		62E98778AE17D820A3E7A98B /* StepsPagerPresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerPresenterImpl.swift; sourceTree = "<group>"; };
 		62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
 		62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderInfoView.xib; sourceTree = "<group>"; };
+		62E98849F0870E88D6D8F2E7 /* StepsPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerViewController.swift; sourceTree = "<group>"; };
 		62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+StreakNotificationsControlView.swift"; sourceTree = "<group>"; };
 		62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsPresenter.swift; sourceTree = "<group>"; };
 		62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerRouter.swift; sourceTree = "<group>"; };
@@ -6017,6 +6027,7 @@
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
 		62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
 		62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingNavigationViewController.swift; sourceTree = "<group>"; };
+		62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerPresenter.swift; sourceTree = "<group>"; };
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
 		62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsAPI.swift; sourceTree = "<group>"; };
 		62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementDescription.swift; sourceTree = "<group>"; };
@@ -9958,7 +9969,10 @@
 		62E9814DEE0740A13A67B9BA /* Pager */ = {
 			isa = PBXGroup;
 			children = (
-				62E984D6F6E9CED19E4E38B2 /* StepsViewController.swift */,
+				62E98C2C298F7A5A86C64616 /* Model */,
+				62E98F378E6591F9E831C650 /* Presenter */,
+				62E98B764E38D2D31AA36D0B /* Router */,
+				62E98F8AF83881B98BA4D320 /* View */,
 			);
 			path = Pager;
 			sourceTree = "<group>";
@@ -10047,6 +10061,23 @@
 			path = AuthGreetingViewController;
 			sourceTree = "<group>";
 		};
+		62E98B764E38D2D31AA36D0B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		62E98C2C298F7A5A86C64616 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */,
+				62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		62E98E1032DDB6DD34A6D5D6 /* ProfileDescription */ = {
 			isa = PBXGroup;
 			children = (
@@ -10055,6 +10086,24 @@
 				62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */,
 			);
 			name = ProfileDescription;
+			sourceTree = "<group>";
+		};
+		62E98F378E6591F9E831C650 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */,
+				62E98778AE17D820A3E7A98B /* StepsPagerPresenterImpl.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		62E98F8AF83881B98BA4D320 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				62E98500A0C0811D21357E27 /* StepsPagerView.swift */,
+				62E98849F0870E88D6D8F2E7 /* StepsPagerViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
@@ -15638,7 +15687,6 @@
 				2C949A2920ECC62E0049E9A8 /* ProfileAchievementsContentView.swift in Sources */,
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
 				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
-				62E98A25900088A176C0B26A /* StepsViewController.swift in Sources */,
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
 				2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */,
 				2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */,
@@ -15647,6 +15695,14 @@
 				62E989085F0A0C8308526B56 /* ThirdPartiesConfigurator.swift in Sources */,
 				62E9852AE720DF947F39C98C /* ServiceFactory.swift in Sources */,
 				62E981CC646675C80868210C /* ServiceFactoryImpl.swift in Sources */,
+				62E98BBF77480A2172E6C469 /* StepsPagerPresenter.swift in Sources */,
+				62E9824D1F33BCAD44C34707 /* StepsPagerPresenterImpl.swift in Sources */,
+				62E9822D92CA621E09BA5995 /* StepsPagerViewController.swift in Sources */,
+				62E98E5A0A94A3955427B3D4 /* StepsPagerView.swift in Sources */,
+				62E988866D3362A65DC7BFD1 /* StepsPagerDataSource.swift in Sources */,
+				62E9820491170A9FF2E00442 /* StepsPagerDataSourceImpl.swift in Sources */,
+				62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */,
+				62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

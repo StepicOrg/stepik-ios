@@ -7,12 +7,26 @@
 //
 
 import Foundation
+import UIKit.UINavigationController
 
 final class StepsAssemblyImpl: BaseAssembly, StepsAssembly {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController {
-        return StepsViewController(
+        let dataSource = StepsPagerDataSourceImpl(lesson: lesson)
+        let controller = StepsPagerViewController(strongDataSource: dataSource)
+        controller.title = lesson.title
+
+        let router = StepsPagerRouterImpl(
+            assemblyFactory: assemblyFactory,
+            navigationController: navigationController
+        )
+        let presenter = StepsPagerPresenterImpl(
+            view: controller,
             lesson: lesson,
+            router: router,
             stepsService: serviceFactory.stepsService
         )
+        controller.presenter = presenter
+
+        return controller
     }
 }
