@@ -10,13 +10,13 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
 
     private let lesson: LessonPlainObject
     private var steps: [StepPlainObject]
+    private let assembly: StepAssembly
 
-    init(lesson: LessonPlainObject, steps: [StepPlainObject] = []) {
+    init(lesson: LessonPlainObject, assembly: StepAssembly, steps: [StepPlainObject] = []) {
         self.lesson = lesson
         self.steps = steps
+        self.assembly = assembly
     }
-
-    // MARK: PagerDataSource
 
     public func numberOfTabs(_ pager: PagerController) -> Int {
         return steps.count
@@ -31,26 +31,10 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
     }
 
     public func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        return stepController(for: index)
+        return assembly.module(lesson: lesson, step: steps[index])
     }
-
-    // MARK: Public API
 
     func setSteps(_ newSteps: [StepPlainObject]) {
         self.steps = newSteps
-    }
-
-    // MARK: Private API
-
-    private func stepController(for index: Int) -> StepViewController {
-        let controller = StepViewController()
-        let presenter = StepPresenterImpl(
-            view: controller,
-            step: steps[index],
-            lesson: lesson
-        )
-        controller.presenter = presenter
-
-        return controller
     }
 }
