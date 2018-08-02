@@ -9,27 +9,18 @@
 import Foundation
 import PromiseKit
 
-protocol LessonsRouter: class {
-    func showStepsForLesson(_ lesson: LessonPlainObject)
-}
-
 final class LessonsPresenterImpl: LessonsPresenter {
-
     private weak var view: LessonsView?
-    private weak var router: LessonsRouter?
+    private let router: LessonsRouter
 
     private let topicId: String
     private let knowledgeGraph: KnowledgeGraph
+
     private var lessons = [LessonPlainObject]() {
         didSet {
             self.view?.setLessons(viewLessons(from: lessons))
         }
     }
-
-    private let lessonsService: LessonsService
-    private let courseService: CourseService
-    private let enrollmentService: EnrollmentService
-
     private var topic: KnowledgeGraphVertex<String> {
         return knowledgeGraph[topicId]!.key
     }
@@ -39,6 +30,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
     private var coursesIds: [Int] {
         return topic.lessons.compactMap { Int($0.courseId) }
     }
+
+    private let lessonsService: LessonsService
+    private let courseService: CourseService
+    private let enrollmentService: EnrollmentService
 
     init(view: LessonsView, router: LessonsRouter, topicId: String,
          knowledgeGraph: KnowledgeGraph, lessonsService: LessonsService,
@@ -62,7 +57,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
             return
         }
 
-        router?.showStepsForLesson(lesson)
+        router.showStepsForLesson(lesson)
     }
 
     // MARK: - Private API
@@ -74,7 +69,10 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
         courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
             var ids = Set(self.coursesIds)
-            courses.filter { $0.enrolled }.map { $0.id }.forEach { ids.remove($0) }
+            courses
+                .filter { $0.enrolled }
+                .map { $0.id }
+                .forEach { ids.remove($0) }
 
             return .value(Array(ids))
         }.then { ids -> Promise<[Course]> in

@@ -33,15 +33,7 @@ final class TopicsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerNib(for: TopicTableViewCell.self)
-        title = NSLocalizedString("Topics", comment: "")
-
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = topicsRefreshControl
-        } else {
-            tableView.addSubview(topicsRefreshControl)
-        }
-
+        setupView()
         presenter.refresh()
     }
 
@@ -65,10 +57,45 @@ final class TopicsTableViewController: UITableViewController {
         presenter.selectTopic(with: topics[indexPath.row])
     }
 
-    // MARK: - Private API
+    // MARK: - Private API -
+
+    private func setupView() {
+        tableView.registerNib(for: TopicTableViewCell.self)
+        title = NSLocalizedString("Topics", comment: "")
+
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = topicsRefreshControl
+        } else {
+            tableView.addSubview(topicsRefreshControl)
+        }
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("Logout", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(onLogoutClick(_:))
+        )
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("SignIn", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(onSignInClick(_:))
+        )
+    }
+
+    // MARK: Actions
 
     @objc private func refreshData(_ sender: Any) {
         presenter.refresh()
+    }
+
+    @objc private func onLogoutClick(_ sender: Any) {
+        presenter.logout()
+    }
+
+    @objc private func onSignInClick(_ sender: Any) {
+        presenter.signIn()
     }
 }
 

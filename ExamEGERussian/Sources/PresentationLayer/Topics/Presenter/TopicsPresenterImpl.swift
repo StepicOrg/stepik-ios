@@ -7,16 +7,14 @@
 //
 
 import Foundation
-
-protocol TopicsRouter: class {
-    func showLessonsForTopicWithId(_ id: String)
-}
+import PromiseKit
 
 final class TopicsPresenterImpl: TopicsPresenter {
-
     private weak var view: TopicsView?
-    private weak var router: TopicsRouter?
+    private let router: TopicsRouter
+
     private let knowledgeGraph: KnowledgeGraph
+
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphService
 
@@ -35,16 +33,30 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = knowledgeGraph[viewData.id]?.key else { return }
-        router?.showLessonsForTopicWithId(topic.id)
+        guard let topic = knowledgeGraph[viewData.id]?.key else {
+            return
+        }
+
+        router.showLessonsForTopicWithId(topic.id)
+    }
+
+    func signIn() {
+        router.showAuth()
+    }
+
+    func logout() {
+        AuthInfo.shared.token = nil
     }
 
     // MARK: - Private API
 
     private func checkAuthStatus() {
         if !AuthInfo.shared.isAuthorized {
-            userRegistrationService.registerNewUser().done {
-                print("Successfully register user with id: \($0.id)")
+            let params = RandomCredentialsGenerator().userRegistrationParams
+            userRegistrationService.registerAndSignIn(with: params).then { [unowned self] user in
+                self.userRegistrationService.unregisterFromEmail(user: user)
+            }.done { user in
+                print("Successfully register fake user with id: \(user.id)")
             }.catch { [weak self] error in
                 self?.displayError(error)
             }
@@ -53,12 +65,17 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func fetchGraphData() {
         graphService.fetchGraph().done { [weak self] responseModel in
-            guard let `self` = self else { return }
-            let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
-            guard let graph = builder.build() as? KnowledgeGraph else { return }
-            self.knowledgeGraph.adjacencies = graph.adjacencies
+            guard let `self` = self else {
+                return
+            }
 
-            let vertices = self.knowledgeGraph.vertices as! [KnowledgeGraphVertex<String>]
+            let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
+            guard let graph = builder.build() as? KnowledgeGraph,
+                  let vertices = graph.vertices as? [KnowledgeGraphVertex<String>] else {
+                return
+            }
+
+            self.knowledgeGraph.adjacencies = graph.adjacencies
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)

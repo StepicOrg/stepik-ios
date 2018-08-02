@@ -161,7 +161,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
-    
+
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
     }

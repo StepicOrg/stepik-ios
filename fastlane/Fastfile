@@ -1,315 +1,436 @@
-# Customise this file, documentation can be found here:
-# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
-# All available actions: https://docs.fastlane.tools/actions
-# can also be listed using the `fastlane actions` command
-
-# Change the syntax highlighting to Ruby
-# All lines starting with a # are ignored when running `fastlane`
-
-# If you want to automatically update fastlane if a new version is available:
-# update_fastlane
-
 # This is the minimum version number required.
-# Update this, if you use features of a newer version
 fastlane_version "2.93.1"
 
 default_platform :ios
 
 platform :ios do
+    # Config variables
 
-  before_all do
-    cocoapods(repo_update: true)
-  end
+    team_id = ENV["FASTLANE_TEAM_ID"]
+    keychain_password = ENV["KEYCHAIN_PASSWORD"]
 
-  def version_string(version_number, build_number)
-    "v. #{version_number} (#{build_number})"
-  end
+    # Constants
 
-  app_identifiers = {
-    "Stepic" => [
-      "com.AlexKarpov.Stepic",
-      "com.AlexKarpov.Stepic.watchkitapp",
-      "com.AlexKarpov.Stepic.watchkitapp.watchkitextension",
-      "com.AlexKarpov.Stepic.StickerPackExtension"
-    ],
-    "Adaptive 1838" => [
-      "org.stepik.ios.adaptive.1838"
-    ],
-    "Adaptive 3150" => [
-      "org.stepik.ios.adaptive.3150"
-    ],
-    "Adaptive 3149" => [
-      "org.stepik.ios.adaptive.3149"
-    ],
-    "Adaptive 3124" => [
-      "org.stepik.ios.adaptive.3124"
-    ],
-    "Adaptive GMAT" => [
-      "org.stepik.ios.adaptive.gmat"
-    ],
-    "Adaptive 8290" => [
-      "org.stepik.ios.adaptive.8290"
-    ]
-  }
+    slack_mentions_beta = ['@vladislav.kiryukhin', '@akarpov', "@iulia.liakh"]
+    slack_mentions_release = ['@vladislav.kiryukhin', '@akarpov']
+    project_metapath = "./fastlane/metadata"
+    project_screenpath = "./fastlane/screenshots"
 
-  all_schemes = [
-    "Stepic",
-    "Adaptive 1838",
-    "Adaptive 3150",
-    "Adaptive 3149",
-    "Adaptive 3124",
-    "Adaptive GMAT"
-  ]
+    schemes = {
+        "Stepic" => [
+            "Stepic",
+            "StepicWatch", 
+            "StepicWatch Extension", 
+            "StickerPackExtension"
+        ],
+        "Adaptive 1838" => [
+            "Adaptive 1838"
+        ],
+        "Adaptive 3150" => [
+            "Adaptive 3150"
+        ],
+        "Adaptive 3149" => [
+            "Adaptive 3149"
+        ],
+        "Adaptive 3124" => [
+            "Adaptive 3124"
+        ],
+        "Adaptive GMAT" => [
+            "Adaptive GMAT"
+        ],
+        "Adaptive 8290" => [
+            "Adaptive 8290"
+        ]
+    }
 
-  test_schemes = [
-    "Stepic"
-  ]
+    # Helpers
 
-  screenshots_schemes = {
-    "Stepic" => "Stepic Screenshots",
-    "Adaptive 1838" => "Adaptive 1838 Screenshots",
-    "Adaptive 1906" => "Adaptive 1906 Screenshots",
-    "Adaptive 3150" => "Adaptive 3150 Screenshots",
-    "Adaptive 3149" => "Adaptive 3149 Screenshots",
-    "Adaptive 3124" => "Adaptive 3124 Screenshots",
-    "Adaptive 3067" => "Adaptive 3067 Screenshots"
-  }
+    def version_string(options)
+        version = options[:version_number]
+        build = options[:build_number]
 
-  # Test
-  lane :test do
-    for scheme in test_schemes
-      testscheme(scheme: scheme)
-    end
-  end
+        UI.user_error!("Wrong version parameter") if version.nil?
+        UI.user_error!("Wrong build parameter") if build.nil?
 
-  desc "Runs all the tests for scheme"
-  lane :testscheme do |options|
-    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
-    scheme = options[:scheme]
-    scan(scheme:scheme, slack_only_on_failure: true)
-  end
-
-  # Beta
-  lane :beta do |options|
-    git_change = options[:git_change]
-
-    if git_change
-      # Ensure that your git status is not dirty
-      ensure_git_status_clean
-
-      # Increment the build number (not the version number)
-      # Providing the xcodeproj is optional
-      build_number = increment_build_number(xcodeproj: "Stepic.xcodeproj")
-      version_number = get_version_number
-      # Commit the version bump
-      commit_version_bump(xcodeproj: "Stepic.xcodeproj")
-
-      # Add a git tag for this build. This will automatically
-      # use an appropriate git tag name
-      add_git_tag
-
-      # Push the new commit and tag back to your git remote
-      push_to_git_remote
+        "v. #{version} (#{build})"
     end
 
-    for scheme in all_schemes do
-      betascheme(scheme: scheme, git_change: false)
-    end
-  end
+    def get_bundle_id(options)
+        project_path = options[:xcodeproj] ? File.join(options[:xcodeproj], '..') : Dir.glob("../*.xcodeproj").first
+        scheme = options[:scheme]
 
-  desc "Submit a new Beta Build to Crashlytics"
-  desc "This will also make sure the profile is up to date"
-  desc "Options: scheme to identify the current scheme & git_change, which identifies if the changes need to be pushed to github"
-  lane :betascheme do |options|
+        if project_path
+            project = Xcodeproj::Project.open(project_path)
+        else 
+            UI.user_error!("Unable to find xcodeproj file")
+        end
 
-    scheme = options[:scheme]
-    git_change = options[:git_change]
-    matchadhoc(scheme: scheme)
+        scheme = project.native_targets.find { |target| target.name == scheme }
+        build_configuration = scheme.build_configurations.first
 
-    # Ensure that your git status is not dirty
-    if git_change
-      ensure_git_status_clean
+        UI.user_error!("Unable to find build configuration") if build_configuration.nil?
 
-      # Increment the build number (not the version number)
-      # Providing the xcodeproj is optional
-      build_number = increment_build_number(xcodeproj: "Stepic.xcodeproj")
-      version_number = get_version_number
-      # Commit the version bump
-      commit_version_bump(xcodeproj: "Stepic.xcodeproj")
-
-      # Add a git tag for this build. This will automatically
-      # use an appropriate git tag name
-      add_git_tag
-
-      # Push the new commit and tag back to your git remote
-      push_to_git_remote
+        build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
     end
 
-    unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
-    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
-    gym(scheme: scheme,
-        clean: true,
-        output_directory: "artefacts",
-        output_name: "#{scheme}.ipa",
-        include_bitcode: true,
-        export_method: "ad-hoc") # Build your app - more options available
-    crashlytics(api_token: "d4016589326f6f7814080b7ff9017e18711a1959",
-                build_secret: "7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8",
-                notifications: true,
-                groups: "all-ios-testers")
-    slack(
-          message: "Successfully released iOS beta #{scheme} #{version_string(get_version_number, get_build_number)}",
-          channel: "#ios-ci")
-  end
+    def build_bundle_id_to_scheme_mapping(options)
+        schemes = options[:schemes]
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
 
-  # Certificates
-  desc "Match all certificates for all schemes"
-  lane :matchall do
-    for scheme in all_schemes do
-      matchscheme(scheme: scheme)
+        if schemes.nil? || scheme.nil? || provisioning_profile_mapping.nil?
+            UI.user_error!("Wrong parameters")
+        end
+        
+        bundle_id_to_scheme = {}
+        dependent_schemes = schemes[scheme]
+        for i in dependent_schemes
+            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
+        end
+
+        bundle_id_to_scheme
     end
-  end
 
-  desc "Match all certificates for scheme"
-  lane :matchscheme do |options|
-    matchdev(scheme: options[:scheme])
-    matchadhoc(scheme: options[:scheme])
-    matchrelease(scheme: options[:scheme])
-  end
+    # Private lanes
 
-  lane :matchdev do |options|
-    scheme = options[:scheme]
-    identifiers = app_identifiers[scheme]
-    match(type: "development", force_for_new_devices: true,
-          app_identifier: identifiers)
-  end
+    private_lane :match_scheme do |options|
+        scheme = options[:scheme]
+        type = options[:type]
 
-  lane :matchadhoc do |options|
-    scheme = options[:scheme]
-    identifiers = app_identifiers[scheme]
-    match(type: "adhoc", force_for_new_devices: true,
-          app_identifier: identifiers)
-  end
+        UI.user_error!("Wrong parameters") if scheme.nil? || type.nil?
 
-  lane :matchrelease do |options|
-    scheme = options[:scheme]
-    identifiers = app_identifiers[scheme]
-    match(type: "appstore", force_for_new_devices: true,
-          app_identifier: identifiers)
-  end
+        read_only = options.key?(:read_only) ? options[:read_only] : true
+        dependent_schemes = schemes[scheme]
+        identifiers = dependent_schemes.map { |scheme| get_bundle_id(scheme: scheme) }
 
-  # Screenshots
-  desc "Add frame, background and caption to screenshot"
-  lane :customise_screenshots do |options|
-    scheme = options[:scheme]
-    screenshots_scheme = screenshots_schemes[scheme]
-
-    # Make absolute path for screenshots generator
-    # Current dir – ./fastlane
-    screenpath = Dir.pwd + "/screenshots/#{scheme}"
-
-    customize_screenshots(path: screenpath)
-  end
-
-  desc "Create screenshots"
-  lane :create_screenshots do |options|
-    scheme = options[:scheme]
-    screenshots_scheme = screenshots_schemes[scheme]
-    screenpath = "./fastlane/screenshots/#{scheme}"
-
-    snapshot(scheme: screenshots_scheme, output_directory: screenpath)
-  end
-
-  desc "Create screenshots for all schemes"
-  lane :create_screenshots_all do |options|
-    customise = options[:customise]
-
-    for scheme in all_schemes do
-      create_screenshots(scheme: scheme)
-
-      if customise
-        customise_screenshots(scheme: scheme)
-      end
+        match(
+            type: type,
+            force_for_new_devices: true,
+            readonly: read_only,
+            app_identifier: identifiers
+        )
     end
-  end
 
-  # Update version/build
-  desc "Increment build number"
-  lane :increment_build do
-    increment_build_number
-  end
+    private_lane :set_manual_code_signing do |options|
+        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
 
-  desc "Set version"
-  lane :set_version do |options|
-    version = options[:version]
-    increment_version_number(version_number: version)
-  end
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
 
-  # dSYM files
-  desc "Refresh dSYMs in Crashlytics for all schemes"
-  lane :refresh_dsyms_all do
-    for scheme in all_schemes do
-      refresh_dsyms(app_identifier: app_identifiers[scheme][0])
+        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
+            schemes: schemes, 
+            scheme: scheme, 
+            provisioning_profile_mapping: provisioning_profile_mapping
+        )
+
+        provisioning_profile_mapping.each do |key, value|
+            automatic_code_signing(
+                use_automatic_signing: false,
+                targets: [bundle_id_to_scheme[key]],
+                profile_name: value,
+                team_id: team_id,
+                code_sign_identity: "iPhone Distribution"
+            )
+        end
     end
-  end
 
-  desc "Download all dSYM files from App Store and upload to the Crashlytics"
-  lane :refresh_dsyms do |options|
-    app_identifier = options[:app_identifier]
+    private_lane :set_auto_code_signing do |options|
+        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
 
-    download_dsyms(app_identifier: app_identifier)
-    upload_symbols_to_crashlytics
-    clean_build_artifacts
-  end
+        scheme = options[:scheme]
+        provisioning_profile_mapping = options[:provisioning_profile_mapping]
 
-  # Release
-  lane :release do
-    for scheme in all_schemes do
-      releasescheme(scheme: scheme)
+        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
+        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
+            schemes: schemes, 
+            scheme: scheme, 
+            provisioning_profile_mapping: provisioning_profile_mapping
+        )
+
+        provisioning_profile_mapping.each do |key, value|
+            automatic_code_signing(
+                use_automatic_signing: true,
+                targets: [bundle_id_to_scheme[key]],
+                profile_name: "",
+                team_id: team_id,
+                code_sign_identity: "iPhone Developer"
+            )
+        end
     end
-  end
 
-  desc "Deploy a new version to the App Store"
-  lane :releasescheme do |options|
+    # Lanes
 
-    scheme = options[:scheme]
-    app_identifier = app_identifiers[scheme][0]
+    desc "Run all tests for scheme."
+    desc "Options: scheme"
+    lane :test do |options|
+        clear_derived_data
 
-    matchrelease(scheme: scheme)
+        ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
+        scheme = options[:scheme]
 
-    clear_derived_data
-    unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
-    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
-    gym(scheme: "#{scheme}",
-        clean: true,
-        output_directory: "artefacts",
-        output_name: "#{scheme}.ipa",
-        include_bitcode: true,
-        export_method: "app-store")
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
 
-    metapath = "./fastlane/metadata/#{scheme}"
-    screenpath = "./fastlane/screenshots/#{scheme}"
-    deliver(metadata_path: metapath, screenshots_path: screenpath, app_identifier: app_identifier)
-    slack(
-          message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}",
-          channel: "#ios-ci")
-  end
+        cocoapods(try_repo_update_on_error: true)
 
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
-  end
+        scan(
+            scheme: scheme,
+            slack_only_on_failure: true
+        )
+    end
 
-  error do |lane, exception|
-    slack(
-      message: exception.message,
-      success: false
-    )
-  end
+    desc "Submit a new Beta Build to Crashlytics."
+    desc "This will also make sure the profile is up to date."
+    desc "Options: scheme"
+    lane :beta do |options|
+        scheme = options[:scheme]
+
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
+        clear_derived_data
+        cocoapods(repo_update: true)
+
+        unlock_keychain
+
+        match_adhoc(scheme: scheme)
+
+        # Disable automatic code signing -> build -> enable again
+        set_manual_code_signing(
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+            scheme: scheme
+        )
+        begin
+            gym(
+                scheme: scheme,
+                clean: true,
+                output_directory: "artifacts",
+                output_name: "#{scheme}.ipa",
+                include_bitcode: true,
+                skip_profile_detection: true,
+                export_method: "ad-hoc",
+                export_options: {
+                    # use only provisioning profiles from match
+                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                }
+            )
+        ensure
+            set_auto_code_signing(
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+                scheme: scheme
+            )
+        end
+
+        crashlytics(
+            notifications: true,
+            groups: "all-ios-testers"
+        )
+
+        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+        upload_symbols_to_crashlytics(dsym_path: dsym_path)
+
+        vs = version_string(
+            version_number: get_version_number(target: scheme),
+            build_number: get_build_number
+        )
+
+        slack(
+            message: "Successfully released iOS BETA #{scheme} #{vs}\n#{slack_mentions_beta.join(' ')}",
+            channel: "#ios-ci",
+            link_names: true
+        )
+    end
+
+    desc "Match all certificates for scheme."
+    desc "Options: scheme, read_only"
+    lane :match_all do |options|
+        params = {
+            :scheme => options[:scheme],
+            :read_only => options.key?(:read_only) ? options[:read_only] : true
+        }
+
+        match_dev(params)
+        match_adhoc(params)
+        match_release(params)
+    end
+
+    desc "Match development certificates for scheme."
+    desc "Options: scheme, read_only"
+    lane :match_dev do |options|
+        match_scheme(
+            type: "development",
+            scheme: options[:scheme],
+            read_only: options.key?(:read_only) ? options[:read_only] : true
+        )
+    end
+
+    desc "Match adhoc certificates for scheme."
+    desc "Options: scheme, read_only"
+    lane :match_adhoc do |options|
+        match_scheme(
+            type: "adhoc",
+            scheme: options[:scheme],
+            read_only: options.key?(:read_only) ? options[:read_only] : true
+        )
+    end
+
+    desc "Match appstore certificates for scheme."
+    desc "Options: scheme, read_only"
+    lane :match_release do |options|
+        match_scheme(
+            type: "appstore",
+            scheme: options[:scheme],
+            read_only: options.key?(:read_only) ? options[:read_only] : true
+        )
+    end
+
+    desc "Increment build number in project"
+    lane :increment_build do
+        increment_build_number
+    end
+
+    desc "Set version."
+    desc "Options: version"
+    lane :set_version do |options|
+        version = options[:version]
+
+        UI.user_error!("Wrong version parameter") if version.nil?
+
+        increment_version_number(version_number: version)
+    end
+
+    desc "Increment minor version"
+    lane :increment_minor_version do
+        increment_version_number(bump_type: "minor")
+    end
+
+    desc "Download all dSYM files from App Store and upload to the Crashlytics."
+    desc "Options: scheme, version and build"
+    lane :refresh_dsyms do |options|
+        scheme = options[:scheme]
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
+        app_identifier = get_bundle_id(scheme: scheme)
+
+        params = {
+            :app_identifier => app_identifier
+        }
+
+        if options[:version]
+            version = options[:version]
+            params[:version] = options[:version]
+
+            if version != "latest" && options[:build]
+                params[:build] = options[:build]
+            end
+        end
+
+        download_dsyms(params)
+        upload_symbols_to_crashlytics
+    end
+
+    desc "Download dDSYMs for latest version."
+    desc "Options: scheme"
+    lane :refresh_dsyms_for_latest_version do |options|
+        scheme = options[:scheme]
+
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
+        refresh_dsyms(
+            scheme: scheme,
+            version: "latest"
+        )
+    end
+
+    desc "Deploy a new version to the App Store."
+    desc "Options: scheme, should_submit"
+    lane :release do |options|
+        scheme = options[:scheme]
+        UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
+        app_identifier = get_bundle_id(scheme: scheme)
+        metapath = "#{project_metapath}/#{scheme}"
+        screenpath = "#{project_screenpath}/#{scheme}"
+        should_submit = options.key?(:should_submit) ? options[:should_submit] : false
+
+        clear_derived_data
+        cocoapods(repo_update: true)
+
+        unlock_keychain
+
+        match_release(scheme: scheme)
+
+        # Disable automatic code signing -> build -> enable again
+        set_manual_code_signing(
+            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+            scheme: scheme
+        )
+        begin
+            gym(
+                scheme: "#{scheme}",
+                clean: true,
+                output_directory: "artifacts",
+                output_name: "#{scheme}.ipa",
+                include_bitcode: true,
+                skip_profile_detection: true,
+                export_method: "app-store",
+                export_options: {
+                    # use only provisioning profiles from match
+                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
+                }
+            )
+        ensure
+            set_auto_code_signing(
+                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+                scheme: scheme
+            )
+        end
+
+        deliver(
+            force: true,
+            metadata_path: metapath,
+            screenshots_path: screenpath,
+            app_identifier: app_identifier,
+
+            # submit options 
+            submit_for_review: should_submit,
+            phased_release: true,
+            automatic_release: true,
+            submission_information: {
+                export_compliance_encryption_updated: false,
+                add_id_info_uses_idfa: true,
+                add_id_info_serves_ads: false,
+                add_id_info_tracks_action: true,
+                add_id_info_tracks_install: false
+            }
+        )
+
+        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+        upload_symbols_to_crashlytics(dsym_path: dsym_path)
+
+        vs = version_string(
+            version_number: get_version_number(target: scheme),
+            build_number: get_build_number
+        )
+
+        slack(
+            message: "Successfully released iOS RELEASE #{scheme} #{vs}\n#{slack_mentions_release.join(' ')}",
+            channel: "#ios-ci",
+            link_names: true
+        )
+    end
+
+    after_all do |lane, options|
+        clean_build_artifacts
+    end
+
+    error do |lane, exception|
+        clean_build_artifacts
+
+        slack(
+            message: exception.message,
+            success: false
+        )
+    end
 end
-
-
-# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
-# All available actions: https://docs.fastlane.tools/actions
-
-# fastlane reports which actions are used
-# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
