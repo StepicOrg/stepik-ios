@@ -10,7 +10,7 @@ import UIKit
 
 typealias RouterNavigational = RouterDismissable & RouterPoppable
 
-class BaseRouter {
+class BaseRouter: RouterNavigational {
     typealias DeriveViewControllerClosure = (UINavigationController) -> UIViewController
 
     let assemblyFactory: AssemblyFactory
@@ -48,7 +48,7 @@ class BaseRouter {
 
 // MARK: - BaseRouter: RouterDismissable -
 
-extension BaseRouter: RouterDismissable {
+extension BaseRouter {
     func dismiss(completion: (() -> Void)?) {
         navigationController?.dismiss(animated: true, completion: completion)
     }
@@ -60,7 +60,7 @@ extension BaseRouter: RouterDismissable {
 
 // MARK: - BaseRouter: RouterPoppable -
 
-extension BaseRouter: RouterPoppable {
+extension BaseRouter {
     public func pop(animated: Bool) {
         navigationController?.popViewController(animated: animated)
     }
