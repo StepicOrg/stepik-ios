@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias RouterNavigational = RouterDismissable & RouterPoppable
+
 class BaseRouter {
     typealias DeriveViewControllerClosure = (UINavigationController) -> UIViewController
 
@@ -42,14 +44,6 @@ class BaseRouter {
     func presentModal(from viewControllerFromPresent: UIViewController, to viewControllerToPresent: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         viewControllerFromPresent.present(viewControllerToPresent, animated: animated, completion: completion)
     }
-
-    func popToRootViewController(_ animated: Bool = true) {
-        navigationController?.popToRootViewController(animated: animated)
-    }
-
-    func popViewController(_ animated: Bool = true) {
-        navigationController?.popViewController(animated: animated)
-    }
 }
 
 // MARK: - BaseRouter: RouterDismissable -
@@ -61,5 +55,21 @@ extension BaseRouter: RouterDismissable {
 
     func dismiss() {
         dismiss(completion: nil)
+    }
+}
+
+// MARK: - BaseRouter: RouterPoppable -
+
+extension BaseRouter: RouterPoppable {
+    public func pop(animated: Bool) {
+        navigationController?.popViewController(animated: animated)
+    }
+
+    public func popToRootViewController(animated: Bool) {
+        navigationController?.popToRootViewController(animated: animated)
+    }
+
+    public func popToViewController(_ viewController: UIViewController, animated: Bool) {
+        navigationController?.popToViewController(viewController, animated: animated)
     }
 }
