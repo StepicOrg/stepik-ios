@@ -9,6 +9,9 @@
 import Foundation
 
 final class ServiceFactoryImpl: ServiceFactory {
+
+    // MARK: - ServiceFactory -
+
     let authAPI: AuthAPI
     let stepicsAPI: StepicsAPI
     let profilesAPI: ProfilesAPI
@@ -18,25 +21,6 @@ final class ServiceFactoryImpl: ServiceFactory {
     let stepsAPI: StepsAPI
 
     let defaultsStorageManager: DefaultsStorageManager
-
-    init(authAPI: AuthAPI,
-         stepicsAPI: StepicsAPI,
-         profilesAPI: ProfilesAPI,
-         coursesAPI: CoursesAPI,
-         enrollmentsAPI: EnrollmentsAPI,
-         lessonsAPI: LessonsAPI,
-         stepsAPI: StepsAPI,
-         defaultsStorageManager: DefaultsStorageManager
-        ) {
-        self.authAPI = authAPI
-        self.stepicsAPI = stepicsAPI
-        self.profilesAPI = profilesAPI
-        self.coursesAPI = coursesAPI
-        self.enrollmentsAPI = enrollmentsAPI
-        self.lessonsAPI = lessonsAPI
-        self.stepsAPI = stepsAPI
-        self.defaultsStorageManager = defaultsStorageManager
-    }
 
     var userRegistrationService: UserRegistrationService {
         return UserRegistrationServiceImpl(
@@ -65,5 +49,26 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     var stepsService: StepsService {
         return StepsServiceImpl(stepsAPI: stepsAPI)
+    }
+
+    // MARK: - Init -
+
+    init(authAPI: AuthAPI,
+         stepicsAPI: StepicsAPI,
+         profilesAPI: ProfilesAPI,
+         coursesAPI: CoursesAPI,
+         enrollmentsAPI: EnrollmentsAPI,
+         lessonsAPI: LessonsAPI,
+         stepsAPI: StepsAPI,
+         defaultsStorageManager: DefaultsStorageManager
+        ) {
+        self.authAPI = authAPI
+        self.stepicsAPI = stepicsAPI
+        self.profilesAPI = profilesAPI
+        self.coursesAPI = coursesAPI
+        self.enrollmentsAPI = enrollmentsAPI
+        self.lessonsAPI = lessonsAPI
+        self.stepsAPI = stepsAPI
+        self.defaultsStorageManager = defaultsStorageManager
     }
 }
