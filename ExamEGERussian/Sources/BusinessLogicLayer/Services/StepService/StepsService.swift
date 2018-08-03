@@ -30,6 +30,11 @@ protocol StepsService: class {
     /// - Parameter lesson: Lesson for which steps will be obtained from cache.
     /// - Returns: Promise with an array of cached StepPlainObjects.
     func obtainSteps(for lesson: LessonPlainObject) -> Promise<[StepPlainObject]>
+    /// Method is used to fetch progresses for steps from Stepik API.
+    ///
+    /// - Parameter ids: Lesson for which steps progresses will be fetched.
+    /// - Returns: Promise with an array of `StepPlainObject` objects.
+    func fetchProgresses(stepsIds ids: [Int]) -> Promise<[StepPlainObject]>
 }
 
 extension StepsService {

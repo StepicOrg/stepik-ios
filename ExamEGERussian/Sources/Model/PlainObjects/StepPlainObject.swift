@@ -33,6 +33,8 @@ struct StepPlainObject {
     let position: Int
     let text: String
     let type: StepType
+    let progressId: String?
+    var isPassed = false
 
     var image: UIImage {
         switch type {

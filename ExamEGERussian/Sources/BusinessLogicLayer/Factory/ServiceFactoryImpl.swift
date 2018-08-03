@@ -49,7 +49,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var stepsService: StepsService {
-        return StepsServiceImpl(stepsAPI: stepsAPI)
+        return StepsServiceImpl(stepsAPI: stepsAPI, progressService: self.progressService)
     }
 
     var progressService: ProgressService {
