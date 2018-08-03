@@ -36,8 +36,11 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
                 step.type == .text
             }
             self?.view?.state = .fetched(steps: textSteps)
-        }.catch { [weak self] _ in
-            self?.view?.state = .error(message: NSLocalizedString("Failed to fetch steps. Try again?", comment: ""))
+        }.catch { [weak self] error in
+            let message = error is NetworkError
+                ? NSLocalizedString("ConnectionErrorText", comment: "")
+                : NSLocalizedString("Failed to fetch steps", comment: "")
+            self?.view?.state = .error(message: message)
         }
     }
 }
