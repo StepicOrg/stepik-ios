@@ -36,7 +36,7 @@ final class CourseServiceImpl: CourseService {
         return Course.fetchAsync(ids)
     }
 
-    func fetchProgresses(with ids: [Int]) -> Promise<[Course]> {
+    func fetchProgresses(coursesIds ids: [Int]) -> Promise<[Course]> {
         guard !ids.isEmpty else {
             return .value([])
         }

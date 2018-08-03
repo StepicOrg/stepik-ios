@@ -85,7 +85,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
         }.then { courses in
             when(fulfilled: courses.map { self.joinCourse($0) })
         }.then { courses in
-            self.courseService.fetchProgresses(with: courses.map { $0.id })
+            self.courseService.fetchProgresses(coursesIds: courses.map { $0.id })
         }.done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
         }.catch { [weak self] error in
