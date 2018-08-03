@@ -25,7 +25,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return knowledgeGraph[topicId]!.key
     }
     private var lessonsIds: [Int] {
-        return topic.lessons.filter { $0.type == .theory }.map { $0.id }
+        return topic.lessons.map { $0.id }
     }
     private var coursesIds: [Int] {
         return topic.lessons.compactMap { Int($0.courseId) }
