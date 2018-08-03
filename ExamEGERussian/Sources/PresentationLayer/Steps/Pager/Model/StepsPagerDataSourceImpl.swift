@@ -27,7 +27,7 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
         let size = StepsPagerDataSourceImpl.tabViewSize
         let frame = CGRect(origin: .zero, size: CGSize(width: size, height: size))
 
-        return StepTabView(frame: frame, image: step.image, stepId: step.id, passed: false)
+        return StepTabView(frame: frame, image: step.image, stepId: step.id, passed: step.isPassed)
     }
 
     public func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {

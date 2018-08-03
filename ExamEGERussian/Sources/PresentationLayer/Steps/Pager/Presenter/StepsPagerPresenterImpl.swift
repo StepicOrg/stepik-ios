@@ -31,10 +31,19 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     private func fetchSteps() {
         self.view?.state = .fetching
 
-        stepsService.fetchSteps(for: lesson).done { [weak self] steps in
-            let textSteps = steps.filter { step in
-                step.type == .text
-            }
+        stepsService.fetchSteps(for: lesson).mapValues {
+            $0.id
+        }.then { stepsIds in
+            self.stepsService.fetchProgresses(stepsIds: stepsIds)
+        }.done { [weak self] steps in
+            let textSteps = steps
+                .filter { step in
+                    step.type == .text
+                }.sorted(by: { lhs, rhs in
+                    lhs.position < rhs.position
+                }
+            )
+
             self?.view?.state = .fetched(steps: textSteps)
         }.catch { [weak self] error in
             let message = error is NetworkError
