@@ -16,6 +16,15 @@ class WarningView: NibInitializableView {
 
     var textLabel: StepikLabel!
 
+    var text: String {
+        get {
+            return textLabel.text ?? ""
+        }
+        set {
+            textLabel.attributedText = getAttributedDescription(newValue)
+        }
+    }
+
     weak var delegate: WarningViewDelegate?
 
     override var nibName: String {

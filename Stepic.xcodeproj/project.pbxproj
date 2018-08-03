@@ -2054,6 +2054,8 @@
 		2C4BBF25203DC670000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF26203DC670000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
+		2C4E13FB21143712001C8751 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
+		2C4E13FC21143718001C8751 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
@@ -11485,6 +11487,7 @@
 				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */,
 				2C59F03120EB8AC900666EE0 /* Assets.xcassets in Resources */,
+				2C4E13FB21143712001C8751 /* WarningView.xib in Resources */,
 				62E982D6A7D79E45786B4C8D /* AuthGreetingViewController.xib in Resources */,
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
@@ -15493,6 +15496,7 @@
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
 				2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
+				2C4E13FC21143718001C8751 /* WarningView.swift in Sources */,
 				2C949A5720ECCE4F0049E9A8 /* AchievementPopupAlertManager.swift in Sources */,
 				2C949A5C20ECCE950049E9A8 /* ArtView.swift in Sources */,
 				2C9499EA20ECBFD90049E9A8 /* UIThreadHelper.swift in Sources */,

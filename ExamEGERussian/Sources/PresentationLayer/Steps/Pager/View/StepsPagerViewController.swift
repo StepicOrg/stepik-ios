@@ -17,6 +17,8 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         static let indicatorHeight: CGFloat = 2.0
         static let tabOffset: CGFloat = 8.0
         static let shadowViewHeight: CGFloat = 0.5
+        static let warningViewSize: CGSize = CGSize(width: 100.0, height: 100.0)
+        static let warningViewOffsetTop: CGFloat = warningViewSize.height / 2.0
     }
 
     var state: StepsPagerViewState = .idle {
@@ -29,15 +31,29 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             case .fetched(let steps):
                 SVProgressHUD.showSuccess(withStatus: nil)
                 setSteps(steps)
-            case .error(let message):
+            case .error:
                 SVProgressHUD.dismiss()
-                displayError(with: message)
             }
+
+            updateWarningView(with: state)
         }
     }
 
     var presenter: StepsPagerPresenter?
     private var strongDataSource: StepsPagerDataSource?
+
+    private lazy var warningView: WarningView = {
+        let warningView = WarningView(
+            frame: CGRect(origin: .zero, size: Theme.warningViewSize),
+            delegate: self,
+            text: "",
+            image: Images.noWifiImage.size250x250,
+            width: UIScreen.main.bounds.width - 16,
+            contentMode: DeviceInfo.current.isPad ? .bottom : .scaleAspectFit
+        )
+
+        return warningView
+    }()
 
     /// Constructs a new `StepsPagerViewController` with strong reference to the data source.
     ///
@@ -94,6 +110,12 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             make.top.equalTo(contentView)
             make.leading.trailing.equalTo(contentView)
         }
+
+        view.insertSubview(warningView, aboveSubview: view)
+        warningView.snp.makeConstraints { make in
+            make.top.equalTo(self.tabsView!.snp.bottom).offset(Theme.warningViewOffsetTop)
+            make.leading.bottom.trailing.equalTo(self.view)
+        }
     }
 }
 
@@ -136,19 +158,22 @@ extension StepsPagerViewController {
         reloadData()
     }
 
-    private func displayError(with message: String) {
-        presentConfirmationAlert(
-            withTitle: NSLocalizedString("Error", comment: ""),
-            message: message,
-            buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
-            buttonSecondTitle: NSLocalizedString("Try Again", comment: ""),
-            firstAction: { [weak self] in
-                self?.presenter?.cancel()
-            },
-            secondAction: { [weak self] in
-                self?.presenter?.refresh()
-            }
-        )
+    private func updateWarningView(with state: StepsPagerViewState) {
+        switch state {
+        case .idle, .fetching, .fetched:
+            warningView.isHidden = true
+        case .error(let message):
+            warningView.isHidden = false
+            warningView.text = message
+        }
+    }
+}
+
+// MARK: - StepsPagerViewController: WarningViewDelegate -
+
+extension StepsPagerViewController: WarningViewDelegate {
+    func didPressButton() {
+        presenter?.refresh()
     }
 }
 
