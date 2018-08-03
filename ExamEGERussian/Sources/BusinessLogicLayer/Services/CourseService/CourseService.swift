@@ -20,4 +20,9 @@ protocol CourseService: class {
     /// - Parameter ids: Ids Course objects
     /// - Returns: Promise with a result of an array of Course objects from cache.
     func obtainCourses(with ids: [Int]) -> Promise<[Course]>
+    /// Method is used to fetch progresses for `Course` objects from Stepik API.
+    ///
+    /// - Parameter ids: `Course` objects ids.
+    /// - Returns: Promise with an array of `Course` objects, that contains referenced `Progress` object.
+    func fetchProgresses(with ids: [Int]) -> Promise<[Course]>
 }

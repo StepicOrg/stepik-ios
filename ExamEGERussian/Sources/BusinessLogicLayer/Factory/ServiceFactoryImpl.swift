@@ -19,6 +19,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     let enrollmentsAPI: EnrollmentsAPI
     let lessonsAPI: LessonsAPI
     let stepsAPI: StepsAPI
+    let progressesAPI: ProgressesAPI
 
     let defaultsStorageManager: DefaultsStorageManager
 
@@ -40,7 +41,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var courseService: CourseService {
-        return CourseServiceImpl(coursesAPI: coursesAPI)
+        return CourseServiceImpl(coursesAPI: coursesAPI, progressesService: self.progressService)
     }
 
     var enrollmentService: EnrollmentService {
@@ -49,6 +50,10 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     var stepsService: StepsService {
         return StepsServiceImpl(stepsAPI: stepsAPI)
+    }
+
+    var progressService: ProgressService {
+        return ProgressServiceImpl(progressesAPI: progressesAPI)
     }
 
     // MARK: - Init -
@@ -60,8 +65,9 @@ final class ServiceFactoryImpl: ServiceFactory {
          enrollmentsAPI: EnrollmentsAPI,
          lessonsAPI: LessonsAPI,
          stepsAPI: StepsAPI,
+         progressesAPI: ProgressesAPI,
          defaultsStorageManager: DefaultsStorageManager
-        ) {
+    ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.profilesAPI = profilesAPI
@@ -69,6 +75,7 @@ final class ServiceFactoryImpl: ServiceFactory {
         self.enrollmentsAPI = enrollmentsAPI
         self.lessonsAPI = lessonsAPI
         self.stepsAPI = stepsAPI
+        self.progressesAPI = progressesAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
 }

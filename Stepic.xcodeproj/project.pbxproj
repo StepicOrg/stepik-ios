@@ -4162,6 +4162,7 @@
 		62E9815A6AAC6C12E9B9D862 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E98176284407D3D2A0E271 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98708CFECD3F1D0AD4120 /* Achievement.swift */; };
 		62E981858E2E696693A1AB87 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
+		62E981A09293D322A38F2D13 /* ProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9830545E2E72A276F308B /* ProgressService.swift */; };
 		62E981AC996C4AA91527B064 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E981B26AD9DC231C5414D1 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E981CC08A57CBEE4878767 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
@@ -4219,6 +4220,7 @@
 		62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9848BCD3343E626596F54 /* HeaderEmptyAuthView.swift */; };
 		62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9851360F1490A8311EC41 /* AchievementPopupAlertManager.swift */; };
 		62E987E79C773F8C291F49F3 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
+		62E987EE86AB48E30FF5EC79 /* ProgressServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */; };
 		62E9883EB54C3849E60F905B /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E98873E98E4598D8F1ACB0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E988866D3362A65DC7BFD1 /* StepsPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */; };
@@ -5995,6 +5997,7 @@
 		62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoPresenter.swift; sourceTree = "<group>"; };
 		62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+fromNib.swift"; sourceTree = "<group>"; };
 		62E982CD72238277F414FC52 /* AuthGreetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthGreetingViewController.xib; sourceTree = "<group>"; };
+		62E9830545E2E72A276F308B /* ProgressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressService.swift; sourceTree = "<group>"; };
 		62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepAssemblyImpl.swift; sourceTree = "<group>"; };
 		62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSourceImpl.swift; sourceTree = "<group>"; };
 		62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListViewController.swift; sourceTree = "<group>"; };
@@ -6029,6 +6032,7 @@
 		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
 		62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableHeaderLayout.swift"; sourceTree = "<group>"; };
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
+		62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressServiceImpl.swift; sourceTree = "<group>"; };
 		62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
 		62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingNavigationViewController.swift; sourceTree = "<group>"; };
 		62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerPresenter.swift; sourceTree = "<group>"; };
@@ -8887,6 +8891,7 @@
 				2CCC59FA2109BB3A00564D45 /* EnrollmentService */,
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
+				62E984604AE4F1CF6E9A71EB /* ProgressService */,
 				2C83E5E0211058CC00A8322D /* StepService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
 			);
@@ -10888,7 +10893,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
 					085D5CD81D007F2100092060 = {
@@ -15719,6 +15724,8 @@
 				62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */,
 				62E98B8BE1F22F2E05CA130D /* StepAssembly.swift in Sources */,
 				62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */,
+				62E981A09293D322A38F2D13 /* ProgressService.swift in Sources */,
+				62E987EE86AB48E30FF5EC79 /* ProgressServiceImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
