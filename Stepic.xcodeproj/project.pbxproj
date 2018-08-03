@@ -10025,6 +10025,15 @@
 			name = PinsMap;
 			sourceTree = "<group>";
 		};
+		62E984604AE4F1CF6E9A71EB /* ProgressService */ = {
+			isa = PBXGroup;
+			children = (
+				62E9830545E2E72A276F308B /* ProgressService.swift */,
+				62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */,
+			);
+			path = ProgressService;
+			sourceTree = "<group>";
+		};
 		62E9851EC1CEC1B2694CEA00 /* NotificationBanner */ = {
 			isa = PBXGroup;
 			children = (
