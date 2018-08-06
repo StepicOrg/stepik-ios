@@ -9,11 +9,15 @@ import PromiseKit
 final class StepsPagerPresenterImpl: StepsPagerPresenter {
     private weak var view: StepsPagerView?
     private let lesson: LessonPlainObject
+    private var steps = [StepPlainObject]()
     private let router: StepsPagerRouter
     private let stepsService: StepsService
 
-    init(view: StepsPagerView, lesson: LessonPlainObject, router: StepsPagerRouter,
-         stepsService: StepsService) {
+    init(view: StepsPagerView,
+         lesson: LessonPlainObject,
+         router: StepsPagerRouter,
+         stepsService: StepsService
+    ) {
         self.view = view
         self.lesson = lesson
         self.router = router
@@ -26,6 +30,13 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
 
     func cancel() {
         router.pop()
+    }
+
+    func selectStep(at index: Int) {
+        let step = steps[index]
+        if step.type == .text {
+            didSolveStep(step)
+        }
     }
 
     private func fetchSteps() {
@@ -44,6 +55,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
                 }
             )
 
+            self?.steps = textSteps
             self?.view?.state = .fetched(steps: textSteps)
         }.catch { [weak self] error in
             let message = error is NetworkError
@@ -51,5 +63,20 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
                 : NSLocalizedString("Failed to fetch steps", comment: "")
             self?.view?.state = .error(message: message)
         }
+    }
+
+    private func didSolveStep(_ step: StepPlainObject) {
+        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] steps in
+            guard let step = steps.first,
+                  let index = self?.steps.index(where: { $0.id == step.id }) else {
+                return
+            }
+            self?.steps[index].isPassed = step.isPassed
+
+            NotificationCenter.default.post(
+                descriptor: Step.progressNotification,
+                value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
+            )
+        }.cauterize()
     }
 }

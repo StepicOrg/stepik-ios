@@ -35,6 +35,11 @@ protocol StepsService: class {
     /// - Parameter ids: Lesson for which steps progresses will be fetched.
     /// - Returns: Promise with an array of `StepPlainObject` objects.
     func fetchProgresses(stepsIds ids: [Int]) -> Promise<[StepPlainObject]>
+    /// Updates step progress value.
+    ///
+    /// - Parameter stepsIds: Steps ids.
+    /// - Returns: Promise with an array of `StepPlainObject` objects.
+    func markAsSolved(stepsIds ids: [Int]) -> Promise<[StepPlainObject]>
 }
 
 extension StepsService {

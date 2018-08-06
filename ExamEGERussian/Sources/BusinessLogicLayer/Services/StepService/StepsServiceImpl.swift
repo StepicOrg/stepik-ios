@@ -70,6 +70,19 @@ final class StepsServiceImpl: StepsService {
         }
     }
 
+    func markAsSolved(stepsIds ids: [Int]) -> Promise<[StepPlainObject]> {
+        return executeFetchRequest(ids: ids).then { steps -> Promise<[Step]> in
+            steps.forEach { step in
+                step.progress?.isPassed = true
+            }
+            CoreDataHelper.instance.save()
+
+            return .value(steps)
+        }.mapValues {
+            self.toPlainObject($0)
+        }
+    }
+
     // MARK: - Private API
 
     func fetchSteps(ids: [Int]) -> Promise<[Step]> {
