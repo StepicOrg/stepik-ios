@@ -1,4 +1,7 @@
-In the new version of Stepik we fixed some bugs and made stability improvements.
+In the new version of Stepik we:
+• Fixed all video downloading issues (actually, we created a completely new downloader)
+• Fixed fonts in discussions, which we have proudly broken in the previous release
+• Made the app a bit more stable than before
 
 Enjoy learning!
 Stepik team
