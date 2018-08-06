@@ -47,11 +47,15 @@ final class StepsServiceImpl: StepsService {
         }
 
         var steps = [Step]()
+        var solvedMap = [Int: Bool]()
 
         return executeFetchRequest(ids: ids).then { cachedSteps -> Promise<[Progress]> in
             steps = cachedSteps
             let progressesIds = steps.compactMap {
                 $0.progressId
+            }
+            steps.forEach {
+                solvedMap[$0.id] = $0.progress?.isPassed ?? false
             }
 
             return self.progressService.fetchProgresses(with: progressesIds)
@@ -60,6 +64,7 @@ final class StepsServiceImpl: StepsService {
                 guard let step = steps.filter({ $0.progressId == progress.id }).first else {
                     return
                 }
+                progress.isPassed = solvedMap[step.id] ?? false
                 step.progress = progress
             }
             CoreDataHelper.instance.save()
