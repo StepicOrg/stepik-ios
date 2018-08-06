@@ -295,12 +295,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
 
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         print("opened app via url \(url.absoluteString)")
-        if VKSdk.processOpen(url, fromApplication: sourceApplication) {
+
+        if let sourceApplication = options[.sourceApplication] as? String,
+            VKSdk.processOpen(url, fromApplication: sourceApplication) {
             return true
         }
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
@@ -320,6 +322,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Other actions
             handleOpenedFromDeepLink(url)
         }
+
         return true
     }
 
