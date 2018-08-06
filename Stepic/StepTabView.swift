@@ -18,13 +18,21 @@ class StepTabView: NibInitializableView {
 
     let solvedViewHeight: CGFloat = 15
     var stepId: Int?
+    private var token: NotificationToken?
 
     override var nibName: String {
         return "StepTabView"
     }
 
     override func setupSubviews() {
-        NotificationCenter.default.addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: .stepDone, object: nil)
+        token = NotificationCenter.default.addObserver(descriptor: Step.progressNotification) { [weak self] payload in
+            guard let `self` = self,
+                  let stepId = self.stepId, stepId == payload.id else {
+                return
+            }
+
+            self.setTab(selected: payload.isPassed, animated: true)
+        }
     }
 
     convenience init(frame: CGRect, image: UIImage, stepId: Int, passed: Bool) {
@@ -49,21 +57,4 @@ class StepTabView: NibInitializableView {
             self.view.layoutIfNeeded()
         }
     }
-
-    @objc func stepDone(_ notification: Foundation.Notification) {
-        if let notificationStepId = (notification as NSNotification).userInfo?["id"] as? Int,
-            let stepId = self.stepId {
-            if notificationStepId == stepId {
-                setTab(selected: true, animated: true)
-            }
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .stepDone, object: nil)
-    }
-}
-
-extension Foundation.Notification.Name {
-    public static let stepDone = Foundation.Notification.Name("StepDoneNotificationKey")
 }

@@ -96,7 +96,10 @@ class QuizPresenter {
                     #if os(tvOS)
                     NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
                     #else
-                    NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
+                    NotificationCenter.default.post(
+                        descriptor: Step.progressNotification,
+                        value: StepProgressNotificationPayload(id: step.id, isPassed: true)
+                    )
                     #endif
                     DispatchQueue.main.async {
                         [weak self] in
