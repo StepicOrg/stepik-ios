@@ -27,7 +27,7 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             case .fetching:
                 SVProgressHUD.show()
             case .fetched(let steps):
-                SVProgressHUD.showSuccess(withStatus: nil)
+                SVProgressHUD.dismiss()
                 setSteps(steps)
             case .error(let message):
                 SVProgressHUD.dismiss()
