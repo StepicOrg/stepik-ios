@@ -31,6 +31,9 @@ class StepViewController: UIViewController, StepView {
         return stepWebView
     }()
 
+    // For updates after rotation only when controller not presented
+    private var shouldRefreshOnAppear: Bool = false
+
     // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
@@ -57,7 +60,15 @@ class StepViewController: UIViewController, StepView {
         super.viewWillAppear(animated)
 
         view.layoutIfNeeded()
-        refreshWebView()
+
+        if shouldRefreshOnAppear {
+            refreshWebView()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shouldRefreshOnAppear = false
     }
 
     deinit {
@@ -76,6 +87,7 @@ class StepViewController: UIViewController, StepView {
 
     @objc func didScreenRotate() {
         refreshWebView()
+        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 
     private func setupWebView() {
