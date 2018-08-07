@@ -64,6 +64,8 @@ class StepViewController: UIViewController, StepView {
         if shouldRefreshOnAppear {
             refreshWebView()
         }
+
+        animateOpacity()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,6 +145,13 @@ class StepViewController: UIViewController, StepView {
             self?.activityIndicator.stopAnimating()
         }.catch { error in
             print("Error while refreshing: \(error)")
+        }
+    }
+
+    private func animateOpacity(with duration: TimeInterval = 0.75) {
+        stepWebView.alpha = 0
+        UIView.animate(withDuration: duration) {
+            self.stepWebView.alpha = 1.0
         }
     }
 }
