@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoriesViewController" customModule="stepik_stories" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoriesViewController" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="8K4-Bm-k7R" id="9BD-DQ-zcs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="nbf-cc-FUf"/>

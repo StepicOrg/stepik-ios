@@ -15,7 +15,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     let cornerRadius: CGFloat = 16
-    let unwatchedColor: UIColor = UIColor.yellow
+    let unwatchedColor: UIColor = UIColor.mainDark
 
     var imagePath: String = "" {
         didSet {

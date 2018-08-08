@@ -40,8 +40,9 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: 90, height: 90)
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 16
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 16
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         collectionView.showsHorizontalScrollIndicator = false
         presenter?.refresh()

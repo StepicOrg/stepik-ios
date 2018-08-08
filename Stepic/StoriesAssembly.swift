@@ -10,12 +10,6 @@ import Foundation
 import UIKit
 
 class StoriesAssembly: Assembly {
-
-    var stories: [Story]
-    init(stories: [Story]) {
-        self.stories = stories
-    }
-
     func buildModule() -> UIViewController {
         let vc = StoriesViewController()
         vc.presenter = StoriesPresenter(view: vc)
