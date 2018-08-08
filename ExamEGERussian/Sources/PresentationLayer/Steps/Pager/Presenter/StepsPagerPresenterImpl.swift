@@ -84,13 +84,9 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     }
 
     private func preparedSteps(_ steps: [StepPlainObject]) -> [StepPlainObject] {
-        return steps
-            .filter { step in
-                step.type == .text
-            }.sorted(by: { lhs, rhs in
-                lhs.position < rhs.position
-            }
-        )
+        return steps.sorted(by: { lhs, rhs in
+            lhs.position < rhs.position
+        })
     }
 
     private func didSolveStep(_ step: StepPlainObject) {
