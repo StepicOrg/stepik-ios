@@ -10,20 +10,20 @@ import Foundation
 
 class CachedValue<T> {
     private let defaults = UserDefaults.standard
-    
+
     private let key: String
-    
+
     init(key: String) {
         self.key = key
     }
-    
+
     init(key: String, value: T?) {
         self.key = key
         self.value = value
     }
-    
+
     private var privateValue: T?
-    
+
     var value: T? {
         get {
             if privateValue == nil {

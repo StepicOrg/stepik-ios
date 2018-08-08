@@ -11,43 +11,43 @@ import SnapKit
 import Hero
 
 class StoryViewController: UIViewController {
-    
+
     @IBOutlet weak var progressView: SegmentedProgressView!
     @IBOutlet weak var partsContainerView: UIView!
     @IBOutlet weak var closeView: UIView!
-    
+
     private var gradientLayer: CAGradientLayer?
 
     var presenter: StoryPresenterProtocol?
-    
+
     private var didAppear: Bool = false
-    private var onAppearBlock: (()->Void)?
-    
+    private var onAppearBlock: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.hero.id = "story_\(presenter?.storyId ?? -1)"
         progressView.completion = {
             [weak self] in
             self?.presenter?.finishedAnimating()
         }
         progressView.segmentsCount = presenter?.storyPartsCount ?? 0
-        
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StoryViewController.didTap(recognizer:)))
         view.addGestureRecognizer(tapG)
         tapG.cancelsTouchesInView = false
-        
+
         let panGR = UIPanGestureRecognizer(target: self, action: #selector(StoryViewController.didPan(recognizer:)))
         view.addGestureRecognizer(panGR)
         panGR.cancelsTouchesInView = false
-        
+
         let downPanGR = UIPanGestureRecognizer(target: self, action: #selector(StoryViewController.didPanDown(recognizer:)))
         view.addGestureRecognizer(downPanGR)
         downPanGR.cancelsTouchesInView = false
         downPanGR.delegate = self
         presenter?.animate()
     }
-    
+
     enum TransitionState {
         case normal, slidingLeft, slidingRight
     }
@@ -81,11 +81,11 @@ class StoryViewController: UIViewController {
             state = .normal
         }
     }
-    
+
     @objc func didPan(recognizer: UIPanGestureRecognizer) {
         let translateX = recognizer.translation(in: nil).x
         let velocityX = recognizer.velocity(in: nil).x
-        
+
         switch recognizer.state {
         case .began, .changed:
             let nextState: TransitionState
@@ -94,17 +94,17 @@ class StoryViewController: UIViewController {
             } else {
                 nextState = translateX < 0 ? .slidingLeft : .slidingRight
             }
-            
+
             guard let nextVC = nextState == .slidingLeft ? presenter?.getNextStory() : presenter?.getPrevStory() else {
                 Hero.shared.cancel(animate: false)
                 return
             }
-            
+
             nextVC.hero.isEnabled = true
 
             if nextState != state {
                 Hero.shared.cancel(animate: false)
-                
+
                 if nextState == .slidingLeft {
                     nextVC.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .none)
                 } else {
@@ -126,23 +126,23 @@ class StoryViewController: UIViewController {
             state = .normal
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         didAppear = true
         onAppearBlock?()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         didAppear = false
     }
-    
+
     private func add(partView: UIView) {
         partsContainerView.addSubview(partView)
         partView.snp.makeConstraints {
@@ -150,7 +150,7 @@ class StoryViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
+
     @objc
     func didTap(recognizer: UITapGestureRecognizer) {
         let closeLocation = recognizer.location(in: closeView)
@@ -159,58 +159,58 @@ class StoryViewController: UIViewController {
             close()
             return
         }
-        
+
         let location = recognizer.location(in: view)
         if location.x < view.frame.width / 3 {
             rewind()
             return
         }
-        
+
         if location.x > view.frame.width / 3 * 2 {
             skip()
             return
         }
     }
-    
+
     func rewind() {
         presenter?.rewind()
     }
-    
+
     func skip() {
         presenter?.skip()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         presenter?.pause()
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         presenter?.unpause()
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         presenter?.unpause()
     }
-    
+
     func close() {
         hero.dismissViewController()
     }
-    
+
     func transitionNext(destinationVC: StoryViewController) {
         destinationVC.hero.isEnabled = true
         destinationVC.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .left), dismissing: .none)
 
         hero.replaceViewController(with: destinationVC)
     }
-    
+
     func transitionPrev(destinationVC: StoryViewController) {
         destinationVC.hero.isEnabled = true
         destinationVC.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .right), dismissing: .none)
@@ -227,11 +227,11 @@ extension StoryViewController: StoryViewProtocol {
             view.startLoad()
         }
     }
-    
+
     func set(segment: Int, completed: Bool) {
         self.progressView.set(segment: segment, completed: completed)
     }
-    
+
     func animateProgress(segment: Int, duration: TimeInterval) {
         if !didAppear {
             onAppearBlock = { [weak self] in
@@ -242,11 +242,11 @@ extension StoryViewController: StoryViewProtocol {
             progressView.animate(duration: duration, segment: segment)
         }
     }
-    
+
     func pause(segment: Int) {
         progressView.pause(segment: segment)
     }
-    
+
     func unpause(segment: Int) {
         progressView.unpause(segment: segment)
     }

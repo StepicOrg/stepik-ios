@@ -36,13 +36,13 @@ protocol StoryPresenterProtocol: class {
 class StoryPresenter: StoryPresenterProtocol {
     weak var view: StoryViewProtocol?
     private var story: Story
-    
+
     private var prevStoryLazyAssembly: LazyStoryAssembly
     private var nextStoryLazyAssembly: LazyStoryAssembly
-    
+
     private var nextModule: StoryViewController?
     private var prevModule: StoryViewController?
-    
+
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryViewProtocol] = [:]
 
@@ -57,20 +57,20 @@ class StoryPresenter: StoryPresenterProtocol {
         self.prevStoryLazyAssembly = prevStoryLazyAssembly
         self.nextStoryLazyAssembly = nextStoryLazyAssembly
     }
-    
+
     var storyId: Int {
         return story.id
     }
-    
+
     var storyPartsCount: Int {
         return story.parts.count
     }
-    
+
     func finishedAnimating() {
         partToAnimate += 1
         animate()
     }
-    
+
     func animate() {
         guard 0 <= partToAnimate && partToAnimate < story.parts.count else {
             if partToAnimate < 0 {
@@ -81,16 +81,16 @@ class StoryPresenter: StoryPresenterProtocol {
                 return
             }
         }
-        
+
         let animatingStoryPart = story.parts[partToAnimate] as! ImageStoryPart
-        
+
         if let viewToAnimate = viewForIndex[partToAnimate] {
             view?.animate(view: viewToAnimate)
             view?.animateProgress(segment: partToAnimate, duration: animatingStoryPart.duration)
         } else {
             let viewToAnimate: ImageStoryView = .fromNib()
             viewToAnimate.imagePath = animatingStoryPart.imagePath
-            viewToAnimate.completion =  {
+            viewToAnimate.completion = {
                 [weak self] in
                 guard let strongSelf = self else {
                     return
@@ -102,55 +102,55 @@ class StoryPresenter: StoryPresenterProtocol {
             view?.animate(view: viewToAnimate)
         }
     }
-    
+
     func getPrevStory() -> StoryViewController? {
         if prevModule == nil {
             prevModule = prevStoryLazyAssembly.buildModule?()
         }
         return prevModule
     }
-    
+
     func getNextStory() -> StoryViewController? {
         if nextModule == nil {
             nextModule = nextStoryLazyAssembly.buildModule?()
         }
         return nextModule
     }
-    
+
     private func showPreviousStory() {
         guard let module = getPrevStory() else {
             view?.close()
             return
         }
-        
+
         view?.transitionPrev(destinationVC: module)
     }
-    
+
     private func showNextStory() {
         guard let module = getNextStory() else {
             view?.close()
             return
         }
-        
+
         view?.transitionNext(destinationVC: module)
     }
-    
+
     func skip() {
         view?.set(segment: partToAnimate, completed: true)
         partToAnimate += 1
         animate()
     }
-    
+
     func rewind() {
         view?.set(segment: partToAnimate, completed: false)
         partToAnimate -= 1
         animate()
     }
-    
+
     func pause() {
         view?.pause(segment: partToAnimate)
     }
-    
+
     func unpause() {
         view?.unpause(segment: partToAnimate)
     }

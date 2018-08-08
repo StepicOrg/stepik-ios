@@ -14,7 +14,7 @@ class Story {
     var title: String
     var isViewed: CachedValue<Bool>
     var parts: [StoryPart]
-    
+
     init(id: Int, coverPath: String, title: String, isViewed: Bool, parts: [StoryPart]) {
         self.id = id
         self.coverPath = coverPath
@@ -22,14 +22,14 @@ class Story {
         self.isViewed = CachedValue<Bool>(key: "isViewed", value: isViewed)
         self.parts = parts
     }
-    
+
 }
 
 class StoryPart {
     var type: String
     var position: Int
     var duration: Double
-    
+
     init(type: String, position: Int, duration: Double) {
         self.type = type
         self.position = position
@@ -43,7 +43,7 @@ protocol ImageStoryPartProtocol {
 
 class ImageStoryPart: StoryPart, ImageStoryPartProtocol {
     var imagePath: String
-    
+
     init(type: String, position: Int, duration: Double, imagePath: String) {
         self.imagePath = imagePath
         super.init(type: type, position: position, duration: duration)
@@ -54,7 +54,7 @@ class TextStoryPart: StoryPart {
     var title: String
     var text: String
     var imagePath: String
-    
+
     init(type: String, position: Int, duration: Double, title: String, text: String, imagePath: String) {
         self.title = title
         self.text = text

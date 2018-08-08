@@ -11,9 +11,9 @@ import UIKit
 import Hero
 
 class StoriesViewController: UIViewController, StoriesViewProtocol {
-    
+
     var presenter: StoriesPresenterProtocol?
-    
+
     func set(state: StoriesViewState) {
         switch state {
         case .empty:
@@ -24,16 +24,16 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
             print("loading")
         }
     }
-    
+
     func set(stories: [Story]) {
         self.stories = stories
         collectionView.reloadData()
     }
-    
+
     var stories: [Story] = []
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
@@ -46,9 +46,9 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
         collectionView.showsHorizontalScrollIndicator = false
         presenter?.refresh()
     }
-    
+
     private var willDisappear: Bool = false
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("didAppear")
@@ -60,17 +60,17 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
             }
         })
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         willDisappear = true
         print("willDisappear")
     }
-    
+
     private func routedStoryModule(forStoryAt index: Int) -> UIViewController {
         let story = stories[index]
         let storiesCount = stories.count
-        
+
         let prevLazyAssembly = LazyStoryAssembly(
             buildBlock: { [weak self] in
                 if index == 0 {
@@ -80,7 +80,7 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
                 }
             }
         )
-        
+
         let nextLazyAssembly = LazyStoryAssembly(
             buildBlock: { [weak self] in
                 if index >= storiesCount - 1 {
@@ -90,51 +90,50 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
                 }
             }
         )
-        
+
         let assembly = StoryAssembly(
             story: story,
             prevStoryLazyAssembly: prevLazyAssembly,
             nextStoryLazyAssembly: nextLazyAssembly
         )
-        
+
         return assembly.buildModule()
     }
-    
+
     func showStory(at index: Int) {
         guard let moduleToPresent = routedStoryModule(forStoryAt: index) as? StoryViewController else {
             return
         }
-        
+
         let story = stories[index]
         moduleToPresent.view.hero.id = "story_\(story.id)"
         moduleToPresent.hero.isEnabled = true
-        
+
         present(moduleToPresent, animated: true, completion: nil)
-    }    
+    }
 }
 
 extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         showStory(at: indexPath.item)
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return stories.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as? StoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+
         let story = stories[indexPath.item]
         cell.contentView.hero.id = "story_\(story.id)"
         cell.update(imagePath: story.coverPath, title: story.title)
         return cell
     }
 }
-

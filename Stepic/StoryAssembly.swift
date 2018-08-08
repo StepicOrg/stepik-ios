@@ -9,21 +9,20 @@
 import Foundation
 import UIKit
 
-
 class LazyStoryAssembly {
-    init(buildBlock: (()->StoryViewController?)?) {
+    init(buildBlock: (() -> StoryViewController?)?) {
         self.buildModule = buildBlock
     }
-    
-    var buildModule: (()->StoryViewController?)?
+
+    var buildModule: (() -> StoryViewController?)?
 }
 
 class StoryAssembly: Assembly {
-    
+
     var story: Story
     var prevStoryLazyAssembly: LazyStoryAssembly
     var nextStoryLazyAssembly: LazyStoryAssembly
-    
+
     init(
         story: Story,
         prevStoryLazyAssembly: LazyStoryAssembly,
@@ -33,7 +32,7 @@ class StoryAssembly: Assembly {
         self.prevStoryLazyAssembly = prevStoryLazyAssembly
         self.nextStoryLazyAssembly = nextStoryLazyAssembly
     }
-    
+
     func buildModule() -> UIViewController {
         let vc = StoryViewController()
         vc.presenter = StoryPresenter(

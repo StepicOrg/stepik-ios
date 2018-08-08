@@ -14,26 +14,26 @@ import SnapKit
 class ImageStoryView: UIView, UIStoryViewProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     var imagePath: String = ""
     var completion: (() -> Void)?
-        
+
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.isHidden = true
     }
-    
+
     func startLoad() {
         if activityIndicator.isHidden != false {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
         guard let url = URL(string: imagePath) else { return }
-        Nuke.loadImage(with: url, options: .shared, into: imageView) { [weak self] (_, error) in
+        Nuke.loadImage(with: url, options: .shared, into: imageView) { [weak self] (_, _) in
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.isHidden = true
             self?.completion?()
-        }        
+        }
     }
 }
 
