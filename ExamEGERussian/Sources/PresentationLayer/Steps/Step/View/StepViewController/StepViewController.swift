@@ -12,14 +12,28 @@ import PromiseKit
 import SnapKit
 
 class StepViewController: UIViewController, StepView {
+    private struct Theme {
+        static let viewInitialHeight: CGFloat = 5.0
 
-    // MARK: IBOutlets
+        struct StepWebView {
+            static let horizontalSpacing: CGFloat = 2.0
+            static let topSpacing: CGFloat = 5.0
+        }
+    }
+
+    // MARK: - Instance Properties
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    private var stepWebViewHeight: Constraint!
 
-    // MARK: Instance Properties
+    private var stepWebViewHeight: Constraint!
+    private weak var quizView: UIView?
+    private lazy var quizPlaceholderView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
 
     var presenter: StepPresenter?
 
@@ -38,22 +52,7 @@ class StepViewController: UIViewController, StepView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didScreenRotate),
-            name: .UIDeviceOrientationDidChange,
-            object: nil
-        )
-
-        setupWebView()
-
-        activityIndicator.startAnimating()
-        presenter?.refreshStep()
+        setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,17 +86,47 @@ class StepViewController: UIViewController, StepView {
 
     // MARK: - Private API
 
-    @objc func didScreenRotate() {
+    private func setup() {
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didScreenRotate),
+            name: .UIDeviceOrientationDidChange,
+            object: nil
+        )
+
+        setupQuizPlaceholderView()
+        setupWebView()
+
+        activityIndicator.startAnimating()
+        presenter?.refreshStep()
+    }
+
+    @objc private func didScreenRotate() {
         refreshWebView()
         shouldRefreshOnAppear = !shouldRefreshOnAppear
+    }
+
+    private func setupQuizPlaceholderView() {
+        scrollView.addSubview(quizPlaceholderView)
+        quizPlaceholderView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.trailing.leading.bottom.equalToSuperview()
+            make.height.equalTo(Theme.viewInitialHeight)
+        }
     }
 
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
-            stepWebViewHeight = make.height.equalTo(5).constraint
-            make.edges.equalTo(scrollView)
-            make.centerX.equalTo(self.view)
+            stepWebViewHeight = make.height.equalTo(Theme.viewInitialHeight).constraint
+            make.bottom.equalTo(quizPlaceholderView.snp.top)
+            make.leading.equalTo(scrollView).offset(Theme.StepWebView.horizontalSpacing)
+            make.trailing.equalTo(scrollView).offset(-Theme.StepWebView.horizontalSpacing)
+            make.top.equalTo(scrollView).offset(Theme.StepWebView.topSpacing)
         }
 
         stepWebView.didFinishNavigation = { [weak self] _ in
