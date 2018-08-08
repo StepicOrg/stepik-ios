@@ -44,6 +44,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
             return
         }
 
+        //TODO: update cell's viewed state here
         view?.showIfNotVisible(index: index)
     }
 
