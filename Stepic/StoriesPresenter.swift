@@ -103,7 +103,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     func refresh() {
         view?.set(state: .loading)
         self.stories = mockedStories
-        delay(0.5, closure: {
+        delay(2.0, closure: {
             [weak self] in
             guard let `self` = self else {
                 return

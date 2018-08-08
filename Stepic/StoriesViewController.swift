@@ -10,25 +10,9 @@ import Foundation
 import UIKit
 import Hero
 
-class StoriesViewController: UIViewController, StoriesViewProtocol {
+class StoriesViewController: UIViewController {
 
     var presenter: StoriesPresenterProtocol?
-
-    func set(state: StoriesViewState) {
-        switch state {
-        case .empty:
-            print("empty")
-        case .normal:
-            print("normal")
-        case .loading:
-            print("loading")
-        }
-    }
-
-    func set(stories: [Story]) {
-        self.stories = stories
-        collectionView.reloadData()
-    }
 
     var stories: [Story] = []
 
@@ -38,6 +22,8 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.skeleton.viewBuilder = { return UIView.fromNib(named: "StorySkeletonPlaceholderView") }
+
         collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: 90, height: 90)
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 16
@@ -45,6 +31,12 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         collectionView.showsHorizontalScrollIndicator = false
+
+        refresh()
+    }
+
+    private func refresh() {
+        collectionView.skeleton.show()
         presenter?.refresh()
     }
 
@@ -111,6 +103,25 @@ class StoriesViewController: UIViewController, StoriesViewProtocol {
         moduleToPresent.hero.isEnabled = true
 
         present(moduleToPresent, animated: true, completion: nil)
+    }
+}
+
+extension StoriesViewController: StoriesViewProtocol {
+    func set(state: StoriesViewState) {
+        switch state {
+        case .empty:
+            print("empty")
+        case .normal:
+            print("normal")
+        case .loading:
+            print("loading")
+        }
+    }
+
+    func set(stories: [Story]) {
+        collectionView.skeleton.hide()
+        self.stories = stories
+        collectionView.reloadData()
     }
 }
 

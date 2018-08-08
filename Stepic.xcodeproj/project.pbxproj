@@ -276,6 +276,8 @@
 		08484F0C211AF4320006266F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEF211AF4310006266F /* StoryViewController.swift */; };
 		08484F11211AF4320006266F /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
 		08484F18211AF4320006266F /* ImageStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EFD211AF4320006266F /* ImageStoryView.swift */; };
+		08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */; };
+		08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
 		084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
 		084C658F1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
@@ -5135,6 +5137,8 @@
 		08484EEF211AF4310006266F /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		08484EF5211AF4310006266F /* StoriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesPresenter.swift; sourceTree = "<group>"; };
 		08484EFD211AF4320006266F /* ImageStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStoryView.swift; sourceTree = "<group>"; };
+		08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UICollectionView.swift"; sourceTree = "<group>"; };
+		08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorySkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
@@ -8381,6 +8385,7 @@
 				2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */,
 				2C22042920E277F60060117A /* Skeletonable+UIView.swift */,
 				2C22042820E277F60060117A /* SkeletonViewAnimation.swift */,
+				08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */,
 			);
 			name = Skeleton;
 			sourceTree = "<group>";
@@ -8391,6 +8396,7 @@
 				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
 				2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */,
 				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
+				08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10585,6 +10591,7 @@
 				08ED08E21FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */,
 				08484EFE211AF4320006266F /* StoriesViewController.xib in Resources */,
 				2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
@@ -13608,6 +13615,7 @@
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
+				08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */,
 				62E9831EA7A75D89A3C9EC5B /* CourseListViewData.swift in Sources */,
 				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
