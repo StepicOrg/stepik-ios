@@ -42,22 +42,8 @@ class StoriesViewController: UIViewController {
 
     private var willDisappear: Bool = false
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("didAppear")
-        willDisappear = false
-        delay(0.1, closure: {
-            [weak self] in
-            if self?.willDisappear == false {
-                UIApplication.shared.isStatusBarHidden = false
-            }
-        })
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        willDisappear = true
-        print("willDisappear")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     private func routedStoryModule(forStoryAt index: Int) -> UIViewController {

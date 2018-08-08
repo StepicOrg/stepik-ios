@@ -129,7 +129,8 @@ class StoryViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.isStatusBarHidden = true
+        UIApplication.shared.statusBarStyle = .lightContent
+
     }
 
     override func viewDidAppear(_ animated: Bool) {

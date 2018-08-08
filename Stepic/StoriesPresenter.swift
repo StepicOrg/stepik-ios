@@ -97,6 +97,17 @@ class StoriesPresenter: StoriesPresenterProtocol {
                 ImageStoryPart(type: "image", position: 2, duration: 15, imagePath: "https://placeimg.com/403/800/architecture"),
                 ImageStoryPart(type: "image", position: 3, duration: 15, imagePath: "https://placeimg.com/404/800/architecture")
                 ]
+        ), Story(
+            id: 5,
+            coverPath: "https://placeimg.com/100/100/people",
+            title: "People",
+            isViewed: false,
+            parts: [
+                ImageStoryPart(type: "image", position: 0, duration: 15, imagePath: "https://placeimg.com/401/800/people"),
+                ImageStoryPart(type: "image", position: 1, duration: 15, imagePath: "https://placeimg.com/402/800/people"),
+                ImageStoryPart(type: "image", position: 2, duration: 15, imagePath: "https://placeimg.com/403/800/people"),
+                ImageStoryPart(type: "image", position: 3, duration: 15, imagePath: "https://placeimg.com/404/800/people")
+            ]
         )
     ]
 
