@@ -28,9 +28,14 @@ protocol StoryPresenterProtocol: class {
     func pause()
     func unpause()
     var storyPartsCount: Int { get }
-    var storyId: Int { get }
+    var storyID: Int { get }
     func getNextStory() -> StoryViewController?
     func getPrevStory() -> StoryViewController?
+    func didAppear()
+}
+
+extension NSNotification.Name {
+    static let storyDidAppear = NSNotification.Name("storyDidAppear")
 }
 
 class StoryPresenter: StoryPresenterProtocol {
@@ -58,7 +63,7 @@ class StoryPresenter: StoryPresenterProtocol {
         self.nextStoryLazyAssembly = nextStoryLazyAssembly
     }
 
-    var storyId: Int {
+    var storyID: Int {
         return story.id
     }
 
@@ -101,6 +106,10 @@ class StoryPresenter: StoryPresenterProtocol {
             }
             view?.animate(view: viewToAnimate)
         }
+    }
+
+    func didAppear() {
+        NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": storyID])
     }
 
     func getPrevStory() -> StoryViewController? {

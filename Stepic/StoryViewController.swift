@@ -26,7 +26,7 @@ class StoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.hero.id = "story_\(presenter?.storyId ?? -1)"
+        view.hero.id = "story_\(presenter?.storyID ?? -1)"
         progressView.completion = {
             [weak self] in
             self?.presenter?.finishedAnimating()
@@ -136,6 +136,7 @@ class StoryViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         didAppear = true
+        presenter?.didAppear()
         onAppearBlock?()
     }
 

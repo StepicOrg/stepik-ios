@@ -67,6 +67,7 @@ class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //TODO: Think how to customize this without hardcode
         return 3
     }
 

@@ -18,6 +18,7 @@ enum StoriesViewState {
 protocol StoriesViewProtocol: class {
     func set(state: StoriesViewState)
     func set(stories: [Story])
+    func showIfNotVisible(index: Int)
 }
 
 protocol StoriesPresenterProtocol: class {
@@ -33,6 +34,17 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     init(view: StoriesViewProtocol) {
         self.view = view
+        NotificationCenter.default.addObserver(self, selector: #selector(StoriesPresenter.storyDidAppear(_:)), name: .storyDidAppear, object: nil)
+    }
+
+    @objc
+    func storyDidAppear(_ notification: Foundation.Notification) {
+        guard let storyID = (notification as NSNotification).userInfo?["id"] as? Int,
+            let index = stories.index(where: {$0.id == storyID}) else {
+            return
+        }
+
+        view?.showIfNotVisible(index: index)
     }
 
     private func preheatFirstImages(stories: [Story]) {
@@ -130,6 +142,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self)
         stopPreheat()
     }
 }

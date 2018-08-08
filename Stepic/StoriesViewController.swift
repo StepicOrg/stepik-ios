@@ -46,6 +46,13 @@ class StoriesViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
+    func showIfNotVisible(index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        if !collectionView.indexPathsForVisibleItems.contains(indexPath) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
+    }
+
     private func routedStoryModule(forStoryAt index: Int) -> UIViewController {
         let story = stories[index]
         let storiesCount = stories.count
