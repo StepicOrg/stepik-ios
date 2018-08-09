@@ -59,7 +59,7 @@ class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
             achievementsStackView?.addArrangedSubview(placeholderView)
-            placeholderView.skeleton.viewBuilder = { return UIView.fromNib(named: "AchievementSkeletonPlaceholderView") }
+            placeholderView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementSkeletonPlaceholderView") }
             placeholderView.skeleton.show()
         }
     }

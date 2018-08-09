@@ -343,7 +343,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func showRateAlert() {
-        var positionPercentageString: String? = nil
+        var positionPercentageString: String?
         if let cnt = step.lesson?.stepsArray.count {
             positionPercentageString = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
         }

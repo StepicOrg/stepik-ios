@@ -26,7 +26,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView, Co
             self?.refresh()
         }), for: .connectionError)
 
-        tableView.skeleton.viewBuilder = { return UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
+        tableView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
 
         tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
 

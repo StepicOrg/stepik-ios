@@ -24,7 +24,7 @@ extension Array {
         let negativeShift = shiftAmount < 0
         let effectiveShiftAmount = negativeShift ? moduloShiftAmount + self.count : moduloShiftAmount
 
-        let shift: (Int) -> Int = { return $0 + effectiveShiftAmount >= self.count ? $0 + effectiveShiftAmount - self.count : $0 + effectiveShiftAmount }
+        let shift: (Int) -> Int = { $0 + effectiveShiftAmount >= self.count ? $0 + effectiveShiftAmount - self.count : $0 + effectiveShiftAmount }
 
         return self.enumerated().sorted(by: { shift($0.offset) < shift($1.offset) }).map { $0.element }
     }

@@ -282,7 +282,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             dvc.hidesBottomBarWhenPushed = true
             if let stepsPresentation = sender as? StepsPresentation {
 
-                var stepId: Int? = nil
+                var stepId: Int?
                 var startStepId: Int = 0
 
                 let index = stepsPresentation.index

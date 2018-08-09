@@ -20,7 +20,7 @@ class PlaceholderTableViewCell: MenuBlockTableViewCell {
     }
 
     func startAnimating() {
-        placeholderView.skeleton.viewBuilder = { return UIView.fromNib(named: "ProfileCellSkeletonPlaceholderView") }
+        placeholderView.skeleton.viewBuilder = { UIView.fromNib(named: "ProfileCellSkeletonPlaceholderView") }
         placeholderView.skeleton.show()
     }
 }
