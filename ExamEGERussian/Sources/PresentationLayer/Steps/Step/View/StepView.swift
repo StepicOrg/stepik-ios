@@ -10,4 +10,5 @@ import Foundation
 
 protocol StepView: class {
     func update(with htmlText: String)
+    func updateQuiz(with controller: UIViewController)
 }
