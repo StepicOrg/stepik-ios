@@ -4167,6 +4167,7 @@
 		2CE22D9A211C587F004D9D10 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilder.swift */; };
 		2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift */; };
+		2CE22DA1211C8316004D9D10 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
@@ -11656,6 +11657,7 @@
 				2C83E5FB21109A3700A8322D /* plyr.css in Resources */,
 				2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */,
 				2C83E5F621108A5600A8322D /* Scripts.plist in Resources */,
+				2CE22DA1211C8316004D9D10 /* CustomMessagesDesign.json in Resources */,
 				2C83E5F7211099BA00A8322D /* stepikcontent.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
