@@ -75,7 +75,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 return
             }
 
-            self.knowledgeGraph.adjacencies = graph.adjacencies
+            self.knowledgeGraph.adjacency = graph.adjacency
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)
@@ -87,7 +87,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
-        return vertices.map { viewTopicFromVertex($0) }
+        return vertices.map {
+            viewTopicFromVertex($0)
+        }
     }
 
     private func viewTopicFromVertex(_ vertex: KnowledgeGraphVertex<String>) -> TopicsViewData {

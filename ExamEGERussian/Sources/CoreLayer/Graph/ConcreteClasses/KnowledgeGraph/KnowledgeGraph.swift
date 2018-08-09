@@ -12,7 +12,7 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
     typealias Element = (key: KnowledgeGraphVertex<String>, value: [KnowledgeGraphVertex<String>])
 
     var count: Int {
-        return adjacencies.keys.count
+        return adjacency.keys.count
     }
 
     override func instantiateVertex(id: String) -> KnowledgeGraphVertex<String> {
@@ -20,8 +20,8 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
     }
 
     subscript(index: Int) -> Element {
-        let index = adjacencies.index(adjacencies.startIndex, offsetBy: index)
-        guard let element = adjacencies[index] as? Element else {
+        let index = adjacency.index(adjacency.startIndex, offsetBy: index)
+        guard let element = adjacency[index] as? Element else {
             fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
         return element
@@ -32,8 +32,10 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
     }
 
     private func getElement(by id: String) -> Element? {
-        guard let index = adjacencies.index(forKey: Vertex(id: id)) else { return nil }
-        guard let element = adjacencies[index] as? Element else {
+        guard let index = adjacency.index(forKey: Vertex(id: id)) else {
+            return nil
+        }
+        guard let element = adjacency[index] as? Element else {
             fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
         return element
