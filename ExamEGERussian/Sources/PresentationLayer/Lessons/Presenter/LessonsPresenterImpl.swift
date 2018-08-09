@@ -25,10 +25,14 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return knowledgeGraph[topicId]!.key
     }
     private var lessonsIds: [Int] {
-        return topic.lessons.map { $0.id }
+        return topic.lessons.map {
+            $0.id
+        }
     }
     private var coursesIds: [Int] {
-        return topic.lessons.compactMap { Int($0.courseId) }
+        return topic.lessons.compactMap {
+            Int($0.courseId)
+        }
     }
 
     private let lessonsService: LessonsService
@@ -74,10 +78,13 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
         courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
             var ids = Set(self.coursesIds)
-            courses
-                .filter { $0.enrolled }
-                .map { $0.id }
-                .forEach { ids.remove($0) }
+            courses.filter {
+                $0.enrolled
+            }.map {
+                $0.id
+            }.forEach {
+                ids.remove($0)
+            }
 
             return .value(Array(ids))
         }.then { ids -> Promise<[Course]> in
@@ -131,7 +138,9 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private func viewLessons(from lessons: [LessonPlainObject]) -> [LessonsViewData] {
-        return lessons.map { LessonsViewData(id: $0.id, title: $0.title) }
+        return lessons.map {
+            LessonsViewData(id: $0.id, title: $0.title)
+        }
     }
 
     private func displayError(_ error: Swift.Error) {

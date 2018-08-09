@@ -21,22 +21,22 @@ final class KnowledgeGraphBuilder: AbstractGraphBuilder {
         graphPlainObject.topics.forEach {
             graph.addVertex(KnowledgeGraphVertex(id: $0.id, title: $0.title))
         }
-        graphPlainObject.topics
-            .filter { $0.requiredFor != nil }
-            .forEach { topic in
-                guard let (source, _) = graph[topic.id],
-                    let (destination, _) = graph[topic.requiredFor!] else {
-                        return
-                }
-                graph.add(from: source, to: destination)
+        graphPlainObject.topics.filter {
+            $0.requiredFor != nil
+        }.forEach { topic in
+            guard let (source, _) = graph[topic.id],
+                  let (destination, _) = graph[topic.requiredFor!] else {
+                return
             }
+            graph.add(from: source, to: destination)
+        }
         graphPlainObject.topicsMap.forEach { topicMap in
-            guard let (vertex, _) = graph[topicMap.id] else { return }
-            vertex.lessons.append(contentsOf:
-                topicMap.lessons.map {
-                    KnowledgeGraphLesson(id: $0.id, type: $0.type, courseId: $0.course)
-                }
-            )
+            guard let (vertex, _) = graph[topicMap.id] else {
+                return
+            }
+            vertex.lessons.append(contentsOf: topicMap.lessons.map {
+                KnowledgeGraphLesson(id: $0.id, type: $0.type, courseId: $0.course)
+            })
         }
 
         return graph

@@ -38,7 +38,9 @@ public class GraphPathFinder<T> where T: Hashable {
         var vertices = [Vertex<T>]()
 
         graph.vertices.forEach { vertex in
-            guard vertex != destination else { return }
+            guard vertex != destination else {
+                return
+            }
             if isReachable(source: vertex, destination: destination) {
                 vertices.append(vertex)
             }
@@ -61,7 +63,9 @@ public class GraphPathFinder<T> where T: Hashable {
         while let current = stack.popLast() {
             block(current, &stop)
 
-            guard !stop else { return }
+            guard !stop else {
+                return
+            }
 
             let neighbours = graph.edges(from: current)
             for neighbour in neighbours {
