@@ -11,7 +11,7 @@ import UIKit
 import Nuke
 import SnapKit
 
-class ImageStoryView: UIView, UIStoryViewProtocol {
+class ImageStoryView: UIView, UIStoryPartViewProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -37,7 +37,7 @@ class ImageStoryView: UIView, UIStoryViewProtocol {
     }
 }
 
-protocol UIStoryViewProtocol {
+protocol UIStoryPartViewProtocol {
     var completion: (() -> Void)? { get set }
     func startLoad()
 }

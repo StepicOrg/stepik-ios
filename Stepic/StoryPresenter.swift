@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol StoryViewProtocol: class {
-    func animate(view: UIView & UIStoryViewProtocol)
+    func animate(view: UIView & UIStoryPartViewProtocol)
     func animateProgress(segment: Int, duration: TimeInterval)
     func pause(segment: Int)
     func unpause(segment: Int)
@@ -49,7 +49,7 @@ class StoryPresenter: StoryPresenterProtocol {
     private var prevModule: StoryViewController?
 
     private var partToAnimate: Int = 0
-    private var viewForIndex: [Int: UIView & UIStoryViewProtocol] = [:]
+    private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
 
     init(
         view: StoryViewProtocol,

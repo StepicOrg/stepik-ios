@@ -221,7 +221,7 @@ class StoryViewController: UIViewController {
 }
 
 extension StoryViewController: StoryViewProtocol {
-    func animate(view: UIView & UIStoryViewProtocol) {
+    func animate(view: UIView & UIStoryPartViewProtocol) {
         if view.isDescendant(of: partsContainerView) {
             partsContainerView.bringSubview(toFront: view)
         } else {

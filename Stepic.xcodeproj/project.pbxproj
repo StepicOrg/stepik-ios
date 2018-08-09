@@ -6826,20 +6826,11 @@
 			isa = PBXGroup;
 			children = (
 				08484EE4211AF42E0006266F /* CachedValue.swift */,
-				08484EFD211AF4320006266F /* ImageStoryView.swift */,
-				08484EE7211AF42F0006266F /* ImageStoryView.xib */,
+				088A65E8211CA8C5001431E3 /* Story Part Views */,
 				08484EE6211AF42E0006266F /* SegmentedProgressView.swift */,
-				08484EEC211AF4300006266F /* StoriesAssembly.swift */,
-				08484EF5211AF4310006266F /* StoriesPresenter.swift */,
-				08484EE5211AF42E0006266F /* StoriesViewController.swift */,
-				08484EE0211AF42D0006266F /* StoriesViewController.xib */,
+				088A65E9211CA8EE001431E3 /* Stories */,
 				08484EED211AF4300006266F /* Story.swift */,
-				08484EE8211AF42F0006266F /* StoryAssembly.swift */,
-				08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */,
-				08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */,
-				08484EEA211AF42F0006266F /* StoryPresenter.swift */,
-				08484EEF211AF4310006266F /* StoryViewController.swift */,
-				08484EEE211AF4310006266F /* StoryViewController.xib */,
+				088A65EA211CA900001431E3 /* Story */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -7246,6 +7237,39 @@
 				0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */,
 			);
 			name = Downloads;
+			sourceTree = "<group>";
+		};
+		088A65E8211CA8C5001431E3 /* Story Part Views */ = {
+			isa = PBXGroup;
+			children = (
+				08484EFD211AF4320006266F /* ImageStoryView.swift */,
+				08484EE7211AF42F0006266F /* ImageStoryView.xib */,
+			);
+			name = "Story Part Views";
+			sourceTree = "<group>";
+		};
+		088A65E9211CA8EE001431E3 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				08484EEC211AF4300006266F /* StoriesAssembly.swift */,
+				08484EF5211AF4310006266F /* StoriesPresenter.swift */,
+				08484EE5211AF42E0006266F /* StoriesViewController.swift */,
+				08484EE0211AF42D0006266F /* StoriesViewController.xib */,
+			);
+			name = Stories;
+			sourceTree = "<group>";
+		};
+		088A65EA211CA900001431E3 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				08484EE8211AF42F0006266F /* StoryAssembly.swift */,
+				08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */,
+				08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */,
+				08484EEA211AF42F0006266F /* StoryPresenter.swift */,
+				08484EEF211AF4310006266F /* StoryViewController.swift */,
+				08484EEE211AF4310006266F /* StoryViewController.xib */,
+			);
+			name = Story;
 			sourceTree = "<group>";
 		};
 		088E58BF1DE34E140009B9CE /* SocialSDKProviders */ = {
