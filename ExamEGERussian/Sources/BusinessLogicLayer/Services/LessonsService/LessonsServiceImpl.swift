@@ -57,6 +57,6 @@ final class LessonsServiceImpl: LessonsService {
     }
 
     private func toPlainObject(_ lesson: Lesson) -> LessonPlainObject {
-        return LessonPlainObject(id: lesson.id, steps: lesson.stepsArray, title: lesson.title)
+        return LessonPlainObject(id: lesson.id, steps: lesson.stepsArray, title: lesson.title, slug: lesson.slug)
     }
 }

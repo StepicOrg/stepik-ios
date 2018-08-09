@@ -12,4 +12,5 @@ struct LessonPlainObject: Codable {
     let id: Int
     let steps: [Int]
     let title: String
+    let slug: String
 }
