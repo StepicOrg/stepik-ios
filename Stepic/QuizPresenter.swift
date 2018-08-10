@@ -335,23 +335,23 @@ class QuizPresenter {
                 [weak self]
                 submission in
 
-                guard let `self` = self else {
+                guard let strongSelf = self else {
                     return
                 }
 
                 AnalyticsUserProperties.shared.incrementSubmissionsCount()
-                self.submissionsCount = (self.submissionsCount ?? 0) + 1
+                strongSelf.submissionsCount = (strongSelf.submissionsCount ?? 0) + 1
 
                 if let codeReply = reply as? CodeReply {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": self.step.block.name, "language": codeReply.languageName])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: self.step.id, type: self.step.block.name, language: codeReply.languageName).send()
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name, "language": codeReply.languageName])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name, language: codeReply.languageName).send()
                 } else {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": self.step.block.name])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: self.step.id, type: self.step.block.name).send()
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name).send()
                 }
 
-                self.submission = submission
-                self.checkSubmission(submission.id, time: 0, completion: completion)
+                strongSelf.submission = submission
+                strongSelf.checkSubmission(submission.id, time: 0, completion: completion)
             }, error: { error in
                 errorHandler(error)
                 //TODO: test this
