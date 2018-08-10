@@ -123,11 +123,6 @@ class StepViewController: UIViewController, StepView {
         setupWebView()
     }
 
-    @objc private func didScreenRotate() {
-        refreshWebView()
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
-    }
-
     private func setupQuizPlaceholderView() {
         scrollView.addSubview(quizPlaceholderView)
         quizPlaceholderView.snp.makeConstraints { make in
@@ -196,5 +191,14 @@ extension StepViewController {
         }.catch { error in
             print("Error while refreshing: \(error)")
         }
+    }
+}
+
+// MARK: - StepViewController (Actions) -
+
+extension StepViewController {
+    @objc private func didScreenRotate() {
+        refreshWebView()
+        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }
