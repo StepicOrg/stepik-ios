@@ -17,17 +17,18 @@ final class QuizViewControllerBuilderImpl: QuizViewControllerBuilder {
 
     func build() -> QuizViewController? {
         let quizViewController: QuizViewController?
+        let nibName = String(describing: QuizViewController.self)
 
         switch step.type {
         case .choice:
-            quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+            quizViewController = ChoiceQuizViewController(nibName: nibName, bundle: nil)
         case .string:
-            let controller = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+            let controller = StringQuizViewController(nibName: nibName, bundle: nil)
             controller.useSmallPadding = true
             controller.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
             quizViewController = controller
         case .number:
-            let vc = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+            let vc = NumberQuizViewController(nibName: nibName, bundle: nil)
             vc.useSmallPadding = true
             vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
