@@ -162,12 +162,12 @@ extension StepViewController {
         }
 
         stepWebView.didFinishNavigation = { [weak self] _ in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            self.stepWebView.alignImages().then {
-                self.stepWebView.getContentHeight()
+            strongSelf.stepWebView.alignImages().then {
+                strongSelf.stepWebView.getContentHeight()
             }.done { [weak self] height in
                 self?.resetWebViewHeight(Float(height))
                 self?.triggerViewLayoutUpdate()
@@ -178,11 +178,11 @@ extension StepViewController {
         }
 
         stepWebView.onOpenImage = { [weak self] imageURL in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            Agrume(imageUrl: imageURL).showFrom(self)
+            Agrume(imageUrl: imageURL).showFrom(strongSelf)
         }
     }
 

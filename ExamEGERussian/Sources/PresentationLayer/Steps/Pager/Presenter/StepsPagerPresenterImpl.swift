@@ -79,12 +79,12 @@ extension StepsPagerPresenterImpl {
     private func obtainStepsFromCache() -> Promise<Void> {
         return Promise { seal in
             self.stepsService.obtainSteps(for: lesson).done { [weak self] steps in
-                guard let `self` = self else {
+                guard let strongSelf = self else {
                     return
                 }
 
-                self.steps = self.preparedSteps(steps)
-                self.view?.state = .fetched(steps: self.steps)
+                strongSelf.steps = strongSelf.preparedSteps(steps)
+                strongSelf.view?.state = .fetched(steps: strongSelf.steps)
                 seal.fulfill(())
             }.catch { [weak self] error in
                 self?.view?.state = .error(message: NSLocalizedString("Failed to get steps from cache", comment: ""))
@@ -100,12 +100,12 @@ extension StepsPagerPresenterImpl {
         }.then { stepsIds in
             self.stepsService.fetchProgresses(stepsIds: stepsIds)
         }.done { [weak self] steps in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            self.steps = self.preparedSteps(steps)
-            self.view?.state = .fetched(steps: self.steps)
+            strongSelf.steps = strongSelf.preparedSteps(steps)
+            strongSelf.view?.state = .fetched(steps: strongSelf.steps)
         }.catch { [weak self] error in
             let message = error is NetworkError
                 ? NSLocalizedString("ConnectionErrorText", comment: "")
