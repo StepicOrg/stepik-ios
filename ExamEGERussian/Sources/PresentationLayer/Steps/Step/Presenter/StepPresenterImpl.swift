@@ -61,7 +61,7 @@ extension StepPresenterImpl {
     }
 
     private func showUnknownQuizTypeContent() {
-        let controller = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
+        let controller = UnknownTypeQuizViewController()
         let stepUrl = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)?from_mobile_app=true"
         controller.stepUrl = stepUrl
 
