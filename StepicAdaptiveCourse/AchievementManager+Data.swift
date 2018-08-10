@@ -18,7 +18,7 @@ extension AchievementManager {
         typealias ProgressAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, maxValue: Int, pre: ((Int, Int, Int) -> (Bool))?, value: ((Int, Int, Int) -> Int)?, migration: (() -> Int)?, event: String)
 
         let challengeAchievements: [ChallengeAchievementDescription] = [
-            (slug: "onboarding", name: NSLocalizedString("AdaptiveAchievementFirstStep", comment: ""), info: NSLocalizedString("AdaptiveAchievementFirstStepDesc", comment: ""), cover: #imageLiteral(resourceName: "onboarding"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding)
+            (slug: "onboarding", name: NSLocalizedString("AdaptiveAchievementFirstStep", comment: ""), info: NSLocalizedString("AdaptiveAchievementFirstStepDesc", comment: ""), cover: #imageLiteral(resourceName: "onboarding"), pre: nil, migration: { isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding)
         ]
 
         func createExpAchievement(name: String, exp: Int, cover: UIImage) -> ProgressAchievementDescription {
@@ -28,8 +28,8 @@ extension AchievementManager {
                 cover: cover,
                 maxValue: exp,
                 pre: nil,
-                value: { cur, _, value in return cur + value },
-                migration: { return currentRating },
+                value: { cur, _, value in cur + value },
+                migration: { currentRating },
                 event: AchievementEvent.events.exp)
         }
 
@@ -39,9 +39,9 @@ extension AchievementManager {
                 info: String(format: NSLocalizedString("AdaptiveAchievementStreakDesc", comment: ""), "\(streak)"),
                 cover: cover,
                 maxValue: streak,
-                pre: { cur, _, value in return value > cur },
-                value: { cur, _, value in return max(cur, value) },
-                migration: { return currentStreak },
+                pre: { cur, _, value in value > cur },
+                value: { cur, _, value in max(cur, value) },
+                migration: { currentStreak },
                 event: AchievementEvent.events.streak)
         }
 
@@ -51,9 +51,9 @@ extension AchievementManager {
                 info: String(format: NSLocalizedString("AdaptiveAchievementDaysStreakDesc", comment: ""), "\(streak)"),
                 cover: cover,
                 maxValue: streak,
-                pre: { cur, _, value in return value > cur },
-                value: { cur, _, value in return max(cur, value) },
-                migration: { return 0 },
+                pre: { cur, _, value in value > cur },
+                value: { cur, _, value in max(cur, value) },
+                migration: { 0 },
                 event: AchievementEvent.events.days)
         }
 
@@ -63,9 +63,9 @@ extension AchievementManager {
                 info: String(format: NSLocalizedString("AdaptiveAchievementLevelDesc", comment: ""), "\(level)"),
                 cover: cover,
                 maxValue: level,
-                pre: { cur, _, value in return value > cur },
-                value: { cur, _, value in return max(cur, value) },
-                migration: { return currentLevel },
+                pre: { cur, _, value in value > cur },
+                value: { cur, _, value in max(cur, value) },
+                migration: { currentLevel },
                 event: AchievementEvent.events.level)
         }
 

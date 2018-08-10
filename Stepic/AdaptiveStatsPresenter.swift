@@ -69,7 +69,7 @@ class AdaptiveStatsPresenter {
 
             var weekXP: [Int: Int] = [:]
             var weeks: Set<Date> = Set<Date>()
-            var weekRecordBeginHash: Int? = nil
+            var weekRecordBeginHash: Int?
             for (day, progress) in stats {
                 let weekBeginForCurrentDay = getWeekBeginByDate(statsManager.dateByDay(day))
                 let weekHash = weekBeginForCurrentDay.hashValue
