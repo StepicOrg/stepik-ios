@@ -35,6 +35,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     func selectStep(at index: Int) {
         let step = steps[index]
         if step.type == .text {
+            // TODO: Move to StepPresenter
             didSolveStep(step)
         }
     }
