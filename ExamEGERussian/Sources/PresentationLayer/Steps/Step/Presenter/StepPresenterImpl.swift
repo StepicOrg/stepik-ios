@@ -48,13 +48,10 @@ extension StepPresenterImpl {
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
         guard let step = Step.getStepWithId(self.step.id) else {
             // TODO: display error
-            //delegate?.contentLoadingDidFail()
             return print("\(#file): Unable to instantiate QuizViewController")
         }
 
         quizViewController.step = step
-        quizViewController.delegate = self
-        quizViewController.needNewAttempt = true
     }
 
     private func showUnknownQuizTypeContent() {
@@ -63,23 +60,5 @@ extension StepPresenterImpl {
         controller.stepUrl = stepUrl
 
         view?.updateQuiz(with: controller)
-    }
-}
-
-// MARK: - StepPresenterImpl: QuizControllerDelegate -
-
-extension StepPresenterImpl: QuizControllerDelegate {
-    func submissionDidCorrect() {
-        quizViewController?.isSubmitButtonHidden = true
-    }
-
-    func submissionDidWrong() {
-        quizViewController?.isSubmitButtonHidden = true
-    }
-
-    func submissionDidRetry() {
-    }
-
-    func didWarningPlaceholderShow() {
     }
 }
