@@ -19,7 +19,7 @@ class AdaptiveUserActions {
     private var adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI
     private let userRegistrationService: UserRegistrationService
 
-    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI, defaultsStorageManager: DefaultsStorageManager) {
+    init(coursesAPI: CoursesAPI, authAPI: AuthAPI, stepicsAPI: StepicsAPI, profilesAPI: ProfilesAPI, enrollmentsAPI: EnrollmentsAPI, adaptiveCoursesInfoAPI: AdaptiveCoursesInfoAPI, defaultsStorageManager: DefaultsStorageManager, userRegistrationService: UserRegistrationService? = nil) {
         self.enrollmentsAPI = enrollmentsAPI
         self.profilesAPI = profilesAPI
         self.stepicsAPI = stepicsAPI
@@ -27,12 +27,15 @@ class AdaptiveUserActions {
         self.coursesAPI = coursesAPI
         self.adaptiveCoursesInfoAPI = adaptiveCoursesInfoAPI
         self.defaultsStorageManager = defaultsStorageManager
-        self.userRegistrationService = UserRegistrationServiceImplementation(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager, randomCredentialsGenerator: RandomCredentialsGeneratorImplementation())
+        self.userRegistrationService = userRegistrationService ?? UserRegistrationServiceImpl(authAPI: authAPI, stepicsAPI: stepicsAPI, profilesAPI: profilesAPI, defaultsStorageManager: defaultsStorageManager)
     }
 
     func registerNewUser() -> Promise<Void> {
         return Promise { seal in
-            self.userRegistrationService.registerNewUser().done { _ in
+            let params = RandomCredentialsGenerator().userRegistrationParams
+            self.userRegistrationService.registerAndSignIn(with: params).then { user in
+                self.userRegistrationService.unregisterFromEmail(user: user)
+            }.done { _ in
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -65,11 +68,11 @@ class AdaptiveUserActions {
     }
 
     internal func registerAdaptiveUser() -> Promise<(email: String, password: String)> {
-        return userRegistrationService.registerUser()
+        return userRegistrationService.register(with: RandomCredentialsGenerator().userRegistrationParams)
     }
 
     internal func logInUser(email: String, password: String) -> Promise<User> {
-        return userRegistrationService.logInUser(email: email, password: password)
+        return userRegistrationService.signIn(email: email, password: password)
     }
 
     internal func unregisterFromEmail(user: User) -> Promise<Void> {

@@ -10,7 +10,6 @@ import XCTest
 @testable import ExamEGERussian
 
 class TopicsTableViewControllerTests: XCTestCase {
-
     func testViewInstantiated() {
         let vc = TopicsTableViewController()
         let presenter = TopicsPresenterImpl(
@@ -24,5 +23,4 @@ class TopicsTableViewControllerTests: XCTestCase {
 
         XCTAssertNotNil(vc.view, "Could not instantiate MainViewController")
     }
-
 }
