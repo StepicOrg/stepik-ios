@@ -32,39 +32,11 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
         router.pop()
     }
 
-    func selectStep(at index: Int) {
-        let step = steps[index]
-        if step.type == .text {
-            // TODO: Move to StepPresenter
-            didSolveStep(step)
-        }
-    }
-
     func selectShareStep(at index: Int) {
         let step = steps[index]
         let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)?from_mobile_app=true"
 
         router.shareStep(with: url)
-    }
-
-    // MARK: Private API
-
-    private func didSolveStep(_ step: StepPlainObject) {
-        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] steps in
-            guard let step = steps.first,
-                  let index = self?.steps.index(where: { $0.id == step.id }) else {
-                return
-            }
-            self?.steps[index].isPassed = step.isPassed
-
-            NotificationCenter.default.post(
-                descriptor: Step.progressNotification,
-                value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
-            )
-        }.catch { [weak self] error in
-            print(error)
-            self?.view?.state = .error(message: NSLocalizedString("Failed to mark step as solved", comment: ""))
-        }
     }
 }
 
@@ -119,5 +91,23 @@ extension StepsPagerPresenterImpl {
         return steps.sorted(by: { lhs, rhs in
             lhs.position < rhs.position
         })
+    }
+}
+
+// MARK: - StepsPagerPresenterImpl: StepPresenterDelegate -
+
+extension StepsPagerPresenterImpl: StepPresenterDelegate {
+    func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
+        let step = stepPresenter.step
+        guard let index = steps.index(where: { $0.id == step.id }) else {
+                return
+        }
+
+        steps[index].isPassed = step.isPassed
+
+        NotificationCenter.default.post(
+            descriptor: Step.progressNotification,
+            value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
+        )
     }
 }

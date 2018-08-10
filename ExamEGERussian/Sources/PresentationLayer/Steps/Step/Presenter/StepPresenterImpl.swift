@@ -10,20 +10,48 @@ import Foundation
 
 final class StepPresenterImpl: StepPresenter {
     private weak var view: StepView?
+    weak var delegate: StepPresenterDelegate?
 
-    private let step: StepPlainObject
+    private(set) var step: StepPlainObject
     private let lesson: LessonPlainObject
     private var quizViewController: QuizViewController?
+    private let stepsService: StepsService
 
-    init(view: StepView, step: StepPlainObject, lesson: LessonPlainObject) {
+    init(view: StepView,
+         delegate: StepPresenterDelegate?,
+         step: StepPlainObject,
+         lesson: LessonPlainObject,
+         stepsService: StepsService
+    ) {
         self.view = view
+        self.delegate = delegate
         self.step = step
         self.lesson = lesson
+        self.stepsService = stepsService
     }
 
     func refreshStep() {
         view?.update(with: step.text)
         updateQuiz()
+    }
+
+    // MARK: - Private API
+
+    private func markTextStepAsPassed() {
+        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.setStepProgressAsPassed()
+        }.catch { [weak self] error in
+            print("\(#file): \(error)")
+            self?.showError(message: NSLocalizedString("Could't mark as quiz as solved. Please try again.", comment: ""))
+        }
+    }
+
+    private func showError(title: String = NSLocalizedString("Error", comment: ""), message: String) {
+        view?.displayError(title: title, message: message)
     }
 }
 
@@ -31,11 +59,15 @@ final class StepPresenterImpl: StepPresenter {
 
 extension StepPresenterImpl {
     private func updateQuiz() {
-        guard step.type != .text else {
+        if step.type == .text {
             quizViewController = nil
-            return
+            markTextStepAsPassed()
+        } else {
+            showQuizViewController()
         }
+    }
 
+    private func showQuizViewController() {
         quizViewController = QuizViewControllerBuilderImpl(step: step).build()
         guard let quizViewController = quizViewController else {
             return showUnknownQuizTypeContent()
@@ -47,14 +79,12 @@ extension StepPresenterImpl {
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
         guard let step = Step.getStepWithId(self.step.id) else {
-            view?.displayError(
-                title: NSLocalizedString("Error", comment: ""),
-                message: NSLocalizedString("Could't display quiz. Please try again later.", comment: "")
-            )
+            showError(message: NSLocalizedString("Could't display quiz. Please try again later.", comment: ""))
             return print("\(#file): Unable to instantiate QuizViewController")
         }
 
         quizViewController.step = step
+        quizViewController.delegate = self
     }
 
     private func showUnknownQuizTypeContent() {
@@ -63,5 +93,20 @@ extension StepPresenterImpl {
         controller.stepUrl = stepUrl
 
         view?.updateQuiz(with: controller)
+    }
+}
+
+// MARK: - StepPresenterImpl: QuizControllerDelegate -
+
+extension StepPresenterImpl: QuizControllerDelegate {
+    func submissionDidCorrect() {
+        setStepProgressAsPassed()
+    }
+
+    // MARK: Private Helpers
+
+    private func setStepProgressAsPassed() {
+        step.isPassed = true
+        delegate?.stepPresenterSubmissionDidCorrect(self)
     }
 }

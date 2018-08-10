@@ -8,6 +8,13 @@
 
 import Foundation
 
+protocol StepPresenterDelegate: class {
+    func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter)
+}
+
 protocol StepPresenter: class {
+    var step: StepPlainObject { get }
+    var delegate: StepPresenterDelegate? { get set }
+
     func refreshStep()
 }

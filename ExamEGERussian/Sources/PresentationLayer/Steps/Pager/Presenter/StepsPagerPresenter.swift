@@ -8,6 +8,5 @@ import Foundation
 protocol StepsPagerPresenter: class {
     func refresh()
     func cancel()
-    func selectStep(at index: Int)
     func selectShareStep(at index: Int)
 }

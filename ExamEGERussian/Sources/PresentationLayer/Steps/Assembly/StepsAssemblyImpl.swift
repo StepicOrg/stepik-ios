@@ -11,7 +11,8 @@ import UIKit.UINavigationController
 
 final class StepsAssemblyImpl: BaseAssembly, StepsAssembly {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController {
-        let dataSource = StepsPagerDataSourceImpl(lesson: lesson, assembly: StepAssemblyImpl())
+        let stepAssemby = StepAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
+        let dataSource = StepsPagerDataSourceImpl(lesson: lesson, assembly: stepAssemby)
         let controller = StepsPagerViewController(strongDataSource: dataSource)
         controller.title = lesson.title
 
@@ -26,6 +27,7 @@ final class StepsAssemblyImpl: BaseAssembly, StepsAssembly {
             stepsService: serviceFactory.stepsService
         )
         controller.presenter = presenter
+        dataSource.stepPresenterDelegate = presenter
 
         return controller
     }

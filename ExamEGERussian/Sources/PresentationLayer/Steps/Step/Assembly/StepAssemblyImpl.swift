@@ -5,13 +5,15 @@
 
 import Foundation
 
-final class StepAssemblyImpl: StepAssembly {
-    func module(lesson: LessonPlainObject, step: StepPlainObject) -> UIViewController {
+final class StepAssemblyImpl: BaseAssembly, StepAssembly {
+    func module(lesson: LessonPlainObject, step: StepPlainObject, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
         let controller = StepViewController()
         let presenter = StepPresenterImpl(
             view: controller,
+            delegate: stepPresenterDelegate,
             step: step,
-            lesson: lesson
+            lesson: lesson,
+            stepsService: serviceFactory.stepsService
         )
         controller.presenter = presenter
 

@@ -97,14 +97,6 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
     }
 }
 
-// MARK: - StepsPagerViewController: PagerDelegate -
-
-extension StepsPagerViewController: PagerDelegate {
-    func didChangeTabToIndex(_ pager: PagerController, index: Int) {
-        presenter?.selectStep(at: index)
-    }
-}
-
 // MARK: - StepsPagerViewController (Actions) -
 
 extension StepsPagerViewController {
@@ -131,8 +123,6 @@ extension StepsPagerViewController {
 
         view.backgroundColor = .white
         setupTabs()
-
-        delegate = self
     }
 
     private func setupTabs() {
