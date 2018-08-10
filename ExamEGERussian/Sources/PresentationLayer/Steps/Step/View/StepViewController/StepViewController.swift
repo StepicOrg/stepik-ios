@@ -11,7 +11,9 @@ import Agrume
 import PromiseKit
 import SnapKit
 
-class StepViewController: UIViewController, StepView {
+class StepViewController: UIViewController {
+    // MARK: - Types
+
     private struct Theme {
         static let viewInitialHeight: CGFloat = 5.0
 
@@ -78,28 +80,6 @@ class StepViewController: UIViewController, StepView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: - StepView
-
-    func update(with htmlText: String) {
-        let processor = HTMLProcessor(html: htmlText)
-        let html = processor.injectDefault().html
-        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-    }
-
-    func updateQuiz(with controller: UIViewController) {
-        quizView = controller.view
-        addChildViewController(controller)
-
-        quizPlaceholderView.addSubview(quizView!)
-        quizView!.snp.makeConstraints {
-            $0.edges.equalTo(quizPlaceholderView)
-        }
-        controller.didMove(toParentViewController: self)
-
-        triggerViewLayoutUpdate()
-    }
-
-
     // MARK: - Private API
 
     private func triggerViewLayoutUpdate() {
@@ -129,6 +109,42 @@ class StepViewController: UIViewController, StepView {
             make.centerX.equalToSuperview()
             make.trailing.leading.bottom.equalToSuperview()
         }
+    }
+}
+
+// MARK: - StepViewController (StepView) -
+
+extension StepViewController: StepView {
+    func update(with htmlText: String) {
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor.injectDefault().html
+        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+    }
+
+    func updateQuiz(with controller: UIViewController) {
+        quizView = controller.view
+        addChildViewController(controller)
+
+        quizPlaceholderView.addSubview(quizView!)
+        quizView!.snp.makeConstraints {
+            $0.edges.equalTo(quizPlaceholderView)
+        }
+        controller.didMove(toParentViewController: self)
+
+        triggerViewLayoutUpdate()
+    }
+
+    func displayError(title: String, message: String) {
+        presentAlert(withTitle: title, message: message)
+    }
+}
+
+// MARK: - StepViewController (Actions) -
+
+extension StepViewController {
+    @objc private func didScreenRotate() {
+        refreshWebView()
+        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }
 
@@ -191,14 +207,5 @@ extension StepViewController {
         }.catch { error in
             print("Error while refreshing: \(error)")
         }
-    }
-}
-
-// MARK: - StepViewController (Actions) -
-
-extension StepViewController {
-    @objc private func didScreenRotate() {
-        refreshWebView()
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }

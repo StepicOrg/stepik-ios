@@ -47,7 +47,10 @@ extension StepPresenterImpl {
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
         guard let step = Step.getStepWithId(self.step.id) else {
-            // TODO: display error
+            view?.displayError(
+                title: NSLocalizedString("Error", comment: ""),
+                message: NSLocalizedString("Could not display quiz content. Please try again later.", comment: "")
+            )
             return print("\(#file): Unable to instantiate QuizViewController")
         }
 
