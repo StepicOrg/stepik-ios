@@ -38,10 +38,7 @@ class SearchQueriesPresenter {
         }, error: {
             [weak self]
             error in
-            guard let networkError = error as? NetworkError else {
-                self?.view?.setState(state: .error)
-            }
-            switch networkError {
+            switch error {
             case .cancelled:
                 self?.view?.setState(state: .ok)
             default:

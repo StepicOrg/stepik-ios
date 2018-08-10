@@ -76,7 +76,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
     // We can init this class w/o course (for adaptive app)
-    internal(set) var course: Course?
+    var course: Course?
 
     var cachedRecommendedLessons: [Lesson] = []
     var canSwipeCard: Bool {
@@ -276,7 +276,9 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             return
         }
 
-        self.sendReaction(reaction, for: lesson, user: user).done { _ in }
+        self.sendReaction(reaction, for: lesson, user: user).catch { error in
+            print("\(#file) \(#function) \(error)")
+        }
     }
 
     func tryAgain() {

@@ -165,7 +165,7 @@ extension SortingQuizViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataset = dataset else {
+        guard dataset != nil else {
             return UITableViewCell()
         }
 
