@@ -41,7 +41,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
 
     func selectShareStep(at index: Int) {
         let step = steps[index]
-        let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)"
+        let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)?from_mobile_app=true"
 
         router.shareStep(with: url)
     }
