@@ -10,8 +10,6 @@ import Foundation
 
 final class StepPresenterImpl: StepPresenter {
     private weak var view: StepView?
-    weak var delegate: StepPresenterDelegate?
-    var state: StepPresenterState = .unsolved
 
     private let step: StepPlainObject
     private let lesson: LessonPlainObject
@@ -49,7 +47,8 @@ extension StepPresenterImpl {
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
         guard let step = Step.getStepWithId(self.step.id) else {
-            delegate?.contentLoadingDidFail()
+            // TODO: display error
+            //delegate?.contentLoadingDidFail()
             return print("\(#file): Unable to instantiate QuizViewController")
         }
 
@@ -71,23 +70,16 @@ extension StepPresenterImpl {
 
 extension StepPresenterImpl: QuizControllerDelegate {
     func submissionDidCorrect() {
-        state = .successful
-        delegate?.stepSubmissionDidCorrect()
         quizViewController?.isSubmitButtonHidden = true
     }
 
     func submissionDidWrong() {
-        state = .wrong
-        delegate?.stepSubmissionDidWrong()
         quizViewController?.isSubmitButtonHidden = true
     }
 
     func submissionDidRetry() {
-        state = .unsolved
-        delegate?.stepSubmissionDidRetry()
     }
 
     func didWarningPlaceholderShow() {
-        delegate?.contentLoadingDidFail()
     }
 }
