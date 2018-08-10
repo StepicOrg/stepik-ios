@@ -4188,6 +4188,8 @@
 		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
 		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
 		2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */; };
+		2CEBAB90211D82880014085E /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
+		2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -4365,6 +4367,7 @@
 		62E98CE7008D80E6AA70A5D6 /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98D07F2F12EF7A3CB3E09 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E98D1D5AE08AC53898A59B /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98D2289B2FF8307945FAA /* StepsPagerRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98672561A64F1223F9A03 /* StepsPagerRouterImpl.swift */; };
 		62E98D42A45F833D1371E4A6 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E98D686165FCA5E588FDD5 /* CustomNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9810DF187ACA3C26F5396 /* CustomNotificationBanner.swift */; };
 		62E98D7EC355992DB8889003 /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
@@ -6114,6 +6117,7 @@
 		62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapBlockContentView.swift; sourceTree = "<group>"; };
 		62E9863AAABC06CDEE98110E /* StepWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepWebView.swift; sourceTree = "<group>"; };
 		62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewData.swift; sourceTree = "<group>"; };
+		62E98672561A64F1223F9A03 /* StepsPagerRouterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerRouterImpl.swift; sourceTree = "<group>"; };
 		62E98696D8F1FF253E8BF1D3 /* ClearNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearNavigationViewController.swift; sourceTree = "<group>"; };
 		62E986B6284822FB1A8E1FCC /* AuthGreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthGreetingViewController.swift; sourceTree = "<group>"; };
 		62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsRetriever.swift; sourceTree = "<group>"; };
@@ -10242,6 +10246,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */,
+				62E98672561A64F1223F9A03 /* StepsPagerRouterImpl.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -15558,6 +15563,7 @@
 				2C9499B120ECBAA80049E9A8 /* Notification+CoreDataProperties.swift in Sources */,
 				2C949A2A20ECC63C0049E9A8 /* Tooltip.swift in Sources */,
 				2C093F29211B465700162DD0 /* FullHeightTableView.swift in Sources */,
+				2CEBAB90211D82880014085E /* SharingHelper.swift in Sources */,
 				2C9499D820ECBD2B0049E9A8 /* VideoURL+CoreDataProperties.swift in Sources */,
 				2C949A0520ECC3050049E9A8 /* StepikButton.swift in Sources */,
 				2C093EF8211B41F800162DD0 /* ReplyCache.swift in Sources */,
@@ -15610,6 +15616,7 @@
 				2C949A2020ECC5B40049E9A8 /* ProfileMenuBlock.swift in Sources */,
 				2C34D68420FCE584001EF741 /* AuthSignUpRouter.swift in Sources */,
 				2C949A4D20ECCCD40049E9A8 /* RateAppManager.swift in Sources */,
+				2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,
 				2C01079E210F37A2009A53DF /* AttemptsAPI.swift in Sources */,
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
@@ -15960,6 +15967,7 @@
 				62E98FA01AA38149BD6E9D8A /* Step+ProgressNotification.swift in Sources */,
 				2C093F10211B43FE00162DD0 /* StreaksStepikAlertManager.swift in Sources */,
 				62E98604302766B94432A342 /* ObjectNotificationDescriptor.swift in Sources */,
+				62E98D2289B2FF8307945FAA /* StepsPagerRouterImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

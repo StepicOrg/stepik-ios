@@ -39,6 +39,37 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
         }
     }
 
+    func selectShareStep(at index: Int) {
+        let step = steps[index]
+        let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)"
+
+        router.shareStep(with: url)
+    }
+
+    // MARK: Private API
+
+    private func didSolveStep(_ step: StepPlainObject) {
+        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] steps in
+            guard let step = steps.first,
+                  let index = self?.steps.index(where: { $0.id == step.id }) else {
+                return
+            }
+            self?.steps[index].isPassed = step.isPassed
+
+            NotificationCenter.default.post(
+                descriptor: Step.progressNotification,
+                value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
+            )
+        }.catch { [weak self] error in
+            print(error)
+            self?.view?.state = .error(message: NSLocalizedString("Failed to mark step as solved", comment: ""))
+        }
+    }
+}
+
+// MARK: - StepsPagerPresenterImpl (Get Steps) -
+
+extension StepsPagerPresenterImpl {
     private func getSteps() {
         obtainStepsFromCache().done {
             self.fetchSteps()
@@ -87,23 +118,5 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
         return steps.sorted(by: { lhs, rhs in
             lhs.position < rhs.position
         })
-    }
-
-    private func didSolveStep(_ step: StepPlainObject) {
-        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] steps in
-            guard let step = steps.first,
-                  let index = self?.steps.index(where: { $0.id == step.id }) else {
-                return
-            }
-            self?.steps[index].isPassed = step.isPassed
-
-            NotificationCenter.default.post(
-                descriptor: Step.progressNotification,
-                value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
-            )
-        }.catch { [weak self] error in
-            print(error)
-            self?.view?.state = .error(message: NSLocalizedString("Failed to mark step as solved", comment: ""))
-        }
     }
 }

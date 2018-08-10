@@ -105,6 +105,14 @@ extension StepsPagerViewController: PagerDelegate {
     }
 }
 
+// MARK: - StepsPagerViewController (Actions) -
+
+extension StepsPagerViewController {
+    @objc private func shareBarButtonItemDidPressed(_ sender: Any) {
+        presenter?.selectShareStep(at: activeTabIndex)
+    }
+}
+
 // MARK: - StepsPagerViewController (UI Configuration) -
 
 extension StepsPagerViewController {
@@ -113,6 +121,13 @@ extension StepsPagerViewController {
         navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.hideBottomHairline()
+
+        let shareBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(shareBarButtonItemDidPressed(_:))
+        )
+        navigationItem.rightBarButtonItem = shareBarButtonItem
 
         view.backgroundColor = .white
         setupTabs()
