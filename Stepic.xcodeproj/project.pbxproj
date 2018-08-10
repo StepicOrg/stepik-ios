@@ -2851,6 +2851,7 @@
 		2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		2C8A0F3320FCCE230009F67E /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
+		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
@@ -11644,6 +11645,7 @@
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
 				2CD7999021077D010054D098 /* TopicsTableViewController.xib in Resources */,
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
+				2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */,
 				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */,
 				2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */,

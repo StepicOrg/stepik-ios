@@ -95,6 +95,24 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             make.leading.trailing.equalTo(contentView)
         }
     }
+
+    func setTabSelected(_ selected: Bool, at index: Int) {
+        guard index < tabCount,
+              let subview = tabs[index]?.subviews.first(where: { $0 is StepTabView }),
+              let stepTabView = subview as? StepTabView else {
+            return
+        }
+
+        stepTabView.setTab(selected: selected, animated: true)
+    }
+}
+
+// MARK: - StepsPagerViewController: PagerDelegate -
+
+extension StepsPagerViewController: PagerDelegate {
+    func didChangeTabToIndex(_ pager: PagerController, index: Int) {
+        presenter?.selectStep(at: index)
+    }
 }
 
 // MARK: - StepsPagerViewController (Actions) -
@@ -105,7 +123,7 @@ extension StepsPagerViewController {
     }
 }
 
-// MARK: - StepsPagerViewController (UI Configuration) -
+// MARK: - StepsPagerViewController (UI Setup) -
 
 extension StepsPagerViewController {
     private func setup() {
@@ -123,6 +141,8 @@ extension StepsPagerViewController {
 
         view.backgroundColor = .white
         setupTabs()
+
+        delegate = self
     }
 
     private func setupTabs() {

@@ -32,11 +32,37 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
         router.pop()
     }
 
+    func selectStep(at index: Int) {
+        if steps[index].type == .text {
+            markTextStepAsPassed(at: index)
+        }
+    }
+
     func selectShareStep(at index: Int) {
         let step = steps[index]
         let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)?from_mobile_app=true"
 
         router.shareStep(with: url)
+    }
+
+    // MARK: - Private API
+
+    private func markTextStepAsPassed(at index: Int) {
+        let step = steps[index]
+        guard !step.isPassed else {
+            return
+        }
+
+        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.updateStepProgress(at: index, passed: true)
+        }.catch { [weak self] error in
+            print("\(#file) \(#function): \(error)")
+            self?.view?.state = .error(message: NSLocalizedString("Could't mark quiz as solved. Please try again.", comment: ""))
+        }
     }
 }
 
@@ -100,14 +126,16 @@ extension StepsPagerPresenterImpl: StepPresenterDelegate {
     func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
         let step = stepPresenter.step
         guard let index = steps.index(where: { $0.id == step.id }) else {
-                return
+            return
         }
 
-        steps[index].isPassed = step.isPassed
+        updateStepProgress(at: index, passed: true)
+    }
 
-        NotificationCenter.default.post(
-            descriptor: Step.progressNotification,
-            value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
-        )
+    // MARK: Private Helpers
+
+    private func updateStepProgress(at index: Int, passed: Bool) {
+        steps[index].isPassed = passed
+        view?.setTabSelected(passed, at: index)
     }
 }

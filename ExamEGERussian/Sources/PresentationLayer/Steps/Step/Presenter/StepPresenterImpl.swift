@@ -37,19 +37,6 @@ final class StepPresenterImpl: StepPresenter {
 
     // MARK: - Private API
 
-    private func markTextStepAsPassed() {
-        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] _ in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.setStepProgressAsPassed()
-        }.catch { [weak self] error in
-            print("\(#file): \(error)")
-            self?.showError(message: NSLocalizedString("Could't mark as quiz as solved. Please try again.", comment: ""))
-        }
-    }
-
     private func showError(title: String = NSLocalizedString("Error", comment: ""), message: String) {
         view?.displayError(title: title, message: message)
     }
@@ -61,7 +48,6 @@ extension StepPresenterImpl {
     private func updateQuiz() {
         if step.type == .text {
             quizViewController = nil
-            markTextStepAsPassed()
         } else {
             showQuizViewController()
         }
