@@ -135,7 +135,11 @@ class StepViewController: UIViewController, StepView {
             make.trailing.leading.bottom.equalToSuperview()
         }
     }
+}
 
+// MARK: - StepViewController (StepWebView) -
+
+extension StepViewController {
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
