@@ -662,19 +662,6 @@
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
-		08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
-		08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
 		08B062DF1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
 		08B062E11FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
@@ -1249,21 +1236,8 @@
 		2C1B612D1F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C1B612E1F4C4AEF00236804 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C1B61331F4C4AEF00236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C1B61351F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C1B61361F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C1B61371F4C4AEF00236804 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C1B61381F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C1B61391F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C1B613A1F4C4AEF00236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C1B61421F4C4AEF00236804 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C1B61431F4C4AEF00236804 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -1632,21 +1606,8 @@
 		2C1B633E1F4C590700236804 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C1B633F1F4C590700236804 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C1B63431F4C590700236804 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C1B63441F4C590700236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C1B63461F4C590700236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C1B63471F4C590700236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C1B63481F4C590700236804 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C1B63491F4C590700236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C1B634A1F4C590700236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C1B634B1F4C590700236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C1B63531F4C590700236804 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C1B63541F4C590700236804 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -2479,21 +2440,8 @@
 		2C89A9C11F4C289900227C3B /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C89A9C21F4C289900227C3B /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C89A9C31F4C289900227C3B /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C89A9C41F4C289900227C3B /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C89A9C51F4C289900227C3B /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C89A9C61F4C289900227C3B /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C89A9C71F4C289900227C3B /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C89A9C91F4C289900227C3B /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C89A9CA1F4C289900227C3B /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C89A9CB1F4C289900227C3B /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C89A9CC1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C89A9CD1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C89A9CE1F4C289900227C3B /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C89A9D61F4C289900227C3B /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C89A9D71F4C289900227C3B /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -3055,21 +3003,8 @@
 		2C9731751F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C9731761F4C38F600AC9301 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C97317B1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C97317D1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C97317E1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C97317F1F4C38F600AC9301 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C9731801F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C9731811F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C9731821F4C38F600AC9301 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C97318A1F4C38F600AC9301 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C97318B1F4C38F600AC9301 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -3509,28 +3444,15 @@
 		2CA8D1B82088D9C000E105E9 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2CA8D1B92088D9C000E105E9 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2CA8D1BA2088D9C000E105E9 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2CA8D1BB2088D9C000E105E9 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2CA8D1BC2088D9C000E105E9 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
 		2CA8D1BD2088D9C000E105E9 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
-		2CA8D1BE2088D9C000E105E9 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2CA8D1BF2088D9C000E105E9 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
 		2CA8D1C02088D9C000E105E9 /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
-		2CA8D1C12088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2CA8D1C22088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2CA8D1C32088D9C000E105E9 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
 		2CA8D1C42088D9C000E105E9 /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		2CA8D1C52088D9C000E105E9 /* CourseListHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */; };
 		2CA8D1C62088D9C000E105E9 /* CardStepDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1421FED2758003B1177 /* CardStepDelegate.swift */; };
-		2CA8D1C72088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2CA8D1C82088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2CA8D1C92088D9C000E105E9 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2CA8D1CA2088D9C000E105E9 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2CA8D1CB2088D9C000E105E9 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2CA8D1CC2088D9C000E105E9 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2CA8D1CD2088D9C000E105E9 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
 		2CA8D1CE2088D9C000E105E9 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA8D1CF2088D9C000E105E9 /* MigrationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */; };
-		2CA8D1D02088D9C000E105E9 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2CA8D1D12088D9C000E105E9 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2CA8D1D22088D9C000E105E9 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2CA8D1D32088D9C000E105E9 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -4522,19 +4444,6 @@
 		864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
 		864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		864D67951E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		864D67961E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
-		864D67971E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		864D67981E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		864D67991E83E08E001E8D9E /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		864D67A01E83E08E001E8D9E /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -5348,19 +5257,6 @@
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIDefaults.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
-		08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabBarItem.swift; sourceTree = "<group>"; };
-		08AF59D71E6D9BE800423EFF /* RGTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabView.swift; sourceTree = "<group>"; };
-		08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDataSource.swift"; sourceTree = "<group>"; };
-		08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
-		08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDataSource.swift"; sourceTree = "<group>"; };
-		08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIToolbarDelegate.swift"; sourceTree = "<group>"; };
-		08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
-		08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDataSource.swift; sourceTree = "<group>"; };
-		08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreaksAlertPresentationManager.swift; sourceTree = "<group>"; };
 		08B3B80520F3909400F64D20 /* HTMLProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLProcessor.swift; sourceTree = "<group>"; };
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
@@ -7488,59 +7384,6 @@
 			name = "Users data";
 			sourceTree = "<group>";
 		};
-		08AF59CC1E6D9A8100423EFF /* RGPageViewController */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D31E6D9BE800423EFF /* Source */,
-			);
-			name = RGPageViewController;
-			path = Stepic;
-			sourceTree = "<group>";
-		};
-		08AF59D31E6D9BE800423EFF /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D41E6D9BE800423EFF /* Classes */,
-				08AF59D81E6D9BE800423EFF /* Extensions */,
-				08AF59E11E6D9BE800423EFF /* Protocols */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		08AF59D41E6D9BE800423EFF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */,
-				08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */,
-				08AF59D71E6D9BE800423EFF /* RGTabView.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		08AF59D81E6D9BE800423EFF /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */,
-				08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */,
-				08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */,
-				08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */,
-				08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */,
-				08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */,
-				08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */,
-				08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		08AF59E11E6D9BE800423EFF /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */,
-				08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		08B361061BB2E3C100090843 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -8349,7 +8192,6 @@
 			isa = PBXGroup;
 			children = (
 				2C4BBF0B203DC5C9000A4250 /* Plyr */,
-				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
@@ -13550,19 +13392,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
-				08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */,
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */,
-				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */,
 				08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
@@ -13572,7 +13411,6 @@
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
-				08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
@@ -13713,7 +13551,6 @@
 				2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
-				08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				087585B71FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */,
 				0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
@@ -13870,7 +13707,6 @@
 				2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */,
-				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
@@ -13888,10 +13724,8 @@
 				2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */,
-				08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				2C5DF1431FED2758003B1177 /* CardStepDelegate.swift in Sources */,
@@ -13903,7 +13737,6 @@
 				0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
-				08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				08C7CB7D1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
@@ -13911,7 +13744,6 @@
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
-				08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
 				2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */,
 				080C5E771EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
@@ -13930,7 +13762,6 @@
 				2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
-				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
 				08C1BF281FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
@@ -13966,7 +13797,6 @@
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
-				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -14002,7 +13832,6 @@
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */,
 				088EDB591F8F5A48009B736E /* CourseListViewController.swift in Sources */,
-				08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */,
@@ -14476,25 +14305,12 @@
 				2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7241FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */,
-				2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */,
-				2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */,
 				2C608AC3204568BC006870BB /* CongratulationViewController.swift in Sources */,
-				2C1B61331F4C4AEF00236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C1B61351F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C1B61361F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C1B61371F4C4AEF00236804 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFD2045694E006870BB /* CardStepDelegate.swift in Sources */,
-				2C1B61381F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C1B61391F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C1B613A1F4C4AEF00236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */,
-				2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4B20456B72006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */,
-				2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C1B61421F4C4AEF00236804 /* TeachersTableViewCell.swift in Sources */,
 				2C1B61431F4C4AEF00236804 /* TeacherCollectionViewCell.swift in Sources */,
@@ -14961,25 +14777,12 @@
 				2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7251FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */,
-				2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */,
-				2C1B63431F4C590700236804 /* RGTabView.swift in Sources */,
 				2C608AC4204568BD006870BB /* CongratulationViewController.swift in Sources */,
-				2C1B63441F4C590700236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C1B63461F4C590700236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C1B63471F4C590700236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C1B63481F4C590700236804 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFF2045694F006870BB /* CardStepDelegate.swift in Sources */,
-				2C1B63491F4C590700236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C1B634A1F4C590700236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C1B634B1F4C590700236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */,
-				2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4A20456B72006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */,
-				2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C1B63531F4C590700236804 /* TeachersTableViewCell.swift in Sources */,
 				2C1B63541F4C590700236804 /* TeacherCollectionViewCell.swift in Sources */,
@@ -15813,28 +15616,15 @@
 				2C89A9C11F4C289900227C3B /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C89A9C21F4C289900227C3B /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C89A9C31F4C289900227C3B /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
-				2C89A9C41F4C289900227C3B /* RGPageViewController.swift in Sources */,
-				2C89A9C51F4C289900227C3B /* RGTabBarItem.swift in Sources */,
 				2C6A76302045CE5A00C509A6 /* AdaptiveStatsViewController.swift in Sources */,
-				2C89A9C61F4C289900227C3B /* RGTabView.swift in Sources */,
-				2C89A9C71F4C289900227C3B /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2C6A76462045CED400C509A6 /* CAGradientLayer+Init.swift in Sources */,
-				2C89A9C91F4C289900227C3B /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C89A9CA1F4C289900227C3B /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C89A9CB1F4C289900227C3B /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				86A1C3372065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				088EDCAA1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C6A76392045CE8200C509A6 /* CardStepDelegate.swift in Sources */,
-				2C89A9CC1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C89A9CD1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C89A9CE1F4C289900227C3B /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */,
-				2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */,
 				2C6A76552045CF4600C509A6 /* MigrationExtensions.swift in Sources */,
-				2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */,
 				2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */,
 				2C89A9D61F4C289900227C3B /* TeachersTableViewCell.swift in Sources */,
 				2C89A9D71F4C289900227C3B /* TeacherCollectionViewCell.swift in Sources */,
@@ -16309,26 +16099,13 @@
 				2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7231FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */,
-				2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */,
-				2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */,
 				2C608AC2204568BC006870BB /* CongratulationViewController.swift in Sources */,
-				2C97317B1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C97317D1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C97317E1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C97317F1F4C38F600AC9301 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFC2045694D006870BB /* CardStepDelegate.swift in Sources */,
-				2C9731801F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C9731811F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				2C604E24207E460F001588FB /* CodeEditorPreviewView.swift in Sources */,
-				2C9731821F4C38F600AC9301 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
-				2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4C20456B73006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */,
-				2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C97318A1F4C38F600AC9301 /* TeachersTableViewCell.swift in Sources */,
 				2C97318B1F4C38F600AC9301 /* TeacherCollectionViewCell.swift in Sources */,
@@ -16798,28 +16575,15 @@
 				2CA8D1B82088D9C000E105E9 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2CA8D1B92088D9C000E105E9 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2CA8D1BA2088D9C000E105E9 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
-				2CA8D1BB2088D9C000E105E9 /* RGPageViewController.swift in Sources */,
-				2CA8D1BC2088D9C000E105E9 /* RGTabBarItem.swift in Sources */,
 				2CA8D1BD2088D9C000E105E9 /* AdaptiveStatsViewController.swift in Sources */,
-				2CA8D1BE2088D9C000E105E9 /* RGTabView.swift in Sources */,
-				2CA8D1BF2088D9C000E105E9 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2CA8D1C02088D9C000E105E9 /* CAGradientLayer+Init.swift in Sources */,
-				2CA8D1C12088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2CA8D1C22088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2CA8D1C32088D9C000E105E9 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2CA8D1C42088D9C000E105E9 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2CA8D1C52088D9C000E105E9 /* CourseListHorizontalViewController.swift in Sources */,
 				2CA8D1C62088D9C000E105E9 /* CardStepDelegate.swift in Sources */,
-				2CA8D1C72088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2CA8D1C82088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2CA8D1C92088D9C000E105E9 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2CA8D1CA2088D9C000E105E9 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2CA8D1CB2088D9C000E105E9 /* UINavigationBar.swift in Sources */,
-				2CA8D1CC2088D9C000E105E9 /* RGPageViewControllerDataSource.swift in Sources */,
 				2CA8D1CD2088D9C000E105E9 /* CourseWidgetTableViewCell.swift in Sources */,
 				2CA8D1CE2088D9C000E105E9 /* AdaptiveStatsManager.swift in Sources */,
 				2CA8D1CF2088D9C000E105E9 /* MigrationExtensions.swift in Sources */,
-				2CA8D1D02088D9C000E105E9 /* RGPageViewControllerDelegate.swift in Sources */,
 				2CA8D1D12088D9C000E105E9 /* GeneralInfoTableViewCell.swift in Sources */,
 				2CA8D1D22088D9C000E105E9 /* TeachersTableViewCell.swift in Sources */,
 				2CA8D1D32088D9C000E105E9 /* TeacherCollectionViewCell.swift in Sources */,
@@ -17367,24 +17131,11 @@
 				2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
 				08A9F7201FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
-				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
 				2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */,
-				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				08CCAEC2204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
-				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
-				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				864D67951E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				864D67961E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0846B11B1EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				864D67971E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				864D67981E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				864D67991E83E08E001E8D9E /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
-				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C733C3A1F29E090000E7FAF /* AdaptiveStatsManager.swift in Sources */,
-				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
 				864D67A01E83E08E001E8D9E /* TeachersTableViewCell.swift in Sources */,
 				864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */,
