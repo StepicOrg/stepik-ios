@@ -323,6 +323,11 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
+    func showError(message: String) {
+        self.doesPresentActivityIndicatorView = false
+        Messages.sharedManager.show(with: message)
+    }
+
     func showLoading(visible: Bool) {
         if visible {
             self.doesPresentWarningView = false
@@ -421,6 +426,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func submitPressed() {
+        self.view.endEditing(true)
+
         submissionPressedBlock?()
         presenter?.submitPressed()
     }

@@ -127,13 +127,13 @@ class SubmissionsAPI: APIEndpoint {
 
 extension SubmissionsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
         self.create(stepName: stepName, attemptId: attemptId, reply: reply).done {
             submission in
             success(submission)
         }.catch {
             error in
-            errorHandler(error.localizedDescription)
+            errorHandler(error)
         }
         return nil
     }
