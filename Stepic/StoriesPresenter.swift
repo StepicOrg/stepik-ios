@@ -129,12 +129,12 @@ class StoriesPresenter: StoriesPresenterProtocol {
         self.stories = mockedStories
         delay(2.0, closure: {
             [weak self] in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
-            self.view?.set(state: self.stories.isEmpty ? .empty : .normal)
-            self.preheatFirstImages(stories: self.stories)
-            self.view?.set(stories: self.stories)
+            strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
+            strongSelf.preheatFirstImages(stories: strongSelf.stories)
+            strongSelf.view?.set(stories: strongSelf.stories)
         })
     }
 
