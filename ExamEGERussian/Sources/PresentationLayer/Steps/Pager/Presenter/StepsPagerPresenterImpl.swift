@@ -101,10 +101,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
             }
             self?.steps[index].isPassed = step.isPassed
 
-            NotificationCenter.default.post(
-                descriptor: Step.progressNotification,
-                value: StepProgressNotificationPayload(id: step.id, isPassed: step.isPassed)
-            )
+            NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
         }.catch { [weak self] error in
             print(error)
             self?.view?.state = .error(message: NSLocalizedString("Failed to mark step as solved", comment: ""))
