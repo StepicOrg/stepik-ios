@@ -16,8 +16,8 @@ protocol StoryViewProtocol: class {
     func unpause(segment: Int)
     func set(segment: Int, completed: Bool)
     func close()
-    func transitionNext(destinationVC: StoryViewController)
-    func transitionPrev(destinationVC: StoryViewController)
+//    func transitionNext(destinationVC: StoryViewController)
+//    func transitionPrev(destinationVC: StoryViewController)
 }
 
 protocol StoryPresenterProtocol: class {
@@ -29,8 +29,8 @@ protocol StoryPresenterProtocol: class {
     func unpause()
     var storyPartsCount: Int { get }
     var storyID: Int { get }
-    func getNextStory() -> StoryViewController?
-    func getPrevStory() -> StoryViewController?
+//    func getNextStory() -> StoryViewController?
+//    func getPrevStory() -> StoryViewController?
     func didAppear()
 }
 
@@ -42,25 +42,12 @@ class StoryPresenter: StoryPresenterProtocol {
     weak var view: StoryViewProtocol?
     private var story: Story
 
-    private var prevStoryLazyAssembly: LazyStoryAssembly
-    private var nextStoryLazyAssembly: LazyStoryAssembly
-
-    private var nextModule: StoryViewController?
-    private var prevModule: StoryViewController?
-
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
 
-    init(
-        view: StoryViewProtocol,
-        story: Story,
-        prevStoryLazyAssembly: LazyStoryAssembly,
-        nextStoryLazyAssembly: LazyStoryAssembly
-    ) {
+    init(view: StoryViewProtocol, story: Story) {
         self.view = view
         self.story = story
-        self.prevStoryLazyAssembly = prevStoryLazyAssembly
-        self.nextStoryLazyAssembly = nextStoryLazyAssembly
     }
 
     var storyID: Int {
@@ -112,36 +99,22 @@ class StoryPresenter: StoryPresenterProtocol {
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": storyID])
     }
 
-    func getPrevStory() -> StoryViewController? {
-        if prevModule == nil {
-            prevModule = prevStoryLazyAssembly.buildModule?()
-        }
-        return prevModule
-    }
-
-    func getNextStory() -> StoryViewController? {
-        if nextModule == nil {
-            nextModule = nextStoryLazyAssembly.buildModule?()
-        }
-        return nextModule
-    }
-
     private func showPreviousStory() {
-        guard let module = getPrevStory() else {
-            view?.close()
-            return
-        }
-
-        view?.transitionPrev(destinationVC: module)
+//        guard let module = getPrevStory() else {
+//            view?.close()
+//            return
+//        }
+//
+//        view?.transitionPrev(destinationVC: module)
     }
 
     private func showNextStory() {
-        guard let module = getNextStory() else {
-            view?.close()
-            return
-        }
-
-        view?.transitionNext(destinationVC: module)
+//        guard let module = getNextStory() else {
+//            view?.close()
+//            return
+//        }
+//
+//        view?.transitionNext(destinationVC: module)
     }
 
     func skip() {

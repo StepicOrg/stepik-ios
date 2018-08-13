@@ -140,6 +140,7 @@
 		081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */; };
 		081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */; };
+		081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */; };
 		082348391ECA264100D2CB40 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
@@ -4972,6 +4973,7 @@
 		081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerViewController.swift; sourceTree = "<group>"; };
 		081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPageViewController.swift; sourceTree = "<group>"; };
 		081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPresenter.swift; sourceTree = "<group>"; };
+		081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesAssembly.swift; sourceTree = "<group>"; };
 		082348381ECA264000D2CB40 /* ShareableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
@@ -6445,6 +6447,7 @@
 			children = (
 				081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */,
 				081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */,
+				081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */,
 			);
 			name = "Opened Stories";
 			sourceTree = "<group>";
@@ -13478,6 +13481,7 @@
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */,
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
+				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,

@@ -53,48 +53,10 @@ class StoriesViewController: UIViewController {
         }
     }
 
-    private func routedStoryModule(forStoryAt index: Int) -> UIViewController {
-        let story = stories[index]
-        let storiesCount = stories.count
-
-        let prevLazyAssembly = LazyStoryAssembly(
-            buildBlock: { [weak self] in
-                if index == 0 {
-                    return nil
-                } else {
-                    return self?.routedStoryModule(forStoryAt: index - 1) as? StoryViewController
-                }
-            }
-        )
-
-        let nextLazyAssembly = LazyStoryAssembly(
-            buildBlock: { [weak self] in
-                if index >= storiesCount - 1 {
-                    return nil
-                } else {
-                    return self?.routedStoryModule(forStoryAt: index + 1) as? StoryViewController
-                }
-            }
-        )
-
-        let assembly = StoryAssembly(
-            story: story,
-            prevStoryLazyAssembly: prevLazyAssembly,
-            nextStoryLazyAssembly: nextLazyAssembly
-        )
-
-        return assembly.buildModule()
-    }
-
     func showStory(at index: Int) {
-        guard let moduleToPresent = routedStoryModule(forStoryAt: index) as? StoryViewController else {
-            return
-        }
 
-        let story = stories[index]
-        moduleToPresent.view.hero.id = "story_\(story.id)"
-        moduleToPresent.hero.isEnabled = true
-
+        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).buildModule()
+        moduleToPresent.view.hero.id = "story_\(stories[index].id)"
         present(moduleToPresent, animated: true, completion: nil)
     }
 }

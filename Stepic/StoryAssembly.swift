@@ -20,26 +20,14 @@ class LazyStoryAssembly {
 class StoryAssembly: Assembly {
 
     var story: Story
-    var prevStoryLazyAssembly: LazyStoryAssembly
-    var nextStoryLazyAssembly: LazyStoryAssembly
 
-    init(
-        story: Story,
-        prevStoryLazyAssembly: LazyStoryAssembly,
-        nextStoryLazyAssembly: LazyStoryAssembly
-    ) {
+    init(story: Story) {
         self.story = story
-        self.prevStoryLazyAssembly = prevStoryLazyAssembly
-        self.nextStoryLazyAssembly = nextStoryLazyAssembly
     }
 
     func buildModule() -> UIViewController {
         let vc = StoryViewController()
-        vc.presenter = StoryPresenter(
-            view: vc, story: story,
-            prevStoryLazyAssembly: prevStoryLazyAssembly,
-            nextStoryLazyAssembly: nextStoryLazyAssembly
-        )
+        vc.presenter = StoryPresenter(view: vc, story: story)
         return vc
     }
 }
