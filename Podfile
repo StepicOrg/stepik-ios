@@ -15,6 +15,7 @@ def shared_pods
     pod 'Crashlytics', '~> 3.10.5'
     pod 'DeviceKit', '~> 1.7.0'
     pod 'PromiseKit', '~> 6.3.4'
+    pod 'SwiftLint', '0.27.0'
 end
 
 def all_pods

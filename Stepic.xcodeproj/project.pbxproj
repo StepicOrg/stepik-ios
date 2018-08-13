@@ -12150,7 +12150,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		08983F251F3E4131008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12164,7 +12164,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		08A947FE1EB2B1A5001EC02D /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12326,7 +12326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config .swiftlint.yml\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		1B71EA4E17E70513F7694386 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12358,7 +12358,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12386,7 +12386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2C1B64C11F4C590700236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12414,7 +12414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2C47A16C206297D0003E87EC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12455,7 +12455,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2C9732E71F4C38F600AC9301 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12483,7 +12483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2CA8D13A2088D9C000E105E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12529,7 +12529,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
+			shellScript = "${SRCROOT}/lint.sh";
 		};
 		2CA8D3822088D9C000E105E9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
