@@ -18,31 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else {
-            fatalError("Could not instantiate window")
+            fatalError("Could't initialize window")
         }
 
-        let serviceFactory = ServiceFactoryImpl(
-            authAPI: AuthAPI(),
-            stepicsAPI: StepicsAPI(),
-            profilesAPI: ProfilesAPI(),
-            coursesAPI: CoursesAPI(),
-            enrollmentsAPI: EnrollmentsAPI(),
-            lessonsAPI: LessonsAPI(),
-            stepsAPI: StepsAPI(),
-            progressesAPI: ProgressesAPI(),
-            defaultsStorageManager: DefaultsStorageManager.shared
-        )
-        let assemblyFactory = AssemblyFactoryImpl(
-            serviceFactory: serviceFactory,
-            knowledgeGraph: KnowledgeGraph()
-        )
-
-        guard let router = assemblyFactory.applicationAssembly.module().router else {
-            fatalError("Could not instantiate router")
-        }
-        router.start(window)
-
-        ThirdPartiesConfigurator().configure()
+        AppLaunchingCommandsBuilder()
+            .setKeyWindow(window)
+            .build()
+            .forEach {
+                $0.execute()
+            }
 
         return true
     }

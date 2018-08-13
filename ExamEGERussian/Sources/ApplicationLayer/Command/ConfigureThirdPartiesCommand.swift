@@ -1,8 +1,8 @@
 //
-//  ThirdPartiesConfigurator.swift
+//  ConfigureThirdPartiesCommand.swift
 //  ExamEGERussian
 //
-//  Created by Ivan Magda on 27/07/2018.
+//  Created by Ivan Magda on 13/08/2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
@@ -11,8 +11,8 @@ import AlamofireNetworkActivityIndicator
 import IQKeyboardManagerSwift
 import SVProgressHUD
 
-final class ThirdPartiesConfigurator {
-    func configure() {
+struct ConfigureThirdPartiesCommand: Command {
+    func execute() {
         NetworkActivityIndicatorManager.shared.isEnabled = true
 
         IQKeyboardManager.sharedManager().enable = true
