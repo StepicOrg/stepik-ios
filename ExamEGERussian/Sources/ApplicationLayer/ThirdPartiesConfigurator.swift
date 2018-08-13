@@ -9,6 +9,7 @@
 import Foundation
 import AlamofireNetworkActivityIndicator
 import IQKeyboardManagerSwift
+import SVProgressHUD
 
 final class ThirdPartiesConfigurator {
     func configure() {
@@ -18,5 +19,9 @@ final class ThirdPartiesConfigurator {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setMinimumDismissTimeInterval(0.5)
+        SVProgressHUD.setHapticsEnabled(true)
     }
 }

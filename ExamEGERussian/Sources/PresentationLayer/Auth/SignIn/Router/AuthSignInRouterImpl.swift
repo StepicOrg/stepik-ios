@@ -27,8 +27,4 @@ final class AuthSignInRouterImpl: BaseRouter, AuthSignInRouter {
             backButtonStyle: .done
         )
     }
-
-    func pop() {
-        popViewController()
-    }
 }

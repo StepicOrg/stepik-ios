@@ -25,7 +25,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
         return knowledgeGraph[topicId]!.key
     }
     private var lessonsIds: [Int] {
-        return topic.lessons.filter { $0.type == .theory }.map { $0.id }
+        return topic.lessons.map { $0.id }
     }
     private var coursesIds: [Int] {
         return topic.lessons.compactMap { Int($0.courseId) }
@@ -35,9 +35,14 @@ final class LessonsPresenterImpl: LessonsPresenter {
     private let courseService: CourseService
     private let enrollmentService: EnrollmentService
 
-    init(view: LessonsView, router: LessonsRouter, topicId: String,
-         knowledgeGraph: KnowledgeGraph, lessonsService: LessonsService,
-         courseService: CourseService, enrollmentService: EnrollmentService) {
+    init(view: LessonsView,
+         router: LessonsRouter,
+         topicId: String,
+         knowledgeGraph: KnowledgeGraph,
+         lessonsService: LessonsService,
+         courseService: CourseService,
+         enrollmentService: EnrollmentService
+    ) {
         self.view = view
         self.router = router
         self.topicId = topicId
@@ -53,7 +58,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     func selectLesson(with viewData: LessonsViewData) {
-        router.showStepsForLessonWith(viewData.id)
+        guard let lesson = lessons.first(where: { $0.id == viewData.id }) else {
+            return
+        }
+
+        router.showStepsForLesson(lesson)
     }
 
     // MARK: - Private API
@@ -72,13 +81,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
             return .value(Array(ids))
         }.then { ids -> Promise<[Course]> in
-            guard !ids.isEmpty else {
-                return .value([])
-            }
-
-            return self.courseService.fetchCourses(with: ids)
+            self.courseService.fetchCourses(with: ids)
         }.then { courses in
             when(fulfilled: courses.map { self.joinCourse($0) })
+        }.then { courses in
+            self.courseService.fetchProgresses(coursesIds: courses.map { $0.id })
         }.done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
         }.catch { [weak self] error in

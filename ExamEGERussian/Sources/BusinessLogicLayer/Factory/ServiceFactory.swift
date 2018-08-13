@@ -15,6 +15,7 @@ protocol ServiceFactory: class {
     var coursesAPI: CoursesAPI { get }
     var enrollmentsAPI: EnrollmentsAPI { get }
     var lessonsAPI: LessonsAPI { get }
+    var progressesAPI: ProgressesAPI { get }
     var defaultsStorageManager: DefaultsStorageManager { get }
 
     var userRegistrationService: UserRegistrationService { get }
@@ -22,4 +23,6 @@ protocol ServiceFactory: class {
     var lessonsService: LessonsService { get }
     var courseService: CourseService { get }
     var enrollmentService: EnrollmentService { get }
+    var stepsService: StepsService { get }
+    var progressService: ProgressService { get }
 }

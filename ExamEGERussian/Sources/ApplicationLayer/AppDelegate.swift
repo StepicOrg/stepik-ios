@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             coursesAPI: CoursesAPI(),
             enrollmentsAPI: EnrollmentsAPI(),
             lessonsAPI: LessonsAPI(),
+            stepsAPI: StepsAPI(),
+            progressesAPI: ProgressesAPI(),
             defaultsStorageManager: DefaultsStorageManager.shared
         )
         let assemblyFactory = AssemblyFactoryImpl(
