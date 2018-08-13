@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import Hero
 
 class StoryViewController: UIViewController {
 
@@ -26,7 +25,6 @@ class StoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        view.hero.id = "story_\(presenter?.storyID ?? -1)"
         progressView.completion = {
             [weak self] in
             self?.presenter?.finishedAnimating()
@@ -117,7 +115,7 @@ class StoryViewController: UIViewController {
 
     func close() {
         //TODO: Translate this to presenter
-        hero.dismissViewController()
+        dismiss(animated: true, completion: nil)
     }
 }
 

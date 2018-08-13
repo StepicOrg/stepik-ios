@@ -8,15 +8,17 @@
 
 import Foundation
 import UIKit
-import Hero
 
 class StoriesViewController: UIViewController {
 
     var presenter: StoriesPresenterProtocol?
 
     var stories: [Story] = []
+    var currentItemFrame: CGRect?
 
     @IBOutlet weak var collectionView: UICollectionView!
+
+    private var willDisappear: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,32 +34,33 @@ class StoriesViewController: UIViewController {
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         collectionView.showsHorizontalScrollIndicator = false
 
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
+
         refresh()
     }
-
-    private func refresh() {
-        collectionView.skeleton.show()
-        presenter?.refresh()
-    }
-
-    private var willDisappear: Bool = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-    func showIfNotVisible(index: Int) {
-        let indexPath = IndexPath(item: index, section: 0)
-        if !collectionView.indexPathsForVisibleItems.contains(indexPath) {
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        }
+    func showStory(at index: Int) {
+        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).buildModule()
+        moduleToPresent.modalPresentationStyle = .custom
+        moduleToPresent.transitioningDelegate = self
+        present(moduleToPresent, animated: true, completion: nil)
     }
 
-    func showStory(at index: Int) {
+    private func refresh() {
+        presenter?.refresh()
+    }
 
-        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).buildModule()
-        moduleToPresent.view.hero.id = "story_\(stories[index].id)"
-        present(moduleToPresent, animated: true, completion: nil)
+    private func getFrame(indexPath: IndexPath) -> CGRect? {
+        if let frame = collectionView.cellForItem(at: indexPath)?.frame {
+            return collectionView.convert(frame, to: UIApplication.shared.keyWindow)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -69,7 +72,7 @@ extension StoriesViewController: StoriesViewProtocol {
         case .normal:
             print("normal")
         case .loading:
-            print("loading")
+            collectionView.skeleton.show()
         }
     }
 
@@ -78,10 +81,21 @@ extension StoriesViewController: StoriesViewProtocol {
         self.stories = stories
         collectionView.reloadData()
     }
+
+    func showIfNotVisible(index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        if !collectionView.indexPathsForVisibleItems.contains(indexPath) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.currentItemFrame = self?.getFrame(indexPath: indexPath)
+        }
+    }
 }
 
 extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        currentItemFrame = getFrame(indexPath: indexPath)
         showStory(at: indexPath.item)
     }
 
@@ -99,8 +113,46 @@ extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
 
         let story = stories[indexPath.item]
-        cell.contentView.hero.id = "story_\(story.id)"
         cell.update(imagePath: story.coverPath, title: story.title)
         return cell
+    }
+}
+
+extension StoriesViewController: UIViewControllerTransitioningDelegate {
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        guard let currentItemFrame = currentItemFrame else {
+            return nil
+        }
+
+        return GrowPresentAnimationController(originFrame: currentItemFrame)
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard
+            let revealVC = dismissed as? OpenedStoriesPageViewController,
+            let currentItemFrame = currentItemFrame
+            else
+        {
+            return nil
+        }
+
+        return ShrinkDismissAnimationController(
+            destinationFrame: currentItemFrame,
+            interactionController: revealVC.swipeInteractionController
+        )
+    }
+
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = animator as? ShrinkDismissAnimationController,
+            let interactionController = animator.interactionController,
+            interactionController.interactionInProgress
+            else {
+                return nil
+        }
+        return interactionController
     }
 }
