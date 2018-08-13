@@ -10,19 +10,25 @@ import Foundation
 import UIKit.UIWindow
 
 final class AppLaunchingCommandsBuilder {
-    private var window: UIWindow!
-    private lazy var assemblyFactory: AssemblyFactory = {
-        AssemblyFactoryBuilder()
-            .setServiceFactory(ServiceFactoryBuilder().build())
-            .build()
-    }()
+    private var window: UIWindow?
+    private var assemblyFactory: AssemblyFactory?
 
     func setKeyWindow(_ window: UIWindow) -> AppLaunchingCommandsBuilder {
         self.window = window
         return self
     }
 
+    func setAssemblyFactory(_ assemblyFactory: AssemblyFactory) -> AppLaunchingCommandsBuilder {
+        self.assemblyFactory = assemblyFactory
+        return self
+    }
+
     func build() -> [Command] {
+        guard let window = window,
+              let assemblyFactory = assemblyFactory else {
+            fatalError("window & assemblyFactory must be initialized, call appropriate methods before.")
+        }
+
         return [
             ConfigureThirdPartiesCommand(),
             ConfigureKeyWindowCommand(keyWindow: window, assemblyFactory: assemblyFactory)

@@ -10,10 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
-    // MARK: - UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -21,8 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could't initialize window")
         }
 
+        let serviceFactory = ServiceFactoryBuilder().build()
+        let assemblyFactory = AssemblyFactoryBuilder()
+            .setServiceFactory(serviceFactory)
+            .build()
+
         AppLaunchingCommandsBuilder()
             .setKeyWindow(window)
+            .setAssemblyFactory(assemblyFactory)
             .build()
             .forEach {
                 $0.execute()
@@ -30,5 +33,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-
 }

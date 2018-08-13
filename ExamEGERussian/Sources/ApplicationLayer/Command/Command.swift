@@ -8,8 +8,8 @@
 
 import Foundation
 
-// https://sourcemaking.com/design_patterns/command
 /// Encapsulates a command request as an object.
+/// https://sourcemaking.com/design_patterns/command
 protocol Command {
     func execute()
 }
