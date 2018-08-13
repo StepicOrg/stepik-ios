@@ -4285,7 +4285,6 @@
 		62E98F967FBB258240185AA0 /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E98F998D66438F26E5A929 /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
 		62E98F9A851DD9F2A2FC4297 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
-		62E98FA01AA38149BD6E9D8A /* Step+ProgressNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D1F4129C3F9A02FEB2F /* Step+ProgressNotification.swift */; };
 		62E98FAFFA3F5A6BBA5AA68F /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
 		62E98FB66D35A40DBF66FE61 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E98FBB960F50579902DF62 /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
@@ -9818,7 +9817,6 @@
 		2CD7999221077E540054D098 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				62E98487EF7EEBA628CA3860 /* Notifications */,
 				2CD7999521077E540054D098 /* PlainObjects */,
 				2CD7999421077E540054D098 /* StepikResult.swift */,
 			);
@@ -10036,14 +10034,6 @@
 			path = ProgressService;
 			sourceTree = "<group>";
 		};
-		62E98487EF7EEBA628CA3860 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				62E9899A3E2470C0B127B722 /* Step */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
 		62E9851EC1CEC1B2694CEA00 /* NotificationBanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -10078,14 +10068,6 @@
 				62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */,
 			);
 			path = Factory;
-			sourceTree = "<group>";
-		};
-		62E9899A3E2470C0B127B722 /* Step */ = {
-			isa = PBXGroup;
-			children = (
-				62E98D1F4129C3F9A02FEB2F /* Step+ProgressNotification.swift */,
-			);
-			path = Step;
 			sourceTree = "<group>";
 		};
 		62E98AC3C03DF7EDB2FD4AB6 /* List */ = {
@@ -13818,7 +13800,6 @@
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
-				2C64D6E321183B9C003AC69A /* Step+ProgressNotification.swift in Sources */,
 				2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
@@ -14598,7 +14579,6 @@
 				2C1B616D1F4C4AEF00236804 /* StyledTabBarViewController.swift in Sources */,
 				2C1B616E1F4C4AEF00236804 /* CodeReply.swift in Sources */,
 				2C1B61711F4C4AEF00236804 /* Alamofire-SwiftyJSON.swift in Sources */,
-				2C64D6E721183B9F003AC69A /* Step+ProgressNotification.swift in Sources */,
 				2CBC261821086949004245D6 /* UserRegistrationServiceImpl.swift in Sources */,
 				2C1B61721F4C4AEF00236804 /* JSQWebViewController.swift in Sources */,
 				08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
@@ -15084,7 +15064,6 @@
 				2C1B637E1F4C590700236804 /* StyledTabBarViewController.swift in Sources */,
 				2C1B637F1F4C590700236804 /* CodeReply.swift in Sources */,
 				2C1B63821F4C590700236804 /* Alamofire-SwiftyJSON.swift in Sources */,
-				2C64D6E821183B9F003AC69A /* Step+ProgressNotification.swift in Sources */,
 				2CBC261921086949004245D6 /* UserRegistrationServiceImpl.swift in Sources */,
 				2C1B63831F4C590700236804 /* JSQWebViewController.swift in Sources */,
 				08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
@@ -15843,7 +15822,6 @@
 				2C89A98B1F4C289900227C3B /* AdaptiveRatingManager.swift in Sources */,
 				08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				08A9F7111FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
-				2C64D6E521183B9E003AC69A /* Step+ProgressNotification.swift in Sources */,
 				2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */,
 				2CF2248220EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */,
@@ -16363,7 +16341,6 @@
 				2C608ADB204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
 				2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */,
 				2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */,
-				2C64D6E621183B9E003AC69A /* Step+ProgressNotification.swift in Sources */,
 				2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF361FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C97315B1F4C38F600AC9301 /* CellOperationsUtil.swift in Sources */,
@@ -17244,7 +17221,6 @@
 				62E9813EA4EF290CAD112E87 /* ProfileHeaderInfoView.swift in Sources */,
 				62E98C0BC0F2F1C04047799F /* ProfileInfoPresenter.swift in Sources */,
 				62E98B7E75DC928DA044BC5D /* UIView+fromNib.swift in Sources */,
-				2C64D6E921183BA1003AC69A /* Step+ProgressNotification.swift in Sources */,
 				62E98BB5A0A3D643A07C837B /* StreakNotificationsControlPresenter.swift in Sources */,
 				62E98741E700A4CEB1B6FA0B /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E9839060309CC98517D0FB /* ProfileDescriptionPresenter.swift in Sources */,
@@ -17794,7 +17770,6 @@
 				62E983B6D2377B0F812820C5 /* ProfileHeaderInfoView.swift in Sources */,
 				62E9803CECA6AA67AF1DECFB /* ProfileInfoPresenter.swift in Sources */,
 				62E98FB66D35A40DBF66FE61 /* UIView+fromNib.swift in Sources */,
-				2C64D6E421183B9D003AC69A /* Step+ProgressNotification.swift in Sources */,
 				62E98EE5F0C3EF9E991C8AD3 /* StreakNotificationsControlPresenter.swift in Sources */,
 				62E98C6B6DE6E2BD98829A26 /* UITableView+TableHeaderLayout.swift in Sources */,
 				62E98FBB960F50579902DF62 /* ProfileDescriptionPresenter.swift in Sources */,
