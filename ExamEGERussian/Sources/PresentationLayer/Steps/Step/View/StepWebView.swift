@@ -19,8 +19,8 @@ final class StepWebView: WKWebView {
         return configuration
     }()
 
-    var didFinishNavigation: (_ navigation: WKNavigation) -> Void = { _ in }
-    var onOpenImage: (_ imageURL: URL) -> Void = { _ in }
+    var didFinishNavigation: ((_ navigation: WKNavigation) -> Void)?
+    var onOpenImage: ((_ imageURL: URL) -> Void)?
 
     // MARK: - Init
 
@@ -89,7 +89,7 @@ final class StepWebView: WKWebView {
 
 extension StepWebView: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        didFinishNavigation(navigation)
+        didFinishNavigation?(navigation)
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -103,7 +103,7 @@ extension StepWebView: WKNavigationDelegate {
             if let offset = urlString.indexOf("//") {
                 urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
                 if let imageURL = URL(string: urlString) {
-                    onOpenImage(imageURL)
+                    onOpenImage?(imageURL)
                 }
             }
 
