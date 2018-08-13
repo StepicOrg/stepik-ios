@@ -24,9 +24,7 @@ final class StepsServiceImpl: StepsService {
             return .value([])
         }
 
-        return firstly {
-            fetchSteps(ids: ids)
-        }.mapValues {
+        return fetchSteps(ids: ids).mapValues {
             self.toPlainObject($0)
         }
     }
@@ -95,9 +93,7 @@ final class StepsServiceImpl: StepsService {
             return .value([])
         }
 
-        return firstly {
-            executeFetchRequest(ids: ids)
-        }.then {
+        return executeFetchRequest(ids: ids).then {
             self.stepsAPI.retrieve(ids: ids, existing: $0)
         }
     }

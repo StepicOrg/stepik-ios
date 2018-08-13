@@ -87,6 +87,8 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
             SVProgressHUD.dismiss()
             self.onDeadlineSelected?()
             self.dismiss(animated: true, completion: nil)
+        }.catch { error in
+            print("\(#file) \(#function) \(error)")
         }
     }
 }

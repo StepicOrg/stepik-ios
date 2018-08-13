@@ -74,7 +74,7 @@ class LessonPresenter {
 
         view?.setRefreshing(refreshing: true)
 
-        var step: Step? = nil
+        var step: Step?
 
         if let localStep = Step.getStepWithId(stepId, unitId: unitId) {
             step = localStep
@@ -93,7 +93,7 @@ class LessonPresenter {
                 return
             }
 
-            var localLesson: Lesson? = nil
+            var localLesson: Lesson?
             localLesson = Lesson.getLesson(step.lessonId)
 
             _ = self?.lessonsAPI.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
@@ -265,7 +265,7 @@ class LessonPresenter {
             }
             stepController.shouldSendViewsBlock = {
                 [weak self] in
-                return self?.canSendViews ?? false
+                self?.canSendViews ?? false
             }
 
             if context == .unit {
@@ -308,7 +308,7 @@ class LessonPresenter {
             }
             stepController.shouldSendViewsBlock = {
                 [weak self] in
-                return self?.canSendViews ?? false
+                self?.canSendViews ?? false
             }
             stepController.lessonSlug = lesson.slug
             if context == .unit {

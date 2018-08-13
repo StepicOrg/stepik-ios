@@ -124,7 +124,7 @@ class LastStepRouter {
         }
 
         func checkSectionAndNavigate(in unit: Unit) {
-            var sectionForUpdate: Section? = nil
+            var sectionForUpdate: Section?
             if let retrievedSections = try? Section.getSections(unit.sectionId),
                let section = retrievedSections.first {
                 sectionForUpdate = section

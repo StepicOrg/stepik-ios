@@ -43,11 +43,13 @@ class AuthNavigationViewController: UINavigationController {
         let userActivitiesAPI = UserActivitiesAPI()
         checkToken().then {
             userActivitiesAPI.retrieve(user: userId)
-        }.done { userActivity -> Void in
+        }.done { userActivity in
             if userActivity.didSolveThisWeek && self.streaksNotificationSuggestionManager.canShowAlert(context: .streak, after: .login) {
                 self.streaksNotificationSuggestionManager.didShowAlert(context: .streak)
                 self.streaksAlertPresentationManager.suggestStreak(streak: userActivity.currentStreak)
             }
+        }.catch { error in
+            print("\(#file) \(#function) \(error)")
         }
     }
 

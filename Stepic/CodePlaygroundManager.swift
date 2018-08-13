@@ -123,7 +123,7 @@ class CodePlaygroundManager {
                 let offset = spacesCount
 
                 //searching for the last non-space symbol in the string to know if we need to do more than just return
-                var characterBeforeEndline: Character? = nil
+                var characterBeforeEndline: Character?
                 for character in line.reversed() {
                     if character == " " {
                         continue

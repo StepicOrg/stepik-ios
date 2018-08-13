@@ -6,15 +6,15 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '~> 4.4'
-    pod 'Atributika', '~> 4.0'
-    pod 'SwiftyJSON', '3.1.4'
+    pod 'Alamofire', '~> 4.7.3'
+    pod 'Atributika', '~> 4.4.3'
+    pod 'SwiftyJSON', '4.1.0'
     pod 'SDWebImage'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric'
-    pod 'Crashlytics', '~> 3.9'
-    pod 'DeviceKit', '~> 1.0'
-    pod "PromiseKit", "~> 6.0"
+    pod 'Crashlytics', '~> 3.10.5'
+    pod 'DeviceKit', '~> 1.7.0'
+    pod 'PromiseKit', '~> 6.3.4'
 end
 
 def all_pods
@@ -23,7 +23,7 @@ def all_pods
     pod "DownloadButton"
     pod 'SVProgressHUD'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic', '~> 3.1.2'
+    pod 'YandexMobileMetrica/Dynamic', '~> 3.2.0'
 
     pod 'SnapKit', '~> 4.0.0'
     
@@ -56,8 +56,6 @@ def all_pods
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
     pod "RFKeyboardToolbar", "~> 1.3"
     pod 'TTTAttributedLabel'
-    pod 'Atributika', '~> 4.0'
-    pod 'DeviceKit', '~> 1.0'
     pod 'lottie-ios'
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.0.4'

@@ -81,7 +81,7 @@ class AdaptiveRatingsPresenter {
         return Promise { seal in
             let currentUser = AuthInfo.shared.userId
             var usersForDeanonIds = [Int]()
-            var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard? = nil
+            var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard?
 
             ratingsAPI.cancelAllTasks()
             ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Guarantee<[User]> in

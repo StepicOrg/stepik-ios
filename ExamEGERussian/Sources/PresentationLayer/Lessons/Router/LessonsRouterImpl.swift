@@ -9,12 +9,12 @@
 import Foundation
 
 final class LessonsRouterImpl: BaseRouter, LessonsRouter {
-    func showStepsForLesson(_ lesson: LessonPlainObject) {
+	func showStepsForLesson(_ lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.stepsAssembly.module(
                 navigationController: navigationController,
                 lesson: lesson
             )
         })
-    }
+	}
 }

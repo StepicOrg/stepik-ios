@@ -17,7 +17,7 @@ class Skeleton {
     private var parent: Skeletonable
 
     var viewBuilder: (() -> UIView?) = {
-        return nil
+        nil
     }
 
     init(parent: Skeletonable) {

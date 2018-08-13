@@ -159,6 +159,8 @@ class RetrieveRequestMaker {
                         seal.fulfill((resultArray, json))
                     }
                 }
+            }.catch { error in
+                print("\(#file) \(#function) \(error)")
             }
         }
     }
