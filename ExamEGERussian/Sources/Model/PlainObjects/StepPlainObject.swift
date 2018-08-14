@@ -21,13 +21,13 @@ struct StepPlainObject {
     var image: UIImage {
         switch type {
         case .video:
-            return Constants.Images.videoDark
+            return ImageAsset.StepIcons.videoDark.image
         case .text:
-            return Constants.Images.theoryDark
+            return ImageAsset.StepIcons.theoryDark.image
         case .code, .dataset, .admin, .sql:
-            return Constants.Images.hardDark
+            return ImageAsset.StepIcons.adminDark.image
         default:
-            return Constants.Images.easyDark
+            return ImageAsset.StepIcons.easyDark.image
         }
     }
 
