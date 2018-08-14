@@ -8636,6 +8636,17 @@
 			path = PlainObjectsTests;
 			sourceTree = "<group>";
 		};
+		2C23FF1E212319E900721E59 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				2CFE248020ED112100AF1E3D /* Auth.plist */,
+				2CFE247B20ECF7F700AF1E3D /* Config.plist */,
+				2C59F03520EB8AC900666EE0 /* Info.plist */,
+				2C23FF1F21231A0200721E59 /* Constants.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -8858,7 +8869,6 @@
 			children = (
 				2C59F05D20EB98CA00666EE0 /* Sources */,
 				2C59F05E20EB98D400666EE0 /* Resources */,
-				2C59F05A20EB8E5C00666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussian;
 			sourceTree = "<group>";
@@ -8875,16 +8885,6 @@
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
-			sourceTree = "<group>";
-		};
-		2C59F05A20EB8E5C00666EE0 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				2CFE248020ED112100AF1E3D /* Auth.plist */,
-				2CFE247B20ECF7F700AF1E3D /* Config.plist */,
-				2C59F03520EB8AC900666EE0 /* Info.plist */,
-			);
-			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		2C59F05C20EB8F0D00666EE0 /* PresentationLayer */ = {
@@ -8915,6 +8915,7 @@
 			isa = PBXGroup;
 			children = (
 				2C59F05F20EB98E800666EE0 /* Assets */,
+				2C23FF1E212319E900721E59 /* Config */,
 				2CCA14C52111A7010068081A /* Storyboards */,
 			);
 			path = Resources;
@@ -18715,7 +18716,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6UNHY8UY6E;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/SupportingFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
@@ -18745,7 +18746,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UNHY8UY6E;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/SupportingFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussian;
@@ -18776,7 +18777,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6UNHY8UY6E;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExamEGERussianTests/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussianTests/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianTests;
@@ -18806,7 +18807,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UNHY8UY6E;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExamEGERussianTests/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussianTests/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianTests;
