@@ -1966,6 +1966,7 @@
 		2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
 		2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */; };
+		2C23FF2021231A0200721E59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23FF1F21231A0200721E59 /* Constants.swift */; };
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
@@ -2983,7 +2984,6 @@
 		2C949A4020ECC95E0049E9A8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */; };
 		2C949A4220ECC9C60049E9A8 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
-		2C949A4320ECC9E90049E9A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
 		2C949A4420ECCA000049E9A8 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
 		2C949A4520ECCA290049E9A8 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
 		2C949A4820ECCC890049E9A8 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
@@ -5686,6 +5686,7 @@
 		2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObjectTests.swift; sourceTree = "<group>"; };
+		2C23FF1F21231A0200721E59 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
@@ -15446,7 +15447,6 @@
 				2C9499D820ECBD2B0049E9A8 /* VideoURL+CoreDataProperties.swift in Sources */,
 				2C949A0520ECC3050049E9A8 /* StepikButton.swift in Sources */,
 				2C093EF8211B41F800162DD0 /* ReplyCache.swift in Sources */,
-				2C949A4320ECC9E90049E9A8 /* Constants.swift in Sources */,
 				2C093EF9211B423E00162DD0 /* AmplitudeAnalyticsEvents.swift in Sources */,
 				2C949A0A20ECC3E00049E9A8 /* NotificationsSection.swift in Sources */,
 				2C949A0920ECC3BE0049E9A8 /* HTMLParsingUtil.swift in Sources */,
@@ -15631,6 +15631,7 @@
 				2C949A3320ECC70D0049E9A8 /* AchievementProgressesAPI.swift in Sources */,
 				2CFE247420ECD87A00AF1E3D /* UIImageViewExtension.swift in Sources */,
 				2C770301210F29A3002E250D /* KnowledgeGraphTopicsMapPlainObject.swift in Sources */,
+				2C23FF2021231A0200721E59 /* Constants.swift in Sources */,
 				2C9499B920ECBB150049E9A8 /* Certificate+CoreDataProperties.swift in Sources */,
 				2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */,
 				2C9492CD2113119100552600 /* StepsAssembly.swift in Sources */,
