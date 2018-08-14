@@ -1965,6 +1965,7 @@
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
 		2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
+		2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */; };
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
@@ -5684,6 +5685,7 @@
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
@@ -8618,6 +8620,22 @@
 			name = Videos;
 			sourceTree = "<group>";
 		};
+		2C23FF16212303E900721E59 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C23FF17212303FC00721E59 /* PlainObjectsTests */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		2C23FF17212303FC00721E59 /* PlainObjectsTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */,
+			);
+			path = PlainObjectsTests;
+			sourceTree = "<group>";
+		};
 		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -8849,10 +8867,11 @@
 			isa = PBXGroup;
 			children = (
 				2C6841BC20EE12590050155F /* AssemblyTests */,
-				2CC8BA05210B4AF40080BA05 /* PresentationTests */,
-				2C6841C120EE14AE0050155F /* LogicTests */,
-				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2CC995632105C77C0023EC0C /* Common */,
+				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
+				2C6841C120EE14AE0050155F /* LogicTests */,
+				2C23FF16212303E900721E59 /* ModelTests */,
+				2CC8BA05210B4AF40080BA05 /* PresentationTests */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -15847,6 +15866,7 @@
 				2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
+				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
