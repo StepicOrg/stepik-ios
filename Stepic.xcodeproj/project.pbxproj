@@ -4117,7 +4117,6 @@
 		2CD7998F21077D010054D098 /* TopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7997F21077D010054D098 /* TopicsView.swift */; };
 		2CD7999021077D010054D098 /* TopicsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7998121077D010054D098 /* TopicsTableViewController.xib */; };
 		2CD7999121077D010054D098 /* TopicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7998221077D010054D098 /* TopicsTableViewController.swift */; };
-		2CD7999C21077E540054D098 /* StepikResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7999421077E540054D098 /* StepikResult.swift */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846411F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
@@ -5997,7 +5996,6 @@
 		2CD7997F21077D010054D098 /* TopicsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsView.swift; sourceTree = "<group>"; };
 		2CD7998121077D010054D098 /* TopicsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicsTableViewController.xib; sourceTree = "<group>"; };
 		2CD7998221077D010054D098 /* TopicsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsTableViewController.swift; sourceTree = "<group>"; };
-		2CD7999421077E540054D098 /* StepikResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -9924,7 +9922,6 @@
 			isa = PBXGroup;
 			children = (
 				2CD7999521077E540054D098 /* PlainObjects */,
-				2CD7999421077E540054D098 /* StepikResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -15862,7 +15859,6 @@
 				2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */,
 				2C33CBF320EC3270009956B0 /* SectionsAPI.swift in Sources */,
 				2C33CC0020EC333D009956B0 /* EnrollmentsAPI.swift in Sources */,
-				2CD7999C21077E540054D098 /* StepikResult.swift in Sources */,
 				2C093F08211B434800162DD0 /* Menu.swift in Sources */,
 				2C949A2720ECC61B0049E9A8 /* ProfileDescriptionContentView.swift in Sources */,
 				2CFE247120ECD80D00AF1E3D /* AlamofireExtensions.swift in Sources */,
