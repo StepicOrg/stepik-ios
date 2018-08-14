@@ -9,7 +9,7 @@
 import Foundation
 
 final class AssemblyFactoryBuilder {
-    private var serviceFactory: ServiceFactory!
+    private var serviceFactory: ServiceFactory?
 
     func setServiceFactory(_ serviceFactory: ServiceFactory) -> AssemblyFactoryBuilder {
         self.serviceFactory = serviceFactory
@@ -17,6 +17,10 @@ final class AssemblyFactoryBuilder {
     }
 
     func build() -> AssemblyFactory {
+        guard let serviceFactory = serviceFactory else {
+            fatalError("`serviceFactory` is nil. Call `setServiceFactory(_:)` before.")
+        }
+
         return AssemblyFactoryImpl(
             serviceFactory: serviceFactory,
             knowledgeGraph: KnowledgeGraph()
