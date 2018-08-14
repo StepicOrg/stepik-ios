@@ -2112,7 +2112,6 @@
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
 		2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */; };
-		2C59F04A20EB8ACA00666EE0 /* ExamEGERussianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C5D515B202468D100B9D932 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
@@ -4216,7 +4215,6 @@
 		2CFF9F2820FDD1010023B5D4 /* AuthSignInAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF9F2720FDD1010023B5D4 /* AuthSignInAssemblyImpl.swift */; };
 		2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF9F2920FDD1670023B5D4 /* AuthSignInRouterImpl.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
-		51CB17C528DD51B175CC3FA0 /* Pods_ExamEGERussianUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D508E4A02170116945287545 /* Pods_ExamEGERussianUITests.framework */; };
 		62E98002F8F247D1CAC54767 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E980030A958F54CB76E92E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
@@ -4961,13 +4959,6 @@
 			remoteInfo = StepikTV;
 		};
 		2C59F03B20EB8ACA00666EE0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2C59F02620EB8AC800666EE0;
-			remoteInfo = ExamEGERussian;
-		};
-		2C59F04620EB8ACA00666EE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
 			proxyType = 1;
@@ -5752,9 +5743,6 @@
 		2C59F03520EB8AC900666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C59F04020EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEGERussianUITests.swift; sourceTree = "<group>"; };
-		2C59F04B20EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationService.swift; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
@@ -6320,14 +6308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA750F115C87044DAC9367C0 /* Pods_ExamEGERussianTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C59F04220EB8ACA00666EE0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				51CB17C528DD51B175CC3FA0 /* Pods_ExamEGERussianUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7820,7 +7800,6 @@
 				1BAE13041F93F67700482251 /* StepikTVTests */,
 				2C59F02820EB8AC800666EE0 /* ExamEGERussian */,
 				2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */,
-				2C59F04820EB8ACA00666EE0 /* ExamEGERussianUITests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				15A6EA0367C62E2E49D43D22 /* Pods */,
@@ -7852,7 +7831,6 @@
 				2CA8D3872088D9C000E105E9 /* Adaptive 8290.app */,
 				2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */,
 				2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */,
-				2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8880,15 +8858,6 @@
 			path = ExamEGERussianTests;
 			sourceTree = "<group>";
 		};
-		2C59F04820EB8ACA00666EE0 /* ExamEGERussianUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2C59F04920EB8ACA00666EE0 /* ExamEGERussianUITests.swift */,
-				2C59F06120EB99FE00666EE0 /* SupportingFiles */,
-			);
-			path = ExamEGERussianUITests;
-			sourceTree = "<group>";
-		};
 		2C59F05A20EB8E5C00666EE0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -8944,14 +8913,6 @@
 			isa = PBXGroup;
 			children = (
 				2C59F04020EB8ACA00666EE0 /* Info.plist */,
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		2C59F06120EB99FE00666EE0 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				2C59F04B20EB8ACA00666EE0 /* Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -10756,25 +10717,6 @@
 			productReference = 2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2C59F04420EB8ACA00666EE0 /* ExamEGERussianUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C59F05420EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianUITests" */;
-			buildPhases = (
-				F9A455D3AD2453C4AFB05AA7 /* [CP] Check Pods Manifest.lock */,
-				2C59F04120EB8ACA00666EE0 /* Sources */,
-				2C59F04220EB8ACA00666EE0 /* Frameworks */,
-				2C59F04320EB8ACA00666EE0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2C59F04720EB8ACA00666EE0 /* PBXTargetDependency */,
-			);
-			name = ExamEGERussianUITests;
-			productName = ExamEGERussianUITests;
-			productReference = 2C59F04520EB8ACA00666EE0 /* ExamEGERussianUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		2C89A9511F4C289900227C3B /* Adaptive GMAT */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C89AB371F4C289900227C3B /* Build configuration list for PBXNativeTarget "Adaptive GMAT" */;
@@ -11090,12 +11032,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2C59F02620EB8AC800666EE0;
 					};
-					2C59F04420EB8ACA00666EE0 = {
-						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = 6UNHY8UY6E;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 2C59F02620EB8AC800666EE0;
-					};
 					2C89A9511F4C289900227C3B = {
 						DevelopmentTeam = E9KER42773;
 						ProvisioningStyle = Manual;
@@ -11193,7 +11129,6 @@
 				2CA8D1392088D9C000E105E9 /* Adaptive 8290 */,
 				2C59F02620EB8AC800666EE0 /* ExamEGERussian */,
 				2C59F03920EB8ACA00666EE0 /* ExamEGERussianTests */,
-				2C59F04420EB8ACA00666EE0 /* ExamEGERussianUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -11632,13 +11567,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2C59F03820EB8ACA00666EE0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C59F04320EB8ACA00666EE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -13690,24 +13618,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-StepikTVTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F9A455D3AD2453C4AFB05AA7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ExamEGERussianUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15940,14 +15850,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C59F04120EB8ACA00666EE0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C59F04A20EB8ACA00666EE0 /* ExamEGERussianUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C89A9531F4C289900227C3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -18012,11 +17914,6 @@
 			target = 2C59F02620EB8AC800666EE0 /* ExamEGERussian */;
 			targetProxy = 2C59F03B20EB8ACA00666EE0 /* PBXContainerItemProxy */;
 		};
-		2C59F04720EB8ACA00666EE0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2C59F02620EB8AC800666EE0 /* ExamEGERussian */;
-			targetProxy = 2C59F04620EB8ACA00666EE0 /* PBXContainerItemProxy */;
-		};
 		2CD12B8B1F4ED1F4001D3C82 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86EF29331E83CEA900F8D214 /* Adaptive 1838 */;
@@ -18900,66 +18797,6 @@
 			};
 			name = Release;
 		};
-		2C59F05020EB8ACA00666EE0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE9D1A196EE102CE3116B172 /* Pods-ExamEGERussianUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 6UNHY8UY6E;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExamEGERussianUITests/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b0c0c092-abaf-46f6-84ee-78eedb9ddac0";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ExamEGERussian;
-			};
-			name = Debug;
-		};
-		2C59F05120EB8ACA00666EE0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1396169CEB9B2A88EF39CB05 /* Pods-ExamEGERussianUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UNHY8UY6E;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExamEGERussianUITests/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.ExamEGERussianUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b0c0c092-abaf-46f6-84ee-78eedb9ddac0";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ExamEGERussian;
-			};
-			name = Release;
-		};
 		2C89AB381F4C289900227C3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 210D872D0B8EC9F0380D3EF9 /* Pods-Adaptive GMAT.debug.xcconfig */;
@@ -19620,15 +19457,6 @@
 			buildConfigurations = (
 				2C59F04E20EB8ACA00666EE0 /* Debug */,
 				2C59F04F20EB8ACA00666EE0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2C59F05420EB8ACA00666EE0 /* Build configuration list for PBXNativeTarget "ExamEGERussianUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2C59F05020EB8ACA00666EE0 /* Debug */,
-				2C59F05120EB8ACA00666EE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

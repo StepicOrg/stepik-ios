@@ -38,16 +38,6 @@
                ReferencedContainer = "container:Stepic.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C59F04420EB8ACA00666EE0"
-               BuildableName = "ExamEGERussianUITests.xctest"
-               BlueprintName = "ExamEGERussianUITests"
-               ReferencedContainer = "container:Stepic.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
