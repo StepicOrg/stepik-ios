@@ -70,6 +70,5 @@ extension OpenedStoriesPageViewController: UIScrollViewDelegate {
         if percent > 0.2 && !hasNextModule {
             close()
         }
-        //you can decide what to do with scroll
     }
 }

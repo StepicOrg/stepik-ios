@@ -146,7 +146,7 @@ private class SegmentAnimatedProgressView: UIView {
         addSubview(topSegmentView)
 
         alignToSelf(view: topSegmentView)
-        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0)
+        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat.leastNormalMagnitude)
         topWidthConstraint?.isActive = true
 
         alignToSelf(view: bottomSegmentView)
@@ -176,6 +176,7 @@ private class SegmentAnimatedProgressView: UIView {
         topWidthConstraint?.isActive = false
         topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1)
         topWidthConstraint?.isActive = true
+        self.setNeedsLayout()
         UIView.animate(
             withDuration: duration,
             delay: 0.0,
@@ -192,9 +193,10 @@ private class SegmentAnimatedProgressView: UIView {
     }
 
     func set(progress: CGFloat) {
+        isPaused = false
         topSegmentView.layer.removeAllAnimations()
         topWidthConstraint?.isActive = false
-        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: progress)
+        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: progress == 0 ? CGFloat.leastNormalMagnitude : progress)
         topWidthConstraint?.isActive = true
         self.updateConstraints()
         self.setNeedsLayout()

@@ -20,6 +20,7 @@ class StoryViewController: UIViewController {
     var presenter: StoryPresenterProtocol?
 
     private var didAppear: Bool = false
+    private var didLayout: Bool = false
     private var onAppearBlock: (() -> Void)?
 
     override func viewDidLoad() {
@@ -38,22 +39,37 @@ class StoryViewController: UIViewController {
         presenter?.animate()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        UIApplication.shared.statusBarStyle = .lightContent
-
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         didAppear = true
+
+        if didAppear && didLayout {
+            onAppearBlock?()
+        }
         presenter?.didAppear()
-        onAppearBlock?()
+        presenter?.unpause()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        didLayout = true
+
+        if didAppear && didLayout {
+            onAppearBlock?()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter?.pause()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        print("did disappear")
         didAppear = false
+        didLayout = false
+        presenter?.pause()
     }
 
     private func add(partView: UIView) {
@@ -114,8 +130,11 @@ class StoryViewController: UIViewController {
     }
 
     func close() {
-        //TODO: Translate this to presenter
         dismiss(animated: true, completion: nil)
+    }
+
+    deinit {
+        print("deinit")
     }
 }
 
@@ -137,10 +156,12 @@ extension StoryViewController: StoryViewProtocol {
         if !didAppear {
             onAppearBlock = { [weak self] in
                 self?.progressView.animate(duration: duration, segment: segment)
+                self?.presenter?.unpause()
                 self?.onAppearBlock = nil
             }
         } else {
             progressView.animate(duration: duration, segment: segment)
+            self.presenter?.unpause()
         }
     }
 
