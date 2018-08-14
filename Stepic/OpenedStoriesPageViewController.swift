@@ -67,7 +67,7 @@ extension OpenedStoriesPageViewController: UIScrollViewDelegate {
         let positionFromStartOfCurrentPage = abs(startOffset - scrollView.contentOffset.x)
         let percent = positionFromStartOfCurrentPage / self.view.frame.width
 
-        if percent > 0.1 && !hasNextModule {
+        if percent > 0.2 && !hasNextModule {
             close()
         }
         //you can decide what to do with scroll
