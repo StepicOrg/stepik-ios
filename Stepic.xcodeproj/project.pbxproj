@@ -1966,6 +1966,7 @@
 		2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
 		2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */; };
+		2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23FF1A21230C7F00721E59 /* StepPlainObjectTests.swift */; };
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
@@ -3438,6 +3439,7 @@
 		2CA2E72920237E61001DC410 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
 		2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55C20FF79860041E893 /* GraphService.swift */; };
 		2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */; };
+		2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */; };
 		2CA5568C212323E800A3B1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568D2123397400A3B1AB /* ImageAsset.swift */; };
 		2CA5568F212339E200A3B1AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
@@ -5688,6 +5690,7 @@
 		2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObjectTests.swift; sourceTree = "<group>"; };
+		2C23FF1A21230C7F00721E59 /* StepPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
@@ -5875,6 +5878,7 @@
 		2CA3F56420FF82970041E893 /* KnowledgeGraphLessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphLessonPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56520FF82970041E893 /* KnowledgeGraphTopicsMapPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicsMapPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56620FF82970041E893 /* KnowledgeGraphTopicPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicPlainObject.swift; sourceTree = "<group>"; };
+		2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepPlainObject+Create.swift"; sourceTree = "<group>"; };
 		2CA5568D2123397400A3B1AB /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		2CA6F5ED21219A6500EE337E /* ServiceFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryBuilder.swift; sourceTree = "<group>"; };
 		2CA6F5EF21219ABB00EE337E /* AssemblyFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryBuilder.swift; sourceTree = "<group>"; };
@@ -8635,6 +8639,7 @@
 			isa = PBXGroup;
 			children = (
 				2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */,
+				2C23FF1A21230C7F00721E59 /* StepPlainObjectTests.swift */,
 			);
 			path = PlainObjectsTests;
 			sourceTree = "<group>";
@@ -9657,6 +9662,7 @@
 			children = (
 				2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */,
 				2CC995672105C98E0023EC0C /* NSError+Create.swift */,
+				2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */,
 			);
 			path = Creator;
 			sourceTree = "<group>";
@@ -15862,6 +15868,7 @@
 				2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
+				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
@@ -15871,6 +15878,7 @@
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
+				2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
 			);
