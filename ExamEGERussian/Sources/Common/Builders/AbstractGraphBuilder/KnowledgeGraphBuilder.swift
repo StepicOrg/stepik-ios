@@ -34,9 +34,11 @@ final class KnowledgeGraphBuilder: AbstractGraphBuilder {
             guard let (vertex, _) = graph[topicMap.id] else {
                 return
             }
-            vertex.lessons.append(contentsOf: topicMap.lessons.map {
+
+            let graphLessons = topicMap.lessons.map {
                 KnowledgeGraphLesson(id: $0.id, type: $0.type, courseId: $0.course)
-            })
+            }
+            vertex.lessons.append(contentsOf: graphLessons)
         }
 
         return graph

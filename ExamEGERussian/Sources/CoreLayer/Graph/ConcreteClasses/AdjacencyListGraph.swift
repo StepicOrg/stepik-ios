@@ -37,10 +37,9 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
     }
 
     public override func addVertex(_ vertex: Vertex<T>) {
-        guard adjacency[vertex] == nil else {
-            return
+        if adjacency[vertex] == nil {
+            adjacency[vertex] = []
         }
-        adjacency[vertex] = []
     }
 
     public func instantiateVertex(id: T) -> Vertex<T> {

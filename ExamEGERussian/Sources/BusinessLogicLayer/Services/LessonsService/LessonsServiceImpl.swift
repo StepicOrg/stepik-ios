@@ -37,9 +37,7 @@ final class LessonsServiceImpl: LessonsService {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Lesson.self))
         let descriptor = NSSortDescriptor(key: "managedId", ascending: true)
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         request.predicate = predicate
         request.sortDescriptors = [descriptor]

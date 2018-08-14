@@ -24,6 +24,7 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         guard let element = adjacency[index] as? Element else {
             fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
+
         return element
     }
 
@@ -38,6 +39,7 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         guard let element = adjacency[index] as? Element else {
             fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
+
         return element
     }
 }
