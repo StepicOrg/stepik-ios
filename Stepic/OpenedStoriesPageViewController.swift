@@ -12,13 +12,15 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
     var presenter: OpenedStoriesPresenterProtocol?
 
     var swipeInteractionController: SwipeInteractionController?
+    var startOffset: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dataSource = self
         presenter?.refresh()
-
+        let scrollView = view.subviews.filter { $0 is UIScrollView }.first as! UIScrollView
+        scrollView.delegate = self
         swipeInteractionController = SwipeInteractionController(viewController: self)
     }
 
@@ -27,12 +29,13 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
-    func set(heroID: String) {
+    func close() {
+        dismiss(animated: true, completion: nil)
     }
 
-    func set(module: UIViewController) {
+    func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
         addChildViewController(module)
-        setViewControllers([module], direction: .forward, animated: false, completion: nil)
+        setViewControllers([module], direction: direction, animated: animated, completion: nil)
     }
 }
 
@@ -45,5 +48,28 @@ extension OpenedStoriesPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         return presenter?.nextModule
     }
+}
 
+extension OpenedStoriesPageViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        startOffset = scrollView.contentOffset.x
+    }
+
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var hasNextModule: Bool = true
+
+        if startOffset < scrollView.contentOffset.x {
+            hasNextModule = presenter?.nextModule != nil
+        } else if startOffset > scrollView.contentOffset.x {
+            hasNextModule = presenter?.prevModule != nil
+        }
+
+        let positionFromStartOfCurrentPage = abs(startOffset - scrollView.contentOffset.x)
+        let percent = positionFromStartOfCurrentPage / self.view.frame.width
+
+        if percent > 0.1 && !hasNextModule {
+            close()
+        }
+        //you can decide what to do with scroll
+    }
 }

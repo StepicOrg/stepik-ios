@@ -9,8 +9,8 @@
 import Foundation
 
 protocol OpenedStoriesViewProtocol: class {
-    func set(module: UIViewController)
-    func set(heroID: String)
+    func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool)
+    func close()
 }
 
 protocol OpenedStoriesPresenterProtocol: class {
@@ -56,7 +56,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     func refresh() {
-        view?.set(module: currentModule)
+        view?.set(module: currentModule, direction: .forward, animated: false)
     }
 
     private func getModule(story: Story) -> UIViewController {
@@ -70,7 +70,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     private func buildModule(for story: Story) -> UIViewController {
-        return StoryAssembly(story: story).buildModule()
+        return StoryAssembly(story: story, navigationDelegate: self).buildModule()
     }
 
     @objc
@@ -79,7 +79,24 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
             let position = stories.index(where: {$0.id == storyID}) else {
                 return
         }
-        view?.set(heroID: "story_\(storyID)")
         currentPosition = position
+    }
+}
+
+extension OpenedStoriesPresenter: StoryNavigationDelegate {
+    func didFinishForward() {
+        guard let nextModule = nextModule else {
+            view?.close()
+            return
+        }
+        view?.set(module: nextModule, direction: .forward, animated: true)
+    }
+
+    func didFinishBack() {
+        guard let prevModule = prevModule else {
+            view?.close()
+            return
+        }
+        view?.set(module: prevModule, direction: .reverse, animated: true)
     }
 }

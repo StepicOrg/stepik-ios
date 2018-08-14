@@ -29,8 +29,6 @@ protocol StoryPresenterProtocol: class {
     func unpause()
     var storyPartsCount: Int { get }
     var storyID: Int { get }
-//    func getNextStory() -> StoryViewController?
-//    func getPrevStory() -> StoryViewController?
     func didAppear()
 }
 
@@ -40,14 +38,17 @@ extension NSNotification.Name {
 
 class StoryPresenter: StoryPresenterProtocol {
     weak var view: StoryViewProtocol?
+    weak var navigationDelegate: StoryNavigationDelegate?
+
     private var story: Story
 
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
 
-    init(view: StoryViewProtocol, story: Story) {
+    init(view: StoryViewProtocol, story: Story, navigationDelegate: StoryNavigationDelegate?) {
         self.view = view
         self.story = story
+        self.navigationDelegate = navigationDelegate
     }
 
     var storyID: Int {
@@ -100,21 +101,11 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     private func showPreviousStory() {
-//        guard let module = getPrevStory() else {
-//            view?.close()
-//            return
-//        }
-//
-//        view?.transitionPrev(destinationVC: module)
+        navigationDelegate?.didFinishBack()
     }
 
     private func showNextStory() {
-//        guard let module = getNextStory() else {
-//            view?.close()
-//            return
-//        }
-//
-//        view?.transitionNext(destinationVC: module)
+        navigationDelegate?.didFinishForward()
     }
 
     func skip() {
