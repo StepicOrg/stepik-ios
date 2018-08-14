@@ -69,6 +69,8 @@ class StepViewController: UIViewController {
         if shouldRefreshOnAppear {
             refreshWebView()
         }
+
+        fadeIn()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,6 +112,18 @@ class StepViewController: UIViewController {
             make.trailing.leading.bottom.equalToSuperview()
         }
     }
+
+    private func fadeIn(duration: TimeInterval = 0.75) {
+        let key = "alpha"
+
+        scrollView.layer.removeAnimation(forKey: key)
+
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.duration = duration
+        scrollView.layer.add(animation, forKey: key)
+    }
 }
 
 // MARK: - StepViewController (StepView) -
@@ -144,6 +158,8 @@ extension StepViewController: StepView {
 extension StepViewController {
     @objc private func didScreenRotate() {
         refreshWebView()
+        fadeIn()
+
         shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }
