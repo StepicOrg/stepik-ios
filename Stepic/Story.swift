@@ -19,10 +19,9 @@ class Story {
         self.id = id
         self.coverPath = coverPath
         self.title = title
-        self.isViewed = CachedValue<Bool>(key: "isViewed", value: isViewed)
+        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", value: isViewed)
         self.parts = parts
     }
-
 }
 
 class StoryPart {

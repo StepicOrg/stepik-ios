@@ -82,11 +82,12 @@ extension StoriesViewController: StoriesViewProtocol {
         collectionView.reloadData()
     }
 
-    func showIfNotVisible(index: Int) {
+    func updateStory(index: Int) {
         let indexPath = IndexPath(item: index, section: 0)
         if !collectionView.indexPathsForVisibleItems.contains(indexPath) {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
+        collectionView.reloadItems(at: [indexPath])
         DispatchQueue.main.async { [weak self] in
             self?.currentItemFrame = self?.getFrame(indexPath: indexPath)
         }
@@ -113,7 +114,7 @@ extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
 
         let story = stories[indexPath.item]
-        cell.update(imagePath: story.coverPath, title: story.title)
+        cell.update(imagePath: story.coverPath, title: story.title, isWatched: story.isViewed.value ?? true)
         return cell
     }
 }

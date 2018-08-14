@@ -18,7 +18,7 @@ enum StoriesViewState {
 protocol StoriesViewProtocol: class {
     func set(state: StoriesViewState)
     func set(stories: [Story])
-    func showIfNotVisible(index: Int)
+    func updateStory(index: Int)
 }
 
 protocol StoriesPresenterProtocol: class {
@@ -45,7 +45,8 @@ class StoriesPresenter: StoriesPresenterProtocol {
         }
 
         //TODO: update cell's viewed state here
-        view?.showIfNotVisible(index: index)
+        stories[index].isViewed.value = true
+        view?.updateStory(index: index)
     }
 
     private func preheatFirstImages(stories: [Story]) {

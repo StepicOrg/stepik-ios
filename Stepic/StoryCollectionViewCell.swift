@@ -31,10 +31,18 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    var isWatched: Bool = true {
+        didSet {
+            updateWatched()
+        }
+    }
+
+    private func updateWatched() {
+        self.layer.borderColor = isWatched ? UIColor.mainLight.cgColor : unwatchedColor.cgColor
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        update(imagePath: imagePath, title: title)
-
         self.contentView.layer.cornerRadius = cornerRadius
         self.contentView.layer.borderWidth = 4
         self.contentView.layer.borderColor = UIColor.white.cgColor
@@ -46,10 +54,13 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = unwatchedColor.cgColor
         self.clipsToBounds = true
         self.layer.masksToBounds = true
+
+        update(imagePath: imagePath, title: title, isWatched: isWatched)
     }
 
-    func update(imagePath: String, title: String) {
+    func update(imagePath: String, title: String, isWatched: Bool) {
         self.imagePath = imagePath
         self.title = title
+        self.isWatched = isWatched
     }
 }

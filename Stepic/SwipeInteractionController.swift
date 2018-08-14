@@ -29,7 +29,7 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
 
     @objc func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
-        var progress = (translation.y / 200)
+        var progress = (translation.y / 400)
         progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
 
         switch gestureRecognizer.state {

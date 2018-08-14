@@ -6864,8 +6864,7 @@
 		08484EDF211AF41A0006266F /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				08FA62252121BF4300F00275 /* Transition Interaction */,
-				08FA62202121BEE200F00275 /* Animation */,
+				08D2F72A2122D9DE009BA052 /* Transitions */,
 				081D7416211DB4490086F6F8 /* Opened Stories */,
 				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				088A65E8211CA8C5001431E3 /* Story Part Views */,
@@ -7293,6 +7292,8 @@
 		088A65E9211CA8EE001431E3 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */,
+				08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */,
 				08484EEC211AF4300006266F /* StoriesAssembly.swift */,
 				08484EF5211AF4310006266F /* StoriesPresenter.swift */,
 				08484EE5211AF42E0006266F /* StoriesViewController.swift */,
@@ -7305,8 +7306,6 @@
 			isa = PBXGroup;
 			children = (
 				08484EE8211AF42F0006266F /* StoryAssembly.swift */,
-				08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */,
-				08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */,
 				08484EEA211AF42F0006266F /* StoryPresenter.swift */,
 				08484EEF211AF4310006266F /* StoryViewController.swift */,
 				08484EEE211AF4310006266F /* StoryViewController.xib */,
@@ -7583,6 +7582,15 @@
 				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 			);
 			name = Analytics;
+			sourceTree = "<group>";
+		};
+		08D2F72A2122D9DE009BA052 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				08FA62252121BF4300F00275 /* Transition Interaction */,
+				08FA62202121BEE200F00275 /* Animation */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 		08D565C91C5F7CF000DE2B6A /* Quizzes */ = {
