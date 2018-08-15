@@ -4143,8 +4143,8 @@
 		2CE1C2B520249C2B00722989 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2CE22D99211C5879004D9D10 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
 		2CE22D9A211C587F004D9D10 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
-		2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilder.swift */; };
-		2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift */; };
+		2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */; };
+		2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */; };
 		2CE22DA1211C8316004D9D10 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
@@ -6014,8 +6014,8 @@
 		2CE1133D208E102900293EAE /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/8290/Tokens.plist; sourceTree = "<group>"; };
 		2CE1134F208E106B00293EAE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/8290/ru.lproj/step0.html; sourceTree = "<group>"; };
 		2CE11351208E107400293EAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/8290/en.lproj/step0.html; sourceTree = "<group>"; };
-		2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilder.swift; sourceTree = "<group>"; };
-		2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderImpl.swift; sourceTree = "<group>"; };
+		2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderProtocol.swift; sourceTree = "<group>"; };
+		2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilder.swift; sourceTree = "<group>"; };
 		2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLQuizViewController.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE3C2B121007B9D003AB54A /* TopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsView.swift; sourceTree = "<group>"; };
@@ -9993,8 +9993,8 @@
 		2CE22DA0211C76DC004D9D10 /* QuizViewControllerBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilder.swift */,
-				2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift */,
+				2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */,
+				2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */,
 			);
 			path = QuizViewControllerBuilder;
 			sourceTree = "<group>";
@@ -15642,7 +15642,7 @@
 				2C33CBF720EC328E009956B0 /* SearchResultsAPI.swift in Sources */,
 				2C9499CF20ECBCCA0049E9A8 /* NumberReply.swift in Sources */,
 				2C949A5620ECCE3F0049E9A8 /* StyledNavigationViewController.swift in Sources */,
-				2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilderImpl.swift in Sources */,
+				2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilder.swift in Sources */,
 				2C949A1620ECC5100049E9A8 /* RemoteConfig.swift in Sources */,
 				2C9499F520ECC0DC0049E9A8 /* ExecutionQueues.swift in Sources */,
 				2C093F14211B443300162DD0 /* MenuUIManager.swift in Sources */,
@@ -15723,7 +15723,7 @@
 				2CFF9F2420FDD02F0023B5D4 /* AuthGreetingAssemblyImpl.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
-				2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilder.swift in Sources */,
+				2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift in Sources */,
 				2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */,
 				2C21624C20F906CD0063DD57 /* AuthGreetingAssembly.swift in Sources */,
 				2C949A4220ECC9C60049E9A8 /* Images.swift in Sources */,
