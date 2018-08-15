@@ -22,7 +22,7 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
         let jsonDecoder = JSONDecoder()
         let decodedTopic = try? jsonDecoder.decode(KnowledgeGraphTopicPlainObject.self, from: jsonData)
 
-        XCTAssertNotNil(decodedTopic, "Could't decode KnowledgeGraphTopicPlainObject)")
+        XCTAssertNotNil(decodedTopic, "Could't decode KnowledgeGraphTopicPlainObject")
         XCTAssertEqual(decodedTopic!.id, "slitno-razdelno")
         XCTAssertEqual(decodedTopic!.title, "B13 Слитное раздельное написание")
     }

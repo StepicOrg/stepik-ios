@@ -2111,6 +2111,7 @@
 		2C4BBF26203DC670000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */; };
+		2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
@@ -5741,6 +5742,7 @@
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicPlainObjectTests.swift; sourceTree = "<group>"; };
+		2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
 		2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterImpl.swift; sourceTree = "<group>"; };
 		2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInViewController.swift; sourceTree = "<group>"; };
@@ -8869,6 +8871,7 @@
 		2C4EB2CA212416B500AF2331 /* KnowledgeGraphTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */,
 				2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */,
 			);
 			path = KnowledgeGraphTests;
@@ -15890,6 +15893,7 @@
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
+				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */,
 				2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */,
