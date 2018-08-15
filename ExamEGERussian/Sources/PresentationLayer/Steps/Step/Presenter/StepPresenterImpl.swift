@@ -58,7 +58,7 @@ extension StepPresenterImpl {
 
     private func showQuizViewController() {
         let builder = QuizViewControllerBuilder()
-            .setStep(step)
+            .setStepType(step.type)
             .setLogoutable(self)
 
         quizViewController = builder.build()

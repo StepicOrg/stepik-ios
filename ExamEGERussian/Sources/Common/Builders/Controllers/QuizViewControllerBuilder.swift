@@ -9,11 +9,11 @@
 import Foundation
 
 final class QuizViewControllerBuilder {
-    private var step: StepPlainObject?
-    private weak var logoutable: Logoutable?
+    private(set) var stepType: StepPlainObject.StepType?
+    private(set) weak var logoutable: Logoutable?
 
-    func setStep(_ step: StepPlainObject) -> QuizViewControllerBuilder {
-        self.step = step
+    func setStepType(_ stepType: StepPlainObject.StepType) -> QuizViewControllerBuilder {
+        self.stepType = stepType
         return self
     }
 
@@ -23,13 +23,13 @@ final class QuizViewControllerBuilder {
     }
 
     func build() -> QuizViewController? {
-        guard let step = step else {
+        guard let stepType = stepType else {
             return nil
         }
 
         let nibName = String(describing: QuizViewController.self)
 
-        switch step.type {
+        switch stepType {
         case .choice:
             let controller = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
             controller.logoutable = logoutable
