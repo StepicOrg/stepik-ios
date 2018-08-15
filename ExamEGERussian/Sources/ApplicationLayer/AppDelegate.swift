@@ -19,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let serviceFactory = ServiceFactoryBuilder().build()
-        let assemblyFactory = AssemblyFactoryBuilder()
-            .setServiceFactory(serviceFactory)
-            .build()
+        let assemblyFactory = AssemblyFactoryBuilder(serviceFactory: serviceFactory).build()
 
         AppLaunchingCommandsBuilder()
             .setKeyWindow(window)

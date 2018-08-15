@@ -9,21 +9,21 @@
 import Foundation
 
 final class AssemblyFactoryBuilder {
-    private var serviceFactory: ServiceFactory?
+    private let serviceFactory: ServiceFactory
 
-    func setServiceFactory(_ serviceFactory: ServiceFactory) -> AssemblyFactoryBuilder {
+    init(serviceFactory: ServiceFactory) {
         self.serviceFactory = serviceFactory
-        return self
     }
 
     func build() -> AssemblyFactory {
-        guard let serviceFactory = serviceFactory else {
-            fatalError("`serviceFactory` is nil. Call `setServiceFactory(_:)` before.")
-        }
-
         return AssemblyFactoryImpl(
             serviceFactory: serviceFactory,
-            knowledgeGraph: KnowledgeGraph()
+            knowledgeGraph: obtainKnowledgeGraph()
         )
+    }
+    
+    // TODO: Get from cache or create a new one.
+    private func obtainKnowledgeGraph() -> KnowledgeGraph {
+        return KnowledgeGraph()
     }
 }
