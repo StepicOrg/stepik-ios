@@ -10,7 +10,7 @@ import Foundation
 @testable import ExamEGERussian
 
 extension StepPlainObject {
-    private static let allTypes: [StepPlainObject.StepType] = [
+    static let allTypes: [StepPlainObject.StepType] = [
         .text, .choice, .string, .number, .freeAnswer, .math, .sorting, .matching, .fillBlanks,
         .code, .sql, .table, .video, .dataset, .admin
     ]
