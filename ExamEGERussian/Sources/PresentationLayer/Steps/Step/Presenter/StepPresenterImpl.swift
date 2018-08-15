@@ -107,8 +107,11 @@ extension StepPresenterImpl: QuizControllerDelegate {
 // MARK: - StepPresenterImpl: Logoutable -
 
 extension StepPresenterImpl: Logoutable {
-    func logout() {
-        AuthInfo.shared.token = nil
-        router.showAuth()
+    func logout(completion: (() -> Void)?) {
+        checkToken().done { _ in
+            completion?()
+        }.catch { [weak self] error in
+            self?.showError(message: error.localizedDescription)
+        }
     }
 }

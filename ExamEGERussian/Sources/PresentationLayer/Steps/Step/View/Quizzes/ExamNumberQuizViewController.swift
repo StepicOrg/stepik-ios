@@ -18,6 +18,8 @@ final class ExamNumberQuizViewController: NumberQuizViewController {
     }
 
     override func logout(onClose: (() -> Void)?) {
-        logoutable?.logout()
+        logoutable?.logout { [weak self] in
+            self?.presenter?.refreshAttempt()
+        }
     }
 }

@@ -9,5 +9,11 @@
 import Foundation
 
 protocol Logoutable: class {
-    func logout()
+    func logout(completion: (() -> Void)?)
+}
+
+extension Logoutable {
+    func logout() {
+        logout(completion: nil)
+    }
 }

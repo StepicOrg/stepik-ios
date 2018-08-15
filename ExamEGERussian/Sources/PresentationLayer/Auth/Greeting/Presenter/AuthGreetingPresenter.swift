@@ -27,11 +27,11 @@ final class AuthGreetingPresenter: AuthGreetingPresenterProtocol {
     }
 
     func cancel() {
-        refreshToken()
+        checkAuthInfo()
         router.dismiss()
     }
 
-    private func refreshToken() {
+    private func checkAuthInfo() {
         if !AuthInfo.shared.isAuthorized {
             let params = RandomCredentialsGenerator().userRegistrationParams
             userRegistrationService.registerAndSignIn(with: params).then { user in
