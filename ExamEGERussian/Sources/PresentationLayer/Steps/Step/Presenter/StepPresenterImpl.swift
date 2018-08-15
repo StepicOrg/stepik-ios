@@ -57,7 +57,10 @@ extension StepPresenterImpl {
     }
 
     private func showQuizViewController() {
-        let builder = QuizViewControllerBuilder().setStep(step)
+        let builder = QuizViewControllerBuilder()
+            .setStep(step)
+            .setLogoutable(self)
+
         quizViewController = builder.build()
         guard let quizViewController = quizViewController else {
             return showUnknownQuizTypeContent()
@@ -98,5 +101,14 @@ extension StepPresenterImpl: QuizControllerDelegate {
     private func setStepProgressAsPassed() {
         step.isPassed = true
         delegate?.stepPresenterSubmissionDidCorrect(self)
+    }
+}
+
+// MARK: - StepPresenterImpl: Logoutable -
+
+extension StepPresenterImpl: Logoutable {
+    func logout() {
+        AuthInfo.shared.token = nil
+        router.showAuth()
     }
 }

@@ -10,9 +10,15 @@ import Foundation
 
 final class QuizViewControllerBuilder {
     private var step: StepPlainObject?
+    private weak var logoutable: Logoutable?
 
     func setStep(_ step: StepPlainObject) -> QuizViewControllerBuilder {
         self.step = step
+        return self
+    }
+
+    func setLogoutable(_ logoutable: Logoutable) -> QuizViewControllerBuilder {
+        self.logoutable = logoutable
         return self
     }
 
@@ -21,26 +27,30 @@ final class QuizViewControllerBuilder {
             return nil
         }
 
-        let quizViewController: QuizViewController?
         let nibName = String(describing: QuizViewController.self)
 
         switch step.type {
         case .choice:
-            quizViewController = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
+            let controller = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
+            controller.logoutable = logoutable
+
+            return controller
         case .string:
             let controller = ExamStringQuizViewController(nibName: nibName, bundle: nil)
             controller.useSmallPadding = true
             controller.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
-            quizViewController = controller
-        case .number:
-            let vc = ExamNumberQuizViewController(nibName: nibName, bundle: nil)
-            vc.useSmallPadding = true
-            vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
-            quizViewController = vc
-        default:
-            quizViewController = nil
-        }
+            controller.logoutable = logoutable
 
-        return quizViewController
+            return controller
+        case .number:
+            let controller = ExamNumberQuizViewController(nibName: nibName, bundle: nil)
+            controller.useSmallPadding = true
+            controller.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
+            controller.logoutable = logoutable
+
+            return controller
+        default:
+            return nil
+        }
     }
 }

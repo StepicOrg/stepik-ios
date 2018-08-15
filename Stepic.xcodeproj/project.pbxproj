@@ -2117,6 +2117,7 @@
 		2C4EB2DA21242F5700AF2331 /* ExamChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */; };
 		2C4EB2DC2124304000AF2331 /* ExamStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */; };
 		2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */; };
+		2C4EB2E42124385400AF2331 /* Logoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2E32124385400AF2331 /* Logoutable.swift */; };
 		2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2EA212443AD00AF2331 /* StepRouterProtocol.swift */; };
 		2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2EC2124443500AF2331 /* StepRouter.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
@@ -5754,6 +5755,7 @@
 		2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamStringQuizViewController.swift; sourceTree = "<group>"; };
 		2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamNumberQuizViewController.swift; sourceTree = "<group>"; };
+		2C4EB2E32124385400AF2331 /* Logoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logoutable.swift; sourceTree = "<group>"; };
 		2C4EB2EA212443AD00AF2331 /* StepRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRouterProtocol.swift; sourceTree = "<group>"; };
 		2C4EB2EC2124443500AF2331 /* StepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRouter.swift; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
@@ -8919,10 +8921,18 @@
 			isa = PBXGroup;
 			children = (
 				2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */,
-				2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */,
 				2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */,
+				2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */,
 			);
 			path = Quizzes;
+			sourceTree = "<group>";
+		};
+		2C4EB2E22124384300AF2331 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C4EB2E32124385400AF2331 /* Logoutable.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2C4EB2E92124438700AF2331 /* Router */ = {
@@ -9126,6 +9136,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9814616BC935A78BDB36D /* Assembly */,
+				2C4EB2E22124384300AF2331 /* Model */,
 				2CCA14C22111A6520068081A /* Presenter */,
 				2C4EB2E92124438700AF2331 /* Router */,
 				2CCA14C32111A6C70068081A /* View */,
@@ -15624,6 +15635,7 @@
 				2C33CC0E20EC3405009956B0 /* RetrieveRequestMaker.swift in Sources */,
 				2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */,
 				2C093F18211B446A00162DD0 /* ContentMenuBlockTableViewCell.swift in Sources */,
+				2C4EB2E42124385400AF2331 /* Logoutable.swift in Sources */,
 				2C9499F920ECC14F0049E9A8 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
 				2C949A0420ECC3000049E9A8 /* NotificationsMarkAsReadButton.swift in Sources */,

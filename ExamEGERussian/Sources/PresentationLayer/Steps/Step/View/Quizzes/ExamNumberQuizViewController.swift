@@ -9,14 +9,15 @@
 import UIKit
 
 final class ExamNumberQuizViewController: NumberQuizViewController {
+    weak var logoutable: Logoutable?
+
     override func suggestStreak(streak: Int) {
     }
 
     override func showRateAlert() {
     }
 
-    // TODO: Handle logout
     override func logout(onClose: (() -> Void)?) {
-        AuthInfo.shared.token = nil
+        logoutable?.logout()
     }
 }
