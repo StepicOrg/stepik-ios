@@ -67,11 +67,14 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         presenter?.refresh()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBarBottomHairlineVisible(false)
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.showBottomHairline()
+        setNavigationBarBottomHairlineVisible(true)
     }
 
     override func makeConstraints() {
@@ -129,8 +132,6 @@ extension StepsPagerViewController {
     private func setup() {
         edgesForExtendedLayout = [.left, .right, .bottom]
         navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.hideBottomHairline()
 
         let shareBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .action,
@@ -156,6 +157,16 @@ extension StepsPagerViewController {
 
         centerCurrentTab = true
         fixLaterTabsPosition = true
+    }
+
+    private func setNavigationBarBottomHairlineVisible(_ visible: Bool) {
+        if visible {
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.showBottomHairline()
+        } else {
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.hideBottomHairline()
+        }
     }
 }
 
