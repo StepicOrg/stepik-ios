@@ -4143,7 +4143,6 @@
 		2CE1C2B520249C2B00722989 /* AdaptiveStepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* AdaptiveStepCardView.swift */; };
 		2CE22D99211C5879004D9D10 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
 		2CE22D9A211C587F004D9D10 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
-		2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */; };
 		2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */; };
 		2CE22DA1211C8316004D9D10 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		2CE3BCA51FBF0121000AD405 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
@@ -6014,7 +6013,6 @@
 		2CE1133D208E102900293EAE /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/8290/Tokens.plist; sourceTree = "<group>"; };
 		2CE1134F208E106B00293EAE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/8290/ru.lproj/step0.html; sourceTree = "<group>"; };
 		2CE11351208E107400293EAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/8290/en.lproj/step0.html; sourceTree = "<group>"; };
-		2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderProtocol.swift; sourceTree = "<group>"; };
 		2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilder.swift; sourceTree = "<group>"; };
 		2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLQuizViewController.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
@@ -8890,6 +8888,23 @@
 			path = KnowledgeGraph;
 			sourceTree = "<group>";
 		};
+		2C4EB2D621242ABD00AF2331 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2C4EB2D821242B0100AF2331 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				2CA6F5EF21219ABB00EE337E /* AssemblyFactoryBuilder.swift */,
+				2CA6F5ED21219A6500EE337E /* ServiceFactoryBuilder.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		2C4F33FC2109EDD400E259FE /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -9800,21 +9815,20 @@
 		2CD7993C21077CB90054D098 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7993D21077CB90054D098 /* AbstractGraphBuilder */,
-				2CE22DA0211C76DC004D9D10 /* QuizViewControllerBuilder */,
-				2CA6F5EF21219ABB00EE337E /* AssemblyFactoryBuilder.swift */,
-				2CA6F5ED21219A6500EE337E /* ServiceFactoryBuilder.swift */,
+				2C4EB2D621242ABD00AF2331 /* Controllers */,
+				2C4EB2D821242B0100AF2331 /* Factories */,
+				2CD7993D21077CB90054D098 /* Graph */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
 		};
-		2CD7993D21077CB90054D098 /* AbstractGraphBuilder */ = {
+		2CD7993D21077CB90054D098 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
 				2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */,
 				2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */,
 			);
-			path = AbstractGraphBuilder;
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		2CD7994021077CB90054D098 /* Assembly */ = {
@@ -9988,15 +10002,6 @@
 				2CE1133D208E102900293EAE /* Tokens.plist */,
 			);
 			name = 8290;
-			sourceTree = "<group>";
-		};
-		2CE22DA0211C76DC004D9D10 /* QuizViewControllerBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				2CE22D9D211C7624004D9D10 /* QuizViewControllerBuilder.swift */,
-				2CE22D9B211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift */,
-			);
-			path = QuizViewControllerBuilder;
 			sourceTree = "<group>";
 		};
 		2CE3BCA31FBEFF74000AD405 /* SQLQuizViewController */ = {
@@ -15723,7 +15728,6 @@
 				2CFF9F2420FDD02F0023B5D4 /* AuthGreetingAssemblyImpl.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
 				2C949A4F20ECCD380049E9A8 /* UIView+fromNib.swift in Sources */,
-				2CE22D9C211C759A004D9D10 /* QuizViewControllerBuilderProtocol.swift in Sources */,
 				2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */,
 				2C21624C20F906CD0063DD57 /* AuthGreetingAssembly.swift in Sources */,
 				2C949A4220ECC9C60049E9A8 /* Images.swift in Sources */,

@@ -54,7 +54,8 @@ extension StepPresenterImpl {
     }
 
     private func showQuizViewController() {
-        quizViewController = QuizViewControllerBuilder(step: step).build()
+        let builder = QuizViewControllerBuilder().setStep(step)
+        quizViewController = builder.build()
         guard let quizViewController = quizViewController else {
             return showUnknownQuizTypeContent()
         }

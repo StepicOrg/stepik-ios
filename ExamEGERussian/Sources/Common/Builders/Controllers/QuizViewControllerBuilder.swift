@@ -8,14 +8,19 @@
 
 import Foundation
 
-final class QuizViewControllerBuilder: QuizViewControllerBuilderProtocol {
-    let step: StepPlainObject
+final class QuizViewControllerBuilder {
+    private var step: StepPlainObject?
 
-    init(step: StepPlainObject) {
+    func setStep(_ step: StepPlainObject) -> QuizViewControllerBuilder {
         self.step = step
+        return self
     }
 
     func build() -> QuizViewController? {
+        guard let step = step else {
+            return nil
+        }
+
         let quizViewController: QuizViewController?
         let nibName = String(describing: QuizViewController.self)
 

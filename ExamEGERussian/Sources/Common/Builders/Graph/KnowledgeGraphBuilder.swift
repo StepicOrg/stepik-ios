@@ -1,5 +1,5 @@
 //
-//  AbstractGraphBuilderImpl.swift
+//  KnowledgeGraphBuilder.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 19/07/2018.
