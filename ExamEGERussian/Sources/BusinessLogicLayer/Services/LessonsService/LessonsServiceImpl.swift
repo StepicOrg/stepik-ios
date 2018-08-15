@@ -18,17 +18,13 @@ final class LessonsServiceImpl: LessonsService {
     }
 
     func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
-        return executeFetchRequest(ids: ids).then {
-            self.lessonsAPI.retrieve(ids: ids, existing: $0)
-        }.mapValues {
-            self.toPlainObject($0)
-        }
+        return executeFetchRequest(ids: ids)
+            .then { self.lessonsAPI.retrieve(ids: ids, existing: $0) }
+            .mapValues { self.toPlainObject($0) }
     }
 
     func obtainLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
-        return executeFetchRequest(ids: ids).mapValues {
-            self.toPlainObject($0)
-        }
+        return executeFetchRequest(ids: ids).mapValues { self.toPlainObject($0) }
     }
 
     // MARK: - Private API
