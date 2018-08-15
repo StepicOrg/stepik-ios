@@ -2112,6 +2112,8 @@
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */; };
 		2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */; };
+		2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D2212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift */; };
+		2C4EB2D52124222600AF2331 /* knowledge-graph.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D42124222500AF2331 /* knowledge-graph.json */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
@@ -5743,6 +5745,8 @@
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObjectTests.swift; sourceTree = "<group>"; };
+		2C4EB2D2212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphPlainObjectTests.swift; sourceTree = "<group>"; };
+		2C4EB2D42124222500AF2331 /* knowledge-graph.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "knowledge-graph.json"; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
 		2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterImpl.swift; sourceTree = "<group>"; };
 		2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInViewController.swift; sourceTree = "<group>"; };
@@ -8872,6 +8876,7 @@
 			isa = PBXGroup;
 			children = (
 				2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */,
+				2C4EB2D2212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift */,
 				2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */,
 			);
 			path = KnowledgeGraphTests;
@@ -8963,6 +8968,7 @@
 			isa = PBXGroup;
 			children = (
 				2C59F04020EB8ACA00666EE0 /* Info.plist */,
+				2C4EB2D42124222500AF2331 /* knowledge-graph.json */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -11622,6 +11628,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA5568C212323E800A3B1AB /* Assets.xcassets in Resources */,
+				2C4EB2D52124222600AF2331 /* knowledge-graph.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15902,6 +15909,7 @@
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
+				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
 				2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
