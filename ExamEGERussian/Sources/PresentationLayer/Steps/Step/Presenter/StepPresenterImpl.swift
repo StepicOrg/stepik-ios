@@ -11,6 +11,7 @@ import Foundation
 final class StepPresenterImpl: StepPresenter {
     private weak var view: StepView?
     weak var delegate: StepPresenterDelegate?
+    private let router: StepRouterProtocol
 
     private(set) var step: StepPlainObject
     private let lesson: LessonPlainObject
@@ -18,15 +19,17 @@ final class StepPresenterImpl: StepPresenter {
     private let stepsService: StepsService
 
     init(view: StepView,
-         delegate: StepPresenterDelegate?,
          step: StepPlainObject,
          lesson: LessonPlainObject,
+         router: StepRouterProtocol,
+         delegate: StepPresenterDelegate?,
          stepsService: StepsService
     ) {
         self.view = view
-        self.delegate = delegate
         self.step = step
         self.lesson = lesson
+        self.router = router
+        self.delegate = delegate
         self.stepsService = stepsService
     }
 

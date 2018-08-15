@@ -2117,6 +2117,8 @@
 		2C4EB2DA21242F5700AF2331 /* ExamChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */; };
 		2C4EB2DC2124304000AF2331 /* ExamStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */; };
 		2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */; };
+		2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2EA212443AD00AF2331 /* StepRouterProtocol.swift */; };
+		2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2EC2124443500AF2331 /* StepRouter.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
@@ -5752,6 +5754,8 @@
 		2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamStringQuizViewController.swift; sourceTree = "<group>"; };
 		2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamNumberQuizViewController.swift; sourceTree = "<group>"; };
+		2C4EB2EA212443AD00AF2331 /* StepRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRouterProtocol.swift; sourceTree = "<group>"; };
+		2C4EB2EC2124443500AF2331 /* StepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRouter.swift; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
 		2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterImpl.swift; sourceTree = "<group>"; };
 		2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInViewController.swift; sourceTree = "<group>"; };
@@ -8921,6 +8925,15 @@
 			path = Quizzes;
 			sourceTree = "<group>";
 		};
+		2C4EB2E92124438700AF2331 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2C4EB2EC2124443500AF2331 /* StepRouter.swift */,
+				2C4EB2EA212443AD00AF2331 /* StepRouterProtocol.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		2C4F33FC2109EDD400E259FE /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -9114,6 +9127,7 @@
 			children = (
 				62E9814616BC935A78BDB36D /* Assembly */,
 				2CCA14C22111A6520068081A /* Presenter */,
+				2C4EB2E92124438700AF2331 /* Router */,
 				2CCA14C32111A6C70068081A /* View */,
 			);
 			path = Step;
@@ -15613,6 +15627,7 @@
 				2C9499F920ECC14F0049E9A8 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
 				2C949A0420ECC3000049E9A8 /* NotificationsMarkAsReadButton.swift in Sources */,
+				2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */,
 				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
@@ -15679,6 +15694,7 @@
 				2C093F03211B42EB00162DD0 /* AuthNavigationViewController.swift in Sources */,
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,
 				2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */,
+				2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */,
 				2C94998D20ECB7350049E9A8 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C77030A210F2AD5002E250D /* RouterDismissable.swift in Sources */,
 				2C33CBEA20EC321E009956B0 /* DiscussionProxiesAPI.swift in Sources */,
