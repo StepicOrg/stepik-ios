@@ -2114,6 +2114,9 @@
 		2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */; };
 		2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D2212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift */; };
 		2C4EB2D52124222600AF2331 /* knowledge-graph.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D42124222500AF2331 /* knowledge-graph.json */; };
+		2C4EB2DA21242F5700AF2331 /* ExamChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */; };
+		2C4EB2DC2124304000AF2331 /* ExamStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */; };
+		2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */; };
 		2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */; };
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
@@ -5746,6 +5749,9 @@
 		2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C4EB2D2212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C4EB2D42124222500AF2331 /* knowledge-graph.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "knowledge-graph.json"; sourceTree = "<group>"; };
+		2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamChoiceQuizViewController.swift; sourceTree = "<group>"; };
+		2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamStringQuizViewController.swift; sourceTree = "<group>"; };
+		2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamNumberQuizViewController.swift; sourceTree = "<group>"; };
 		2C4F33FD2109EDF100E259FE /* TopicsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouter.swift; sourceTree = "<group>"; };
 		2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterImpl.swift; sourceTree = "<group>"; };
 		2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInViewController.swift; sourceTree = "<group>"; };
@@ -8905,6 +8911,16 @@
 			path = Factories;
 			sourceTree = "<group>";
 		};
+		2C4EB2DF212430D700AF2331 /* Quizzes */ = {
+			isa = PBXGroup;
+			children = (
+				2C4EB2D921242F5700AF2331 /* ExamChoiceQuizViewController.swift */,
+				2C4EB2DB2124304000AF2331 /* ExamStringQuizViewController.swift */,
+				2C4EB2DD2124308800AF2331 /* ExamNumberQuizViewController.swift */,
+			);
+			path = Quizzes;
+			sourceTree = "<group>";
+		};
 		2C4F33FC2109EDD400E259FE /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -9740,6 +9756,7 @@
 			isa = PBXGroup;
 			children = (
 				2CCA14C42111A6E60068081A /* StepViewController */,
+				2C4EB2DF212430D700AF2331 /* Quizzes */,
 				2CCA14C02111A6050068081A /* StepView.swift */,
 				62E9863AAABC06CDEE98110E /* StepWebView.swift */,
 			);
@@ -15581,6 +15598,7 @@
 				2C34D67A20FCE2B0001EF741 /* AuthSignInAssembly.swift in Sources */,
 				2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */,
 				2C770300210F29A3002E250D /* KnowledgeGraphGoalPlainObject.swift in Sources */,
+				2C4EB2DC2124304000AF2331 /* ExamStringQuizViewController.swift in Sources */,
 				2C093EFC211B427200162DD0 /* CellWebViewHelper.swift in Sources */,
 				2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */,
 				2C093F0F211B43DB00162DD0 /* Alerts.swift in Sources */,
@@ -15622,6 +15640,7 @@
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
 				2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
+				2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */,
 				2C949A5720ECCE4F0049E9A8 /* AchievementPopupAlertManager.swift in Sources */,
 				2C949A5C20ECCE950049E9A8 /* ArtView.swift in Sources */,
 				2C9499EA20ECBFD90049E9A8 /* UIThreadHelper.swift in Sources */,
@@ -15851,6 +15870,7 @@
 				2C093F19211B447800162DD0 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C33CC0A20EC33E5009956B0 /* Meta.swift in Sources */,
 				2C33CBF920EC32A8009956B0 /* StepsAPI.swift in Sources */,
+				2C4EB2DA21242F5700AF2331 /* ExamChoiceQuizViewController.swift in Sources */,
 				2C093F1D211B44C700162DD0 /* SettingsViewController.swift in Sources */,
 				2C9499A320ECB9590049E9A8 /* DataConvertable.swift in Sources */,
 				2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */,

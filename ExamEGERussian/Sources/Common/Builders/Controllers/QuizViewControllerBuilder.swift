@@ -26,14 +26,14 @@ final class QuizViewControllerBuilder {
 
         switch step.type {
         case .choice:
-            quizViewController = ChoiceQuizViewController(nibName: nibName, bundle: nil)
+            quizViewController = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
         case .string:
-            let controller = StringQuizViewController(nibName: nibName, bundle: nil)
+            let controller = ExamStringQuizViewController(nibName: nibName, bundle: nil)
             controller.useSmallPadding = true
             controller.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
             quizViewController = controller
         case .number:
-            let vc = NumberQuizViewController(nibName: nibName, bundle: nil)
+            let vc = ExamNumberQuizViewController(nibName: nibName, bundle: nil)
             vc.useSmallPadding = true
             vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
