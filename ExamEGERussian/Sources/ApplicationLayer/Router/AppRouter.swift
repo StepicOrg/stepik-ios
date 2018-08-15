@@ -17,17 +17,15 @@ final class AppRouter: BaseRouter {
         window.makeKeyAndVisible()
     }
 
+    func showAuthorization(animated: Bool = true) {
+        presentModalNavigationController(derivedFrom: { _ in
+            assemblyFactory.authAssembly.greeting.module()
+        }, animated: animated)
+    }
+
     func showTopics(animated: Bool = true) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.topicsAssembly.module(navigationController: navigationController)
-        }, animated: animated)
-    }
-}
-
-extension AppRouter: AuthorizationPresentable {
-    func showAuthorization(animated: Bool) {
-        presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authAssembly.greeting.module()
         }, animated: animated)
     }
 }
