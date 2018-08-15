@@ -4112,6 +4112,8 @@
 		2CD1E3592114B0D0007AA7B3 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2CD1E35A2114B0D0007AA7B3 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
+		2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4358921245A13005A5B19 /* AuthGreetingPresenterProtocol.swift */; };
+		2CD4358C21245A26005A5B19 /* AuthGreetingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4358B21245A26005A5B19 /* AuthGreetingPresenter.swift */; };
 		2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */; };
 		2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */; };
 		2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994121077CB90054D098 /* BaseAssembly.swift */; };
@@ -5993,6 +5995,8 @@
 		2CD12BC51F4F34AE001D3C82 /* Adaptive 3150 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3150 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD12BD41F4F34BD001D3C82 /* Adaptive 3149 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3149 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD12BE31F4F34CC001D3C82 /* Adaptive 3124 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3124 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD4358921245A13005A5B19 /* AuthGreetingPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingPresenterProtocol.swift; sourceTree = "<group>"; };
+		2CD4358B21245A26005A5B19 /* AuthGreetingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingPresenter.swift; sourceTree = "<group>"; };
 		2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphBuilder.swift; sourceTree = "<group>"; };
 		2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractGraphBuilder.swift; sourceTree = "<group>"; };
 		2CD7994121077CB90054D098 /* BaseAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAssembly.swift; sourceTree = "<group>"; };
@@ -8754,6 +8758,7 @@
 			isa = PBXGroup;
 			children = (
 				2C21624A20F906C00063DD57 /* Assembly */,
+				2CD43588212459E7005A5B19 /* Presenter */,
 				2CA2C66620FA5D15005EC191 /* Router */,
 				2C966D5720F7FFF600DECF6D /* View */,
 			);
@@ -9839,6 +9844,15 @@
 				2CD12B941F4F3374001D3C82 /* Info.plist */,
 			);
 			name = Screenshots;
+			sourceTree = "<group>";
+		};
+		2CD43588212459E7005A5B19 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2CD4358B21245A26005A5B19 /* AuthGreetingPresenter.swift */,
+				2CD4358921245A13005A5B19 /* AuthGreetingPresenterProtocol.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2CD7993B21077CB90054D098 /* Common */ = {
@@ -15680,6 +15694,7 @@
 				2C94999520ECB8420049E9A8 /* Unit+CoreDataProperties.swift in Sources */,
 				2CE22D99211C5879004D9D10 /* UnknownTypeQuizViewController.swift in Sources */,
 				2CD7995C21077CBA0054D098 /* AssemblyFactory.swift in Sources */,
+				2CD4358C21245A26005A5B19 /* AuthGreetingPresenter.swift in Sources */,
 				2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */,
 				2C9499AF20ECBA6A0049E9A8 /* LastStep+CoreDataProperties.swift in Sources */,
 				2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */,
@@ -15751,6 +15766,7 @@
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
+				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
 				2C9499DF20ECBDEC0049E9A8 /* StepikURLSessionConfiguration.swift in Sources */,
