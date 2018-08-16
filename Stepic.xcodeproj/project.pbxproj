@@ -8641,6 +8641,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2C130EB12125BC540022E998 /* CommonTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C130EA12125AD630022E998 /* AssemblyTests */,
+				2C130EA42125B25B0022E998 /* ExtensionsTests */,
+			);
+			path = CommonTests;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -9084,13 +9093,12 @@
 		2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C130EA12125AD630022E998 /* AssemblyTests */,
 				2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */,
 				2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C23FF16212303E900721E59 /* ModelTests */,
-				2C130EA42125B25B0022E998 /* ExtensionsTests */,
-				2CC995632105C77C0023EC0C /* Common */,
+				2C130EB12125BC540022E998 /* CommonTests */,
+				2CC995632105C77C0023EC0C /* Helpers */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -9866,23 +9874,22 @@
 			path = TopicsTests;
 			sourceTree = "<group>";
 		};
-		2CC8BA13210B4CBF0080BA05 /* Router */ = {
+		2CC8BA13210B4CBF0080BA05 /* Routers */ = {
 			isa = PBXGroup;
 			children = (
 				2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */,
 			);
-			path = Router;
+			path = Routers;
 			sourceTree = "<group>";
 		};
-		2CC995632105C77C0023EC0C /* Common */ = {
+		2CC995632105C77C0023EC0C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				2CC995642105C78C0023EC0C /* FactoryMethods */,
 				2CC995662105C8020023EC0C /* Mock */,
-				2CC8BA13210B4CBF0080BA05 /* Router */,
 				2CC995652105C7B80023EC0C /* View */,
 			);
-			path = Common;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2CC995642105C78C0023EC0C /* FactoryMethods */ = {
@@ -9907,6 +9914,7 @@
 			children = (
 				2C130E872125A3E40022E998 /* Assemblies */,
 				2CA9FDF42125942A0046128C /* Factories */,
+				2CC8BA13210B4CBF0080BA05 /* Routers */,
 				2CA9FDF3212594040046128C /* Services */,
 				2C130EA82125B7050022E998 /* View */,
 				2CDE34B5212472AA00898A70 /* LogoutableMock.swift */,
