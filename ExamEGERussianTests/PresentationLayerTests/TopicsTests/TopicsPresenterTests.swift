@@ -31,7 +31,7 @@ class TopicsPresenterTests: XCTestCase {
     func testSuccessResponseEqualCountTopics() {
         let exp = expectation(description: "Equal count of fetched and mapped topics")
 
-        let resultToBeReturned = KnowledgeGraphPlainObject.createGraph()
+        let resultToBeReturned = KnowledgeGraphPlainObject.make()
         graphService.resultToBeReturned = .value(resultToBeReturned)
         topicsViewSpy.onSet = { [weak self] in
             guard let `self` = self else {
@@ -51,7 +51,7 @@ class TopicsPresenterTests: XCTestCase {
 
         let expectedErrorTitle = "Error"
         let expectedErrorMessage = "Some error message"
-        let errorToBeReturned = NSError.createError(withMessage: expectedErrorMessage)
+        let errorToBeReturned = NSError.make(with: expectedErrorMessage)
         graphService.resultToBeReturned = Promise(error: errorToBeReturned)
         topicsViewSpy.onError = { [weak self] in
             guard let `self` = self else {

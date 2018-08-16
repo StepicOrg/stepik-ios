@@ -1,5 +1,5 @@
 //
-//  StepPlainObject+Create.swift
+//  StepPlainObject+Make.swift
 //  ExamEGERussianTests
 //
 //  Created by Ivan Magda on 14/08/2018.
@@ -15,7 +15,7 @@ extension StepPlainObject {
         .code, .sql, .table, .video, .dataset, .admin
     ]
 
-    static func create(type: StepPlainObject.StepType? = nil) -> StepPlainObject {
+    static func make(type: StepPlainObject.StepType? = nil) -> StepPlainObject {
         let stepType = type == nil
             ? StepPlainObject.allTypes.randomElement()!
             : type!

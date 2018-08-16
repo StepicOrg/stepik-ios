@@ -1,5 +1,5 @@
 //
-//  KnowledgeGraphPlainObject.swift
+//  KnowledgeGraphPlainObject+Make.swift
 //  ExamEGERussianTests
 //
 //  Created by Ivan Magda on 23/07/2018.
@@ -10,7 +10,7 @@ import Foundation
 @testable import ExamEGERussian
 
 extension KnowledgeGraphPlainObject {
-    static func createGraph() -> KnowledgeGraphPlainObject {
+    static func make() -> KnowledgeGraphPlainObject {
         let goals = [
             KnowledgeGraphGoalPlainObject(title: "Морфология", id: "morph", requiredTopics: ["slitno-razdelno"])
         ]
