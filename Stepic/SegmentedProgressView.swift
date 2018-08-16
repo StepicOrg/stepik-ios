@@ -37,7 +37,6 @@ class SegmentedProgressView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         progressesStackView.layoutIfNeeded()
         progressViews.forEach { $0.layoutIfNeeded() }
     }
@@ -79,7 +78,7 @@ class SegmentedProgressView: UIView {
         }
 
         for id in 0 ..< segmentsCount {
-            progressViews[id].set(progress: (id < segment ? 1 : 0))
+            set(segment: id, completed: id < segment)
         }
         progressViews[segment].animate(duration: duration, completion: completion)
     }

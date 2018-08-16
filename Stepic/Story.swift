@@ -63,13 +63,13 @@ class StoryPart {
 
     init(json: JSON) {
         self.type = PartType(rawValue: json["type"].stringValue)
-        self.position = json["position"].intValue
+        self.position = json["position"].intValue - 1
         self.duration = json["duration"].doubleValue
     }
 
     init(type: String, position: Int, duration: Double) {
         self.type = PartType(rawValue: type)
-        self.position = position
+        self.position = position - 1
         self.duration = duration
     }
 
