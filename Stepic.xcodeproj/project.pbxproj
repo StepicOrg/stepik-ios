@@ -1181,6 +1181,17 @@
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
+		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
+		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
+		2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */; };
+		2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */; };
+		2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */; };
+		2C130E932125A6090022E998 /* MockAssemblyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */; };
+		2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */; };
+		2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E962125A6890022E998 /* StepsAssemblyMock.swift */; };
+		2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */; };
+		2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */; };
+		2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C1B60C11F4C4AEF00236804 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5665,6 +5676,17 @@
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
+		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
+		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyViewController.swift; sourceTree = "<group>"; };
+		2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyNavigationController.swift; sourceTree = "<group>"; };
+		2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E962125A6890022E998 /* StepsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssemblyMock.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8544,6 +8566,40 @@
 			path = AuthSignInViewController;
 			sourceTree = "<group>";
 		};
+		2C130E872125A3E40022E998 /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E982125A6CF0022E998 /* Auth */,
+				2C130E9F2125A7E60022E998 /* ViewControllers */,
+				2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */,
+				2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */,
+				2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */,
+				2C130E962125A6890022E998 /* StepsAssemblyMock.swift */,
+				2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		2C130E982125A6CF0022E998 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */,
+				2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */,
+				2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */,
+				2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		2C130E9F2125A7E60022E998 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */,
+				2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -9806,6 +9862,7 @@
 		2CC995662105C8020023EC0C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				2C130E872125A3E40022E998 /* Assemblies */,
 				2CA9FDF42125942A0046128C /* Factories */,
 				2CA9FDF3212594040046128C /* Services */,
 				2CDE34B5212472AA00898A70 /* LogoutableMock.swift */,
@@ -16012,11 +16069,18 @@
 			files = (
 				2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
+				2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */,
 				2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */,
 				2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */,
+				2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */,
+				2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */,
 				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
+				2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
+				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,
+				2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
+				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
 				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
 				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
@@ -16024,16 +16088,20 @@
 				2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */,
 				2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */,
 				2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */,
+				2C130E932125A6090022E998 /* MockAssemblyNavigationController.swift in Sources */,
 				2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */,
 				2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */,
 				2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */,
 				2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */,
+				2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */,
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
+				2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */,
 				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
 				2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */,
+				2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */,
 				2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
