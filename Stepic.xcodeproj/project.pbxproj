@@ -8600,6 +8600,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		2C130EA02125A9140022E998 /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
+			);
+			path = ServicesTests;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -8725,7 +8733,6 @@
 			isa = PBXGroup;
 			children = (
 				2CDE34B2212470E800898A70 /* BuildersTests */,
-				2CA9FDEE21258F620046128C /* FactoriesTests */,
 				2C23FF17212303FC00721E59 /* PlainObjectsTests */,
 			);
 			path = ModelTests;
@@ -9044,11 +9051,11 @@
 		2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */ = {
 			isa = PBXGroup;
 			children = (
-				2CC995632105C77C0023EC0C /* Common */,
+				2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */,
+				2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
-				2C6841C120EE14AE0050155F /* LogicTests */,
 				2C23FF16212303E900721E59 /* ModelTests */,
-				2CC8BA05210B4AF40080BA05 /* PresentationTests */,
+				2CC995632105C77C0023EC0C /* Common */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -9268,12 +9275,13 @@
 			path = AuthSignUpViewController;
 			sourceTree = "<group>";
 		};
-		2C6841C120EE14AE0050155F /* LogicTests */ = {
+		2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
+				2CA9FDEE21258F620046128C /* FactoriesTests */,
+				2C130EA02125A9140022E998 /* ServicesTests */,
 			);
-			path = LogicTests;
+			path = BusinessLogicLayerTests;
 			sourceTree = "<group>";
 		};
 		2C6ABCD020F7568900E300D3 /* Auth */ = {
@@ -9404,18 +9412,18 @@
 		2C8305F420F38DCD003D7F9B /* CoreLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C8305F520F38DEB003D7F9B /* Graph */,
+				2C8305F520F38DEB003D7F9B /* GraphTests */,
 			);
 			path = CoreLayerTests;
 			sourceTree = "<group>";
 		};
-		2C8305F520F38DEB003D7F9B /* Graph */ = {
+		2C8305F520F38DEB003D7F9B /* GraphTests */ = {
 			isa = PBXGroup;
 			children = (
 				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
 				2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */,
 			);
-			path = Graph;
+			path = GraphTests;
 			sourceTree = "<group>";
 		};
 		2C83E5E0211058CC00A8322D /* StepService */ = {
@@ -9806,21 +9814,21 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		2CC8BA05210B4AF40080BA05 /* PresentationTests */ = {
+		2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2CC8BA06210B4AF40080BA05 /* TopicsModuleTests */,
+				2CC8BA06210B4AF40080BA05 /* TopicsTests */,
 			);
-			path = PresentationTests;
+			path = PresentationLayerTests;
 			sourceTree = "<group>";
 		};
-		2CC8BA06210B4AF40080BA05 /* TopicsModuleTests */ = {
+		2CC8BA06210B4AF40080BA05 /* TopicsTests */ = {
 			isa = PBXGroup;
 			children = (
 				2CC8BA07210B4AF40080BA05 /* TopicsPresenterTests.swift */,
 				2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */,
 			);
-			path = TopicsModuleTests;
+			path = TopicsTests;
 			sourceTree = "<group>";
 		};
 		2CC8BA13210B4CBF0080BA05 /* Router */ = {
@@ -9956,7 +9964,6 @@
 			isa = PBXGroup;
 			children = (
 				2CD7994021077CB90054D098 /* Assembly */,
-				2CD7993C21077CB90054D098 /* Builders */,
 				2CD7994421077CB90054D098 /* Extensions */,
 				2CD7995121077CB90054D098 /* Helpers */,
 				2C770307210F2AD5002E250D /* Router */,
@@ -10106,6 +10113,7 @@
 		2CD7999221077E540054D098 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2CD7993C21077CB90054D098 /* Builders */,
 				2CD7999521077E540054D098 /* PlainObjects */,
 			);
 			path = Model;
