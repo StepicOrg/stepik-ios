@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class StoriesViewController: UIViewController {
+class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
+    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
     var presenter: StoriesPresenterProtocol?
 
@@ -22,6 +23,24 @@ class StoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupCollectionView()
+
+        registerPlaceholder(placeholder: StepikPlaceholder(.refreshStories, action: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.presenter?.refresh()
+        }), for: .connectionError)
+
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
+
+        refresh()
+    }
+
+    private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.skeleton.viewBuilder = { return UIView.fromNib(named: "StorySkeletonPlaceholderView") }
@@ -33,11 +52,6 @@ class StoriesViewController: UIViewController {
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         collectionView.showsHorizontalScrollIndicator = false
-
-        transitioningDelegate = self
-        modalPresentationStyle = .custom
-
-        refresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,16 +82,18 @@ extension StoriesViewController: StoriesViewProtocol {
     func set(state: StoriesViewState) {
         switch state {
         case .empty:
-            print("empty")
+            collectionView.skeleton.hide()
+            showPlaceholder(for: .connectionError)
         case .normal:
-            print("normal")
+            collectionView.skeleton.hide()
+            isPlaceholderShown = false
         case .loading:
+            isPlaceholderShown = false
             collectionView.skeleton.show()
         }
     }
 
     func set(stories: [Story]) {
-        collectionView.skeleton.hide()
         self.stories = stories
         collectionView.reloadData()
     }
