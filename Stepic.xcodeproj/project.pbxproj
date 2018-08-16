@@ -1093,7 +1093,6 @@
 		2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */; };
 		2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouter.swift */; };
 		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
-		2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
 		2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
@@ -4033,6 +4032,13 @@
 		2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */; };
+		2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */; };
+		2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF5212594580046128C /* CourseServiceMock.swift */; };
+		2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF7212594D00046128C /* BaseServiceMock.swift */; };
+		2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */; };
+		2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */; };
+		2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFD212597060046128C /* ProgressServiceMock.swift */; };
 		2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296220FDE4700058481C /* ApplicationAssembly.swift */; };
 		2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */; };
 		2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */; };
@@ -5805,7 +5811,6 @@
 		2C681A0C210B38D800C3DDCA /* AuthSignUpRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpRouterImpl.swift; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
-		2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTestsHelper.swift; sourceTree = "<group>"; };
 		2C6B2B982121A08300968C96 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureKeyWindowCommand.swift; sourceTree = "<group>"; };
 		2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureThirdPartiesCommand.swift; sourceTree = "<group>"; };
@@ -5914,6 +5919,13 @@
 		2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsAPI.swift; sourceTree = "<group>"; };
 		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryMock.swift; sourceTree = "<group>"; };
+		2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF5212594580046128C /* CourseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF7212594D00046128C /* BaseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDFD212597060046128C /* ProgressServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressServiceMock.swift; sourceTree = "<group>"; };
 		2CAD296220FDE4700058481C /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyImpl.swift; sourceTree = "<group>"; };
 		2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleHolder.swift; sourceTree = "<group>"; };
@@ -8657,6 +8669,7 @@
 			isa = PBXGroup;
 			children = (
 				2CDE34B2212470E800898A70 /* BuildersTests */,
+				2CA9FDEE21258F620046128C /* FactoriesTests */,
 				2C23FF17212303FC00721E59 /* PlainObjectsTests */,
 			);
 			path = ModelTests;
@@ -8975,7 +8988,6 @@
 		2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841BC20EE12590050155F /* AssemblyTests */,
 				2CC995632105C77C0023EC0C /* Common */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C6841C120EE14AE0050155F /* LogicTests */,
@@ -9200,29 +9212,12 @@
 			path = AuthSignUpViewController;
 			sourceTree = "<group>";
 		};
-		2C6841BC20EE12590050155F /* AssemblyTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C6841C820EE1F030050155F /* ServiceFactoryTests */,
-			);
-			path = AssemblyTests;
-			sourceTree = "<group>";
-		};
 		2C6841C120EE14AE0050155F /* LogicTests */ = {
 			isa = PBXGroup;
 			children = (
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
 			path = LogicTests;
-			sourceTree = "<group>";
-		};
-		2C6841C820EE1F030050155F /* ServiceFactoryTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */,
-				2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */,
-			);
-			path = ServiceFactoryTests;
 			sourceTree = "<group>";
 		};
 		2C6ABCD020F7568900E300D3 /* Auth */ = {
@@ -9566,6 +9561,46 @@
 			path = "Adaptive leaderboards names";
 			sourceTree = "<group>";
 		};
+		2CA9FDEE21258F620046128C /* FactoriesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */,
+			);
+			path = FactoriesTests;
+			sourceTree = "<group>";
+		};
+		2CA9FDF3212594040046128C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9FDF7212594D00046128C /* BaseServiceMock.swift */,
+				2CA9FDF5212594580046128C /* CourseServiceMock.swift */,
+				2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */,
+				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
+				2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */,
+				2CA9FDFD212597060046128C /* ProgressServiceMock.swift */,
+				2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */,
+				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2CA9FDF42125942A0046128C /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		2CA9FDFF212598580046128C /* PlainObjects */ = {
+			isa = PBXGroup;
+			children = (
+				2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */,
+				2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */,
+			);
+			path = PlainObjects;
+			sourceTree = "<group>";
+		};
 		2CAD296120FDE45D0058481C /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
@@ -9754,9 +9789,8 @@
 		2CC995642105C78C0023EC0C /* Creator */ = {
 			isa = PBXGroup;
 			children = (
-				2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */,
+				2CA9FDFF212598580046128C /* PlainObjects */,
 				2CC995672105C98E0023EC0C /* NSError+Create.swift */,
-				2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */,
 			);
 			path = Creator;
 			sourceTree = "<group>";
@@ -9772,9 +9806,9 @@
 		2CC995662105C8020023EC0C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
+				2CA9FDF42125942A0046128C /* Factories */,
+				2CA9FDF3212594040046128C /* Services */,
 				2CDE34B5212472AA00898A70 /* LogoutableMock.swift */,
-				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -15978,15 +16012,21 @@
 			files = (
 				2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
-				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
+				2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */,
+				2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */,
+				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
+				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
 				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
+				2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */,
 				2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */,
 				2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */,
+				2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */,
 				2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */,
+				2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */,
 				2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,

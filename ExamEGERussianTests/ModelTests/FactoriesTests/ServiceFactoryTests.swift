@@ -14,17 +14,15 @@ class ServiceFactoryTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-
-        serviceFactory = ServiceFactoryTestsHelper().serviceFactory
+        serviceFactory = ServiceFactoryMock()
     }
 
     override func tearDown() {
         super.tearDown()
-
         serviceFactory = nil
     }
 
-    func testServiceComponentsCreation() {
+    func testServiceFactoryNotNil() {
         XCTAssertNotNil(serviceFactory, "Could not instantiate ServiceFactory")
     }
 }
