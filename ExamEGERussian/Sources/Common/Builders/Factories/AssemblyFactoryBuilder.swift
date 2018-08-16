@@ -21,7 +21,7 @@ final class AssemblyFactoryBuilder {
             knowledgeGraph: obtainKnowledgeGraph()
         )
     }
-    
+
     // TODO: Get from cache or create a new one.
     private func obtainKnowledgeGraph() -> KnowledgeGraph {
         return KnowledgeGraph()

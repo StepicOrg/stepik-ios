@@ -37,13 +37,7 @@ struct ImageAsset {
         case videoDark = "ic_video_dark"
 
         var image: UIImage {
-            return self._image
+            return UIImage(named: rawValue)!
         }
-    }
-}
-
-private extension RawRepresentable where RawValue == String {
-    var _image: UIImage {
-        return UIImage(named: rawValue)!
     }
 }
