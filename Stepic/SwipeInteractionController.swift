@@ -39,7 +39,7 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
             viewController.dismiss(animated: true, completion: nil)
 
         case .changed:
-            shouldCompleteTransition = progress > 0.5
+            shouldCompleteTransition = progress > 0.35
             update(progress)
 
         case .cancelled:

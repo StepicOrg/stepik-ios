@@ -14,6 +14,7 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
     var swipeInteractionController: SwipeInteractionController?
     var startOffset: CGFloat = 0
 
+    private var isDragging: Bool = false
     private var prevStatusBarStyle: UIStatusBarStyle?
 
     override func viewDidLoad() {
@@ -24,6 +25,7 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         let scrollView = view.subviews.filter { $0 is UIScrollView }.first as! UIScrollView
         scrollView.delegate = self
         swipeInteractionController = SwipeInteractionController(viewController: self)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +65,14 @@ extension OpenedStoriesPageViewController: UIPageViewControllerDataSource {
 extension OpenedStoriesPageViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         startOffset = scrollView.contentOffset.x
+        isDragging = true
     }
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isDragging else {
+            return
+        }
+
         var hasNextModule: Bool = true
 
         if startOffset < scrollView.contentOffset.x {
@@ -80,5 +87,9 @@ extension OpenedStoriesPageViewController: UIScrollViewDelegate {
         if percent > 0.2 && !hasNextModule {
             close()
         }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        isDragging = false
     }
 }
