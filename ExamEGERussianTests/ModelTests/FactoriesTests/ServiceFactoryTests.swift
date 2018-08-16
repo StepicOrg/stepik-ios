@@ -23,6 +23,27 @@ class ServiceFactoryTests: XCTestCase {
     }
 
     func testServiceFactoryNotNil() {
-        XCTAssertNotNil(serviceFactory, "Could not instantiate ServiceFactory")
+        XCTAssertNotNil(serviceFactory, "Could't instantiate ServiceFactory")
+    }
+
+    func testMockServiceFactoryTypes() {
+        XCTAssert(serviceFactory!.userRegistrationService is UserRegistrationServiceMock)
+        XCTAssert(serviceFactory!.graphService is GraphServiceMock)
+        XCTAssert(serviceFactory!.lessonsService is LessonsServiceMock)
+        XCTAssert(serviceFactory!.courseService is CourseServiceMock)
+        XCTAssert(serviceFactory!.enrollmentService is EnrollmentServiceMock)
+        XCTAssert(serviceFactory!.stepsService is StepsServiceMock)
+        XCTAssert(serviceFactory!.progressService is ProgressServiceMock)
+    }
+
+    func testConcreateServiceFactoryTypes() {
+        let serviceFactory = ServiceFactoryBuilder().build() as! ServiceFactoryImpl
+        XCTAssert(serviceFactory.userRegistrationService is UserRegistrationServiceImpl)
+        XCTAssert(serviceFactory.graphService is GraphServiceImpl)
+        XCTAssert(serviceFactory.lessonsService is LessonsServiceImpl)
+        XCTAssert(serviceFactory.courseService is CourseServiceImpl)
+        XCTAssert(serviceFactory.enrollmentService is EnrollmentServiceImpl)
+        XCTAssert(serviceFactory.stepsService is StepsServiceImpl)
+        XCTAssert(serviceFactory.progressService is ProgressServiceImpl)
     }
 }
