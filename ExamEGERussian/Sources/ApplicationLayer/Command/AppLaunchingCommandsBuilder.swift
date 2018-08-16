@@ -6,8 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import UIKit.UIWindow
+import UIKit
 
 final class AppLaunchingCommandsBuilder {
     private var window: UIWindow?

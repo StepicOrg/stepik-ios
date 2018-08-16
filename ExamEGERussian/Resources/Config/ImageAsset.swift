@@ -6,8 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import UIKit.UIImage
+import UIKit
 
 struct ImageAsset {
     enum StepIcons: String {
