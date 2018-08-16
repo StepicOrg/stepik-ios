@@ -1,6 +1,8 @@
-if [ -f "${PODS_ROOT}/SwiftLint/swiftlint" ]; then
-    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect
-    ${PODS_ROOT}/SwiftLint/swiftlint lint --config ${SRCROOT}/.swiftlint.yml
+swiftlint_executable="${PWD}/Pods/SwiftLint/swiftlint"
+
+if [ -f $swiftlint_executable ]; then
+    $swiftlint_executable autocorrect
+    $swiftlint_executable lint --config ${PWD}/.swiftlint.yml
 else
     echo "warning: SwiftLint not installed, run pod install"
 fi
