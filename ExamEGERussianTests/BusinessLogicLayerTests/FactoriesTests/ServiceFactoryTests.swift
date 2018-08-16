@@ -10,40 +10,40 @@ import XCTest
 @testable import ExamEGERussian
 
 class ServiceFactoryTests: XCTestCase {
-    private var serviceFactory: ServiceFactory?
+    private var mockServiceFactory: ServiceFactory!
+    private var concreateServiceFactory: ServiceFactory!
 
     override func setUp() {
         super.setUp()
-        serviceFactory = ServiceFactoryMock()
+
+        mockServiceFactory = ServiceFactoryMock()
+        concreateServiceFactory = ServiceFactoryBuilder().build()
     }
 
     override func tearDown() {
         super.tearDown()
-        serviceFactory = nil
-    }
 
-    func testServiceFactoryNotNil() {
-        XCTAssertNotNil(serviceFactory, "Could't instantiate ServiceFactory")
+        mockServiceFactory = nil
+        concreateServiceFactory = nil
     }
 
     func testMockServiceFactoryTypes() {
-        XCTAssert(serviceFactory!.userRegistrationService is UserRegistrationServiceMock)
-        XCTAssert(serviceFactory!.graphService is GraphServiceMock)
-        XCTAssert(serviceFactory!.lessonsService is LessonsServiceMock)
-        XCTAssert(serviceFactory!.courseService is CourseServiceMock)
-        XCTAssert(serviceFactory!.enrollmentService is EnrollmentServiceMock)
-        XCTAssert(serviceFactory!.stepsService is StepsServiceMock)
-        XCTAssert(serviceFactory!.progressService is ProgressServiceMock)
+        XCTAssert(mockServiceFactory.userRegistrationService is UserRegistrationServiceMock)
+        XCTAssert(mockServiceFactory.graphService is GraphServiceMock)
+        XCTAssert(mockServiceFactory.lessonsService is LessonsServiceMock)
+        XCTAssert(mockServiceFactory.courseService is CourseServiceMock)
+        XCTAssert(mockServiceFactory.enrollmentService is EnrollmentServiceMock)
+        XCTAssert(mockServiceFactory.stepsService is StepsServiceMock)
+        XCTAssert(mockServiceFactory.progressService is ProgressServiceMock)
     }
 
     func testConcreateServiceFactoryTypes() {
-        let serviceFactory = ServiceFactoryBuilder().build() as! ServiceFactoryImpl
-        XCTAssert(serviceFactory.userRegistrationService is UserRegistrationServiceImpl)
-        XCTAssert(serviceFactory.graphService is GraphServiceImpl)
-        XCTAssert(serviceFactory.lessonsService is LessonsServiceImpl)
-        XCTAssert(serviceFactory.courseService is CourseServiceImpl)
-        XCTAssert(serviceFactory.enrollmentService is EnrollmentServiceImpl)
-        XCTAssert(serviceFactory.stepsService is StepsServiceImpl)
-        XCTAssert(serviceFactory.progressService is ProgressServiceImpl)
+        XCTAssert(concreateServiceFactory.userRegistrationService is UserRegistrationServiceImpl)
+        XCTAssert(concreateServiceFactory.graphService is GraphServiceImpl)
+        XCTAssert(concreateServiceFactory.lessonsService is LessonsServiceImpl)
+        XCTAssert(concreateServiceFactory.courseService is CourseServiceImpl)
+        XCTAssert(concreateServiceFactory.enrollmentService is EnrollmentServiceImpl)
+        XCTAssert(concreateServiceFactory.stepsService is StepsServiceImpl)
+        XCTAssert(concreateServiceFactory.progressService is ProgressServiceImpl)
     }
 }
