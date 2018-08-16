@@ -12,7 +12,7 @@ import UIKit
 class StoriesAssembly: Assembly {
     func buildModule() -> UIViewController {
         let vc = StoriesViewController()
-        vc.presenter = StoriesPresenter(view: vc)
+        vc.presenter = StoriesPresenter(view: vc, storyTemplatesAPI: StoryTemplatesAPI())
         return vc
     }
 }

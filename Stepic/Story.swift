@@ -9,7 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-class Story {
+class Story: JSONSerializable {
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.coverPath = json["cover"].stringValue
+        self.title = json["title"].stringValue
+        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0) }
+        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)")
+    }
+
     var id: Int
     var coverPath: String
     var title: String
@@ -24,12 +32,27 @@ class Story {
         self.parts = parts
     }
 
-    init(json: JSON) {
+    required init(json: JSON) {
         self.id = json["id"].intValue
         self.coverPath = json["cover"].stringValue
         self.title = json["title"].stringValue
-        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0) }
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)")
+        self.parts = json["parts"].arrayValue.compactMap {
+            Story.buildStoryPart(json: $0)
+        }
+    }
+
+    private static func buildStoryPart(json: JSON) -> StoryPart? {
+        guard let type = json["type"].string else {
+            return nil
+        }
+
+        switch type {
+        case "text":
+            return TextStoryPart(json: json)
+        default:
+            return nil
+        }
     }
 }
 
@@ -54,19 +77,6 @@ class StoryPart {
         case text
     }
 }
-
-//protocol ImageStoryPartProtocol {
-//    var imagePath: String {get set}
-//}
-//
-//class ImageStoryPart: StoryPart, ImageStoryPartProtocol {
-//    var imagePath: String
-//
-//    init(type: String, position: Int, duration: Double, imagePath: String) {
-//        self.imagePath = imagePath
-//        super.init(type: type, position: position, duration: duration)
-//    }
-//}
 
 class TextStoryPart: StoryPart {
     var imagePath: String

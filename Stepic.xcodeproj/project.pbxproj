@@ -64,6 +64,7 @@
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */; };
 		080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */; };
+		080E1ACE212583E5006B58A9 /* StoryTemplatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */; };
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
@@ -4942,6 +4943,7 @@
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuBlock.swift; sourceTree = "<group>"; };
 		080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartViewFactory.swift; sourceTree = "<group>"; };
+		080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTemplatesAPI.swift; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
 		080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCodeQuizViewController.swift; sourceTree = "<group>"; };
 		080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenCodeQuizViewController.xib; sourceTree = "<group>"; };
@@ -6935,6 +6937,7 @@
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
 				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
+				080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -13606,6 +13609,7 @@
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
+				080E1ACE212583E5006B58A9 /* StoryTemplatesAPI.swift in Sources */,
 				2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,

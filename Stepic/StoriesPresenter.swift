@@ -28,9 +28,11 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     var stories: [Story] = []
     weak var view: StoriesViewProtocol?
+    var storyTemplatesAPI: StoryTemplatesAPI
 
-    init(view: StoriesViewProtocol) {
+    init(view: StoriesViewProtocol, storyTemplatesAPI: StoryTemplatesAPI) {
         self.view = view
+        self.storyTemplatesAPI = storyTemplatesAPI
         NotificationCenter.default.addObserver(self, selector: #selector(StoriesPresenter.storyDidAppear(_:)), name: .storyDidAppear, object: nil)
     }
 
@@ -107,15 +109,18 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     func refresh() {
         view?.set(state: .loading)
-        self.stories = mockedStories
-        delay(2.0, closure: {
-            [weak self] in
+
+        storyTemplatesAPI.retrieve(isPublished: true).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return
             }
+            strongSelf.stories = stories
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
             strongSelf.view?.set(stories: strongSelf.stories)
-        })
+        }.catch {
+            _ in
+            //TODO: Show error state here
+        }
     }
 
     deinit {
