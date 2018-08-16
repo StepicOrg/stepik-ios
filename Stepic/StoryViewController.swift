@@ -66,7 +66,6 @@ class StoryViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("did disappear")
         didAppear = false
         didLayout = false
         presenter?.pause()
@@ -131,10 +130,6 @@ class StoryViewController: UIViewController {
 
     func close() {
         dismiss(animated: true, completion: nil)
-    }
-
-    deinit {
-        print("deinit")
     }
 }
 

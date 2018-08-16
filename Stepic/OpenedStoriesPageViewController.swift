@@ -6,13 +6,15 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewProtocol {
     var presenter: OpenedStoriesPresenterProtocol?
 
     var swipeInteractionController: SwipeInteractionController?
     var startOffset: CGFloat = 0
+
+    private var prevStatusBarStyle: UIStatusBarStyle?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,15 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        prevStatusBarStyle = UIApplication.shared.statusBarStyle
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let style = prevStatusBarStyle {
+            UIApplication.shared.statusBarStyle = style
+        }
     }
 
     func close() {

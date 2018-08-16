@@ -42,14 +42,17 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
         stackView.spacing = 16
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.leadingMargin.trailingMargin.bottomMargin.equalTo(self)
+            make.leadingMargin.trailingMargin.equalTo(self)
+            make.bottomMargin.equalTo(self).offset(-12)
         }
         elementsStackView = stackView
+        elementsStackView?.isHidden = true
     }
 
     private func buildTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
         let containerView = UIView()
         var views: [UIView] = []
+
         if let text = textModel.text {
             let label = UILabel()
             label.text = text
@@ -63,6 +66,7 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             }
             views += [label]
         }
+
         if let title = textModel.title {
             let label = UILabel()
             label.text = title
@@ -79,6 +83,7 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             }
             views += [label]
         }
+
         containerView.backgroundColor = textModel.backgroundStyle.backgroundColor
         containerView.setRoundedCorners(cornerRadius: 8)
         views.last?.snp.makeConstraints { make in
@@ -94,12 +99,11 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
         storyButton.backgroundColor = buttonModel.backgroundColor
         storyButton.setTitleColor(buttonModel.titleColor, for: .normal)
         storyButton.setTitle(buttonModel.title, for: .normal)
-//        storyButton.setRoundedCorners(cornerRadius: 8)
         containerView.addSubview(storyButton)
         storyButton.snp.makeConstraints { make in
             make.bottom.top.equalTo(containerView)
             make.centerX.equalTo(containerView)
-            make.width.equalTo(150)
+            make.width.equalTo(180)
             make.height.equalTo(48)
         }
         return containerView
@@ -108,12 +112,14 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
     func startLoad() {
         if activityIndicator.isHidden != false {
             activityIndicator.isHidden = false
+            elementsStackView?.isHidden = true
             activityIndicator.startAnimating()
         }
         guard let url = URL(string: imagePath) else { return }
         Nuke.loadImage(with: url, options: .shared, into: imageView) { [weak self] (_, _) in
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.isHidden = true
+            self?.elementsStackView?.isHidden = false
             self?.completion?()
         }
     }
