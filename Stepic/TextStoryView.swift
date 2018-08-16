@@ -1,5 +1,5 @@
 //
-//  ImageStoryView.swift
+//  TextStoryView.swift
 //  stepik-stories
 //
 //  Created by Ostrenkiy on 03.08.2018.
@@ -11,7 +11,7 @@ import UIKit
 import Nuke
 import SnapKit
 
-class ImageStoryView: UIView, UIStoryPartViewProtocol {
+class TextStoryView: UIView, UIStoryPartViewProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -21,6 +21,10 @@ class ImageStoryView: UIView, UIStoryPartViewProtocol {
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.isHidden = true
+    }
+
+    func setup(storyPart: TextStoryPart) {
+        self.imagePath = storyPart.imagePath
     }
 
     func startLoad() {

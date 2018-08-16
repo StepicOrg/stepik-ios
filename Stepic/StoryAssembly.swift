@@ -21,7 +21,7 @@ class StoryAssembly: Assembly {
 
     func buildModule() -> UIViewController {
         let vc = StoryViewController()
-        vc.presenter = StoryPresenter(view: vc, story: story, navigationDelegate: navigationDelegate)
+        vc.presenter = StoryPresenter(view: vc, story: story, storyPartViewFactory: StoryPartViewFactory(), navigationDelegate: navigationDelegate)
         return vc
     }
 }

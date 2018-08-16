@@ -63,6 +63,7 @@
 		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */; };
+		080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */; };
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
@@ -268,7 +269,7 @@
 		08484F01211AF4320006266F /* CachedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE4211AF42E0006266F /* CachedValue.swift */; };
 		08484F02211AF4320006266F /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
 		08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE6211AF42E0006266F /* SegmentedProgressView.swift */; };
-		08484F04211AF4320006266F /* ImageStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE7211AF42F0006266F /* ImageStoryView.xib */; };
+		08484F04211AF4320006266F /* TextStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE7211AF42F0006266F /* TextStoryView.xib */; };
 		08484F05211AF4320006266F /* StoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE8211AF42F0006266F /* StoryAssembly.swift */; };
 		08484F06211AF4320006266F /* StoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */; };
 		08484F07211AF4320006266F /* StoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEA211AF42F0006266F /* StoryPresenter.swift */; };
@@ -278,7 +279,7 @@
 		08484F0B211AF4320006266F /* StoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EEE211AF4310006266F /* StoryViewController.xib */; };
 		08484F0C211AF4320006266F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEF211AF4310006266F /* StoryViewController.swift */; };
 		08484F11211AF4320006266F /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
-		08484F18211AF4320006266F /* ImageStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EFD211AF4320006266F /* ImageStoryView.swift */; };
+		08484F18211AF4320006266F /* TextStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EFD211AF4320006266F /* TextStoryView.swift */; };
 		08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */; };
 		08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
@@ -4940,6 +4941,7 @@
 		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuBlock.swift; sourceTree = "<group>"; };
+		080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartViewFactory.swift; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
 		080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCodeQuizViewController.swift; sourceTree = "<group>"; };
 		080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenCodeQuizViewController.xib; sourceTree = "<group>"; };
@@ -5085,7 +5087,7 @@
 		08484EE4211AF42E0006266F /* CachedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedValue.swift; sourceTree = "<group>"; };
 		08484EE5211AF42E0006266F /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		08484EE6211AF42E0006266F /* SegmentedProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedProgressView.swift; sourceTree = "<group>"; };
-		08484EE7211AF42F0006266F /* ImageStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageStoryView.xib; sourceTree = "<group>"; };
+		08484EE7211AF42F0006266F /* TextStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextStoryView.xib; sourceTree = "<group>"; };
 		08484EE8211AF42F0006266F /* StoryAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryAssembly.swift; sourceTree = "<group>"; };
 		08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		08484EEA211AF42F0006266F /* StoryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryPresenter.swift; sourceTree = "<group>"; };
@@ -5095,7 +5097,7 @@
 		08484EEE211AF4310006266F /* StoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryViewController.xib; sourceTree = "<group>"; };
 		08484EEF211AF4310006266F /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		08484EF5211AF4310006266F /* StoriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesPresenter.swift; sourceTree = "<group>"; };
-		08484EFD211AF4320006266F /* ImageStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStoryView.swift; sourceTree = "<group>"; };
+		08484EFD211AF4320006266F /* TextStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStoryView.swift; sourceTree = "<group>"; };
 		08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UICollectionView.swift"; sourceTree = "<group>"; };
 		08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorySkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
@@ -6875,6 +6877,7 @@
 				08484EED211AF4300006266F /* Story.swift */,
 				088A65EA211CA900001431E3 /* Story */,
 				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
+				080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -7286,8 +7289,8 @@
 		088A65E8211CA8C5001431E3 /* Story Part Views */ = {
 			isa = PBXGroup;
 			children = (
-				08484EFD211AF4320006266F /* ImageStoryView.swift */,
-				08484EE7211AF42F0006266F /* ImageStoryView.xib */,
+				08484EFD211AF4320006266F /* TextStoryView.swift */,
+				08484EE7211AF42F0006266F /* TextStoryView.xib */,
 			);
 			name = "Story Part Views";
 			sourceTree = "<group>";
@@ -10971,7 +10974,7 @@
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
-				08484F04211AF4320006266F /* ImageStoryView.xib in Resources */,
+				08484F04211AF4320006266F /* TextStoryView.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
@@ -13472,7 +13475,7 @@
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				087235EE20FE2F2F00B4D5B1 /* AnalyticsEvent.swift in Sources */,
 				08A9F7031FC37DD000640F1F /* CourseTagsView.swift in Sources */,
-				08484F18211AF4320006266F /* ImageStoryView.swift in Sources */,
+				08484F18211AF4320006266F /* TextStoryView.swift in Sources */,
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
@@ -13808,6 +13811,7 @@
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
+				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,

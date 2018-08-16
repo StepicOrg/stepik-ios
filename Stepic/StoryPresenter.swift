@@ -40,14 +40,16 @@ class StoryPresenter: StoryPresenterProtocol {
     weak var view: StoryViewProtocol?
     weak var navigationDelegate: StoryNavigationDelegate?
 
+    private var storyPartViewFactory: StoryPartViewFactory
     private var story: Story
 
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
 
-    init(view: StoryViewProtocol, story: Story, navigationDelegate: StoryNavigationDelegate?) {
+    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, navigationDelegate: StoryNavigationDelegate?) {
         self.view = view
         self.story = story
+        self.storyPartViewFactory = storyPartViewFactory
         self.navigationDelegate = navigationDelegate
     }
 
@@ -75,15 +77,14 @@ class StoryPresenter: StoryPresenterProtocol {
             }
         }
 
-        let animatingStoryPart = story.parts[partToAnimate] as! ImageStoryPart
+        let animatingStoryPart = story.parts[partToAnimate]
 
         if let viewToAnimate = viewForIndex[partToAnimate] {
             view?.animate(view: viewToAnimate)
             view?.animateProgress(segment: partToAnimate, duration: animatingStoryPart.duration)
         } else {
-            let viewToAnimate: ImageStoryView = .fromNib()
-            viewToAnimate.imagePath = animatingStoryPart.imagePath
-            viewToAnimate.completion = {
+            var viewToAnimate = storyPartViewFactory.buildView(storyPart: animatingStoryPart)
+            viewToAnimate?.completion = {
                 [weak self] in
                 guard let strongSelf = self else {
                     return
@@ -92,7 +93,9 @@ class StoryPresenter: StoryPresenterProtocol {
                     strongSelf.view?.animateProgress(segment: strongSelf.partToAnimate, duration: animatingStoryPart.duration)
                 }
             }
-            view?.animate(view: viewToAnimate)
+            if let viewToAnimate = viewToAnimate {
+                view?.animate(view: viewToAnimate)
+            }
         }
     }
 
