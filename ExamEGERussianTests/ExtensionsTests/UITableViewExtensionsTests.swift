@@ -17,7 +17,7 @@ class UITableViewExtensionsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        
+
         tableView = UITableView()
         tableView.registerClass(for: MockTableViewCell.self)
         tableView.registerHeaderNib(for: UITableViewHeaderFooterView.self)
