@@ -18,6 +18,8 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
     var imagePath: String = ""
     var completion: (() -> Void)?
 
+    var elementsStackView: UIStackView?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.isHidden = true
@@ -25,6 +27,82 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
 
     func setup(storyPart: TextStoryPart) {
         self.imagePath = storyPart.imagePath
+
+        var storyContentViews: [UIView] = []
+        if let text = storyPart.text {
+            storyContentViews += [buildTextContainerView(text: text)]
+        }
+        if let button = storyPart.button {
+            storyContentViews += [buildButtonView(button: button)]
+        }
+        let stackView = UIStackView(arrangedSubviews: storyContentViews)
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.leadingMargin.trailingMargin.bottomMargin.equalTo(self)
+        }
+        elementsStackView = stackView
+    }
+
+    private func buildTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
+        let containerView = UIView()
+        var views: [UIView] = []
+        if let text = textModel.text {
+            let label = UILabel()
+            label.text = text
+            label.textColor = textModel.textColor
+            label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+            label.numberOfLines = 0
+            containerView.addSubview(label)
+            label.snp.makeConstraints { make in
+                make.leading.equalTo(containerView).offset(16)
+                make.bottom.trailing.equalTo(containerView).offset(-16)
+            }
+            views += [label]
+        }
+        if let title = textModel.title {
+            let label = UILabel()
+            label.text = title
+            label.textColor = textModel.textColor
+            label.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+            label.numberOfLines = 0
+            containerView.addSubview(label)
+            label.snp.makeConstraints { make in
+                make.leading.equalTo(containerView).offset(16)
+                make.trailing.equalTo(containerView).offset(-16)
+                if let lastView = views.last {
+                    make.bottom.equalTo(lastView.snp.top).offset(-8)
+                }
+            }
+            views += [label]
+        }
+        containerView.backgroundColor = textModel.backgroundStyle.backgroundColor
+        containerView.setRoundedCorners(cornerRadius: 8)
+        views.last?.snp.makeConstraints { make in
+            make.top.equalTo(containerView).offset(16)
+        }
+        return containerView
+    }
+
+    private func buildButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
+        let containerView = UIView()
+        containerView.backgroundColor = UIColor.clear
+        let storyButton = StepikButton(type: .system)
+        storyButton.backgroundColor = buttonModel.backgroundColor
+        storyButton.setTitleColor(buttonModel.titleColor, for: .normal)
+        storyButton.setTitle(buttonModel.title, for: .normal)
+//        storyButton.setRoundedCorners(cornerRadius: 8)
+        containerView.addSubview(storyButton)
+        storyButton.snp.makeConstraints { make in
+            make.bottom.top.equalTo(containerView)
+            make.centerX.equalTo(containerView)
+            make.width.equalTo(150)
+            make.height.equalTo(48)
+        }
+        return containerView
     }
 
     func startLoad() {

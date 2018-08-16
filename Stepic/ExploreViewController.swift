@@ -140,8 +140,8 @@ class ExploreViewController: UIViewController, ExploreView {
         widgetBackgroundView.addSubview(storiesModule.view)
         storiesModule.view.snp.makeConstraints { make -> Void in
             make.top.equalTo(widgetBackgroundView).offset(16)
-            make.bottom.equalTo(widgetBackgroundView).offset(-8)
-            make.height.equalTo(100)
+            make.bottom.equalTo(widgetBackgroundView).offset(0)
+            make.height.equalTo(98)
         }
         if #available(iOS 11.0, *) {
             storiesModule.view.snp.makeConstraints { make -> Void in

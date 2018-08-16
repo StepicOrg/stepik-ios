@@ -113,7 +113,7 @@ class HTMLProcessor {
 
         for link in links {
             if link.first == Character("/") {
-                linkMap[link] = "\(StepicApplicationsInfo.stepicURL)/\(link)"
+                linkMap[link] = HTMLProcessor.addStepikURLIfNeeded(url: link)
             }
         }
 
@@ -123,6 +123,14 @@ class HTMLProcessor {
         }
 
         return newBody
+    }
+
+    static func addStepikURLIfNeeded(url: String) -> String {
+        if url.first == Character("/") {
+            return "\(StepicApplicationsInfo.stepicURL)/\(url)"
+        } else {
+            return url
+        }
     }
 
     private func fixProtocolRelativeURLs(html: String) -> String {

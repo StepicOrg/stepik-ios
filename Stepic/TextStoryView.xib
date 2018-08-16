@@ -37,7 +37,7 @@
                 <outlet property="activityIndicator" destination="we1-Lv-9YI" id="Zyx-Xn-n6c"/>
                 <outlet property="imageView" destination="r0Q-D2-RNe" id="uG1-rU-nBL"/>
             </connections>
-            <point key="canvasLocation" x="-36" y="49"/>
+            <point key="canvasLocation" x="-36.5" y="48.5"/>
         </view>
     </objects>
 </document>

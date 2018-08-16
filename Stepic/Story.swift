@@ -34,7 +34,7 @@ class Story: JSONSerializable {
 
     required init(json: JSON) {
         self.id = json["id"].intValue
-        self.coverPath = json["cover"].stringValue
+        self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json["cover"].stringValue)
         self.title = json["title"].stringValue
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)")
         self.parts = json["parts"].arrayValue.compactMap {
@@ -85,32 +85,60 @@ class TextStoryPart: StoryPart {
         var title: String?
         var text: String?
         var textColor: UIColor
+        var backgroundStyle: BackgroundStyle
+
+        enum BackgroundStyle: String {
+            case light, dark, none
+
+            var backgroundColor: UIColor {
+                switch self {
+                case .light:
+                    return UIColor.white.withAlphaComponent(0.7)
+                case .dark:
+                    return UIColor.mainDark.withAlphaComponent(0.7)
+                default:
+                    return UIColor.clear
+                }
+            }
+        }
     }
+
     var text: Text?
 
     struct Button {
         var title: String
         var urlPath: String
+        var backgroundColor: UIColor
+        var titleColor: UIColor
     }
     var button: Button?
 
     override init(json: JSON) {
-        imagePath = json["image"].stringValue
-        let textJSON = json["text"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
-        if textJSON != JSON.null {
-            let title = textJSON["title"].string
-            let text = textJSON["text"].string
+        imagePath = HTMLProcessor.addStepikURLIfNeeded(url: json["image"].stringValue)
+
+        let textJSON = json["text"]
+        let localizedTextJSON = json["text"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
+        if localizedTextJSON != JSON.null {
+            let title = localizedTextJSON["title"].string
+            let text = localizedTextJSON["text"].string
             let colorHexInt = Int(textJSON["text_color"].stringValue, radix: 16) ?? 0x000000
             let textColor = UIColor(hex: colorHexInt)
-            self.text = Text(title: title, text: text, textColor: textColor)
+            let backgroundStyle = Text.BackgroundStyle(rawValue: textJSON["background_style"].stringValue) ?? .none
+            self.text = Text(title: title, text: text, textColor: textColor, backgroundStyle: backgroundStyle)
         }
 
-        let buttonJSON = json["button"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
-        if buttonJSON != JSON.null {
-            let title = json["title"].stringValue
-            let urlPath = json["url"].stringValue
-            self.button = Button(title: title, urlPath: urlPath)
+        let buttonJSON = json["button"]
+        let localizedButtonJSON = json["button"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
+        if localizedButtonJSON != JSON.null {
+            let title = localizedButtonJSON["title"].stringValue
+            let urlPath = localizedButtonJSON["url"].stringValue
+            let backgroundColorHexInt = Int(buttonJSON["background_color"].stringValue, radix: 16) ?? 0x000000
+            let backgroundColor = UIColor(hex: backgroundColorHexInt)
+            let titleColorHexInt = Int(buttonJSON["text_color"].stringValue, radix: 16) ?? 0x000000
+            let titleColor = UIColor(hex: titleColorHexInt)
+            self.button = Button(title: title, urlPath: urlPath, backgroundColor: backgroundColor, titleColor: titleColor)
         }
+
         super.init(json: json)
     }
 }
