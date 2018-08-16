@@ -157,9 +157,5 @@ target 'ExamEGERussian' do
     target 'ExamEGERussianTests' do
         inherit! :search_paths
     end
-
-    target 'ExamEGERussianUITests' do
-        inherit! :search_paths
-    end
 end
 

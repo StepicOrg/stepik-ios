@@ -75,7 +75,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 return
             }
 
-            self.knowledgeGraph.adjacencies = graph.adjacencies
+            self.knowledgeGraph.adjacency = graph.adjacency
             self.view?.setTopics(self.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)

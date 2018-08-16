@@ -26,7 +26,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2C59F02620EB8AC800666EE0"
+            BuildableName = "ExamEGERussian.app"
+            BlueprintName = "ExamEGERussian"
+            ReferencedContainer = "container:Stepic.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +46,6 @@
                BlueprintIdentifier = "2C59F03920EB8ACA00666EE0"
                BuildableName = "ExamEGERussianTests.xctest"
                BlueprintName = "ExamEGERussianTests"
-               ReferencedContainer = "container:Stepic.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C59F04420EB8ACA00666EE0"
-               BuildableName = "ExamEGERussianUITests.xctest"
-               BlueprintName = "ExamEGERussianUITests"
                ReferencedContainer = "container:Stepic.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -88,6 +89,16 @@
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "MallocStackLogging"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "PrefersMallocStackLoggingLite"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction

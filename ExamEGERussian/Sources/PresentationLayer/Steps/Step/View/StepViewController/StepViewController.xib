@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,22 +22,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Dop-QF-tVa">
-                    <rect key="frame" x="177" y="323" width="20" height="20"/>
+                    <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                 </activityIndicatorView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Epd-wS-JR3">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Epd-wS-JR3">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Dop-QF-tVa" firstAttribute="centerX" secondItem="EaW-md-5R7" secondAttribute="centerX" id="3ur-tR-tDW"/>
-                <constraint firstItem="qj3-uY-T7R" firstAttribute="trailing" secondItem="Epd-wS-JR3" secondAttribute="trailing" id="6Gu-Lb-UWx"/>
-                <constraint firstItem="Epd-wS-JR3" firstAttribute="top" secondItem="qj3-uY-T7R" secondAttribute="top" id="A8M-pD-nKc"/>
-                <constraint firstItem="qj3-uY-T7R" firstAttribute="bottom" secondItem="Epd-wS-JR3" secondAttribute="bottom" id="KFp-eQ-dOP"/>
-                <constraint firstItem="Epd-wS-JR3" firstAttribute="leading" secondItem="qj3-uY-T7R" secondAttribute="leading" id="XvG-iN-WRB"/>
+                <constraint firstAttribute="trailing" secondItem="Epd-wS-JR3" secondAttribute="trailing" id="6Gu-Lb-UWx"/>
+                <constraint firstItem="Epd-wS-JR3" firstAttribute="top" secondItem="EaW-md-5R7" secondAttribute="top" id="A8M-pD-nKc"/>
+                <constraint firstAttribute="bottom" secondItem="Epd-wS-JR3" secondAttribute="bottom" id="KFp-eQ-dOP"/>
+                <constraint firstItem="Epd-wS-JR3" firstAttribute="leading" secondItem="EaW-md-5R7" secondAttribute="leading" id="XvG-iN-WRB"/>
                 <constraint firstItem="Dop-QF-tVa" firstAttribute="centerY" secondItem="EaW-md-5R7" secondAttribute="centerY" id="YNL-Vh-o3b"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="qj3-uY-T7R"/>
             <point key="canvasLocation" x="316" y="54"/>
         </view>
     </objects>

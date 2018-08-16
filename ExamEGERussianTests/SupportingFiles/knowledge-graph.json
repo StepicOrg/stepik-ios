@@ -1,0 +1,74 @@
+{
+    "goals": [
+        {
+            "title": "Морфология",
+            "id": "morph",
+            "required-topics": [
+                "slitno-razdelno"
+            ]
+        }
+    ],
+    "topics": [
+        {
+            "id": "slitno-razdelno",
+            "title": "B13 Слитное раздельное написание"
+        },
+        {
+            "id": "pristavki",
+            "title": "B9 Приставки",
+            "required-for": "slitno-razdelno"
+        }
+    ],
+    "topics-map": [
+        {
+            "id": "slitno-razdelno",
+            "lessons": [
+                {
+                    "id": 82810,
+                    "type": "theory",
+                    "course": "7798"
+                },
+                {
+                    "id": 82809,
+                    "type": "theory",
+                    "course": "7798"
+                },
+                {
+                    "id": 86295,
+                    "type": "theory",
+                    "course": "7798"
+                },
+                {
+                    "id": 86297,
+                    "type": "theory",
+                    "course": "7798"
+                },
+                {
+                    "id": 6000,
+                    "type": "practice",
+                    "course": "7798"
+                },
+                {
+                    "id": 66286,
+                    "type": "theory",
+                    "course": "5448"
+                }
+            ]
+        },
+        {
+            "id": "pristavki",
+            "lessons": [
+                {
+                    "id": 42158,
+                    "type": "theory",
+                    "course": "1891"
+                },
+                {
+                    "id": 42171,
+                    "type": "theory",
+                    "course": "1891"
+                }
+            ]
+        }
+    ]
+}

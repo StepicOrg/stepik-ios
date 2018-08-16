@@ -14,4 +14,6 @@ enum StepsPagerViewState {
 
 protocol StepsPagerView: class {
     var state: StepsPagerViewState { get set }
+
+    func setTabSelected(_ selected: Bool, at index: Int)
 }

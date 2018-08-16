@@ -6,7 +6,5 @@
 import Foundation
 
 protocol StepsPagerRouter: RouterPoppable {
-}
-
-final class StepsPagerRouterImpl: BaseRouter, StepsPagerRouter {
+    func shareStep(with url: String)
 }

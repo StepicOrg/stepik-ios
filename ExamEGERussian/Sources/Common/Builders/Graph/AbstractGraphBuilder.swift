@@ -10,5 +10,6 @@ import Foundation
 
 protocol AbstractGraphBuilder {
     associatedtype T: Hashable
+
     func build() -> AbstractGraph<T>
 }

@@ -10,7 +10,8 @@ import Foundation
 
 public class AbstractGraph<T: Hashable>: CustomStringConvertible {
 
-    public required init() {}
+    public required init() {
+    }
 
     public var description: String {
         fatalError("abstract property accessed")

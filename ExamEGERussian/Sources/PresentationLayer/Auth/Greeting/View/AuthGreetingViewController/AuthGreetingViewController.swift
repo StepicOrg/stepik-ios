@@ -9,7 +9,7 @@
 import UIKit
 
 final class AuthGreetingViewController: UIViewController {
-    var router: AuthGreetingRouter?
+    var presenter: AuthGreetingPresenterProtocol?
 
     private let gradientLayer = CAGradientLayer(
         colors: [UIColor.stepicGreen, UIColor(hex: 0x4CAF50), UIColor(hex: 0x8BC34A)],
@@ -41,11 +41,11 @@ final class AuthGreetingViewController: UIViewController {
     // MARK: Actions
 
     @IBAction private func onSignIn(_ sender: Any) {
-        router?.showSignIn()
+        presenter?.signIn()
     }
 
     @IBAction private func onSignUp(_ sender: Any) {
-        router?.showSignUp()
+        presenter?.signUp()
     }
 
     @IBAction private func onLater(_ sender: Any) {
@@ -53,6 +53,6 @@ final class AuthGreetingViewController: UIViewController {
     }
 
     @objc private func dismiss(_ sender: Any) {
-        router?.dismiss()
+        presenter?.cancel()
     }
 }

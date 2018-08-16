@@ -12,10 +12,16 @@ final class AuthGreetingAssemblyImpl: BaseAssembly, AuthGreetingAssembly {
     func module() -> UINavigationController {
         let controller = AuthGreetingViewController()
         let navigationController = ClearNavigationViewController(rootViewController: controller)
-        controller.router = AuthGreetingRouterImpl(
+
+        let router = AuthGreetingRouterImpl(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
+        let presenter = AuthGreetingPresenter(
+            router: router,
+            userRegistrationService: serviceFactory.userRegistrationService
+        )
+        controller.presenter = presenter
 
         return navigationController
     }

@@ -19,8 +19,8 @@ class VideoStepViewController: UIViewController {
     var lessonSlug: String!
 
     var startStepId: Int!
-    var startStepBlock : (() -> Void)!
-    var shouldSendViewsBlock : (() -> Bool)!
+    var startStepBlock: (() -> Void)!
+    var shouldSendViewsBlock: (() -> Bool)!
 
     var assignment: Assignment?
 
@@ -57,7 +57,7 @@ class VideoStepViewController: UIViewController {
             [weak self]
             _ in
             self?.playVideo()
-            })
+        })
 
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
@@ -220,7 +220,7 @@ class VideoStepViewController: UIViewController {
                         print("initializing post views task")
                         print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
                         if let userId = AuthInfo.shared.userId,
-                            let token = AuthInfo.shared.token {
+                           let token = AuthInfo.shared.token {
 
                             let task = PostViewsExecutableTask(stepId: stepid, assignmentId: self?.assignment?.id, userId: userId)
                             ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(task)

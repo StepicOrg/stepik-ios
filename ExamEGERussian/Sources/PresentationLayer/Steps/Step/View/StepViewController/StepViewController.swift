@@ -11,15 +11,31 @@ import Agrume
 import PromiseKit
 import SnapKit
 
-class StepViewController: UIViewController, StepView {
+class StepViewController: UIViewController {
+    // MARK: - Types
 
-    // MARK: IBOutlets
+    private struct Theme {
+        static let viewInitialHeight: CGFloat = 5.0
+
+        struct StepWebView {
+            static let horizontalSpacing: CGFloat = 2.0
+            static let topSpacing: CGFloat = 5.0
+        }
+    }
+
+    // MARK: - Instance Properties
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    private var stepWebViewHeight: Constraint!
 
-    // MARK: Instance Properties
+    private var stepWebViewHeight: Constraint!
+    private weak var quizView: UIView?
+    private lazy var quizPlaceholderView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
 
     var presenter: StepPresenter?
 
@@ -39,18 +55,7 @@ class StepViewController: UIViewController, StepView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didScreenRotate),
-            name: .UIDeviceOrientationDidChange,
-            object: nil
-        )
-
-        setupWebView()
+        setup()
 
         activityIndicator.startAnimating()
         presenter?.refreshStep()
@@ -59,13 +64,13 @@ class StepViewController: UIViewController, StepView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        view.layoutIfNeeded()
+        triggerViewLayoutUpdate()
 
         if shouldRefreshOnAppear {
             refreshWebView()
         }
 
-        animateOpacity()
+        fadeIn()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,39 +82,111 @@ class StepViewController: UIViewController, StepView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: - StepView
+    // MARK: - Private API
 
+    private func triggerViewLayoutUpdate() {
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+
+    private func setup() {
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didScreenRotate),
+            name: .UIDeviceOrientationDidChange,
+            object: nil
+        )
+
+        setupQuizPlaceholderView()
+        setupWebView()
+    }
+
+    private func setupQuizPlaceholderView() {
+        scrollView.addSubview(quizPlaceholderView)
+        quizPlaceholderView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.trailing.leading.bottom.equalToSuperview()
+        }
+    }
+
+    private func fadeIn(duration: TimeInterval = 0.75) {
+        let key = "alpha"
+
+        scrollView.layer.removeAnimation(forKey: key)
+
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.duration = duration
+        scrollView.layer.add(animation, forKey: key)
+    }
+}
+
+// MARK: - StepViewController (StepView) -
+
+extension StepViewController: StepView {
     func update(with htmlText: String) {
         let processor = HTMLProcessor(html: htmlText)
         let html = processor.injectDefault().html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
-    // MARK: - Private API
+    func updateQuiz(with controller: UIViewController) {
+        quizView = controller.view
+        addChildViewController(controller)
 
-    @objc func didScreenRotate() {
-        refreshWebView()
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
+        quizPlaceholderView.addSubview(quizView!)
+        quizView!.snp.makeConstraints {
+            $0.edges.equalTo(quizPlaceholderView)
+        }
+        controller.didMove(toParentViewController: self)
+
+        triggerViewLayoutUpdate()
     }
 
+    func displayError(title: String, message: String) {
+        presentAlert(withTitle: title, message: message)
+    }
+}
+
+// MARK: - StepViewController (Actions) -
+
+extension StepViewController {
+    @objc private func didScreenRotate() {
+        refreshWebView()
+        fadeIn()
+
+        shouldRefreshOnAppear = !shouldRefreshOnAppear
+    }
+}
+
+// MARK: - StepViewController (StepWebView) -
+
+extension StepViewController {
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
-            stepWebViewHeight = make.height.equalTo(5).constraint
-            make.edges.equalTo(scrollView)
-            make.centerX.equalTo(self.view)
+            stepWebViewHeight = make.height.equalTo(Theme.viewInitialHeight).constraint
+            make.bottom.equalTo(quizPlaceholderView.snp.top)
+            make.leading.equalTo(scrollView).offset(Theme.StepWebView.horizontalSpacing)
+            make.trailing.equalTo(scrollView).offset(-Theme.StepWebView.horizontalSpacing)
+            make.top.equalTo(scrollView).offset(Theme.StepWebView.topSpacing)
         }
 
         stepWebView.didFinishNavigation = { [weak self] _ in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            self.stepWebView.alignImages().then {
-                self.stepWebView.getContentHeight()
+            strongSelf.stepWebView.alignImages().then {
+                strongSelf.stepWebView.getContentHeight()
             }.done { [weak self] height in
                 self?.resetWebViewHeight(Float(height))
-                self?.view.layoutIfNeeded()
+                self?.triggerViewLayoutUpdate()
                 self?.activityIndicator.stopAnimating()
             }.catch { error in
                 print("Error after did finish navigation: \(error)")
@@ -117,11 +194,11 @@ class StepViewController: UIViewController, StepView {
         }
 
         stepWebView.onOpenImage = { [weak self] imageURL in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            Agrume(imageUrl: imageURL).showFrom(self)
+            Agrume(imageUrl: imageURL).showFrom(strongSelf)
         }
     }
 
@@ -141,17 +218,10 @@ class StepViewController: UIViewController, StepView {
             self.stepWebView.getContentHeight()
         }.done { [weak self] height in
             self?.resetWebViewHeight(Float(height))
-            self?.view.layoutIfNeeded()
+            self?.triggerViewLayoutUpdate()
             self?.activityIndicator.stopAnimating()
         }.catch { error in
             print("Error while refreshing: \(error)")
-        }
-    }
-
-    private func animateOpacity(with duration: TimeInterval = 0.75) {
-        stepWebView.alpha = 0
-        UIView.animate(withDuration: duration) {
-            self.stepWebView.alpha = 1.0
         }
     }
 }

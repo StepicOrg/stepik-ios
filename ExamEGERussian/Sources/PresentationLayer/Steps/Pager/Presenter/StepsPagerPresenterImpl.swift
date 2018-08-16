@@ -33,12 +33,42 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     }
 
     func selectStep(at index: Int) {
-        let step = steps[index]
-        if step.type == .text {
-            didSolveStep(step)
+        if steps[index].type == .text {
+            markTextStepAsPassed(at: index)
         }
     }
 
+    func selectShareStep(at index: Int) {
+        let step = steps[index]
+        let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.id)?from_mobile_app=true"
+
+        router.shareStep(with: url)
+    }
+
+    // MARK: - Private API
+
+    private func markTextStepAsPassed(at index: Int) {
+        let step = steps[index]
+        guard !step.isPassed else {
+            return
+        }
+
+        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.updateStepProgress(at: index, passed: true)
+        }.catch { [weak self] error in
+            print("\(#file) \(#function): \(error)")
+            self?.view?.state = .error(message: NSLocalizedString("Could't mark quiz as solved. Please try again.", comment: ""))
+        }
+    }
+}
+
+// MARK: - StepsPagerPresenterImpl (Get Steps) -
+
+extension StepsPagerPresenterImpl {
     private func getSteps() {
         obtainStepsFromCache().done {
             self.fetchSteps()
@@ -48,12 +78,12 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     private func obtainStepsFromCache() -> Promise<Void> {
         return Promise { seal in
             self.stepsService.obtainSteps(for: lesson).done { [weak self] steps in
-                guard let `self` = self else {
+                guard let strongSelf = self else {
                     return
                 }
 
-                self.steps = self.preparedSteps(steps)
-                self.view?.state = .fetched(steps: self.steps)
+                strongSelf.steps = strongSelf.preparedSteps(steps)
+                strongSelf.view?.state = .fetched(steps: strongSelf.steps)
                 seal.fulfill(())
             }.catch { [weak self] error in
                 self?.view?.state = .error(message: NSLocalizedString("Failed to get steps from cache", comment: ""))
@@ -69,12 +99,12 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
         }.then { stepsIds in
             self.stepsService.fetchProgresses(stepsIds: stepsIds)
         }.done { [weak self] steps in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            self.steps = self.preparedSteps(steps)
-            self.view?.state = .fetched(steps: self.steps)
+            strongSelf.steps = strongSelf.preparedSteps(steps)
+            strongSelf.view?.state = .fetched(steps: strongSelf.steps)
         }.catch { [weak self] error in
             let message = error is NetworkError
                 ? NSLocalizedString("ConnectionErrorText", comment: "")
@@ -84,27 +114,28 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     }
 
     private func preparedSteps(_ steps: [StepPlainObject]) -> [StepPlainObject] {
-        return steps
-            .filter { step in
-                step.type == .text
-            }.sorted(by: { lhs, rhs in
-                lhs.position < rhs.position
-            }
-        )
+        return steps.sorted(by: { lhs, rhs in
+            lhs.position < rhs.position
+        })
+    }
+}
+
+// MARK: - StepsPagerPresenterImpl: StepPresenterDelegate -
+
+extension StepsPagerPresenterImpl: StepPresenterDelegate {
+    func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
+        let step = stepPresenter.step
+        guard let index = steps.index(where: { $0.id == step.id }) else {
+            return
+        }
+
+        updateStepProgress(at: index, passed: true)
     }
 
-    private func didSolveStep(_ step: StepPlainObject) {
-        stepsService.markAsSolved(stepsIds: [step.id]).done { [weak self] steps in
-            guard let step = steps.first,
-                  let index = self?.steps.index(where: { $0.id == step.id }) else {
-                return
-            }
-            self?.steps[index].isPassed = step.isPassed
+    // MARK: Private Helpers
 
-            NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
-        }.catch { [weak self] error in
-            print(error)
-            self?.view?.state = .error(message: NSLocalizedString("Failed to mark step as solved", comment: ""))
-        }
+    private func updateStepProgress(at index: Int, passed: Bool) {
+        steps[index].isPassed = passed
+        view?.setTabSelected(passed, at: index)
     }
 }

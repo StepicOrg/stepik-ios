@@ -12,6 +12,8 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
     private var steps: [StepPlainObject]
     private let assembly: StepAssembly
 
+    weak var stepPresenterDelegate: StepPresenterDelegate?
+
     init(lesson: LessonPlainObject, assembly: StepAssembly, steps: [StepPlainObject] = []) {
         self.lesson = lesson
         self.steps = steps
@@ -31,7 +33,7 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
     }
 
     public func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        return assembly.module(lesson: lesson, step: steps[index])
+        return assembly.module(lesson: lesson, step: steps[index], stepPresenterDelegate: stepPresenterDelegate)
     }
 
     func setSteps(_ newSteps: [StepPlainObject]) {
