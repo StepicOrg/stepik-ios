@@ -8,33 +8,11 @@
 
 import Foundation
 
-final class KnowledgeGraph: AdjacencyListGraph<String>, Codable {
+final class KnowledgeGraph: AdjacencyListGraph<String> {
     typealias Element = (key: KnowledgeGraphVertex<String>, value: [KnowledgeGraphVertex<String>])
 
     var count: Int {
         return adjacency.keys.count
-    }
-
-    public required init() {
-        super.init()
-    }
-
-    public init(from decoder: Decoder) throws {
-        super.init()
-
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        adjacency = try values.decode(
-            [KnowledgeGraphVertex<String>: [KnowledgeGraphVertex<String>]].self,
-            forKey: CodingKeys.adjacency
-        )
-    }
-
-    func encode(to encoder: Encoder) throws {
-        guard let adjacency = adjacency as? [KnowledgeGraphVertex<String>: [KnowledgeGraphVertex<String>]] else {
-            fatalError("failed to encode")
-        }
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(adjacency, forKey: CodingKeys.adjacency)
     }
 
     override func instantiateVertex(id: String) -> KnowledgeGraphVertex<String> {
@@ -63,9 +41,5 @@ final class KnowledgeGraph: AdjacencyListGraph<String>, Codable {
         }
 
         return element
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case adjacency
     }
 }
