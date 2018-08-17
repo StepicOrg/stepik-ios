@@ -21,11 +21,21 @@ final class TopicsTableViewController: UITableViewController {
         }
     }
 
+    private var selectedSegment = SegmentItem.all
+
     private lazy var topicsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
 
         return refreshControl
+    }()
+
+    private lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: [SegmentItem.all.title, SegmentItem.adaptive.title])
+        segmentedControl.addTarget(self, action: #selector(onSegmentedControlValueChanged(_:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = selectedSegment.rawValue
+
+        return segmentedControl
     }()
 
     // MARK: - UIViewController Lifecycle
@@ -57,7 +67,7 @@ final class TopicsTableViewController: UITableViewController {
         presenter.selectTopic(with: topics[indexPath.row])
     }
 
-    // MARK: - Private API -
+    // MARK: - Private API
 
     private func setupView() {
         tableView.registerNib(for: TopicTableViewCell.self)
@@ -82,20 +92,57 @@ final class TopicsTableViewController: UITableViewController {
             target: self,
             action: #selector(onSignInClick(_:))
         )
+
+        segmentedControl.sizeToFit()
+        navigationItem.titleView = segmentedControl
     }
 
-    // MARK: Actions
+    // MARK: - Types
 
-    @objc private func refreshData(_ sender: Any) {
+    private enum SegmentItem: Int {
+        case all
+        case adaptive
+
+        var title: String {
+            switch self {
+            case .all:
+                return NSLocalizedString("All", comment: "")
+            case .adaptive:
+                return NSLocalizedString("Adaptive", comment: "")
+            }
+        }
+
+        static func segment(at index: Int) -> SegmentItem? {
+            return SegmentItem(rawValue: index)
+        }
+    }
+}
+
+// MARK: - TopicsTableViewController (Actions) -
+
+extension TopicsTableViewController {
+    @objc
+    private func refreshData(_ sender: Any) {
         presenter.refresh()
     }
 
-    @objc private func onLogoutClick(_ sender: Any) {
+    @objc
+    private func onLogoutClick(_ sender: Any) {
         presenter.logout()
     }
 
-    @objc private func onSignInClick(_ sender: Any) {
+    @objc
+    private func onSignInClick(_ sender: Any) {
         presenter.signIn()
+    }
+
+    @objc
+    private func onSegmentedControlValueChanged(_ sender: Any) {
+        guard let segment = SegmentItem.segment(at: segmentedControl.selectedSegmentIndex) else {
+            fatalError("What's going on, bro :trollface")
+        }
+
+        selectedSegment = segment
     }
 }
 
