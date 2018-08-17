@@ -4164,6 +4164,10 @@
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
 		2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */; };
 		2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B5212472AA00898A70 /* LogoutableMock.swift */; };
+		2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */; };
+		2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46362126B0A100A803C5 /* RecommendationsService.swift */; };
+		2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */; };
+		2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */; };
 		2CE11347208E103100293EAE /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133D208E102900293EAE /* Tokens.plist */; };
 		2CE11348208E103400293EAE /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE11335208E102700293EAE /* Icons.xcassets */; };
 		2CE11349208E103900293EAE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133A208E102800293EAE /* icon.png */; };
@@ -6068,6 +6072,10 @@
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		2CDE34B5212472AA00898A70 /* LogoutableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutableMock.swift; sourceTree = "<group>"; };
+		2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceProtocol.swift; sourceTree = "<group>"; };
+		2CDF46362126B0A100A803C5 /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
+		2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsAPIMock.swift; sourceTree = "<group>"; };
+		2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceTests.swift; sourceTree = "<group>"; };
 		2CE11335208E102700293EAE /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/8290/Icons.xcassets; sourceTree = "<group>"; };
 		2CE11336208E102700293EAE /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/8290/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2CE11337208E102700293EAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/8290/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -8613,6 +8621,7 @@
 		2C130EA02125A9140022E998 /* ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */,
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
 			path = ServicesTests;
@@ -9167,6 +9176,7 @@
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
 				62E984604AE4F1CF6E9A71EB /* ProgressService */,
+				2CDF46332126AE0600A803C5 /* RecommendationsService */,
 				2C83E5E0211058CC00A8322D /* StepService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
 			);
@@ -9907,6 +9917,7 @@
 		2CC995662105C8020023EC0C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				2CDF463A2126C21100A803C5 /* API */,
 				2C130E872125A3E40022E998 /* Assemblies */,
 				2CA9FDF42125942A0046128C /* Factories */,
 				2CC8BA13210B4CBF0080BA05 /* Routers */,
@@ -10195,6 +10206,23 @@
 				2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */,
 			);
 			path = BuildersTests;
+			sourceTree = "<group>";
+		};
+		2CDF46332126AE0600A803C5 /* RecommendationsService */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46362126B0A100A803C5 /* RecommendationsService.swift */,
+				2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */,
+			);
+			path = RecommendationsService;
+			sourceTree = "<group>";
+		};
+		2CDF463A2126C21100A803C5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		2CE11332208E100F00293EAE /* 8290 */ = {
@@ -15776,6 +15804,7 @@
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C093F16211B444A00162DD0 /* ProfileHeaderInfoView.swift in Sources */,
+				2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */,
 				2C33CC1120EC3420009956B0 /* ContentLanguage.swift in Sources */,
 				2C949A4B20ECCCAF0049E9A8 /* ControllerHelper.swift in Sources */,
 				2C94999820ECB88D0049E9A8 /* Lesson.swift in Sources */,
@@ -15990,6 +16019,7 @@
 				2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */,
 				2C94999920ECB8930049E9A8 /* Progress.swift in Sources */,
 				2C9499BB20ECBB2F0049E9A8 /* Profile+CoreDataProperties.swift in Sources */,
+				2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */,
 				2C949A1920ECC54F0049E9A8 /* StepikTableView.swift in Sources */,
 				2C9492C421130E1000552600 /* Device.swift in Sources */,
 				2C949A6A20ECD0400049E9A8 /* AchievementDescription.swift in Sources */,
@@ -16116,6 +16146,7 @@
 			files = (
 				2C130EA32125AD7D0022E998 /* AssemblyFactoryTests.swift in Sources */,
 				2CC995682105C98E0023EC0C /* NSError+Make.swift in Sources */,
+				2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */,
 				2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */,
@@ -16129,6 +16160,7 @@
 				2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */,
+				2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */,
 				2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */,
 				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
 				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
