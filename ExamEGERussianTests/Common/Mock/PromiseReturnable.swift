@@ -1,5 +1,5 @@
 //
-//  BaseMock.swift
+//  PromiseReturnable.swift
 //  ExamEGERussianTests
 //
 //  Created by Ivan Magda on 16/08/2018.
@@ -8,8 +8,9 @@
 
 import Foundation
 import PromiseKit
-@testable import ExamEGERussian
 
-class BaseServiceMock<T> {
-    var resultToBeReturned: Promise<T> = Promise(error: NSError.mockError)
+protocol PromiseReturnable {
+    associatedtype PromiseReturnType
+
+    var resultToBeReturned: Promise<PromiseReturnType> { get set }
 }

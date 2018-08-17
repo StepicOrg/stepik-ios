@@ -10,7 +10,9 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class LessonsServiceMock: BaseServiceMock<[LessonPlainObject]>, LessonsService {
+final class LessonsServiceMock: LessonsService, PromiseReturnable {
+    var resultToBeReturned: Promise<[LessonPlainObject]> = Promise(error: NSError.mockError)
+
     func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
         return resultToBeReturned
     }

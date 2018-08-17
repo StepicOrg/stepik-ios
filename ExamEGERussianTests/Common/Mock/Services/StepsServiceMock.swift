@@ -10,7 +10,9 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class StepsServiceMock: BaseServiceMock<[StepPlainObject]>, StepsService {
+final class StepsServiceMock: StepsService, PromiseReturnable {
+    var resultToBeReturned: Promise<[StepPlainObject]> = Promise(error: NSError.mockError)
+
     func fetchSteps(with ids: [Int]) -> Promise<[StepPlainObject]> {
         return resultToBeReturned
     }

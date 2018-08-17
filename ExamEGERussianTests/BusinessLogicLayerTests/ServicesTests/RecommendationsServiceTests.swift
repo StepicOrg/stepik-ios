@@ -47,11 +47,14 @@ class RecommendationsServiceTests: XCTestCase {
     func testRecommendationsServiceFailResponse() {
         let ex = expectation(description: "\(#function)")
 
+        let errorMessage = "RecommendationsAPIMock error"
+        recommendationsAPIMock.resultToBeReturned = Promise(error: NSError.make(with: errorMessage))
+
         recommendationsService.fetchForCourseWithId(1).done { _ in
             XCTFail("Error should be returned")
             ex.fulfill()
         }.catch { error in
-            XCTAssertTrue(error.localizedDescription == NSError.mockError.localizedDescription)
+            XCTAssertTrue(error.localizedDescription == errorMessage)
             ex.fulfill()
         }
 
