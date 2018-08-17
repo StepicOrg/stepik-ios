@@ -4170,6 +4170,10 @@
 		2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */; };
 		2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463E2126CC2500A803C5 /* LessonMapper.swift */; };
 		2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */; };
+		2CDF46442126DE1D00A803C5 /* ReactionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */; };
+		2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46452126DE2500A803C5 /* ReactionService.swift */; };
+		2CDF46482126E50F00A803C5 /* ReactionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */; };
+		2CDF464A2126E61100A803C5 /* ReactionsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */; };
 		2CE11347208E103100293EAE /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133D208E102900293EAE /* Tokens.plist */; };
 		2CE11348208E103400293EAE /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE11335208E102700293EAE /* Icons.xcassets */; };
 		2CE11349208E103900293EAE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133A208E102800293EAE /* icon.png */; };
@@ -6080,6 +6084,10 @@
 		2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceTests.swift; sourceTree = "<group>"; };
 		2CDF463E2126CC2500A803C5 /* LessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMapper.swift; sourceTree = "<group>"; };
 		2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonPlainObject+Make.swift"; sourceTree = "<group>"; };
+		2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceProtocol.swift; sourceTree = "<group>"; };
+		2CDF46452126DE2500A803C5 /* ReactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionService.swift; sourceTree = "<group>"; };
+		2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceTests.swift; sourceTree = "<group>"; };
+		2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsAPIMock.swift; sourceTree = "<group>"; };
 		2CE11335208E102700293EAE /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/8290/Icons.xcassets; sourceTree = "<group>"; };
 		2CE11336208E102700293EAE /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/8290/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2CE11337208E102700293EAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/8290/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -8625,6 +8633,7 @@
 		2C130EA02125A9140022E998 /* ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */,
 				2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */,
 				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
 			);
@@ -9180,6 +9189,7 @@
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
 				62E984604AE4F1CF6E9A71EB /* ProgressService */,
+				2CDF46422126DE0300A803C5 /* ReactionService */,
 				2CDF46332126AE0600A803C5 /* RecommendationsService */,
 				2C83E5E0211058CC00A8322D /* StepService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
@@ -10226,6 +10236,7 @@
 		2CDF463A2126C21100A803C5 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */,
 				2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */,
 			);
 			path = API;
@@ -10237,6 +10248,15 @@
 				2CDF463E2126CC2500A803C5 /* LessonMapper.swift */,
 			);
 			path = Mappers;
+			sourceTree = "<group>";
+		};
+		2CDF46422126DE0300A803C5 /* ReactionService */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46452126DE2500A803C5 /* ReactionService.swift */,
+				2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */,
+			);
+			path = ReactionService;
 			sourceTree = "<group>";
 		};
 		2CE11332208E100F00293EAE /* 8290 */ = {
@@ -15840,6 +15860,7 @@
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,
 				2C9499E220ECBE650049E9A8 /* NSDateExtensions.swift in Sources */,
 				2C0107A0210F39A0009A53DF /* CreateRequestMaker.swift in Sources */,
+				2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */,
 				2CD7998C21077D010054D098 /* TopicsPresenterImpl.swift in Sources */,
 				2C33CC0E20EC3405009956B0 /* RetrieveRequestMaker.swift in Sources */,
 				2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */,
@@ -15983,6 +16004,7 @@
 				2C33CBDF20EC2FB1009956B0 /* AuthAPI.swift in Sources */,
 				2C949A3620ECC7580049E9A8 /* AvatarImageView.swift in Sources */,
 				2C8A0F3320FCCE230009F67E /* VKSocialSDKProvider.swift in Sources */,
+				2CDF46442126DE1D00A803C5 /* ReactionServiceProtocol.swift in Sources */,
 				2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */,
 				2CFF9F2420FDD02F0023B5D4 /* AuthGreetingAssemblyImpl.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
@@ -16199,10 +16221,12 @@
 				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift in Sources */,
 				2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */,
 				2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */,
+				2CDF46482126E50F00A803C5 /* ReactionServiceTests.swift in Sources */,
 				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
 				2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */,
 				2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */,
 				2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */,
+				2CDF464A2126E61100A803C5 /* ReactionsAPIMock.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
 			);
