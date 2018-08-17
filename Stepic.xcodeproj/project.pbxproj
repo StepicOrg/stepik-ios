@@ -4168,6 +4168,8 @@
 		2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46362126B0A100A803C5 /* RecommendationsService.swift */; };
 		2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */; };
 		2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */; };
+		2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463E2126CC2500A803C5 /* LessonMapper.swift */; };
+		2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */; };
 		2CE11347208E103100293EAE /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133D208E102900293EAE /* Tokens.plist */; };
 		2CE11348208E103400293EAE /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE11335208E102700293EAE /* Icons.xcassets */; };
 		2CE11349208E103900293EAE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133A208E102800293EAE /* icon.png */; };
@@ -6076,6 +6078,8 @@
 		2CDF46362126B0A100A803C5 /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 		2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsAPIMock.swift; sourceTree = "<group>"; };
 		2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceTests.swift; sourceTree = "<group>"; };
+		2CDF463E2126CC2500A803C5 /* LessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMapper.swift; sourceTree = "<group>"; };
+		2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonPlainObject+Make.swift"; sourceTree = "<group>"; };
 		2CE11335208E102700293EAE /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/8290/Icons.xcassets; sourceTree = "<group>"; };
 		2CE11336208E102700293EAE /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/8290/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2CE11337208E102700293EAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/8290/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -9707,6 +9711,7 @@
 			isa = PBXGroup;
 			children = (
 				2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */,
+				2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */,
 				2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */,
 			);
 			path = PlainObjects;
@@ -10164,6 +10169,7 @@
 			isa = PBXGroup;
 			children = (
 				2CD7993C21077CB90054D098 /* Builders */,
+				2CDF463D2126CBFE00A803C5 /* Mappers */,
 				2CD7999521077E540054D098 /* PlainObjects */,
 			);
 			path = Model;
@@ -10223,6 +10229,14 @@
 				2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		2CDF463D2126CBFE00A803C5 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF463E2126CC2500A803C5 /* LessonMapper.swift */,
+			);
+			path = Mappers;
 			sourceTree = "<group>";
 		};
 		2CE11332208E100F00293EAE /* 8290 */ = {
@@ -15838,6 +15852,7 @@
 				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
+				2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,
 				2C94999120ECB7AA0049E9A8 /* NotificationsStatus.swift in Sources */,
 				2C94998F20ECB7770049E9A8 /* Course.swift in Sources */,
@@ -16165,6 +16180,7 @@
 				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
 				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
+				2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */,
 				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
 				2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */,
