@@ -117,10 +117,9 @@ class TextStoryPart: StoryPart {
         imagePath = HTMLProcessor.addStepikURLIfNeeded(url: json["image"].stringValue)
 
         let textJSON = json["text"]
-        let localizedTextJSON = json["text"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
-        if localizedTextJSON != JSON.null {
-            let title = localizedTextJSON["title"].string
-            let text = localizedTextJSON["text"].string
+        if textJSON != JSON.null {
+            let title = textJSON["title"].string
+            let text = textJSON["text"].string
             let colorHexInt = Int(textJSON["text_color"].stringValue, radix: 16) ?? 0x000000
             let textColor = UIColor(hex: colorHexInt)
             let backgroundStyle = Text.BackgroundStyle(rawValue: textJSON["background_style"].stringValue) ?? .none
@@ -128,10 +127,9 @@ class TextStoryPart: StoryPart {
         }
 
         let buttonJSON = json["button"]
-        let localizedButtonJSON = json["button"]["\(ContentLanguage.sharedContentLanguage.languageString)"]
-        if localizedButtonJSON != JSON.null {
-            let title = localizedButtonJSON["title"].stringValue
-            let urlPath = localizedButtonJSON["url"].stringValue
+        if buttonJSON != JSON.null {
+            let title = buttonJSON["title"].stringValue
+            let urlPath = buttonJSON["url"].stringValue
             let backgroundColorHexInt = Int(buttonJSON["background_color"].stringValue, radix: 16) ?? 0x000000
             let backgroundColor = UIColor(hex: backgroundColorHexInt)
             let titleColorHexInt = Int(buttonJSON["text_color"].stringValue, radix: 16) ?? 0x000000

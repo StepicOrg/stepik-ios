@@ -50,7 +50,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     func refresh() {
         view?.set(state: .loading)
 
-        storyTemplatesAPI.retrieve(isPublished: true).done { [weak self] stories, _ in
+        storyTemplatesAPI.retrieve(isPublished: true, language: ContentLanguage.sharedContentLanguage).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return
             }
