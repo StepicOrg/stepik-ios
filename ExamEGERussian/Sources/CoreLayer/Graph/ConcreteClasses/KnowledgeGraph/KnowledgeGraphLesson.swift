@@ -8,8 +8,8 @@
 
 import Foundation
 
-public struct KnowledgeGraphLesson {
-    public enum LessonType: String {
+public struct KnowledgeGraphLesson: Codable {
+    public enum LessonType: String, Codable {
         case theory
         case practice
     }
