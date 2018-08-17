@@ -23,4 +23,14 @@ final class TopicsRouterImpl: BaseRouter, TopicsRouter {
             )
         })
     }
+
+    func showAdaptive() {
+        pushViewController(derivedFrom: { _ in
+            let viewController = UIViewController()
+            viewController.view.backgroundColor = .white
+            viewController.title = NSLocalizedString("Adaptive", comment: "")
+
+            return viewController
+        })
+    }
 }

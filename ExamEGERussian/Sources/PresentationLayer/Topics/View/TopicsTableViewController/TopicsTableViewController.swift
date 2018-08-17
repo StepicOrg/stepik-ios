@@ -21,8 +21,6 @@ final class TopicsTableViewController: UITableViewController {
         }
     }
 
-    private var selectedSegment = SegmentItem.all
-
     private lazy var topicsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
@@ -31,9 +29,8 @@ final class TopicsTableViewController: UITableViewController {
     }()
 
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: [SegmentItem.all.title, SegmentItem.adaptive.title])
+        let segmentedControl = UISegmentedControl()
         segmentedControl.addTarget(self, action: #selector(onSegmentedControlValueChanged(_:)), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = selectedSegment.rawValue
 
         return segmentedControl
     }()
@@ -93,28 +90,7 @@ final class TopicsTableViewController: UITableViewController {
             action: #selector(onSignInClick(_:))
         )
 
-        segmentedControl.sizeToFit()
         navigationItem.titleView = segmentedControl
-    }
-
-    // MARK: - Types
-
-    private enum SegmentItem: Int {
-        case all
-        case adaptive
-
-        var title: String {
-            switch self {
-            case .all:
-                return NSLocalizedString("All", comment: "")
-            case .adaptive:
-                return NSLocalizedString("Adaptive", comment: "")
-            }
-        }
-
-        static func segment(at index: Int) -> SegmentItem? {
-            return SegmentItem(rawValue: index)
-        }
     }
 }
 
@@ -138,11 +114,7 @@ extension TopicsTableViewController {
 
     @objc
     private func onSegmentedControlValueChanged(_ sender: Any) {
-        guard let segment = SegmentItem.segment(at: segmentedControl.selectedSegmentIndex) else {
-            fatalError("What's going on, bro :trollface")
-        }
-
-        selectedSegment = segment
+        presenter.selectSegment(at: segmentedControl.selectedSegmentIndex)
     }
 }
 
@@ -151,6 +123,19 @@ extension TopicsTableViewController {
 extension TopicsTableViewController: TopicsView {
     func setTopics(_ topics: [TopicsViewData]) {
         self.topics = topics
+    }
+
+    func setSegments(_ segments: [String]) {
+        segmentedControl.removeAllSegments()
+        segments.enumerated().forEach {
+            segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false)
+        }
+
+        segmentedControl.sizeToFit()
+    }
+
+    func selectSegment(at index: Int) {
+        segmentedControl.selectedSegmentIndex = index
     }
 
     func displayError(title: String, message: String) {
