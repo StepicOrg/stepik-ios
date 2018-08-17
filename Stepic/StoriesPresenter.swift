@@ -47,6 +47,15 @@ class StoriesPresenter: StoriesPresenterProtocol {
         view?.updateStory(index: index)
     }
 
+    private func isSupported(story: Story) -> Bool {
+        for part in story.parts {
+            if part.type == nil {
+                return false
+            }
+        }
+        return story.parts.count > 0
+    }
+
     func refresh() {
         view?.set(state: .loading)
 
@@ -54,7 +63,8 @@ class StoriesPresenter: StoriesPresenterProtocol {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.stories = stories
+
+            strongSelf.stories = stories.filter { strongSelf.isSupported(story: $0) }
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
             strongSelf.view?.set(stories: strongSelf.stories)
         }.catch { [weak self] _ in
