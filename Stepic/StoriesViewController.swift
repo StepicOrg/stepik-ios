@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Presentr
 
 class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -58,11 +59,35 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
         super.viewWillAppear(animated)
     }
 
+    let storyPresentr: Presentr = {
+        let sourcePortraitHeight: Float = Float(max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
+        let sourcePortraitWidth: Float = sourcePortraitHeight * 9 / 16
+        let sourceLandscapeHeight: Float = Float(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
+        let sourceLandscapeWidth: Float = sourceLandscapeHeight * 9 / 16
+
+        let height = ModalSize.customOrientation(sizePortrait: sourcePortraitHeight, sizeLandscape: sourceLandscapeHeight)
+        let width = ModalSize.customOrientation(sizePortrait: sourcePortraitWidth, sizeLandscape: sourceLandscapeWidth)
+
+        let presentr = Presentr(presentationType: .custom(width: width, height: height, center: .center))
+        presentr.backgroundOpacity = 0.5
+        presentr.dismissOnTap = false
+        presentr.dismissAnimated = true
+        presentr.dismissTransitionType = TransitionType.coverVertical
+        presentr.roundCorners = true
+        presentr.cornerRadius = 8
+        presentr.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.3, shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: 1.2)
+        return presentr
+    }()
+
     func showStory(at index: Int) {
         let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).buildModule()
-        moduleToPresent.modalPresentationStyle = .custom
-        moduleToPresent.transitioningDelegate = self
-        present(moduleToPresent, animated: true, completion: nil)
+        if DeviceInfo.current.isPad {
+            customPresentViewController(storyPresentr, viewController: moduleToPresent, animated: true, completion: nil)
+        } else {
+            moduleToPresent.modalPresentationStyle = .custom
+            moduleToPresent.transitioningDelegate = self
+            present(moduleToPresent, animated: true, completion: nil)
+        }
     }
 
     private func refresh() {

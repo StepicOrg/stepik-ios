@@ -36,6 +36,12 @@ class StoryViewController: UIViewController {
         view.addGestureRecognizer(tapG)
         tapG.cancelsTouchesInView = false
 
+        if DeviceInfo.current.isPad {
+            view.layer.cornerRadius = 8
+            view.clipsToBounds = true
+            view.layer.masksToBounds = true
+        }
+
         presenter?.animate()
     }
 
@@ -166,5 +172,13 @@ extension StoryViewController: StoryViewProtocol {
 
     func unpause(segment: Int) {
         progressView.unpause(segment: segment)
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return false
     }
 }

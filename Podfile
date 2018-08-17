@@ -50,7 +50,7 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'Presentr', '1.3.0'
+    pod 'Presentr', '1.3.1'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'

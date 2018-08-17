@@ -49,6 +49,14 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         addChildViewController(module)
         setViewControllers([module], direction: direction, animated: animated, completion: nil)
     }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return false
+    }
 }
 
 extension OpenedStoriesPageViewController: UIPageViewControllerDataSource {
