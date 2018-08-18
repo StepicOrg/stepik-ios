@@ -3462,8 +3462,8 @@
 		2CA2E72720237E5B001DC410 /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		2CA2E72820237E5E001DC410 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
 		2CA2E72920237E61001DC410 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
-		2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55C20FF79860041E893 /* GraphService.swift */; };
-		2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */; };
+		2CA3F55D20FF79860041E893 /* GraphServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */; };
+		2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56020FF7C030041E893 /* GraphService.swift */; };
 		2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */; };
 		2CA5568C212323E800A3B1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568D2123397400A3B1AB /* ImageAsset.swift */; };
@@ -5940,9 +5940,9 @@
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveUserActions.swift; sourceTree = "<group>"; };
 		2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsViewController.swift; sourceTree = "<group>"; };
-		2CA3F55C20FF79860041E893 /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
+		2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceProtocol.swift; sourceTree = "<group>"; };
 		2CA3F55E20FF7A150041E893 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
-		2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceImpl.swift; sourceTree = "<group>"; };
+		2CA3F56020FF7C030041E893 /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		2CA3F56220FF82960041E893 /* KnowledgeGraphGoalPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56320FF82960041E893 /* KnowledgeGraphPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56420FF82970041E893 /* KnowledgeGraphLessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphLessonPlainObject.swift; sourceTree = "<group>"; };
@@ -10451,8 +10451,8 @@
 		62E9862365BD47119FA0E1D9 /* GraphService */ = {
 			isa = PBXGroup;
 			children = (
-				2CA3F55C20FF79860041E893 /* GraphService.swift */,
-				2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */,
+				2CA3F56020FF7C030041E893 /* GraphService.swift */,
+				2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */,
 			);
 			path = GraphService;
 			sourceTree = "<group>";
@@ -15914,7 +15914,7 @@
 				2CD4358C21245A26005A5B19 /* AuthGreetingPresenter.swift in Sources */,
 				2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */,
 				2C9499AF20ECBA6A0049E9A8 /* LastStep+CoreDataProperties.swift in Sources */,
-				2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */,
+				2CA3F55D20FF79860041E893 /* GraphServiceProtocol.swift in Sources */,
 				2C093F2C211B46FD00162DD0 /* ChoiceQuizTableViewCell.swift in Sources */,
 				2C9499AD20ECBA3E0049E9A8 /* Lesson+CoreDataProperties.swift in Sources */,
 				2C83E5DB2110441800A8322D /* Video.swift in Sources */,
@@ -16068,7 +16068,7 @@
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
 				2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */,
 				2C093F12211B441600162DD0 /* NotificationRequestAlertManager.swift in Sources */,
-				2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */,
+				2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */,
 				2C949A3420ECC7120049E9A8 /* AchievementProgress.swift in Sources */,
 				2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */,
 				2C093F0E211B43BD00162DD0 /* PlaceholderTableViewCell.swift in Sources */,

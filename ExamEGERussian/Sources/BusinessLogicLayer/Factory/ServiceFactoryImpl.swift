@@ -32,8 +32,8 @@ final class ServiceFactoryImpl: ServiceFactory {
         )
     }
 
-    var graphService: GraphService {
-        return GraphServiceImpl()
+    var graphService: GraphServiceProtocol {
+        return GraphService()
     }
 
     var lessonsService: LessonsService {

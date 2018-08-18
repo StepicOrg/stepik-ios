@@ -39,7 +39,7 @@ class ServiceFactoryTests: XCTestCase {
 
     func testConcreateServiceFactoryTypes() {
         XCTAssert(concreateServiceFactory.userRegistrationService is UserRegistrationServiceImpl)
-        XCTAssert(concreateServiceFactory.graphService is GraphServiceImpl)
+        XCTAssert(concreateServiceFactory.graphService is GraphService)
         XCTAssert(concreateServiceFactory.lessonsService is LessonsServiceImpl)
         XCTAssert(concreateServiceFactory.courseService is CourseServiceImpl)
         XCTAssert(concreateServiceFactory.enrollmentService is EnrollmentServiceImpl)

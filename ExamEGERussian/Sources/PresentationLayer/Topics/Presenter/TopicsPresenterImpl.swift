@@ -17,10 +17,10 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private var segmentSelectedIndex = 0
 
     private let userRegistrationService: UserRegistrationService
-    private let graphService: GraphService
+    private let graphService: GraphServiceProtocol
 
     init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
-         userRegistrationService: UserRegistrationService, graphService: GraphService) {
+         userRegistrationService: UserRegistrationService, graphService: GraphServiceProtocol) {
         self.view = view
         self.knowledgeGraph = knowledgeGraph
         self.router = router
@@ -34,6 +34,10 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
         checkAuthStatus()
         fetchGraphData()
+
+        obtainGraphFromCache().done { graph in
+            print(graph)
+        }
     }
 
     func selectTopic(with viewData: TopicsViewData) {
@@ -78,7 +82,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func fetchGraphData() {
         graphService.fetchGraph().done { [weak self] responseModel in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
@@ -88,10 +92,27 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 return
             }
 
-            self.knowledgeGraph.adjacency = graph.adjacency
-            self.view?.setTopics(self.viewTopicsFrom(vertices))
+            strongSelf.knowledgeGraph.adjacency = graph.adjacency
+            strongSelf.view?.setTopics(strongSelf.viewTopicsFrom(vertices))
         }.catch { [weak self] error in
             self?.displayError(error)
+        }
+    }
+
+    private func obtainGraphFromCache() -> Promise<KnowledgeGraph> {
+        return Promise { seal in
+            self.graphService.obtainGraph().map { plainObject -> KnowledgeGraph in
+                let builder = KnowledgeGraphBuilder(graphPlainObject: plainObject)
+                guard let graph = builder.build() as? KnowledgeGraph else {
+                    return KnowledgeGraph()
+                }
+
+                return graph
+            }.done { knowledgeGraph in
+                seal.fulfill(knowledgeGraph)
+            }.catch { _ in
+                seal.fulfill(KnowledgeGraph())
+            }
         }
     }
 

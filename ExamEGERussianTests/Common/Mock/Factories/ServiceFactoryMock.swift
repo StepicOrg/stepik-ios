@@ -28,7 +28,7 @@ final class ServiceFactoryMock: ServiceFactory {
 
     let userRegistrationService: UserRegistrationService
 
-    let graphService: GraphService
+    let graphService: GraphServiceProtocol
 
     let lessonsService: LessonsService
 

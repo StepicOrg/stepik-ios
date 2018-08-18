@@ -10,10 +10,14 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class GraphServiceMock: GraphService, PromiseReturnable {
+final class GraphServiceMock: GraphServiceProtocol, PromiseReturnable {
     var resultToBeReturned: Promise<KnowledgeGraphPlainObject> = Promise(error: NSError.mockError)
 
     func fetchGraph() -> Promise<KnowledgeGraphPlainObject> {
+        return resultToBeReturned
+    }
+
+    func obtainGraph() -> Promise<KnowledgeGraphPlainObject> {
         return resultToBeReturned
     }
 }
