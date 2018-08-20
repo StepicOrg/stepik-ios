@@ -11,5 +11,5 @@ import Foundation
 protocol TopicsRouter: class {
     func showAuth()
     func showLessonsForTopicWithId(_ id: String)
-    func showAdaptive()
+    func showAdaptiveForTopicWithId(_ id: String)
 }

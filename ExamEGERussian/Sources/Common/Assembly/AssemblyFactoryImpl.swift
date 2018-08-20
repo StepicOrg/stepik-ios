@@ -29,6 +29,10 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return StepsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
+    var adaptiveStepsAssembly: AdaptiveStepsAssemblyProtocol {
+        return AdaptiveStepsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
     private let serviceFactory: ServiceFactory
 
     init(serviceFactory: ServiceFactory) {

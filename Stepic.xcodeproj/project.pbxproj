@@ -1200,6 +1200,12 @@
 		2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFD8212A9D05000D2765 /* FileStorage.swift */; };
 		2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */; };
 		2C14DFE6212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */; };
+		2C15BC40212AE1C000AB1015 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */; };
+		2C15BC42212AE26000AB1015 /* AdaptiveStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */; };
+		2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */; };
+		2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */; };
+		2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */; };
+		2C15BC4C212AEED900AB1015 /* AdaptiveStepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C1B60C11F4C4AEF00236804 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5713,6 +5719,12 @@
 		2C14DFD8212A9D05000D2765 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphProviderProtocol.swift; sourceTree = "<group>"; };
 		2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKnowledgeGraphProvider.swift; sourceTree = "<group>"; };
+		2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
+		2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsView.swift; sourceTree = "<group>"; };
+		2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenterProtocol.swift; sourceTree = "<group>"; };
+		2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
+		2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsAssembly.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8689,6 +8701,43 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		2C15BC3D212AE0CC00AB1015 /* AdaptiveSteps */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC48212AEEA400AB1015 /* Assembly */,
+				2C15BC43212AEC4500AB1015 /* Presenter */,
+				2C15BC3E212AE12B00AB1015 /* View */,
+			);
+			path = AdaptiveSteps;
+			sourceTree = "<group>";
+		};
+		2C15BC3E212AE12B00AB1015 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */,
+				2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C15BC43212AEC4500AB1015 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */,
+				2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2C15BC48212AEEA400AB1015 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */,
+				2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -9151,6 +9200,7 @@
 				2CD7997721077D010054D098 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
 				2C83E5E52110600200A8322D /* Steps */,
+				2C15BC3D212AE0CC00AB1015 /* AdaptiveSteps */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -15775,7 +15825,9 @@
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
+				2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */,
 				2C093F1B211B44B000162DD0 /* AchievementsListPresenter.swift in Sources */,
+				2C15BC42212AE26000AB1015 /* AdaptiveStepsView.swift in Sources */,
 				2C9499D620ECBCF40049E9A8 /* CodeLanguages.swift in Sources */,
 				2C94998C20ECB71D0049E9A8 /* IDFetchable.swift in Sources */,
 				2C9499B120ECBAA80049E9A8 /* Notification+CoreDataProperties.swift in Sources */,
@@ -15891,6 +15943,7 @@
 				2C33CC0E20EC3405009956B0 /* RetrieveRequestMaker.swift in Sources */,
 				2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */,
 				2C093F18211B446A00162DD0 /* ContentMenuBlockTableViewCell.swift in Sources */,
+				2C15BC40212AE1C000AB1015 /* AdaptiveStepsViewController.swift in Sources */,
 				2C4EB2E42124385400AF2331 /* Logoutable.swift in Sources */,
 				2C9499F920ECC14F0049E9A8 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
@@ -16078,6 +16131,7 @@
 				2CCA14C12111A6050068081A /* StepView.swift in Sources */,
 				2C33CBE320EC3127009956B0 /* Session.swift in Sources */,
 				2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
+				2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */,
 				2C9499B820ECBB100049E9A8 /* Certificate.swift in Sources */,
 				2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */,
 				2C94999920ECB8930049E9A8 /* Progress.swift in Sources */,
@@ -16111,6 +16165,7 @@
 				2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */,
 				2C093F09211B435A00162DD0 /* PickerViewController.swift in Sources */,
 				2C33CBE420EC3135009956B0 /* StepicToken.swift in Sources */,
+				2C15BC4C212AEED900AB1015 /* AdaptiveStepsAssembly.swift in Sources */,
 				2C33CBFC20EC32C1009956B0 /* ProfilesAPI.swift in Sources */,
 				2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */,
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
@@ -16124,6 +16179,7 @@
 				2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
 				2C33CBE820EC3160009956B0 /* AnalyticsEvents.swift in Sources */,
+				2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */,
 				2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */,
 				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,

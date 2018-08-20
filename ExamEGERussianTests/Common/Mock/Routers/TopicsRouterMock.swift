@@ -10,7 +10,7 @@ import Foundation
 @testable import ExamEGERussian
 
 final class TopicsRouterMock: TopicsRouter {
-    func showAdaptive() {
+    func showAdaptiveForTopicWithId(_ id: String) {
     }
 
     func showAuth() {

@@ -53,7 +53,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
         if segment == .all {
             router.showLessonsForTopicWithId(topic.id)
         } else {
-            router.showAdaptive()
+            router.showAdaptiveForTopicWithId(topic.id)
         }
     }
 
