@@ -57,6 +57,10 @@ final class ServiceFactoryImpl: ServiceFactory {
         return ProgressServiceImpl(progressesAPI: progressesAPI)
     }
 
+    var knowledgeGraphProvider: KnowledgeGraphProviderProtocol {
+        return CacheKnowledgeGraphProvider(graphService: graphService)
+    }
+
     // MARK: - Init -
 
     init(authAPI: AuthAPI,

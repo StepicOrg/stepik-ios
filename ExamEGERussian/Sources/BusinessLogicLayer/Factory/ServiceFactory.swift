@@ -25,4 +25,6 @@ protocol ServiceFactory: class {
     var enrollmentService: EnrollmentService { get }
     var stepsService: StepsService { get }
     var progressService: ProgressService { get }
+
+    var knowledgeGraphProvider: KnowledgeGraphProviderProtocol { get }
 }

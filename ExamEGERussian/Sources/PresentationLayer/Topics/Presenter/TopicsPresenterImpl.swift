@@ -91,6 +91,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 return
             }
 
+            // TODO: Write changes to cache.
             strongSelf.knowledgeGraph.adjacency = graph.adjacency
             strongSelf.reloadViewData()
         }.catch { [weak self] _ in

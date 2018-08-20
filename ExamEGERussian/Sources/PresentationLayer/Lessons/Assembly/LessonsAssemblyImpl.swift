@@ -9,21 +9,14 @@
 import Foundation
 
 final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
-    private let knowledgeGraph: KnowledgeGraph
-
-    init(assemblyFactory: AssemblyFactory,
-         serviceFactory: ServiceFactory,
-         knowledgeGraph: KnowledgeGraph) {
-        self.knowledgeGraph = knowledgeGraph
-        super.init(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
-    }
-
     func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
         let controller = LessonsTableViewController()
         let router = LessonsRouterImpl(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
+
+        let knowledgeGraph = serviceFactory.knowledgeGraphProvider.knowledgeGraph
         let presenter = LessonsPresenterImpl(
             view: controller,
             router: router,

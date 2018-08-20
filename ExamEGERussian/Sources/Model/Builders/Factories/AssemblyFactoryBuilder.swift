@@ -16,9 +16,6 @@ final class AssemblyFactoryBuilder {
     }
 
     func build() -> AssemblyFactory {
-        return AssemblyFactoryImpl(
-            serviceFactory: serviceFactory,
-            knowledgeGraphProvider: CacheKnowledgeGraphProvider(graphService: serviceFactory.graphService)
-        )
+        return AssemblyFactoryImpl(serviceFactory: serviceFactory)
     }
 }
