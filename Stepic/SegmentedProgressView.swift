@@ -13,8 +13,8 @@ import SnapKit
 class SegmentedProgressView: UIView {
 
     var spacing: CGFloat = 5
-    var barColor: UIColor = UIColor.white.withAlphaComponent(0.3)
-    var progressColor: UIColor = UIColor.white.withAlphaComponent(1)
+    var barColor = UIColor.white.withAlphaComponent(0.3)
+    var progressColor = UIColor.white.withAlphaComponent(1)
     var isAutoPlayEnabled: Bool = false
     var segmentsCount: Int = 0 {
         didSet {
@@ -44,14 +44,14 @@ class SegmentedProgressView: UIView {
     private func setupView() {
         addSubview(progressesStackView)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         progressesStackView.alignment = .fill
         progressesStackView.distribution = .fillEqually
         progressesStackView.spacing = spacing
 
         progressesStackView.snp.makeConstraints {
             make in
-            make.top.leading.bottom.trailing.equalToSuperview().priority(ConstraintPriority.required)
+            make.edges.equalToSuperview().priority(ConstraintPriority.required)
         }
     }
 
@@ -64,7 +64,8 @@ class SegmentedProgressView: UIView {
             progressesStackView.addArrangedSubview(progressView)
             progressViews += [progressView]
         }
-        progressesStackView.layoutSubviews()
+        progressesStackView.setNeedsLayout()
+        progressesStackView.layoutIfNeeded()
     }
 
     private func isInBounds(index: Int) -> Bool {
@@ -97,7 +98,7 @@ class SegmentedProgressView: UIView {
         progressViews[segment].isPaused = true
     }
 
-    func unpause(segment: Int) {
+    func resume(segment: Int) {
         guard isInBounds(index: segment) else {
             return
         }

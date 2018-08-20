@@ -13,11 +13,9 @@ protocol StoryViewProtocol: class {
     func animate(view: UIView & UIStoryPartViewProtocol)
     func animateProgress(segment: Int, duration: TimeInterval)
     func pause(segment: Int)
-    func unpause(segment: Int)
+    func resume(segment: Int)
     func set(segment: Int, completed: Bool)
     func close()
-//    func transitionNext(destinationVC: StoryViewController)
-//    func transitionPrev(destinationVC: StoryViewController)
 }
 
 protocol StoryPresenterProtocol: class {
@@ -26,7 +24,7 @@ protocol StoryPresenterProtocol: class {
     func skip()
     func rewind()
     func pause()
-    func unpause()
+    func resume()
     var storyPartsCount: Int { get }
     var storyID: Int { get }
     func didAppear()
@@ -46,13 +44,6 @@ class StoryPresenter: StoryPresenterProtocol {
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
 
-    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, navigationDelegate: StoryNavigationDelegate?) {
-        self.view = view
-        self.story = story
-        self.storyPartViewFactory = storyPartViewFactory
-        self.navigationDelegate = navigationDelegate
-    }
-
     var storyID: Int {
         return story.id
     }
@@ -66,15 +57,21 @@ class StoryPresenter: StoryPresenterProtocol {
         animate()
     }
 
+    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, navigationDelegate: StoryNavigationDelegate?) {
+        self.view = view
+        self.story = story
+        self.storyPartViewFactory = storyPartViewFactory
+        self.navigationDelegate = navigationDelegate
+    }
+
     func animate() {
-        guard 0 <= partToAnimate && partToAnimate < story.parts.count else {
-            if partToAnimate < 0 {
-                showPreviousStory()
-                return
-            } else {
-                showNextStory()
-                return
-            }
+        if partToAnimate < 0 {
+            showPreviousStory()
+            return
+        }
+        if partToAnimate >= story.parts.count {
+            showNextStory()
+            return
         }
 
         let animatingStoryPart = story.parts[partToAnimate]
@@ -127,7 +124,7 @@ class StoryPresenter: StoryPresenterProtocol {
         view?.pause(segment: partToAnimate)
     }
 
-    func unpause() {
-        view?.unpause(segment: partToAnimate)
+    func resume() {
+        view?.resume(segment: partToAnimate)
     }
 }

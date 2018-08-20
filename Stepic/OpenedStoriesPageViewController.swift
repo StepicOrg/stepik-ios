@@ -17,13 +17,21 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
     private var isDragging: Bool = false
     private var prevStatusBarStyle: UIStatusBarStyle?
 
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dataSource = self
         presenter?.refresh()
-        let scrollView = view.subviews.filter { $0 is UIScrollView }.first as! UIScrollView
-        scrollView.delegate = self
+        let scrollView = view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView
+        scrollView?.delegate = self
         swipeInteractionController = SwipeInteractionController(viewController: self)
         view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
     }
@@ -48,14 +56,6 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
     func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
         addChildViewController(module)
         setViewControllers([module], direction: direction, animated: animated, completion: nil)
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-
-    override var shouldAutorotate: Bool {
-        return false
     }
 }
 
@@ -92,7 +92,8 @@ extension OpenedStoriesPageViewController: UIScrollViewDelegate {
         let positionFromStartOfCurrentPage = abs(startOffset - scrollView.contentOffset.x)
         let percent = positionFromStartOfCurrentPage / self.view.frame.width
 
-        if percent > 0.2 && !hasNextModule {
+        let dismissThreshold: CGFloat = 0.2
+        if percent > dismissThreshold && !hasNextModule {
             close()
         }
     }

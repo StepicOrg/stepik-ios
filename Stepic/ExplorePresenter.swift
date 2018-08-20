@@ -69,10 +69,6 @@ class ExplorePresenter: CourseListCountDelegate {
         }
     }
 
-    private func initStoriesWidget() {
-
-    }
-
     private func initLanguagesWidget() {
         view?.setLanguages(withLanguages: ContentLanguage.supportedLanguages, initialLanguage: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]

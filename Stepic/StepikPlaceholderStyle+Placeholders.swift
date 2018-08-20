@@ -93,8 +93,7 @@ extension StepikPlaceholder.Style {
             .empty, .noConnection, .login,
             .emptyDownloads, .emptyNotifications, .emptySearch,
             .emptyCertificates, .emptyDiscussions, .emptyProfileLoading,
-            .emptySections, .emptyUnits, .emptyUnitsLoading,
-            .noConnectionQuiz, .adaptiveCoursePassed, .refreshStories
+            .emptySections, .emptyUnits
         ]
     }
 }

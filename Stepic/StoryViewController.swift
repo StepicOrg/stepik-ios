@@ -53,7 +53,7 @@ class StoryViewController: UIViewController {
             onAppearBlock?()
         }
         presenter?.didAppear()
-        presenter?.unpause()
+        presenter?.resume()
     }
 
     override func viewDidLayoutSubviews() {
@@ -114,11 +114,6 @@ class StoryViewController: UIViewController {
         presenter?.skip()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         presenter?.pause()
@@ -126,12 +121,12 @@ class StoryViewController: UIViewController {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        presenter?.unpause()
+        presenter?.resume()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        presenter?.unpause()
+        presenter?.resume()
     }
 
     func close() {
@@ -140,6 +135,14 @@ class StoryViewController: UIViewController {
 }
 
 extension StoryViewController: StoryViewProtocol {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
     func animate(view: UIView & UIStoryPartViewProtocol) {
         if view.isDescendant(of: partsContainerView) {
             partsContainerView.bringSubview(toFront: view)
@@ -157,12 +160,12 @@ extension StoryViewController: StoryViewProtocol {
         if !didAppear {
             onAppearBlock = { [weak self] in
                 self?.progressView.animate(duration: duration, segment: segment)
-                self?.presenter?.unpause()
+                self?.presenter?.resume()
                 self?.onAppearBlock = nil
             }
         } else {
             progressView.animate(duration: duration, segment: segment)
-            self.presenter?.unpause()
+            self.presenter?.resume()
         }
     }
 
@@ -170,15 +173,7 @@ extension StoryViewController: StoryViewProtocol {
         progressView.pause(segment: segment)
     }
 
-    func unpause(segment: Int) {
-        progressView.unpause(segment: segment)
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-
-    override var shouldAutorotate: Bool {
-        return false
+    func resume(segment: Int) {
+        progressView.resume(segment: segment)
     }
 }

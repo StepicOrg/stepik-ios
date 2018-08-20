@@ -19,7 +19,7 @@ class StoryAssembly: Assembly {
         self.navigationDelegate = navigationDelegate
     }
 
-    func buildModule() -> UIViewController {
+    func makeModule() -> UIViewController {
         let vc = StoryViewController()
         vc.presenter = StoryPresenter(view: vc, story: story, storyPartViewFactory: StoryPartViewFactory(), navigationDelegate: navigationDelegate)
         return vc
@@ -27,5 +27,5 @@ class StoryAssembly: Assembly {
 }
 
 protocol Assembly {
-    func buildModule() -> UIViewController
+    func makeModule() -> UIViewController
 }

@@ -13,15 +13,6 @@ class CachedValue<T> {
 
     private let key: String
 
-    init(key: String) {
-        self.key = key
-    }
-
-    init(key: String, value: T?) {
-        self.key = key
-        self.value = value
-    }
-
     private var privateValue: T?
 
     var value: T? {
@@ -35,5 +26,14 @@ class CachedValue<T> {
             defaults.set(newValue, forKey: key)
             privateValue = newValue
         }
+    }
+
+    init(key: String) {
+        self.key = key
+    }
+
+    init(key: String, value: T?) {
+        self.key = key
+        self.value = value
     }
 }

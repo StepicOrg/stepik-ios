@@ -18,7 +18,7 @@ class OpenedStoriesAssembly: Assembly {
         self.startPosition = startPosition
     }
 
-    func buildModule() -> UIViewController {
+    func makeModule() -> UIViewController {
         let vc = OpenedStoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         vc.presenter = OpenedStoriesPresenter(view: vc, stories: stories, startPosition: startPosition)
         return vc

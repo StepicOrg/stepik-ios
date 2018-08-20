@@ -47,11 +47,13 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
         collectionView.skeleton.viewBuilder = { return UIView.fromNib(named: "StorySkeletonPlaceholderView") }
 
         collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: 98, height: 98)
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 16
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 16
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 98, height: 98)
+            layout.minimumInteritemSpacing = 16
+            layout.minimumLineSpacing = 16
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            layout.scrollDirection = .horizontal
+        }
         collectionView.showsHorizontalScrollIndicator = false
     }
 
@@ -80,7 +82,7 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
     }()
 
     func showStory(at index: Int) {
-        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).buildModule()
+        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).makeModule()
         if DeviceInfo.current.isPad {
             customPresentViewController(storyPresentr, viewController: moduleToPresent, animated: true, completion: nil)
         } else {

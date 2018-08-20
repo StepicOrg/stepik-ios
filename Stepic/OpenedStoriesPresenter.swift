@@ -14,10 +14,10 @@ protocol OpenedStoriesViewProtocol: class {
 }
 
 protocol OpenedStoriesPresenterProtocol: class {
-    func refresh()
     var nextModule: UIViewController? { get }
     var prevModule: UIViewController? { get }
     var currentModule: UIViewController { get }
+    func refresh()
 }
 
 class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
@@ -63,14 +63,14 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
         if let module = moduleForStoryID[story.id] {
             return module
         } else {
-            let module = buildModule(for: story)
+            let module = makeModule(for: story)
             moduleForStoryID[story.id] = module
             return module
         }
     }
 
-    private func buildModule(for story: Story) -> UIViewController {
-        return StoryAssembly(story: story, navigationDelegate: self).buildModule()
+    private func makeModule(for story: Story) -> UIViewController {
+        return StoryAssembly(story: story, navigationDelegate: self).makeModule()
     }
 
     @objc
@@ -80,6 +80,11 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
                 return
         }
         currentPosition = position
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+
     }
 }
 

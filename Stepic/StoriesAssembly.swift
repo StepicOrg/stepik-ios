@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class StoriesAssembly: Assembly {
-    func buildModule() -> UIViewController {
+    func makeModule() -> UIViewController {
         let vc = StoriesViewController()
         vc.presenter = StoriesPresenter(view: vc, storyTemplatesAPI: StoryTemplatesAPI())
         return vc

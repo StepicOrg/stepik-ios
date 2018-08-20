@@ -133,7 +133,7 @@ class ExploreViewController: UIViewController, ExploreView {
     }
 
     func setStories() {
-        let storiesModule = StoriesAssembly().buildModule()
+        let storiesModule = StoriesAssembly().makeModule()
         addChildViewController(storiesModule)
         let widgetBackgroundView = UIView()
         widgetBackgroundView.backgroundColor = UIColor.white
