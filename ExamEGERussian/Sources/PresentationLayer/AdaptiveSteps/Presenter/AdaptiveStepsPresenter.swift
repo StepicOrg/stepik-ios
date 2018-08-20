@@ -23,6 +23,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private let sendStepViewUseCase: SendStepViewUseCaseProtocol
 
     private var stepViewController: UIViewController?
+    private var currentStep: StepPlainObject?
+    
     private var cachedRecommendedLessons = [LessonPlainObject]()
     private var recommendationsBatchSize: Int {
         return 6
@@ -71,6 +73,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 strongSelf.view?.removeContentController(stepViewController)
             }
 
+            strongSelf.currentStep = step
             strongSelf.stepViewController = newStepController
             strongSelf.view?.addContentController(newStepController)
             strongSelf.view?.updateTitle(title)
@@ -157,6 +160,15 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 seal.reject(AdaptiveStepsError.stepNotLoaded)
             }
         }
+    }
+    
+    private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
+        guard let lessonId = currentStep?.lessonId,
+              let user = AuthInfo.shared.user else {
+            return Promise(error: AdaptiveStepsError.reactionNotSent)
+        }
+        
+        return reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id)
     }
 }
 
