@@ -90,10 +90,6 @@ class StepViewController: UIViewController {
     }
 
     private func setup() {
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
-
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didScreenRotate),

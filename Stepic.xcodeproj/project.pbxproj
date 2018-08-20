@@ -1200,7 +1200,6 @@
 		2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFD8212A9D05000D2765 /* FileStorage.swift */; };
 		2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */; };
 		2C14DFE6212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */; };
-		2C15BC40212AE1C000AB1015 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */; };
 		2C15BC42212AE26000AB1015 /* AdaptiveStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */; };
 		2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */; };
 		2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */; };
@@ -2115,6 +2114,7 @@
 		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */; };
 		2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */; };
+		2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -5719,7 +5719,6 @@
 		2C14DFD8212A9D05000D2765 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphProviderProtocol.swift; sourceTree = "<group>"; };
 		2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKnowledgeGraphProvider.swift; sourceTree = "<group>"; };
-		2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
 		2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsView.swift; sourceTree = "<group>"; };
 		2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenterProtocol.swift; sourceTree = "<group>"; };
 		2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
@@ -5815,6 +5814,7 @@
 		2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssembly.swift; sourceTree = "<group>"; };
 		2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
+		2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -8714,8 +8714,8 @@
 		2C15BC3E212AE12B00AB1015 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C15BC3F212AE1C000AB1015 /* AdaptiveStepsViewController.swift */,
 				2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */,
+				2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -15943,7 +15943,6 @@
 				2C33CC0E20EC3405009956B0 /* RetrieveRequestMaker.swift in Sources */,
 				2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */,
 				2C093F18211B446A00162DD0 /* ContentMenuBlockTableViewCell.swift in Sources */,
-				2C15BC40212AE1C000AB1015 /* AdaptiveStepsViewController.swift in Sources */,
 				2C4EB2E42124385400AF2331 /* Logoutable.swift in Sources */,
 				2C9499F920ECC14F0049E9A8 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
@@ -15968,6 +15967,7 @@
 				2C949A7020ECD17B0049E9A8 /* SkeletonView.swift in Sources */,
 				2C770303210F29A3002E250D /* KnowledgeGraphLessonPlainObject.swift in Sources */,
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
+				2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */,
 				2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,

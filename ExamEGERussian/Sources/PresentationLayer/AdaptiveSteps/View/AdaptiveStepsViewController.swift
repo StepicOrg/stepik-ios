@@ -11,13 +11,6 @@ import SnapKit
 
 final class AdaptiveStepsViewController: UIViewController {
     var presenter: AdaptiveStepsPresenterProtocol?
-
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     private weak var stepView: UIView?
 
     // MARK: - UIViewController Lifecycle
@@ -33,11 +26,6 @@ final class AdaptiveStepsViewController: UIViewController {
 
     private func setup() {
         view.backgroundColor = .white
-
-        view.addSubview(contentView)
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
 }
 
@@ -45,14 +33,14 @@ final class AdaptiveStepsViewController: UIViewController {
 
 extension AdaptiveStepsViewController: AdaptiveStepsView {
     func addContentController(_ controller: UIViewController) {
-        addChildViewController(controller)
+        view.addSubview(controller.view)
 
         stepView = controller.view
-        contentView.addSubview(stepView!)
         stepView?.snp.makeConstraints {
-            $0.edges.equalTo(contentView)
+            $0.edges.equalToSuperview()
         }
 
+        addChildViewController(controller)
         controller.didMove(toParentViewController: self)
     }
 
