@@ -18,6 +18,10 @@ final class UseCaseFactory: UseCaseFactoryProtocol {
         )
     }
 
+    var sendStepViewUseCase: SendStepViewUseCaseProtocol {
+        return SendStepViewUseCase(unitsAPI: serviceFactory.unitsAPI, viewsAPI: serviceFactory.viewsAPI)
+    }
+
     init(serviceFactory: ServiceFactory) {
         self.serviceFactory = serviceFactory
     }

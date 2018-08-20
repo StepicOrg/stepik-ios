@@ -21,6 +21,8 @@ final class ServiceFactoryImpl: ServiceFactory {
     let stepsAPI: StepsAPI
     let progressesAPI: ProgressesAPI
     let recommendationsAPI: RecommendationsAPI
+    let unitsAPI: UnitsAPI
+    let viewsAPI: ViewsAPI
 
     let defaultsStorageManager: DefaultsStorageManager
 
@@ -81,6 +83,8 @@ final class ServiceFactoryImpl: ServiceFactory {
          stepsAPI: StepsAPI,
          progressesAPI: ProgressesAPI,
          recommendationsAPI: RecommendationsAPI,
+         unitsAPI: UnitsAPI,
+         viewsAPI: ViewsAPI,
          defaultsStorageManager: DefaultsStorageManager
     ) {
         self.authAPI = authAPI
@@ -92,6 +96,8 @@ final class ServiceFactoryImpl: ServiceFactory {
         self.stepsAPI = stepsAPI
         self.progressesAPI = progressesAPI
         self.recommendationsAPI = recommendationsAPI
+        self.unitsAPI = unitsAPI
+        self.viewsAPI = viewsAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
 }

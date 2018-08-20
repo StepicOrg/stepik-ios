@@ -2122,6 +2122,8 @@
 		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */; };
 		2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */; };
+		2C4B6A6D212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */; };
+		2C4B6A6F212B63F4008B3953 /* SendStepViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -5827,6 +5829,8 @@
 		2C4B6A61212B528A008B3953 /* CourseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMapper.swift; sourceTree = "<group>"; };
 		2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactoryProtocol.swift; sourceTree = "<group>"; };
 		2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
+		2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendStepViewUseCaseProtocol.swift; sourceTree = "<group>"; };
+		2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendStepViewUseCase.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -9104,8 +9108,8 @@
 		2C4B6A5A212B4DCA008B3953 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */,
-				2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */,
+				2C4B6A6A212B63C4008B3953 /* JoinCourse */,
+				2C4B6A6B212B63CF008B3953 /* SendStepView */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -9126,6 +9130,24 @@
 				2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */,
 			);
 			path = UseCaseFactory;
+			sourceTree = "<group>";
+		};
+		2C4B6A6A212B63C4008B3953 /* JoinCourse */ = {
+			isa = PBXGroup;
+			children = (
+				2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */,
+				2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */,
+			);
+			path = JoinCourse;
+			sourceTree = "<group>";
+		};
+		2C4B6A6B212B63CF008B3953 /* SendStepView */ = {
+			isa = PBXGroup;
+			children = (
+				2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */,
+				2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */,
+			);
+			path = SendStepView;
 			sourceTree = "<group>";
 		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
@@ -16105,6 +16127,7 @@
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
+				2C4B6A6F212B63F4008B3953 /* SendStepViewUseCase.swift in Sources */,
 				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
@@ -16219,6 +16242,7 @@
 				2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */,
 				2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
+				2C4B6A6D212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C093F17211B445900162DD0 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */,

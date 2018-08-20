@@ -17,6 +17,8 @@ protocol ServiceFactory: class {
     var lessonsAPI: LessonsAPI { get }
     var progressesAPI: ProgressesAPI { get }
     var recommendationsAPI: RecommendationsAPI { get }
+    var unitsAPI: UnitsAPI { get }
+    var viewsAPI: ViewsAPI { get }
     var defaultsStorageManager: DefaultsStorageManager { get }
 
     var userRegistrationService: UserRegistrationService { get }

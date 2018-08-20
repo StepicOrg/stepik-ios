@@ -10,4 +10,5 @@ import Foundation
 
 protocol UseCaseFactoryProtocol: class {
     var joinCourseUseCase: JoinCourseUseCaseProtocol { get }
+    var sendStepViewUseCase: SendStepViewUseCaseProtocol { get }
 }

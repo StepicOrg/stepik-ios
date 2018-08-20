@@ -13,14 +13,16 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private weak var view: AdaptiveStepsView?
 
     private let courseId: Int
-    private var stepViewController: UIViewController?
     private let stepAssembly: StepAssembly
 
     private let recommendationsService: RecommendationsServiceProtocol
     private let reactionService: ReactionServiceProtocol
     private let stepsService: StepsService
-    private let joinCourseUseCase: JoinCourseUseCaseProtocol
 
+    private let joinCourseUseCase: JoinCourseUseCaseProtocol
+    private let sendStepViewUseCase: SendStepViewUseCaseProtocol
+
+    private var stepViewController: UIViewController?
     private var cachedRecommendedLessons = [LessonPlainObject]()
     private var recommendationsBatchSize: Int {
         return 6
@@ -35,7 +37,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
          recommendationsService: RecommendationsServiceProtocol,
          reactionService: ReactionServiceProtocol,
          stepsService: StepsService,
-         joinCourseUseCase: JoinCourseUseCaseProtocol
+         joinCourseUseCase: JoinCourseUseCaseProtocol,
+         sendStepViewUseCase: SendStepViewUseCaseProtocol
     ) {
         self.view = view
         self.courseId = courseId
@@ -44,6 +47,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         self.reactionService = reactionService
         self.stepsService = stepsService
         self.joinCourseUseCase = joinCourseUseCase
+        self.sendStepViewUseCase = sendStepViewUseCase
     }
 
     func refresh() {
@@ -71,7 +75,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
             strongSelf.view?.addContentController(newStepController)
             strongSelf.view?.updateTitle(title)
 
-            return .value(())
+            return strongSelf.sendStepViewUseCase.sendView(for: step)
         }.done {
             print("\(#function): view for step created")
         }.catch { error in

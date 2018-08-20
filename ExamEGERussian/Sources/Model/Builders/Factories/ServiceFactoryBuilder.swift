@@ -20,6 +20,8 @@ final class ServiceFactoryBuilder {
             stepsAPI: StepsAPI(),
             progressesAPI: ProgressesAPI(),
             recommendationsAPI: RecommendationsAPI(),
+            unitsAPI: UnitsAPI(),
+            viewsAPI: ViewsAPI(),
             defaultsStorageManager: DefaultsStorageManager.shared
         )
     }
