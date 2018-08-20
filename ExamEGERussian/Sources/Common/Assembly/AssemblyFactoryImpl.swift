@@ -21,7 +21,7 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return TopicsAssemblyImpl(
             assemblyFactory: self,
             serviceFactory: serviceFactory,
-            knowledgeGraph: knowledgeGraph
+            knowledgeGraph: knowledgeGraphProvider.knowledgeGraph
         )
     }
 
@@ -29,7 +29,7 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return LessonsAssemblyImpl(
             assemblyFactory: self,
             serviceFactory: serviceFactory,
-            knowledgeGraph: knowledgeGraph
+            knowledgeGraph: knowledgeGraphProvider.knowledgeGraph
         )
     }
 
@@ -38,10 +38,10 @@ final class AssemblyFactoryImpl: AssemblyFactory {
     }
 
     private let serviceFactory: ServiceFactory
-    private let knowledgeGraph: KnowledgeGraph
+    private let knowledgeGraphProvider: KnowledgeGraphProviderProtocol
 
-    init(serviceFactory: ServiceFactory, knowledgeGraph: KnowledgeGraph) {
+    init(serviceFactory: ServiceFactory, knowledgeGraphProvider: KnowledgeGraphProviderProtocol) {
         self.serviceFactory = serviceFactory
-        self.knowledgeGraph = knowledgeGraph
+        self.knowledgeGraphProvider = knowledgeGraphProvider
     }
 }

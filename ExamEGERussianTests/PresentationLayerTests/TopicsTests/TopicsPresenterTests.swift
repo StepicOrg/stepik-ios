@@ -50,7 +50,7 @@ class TopicsPresenterTests: XCTestCase {
         let exp = expectation(description: "Concrete error title and message")
 
         let expectedErrorTitle = "Error"
-        let expectedErrorMessage = "Some error message"
+        let expectedErrorMessage = "Something went wrong. Try again later."
         let errorToBeReturned = NSError.make(with: expectedErrorMessage)
         graphService.resultToBeReturned = Promise(error: errorToBeReturned)
         topicsViewSpy.onError = { [weak self] in

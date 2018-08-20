@@ -18,12 +18,7 @@ final class AssemblyFactoryBuilder {
     func build() -> AssemblyFactory {
         return AssemblyFactoryImpl(
             serviceFactory: serviceFactory,
-            knowledgeGraph: obtainKnowledgeGraph()
+            knowledgeGraphProvider: CacheKnowledgeGraphProvider(graphService: serviceFactory.graphService)
         )
-    }
-
-    // TODO: Get from cache or create a new one.
-    private func obtainKnowledgeGraph() -> KnowledgeGraph {
-        return KnowledgeGraph()
     }
 }

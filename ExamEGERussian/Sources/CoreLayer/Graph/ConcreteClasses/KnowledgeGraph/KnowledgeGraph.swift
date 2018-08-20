@@ -15,6 +15,10 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return adjacency.keys.count
     }
 
+    var isEmpty: Bool {
+        return count == 0
+    }
+
     override func instantiateVertex(id: String) -> KnowledgeGraphVertex<String> {
         return KnowledgeGraphVertex(id: id)
     }

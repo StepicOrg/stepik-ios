@@ -19,6 +19,8 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
 
+    private var isFirstRefresh = true
+
     init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
          userRegistrationService: UserRegistrationService, graphService: GraphServiceProtocol) {
         self.view = view
@@ -33,7 +35,13 @@ final class TopicsPresenterImpl: TopicsPresenter {
         view?.selectSegment(at: segmentSelectedIndex)
 
         checkAuthStatus()
-        fetchGraphData()
+
+        if isFirstRefresh && !knowledgeGraph.isEmpty {
+            isFirstRefresh = false
+            reloadViewData()
+        } else {
+            fetchGraphData()
+        }
     }
 
     func selectTopic(with viewData: TopicsViewData) {
@@ -70,50 +78,39 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
-            }.catch { [weak self] error in
-                self?.displayError(error)
+            }.catch { [weak self] _ in
+                self?.displayError()
             }
         }
     }
 
     private func fetchGraphData() {
         graphService.fetchGraph().done { [weak self] responseModel in
-            guard let strongSelf = self else {
-                return
-            }
-
-            let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
-            guard let graph = builder.build() as? KnowledgeGraph,
-                  let vertices = graph.vertices as? [KnowledgeGraphVertex<String>] else {
+            guard let strongSelf = self,
+                  let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
                 return
             }
 
             strongSelf.knowledgeGraph.adjacency = graph.adjacency
-            strongSelf.view?.setTopics(strongSelf.viewTopicsFrom(vertices))
-        }.catch { [weak self] error in
-            self?.displayError(error)
+            strongSelf.reloadViewData()
+        }.catch { [weak self] _ in
+            self?.displayError()
         }
     }
 
-    private func obtainGraphFromCache() -> Promise<KnowledgeGraph> {
-        return Promise { seal in
-            self.graphService.obtainGraph().map { plainObject -> KnowledgeGraph in
-                let builder = KnowledgeGraphBuilder(graphPlainObject: plainObject)
-                guard let graph = builder.build() as? KnowledgeGraph else {
-                    return KnowledgeGraph()
-                }
-
-                return graph
-            }.done { knowledgeGraph in
-                seal.fulfill(knowledgeGraph)
-            }.catch { _ in
-                seal.fulfill(KnowledgeGraph())
-            }
+    private func reloadViewData() {
+        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
+            view?.setTopics(viewTopicsFrom(vertices))
+        } else {
+            displayError()
         }
     }
 
-    private func displayError(_ error: Swift.Error) {
-        view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
+    private func displayError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("Something went wrong. Try again later.", comment: "")
+    ) {
+        view?.displayError(title: title, message: message)
     }
 
     private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
