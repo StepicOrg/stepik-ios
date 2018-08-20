@@ -32,24 +32,21 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private let lessonsService: LessonsService
-    private let courseService: CourseService
-    private let enrollmentService: EnrollmentService
+    private let joinCourseUseCase: JoinCourseUseCaseProtocol
 
     init(view: LessonsView,
          router: LessonsRouter,
          topicId: String,
          knowledgeGraph: KnowledgeGraph,
          lessonsService: LessonsService,
-         courseService: CourseService,
-         enrollmentService: EnrollmentService
+         joinCourseUseCase: JoinCourseUseCaseProtocol
     ) {
         self.view = view
         self.router = router
         self.topicId = topicId
         self.knowledgeGraph = knowledgeGraph
         self.lessonsService = lessonsService
-        self.courseService = courseService
-        self.enrollmentService = enrollmentService
+        self.joinCourseUseCase = joinCourseUseCase
     }
 
     func refresh() {
@@ -72,33 +69,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
             return
         }
 
-        courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
-            var ids = Set(self.coursesIds)
-            courses
-                .filter { $0.enrolled }
-                .map { $0.id }
-                .forEach { ids.remove($0) }
-
-            return .value(Array(ids))
-        }.then { ids -> Promise<[Course]> in
-            self.courseService.fetchCourses(with: ids)
-        }.then { courses in
-            when(fulfilled: courses.map { self.joinCourse($0) })
-        }.then { courses in
-            self.courseService.fetchProgresses(coursesIds: courses.map { $0.id })
-        }.done { courses in
+        joinCourseUseCase.joinCourses(coursesIds).done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
         }.catch { [weak self] error in
             self?.displayError(error)
         }
-    }
-
-    private func joinCourse(_ course: Course) -> Promise<Course> {
-        guard !course.enrolled else {
-            return .value(course)
-        }
-
-        return enrollmentService.joinCourse(course)
     }
 
     private func getLessons() {

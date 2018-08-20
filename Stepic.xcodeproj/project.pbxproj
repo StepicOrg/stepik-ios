@@ -2115,6 +2115,13 @@
 		2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */; };
 		2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */; };
 		2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */; };
+		2C4B6A5C212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */; };
+		2C4B6A5E212B4E1C008B3953 /* JoinCourseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */; };
+		2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */; };
+		2C4B6A62212B528A008B3953 /* CourseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A61212B528A008B3953 /* CourseMapper.swift */; };
+		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */; };
+		2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -2891,7 +2898,6 @@
 		2C94999920ECB8930049E9A8 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		2C94999A20ECB8AC0049E9A8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
-		2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
@@ -5815,6 +5821,12 @@
 		2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
 		2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
+		2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCaseProtocol.swift; sourceTree = "<group>"; };
+		2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCase.swift; sourceTree = "<group>"; };
+		2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
+		2C4B6A61212B528A008B3953 /* CourseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMapper.swift; sourceTree = "<group>"; };
+		2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactoryProtocol.swift; sourceTree = "<group>"; };
+		2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -9089,6 +9101,33 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		2C4B6A5A212B4DCA008B3953 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */,
+				2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		2C4B6A66212B55CF008B3953 /* ServiceFactory */ = {
+			isa = PBXGroup;
+			children = (
+				62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */,
+				62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */,
+			);
+			path = ServiceFactory;
+			sourceTree = "<group>";
+		};
+		2C4B6A67212B55DA008B3953 /* UseCaseFactory */ = {
+			isa = PBXGroup;
+			children = (
+				2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */,
+				2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */,
+			);
+			path = UseCaseFactory;
+			sourceTree = "<group>";
+		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
 			isa = PBXGroup;
 			children = (
@@ -9250,6 +9289,7 @@
 			children = (
 				62E9896A25BC9EB0045900B5 /* Factory */,
 				2C59F06320EB9FFA00666EE0 /* Services */,
+				2C4B6A5A212B4DCA008B3953 /* UseCases */,
 			);
 			path = BusinessLogicLayer;
 			sourceTree = "<group>";
@@ -10264,6 +10304,7 @@
 			isa = PBXGroup;
 			children = (
 				2CD7999621077E540054D098 /* KnowledgeGraph */,
+				2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */,
 				2C770305210F29B0002E250D /* LessonPlainObject.swift */,
 				2C9492C521130E6600552600 /* StepPlainObject.swift */,
 			);
@@ -10320,6 +10361,7 @@
 		2CDF463D2126CBFE00A803C5 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
+				2C4B6A61212B528A008B3953 /* CourseMapper.swift */,
 				2CDF463E2126CC2500A803C5 /* LessonMapper.swift */,
 			);
 			path = Mappers;
@@ -10544,8 +10586,8 @@
 		62E9896A25BC9EB0045900B5 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */,
-				62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */,
+				2C4B6A66212B55CF008B3953 /* ServiceFactory */,
+				2C4B6A67212B55DA008B3953 /* UseCaseFactory */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -15893,6 +15935,7 @@
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
 				2C093F24211B455E00162DD0 /* EmailAuthViewController.swift in Sources */,
 				2C33CBF520EC327F009956B0 /* UsersAPI.swift in Sources */,
+				2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */,
 				2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */,
 				2C33CBF220EC326A009956B0 /* CoursesAPI.swift in Sources */,
 				2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */,
@@ -15909,6 +15952,7 @@
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
 				2C093EFA211B425F00162DD0 /* RoutingManager.swift in Sources */,
 				2C093F1C211B44BA00162DD0 /* TagDetectionUtil.swift in Sources */,
+				2C4B6A5E212B4E1C008B3953 /* JoinCourseUseCase.swift in Sources */,
 				2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */,
 				2C6B2B9D2121A15900968C96 /* ConfigureThirdPartiesCommand.swift in Sources */,
 				2CA6F5EE21219A6500EE337E /* ServiceFactoryBuilder.swift in Sources */,
@@ -16026,7 +16070,6 @@
 				2C093F0C211B439D00162DD0 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C9499D320ECBCE10049E9A8 /* MatchingReply.swift in Sources */,
 				2C9499AE20ECBA670049E9A8 /* LastStep.swift in Sources */,
-				2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */,
 				2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */,
 				2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */,
 				2C949A3320ECC70D0049E9A8 /* AchievementProgressesAPI.swift in Sources */,
@@ -16147,6 +16190,7 @@
 				2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
+				2C4B6A62212B528A008B3953 /* CourseMapper.swift in Sources */,
 				2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */,
 				2C093F12211B441600162DD0 /* NotificationRequestAlertManager.swift in Sources */,
 				2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */,
@@ -16170,6 +16214,7 @@
 				2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */,
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
+				2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
 				2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */,
 				2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */,
@@ -16183,6 +16228,7 @@
 				2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */,
 				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,
+				2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */,
 				2C770306210F29B0002E250D /* LessonPlainObject.swift in Sources */,
 				2C77030B210F2AD5002E250D /* BaseRouter.swift in Sources */,
 				2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */,
@@ -16234,6 +16280,7 @@
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
 				2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */,
 				2C6B2B992121A08300968C96 /* Command.swift in Sources */,
+				2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */,
 				2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
@@ -16253,6 +16300,7 @@
 				62E98B8BE1F22F2E05CA130D /* StepAssembly.swift in Sources */,
 				62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */,
 				62E981A09293D322A38F2D13 /* ProgressService.swift in Sources */,
+				2C4B6A5C212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift in Sources */,
 				62E987EE86AB48E30FF5EC79 /* ProgressServiceImpl.swift in Sources */,
 				62E989D0D1B162A9AE12DFD6 /* StepsServiceImpl.swift in Sources */,
 				2C093F04211B42F500162DD0 /* ProfileViewController.swift in Sources */,

@@ -23,8 +23,7 @@ final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
             topicId: topicId,
             knowledgeGraph: knowledgeGraph,
             lessonsService: serviceFactory.lessonsService,
-            courseService: serviceFactory.courseService,
-            enrollmentService: serviceFactory.enrollmentService
+            joinCourseUseCase: useCaseFactory.joinCourseUseCase
         )
         controller.presenter = presenter
         controller.title = knowledgeGraph[topicId]?.key.title

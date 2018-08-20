@@ -19,6 +19,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private let recommendationsService: RecommendationsServiceProtocol
     private let reactionService: ReactionServiceProtocol
     private let stepsService: StepsService
+    private let joinCourseUseCase: JoinCourseUseCaseProtocol
 
     private var cachedRecommendedLessons = [LessonPlainObject]()
     private var recommendationsBatchSize: Int {
@@ -33,7 +34,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
          stepAssembly: StepAssembly,
          recommendationsService: RecommendationsServiceProtocol,
          reactionService: ReactionServiceProtocol,
-         stepsService: StepsService
+         stepsService: StepsService,
+         joinCourseUseCase: JoinCourseUseCaseProtocol
     ) {
         self.view = view
         self.courseId = courseId
@@ -41,16 +43,19 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         self.recommendationsService = recommendationsService
         self.reactionService = reactionService
         self.stepsService = stepsService
+        self.joinCourseUseCase = joinCourseUseCase
     }
 
     func refresh() {
         var lesson: LessonPlainObject?
         var title = ""
 
-        getNewRecommendation(for: courseId).then { recommendedLesson -> Promise<StepPlainObject> in
-            lesson = recommendedLesson
-            title = recommendedLesson.title
-            return self.getStep(for: recommendedLesson)
+        joinCourseUseCase.joinCourses([courseId]).then { _ in
+            self.getNewRecommendation(for: self.courseId)
+        }.then { recommendation -> Promise<StepPlainObject> in
+            lesson = recommendation
+            title = recommendation.title
+            return self.getStep(for: recommendation)
         }.then { [weak self] step -> Promise<Void> in
             guard let strongSelf = self else {
                 throw AdaptiveStepsError.unknown

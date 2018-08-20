@@ -22,7 +22,8 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
             stepAssembly: StepAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory),
             recommendationsService: serviceFactory.recommendationsService,
             reactionService: serviceFactory.reactionService,
-            stepsService: serviceFactory.stepsService
+            stepsService: serviceFactory.stepsService,
+            joinCourseUseCase: useCaseFactory.joinCourseUseCase
         )
         controller.presenter = presenter
 
