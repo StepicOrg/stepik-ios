@@ -61,7 +61,9 @@ def all_pods
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.1.1'
     pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
-    pod 'Nuke'
+    pod 'ActionSheetPicker-3.0', '2.3.0'
+    pod 'NotificationBannerSwift', '1.6.3'
+    pod 'Nuke', '7.3.2'
 end
 
 def testing_pods
