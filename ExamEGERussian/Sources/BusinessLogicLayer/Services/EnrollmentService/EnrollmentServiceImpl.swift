@@ -18,7 +18,9 @@ final class EnrollmentServiceImpl: EnrollmentService {
 
     func joinCourse(_ course: Course) -> Promise<Course> {
         return enrollmentsAPI.joinCourse(course).then { _ -> Promise<Course> in
-            .value(course)
+            course.enrolled = true
+
+            return .value(course)
         }
     }
 }

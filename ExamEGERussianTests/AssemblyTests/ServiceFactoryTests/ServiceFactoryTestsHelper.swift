@@ -20,6 +20,8 @@ final class ServiceFactoryTestsHelper {
             coursesAPI: CoursesAPI(),
             enrollmentsAPI: EnrollmentsAPI(),
             lessonsAPI: LessonsAPI(),
+            stepsAPI: StepsAPI(),
+            progressesAPI: ProgressesAPI(),
             defaultsStorageManager: DefaultsStorageManager.shared
         )
     }

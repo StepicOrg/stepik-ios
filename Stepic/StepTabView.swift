@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-let StepDoneNotificationKey: String = "StepDoneNotificationKey"
+import Foundation
 
 class StepTabView: NibInitializableView {
 
@@ -25,7 +24,7 @@ class StepTabView: NibInitializableView {
     }
 
     override func setupSubviews() {
-        NotificationCenter.default.addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: NSNotification.Name(rawValue: StepDoneNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: .stepDone, object: nil)
     }
 
     convenience init(frame: CGRect, image: UIImage, stepId: Int, passed: Bool) {
@@ -61,6 +60,10 @@ class StepTabView: NibInitializableView {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepDoneNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: .stepDone, object: nil)
     }
+}
+
+extension Foundation.Notification.Name {
+    public static let stepDone = Foundation.Notification.Name("StepDoneNotificationKey")
 }

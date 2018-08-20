@@ -193,7 +193,7 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
 
     func presentingViewSwipe(gesture: UIPanGestureRecognizer) {
         let gestureState: (UIGestureRecognizerState) -> Bool = {
-            return gesture.state == $0 && self.dismissOnSwipe
+            gesture.state == $0 && self.dismissOnSwipe
         }
 
         guard conformingPresentedController?.presentrShouldDismiss?(keyboardShowing: keyboardIsShowing) ?? true else {

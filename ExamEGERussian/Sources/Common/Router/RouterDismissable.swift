@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public protocol RouterDismissable: class {
+@objc protocol RouterDismissable: class {
     func dismiss(completion: (() -> Void)?)
     func dismiss()
 }

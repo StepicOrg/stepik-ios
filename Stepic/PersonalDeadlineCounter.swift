@@ -47,6 +47,8 @@ class PersonalDeadlineCounter {
                     previousDeadline = sectionDeadlines.last?.deadlineDate ?? Date()
                 }
                 seal.fulfill(sectionDeadlines)
+            }.catch { error in
+                print("\(#file) \(#function) \(error)")
             }
         }
     }

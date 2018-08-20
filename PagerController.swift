@@ -284,6 +284,13 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             }
         }
 
+        makeConstraints()
+
+        // Set setup done
+        self.defaultSetupDone = true
+    }
+
+    func makeConstraints() {
         self.contentView.snp.makeConstraints { make -> Void in
             make.leading.trailing.equalTo(self.view)
             make.top.equalTo(self.tabsView!.snp.bottom).offset(-22)
@@ -302,9 +309,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             make.top.equalTo(contentView).offset(22)
             make.leading.trailing.equalTo(contentView)
         }
-
-        // Set setup done
-        self.defaultSetupDone = true
     }
 
     func indexForViewController(_ viewController: UIViewController) -> Int {

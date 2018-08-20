@@ -69,7 +69,7 @@ class DownloaderSpec: QuickSpec {
 
     private func jsonDataWithEmptySizeHeader(data: Data, chunksCount: Int) -> ((_ request: URLRequest) -> Response) {
         return { (request: URLRequest) in
-            return http(200, headers: [String: String](), download: .streamContent(data: data, inChunksOf: chunksCount))(request)
+            http(200, headers: [String: String](), download: .streamContent(data: data, inChunksOf: chunksCount))(request)
         }
     }
 

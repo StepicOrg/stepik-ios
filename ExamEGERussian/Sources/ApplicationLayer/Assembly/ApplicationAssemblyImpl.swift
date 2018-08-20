@@ -18,8 +18,10 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         let controller = assemblyFactory.topicsAssembly.module(navigationController: navigationController)
         navigationController.setViewControllers([controller], animated: false)
 
-        let router = AppRouter(assemblyFactory: assemblyFactory,
-                               navigationController: navigationController)
+        let router = AppRouter(
+            assemblyFactory: assemblyFactory,
+            navigationController: navigationController
+        )
         let applicationModule = ApplicationModule(router: router)
 
         ApplicationModuleHolder.instance.applicationModule = applicationModule

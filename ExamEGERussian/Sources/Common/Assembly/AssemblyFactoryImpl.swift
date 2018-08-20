@@ -33,6 +33,10 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         )
     }
 
+    var stepsAssembly: StepsAssembly {
+        return StepsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
     private let serviceFactory: ServiceFactory
     private let knowledgeGraph: KnowledgeGraph
 

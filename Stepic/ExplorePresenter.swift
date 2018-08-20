@@ -205,6 +205,8 @@ class ExplorePresenter: CourseListCountDelegate {
         let listLanguage = ContentLanguage.sharedContentLanguage
         refreshFromLocalAsync(forLanguage: listLanguage).done { [weak self] in
             self?.refreshFromRemote(forLanguage: listLanguage)
+        }.catch { error in
+            print("\(#file) \(#function) \(error)")
         }
     }
 

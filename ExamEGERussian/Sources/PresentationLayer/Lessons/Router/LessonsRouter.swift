@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LessonsRouter: class {
-    func showStepsForLessonWith(_ id: Int)
+    func showStepsForLesson(_ lesson: LessonPlainObject)
 }

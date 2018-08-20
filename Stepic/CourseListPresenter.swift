@@ -530,7 +530,7 @@ class CourseListPresenter {
                 strongSelf.lastStepDataSource?.didLoadWithProgresses(courses: strongSelf.courses)
                 if let userID = AuthInfo.shared.userId {
                     for course in strongSelf.courses {
-                        PersonalDeadlineManager.shared.syncDeadline(for: course, userID: userID)
+                        _ = PersonalDeadlineManager.shared.syncDeadline(for: course, userID: userID)
                     }
                 }
             })
