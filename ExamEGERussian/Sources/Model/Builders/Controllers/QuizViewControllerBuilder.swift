@@ -9,8 +9,9 @@
 import Foundation
 
 final class QuizViewControllerBuilder {
-    private(set) var stepType: StepPlainObject.StepType?
-    private(set) weak var logoutable: Logoutable?
+    private weak var logoutable: Logoutable?
+    private var stepType: StepPlainObject.StepType?
+    private var needNewAttempt = false
 
     func setStepType(_ stepType: StepPlainObject.StepType) -> QuizViewControllerBuilder {
         self.stepType = stepType
@@ -22,35 +23,45 @@ final class QuizViewControllerBuilder {
         return self
     }
 
+    func setNeedNewAttempt(_ needNewAttempt: Bool) -> QuizViewControllerBuilder {
+        self.needNewAttempt = needNewAttempt
+        return self
+    }
+
     func build() -> QuizViewController? {
         guard let stepType = stepType else {
             return nil
         }
 
         let nibName = String(describing: QuizViewController.self)
+        var quizController: QuizViewController?
 
         switch stepType {
         case .choice:
-            let controller = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
-            controller.logoutable = logoutable
+            let choiseController = ExamChoiceQuizViewController(nibName: nibName, bundle: nil)
+            choiseController.logoutable = logoutable
 
-            return controller
+            quizController = choiseController
         case .string:
-            let controller = ExamStringQuizViewController(nibName: nibName, bundle: nil)
-            controller.useSmallPadding = true
-            controller.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
-            controller.logoutable = logoutable
+            let stringController = ExamStringQuizViewController(nibName: nibName, bundle: nil)
+            stringController.useSmallPadding = true
+            stringController.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
+            stringController.logoutable = logoutable
 
-            return controller
+            quizController = stringController
         case .number:
-            let controller = ExamNumberQuizViewController(nibName: nibName, bundle: nil)
-            controller.useSmallPadding = true
-            controller.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
-            controller.logoutable = logoutable
+            let numberController = ExamNumberQuizViewController(nibName: nibName, bundle: nil)
+            numberController.useSmallPadding = true
+            numberController.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
+            numberController.logoutable = logoutable
 
-            return controller
+            quizController = numberController
         default:
-            return nil
+            quizController = nil
         }
+
+        quizController?.needNewAttempt = needNewAttempt
+
+        return quizController
     }
 }

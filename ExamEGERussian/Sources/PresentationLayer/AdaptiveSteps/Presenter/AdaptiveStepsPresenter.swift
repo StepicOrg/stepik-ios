@@ -61,7 +61,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 throw AdaptiveStepsError.unknown
             }
 
-            let newStepController = strongSelf.stepAssembly.module(lesson: lesson!, step: step)
+            let newStepController = strongSelf.stepAssembly.module(lesson: lesson!, step: step, needNewAttempt: true)
 
             if let stepViewController = strongSelf.stepViewController {
                 strongSelf.view?.removeContentController(stepViewController)

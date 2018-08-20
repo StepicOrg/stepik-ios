@@ -6,13 +6,14 @@
 import Foundation
 
 final class StepAssemblyImpl: BaseAssembly, StepAssembly {
-    func module(lesson: LessonPlainObject, step: StepPlainObject, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
+    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
         let controller = StepViewController()
         let router = StepRouter(viewController: controller, authAssembly: assemblyFactory.authAssembly)
         let presenter = StepPresenterImpl(
             view: controller,
             step: step,
             lesson: lesson,
+            needNewAttempt: needNewAttempt,
             router: router,
             delegate: stepPresenterDelegate,
             stepsService: serviceFactory.stepsService

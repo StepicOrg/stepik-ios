@@ -6,12 +6,20 @@
 import Foundation
 
 protocol StepAssembly: class {
-    func module(lesson: LessonPlainObject, step: StepPlainObject,
+    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool,
                 stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController
 }
 
 extension StepAssembly {
+    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool) -> UIViewController {
+        return module(lesson: lesson, step: step, needNewAttempt: needNewAttempt, stepPresenterDelegate: nil)
+    }
+
+    func module(lesson: LessonPlainObject, step: StepPlainObject, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
+        return module(lesson: lesson, step: step, needNewAttempt: false, stepPresenterDelegate: stepPresenterDelegate)
+    }
+
     func module(lesson: LessonPlainObject, step: StepPlainObject) -> UIViewController {
-        return module(lesson: lesson, step: step, stepPresenterDelegate: nil)
+        return module(lesson: lesson, step: step, needNewAttempt: false, stepPresenterDelegate: nil)
     }
 }
