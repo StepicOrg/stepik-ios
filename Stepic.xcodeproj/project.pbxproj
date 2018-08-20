@@ -9264,7 +9264,7 @@
 				62E984604AE4F1CF6E9A71EB /* ProgressService */,
 				2CDF46422126DE0300A803C5 /* ReactionService */,
 				2CDF46332126AE0600A803C5 /* RecommendationsService */,
-				2C83E5E0211058CC00A8322D /* StepService */,
+				2C83E5E0211058CC00A8322D /* StepsService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
 			);
 			path = Services;
@@ -9562,13 +9562,13 @@
 			path = GraphTests;
 			sourceTree = "<group>";
 		};
-		2C83E5E0211058CC00A8322D /* StepService */ = {
+		2C83E5E0211058CC00A8322D /* StepsService */ = {
 			isa = PBXGroup;
 			children = (
 				2C83E5E1211058DE00A8322D /* StepsService.swift */,
 				62E98719354649AAFC238BDA /* StepsServiceImpl.swift */,
 			);
-			path = StepService;
+			path = StepsService;
 			sourceTree = "<group>";
 		};
 		2C83E5E52110600200A8322D /* Steps */ = {
