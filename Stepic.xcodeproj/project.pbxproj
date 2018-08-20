@@ -1197,6 +1197,7 @@
 		2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA92125B71B0022E998 /* MockTableViewCell.swift */; };
 		2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */; };
 		2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EB22125BE770022E998 /* BaseRouterTests.swift */; };
+		2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFD8212A9D05000D2765 /* FileStorage.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C1B60C11F4C4AEF00236804 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5707,6 +5708,7 @@
 		2C130EA92125B71B0022E998 /* MockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewCell.swift; sourceTree = "<group>"; };
 		2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		2C130EB22125BE770022E998 /* BaseRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouterTests.swift; sourceTree = "<group>"; };
+		2C14DFD8212A9D05000D2765 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8666,6 +8668,14 @@
 			path = ApplicationLayerTests;
 			sourceTree = "<group>";
 		};
+		2C14DFD5212A9C16000D2765 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				2C14DFD8212A9D05000D2765 /* FileStorage.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -9438,6 +9448,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8305E820F38809003D7F9B /* Graph */,
+				2C14DFD5212A9C16000D2765 /* Persistence */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -16140,6 +16151,7 @@
 				2CD7995D21077CBA0054D098 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C093F23211B455100162DD0 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
+				2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */,
 				2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */,
 				2C949A2320ECC5D60049E9A8 /* ProfileDescriptionPresenter.swift in Sources */,
 				2CCA14BF2111A5E90068081A /* StepPresenterImpl.swift in Sources */,
