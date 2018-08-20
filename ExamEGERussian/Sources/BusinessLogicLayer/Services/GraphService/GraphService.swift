@@ -12,7 +12,13 @@ import Alamofire
 
 final class GraphService: GraphServiceProtocol {
     private static let url = URL(string: "https://www.dropbox.com/s/l8n1wny8qu0gbqt/example.json?dl=1")!
-    private static let fileUrl = getURL(for: .documentDirectory).appendingPathComponent("knowledge-graph", isDirectory: false)
+    private static let fileName = "plain-object-response"
+
+    private let fileStorage: FileStorage
+
+    init(fileStorage: FileStorage) {
+        self.fileStorage = fileStorage
+    }
 
     func fetchGraph() -> Promise<KnowledgeGraphPlainObject> {
         return Alamofire
@@ -23,11 +29,11 @@ final class GraphService: GraphServiceProtocol {
     }
 
     func obtainGraph() -> Promise<KnowledgeGraphPlainObject> {
-        return getGraphFromCache()
+        return obtainFromCache()
     }
 
-    private func getGraphFromCache() -> Promise<KnowledgeGraphPlainObject> {
-        if let data = FileManager.default.contents(atPath: GraphService.fileUrl.path) {
+    private func obtainFromCache() -> Promise<KnowledgeGraphPlainObject> {
+        if let data = fileStorage.loadData(fileName: GraphService.fileName) {
             return decodeData(data)
         }
 
@@ -35,43 +41,25 @@ final class GraphService: GraphServiceProtocol {
     }
 
     private func persistData(_ data: Data) -> Promise<Data> {
-        let filePath = GraphService.fileUrl.path
-        let fileManager = FileManager.default
-
-        do {
-            if fileManager.fileExists(atPath: filePath) {
-                try fileManager.removeItem(atPath: filePath)
+        return Promise { seal in
+            self.fileStorage.persist(data: data, named: GraphService.fileName) { (_, error) in
+                seal.resolve(data, error)
             }
-            fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
-        } catch let error {
-            return Promise(error: Error.persisting(message: error.localizedDescription))
         }
-
-        return .value(data)
     }
 
     private func decodeData(_ data: Data) -> Promise<KnowledgeGraphPlainObject> {
         do {
-            let decoder = JSONDecoder()
-            let knowledgeGraph = try decoder.decode(KnowledgeGraphPlainObject.self, from: data)
+            let knowledgeGraph = try JSONDecoder().decode(KnowledgeGraphPlainObject.self, from: data)
             return .value(knowledgeGraph)
         } catch let error {
-            return Promise(error: Error.decoding(message: error.localizedDescription))
-        }
-    }
-
-    /// Returns URL constructed from specified directory
-    private static func getURL(for directory: FileManager.SearchPathDirectory) -> URL {
-        if let url = FileManager.default.urls(for: directory, in: .userDomainMask).first {
-            return url
-        } else {
-            fatalError("Could not create URL for specified directory!")
+            return Promise(error: Error.unableToDecode(message: error.localizedDescription))
         }
     }
 
     enum Error: Swift.Error {
         case noDataAtPath
-        case persisting(message: String)
-        case decoding(message: String)
+        case unableToPersist(message: String)
+        case unableToDecode(message: String)
     }
 }

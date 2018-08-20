@@ -34,10 +34,6 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
         checkAuthStatus()
         fetchGraphData()
-
-        obtainGraphFromCache().done { graph in
-            print(graph)
-        }
     }
 
     func selectTopic(with viewData: TopicsViewData) {

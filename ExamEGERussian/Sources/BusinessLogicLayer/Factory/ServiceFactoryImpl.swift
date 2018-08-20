@@ -33,7 +33,8 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var graphService: GraphServiceProtocol {
-        return GraphService()
+        let fileStorage = FileStorage(destination: .atFolder(name: "knowledge-graph"))
+        return GraphService(fileStorage: fileStorage)
     }
 
     var lessonsService: LessonsService {
