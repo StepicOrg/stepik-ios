@@ -24,7 +24,9 @@ final class AdaptiveStepsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setup()
+        presenter?.refresh()
     }
 
     // MARK: - Private API

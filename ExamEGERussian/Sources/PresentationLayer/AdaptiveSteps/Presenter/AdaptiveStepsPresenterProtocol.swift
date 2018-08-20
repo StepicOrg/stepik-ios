@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AdaptiveStepsPresenterProtocol: class {
-
+    func refresh()
 }

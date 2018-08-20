@@ -19,17 +19,17 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
         let presenter = AdaptiveStepsPresenter(
             view: controller,
             courseId: courseId,
+            stepAssembly: StepAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory),
             recommendationsService: serviceFactory.recommendationsService,
-            reactionService: serviceFactory.reactionService
+            reactionService: serviceFactory.reactionService,
+            stepsService: serviceFactory.stepsService
         )
-
         controller.presenter = presenter
-        controller.title = knowledgeGraph[topicId]?.key.title
 
         return controller
     }
 
-    private func getCourseId(for topicId: String, knowledgeGraph: KnowledgeGraph) -> String? {
+    private func getCourseId(for topicId: String, knowledgeGraph: KnowledgeGraph) -> Int? {
         guard let vertex = knowledgeGraph[topicId]?.key else {
             print("Couldn't fide topic with id: \(topicId)")
             return nil
@@ -39,6 +39,6 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
             .filter { $0.type == .practice }
             .map { $0.courseId }
 
-        return Set(coursesIds).randomElement()
+        return Set(coursesIds).randomElement().flatMap { Int($0) }
     }
 }
