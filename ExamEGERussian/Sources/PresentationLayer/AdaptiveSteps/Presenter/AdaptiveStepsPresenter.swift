@@ -14,8 +14,17 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private let courseId: String
     private var stepViewController: StepViewController?
 
-    init(view: AdaptiveStepsView, courseId: String) {
+    private let recommendationsService: RecommendationsServiceProtocol
+    private let reactionService: ReactionServiceProtocol
+
+    init(view: AdaptiveStepsView,
+         courseId: String,
+         recommendationsService: RecommendationsServiceProtocol,
+         reactionService: ReactionServiceProtocol
+    ) {
         self.view = view
         self.courseId = courseId
+        self.recommendationsService = recommendationsService
+        self.reactionService = reactionService
     }
 }

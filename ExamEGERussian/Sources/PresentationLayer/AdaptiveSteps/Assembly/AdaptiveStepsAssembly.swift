@@ -16,7 +16,12 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
         }
 
         let controller = AdaptiveStepsViewController()
-        let presenter = AdaptiveStepsPresenter(view: controller, courseId: courseId)
+        let presenter = AdaptiveStepsPresenter(
+            view: controller,
+            courseId: courseId,
+            recommendationsService: serviceFactory.recommendationsService,
+            reactionService: serviceFactory.reactionService
+        )
 
         controller.presenter = presenter
         controller.title = knowledgeGraph[topicId]?.key.title

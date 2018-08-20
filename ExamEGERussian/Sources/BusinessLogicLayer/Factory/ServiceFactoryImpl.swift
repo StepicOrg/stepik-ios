@@ -20,6 +20,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     let lessonsAPI: LessonsAPI
     let stepsAPI: StepsAPI
     let progressesAPI: ProgressesAPI
+    let recommendationsAPI: RecommendationsAPI
 
     let defaultsStorageManager: DefaultsStorageManager
 
@@ -57,6 +58,14 @@ final class ServiceFactoryImpl: ServiceFactory {
         return ProgressServiceImpl(progressesAPI: progressesAPI)
     }
 
+    var recommendationsService: RecommendationsServiceProtocol {
+        return RecommendationsService(recommendationsAPI: recommendationsAPI, lessonsService: lessonsService)
+    }
+
+    var reactionService: ReactionServiceProtocol {
+        return ReactionService(recommendationsAPI: recommendationsAPI)
+    }
+
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol {
         return CacheKnowledgeGraphProvider(graphService: graphService)
     }
@@ -71,6 +80,7 @@ final class ServiceFactoryImpl: ServiceFactory {
          lessonsAPI: LessonsAPI,
          stepsAPI: StepsAPI,
          progressesAPI: ProgressesAPI,
+         recommendationsAPI: RecommendationsAPI,
          defaultsStorageManager: DefaultsStorageManager
     ) {
         self.authAPI = authAPI
@@ -81,6 +91,7 @@ final class ServiceFactoryImpl: ServiceFactory {
         self.lessonsAPI = lessonsAPI
         self.stepsAPI = stepsAPI
         self.progressesAPI = progressesAPI
+        self.recommendationsAPI = recommendationsAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
 }

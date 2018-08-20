@@ -16,6 +16,7 @@ protocol ServiceFactory: class {
     var enrollmentsAPI: EnrollmentsAPI { get }
     var lessonsAPI: LessonsAPI { get }
     var progressesAPI: ProgressesAPI { get }
+    var recommendationsAPI: RecommendationsAPI { get }
     var defaultsStorageManager: DefaultsStorageManager { get }
 
     var userRegistrationService: UserRegistrationService { get }
@@ -25,6 +26,8 @@ protocol ServiceFactory: class {
     var enrollmentService: EnrollmentService { get }
     var stepsService: StepsService { get }
     var progressService: ProgressService { get }
+    var recommendationsService: RecommendationsServiceProtocol { get }
+    var reactionService: ReactionServiceProtocol { get }
 
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol { get }
 }
