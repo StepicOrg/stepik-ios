@@ -4073,7 +4073,7 @@
 		2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */; };
 		2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */; };
 		2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF5212594580046128C /* CourseServiceMock.swift */; };
-		2CA9FDF8212594D00046128C /* PromiseReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF7212594D00046128C /* PromiseReturnable.swift */; };
+		2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF7212594D00046128C /* BaseServiceMock.swift */; };
 		2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */; };
 		2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */; };
 		2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFD212597060046128C /* ProgressServiceMock.swift */; };
@@ -6008,7 +6008,7 @@
 		2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryMock.swift; sourceTree = "<group>"; };
 		2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDF5212594580046128C /* CourseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServiceMock.swift; sourceTree = "<group>"; };
-		2CA9FDF7212594D00046128C /* PromiseReturnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseReturnable.swift; sourceTree = "<group>"; };
+		2CA9FDF7212594D00046128C /* BaseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFD212597060046128C /* ProgressServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressServiceMock.swift; sourceTree = "<group>"; };
@@ -9862,10 +9862,10 @@
 		2CA9FDF3212594040046128C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2CA9FDF7212594D00046128C /* BaseServiceMock.swift */,
 				2CA9FDF5212594580046128C /* CourseServiceMock.swift */,
 				2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */,
 				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
-				2C1351E5212C48D1009E7312 /* KnowledgeGraphProviderMock.swift */,
 				2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */,
 				2CA9FDFD212597060046128C /* ProgressServiceMock.swift */,
 				2C1351E3212C4871009E7312 /* ReactionServiceMock.swift */,
@@ -10104,8 +10104,8 @@
 				2CC8BA13210B4CBF0080BA05 /* Routers */,
 				2CA9FDF3212594040046128C /* Services */,
 				2C130EA82125B7050022E998 /* View */,
+				2C1351E5212C48D1009E7312 /* KnowledgeGraphProviderMock.swift */,
 				2CDE34B5212472AA00898A70 /* LogoutableMock.swift */,
-				2CA9FDF7212594D00046128C /* PromiseReturnable.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -16380,7 +16380,7 @@
 				2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */,
 				2C1351E4212C4871009E7312 /* ReactionServiceMock.swift in Sources */,
 				2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */,
-				2CA9FDF8212594D00046128C /* PromiseReturnable.swift in Sources */,
+				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
 				2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,

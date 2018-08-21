@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class ReactionsAPIMock: RecommendationsAPI, PromiseReturnable {
+final class ReactionsAPIMock: RecommendationsAPI {
     var resultToBeReturned: Promise<Void> = Promise(error: NSError.mockError)
 
     override func sendReaction(user userId: Int, lesson lessonId: Int, reaction: Reaction, headers: [String : String]) -> Promise<Void> {

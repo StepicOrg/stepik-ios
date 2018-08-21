@@ -9,8 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol PromiseReturnable {
-    associatedtype PromiseReturnType
-
-    var resultToBeReturned: Promise<PromiseReturnType> { get set }
+class BaseServiceMock<T> {
+    var resultToBeReturned: Promise<T> = Promise(error: NSError.mockError)
 }

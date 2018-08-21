@@ -10,9 +10,7 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class ReactionServiceMock: ReactionServiceProtocol, PromiseReturnable {
-    var resultToBeReturned: Promise<Void> = Promise(error: NSError.mockError)
-
+final class ReactionServiceMock: BaseServiceMock<Void>, ReactionServiceProtocol {
     func sendReaction(_ reaction: Reaction, forLesson lessonId: Int, byUser userId: Int) -> Promise<Void> {
         return resultToBeReturned
     }

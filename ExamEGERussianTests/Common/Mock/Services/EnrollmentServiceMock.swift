@@ -10,9 +10,7 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class EnrollmentServiceMock: EnrollmentService, PromiseReturnable {
-    var resultToBeReturned: Promise<Course> = Promise(error: NSError.mockError)
-
+final class EnrollmentServiceMock: BaseServiceMock<Course>, EnrollmentService {
     func joinCourse(_ course: Course) -> Promise<Course> {
         return resultToBeReturned
     }

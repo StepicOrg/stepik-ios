@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class RecommendationsAPIMock: RecommendationsAPI, PromiseReturnable {
+final class RecommendationsAPIMock: RecommendationsAPI {
     var resultToBeReturned: Promise<[Int]> = Promise(error: NSError.mockError)
 
     override func retrieve(course courseId: Int, count: Int, headers: [String : String]) -> Promise<[Int]> {
