@@ -64,7 +64,7 @@ final class VideoDownloaderTask: DownloaderTask {
 
     init(videoId: Int, url: URL) {
         self.videoId = videoId
-        let id = videoId.hashValue &* Int(arc4random())
+        let id = videoId.hashValue &* Int(arc4random_uniform(UInt32(Int32.max)))
         super.init(id: id, url: url, executor: nil, priority: .default)
     }
 
