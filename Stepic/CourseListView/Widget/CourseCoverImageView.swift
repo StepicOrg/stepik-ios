@@ -10,7 +10,7 @@ import UIKit
 
 extension CourseCoverImageView {
     class Appearance {
-        let placeholderImage: UIImage = #imageLiteral(resourceName: "1")
+        let placeholderImage: UIImage = #imageLiteral(resourceName: "placeholder")
         let cornerRadius: CGFloat = 0
     }
 }

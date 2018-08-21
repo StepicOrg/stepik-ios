@@ -9,13 +9,12 @@
 import UIKit
 
 extension HorizontalCourseListFlowLayout {
-    struct Appearance {
-        let pagingVelocityThreshold: CGFloat = 0.6
+    enum Paging {
+        let velocityThreshold: CGFloat = 0.6
     }
 }
 
 final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
-    let appearance: Appearance
     var rowsCount: Int
     var columnsCount: Int
 
@@ -30,7 +29,7 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         return allItemsHeight + allSpacing
     }
 
-    init(rowsCount: Int = 2, columnsCount: Int = 1, appearance: Appearance = Appearance()) {
+    init(rowsCount: Int = 2, columnsCount: Int = 1) {
         self.rowsCount = rowsCount
         self.columnsCount = columnsCount
         self.appearance = appearance
@@ -109,7 +108,7 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         let nearestPage: CGFloat = round(currentPage)
 
         var pageDiff: CGFloat = 0
-        let velocityThreshold: CGFloat = self.appearance.pagingVelocityThreshold
+        let velocityThreshold: CGFloat = Paging.velocityThreshold
         if nearestPage < currentPage {
             if velocity.x >= velocityThreshold {
                 pageDiff = 1

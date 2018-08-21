@@ -48,7 +48,7 @@ final class ProgressCircleImage {
         circle.path = UIBezierPath(
             arcCenter: CGPoint(
                 x: width / 2.0,
-                y: width  / 2.0
+                y: width / 2.0
             ),
             radius: width / 2.0 - lineWidth,
             startAngle: -CGFloat.pi / 2,

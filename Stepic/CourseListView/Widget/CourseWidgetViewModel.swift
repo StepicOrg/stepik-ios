@@ -23,5 +23,5 @@ struct CourseWidgetViewModel {
     var learnersLabelText: String
     var ratingLabelText: String
     var isAdaptive: Bool
-    var progress: CourseWidgetProgressViewModel? = nil
+    var progress: CourseWidgetProgressViewModel?
 }

@@ -22,7 +22,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
     private var previousAllItemsOffset: CGFloat?
 
     override var contentWidth: CGFloat {
-        let allItemsWidth = self.itemSize.width  * CGFloat(self.columnsCount)
+        let allItemsWidth = self.itemSize.width * CGFloat(self.columnsCount)
         let flowInsets = 2 * self.minimumInteritemSpacing
         return allItemsWidth + flowInsets
     }
