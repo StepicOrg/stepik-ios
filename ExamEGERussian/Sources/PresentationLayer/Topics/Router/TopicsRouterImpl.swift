@@ -25,7 +25,7 @@ final class TopicsRouterImpl: BaseRouter, TopicsRouter {
     }
 
     func showAdaptiveForTopicWithId(_ id: String) {
-        if let module = assemblyFactory.adaptiveStepsAssembly.module(topicId: id) {
+        if let module = assemblyFactory.stepsAssembly.adaptive.module(topicId: id) {
             pushViewController(derivedFrom: { _ in
                 module
             })

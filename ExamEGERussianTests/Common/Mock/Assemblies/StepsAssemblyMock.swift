@@ -9,7 +9,7 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class StepsAssemblyMock: StepsAssembly {
+final class StepsAssemblyMock: StandartStepsAssemblyProtocol {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController {
         return MockAssemblyViewController()
     }

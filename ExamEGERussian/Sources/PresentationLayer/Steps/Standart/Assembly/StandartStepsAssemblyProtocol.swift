@@ -1,5 +1,5 @@
 //
-//  StepsAssembly.swift
+//  StandartStepsAssemblyProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 02/08/2018.
@@ -9,6 +9,6 @@
 import Foundation
 import UIKit.UINavigationController
 
-protocol StepsAssembly: class {
+protocol StandartStepsAssemblyProtocol: class {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController
 }

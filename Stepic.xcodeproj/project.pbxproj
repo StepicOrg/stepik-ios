@@ -1197,6 +1197,8 @@
 		2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA92125B71B0022E998 /* MockTableViewCell.swift */; };
 		2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */; };
 		2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EB22125BE770022E998 /* BaseRouterTests.swift */; };
+		2C1351DE212C43C8009E7312 /* StepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */; };
+		2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351DF212C43D1009E7312 /* StepsAssembly.swift */; };
 		2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFD8212A9D05000D2765 /* FileStorage.swift */; };
 		2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */; };
 		2C14DFE6212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */; };
@@ -2881,8 +2883,8 @@
 		2C9492C821130F7C00552600 /* CourseServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */; };
 		2C9492C921130FC100552600 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C9492CD2113119100552600 /* StepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CC2113119100552600 /* StepsAssembly.swift */; };
-		2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */; };
+		2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */; };
+		2C9492CF2113119E00552600 /* StandartStepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */; };
 		2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		2C94998C20ECB71D0049E9A8 /* IDFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E49DC2072B684004896C0 /* IDFetchable.swift */; };
 		2C94998D20ECB7350049E9A8 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -5724,6 +5726,8 @@
 		2C130EA92125B71B0022E998 /* MockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewCell.swift; sourceTree = "<group>"; };
 		2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		2C130EB22125BE770022E998 /* BaseRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouterTests.swift; sourceTree = "<group>"; };
+		2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C1351DF212C43D1009E7312 /* StepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssembly.swift; sourceTree = "<group>"; };
 		2C14DFD8212A9D05000D2765 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphProviderProtocol.swift; sourceTree = "<group>"; };
 		2C14DFE4212AC9D8000D2765 /* CacheKnowledgeGraphProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKnowledgeGraphProvider.swift; sourceTree = "<group>"; };
@@ -5948,8 +5952,8 @@
 		2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRemoteConfig.swift; sourceTree = "<group>"; };
 		2C9295062035D8FC0058D18C /* AdaptiveCoursesInfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCoursesInfoAPI.swift; sourceTree = "<group>"; };
 		2C9492C521130E6600552600 /* StepPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
-		2C9492CC2113119100552600 /* StepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssembly.swift; sourceTree = "<group>"; };
-		2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyImpl.swift; sourceTree = "<group>"; };
+		2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartStepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartStepsAssembly.swift; sourceTree = "<group>"; };
 		2C966D5B20F8078000DECF6D /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
@@ -8710,6 +8714,15 @@
 			path = Standart;
 			sourceTree = "<group>";
 		};
+		2C1351DC212C4305009E7312 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C1351DF212C43D1009E7312 /* StepsAssembly.swift */,
+				2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		2C14DFD5212A9C16000D2765 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -9645,6 +9658,7 @@
 		2C83E5E52110600200A8322D /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				2C1351DC212C4305009E7312 /* Assembly */,
 				2C15BC3D212AE0CC00AB1015 /* Adaptive */,
 				2C1351DB212C4282009E7312 /* Standart */,
 			);
@@ -9712,8 +9726,8 @@
 		2C9492CB2113117B00552600 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2C9492CC2113119100552600 /* StepsAssembly.swift */,
-				2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */,
+				2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */,
+				2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -16010,6 +16024,7 @@
 				2C093F0F211B43DB00162DD0 /* Alerts.swift in Sources */,
 				2C093F27211B462B00162DD0 /* ChoiceQuizViewController.swift in Sources */,
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,
+				2C1351DE212C43C8009E7312 /* StepsAssemblyProtocol.swift in Sources */,
 				2C9499E220ECBE650049E9A8 /* NSDateExtensions.swift in Sources */,
 				2C0107A0210F39A0009A53DF /* CreateRequestMaker.swift in Sources */,
 				2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */,
@@ -16024,6 +16039,7 @@
 				2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */,
 				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
+				2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
 				2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,
@@ -16108,7 +16124,7 @@
 				2C9499B920ECBB150049E9A8 /* Certificate+CoreDataProperties.swift in Sources */,
 				2CA5568F212339E200A3B1AB /* Constants.swift in Sources */,
 				2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */,
-				2C9492CD2113119100552600 /* StepsAssembly.swift in Sources */,
+				2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
@@ -16253,7 +16269,7 @@
 				2C4B6A6D212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C093F17211B445900162DD0 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
-				2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */,
+				2C9492CF2113119E00552600 /* StandartStepsAssembly.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
 				2C33CBE820EC3160009956B0 /* AnalyticsEvents.swift in Sources */,
 				2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */,

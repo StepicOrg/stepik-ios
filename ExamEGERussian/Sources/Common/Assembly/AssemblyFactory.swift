@@ -14,6 +14,5 @@ protocol AssemblyFactory: class {
     var authAssembly: AuthAssembly { get }
     var topicsAssembly: TopicsAssembly { get }
     var lessonsAssembly: LessonsAssembly { get }
-    var stepsAssembly: StepsAssembly { get }
-    var adaptiveStepsAssembly: AdaptiveStepsAssemblyProtocol { get }
+    var stepsAssembly: StepsAssemblyProtocol { get }
 }

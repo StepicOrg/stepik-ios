@@ -1,5 +1,5 @@
 //
-//  StepsAssemblyImpl.swift
+//  StandartStepsAssembly.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 02/08/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit.UINavigationController
 
-final class StepsAssemblyImpl: BaseAssembly, StepsAssembly {
+final class StandartStepsAssembly: BaseAssembly, StandartStepsAssemblyProtocol {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController {
         let stepAssemby = StepAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
         let dataSource = StepsPagerDataSourceImpl(lesson: lesson, assembly: stepAssemby)

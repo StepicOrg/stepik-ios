@@ -25,12 +25,8 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return LessonsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var stepsAssembly: StepsAssembly {
-        return StepsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
-    }
-
-    var adaptiveStepsAssembly: AdaptiveStepsAssemblyProtocol {
-        return AdaptiveStepsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
+    var stepsAssembly: StepsAssemblyProtocol {
+        return StepsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     private let serviceFactory: ServiceFactory
