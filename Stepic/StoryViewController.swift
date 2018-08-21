@@ -138,11 +138,11 @@ extension StoryViewController: StoryViewProtocol {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
+
     override var shouldAutorotate: Bool {
         return false
     }
-    
+
     func animate(view: UIView & UIStoryPartViewProtocol) {
         if view.isDescendant(of: partsContainerView) {
             partsContainerView.bringSubview(toFront: view)
