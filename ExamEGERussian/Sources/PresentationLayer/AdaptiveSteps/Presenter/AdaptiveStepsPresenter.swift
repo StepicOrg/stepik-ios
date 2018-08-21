@@ -49,32 +49,51 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     }
 
     func refresh() {
-        var lesson: LessonPlainObject?
-        var title = ""
+        startRecommendationPipeline()
+    }
 
+    private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
+        guard let lessonId = currentStep?.lessonId,
+              let user = AuthInfo.shared.user else {
+            return Promise(error: AdaptiveStepsError.reactionNotSent)
+        }
+
+        return reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id)
+    }
+
+    // MARK: - Types
+
+    enum AdaptiveStepsError: Error {
+        case noStepsInLesson
+        case recommendationsNotLoaded
+        case stepNotLoaded
+        case unknown
+        case reactionNotSent
+        case viewNotSent
+        case coursePassed
+    }
+}
+
+// MARK: - AdaptiveStepsPresenter (Recommendations) -
+
+extension AdaptiveStepsPresenter {
+    private func startRecommendationPipeline() {
+        var lesson: LessonPlainObject?
         view?.state = .fetching
 
         joinCourseUseCase.joinCourses([courseId]).then { _ in
-            self.getNewRecommendation(for: self.courseId)
+            self.getRecommendation(for: self.courseId)
         }.then { recommendation -> Promise<StepPlainObject> in
             lesson = recommendation
-            title = recommendation.title
             return self.getStep(for: recommendation)
         }.then { [weak self] step -> Promise<Void> in
             guard let strongSelf = self,
-                  let lesson = lesson else {
-                throw AdaptiveStepsError.unknown
-            }
-
-            let newStepViewController = strongSelf.buildStepViewController(for: step, lesson: lesson)
-            if let stepViewController = strongSelf.stepViewController {
-                strongSelf.view?.removeContentController(stepViewController)
+                let lesson = lesson else {
+                    throw AdaptiveStepsError.unknown
             }
 
             strongSelf.currentStep = step
-            strongSelf.stepViewController = newStepViewController
-            strongSelf.view?.addContentController(newStepViewController)
-            strongSelf.view?.updateTitle(title)
+            strongSelf.showStepViewController(for: step, lesson: lesson)
 
             return strongSelf.sendStepViewUseCase.sendView(for: step)
         }.done {
@@ -100,50 +119,35 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         }
     }
 
-    private func getNewRecommendation(for courseId: Int) -> Promise<LessonPlainObject> {
-        print("\(#function): cached lessons = \(cachedRecommendedLessons.map { $0.id })")
-
-        let batchSize = AdaptiveStepsPresenter.recommendationsBatchSize
-        let nextBatchThreshold = AdaptiveStepsPresenter.nextRecommendationsBatchThreshold
-
+    private func getRecommendation(for courseId: Int) -> Promise<LessonPlainObject> {
         return Promise { seal in
             if self.cachedRecommendedLessons.isEmpty {
-                print("\(#function): no recommendations -> loading \(batchSize) lessons")
-
                 self.fetchRecommendations().done { lessons in
                     guard let lesson = lessons.first else {
                         return seal.reject(AdaptiveStepsError.coursePassed)
                     }
 
                     self.cachedRecommendedLessons = Array(lessons.suffix(from: 1))
-
-                    print("\(#function): recommendations -> using lesson = \(lesson.id)")
                     seal.fulfill(lesson)
                 }.catch { error in
                     seal.reject(error)
                 }
             } else {
-                print("\(#function): recommendations loaded (count = \(self.cachedRecommendedLessons.count)), using loaded lesson")
-
                 guard let lesson = self.cachedRecommendedLessons.first else {
                     return seal.reject(AdaptiveStepsError.coursePassed)
                 }
 
                 self.cachedRecommendedLessons.removeFirst()
-
-                print("\(#function)': recommendations -> preloaded lesson = \(lesson.id)")
                 seal.fulfill(lesson)
 
-                if self.cachedRecommendedLessons.count < nextBatchThreshold {
-                    print("\(#function): recommendations loaded, loading next \(batchSize) lessons")
+                if self.cachedRecommendedLessons.count < AdaptiveStepsPresenter.nextRecommendationsBatchThreshold {
                     self.fetchRecommendations().done { lessons in
                         var existingLessons = self.cachedRecommendedLessons.map { $0.id }
                         existingLessons.append(lesson.id)
-                        lessons.forEach { lesson in
-                            if !existingLessons.contains(lesson.id) {
-                                self.cachedRecommendedLessons.append(lesson)
-                            }
-                        }
+
+                        self.cachedRecommendedLessons.append(contentsOf: lessons.filter {
+                            !existingLessons.contains($0.id)
+                        })
                     }.catch { error in
                         print("\(#function): error while loading next recommendations batch: \(error)")
                     }
@@ -175,39 +179,27 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
             }
         }
     }
+}
+
+// MARK: - AdaptiveStepsPresenter (StepViewController) -
+
+extension AdaptiveStepsPresenter {
+    private func showStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) {
+        let newStepViewController = buildStepViewController(for: step, lesson: lesson)
+        if let stepViewController = stepViewController {
+            view?.removeContentController(stepViewController)
+        }
+
+        stepViewController = newStepViewController
+        view?.addContentController(newStepViewController)
+        view?.updateTitle(lesson.title)
+    }
 
     private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> UIViewController {
         let builder = QuizViewControllerBuilder().setNeedNewAttempt(true)
         let seed = StepModuleSeed(lesson: lesson, step: step, quizViewControllerBuilder: builder, stepPresenterDelegate: self)
 
         return stepAssembly.module(seed: seed)
-    }
-
-    private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
-        guard let lessonId = currentStep?.lessonId,
-              let user = AuthInfo.shared.user else {
-            return Promise(error: AdaptiveStepsError.reactionNotSent)
-        }
-
-        return reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id)
-    }
-
-    // MARK: - Types
-
-    enum AdaptiveStepsError: Error {
-        case noStepsInLesson
-        case recommendationsNotLoaded
-        case stepNotLoaded
-        case unknown
-        case reactionNotSent
-        case viewNotSent
-        case registrationFailed
-        case notLoggedIn
-        case noProfile
-        case notUnsubscribed
-        case noCourse
-        case notEnrolled
-        case coursePassed
     }
 }
 
@@ -216,6 +208,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 extension AdaptiveStepsPresenter: StepPresenterDelegate {
     func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
         currentStep?.isPassed = true
+
         sendReaction(.solved).done {
             self.refresh()
         }.catch { error in
