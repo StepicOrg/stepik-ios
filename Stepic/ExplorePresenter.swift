@@ -24,6 +24,7 @@ protocol ExploreView: class {
     func updateTagsLanguage(language: ContentLanguage)
 
     func setStories()
+    func hideStories()
 
     func updateCourseCount(to: Int, forBlockWithID: String)
     func updateSearchQuery(to: String)
@@ -330,6 +331,12 @@ class ExplorePresenter: CourseListCountDelegate {
 
     func updateCourseCount(to: Int, forListID: String) {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
+    }
+}
+
+extension ExplorePresenter: StoriesRefreshDelegate {
+    func refreshedEmpty() {
+        view?.hideStories()
     }
 }
 

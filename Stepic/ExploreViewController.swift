@@ -132,8 +132,25 @@ class ExploreViewController: UIViewController, ExploreView {
         return self.navigationController
     }
 
+    var storiesWidgetView: UIView?
+
+    func hideStories() {
+        if let storiesWidgetView = storiesWidgetView {
+            storiesWidgetView.isHidden = true
+            stackView.removeArrangedSubview(storiesWidgetView)
+            stackView.setNeedsLayout()
+            UIView.animate(withDuration: 0.15, animations: {
+                self.stackView.layoutIfNeeded()
+            })
+            self.storiesWidgetView = nil
+        }
+    }
+
     func setStories() {
-        let storiesModule = StoriesAssembly().makeModule()
+        guard let presenter = self.presenter else {
+            return
+        }
+        let storiesModule = StoriesAssembly(refreshDelegate: presenter).makeModule()
         addChildViewController(storiesModule)
         let widgetBackgroundView = UIView()
         widgetBackgroundView.backgroundColor = UIColor.white
@@ -156,7 +173,7 @@ class ExploreViewController: UIViewController, ExploreView {
         }
         widgetBackgroundView.isHidden = false
         stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
-        widgetBackgroundView.addSubview(storiesModule.view)
+        storiesWidgetView = widgetBackgroundView
     }
 
     func setLanguages(withLanguages languages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void) {

@@ -9,7 +9,7 @@
 import UIKit
 
 class StoryPartViewFactory {
-    func buildView(storyPart: StoryPart) -> (UIView & UIStoryPartViewProtocol)? {
+    func makeView(storyPart: StoryPart) -> (UIView & UIStoryPartViewProtocol)? {
         guard let type = storyPart.type else {
             return nil
         }

@@ -80,8 +80,10 @@ class StoryPresenter: StoryPresenterProtocol {
             view?.animate(view: viewToAnimate)
             view?.animateProgress(segment: partToAnimate, duration: animatingStoryPart.duration)
         } else {
-            var viewToAnimate = storyPartViewFactory.buildView(storyPart: animatingStoryPart)
-            viewToAnimate?.completion = {
+            guard var viewToAnimate = storyPartViewFactory.makeView(storyPart: animatingStoryPart) else {
+                return
+            }
+            viewToAnimate.completion = {
                 [weak self] in
                 guard let strongSelf = self else {
                     return
@@ -90,9 +92,7 @@ class StoryPresenter: StoryPresenterProtocol {
                     strongSelf.view?.animateProgress(segment: strongSelf.partToAnimate, duration: animatingStoryPart.duration)
                 }
             }
-            if let viewToAnimate = viewToAnimate {
-                view?.animate(view: viewToAnimate)
-            }
+            view?.animate(view: viewToAnimate)
         }
     }
 

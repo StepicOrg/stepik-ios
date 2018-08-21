@@ -15,8 +15,8 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
 
     var presenter: StoriesPresenterProtocol?
 
-    var stories: [Story] = []
-    var currentItemFrame: CGRect?
+    private var stories: [Story] = []
+    private var currentItemFrame: CGRect?
 
     @IBOutlet weak var collectionView: UICollectionView!
 

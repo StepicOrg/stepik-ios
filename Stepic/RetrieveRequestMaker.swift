@@ -37,11 +37,13 @@ class RetrieveRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, params: Parameters, updatingObjects: [T] = [], withManager manager: Alamofire.SessionManager) -> Promise<([T], Meta, JSON)> {
         return Promise { seal in
             checkToken().done {
+                print("GET request \(StepicApplicationsInfo.apiURL)/\(requestEndpoint) with parameters \(params)")
                 manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .get, parameters: params, encoding: URLEncoding.default).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
                     case .success(let json):
+                        print(json)
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map {
                             objectJSON in
