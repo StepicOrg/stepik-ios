@@ -36,16 +36,12 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
 
     private weak var stepView: UIView?
 
-    // MARK: - UIViewController Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         presenter?.refresh()
     }
-
-    // MARK: - Private API
 
     private func setup() {
         view.backgroundColor = .white

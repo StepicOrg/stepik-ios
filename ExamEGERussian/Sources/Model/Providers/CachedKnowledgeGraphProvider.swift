@@ -1,5 +1,5 @@
 //
-//  CacheKnowledgeGraphProvider.swift
+//  CachedKnowledgeGraphProvider.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 20/08/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class CacheKnowledgeGraphProvider: KnowledgeGraphProviderProtocol {
+final class CachedKnowledgeGraphProvider: KnowledgeGraphProviderProtocol {
     var knowledgeGraph: KnowledgeGraph {
         return obtainKnowledgeGraph()
     }

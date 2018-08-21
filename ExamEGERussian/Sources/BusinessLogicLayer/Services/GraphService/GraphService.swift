@@ -37,7 +37,7 @@ final class GraphService: GraphServiceProtocol {
             return decodeData(data)
         }
 
-        return Promise(error: Error.noDataAtPath)
+        return Promise(error: GraphServiceError.noDataAtPath)
     }
 
     private func persistData(_ data: Data) -> Promise<Data> {
@@ -53,11 +53,11 @@ final class GraphService: GraphServiceProtocol {
             let knowledgeGraph = try JSONDecoder().decode(KnowledgeGraphPlainObject.self, from: data)
             return .value(knowledgeGraph)
         } catch let error {
-            return Promise(error: Error.unableToDecode(message: error.localizedDescription))
+            return Promise(error: GraphServiceError.unableToDecode(message: error.localizedDescription))
         }
     }
 
-    enum Error: Swift.Error {
+    enum GraphServiceError: Error {
         case noDataAtPath
         case unableToPersist(message: String)
         case unableToDecode(message: String)

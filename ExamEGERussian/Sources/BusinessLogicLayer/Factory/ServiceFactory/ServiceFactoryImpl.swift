@@ -9,8 +9,7 @@
 import Foundation
 
 final class ServiceFactoryImpl: ServiceFactory {
-
-    // MARK: - ServiceFactory -
+    private static let knowledgeGraphDirectoryName = "knowledge-graph"
 
     let authAPI: AuthAPI
     let stepicsAPI: StepicsAPI
@@ -36,7 +35,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var graphService: GraphServiceProtocol {
-        let fileStorage = FileStorage(destination: .atFolder(name: "knowledge-graph"))
+        let fileStorage = FileStorage(destination: .atFolder(name: ServiceFactoryImpl.knowledgeGraphDirectoryName))
         return GraphService(fileStorage: fileStorage)
     }
 
@@ -69,7 +68,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol {
-        return CacheKnowledgeGraphProvider(graphService: graphService)
+        return CachedKnowledgeGraphProvider(graphService: graphService)
     }
 
     // MARK: - Init -

@@ -96,17 +96,15 @@ final class StepsServiceImpl: StepsService {
         return executeFetchRequest(ids: ids).then {
             self.stepsAPI.retrieve(ids: ids, existing: $0)
         }.then { steps in
-            self.setLessonConnectionsIfNeeded(for: steps)
+            self.connectWithLessonIfNeeded(for: steps)
         }
     }
 
-    private func setLessonConnectionsIfNeeded(for steps: [Step]) -> Promise<[Step]> {
-        return Promise { seal in
-            steps.filter { $0.lesson == nil }
-                .forEach { $0.lesson = Lesson.getLesson($0.lessonId) }
+    private func connectWithLessonIfNeeded(for steps: [Step]) -> Promise<[Step]> {
+        steps.filter { $0.lesson == nil }
+             .forEach { $0.lesson = Lesson.getLesson($0.lessonId) }
 
-            seal.fulfill(steps)
-        }
+        return .value(steps)
     }
 
     private func executeFetchRequest(ids: [Int]) -> Promise<[Step]> {

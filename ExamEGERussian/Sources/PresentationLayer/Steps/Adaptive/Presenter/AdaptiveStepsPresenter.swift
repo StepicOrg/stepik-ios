@@ -49,7 +49,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     }
 
     func refresh() {
-        startRecommendationPipeline()
+        startRecommendationsPipeline()
     }
 
     private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
@@ -77,7 +77,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 // MARK: - AdaptiveStepsPresenter (Recommendations) -
 
 extension AdaptiveStepsPresenter {
-    private func startRecommendationPipeline() {
+    private func startRecommendationsPipeline() {
         var lesson: LessonPlainObject?
         view?.state = .fetching
 

@@ -21,12 +21,12 @@ final class SendStepViewUseCase: SendStepViewUseCaseProtocol {
     func sendView(for step: StepPlainObject) -> Promise<Void> {
         return Promise { seal in
             guard let lesson = Lesson.getLesson(step.lessonId) else {
-                throw Error.viewNotSent
+                throw SendStepViewUseCaseError.viewNotSent
             }
 
             self.unitsAPI.retrieve(lesson: lesson.id).then { unit -> Promise<Void> in
                 guard let assignmentId = unit.assignmentsArray.first else {
-                    seal.reject(Error.viewNotSent)
+                    seal.reject(SendStepViewUseCaseError.viewNotSent)
                     return .value(())
                 }
 
@@ -34,12 +34,12 @@ final class SendStepViewUseCase: SendStepViewUseCaseProtocol {
             }.done { _ in
                 seal.fulfill(())
             }.catch { _ in
-                seal.reject(Error.viewNotSent)
+                seal.reject(SendStepViewUseCaseError.viewNotSent)
             }
         }
     }
 
-    enum Error: Swift.Error {
+    enum SendStepViewUseCaseError: Error {
         case viewNotSent
     }
 }
