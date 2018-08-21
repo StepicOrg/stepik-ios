@@ -15,22 +15,23 @@ final class StepPresenterImpl: StepPresenter {
 
     private(set) var step: StepPlainObject
     private let lesson: LessonPlainObject
-    private let needNewAttempt: Bool
+    private let quizViewControllerBuilder: QuizViewControllerBuilder
     private var quizViewController: QuizViewController?
+
     private let stepsService: StepsService
 
     init(view: StepView,
          step: StepPlainObject,
          lesson: LessonPlainObject,
-         needNewAttempt: Bool,
          router: StepRouterProtocol,
+         quizViewControllerBuilder: QuizViewControllerBuilder,
          delegate: StepPresenterDelegate?,
          stepsService: StepsService
     ) {
         self.view = view
         self.step = step
         self.lesson = lesson
-        self.needNewAttempt = needNewAttempt
+        self.quizViewControllerBuilder = quizViewControllerBuilder
         self.router = router
         self.delegate = delegate
         self.stepsService = stepsService
@@ -60,12 +61,7 @@ extension StepPresenterImpl {
     }
 
     private func showQuizViewController() {
-        let builder = QuizViewControllerBuilder()
-            .setStepType(step.type)
-            .setLogoutable(self)
-            .setNeedNewAttempt(needNewAttempt)
-
-        quizViewController = builder.build()
+        quizViewController = quizViewControllerBuilder.build()
         guard let quizViewController = quizViewController else {
             return showUnknownQuizTypeContent()
         }

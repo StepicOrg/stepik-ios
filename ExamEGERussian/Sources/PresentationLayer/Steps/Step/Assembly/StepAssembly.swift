@@ -6,20 +6,23 @@
 import Foundation
 
 protocol StepAssembly: class {
-    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool,
-                stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController
+    func module(seed: StepModuleSeed) -> UIViewController
 }
 
-extension StepAssembly {
-    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool) -> UIViewController {
-        return module(lesson: lesson, step: step, needNewAttempt: needNewAttempt, stepPresenterDelegate: nil)
-    }
+class StepModuleSeed {
+    let lesson: LessonPlainObject
+    let step: StepPlainObject
+    let quizViewControllerBuilder: QuizViewControllerBuilder
+    weak var stepPresenterDelegate: StepPresenterDelegate?
 
-    func module(lesson: LessonPlainObject, step: StepPlainObject, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
-        return module(lesson: lesson, step: step, needNewAttempt: false, stepPresenterDelegate: stepPresenterDelegate)
-    }
-
-    func module(lesson: LessonPlainObject, step: StepPlainObject) -> UIViewController {
-        return module(lesson: lesson, step: step, needNewAttempt: false, stepPresenterDelegate: nil)
+    init(lesson: LessonPlainObject,
+         step: StepPlainObject,
+         quizViewControllerBuilder: QuizViewControllerBuilder = QuizViewControllerBuilder(),
+         stepPresenterDelegate: StepPresenterDelegate? = nil
+    ) {
+        self.lesson = lesson
+        self.step = step
+        self.quizViewControllerBuilder = quizViewControllerBuilder
+        self.stepPresenterDelegate = stepPresenterDelegate
     }
 }

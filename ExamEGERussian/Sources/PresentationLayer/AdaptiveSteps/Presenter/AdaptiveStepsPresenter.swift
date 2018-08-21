@@ -64,15 +64,14 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 throw AdaptiveStepsError.unknown
             }
 
-            let newStepController = strongSelf.stepAssembly.module(lesson: lesson, step: step, needNewAttempt: true)
-            
+            let newStepViewController = strongSelf.buildStepViewController(for: step, lesson: lesson)
             if let stepViewController = strongSelf.stepViewController {
                 strongSelf.view?.removeContentController(stepViewController)
             }
 
             strongSelf.currentStep = step
-            strongSelf.stepViewController = newStepController
-            strongSelf.view?.addContentController(newStepController)
+            strongSelf.stepViewController = newStepViewController
+            strongSelf.view?.addContentController(newStepViewController)
             strongSelf.view?.updateTitle(title)
 
             return strongSelf.sendStepViewUseCase.sendView(for: step)
@@ -131,7 +130,7 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                             }
                         }
                     }.catch { error in
-                        print("\(#function): error while loading next recommendations batch: \(error.localizedDescription)")
+                        print("\(#function): error while loading next recommendations batch: \(error)")
                     }
                 }
             }
@@ -156,10 +155,17 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                     seal.reject(AdaptiveStepsError.noStepsInLesson)
                 }
             }.catch { error in
-                print("\(#function): Failed to obtain step with id: \(stepId); error: \(error.localizedDescription)")
+                print("\(#function): Failed to obtain step with id: \(stepId); error: \(error)")
                 seal.reject(AdaptiveStepsError.stepNotLoaded)
             }
         }
+    }
+
+    private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> UIViewController {
+        let builder = QuizViewControllerBuilder().setNeedNewAttempt(true)
+        let seed = StepModuleSeed(lesson: lesson, step: step, quizViewControllerBuilder: builder, stepPresenterDelegate: self)
+
+        return stepAssembly.module(seed: seed)
     }
 
     private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
@@ -187,5 +193,18 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         case noCourse
         case notEnrolled
         case coursePassed
+    }
+}
+
+// MARK: - AdaptiveStepsPresenter: StepPresenterDelegate -
+
+extension AdaptiveStepsPresenter: StepPresenterDelegate {
+    func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
+        currentStep?.isPassed = true
+        sendReaction(.solved).done {
+            self.refresh()
+        }.catch { error in
+            print("\(#function): error: \(error)")
+        }
     }
 }

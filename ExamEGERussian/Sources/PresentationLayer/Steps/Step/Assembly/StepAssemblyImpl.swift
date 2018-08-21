@@ -6,19 +6,28 @@
 import Foundation
 
 final class StepAssemblyImpl: BaseAssembly, StepAssembly {
-    func module(lesson: LessonPlainObject, step: StepPlainObject, needNewAttempt: Bool, stepPresenterDelegate: StepPresenterDelegate?) -> UIViewController {
+    func module(seed: StepModuleSeed) -> UIViewController {
         let controller = StepViewController()
         let router = StepRouter(viewController: controller, authAssembly: assemblyFactory.authAssembly)
+
+        let builder = seed.quizViewControllerBuilder
         let presenter = StepPresenterImpl(
             view: controller,
-            step: step,
-            lesson: lesson,
-            needNewAttempt: needNewAttempt,
+            step: seed.step,
+            lesson: seed.lesson,
             router: router,
-            delegate: stepPresenterDelegate,
+            quizViewControllerBuilder: builder,
+            delegate: seed.stepPresenterDelegate,
             stepsService: serviceFactory.stepsService
         )
         controller.presenter = presenter
+
+        if builder.logoutable == nil {
+            _ = builder.setLogoutable(presenter)
+        }
+        if builder.stepType == nil {
+            _ = builder.setStepType(seed.step.type)
+        }
 
         return controller
     }

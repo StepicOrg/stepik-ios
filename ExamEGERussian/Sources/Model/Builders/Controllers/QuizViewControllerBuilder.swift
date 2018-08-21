@@ -9,9 +9,9 @@
 import Foundation
 
 final class QuizViewControllerBuilder {
-    private weak var logoutable: Logoutable?
-    private var stepType: StepPlainObject.StepType?
-    private var needNewAttempt = false
+    private(set) weak var logoutable: Logoutable?
+    private(set) var stepType: StepPlainObject.StepType?
+    private(set) var needNewAttempt = false
 
     func setStepType(_ stepType: StepPlainObject.StepType) -> QuizViewControllerBuilder {
         self.stepType = stepType
