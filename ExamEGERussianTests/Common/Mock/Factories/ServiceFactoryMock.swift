@@ -24,6 +24,12 @@ final class ServiceFactoryMock: ServiceFactory {
 
     let progressesAPI: ProgressesAPI
 
+    var recommendationsAPI: RecommendationsAPI
+
+    var unitsAPI: UnitsAPI
+
+    var viewsAPI: ViewsAPI
+
     let defaultsStorageManager: DefaultsStorageManager
 
     let userRegistrationService: UserRegistrationService
@@ -40,6 +46,12 @@ final class ServiceFactoryMock: ServiceFactory {
 
     let progressService: ProgressService
 
+    var recommendationsService: RecommendationsServiceProtocol
+
+    var reactionService: ReactionServiceProtocol
+
+    var knowledgeGraphProvider: KnowledgeGraphProviderProtocol
+
     init() {
         self.authAPI = AuthAPI()
         self.stepicsAPI = StepicsAPI()
@@ -48,6 +60,9 @@ final class ServiceFactoryMock: ServiceFactory {
         self.enrollmentsAPI = EnrollmentsAPI()
         self.lessonsAPI = LessonsAPI()
         self.progressesAPI = ProgressesAPI()
+        self.recommendationsAPI = RecommendationsAPI()
+        self.unitsAPI = UnitsAPI()
+        self.viewsAPI = ViewsAPI()
         self.defaultsStorageManager = DefaultsStorageManager.shared
         self.userRegistrationService = UserRegistrationServiceMock()
         self.graphService = GraphServiceMock()
@@ -56,5 +71,8 @@ final class ServiceFactoryMock: ServiceFactory {
         self.enrollmentService = EnrollmentServiceMock()
         self.stepsService = StepsServiceMock()
         self.progressService = ProgressServiceMock()
+        self.recommendationsService = RecommendationsServiceMock()
+        self.reactionService = ReactionServiceMock()
+        self.knowledgeGraphProvider = KnowledgeGraphProviderMock()
     }
 }

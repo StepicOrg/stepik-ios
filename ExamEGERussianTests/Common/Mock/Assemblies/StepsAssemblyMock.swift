@@ -9,8 +9,21 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class StepsAssemblyMock: StandartStepsAssemblyProtocol {
+final class StepsAssemblyMock: StepsAssemblyProtocol {
+    var standart: StandartStepsAssemblyProtocol = StandartStepsAssemblyMock()
+    var adaptive: AdaptiveStepsAssemblyProtocol = AdaptiveStepsAssemblyMock()
+}
+
+final class StandartStepsAssemblyMock: StandartStepsAssemblyProtocol {
     func module(navigationController: UINavigationController, lesson: LessonPlainObject) -> UIViewController {
         return MockAssemblyViewController()
+    }
+}
+
+final class AdaptiveStepsAssemblyMock: AdaptiveStepsAssemblyProtocol {
+    var viewControllerToReturn: UIViewController?
+
+    func module(topicId: String) -> UIViewController? {
+        return viewControllerToReturn
     }
 }
