@@ -157,7 +157,7 @@ extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
 
         let story = stories[indexPath.item]
-        cell.update(imagePath: story.coverPath, title: story.title, isWatched: story.isViewed.value ?? true)
+        cell.update(imagePath: story.coverPath, title: story.title, isWatched: story.isViewed.value)
         return cell
     }
 }

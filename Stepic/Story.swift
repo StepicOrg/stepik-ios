@@ -15,7 +15,7 @@ class Story: JSONSerializable {
         self.coverPath = json["cover"].stringValue
         self.title = json["title"].stringValue
         self.parts = json["parts"].arrayValue.map { StoryPart(json: $0) }
-        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)")
+        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
     }
 
     var id: Int
@@ -24,19 +24,11 @@ class Story: JSONSerializable {
     var isViewed: CachedValue<Bool>
     var parts: [StoryPart]
 
-    init(id: Int, coverPath: String, title: String, isViewed: Bool, parts: [StoryPart]) {
-        self.id = id
-        self.coverPath = coverPath
-        self.title = title
-        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", value: isViewed)
-        self.parts = parts
-    }
-
     required init(json: JSON) {
         self.id = json["id"].intValue
         self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json["cover"].stringValue)
         self.title = json["title"].stringValue
-        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)")
+        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
         self.parts = json["parts"].arrayValue.compactMap {
             Story.buildStoryPart(json: $0)
         }

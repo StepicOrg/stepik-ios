@@ -14,13 +14,14 @@ class CachedValue<T> {
     private let key: String
 
     private var privateValue: T?
+    private var defaultValue: T
 
-    var value: T? {
+    var value: T {
         get {
             if privateValue == nil {
                 privateValue = defaults.value(forKey: key) as? T
             }
-            return privateValue
+            return privateValue ?? defaultValue
         }
         set {
             defaults.set(newValue, forKey: key)
@@ -28,12 +29,13 @@ class CachedValue<T> {
         }
     }
 
-    init(key: String) {
+    init(key: String, defaultValue: T) {
         self.key = key
+        self.defaultValue = defaultValue
     }
 
-    init(key: String, value: T?) {
-        self.key = key
+    convenience init(key: String, value: T, defaultValue: T) {
+        self.init(key: key, defaultValue: defaultValue)
         self.value = value
     }
 }
