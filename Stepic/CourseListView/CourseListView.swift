@@ -125,7 +125,7 @@ final class CourseListView: UIView {
         _ orientation: Orientation
     ) -> UICollectionViewFlowLayout {
         switch self.orientation {
-        case .horizontal(_, _):
+        case .horizontal:
             return self.horizontalCourseFlowLayout
         case .vertical:
             return self.verticalCourseFlowLayout
