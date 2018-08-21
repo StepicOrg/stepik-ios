@@ -52,6 +52,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         var lesson: LessonPlainObject?
         var title = ""
 
+        view?.state = .fetching
+
         joinCourseUseCase.joinCourses([courseId]).then { _ in
             self.getNewRecommendation(for: self.courseId)
         }.then { recommendation -> Promise<StepPlainObject> in
@@ -76,8 +78,10 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 
             return strongSelf.sendStepViewUseCase.sendView(for: step)
         }.done {
+            self.view?.state = .idle
             print("\(#function): view for step created")
         }.catch { error in
+            self.view?.state = .error(message: NSLocalizedString("We couldn't get adaptive step for you at this moment. Try again later.", comment: ""))
             print(error)
         }
     }

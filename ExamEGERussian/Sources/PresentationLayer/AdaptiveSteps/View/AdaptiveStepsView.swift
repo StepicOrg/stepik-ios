@@ -8,7 +8,15 @@
 
 import Foundation
 
+enum AdaptiveStepsViewState {
+    case idle
+    case fetching
+    case error(message: String)
+}
+
 protocol AdaptiveStepsView: class {
+    var state: AdaptiveStepsViewState { get set }
+
     func addContentController(_ controller: UIViewController)
     func removeContentController(_ controller: UIViewController)
 

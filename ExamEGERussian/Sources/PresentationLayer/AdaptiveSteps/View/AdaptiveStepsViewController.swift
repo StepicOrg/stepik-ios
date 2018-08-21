@@ -8,9 +8,25 @@
 
 import UIKit
 import SnapKit
+import SVProgressHUD
 
 final class AdaptiveStepsViewController: UIViewController {
     var presenter: AdaptiveStepsPresenterProtocol?
+
+    var state: AdaptiveStepsViewState = .idle {
+        didSet {
+            switch state {
+            case .idle:
+                SVProgressHUD.dismiss()
+            case .fetching:
+                SVProgressHUD.show()
+            case .error(let message):
+                SVProgressHUD.dismiss()
+                displayError(with: message)
+            }
+        }
+    }
+
     private weak var stepView: UIView?
 
     // MARK: - UIViewController Lifecycle
@@ -26,6 +42,18 @@ final class AdaptiveStepsViewController: UIViewController {
 
     private func setup() {
         view.backgroundColor = .white
+    }
+
+    private func displayError(with message: String) {
+        presentConfirmationAlert(
+            withTitle: NSLocalizedString("Error", comment: ""),
+            message: message,
+            buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
+            buttonSecondTitle: NSLocalizedString("Try Again", comment: ""),
+            secondAction: { [weak self] in
+                self?.presenter?.refresh()
+            }
+        )
     }
 }
 
