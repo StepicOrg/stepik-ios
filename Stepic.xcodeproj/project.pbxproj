@@ -8700,6 +8700,16 @@
 			path = ApplicationLayerTests;
 			sourceTree = "<group>";
 		};
+		2C1351DB212C4282009E7312 /* Standart */ = {
+			isa = PBXGroup;
+			children = (
+				2C9492CB2113117B00552600 /* Assembly */,
+				62E9814DEE0740A13A67B9BA /* Pager */,
+				2C5FDC962111DEB40077C15C /* Step */,
+			);
+			path = Standart;
+			sourceTree = "<group>";
+		};
 		2C14DFD5212A9C16000D2765 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -8717,14 +8727,14 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		2C15BC3D212AE0CC00AB1015 /* AdaptiveSteps */ = {
+		2C15BC3D212AE0CC00AB1015 /* Adaptive */ = {
 			isa = PBXGroup;
 			children = (
 				2C15BC48212AEEA400AB1015 /* Assembly */,
 				2C15BC43212AEC4500AB1015 /* Presenter */,
 				2C15BC3E212AE12B00AB1015 /* View */,
 			);
-			path = AdaptiveSteps;
+			path = Adaptive;
 			sourceTree = "<group>";
 		};
 		2C15BC3E212AE12B00AB1015 /* View */ = {
@@ -9261,7 +9271,6 @@
 				2CD7997721077D010054D098 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
 				2C83E5E52110600200A8322D /* Steps */,
-				2C15BC3D212AE0CC00AB1015 /* AdaptiveSteps */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -9636,9 +9645,8 @@
 		2C83E5E52110600200A8322D /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				2C9492CB2113117B00552600 /* Assembly */,
-				62E9814DEE0740A13A67B9BA /* Pager */,
-				2C5FDC962111DEB40077C15C /* Step */,
+				2C15BC3D212AE0CC00AB1015 /* Adaptive */,
+				2C1351DB212C4282009E7312 /* Standart */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
