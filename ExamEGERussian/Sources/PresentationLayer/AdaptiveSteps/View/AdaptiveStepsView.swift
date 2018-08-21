@@ -11,7 +11,8 @@ import Foundation
 enum AdaptiveStepsViewState {
     case idle
     case fetching
-    case error(message: String)
+    case coursePassed
+    case connectionError
 }
 
 protocol AdaptiveStepsView: class {

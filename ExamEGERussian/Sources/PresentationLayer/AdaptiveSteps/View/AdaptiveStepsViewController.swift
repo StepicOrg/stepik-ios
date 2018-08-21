@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import SVProgressHUD
 
-final class AdaptiveStepsViewController: UIViewController {
+final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikPlaceholder {
     var presenter: AdaptiveStepsPresenterProtocol?
 
     var state: AdaptiveStepsViewState = .idle {
@@ -18,14 +18,21 @@ final class AdaptiveStepsViewController: UIViewController {
             switch state {
             case .idle:
                 SVProgressHUD.dismiss()
+                isPlaceholderShown = false
             case .fetching:
                 SVProgressHUD.show()
-            case .error(let message):
+                isPlaceholderShown = false
+            case .coursePassed:
                 SVProgressHUD.dismiss()
-                displayError(with: message)
+                showPlaceholder(for: .adaptiveCoursePassed)
+            case .connectionError:
+                SVProgressHUD.dismiss()
+                showPlaceholder(for: .connectionError)
             }
         }
     }
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private weak var stepView: UIView?
 
@@ -42,18 +49,11 @@ final class AdaptiveStepsViewController: UIViewController {
 
     private func setup() {
         view.backgroundColor = .white
-    }
 
-    private func displayError(with message: String) {
-        presentConfirmationAlert(
-            withTitle: NSLocalizedString("Error", comment: ""),
-            message: message,
-            buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
-            buttonSecondTitle: NSLocalizedString("Try Again", comment: ""),
-            secondAction: { [weak self] in
-                self?.presenter?.refresh()
-            }
-        )
+        registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
+            self?.presenter?.refresh()
+        }), for: .connectionError)
+        registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
     }
 }
 

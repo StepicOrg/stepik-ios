@@ -80,9 +80,23 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         }.done {
             self.view?.state = .idle
             print("\(#function): view for step created")
-        }.catch { error in
-            self.view?.state = .error(message: NSLocalizedString("We couldn't get adaptive step for you at this moment. Try again later.", comment: ""))
-            print(error)
+        }.catch { [weak self] error in
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch error {
+            case AdaptiveStepsError.coursePassed:
+                strongSelf.view?.state = .coursePassed
+            case AdaptiveStepsError.recommendationsNotLoaded:
+                strongSelf.view?.state = .connectionError
+            case AdaptiveStepsError.viewNotSent:
+                print("\(#function): view not sent")
+            case AdaptiveStepsError.noStepsInLesson, AdaptiveStepsError.stepNotLoaded:
+                strongSelf.view?.state = .connectionError
+            default:
+                strongSelf.view?.state = .connectionError
+            }
         }
     }
 
@@ -98,7 +112,6 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 
                 self.fetchRecommendations().done { lessons in
                     guard let lesson = lessons.first else {
-                        // TODO: Use another course id
                         return seal.reject(AdaptiveStepsError.coursePassed)
                     }
 
@@ -113,7 +126,6 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 print("\(#function): recommendations loaded (count = \(self.cachedRecommendedLessons.count)), using loaded lesson")
 
                 guard let lesson = self.cachedRecommendedLessons.first else {
-                    // TODO: Use another course id
                     return seal.reject(AdaptiveStepsError.coursePassed)
                 }
 
@@ -126,7 +138,6 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                     print("\(#function): recommendations loaded, loading next \(batchSize) lessons")
                     self.fetchRecommendations().done { lessons in
                         var existingLessons = self.cachedRecommendedLessons.map { $0.id }
-                        // Add current lesson cause we should ignore it while merging
                         existingLessons.append(lesson.id)
                         lessons.forEach { lesson in
                             if !existingLessons.contains(lesson.id) {
