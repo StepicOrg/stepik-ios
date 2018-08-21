@@ -24,14 +24,10 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 
     private var stepViewController: UIViewController?
     private var currentStep: StepPlainObject?
-    
+
     private var cachedRecommendedLessons = [LessonPlainObject]()
-    private var recommendationsBatchSize: Int {
-        return 6
-    }
-    private var nextRecommendationsBatchThreshold: Int {
-        return 4
-    }
+    private static let recommendationsBatchSize = 6
+    private static let nextRecommendationsBatchThreshold = 4
 
     init(view: AdaptiveStepsView,
          courseId: Int,
@@ -63,12 +59,13 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
             title = recommendation.title
             return self.getStep(for: recommendation)
         }.then { [weak self] step -> Promise<Void> in
-            guard let strongSelf = self else {
+            guard let strongSelf = self,
+                  let lesson = lesson else {
                 throw AdaptiveStepsError.unknown
             }
 
-            let newStepController = strongSelf.stepAssembly.module(lesson: lesson!, step: step, needNewAttempt: true)
-
+            let newStepController = strongSelf.stepAssembly.module(lesson: lesson, step: step, needNewAttempt: true)
+            
             if let stepViewController = strongSelf.stepViewController {
                 strongSelf.view?.removeContentController(stepViewController)
             }
@@ -89,11 +86,14 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private func getNewRecommendation(for courseId: Int) -> Promise<LessonPlainObject> {
         print("\(#function): cached lessons = \(cachedRecommendedLessons.map { $0.id })")
 
+        let batchSize = AdaptiveStepsPresenter.recommendationsBatchSize
+        let nextBatchThreshold = AdaptiveStepsPresenter.nextRecommendationsBatchThreshold
+
         return Promise { seal in
             if self.cachedRecommendedLessons.isEmpty {
-                print("\(#function): no recommendations -> loading \(self.recommendationsBatchSize) lessons")
+                print("\(#function): no recommendations -> loading \(batchSize) lessons")
 
-                self.loadRecommendations(for: courseId, count: self.recommendationsBatchSize).done { lessons in
+                self.fetchRecommendations().done { lessons in
                     guard let lesson = lessons.first else {
                         // TODO: Use another course id
                         return seal.reject(AdaptiveStepsError.coursePassed)
@@ -119,9 +119,9 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
                 print("\(#function)': recommendations -> preloaded lesson = \(lesson.id)")
                 seal.fulfill(lesson)
 
-                if self.cachedRecommendedLessons.count < self.nextRecommendationsBatchThreshold {
-                    print("\(#function): recommendations loaded, loading next \(self.recommendationsBatchSize) lessons")
-                    self.loadRecommendations(for: courseId, count: self.recommendationsBatchSize).done { lessons in
+                if self.cachedRecommendedLessons.count < nextBatchThreshold {
+                    print("\(#function): recommendations loaded, loading next \(batchSize) lessons")
+                    self.fetchRecommendations().done { lessons in
                         var existingLessons = self.cachedRecommendedLessons.map { $0.id }
                         // Add current lesson cause we should ignore it while merging
                         existingLessons.append(lesson.id)
@@ -138,8 +138,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         }
     }
 
-    private func loadRecommendations(for courseId: Int, count: Int) -> Promise<[LessonPlainObject]> {
-        return self.recommendationsService.fetchLessonsForCourseWithId(courseId, batchSize: count)
+    private func fetchRecommendations() -> Promise<[LessonPlainObject]> {
+        return recommendationsService.fetchLessonsForCourseWithId(courseId, batchSize: AdaptiveStepsPresenter.recommendationsBatchSize)
     }
 
     private func getStep(for lesson: LessonPlainObject, index: Int = 0) -> Promise<StepPlainObject> {
@@ -161,29 +161,31 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
             }
         }
     }
-    
+
     private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
         guard let lessonId = currentStep?.lessonId,
               let user = AuthInfo.shared.user else {
             return Promise(error: AdaptiveStepsError.reactionNotSent)
         }
-        
+
         return reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id)
     }
-}
 
-enum AdaptiveStepsError: Error {
-    case noStepsInLesson
-    case recommendationsNotLoaded
-    case stepNotLoaded
-    case unknown
-    case reactionNotSent
-    case viewNotSent
-    case registrationFailed
-    case notLoggedIn
-    case noProfile
-    case notUnsubscribed
-    case noCourse
-    case notEnrolled
-    case coursePassed
+    // MARK: - Types
+
+    enum AdaptiveStepsError: Error {
+        case noStepsInLesson
+        case recommendationsNotLoaded
+        case stepNotLoaded
+        case unknown
+        case reactionNotSent
+        case viewNotSent
+        case registrationFailed
+        case notLoggedIn
+        case noProfile
+        case notUnsubscribed
+        case noCourse
+        case notEnrolled
+        case coursePassed
+    }
 }
