@@ -21,8 +21,22 @@ class StoryAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let vc = StoryViewController()
-        vc.presenter = StoryPresenter(view: vc, story: story, storyPartViewFactory: StoryPartViewFactory(), navigationDelegate: navigationDelegate)
+
+        let urlNavigator = URLNavigator(presentingController: vc)
+        vc.presenter = StoryPresenter(view: vc, story: story, storyPartViewFactory: StoryPartViewFactory(urlNavigationDelegate: urlNavigator), urlNavigator: urlNavigator, navigationDelegate: navigationDelegate)
         return vc
+    }
+}
+
+class URLNavigator: StoryURLNavigationDelegate {
+    weak var presentingController: UIViewController?
+
+    init(presentingController: UIViewController?) {
+        self.presentingController = presentingController
+    }
+
+    func open(url: URL) {
+        DeepLinkRouter.routeFromDeepLink(url: url, showAlertForUnsupported: false, presentFrom: presentingController)
     }
 }
 

@@ -9,6 +9,13 @@
 import UIKit
 
 class StoryPartViewFactory {
+
+    weak var urlNavigationDelegate: StoryURLNavigationDelegate?
+
+    init(urlNavigationDelegate: StoryURLNavigationDelegate?) {
+        self.urlNavigationDelegate = urlNavigationDelegate
+    }
+
     func makeView(storyPart: StoryPart) -> (UIView & UIStoryPartViewProtocol)? {
         guard let type = storyPart.type else {
             return nil
@@ -19,7 +26,7 @@ class StoryPartViewFactory {
                 return nil
             }
             let viewToAnimate: TextStoryView = .fromNib()
-            viewToAnimate.setup(storyPart: storyPart)
+            viewToAnimate.setup(storyPart: storyPart, urlNavigationDelegate: urlNavigationDelegate)
             return viewToAnimate
         }
     }

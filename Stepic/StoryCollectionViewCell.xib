@@ -27,8 +27,8 @@
                         <color key="backgroundColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="0.5" colorSpace="calibratedRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QW-UT-met">
-                        <rect key="frame" x="16" y="74" width="74" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="12" y="79.5" width="82" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,13 +36,13 @@
             </view>
             <constraints>
                 <constraint firstItem="K4O-7m-Ccl" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="0vT-Sg-acg"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="4QW-UT-met" secondAttribute="trailing" constant="16" id="5Uc-wx-444"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="4QW-UT-met" secondAttribute="trailing" constant="12" id="5Uc-wx-444"/>
                 <constraint firstItem="uh4-Fn-4Az" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="EAO-YJ-ZHM"/>
                 <constraint firstItem="4QW-UT-met" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZTg-uK-7eu" secondAttribute="top" priority="999" constant="8" id="dde-Kc-Qxb"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="4QW-UT-met" secondAttribute="bottom" constant="16" id="gZQ-lb-9Z8"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="4QW-UT-met" secondAttribute="bottom" constant="12" id="gZQ-lb-9Z8"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="uh4-Fn-4Az" secondAttribute="trailing" id="muY-4k-Gc6"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="K4O-7m-Ccl" secondAttribute="trailing" id="pvB-v6-eWi"/>
-                <constraint firstItem="4QW-UT-met" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="16" id="t09-eE-4KS"/>
+                <constraint firstItem="4QW-UT-met" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="12" id="t09-eE-4KS"/>
                 <constraint firstItem="K4O-7m-Ccl" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="tr6-jf-kyd"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="K4O-7m-Ccl" secondAttribute="bottom" id="vj0-Qb-eCB"/>
                 <constraint firstItem="uh4-Fn-4Az" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="xxl-pS-MFb"/>

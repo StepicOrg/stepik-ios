@@ -19,14 +19,14 @@ protocol StoryViewProtocol: class {
 }
 
 protocol StoryPresenterProtocol: class {
+    var storyPartsCount: Int { get }
+    var storyID: Int { get }
     func animate()
     func finishedAnimating()
     func skip()
     func rewind()
     func pause()
     func resume()
-    var storyPartsCount: Int { get }
-    var storyID: Int { get }
     func didAppear()
 }
 
@@ -39,6 +39,7 @@ class StoryPresenter: StoryPresenterProtocol {
     weak var navigationDelegate: StoryNavigationDelegate?
 
     private var storyPartViewFactory: StoryPartViewFactory
+    private var urlNavigator: URLNavigator
     private var story: Story
 
     private var partToAnimate: Int = 0
@@ -57,11 +58,12 @@ class StoryPresenter: StoryPresenterProtocol {
         animate()
     }
 
-    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, navigationDelegate: StoryNavigationDelegate?) {
+    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, urlNavigator: URLNavigator, navigationDelegate: StoryNavigationDelegate?) {
         self.view = view
         self.story = story
         self.storyPartViewFactory = storyPartViewFactory
         self.navigationDelegate = navigationDelegate
+        self.urlNavigator = urlNavigator
     }
 
     func animate() {

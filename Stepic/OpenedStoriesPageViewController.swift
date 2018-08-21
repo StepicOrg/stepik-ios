@@ -40,6 +40,7 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         super.viewWillAppear(true)
         prevStatusBarStyle = UIApplication.shared.statusBarStyle
         UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,6 +48,7 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         if let style = prevStatusBarStyle {
             UIApplication.shared.statusBarStyle = style
         }
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     func close() {

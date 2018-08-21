@@ -12,21 +12,24 @@ import Nuke
 import SnapKit
 
 class TextStoryView: UIView, UIStoryPartViewProtocol {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
-    var imagePath: String = ""
     var completion: (() -> Void)?
+    weak var urlNavigationDelegate: StoryURLNavigationDelegate?
 
-    var elementsStackView: UIStackView?
+    private var elementsStackView: UIStackView?
+    private var imagePath: String = ""
+    private var storyPart: TextStoryPart?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.isHidden = true
     }
 
-    func setup(storyPart: TextStoryPart) {
+    func setup(storyPart: TextStoryPart, urlNavigationDelegate: StoryURLNavigationDelegate?) {
         self.imagePath = storyPart.imagePath
+        self.urlNavigationDelegate = urlNavigationDelegate
 
         var storyContentViews: [UIView] = []
         if let text = storyPart.text {
@@ -47,6 +50,7 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
         }
         elementsStackView = stackView
         elementsStackView?.isHidden = true
+        self.storyPart = storyPart
     }
 
     private func buildTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
@@ -106,6 +110,7 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             make.width.equalTo(180)
             make.height.equalTo(48)
         }
+        storyButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         return containerView
     }
 
@@ -123,6 +128,21 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             self?.completion?()
         }
     }
+
+    @objc
+    func buttonClicked() {
+        guard
+            let path = storyPart?.button?.urlPath,
+            let url = URL(string: path)
+        else {
+            return
+        }
+        urlNavigationDelegate?.open(url: url)
+    }
+}
+
+protocol StoryURLNavigationDelegate: class {
+    func open(url: URL)
 }
 
 protocol UIStoryPartViewProtocol {
