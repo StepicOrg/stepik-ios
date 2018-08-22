@@ -63,6 +63,8 @@
 		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */; };
+		080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */; };
+		080E1ACE212583E5006B58A9 /* StoryTemplatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */; };
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
@@ -138,6 +140,9 @@
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
+		081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */; };
+		081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */; };
+		081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */; };
 		082348391ECA264100D2CB40 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
@@ -261,6 +266,23 @@
 		0846B1171EDDF63200D64D77 /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
 		0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
 		0846B11B1EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
+		08484EFE211AF4320006266F /* StoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE0211AF42D0006266F /* StoriesViewController.xib */; };
+		08484F01211AF4320006266F /* CachedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE4211AF42E0006266F /* CachedValue.swift */; };
+		08484F02211AF4320006266F /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
+		08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE6211AF42E0006266F /* SegmentedProgressView.swift */; };
+		08484F04211AF4320006266F /* TextStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE7211AF42F0006266F /* TextStoryView.xib */; };
+		08484F05211AF4320006266F /* StoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE8211AF42F0006266F /* StoryAssembly.swift */; };
+		08484F06211AF4320006266F /* StoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */; };
+		08484F07211AF4320006266F /* StoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEA211AF42F0006266F /* StoryPresenter.swift */; };
+		08484F08211AF4320006266F /* StoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */; };
+		08484F09211AF4320006266F /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
+		08484F0A211AF4320006266F /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EED211AF4300006266F /* Story.swift */; };
+		08484F0B211AF4320006266F /* StoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484EEE211AF4310006266F /* StoryViewController.xib */; };
+		08484F0C211AF4320006266F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEF211AF4310006266F /* StoryViewController.swift */; };
+		08484F11211AF4320006266F /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
+		08484F18211AF4320006266F /* TextStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EFD211AF4320006266F /* TextStoryView.swift */; };
+		08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */; };
+		08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
 		084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
 		084C658F1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
@@ -641,19 +663,6 @@
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
-		08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
-		08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
 		08B062DF1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
 		08B062E11FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */; };
@@ -812,6 +821,7 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */; };
 		08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
 		08D5F56F1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
 		08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
@@ -1033,6 +1043,9 @@
 		08F8FEB81F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		08F8FEB91F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		08F8FEBA1F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		08FA62222121BEF900F00275 /* GrowPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA62212121BEF900F00275 /* GrowPresentAnimationController.swift */; };
+		08FA62242121BF1200F00275 /* ShrinkDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA62232121BF1200F00275 /* ShrinkDismissAnimationController.swift */; };
+		08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA62262121BF6100F00275 /* SwipeInteractionController.swift */; };
 		08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */ = {isa = PBXBuildFile; fileRef = 08FCC79320F3BAEA008B84B9 /* stepikcontent.css */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */; };
@@ -1277,21 +1290,8 @@
 		2C1B612D1F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C1B612E1F4C4AEF00236804 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C1B61331F4C4AEF00236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C1B61351F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C1B61361F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C1B61371F4C4AEF00236804 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C1B61381F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C1B61391F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C1B613A1F4C4AEF00236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C1B61421F4C4AEF00236804 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C1B61431F4C4AEF00236804 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -1658,21 +1658,8 @@
 		2C1B633E1F4C590700236804 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C1B633F1F4C590700236804 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C1B63431F4C590700236804 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C1B63441F4C590700236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C1B63461F4C590700236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C1B63471F4C590700236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C1B63481F4C590700236804 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C1B63491F4C590700236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C1B634A1F4C590700236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C1B634B1F4C590700236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C1B63531F4C590700236804 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C1B63541F4C590700236804 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -2540,21 +2527,8 @@
 		2C89A9C11F4C289900227C3B /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C89A9C21F4C289900227C3B /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C89A9C31F4C289900227C3B /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C89A9C41F4C289900227C3B /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C89A9C51F4C289900227C3B /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C89A9C61F4C289900227C3B /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C89A9C71F4C289900227C3B /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C89A9C91F4C289900227C3B /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C89A9CA1F4C289900227C3B /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C89A9CB1F4C289900227C3B /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C89A9CC1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C89A9CD1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C89A9CE1F4C289900227C3B /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C89A9D61F4C289900227C3B /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C89A9D71F4C289900227C3B /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -3119,21 +3093,8 @@
 		2C9731751F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2C9731761F4C38F600AC9301 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2C97317B1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		2C97317D1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2C97317E1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2C97317F1F4C38F600AC9301 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
-		2C9731801F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2C9731811F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2C9731821F4C38F600AC9301 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
-		2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2C97318A1F4C38F600AC9301 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2C97318B1F4C38F600AC9301 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -3579,28 +3540,15 @@
 		2CA8D1B82088D9C000E105E9 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		2CA8D1B92088D9C000E105E9 /* CodeLimit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */; };
 		2CA8D1BA2088D9C000E105E9 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		2CA8D1BB2088D9C000E105E9 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		2CA8D1BC2088D9C000E105E9 /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
 		2CA8D1BD2088D9C000E105E9 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
-		2CA8D1BE2088D9C000E105E9 /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		2CA8D1BF2088D9C000E105E9 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
 		2CA8D1C02088D9C000E105E9 /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
-		2CA8D1C12088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		2CA8D1C22088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		2CA8D1C32088D9C000E105E9 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
 		2CA8D1C42088D9C000E105E9 /* StepikPlaceholderStyle+Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */; };
 		2CA8D1C52088D9C000E105E9 /* CourseListHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDCA51F9496DE0098DEC7 /* CourseListHorizontalViewController.swift */; };
 		2CA8D1C62088D9C000E105E9 /* CardStepDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1421FED2758003B1177 /* CardStepDelegate.swift */; };
-		2CA8D1C72088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		2CA8D1C82088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		2CA8D1C92088D9C000E105E9 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		2CA8D1CA2088D9C000E105E9 /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		2CA8D1CB2088D9C000E105E9 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		2CA8D1CC2088D9C000E105E9 /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
 		2CA8D1CD2088D9C000E105E9 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
 		2CA8D1CE2088D9C000E105E9 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA8D1CF2088D9C000E105E9 /* MigrationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */; };
-		2CA8D1D02088D9C000E105E9 /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		2CA8D1D12088D9C000E105E9 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		2CA8D1D22088D9C000E105E9 /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		2CA8D1D32088D9C000E105E9 /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -4620,19 +4568,6 @@
 		864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
 		864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
 		864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
-		864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
-		864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
-		864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
-		864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
-		864D67951E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
-		864D67961E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
-		864D67971E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
-		864D67981E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
-		864D67991E83E08E001E8D9E /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
-		864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
-		864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
-		864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
-		864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		864D67A01E83E08E001E8D9E /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -5117,6 +5052,8 @@
 		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuBlock.swift; sourceTree = "<group>"; };
+		080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartViewFactory.swift; sourceTree = "<group>"; };
+		080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTemplatesAPI.swift; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
 		080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCodeQuizViewController.swift; sourceTree = "<group>"; };
 		080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenCodeQuizViewController.xib; sourceTree = "<group>"; };
@@ -5152,6 +5089,9 @@
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
 		081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerViewController.swift; sourceTree = "<group>"; };
+		081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPageViewController.swift; sourceTree = "<group>"; };
+		081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPresenter.swift; sourceTree = "<group>"; };
+		081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesAssembly.swift; sourceTree = "<group>"; };
 		082348381ECA264000D2CB40 /* ShareableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
@@ -5255,6 +5195,23 @@
 		0846B10F1EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodeLimit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0846B1141EDDF63200D64D77 /* CodeTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTemplate.swift; sourceTree = "<group>"; };
 		0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodeTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		08484EE0211AF42D0006266F /* StoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesViewController.xib; sourceTree = "<group>"; };
+		08484EE4211AF42E0006266F /* CachedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedValue.swift; sourceTree = "<group>"; };
+		08484EE5211AF42E0006266F /* StoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
+		08484EE6211AF42E0006266F /* SegmentedProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedProgressView.swift; sourceTree = "<group>"; };
+		08484EE7211AF42F0006266F /* TextStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextStoryView.xib; sourceTree = "<group>"; };
+		08484EE8211AF42F0006266F /* StoryAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryAssembly.swift; sourceTree = "<group>"; };
+		08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		08484EEA211AF42F0006266F /* StoryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryPresenter.swift; sourceTree = "<group>"; };
+		08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		08484EEC211AF4300006266F /* StoriesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesAssembly.swift; sourceTree = "<group>"; };
+		08484EED211AF4300006266F /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		08484EEE211AF4310006266F /* StoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryViewController.xib; sourceTree = "<group>"; };
+		08484EEF211AF4310006266F /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
+		08484EF5211AF4310006266F /* StoriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesPresenter.swift; sourceTree = "<group>"; };
+		08484EFD211AF4320006266F /* TextStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStoryView.swift; sourceTree = "<group>"; };
+		08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UICollectionView.swift"; sourceTree = "<group>"; };
+		08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorySkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
@@ -5420,19 +5377,6 @@
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIDefaults.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
-		08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabBarItem.swift; sourceTree = "<group>"; };
-		08AF59D71E6D9BE800423EFF /* RGTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabView.swift; sourceTree = "<group>"; };
-		08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDataSource.swift"; sourceTree = "<group>"; };
-		08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
-		08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDataSource.swift"; sourceTree = "<group>"; };
-		08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
-		08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIToolbarDelegate.swift"; sourceTree = "<group>"; };
-		08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
-		08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDataSource.swift; sourceTree = "<group>"; };
-		08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreaksAlertPresentationManager.swift; sourceTree = "<group>"; };
 		08B3B80520F3909400F64D20 /* HTMLProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLProcessor.swift; sourceTree = "<group>"; };
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
@@ -5491,6 +5435,7 @@
 		08D2AE451C04BA6100BD8C3D /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryNavigationDelegate.swift; sourceTree = "<group>"; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
 		08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummary.swift; sourceTree = "<group>"; };
 		08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -5588,6 +5533,9 @@
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
+		08FA62212121BEF900F00275 /* GrowPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowPresentAnimationController.swift; sourceTree = "<group>"; };
+		08FA62232121BF1200F00275 /* ShrinkDismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkDismissAnimationController.swift; sourceTree = "<group>"; };
+		08FA62262121BF6100F00275 /* SwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
 		08FCC79320F3BAEA008B84B9 /* stepikcontent.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stepikcontent.css; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthAPI.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -6658,6 +6606,16 @@
 			name = "Course List";
 			sourceTree = "<group>";
 		};
+		081D7416211DB4490086F6F8 /* Opened Stories */ = {
+			isa = PBXGroup;
+			children = (
+				081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */,
+				081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */,
+				081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */,
+			);
+			name = "Opened Stories";
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -7061,6 +7019,23 @@
 			name = CodeTemplates;
 			sourceTree = "<group>";
 		};
+		08484EDF211AF41A0006266F /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				08D2F72A2122D9DE009BA052 /* Transitions */,
+				081D7416211DB4490086F6F8 /* Opened Stories */,
+				08484EE4211AF42E0006266F /* CachedValue.swift */,
+				088A65E8211CA8C5001431E3 /* Story Part Views */,
+				08484EE6211AF42E0006266F /* SegmentedProgressView.swift */,
+				088A65E9211CA8EE001431E3 /* Stories */,
+				08484EED211AF4300006266F /* Story.swift */,
+				088A65EA211CA900001431E3 /* Story */,
+				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
+				080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */,
+			);
+			name = Stories;
+			sourceTree = "<group>";
+		};
 		084896931F9E8A1E00CFA273 /* Continue Learning Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -7114,6 +7089,7 @@
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
 				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
+				080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -7465,6 +7441,39 @@
 			name = Downloads;
 			sourceTree = "<group>";
 		};
+		088A65E8211CA8C5001431E3 /* Story Part Views */ = {
+			isa = PBXGroup;
+			children = (
+				08484EFD211AF4320006266F /* TextStoryView.swift */,
+				08484EE7211AF42F0006266F /* TextStoryView.xib */,
+			);
+			name = "Story Part Views";
+			sourceTree = "<group>";
+		};
+		088A65E9211CA8EE001431E3 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				08484EEB211AF4300006266F /* StoryCollectionViewCell.swift */,
+				08484EE9211AF42F0006266F /* StoryCollectionViewCell.xib */,
+				08484EEC211AF4300006266F /* StoriesAssembly.swift */,
+				08484EF5211AF4310006266F /* StoriesPresenter.swift */,
+				08484EE5211AF42E0006266F /* StoriesViewController.swift */,
+				08484EE0211AF42D0006266F /* StoriesViewController.xib */,
+			);
+			name = Stories;
+			sourceTree = "<group>";
+		};
+		088A65EA211CA900001431E3 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				08484EE8211AF42F0006266F /* StoryAssembly.swift */,
+				08484EEA211AF42F0006266F /* StoryPresenter.swift */,
+				08484EEF211AF4310006266F /* StoryViewController.swift */,
+				08484EEE211AF4310006266F /* StoryViewController.xib */,
+			);
+			name = Story;
+			sourceTree = "<group>";
+		};
 		088E58BF1DE34E140009B9CE /* SocialSDKProviders */ = {
 			isa = PBXGroup;
 			children = (
@@ -7544,59 +7553,6 @@
 				08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */,
 			);
 			name = "Users data";
-			sourceTree = "<group>";
-		};
-		08AF59CC1E6D9A8100423EFF /* RGPageViewController */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D31E6D9BE800423EFF /* Source */,
-			);
-			name = RGPageViewController;
-			path = Stepic;
-			sourceTree = "<group>";
-		};
-		08AF59D31E6D9BE800423EFF /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D41E6D9BE800423EFF /* Classes */,
-				08AF59D81E6D9BE800423EFF /* Extensions */,
-				08AF59E11E6D9BE800423EFF /* Protocols */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		08AF59D41E6D9BE800423EFF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */,
-				08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */,
-				08AF59D71E6D9BE800423EFF /* RGTabView.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		08AF59D81E6D9BE800423EFF /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */,
-				08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */,
-				08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */,
-				08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */,
-				08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */,
-				08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */,
-				08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */,
-				08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		08AF59E11E6D9BE800423EFF /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */,
-				08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		08B361061BB2E3C100090843 /* Profile */ = {
@@ -7789,6 +7745,15 @@
 			name = Analytics;
 			sourceTree = "<group>";
 		};
+		08D2F72A2122D9DE009BA052 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				08FA62252121BF4300F00275 /* Transition Interaction */,
+				08FA62202121BEE200F00275 /* Animation */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
 		08D565C91C5F7CF000DE2B6A /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
@@ -7873,6 +7838,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				08484EDF211AF41A0006266F /* Stories */,
 				2CE664DE20F5204D0082F3FE /* Downloader */,
 				088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */,
 				084C658B1FDAAD35006A3E17 /* Remote Config */,
@@ -8224,6 +8190,23 @@
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
 		};
+		08FA62202121BEE200F00275 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				08FA62212121BEF900F00275 /* GrowPresentAnimationController.swift */,
+				08FA62232121BF1200F00275 /* ShrinkDismissAnimationController.swift */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		08FA62252121BF4300F00275 /* Transition Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				08FA62262121BF6100F00275 /* SwipeInteractionController.swift */,
+			);
+			name = "Transition Interaction";
+			sourceTree = "<group>";
+		};
 		08FF75271DF9938E00D656C4 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -8404,7 +8387,6 @@
 			isa = PBXGroup;
 			children = (
 				2C4BBF0B203DC5C9000A4250 /* Plyr */,
-				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
@@ -8628,6 +8610,7 @@
 				2C22042A20E277F60060117A /* Skeletonable+UITableView.swift */,
 				2C22042920E277F60060117A /* Skeletonable+UIView.swift */,
 				2C22042820E277F60060117A /* SkeletonViewAnimation.swift */,
+				08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */,
 			);
 			name = Skeleton;
 			sourceTree = "<group>";
@@ -8638,6 +8621,7 @@
 				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
 				2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */,
 				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
+				08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -11310,6 +11294,8 @@
 				08ED08E21FCCDC3A0053FB68 /* UserActivityHomeView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */,
+				08484EFE211AF4320006266F /* StoriesViewController.xib in Resources */,
 				2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				08195A211FA0AF2A00E6D6CD /* HorizontalCoursesView.xib in Resources */,
@@ -11320,6 +11306,7 @@
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				088EDCB91F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.xib in Resources */,
 				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
+				08484F06211AF4320006266F /* StoryCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
@@ -11335,6 +11322,7 @@
 				08DDF90D20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */,
+				08484F0B211AF4320006266F /* StoryViewController.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
@@ -11373,6 +11361,7 @@
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
+				08484F04211AF4320006266F /* TextStoryView.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
@@ -12241,6 +12230,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -12285,6 +12275,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -12431,6 +12422,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -12475,6 +12467,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -12746,6 +12739,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -12790,6 +12784,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -12896,6 +12891,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -12940,6 +12936,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13132,6 +13129,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit.default-Alamofire/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -13176,6 +13174,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13248,6 +13247,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -13292,6 +13292,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13382,6 +13383,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -13426,6 +13428,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13534,6 +13537,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -13577,6 +13581,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13666,6 +13671,7 @@
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -13713,6 +13719,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -13782,18 +13789,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
-				08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */,
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
-				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
+				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
+				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */,
-				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */,
 				08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
@@ -13803,12 +13809,12 @@
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
-				08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
 				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
+				08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
@@ -13817,6 +13823,7 @@
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				088FD8171FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
+				08484F02211AF4320006266F /* StoriesViewController.swift in Sources */,
 				084DB9DE1FA2A1B00074B11E /* ContinueLearningWidgetView.swift in Sources */,
 				089C88D51FCCDF3900003B63 /* UserActivityHomeView.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
@@ -13841,6 +13848,7 @@
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				087235EE20FE2F2F00B4D5B1 /* AnalyticsEvent.swift in Sources */,
 				08A9F7031FC37DD000640F1F /* CourseTagsView.swift in Sources */,
+				08484F18211AF4320006266F /* TextStoryView.swift in Sources */,
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
@@ -13857,6 +13865,7 @@
 				08A9F71E1FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
+				08FA62242121BF1200F00275 /* ShrinkDismissAnimationController.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
@@ -13868,6 +13877,7 @@
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */,
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
+				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
@@ -13885,6 +13895,7 @@
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
+				081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				086BE2B21F93A21B00B4BE56 /* LoadingCourseWidgetView.swift in Sources */,
@@ -13924,12 +13935,14 @@
 				86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
+				08FA62222121BEF900F00275 /* GrowPresentAnimationController.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
+				08484F08211AF4320006266F /* StoryCollectionViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */,
@@ -13939,7 +13952,6 @@
 				2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
-				08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				087585B71FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */,
 				0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
@@ -13967,6 +13979,7 @@
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
+				080E1ACE212583E5006B58A9 /* StoryTemplatesAPI.swift in Sources */,
 				2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
@@ -13994,11 +14007,13 @@
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
+				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				089587F520A20C5D003BAFB3 /* Enrollment.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
 				081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
 				2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */,
+				081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */,
 				08CCAEC1204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
@@ -14049,6 +14064,7 @@
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
+				08484F11211AF4320006266F /* StoriesPresenter.swift in Sources */,
 				080F211B2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
 				86624A731FC76578008E7E6C /* NotificationStatusesAPI.swift in Sources */,
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
@@ -14093,7 +14109,6 @@
 				2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */,
-				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
@@ -14111,10 +14126,8 @@
 				2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
-				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */,
-				08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				2C5DF1431FED2758003B1177 /* CardStepDelegate.swift in Sources */,
@@ -14126,14 +14139,13 @@
 				0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
-				08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
+				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				08C7CB7D1FA7ACC1001D8241 /* CourseListEmptyPlaceholder.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
-				08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
 				2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */,
 				080C5E771EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
@@ -14152,7 +14164,6 @@
 				2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
-				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
 				08C1BF281FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
@@ -14166,6 +14177,7 @@
 				2C80C829201A504700ABB312 /* StepCardView.swift in Sources */,
 				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
+				08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
@@ -14173,6 +14185,7 @@
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
+				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,
@@ -14188,7 +14201,6 @@
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
-				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -14224,7 +14236,6 @@
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */,
 				088EDB591F8F5A48009B736E /* CourseListViewController.swift in Sources */,
-				08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */,
@@ -14282,6 +14293,7 @@
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
+				08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */,
 				62E9831EA7A75D89A3C9EC5B /* CourseListViewData.swift in Sources */,
 				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
@@ -14297,7 +14309,9 @@
 				62E9870AFED7781931340685 /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */,
 				0829ED9220C863B30018E6FF /* LanguageSettingsViewController.swift in Sources */,
+				08484F01211AF4320006266F /* CachedValue.swift in Sources */,
 				62E981858E2E696693A1AB87 /* PinsMapBlockContentView.swift in Sources */,
+				08484F09211AF4320006266F /* StoriesAssembly.swift in Sources */,
 				62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */,
 				62E98176284407D3D2A0E271 /* Achievement.swift in Sources */,
@@ -14312,6 +14326,7 @@
 				62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */,
 				62E986E3352543F9ED07093F /* NotificationBannerType.swift in Sources */,
 				62E98D686165FCA5E588FDD5 /* CustomNotificationBanner.swift in Sources */,
+				08484F0A211AF4320006266F /* Story.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14693,25 +14708,12 @@
 				2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7241FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */,
-				2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */,
-				2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */,
 				2C608AC3204568BC006870BB /* CongratulationViewController.swift in Sources */,
-				2C1B61331F4C4AEF00236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C1B61351F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C1B61361F4C4AEF00236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C1B61371F4C4AEF00236804 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFD2045694E006870BB /* CardStepDelegate.swift in Sources */,
-				2C1B61381F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C1B61391F4C4AEF00236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C1B613A1F4C4AEF00236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */,
-				2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4B20456B72006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B613E1F4C4AEF00236804 /* AdaptiveStatsManager.swift in Sources */,
-				2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B61411F4C4AEF00236804 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C1B61421F4C4AEF00236804 /* TeachersTableViewCell.swift in Sources */,
 				2C1B61431F4C4AEF00236804 /* TeacherCollectionViewCell.swift in Sources */,
@@ -15178,25 +15180,12 @@
 				2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7251FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */,
-				2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */,
-				2C1B63431F4C590700236804 /* RGTabView.swift in Sources */,
 				2C608AC4204568BD006870BB /* CongratulationViewController.swift in Sources */,
-				2C1B63441F4C590700236804 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C1B63461F4C590700236804 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C1B63471F4C590700236804 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C1B63481F4C590700236804 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFF2045694F006870BB /* CardStepDelegate.swift in Sources */,
-				2C1B63491F4C590700236804 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C1B634A1F4C590700236804 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C1B634B1F4C590700236804 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */,
-				2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4A20456B72006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B634F1F4C590700236804 /* AdaptiveStatsManager.swift in Sources */,
-				2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B63521F4C590700236804 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C1B63531F4C590700236804 /* TeachersTableViewCell.swift in Sources */,
 				2C1B63541F4C590700236804 /* TeacherCollectionViewCell.swift in Sources */,
@@ -16127,28 +16116,15 @@
 				2C89A9C11F4C289900227C3B /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C89A9C21F4C289900227C3B /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C89A9C31F4C289900227C3B /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
-				2C89A9C41F4C289900227C3B /* RGPageViewController.swift in Sources */,
-				2C89A9C51F4C289900227C3B /* RGTabBarItem.swift in Sources */,
 				2C6A76302045CE5A00C509A6 /* AdaptiveStatsViewController.swift in Sources */,
-				2C89A9C61F4C289900227C3B /* RGTabView.swift in Sources */,
-				2C89A9C71F4C289900227C3B /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2C6A76462045CED400C509A6 /* CAGradientLayer+Init.swift in Sources */,
-				2C89A9C91F4C289900227C3B /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C89A9CA1F4C289900227C3B /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C89A9CB1F4C289900227C3B /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				86A1C3372065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				088EDCAA1F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
 				2C6A76392045CE8200C509A6 /* CardStepDelegate.swift in Sources */,
-				2C89A9CC1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C89A9CD1F4C289900227C3B /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2C89A9CE1F4C289900227C3B /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */,
-				2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C89A9D21F4C289900227C3B /* AdaptiveStatsManager.swift in Sources */,
 				2C6A76552045CF4600C509A6 /* MigrationExtensions.swift in Sources */,
-				2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */,
 				2C89A9D51F4C289900227C3B /* GeneralInfoTableViewCell.swift in Sources */,
 				2C89A9D61F4C289900227C3B /* TeachersTableViewCell.swift in Sources */,
 				2C89A9D71F4C289900227C3B /* TeacherCollectionViewCell.swift in Sources */,
@@ -16623,26 +16599,13 @@
 				2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08A9F7231FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */,
-				2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */,
-				2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */,
-				2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */,
 				2C608AC2204568BC006870BB /* CongratulationViewController.swift in Sources */,
-				2C97317B1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				2C97317D1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2C97317E1F4C38F600AC9301 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2C97317F1F4C38F600AC9301 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C608AFC2045694D006870BB /* CardStepDelegate.swift in Sources */,
-				2C9731801F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2C9731811F4C38F600AC9301 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				2C604E24207E460F001588FB /* CodeEditorPreviewView.swift in Sources */,
-				2C9731821F4C38F600AC9301 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
-				2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */,
 				2C608B4C20456B73006870BB /* NotificationsPresenter.swift in Sources */,
 				08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C9731861F4C38F600AC9301 /* AdaptiveStatsManager.swift in Sources */,
-				2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C9731891F4C38F600AC9301 /* GeneralInfoTableViewCell.swift in Sources */,
 				2C97318A1F4C38F600AC9301 /* TeachersTableViewCell.swift in Sources */,
 				2C97318B1F4C38F600AC9301 /* TeacherCollectionViewCell.swift in Sources */,
@@ -17111,28 +17074,15 @@
 				2CA8D1B82088D9C000E105E9 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2CA8D1B92088D9C000E105E9 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2CA8D1BA2088D9C000E105E9 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
-				2CA8D1BB2088D9C000E105E9 /* RGPageViewController.swift in Sources */,
-				2CA8D1BC2088D9C000E105E9 /* RGTabBarItem.swift in Sources */,
 				2CA8D1BD2088D9C000E105E9 /* AdaptiveStatsViewController.swift in Sources */,
-				2CA8D1BE2088D9C000E105E9 /* RGTabView.swift in Sources */,
-				2CA8D1BF2088D9C000E105E9 /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				2CA8D1C02088D9C000E105E9 /* CAGradientLayer+Init.swift in Sources */,
-				2CA8D1C12088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				2CA8D1C22088D9C000E105E9 /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				2CA8D1C32088D9C000E105E9 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2CA8D1C42088D9C000E105E9 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2CA8D1C52088D9C000E105E9 /* CourseListHorizontalViewController.swift in Sources */,
 				2CA8D1C62088D9C000E105E9 /* CardStepDelegate.swift in Sources */,
-				2CA8D1C72088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				2CA8D1C82088D9C000E105E9 /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				2CA8D1C92088D9C000E105E9 /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				2CA8D1CA2088D9C000E105E9 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				2CA8D1CB2088D9C000E105E9 /* UINavigationBar.swift in Sources */,
-				2CA8D1CC2088D9C000E105E9 /* RGPageViewControllerDataSource.swift in Sources */,
 				2CA8D1CD2088D9C000E105E9 /* CourseWidgetTableViewCell.swift in Sources */,
 				2CA8D1CE2088D9C000E105E9 /* AdaptiveStatsManager.swift in Sources */,
 				2CA8D1CF2088D9C000E105E9 /* MigrationExtensions.swift in Sources */,
-				2CA8D1D02088D9C000E105E9 /* RGPageViewControllerDelegate.swift in Sources */,
 				2CA8D1D12088D9C000E105E9 /* GeneralInfoTableViewCell.swift in Sources */,
 				2CA8D1D22088D9C000E105E9 /* TeachersTableViewCell.swift in Sources */,
 				2CA8D1D32088D9C000E105E9 /* TeacherCollectionViewCell.swift in Sources */,
@@ -17678,25 +17628,12 @@
 				2CE527C72029DFE70047EC5F /* AdaptiveAdaptiveStatsPagerViewController.swift in Sources */,
 				08A9F7201FC38C9E00640F1F /* CourseTag.swift in Sources */,
 				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
-				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
 				2CE527C22029D9030047EC5F /* AdaptiveStatsSection.swift in Sources */,
-				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				08CCAEC2204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
-				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
-				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
-				864D67951E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
-				864D67961E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0846B11B1EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				864D67971E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				864D67981E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
-				864D67991E83E08E001E8D9E /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
-				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
-				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
-				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
 				08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C733C3A1F29E090000E7FAF /* AdaptiveStatsManager.swift in Sources */,
 				2C3A22552121DEFD00927BD7 /* AdaptiveCourseSelectPresenter.swift in Sources */,
-				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
 				864D67A01E83E08E001E8D9E /* TeachersTableViewCell.swift in Sources */,
 				864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */,
@@ -18384,7 +18321,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
