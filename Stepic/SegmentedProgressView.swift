@@ -20,15 +20,15 @@ extension SegmentedProgressView {
 
 class SegmentedProgressView: UIView {
 
-    var appearance: Appearance = Appearance()
-    var isAutoPlayEnabled: Bool = false
-    var segmentsCount: Int = 0 {
+    var appearance = Appearance()
+    var isAutoPlayEnabled = false
+    var segmentsCount = 0 {
         didSet {
             addProgresses()
         }
     }
 
-    private var progressesStackView: UIStackView = UIStackView(arrangedSubviews: [])
+    private var progressesStackView = UIStackView(arrangedSubviews: [])
 
     var completion: (() -> Void)?
 
@@ -117,9 +117,9 @@ private class SegmentAnimatedProgressView: UIView {
     let topSegmentView = UIView()
     private var topWidthConstraint: Constraint?
 
-    private var didLayout: Bool = false
+    private var didLayout = false
 
-    var isPaused: Bool = false {
+    var isPaused = false {
         didSet {
             guard isPaused != oldValue else {
                 return
