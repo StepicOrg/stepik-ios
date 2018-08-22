@@ -109,7 +109,7 @@ class SegmentedProgressView: UIView {
 private class SegmentAnimatedProgressView: UIView {
     let bottomSegmentView = UIView()
     let topSegmentView = UIView()
-    private var topWidthConstraint: NSLayoutConstraint?
+    private var topWidthConstraint: Constraint?
 
     private var didLayout: Bool = false
 
@@ -146,8 +146,11 @@ private class SegmentAnimatedProgressView: UIView {
         addSubview(topSegmentView)
 
         alignToSelf(view: topSegmentView)
-        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat.leastNormalMagnitude)
-        topWidthConstraint?.isActive = true
+        topSegmentView.snp.makeConstraints { make in
+            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(CGFloat.leastNormalMagnitude).constraint
+
+        }
+        topWidthConstraint?.activate()
 
         alignToSelf(view: bottomSegmentView)
         bottomSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
@@ -173,9 +176,11 @@ private class SegmentAnimatedProgressView: UIView {
 
     func animate(duration: TimeInterval, completion: (() -> Void)?) {
         isPaused = false
-        topWidthConstraint?.isActive = false
-        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1)
-        topWidthConstraint?.isActive = true
+        topWidthConstraint?.deactivate()
+        topSegmentView.snp.makeConstraints { make in
+            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(1).constraint
+        }
+        topWidthConstraint?.activate()
         self.setNeedsLayout()
         UIView.animate(
             withDuration: duration,
@@ -195,9 +200,11 @@ private class SegmentAnimatedProgressView: UIView {
     func set(progress: CGFloat) {
         isPaused = false
         topSegmentView.layer.removeAllAnimations()
-        topWidthConstraint?.isActive = false
-        topWidthConstraint = topSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: progress == 0 ? CGFloat.leastNormalMagnitude : progress)
-        topWidthConstraint?.isActive = true
+        topWidthConstraint?.deactivate()
+        topSegmentView.snp.makeConstraints { make in
+            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(progress == 0 ? CGFloat.leastNormalMagnitude : progress).constraint
+        }
+        topWidthConstraint?.activate()
         self.updateConstraints()
         self.setNeedsLayout()
         self.layoutIfNeeded()
