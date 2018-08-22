@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 import SnapKit
 
+extension SegmentedProgressView {
+    struct Appearance {
+        var spacing: CGFloat = 5
+        var barColor = UIColor.white.withAlphaComponent(0.3)
+        var progressColor = UIColor.white.withAlphaComponent(1)
+    }
+}
+
 class SegmentedProgressView: UIView {
 
-    var spacing: CGFloat = 5
-    var barColor = UIColor.white.withAlphaComponent(0.3)
-    var progressColor = UIColor.white.withAlphaComponent(1)
+    var appearance: Appearance = Appearance()
     var isAutoPlayEnabled: Bool = false
     var segmentsCount: Int = 0 {
         didSet {
@@ -47,7 +53,7 @@ class SegmentedProgressView: UIView {
         backgroundColor = .clear
         progressesStackView.alignment = .fill
         progressesStackView.distribution = .fillEqually
-        progressesStackView.spacing = spacing
+        progressesStackView.spacing = appearance.spacing
 
         progressesStackView.snp.makeConstraints {
             make in
@@ -59,7 +65,7 @@ class SegmentedProgressView: UIView {
         progressViews.forEach { progressesStackView.removeArrangedSubview($0) }
         progressViews = []
         for _ in 0 ..< segmentsCount {
-            let progressView = SegmentAnimatedProgressView(barColor: barColor, progressColor: progressColor)
+            let progressView = SegmentAnimatedProgressView(barColor: appearance.barColor, progressColor: appearance.progressColor)
 
             progressesStackView.addArrangedSubview(progressView)
             progressViews += [progressView]
