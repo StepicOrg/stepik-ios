@@ -129,4 +129,8 @@ extension AdaptiveStepsViewController: AdaptiveStepsView {
     func updateTitle(_ title: String) {
         self.title = title
     }
+
+    func updateSubmitButtonTitle(_ title: String) {
+        submitBarButtonItem.title = title
+    }
 }
