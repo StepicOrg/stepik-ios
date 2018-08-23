@@ -42,9 +42,35 @@ final class StepPresenterImpl: StepPresenter {
         updateQuiz()
     }
 
+    func submit() {
+        var isSelected = false
+
+        switch step.type {
+        case .choice:
+            (quizViewController as? ChoiceQuizViewController)?.choices.forEach {
+                isSelected = isSelected || $0
+            }
+        case .string, .number:
+            isSelected = true
+        default:
+            break
+        }
+
+        if isSelected {
+            quizViewController?.submitPressed()
+        }
+    }
+
+    func retry() {
+        quizViewController?.submitPressed()
+    }
+
     // MARK: - Private API
 
-    private func showError(title: String = NSLocalizedString("Error", comment: ""), message: String) {
+    private func showError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String
+    ) {
         view?.displayError(title: title, message: message)
     }
 }

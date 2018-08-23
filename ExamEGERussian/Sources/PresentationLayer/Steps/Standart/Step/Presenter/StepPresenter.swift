@@ -19,6 +19,8 @@ protocol StepPresenter: class {
     var delegate: StepPresenterDelegate? { get set }
 
     func refreshStep()
+    func submit()
+    func retry()
 }
 
 extension StepPresenterDelegate {
