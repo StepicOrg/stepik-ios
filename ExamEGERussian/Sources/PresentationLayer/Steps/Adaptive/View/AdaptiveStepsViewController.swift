@@ -43,13 +43,70 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
         presenter?.refresh()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: animated)
+    }
+
     private func setup() {
         view.backgroundColor = .white
+
+        setupToolbar()
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
             self?.presenter?.refresh()
         }), for: .connectionError)
         registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
+    }
+
+    private func setupToolbar() {
+        let spacer = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: self,
+            action: nil
+        )
+
+        let hard = UIBarButtonItem(
+            title: NSLocalizedString("Hard", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(onHardClick(_:))
+        )
+
+        let taskControl = UIBarButtonItem(
+            title: NSLocalizedString("Submit", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(onTaskControlClick)
+        )
+        let easy = UIBarButtonItem(
+            title: NSLocalizedString("Easy", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(onEasyClick(_:))
+        )
+
+        toolbarItems = [hard, spacer, taskControl, spacer, easy]
+    }
+
+    @objc
+    private func onHardClick(_ sender: Any) {
+        print("\(#function)")
+    }
+
+    @objc
+    private func onTaskControlClick(_ sender: Any) {
+        print("\(#function)")
+    }
+
+    @objc
+    private func onEasyClick(_ sender: Any) {
+        print("\(#function)")
     }
 }
 
