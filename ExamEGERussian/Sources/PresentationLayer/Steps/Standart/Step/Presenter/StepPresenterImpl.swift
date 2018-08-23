@@ -94,14 +94,18 @@ extension StepPresenterImpl {
 
 extension StepPresenterImpl: QuizControllerDelegate {
     func submissionDidCorrect() {
-        setStepProgressAsPassed()
+        step.state = .successful
+        delegate?.stepPresenterSubmissionDidCorrect(self)
     }
 
-    // MARK: Private Helpers
+    func submissionDidWrong() {
+        step.state = .wrong
+        delegate?.stepPresenterSubmissionDidWrong(self)
+    }
 
-    private func setStepProgressAsPassed() {
-        step.isPassed = true
-        delegate?.stepPresenterSubmissionDidCorrect(self)
+    func submissionDidRetry() {
+        step.state = .unsolved
+        delegate?.stepPresenterSubmissionDidRetry(self)
     }
 }
 
