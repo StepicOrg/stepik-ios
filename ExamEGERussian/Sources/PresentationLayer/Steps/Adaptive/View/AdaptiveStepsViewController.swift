@@ -19,15 +19,19 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
             case .idle:
                 SVProgressHUD.dismiss()
                 isPlaceholderShown = false
+                setToolbarItemsEnabled(true)
             case .fetching:
                 SVProgressHUD.show()
                 isPlaceholderShown = false
+                setToolbarItemsEnabled(false)
             case .coursePassed:
                 SVProgressHUD.dismiss()
                 showPlaceholder(for: .adaptiveCoursePassed)
+                setToolbarItemsEnabled(false)
             case .connectionError:
                 SVProgressHUD.dismiss()
                 showPlaceholder(for: .connectionError)
+                setToolbarItemsEnabled(false)
             }
         }
     }
@@ -83,10 +87,10 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
         registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
     }
 
-    private func setupToolbar() {
-        let spacer = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace,
-            target: self,
+    private func setToolbarItemsEnabled(_ enabled: Bool) {
+        toolbarItems?.forEach {
+            $0.isEnabled = enabled
+        }
     }
 
     @objc
