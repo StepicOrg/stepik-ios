@@ -135,7 +135,7 @@ extension StepsPagerPresenterImpl: StepPresenterDelegate {
     // MARK: Private Helpers
 
     private func updateStepProgress(at index: Int, passed: Bool) {
-        steps[index].isPassed = passed
+        steps[index].setPassed(passed)
         view?.setTabSelected(passed, at: index)
     }
 }
