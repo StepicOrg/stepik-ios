@@ -40,10 +40,13 @@ final class GraphService: GraphServiceProtocol {
         return Promise(error: GraphServiceError.noDataAtPath)
     }
 
-    private func persistData(_ data: Data) -> Promise<Data> {
-        return Promise { seal in
-            self.fileStorage.persist(data: data, named: GraphService.fileName) { (_, error) in
-                seal.resolve(data, error)
+    private func persistData(_ data: Data) -> Guarantee<Data> {
+        return Guarantee { seal in
+            self.fileStorage.persist(data: data, named: GraphService.fileName).done { _ in
+                seal(data)
+            }.catch { error in
+                print("\(#function): unable to persist data with error: \(error)")
+                seal(data)
             }
         }
     }

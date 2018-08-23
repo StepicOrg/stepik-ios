@@ -7,10 +7,9 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class FileStorage {
-    typealias CompletionHandler = (_ url: URL?, _ error: Error?) -> Void
-
     private let destinationDirectory: URL
     private let queue = OperationQueue()
 
@@ -21,34 +20,45 @@ final class FileStorage {
     // MARK: - Public API -
 
     /// Persists `Encodable` item.
-    func persist<T: Encodable>(item: T, named fileName: String, with completion: @escaping CompletionHandler) {
-        do {
-            let data = try JSONEncoder().encode(item)
-            persist(data: data, named: fileName, with: completion)
-        } catch let error {
-            completion(nil, error)
+    ///
+    /// - Parameters:
+    ///   - item: `Encodable` item to persist.
+    ///   - fileName: Destination file name.
+    /// - Returns: URL with a location on disk of the saved item.
+    func persist<T: Encodable>(item: T, named fileName: String) -> Promise<URL> {
+        if let data = try? JSONEncoder().encode(item) {
+            return persist(data: data, named: fileName)
+        } else {
+            return Promise(error: FileStorageError.unableToEncode)
         }
     }
 
-    /// Persists raw data at the specified location with `CompletionHandler`.
-    func persist(data: Data, named fileName: String, with completion: @escaping CompletionHandler) {
-        var url: URL?
-        var error: Error?
+    /// Persists raw data at the specified location.
+    ///
+    /// - Parameters:
+    ///   - data: Data to persist.
+    ///   - fileName: Destination file name.
+    /// - Returns: URL with a location on disk of the saved data.
+    func persist(data: Data, named fileName: String) -> Promise<URL> {
+        return Promise { seal in
+            var url: URL?
+            var error: Error?
 
-        // Create an operation to process the request.
-        let operation = BlockOperation {
-            do {
-                url = try self.persist(data: data, at: self.getFileURL(at: fileName))
-            } catch let persistenceError {
-                error = persistenceError
+            // Create an operation to process the request.
+            let operation = BlockOperation {
+                do {
+                    url = try self.persist(data: data, at: self.getFileURL(at: fileName))
+                } catch let persistenceError {
+                    error = persistenceError
+                }
             }
-        }
 
-        operation.completionBlock = {
-            completion(url, error)
-        }
+            operation.completionBlock = {
+                seal.resolve(url, error)
+            }
 
-        queue.addOperation(operation)
+            queue.addOperation(operation)
+        }
     }
 
     /// Load cached data from the specified location.
@@ -71,7 +81,11 @@ final class FileStorage {
     private func persist(data: Data, at url: URL) throws -> URL {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: url.path) {
-            try fileManager.removeItem(atPath: url.path)
+            do {
+                try fileManager.removeItem(atPath: url.path)
+            } catch {
+                throw FileStorageError.unableToRemoveItemAtPath(url.path)
+            }
         }
         fileManager.createFile(atPath: url.path, contents: data, attributes: nil)
 
@@ -119,5 +133,10 @@ final class FileStorage {
         /// Stores items at a specific location
         /// If `nil` was specified returns root
         case atFolder(name: String?)
+    }
+
+    enum FileStorageError: Error {
+        case unableToEncode
+        case unableToRemoveItemAtPath(String)
     }
 }
