@@ -6,7 +6,7 @@
 import Foundation
 
 final class StepAssemblyImpl: BaseAssembly, StepAssembly {
-    func module(seed: StepModuleSeed) -> UIViewController {
+    func module(seed: StepModuleSeed) -> StepViewController {
         let controller = StepViewController()
         let router = StepRouter(viewController: controller, authAssembly: assemblyFactory.authAssembly)
 
