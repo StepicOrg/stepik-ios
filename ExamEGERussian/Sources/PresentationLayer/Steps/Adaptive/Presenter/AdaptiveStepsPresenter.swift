@@ -266,7 +266,7 @@ extension AdaptiveStepsPresenter {
             quizViewControllerBuilder: builder,
             stepPresenterDelegate: self
         )
-        
+
         return stepAssembly.module(seed: seed)
     }
 }
