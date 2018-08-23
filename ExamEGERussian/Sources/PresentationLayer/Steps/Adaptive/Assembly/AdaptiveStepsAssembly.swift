@@ -16,15 +16,19 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
         }
 
         let controller = AdaptiveStepsViewController()
+        let stepAssembly = StepAssemblyImpl(
+            assemblyFactory: assemblyFactory,
+            serviceFactory: serviceFactory
+        )
         let presenter = AdaptiveStepsPresenter(
             view: controller,
             courseId: courseId,
-            stepAssembly: StepAssemblyImpl(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory),
+            stepAssembly: stepAssembly,
             recommendationsService: serviceFactory.recommendationsService,
             reactionService: serviceFactory.reactionService,
             stepsService: serviceFactory.stepsService,
-            joinCourseUseCase: useCaseFactory.joinCourseUseCase,
-            sendStepViewUseCase: useCaseFactory.sendStepViewUseCase
+            courseService: serviceFactory.courseService,
+            viewsService: serviceFactory.viewsService
         )
         controller.presenter = presenter
 

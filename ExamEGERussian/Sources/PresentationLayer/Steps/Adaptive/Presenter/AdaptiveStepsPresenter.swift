@@ -18,9 +18,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private let recommendationsService: RecommendationsServiceProtocol
     private let reactionService: ReactionServiceProtocol
     private let stepsService: StepsService
-
-    private let joinCourseUseCase: JoinCourseUseCaseProtocol
-    private let sendStepViewUseCase: SendStepViewUseCaseProtocol
+    private let courseService: CourseService
+    private let viewsService: ViewsServiceProtocol
 
     private var stepViewController: UIViewController?
     private var currentStep: StepPlainObject?
@@ -35,8 +34,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
          recommendationsService: RecommendationsServiceProtocol,
          reactionService: ReactionServiceProtocol,
          stepsService: StepsService,
-         joinCourseUseCase: JoinCourseUseCaseProtocol,
-         sendStepViewUseCase: SendStepViewUseCaseProtocol
+         courseService: CourseService,
+         viewsService: ViewsServiceProtocol
     ) {
         self.view = view
         self.courseId = courseId
@@ -44,8 +43,8 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         self.recommendationsService = recommendationsService
         self.reactionService = reactionService
         self.stepsService = stepsService
-        self.joinCourseUseCase = joinCourseUseCase
-        self.sendStepViewUseCase = sendStepViewUseCase
+        self.courseService = courseService
+        self.viewsService = viewsService
     }
 
     func refresh() {
@@ -81,21 +80,21 @@ extension AdaptiveStepsPresenter {
         var lesson: LessonPlainObject?
         view?.state = .fetching
 
-        joinCourseUseCase.joinCourses([courseId]).then { _ in
+        courseService.joinCourses(with: [courseId]).then { _ in
             self.getRecommendation(for: self.courseId)
         }.then { recommendation -> Promise<StepPlainObject> in
             lesson = recommendation
             return self.getStep(for: recommendation)
         }.then { [weak self] step -> Promise<Void> in
             guard let strongSelf = self,
-                let lesson = lesson else {
-                    throw AdaptiveStepsError.unknown
+                  let lesson = lesson else {
+                throw AdaptiveStepsError.unknown
             }
 
             strongSelf.currentStep = step
             strongSelf.showStepViewController(for: step, lesson: lesson)
 
-            return strongSelf.sendStepViewUseCase.sendView(for: step)
+            return strongSelf.viewsService.sendView(for: step)
         }.done {
             self.view?.state = .idle
             print("\(#function): view for step created")

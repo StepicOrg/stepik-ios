@@ -44,7 +44,11 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var courseService: CourseService {
-        return CourseServiceImpl(coursesAPI: coursesAPI, progressesService: self.progressService)
+        return CourseServiceImpl(
+            coursesAPI: coursesAPI,
+            progressesService: progressService,
+            enrollmentService: enrollmentService
+        )
     }
 
     var enrollmentService: EnrollmentService {
@@ -52,7 +56,7 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var stepsService: StepsService {
-        return StepsServiceImpl(stepsAPI: stepsAPI, progressService: self.progressService)
+        return StepsServiceImpl(stepsAPI: stepsAPI, progressService: progressService)
     }
 
     var progressService: ProgressService {
@@ -65,6 +69,10 @@ final class ServiceFactoryImpl: ServiceFactory {
 
     var reactionService: ReactionServiceProtocol {
         return ReactionService(recommendationsAPI: recommendationsAPI)
+    }
+
+    var viewsService: ViewsServiceProtocol {
+        return ViewsService(unitsAPI: unitsAPI, viewsAPI: viewsAPI)
     }
 
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol {

@@ -32,21 +32,21 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private let lessonsService: LessonsService
-    private let joinCourseUseCase: JoinCourseUseCaseProtocol
+    private let courseService: CourseService
 
     init(view: LessonsView,
          router: LessonsRouter,
          topicId: String,
          knowledgeGraph: KnowledgeGraph,
          lessonsService: LessonsService,
-         joinCourseUseCase: JoinCourseUseCaseProtocol
+         courseService: CourseService
     ) {
         self.view = view
         self.router = router
         self.topicId = topicId
         self.knowledgeGraph = knowledgeGraph
         self.lessonsService = lessonsService
-        self.joinCourseUseCase = joinCourseUseCase
+        self.courseService = courseService
     }
 
     func refresh() {
@@ -69,7 +69,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
             return
         }
 
-        joinCourseUseCase.joinCourses(coursesIds).done { courses in
+        courseService.joinCourses(with: coursesIds).done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
         }.catch { [weak self] error in
             self?.displayError(error)

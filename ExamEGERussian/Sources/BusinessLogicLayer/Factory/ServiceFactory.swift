@@ -30,6 +30,7 @@ protocol ServiceFactory: class {
     var progressService: ProgressService { get }
     var recommendationsService: RecommendationsServiceProtocol { get }
     var reactionService: ReactionServiceProtocol { get }
+    var viewsService: ViewsServiceProtocol { get }
 
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol { get }
 }

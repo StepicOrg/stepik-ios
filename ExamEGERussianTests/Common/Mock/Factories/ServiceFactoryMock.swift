@@ -50,6 +50,8 @@ final class ServiceFactoryMock: ServiceFactory {
 
     var reactionService: ReactionServiceProtocol
 
+    var viewsService: ViewsServiceProtocol
+
     var knowledgeGraphProvider: KnowledgeGraphProviderProtocol
 
     init() {
@@ -73,6 +75,7 @@ final class ServiceFactoryMock: ServiceFactory {
         self.progressService = ProgressServiceMock()
         self.recommendationsService = RecommendationsServiceMock()
         self.reactionService = ReactionServiceMock()
+        self.viewsService = ViewsServiceMock()
         self.knowledgeGraphProvider = KnowledgeGraphProviderMock()
     }
 }

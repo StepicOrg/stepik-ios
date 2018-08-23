@@ -10,16 +10,20 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class CourseServiceMock: BaseServiceMock<[Course]>, CourseService {
-    func fetchCourses(with ids: [Int]) -> Promise<[Course]> {
+final class CourseServiceMock: BaseServiceMock<[CoursePlainObject]>, CourseService {
+    func fetchCourses(with ids: [Int]) -> Promise<[CoursePlainObject]> {
         return resultToBeReturned
     }
 
-    func obtainCourses(with ids: [Int]) -> Promise<[Course]> {
+    func obtainCourses(with ids: [Int]) -> Promise<[CoursePlainObject]> {
         return resultToBeReturned
     }
 
-    func fetchProgresses(coursesIds ids: [Int]) -> Promise<[Course]> {
+    func fetchProgresses(coursesIds ids: [Int]) -> Promise<[CoursePlainObject]> {
+        return resultToBeReturned
+    }
+
+    func joinCourses(with ids: [Int]) -> Promise<[CoursePlainObject]> {
         return resultToBeReturned
     }
 }

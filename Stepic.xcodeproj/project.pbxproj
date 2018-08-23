@@ -2120,14 +2120,8 @@
 		2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */; };
 		2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */; };
 		2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */; };
-		2C4B6A5C212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */; };
-		2C4B6A5E212B4E1C008B3953 /* JoinCourseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */; };
 		2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */; };
 		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */; };
-		2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */; };
-		2C4B6A6D212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */; };
-		2C4B6A6F212B63F4008B3953 /* SendStepViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -2872,6 +2866,9 @@
 		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */; };
+		2C905233212EADD100354DFB /* ViewsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */; };
+		2C905235212EADDB00354DFB /* ViewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905234212EADDB00354DFB /* ViewsService.swift */; };
+		2C905237212EB17D00354DFB /* ViewsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905236212EB17D00354DFB /* ViewsServiceMock.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C9294FE2035CE2D0058D18C /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
@@ -5832,13 +5829,7 @@
 		2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
 		2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
-		2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCaseProtocol.swift; sourceTree = "<group>"; };
-		2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCase.swift; sourceTree = "<group>"; };
 		2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
-		2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactoryProtocol.swift; sourceTree = "<group>"; };
-		2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
-		2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendStepViewUseCaseProtocol.swift; sourceTree = "<group>"; };
-		2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendStepViewUseCase.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -5952,6 +5943,9 @@
 		2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive GMAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
 		2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObjectTests.swift; sourceTree = "<group>"; };
+		2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsServiceProtocol.swift; sourceTree = "<group>"; };
+		2C905234212EADDB00354DFB /* ViewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsService.swift; sourceTree = "<group>"; };
+		2C905236212EB17D00354DFB /* ViewsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsServiceMock.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRemoteConfig.swift; sourceTree = "<group>"; };
@@ -9133,51 +9127,6 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		2C4B6A5A212B4DCA008B3953 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				2C4B6A6A212B63C4008B3953 /* JoinCourse */,
-				2C4B6A6B212B63CF008B3953 /* SendStepView */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
-		2C4B6A66212B55CF008B3953 /* ServiceFactory */ = {
-			isa = PBXGroup;
-			children = (
-				62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */,
-				62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */,
-			);
-			path = ServiceFactory;
-			sourceTree = "<group>";
-		};
-		2C4B6A67212B55DA008B3953 /* UseCaseFactory */ = {
-			isa = PBXGroup;
-			children = (
-				2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */,
-				2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */,
-			);
-			path = UseCaseFactory;
-			sourceTree = "<group>";
-		};
-		2C4B6A6A212B63C4008B3953 /* JoinCourse */ = {
-			isa = PBXGroup;
-			children = (
-				2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */,
-				2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */,
-			);
-			path = JoinCourse;
-			sourceTree = "<group>";
-		};
-		2C4B6A6B212B63CF008B3953 /* SendStepView */ = {
-			isa = PBXGroup;
-			children = (
-				2C4B6A6E212B63F4008B3953 /* SendStepViewUseCase.swift */,
-				2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */,
-			);
-			path = SendStepView;
-			sourceTree = "<group>";
-		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
 			isa = PBXGroup;
 			children = (
@@ -9338,7 +9287,6 @@
 			children = (
 				62E9896A25BC9EB0045900B5 /* Factory */,
 				2C59F06320EB9FFA00666EE0 /* Services */,
-				2C4B6A5A212B4DCA008B3953 /* UseCases */,
 			);
 			path = BusinessLogicLayer;
 			sourceTree = "<group>";
@@ -9355,6 +9303,7 @@
 				2CDF46332126AE0600A803C5 /* RecommendationsService */,
 				2C83E5E0211058CC00A8322D /* StepsService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
+				2C905231212EADAC00354DFB /* ViewsService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -9719,6 +9668,15 @@
 			name = GMAT;
 			sourceTree = "<group>";
 		};
+		2C905231212EADAC00354DFB /* ViewsService */ = {
+			isa = PBXGroup;
+			children = (
+				2C905234212EADDB00354DFB /* ViewsService.swift */,
+				2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */,
+			);
+			path = ViewsService;
+			sourceTree = "<group>";
+		};
 		2C92669420B5C78900525AFC /* PlaceholderCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -9871,6 +9829,7 @@
 				2C1351E1212C47A2009E7312 /* RecommendationsServiceMock.swift */,
 				2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */,
 				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
+				2C905236212EB17D00354DFB /* ViewsServiceMock.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -10628,8 +10587,8 @@
 		62E9896A25BC9EB0045900B5 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				2C4B6A66212B55CF008B3953 /* ServiceFactory */,
-				2C4B6A67212B55DA008B3953 /* UseCaseFactory */,
+				62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */,
+				62E98003E33487A15450E427 /* ServiceFactoryImpl.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -15977,7 +15936,6 @@
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
 				2C093F24211B455E00162DD0 /* EmailAuthViewController.swift in Sources */,
 				2C33CBF520EC327F009956B0 /* UsersAPI.swift in Sources */,
-				2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */,
 				2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */,
 				2C33CBF220EC326A009956B0 /* CoursesAPI.swift in Sources */,
 				2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */,
@@ -15994,7 +15952,6 @@
 				2C33CBF020EC325A009956B0 /* RecommendationsAPI.swift in Sources */,
 				2C093EFA211B425F00162DD0 /* RoutingManager.swift in Sources */,
 				2C093F1C211B44BA00162DD0 /* TagDetectionUtil.swift in Sources */,
-				2C4B6A5E212B4E1C008B3953 /* JoinCourseUseCase.swift in Sources */,
 				2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */,
 				2C6B2B9D2121A15900968C96 /* ConfigureThirdPartiesCommand.swift in Sources */,
 				2CA6F5EE21219A6500EE337E /* ServiceFactoryBuilder.swift in Sources */,
@@ -16056,6 +16013,7 @@
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */,
 				2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */,
+				2C905235212EADDB00354DFB /* ViewsService.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,
 				2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */,
@@ -16084,6 +16042,7 @@
 				2C093F2C211B46FD00162DD0 /* ChoiceQuizTableViewCell.swift in Sources */,
 				2C9499AD20ECBA3E0049E9A8 /* Lesson+CoreDataProperties.swift in Sources */,
 				2C83E5DB2110441800A8322D /* Video.swift in Sources */,
+				2C905233212EADD100354DFB /* ViewsServiceProtocol.swift in Sources */,
 				2C9499B020ECBAA10049E9A8 /* Notification.swift in Sources */,
 				2C33CBFE20EC332E009956B0 /* ProgressesAPI.swift in Sources */,
 				2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */,
@@ -16148,7 +16107,6 @@
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
-				2C4B6A6F212B63F4008B3953 /* SendStepViewUseCase.swift in Sources */,
 				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
@@ -16262,7 +16220,6 @@
 				2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */,
 				2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
-				2C4B6A6D212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C093F17211B445900162DD0 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C9492CF2113119E00552600 /* StandartStepsAssembly.swift in Sources */,
@@ -16272,7 +16229,6 @@
 				2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */,
 				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,
-				2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */,
 				2C770306210F29B0002E250D /* LessonPlainObject.swift in Sources */,
 				2C77030B210F2AD5002E250D /* BaseRouter.swift in Sources */,
 				2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */,
@@ -16344,7 +16300,6 @@
 				62E98B8BE1F22F2E05CA130D /* StepAssembly.swift in Sources */,
 				62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */,
 				62E981A09293D322A38F2D13 /* ProgressService.swift in Sources */,
-				2C4B6A5C212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift in Sources */,
 				62E987EE86AB48E30FF5EC79 /* ProgressServiceImpl.swift in Sources */,
 				62E989D0D1B162A9AE12DFD6 /* StepsServiceImpl.swift in Sources */,
 				2C093F04211B42F500162DD0 /* ProfileViewController.swift in Sources */,
@@ -16374,6 +16329,7 @@
 				2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */,
+				2C905237212EB17D00354DFB /* ViewsServiceMock.swift in Sources */,
 				2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */,
 				2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */,
 				2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */,

@@ -11,11 +11,9 @@ import Foundation
 class BaseAssembly {
     let assemblyFactory: AssemblyFactory
     let serviceFactory: ServiceFactory
-    let useCaseFactory: UseCaseFactoryProtocol
 
     init(assemblyFactory: AssemblyFactory, serviceFactory: ServiceFactory) {
         self.assemblyFactory = assemblyFactory
         self.serviceFactory = serviceFactory
-        self.useCaseFactory = UseCaseFactory(serviceFactory: serviceFactory)
     }
 }

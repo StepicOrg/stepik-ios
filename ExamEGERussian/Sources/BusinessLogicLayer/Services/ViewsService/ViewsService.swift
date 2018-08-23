@@ -1,15 +1,15 @@
 //
-//  SendStepViewUseCase.swift
+//  ViewsService.swift
 //  ExamEGERussian
 //
-//  Created by Ivan Magda on 21/08/2018.
+//  Created by Ivan Magda on 23/08/2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
 import Foundation
 import PromiseKit
 
-final class SendStepViewUseCase: SendStepViewUseCaseProtocol {
+final class ViewsService: ViewsServiceProtocol {
     private let unitsAPI: UnitsAPI
     private let viewsAPI: ViewsAPI
 
@@ -21,12 +21,12 @@ final class SendStepViewUseCase: SendStepViewUseCaseProtocol {
     func sendView(for step: StepPlainObject) -> Promise<Void> {
         return Promise { seal in
             guard let lesson = Lesson.getLesson(step.lessonId) else {
-                throw SendStepViewUseCaseError.viewNotSent
+                throw ViewsServiceError.viewNotSent
             }
 
             self.unitsAPI.retrieve(lesson: lesson.id).then { unit -> Promise<Void> in
                 guard let assignmentId = unit.assignmentsArray.first else {
-                    seal.reject(SendStepViewUseCaseError.viewNotSent)
+                    seal.reject(ViewsServiceError.viewNotSent)
                     return .value(())
                 }
 
@@ -34,12 +34,12 @@ final class SendStepViewUseCase: SendStepViewUseCaseProtocol {
             }.done { _ in
                 seal.fulfill(())
             }.catch { _ in
-                seal.reject(SendStepViewUseCaseError.viewNotSent)
+                seal.reject(ViewsServiceError.viewNotSent)
             }
         }
     }
 
-    enum SendStepViewUseCaseError: Error {
+    enum ViewsServiceError: Error {
         case viewNotSent
     }
 }
