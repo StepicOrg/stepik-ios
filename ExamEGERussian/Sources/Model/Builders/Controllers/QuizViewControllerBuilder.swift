@@ -12,6 +12,7 @@ final class QuizViewControllerBuilder {
     private(set) weak var logoutable: Logoutable?
     private(set) var stepType: StepPlainObject.StepType?
     private(set) var needNewAttempt = false
+    private(set) var isSubmitButtonHidden = false
 
     func setStepType(_ stepType: StepPlainObject.StepType) -> QuizViewControllerBuilder {
         self.stepType = stepType
@@ -25,6 +26,11 @@ final class QuizViewControllerBuilder {
 
     func setNeedNewAttempt(_ needNewAttempt: Bool) -> QuizViewControllerBuilder {
         self.needNewAttempt = needNewAttempt
+        return self
+    }
+
+    func setSubmitButtonHidden(_ isSubmitButtonHidden: Bool) -> QuizViewControllerBuilder {
+        self.isSubmitButtonHidden = isSubmitButtonHidden
         return self
     }
 

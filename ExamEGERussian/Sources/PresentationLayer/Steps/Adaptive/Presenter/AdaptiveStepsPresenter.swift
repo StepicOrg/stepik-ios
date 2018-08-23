@@ -195,7 +195,9 @@ extension AdaptiveStepsPresenter {
     }
 
     private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> UIViewController {
-        let builder = QuizViewControllerBuilder().setNeedNewAttempt(true)
+        let builder = QuizViewControllerBuilder()
+            .setNeedNewAttempt(true)
+            .setSubmitButtonHidden(true)
         let seed = StepModuleSeed(lesson: lesson, step: step, quizViewControllerBuilder: builder, stepPresenterDelegate: self)
 
         return stepAssembly.module(seed: seed)

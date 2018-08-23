@@ -68,6 +68,7 @@ extension StepPresenterImpl {
 
         setupQuizViewController(quizViewController)
         view?.updateQuiz(with: quizViewController)
+        quizViewController.isSubmitButtonHidden = quizViewControllerBuilder.isSubmitButtonHidden
     }
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
