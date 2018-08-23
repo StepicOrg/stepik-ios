@@ -2123,7 +2123,6 @@
 		2C4B6A5C212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */; };
 		2C4B6A5E212B4E1C008B3953 /* JoinCourseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */; };
 		2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */; };
-		2C4B6A62212B528A008B3953 /* CourseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A61212B528A008B3953 /* CourseMapper.swift */; };
 		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C4B6A65212B55B9008B3953 /* UseCaseFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */; };
 		2C4B6A69212B55EF008B3953 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */; };
@@ -2872,6 +2871,7 @@
 		2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
+		2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C9294FE2035CE2D0058D18C /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
@@ -4190,7 +4190,6 @@
 		2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46362126B0A100A803C5 /* RecommendationsService.swift */; };
 		2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */; };
 		2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */; };
-		2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463E2126CC2500A803C5 /* LessonMapper.swift */; };
 		2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */; };
 		2CDF46442126DE1D00A803C5 /* ReactionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */; };
 		2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46452126DE2500A803C5 /* ReactionService.swift */; };
@@ -5836,7 +5835,6 @@
 		2C4B6A5B212B4E02008B3953 /* JoinCourseUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCaseProtocol.swift; sourceTree = "<group>"; };
 		2C4B6A5D212B4E1C008B3953 /* JoinCourseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseUseCase.swift; sourceTree = "<group>"; };
 		2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
-		2C4B6A61212B528A008B3953 /* CourseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMapper.swift; sourceTree = "<group>"; };
 		2C4B6A64212B55B9008B3953 /* UseCaseFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactoryProtocol.swift; sourceTree = "<group>"; };
 		2C4B6A68212B55EF008B3953 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
 		2C4B6A6C212B63EC008B3953 /* SendStepViewUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendStepViewUseCaseProtocol.swift; sourceTree = "<group>"; };
@@ -5953,6 +5951,7 @@
 		2C89A9461F4C285B00227C3B /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/GMAT/Tokens.plist; sourceTree = "<group>"; };
 		2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive GMAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
+		2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObjectTests.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRemoteConfig.swift; sourceTree = "<group>"; };
@@ -6126,7 +6125,6 @@
 		2CDF46362126B0A100A803C5 /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 		2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsAPIMock.swift; sourceTree = "<group>"; };
 		2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceTests.swift; sourceTree = "<group>"; };
-		2CDF463E2126CC2500A803C5 /* LessonMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMapper.swift; sourceTree = "<group>"; };
 		2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonPlainObject+Make.swift"; sourceTree = "<group>"; };
 		2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceProtocol.swift; sourceTree = "<group>"; };
 		2CDF46452126DE2500A803C5 /* ReactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionService.swift; sourceTree = "<group>"; };
@@ -8917,6 +8915,7 @@
 			isa = PBXGroup;
 			children = (
 				2C4EB2CA212416B500AF2331 /* KnowledgeGraphTests */,
+				2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */,
 				2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */,
 				2C23FF1A21230C7F00721E59 /* StepPlainObjectTests.swift */,
 			);
@@ -10346,7 +10345,6 @@
 			isa = PBXGroup;
 			children = (
 				2CD7993C21077CB90054D098 /* Builders */,
-				2CDF463D2126CBFE00A803C5 /* Mappers */,
 				2CD7999521077E540054D098 /* PlainObjects */,
 				2C14DFE2212AC9D8000D2765 /* Providers */,
 			);
@@ -10409,15 +10407,6 @@
 				2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		2CDF463D2126CBFE00A803C5 /* Mappers */ = {
-			isa = PBXGroup;
-			children = (
-				2C4B6A61212B528A008B3953 /* CourseMapper.swift */,
-				2CDF463E2126CC2500A803C5 /* LessonMapper.swift */,
-			);
-			path = Mappers;
 			sourceTree = "<group>";
 		};
 		2CDF46422126DE0300A803C5 /* ReactionService */ = {
@@ -16050,7 +16039,6 @@
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
-				2CDF463F2126CC2500A803C5 /* LessonMapper.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,
 				2C94999120ECB7AA0049E9A8 /* NotificationsStatus.swift in Sources */,
 				2C94998F20ECB7770049E9A8 /* Course.swift in Sources */,
@@ -16246,7 +16234,6 @@
 				2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */,
 				2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */,
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
-				2C4B6A62212B528A008B3953 /* CourseMapper.swift in Sources */,
 				2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */,
 				2C093F12211B441600162DD0 /* NotificationRequestAlertManager.swift in Sources */,
 				2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */,
@@ -16388,6 +16375,7 @@
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */,
 				2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */,
+				2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */,
 				2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */,
 				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
 				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,

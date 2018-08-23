@@ -38,7 +38,7 @@ final class JoinCourseUseCase: JoinCourseUseCaseProtocol {
         }.then { courses in
             self.courseService.fetchProgresses(coursesIds: courses.map { $0.id })
         }.mapValues {
-            CourseMapper(course: $0).plainObject
+            CoursePlainObject(course: $0)
         }
     }
 

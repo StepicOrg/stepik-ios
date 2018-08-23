@@ -16,3 +16,14 @@ struct CoursePlainObject {
     let summary: String
     var enrolled = false
 }
+
+extension CoursePlainObject {
+    init(course: Course) {
+        self.id = course.id
+        self.title = course.title
+        self.coverURLString = course.coverURLString
+        self.courseDescription = course.courseDescription
+        self.summary = course.summary
+        self.enrolled = course.enrolled
+    }
+}

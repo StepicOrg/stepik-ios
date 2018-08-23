@@ -20,11 +20,11 @@ final class LessonsServiceImpl: LessonsService {
     func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
         return executeFetchRequest(ids: ids)
             .then { self.lessonsAPI.retrieve(ids: ids, existing: $0) }
-            .mapValues { self.toPlainObject($0) }
+            .mapValues { LessonPlainObject(lesson: $0) }
     }
 
     func obtainLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
-        return executeFetchRequest(ids: ids).mapValues { self.toPlainObject($0) }
+        return executeFetchRequest(ids: ids).mapValues { LessonPlainObject(lesson: $0) }
     }
 
     // MARK: - Private API
@@ -48,9 +48,5 @@ final class LessonsServiceImpl: LessonsService {
             })
             _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
         }
-    }
-
-    private func toPlainObject(_ lesson: Lesson) -> LessonPlainObject {
-        return LessonMapper(lesson: lesson).plainObject
     }
 }
