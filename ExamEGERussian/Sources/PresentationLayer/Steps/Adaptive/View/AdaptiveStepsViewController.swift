@@ -36,6 +36,20 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
 
     private weak var stepView: UIView?
 
+    private lazy var hardBarButtonItem: UIBarButtonItem = {
+        UIBarButtonItem(title: NSLocalizedString("Hard", comment: ""), style: .plain,
+                        target: self, action: #selector(onHardClick(_:)))
+    }()
+    private lazy var easyBarButtonItem: UIBarButtonItem = {
+        UIBarButtonItem(title: NSLocalizedString("Easy", comment: ""), style: .plain,
+                        target: self, action: #selector(onEasyClick(_:)))
+    }()
+
+    private lazy var submitBarButtonItem: UIBarButtonItem = {
+        UIBarButtonItem(title: NSLocalizedString("Submit", comment: ""), style: .plain,
+                        target: self, action: #selector(onSubmitClick(_:)))
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,10 +67,15 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
         navigationController?.setToolbarHidden(true, animated: animated)
     }
 
+    // MARK: - Private API
+
     private func setup() {
         view.backgroundColor = .white
 
-        setupToolbar()
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                     target: self, action: nil)
+        toolbarItems = [hardBarButtonItem, spacer, submitBarButtonItem, spacer,
+                        easyBarButtonItem]
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
             self?.presenter?.refresh()
@@ -68,30 +87,6 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
         let spacer = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: self,
-            action: nil
-        )
-
-        let hard = UIBarButtonItem(
-            title: NSLocalizedString("Hard", comment: ""),
-            style: .plain,
-            target: self,
-            action: #selector(onHardClick(_:))
-        )
-
-        let taskControl = UIBarButtonItem(
-            title: NSLocalizedString("Submit", comment: ""),
-            style: .plain,
-            target: self,
-            action: #selector(onTaskControlClick)
-        )
-        let easy = UIBarButtonItem(
-            title: NSLocalizedString("Easy", comment: ""),
-            style: .plain,
-            target: self,
-            action: #selector(onEasyClick(_:))
-        )
-
-        toolbarItems = [hard, spacer, taskControl, spacer, easy]
     }
 
     @objc
