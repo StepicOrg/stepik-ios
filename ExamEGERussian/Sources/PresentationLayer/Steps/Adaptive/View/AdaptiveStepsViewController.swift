@@ -95,17 +95,17 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
 
     @objc
     private func onHardClick(_ sender: Any) {
-        print("\(#function)")
+        presenter?.sendHardReaction()
     }
 
     @objc
-    private func onTaskControlClick(_ sender: Any) {
-        print("\(#function)")
+    private func onSubmitClick(_ sender: Any) {
+        presenter?.submit()
     }
 
     @objc
     private func onEasyClick(_ sender: Any) {
-        print("\(#function)")
+        presenter?.sendEasyReaction()
     }
 }
 
