@@ -135,7 +135,7 @@ extension AdjacencyListGraph {
             return false
         }
 
-        for node in vertices {
+        for (node, _) in adjacency {
             hasCycle = dfs(node)
             if hasCycle {
                 throw AdjacencyListGraphError.hasCycle
