@@ -27,7 +27,7 @@ final class StepPresenterImpl: StepPresenter {
          quizViewControllerBuilder: QuizViewControllerBuilder,
          delegate: StepPresenterDelegate?,
          stepsService: StepsService
-    ) {
+        ) {
         self.view = view
         self.step = step
         self.lesson = lesson
@@ -70,7 +70,7 @@ final class StepPresenterImpl: StepPresenter {
     private func showError(
         title: String = NSLocalizedString("Error", comment: ""),
         message: String
-    ) {
+        ) {
         view?.displayError(title: title, message: message)
     }
 }

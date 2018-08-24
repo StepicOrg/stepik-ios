@@ -27,10 +27,7 @@ class ExploreViewController: UIViewController, ExploreView {
             scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
         //Initialized in reverse order to be inserted in correct way
-        presenter?.initTagsWidget()
-        if DefaultsContainer.explore.shouldDisplayContentLanguageWidget {
-            presenter?.initLanguagesWidget()
-        }
+        presenter?.setupWidgets()
     }
 
     private func setupStackView() {
@@ -133,6 +130,50 @@ class ExploreViewController: UIViewController, ExploreView {
 
     func getNavigation() -> UINavigationController? {
         return self.navigationController
+    }
+
+    var storiesWidgetView: UIView?
+
+    func hideStories() {
+        if let storiesWidgetView = storiesWidgetView {
+            storiesWidgetView.isHidden = true
+            stackView.removeArrangedSubview(storiesWidgetView)
+            stackView.setNeedsLayout()
+            UIView.animate(withDuration: 0.15, animations: {
+                self.stackView.layoutIfNeeded()
+            })
+            self.storiesWidgetView = nil
+        }
+    }
+
+    func setStories() {
+        guard let presenter = self.presenter else {
+            return
+        }
+        let storiesModule = StoriesAssembly(refreshDelegate: presenter).makeModule()
+        addChildViewController(storiesModule)
+        let widgetBackgroundView = UIView()
+        widgetBackgroundView.backgroundColor = UIColor.white
+        widgetBackgroundView.addSubview(storiesModule.view)
+        storiesModule.view.snp.makeConstraints { make -> Void in
+            make.top.equalTo(widgetBackgroundView).offset(16)
+            make.bottom.equalTo(widgetBackgroundView).offset(0)
+            make.height.equalTo(98)
+        }
+        if #available(iOS 11.0, *) {
+            storiesModule.view.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.leading).offset(0)
+                make.trailing.equalTo(widgetBackgroundView.safeAreaLayoutGuide.snp.trailing).offset(0)
+            }
+        } else {
+            storiesModule.view.snp.makeConstraints { make -> Void in
+                make.leading.equalTo(widgetBackgroundView).offset(0)
+                make.trailing.equalTo(widgetBackgroundView).offset(0)
+            }
+        }
+        widgetBackgroundView.isHidden = false
+        stackView.insertArrangedSubview(widgetBackgroundView, at: 0)
+        storiesWidgetView = widgetBackgroundView
     }
 
     func setLanguages(withLanguages languages: [ContentLanguage], initialLanguage: ContentLanguage, onSelected: @escaping (ContentLanguage) -> Void) {
