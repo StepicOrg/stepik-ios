@@ -16,6 +16,10 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return adjacency.keys.count
     }
 
+    var isEmpty: Bool {
+        return count == 0
+    }
+
     private var adjacencyLists: [Node: [Node]] {
         return adjacency as! [Node: [Node]]
     }

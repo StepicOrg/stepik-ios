@@ -33,15 +33,13 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     private let lessonsService: LessonsService
     private let courseService: CourseService
-    private let enrollmentService: EnrollmentService
 
     init(view: LessonsView,
          router: LessonsRouter,
          topicId: String,
          knowledgeGraph: KnowledgeGraph,
          lessonsService: LessonsService,
-         courseService: CourseService,
-         enrollmentService: EnrollmentService
+         courseService: CourseService
     ) {
         self.view = view
         self.router = router
@@ -49,7 +47,6 @@ final class LessonsPresenterImpl: LessonsPresenter {
         self.knowledgeGraph = knowledgeGraph
         self.lessonsService = lessonsService
         self.courseService = courseService
-        self.enrollmentService = enrollmentService
     }
 
     func refresh() {
@@ -72,33 +69,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
             return
         }
 
-        courseService.obtainCourses(with: coursesIds).then { courses -> Promise<[Int]> in
-            var ids = Set(self.coursesIds)
-            courses
-                .filter { $0.enrolled }
-                .map { $0.id }
-                .forEach { ids.remove($0) }
-
-            return .value(Array(ids))
-        }.then { ids -> Promise<[Course]> in
-            self.courseService.fetchCourses(with: ids)
-        }.then { courses in
-            when(fulfilled: courses.map { self.joinCourse($0) })
-        }.then { courses in
-            self.courseService.fetchProgresses(coursesIds: courses.map { $0.id })
-        }.done { courses in
+        courseService.joinCourses(with: coursesIds).done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
         }.catch { [weak self] error in
             self?.displayError(error)
         }
-    }
-
-    private func joinCourse(_ course: Course) -> Promise<Course> {
-        guard !course.enrolled else {
-            return .value(course)
-        }
-
-        return enrollmentService.joinCourse(course)
     }
 
     private func getLessons() {

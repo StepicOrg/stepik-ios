@@ -25,6 +25,19 @@ class LessonPlainObjectTests: XCTestCase {
         frenchLesson = nil
     }
 
+    func testInitFromLessonManagedObject() {
+        let lesson = Lesson()
+        lesson.title = "title"
+        lesson.slug = "slug"
+        lesson.stepsArray = [1, 2, 3, 4]
+
+        let plainObject = LessonPlainObject(lesson: lesson)
+        XCTAssertEqual(plainObject.id, lesson.id)
+        XCTAssertEqual(plainObject.steps, lesson.stepsArray)
+        XCTAssertEqual(plainObject.title, lesson.title)
+        XCTAssertEqual(plainObject.slug, lesson.slug)
+    }
+
     func testLesson() {
         XCTAssertEqual(mathLesson.id, 1)
         XCTAssertEqual(mathLesson.steps, [22, 23, 24])

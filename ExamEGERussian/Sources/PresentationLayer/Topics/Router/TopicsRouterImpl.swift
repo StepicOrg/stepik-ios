@@ -23,4 +23,17 @@ final class TopicsRouterImpl: BaseRouter, TopicsRouter {
             )
         })
     }
+
+    func showAdaptiveForTopicWithId(_ id: String) {
+        if let module = assemblyFactory.stepsAssembly.adaptive.module(topicId: id) {
+            pushViewController(derivedFrom: { _ in
+                module
+            })
+        } else {
+            navigationController?.presentAlert(
+                withTitle: NSLocalizedString("Error", comment: ""),
+                message: NSLocalizedString("At this moment we couldn't show adaptive lessons. Please, try again later.", comment: "")
+            )
+        }
+    }
 }

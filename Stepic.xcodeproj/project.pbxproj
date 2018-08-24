@@ -1106,7 +1106,6 @@
 		2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */; };
 		2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouter.swift */; };
 		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
-		2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
 		2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
@@ -1195,6 +1194,35 @@
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
+		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
+		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
+		2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */; };
+		2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */; };
+		2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */; };
+		2C130E932125A6090022E998 /* MockAssemblyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */; };
+		2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */; };
+		2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E962125A6890022E998 /* StepsAssemblyMock.swift */; };
+		2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */; };
+		2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */; };
+		2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */; };
+		2C130EA32125AD7D0022E998 /* AssemblyFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA22125AD7D0022E998 /* AssemblyFactoryTests.swift */; };
+		2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */; };
+		2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA92125B71B0022E998 /* MockTableViewCell.swift */; };
+		2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */; };
+		2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EB22125BE770022E998 /* BaseRouterTests.swift */; };
+		2C1351DE212C43C8009E7312 /* StepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */; };
+		2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351DF212C43D1009E7312 /* StepsAssembly.swift */; };
+		2C1351E2212C47A2009E7312 /* RecommendationsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351E1212C47A2009E7312 /* RecommendationsServiceMock.swift */; };
+		2C1351E4212C4871009E7312 /* ReactionServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351E3212C4871009E7312 /* ReactionServiceMock.swift */; };
+		2C1351E6212C48D1009E7312 /* KnowledgeGraphProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1351E5212C48D1009E7312 /* KnowledgeGraphProviderMock.swift */; };
+		2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFD8212A9D05000D2765 /* FileStorage.swift */; };
+		2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */; };
+		2C14DFE6212AC9D8000D2765 /* CachedKnowledgeGraphProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14DFE4212AC9D8000D2765 /* CachedKnowledgeGraphProvider.swift */; };
+		2C15BC42212AE26000AB1015 /* AdaptiveStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */; };
+		2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */; };
+		2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */; };
+		2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */; };
+		2C15BC4C212AEED900AB1015 /* AdaptiveStepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C1B60C01F4C4AEF00236804 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C1B60C11F4C4AEF00236804 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -2078,6 +2106,9 @@
 		2C4919112062A1EC003E733D /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2C4A1ECE21087D1800A1D68C /* TopicsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */; };
 		2C4A1ED021087D2800A1D68C /* TopicsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */; };
+		2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */; };
+		2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */; };
+		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -2809,6 +2840,10 @@
 		2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
+		2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */; };
+		2C905233212EADD100354DFB /* ViewsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */; };
+		2C905235212EADDB00354DFB /* ViewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905234212EADDB00354DFB /* ViewsService.swift */; };
+		2C905237212EB17D00354DFB /* ViewsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C905236212EB17D00354DFB /* ViewsServiceMock.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C9294FE2035CE2D0058D18C /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
@@ -2823,8 +2858,8 @@
 		2C9492C821130F7C00552600 /* CourseServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F72109B92300564D45 /* CourseServiceImpl.swift */; };
 		2C9492C921130FC100552600 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C9492CD2113119100552600 /* StepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CC2113119100552600 /* StepsAssembly.swift */; };
-		2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */; };
+		2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */; };
+		2C9492CF2113119E00552600 /* StandartStepsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */; };
 		2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		2C94998C20ECB71D0049E9A8 /* IDFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E49DC2072B684004896C0 /* IDFetchable.swift */; };
 		2C94998D20ECB7350049E9A8 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -2842,7 +2877,6 @@
 		2C94999920ECB8930049E9A8 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		2C94999A20ECB8AC0049E9A8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
-		2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
@@ -3409,9 +3443,9 @@
 		2CA2E72720237E5B001DC410 /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		2CA2E72820237E5E001DC410 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
 		2CA2E72920237E61001DC410 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
-		2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55C20FF79860041E893 /* GraphService.swift */; };
-		2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */; };
-		2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */; };
+		2CA3F55D20FF79860041E893 /* GraphServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */; };
+		2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3F56020FF7C030041E893 /* GraphService.swift */; };
+		2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */; };
 		2CA5568C212323E800A3B1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568D2123397400A3B1AB /* ImageAsset.swift */; };
 		2CA5568F212339E200A3B1AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
@@ -3982,6 +4016,13 @@
 		2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */; };
+		2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */; };
+		2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF5212594580046128C /* CourseServiceMock.swift */; };
+		2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF7212594D00046128C /* BaseServiceMock.swift */; };
+		2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */; };
+		2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */; };
+		2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFD212597060046128C /* ProgressServiceMock.swift */; };
 		2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296220FDE4700058481C /* ApplicationAssembly.swift */; };
 		2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */; };
 		2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */; };
@@ -4030,8 +4071,8 @@
 		2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */; };
 		2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */; };
 		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
-		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */; };
-		2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995672105C98E0023EC0C /* NSError+Create.swift */; };
+		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift */; };
+		2CC995682105C98E0023EC0C /* NSError+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995672105C98E0023EC0C /* NSError+Make.swift */; };
 		2CCA14BF2111A5E90068081A /* StepPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCA14BE2111A5E90068081A /* StepPresenterImpl.swift */; };
 		2CCA14C12111A6050068081A /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCA14C02111A6050068081A /* StepView.swift */; };
 		2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */; };
@@ -4091,6 +4132,15 @@
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
 		2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */; };
 		2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B5212472AA00898A70 /* LogoutableMock.swift */; };
+		2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */; };
+		2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46362126B0A100A803C5 /* RecommendationsService.swift */; };
+		2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */; };
+		2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */; };
+		2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */; };
+		2CDF46442126DE1D00A803C5 /* ReactionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */; };
+		2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46452126DE2500A803C5 /* ReactionService.swift */; };
+		2CDF46482126E50F00A803C5 /* ReactionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */; };
+		2CDF464A2126E61100A803C5 /* ReactionsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */; };
 		2CE11347208E103100293EAE /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133D208E102900293EAE /* Tokens.plist */; };
 		2CE11348208E103400293EAE /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE11335208E102700293EAE /* Icons.xcassets */; };
 		2CE11349208E103900293EAE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1133A208E102800293EAE /* icon.png */; };
@@ -5608,6 +5658,35 @@
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
+		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
+		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyViewController.swift; sourceTree = "<group>"; };
+		2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyNavigationController.swift; sourceTree = "<group>"; };
+		2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E962125A6890022E998 /* StepsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssemblyMock.swift; sourceTree = "<group>"; };
+		2C130EA22125AD7D0022E998 /* AssemblyFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryTests.swift; sourceTree = "<group>"; };
+		2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensionsTests.swift; sourceTree = "<group>"; };
+		2C130EA92125B71B0022E998 /* MockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewCell.swift; sourceTree = "<group>"; };
+		2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		2C130EB22125BE770022E998 /* BaseRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouterTests.swift; sourceTree = "<group>"; };
+		2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C1351DF212C43D1009E7312 /* StepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssembly.swift; sourceTree = "<group>"; };
+		2C1351E1212C47A2009E7312 /* RecommendationsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceMock.swift; sourceTree = "<group>"; };
+		2C1351E3212C4871009E7312 /* ReactionServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceMock.swift; sourceTree = "<group>"; };
+		2C1351E5212C48D1009E7312 /* KnowledgeGraphProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphProviderMock.swift; sourceTree = "<group>"; };
+		2C14DFD8212A9D05000D2765 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphProviderProtocol.swift; sourceTree = "<group>"; };
+		2C14DFE4212AC9D8000D2765 /* CachedKnowledgeGraphProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedKnowledgeGraphProvider.swift; sourceTree = "<group>"; };
+		2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsView.swift; sourceTree = "<group>"; };
+		2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenterProtocol.swift; sourceTree = "<group>"; };
+		2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
+		2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsAssembly.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5698,6 +5777,8 @@
 		2C4A1ECD21087D1800A1D68C /* TopicsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssembly.swift; sourceTree = "<group>"; };
 		2C4A1ECF21087D2800A1D68C /* TopicsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C4AC85F20FE31570085B2B8 /* AuthInfo+FakeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthInfo+FakeUser.swift"; sourceTree = "<group>"; };
+		2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
+		2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -5755,7 +5836,6 @@
 		2C681A0C210B38D800C3DDCA /* AuthSignUpRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpRouterImpl.swift; sourceTree = "<group>"; };
 		2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
-		2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTestsHelper.swift; sourceTree = "<group>"; };
 		2C6B2B982121A08300968C96 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureKeyWindowCommand.swift; sourceTree = "<group>"; };
 		2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureThirdPartiesCommand.swift; sourceTree = "<group>"; };
@@ -5812,13 +5892,17 @@
 		2C89A9461F4C285B00227C3B /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/GMAT/Tokens.plist; sourceTree = "<group>"; };
 		2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive GMAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
+		2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObjectTests.swift; sourceTree = "<group>"; };
+		2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsServiceProtocol.swift; sourceTree = "<group>"; };
+		2C905234212EADDB00354DFB /* ViewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsService.swift; sourceTree = "<group>"; };
+		2C905236212EB17D00354DFB /* ViewsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsServiceMock.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRemoteConfig.swift; sourceTree = "<group>"; };
 		2C9295062035D8FC0058D18C /* AdaptiveCoursesInfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCoursesInfoAPI.swift; sourceTree = "<group>"; };
 		2C9492C521130E6600552600 /* StepPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
-		2C9492CC2113119100552600 /* StepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssembly.swift; sourceTree = "<group>"; };
-		2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsAssemblyImpl.swift; sourceTree = "<group>"; };
+		2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartStepsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartStepsAssembly.swift; sourceTree = "<group>"; };
 		2C966D5B20F8078000DECF6D /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
@@ -5843,15 +5927,15 @@
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA2E7092023591F001DC410 /* AdaptiveUserActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveUserActions.swift; sourceTree = "<group>"; };
 		2CA2E70D20237DB7001DC410 /* AdaptiveCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsViewController.swift; sourceTree = "<group>"; };
-		2CA3F55C20FF79860041E893 /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
+		2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceProtocol.swift; sourceTree = "<group>"; };
 		2CA3F55E20FF7A150041E893 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
-		2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphServiceImpl.swift; sourceTree = "<group>"; };
+		2CA3F56020FF7C030041E893 /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		2CA3F56220FF82960041E893 /* KnowledgeGraphGoalPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56320FF82960041E893 /* KnowledgeGraphPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56420FF82970041E893 /* KnowledgeGraphLessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphLessonPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56520FF82970041E893 /* KnowledgeGraphTopicsMapPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicsMapPlainObject.swift; sourceTree = "<group>"; };
 		2CA3F56620FF82970041E893 /* KnowledgeGraphTopicPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicPlainObject.swift; sourceTree = "<group>"; };
-		2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepPlainObject+Create.swift"; sourceTree = "<group>"; };
+		2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepPlainObject+Make.swift"; sourceTree = "<group>"; };
 		2CA5568D2123397400A3B1AB /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		2CA6F5ED21219A6500EE337E /* ServiceFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryBuilder.swift; sourceTree = "<group>"; };
 		2CA6F5EF21219ABB00EE337E /* AssemblyFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryBuilder.swift; sourceTree = "<group>"; };
@@ -5864,6 +5948,13 @@
 		2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsAPI.swift; sourceTree = "<group>"; };
 		2CA9D9872011FB4E007AA743 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryMock.swift; sourceTree = "<group>"; };
+		2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF5212594580046128C /* CourseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF7212594D00046128C /* BaseServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceMock.swift; sourceTree = "<group>"; };
+		2CA9FDFD212597060046128C /* ProgressServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressServiceMock.swift; sourceTree = "<group>"; };
 		2CAD296220FDE4700058481C /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyImpl.swift; sourceTree = "<group>"; };
 		2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleHolder.swift; sourceTree = "<group>"; };
@@ -5910,8 +6001,8 @@
 		2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterMock.swift; sourceTree = "<group>"; };
 		2CC9955D2105C0AD0023EC0C /* TopicsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsPresenterTests.swift; sourceTree = "<group>"; };
 		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
-		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Create.swift"; sourceTree = "<group>"; };
-		2CC995672105C98E0023EC0C /* NSError+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Create.swift"; sourceTree = "<group>"; };
+		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Make.swift"; sourceTree = "<group>"; };
+		2CC995672105C98E0023EC0C /* NSError+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Make.swift"; sourceTree = "<group>"; };
 		2CCA14BE2111A5E90068081A /* StepPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenterImpl.swift; sourceTree = "<group>"; };
 		2CCA14C02111A6050068081A /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		2CCB5A3B2100824F0091A605 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
@@ -5974,6 +6065,15 @@
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		2CDE34B5212472AA00898A70 /* LogoutableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutableMock.swift; sourceTree = "<group>"; };
+		2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceProtocol.swift; sourceTree = "<group>"; };
+		2CDF46362126B0A100A803C5 /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
+		2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsAPIMock.swift; sourceTree = "<group>"; };
+		2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceTests.swift; sourceTree = "<group>"; };
+		2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonPlainObject+Make.swift"; sourceTree = "<group>"; };
+		2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceProtocol.swift; sourceTree = "<group>"; };
+		2CDF46452126DE2500A803C5 /* ReactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionService.swift; sourceTree = "<group>"; };
+		2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionServiceTests.swift; sourceTree = "<group>"; };
+		2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsAPIMock.swift; sourceTree = "<group>"; };
 		2CE11335208E102700293EAE /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/8290/Icons.xcassets; sourceTree = "<group>"; };
 		2CE11336208E102700293EAE /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/8290/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2CE11337208E102700293EAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/8290/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -8516,6 +8616,149 @@
 			path = AuthSignInViewController;
 			sourceTree = "<group>";
 		};
+		2C130E872125A3E40022E998 /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E982125A6CF0022E998 /* Auth */,
+				2C130E9F2125A7E60022E998 /* ViewControllers */,
+				2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */,
+				2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */,
+				2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */,
+				2C130E962125A6890022E998 /* StepsAssemblyMock.swift */,
+				2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		2C130E982125A6CF0022E998 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */,
+				2C130E992125A6F40022E998 /* AuthGreetingAssemblyMock.swift */,
+				2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */,
+				2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		2C130E9F2125A7E60022E998 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */,
+				2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2C130EA02125A9140022E998 /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46472126E50F00A803C5 /* ReactionServiceTests.swift */,
+				2CDF463B2126C23200A803C5 /* RecommendationsServiceTests.swift */,
+				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
+			);
+			path = ServicesTests;
+			sourceTree = "<group>";
+		};
+		2C130EA42125B25B0022E998 /* ExtensionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */,
+			);
+			path = ExtensionsTests;
+			sourceTree = "<group>";
+		};
+		2C130EA82125B7050022E998 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C130EA92125B71B0022E998 /* MockTableViewCell.swift */,
+				2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C130EB42125E2D50022E998 /* ApplicationLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C130EA22125AD7D0022E998 /* AssemblyFactoryTests.swift */,
+				2C130EB22125BE770022E998 /* BaseRouterTests.swift */,
+			);
+			path = ApplicationLayerTests;
+			sourceTree = "<group>";
+		};
+		2C1351DB212C4282009E7312 /* Standart */ = {
+			isa = PBXGroup;
+			children = (
+				2C9492CB2113117B00552600 /* Assembly */,
+				62E9814DEE0740A13A67B9BA /* Pager */,
+				2C5FDC962111DEB40077C15C /* Step */,
+			);
+			path = Standart;
+			sourceTree = "<group>";
+		};
+		2C1351DC212C4305009E7312 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C1351DF212C43D1009E7312 /* StepsAssembly.swift */,
+				2C1351DD212C43C8009E7312 /* StepsAssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		2C14DFD5212A9C16000D2765 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				2C14DFD8212A9D05000D2765 /* FileStorage.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		2C14DFE2212AC9D8000D2765 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				2C14DFE4212AC9D8000D2765 /* CachedKnowledgeGraphProvider.swift */,
+				2C14DFE3212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		2C15BC3D212AE0CC00AB1015 /* Adaptive */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC48212AEEA400AB1015 /* Assembly */,
+				2C15BC43212AEC4500AB1015 /* Presenter */,
+				2C15BC3E212AE12B00AB1015 /* View */,
+			);
+			path = Adaptive;
+			sourceTree = "<group>";
+		};
+		2C15BC3E212AE12B00AB1015 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC41212AE26000AB1015 /* AdaptiveStepsView.swift */,
+				2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C15BC43212AEC4500AB1015 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC46212AEC8200AB1015 /* AdaptiveStepsPresenter.swift */,
+				2C15BC44212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2C15BC48212AEEA400AB1015 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */,
+				2C15BC49212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
@@ -8652,6 +8895,7 @@
 			isa = PBXGroup;
 			children = (
 				2C4EB2CA212416B500AF2331 /* KnowledgeGraphTests */,
+				2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */,
 				2C23FF18212304CA00721E59 /* LessonPlainObjectTests.swift */,
 				2C23FF1A21230C7F00721E59 /* StepPlainObjectTests.swift */,
 			);
@@ -8891,7 +9135,7 @@
 		2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */ = {
 			isa = PBXGroup;
 			children = (
-				2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift */,
+				2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift */,
 			);
 			path = KnowledgeGraph;
 			sourceTree = "<group>";
@@ -8961,12 +9205,13 @@
 		2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841BC20EE12590050155F /* AssemblyTests */,
-				2CC995632105C77C0023EC0C /* Common */,
+				2C130EB42125E2D50022E998 /* ApplicationLayerTests */,
+				2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */,
+				2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
-				2C6841C120EE14AE0050155F /* LogicTests */,
 				2C23FF16212303E900721E59 /* ModelTests */,
-				2CC8BA05210B4AF40080BA05 /* PresentationTests */,
+				2C130EA42125B25B0022E998 /* ExtensionsTests */,
+				2CC995632105C77C0023EC0C /* Common */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
 			path = ExamEGERussianTests;
@@ -9040,8 +9285,11 @@
 				62E9862365BD47119FA0E1D9 /* GraphService */,
 				2C2FD7822107447300609621 /* LessonsService */,
 				62E984604AE4F1CF6E9A71EB /* ProgressService */,
-				2C83E5E0211058CC00A8322D /* StepService */,
+				2CDF46422126DE0300A803C5 /* ReactionService */,
+				2CDF46332126AE0600A803C5 /* RecommendationsService */,
+				2C83E5E0211058CC00A8322D /* StepsService */,
 				2C59F06520EBA26C00666EE0 /* UserRegistrationService */,
+				2C905231212EADAC00354DFB /* ViewsService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -9186,29 +9434,13 @@
 			path = AuthSignUpViewController;
 			sourceTree = "<group>";
 		};
-		2C6841BC20EE12590050155F /* AssemblyTests */ = {
+		2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6841C820EE1F030050155F /* ServiceFactoryTests */,
+				2CA9FDEE21258F620046128C /* FactoriesTests */,
+				2C130EA02125A9140022E998 /* ServicesTests */,
 			);
-			path = AssemblyTests;
-			sourceTree = "<group>";
-		};
-		2C6841C120EE14AE0050155F /* LogicTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */,
-			);
-			path = LogicTests;
-			sourceTree = "<group>";
-		};
-		2C6841C820EE1F030050155F /* ServiceFactoryTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */,
-				2C6841C920EE1F7D0050155F /* ServiceFactoryTestsHelper.swift */,
-			);
-			path = ServiceFactoryTests;
+			path = BusinessLogicLayerTests;
 			sourceTree = "<group>";
 		};
 		2C6ABCD020F7568900E300D3 /* Auth */ = {
@@ -9303,6 +9535,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8305E820F38809003D7F9B /* Graph */,
+				2C14DFD5212A9C16000D2765 /* Persistence */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -9339,36 +9572,36 @@
 		2C8305F420F38DCD003D7F9B /* CoreLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C8305F520F38DEB003D7F9B /* Graph */,
+				2C8305F520F38DEB003D7F9B /* GraphTests */,
 			);
 			path = CoreLayerTests;
 			sourceTree = "<group>";
 		};
-		2C8305F520F38DEB003D7F9B /* Graph */ = {
+		2C8305F520F38DEB003D7F9B /* GraphTests */ = {
 			isa = PBXGroup;
 			children = (
 				2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */,
 				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
 				2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */,
 			);
-			path = Graph;
+			path = GraphTests;
 			sourceTree = "<group>";
 		};
-		2C83E5E0211058CC00A8322D /* StepService */ = {
+		2C83E5E0211058CC00A8322D /* StepsService */ = {
 			isa = PBXGroup;
 			children = (
 				2C83E5E1211058DE00A8322D /* StepsService.swift */,
 				62E98719354649AAFC238BDA /* StepsServiceImpl.swift */,
 			);
-			path = StepService;
+			path = StepsService;
 			sourceTree = "<group>";
 		};
 		2C83E5E52110600200A8322D /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				2C9492CB2113117B00552600 /* Assembly */,
-				62E9814DEE0740A13A67B9BA /* Pager */,
-				2C5FDC962111DEB40077C15C /* Step */,
+				2C1351DC212C4305009E7312 /* Assembly */,
+				2C15BC3D212AE0CC00AB1015 /* Adaptive */,
+				2C1351DB212C4282009E7312 /* Standart */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -9422,6 +9655,15 @@
 			name = GMAT;
 			sourceTree = "<group>";
 		};
+		2C905231212EADAC00354DFB /* ViewsService */ = {
+			isa = PBXGroup;
+			children = (
+				2C905234212EADDB00354DFB /* ViewsService.swift */,
+				2C905232212EADD100354DFB /* ViewsServiceProtocol.swift */,
+			);
+			path = ViewsService;
+			sourceTree = "<group>";
+		};
 		2C92669420B5C78900525AFC /* PlaceholderCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -9434,8 +9676,8 @@
 		2C9492CB2113117B00552600 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2C9492CC2113119100552600 /* StepsAssembly.swift */,
-				2C9492CE2113119E00552600 /* StepsAssemblyImpl.swift */,
+				2C9492CE2113119E00552600 /* StandartStepsAssembly.swift */,
+				2C9492CC2113119100552600 /* StandartStepsAssemblyProtocol.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -9551,6 +9793,50 @@
 				2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */,
 			);
 			path = "Adaptive leaderboards names";
+			sourceTree = "<group>";
+		};
+		2CA9FDEE21258F620046128C /* FactoriesTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */,
+			);
+			path = FactoriesTests;
+			sourceTree = "<group>";
+		};
+		2CA9FDF3212594040046128C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9FDF7212594D00046128C /* BaseServiceMock.swift */,
+				2CA9FDF5212594580046128C /* CourseServiceMock.swift */,
+				2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */,
+				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
+				2CA9FDF12125909D0046128C /* LessonsServiceMock.swift */,
+				2CA9FDFD212597060046128C /* ProgressServiceMock.swift */,
+				2C1351E3212C4871009E7312 /* ReactionServiceMock.swift */,
+				2C1351E1212C47A2009E7312 /* RecommendationsServiceMock.swift */,
+				2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */,
+				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
+				2C905236212EB17D00354DFB /* ViewsServiceMock.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2CA9FDF42125942A0046128C /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9FDEF21258F970046128C /* ServiceFactoryMock.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		2CA9FDFF212598580046128C /* PlainObjects */ = {
+			isa = PBXGroup;
+			children = (
+				2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */,
+				2CDF46402126D30E00A803C5 /* LessonPlainObject+Make.swift */,
+				2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */,
+			);
+			path = PlainObjects;
 			sourceTree = "<group>";
 		};
 		2CAD296120FDE45D0058481C /* Assembly */ = {
@@ -9702,50 +9988,48 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		2CC8BA05210B4AF40080BA05 /* PresentationTests */ = {
+		2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2CC8BA06210B4AF40080BA05 /* TopicsModuleTests */,
+				2CC8BA06210B4AF40080BA05 /* TopicsTests */,
 			);
-			path = PresentationTests;
+			path = PresentationLayerTests;
 			sourceTree = "<group>";
 		};
-		2CC8BA06210B4AF40080BA05 /* TopicsModuleTests */ = {
+		2CC8BA06210B4AF40080BA05 /* TopicsTests */ = {
 			isa = PBXGroup;
 			children = (
 				2CC8BA07210B4AF40080BA05 /* TopicsPresenterTests.swift */,
 				2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */,
 			);
-			path = TopicsModuleTests;
+			path = TopicsTests;
 			sourceTree = "<group>";
 		};
-		2CC8BA13210B4CBF0080BA05 /* Router */ = {
+		2CC8BA13210B4CBF0080BA05 /* Routers */ = {
 			isa = PBXGroup;
 			children = (
 				2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */,
 			);
-			path = Router;
+			path = Routers;
 			sourceTree = "<group>";
 		};
 		2CC995632105C77C0023EC0C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2CC995642105C78C0023EC0C /* Creator */,
+				2CC995642105C78C0023EC0C /* FactoryMethods */,
 				2CC995662105C8020023EC0C /* Mock */,
-				2CC8BA13210B4CBF0080BA05 /* Router */,
 				2CC995652105C7B80023EC0C /* View */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2CC995642105C78C0023EC0C /* Creator */ = {
+		2CC995642105C78C0023EC0C /* FactoryMethods */ = {
 			isa = PBXGroup;
 			children = (
-				2C4EB2CF21241D9000AF2331 /* KnowledgeGraph */,
-				2CC995672105C98E0023EC0C /* NSError+Create.swift */,
-				2CA5568A2123204B00A3B1AB /* StepPlainObject+Create.swift */,
+				2CA9FDFF212598580046128C /* PlainObjects */,
+				2CC995672105C98E0023EC0C /* NSError+Make.swift */,
 			);
-			path = Creator;
+			path = FactoryMethods;
 			sourceTree = "<group>";
 		};
 		2CC995652105C7B80023EC0C /* View */ = {
@@ -9759,9 +10043,14 @@
 		2CC995662105C8020023EC0C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				2CCB5A632100A5D60091A605 /* GraphServiceMock.swift */,
+				2CDF463A2126C21100A803C5 /* API */,
+				2C130E872125A3E40022E998 /* Assemblies */,
+				2CA9FDF42125942A0046128C /* Factories */,
+				2CC8BA13210B4CBF0080BA05 /* Routers */,
+				2CA9FDF3212594040046128C /* Services */,
+				2C130EA82125B7050022E998 /* View */,
+				2C1351E5212C48D1009E7312 /* KnowledgeGraphProviderMock.swift */,
 				2CDE34B5212472AA00898A70 /* LogoutableMock.swift */,
-				2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -9852,7 +10141,6 @@
 			isa = PBXGroup;
 			children = (
 				2CD7994021077CB90054D098 /* Assembly */,
-				2CD7993C21077CB90054D098 /* Builders */,
 				2CD7994421077CB90054D098 /* Extensions */,
 				2CD7995121077CB90054D098 /* Helpers */,
 				2C770307210F2AD5002E250D /* Router */,
@@ -10002,7 +10290,9 @@
 		2CD7999221077E540054D098 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2CD7993C21077CB90054D098 /* Builders */,
 				2CD7999521077E540054D098 /* PlainObjects */,
+				2C14DFE2212AC9D8000D2765 /* Providers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -10011,6 +10301,7 @@
 			isa = PBXGroup;
 			children = (
 				2CD7999621077E540054D098 /* KnowledgeGraph */,
+				2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */,
 				2C770305210F29B0002E250D /* LessonPlainObject.swift */,
 				2C9492C521130E6600552600 /* StepPlainObject.swift */,
 			);
@@ -10044,6 +10335,33 @@
 				2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */,
 			);
 			path = BuildersTests;
+			sourceTree = "<group>";
+		};
+		2CDF46332126AE0600A803C5 /* RecommendationsService */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46362126B0A100A803C5 /* RecommendationsService.swift */,
+				2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */,
+			);
+			path = RecommendationsService;
+			sourceTree = "<group>";
+		};
+		2CDF463A2126C21100A803C5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46492126E61100A803C5 /* ReactionsAPIMock.swift */,
+				2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		2CDF46422126DE0300A803C5 /* ReactionService */ = {
+			isa = PBXGroup;
+			children = (
+				2CDF46452126DE2500A803C5 /* ReactionService.swift */,
+				2CDF46432126DE1D00A803C5 /* ReactionServiceProtocol.swift */,
+			);
+			path = ReactionService;
 			sourceTree = "<group>";
 		};
 		2CE11332208E100F00293EAE /* 8290 */ = {
@@ -10238,8 +10556,8 @@
 		62E9862365BD47119FA0E1D9 /* GraphService */ = {
 			isa = PBXGroup;
 			children = (
-				2CA3F55C20FF79860041E893 /* GraphService.swift */,
-				2CA3F56020FF7C030041E893 /* GraphServiceImpl.swift */,
+				2CA3F56020FF7C030041E893 /* GraphService.swift */,
+				2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */,
 			);
 			path = GraphService;
 			sourceTree = "<group>";
@@ -15542,7 +15860,9 @@
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
+				2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */,
 				2C093F1B211B44B000162DD0 /* AchievementsListPresenter.swift in Sources */,
+				2C15BC42212AE26000AB1015 /* AdaptiveStepsView.swift in Sources */,
 				2C9499D620ECBCF40049E9A8 /* CodeLanguages.swift in Sources */,
 				2C94998C20ECB71D0049E9A8 /* IDFetchable.swift in Sources */,
 				2C9499B120ECBAA80049E9A8 /* Notification+CoreDataProperties.swift in Sources */,
@@ -15578,6 +15898,7 @@
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2C9492C321130DCE00552600 /* PagerController.swift in Sources */,
 				2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */,
+				2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
 				2C9499B320ECBAC90049E9A8 /* SortingDataset.swift in Sources */,
 				2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */,
@@ -15630,6 +15951,7 @@
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C093F16211B444A00162DD0 /* ProfileHeaderInfoView.swift in Sources */,
+				2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */,
 				2C33CC1120EC3420009956B0 /* ContentLanguage.swift in Sources */,
 				2C949A4B20ECCCAF0049E9A8 /* ControllerHelper.swift in Sources */,
 				2C94999820ECB88D0049E9A8 /* Lesson.swift in Sources */,
@@ -15649,8 +15971,10 @@
 				2C093F0F211B43DB00162DD0 /* Alerts.swift in Sources */,
 				2C093F27211B462B00162DD0 /* ChoiceQuizViewController.swift in Sources */,
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,
+				2C1351DE212C43C8009E7312 /* StepsAssemblyProtocol.swift in Sources */,
 				2C9499E220ECBE650049E9A8 /* NSDateExtensions.swift in Sources */,
 				2C0107A0210F39A0009A53DF /* CreateRequestMaker.swift in Sources */,
+				2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */,
 				2CD7998C21077D010054D098 /* TopicsPresenterImpl.swift in Sources */,
 				2C33CC0E20EC3405009956B0 /* RetrieveRequestMaker.swift in Sources */,
 				2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */,
@@ -15662,6 +15986,7 @@
 				2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */,
 				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
+				2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,
 				2C94999120ECB7AA0049E9A8 /* NotificationsStatus.swift in Sources */,
@@ -15678,7 +16003,9 @@
 				2C949A7020ECD17B0049E9A8 /* SkeletonView.swift in Sources */,
 				2C770303210F29A3002E250D /* KnowledgeGraphLessonPlainObject.swift in Sources */,
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
+				2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */,
 				2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */,
+				2C905235212EADDB00354DFB /* ViewsService.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,
 				2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */,
@@ -15703,10 +16030,11 @@
 				2CD4358C21245A26005A5B19 /* AuthGreetingPresenter.swift in Sources */,
 				2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */,
 				2C9499AF20ECBA6A0049E9A8 /* LastStep+CoreDataProperties.swift in Sources */,
-				2CA3F55D20FF79860041E893 /* GraphService.swift in Sources */,
+				2CA3F55D20FF79860041E893 /* GraphServiceProtocol.swift in Sources */,
 				2C093F2C211B46FD00162DD0 /* ChoiceQuizTableViewCell.swift in Sources */,
 				2C9499AD20ECBA3E0049E9A8 /* Lesson+CoreDataProperties.swift in Sources */,
 				2C83E5DB2110441800A8322D /* Video.swift in Sources */,
+				2C905233212EADD100354DFB /* ViewsServiceProtocol.swift in Sources */,
 				2C9499B020ECBAA10049E9A8 /* Notification.swift in Sources */,
 				2C33CBFE20EC332E009956B0 /* ProgressesAPI.swift in Sources */,
 				2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */,
@@ -15736,7 +16064,6 @@
 				2C093F0C211B439D00162DD0 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C9499D320ECBCE10049E9A8 /* MatchingReply.swift in Sources */,
 				2C9499AE20ECBA670049E9A8 /* LastStep.swift in Sources */,
-				2C94999D20ECB9080049E9A8 /* CoursePlainEntity.swift in Sources */,
 				2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */,
 				2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */,
 				2C949A3320ECC70D0049E9A8 /* AchievementProgressesAPI.swift in Sources */,
@@ -15745,7 +16072,7 @@
 				2C9499B920ECBB150049E9A8 /* Certificate+CoreDataProperties.swift in Sources */,
 				2CA5568F212339E200A3B1AB /* Constants.swift in Sources */,
 				2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */,
-				2C9492CD2113119100552600 /* StepsAssembly.swift in Sources */,
+				2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
@@ -15793,6 +16120,7 @@
 				2C33CBDF20EC2FB1009956B0 /* AuthAPI.swift in Sources */,
 				2C949A3620ECC7580049E9A8 /* AvatarImageView.swift in Sources */,
 				2C8A0F3320FCCE230009F67E /* VKSocialSDKProvider.swift in Sources */,
+				2CDF46442126DE1D00A803C5 /* ReactionServiceProtocol.swift in Sources */,
 				2CE84BDD20F4D29B0069B869 /* AbstractGraph.swift in Sources */,
 				2CFF9F2420FDD02F0023B5D4 /* AuthGreetingAssemblyImpl.swift in Sources */,
 				2C9499CD20ECBCBB0049E9A8 /* ChoiceReply.swift in Sources */,
@@ -15840,12 +16168,15 @@
 				2CCA14C12111A6050068081A /* StepView.swift in Sources */,
 				2C33CBE320EC3127009956B0 /* Session.swift in Sources */,
 				2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
+				2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */,
 				2C9499B820ECBB100049E9A8 /* Certificate.swift in Sources */,
 				2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */,
 				2C94999920ECB8930049E9A8 /* Progress.swift in Sources */,
 				2C9499BB20ECBB2F0049E9A8 /* Profile+CoreDataProperties.swift in Sources */,
+				2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */,
 				2C949A1920ECC54F0049E9A8 /* StepikTableView.swift in Sources */,
 				2C9492C421130E1000552600 /* Device.swift in Sources */,
+				2C14DFE6212AC9D8000D2765 /* CachedKnowledgeGraphProvider.swift in Sources */,
 				2C949A6A20ECD0400049E9A8 /* AchievementDescription.swift in Sources */,
 				2C949A7220ECD1820049E9A8 /* Skeletonable+UIView.swift in Sources */,
 				2C34D67620FCD84D001EF741 /* AuthAssembly.swift in Sources */,
@@ -15855,7 +16186,7 @@
 				2C33CC0220EC334C009956B0 /* NotificationsAPI.swift in Sources */,
 				2C681A07210B15C400C3DDCA /* AuthSignUpViewController.swift in Sources */,
 				2C093F12211B441600162DD0 /* NotificationRequestAlertManager.swift in Sources */,
-				2CA3F56120FF7C030041E893 /* GraphServiceImpl.swift in Sources */,
+				2CA3F56120FF7C030041E893 /* GraphService.swift in Sources */,
 				2C949A3420ECC7120049E9A8 /* AchievementProgress.swift in Sources */,
 				2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */,
 				2C093F0E211B43BD00162DD0 /* PlaceholderTableViewCell.swift in Sources */,
@@ -15871,19 +16202,22 @@
 				2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */,
 				2C093F09211B435A00162DD0 /* PickerViewController.swift in Sources */,
 				2C33CBE420EC3135009956B0 /* StepicToken.swift in Sources */,
+				2C15BC4C212AEED900AB1015 /* AdaptiveStepsAssembly.swift in Sources */,
 				2C33CBFC20EC32C1009956B0 /* ProfilesAPI.swift in Sources */,
 				2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */,
 				2C9499B620ECBADC0049E9A8 /* FillBlanksDataset.swift in Sources */,
 				2C94999020ECB7810049E9A8 /* Vote.swift in Sources */,
+				2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */,
 				2C949A6220ECCF2F0049E9A8 /* Skeletonable.swift in Sources */,
 				2C83E5EF2110839A00A8322D /* StepViewController.swift in Sources */,
 				2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */,
 				2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */,
 				2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */,
 				2C093F17211B445900162DD0 /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
-				2C9492CF2113119E00552600 /* StepsAssemblyImpl.swift in Sources */,
+				2C9492CF2113119E00552600 /* StandartStepsAssembly.swift in Sources */,
 				2C9499E320ECBE860049E9A8 /* StepOptions.swift in Sources */,
 				2C33CBE820EC3160009956B0 /* AnalyticsEvents.swift in Sources */,
+				2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */,
 				2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */,
 				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,
@@ -15927,6 +16261,7 @@
 				2CD7995D21077CBA0054D098 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C093F23211B455100162DD0 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
+				2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */,
 				2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */,
 				2C949A2320ECC5D60049E9A8 /* ProfileDescriptionPresenter.swift in Sources */,
 				2CCA14BF2111A5E90068081A /* StepPresenterImpl.swift in Sources */,
@@ -15937,6 +16272,7 @@
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
 				2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */,
 				2C6B2B992121A08300968C96 /* Command.swift in Sources */,
+				2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */,
 				2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
@@ -15968,26 +16304,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */,
+				2C130EA32125AD7D0022E998 /* AssemblyFactoryTests.swift in Sources */,
+				2CC995682105C98E0023EC0C /* NSError+Make.swift in Sources */,
+				2CDF463C2126C23200A803C5 /* RecommendationsServiceTests.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
+				2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */,
+				2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */,
+				2CA9FDF22125909D0046128C /* LessonsServiceMock.swift in Sources */,
+				2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */,
+				2C1351E4212C4871009E7312 /* ReactionServiceMock.swift in Sources */,
+				2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */,
+				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
+				2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */,
 				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
 				2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
+				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,
+				2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
+				2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */,
+				2C905237212EB17D00354DFB /* ViewsServiceMock.swift in Sources */,
+				2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */,
+				2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */,
+				2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */,
+				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
+				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
+				2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */,
 				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
+				2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */,
 				2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */,
 				2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */,
+				2C130E932125A6090022E998 /* MockAssemblyNavigationController.swift in Sources */,
+				2CA9FDF021258F970046128C /* ServiceFactoryMock.swift in Sources */,
+				2C1351E2212C47A2009E7312 /* RecommendationsServiceMock.swift in Sources */,
 				2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */,
+				2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */,
 				2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */,
+				2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
+				2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
 				2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */,
-				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Create.swift in Sources */,
+				2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift in Sources */,
+				2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */,
+				2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */,
+				2CDF46482126E50F00A803C5 /* ReactionServiceTests.swift in Sources */,
 				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
-				2CA5568B2123204B00A3B1AB /* StepPlainObject+Create.swift in Sources */,
+				2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */,
+				2C1351E6212C48D1009E7312 /* KnowledgeGraphProviderMock.swift in Sources */,
+				2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */,
 				2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */,
+				2CDF464A2126E61100A803C5 /* ReactionsAPIMock.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
 			);

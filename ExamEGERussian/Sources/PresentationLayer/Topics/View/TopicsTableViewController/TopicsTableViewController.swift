@@ -28,6 +28,13 @@ final class TopicsTableViewController: UITableViewController {
         return refreshControl
     }()
 
+    private lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl()
+        segmentedControl.addTarget(self, action: #selector(onSegmentedControlValueChanged(_:)), for: .valueChanged)
+
+        return segmentedControl
+    }()
+
     // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
@@ -57,7 +64,7 @@ final class TopicsTableViewController: UITableViewController {
         presenter.selectTopic(with: topics[indexPath.row])
     }
 
-    // MARK: - Private API -
+    // MARK: - Private API
 
     private func setupView() {
         tableView.registerNib(for: TopicTableViewCell.self)
@@ -82,20 +89,32 @@ final class TopicsTableViewController: UITableViewController {
             target: self,
             action: #selector(onSignInClick(_:))
         )
+
+        navigationItem.titleView = segmentedControl
     }
+}
 
-    // MARK: Actions
+// MARK: - TopicsTableViewController (Actions) -
 
-    @objc private func refreshData(_ sender: Any) {
+extension TopicsTableViewController {
+    @objc
+    private func refreshData(_ sender: Any) {
         presenter.refresh()
     }
 
-    @objc private func onLogoutClick(_ sender: Any) {
+    @objc
+    private func onLogoutClick(_ sender: Any) {
         presenter.logout()
     }
 
-    @objc private func onSignInClick(_ sender: Any) {
+    @objc
+    private func onSignInClick(_ sender: Any) {
         presenter.signIn()
+    }
+
+    @objc
+    private func onSegmentedControlValueChanged(_ sender: Any) {
+        presenter.selectSegment(at: segmentedControl.selectedSegmentIndex)
     }
 }
 
@@ -104,6 +123,19 @@ final class TopicsTableViewController: UITableViewController {
 extension TopicsTableViewController: TopicsView {
     func setTopics(_ topics: [TopicsViewData]) {
         self.topics = topics
+    }
+
+    func setSegments(_ segments: [String]) {
+        segmentedControl.removeAllSegments()
+        segments.enumerated().forEach {
+            segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false)
+        }
+
+        segmentedControl.sizeToFit()
+    }
+
+    func selectSegment(at index: Int) {
+        segmentedControl.selectedSegmentIndex = index
     }
 
     func displayError(title: String, message: String) {

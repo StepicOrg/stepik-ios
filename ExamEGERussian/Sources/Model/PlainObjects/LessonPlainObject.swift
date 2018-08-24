@@ -14,3 +14,12 @@ struct LessonPlainObject: Codable, Equatable {
     let title: String
     let slug: String
 }
+
+extension LessonPlainObject {
+    init(lesson: Lesson) {
+        self.id = lesson.id
+        self.steps = lesson.stepsArray
+        self.title = lesson.title
+        self.slug = lesson.slug
+    }
+}

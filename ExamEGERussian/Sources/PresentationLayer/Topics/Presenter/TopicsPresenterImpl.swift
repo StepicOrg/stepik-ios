@@ -14,12 +14,15 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private let router: TopicsRouter
 
     private let knowledgeGraph: KnowledgeGraph
+    private var segmentSelectedIndex = 0
 
     private let userRegistrationService: UserRegistrationService
-    private let graphService: GraphService
+    private let graphService: GraphServiceProtocol
+
+    private var isFirstRefresh = true
 
     init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
-         userRegistrationService: UserRegistrationService, graphService: GraphService) {
+         userRegistrationService: UserRegistrationService, graphService: GraphServiceProtocol) {
         self.view = view
         self.knowledgeGraph = knowledgeGraph
         self.router = router
@@ -28,16 +31,34 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func refresh() {
+        view?.setSegments([SegmentItem.all.title, SegmentItem.adaptive.title])
+        view?.selectSegment(at: segmentSelectedIndex)
+
         checkAuthStatus()
-        fetchGraphData()
+
+        if isFirstRefresh && !knowledgeGraph.isEmpty {
+            isFirstRefresh = false
+            reloadViewData()
+        } else {
+            fetchGraphData()
+        }
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = knowledgeGraph[viewData.id]?.key else {
+        guard let topic = knowledgeGraph[viewData.id]?.key,
+              let segment = SegmentItem(rawValue: segmentSelectedIndex) else {
             return
         }
 
-        router.showLessonsForTopicWithId(topic.id)
+        if segment == .all {
+            router.showLessonsForTopicWithId(topic.id)
+        } else {
+            router.showAdaptiveForTopicWithId(topic.id)
+        }
+    }
+
+    func selectSegment(at index: Int) {
+        segmentSelectedIndex = index
     }
 
     func signIn() {
@@ -57,33 +78,40 @@ final class TopicsPresenterImpl: TopicsPresenter {
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
-            }.catch { [weak self] error in
-                self?.displayError(error)
+            }.catch { [weak self] _ in
+                self?.displayError()
             }
         }
     }
 
     private func fetchGraphData() {
         graphService.fetchGraph().done { [weak self] responseModel in
-            guard let `self` = self else {
+            guard let strongSelf = self,
+                  let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
                 return
             }
 
-            let builder = KnowledgeGraphBuilder(graphPlainObject: responseModel)
-            guard let graph = builder.build() as? KnowledgeGraph,
-                  let vertices = graph.vertices as? [KnowledgeGraphVertex<String>] else {
-                return
-            }
-
-            self.knowledgeGraph.adjacency = graph.adjacency
-            self.view?.setTopics(self.viewTopicsFrom(vertices))
-        }.catch { [weak self] error in
-            self?.displayError(error)
+            // TODO: Write changes to cache.
+            strongSelf.knowledgeGraph.adjacency = graph.adjacency
+            strongSelf.reloadViewData()
+        }.catch { [weak self] _ in
+            self?.displayError()
         }
     }
 
-    private func displayError(_ error: Swift.Error) {
-        view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
+    private func reloadViewData() {
+        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
+            view?.setTopics(viewTopicsFrom(vertices))
+        } else {
+            displayError()
+        }
+    }
+
+    private func displayError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("Something went wrong. Try again later.", comment: "")
+    ) {
+        view?.displayError(title: title, message: message)
     }
 
     private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
@@ -92,5 +120,25 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func viewTopicFromVertex(_ vertex: KnowledgeGraphVertex<String>) -> TopicsViewData {
         return TopicsViewData(id: vertex.id, title: vertex.title)
+    }
+
+    // MARK: - Types
+
+    private enum SegmentItem: Int {
+        case all
+        case adaptive
+
+        var title: String {
+            switch self {
+            case .all:
+                return NSLocalizedString("All", comment: "")
+            case .adaptive:
+                return NSLocalizedString("Adaptive", comment: "")
+            }
+        }
+
+        static func segment(at index: Int) -> SegmentItem? {
+            return SegmentItem(rawValue: index)
+        }
     }
 }
