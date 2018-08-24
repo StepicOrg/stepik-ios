@@ -9,23 +9,24 @@
 import Foundation
 
 final class KnowledgeGraph: AdjacencyListGraph<String> {
-    typealias Element = (key: KnowledgeGraphVertex<String>, value: [KnowledgeGraphVertex<String>])
+    typealias Node = KnowledgeGraphVertex<String>
+    typealias Element = (key: Node, value: [Node])
 
     var count: Int {
         return adjacency.keys.count
     }
 
-    override func instantiateVertex(id: String) -> KnowledgeGraphVertex<String> {
+    private var adjacencyLists: [Node: [Node]] {
+        return adjacency as! [Node: [Node]]
+    }
+
+    override func instantiateVertex(id: String) -> Node {
         return KnowledgeGraphVertex(id: id)
     }
 
     subscript(index: Int) -> Element {
-        let index = adjacency.index(adjacency.startIndex, offsetBy: index)
-        guard let element = adjacency[index] as? Element else {
-            fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
-        }
-
-        return element
+        let index = adjacencyLists.index(adjacencyLists.startIndex, offsetBy: index)
+        return adjacencyLists[index]
     }
 
     subscript(id: String) -> Element? {
@@ -33,11 +34,9 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
     }
 
     private func getElement(by id: String) -> Element? {
-        guard let index = adjacency.index(forKey: Vertex(id: id)) else {
+        guard let index = adjacency.index(forKey: Vertex(id: id)),
+              let element = adjacency[index] as? Element else {
             return nil
-        }
-        guard let element = adjacency[index] as? Element else {
-            fatalError("KnowledgeGraph must contains vertices of the KnowledgeGraphVertex type")
         }
 
         return element

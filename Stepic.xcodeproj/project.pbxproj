@@ -2111,6 +2111,7 @@
 		2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F33FF2109EDFD00E259FE /* TopicsRouterImpl.swift */; };
 		2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */; };
 		2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */; };
+		2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C5D515B202468D100B9D932 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
@@ -5715,6 +5716,7 @@
 		2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInViewController.swift; sourceTree = "<group>"; };
 		2C4F34022109F5C900E259FE /* AuthSignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSignInViewController.xib; sourceTree = "<group>"; };
 		2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
+		2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologicalSortTests.swift; sourceTree = "<group>"; };
 		2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamEGERussian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C59F02920EB8AC800666EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C59F03020EB8AC900666EE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -9345,8 +9347,9 @@
 		2C8305F520F38DEB003D7F9B /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
 				2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */,
+				2C8305F620F390F8003D7F9B /* GraphTests.swift */,
+				2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -15968,6 +15971,7 @@
 				2CC995682105C98E0023EC0C /* NSError+Create.swift in Sources */,
 				2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */,
 				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
+				2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
 				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
