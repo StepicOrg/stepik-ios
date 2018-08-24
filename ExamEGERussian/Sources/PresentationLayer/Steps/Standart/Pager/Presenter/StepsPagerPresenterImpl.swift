@@ -72,11 +72,11 @@ extension StepsPagerPresenterImpl {
     private func getSteps() {
         obtainStepsFromCache().done {
             self.fetchSteps()
-        }.cauterize()
+        }
     }
 
-    private func obtainStepsFromCache() -> Promise<Void> {
-        return Promise { seal in
+    private func obtainStepsFromCache() -> Guarantee<Void> {
+        return Guarantee { seal in
             self.stepsService.obtainSteps(for: lesson).done { [weak self] steps in
                 guard let strongSelf = self else {
                     return
@@ -84,9 +84,11 @@ extension StepsPagerPresenterImpl {
 
                 strongSelf.steps = strongSelf.preparedSteps(steps)
                 strongSelf.view?.state = .fetched(steps: strongSelf.steps)
-                seal.fulfill(())
-            }.catch { [weak self] error in
-                self?.view?.state = .error(message: NSLocalizedString("NoCachedStepError", comment: ""))
+
+                seal(())
+            }.catch { error in
+                print("\(#function): \(error)")
+                seal(())
             }
         }
     }
