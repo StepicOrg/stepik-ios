@@ -4214,6 +4214,7 @@
 		2CF953342062ACA700B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CF953352062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
+		2CFD9F0921301686004FD9D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD9F0821301686004FD9D6 /* Localizable.strings */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		2CFE246F20ECD7EC00AF1E3D /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
@@ -6117,6 +6118,7 @@
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF425302024C114002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
+		2CFD9F0821301686004FD9D6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		2CFE247B20ECF7F700AF1E3D /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -9246,6 +9248,7 @@
 			children = (
 				2C59F05F20EB98E800666EE0 /* Assets */,
 				2C23FF1E212319E900721E59 /* Config */,
+				2CFD9F0721301655004FD9D6 /* Localizations */,
 				2CCA14C52111A7010068081A /* Storyboards */,
 			);
 			path = Resources;
@@ -10484,6 +10487,14 @@
 				2C97041A1F3B0B7200C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
+			sourceTree = "<group>";
+		};
+		2CFD9F0721301655004FD9D6 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				2CFD9F0821301686004FD9D6 /* Localizable.strings */,
+			);
+			path = Localizations;
 			sourceTree = "<group>";
 		};
 		62E9814616BC935A78BDB36D /* Assembly */ = {
@@ -11999,6 +12010,7 @@
 				2C093F2E211B4B4800162DD0 /* StepikPlaceholderView.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C83E5FA211099F900A8322D /* plyr.js in Resources */,
+				2CFD9F0921301686004FD9D6 /* Localizable.strings in Resources */,
 				2C83E5F8211099CF00A8322D /* jquery-3.2.1.min.js in Resources */,
 				2C83E5FB21109A3700A8322D /* plyr.css in Resources */,
 				2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */,
@@ -16316,7 +16328,6 @@
 				2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */,
 				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
 				2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */,
-				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
 				2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,
