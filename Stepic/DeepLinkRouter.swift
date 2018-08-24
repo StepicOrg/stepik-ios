@@ -49,22 +49,52 @@ class DeepLinkRouter {
         }
     }
 
-    static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool, presentFrom presentationSource: UIViewController? = nil) {
+    @objc
+    static func close() {
+        navigationToClose?.dismiss(animated: true, completion: {
+            DeepLinkRouter.navigationToClose = nil
+        })
+    }
+
+    private static var navigationToClose: UIViewController?
+
+    private static func open(modules: [UIViewController], from source: UIViewController?, isModal: Bool) {
+        guard let source = source else {
+            return
+        }
+        if isModal {
+            let navigation = StyledNavigationViewController()
+            navigation.setViewControllers(modules, animated: false)
+            let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(DeepLinkRouter.close))
+            navigationToClose = navigation
+            modules.last?.navigationItem.leftBarButtonItem = closeItem
+            source.present(navigation, animated: true, completion: nil)
+        } else {
+            for (index, vc) in modules.enumerated() {
+                source.navigationController?.pushViewController(vc, animated: index == modules.count - 1)
+            }
+        }
+    }
+
+    static func routeFromDeepLink(url: URL,  showAlertForUnsupported: Bool, presentFrom presentationSource: UIViewController? = nil, isModal: Bool = false, withDelay: Bool = true) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             controllers in
-            var navigation: UINavigationController?
-            navigation = presentationSource?.navigationController ?? currentNavigation
+            let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
+//            navigation = presentationSource?.navigationController ?? currentNavigation
             if controllers.count > 0 {
-                if let topController = navigation?.topViewController {
+                let openBlock = {
+                    DeepLinkRouter.open(
+                        modules: controllers,
+                        from: presentationSource ?? navigation?.topViewController,
+                        isModal: isModal
+                    )
+                }
+                if withDelay {
                     delay(0.5, closure: {
-                        for (index, vc) in controllers.enumerated() {
-                            if index == controllers.count - 1 {
-                                topController.navigationController?.pushViewController(vc, animated: true)
-                            } else {
-                                topController.navigationController?.pushViewController(vc, animated: false)
-                            }
-                        }
+                        openBlock()
                     })
+                } else {
+                    openBlock()
                 }
             } else {
                 guard showAlertForUnsupported else {
