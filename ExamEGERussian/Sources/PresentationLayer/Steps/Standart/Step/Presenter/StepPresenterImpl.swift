@@ -44,7 +44,10 @@ final class StepPresenterImpl: StepPresenter {
 
     // MARK: - Private API
 
-    private func showError(title: String = NSLocalizedString("Error", comment: ""), message: String) {
+    private func showError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
         view?.displayError(title: title, message: message)
     }
 }
@@ -72,7 +75,7 @@ extension StepPresenterImpl {
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
         guard let step = Step.getStepWithId(self.step.id) else {
-            showError(message: NSLocalizedString("Could't display quiz. Please try again later.", comment: ""))
+            showError(message: NSLocalizedString("ErrorMessage", comment: ""))
             return print("\(#file): Unable to instantiate QuizViewController")
         }
 

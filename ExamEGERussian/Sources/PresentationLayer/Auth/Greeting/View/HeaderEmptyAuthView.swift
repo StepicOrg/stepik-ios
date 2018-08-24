@@ -42,7 +42,7 @@ public final class HeaderEmptyAuthView: UIView {
         label.font = UIFont.systemFont(ofSize: Theme.Title.fontSize, weight: .heavy)
         label.textAlignment = .center
         label.textColor = .white
-        label.text = NSLocalizedString("It's You!", comment: "EmptyAuthView title")
+        label.text = NSLocalizedString("EmptyAuthViewTitle", comment: "")
 
         return label
     }()
@@ -53,7 +53,7 @@ public final class HeaderEmptyAuthView: UIView {
         label.font = UIFont.systemFont(ofSize: Theme.Subtitle.fontSize, weight: .medium)
         label.textAlignment = .center
         label.textColor = .white
-        label.text = NSLocalizedString("Complete auth to study with comfort", comment: "EmptyAuthView subtitle")
+        label.text = NSLocalizedString("EmptyAuthViewSubtitle", comment: "")
         label.numberOfLines = 0
 
         return label
@@ -73,7 +73,7 @@ public final class HeaderEmptyAuthView: UIView {
         label.font = UIFont.systemFont(ofSize: Theme.Description.fontSize)
         label.textAlignment = .center
         label.textColor = .white
-        label.text = NSLocalizedString("Authorized account allows you to sync progress and purchases between devices and display your name in leaderboards", comment: "EmptyAuthView description")
+        label.text = NSLocalizedString("EmptyAuthViewDescription", comment: "")
         label.numberOfLines = 0
 
         return label

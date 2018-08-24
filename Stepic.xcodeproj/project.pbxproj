@@ -1994,6 +1994,7 @@
 		2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenter.swift */; };
 		2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */; };
 		2C2FD7912107540500609621 /* LessonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7902107540500609621 /* LessonsView.swift */; };
+		2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C302DC321303191006C2BD5 /* AuthGreetingViewController.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -4259,7 +4260,6 @@
 		62E9826D2C6AABDF608C2B57 /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
 		62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E982CD54C2C86F14DF84EB /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
-		62E982D6A7D79E45786B4C8D /* AuthGreetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E982CD72238277F414FC52 /* AuthGreetingViewController.xib */; };
 		62E9831EA7A75D89A3C9EC5B /* CourseListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9865A5FE3936F4ADA7133 /* CourseListViewData.swift */; };
 		62E983397736699787D8DD35 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E9834EF86EA5676FD4686E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
@@ -5745,6 +5745,7 @@
 		2C2FD78C210753AD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
 		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
+		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
 		2C34D67320FCD6EC001EF741 /* AuthSignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenter.swift; sourceTree = "<group>"; };
 		2C34D67520FCD84D001EF741 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssembly.swift; sourceTree = "<group>"; };
@@ -6147,7 +6148,6 @@
 		62E981DAF9200478E1C2E97F /* NotificationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
 		62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoPresenter.swift; sourceTree = "<group>"; };
 		62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+fromNib.swift"; sourceTree = "<group>"; };
-		62E982CD72238277F414FC52 /* AuthGreetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthGreetingViewController.xib; sourceTree = "<group>"; };
 		62E9830545E2E72A276F308B /* ProgressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressService.swift; sourceTree = "<group>"; };
 		62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepAssemblyImpl.swift; sourceTree = "<group>"; };
 		62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSourceImpl.swift; sourceTree = "<group>"; };
@@ -10594,7 +10594,7 @@
 			isa = PBXGroup;
 			children = (
 				62E986B6284822FB1A8E1FCC /* AuthGreetingViewController.swift */,
-				62E982CD72238277F414FC52 /* AuthGreetingViewController.xib */,
+				2C302DC321303191006C2BD5 /* AuthGreetingViewController.xib */,
 			);
 			path = AuthGreetingViewController;
 			sourceTree = "<group>";
@@ -11991,7 +11991,7 @@
 				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */,
 				2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */,
-				62E982D6A7D79E45786B4C8D /* AuthGreetingViewController.xib in Resources */,
+				2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */,
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
@@ -16316,7 +16316,6 @@
 				2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */,
 				2CA9FDF8212594D00046128C /* BaseServiceMock.swift in Sources */,
 				2C130E972125A6890022E998 /* StepsAssemblyMock.swift in Sources */,
-				2C0107B0210F720F009A53DF /* ServiceFactoryTestsHelper.swift in Sources */,
 				2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */,
 				2C23FF1B21230C7F00721E59 /* StepPlainObjectTests.swift in Sources */,
 				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,
@@ -18446,6 +18445,14 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		2C302DC321303191006C2BD5 /* AuthGreetingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C302DC221303191006C2BD5 /* Base */,
+			);
+			name = AuthGreetingViewController.xib;
 			sourceTree = "<group>";
 		};
 		2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */ = {

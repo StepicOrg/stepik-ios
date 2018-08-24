@@ -109,7 +109,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func displayError(
         title: String = NSLocalizedString("Error", comment: ""),
-        message: String = NSLocalizedString("Something went wrong. Try again later.", comment: "")
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
     }
@@ -131,9 +131,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
         var title: String {
             switch self {
             case .all:
-                return NSLocalizedString("All", comment: "")
+                return NSLocalizedString("Theory", comment: "")
             case .adaptive:
-                return NSLocalizedString("Adaptive", comment: "")
+                return NSLocalizedString("Practice", comment: "")
             }
         }
 
