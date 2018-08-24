@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
-        AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
+        AnalyticsUserProperties.shared.set
+        ApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
 
         WatchSessionManager.sharedManager.startSession()
