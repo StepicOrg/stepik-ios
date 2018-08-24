@@ -41,11 +41,11 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
     private weak var stepView: UIView?
 
     private lazy var hardBarButtonItem: UIBarButtonItem = {
-        UIBarButtonItem(title: NSLocalizedString("Hard", comment: ""), style: .plain,
+        UIBarButtonItem(title: NSLocalizedString("AdaptiveHardReaction", comment: ""), style: .plain,
                         target: self, action: #selector(onHardClick(_:)))
     }()
     private lazy var easyBarButtonItem: UIBarButtonItem = {
-        UIBarButtonItem(title: NSLocalizedString("Easy", comment: ""), style: .plain,
+        UIBarButtonItem(title: NSLocalizedString("AdaptiveEasyReaction", comment: ""), style: .plain,
                         target: self, action: #selector(onEasyClick(_:)))
     }()
 

@@ -88,11 +88,11 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
 
         switch currentStepProgress {
         case .unsolved:
-            view?.updateSubmitButtonTitle(NSLocalizedString("Submit", comment: ""))
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonSubmit", comment: ""))
         case .wrong:
-            view?.updateSubmitButtonTitle(NSLocalizedString("TryAgain", comment: ""))
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonTryAgain", comment: ""))
         case .successful:
-            view?.updateSubmitButtonTitle(NSLocalizedString("NextTask", comment: ""))
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonNextTask", comment: ""))
         }
     }
 
