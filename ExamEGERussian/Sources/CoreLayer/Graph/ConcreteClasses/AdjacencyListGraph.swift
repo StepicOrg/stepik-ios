@@ -100,36 +100,37 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
 
         return result
     }
+}
 
-    private enum VertexColor {
-        case white
-        case gray
-        case black
-    }
+// MARK: - AdjacencyListGraph (Topological Sort) -
 
-    public func topSort() -> Bool {
+extension AdjacencyListGraph {
+    /// Topological sort using depth-first search.
+    ///
+    /// - Returns: Sorted vertices on success and `throws` if graph has a cycle.
+    public func topologicalSort() throws -> [Vertex<T>] {
         var hasCycle = false
-        var color = [Vertex<T>: VertexColor]()
         var stack = [Vertex<T>]()
+        var colorMap = [Vertex<T>: VertexColor]()
 
         // Returns `true` if has cycle.
         func dfs(_ node: Vertex<T>) -> Bool {
-            if color[node] == .gray {
+            if colorMap[node] == .gray {
                 return true
             }
-            if color[node] == .black {
+            if colorMap[node] == .black {
                 return false
             }
-            color[node] = .gray
+            colorMap[node] = .gray
 
-            for i in 0..<adjacency[node]!.count {
-                if dfs(adjacency[node]![i]) {
+            for nodeInAdjacencyList in adjacency[node]! {
+                if dfs(nodeInAdjacencyList) {
                     return true
                 }
             }
 
             stack.append(node)
-            color[node] = .black
+            colorMap[node] = .black
 
             return false
         }
@@ -137,74 +138,20 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
         for node in vertices {
             hasCycle = dfs(node)
             if hasCycle {
-                fatalError("Graph has cycle")
+                throw AdjacencyListGraphError.hasCycle
             }
         }
 
-        let result = stack.reversed().map { $0.id }
-
-        return true
+        return stack.reversed()
     }
 
-    func calculateInDegreeOfNodes() -> [Vertex<T> : Int] {
-        var inDegrees = [Vertex<T>: Int]()
-
-        for (node, _) in adjacency {
-            inDegrees[node] = 0
-        }
-
-        for (_, adjacencyList) in adjacency {
-            for nodeInList in adjacencyList {
-                inDegrees[nodeInList] = (inDegrees[nodeInList] ?? 0) + 1
-            }
-        }
-
-        return inDegrees
+    public enum AdjacencyListGraphError: Error {
+        case hasCycle
     }
 
-    private func depthFirstSearch(_ source: Vertex<T>, visited: inout [Vertex<T> : Bool]) -> [Vertex<T>] {
-        var result = [Vertex<T>]()
-
-        if let adjacencyList = adjacencyList(forNode: source) {
-            for nodeInAdjacencyList in adjacencyList {
-                if let seen = visited[nodeInAdjacencyList], !seen {
-                    result = depthFirstSearch(nodeInAdjacencyList, visited: &visited) + result
-                }
-            }
-        }
-
-        visited[source] = true
-        return [source] + result
+    private enum VertexColor {
+        case white
+        case gray
+        case black
     }
-
-    public func adjacencyList(forNode node: Vertex<T>) -> [Vertex<T>]? {
-        for (key, adjacencyList) in adjacency {
-            if key == node {
-                return adjacencyList
-            }
-        }
-        return nil
-    }
-
-    /* Topological sort using depth-first search. */
-    public func topologicalSort1() -> [Vertex<T>] {
-        let startNodes = calculateInDegreeOfNodes().filter({ _, indegree in
-            indegree == 0
-        }).map({ node, _ in
-            node
-        })
-
-        var visited = [Vertex<T>: Bool]()
-        for (node, _) in adjacency {
-            visited[node] = false
-        }
-
-        var result = [Vertex<T>]()
-        for startNode in startNodes {
-            result = depthFirstSearch(startNode, visited: &visited) + result
-        }
-
-        return result
-    }
-
 }

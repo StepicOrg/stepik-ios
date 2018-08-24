@@ -42,37 +42,3 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return element
     }
 }
-
-// MARK: - KnowledgeGraph (Topological Sort) -
-
-extension KnowledgeGraph {
-
-    public func topologicalSort() -> [Node] {
-        var stack = [Node]()
-
-        var visited = [Node: Bool]()
-        for (node, _) in adjacencyLists {
-            visited[node] = false
-        }
-
-        func depthFirstSearch(_ source: Node) {
-            if let adjacencyList = adjacencyLists[source] {
-                for neighbor in adjacencyList {
-                    if let seen = visited[neighbor], !seen {
-                        depthFirstSearch(neighbor)
-                    }
-                }
-            }
-            stack.append(source)
-            visited[source] = true
-        }
-
-        for (node, _) in visited {
-            if let seen = visited[node], !seen {
-                depthFirstSearch(node)
-            }
-        }
-
-        return stack.reversed()
-    }
-}
