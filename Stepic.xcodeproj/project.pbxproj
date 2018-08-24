@@ -5746,8 +5746,6 @@
 		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
-		2C302DC52130319A006C2BD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AuthGreetingViewController.strings; sourceTree = "<group>"; };
-		2C302DC72130319D006C2BD5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AuthGreetingViewController.strings; sourceTree = "<group>"; };
 		2C34D67320FCD6EC001EF741 /* AuthSignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenter.swift; sourceTree = "<group>"; };
 		2C34D67520FCD84D001EF741 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssembly.swift; sourceTree = "<group>"; };
@@ -18453,8 +18451,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C302DC221303191006C2BD5 /* Base */,
-				2C302DC52130319A006C2BD5 /* en */,
-				2C302DC72130319D006C2BD5 /* ru */,
 			);
 			name = AuthGreetingViewController.xib;
 			sourceTree = "<group>";
