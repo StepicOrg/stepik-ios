@@ -36,8 +36,7 @@ class URLNavigator: StoryURLNavigationDelegate {
     }
 
     func open(url: URL) {
-        DeepLinkRouter.routeFromDeepLink(url: url, showAlertForUnsupported: false, presentFrom: presentingController, isModal: true, withDelay: false)
-//        DeepLinkRouter.routeFromDeepLink(url: url, showAlertForUnsupported: false, presentFrom: presentingController)
+        DeepLinkRouter.routeFromDeepLink(url: url, presentFrom: presentingController, isModal: true, withDelay: false)
     }
 }
 
