@@ -44,7 +44,10 @@ final class StepPresenterImpl: StepPresenter {
 
     // MARK: - Private API
 
-    private func showError(title: String = NSLocalizedString("Error", comment: ""), message: String) {
+    private func showError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
         view?.displayError(title: title, message: message)
     }
 }

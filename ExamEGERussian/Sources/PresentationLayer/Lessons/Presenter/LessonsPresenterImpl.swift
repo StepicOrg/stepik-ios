@@ -110,6 +110,9 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private func displayError(_ error: Swift.Error) {
-        view?.displayError(title: NSLocalizedString("Error", comment: ""), message: error.localizedDescription)
+        view?.displayError(
+            title: NSLocalizedString("Error", comment: ""),
+            message: NSLocalizedString("ErrorMessage", comment: "")
+        )
     }
 }
