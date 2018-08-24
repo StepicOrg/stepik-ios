@@ -61,7 +61,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
             strongSelf.updateStepProgress(at: index, passed: true)
         }.catch { [weak self] error in
             print("\(#file) \(#function): \(error)")
-            self?.view?.state = .error(message: NSLocalizedString("Could't mark quiz as solved. Please try again.", comment: ""))
+            self?.view?.state = .error(message: NSLocalizedString("FailedMarkStepAsSolved", comment: ""))
         }
     }
 }
@@ -72,11 +72,11 @@ extension StepsPagerPresenterImpl {
     private func getSteps() {
         obtainStepsFromCache().done {
             self.fetchSteps()
-        }.cauterize()
+        }
     }
 
-    private func obtainStepsFromCache() -> Promise<Void> {
-        return Promise { seal in
+    private func obtainStepsFromCache() -> Guarantee<Void> {
+        return Guarantee { seal in
             self.stepsService.obtainSteps(for: lesson).done { [weak self] steps in
                 guard let strongSelf = self else {
                     return
@@ -84,9 +84,11 @@ extension StepsPagerPresenterImpl {
 
                 strongSelf.steps = strongSelf.preparedSteps(steps)
                 strongSelf.view?.state = .fetched(steps: strongSelf.steps)
-                seal.fulfill(())
-            }.catch { [weak self] error in
-                self?.view?.state = .error(message: NSLocalizedString("Failed to get steps from cache", comment: ""))
+
+                seal(())
+            }.catch { error in
+                print("\(#function): \(error)")
+                seal(())
             }
         }
     }
@@ -108,7 +110,7 @@ extension StepsPagerPresenterImpl {
         }.catch { [weak self] error in
             let message = error is NetworkError
                 ? NSLocalizedString("ConnectionErrorText", comment: "")
-                : NSLocalizedString("Failed to fetch steps", comment: "")
+                : NSLocalizedString("FailedFetchStepsError", comment: "")
             self?.view?.state = .error(message: message)
         }
     }

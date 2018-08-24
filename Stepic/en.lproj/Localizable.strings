@@ -552,3 +552,19 @@ Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
 PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so way you'll never forget to study!";
+
+/* ExamEGERussian */
+"ErrorMessage" = "Sorry, something went wrong: please try again later.";
+"Ok" = "Ok";
+
+"Practice" = "Practice";
+"Theory" = "Theory";
+"Topics" = "Topics";
+
+"FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
+"FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
+"NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+
+"EmptyAuthViewTitle" = "It's You!";
+"EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
+"EmptyAuthViewDescription" = "Authorized account allows you to sync progress";

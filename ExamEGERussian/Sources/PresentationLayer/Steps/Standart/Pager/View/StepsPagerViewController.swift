@@ -187,7 +187,7 @@ extension StepsPagerViewController {
             withTitle: NSLocalizedString("Error", comment: ""),
             message: message,
             buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
-            buttonSecondTitle: NSLocalizedString("Try Again", comment: ""),
+            buttonSecondTitle: NSLocalizedString("TryAgain", comment: ""),
             firstAction: { [weak self] in
                 self?.presenter?.cancel()
             },
