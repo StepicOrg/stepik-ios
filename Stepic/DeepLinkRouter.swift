@@ -49,11 +49,13 @@ class DeepLinkRouter {
         }
     }
 
-    static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool) {
+    static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool, presentFrom presentationSource: UIViewController? = nil) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             controllers in
+            var navigation: UINavigationController?
+            navigation = presentationSource?.navigationController ?? currentNavigation
             if controllers.count > 0 {
-                if let topController = currentNavigation?.topViewController {
+                if let topController = navigation?.topViewController {
                     delay(0.5, closure: {
                         for (index, vc) in controllers.enumerated() {
                             if index == controllers.count - 1 {
@@ -66,7 +68,7 @@ class DeepLinkRouter {
                 }
             } else {
                 guard showAlertForUnsupported else {
-                    if let topController = currentNavigation?.topViewController {
+                    if let topController = navigation?.topViewController {
                         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: topController, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
                     }
                     return

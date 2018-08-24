@@ -31,7 +31,7 @@ class DownloaderTask: DownloaderTaskProtocol {
     }
 
     convenience init(url: URL, priority: DownloaderTaskPriority = .default) {
-        let id = Int(arc4random()) &* url.hashValue
+        let id = Int(arc4random_uniform(UInt32(Int32.max))) &* url.hashValue
         self.init(id: id, url: url, executor: nil, priority: priority)
     }
 

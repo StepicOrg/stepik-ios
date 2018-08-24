@@ -75,6 +75,10 @@ class StepikButton: UIButton {
         updateStyle()
     }
 
+    convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         applyStyles()
