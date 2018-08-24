@@ -21,7 +21,7 @@ extension Vertex: Hashable {
         return "\(id)".hashValue
     }
 
-    public static func == (lhs: Vertex, rhs: Vertex) -> Bool {
+    static public func == (lhs: Vertex, rhs: Vertex) -> Bool {
         return lhs.id == rhs.id
     }
 }
