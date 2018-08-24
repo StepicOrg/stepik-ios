@@ -556,7 +556,7 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
-"Ок" = "Ок";
+"Ok" = "Ok";
 
 "Practice" = "Практика";
 "Theory" = "Теория";

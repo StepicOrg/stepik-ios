@@ -555,7 +555,7 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
-"Ок" = "Ок";
+"Ok" = "Ok";
 
 "Practice" = "Practice";
 "Theory" = "Theory";
