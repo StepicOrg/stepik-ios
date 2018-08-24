@@ -24,35 +24,7 @@ class TopologicalSortTests: XCTestCase {
         graph.add(from: node4, to: node3)
         graph.add(from: node3, to: node2)
 
-        // Add edge that produces cycle
-        graph.add(from: node2, to: node1)
-
-        do {
-            _ = try graph.topologicalSort()
-            XCTFail("Must has a cycle")
-        } catch let error {
-            if let error = error as? KnowledgeGraph.AdjacencyListGraphError {
-                XCTAssertTrue(error == KnowledgeGraph.AdjacencyListGraphError.hasCycle)
-            } else {
-                XCTFail("Must throw AdjacencyListGraph.AdjacencyListGraphError")
-            }
-        }
-    }
-
-    func testFailureWithCycle() {
-        let graph = KnowledgeGraph()
-
-        let node1 = graph.createVertex(id: "1")
-        let node2 = graph.createVertex(id: "2")
-        let node3 = graph.createVertex(id: "3")
-        let node4 = graph.createVertex(id: "4")
-
-        graph.add(from: node1, to: node4)
-        graph.add(from: node4, to: node2)
-        graph.add(from: node4, to: node3)
-        graph.add(from: node3, to: node2)
-
-        let result = try! graph.topologicalSort().map { $0.id }
+        let result = graph.topologicalSort().map { $0.id }
 
         XCTAssertEqual(result, ["1", "4", "3", "2"])
     }
@@ -79,20 +51,26 @@ class TopologicalSortTests: XCTestCase {
         graph.add(from: node11, to: node10)
         graph.add(from: node8, to: node9)
 
-        let result = try! graph.topologicalSort()
+        let result = graph.topologicalSort()
         let possibleSolutions = [
             ["5", "7", "3", "8", "11", "10", "9", "2"],
             ["7", "3", "5", "11", "2", "10", "8", "9"],
             ["5", "7", "11", "2", "3", "10", "8", "9"],
             ["7", "5", "3", "8", "11", "9", "2", "10"],
             ["3", "7", "5", "10", "8", "11", "9", "2"],
-            ["3", "7", "5", "8", "11", "2", "9", "10"]
+            ["3", "7", "5", "8", "11", "2", "9", "10"],
+            ["3", "7", "8", "5", "11", "10", "9", "2"],
+            ["3", "5", "7", "8", "11", "10", "9", "2"],
+            ["7", "5", "11", "2", "3", "10", "8", "9"],
+            ["5", "3", "7", "8", "11", "10", "9", "2"],
+            ["7", "5", "11", "3", "10", "8", "9", "2"]
         ]
 
         let firstId = result.first!.id
         let zeroInDegrees = ["3", "7", "5"]
         XCTAssertTrue(zeroInDegrees.contains(firstId))
 
+        print(result.map { $0.id })
         checkIsValidTopologicalSort(graph, result as! [KnowledgeGraph.Node])
         XCTAssertTrue(possibleSolutions.contains(result.map { $0.id }))
     }
@@ -109,7 +87,7 @@ class TopologicalSortTests: XCTestCase {
             let graph = KnowledgeGraph()
             graph.loadEdgeList(d)
 
-            let sorted = try! graph.topologicalSort()
+            let sorted = graph.topologicalSort()
             checkIsValidTopologicalSort(graph, sorted as! [KnowledgeGraph.Node])
         }
     }

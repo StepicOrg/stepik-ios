@@ -107,8 +107,8 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
 extension AdjacencyListGraph {
     /// Topological sort using depth-first search.
     ///
-    /// - Returns: Sorted vertices on success and `throws` if graph has a cycle.
-    public func topologicalSort() throws -> [Vertex<T>] {
+    /// - Returns: Topologically sorted vertices.
+    public func topologicalSort() -> [Vertex<T>] {
         var hasCycle = false
         var stack = [Vertex<T>]()
         var colorMap = [Vertex<T>: VertexColor]()
@@ -137,16 +137,10 @@ extension AdjacencyListGraph {
 
         for (node, _) in adjacency {
             hasCycle = dfs(node)
-            if hasCycle {
-                throw AdjacencyListGraphError.hasCycle
-            }
+            assert(!hasCycle, "Graph has cycle for vertex: \(node)")
         }
 
         return stack.reversed()
-    }
-
-    public enum AdjacencyListGraphError: Error {
-        case hasCycle
     }
 
     private enum VertexColor {
