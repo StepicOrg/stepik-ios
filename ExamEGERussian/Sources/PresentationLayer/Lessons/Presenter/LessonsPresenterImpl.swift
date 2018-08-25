@@ -107,7 +107,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     private func viewLessons(from lessons: [LessonPlainObject]) -> [LessonsViewData] {
-        return lessons.map { LessonsViewData(id: $0.id, title: $0.title) }
+        return lessons.map { lesson in
+            let viewModel = LessonViewModel(lesson: lesson, topic: topic)
+            return LessonsViewData(id: lesson.id, title: viewModel.title,
+                                        subtitle: viewModel.subtitle)
+        }
     }
 
     private func displayError(_ error: Swift.Error) {

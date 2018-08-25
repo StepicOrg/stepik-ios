@@ -4045,6 +4045,7 @@
 		2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */; };
 		2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */; };
 		2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */; };
+		2CBB70F421315D0A00D67BE1 /* LessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB70F321315D0A00D67BE1 /* LessonViewModel.swift */; };
 		2CBB70F8213171D900D67BE1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2CBB70FB213171D900D67BE1 /* Localizable.stringsdict */; };
 		2CBB70F9213171D900D67BE1 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2CBB70FB213171D900D67BE1 /* Localizable.stringsdict */; };
 		2CBC261421086936004245D6 /* UserRegistrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC261321086936004245D6 /* UserRegistrationServiceImpl.swift */; };
@@ -5982,6 +5983,7 @@
 		2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSectionHeaderView.xib; sourceTree = "<group>"; };
 		2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsTableViewCell.xib; sourceTree = "<group>"; };
+		2CBB70F321315D0A00D67BE1 /* LessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewModel.swift; sourceTree = "<group>"; };
 		2CBB70FA213171D900D67BE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		2CBB70FC213171DE00D67BE1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		2CBC261321086936004245D6 /* UserRegistrationServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceImpl.swift; sourceTree = "<group>"; };
@@ -8929,6 +8931,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0107A6210F41F6009A53DF /* Assembly */,
+				2CBB70F021315C8000D67BE1 /* Model */,
 				2C2FD78B2107539700609621 /* Presenter */,
 				2C0107AB210F428E009A53DF /* Router */,
 				2C2FD7772107357800609621 /* View */,
@@ -9897,6 +9900,14 @@
 				2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */,
 			);
 			name = NotificationsTableViewCell;
+			sourceTree = "<group>";
+		};
+		2CBB70F021315C8000D67BE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CBB70F321315D0A00D67BE1 /* LessonViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2CBCBD4720D1AAD5000B5732 /* Achievement Cell */ = {
@@ -16147,6 +16158,7 @@
 				2CA6F5F021219ABB00EE337E /* AssemblyFactoryBuilder.swift in Sources */,
 				2C83E5DD211044A600A8322D /* VideoLocationManager.swift in Sources */,
 				2C9499B520ECBAD50049E9A8 /* MatchingDataset.swift in Sources */,
+				2CBB70F421315D0A00D67BE1 /* LessonViewModel.swift in Sources */,
 				2C33CBF420EC3278009956B0 /* LessonsAPI.swift in Sources */,
 				2C77030E210F2C7B002E250D /* AuthSignInViewController.swift in Sources */,
 				2CD7998B21077D010054D098 /* TopicsPresenter.swift in Sources */,
