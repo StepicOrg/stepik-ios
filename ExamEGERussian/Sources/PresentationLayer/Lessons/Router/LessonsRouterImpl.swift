@@ -9,7 +9,7 @@
 import Foundation
 
 final class LessonsRouterImpl: BaseRouter, LessonsRouter {
-	func showStepsForLesson(_ lesson: LessonPlainObject) {
+    func showTheory(lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.stepsAssembly.standart.module(
                 navigationController: navigationController,
@@ -17,4 +17,17 @@ final class LessonsRouterImpl: BaseRouter, LessonsRouter {
             )
         })
 	}
+
+    func showPractice(courseId: String) {
+        if let id = Int(courseId) {
+            pushViewController(derivedFrom: { _ in
+                assemblyFactory.stepsAssembly.adaptive.module(courseId: id)
+            })
+        } else {
+            navigationController?.presentAlert(
+                withTitle: NSLocalizedString("Error", comment: ""),
+                message: NSLocalizedString("NoAdaptiveModuleError", comment: "")
+            )
+        }
+    }
 }

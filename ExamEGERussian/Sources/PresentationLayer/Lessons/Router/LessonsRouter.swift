@@ -9,5 +9,6 @@
 import Foundation
 
 protocol LessonsRouter: class {
-    func showStepsForLesson(_ lesson: LessonPlainObject)
+    func showTheory(lesson: LessonPlainObject)
+    func showPractice(courseId: String)
 }

@@ -55,11 +55,20 @@ final class LessonsPresenterImpl: LessonsPresenter {
     }
 
     func selectLesson(with viewData: LessonsViewData) {
-        guard let lesson = lessons.first(where: { $0.id == viewData.id }) else {
+        guard let lesson = topic.lessons.first(where: { $0.id == viewData.id }) else {
             return
         }
 
-        router.showStepsForLesson(lesson)
+        switch lesson.type {
+        case .theory:
+            if let lesson = lessons.first(where: { $0.id == viewData.id }) {
+                router.showTheory(lesson: lesson)
+            } else {
+                displayError()
+            }
+        case .practice:
+            router.showPractice(courseId: lesson.courseId)
+        }
     }
 
     // MARK: - Private API
@@ -71,8 +80,8 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
         courseService.joinCourses(with: coursesIds).done { courses in
             print("Successfully joined courses with ids: \(courses.map { $0.id })")
-        }.catch { [weak self] error in
-            self?.displayError(error)
+        }.catch { [weak self] _ in
+            self?.displayError()
         }
     }
 
@@ -101,16 +110,16 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
         lessonsService.fetchLessons(with: lessonsIds).done { [weak self] lessons in
             self?.lessons = lessons
-        }.catch { [weak self] error in
-            self?.displayError(error)
+        }.catch { [weak self] _ in
+            self?.displayError()
         }
     }
 
-    private func displayError(_ error: Error) {
-        view?.displayError(
-            title: NSLocalizedString("Error", comment: ""),
-            message: NSLocalizedString("ErrorMessage", comment: "")
-        )
+    private func displayError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
+        view?.displayError(title: title, message: message)
     }
 }
 

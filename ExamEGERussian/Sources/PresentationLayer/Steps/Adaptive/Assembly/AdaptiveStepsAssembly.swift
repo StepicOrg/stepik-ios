@@ -15,6 +15,14 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
             return nil
         }
 
+        return makeModule(courseId: courseId)
+    }
+
+    func module(courseId: Int) -> UIViewController {
+        return makeModule(courseId: courseId)
+    }
+
+    private func makeModule(courseId: Int) -> UIViewController {
         let controller = AdaptiveStepsViewController()
         let stepAssembly = StepAssemblyImpl(
             assemblyFactory: assemblyFactory,
