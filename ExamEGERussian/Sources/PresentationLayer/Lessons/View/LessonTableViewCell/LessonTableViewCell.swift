@@ -9,5 +9,11 @@
 import UIKit
 
 final class LessonTableViewCell: UITableViewCell {
-    @IBOutlet var descriptionTitleLabel: UILabel!
+
+    @IBOutlet var numberLabel: UILabel!
+
+    @IBOutlet var titleLabel: UILabel!
+
+    @IBOutlet var subtitleLabel: UILabel!
+
 }
