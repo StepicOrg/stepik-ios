@@ -1986,7 +1986,6 @@
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7782107359E00609621 /* LessonsTableViewController.swift */; };
-		2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD7792107359E00609621 /* LessonsTableViewController.xib */; };
 		2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD77D210735E000609621 /* LessonTableViewCell.swift */; };
 		2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD77E210735E000609621 /* LessonTableViewCell.xib */; };
 		2C2FD7842107448F00609621 /* LessonsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7832107448F00609621 /* LessonsService.swift */; };
@@ -5736,7 +5735,6 @@
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
 		2C2FD7782107359E00609621 /* LessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsTableViewController.swift; sourceTree = "<group>"; };
-		2C2FD7792107359E00609621 /* LessonsTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonsTableViewController.xib; sourceTree = "<group>"; };
 		2C2FD77D210735E000609621 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
 		2C2FD7832107448F00609621 /* LessonsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsService.swift; sourceTree = "<group>"; };
@@ -8936,20 +8934,11 @@
 		2C2FD7772107357800609621 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C2FD77C210735AE00609621 /* LessonsTableViewController */,
 				2C2FD781210735EB00609621 /* LessonTableViewCell */,
+				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
 				2C2FD7902107540500609621 /* LessonsView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2C2FD77C210735AE00609621 /* LessonsTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
-				2C2FD7792107359E00609621 /* LessonsTableViewController.xib */,
-			);
-			path = LessonsTableViewController;
 			sourceTree = "<group>";
 		};
 		2C2FD781210735EB00609621 /* LessonTableViewCell */ = {
@@ -11995,7 +11984,6 @@
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
-				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C093F2E211B4B4800162DD0 /* StepikPlaceholderView.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C83E5FA211099F900A8322D /* plyr.js in Resources */,

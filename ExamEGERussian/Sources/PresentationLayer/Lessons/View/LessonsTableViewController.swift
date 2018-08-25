@@ -9,19 +9,16 @@
 import UIKit
 
 final class LessonsTableViewController: UITableViewController {
-
-    // MARK: Instance Properties
-
     var presenter: LessonsPresenter!
 
     private var lessons = [LessonsViewData]() {
         didSet {
             tableView.reloadData()
-            topicsRefreshControl.endRefreshing()
+            lessonsRefreshControl.endRefreshing()
         }
     }
 
-    private lazy var topicsRefreshControl: UIRefreshControl = {
+    private lazy var lessonsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
 
@@ -36,9 +33,9 @@ final class LessonsTableViewController: UITableViewController {
         tableView.registerNib(for: LessonTableViewCell.self)
 
         if #available(iOS 10.0, *) {
-            tableView.refreshControl = topicsRefreshControl
+            tableView.refreshControl = lessonsRefreshControl
         } else {
-            tableView.addSubview(topicsRefreshControl)
+            tableView.addSubview(lessonsRefreshControl)
         }
 
         presenter.refresh()
@@ -66,7 +63,8 @@ final class LessonsTableViewController: UITableViewController {
 
     // MARK: - Private API
 
-    @objc private func refreshData(_ sender: Any) {
+    @objc
+    private func refreshData(_ sender: Any) {
         presenter.refresh()
     }
 }
