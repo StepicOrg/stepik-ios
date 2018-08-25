@@ -79,16 +79,17 @@ final class LessonsPresenterImpl: LessonsPresenter {
     private func getLessons() {
         obtainLessonsFromCache().done {
             self.fetchLessons()
-        }.cauterize()
+        }
     }
 
-    private func obtainLessonsFromCache() -> Promise<Void> {
-        return Promise { seal in
+    private func obtainLessonsFromCache() -> Guarantee<Void> {
+        return Guarantee { seal in
             self.lessonsService.obtainLessons(with: self.lessonsIds).done { [weak self] lessons in
                 self?.lessons = lessons
-                seal.fulfill(())
-            }.catch { [weak self] error in
-                self?.displayError(error)
+                seal(())
+            }.catch { error in
+                print("\(#function): \(error)")
+                seal(())
             }
         }
     }
