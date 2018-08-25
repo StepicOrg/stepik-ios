@@ -113,15 +113,17 @@ extension LessonsTableViewController: LessonsView {
 
 extension LessonsTableViewController {
     private func layoutHeaderView() {
-        if let headerView = headerView {
-            let height = headerView.layoutHeight
-            var headerFrame = headerView.frame
+        guard let headerView = headerView else {
+            return
+        }
 
-            if height != headerFrame.size.height {
-                headerFrame.size.height = height
-                headerView.frame = headerFrame
-                tableView.tableHeaderView = headerView
-            }
+        let height = headerView.layoutHeight
+        var headerFrame = headerView.frame
+
+        if height != headerFrame.size.height {
+            headerFrame.size.height = height
+            headerView.frame = headerFrame
+            tableView.tableHeaderView = headerView
         }
     }
 
