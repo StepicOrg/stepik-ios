@@ -4176,6 +4176,8 @@
 		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
 		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
 		2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */; };
+		2CE8A69B2131DF5900E3916B /* LessonHeaderTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8A69A2131DF5900E3916B /* LessonHeaderTableView.xib */; };
+		2CE8A69D2131DF7E00E3916B /* LessonHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8A69C2131DF7E00E3916B /* LessonHeaderTableView.swift */; };
 		2CEBAB90211D82880014085E /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
@@ -6109,6 +6111,8 @@
 		2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
 		2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinder.swift; sourceTree = "<group>"; };
 		2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinderTests.swift; sourceTree = "<group>"; };
+		2CE8A69A2131DF5900E3916B /* LessonHeaderTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonHeaderTableView.xib; sourceTree = "<group>"; };
+		2CE8A69C2131DF7E00E3916B /* LessonHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonHeaderTableView.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -8939,6 +8943,7 @@
 		2C2FD7772107357800609621 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CF79D332131A96800DA6953 /* LessonHeaderTableView */,
 				2C2FD781210735EB00609621 /* LessonTableViewCell */,
 				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
 				2C2FD7902107540500609621 /* LessonsView.swift */,
@@ -10464,6 +10469,15 @@
 			name = StepikPlaceholderView;
 			sourceTree = "<group>";
 		};
+		2CF79D332131A96800DA6953 /* LessonHeaderTableView */ = {
+			isa = PBXGroup;
+			children = (
+				2CE8A69C2131DF7E00E3916B /* LessonHeaderTableView.swift */,
+				2CE8A69A2131DF5900E3916B /* LessonHeaderTableView.xib */,
+			);
+			path = LessonHeaderTableView;
+			sourceTree = "<group>";
+		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -11980,6 +11994,7 @@
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */,
 				2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */,
+				2CE8A69B2131DF5900E3916B /* LessonHeaderTableView.xib in Resources */,
 				2CE22D9A211C587F004D9D10 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C093F2B211B46F900162DD0 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C093F2D211B4AE900162DD0 /* QuizViewController.xib in Resources */,
@@ -16189,6 +16204,7 @@
 				2C33CBEF20EC3251009956B0 /* UserActivitiesAPI.swift in Sources */,
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
 				2C67B22120FF1A93005E699B /* AuthSignUpAssemblyImpl.swift in Sources */,
+				2CE8A69D2131DF7E00E3916B /* LessonHeaderTableView.swift in Sources */,
 				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
 				2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,

@@ -12,6 +12,8 @@ struct LessonsViewData {
     let id: Int
     let title: String
     let subtitle: String
+    let headerTitle: String
+    let headerSubtitle: String
 }
 
 protocol LessonsView: class {

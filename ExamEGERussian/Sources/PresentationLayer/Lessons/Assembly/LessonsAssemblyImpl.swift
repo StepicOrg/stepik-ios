@@ -26,7 +26,7 @@ final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
             courseService: serviceFactory.courseService
         )
         controller.presenter = presenter
-        controller.title = knowledgeGraph[topicId]?.key.title
+        controller.title = NSLocalizedString("LessonsViewControllerTitle", comment: "")
 
         return controller
     }

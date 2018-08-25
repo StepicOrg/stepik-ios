@@ -15,6 +15,7 @@ final class LessonsTableViewController: UITableViewController {
         didSet {
             tableView.reloadData()
             lessonsRefreshControl.endRefreshing()
+            updateHeaderViewContent()
         }
     }
 
@@ -25,23 +26,27 @@ final class LessonsTableViewController: UITableViewController {
         return refreshControl
     }()
 
+    private var headerView: LessonHeaderTableView? {
+        return tableView.tableHeaderView as? LessonHeaderTableView
+    }
+
     // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.registerNib(for: LessonTableViewCell.self)
-
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = lessonsRefreshControl
-        } else {
-            tableView.addSubview(lessonsRefreshControl)
-        }
-
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
-
+        setup()
         presenter.refresh()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutHeaderView()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        triggerHeaderViewLayoutUpdate()
+        tableView.setContentOffset(.zero, animated: false)
     }
 
     // MARK: - UITableViewDataSource
@@ -70,6 +75,22 @@ final class LessonsTableViewController: UITableViewController {
 
     // MARK: - Private API
 
+    private func setup() {
+        tableView.registerNib(for: LessonTableViewCell.self)
+
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = lessonsRefreshControl
+        } else {
+            tableView.addSubview(lessonsRefreshControl)
+        }
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60
+
+        tableView.tableHeaderView = LessonHeaderTableView.fromNib() as LessonHeaderTableView
+        updateHeaderViewContent()
+    }
+
     @objc
     private func refreshData(_ sender: Any) {
         presenter.refresh()
@@ -85,5 +106,33 @@ extension LessonsTableViewController: LessonsView {
 
     func displayError(title: String, message: String) {
         presentAlert(withTitle: title, message: message)
+    }
+}
+
+// MARK: - LessonsTableViewController (Header View) -
+
+extension LessonsTableViewController {
+    private func layoutHeaderView() {
+        if let headerView = headerView {
+            let height = headerView.layoutHeight
+            var headerFrame = headerView.frame
+
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                tableView.tableHeaderView = headerView
+            }
+        }
+    }
+
+    private func triggerHeaderViewLayoutUpdate() {
+        tableView.tableHeaderView?.setNeedsLayout()
+        tableView.tableHeaderView?.layoutIfNeeded()
+    }
+
+    private func updateHeaderViewContent() {
+        headerView?.titleLabel.text = lessons.first?.headerTitle
+        headerView?.subtitleLabel.text = lessons.first?.headerSubtitle
+        triggerHeaderViewLayoutUpdate()
     }
 }

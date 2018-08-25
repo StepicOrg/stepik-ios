@@ -131,21 +131,25 @@ extension LessonsPresenterImpl {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
-                subtitle: pagesCountUniversal(count: UInt($0.steps.count))
+                subtitle: pagesCountLocalized(count: UInt($0.steps.count)),
+                headerTitle: topic.title,
+                headerSubtitle: "\(lessons.count) lessons"
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
             LessonsViewData(
                 id: $0.id,
                 title: NSLocalizedString("PracticeLessonTitle", comment: ""),
-                subtitle: NSLocalizedString("PracticeLessonDescription", comment: "")
+                subtitle: NSLocalizedString("PracticeLessonDescription", comment: ""),
+                headerTitle: topic.title,
+                headerSubtitle: "\(lessons.count) lessons"
             )
         }
 
         self.view?.setLessons(theory + practice)
     }
 
-    private func pagesCountUniversal(count: UInt) -> String {
+    private func pagesCountLocalized(count: UInt) -> String {
         let formatString = NSLocalizedString(
             "lesson pages count",
             comment: "Lessons pages count string format to be found in Localized.stringsdict"
