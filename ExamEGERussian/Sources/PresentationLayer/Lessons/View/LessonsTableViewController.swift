@@ -38,6 +38,9 @@ final class LessonsTableViewController: UITableViewController {
             tableView.addSubview(lessonsRefreshControl)
         }
 
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60
+
         presenter.refresh()
     }
 
@@ -48,8 +51,12 @@ final class LessonsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let lesson = lessons[indexPath.row]
+
         let cell: LessonTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.descriptionTitleLabel.text = lessons[indexPath.row].title
+        cell.numberLabel.text = "\(indexPath.row + 1)."
+        cell.titleLabel.text = lesson.title
+        cell.subtitleLabel.text = lesson.subtitle
 
         return cell
     }

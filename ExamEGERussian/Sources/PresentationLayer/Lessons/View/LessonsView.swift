@@ -11,6 +11,7 @@ import Foundation
 struct LessonsViewData {
     let id: Int
     let title: String
+    let subtitle: String
 }
 
 protocol LessonsView: class {
