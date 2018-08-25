@@ -570,4 +570,5 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 "EmptyAuthViewSubtitle" = "Пройдите авторизацию для более удобного обучения";
 "EmptyAuthViewDescription" = "Авторизованный аккаунт позволит синхронизировать прогресс с другими устройствами";
 
+"PracticeLessonTitle" = "Практические задания";
 "PracticeLessonDescription" = "Закрепите полученные знания";

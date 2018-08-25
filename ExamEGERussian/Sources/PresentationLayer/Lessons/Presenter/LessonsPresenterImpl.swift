@@ -18,7 +18,7 @@ final class LessonsPresenterImpl: LessonsPresenter {
 
     private var lessons = [LessonPlainObject]() {
         didSet {
-            self.view?.setLessons(viewLessons(from: lessons))
+            updateView()
         }
     }
     private var topic: KnowledgeGraphVertex<String> {
@@ -106,18 +106,43 @@ final class LessonsPresenterImpl: LessonsPresenter {
         }
     }
 
-    private func viewLessons(from lessons: [LessonPlainObject]) -> [LessonsViewData] {
-        return lessons.map { lesson in
-            let viewModel = LessonViewModel(lesson: lesson, topic: topic)
-            return LessonsViewData(id: lesson.id, title: viewModel.title,
-                                        subtitle: viewModel.subtitle)
-        }
-    }
-
-    private func displayError(_ error: Swift.Error) {
+    private func displayError(_ error: Error) {
         view?.displayError(
             title: NSLocalizedString("Error", comment: ""),
             message: NSLocalizedString("ErrorMessage", comment: "")
         )
+    }
+}
+
+// MARK: - LessonsPresenterImpl (View Data) -
+
+extension LessonsPresenterImpl {
+    private func updateView() {
+        let theory = lessons.map {
+            LessonsViewData(
+                id: $0.id,
+                title: $0.title,
+                subtitle: pagesCountUniversal(count: UInt($0.steps.count))
+            )
+        }
+        let practice = topic.lessons.filter { $0.type == .practice }.map {
+            LessonsViewData(
+                id: $0.id,
+                title: NSLocalizedString("PracticeLessonTitle", comment: ""),
+                subtitle: NSLocalizedString("PracticeLessonDescription", comment: "")
+            )
+        }
+
+        self.view?.setLessons(theory + practice)
+    }
+
+    private func pagesCountUniversal(count: UInt) -> String {
+        let formatString = NSLocalizedString(
+            "lesson pages count",
+            comment: "Lessons pages count string format to be found in Localized.stringsdict"
+        )
+        let resultString = String.localizedStringWithFormat(formatString, count)
+
+        return resultString
     }
 }
