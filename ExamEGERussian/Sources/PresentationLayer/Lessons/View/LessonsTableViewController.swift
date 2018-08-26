@@ -8,8 +8,17 @@
 
 import UIKit
 
+extension LessonsTableViewController {
+    struct Appearance {
+        let headerGradientColors = [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)]
+        let headerGradientLocations = [0.0, 1.0]
+        let headerGradientRotationAngle: CGFloat = 90.0
+    }
+}
+
 final class LessonsTableViewController: UITableViewController {
     var presenter: LessonsPresenterProtocol!
+    private let appearance: Appearance
 
     private var lessons = [LessonsViewData]() {
         didSet {
@@ -18,6 +27,17 @@ final class LessonsTableViewController: UITableViewController {
         }
     }
 
+    private var headerView: LessonHeaderTableView? {
+        return tableView.tableHeaderView as? LessonHeaderTableView
+    }
+    private lazy var headerViewGradient: CAGradientLayer = {
+        CAGradientLayer(
+            colors: appearance.headerGradientColors,
+            locations: appearance.headerGradientLocations,
+            rotationAngle: appearance.headerGradientRotationAngle
+        )
+    }()
+
     private lazy var lessonsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
@@ -25,8 +45,15 @@ final class LessonsTableViewController: UITableViewController {
         return refreshControl
     }()
 
-    private var headerView: LessonHeaderTableView? {
-        return tableView.tableHeaderView as? LessonHeaderTableView
+    // MARK: - Init
+
+    init(appearance: Appearance = Appearance()) {
+        self.appearance = appearance
+        super.init(style: .plain)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - UIViewController Lifecycle
@@ -72,7 +99,7 @@ final class LessonsTableViewController: UITableViewController {
         presenter.selectLesson(with: lessons[indexPath.row])
     }
 
-    // MARK: - Private API
+    // MARK: - Private API -
 
     private func setup() {
         tableView.registerNib(for: LessonTableViewCell.self)
@@ -87,6 +114,7 @@ final class LessonsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 60
 
         tableView.tableHeaderView = LessonHeaderTableView.fromNib() as LessonHeaderTableView
+        tableView.tableHeaderView?.layer.insertSublayer(headerViewGradient, at: 0)
     }
 
     @objc
@@ -128,6 +156,7 @@ extension LessonsTableViewController {
             headerFrame.size.height = height
             headerView.frame = headerFrame
             tableView.tableHeaderView = headerView
+            headerViewGradient.frame = headerView.bounds
         }
     }
 
