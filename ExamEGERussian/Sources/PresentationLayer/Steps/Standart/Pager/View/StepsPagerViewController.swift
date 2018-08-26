@@ -31,6 +31,16 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
     var presenter: StepsPagerPresenter?
     private var strongDataSource: StepsPagerDataSource?
 
+    private let pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.currentPageIndicatorTintColor = UIColor(hex: 0x999999)
+        pageControl.pageIndicatorTintColor = UIColor(hex: 0xE5E5E5)
+        pageControl.addTarget(self, action: #selector(onPageChanged(_:)), for: .touchUpInside)
+
+        return pageControl
+    }()
+
     /// Constructs a new `StepsPagerViewController` with strong reference to the data source.
     ///
     /// - Parameter strongDataSource: Sets a strong reference to the data source of kind `StepsPagerDataSource`.
@@ -68,6 +78,11 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(self.view)
         }
+
+        view.insertSubview(pageControl, aboveSubview: contentView)
+        pageControl.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(self.view)
+        }
     }
 
     func setTabSelected(_ selected: Bool, at index: Int) {
@@ -96,11 +111,6 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         navigationItem.rightBarButtonItem = shareBarButtonItem
     }
 
-    @objc
-    private func shareBarButtonItemDidPressed(_ sender: Any) {
-        presenter?.selectShareStep(at: activeTabIndex)
-    }
-
     private func setSteps(_ steps: [StepPlainObject]) {
         guard let dataSource = dataSource as? StepsPagerDataSource else {
             return print("StepsPagerDataSource doesn't exists")
@@ -108,6 +118,9 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
         dataSource.setSteps(steps)
         reloadData()
+
+        pageControl.numberOfPages = steps.count
+        pageControl.currentPage = activeTabIndex
     }
 
     private func displayError(with message: String) {
@@ -126,10 +139,25 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
     }
 }
 
+// MARK: - StepsPagerViewController (Actions) -
+
+extension StepsPagerViewController {
+    @objc
+    private func shareBarButtonItemDidPressed(_ sender: Any) {
+        presenter?.selectShareStep(at: activeTabIndex)
+    }
+
+    @objc
+    private func onPageChanged(_ sender: Any) {
+        selectTabAtIndex(pageControl.currentPage)
+    }
+}
+
 // MARK: - StepsPagerViewController: PagerDelegate -
 
 extension StepsPagerViewController: PagerDelegate {
     func didChangeTabToIndex(_ pager: PagerController, index: Int) {
+        pageControl.currentPage = index
         presenter?.selectStep(at: index)
     }
 }
