@@ -1104,7 +1104,7 @@
 		2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */; };
 		2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */; };
 		2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssembly.swift */; };
-		2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouter.swift */; };
+		2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */; };
 		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
@@ -5651,7 +5651,7 @@
 		22B314D76C612EF78CF9C87D /* Pods-ExamEGERussianTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2C0107A9210F4214009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
-		2C0107AC210F42A6009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
+		2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterProtocol.swift; sourceTree = "<group>"; };
 		2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterImpl.swift; sourceTree = "<group>"; };
 		2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
 		2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdaptiveCourseTableViewCell.xib; sourceTree = "<group>"; };
@@ -8567,8 +8567,8 @@
 		2C0107AB210F428E009A53DF /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2C0107AC210F42A6009A53DF /* LessonsRouter.swift */,
 				2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */,
+				2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -16018,7 +16018,7 @@
 				2C905235212EADDB00354DFB /* ViewsService.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,
-				2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */,
+				2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */,
 				2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */,
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,

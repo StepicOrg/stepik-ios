@@ -11,7 +11,7 @@ import PromiseKit
 
 final class LessonsPresenter: LessonsPresenterProtocol {
     private weak var view: LessonsView?
-    private let router: LessonsRouter
+    private let router: LessonsRouterProtocol
 
     private let topicId: String
     private let knowledgeGraph: KnowledgeGraph
@@ -35,7 +35,7 @@ final class LessonsPresenter: LessonsPresenterProtocol {
     private let courseService: CourseService
 
     init(view: LessonsView,
-         router: LessonsRouter,
+         router: LessonsRouterProtocol,
          topicId: String,
          knowledgeGraph: KnowledgeGraph,
          lessonsService: LessonsService,

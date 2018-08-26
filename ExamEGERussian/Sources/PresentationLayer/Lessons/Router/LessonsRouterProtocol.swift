@@ -1,5 +1,5 @@
 //
-//  LessonsRouter.swift
+//  LessonsRouterProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 30/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LessonsRouter: class {
+protocol LessonsRouterProtocol: class {
     func showTheory(lesson: LessonPlainObject)
     func showPractice(courseId: String)
 }

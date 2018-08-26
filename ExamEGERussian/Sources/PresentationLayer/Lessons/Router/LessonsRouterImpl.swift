@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LessonsRouterImpl: BaseRouter, LessonsRouter {
+final class LessonsRouterImpl: BaseRouter, LessonsRouterProtocol {
     func showTheory(lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.stepsAssembly.standart.module(
