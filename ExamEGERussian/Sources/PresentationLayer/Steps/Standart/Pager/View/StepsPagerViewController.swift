@@ -31,15 +31,29 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
     var presenter: StepsPagerPresenter?
     private var strongDataSource: StepsPagerDataSource?
 
+    private lazy var pageControlContainer: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.layer.insertSublayer(pageControlGradient, at: 0)
+
+        return view
+    }()
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.currentPageIndicatorTintColor = UIColor(hex: 0x999999)
-        pageControl.pageIndicatorTintColor = UIColor(hex: 0xE5E5E5)
+        pageControl.currentPageIndicatorTintColor = .darkGray
+        pageControl.pageIndicatorTintColor = .lightGray
         pageControl.addTarget(self, action: #selector(onPageChanged(_:)), for: .touchUpInside)
+        pageControl.backgroundColor = .clear
 
         return pageControl
     }()
+    private let pageControlGradient = CAGradientLayer(
+        colors: [UIColor.white.withAlphaComponent(0), .white],
+        locations: [0.0, 1.0],
+        rotationAngle: 0
+    )
 
     /// Constructs a new `StepsPagerViewController` with strong reference to the data source.
     ///
@@ -68,6 +82,11 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         presenter?.refresh()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageControlGradient.frame = pageControlContainer.bounds
+    }
+
     override func makeConstraints() {
         tabsView?.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(self.view)
@@ -79,9 +98,14 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             $0.edges.equalTo(self.view)
         }
 
-        view.insertSubview(pageControl, aboveSubview: contentView)
+        view.insertSubview(pageControlContainer, aboveSubview: contentView)
+        pageControlContainer.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(self.view)
+        }
+
+        pageControlContainer.addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(self.view)
+            make.leading.trailing.top.equalTo(pageControlContainer)
             if #available(iOS 11.0, *) {
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             } else {
