@@ -9,7 +9,7 @@
 import UIKit
 
 final class LessonsTableViewController: UITableViewController {
-    var presenter: LessonsPresenter!
+    var presenter: LessonsPresenterProtocol!
 
     private var lessons = [LessonsViewData]() {
         didSet {

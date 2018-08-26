@@ -1,5 +1,5 @@
 //
-//  LessonsPresenter.swift
+//  LessonsPresenterProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 24/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LessonsPresenter: class {
+protocol LessonsPresenterProtocol: class {
     func refresh()
     func selectLesson(with viewData: LessonsViewData)
 }

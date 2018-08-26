@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class LessonsPresenterImpl: LessonsPresenter {
+final class LessonsPresenterImpl: LessonsPresenterProtocol {
     private weak var view: LessonsView?
     private let router: LessonsRouter
 

@@ -1990,7 +1990,7 @@
 		2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD77E210735E000609621 /* LessonTableViewCell.xib */; };
 		2C2FD7842107448F00609621 /* LessonsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7832107448F00609621 /* LessonsService.swift */; };
 		2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7852107453800609621 /* LessonsServiceImpl.swift */; };
-		2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenter.swift */; };
+		2C2FD78D210753AD00609621 /* LessonsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */; };
 		2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */; };
 		2C2FD7912107540500609621 /* LessonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7902107540500609621 /* LessonsView.swift */; };
 		2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C302DC321303191006C2BD5 /* AuthGreetingViewController.xib */; };
@@ -5744,7 +5744,7 @@
 		2C2FD7832107448F00609621 /* LessonsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsService.swift; sourceTree = "<group>"; };
 		2C2FD7852107453800609621 /* LessonsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceImpl.swift; sourceTree = "<group>"; };
 		2C2FD7892107507200609621 /* LessonPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
-		2C2FD78C210753AD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
+		2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterProtocol.swift; sourceTree = "<group>"; };
 		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
@@ -8972,8 +8972,8 @@
 		2C2FD78B2107539700609621 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2C2FD78C210753AD00609621 /* LessonsPresenter.swift */,
 				2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */,
+				2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -15896,7 +15896,7 @@
 				2C093F07211B434100162DD0 /* ProfilePresenter.swift in Sources */,
 				2C9499D220ECBCDB0049E9A8 /* SortingReply.swift in Sources */,
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */,
+				2C2FD78D210753AD00609621 /* LessonsPresenterProtocol.swift in Sources */,
 				2C94999620ECB86B0049E9A8 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C093F1A211B449E00162DD0 /* AchievementsListViewController.swift in Sources */,
