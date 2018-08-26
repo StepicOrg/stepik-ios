@@ -46,9 +46,8 @@ class NotificationRegistrator {
             } else {
                 let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
                 application.registerUserNotificationSettings(settings)
-                application.registerForRemoteNotifications()
             }
-
+            application.registerForRemoteNotifications()
         }
 
         if AuthInfo.shared.isAuthorized {

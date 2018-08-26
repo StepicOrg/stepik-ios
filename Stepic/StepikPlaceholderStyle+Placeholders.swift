@@ -83,8 +83,8 @@ extension StepikPlaceholder.Style {
                                           buttonTitle: nil)
     static let refreshStories = StepikPlaceholderStyle(id: "refreshStories",
                                           image: nil,
-                                          text: "Ooops, could not retrieve stories",
-                                          buttonTitle: "Load stories")
+                                          text: "",
+                                          buttonTitle: NSLocalizedString("LoadStories", comment: ""))
 }
 
 extension StepikPlaceholder.Style {
