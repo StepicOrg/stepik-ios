@@ -21,7 +21,7 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var lessonsAssembly: LessonsAssembly {
+    var lessonsAssembly: LessonsAssemblyProtocol {
         return LessonsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 

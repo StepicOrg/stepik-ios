@@ -1102,7 +1102,7 @@
 		2C0107A2210F3B22009A53DF /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */; };
-		2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssembly.swift */; };
+		2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */; };
 		2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */; };
 		2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouter.swift */; };
 		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
@@ -5649,7 +5649,7 @@
 		2063E36B4EC96399AAB6ABC9 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		210D872D0B8EC9F0380D3EF9 /* Pods-Adaptive GMAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.debug.xcconfig"; sourceTree = "<group>"; };
 		22B314D76C612EF78CF9C87D /* Pods-ExamEGERussianTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C0107A7210F420C009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
+		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C0107AC210F42A6009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
 		2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterImpl.swift; sourceTree = "<group>"; };
@@ -8558,8 +8558,8 @@
 		2C0107A6210F41F6009A53DF /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2C0107A7210F420C009A53DF /* LessonsAssembly.swift */,
 				2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */,
+				2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -15940,7 +15940,7 @@
 				2C33CBF520EC327F009956B0 /* UsersAPI.swift in Sources */,
 				2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */,
 				2C33CBF220EC326A009956B0 /* CoursesAPI.swift in Sources */,
-				2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */,
+				2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */,
 				2C949A1A20ECC5520049E9A8 /* StepikPlaceholder.swift in Sources */,
 				2C9499CC20ECBCB00049E9A8 /* Reply.swift in Sources */,
 				2C093EFD211B427A00162DD0 /* StreaksAlertPresentationManager.swift in Sources */,

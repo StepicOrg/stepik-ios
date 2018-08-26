@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
+final class LessonsAssemblyImpl: BaseAssembly, LessonsAssemblyProtocol {
     func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
         let controller = LessonsTableViewController()
         let router = LessonsRouterImpl(
