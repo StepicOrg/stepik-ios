@@ -13,6 +13,7 @@ extension LessonsTableViewController {
         let headerGradientColors = [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)]
         let headerGradientLocations = [0.0, 1.0]
         let headerGradientRotationAngle: CGFloat = 90.0
+        let tableViewEstimatedRowHeight: CGFloat = 60.0
     }
 }
 
@@ -111,7 +112,7 @@ final class LessonsTableViewController: UITableViewController {
         }
 
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = appearance.tableViewEstimatedRowHeight
 
         tableView.tableHeaderView = LessonHeaderTableView.fromNib() as LessonHeaderTableView
         tableView.tableHeaderView?.layer.insertSublayer(headerViewGradient, at: 0)
