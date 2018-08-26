@@ -15,7 +15,6 @@ final class LessonsTableViewController: UITableViewController {
         didSet {
             tableView.reloadData()
             lessonsRefreshControl.endRefreshing()
-            updateHeaderViewContent()
         }
     }
 
@@ -88,7 +87,6 @@ final class LessonsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 60
 
         tableView.tableHeaderView = LessonHeaderTableView.fromNib() as LessonHeaderTableView
-        updateHeaderViewContent()
     }
 
     @objc
@@ -102,6 +100,12 @@ final class LessonsTableViewController: UITableViewController {
 extension LessonsTableViewController: LessonsView {
     func setLessons(_ lessons: [LessonsViewData]) {
         self.lessons = lessons
+    }
+
+    func updateHeader(title: String, subtitle: String) {
+        headerView?.titleLabel.text = title
+        headerView?.subtitleLabel.text = subtitle
+        triggerHeaderViewLayoutUpdate()
     }
 
     func displayError(title: String, message: String) {
@@ -130,11 +134,5 @@ extension LessonsTableViewController {
     private func triggerHeaderViewLayoutUpdate() {
         tableView.tableHeaderView?.setNeedsLayout()
         tableView.tableHeaderView?.layoutIfNeeded()
-    }
-
-    private func updateHeaderViewContent() {
-        headerView?.titleLabel.text = lessons.first?.headerTitle
-        headerView?.subtitleLabel.text = lessons.first?.headerSubtitle
-        triggerHeaderViewLayoutUpdate()
     }
 }

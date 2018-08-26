@@ -49,6 +49,8 @@ final class LessonsPresenterImpl: LessonsPresenter {
         self.courseService = courseService
     }
 
+    // MARK: LessonsPresenter
+
     func refresh() {
         getLessons()
         joinCoursesIfNeeded()
@@ -70,9 +72,11 @@ final class LessonsPresenterImpl: LessonsPresenter {
             router.showPractice(courseId: lesson.courseId)
         }
     }
+}
 
-    // MARK: - Private API
+// MARK: - LessonsPresenterImpl (Business Logic) -
 
+extension LessonsPresenterImpl {
     private func joinCoursesIfNeeded() {
         guard !coursesIds.isEmpty else {
             return
@@ -114,56 +118,55 @@ final class LessonsPresenterImpl: LessonsPresenter {
             self?.displayError()
         }
     }
+}
 
+// MARK: - LessonsPresenterImpl (Update View) -
+
+extension LessonsPresenterImpl {
     private func displayError(
         title: String = NSLocalizedString("Error", comment: ""),
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
     }
-}
 
-// MARK: - LessonsPresenterImpl (View Data) -
-
-extension LessonsPresenterImpl {
     private func updateView() {
         let theory = lessons.map {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
-                subtitle: pagesCountLocalized(count: UInt($0.steps.count)),
-                headerTitle: topic.title,
-                headerSubtitle: lessonsCountLocalized(count: UInt(topic.lessons.count))
+                subtitle: countLocalizedString(
+                    key: "lesson pages count",
+                    comment: "Lessons pages count string format to be found in Localized.stringsdict",
+                    count: UInt($0.steps.count)
+                )
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
             LessonsViewData(
                 id: $0.id,
                 title: NSLocalizedString("PracticeLessonTitle", comment: ""),
-                subtitle: NSLocalizedString("PracticeLessonDescription", comment: ""),
-                headerTitle: topic.title,
-                headerSubtitle: lessonsCountLocalized(count: UInt(topic.lessons.count))
+                subtitle: NSLocalizedString("PracticeLessonDescription", comment: "")
             )
         }
 
-        self.view?.setLessons(theory + practice)
+        view?.setLessons(theory + practice)
+        view?.updateHeader(
+            title: topic.title,
+            subtitle: countLocalizedString(
+                key: "topic lessons count",
+                comment: "Lessons count in the topic string format to be found in Localized.stringsdict",
+                count: UInt(topic.lessons.count)
+            )
+        )
     }
 
-    private func pagesCountLocalized(count: UInt) -> String {
-        let formatString = NSLocalizedString(
-            "lesson pages count",
-            comment: "Lessons pages count string format to be found in Localized.stringsdict"
-        )
-        let resultString = String.localizedStringWithFormat(formatString, count)
-
-        return resultString
-    }
-
-    private func lessonsCountLocalized(count: UInt) -> String {
-        let formatString = NSLocalizedString(
-            "topic lessons count",
-            comment: "Lessons count in the topic string format to be found in Localized.stringsdict"
-        )
+    private func countLocalizedString(
+        key: String,
+        comment: String = "",
+        count: UInt
+    ) -> String {
+        let formatString = NSLocalizedString(key, comment: comment)
         let resultString = String.localizedStringWithFormat(formatString, count)
 
         return resultString

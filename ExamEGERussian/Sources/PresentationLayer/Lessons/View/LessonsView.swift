@@ -12,11 +12,10 @@ struct LessonsViewData {
     let id: Int
     let title: String
     let subtitle: String
-    let headerTitle: String
-    let headerSubtitle: String
 }
 
 protocol LessonsView: class {
     func setLessons(_ lessons: [LessonsViewData])
+    func updateHeader(title: String, subtitle: String)
     func displayError(title: String, message: String)
 }
