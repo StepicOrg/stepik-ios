@@ -16,7 +16,7 @@ final class AssemblyFactoryMock: AssemblyFactory {
 
     var topicsAssembly: TopicsAssembly = TopicsAssemblyMock()
 
-    var lessonsAssembly: LessonsAssembly = LessonsAssemblyMock()
+    var lessonsAssembly: LessonsAssemblyProtocol = LessonsAssemblyMock()
 
     var stepsAssembly: StepsAssemblyProtocol = StepsAssemblyMock()
 }
