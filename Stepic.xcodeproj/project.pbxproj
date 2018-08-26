@@ -1105,7 +1105,7 @@
 		2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */; };
 		2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssembly.swift */; };
 		2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */; };
-		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
+		2C0107AF210F42B7009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouter.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
 		2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
@@ -5652,7 +5652,7 @@
 		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2C0107A9210F4214009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
 		2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterProtocol.swift; sourceTree = "<group>"; };
-		2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterImpl.swift; sourceTree = "<group>"; };
+		2C0107AE210F42B7009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
 		2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
 		2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdaptiveCourseTableViewCell.xib; sourceTree = "<group>"; };
 		2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
@@ -8567,7 +8567,7 @@
 		2C0107AB210F428E009A53DF /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */,
+				2C0107AE210F42B7009A53DF /* LessonsRouter.swift */,
 				2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */,
 			);
 			path = Router;
@@ -16281,7 +16281,7 @@
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
 				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
-				2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */,
+				2C0107AF210F42B7009A53DF /* LessonsRouter.swift in Sources */,
 				2C6B2B992121A08300968C96 /* Command.swift in Sources */,
 				2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */,
 				2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */,

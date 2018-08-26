@@ -1,5 +1,5 @@
 //
-//  LessonsRouterImpl.swift
+//  LessonsRouter.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 30/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LessonsRouterImpl: BaseRouter, LessonsRouterProtocol {
+final class LessonsRouter: BaseRouter, LessonsRouterProtocol {
     func showTheory(lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.stepsAssembly.standart.module(

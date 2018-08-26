@@ -11,7 +11,7 @@ import Foundation
 final class LessonsAssembly: BaseAssembly, LessonsAssemblyProtocol {
     func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
         let controller = LessonsTableViewController()
-        let router = LessonsRouterImpl(
+        let router = LessonsRouter(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
