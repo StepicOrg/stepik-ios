@@ -572,3 +572,5 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 
 "PracticeLessonTitle" = "Практические задания";
 "PracticeLessonDescription" = "Закрепите полученные знания";
+
+"LessonsViewControllerTitle" = "Тема";

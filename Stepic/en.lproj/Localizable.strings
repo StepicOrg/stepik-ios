@@ -571,3 +571,5 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 
 "PracticeLessonTitle" = "Practical assignments";
 "PracticeLessonDescription" = "Consolidate the knowledge gained";
+
+"LessonsViewControllerTitle" = "Topic";
