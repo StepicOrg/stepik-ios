@@ -45,7 +45,7 @@ class AssemblyFactoryTests: XCTestCase {
         XCTAssert(concreateAssemblyFactory.authAssembly.signIn is AuthSignInAssemblyImpl)
         XCTAssert(concreateAssemblyFactory.authAssembly.signUp is AuthSignUpAssemblyImpl)
         XCTAssert(concreateAssemblyFactory.topicsAssembly is TopicsAssemblyImpl)
-        XCTAssert(concreateAssemblyFactory.lessonsAssembly is LessonsAssemblyImpl)
+        XCTAssert(concreateAssemblyFactory.lessonsAssembly is LessonsAssembly)
         XCTAssert(concreateAssemblyFactory.stepsAssembly is StepsAssembly)
         XCTAssert(concreateAssemblyFactory.stepsAssembly.standart is StandartStepsAssembly)
         XCTAssert(concreateAssemblyFactory.stepsAssembly.adaptive is AdaptiveStepsAssembly)

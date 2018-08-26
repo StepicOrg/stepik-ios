@@ -22,7 +22,7 @@ final class AssemblyFactoryImpl: AssemblyFactory {
     }
 
     var lessonsAssembly: LessonsAssemblyProtocol {
-        return LessonsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+        return LessonsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     var stepsAssembly: StepsAssemblyProtocol {

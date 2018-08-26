@@ -1,5 +1,5 @@
 //
-//  LessonsAssemblyImpl.swift
+//  LessonsAssembly.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 30/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LessonsAssemblyImpl: BaseAssembly, LessonsAssemblyProtocol {
+final class LessonsAssembly: BaseAssembly, LessonsAssemblyProtocol {
     func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
         let controller = LessonsTableViewController()
         let router = LessonsRouterImpl(
