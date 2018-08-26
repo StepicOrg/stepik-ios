@@ -17,7 +17,7 @@ final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
         )
 
         let knowledgeGraph = serviceFactory.knowledgeGraphProvider.knowledgeGraph
-        let presenter = LessonsPresenterImpl(
+        let presenter = LessonsPresenter(
             view: controller,
             router: router,
             topicId: topicId,

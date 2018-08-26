@@ -1,5 +1,5 @@
 //
-//  LessonsPresenterImpl.swift
+//  LessonsPresenter.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 24/07/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class LessonsPresenterImpl: LessonsPresenterProtocol {
+final class LessonsPresenter: LessonsPresenterProtocol {
     private weak var view: LessonsView?
     private let router: LessonsRouter
 
@@ -49,7 +49,7 @@ final class LessonsPresenterImpl: LessonsPresenterProtocol {
         self.courseService = courseService
     }
 
-    // MARK: LessonsPresenter
+    // MARK: LessonsPresenterProtocol
 
     func refresh() {
         getLessons()
@@ -76,7 +76,7 @@ final class LessonsPresenterImpl: LessonsPresenterProtocol {
 
 // MARK: - LessonsPresenterImpl (Business Logic) -
 
-extension LessonsPresenterImpl {
+extension LessonsPresenter {
     private func joinCoursesIfNeeded() {
         guard !coursesIds.isEmpty else {
             return
@@ -122,7 +122,7 @@ extension LessonsPresenterImpl {
 
 // MARK: - LessonsPresenterImpl (Update View) -
 
-extension LessonsPresenterImpl {
+extension LessonsPresenter {
     private func displayError(
         title: String = NSLocalizedString("Error", comment: ""),
         message: String = NSLocalizedString("ErrorMessage", comment: "")
