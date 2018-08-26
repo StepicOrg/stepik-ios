@@ -81,7 +81,12 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
         view.insertSubview(pageControl, aboveSubview: contentView)
         pageControl.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalTo(self.view)
+            make.leading.trailing.equalTo(self.view)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.bottom.equalTo(self.view)
+            }
         }
     }
 
