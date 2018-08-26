@@ -2,11 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>topic lessons count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@lessons_count@</string>
+		<key>lessons_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>zero</key>
+			<string>No lessons</string>
+			<key>one</key>
+			<string>%u lesson</string>
+			<key>other</key>
+			<string>%u lessons</string>
+		</dict>
+	</dict>
 	<key>lesson pages count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@v1_pages_count@</string>
-		<key>v1_pages_count</key>
+		<string>%#@pages_count@</string>
+		<key>pages_count</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>

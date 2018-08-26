@@ -133,7 +133,7 @@ extension LessonsPresenterImpl {
                 title: $0.title,
                 subtitle: pagesCountLocalized(count: UInt($0.steps.count)),
                 headerTitle: topic.title,
-                headerSubtitle: "\(lessons.count) lessons"
+                headerSubtitle: lessonsCountLocalized(count: UInt(topic.lessons.count))
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
@@ -142,7 +142,7 @@ extension LessonsPresenterImpl {
                 title: NSLocalizedString("PracticeLessonTitle", comment: ""),
                 subtitle: NSLocalizedString("PracticeLessonDescription", comment: ""),
                 headerTitle: topic.title,
-                headerSubtitle: "\(lessons.count) lessons"
+                headerSubtitle: lessonsCountLocalized(count: UInt(topic.lessons.count))
             )
         }
 
@@ -153,6 +153,16 @@ extension LessonsPresenterImpl {
         let formatString = NSLocalizedString(
             "lesson pages count",
             comment: "Lessons pages count string format to be found in Localized.stringsdict"
+        )
+        let resultString = String.localizedStringWithFormat(formatString, count)
+
+        return resultString
+    }
+
+    private func lessonsCountLocalized(count: UInt) -> String {
+        let formatString = NSLocalizedString(
+            "topic lessons count",
+            comment: "Lessons count in the topic string format to be found in Localized.stringsdict"
         )
         let resultString = String.localizedStringWithFormat(formatString, count)
 
