@@ -15,7 +15,9 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         }
 
         let navigationController = UINavigationController()
-        let controller = assemblyFactory.topicsAssembly.module(navigationController: navigationController)
+        navigationController.view.backgroundColor = .white
+        //let controller = assemblyFactory.topicsAssembly.module(navigationController: navigationController)
+        let controller = TopicsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController.setViewControllers([controller], animated: false)
 
         let router = AppRouter(

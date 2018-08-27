@@ -2001,6 +2001,14 @@
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
+		2C33606A21342F41006EACF3 /* TopicsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */; };
+		2C33606B21342F41006EACF3 /* TopicsCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */; };
+		2C33607321343059006EACF3 /* TopicsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607121343059006EACF3 /* TopicsCollectionCell.swift */; };
+		2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607221343059006EACF3 /* TopicsCollectionCell.xib */; };
+		2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */; };
+		2C33607921343183006EACF3 /* TopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */; };
+		2C33607D213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */; };
+		2C33607E213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */; };
 		2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F02920EB8AC800666EE0 /* AppDelegate.swift */; };
 		2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
 		2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
@@ -5746,6 +5754,14 @@
 		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
+		2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewController.swift; sourceTree = "<group>"; };
+		2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionViewController.xib; sourceTree = "<group>"; };
+		2C33607121343059006EACF3 /* TopicsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionCell.swift; sourceTree = "<group>"; };
+		2C33607221343059006EACF3 /* TopicsCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionCell.xib; sourceTree = "<group>"; };
+		2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicCollectionViewCell.xib; sourceTree = "<group>"; };
+		2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsSectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsSectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		2C34D67320FCD6EC001EF741 /* AuthSignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenter.swift; sourceTree = "<group>"; };
 		2C34D67520FCD84D001EF741 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssembly.swift; sourceTree = "<group>"; };
@@ -8989,6 +9005,42 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		2C33606C21342F4C006EACF3 /* TopicsCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */,
+				2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */,
+			);
+			path = TopicsCollectionViewController;
+			sourceTree = "<group>";
+		};
+		2C33607521343065006EACF3 /* TopicsCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C33607121343059006EACF3 /* TopicsCollectionCell.swift */,
+				2C33607221343059006EACF3 /* TopicsCollectionCell.xib */,
+			);
+			path = TopicsCollectionCell;
+			sourceTree = "<group>";
+		};
+		2C33607A2134318A006EACF3 /* TopicCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */,
+				2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */,
+			);
+			path = TopicCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		2C33607F213433AE006EACF3 /* TopicsSectionCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */,
+				2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */,
+			);
+			path = TopicsSectionCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		2C34D66F20FCD342001EF741 /* Greeting */ = {
 			isa = PBXGroup;
 			children = (
@@ -10262,6 +10314,10 @@
 		2CD7997B21077D010054D098 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C33607A2134318A006EACF3 /* TopicCollectionViewCell */,
+				2C33607521343065006EACF3 /* TopicsCollectionCell */,
+				2C33606C21342F4C006EACF3 /* TopicsCollectionViewController */,
+				2C33607F213433AE006EACF3 /* TopicsSectionCollectionViewCell */,
 				2CD7998021077D010054D098 /* TopicsTableViewController */,
 				2CD7997C21077D010054D098 /* TopicTableViewCell */,
 				2CD7997F21077D010054D098 /* TopicsView.swift */,
@@ -11990,17 +12046,21 @@
 				2C093F2D211B4AE900162DD0 /* QuizViewController.xib in Resources */,
 				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */,
+				2C33606B21342F41006EACF3 /* TopicsCollectionViewController.xib in Resources */,
 				2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */,
 				2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */,
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
+				2C33607E213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
 				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C093F2E211B4B4800162DD0 /* StepikPlaceholderView.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C83E5FA211099F900A8322D /* plyr.js in Resources */,
+				2C33607921343183006EACF3 /* TopicCollectionViewCell.xib in Resources */,
 				2C83E5F8211099CF00A8322D /* jquery-3.2.1.min.js in Resources */,
 				2C83E5FB21109A3700A8322D /* plyr.css in Resources */,
+				2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */,
 				2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */,
 				2C83E5F621108A5600A8322D /* Scripts.plist in Resources */,
 				2CE22DA1211C8316004D9D10 /* CustomMessagesDesign.json in Resources */,
@@ -15997,6 +16057,7 @@
 				2C949A3220ECC7020049E9A8 /* AchievementsAPI.swift in Sources */,
 				2C9499E520ECBE960049E9A8 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2CFE247320ECD81F00AF1E3D /* Collection+SafeSubscript.swift in Sources */,
+				2C33607321343059006EACF3 /* TopicsCollectionCell.swift in Sources */,
 				2C949A4020ECC95E0049E9A8 /* GCDThings.swift in Sources */,
 				2C34D67D20FCE2E5001EF741 /* AuthSignInRouter.swift in Sources */,
 				2C9492C821130F7C00552600 /* CourseServiceImpl.swift in Sources */,
@@ -16053,6 +16114,7 @@
 				2C093EFB211B426900162DD0 /* FullHeightWebView.swift in Sources */,
 				2C9499A520ECB9950049E9A8 /* Enrollment.swift in Sources */,
 				2C093F03211B42EB00162DD0 /* AuthNavigationViewController.swift in Sources */,
+				2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */,
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,
 				2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */,
 				2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */,
@@ -16075,6 +16137,7 @@
 				2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */,
+				2C33607D213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
 				2C34D68220FCE545001EF741 /* AuthSignUpAssembly.swift in Sources */,
 				2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */,
@@ -16086,6 +16149,7 @@
 				2C093F21211B452400162DD0 /* CodeEditorSettingsPresenter.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */,
+				2C33606A21342F41006EACF3 /* TopicsCollectionViewController.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
