@@ -44,8 +44,9 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .darkGray
         pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.addTarget(self, action: #selector(onPageChanged(_:)), for: .touchUpInside)
+        pageControl.hidesForSinglePage = true
         pageControl.backgroundColor = .clear
+        pageControl.addTarget(self, action: #selector(onPageChanged(_:)), for: .touchUpInside)
 
         return pageControl
     }()
@@ -85,6 +86,11 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         pageControlGradient.frame = pageControlContainer.bounds
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
     }
 
     override func makeConstraints() {
@@ -188,5 +194,17 @@ extension StepsPagerViewController: PagerDelegate {
     func didChangeTabToIndex(_ pager: PagerController, index: Int) {
         pageControl.currentPage = index
         presenter?.selectStep(at: index)
+
+        updateContentInsetsForViewControllerAtIndex(index)
+    }
+
+    private func updateContentInsetsForViewControllerAtIndex(_ index: Int) {
+        guard contents.indices.contains(index),
+              let stepViewController = viewControllerAtIndex(index) as? StepViewController else {
+            return
+        }
+
+        _ = stepViewController.view
+        stepViewController.scrollView.contentInset.bottom = pageControlContainer.bounds.height
     }
 }
