@@ -15,6 +15,9 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         }
 
         let tabBarController = UITabBarController()
+        // Hides dark shadow on navigation bar during transition.
+        tabBarController.view.backgroundColor = .white
+
         let learningNavigationController = makeLearningController()
         let trainingNavigationController = makeTrainingController()
 
@@ -35,7 +38,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
         return applicationModule
     }
-    
+
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
         let controller = assemblyFactory.topicsAssembly.module(
@@ -49,10 +52,10 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         )
         controller.presenter.selectSegment(at: 0)
         navigationController.setViewControllers([controller], animated: false)
-        
+
         return navigationController
     }
-    
+
     private func makeTrainingController() -> UINavigationController {
         let navigationController = UINavigationController()
         let controller = assemblyFactory.topicsAssembly.module(
@@ -66,7 +69,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         )
         controller.presenter.selectSegment(at: 1)
         navigationController.setViewControllers([controller], animated: false)
-        
+
         return navigationController
     }
 }
