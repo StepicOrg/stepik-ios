@@ -19,25 +19,27 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         let learningNavigationController = UINavigationController()
         let learningController = assemblyFactory.topicsAssembly.module(
             navigationController: learningNavigationController
-        )
+        ) as! TopicsTableViewController
         learningController.title = NSLocalizedString("LearningTabTitle", comment: "")
         learningController.tabBarItem = UITabBarItem(
             title: learningController.title,
             image: UIImage(named: "learning-tab-bar"),
             tag: 0
         )
+        learningController.presenter.selectSegment(at: 0)
         learningNavigationController.setViewControllers([learningController], animated: false)
 
         let trainingNavigationController = UINavigationController()
         let trainingController = assemblyFactory.topicsAssembly.module(
             navigationController: trainingNavigationController
-        )
+        ) as! TopicsTableViewController
         trainingController.title = NSLocalizedString("TrainingTabTitle", comment: "")
         trainingController.tabBarItem = UITabBarItem(
             title: trainingController.title,
             image: UIImage(named: "training-tab-bar"),
             tag: 1
         )
+        trainingController.presenter.selectSegment(at: 1)
         trainingNavigationController.setViewControllers([trainingController], animated: false)
 
         tabBarController.setViewControllers(
