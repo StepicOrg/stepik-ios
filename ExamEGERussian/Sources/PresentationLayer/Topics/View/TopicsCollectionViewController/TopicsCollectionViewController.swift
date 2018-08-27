@@ -17,6 +17,7 @@ final class TopicsCollectionViewController: UICollectionViewController {
 
         collectionView?.backgroundColor = .white
         collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.alwaysBounceVertical = true
 
         let cellNib = UINib(nibName: TopicsCollectionViewController.cellReuseIdentifier, bundle: nil)
         collectionView?.register(

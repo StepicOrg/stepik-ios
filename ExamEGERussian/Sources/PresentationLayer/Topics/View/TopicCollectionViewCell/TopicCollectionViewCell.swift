@@ -9,9 +9,33 @@
 import UIKit
 
 final class TopicCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var containerView: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!
     @IBOutlet var commentLabel: UILabel!
+
+    private lazy var gradientLayer: CAGradientLayer = {
+        CAGradientLayer(
+            colors: [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)],
+            locations: [0.0, 1.0],
+            rotationAngle: 90.0
+        )
+    }()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        containerView.backgroundColor = .clear
+        containerView.layer.cornerRadius = 10
+
+        layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.cornerRadius = 10
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = self.bounds
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

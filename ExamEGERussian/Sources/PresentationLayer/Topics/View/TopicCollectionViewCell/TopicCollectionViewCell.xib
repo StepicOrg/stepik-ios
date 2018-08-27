@@ -53,11 +53,6 @@
                             <constraint firstAttribute="bottom" secondItem="cax-gw-bHz" secondAttribute="bottom" constant="20" id="sKn-DA-1zm"/>
                             <constraint firstItem="cax-gw-bHz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BM7-gL-t6j" secondAttribute="bottom" constant="8" symbolic="YES" id="zWw-DW-Chh"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
@@ -70,6 +65,7 @@
             <connections>
                 <outlet property="bodyLabel" destination="BM7-gL-t6j" id="zPO-hA-2ZK"/>
                 <outlet property="commentLabel" destination="cax-gw-bHz" id="DZl-CW-99l"/>
+                <outlet property="containerView" destination="jNV-O3-8BL" id="e2q-X5-PVu"/>
                 <outlet property="titleLabel" destination="sXG-53-0dE" id="aG1-c8-je4"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
