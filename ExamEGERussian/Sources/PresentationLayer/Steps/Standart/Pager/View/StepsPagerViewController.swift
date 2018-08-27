@@ -134,6 +134,7 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
     private func setup() {
         delegate = self
+
         tabHeight = 0
         tabWidth = 0
         indicatorHeight = 0

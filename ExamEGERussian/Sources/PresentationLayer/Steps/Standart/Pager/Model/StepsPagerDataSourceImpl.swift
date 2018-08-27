@@ -27,13 +27,8 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
     }
 
     public func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        let seed = StepModuleSeed(
-            lesson: lesson,
-            step: steps[index],
-            stepPresenterDelegate: stepPresenterDelegate
-        )
-
-        return assembly.module(seed: seed)
+        return assembly.module(seed: StepModuleSeed(lesson: lesson, step: steps[index],
+                                                    stepPresenterDelegate: stepPresenterDelegate))
     }
 
     func setSteps(_ newSteps: [StepPlainObject]) {
