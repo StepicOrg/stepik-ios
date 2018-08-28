@@ -114,8 +114,9 @@ final class LessonsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = appearance.tableViewEstimatedRowHeight
 
-        tableView.tableHeaderView = LessonTableHeaderView.fromNib() as LessonTableHeaderView
-        tableView.tableHeaderView?.layer.insertSublayer(headerViewGradient, at: 0)
+        let headerView: LessonTableHeaderView = .fromNib()
+        headerView.layer.insertSublayer(headerViewGradient, at: 0)
+        tableView.tableHeaderView = headerView
     }
 
     @objc
