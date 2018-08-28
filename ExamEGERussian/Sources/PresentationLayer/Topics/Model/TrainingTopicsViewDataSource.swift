@@ -8,8 +8,10 @@
 
 import UIKit
 
-final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol {
+final class TrainingTopicsViewDataSource: NSObject, TopicsViewSourceProtocol {
     var topics: [TopicPlainObject]
+
+    weak var delegate: TopicsViewSourceDelegate?
 
     init(topics: [TopicPlainObject] = []) {
         self.topics = topics
@@ -41,6 +43,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
     ) -> UICollectionViewCell {
         let cell: TopicsCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.source = TopicsCollectionSource(topics: topics(for: indexPath))
+        cell.source?.didSelectItem = delegate?.didSelectTopic
 
         return cell
     }

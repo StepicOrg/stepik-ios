@@ -3402,7 +3402,7 @@
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
-		2C97902B21356C4800046625 /* TopicsViewDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */; };
+		2C97902B21356C4800046625 /* TopicsViewSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902A21356C4800046625 /* TopicsViewSource.swift */; };
 		2C97902D21356CA800046625 /* TrainingTopicsViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */; };
 		2C9790332135847300046625 /* TrainingTopicsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */; };
 		2C97903421358F0E00046625 /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA340212C3516002116C9 /* UICollectionViewExtensions.swift */; };
@@ -5940,7 +5940,7 @@
 		2C9732F61F4C391900AC9301 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3150/icon.png; sourceTree = "<group>"; };
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
-		2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewDataSourceProtocol.swift; sourceTree = "<group>"; };
+		2C97902A21356C4800046625 /* TopicsViewSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSource.swift; sourceTree = "<group>"; };
 		2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTopicsViewDataSource.swift; sourceTree = "<group>"; };
 		2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTopicsViewDelegate.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -9827,10 +9827,10 @@
 		2C97902921356C0F00046625 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2C83DFE92135D8A600C5978C /* TopicsCollectionSource.swift */,
-				2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */,
+				2C97902A21356C4800046625 /* TopicsViewSource.swift */,
 				2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */,
 				2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */,
+				2C83DFE92135D8A600C5978C /* TopicsCollectionSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -16189,7 +16189,7 @@
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
 				2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
-				2C97902B21356C4800046625 /* TopicsViewDataSourceProtocol.swift in Sources */,
+				2C97902B21356C4800046625 /* TopicsViewSource.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
 				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,
 				2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */,

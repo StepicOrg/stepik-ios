@@ -13,7 +13,7 @@ final class TopicsViewController: UIViewController, TopicsView {
     var presenter: TopicsPresenter!
 
     private let collectionView: UICollectionView
-    private let dataSource: TopicsViewDataSourceProtocol
+    private let dataSource: TopicsViewSourceProtocol
     private let delegate: UICollectionViewDelegate? // swiftlint:disable:this weak_delegate
 
     private var topics = [TopicPlainObject]() {
@@ -31,7 +31,7 @@ final class TopicsViewController: UIViewController, TopicsView {
         return refreshControl
     }()
 
-    init(dataSource: TopicsViewDataSourceProtocol,
+    init(dataSource: TopicsViewSourceProtocol,
          delegate: UICollectionViewDelegate? = nil,
          layout: UICollectionViewLayout = UICollectionViewFlowLayout()
     ) {
@@ -88,5 +88,13 @@ extension TopicsViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.refreshControl.endRefreshing()
         }
+    }
+}
+
+// MARK: - TopicsViewController: TopicsViewSourceDelegate -
+
+extension TopicsViewController: TopicsViewSourceDelegate {
+    func didSelectTopic(_ topic: TopicPlainObject) {
+        presenter.selectTopic(topic)
     }
 }

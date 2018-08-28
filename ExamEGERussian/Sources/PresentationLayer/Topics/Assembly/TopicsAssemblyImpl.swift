@@ -26,6 +26,7 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
             dataSource: dataSource,
             delegate: delegate
         )
+        dataSource.delegate = controller
         controller.presenter = makePresenter(
             view: controller,
             navigationController: navigationController

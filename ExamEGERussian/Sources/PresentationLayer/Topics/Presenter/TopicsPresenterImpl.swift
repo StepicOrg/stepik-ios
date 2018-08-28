@@ -45,7 +45,12 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func selectTopic(_ topic: TopicPlainObject) {
-        router.showLessonsForTopicWithId(topic.id)
+        switch topic.type {
+        case .theory:
+            router.showLessonsForTopicWithId(topic.id)
+        case .practice:
+            router.showAdaptiveForTopicWithId(topic.id)
+        }
     }
 
     func signIn() {

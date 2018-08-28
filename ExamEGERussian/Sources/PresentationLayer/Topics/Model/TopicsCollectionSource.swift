@@ -10,6 +10,7 @@ import UIKit
 
 final class TopicsCollectionSource: NSObject {
     var topics: [TopicPlainObject]
+    var didSelectItem: ((_ topic: TopicPlainObject) -> Void)?
 
     init(topics: [TopicPlainObject] = []) {
         self.topics = topics
@@ -52,5 +53,9 @@ extension TopicsCollectionSource: UICollectionViewDelegate, UICollectionViewDele
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         return CGSize(width: 240, height: collectionView.bounds.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItem?(topics[indexPath.row])
     }
 }
