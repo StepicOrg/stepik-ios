@@ -10,4 +10,7 @@ import Foundation
 
 protocol AdaptiveStepsPresenterProtocol: class {
     func refresh()
+    func submit()
+    func sendHardReaction()
+    func sendEasyReaction()
 }

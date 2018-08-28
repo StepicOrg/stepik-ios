@@ -21,8 +21,12 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     private let courseService: CourseService
     private let viewsService: ViewsServiceProtocol
 
-    private var stepViewController: UIViewController?
+    private var currentStepViewController: UIViewController?
+    private var currentStepPresenter: StepPresenter?
     private var currentStep: StepPlainObject?
+    private var currentStepProgress: StepPlainObject.Progress {
+        return currentStep?.state ?? .default
+    }
 
     private var cachedRecommendedLessons = [LessonPlainObject]()
     private static let recommendationsBatchSize = 6
@@ -47,17 +51,73 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
         self.viewsService = viewsService
     }
 
+    // MARK: - Public API
+
     func refresh() {
+        currentStep = nil
+
+        updateView()
         startRecommendationsPipeline()
     }
 
-    private func sendReaction(_ reaction: Reaction) -> Promise<Void> {
+    func submit() {
+        view?.state = .fetching
+
+        switch currentStepProgress {
+        case .unsolved:
+            currentStepPresenter?.submit()
+        case .wrong:
+            currentStepPresenter?.retry()
+        case .successful:
+            showNextTask()
+        }
+    }
+
+    func sendHardReaction() {
+        sendReaction(.maybeLater)
+    }
+
+    func sendEasyReaction() {
+        sendReaction(.neverAgain)
+    }
+
+    // MARK: - Private API
+
+    private func updateView() {
+        view?.state = .idle
+
+        switch currentStepProgress {
+        case .unsolved:
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonSubmit", comment: ""))
+        case .wrong:
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonTryAgain", comment: ""))
+        case .successful:
+            view?.updateSubmitButtonTitle(NSLocalizedString("AdaptiveControlButtonNextTask", comment: ""))
+        }
+    }
+
+    private func showNextTask() {
+        refresh()
+    }
+
+    private func sendReaction(_ reaction: Reaction) {
         guard let lessonId = currentStep?.lessonId,
               let user = AuthInfo.shared.user else {
-            return Promise(error: AdaptiveStepsError.reactionNotSent)
+            return
         }
 
-        return reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id)
+        view?.state = .fetching
+
+        reactionService.sendReaction(reaction, forLesson: lessonId, byUser: user.id).done {
+            if reaction == .solved {
+                self.view?.state = .idle
+            } else {
+                self.showNextTask()
+            }
+        }.catch { error in
+            print("\(#function): error: \(error)")
+            self.view?.state = .connectionError
+        }
     }
 
     // MARK: - Types
@@ -184,19 +244,28 @@ extension AdaptiveStepsPresenter {
 
 extension AdaptiveStepsPresenter {
     private func showStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) {
-        let newStepViewController = buildStepViewController(for: step, lesson: lesson)
-        if let stepViewController = stepViewController {
-            view?.removeContentController(stepViewController)
+        if self.currentStepViewController != nil {
+            view?.removeContentController(self.currentStepViewController!)
         }
 
-        stepViewController = newStepViewController
-        view?.addContentController(newStepViewController)
+        let stepViewController = buildStepViewController(for: step, lesson: lesson)
+        self.currentStepViewController = stepViewController
+        self.currentStepPresenter = stepViewController.presenter
+
+        view?.addContentController(stepViewController)
         view?.updateTitle(lesson.title)
     }
 
-    private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> UIViewController {
-        let builder = QuizViewControllerBuilder().setNeedNewAttempt(true)
-        let seed = StepModuleSeed(lesson: lesson, step: step, quizViewControllerBuilder: builder, stepPresenterDelegate: self)
+    private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> StepViewController {
+        let builder = QuizViewControllerBuilder()
+            .setNeedNewAttempt(true)
+            .setSubmitButtonHidden(true)
+        let seed = StepModuleSeed(
+            lesson: lesson,
+            step: step,
+            quizViewControllerBuilder: builder,
+            stepPresenterDelegate: self
+        )
 
         return stepAssembly.module(seed: seed)
     }
@@ -206,12 +275,18 @@ extension AdaptiveStepsPresenter {
 
 extension AdaptiveStepsPresenter: StepPresenterDelegate {
     func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
-        currentStep?.isPassed = true
+        currentStep?.state = .successful
+        updateView()
+        sendReaction(.solved)
+    }
 
-        sendReaction(.solved).done {
-            self.refresh()
-        }.catch { error in
-            print("\(#function): error: \(error)")
-        }
+    func stepPresenterSubmissionDidWrong(_ stepPresenter: StepPresenter) {
+        currentStep?.state = .wrong
+        updateView()
+    }
+
+    func stepPresenterSubmissionDidRetry(_ stepPresenter: StepPresenter) {
+        currentStep?.state = .unsolved
+        updateView()
     }
 }

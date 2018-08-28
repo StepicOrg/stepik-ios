@@ -561,6 +561,12 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "Theory" = "Theory";
 "Topics" = "Topics";
 
+"AdaptiveHardReaction" = "Hard";
+"AdaptiveEasyReaction" = "Easy";
+"AdaptiveControlButtonSubmit" = "Submit";
+"AdaptiveControlButtonTryAgain" = "Try again";
+"AdaptiveControlButtonNextTask" = "Next task";
+
 "FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
 "FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
