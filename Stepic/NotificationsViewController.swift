@@ -199,7 +199,7 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func linkClicked(inCell cell: NotificationsTableViewCell, url: URL, withNotificationId id: Int) {
         let deepLinkingUrlString = "https://stepik.org" + url.absoluteString
         if let deepLinkingUrl = URL(string: deepLinkingUrlString) {
-            DeepLinkRouter.routeFromDeepLink(url: deepLinkingUrl, showAlertForUnsupported: false)
+            DeepLinkRouter.routeFromDeepLink(url: deepLinkingUrl)
 
             presenter?.updateNotification(with: id, status: .read)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "link"])

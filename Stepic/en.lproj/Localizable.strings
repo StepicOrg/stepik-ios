@@ -484,6 +484,7 @@ PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
 PlaceholderEmptySearchText = "Some free space to think";
 PlaceholderEmptySearchButton = "Go to Catalog";
+LoadStories = "Load stories";
 
 /* Content Language settings */
 ContentLanguageDescription = "The language of displayed courses.";
@@ -551,4 +552,29 @@ PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't
 Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
-PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so way you'll never forget to study!";
+PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
+
+/* ExamEGERussian */
+"ErrorMessage" = "Sorry, something went wrong: please try again later.";
+"Ok" = "Ok";
+
+"Practice" = "Practice";
+"Theory" = "Theory";
+"Topics" = "Topics";
+
+"AdaptiveHardReaction" = "Hard";
+"AdaptiveEasyReaction" = "Easy";
+"AdaptiveControlButtonSubmit" = "Submit";
+"AdaptiveControlButtonTryAgain" = "Try again";
+"AdaptiveControlButtonNextTask" = "Next task";
+
+"FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
+"FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
+"NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+
+"EmptyAuthViewTitle" = "It's You!";
+"EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
+"EmptyAuthViewDescription" = "Authorized account allows you to sync progress";
+
+"LearningTabTitle" = "Learning";
+"TrainingTabTitle" = "Training";

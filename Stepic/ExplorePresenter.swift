@@ -23,6 +23,9 @@ protocol ExploreView: class {
     func setTags(withTags: [CourseTag], language: ContentLanguage, onSelected: @escaping (CourseTag) -> Void)
     func updateTagsLanguage(language: ContentLanguage)
 
+    func setStories()
+    func hideStories()
+
     func updateCourseCount(to: Int, forBlockWithID: String)
     func updateSearchQuery(to: String)
 
@@ -59,7 +62,15 @@ class ExplorePresenter: CourseListCountDelegate {
         }
     }
 
-    func initLanguagesWidget() {
+    func setupWidgets() {
+        initTagsWidget()
+        view?.setStories()
+        if DefaultsContainer.explore.shouldDisplayContentLanguageWidget {
+            initLanguagesWidget()
+        }
+    }
+
+    private func initLanguagesWidget() {
         view?.setLanguages(withLanguages: ContentLanguage.supportedLanguages, initialLanguage: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]
             selectedLanguage in
@@ -72,7 +83,7 @@ class ExplorePresenter: CourseListCountDelegate {
         })
     }
 
-    func initTagsWidget() {
+    private func initTagsWidget() {
         view?.setTags(withTags: CourseTag.featuredTags, language: ContentLanguage.sharedContentLanguage, onSelected: {
             [weak self]
             tag in
@@ -320,6 +331,12 @@ class ExplorePresenter: CourseListCountDelegate {
 
     func updateCourseCount(to: Int, forListID: String) {
         view?.updateCourseCount(to: to, forBlockWithID: forListID)
+    }
+}
+
+extension ExplorePresenter: StoriesRefreshDelegate {
+    func refreshedEmpty() {
+        view?.hideStories()
     }
 }
 

@@ -9,6 +9,10 @@
 import UIKit
 
 final class AuthGreetingViewController: UIViewController {
+    @IBOutlet var signInButton: BorderedButton!
+    @IBOutlet var signUpButton: BorderedButton!
+    @IBOutlet var laterButton: UIButton!
+
     var presenter: AuthGreetingPresenterProtocol?
 
     private let gradientLayer = CAGradientLayer(
@@ -31,11 +35,19 @@ final class AuthGreetingViewController: UIViewController {
             action: #selector(dismiss(_:))
         )
         navigationItem.leftBarButtonItem?.tintColor = .white
+
+        localize()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = view.bounds
+    }
+
+    private func localize() {
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: .normal)
+        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
+        laterButton.setTitle(NSLocalizedString("Later", comment: ""), for: .normal)
     }
 
     // MARK: Actions

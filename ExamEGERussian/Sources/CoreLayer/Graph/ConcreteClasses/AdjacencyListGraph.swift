@@ -100,5 +100,52 @@ public class AdjacencyListGraph<T>: AbstractGraph<T> where T: Hashable, T: Compa
 
         return result
     }
+}
 
+// MARK: - AdjacencyListGraph (Topological Sort) -
+
+extension AdjacencyListGraph {
+    /// Topological sort using depth-first search.
+    ///
+    /// - Returns: Topologically sorted vertices.
+    public func topologicalSort() -> [Vertex<T>] {
+        var hasCycle = false
+        var stack = [Vertex<T>]()
+        var colorMap = [Vertex<T>: VertexColor]()
+
+        // Returns `true` if has cycle.
+        func dfs(_ node: Vertex<T>) -> Bool {
+            if colorMap[node] == .gray {
+                return true
+            }
+            if colorMap[node] == .black {
+                return false
+            }
+            colorMap[node] = .gray
+
+            for nodeInAdjacencyList in adjacency[node]! {
+                if dfs(nodeInAdjacencyList) {
+                    return true
+                }
+            }
+
+            stack.append(node)
+            colorMap[node] = .black
+
+            return false
+        }
+
+        for (node, _) in adjacency {
+            hasCycle = dfs(node)
+            assert(!hasCycle, "Graph has cycle for vertex: \(node)")
+        }
+
+        return stack.reversed()
+    }
+
+    private enum VertexColor {
+        case white
+        case gray
+        case black
+    }
 }

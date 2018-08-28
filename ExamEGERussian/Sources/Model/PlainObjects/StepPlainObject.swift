@@ -16,7 +16,11 @@ struct StepPlainObject {
     let text: String
     let type: StepType
     let progressId: String?
-    var isPassed = false
+    var state: Progress = .default
+
+    var isPassed: Bool {
+        return state == .successful
+    }
 
     var image: UIImage {
         switch type {
@@ -29,6 +33,10 @@ struct StepPlainObject {
         default:
             return ImageAsset.StepIcons.easyDark.image
         }
+    }
+
+    mutating func setPassed(_ passed: Bool) {
+        state = passed ? .successful : .unsolved
     }
 
     // MARK: Types
@@ -49,5 +57,34 @@ struct StepPlainObject {
         case video
         case dataset
         case admin
+    }
+
+    enum Progress {
+        case successful
+        case unsolved
+        case wrong
+
+        static var `default`: Progress {
+            return .unsolved
+        }
+    }
+}
+
+extension StepPlainObject {
+    init(id: Int,
+         lessonId: Int,
+         position: Int,
+         text: String,
+         type: StepType,
+         progressId: String?,
+         isPassed: Bool = false
+    ) {
+        self.id = id
+        self.lessonId = lessonId
+        self.position = position
+        self.text = text
+        self.type = type
+        self.progressId = progressId
+        setPassed(isPassed)
     }
 }

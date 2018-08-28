@@ -162,7 +162,7 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
         tableView.setContentOffset(offsetBefore, animated: false)
     }
 
-    func widgetForCell(atIndex index: Int) -> CourseWidgetView? {
+    func widgetForCell(atIndex index: Int) -> OldCourseWidgetView? {
         return (tableView.cellForRow(at: indexPathForIndex(index: index)) as? CourseWidgetTableViewCell)?.widgetView
     }
 

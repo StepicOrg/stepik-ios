@@ -9,6 +9,15 @@
 import Foundation
 
 @objc protocol RouterDismissable: class {
-    func dismiss(completion: (() -> Void)?)
-    func dismiss()
+    func dismiss(animated: Bool, completion: (() -> Void)?)
+}
+
+extension RouterDismissable {
+    func dismiss(animated: Bool) {
+        dismiss(animated: animated, completion: nil)
+    }
+
+    func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
 }

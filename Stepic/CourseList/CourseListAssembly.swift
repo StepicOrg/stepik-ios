@@ -8,11 +8,6 @@
 
 import UIKit
 
-// FIXME: remove protocol if exists in project
-protocol Assembly {
-    func makeModule() -> UIViewController
-}
-
 final class CourseListAssembly: Assembly {
     private let type: CourseListType
 
