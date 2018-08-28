@@ -6,7 +6,7 @@
 import Foundation
 
 protocol StepAssembly: class {
-    func module(seed: StepModuleSeed) -> UIViewController
+    func module(seed: StepModuleSeed) -> StepViewController
 }
 
 class StepModuleSeed {

@@ -22,4 +22,5 @@ protocol AdaptiveStepsView: class {
     func removeContentController(_ controller: UIViewController)
 
     func updateTitle(_ title: String)
+    func updateSubmitButtonTitle(_ title: String)
 }

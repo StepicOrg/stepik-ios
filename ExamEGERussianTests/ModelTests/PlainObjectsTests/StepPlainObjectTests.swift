@@ -96,7 +96,8 @@ class StepPlainObjectTests: XCTestCase {
 
     func testStepProgressUpdate() {
         let originalProgress = step.isPassed
-        step.isPassed = !originalProgress
+        step.setPassed(!originalProgress)
+
         XCTAssert(originalProgress != step.isPassed)
     }
 
