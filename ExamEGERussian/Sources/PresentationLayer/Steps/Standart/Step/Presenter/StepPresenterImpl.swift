@@ -42,6 +42,29 @@ final class StepPresenterImpl: StepPresenter {
         updateQuiz()
     }
 
+    func submit() {
+        var isSelected = false
+
+        switch step.type {
+        case .choice:
+            (quizViewController as? ChoiceQuizViewController)?.choices.forEach {
+                isSelected = isSelected || $0
+            }
+        case .string, .number:
+            isSelected = true
+        default:
+            break
+        }
+
+        if isSelected {
+            quizViewController?.submitPressed()
+        }
+    }
+
+    func retry() {
+        quizViewController?.submitPressed()
+    }
+
     // MARK: - Private API
 
     private func showError(
@@ -71,6 +94,7 @@ extension StepPresenterImpl {
 
         setupQuizViewController(quizViewController)
         view?.updateQuiz(with: quizViewController)
+        quizViewController.isSubmitButtonHidden = quizViewControllerBuilder.isSubmitButtonHidden
     }
 
     private func setupQuizViewController(_ quizViewController: QuizViewController) {
@@ -96,14 +120,18 @@ extension StepPresenterImpl {
 
 extension StepPresenterImpl: QuizControllerDelegate {
     func submissionDidCorrect() {
-        setStepProgressAsPassed()
+        step.state = .successful
+        delegate?.stepPresenterSubmissionDidCorrect(self)
     }
 
-    // MARK: Private Helpers
+    func submissionDidWrong() {
+        step.state = .wrong
+        delegate?.stepPresenterSubmissionDidWrong(self)
+    }
 
-    private func setStepProgressAsPassed() {
-        step.isPassed = true
-        delegate?.stepPresenterSubmissionDidCorrect(self)
+    func submissionDidRetry() {
+        step.state = .unsolved
+        delegate?.stepPresenterSubmissionDidRetry(self)
     }
 }
 

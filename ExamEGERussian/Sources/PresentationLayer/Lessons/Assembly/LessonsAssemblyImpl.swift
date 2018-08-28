@@ -27,6 +27,7 @@ final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
         )
         controller.presenter = presenter
         controller.title = knowledgeGraph[topicId]?.key.title
+        controller.hidesBottomBarWhenPushed = true
 
         return controller
     }

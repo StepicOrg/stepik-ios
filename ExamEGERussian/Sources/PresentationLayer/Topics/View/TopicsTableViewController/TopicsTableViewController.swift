@@ -68,29 +68,12 @@ final class TopicsTableViewController: UITableViewController {
 
     private func setupView() {
         tableView.registerNib(for: TopicTableViewCell.self)
-        title = NSLocalizedString("Topics", comment: "")
 
         if #available(iOS 10.0, *) {
             tableView.refreshControl = topicsRefreshControl
         } else {
             tableView.addSubview(topicsRefreshControl)
         }
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("Logout", comment: ""),
-            style: .plain,
-            target: self,
-            action: #selector(onLogoutClick(_:))
-        )
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("SignIn", comment: ""),
-            style: .plain,
-            target: self,
-            action: #selector(onSignInClick(_:))
-        )
-
-        navigationItem.titleView = segmentedControl
     }
 }
 

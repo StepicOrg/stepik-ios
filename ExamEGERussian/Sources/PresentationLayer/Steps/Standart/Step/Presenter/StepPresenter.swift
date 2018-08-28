@@ -10,6 +10,8 @@ import Foundation
 
 protocol StepPresenterDelegate: class {
     func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter)
+    func stepPresenterSubmissionDidWrong(_ stepPresenter: StepPresenter)
+    func stepPresenterSubmissionDidRetry(_ stepPresenter: StepPresenter)
 }
 
 protocol StepPresenter: class {
@@ -17,4 +19,17 @@ protocol StepPresenter: class {
     var delegate: StepPresenterDelegate? { get set }
 
     func refreshStep()
+    func submit()
+    func retry()
+}
+
+extension StepPresenterDelegate {
+    func stepPresenterSubmissionDidCorrect(_ stepPresenter: StepPresenter) {
+    }
+
+    func stepPresenterSubmissionDidWrong(_ stepPresenter: StepPresenter) {
+    }
+
+    func stepPresenterSubmissionDidRetry(_ stepPresenter: StepPresenter) {
+    }
 }
