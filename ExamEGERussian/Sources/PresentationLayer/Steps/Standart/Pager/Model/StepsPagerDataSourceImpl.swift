@@ -6,8 +6,6 @@
 import Foundation
 
 final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
-    private static let tabViewSize: CGFloat = 25.0
-
     private let lesson: LessonPlainObject
     private var steps: [StepPlainObject]
     private let assembly: StepAssembly
@@ -25,11 +23,7 @@ final class StepsPagerDataSourceImpl: NSObject, StepsPagerDataSource {
     }
 
     public func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
-        let step = steps[index]
-        let size = StepsPagerDataSourceImpl.tabViewSize
-        let frame = CGRect(origin: .zero, size: CGSize(width: size, height: size))
-
-        return StepTabView(frame: frame, image: step.image, stepId: step.id, passed: step.isPassed)
+        return UIView(frame: .zero)
     }
 
     public func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
