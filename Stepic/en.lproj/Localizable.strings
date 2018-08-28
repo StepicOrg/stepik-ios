@@ -484,6 +484,7 @@ PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
 PlaceholderEmptySearchText = "Some free space to think";
 PlaceholderEmptySearchButton = "Go to Catalog";
+LoadStories = "Load stories";
 
 /* Content Language settings */
 ContentLanguageDescription = "The language of displayed courses.";
@@ -551,7 +552,7 @@ PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't
 Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
-PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so way you'll never forget to study!";
+PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
