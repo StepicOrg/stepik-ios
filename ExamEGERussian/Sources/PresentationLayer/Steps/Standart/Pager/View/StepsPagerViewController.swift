@@ -88,11 +88,6 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         pageControlGradient.frame = pageControlContainer.bounds
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
-    }
-
     override func makeConstraints() {
         tabsView?.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(self.view)
@@ -120,6 +115,10 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         }
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func setTabSelected(_ selected: Bool, at index: Int) {
         guard index < tabCount,
               let subview = tabs[index]?.subviews.first(where: { $0 is StepTabView }),
@@ -145,6 +144,15 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             action: #selector(shareBarButtonItemDidPressed(_:))
         )
         navigationItem.rightBarButtonItem = shareBarButtonItem
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deviceOrientationDidChanged(_:)),
+            name: .UIDeviceOrientationDidChange,
+            object: nil
+        )
+
+        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
     }
 
     private func setSteps(_ steps: [StepPlainObject]) {
@@ -186,6 +194,11 @@ extension StepsPagerViewController {
     @objc
     private func onPageChanged(_ sender: Any) {
         selectTabAtIndex(pageControl.currentPage)
+    }
+
+    @objc
+    private func deviceOrientationDidChanged(_ sender: Any) {
+        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
     }
 }
 
