@@ -11,7 +11,6 @@ import Foundation
 protocol TopicsPresenter: class {
     func refresh()
     func selectTopic(with viewData: TopicsViewData)
-    func selectSegment(at index: Int)
     func signIn()
     func logout()
 }

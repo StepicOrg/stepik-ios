@@ -41,19 +41,15 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
-        guard let controller = assemblyFactory.topicsAssembly.learning(
+        let controller = assemblyFactory.topicsAssembly.learning(
             navigationController: navigationController
-        ) as? TopicsTableViewController else {
-            fatalError("TopicsTableViewController expected")
-        }
-
+        )
         controller.title = NSLocalizedString("LearningTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
             title: controller.title,
             image: UIImage(named: "learning-tab-bar"),
             tag: 0
         )
-        controller.presenter.selectSegment(at: 0)
         navigationController.setViewControllers([controller], animated: false)
 
         return navigationController

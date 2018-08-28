@@ -14,15 +14,18 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private let router: TopicsRouter
 
     private let knowledgeGraph: KnowledgeGraph
-    private var segmentSelectedIndex = 0
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
 
     private var isFirstRefresh = true
 
-    init(view: TopicsView, knowledgeGraph: KnowledgeGraph, router: TopicsRouter,
-         userRegistrationService: UserRegistrationService, graphService: GraphServiceProtocol) {
+    init(view: TopicsView,
+         knowledgeGraph: KnowledgeGraph,
+         router: TopicsRouter,
+         userRegistrationService: UserRegistrationService,
+         graphService: GraphServiceProtocol
+    ) {
         self.view = view
         self.knowledgeGraph = knowledgeGraph
         self.router = router
@@ -31,34 +34,22 @@ final class TopicsPresenterImpl: TopicsPresenter {
     }
 
     func refresh() {
-        view?.setSegments([SegmentItem.all.title, SegmentItem.adaptive.title])
-        view?.selectSegment(at: segmentSelectedIndex)
-
         checkAuthStatus()
 
         if isFirstRefresh && !knowledgeGraph.isEmpty {
             isFirstRefresh = false
             reloadViewData()
         } else {
-            fetchGraphData()
+            fetchGraph()
         }
     }
 
     func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = knowledgeGraph[viewData.id]?.key,
-              let segment = SegmentItem(rawValue: segmentSelectedIndex) else {
+        guard let topic = knowledgeGraph[viewData.id]?.key else {
             return
         }
 
-        if segment == .all {
-            router.showLessonsForTopicWithId(topic.id)
-        } else {
-            router.showAdaptiveForTopicWithId(topic.id)
-        }
-    }
-
-    func selectSegment(at index: Int) {
-        segmentSelectedIndex = index
+        router.showLessonsForTopicWithId(topic.id)
     }
 
     func signIn() {
@@ -74,7 +65,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
     private func checkAuthStatus() {
         if !AuthInfo.shared.isAuthorized {
             let params = RandomCredentialsGenerator().userRegistrationParams
-            userRegistrationService.registerAndSignIn(with: params).then { [unowned self] user in
+            userRegistrationService.registerAndSignIn(with: params).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
@@ -84,7 +75,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
         }
     }
 
-    private func fetchGraphData() {
+    private func fetchGraph() {
         graphService.fetchGraph().done { [weak self] responseModel in
             guard let strongSelf = self,
                   let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
@@ -120,25 +111,5 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func viewTopicFromVertex(_ vertex: KnowledgeGraphVertex<String>) -> TopicsViewData {
         return TopicsViewData(id: vertex.id, title: vertex.title)
-    }
-
-    // MARK: - Types
-
-    private enum SegmentItem: Int {
-        case all
-        case adaptive
-
-        var title: String {
-            switch self {
-            case .all:
-                return NSLocalizedString("Theory", comment: "")
-            case .adaptive:
-                return NSLocalizedString("Practice", comment: "")
-            }
-        }
-
-        static func segment(at index: Int) -> SegmentItem? {
-            return SegmentItem(rawValue: index)
-        }
     }
 }

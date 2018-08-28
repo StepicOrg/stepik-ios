@@ -28,13 +28,6 @@ final class TopicsTableViewController: UITableViewController {
         return refreshControl
     }()
 
-    private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
-        segmentedControl.addTarget(self, action: #selector(onSegmentedControlValueChanged(_:)), for: .valueChanged)
-
-        return segmentedControl
-    }()
-
     // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
@@ -94,11 +87,6 @@ extension TopicsTableViewController {
     private func onSignInClick(_ sender: Any) {
         presenter.signIn()
     }
-
-    @objc
-    private func onSegmentedControlValueChanged(_ sender: Any) {
-        presenter.selectSegment(at: segmentedControl.selectedSegmentIndex)
-    }
 }
 
 // MARK: - TopicsTableViewController: TopicsView -
@@ -106,19 +94,6 @@ extension TopicsTableViewController {
 extension TopicsTableViewController: TopicsView {
     func setTopics(_ topics: [TopicsViewData]) {
         self.topics = topics
-    }
-
-    func setSegments(_ segments: [String]) {
-        segmentedControl.removeAllSegments()
-        segments.enumerated().forEach {
-            segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false)
-        }
-
-        segmentedControl.sizeToFit()
-    }
-
-    func selectSegment(at index: Int) {
-        segmentedControl.selectedSegmentIndex = index
     }
 
     func displayError(title: String, message: String) {
