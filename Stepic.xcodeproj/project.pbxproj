@@ -2002,7 +2002,6 @@
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C33606A21342F41006EACF3 /* TopicsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */; };
-		2C33606B21342F41006EACF3 /* TopicsCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */; };
 		2C33607321343059006EACF3 /* TopicsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607121343059006EACF3 /* TopicsCollectionCell.swift */; };
 		2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607221343059006EACF3 /* TopicsCollectionCell.xib */; };
 		2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */; };
@@ -5756,7 +5755,6 @@
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
 		2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewController.swift; sourceTree = "<group>"; };
-		2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionViewController.xib; sourceTree = "<group>"; };
 		2C33607121343059006EACF3 /* TopicsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionCell.swift; sourceTree = "<group>"; };
 		2C33607221343059006EACF3 /* TopicsCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionCell.xib; sourceTree = "<group>"; };
 		2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -9011,7 +9009,6 @@
 			isa = PBXGroup;
 			children = (
 				2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */,
-				2C33606921342F41006EACF3 /* TopicsCollectionViewController.xib */,
 			);
 			path = TopicsCollectionViewController;
 			sourceTree = "<group>";
@@ -12057,7 +12054,6 @@
 				2C093F2D211B4AE900162DD0 /* QuizViewController.xib in Resources */,
 				2C5FDC992111E25A0077C15C /* StepTabView.xib in Resources */,
 				2CD7998D21077D010054D098 /* TopicTableViewCell.xib in Resources */,
-				2C33606B21342F41006EACF3 /* TopicsCollectionViewController.xib in Resources */,
 				2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */,
 				2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */,
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,

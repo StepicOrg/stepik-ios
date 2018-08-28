@@ -9,18 +9,26 @@
 import UIKit
 
 final class TopicsCollectionViewController: UICollectionViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView?.backgroundColor = .white
         collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(cellClass: TopicsCollectionCell.self)
         collectionView?.register(
             viewClass: TopicsSectionCollectionViewCell.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
         )
+    }
+
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: UICollectionViewDataSource
@@ -39,7 +47,11 @@ final class TopicsCollectionViewController: UICollectionViewController {
         return cell
     }
 
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
         guard kind == UICollectionElementKindSectionHeader else {
             return UICollectionReusableView()
         }
