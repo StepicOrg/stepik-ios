@@ -72,8 +72,10 @@ final class LessonsTableViewController: UITableViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        triggerHeaderViewLayoutUpdate()
-        tableView.setContentOffset(.zero, animated: false)
+
+        coordinator.animate(alongsideTransition: { _ in
+            self.triggerHeaderViewLayoutUpdate()
+        })
     }
 
     // MARK: - UITableViewDataSource
