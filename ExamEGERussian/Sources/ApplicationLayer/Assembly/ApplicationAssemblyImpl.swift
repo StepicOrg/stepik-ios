@@ -41,9 +41,12 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
-        let controller = assemblyFactory.topicsAssembly.module(
+        guard let controller = assemblyFactory.topicsAssembly.module(
             navigationController: navigationController
-        ) as! TopicsTableViewController
+        ) as? TopicsTableViewController else {
+            fatalError("TopicsTableViewController expected")
+        }
+
         controller.title = NSLocalizedString("LearningTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
             title: controller.title,
@@ -58,9 +61,12 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeTrainingController() -> UINavigationController {
         let navigationController = UINavigationController()
-        let controller = assemblyFactory.topicsAssembly.module(
+        guard let controller = assemblyFactory.topicsAssembly.module(
             navigationController: navigationController
-        ) as! TopicsTableViewController
+        ) as? TopicsTableViewController else {
+            fatalError("TopicsTableViewController expected")
+        }
+
         controller.title = NSLocalizedString("TrainingTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
             title: controller.title,
