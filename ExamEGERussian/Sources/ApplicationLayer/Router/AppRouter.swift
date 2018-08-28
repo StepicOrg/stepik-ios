@@ -10,10 +10,23 @@ import UIKit
 
 final class AppRouter: BaseRouter {
     private(set) weak var window: UIWindow?
+    private(set) weak var tabBarController: UITabBarController?
+
+    override var navigationController: UINavigationController? {
+        return tabBarController?.selectedViewController as? UINavigationController
+    }
+
+    init(tabBarController: UITabBarController,
+         navigationController: UINavigationController,
+         assemblyFactory: AssemblyFactory
+    ) {
+        self.tabBarController = tabBarController
+        super.init(assemblyFactory: assemblyFactory, navigationController: navigationController)
+    }
 
     func start(_ window: UIWindow) {
         self.window = window
-        window.rootViewController = navigationController
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }
 

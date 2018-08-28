@@ -574,3 +574,6 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
 "EmptyAuthViewDescription" = "Authorized account allows you to sync progress";
+
+"LearningTabTitle" = "Learning";
+"TrainingTabTitle" = "Training";

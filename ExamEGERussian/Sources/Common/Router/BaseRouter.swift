@@ -14,7 +14,7 @@ class BaseRouter: RouterNavigational {
     typealias DeriveViewControllerClosure = (UINavigationController) -> UIViewController
 
     let assemblyFactory: AssemblyFactory
-    weak var navigationController: UINavigationController?
+    private(set) weak var navigationController: UINavigationController?
 
     // MARK: Init
 

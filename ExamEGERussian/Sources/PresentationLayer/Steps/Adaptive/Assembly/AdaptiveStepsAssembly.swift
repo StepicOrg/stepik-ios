@@ -31,6 +31,7 @@ final class AdaptiveStepsAssembly: BaseAssembly, AdaptiveStepsAssemblyProtocol {
             viewsService: serviceFactory.viewsService
         )
         controller.presenter = presenter
+        controller.hidesBottomBarWhenPushed = true
 
         return controller
     }
