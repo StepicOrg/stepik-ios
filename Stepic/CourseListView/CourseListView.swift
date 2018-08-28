@@ -150,6 +150,17 @@ final class CourseListView: UIView {
         self.backgroundColor = self.getBackgroundColor(for: self.colorMode)
     }
 
+    // MARK: - ColorMode
+
+    private func getBackgroundColor(for colorMode: CourseWidgetColorMode) -> UIColor {
+        switch colorMode {
+        case .light:
+            return self.appearance.lightModeBackgroundColor
+        case .dark:
+            return self.appearance.darkModeBackgroundColor
+        }
+    }
+
     enum Orientation {
         case horizontal(rowsCount: Int, columnsCount: Int)
         case vertical(columnsCount: Int)
@@ -179,19 +190,6 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.contentInset = .zero
         self.collectionView.backgroundColor = .clear
-    }
-}
-
-// MARK: - ColorMode
-
-extension CourseListView {
-    private func getBackgroundColor(for colorMode: CourseWidgetColorMode) -> UIColor {
-        switch colorMode {
-        case .light:
-            return self.appearance.lightModeBackgroundColor
-        case .dark:
-            return self.appearance.darkModeBackgroundColor
-        }
     }
 }
 

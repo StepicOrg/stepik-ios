@@ -33,6 +33,20 @@ extension UICollectionView {
         )
     }
 
+    func register<T: UICollectionReusableView>(
+        viewClass: T.Type,
+        forSupplementaryViewOfKind kind: String
+    ) where T: Reusable, T: NibLoadable {
+        let bundle = Bundle(for: T.self)
+        let nib = UINib(nibName: T.nibName, bundle: bundle)
+
+        register(
+            nib,
+            forSupplementaryViewOfKind: kind,
+            withReuseIdentifier: T.defaultReuseIdentifier
+        )
+    }
+
     func dequeueReusableCell<T: UICollectionViewCell>(
         for indexPath: IndexPath
     ) -> T where T: Reusable {

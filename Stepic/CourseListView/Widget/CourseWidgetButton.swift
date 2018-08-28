@@ -69,20 +69,9 @@ final class CourseWidgetButton: BounceButton {
             for: .normal
         )
     }
-}
 
-extension CourseWidgetButton: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.titleLabel?.font = self.appearance.titleFont
+    // MARK: - ColorMode
 
-        self.clipsToBounds = true
-        self.layer.cornerRadius = self.appearance.cornerRadius
-    }
-}
-
-// MARK: - ColorMode
-
-extension CourseWidgetButton {
     private func getTextColor(
         for colorMode: CourseWidgetColorMode,
         isCallToAction: Bool
@@ -113,5 +102,14 @@ extension CourseWidgetButton {
                 ? self.appearance.darkModeCallToActionBackgroundColor
                 : self.appearance.darkModeBackgroundColor
         }
+    }
+}
+
+extension CourseWidgetButton: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.titleLabel?.font = self.appearance.titleFont
+
+        self.clipsToBounds = true
+        self.layer.cornerRadius = self.appearance.cornerRadius
     }
 }

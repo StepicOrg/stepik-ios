@@ -20,7 +20,7 @@ extension CourseWidgetCoverView {
         let adaptiveMarkInsets = UIEdgeInsets(top: 0.0, left: 6.0, bottom: 6.0, right: 6.0)
         let adaptiveMarkLabelInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 5.0)
         let adaptiveMarkCornerRadius: CGFloat = 8.0
-        let adaptiveMarkLabelText = "АДАПТИВНЫЙ"
+        let adaptiveMarkLabelText = NSLocalizedString("WidgetAdaptiveLabel", comment: "")
     }
 }
 

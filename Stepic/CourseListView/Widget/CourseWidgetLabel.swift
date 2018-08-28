@@ -47,19 +47,9 @@ final class CourseWidgetLabel: UILabel {
     private func updateColor() {
         self.textColor = self.getTextColor(for: self.colorMode)
     }
-}
 
-extension CourseWidgetLabel: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.updateColor()
-        self.font = self.appearance.font
-        self.numberOfLines = self.appearance.maxLinesCount
-    }
-}
+    // MARK: - ColorMode
 
-// MARK: - ColorMode
-
-extension CourseWidgetLabel {
     private func getTextColor(for colorMode: CourseWidgetColorMode) -> UIColor {
         switch colorMode {
         case .light:
@@ -67,5 +57,13 @@ extension CourseWidgetLabel {
         case .dark:
             return self.appearance.darkModeTextColor
         }
+    }
+}
+
+extension CourseWidgetLabel: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.updateColor()
+        self.font = self.appearance.font
+        self.numberOfLines = self.appearance.maxLinesCount
     }
 }
