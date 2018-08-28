@@ -18,6 +18,11 @@ class CoursesAPI: APIEndpoint {
         return getObjectsByIds(ids: ids, updating: existing)
     }
 
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Course]> {
+        return getObjectsByIds(ids: ids, updating: Course.getCourses(ids))
+    }
+
     func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
         var params = Parameters()
 

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension CourseList {
+extension CourseListModel {
 
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedTitle: String?
@@ -23,7 +23,7 @@ extension CourseList {
     }
 
     convenience init() {
-        self.init(entity: CourseList.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CourseListModel.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
     var id: Int {

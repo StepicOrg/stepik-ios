@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 import PromiseKit
 
-final class CourseList: NSManagedObject, IDFetchable {
+final class CourseListModel: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
     convenience required init(json: JSON) {
@@ -36,7 +36,7 @@ final class CourseList: NSManagedObject, IDFetchable {
         return ContentLanguage(languageString: languageString)
     }
 
-    class func recoverAsync(ids: [Int]) -> Guarantee<[CourseList]> {
+    class func recoverAsync(ids: [Int]) -> Guarantee<[CourseListModel]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: true)
 
@@ -48,10 +48,10 @@ final class CourseList: NSManagedObject, IDFetchable {
         request.predicate = idCompoundPredicate
         request.sortDescriptors = [descriptor]
 
-        return Guarantee<[CourseList]> { seal in
+        return Guarantee<[CourseListModel]> { seal in
             let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
                 results in
-                guard let courseLists = results.finalResult as? [CourseList] else {
+                guard let courseLists = results.finalResult as? [CourseListModel] else {
                     seal([])
                     return
                 }
@@ -61,7 +61,7 @@ final class CourseList: NSManagedObject, IDFetchable {
         }
     }
 
-    class func recover(ids: [Int]) -> [CourseList] {
+    class func recover(ids: [Int]) -> [CourseListModel] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: false)
 
@@ -75,7 +75,7 @@ final class CourseList: NSManagedObject, IDFetchable {
 
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
-            return results as? [CourseList] ?? []
+            return results as? [CourseListModel] ?? []
         } catch {
             return []
         }

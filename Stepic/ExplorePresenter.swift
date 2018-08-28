@@ -38,7 +38,7 @@ class ExplorePresenter: CourseListCountDelegate {
     private var courseListsAPI: CourseListsAPI
     private var courseListsCache: CourseListsCache
 
-    private var lists: [CourseList] = []
+    private var lists: [CourseListModel] = []
     private var blocks: [CourseListBlock] = []
     private var didRefreshOnce: Bool = false
 
@@ -136,11 +136,11 @@ class ExplorePresenter: CourseListCountDelegate {
         searchController?.presenter?.searchCancelled()
     }
 
-    private func getId(forList list: CourseList) -> String {
+    private func getId(forList list: CourseListModel) -> String {
         return "collection_\(list.id)"
     }
 
-    private func buildBlocks(forLists lists: [CourseList], onlyLocal: Bool) -> [CourseListBlock] {
+    private func buildBlocks(forLists lists: [CourseListModel], onlyLocal: Bool) -> [CourseListBlock] {
         let showController: (UIViewController) -> Void = {
             [weak self]
             vc in
@@ -176,14 +176,14 @@ class ExplorePresenter: CourseListCountDelegate {
             ]
     }
 
-    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Guarantee<[CourseList]> {
+    private func getCachedListsAsync(forLanguage language: ContentLanguage) -> Guarantee<[CourseListModel]> {
         let recoveredIds = courseListsCache.get(forLanguage: language)
-        return CourseList.recoverAsync(ids: recoveredIds)
+        return CourseListModel.recoverAsync(ids: recoveredIds)
     }
 
-    private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseList] {
+    private func getCachedLists(forLanguage language: ContentLanguage) -> [CourseListModel] {
         let recoveredIds = courseListsCache.get(forLanguage: language)
-        return CourseList.recover(ids: recoveredIds).sorted { $0.position < $1.position }
+        return CourseListModel.recover(ids: recoveredIds).sorted { $0.position < $1.position }
     }
 
     func refresh() {
@@ -219,7 +219,7 @@ class ExplorePresenter: CourseListCountDelegate {
         view?.presentBlocks(blocks: blocks)
     }
 
-    private func shouldReloadAll(newLists: [CourseList]) -> Bool {
+    private func shouldReloadAll(newLists: [CourseListModel]) -> Bool {
         return newLists.map { getId(forList: $0) } != blocks.compactMap {
             switch $0.listType {
             case .collection(ids: _):
@@ -234,7 +234,7 @@ class ExplorePresenter: CourseListCountDelegate {
         case wrongLanguageError
     }
 
-    private func updateLists(newLists: [CourseList], forLanguage language: ContentLanguage) {
+    private func updateLists(newLists: [CourseListModel], forLanguage language: ContentLanguage) {
         func refreshLists() {
             lists = newLists
             blocks = buildBlocks(forLists: lists, onlyLocal: false)

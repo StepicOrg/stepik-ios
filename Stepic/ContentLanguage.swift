@@ -11,16 +11,11 @@ import Foundation
 enum ContentLanguage {
     case english, russian
 
-    init(languageString: String) {
-        switch languageString {
-        case "ru":
-            self = .russian
-        case "en":
-            self = .english
-        default:
-            self = .english
-        }
+    static var notSelected: ContentLanguage? {
+        return nil
     }
+
+    static let supportedLanguages: [ContentLanguage] = [.russian, .english]
 
     var languageString: String {
         switch self {
@@ -49,25 +44,14 @@ enum ContentLanguage {
         }
     }
 
-    private static var appInterfaceLanguage: ContentLanguage {
-        let currentLanguageString = Bundle.main.preferredLocalizations.first ?? "en"
-        return ContentLanguage(languageString: currentLanguageString)
-    }
-
-    private static let sharedContentLanguageKey = "contentLanguage"
-    static var sharedContentLanguage: ContentLanguage {
-        set(value) {
-            UserDefaults.standard.setValue(value.languageString, forKey: sharedContentLanguageKey)
-        }
-        get {
-            if let cachedValue = UserDefaults.standard.value(forKey: sharedContentLanguageKey) as? String {
-                return ContentLanguage(languageString: cachedValue)
-            } else {
-                self.sharedContentLanguage = appInterfaceLanguage
-                return appInterfaceLanguage
-            }
+    init(languageString: String) {
+        switch languageString {
+        case "ru":
+            self = .russian
+        case "en":
+            self = .english
+        default:
+            self = .english
         }
     }
-
-    static let supportedLanguages: [ContentLanguage] = [.russian, .english]
 }
