@@ -16,8 +16,9 @@ final class TopicsViewController: UIViewController, TopicsView {
     private let dataSource: TopicsViewDataSourceProtocol
     private let delegate: UICollectionViewDelegate? // swiftlint:disable:this weak_delegate
 
-    private var topics = [TopicsViewData]() {
+    private var topics = [TopicPlainObject]() {
         didSet {
+            dataSource.topics = topics
             collectionView.reloadData()
             refreshControl.endRefreshing()
         }
@@ -78,7 +79,7 @@ final class TopicsViewController: UIViewController, TopicsView {
 // MARK: - TopicsCollectionViewController: TopicsView -
 
 extension TopicsViewController {
-    func setTopics(_ topics: [TopicsViewData]) {
+    func setTopics(_ topics: [TopicPlainObject]) {
         self.topics = topics
     }
 

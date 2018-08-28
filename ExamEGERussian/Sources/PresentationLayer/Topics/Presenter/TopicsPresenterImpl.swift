@@ -44,11 +44,7 @@ final class TopicsPresenterImpl: TopicsPresenter {
         }
     }
 
-    func selectTopic(with viewData: TopicsViewData) {
-        guard let topic = knowledgeGraph[viewData.id]?.key else {
-            return
-        }
-
+    func selectTopic(_ topic: TopicPlainObject) {
         router.showLessonsForTopicWithId(topic.id)
     }
 
@@ -95,9 +91,23 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private func reloadViewData() {
         if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
-            view?.setTopics(viewTopicsFrom(vertices))
+            view?.setTopics(toPlainObjects(vertices))
         } else {
             displayError()
+        }
+    }
+
+    private func toPlainObjects(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicPlainObject] {
+        return vertices.map {
+            TopicPlainObject(
+                id: $0.id,
+                title: $0.title,
+                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+                progress: 60.0,
+                type: $0.containsPractice ? .practice : .theory,
+                timeToComplete: 40,
+                lessons: $0.lessons.map { LessonPlainObject(lesson: $0) }
+            )
         }
     }
 
@@ -106,13 +116,5 @@ final class TopicsPresenterImpl: TopicsPresenter {
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
-    }
-
-    private func viewTopicsFrom(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicsViewData] {
-        return vertices.map { viewTopicFromVertex($0) }
-    }
-
-    private func viewTopicFromVertex(_ vertex: KnowledgeGraphVertex<String>) -> TopicsViewData {
-        return TopicsViewData(id: vertex.id, title: vertex.title)
     }
 }

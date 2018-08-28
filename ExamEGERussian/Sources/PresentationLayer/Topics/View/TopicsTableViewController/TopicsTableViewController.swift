@@ -14,7 +14,7 @@ final class TopicsTableViewController: UITableViewController {
 
     var presenter: TopicsPresenter!
 
-    private var topics = [TopicsViewData]() {
+    private var topics = [TopicPlainObject]() {
         didSet {
             tableView.reloadData()
             topicsRefreshControl.endRefreshing()
@@ -54,7 +54,7 @@ final class TopicsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.selectTopic(with: topics[indexPath.row])
+        presenter.selectTopic(topics[indexPath.row])
     }
 
     // MARK: - Private API
@@ -92,7 +92,7 @@ extension TopicsTableViewController {
 // MARK: - TopicsTableViewController: TopicsView -
 
 extension TopicsTableViewController: TopicsView {
-    func setTopics(_ topics: [TopicsViewData]) {
+    func setTopics(_ topics: [TopicPlainObject]) {
         self.topics = topics
     }
 

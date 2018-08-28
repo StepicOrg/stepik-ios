@@ -2440,6 +2440,8 @@
 		2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305E920F38880003D7F9B /* Vertex.swift */; };
 		2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EB20F388B9003D7F9B /* Edge.swift */; };
 		2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305F620F390F8003D7F9B /* GraphTests.swift */; };
+		2C83DFEA2135D8A600C5978C /* TopicsCollectionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83DFE92135D8A600C5978C /* TopicsCollectionSource.swift */; };
+		2C83DFEC2135E24C00C5978C /* TopicPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83DFEB2135E24C00C5978C /* TopicPlainObject.swift */; };
 		2C83E5DB2110441800A8322D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		2C83E5DD211044A600A8322D /* VideoLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* VideoLocationManager.swift */; };
 		2C83E5E2211058DE00A8322D /* StepsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E5E1211058DE00A8322D /* StepsService.swift */; };
@@ -5891,6 +5893,8 @@
 		2C8305E920F38880003D7F9B /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		2C8305EB20F388B9003D7F9B /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		2C8305F620F390F8003D7F9B /* GraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
+		2C83DFE92135D8A600C5978C /* TopicsCollectionSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionSource.swift; sourceTree = "<group>"; };
+		2C83DFEB2135E24C00C5978C /* TopicPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicPlainObject.swift; sourceTree = "<group>"; };
 		2C83E5E1211058DE00A8322D /* StepsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsService.swift; sourceTree = "<group>"; };
 		2C83E5EC2110821700A8322D /* StepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenter.swift; sourceTree = "<group>"; };
 		2C83E5EE2110839A00A8322D /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
@@ -9823,6 +9827,7 @@
 		2C97902921356C0F00046625 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2C83DFE92135D8A600C5978C /* TopicsCollectionSource.swift */,
 				2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */,
 				2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */,
 				2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */,
@@ -10424,6 +10429,7 @@
 				2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */,
 				2C770305210F29B0002E250D /* LessonPlainObject.swift */,
 				2C9492C521130E6600552600 /* StepPlainObject.swift */,
+				2C83DFEB2135E24C00C5978C /* TopicPlainObject.swift */,
 			);
 			path = PlainObjects;
 			sourceTree = "<group>";
@@ -15977,6 +15983,7 @@
 				2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */,
 				2C33CC0F20EC340D009956B0 /* Assignment.swift in Sources */,
 				2C949A4420ECCA000049E9A8 /* TooltipDefaultsManager.swift in Sources */,
+				2C83DFEA2135D8A600C5978C /* TopicsCollectionSource.swift in Sources */,
 				2C949A6E20ECD0D10049E9A8 /* AchievementsListTableViewCell.swift in Sources */,
 				2C9499B220ECBAC00049E9A8 /* ChoiceDataset.swift in Sources */,
 				2C33CBFA20EC32B0009956B0 /* AssignmentsAPI.swift in Sources */,
@@ -15987,6 +15994,7 @@
 				2C33CBE520EC313A009956B0 /* DictionarySerializable.swift in Sources */,
 				2C949A2020ECC5B40049E9A8 /* ProfileMenuBlock.swift in Sources */,
 				2C34D68420FCE584001EF741 /* AuthSignUpRouter.swift in Sources */,
+				2C83DFEC2135E24C00C5978C /* TopicPlainObject.swift in Sources */,
 				2C949A4D20ECCCD40049E9A8 /* RateAppManager.swift in Sources */,
 				2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,

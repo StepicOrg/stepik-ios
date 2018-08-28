@@ -9,9 +9,9 @@
 import UIKit
 
 final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol {
-    var topics: [TopicsViewData]
+    var topics: [TopicPlainObject]
 
-    init(topics: [TopicsViewData] = []) {
+    init(topics: [TopicPlainObject] = []) {
         self.topics = topics
         super.init()
     }
@@ -40,6 +40,8 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: TopicsCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.source = TopicsCollectionSource(topics: topics(for: indexPath))
+
         return cell
     }
 
@@ -61,10 +63,17 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
 
         return view
     }
-}
 
-extension TrainingTopicsViewDataSource {
-    enum Section: Int, CaseIterable {
+    private func topics(for indexPath: IndexPath) -> [TopicPlainObject] {
+        switch Section.from(indexPath: indexPath) {
+        case .theory:
+            return topics
+        case .practice:
+            return topics.filter { $0.type == .practice }
+        }
+    }
+
+    private enum Section: Int, CaseIterable {
         case theory
         case practice
 
@@ -75,6 +84,10 @@ extension TrainingTopicsViewDataSource {
             case .practice:
                 return NSLocalizedString("Practice", comment: "")
             }
+        }
+
+        static func from(indexPath: IndexPath) -> Section {
+            return Section(rawValue: indexPath.section)!
         }
     }
 }

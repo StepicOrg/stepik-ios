@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TopicsViewDataSourceProtocol: UICollectionViewDataSource {
-    var topics: [TopicsViewData] { get set }
+    var topics: [TopicPlainObject] { get set }
 
     func registerCells(for collectionView: UICollectionView)
 }

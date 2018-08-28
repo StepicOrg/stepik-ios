@@ -8,12 +8,7 @@
 
 import Foundation
 
-struct TopicsViewData {
-    let id: String
-    let title: String
-}
-
 protocol TopicsView: class {
-    func setTopics(_ topics: [TopicsViewData])
+    func setTopics(_ topics: [TopicPlainObject])
     func displayError(title: String, message: String)
 }
