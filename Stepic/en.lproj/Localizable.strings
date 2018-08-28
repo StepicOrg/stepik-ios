@@ -571,6 +571,8 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
 "FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+"FailedFetchKnowledgeGraphErrorTitle" = "Unable to load knowledge graph";
+"FailedFetchKnowledgeGraphErrorMessage" = "Pull down to refresh screen.";
 
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";

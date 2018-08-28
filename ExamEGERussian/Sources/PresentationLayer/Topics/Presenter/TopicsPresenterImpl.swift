@@ -86,7 +86,10 @@ final class TopicsPresenterImpl: TopicsPresenter {
             strongSelf.knowledgeGraph.adjacency = graph.adjacency
             strongSelf.reloadViewData()
         }.catch { [weak self] _ in
-            self?.displayError()
+            self?.displayError(
+                title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
+                message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
+            )
         }
     }
 

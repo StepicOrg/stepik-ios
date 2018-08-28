@@ -572,6 +572,8 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 "FailedFetchStepsError" = "Невозможно получить данные об уроке в данный момент. Пожалуйста, попробуйте снова.";
 "FailedMarkStepAsSolved" = "Мы не можем завершить урок. Пожалуйста, попробуйте снова.";
 "NoAdaptiveModuleError" = "В данном уроке нет практических заданий. Пожалуйста, выберите другой урок.";
+"FailedFetchKnowledgeGraphErrorTitle" = "Невозможно загрузить граф знаний";
+"FailedFetchKnowledgeGraphErrorMessage" = "Потяните вниз, чтобы обновить экран.";
 
 "EmptyAuthViewTitle" = "Это Вы!";
 "EmptyAuthViewSubtitle" = "Пройдите авторизацию для более удобного обучения";
