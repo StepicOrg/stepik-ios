@@ -88,7 +88,7 @@ extension CourseListHorizontalViewController: CourseListViewControllerDelegate {
         collectionView.reloadData()
     }
 
-    func widgetForCell(atIndex index: Int) -> CourseWidgetView? {
+    func widgetForCell(atIndex index: Int) -> OldCourseWidgetView? {
         return (collectionView.cellForItem(at: indexPathForIndex(index: index)) as? CourseWidgetCollectionViewCell)?.widgetView
     }
 

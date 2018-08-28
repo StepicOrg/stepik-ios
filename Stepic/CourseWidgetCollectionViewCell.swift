@@ -9,7 +9,7 @@
 import UIKit
 
 class CourseWidgetCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var widgetView: CourseWidgetView!
+    @IBOutlet weak var widgetView: OldCourseWidgetView!
 
     var isLoading: Bool {
         get {
