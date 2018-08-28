@@ -9,8 +9,6 @@
 import UIKit
 
 final class TopicsCollectionViewController: UICollectionViewController {
-    private static let cellReuseIdentifier = String(describing: TopicsCollectionCell.self)
-    private static let reuseIdentifier = String(describing: TopicsSectionCollectionViewCell.self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,17 +16,10 @@ final class TopicsCollectionViewController: UICollectionViewController {
         collectionView?.backgroundColor = .white
         collectionView?.showsVerticalScrollIndicator = false
         collectionView?.alwaysBounceVertical = true
-
-        let cellNib = UINib(nibName: TopicsCollectionViewController.cellReuseIdentifier, bundle: nil)
+        collectionView?.register(cellClass: TopicsCollectionCell.self)
         collectionView?.register(
-            cellNib,
-            forCellWithReuseIdentifier: TopicsCollectionViewController.cellReuseIdentifier
-        )
-        let sectionNib = UINib(nibName: TopicsCollectionViewController.reuseIdentifier, bundle: nil)
-        collectionView?.register(
-            sectionNib,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-            withReuseIdentifier: TopicsCollectionViewController.reuseIdentifier
+            viewClass: TopicsSectionCollectionViewCell.self,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
         )
     }
 
@@ -43,10 +34,7 @@ final class TopicsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TopicsCollectionViewController.cellReuseIdentifier,
-            for: indexPath
-        ) as! TopicsCollectionCell
+        let cell: TopicsCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
 
         return cell
     }
@@ -56,12 +44,10 @@ final class TopicsCollectionViewController: UICollectionViewController {
             return UICollectionReusableView()
         }
 
-        let view = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: TopicsCollectionViewController.reuseIdentifier,
+        let view: TopicsSectionCollectionViewCell = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionElementKindSectionHeader,
             for: indexPath
-        ) as! TopicsSectionCollectionViewCell
-
+        )
         view.titleLabel.text = "Section \(indexPath.section + 1)".uppercased()
         view.actionButton.setTitle(NSLocalizedString("See All", comment: ""), for: .normal)
 

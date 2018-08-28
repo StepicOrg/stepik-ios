@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicCollectionViewCell: UICollectionViewCell {
+final class TopicCollectionViewCell: UICollectionViewCell, Reusable, NibLoadable {
     @IBOutlet var containerView: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!
