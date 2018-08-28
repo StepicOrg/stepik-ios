@@ -82,15 +82,10 @@ extension TopicsViewController {
         self.topics = topics
     }
 
-    func setSegments(_ segments: [String]) {
-
-    }
-
-    func selectSegment(at index: Int) {
-
-    }
-
     func displayError(title: String, message: String) {
         presentAlert(withTitle: title, message: message)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.refreshControl.endRefreshing()
+        }
     }
 }

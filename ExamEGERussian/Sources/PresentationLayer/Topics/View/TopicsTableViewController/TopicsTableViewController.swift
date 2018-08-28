@@ -98,5 +98,8 @@ extension TopicsTableViewController: TopicsView {
 
     func displayError(title: String, message: String) {
         presentAlert(withTitle: title, message: message)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.refreshControl?.endRefreshing()
+        }
     }
 }
