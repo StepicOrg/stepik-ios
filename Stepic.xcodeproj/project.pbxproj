@@ -2004,10 +2004,10 @@
 		2C33606A21342F41006EACF3 /* TopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TopicsViewController.swift */; };
 		2C33607321343059006EACF3 /* TopicsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607121343059006EACF3 /* TopicsCollectionCell.swift */; };
 		2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607221343059006EACF3 /* TopicsCollectionCell.xib */; };
-		2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */; };
-		2C33607921343183006EACF3 /* TopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */; };
-		2C33607D213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */; };
-		2C33607E213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */; };
+		2C33607821343183006EACF3 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* CardCollectionViewCell.swift */; };
+		2C33607921343183006EACF3 /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607721343183006EACF3 /* CardCollectionViewCell.xib */; };
+		2C33607D213433A3006EACF3 /* TopicsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607B213433A3006EACF3 /* TopicsSectionView.swift */; };
+		2C33607E213433A3006EACF3 /* TopicsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607C213433A3006EACF3 /* TopicsSectionView.xib */; };
 		2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F02920EB8AC800666EE0 /* AppDelegate.swift */; };
 		2C33CBD920EC2BBD009956B0 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
 		2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
@@ -5765,10 +5765,10 @@
 		2C33606821342F41006EACF3 /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
 		2C33607121343059006EACF3 /* TopicsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionCell.swift; sourceTree = "<group>"; };
 		2C33607221343059006EACF3 /* TopicsCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionCell.xib; sourceTree = "<group>"; };
-		2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionViewCell.swift; sourceTree = "<group>"; };
-		2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicCollectionViewCell.xib; sourceTree = "<group>"; };
-		2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsSectionCollectionViewCell.swift; sourceTree = "<group>"; };
-		2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsSectionCollectionViewCell.xib; sourceTree = "<group>"; };
+		2C33607621343183006EACF3 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C33607721343183006EACF3 /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
+		2C33607B213433A3006EACF3 /* TopicsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsSectionView.swift; sourceTree = "<group>"; };
+		2C33607C213433A3006EACF3 /* TopicsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsSectionView.xib; sourceTree = "<group>"; };
 		2C34D67320FCD6EC001EF741 /* AuthSignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenter.swift; sourceTree = "<group>"; };
 		2C34D67520FCD84D001EF741 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		2C34D67920FCE2B0001EF741 /* AuthSignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssembly.swift; sourceTree = "<group>"; };
@@ -9076,22 +9076,22 @@
 			path = TopicsCollectionCell;
 			sourceTree = "<group>";
 		};
-		2C33607A2134318A006EACF3 /* TopicCollectionViewCell */ = {
+		2C33607A2134318A006EACF3 /* CardCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */,
-				2C33607721343183006EACF3 /* TopicCollectionViewCell.xib */,
+				2C33607621343183006EACF3 /* CardCollectionViewCell.swift */,
+				2C33607721343183006EACF3 /* CardCollectionViewCell.xib */,
 			);
-			path = TopicCollectionViewCell;
+			path = CardCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		2C33607F213433AE006EACF3 /* TopicsSectionCollectionViewCell */ = {
+		2C33607F213433AE006EACF3 /* TopicsSectionView */ = {
 			isa = PBXGroup;
 			children = (
-				2C33607B213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift */,
-				2C33607C213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib */,
+				2C33607B213433A3006EACF3 /* TopicsSectionView.swift */,
+				2C33607C213433A3006EACF3 /* TopicsSectionView.xib */,
 			);
-			path = TopicsSectionCollectionViewCell;
+			path = TopicsSectionView;
 			sourceTree = "<group>";
 		};
 		2C34D66F20FCD342001EF741 /* Greeting */ = {
@@ -10378,10 +10378,10 @@
 		2CD7997B21077D010054D098 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C33607A2134318A006EACF3 /* TopicCollectionViewCell */,
+				2C33607A2134318A006EACF3 /* CardCollectionViewCell */,
 				2C33607521343065006EACF3 /* TopicsCollectionCell */,
+				2C33607F213433AE006EACF3 /* TopicsSectionView */,
 				2C33606C21342F4C006EACF3 /* TopicsViewController */,
-				2C33607F213433AE006EACF3 /* TopicsSectionCollectionViewCell */,
 				2CD7998021077D010054D098 /* TopicsTableViewController */,
 				2CD7997C21077D010054D098 /* TopicTableViewCell */,
 				2CD7997F21077D010054D098 /* TopicsView.swift */,
@@ -12066,13 +12066,13 @@
 				2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */,
 				2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */,
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
-				2C33607E213433A3006EACF3 /* TopicsSectionCollectionViewCell.xib in Resources */,
+				2C33607E213433A3006EACF3 /* TopicsSectionView.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
 				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C093F2E211B4B4800162DD0 /* StepikPlaceholderView.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C83E5FA211099F900A8322D /* plyr.js in Resources */,
-				2C33607921343183006EACF3 /* TopicCollectionViewCell.xib in Resources */,
+				2C33607921343183006EACF3 /* CardCollectionViewCell.xib in Resources */,
 				2C83E5F8211099CF00A8322D /* jquery-3.2.1.min.js in Resources */,
 				2C83E5FB21109A3700A8322D /* plyr.css in Resources */,
 				2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */,
@@ -16124,7 +16124,7 @@
 				2C093EFB211B426900162DD0 /* FullHeightWebView.swift in Sources */,
 				2C9499A520ECB9950049E9A8 /* Enrollment.swift in Sources */,
 				2C093F03211B42EB00162DD0 /* AuthNavigationViewController.swift in Sources */,
-				2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */,
+				2C33607821343183006EACF3 /* CardCollectionViewCell.swift in Sources */,
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,
 				2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */,
 				2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */,
@@ -16147,7 +16147,7 @@
 				2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */,
-				2C33607D213433A3006EACF3 /* TopicsSectionCollectionViewCell.swift in Sources */,
+				2C33607D213433A3006EACF3 /* TopicsSectionView.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
 				2C34D68220FCE545001EF741 /* AuthSignUpAssembly.swift in Sources */,
 				2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */,

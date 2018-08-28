@@ -19,7 +19,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
     func registerCells(for collectionView: UICollectionView) {
         collectionView.register(cellClass: TopicsCollectionCell.self)
         collectionView.register(
-            viewClass: TopicsSectionCollectionViewCell.self,
+            viewClass: TopicsSectionView.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
         )
     }
@@ -52,7 +52,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
             return UICollectionReusableView()
         }
 
-        let view: TopicsSectionCollectionViewCell = collectionView.dequeueReusableSupplementaryView(
+        let view: TopicsSectionView = collectionView.dequeueReusableSupplementaryView(
             ofKind: UICollectionElementKindSectionHeader,
             for: indexPath
         )
