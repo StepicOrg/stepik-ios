@@ -2001,7 +2001,7 @@
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
-		2C33606A21342F41006EACF3 /* TopicsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */; };
+		2C33606A21342F41006EACF3 /* TopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TopicsViewController.swift */; };
 		2C33607321343059006EACF3 /* TopicsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607121343059006EACF3 /* TopicsCollectionCell.swift */; };
 		2C33607421343059006EACF3 /* TopicsCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607221343059006EACF3 /* TopicsCollectionCell.xib */; };
 		2C33607821343183006EACF3 /* TopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */; };
@@ -3401,6 +3401,9 @@
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
+		2C97902B21356C4800046625 /* TopicsViewDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */; };
+		2C97902D21356CA800046625 /* TrainingTopicsViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */; };
+		2C9790332135847300046625 /* TrainingTopicsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
@@ -5731,7 +5734,7 @@
 		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
-		2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewController.swift; sourceTree = "<group>"; };
+		2C33606821342F41006EACF3 /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
 		2C33607121343059006EACF3 /* TopicsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionCell.swift; sourceTree = "<group>"; };
 		2C33607221343059006EACF3 /* TopicsCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicsCollectionCell.xib; sourceTree = "<group>"; };
 		2C33607621343183006EACF3 /* TopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -5906,6 +5909,9 @@
 		2C9732F61F4C391900AC9301 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3150/icon.png; sourceTree = "<group>"; };
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
+		2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewDataSourceProtocol.swift; sourceTree = "<group>"; };
+		2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTopicsViewDataSource.swift; sourceTree = "<group>"; };
+		2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTopicsViewDelegate.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
@@ -8944,12 +8950,12 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		2C33606C21342F4C006EACF3 /* TopicsCollectionViewController */ = {
+		2C33606C21342F4C006EACF3 /* TopicsViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2C33606821342F41006EACF3 /* TopicsCollectionViewController.swift */,
+				2C33606821342F41006EACF3 /* TopicsViewController.swift */,
 			);
-			path = TopicsCollectionViewController;
+			path = TopicsViewController;
 			sourceTree = "<group>";
 		};
 		2C33607521343065006EACF3 /* TopicsCollectionCell */ = {
@@ -9713,6 +9719,16 @@
 			name = "Onboarding first step";
 			sourceTree = "<group>";
 		};
+		2C97902921356C0F00046625 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C97902A21356C4800046625 /* TopicsViewDataSourceProtocol.swift */,
+				2C97902C21356CA800046625 /* TrainingTopicsViewDataSource.swift */,
+				2C9790322135847300046625 /* TrainingTopicsViewDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2C9E3F381F7A7B2D00DDF1AA /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -10241,6 +10257,7 @@
 		2CD7997721077D010054D098 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				2C97902921356C0F00046625 /* Model */,
 				2C4A1ECC21087CEF00A1D68C /* Assembly */,
 				2CD7997821077D010054D098 /* Presenter */,
 				2C4F33FC2109EDD400E259FE /* Router */,
@@ -10263,7 +10280,7 @@
 			children = (
 				2C33607A2134318A006EACF3 /* TopicCollectionViewCell */,
 				2C33607521343065006EACF3 /* TopicsCollectionCell */,
-				2C33606C21342F4C006EACF3 /* TopicsCollectionViewController */,
+				2C33606C21342F4C006EACF3 /* TopicsViewController */,
 				2C33607F213433AE006EACF3 /* TopicsSectionCollectionViewCell */,
 				2CD7998021077D010054D098 /* TopicsTableViewController */,
 				2CD7997C21077D010054D098 /* TopicTableViewCell */,
@@ -15963,6 +15980,7 @@
 				2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */,
 				2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */,
+				2C97902D21356CA800046625 /* TrainingTopicsViewDataSource.swift in Sources */,
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
 				2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
@@ -16040,7 +16058,7 @@
 				2C093F21211B452400162DD0 /* CodeEditorSettingsPresenter.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */,
-				2C33606A21342F41006EACF3 /* TopicsCollectionViewController.swift in Sources */,
+				2C33606A21342F41006EACF3 /* TopicsViewController.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
@@ -16061,6 +16079,7 @@
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
 				2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
+				2C97902B21356C4800046625 /* TopicsViewDataSourceProtocol.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
 				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,
 				2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */,
@@ -16239,6 +16258,7 @@
 				62E9824D1F33BCAD44C34707 /* StepsPagerPresenterImpl.swift in Sources */,
 				62E9822D92CA621E09BA5995 /* StepsPagerViewController.swift in Sources */,
 				62E98E5A0A94A3955427B3D4 /* StepsPagerView.swift in Sources */,
+				2C9790332135847300046625 /* TrainingTopicsViewDelegate.swift in Sources */,
 				62E988866D3362A65DC7BFD1 /* StepsPagerDataSource.swift in Sources */,
 				62E9820491170A9FF2E00442 /* StepsPagerDataSourceImpl.swift in Sources */,
 				62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */,

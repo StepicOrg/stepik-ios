@@ -60,8 +60,10 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
     }
 
     private func makeTrainingController() -> UINavigationController {
+        let dataSource = TrainingTopicsViewDataSource()
+        let delegate = TrainingTopicsViewDelegate()
+        let controller = TopicsViewController(dataSource: dataSource, delegate: delegate)
         let navigationController = UINavigationController()
-        let controller = TopicsCollectionViewController()
         navigationController.setViewControllers([controller], animated: false)
 
         controller.title = NSLocalizedString("TrainingTabTitle", comment: "")
