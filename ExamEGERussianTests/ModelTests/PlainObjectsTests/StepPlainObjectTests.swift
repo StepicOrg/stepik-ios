@@ -15,7 +15,7 @@ class StepPlainObjectTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        step = StepPlainObject.create()
+        step = StepPlainObject.make()
     }
 
     override func tearDown() {
@@ -43,43 +43,43 @@ class StepPlainObjectTests: XCTestCase {
 
     func testRandomStepImage() {
         for _ in 0...100 {
-            let step = StepPlainObject.create()
+            let step = StepPlainObject.make()
             XCTAssertTrue(checkImage(for: step))
         }
     }
 
     func testStepTextTypeImage() {
-        let textStep = StepPlainObject.create(type: .text)
+        let textStep = StepPlainObject.make(type: .text)
         XCTAssertTrue(checkStepImage(textStep.image, type: .text))
     }
 
     func testStepVideoTypeImage() {
-        let textStep = StepPlainObject.create(type: .video)
+        let textStep = StepPlainObject.make(type: .video)
         XCTAssertTrue(checkStepImage(textStep.image, type: .video))
     }
 
     func testStepCodeTypeImage() {
-        let textStep = StepPlainObject.create(type: .code)
+        let textStep = StepPlainObject.make(type: .code)
         XCTAssertTrue(checkStepImage(textStep.image, type: .code))
     }
 
     func testStepDatasetTypeImage() {
-        let textStep = StepPlainObject.create(type: .dataset)
+        let textStep = StepPlainObject.make(type: .dataset)
         XCTAssertTrue(checkStepImage(textStep.image, type: .dataset))
     }
 
     func testStepAdminTypeImage() {
-        let textStep = StepPlainObject.create(type: .admin)
+        let textStep = StepPlainObject.make(type: .admin)
         XCTAssertTrue(checkStepImage(textStep.image, type: .admin))
     }
 
     func testStepSQLTypeImage() {
-        let textStep = StepPlainObject.create(type: .sql)
+        let textStep = StepPlainObject.make(type: .sql)
         XCTAssertTrue(checkStepImage(textStep.image, type: .sql))
     }
 
     func testStepFillBlanksTypeImage() {
-        let textStep = StepPlainObject.create(type: .fillBlanks)
+        let textStep = StepPlainObject.make(type: .fillBlanks)
         XCTAssertTrue(checkStepImage(textStep.image, type: .fillBlanks))
     }
 
@@ -96,7 +96,8 @@ class StepPlainObjectTests: XCTestCase {
 
     func testStepProgressUpdate() {
         let originalProgress = step.isPassed
-        step.isPassed = !originalProgress
+        step.setPassed(!originalProgress)
+
         XCTAssert(originalProgress != step.isPassed)
     }
 
