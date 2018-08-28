@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class CourseWidgetView: NibInitializableView {
+class OldCourseWidgetView: NibInitializableView {
 
     @IBOutlet weak var courseImageView: UIImageView!
     @IBOutlet weak var courseTitleLabel: StepikLabel!
@@ -225,13 +225,13 @@ class CourseWidgetView: NibInitializableView {
     }
 }
 
-extension CourseWidgetView: UICollectionViewDelegate {
+extension OldCourseWidgetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
 
-extension CourseWidgetView: UICollectionViewDataSource {
+extension OldCourseWidgetView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

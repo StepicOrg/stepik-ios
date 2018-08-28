@@ -20,8 +20,8 @@ class OpenedStoriesAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let vc = OpenedStoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        let navigation = StyledNavigationViewController(rootViewController: vc)
+//        let navigation = StyledNavigationViewController(rootViewController: vc)
         vc.presenter = OpenedStoriesPresenter(view: vc, stories: stories, startPosition: startPosition)
-        return navigation
+        return vc
     }
 }

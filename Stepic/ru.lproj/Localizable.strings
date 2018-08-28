@@ -485,6 +485,7 @@ PlaceholderEmptyNotificationsText = "Нет уведомлений";
 PlaceholderEmptyNotificationsButton = "Перейти в каталог";
 PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
 PlaceholderEmptySearchButton = "Перейти в каталог";
+LoadStories = "Загрузить истории";
 
 /* Content Language settings */
 ContentLanguageDescription = "Вы будете видеть в приложении курсы на данном языке.";
