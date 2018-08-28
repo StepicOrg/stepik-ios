@@ -14,7 +14,7 @@ final class TopicCollectionViewCell: UICollectionViewCell {
     @IBOutlet var bodyLabel: UILabel!
     @IBOutlet var commentLabel: UILabel!
 
-    private lazy var gradientLayer: CAGradientLayer = {
+    let gradientLayer: CAGradientLayer = {
         CAGradientLayer(
             colors: [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)],
             locations: [0.0, 1.0],
@@ -30,6 +30,10 @@ final class TopicCollectionViewCell: UICollectionViewCell {
 
         layer.insertSublayer(gradientLayer, at: 0)
         gradientLayer.cornerRadius = 10
+
+        titleLabel.textColor = .white
+        bodyLabel.textColor = .white
+        commentLabel.textColor = .white
     }
 
     override func layoutSubviews() {
