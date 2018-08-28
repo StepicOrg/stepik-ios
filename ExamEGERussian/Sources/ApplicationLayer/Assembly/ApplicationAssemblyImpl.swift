@@ -41,7 +41,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
-        guard let controller = assemblyFactory.topicsAssembly.module(
+        guard let controller = assemblyFactory.topicsAssembly.learning(
             navigationController: navigationController
         ) as? TopicsTableViewController else {
             fatalError("TopicsTableViewController expected")
@@ -60,10 +60,10 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
     }
 
     private func makeTrainingController() -> UINavigationController {
-        let dataSource = TrainingTopicsViewDataSource()
-        let delegate = TrainingTopicsViewDelegate()
-        let controller = TopicsViewController(dataSource: dataSource, delegate: delegate)
         let navigationController = UINavigationController()
+        let controller = assemblyFactory.topicsAssembly.training(
+            navigationController: navigationController
+        )
         navigationController.setViewControllers([controller], animated: false)
 
         controller.title = NSLocalizedString("TrainingTabTitle", comment: "")

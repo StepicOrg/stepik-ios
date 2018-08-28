@@ -10,9 +10,25 @@ import UIKit
 import SnapKit
 
 final class TopicsViewController: UIViewController, TopicsView {
+    var presenter: TopicsPresenter!
+
     private let collectionView: UICollectionView
     private let dataSource: TopicsViewDataSourceProtocol
     private let delegate: UICollectionViewDelegate? // swiftlint:disable:this weak_delegate
+
+    private var topics = [TopicsViewData]() {
+        didSet {
+            collectionView.reloadData()
+            refreshControl.endRefreshing()
+        }
+    }
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+
+        return refreshControl
+    }()
 
     init(dataSource: TopicsViewDataSourceProtocol,
          delegate: UICollectionViewDelegate? = nil,
@@ -34,7 +50,11 @@ final class TopicsViewController: UIViewController, TopicsView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        presenter.refresh()
+    }
 
+    private func setup() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
@@ -44,7 +64,14 @@ final class TopicsViewController: UIViewController, TopicsView {
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
+
+        collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
+    }
+
+    @objc
+    private func refreshData(_ sender: Any) {
+        presenter.refresh()
     }
 }
 
@@ -52,7 +79,7 @@ final class TopicsViewController: UIViewController, TopicsView {
 
 extension TopicsViewController {
     func setTopics(_ topics: [TopicsViewData]) {
-
+        self.topics = topics
     }
 
     func setSegments(_ segments: [String]) {
@@ -64,6 +91,6 @@ extension TopicsViewController {
     }
 
     func displayError(title: String, message: String) {
-
+        presentAlert(withTitle: title, message: message)
     }
 }

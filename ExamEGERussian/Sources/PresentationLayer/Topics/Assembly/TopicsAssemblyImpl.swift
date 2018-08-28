@@ -9,20 +9,46 @@
 import Foundation
 
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
-    func module(navigationController: UINavigationController) -> UIViewController {
+    func learning(navigationController: UINavigationController) -> UIViewController {
         let controller = TopicsTableViewController()
+        controller.presenter = makePresenter(
+            view: controller,
+            navigationController: navigationController
+        )
+
+        return controller
+    }
+
+    func training(navigationController: UINavigationController) -> UIViewController {
+        let dataSource = TrainingTopicsViewDataSource()
+        let delegate = TrainingTopicsViewDelegate()
+        let controller = TopicsViewController(
+            dataSource: dataSource,
+            delegate: delegate
+        )
+        controller.presenter = makePresenter(
+            view: controller,
+            navigationController: navigationController
+        )
+
+        return controller
+    }
+
+    private func makePresenter(
+        view: TopicsView,
+        navigationController: UINavigationController
+    ) -> TopicsPresenter {
         let router = TopicsRouterImpl(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
-        controller.presenter = TopicsPresenterImpl(
-            view: controller,
+
+        return TopicsPresenterImpl(
+            view: view,
             knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             router: router,
             userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService
         )
-
-        return controller
     }
 }

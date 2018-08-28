@@ -9,5 +9,6 @@
 import Foundation
 
 protocol TopicsAssembly: class {
-    func module(navigationController: UINavigationController) -> UIViewController
+    func learning(navigationController: UINavigationController) -> UIViewController
+    func training(navigationController: UINavigationController) -> UIViewController
 }

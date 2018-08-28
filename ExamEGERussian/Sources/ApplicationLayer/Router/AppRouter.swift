@@ -35,10 +35,4 @@ final class AppRouter: BaseRouter {
             assemblyFactory.authAssembly.greeting.module()
         }, animated: animated)
     }
-
-    func showTopics(animated: Bool = true) {
-        pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.topicsAssembly.module(navigationController: navigationController)
-        }, animated: animated)
-    }
 }
