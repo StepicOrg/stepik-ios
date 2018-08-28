@@ -28,8 +28,8 @@ final class LessonsTableViewController: UITableViewController {
         }
     }
 
-    private var headerView: LessonHeaderTableView? {
-        return tableView.tableHeaderView as? LessonHeaderTableView
+    private var headerView: LessonTableHeaderView? {
+        return tableView.tableHeaderView as? LessonTableHeaderView
     }
     private lazy var headerViewGradient: CAGradientLayer = {
         CAGradientLayer(
@@ -114,7 +114,7 @@ final class LessonsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = appearance.tableViewEstimatedRowHeight
 
-        tableView.tableHeaderView = LessonHeaderTableView.fromNib() as LessonHeaderTableView
+        tableView.tableHeaderView = LessonTableHeaderView.fromNib() as LessonTableHeaderView
         tableView.tableHeaderView?.layer.insertSublayer(headerViewGradient, at: 0)
     }
 

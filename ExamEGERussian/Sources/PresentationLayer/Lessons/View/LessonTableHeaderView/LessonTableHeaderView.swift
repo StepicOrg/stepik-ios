@@ -1,5 +1,5 @@
 //
-//  LessonHeaderTableView.swift
+//  LessonTableHeaderView.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 25/08/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LessonHeaderTableView: UIView {
+final class LessonTableHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
 
