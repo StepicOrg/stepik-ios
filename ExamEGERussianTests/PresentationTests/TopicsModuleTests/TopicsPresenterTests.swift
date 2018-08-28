@@ -11,7 +11,6 @@ import PromiseKit
 @testable import ExamEGERussian
 
 class TopicsPresenterTests: XCTestCase {
-
     let userRegistrationService = UserRegistrationServiceMock()
     let graphService = GraphServiceMock()
     let topicsViewSpy = TopicsViewSpy()
@@ -22,7 +21,8 @@ class TopicsPresenterTests: XCTestCase {
 
         topicsPresenter = TopicsPresenterImpl(
             view: topicsViewSpy,
-            model: KnowledgeGraph(),
+            knowledgeGraph: KnowledgeGraph(),
+            router: TopicsRouterMock(),
             userRegistrationService: userRegistrationService,
             graphService: graphService
         )
@@ -34,7 +34,9 @@ class TopicsPresenterTests: XCTestCase {
         let resultToBeReturned = KnowledgeGraphPlainObject.createGraph()
         graphService.resultToBeReturned = .value(resultToBeReturned)
         topicsViewSpy.onSet = { [weak self] in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             XCTAssertTrue(self.topicsViewSpy.topics!.count == resultToBeReturned.topics.count, "not equal count of topics")
             exp.fulfill()
         }
@@ -44,15 +46,17 @@ class TopicsPresenterTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
 
-    func testFailureresponseDisplayError() {
-        let exp = expectation(description: "Concreate error title and message")
+    func testFailureResponseDisplayError() {
+        let exp = expectation(description: "Concrete error title and message")
 
         let expectedErrorTitle = "Error"
         let expectedErrorMessage = "Some error message"
         let errorToBeReturned = NSError.createError(withMessage: expectedErrorMessage)
         graphService.resultToBeReturned = Promise(error: errorToBeReturned)
         topicsViewSpy.onError = { [weak self] in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             XCTAssertEqual(expectedErrorTitle, self.topicsViewSpy.displayErrorTitle, "Error title doesn't match")
             XCTAssertEqual(expectedErrorMessage, self.topicsViewSpy.displayErrorMessage, "Error message doesn't match")
             exp.fulfill()

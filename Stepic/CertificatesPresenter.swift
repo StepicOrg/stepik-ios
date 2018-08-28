@@ -146,12 +146,12 @@ class CertificatesPresenter {
 
     private func certificateViewData(fromCertificate certificate: Certificate) -> CertificateViewData {
 
-        var courseImageURL: URL? = nil
+        var courseImageURL: URL?
         if let courseImageURLString = certificate.course?.coverURLString {
             courseImageURL = URL(string: courseImageURLString)
         }
 
-        var certificateURL: URL? = nil
+        var certificateURL: URL?
         if let certificateURLString = certificate.urlString {
             certificateURL = URL(string: certificateURLString)
         }

@@ -96,7 +96,7 @@ class QuizPresenter {
                     #if os(tvOS)
                     NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
                     #else
-                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": step.id])
+                    NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
                     #endif
                     DispatchQueue.main.async {
                         [weak self] in
@@ -312,19 +312,21 @@ class QuizPresenter {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: self.view?.submissionAnalyticsParams)
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
-            submit(reply: reply, completion: {
-                [weak self] in
+            submit(reply: reply, completion: { [weak self] in
                 self?.view?.showLoading(visible: false)
-            }, error: {
-                [weak self]
-                _ in
+            }, error: { [weak self] error in
                 self?.view?.showLoading(visible: false)
-                self?.view?.showConnectionError()
+
+                if !(self?.submissionLimit?.canSubmit ?? true) {
+                    self?.showNoSubmissionsLeftError()
+                } else if error is NetworkError {
+                    self?.view?.showConnectionError()
+                }
             })
         }
     }
 
-    private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((Error) -> Void)) {
         guard let id = attempt?.id else { return }
         performRequest({
             [weak self] in
@@ -333,21 +335,25 @@ class QuizPresenter {
                 [weak self]
                 submission in
 
-                guard let s = self else { return }
-                AnalyticsUserProperties.shared.incrementSubmissionsCount()
-                if let codeReply = reply as? CodeReply {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name, "language": codeReply.languageName])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: s.step.id, type: s.step.block.name, language: codeReply.languageName).send()
-                } else {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": s.step.block.name])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: s.step.id, type: s.step.block.name).send()
+                guard let strongSelf = self else {
+                    return
                 }
 
-                s.submission = submission
-                s.checkSubmission(submission.id, time: 0, completion: completion)
-            }, error: {
-                errorText in
-                errorHandler(errorText)
+                AnalyticsUserProperties.shared.incrementSubmissionsCount()
+                strongSelf.submissionsCount = (strongSelf.submissionsCount ?? 0) + 1
+
+                if let codeReply = reply as? CodeReply {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name, "language": codeReply.languageName])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name, language: codeReply.languageName).send()
+                } else {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name])
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name).send()
+                }
+
+                strongSelf.submission = submission
+                strongSelf.checkSubmission(submission.id, time: 0, completion: completion)
+            }, error: { error in
+                errorHandler(error)
                 //TODO: test this
             })
         }, error: {
@@ -466,6 +472,8 @@ class QuizPresenter {
         case .attempt :
             if submissionLimit?.canSubmit ?? true {
                 submit()
+            } else {
+                showNoSubmissionsLeftError()
             }
         case let .submission(showsTryAgain):
             if submissionLimit?.canSubmit ?? true {
@@ -494,6 +502,11 @@ class QuizPresenter {
         default:
             break
         }
+    }
+
+    private func showNoSubmissionsLeftError() {
+        view?.showError(message: NSLocalizedString("NoSubmissionsLeft", comment: ""))
+        view?.update(limit: submissionLimit)
     }
 }
 
@@ -531,6 +544,7 @@ protocol QuizView: class {
     func set(state: QuizState)
     func update(limit: SubmissionLimitation?)
     func showError(visible: Bool)
+    func showError(message: String)
     func showLoading(visible: Bool)
     func showConnectionError()
 

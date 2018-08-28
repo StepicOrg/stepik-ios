@@ -48,7 +48,7 @@ class ChoiceQuizLabelTableViewCell: ChoiceQuizTableViewCell {
     override func setHTMLText(text: String) -> (Void -> Int) {
         choiceLabel.setTextWithHTMLString(text)
         return {
-            return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - 60))) + 17
+            max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - 60))) + 17
         }
     }
 

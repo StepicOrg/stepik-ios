@@ -184,7 +184,7 @@ class PinsMapView: UIView {
         let rectArea: CGFloat = rect.width * rect.height
         // Binary search with fixed iterations count
         let condition: (CGFloat) -> Bool = { (x: CGFloat) -> Bool in
-            return (CGFloat(self.daysInWeek) * x <= rect.height) &&
+            (CGFloat(self.daysInWeek) * x <= rect.height) &&
                    (CGFloat(self.weeksInMonth) * x <= rect.width) &&
                    (CGFloat(self.daysInWeek * self.weeksInMonth) * x * x <= rectArea)
         }

@@ -46,14 +46,17 @@ class NotificationRegistrator {
             } else {
                 let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
                 application.registerUserNotificationSettings(settings)
-                application.registerForRemoteNotifications()
             }
-
+            application.registerForRemoteNotifications()
         }
 
         if AuthInfo.shared.isAuthorized {
-            if let token = InstanceID.instanceID().token() {
-                registerDevice(token)
+            InstanceID.instanceID().instanceID { [weak self] (result, error) in
+                if let error = error {
+                    print("Error fetching Firebase remote instanse ID: \(error)")
+                } else if let result = result {
+                    self?.registerDevice(result.token)
+                }
             }
         }
     }

@@ -323,6 +323,11 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
+    func showError(message: String) {
+        self.doesPresentActivityIndicatorView = false
+        Messages.sharedManager.show(with: message)
+    }
+
     func showLoading(visible: Bool) {
         if visible {
             self.doesPresentWarningView = false
@@ -343,7 +348,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func showRateAlert() {
-        var positionPercentageString: String? = nil
+        var positionPercentageString: String?
         if let cnt = step.lesson?.stepsArray.count {
             positionPercentageString = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
         }
@@ -421,6 +426,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func submitPressed() {
+        self.view.endEditing(true)
+
         submissionPressedBlock?()
         presenter?.submitPressed()
     }
