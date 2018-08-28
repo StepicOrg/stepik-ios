@@ -2440,6 +2440,7 @@
 		2C77030E210F2C7B002E250D /* AuthSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */; };
 		2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
 		2C770310210F2D1D002E250D /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		2C79347F213552EE00CC371F /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79347E213552EE00CC371F /* UICollectionViewExtensions.swift */; };
 		2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */; };
 		2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */; };
 		2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */; };
@@ -5874,6 +5875,7 @@
 		2C770305210F29B0002E250D /* LessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
 		2C770308210F2AD5002E250D /* RouterDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterDismissable.swift; sourceTree = "<group>"; };
 		2C770309210F2AD5002E250D /* BaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		2C79347E213552EE00CC371F /* UICollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtensions.swift; sourceTree = "<group>"; };
 		2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation4.json; path = LottieFiles/onboardingAnimation4.json; sourceTree = "<group>"; };
 		2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation1.json; path = LottieFiles/onboardingAnimation1.json; sourceTree = "<group>"; };
@@ -9563,6 +9565,14 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		2C79347D213552C400CC371F /* UICollectionViewExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C79347E213552EE00CC371F /* UICollectionViewExtensions.swift */,
+			);
+			path = UICollectionViewExtensions;
+			sourceTree = "<group>";
+		};
 		2C7FEE781FDAF9E100B2B4F1 /* Animations files */ = {
 			isa = PBXGroup;
 			children = (
@@ -10233,6 +10243,7 @@
 		2CD7994421077CB90054D098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C79347D213552C400CC371F /* UICollectionViewExtensions */,
 				2CD7994921077CB90054D098 /* UITableView */,
 				2CD7994521077CB90054D098 /* UITableViewCell */,
 				2CD7994C21077CB90054D098 /* UITableViewHeaderFooterView */,
@@ -16063,6 +16074,7 @@
 				2C9492C821130F7C00552600 /* CourseServiceImpl.swift in Sources */,
 				2C949A7020ECD17B0049E9A8 /* SkeletonView.swift in Sources */,
 				2C770303210F29A3002E250D /* KnowledgeGraphLessonPlainObject.swift in Sources */,
+				2C79347F213552EE00CC371F /* UICollectionViewExtensions.swift in Sources */,
 				2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */,
 				2C9492CA21130FD400552600 /* JSQWebViewController.swift in Sources */,
