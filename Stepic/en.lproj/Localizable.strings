@@ -573,3 +573,11 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "PracticeLessonDescription" = "Consolidate the knowledge gained";
 
 "LessonsViewControllerTitle" = "Topic";
+
+"LessonsCountText1" = "%@ lesson";
+"LessonsCountText234" = "%@ lessons";
+"LessonsCountText567890" = "%@ lessons";
+
+"PagesCountText1" = "%@ page";
+"PagesCountText234" = "%@ pages";
+"PagesCountText567890" = "%@ pages";

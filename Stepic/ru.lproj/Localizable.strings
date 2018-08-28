@@ -574,3 +574,11 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 "PracticeLessonDescription" = "Закрепите полученные знания";
 
 "LessonsViewControllerTitle" = "Тема";
+
+"LessonsCountText1" = "%@ урок";
+"LessonsCountText234" = "%@ урока";
+"LessonsCountText567890" = "%@ уроков";
+
+"PagesCountText1" = "%@ страница";
+"PagesCountText234" = "%@ страницы";
+"PagesCountText567890" = "%@ страниц";

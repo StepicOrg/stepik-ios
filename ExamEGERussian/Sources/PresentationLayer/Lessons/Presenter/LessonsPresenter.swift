@@ -135,11 +135,7 @@ extension LessonsPresenter {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
-                subtitle: countLocalizedString(
-                    key: "lesson pages count",
-                    comment: "Lessons pages count string format to be found in Localized.stringsdict",
-                    count: UInt($0.steps.count)
-                )
+                subtitle: lessonsPluralized(count: $0.steps.count)
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
@@ -153,22 +149,28 @@ extension LessonsPresenter {
         view?.setLessons(theory + practice)
         view?.updateHeader(
             title: topic.title,
-            subtitle: countLocalizedString(
-                key: "topic lessons count",
-                comment: "Lessons count in the topic string format to be found in Localized.stringsdict",
-                count: UInt(topic.lessons.count)
-            )
+            subtitle: topicsPluralized()
         )
     }
 
-    private func countLocalizedString(
-        key: String,
-        comment: String = "",
-        count: UInt
-    ) -> String {
-        let formatString = NSLocalizedString(key, comment: comment)
-        let resultString = String.localizedStringWithFormat(formatString, count)
+    private func lessonsPluralized(count: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: count, forms: [
+            NSLocalizedString("LessonsCountText1", comment: ""),
+            NSLocalizedString("LessonsCountText234", comment: ""),
+            NSLocalizedString("LessonsCountText567890", comment: "")
+        ])
 
-        return resultString
+        return String(format: pluralizedString, "\(count)")
+    }
+
+    private func topicsPluralized() -> String {
+        let count = topic.lessons.count
+        let pluralizedString = StringHelper.pluralize(number: count, forms: [
+            NSLocalizedString("PagesCountText1", comment: ""),
+            NSLocalizedString("PagesCountText234", comment: ""),
+            NSLocalizedString("PagesCountText567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(count)")
     }
 }
