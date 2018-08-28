@@ -11,14 +11,6 @@ import SnapKit
 import SVProgressHUD
 
 final class StepsPagerViewController: PagerController, StepsPagerView {
-    private struct Theme {
-        static let tabHeight: CGFloat = 44.0
-        static let tabWidth: CGFloat = 44.0
-        static let indicatorHeight: CGFloat = 2.0
-        static let tabOffset: CGFloat = 8.0
-        static let shadowViewHeight: CGFloat = 0.5
-    }
-
     var state: StepsPagerViewState = .idle {
         didSet {
             switch state {
@@ -38,6 +30,31 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
     var presenter: StepsPagerPresenter?
     private var strongDataSource: StepsPagerDataSource?
+
+    private lazy var pageControlContainer: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.layer.insertSublayer(pageControlGradient, at: 0)
+
+        return view
+    }()
+    private let pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.currentPageIndicatorTintColor = .darkGray
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.hidesForSinglePage = true
+        pageControl.backgroundColor = .clear
+        pageControl.addTarget(self, action: #selector(onPageChanged(_:)), for: .touchUpInside)
+
+        return pageControl
+    }()
+    private let pageControlGradient = CAGradientLayer(
+        colors: [UIColor.white.withAlphaComponent(0), .white],
+        locations: [0.0, 1.0],
+        rotationAngle: 0
+    )
 
     /// Constructs a new `StepsPagerViewController` with strong reference to the data source.
     ///
@@ -62,41 +79,44 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setup()
         presenter?.refresh()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBarBottomHairlineVisible(false)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        setNavigationBarBottomHairlineVisible(true)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageControlGradient.frame = pageControlContainer.bounds
     }
 
     override func makeConstraints() {
-        self.tabsView!.snp.makeConstraints { make in
+        tabsView?.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(self.view)
-            make.height.equalTo(Theme.tabHeight)
+            make.height.equalTo(0)
+        }
+        tabsView?.isHidden = true
+
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(self.view)
         }
 
-        self.contentView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(self.view)
-            make.top.equalTo(self.tabsView!.snp.bottom)
-            make.bottom.equalTo(self.view)
+        view.insertSubview(pageControlContainer, aboveSubview: contentView)
+        pageControlContainer.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(self.view)
         }
 
-        let shadowView = UIView()
-        self.contentView.addSubview(shadowView)
-        shadowView.backgroundColor = .lightGray
-        shadowView.snp.makeConstraints { make in
-            make.height.equalTo(Theme.shadowViewHeight)
-            make.top.equalTo(contentView)
-            make.leading.trailing.equalTo(contentView)
+        pageControlContainer.addSubview(pageControl)
+        pageControl.snp.makeConstraints { make in
+            make.leading.trailing.top.equalTo(pageControlContainer)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.bottom.equalTo(self.view)
+            }
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func setTabSelected(_ selected: Bool, at index: Int) {
@@ -108,30 +128,15 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
         stepTabView.setTab(selected: selected, animated: true)
     }
-}
 
-// MARK: - StepsPagerViewController: PagerDelegate -
+    // MARK: - Private API -
 
-extension StepsPagerViewController: PagerDelegate {
-    func didChangeTabToIndex(_ pager: PagerController, index: Int) {
-        presenter?.selectStep(at: index)
-    }
-}
-
-// MARK: - StepsPagerViewController (Actions) -
-
-extension StepsPagerViewController {
-    @objc private func shareBarButtonItemDidPressed(_ sender: Any) {
-        presenter?.selectShareStep(at: activeTabIndex)
-    }
-}
-
-// MARK: - StepsPagerViewController (UI Setup) -
-
-extension StepsPagerViewController {
     private func setup() {
-        edgesForExtendedLayout = [.left, .right, .bottom]
-        navigationController?.view.backgroundColor = .white
+        delegate = self
+
+        tabHeight = 0
+        tabWidth = 0
+        indicatorHeight = 0
 
         let shareBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .action,
@@ -140,39 +145,16 @@ extension StepsPagerViewController {
         )
         navigationItem.rightBarButtonItem = shareBarButtonItem
 
-        view.backgroundColor = .white
-        setupTabs()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deviceOrientationDidChanged(_:)),
+            name: .UIDeviceOrientationDidChange,
+            object: nil
+        )
 
-        delegate = self
+        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
     }
 
-    private func setupTabs() {
-        indicatorColor = .mainDark
-        tabsViewBackgroundColor = .white
-
-        tabHeight = Theme.tabHeight
-        tabWidth = Theme.tabWidth
-        indicatorHeight = Theme.indicatorHeight
-        tabOffset = Theme.tabOffset
-
-        centerCurrentTab = true
-        fixLaterTabsPosition = true
-    }
-
-    private func setNavigationBarBottomHairlineVisible(_ visible: Bool) {
-        if visible {
-            navigationController?.navigationBar.isTranslucent = true
-            navigationController?.navigationBar.showBottomHairline()
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.hideBottomHairline()
-        }
-    }
-}
-
-// MARK: - StepsPagerViewController (Private API) -
-
-extension StepsPagerViewController {
     private func setSteps(_ steps: [StepPlainObject]) {
         guard let dataSource = dataSource as? StepsPagerDataSource else {
             return print("StepsPagerDataSource doesn't exists")
@@ -180,6 +162,9 @@ extension StepsPagerViewController {
 
         dataSource.setSteps(steps)
         reloadData()
+
+        pageControl.numberOfPages = steps.count
+        pageControl.currentPage = activeTabIndex
     }
 
     private func displayError(with message: String) {
@@ -198,31 +183,42 @@ extension StepsPagerViewController {
     }
 }
 
-// MARK: - UINavigationBar+hideBottomHairline -
+// MARK: - StepsPagerViewController (Actions) -
 
-private extension UINavigationBar {
-    func hideBottomHairline() {
-        let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView!.isHidden = true
+extension StepsPagerViewController {
+    @objc
+    private func shareBarButtonItemDidPressed(_ sender: Any) {
+        presenter?.selectShareStep(at: activeTabIndex)
     }
 
-    func showBottomHairline() {
-        let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView!.isHidden = false
+    @objc
+    private func onPageChanged(_ sender: Any) {
+        selectTabAtIndex(pageControl.currentPage)
     }
 
-    private func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
-        if let view = view as? UIImageView, view.bounds.size.height <= 1.0 {
-            return view
+    @objc
+    private func deviceOrientationDidChanged(_ sender: Any) {
+        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
+    }
+}
+
+// MARK: - StepsPagerViewController: PagerDelegate -
+
+extension StepsPagerViewController: PagerDelegate {
+    func didChangeTabToIndex(_ pager: PagerController, index: Int) {
+        pageControl.currentPage = index
+        presenter?.selectStep(at: index)
+
+        updateContentInsetsForViewControllerAtIndex(index)
+    }
+
+    private func updateContentInsetsForViewControllerAtIndex(_ index: Int) {
+        guard contents.indices.contains(index),
+              let stepViewController = viewControllerAtIndex(index) as? StepViewController else {
+            return
         }
 
-        let subviews = (view.subviews as [UIView])
-        for subview: UIView in subviews {
-            if let imageView: UIImageView = hairlineImageViewInNavigationBar(subview) {
-                return imageView
-            }
-        }
-
-        return nil
+        _ = stepViewController.view
+        stepViewController.scrollView.contentInset.bottom = pageControlContainer.bounds.height
     }
 }

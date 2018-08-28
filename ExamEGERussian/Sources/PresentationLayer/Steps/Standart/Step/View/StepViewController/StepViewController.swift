@@ -33,6 +33,7 @@ class StepViewController: UIViewController {
     private lazy var quizPlaceholderView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = "QuizPlaceholderView"
 
         return view
     }()

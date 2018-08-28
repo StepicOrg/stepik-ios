@@ -27,6 +27,7 @@ final class StandartStepsAssembly: BaseAssembly, StandartStepsAssemblyProtocol {
             stepsService: serviceFactory.stepsService
         )
         controller.presenter = presenter
+        controller.hidesBottomBarWhenPushed = true
         dataSource.stepPresenterDelegate = presenter
 
         return controller

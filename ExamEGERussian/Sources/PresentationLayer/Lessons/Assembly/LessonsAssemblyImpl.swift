@@ -1,5 +1,5 @@
 //
-//  LessonsAssembly.swift
+//  LessonsAssemblyImpl.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 30/07/2018.
@@ -8,16 +8,16 @@
 
 import Foundation
 
-final class LessonsAssembly: BaseAssembly, LessonsAssemblyProtocol {
+final class LessonsAssemblyImpl: BaseAssembly, LessonsAssembly {
     func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
         let controller = LessonsTableViewController()
-        let router = LessonsRouter(
+        let router = LessonsRouterImpl(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
 
         let knowledgeGraph = serviceFactory.knowledgeGraphProvider.knowledgeGraph
-        let presenter = LessonsPresenter(
+        let presenter = LessonsPresenterImpl(
             view: controller,
             router: router,
             topicId: topicId,
@@ -26,8 +26,8 @@ final class LessonsAssembly: BaseAssembly, LessonsAssemblyProtocol {
             courseService: serviceFactory.courseService
         )
         controller.presenter = presenter
+        controller.title = knowledgeGraph[topicId]?.key.title
         controller.hidesBottomBarWhenPushed = true
-        controller.title = NSLocalizedString("LessonsViewControllerTitle", comment: "")
 
         return controller
     }
