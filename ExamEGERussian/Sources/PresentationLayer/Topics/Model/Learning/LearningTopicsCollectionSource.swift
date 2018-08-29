@@ -18,6 +18,8 @@ final class LearningTopicsCollectionSource: NSObject, TopicsCollectionViewSource
     }
 
     func register(with collectionView: UICollectionView) {
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(cellClass: TopicCardCollectionViewCell.self)
     }
 

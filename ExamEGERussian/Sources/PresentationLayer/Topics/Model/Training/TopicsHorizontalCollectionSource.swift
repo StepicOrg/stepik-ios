@@ -18,9 +18,9 @@ final class TopicsHorizontalCollectionSource: NSObject {
     }
 
     func register(for collectionView: UICollectionView) {
-        collectionView.register(cellClass: TopicCardCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.register(cellClass: TopicCardCollectionViewCell.self)
     }
 }
 

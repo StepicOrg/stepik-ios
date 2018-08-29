@@ -18,6 +18,8 @@ final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSource
     }
 
     func register(with collectionView: UICollectionView) {
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(cellClass: TopicsHorizontalCollectionCell.self)
         collectionView.register(
             viewClass: TopicsSectionView.self,

@@ -11,7 +11,7 @@ import Foundation
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
     func learning(navigationController: UINavigationController) -> UIViewController {
         let source = LearningTopicsCollectionSource()
-        let controller = TopicsViewController(dataSource: source, delegate: source)
+        let controller = TopicsViewController(source: source)
         let presenter = makePresenter(view: controller, navigationController: navigationController)
         controller.presenter = presenter
         source.didSelectTopic = {
@@ -25,7 +25,7 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
 
     func training(navigationController: UINavigationController) -> UIViewController {
         let source = TrainingTopicsCollectionSource()
-        let controller = TopicsViewController(dataSource: source, delegate: source)
+        let controller = TopicsViewController(source: source)
         controller.presenter = makePresenter(
             view: controller,
             navigationController: navigationController

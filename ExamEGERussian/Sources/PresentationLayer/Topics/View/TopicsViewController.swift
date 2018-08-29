@@ -13,12 +13,11 @@ final class TopicsViewController: UIViewController, TopicsView {
     var presenter: TopicsPresenter!
 
     private let collectionView: UICollectionView
-    private let dataSource: TopicsCollectionViewSourceProtocol
-    private let delegate: UICollectionViewDelegate? // swiftlint:disable:this weak_delegate
+    private let collectionSource: TopicsCollectionViewSourceProtocol
 
     private var topics = [TopicPlainObject]() {
         didSet {
-            dataSource.topics = topics
+            collectionSource.topics = topics
             collectionView.reloadData()
             refreshControl.endRefreshing()
         }
@@ -31,18 +30,12 @@ final class TopicsViewController: UIViewController, TopicsView {
         return refreshControl
     }()
 
-    init(dataSource: TopicsCollectionViewSourceProtocol,
-         delegate: UICollectionViewDelegate? = nil,
+    init(source: TopicsCollectionViewSourceProtocol,
          layout: UICollectionViewLayout = UICollectionViewFlowLayout()
     ) {
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        self.dataSource = dataSource
-        self.delegate = delegate
+        self.collectionSource = source
         super.init(nibName: nil, bundle: nil)
-
-        self.collectionView.dataSource = dataSource
-        self.collectionView.delegate = delegate
-        dataSource.register(with: self.collectionView)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,6 +49,8 @@ final class TopicsViewController: UIViewController, TopicsView {
     }
 
     private func setup() {
+        collectionSource.register(with: collectionView)
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {

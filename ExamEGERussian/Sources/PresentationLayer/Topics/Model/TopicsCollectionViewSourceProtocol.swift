@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsCollectionViewSourceProtocol: UICollectionViewDataSource {
+protocol TopicsCollectionViewSourceProtocol: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var topics: [TopicPlainObject] { get set }
 
     func register(with collectionView: UICollectionView)
