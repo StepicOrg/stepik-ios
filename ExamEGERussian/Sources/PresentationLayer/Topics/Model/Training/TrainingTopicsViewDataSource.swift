@@ -1,5 +1,5 @@
 //
-//  TopicsViewDataSource.swift
+//  TrainingTopicsViewDataSource.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,17 +8,16 @@
 
 import UIKit
 
-final class TrainingTopicsViewDataSource: NSObject, TopicsViewSourceProtocol {
+final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol {
     var topics: [TopicPlainObject]
-
-    weak var delegate: TopicsViewSourceDelegate?
+    var didSelectTopic: ((_ topic: TopicPlainObject) -> Void)?
 
     init(topics: [TopicPlainObject] = []) {
         self.topics = topics
         super.init()
     }
 
-    func registerCells(for collectionView: UICollectionView) {
+    func register(with collectionView: UICollectionView) {
         collectionView.register(cellClass: TopicsCollectionCell.self)
         collectionView.register(
             viewClass: TopicsSectionView.self,
@@ -43,7 +42,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewSourceProtocol {
     ) -> UICollectionViewCell {
         let cell: TopicsCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.source = TopicsCollectionSource(topics: topics(for: indexPath))
-        cell.source?.didSelectItem = delegate?.didSelectTopic
+        cell.source?.didSelectItem = didSelectTopic
 
         return cell
     }
@@ -92,5 +91,35 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewSourceProtocol {
         static func from(indexPath: IndexPath) -> Section {
             return Section(rawValue: indexPath.section)!
         }
+    }
+}
+
+extension TrainingTopicsViewDataSource: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 200)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 54)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        if section == collectionView.numberOfSections - 1 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        }
+
+        return .zero
     }
 }

@@ -10,27 +10,27 @@ import Foundation
 
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
     func learning(navigationController: UINavigationController) -> UIViewController {
-        let controller = TopicsTableViewController()
-        controller.presenter = makePresenter(
-            view: controller,
-            navigationController: navigationController
-        )
+        let source = LearningTopicsViewDataSource()
+        let controller = TopicsViewController(dataSource: source, delegate: source)
+        let presenter = makePresenter(view: controller, navigationController: navigationController)
+        controller.presenter = presenter
+        source.didSelectTopic = {
+            var topic = $0
+            topic.type = .theory
+            presenter.selectTopic(topic)
+        }
 
         return controller
     }
 
     func training(navigationController: UINavigationController) -> UIViewController {
-        let dataSource = TrainingTopicsViewDataSource()
-        let delegate = TrainingTopicsViewDelegate()
-        let controller = TopicsViewController(
-            dataSource: dataSource,
-            delegate: delegate
-        )
-        dataSource.delegate = controller
+        let source = TrainingTopicsViewDataSource()
+        let controller = TopicsViewController(dataSource: source, delegate: source)
         controller.presenter = makePresenter(
             view: controller,
             navigationController: navigationController
         )
+        source.didSelectTopic = controller.presenter.selectTopic
 
         return controller
     }

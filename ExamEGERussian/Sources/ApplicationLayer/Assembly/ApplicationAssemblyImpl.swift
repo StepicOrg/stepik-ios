@@ -25,7 +25,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
             [learningNavigationController, trainingNavigationController],
             animated: false
         )
-        tabBarController.selectedIndex = 1
+        tabBarController.selectedIndex = 0
 
         let router = AppRouter(
             tabBarController: tabBarController,

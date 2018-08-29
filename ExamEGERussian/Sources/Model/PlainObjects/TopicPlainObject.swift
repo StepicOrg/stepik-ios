@@ -13,7 +13,7 @@ struct TopicPlainObject {
     let title: String
     let description: String
     let progress: Float
-    let type: TopicType
+    var type: TopicType
     /// In minutes
     let timeToComplete: TimeInterval
     let lessons: [LessonPlainObject]

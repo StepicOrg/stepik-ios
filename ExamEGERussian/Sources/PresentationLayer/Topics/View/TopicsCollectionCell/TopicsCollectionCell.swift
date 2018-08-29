@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SnapKit
 
-final class TopicsCollectionCell: UICollectionViewCell, Reusable, NibLoadable {
-    @IBOutlet var collectionView: UICollectionView!
+final class TopicsCollectionCell: UICollectionViewCell, Reusable {
+    let collectionView: HorizontalTopicsCollectionView
 
     var source: TopicsCollectionSource? = nil {
         didSet {
@@ -17,9 +18,17 @@ final class TopicsCollectionCell: UICollectionViewCell, Reusable, NibLoadable {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        collectionView.showsHorizontalScrollIndicator = false
+    override init(frame: CGRect) {
+        self.collectionView = HorizontalTopicsCollectionView()
+        super.init(frame: frame)
+
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(collectionView)
+        self.collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func prepareForReuse() {
