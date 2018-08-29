@@ -11,13 +11,11 @@ import Foundation
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
     func learning(navigationController: UINavigationController) -> UIViewController {
         let source = LearningTopicsCollectionSource()
-        let controller = TopicsViewController(source: source)
-        let presenter = makePresenter(view: controller, navigationController: navigationController)
-        controller.presenter = presenter
+        let controller = makeController(source: source, navigationController: navigationController)
         source.didSelectTopic = {
             var topic = $0
             topic.type = .theory
-            presenter.selectTopic(topic)
+            controller.presenter.selectTopic(topic)
         }
 
         return controller
@@ -25,31 +23,30 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
 
     func training(navigationController: UINavigationController) -> UIViewController {
         let source = TrainingTopicsCollectionSource()
-        let controller = TopicsViewController(source: source)
-        controller.presenter = makePresenter(
-            view: controller,
-            navigationController: navigationController
-        )
+        let controller = makeController(source: source, navigationController: navigationController)
         source.didSelectTopic = controller.presenter.selectTopic
 
         return controller
     }
 
-    private func makePresenter(
-        view: TopicsView,
+    private func makeController(
+        source: TopicsCollectionViewSourceProtocol,
         navigationController: UINavigationController
-    ) -> TopicsPresenter {
+    ) -> TopicsViewController {
+        let controller = TopicsViewController(source: source)
         let router = TopicsRouterImpl(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
         )
-
-        return TopicsPresenterImpl(
-            view: view,
+        let presenter = TopicsPresenterImpl(
+            view: controller,
             knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             router: router,
             userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService
         )
+        controller.presenter = presenter
+
+        return controller
     }
 }
