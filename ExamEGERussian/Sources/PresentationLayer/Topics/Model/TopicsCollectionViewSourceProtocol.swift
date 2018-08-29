@@ -1,5 +1,5 @@
 //
-//  TopicsViewDataSourceProtocol.swift
+//  TopicsCollectionViewSourceProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsViewDataSourceProtocol: UICollectionViewDataSource {
+protocol TopicsCollectionViewSourceProtocol: UICollectionViewDataSource {
     var topics: [TopicPlainObject] { get set }
 
     func register(with collectionView: UICollectionView)

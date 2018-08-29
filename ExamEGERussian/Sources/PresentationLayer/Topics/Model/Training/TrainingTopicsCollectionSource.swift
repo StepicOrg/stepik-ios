@@ -1,5 +1,5 @@
 //
-//  TrainingTopicsViewDataSource.swift
+//  TrainingTopicsCollectionSource.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol {
+final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSourceProtocol {
     var topics: [TopicPlainObject]
     var didSelectTopic: ((_ topic: TopicPlainObject) -> Void)?
 
@@ -18,7 +18,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
     }
 
     func register(with collectionView: UICollectionView) {
-        collectionView.register(cellClass: TopicsCollectionCell.self)
+        collectionView.register(cellClass: TopicsHorizontalCollectionCell.self)
         collectionView.register(
             viewClass: TopicsSectionView.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
@@ -40,8 +40,8 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell: TopicsCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.source = TopicsCollectionSource(topics: topics(for: indexPath))
+        let cell: TopicsHorizontalCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.source = TopicsHorizontalCollectionSource(topics: topics(for: indexPath))
         cell.source?.didSelectItem = didSelectTopic
 
         return cell
@@ -94,7 +94,7 @@ final class TrainingTopicsViewDataSource: NSObject, TopicsViewDataSourceProtocol
     }
 }
 
-extension TrainingTopicsViewDataSource: UICollectionViewDelegateFlowLayout {
+extension TrainingTopicsCollectionSource: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

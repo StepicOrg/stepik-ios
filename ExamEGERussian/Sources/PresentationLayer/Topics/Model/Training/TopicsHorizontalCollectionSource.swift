@@ -1,5 +1,5 @@
 //
-//  TopicsCollectionSource.swift
+//  TopicsHorizontalCollectionSource.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicsCollectionSource: NSObject {
+final class TopicsHorizontalCollectionSource: NSObject {
     var topics: [TopicPlainObject]
     var didSelectItem: ((_ topic: TopicPlainObject) -> Void)?
 
@@ -18,13 +18,13 @@ final class TopicsCollectionSource: NSObject {
     }
 
     func register(for collectionView: UICollectionView) {
-        collectionView.register(cellClass: CardCollectionViewCell.self)
+        collectionView.register(cellClass: TopicCardCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
 }
 
-extension TopicsCollectionSource: UICollectionViewDataSource {
+extension TopicsHorizontalCollectionSource: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -37,7 +37,7 @@ extension TopicsCollectionSource: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let topic = topics[indexPath.row]
-        let cell: CardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: TopicCardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.titleLabel.text = topic.title
         cell.bodyLabel.text = topic.description
         cell.commentLabel.text = "\(topic.lessons.count) pages"
@@ -46,7 +46,7 @@ extension TopicsCollectionSource: UICollectionViewDataSource {
     }
 }
 
-extension TopicsCollectionSource: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension TopicsHorizontalCollectionSource: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

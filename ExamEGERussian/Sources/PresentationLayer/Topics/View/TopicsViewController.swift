@@ -13,7 +13,7 @@ final class TopicsViewController: UIViewController, TopicsView {
     var presenter: TopicsPresenter!
 
     private let collectionView: UICollectionView
-    private let dataSource: TopicsViewDataSourceProtocol
+    private let dataSource: TopicsCollectionViewSourceProtocol
     private let delegate: UICollectionViewDelegate? // swiftlint:disable:this weak_delegate
 
     private var topics = [TopicPlainObject]() {
@@ -31,7 +31,7 @@ final class TopicsViewController: UIViewController, TopicsView {
         return refreshControl
     }()
 
-    init(dataSource: TopicsViewDataSourceProtocol,
+    init(dataSource: TopicsCollectionViewSourceProtocol,
          delegate: UICollectionViewDelegate? = nil,
          layout: UICollectionViewLayout = UICollectionViewFlowLayout()
     ) {
