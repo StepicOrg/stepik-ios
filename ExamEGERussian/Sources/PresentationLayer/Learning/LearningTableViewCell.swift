@@ -22,9 +22,11 @@ final class LearningTableViewCell: UITableViewCell {
     @IBOutlet var containerView: UIView!
     @IBOutlet var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet var containerBottomConstraint: NSLayoutConstraint!
+
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timeToCompleteLabel: UILabel!
+    @IBOutlet var progressImageView: UIImageView!
     @IBOutlet var progressLabel: UILabel!
 
     var appearance = Appearance() {
@@ -47,6 +49,9 @@ final class LearningTableViewCell: UITableViewCell {
         selectionStyle = .none
         containerView.backgroundColor = .clear
         containerView.layer.insertSublayer(gradientLayer, at: 0)
+
+        progressImageView.image = progressImageView.image?.withRenderingMode(.alwaysTemplate)
+        progressImageView.tintColor = .white
 
         updateAppearance()
     }

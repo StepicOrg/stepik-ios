@@ -40,8 +40,15 @@
                                     <constraint firstAttribute="height" constant="1" id="X1B-5l-DsZ"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="CZa-5V-N5l" userLabel="Progress Image View">
+                                <rect key="frame" x="20" y="110.5" width="13" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="13" id="4wH-1o-09i"/>
+                                    <constraint firstAttribute="height" constant="13" id="xzQ-Hi-tdV"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to complete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="est-VX-FkZ">
-                                <rect key="frame" x="20" y="108.5" width="240" height="17"/>
+                                <rect key="frame" x="41" y="108.5" width="219" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -68,8 +75,10 @@
                             <constraint firstItem="eJx-1n-VzE" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="SOX-il-ThX"/>
                             <constraint firstItem="eyQ-3x-Xod" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="Sqz-Jy-HNS"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vLs-ZV-Df9" secondAttribute="bottom" constant="20" symbolic="YES" id="VnP-kL-KAi"/>
+                            <constraint firstItem="CZa-5V-N5l" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="Z9Q-Mo-lZQ"/>
+                            <constraint firstItem="est-VX-FkZ" firstAttribute="leading" secondItem="CZa-5V-N5l" secondAttribute="trailing" constant="8" symbolic="YES" id="bpU-ZZ-zFd"/>
                             <constraint firstItem="est-VX-FkZ" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="gE5-PL-P4Q"/>
-                            <constraint firstItem="est-VX-FkZ" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="pfV-Ec-SOW"/>
+                            <constraint firstItem="CZa-5V-N5l" firstAttribute="centerY" secondItem="est-VX-FkZ" secondAttribute="centerY" id="rn3-46-4Cn"/>
                             <constraint firstItem="vLs-ZV-Df9" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="zLO-Oz-zex"/>
                         </constraints>
                     </view>
@@ -87,9 +96,13 @@
                 <outlet property="containerView" destination="A5U-83-L8t" id="J7r-9V-sMm"/>
                 <outlet property="descriptionLabel" destination="eJx-1n-VzE" id="gm6-B4-fGq"/>
                 <outlet property="headerLabel" destination="eyQ-3x-Xod" id="rZ1-l4-cbq"/>
+                <outlet property="progressImageView" destination="CZa-5V-N5l" id="TN2-PC-Abu"/>
                 <outlet property="progressLabel" destination="vLs-ZV-Df9" id="qGo-lJ-HyX"/>
                 <outlet property="timeToCompleteLabel" destination="est-VX-FkZ" id="rZZ-YB-NRW"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="time" width="13" height="13"/>
+    </resources>
 </document>
