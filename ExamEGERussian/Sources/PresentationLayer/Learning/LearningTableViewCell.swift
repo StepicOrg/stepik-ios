@@ -26,6 +26,7 @@ final class LearningTableViewCell: UITableViewCell {
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timeToCompleteLabel: UILabel!
+    @IBOutlet var timeToCompleteImageView: UIImageView!
     @IBOutlet var progressImageView: UIImageView!
     @IBOutlet var progressLabel: UILabel!
 
@@ -50,9 +51,7 @@ final class LearningTableViewCell: UITableViewCell {
         containerView.backgroundColor = .clear
         containerView.layer.insertSublayer(gradientLayer, at: 0)
 
-        progressImageView.image = progressImageView.image?.withRenderingMode(.alwaysTemplate)
-        progressImageView.tintColor = .white
-
+        setupImageView(timeToCompleteImageView, progressImageView)
         updateAppearance()
     }
 
@@ -68,6 +67,13 @@ final class LearningTableViewCell: UITableViewCell {
 //        descriptionLabel.text = nil
 //        timeToCompleteLabel.text = nil
 //        progressLabel.text = nil
+    }
+
+    private func setupImageView(_ imageViews: UIImageView...) {
+        imageViews.forEach {
+            $0.image = $0.image?.withRenderingMode(.alwaysTemplate)
+            $0.tintColor = .white
+        }
     }
 
     private func updateAppearance() {

@@ -40,21 +40,28 @@
                                     <constraint firstAttribute="height" constant="1" id="X1B-5l-DsZ"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="CZa-5V-N5l" userLabel="Progress Image View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="wzW-AC-aO6" userLabel="Time to complete Image View">
                                 <rect key="frame" x="20" y="110.5" width="13" height="13"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="13" id="4wH-1o-09i"/>
-                                    <constraint firstAttribute="height" constant="13" id="xzQ-Hi-tdV"/>
+                                    <constraint firstAttribute="width" constant="13" id="KvM-np-zMm"/>
+                                    <constraint firstAttribute="height" constant="13" id="g3X-Ln-sIQ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to complete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="est-VX-FkZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to complete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="est-VX-FkZ" userLabel="Time to complete Label">
                                 <rect key="frame" x="41" y="108.5" width="219" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clipboard-checklist" translatesAutoresizingMaskIntoConstraints="NO" id="VHo-Ii-E05">
+                                <rect key="frame" x="20" y="135.5" width="13" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="A4H-UM-Dns"/>
+                                    <constraint firstAttribute="width" constant="13" id="VP6-4h-0x9"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLs-ZV-Df9">
-                                <rect key="frame" x="20" y="133.5" width="240" height="17"/>
+                                <rect key="frame" x="41" y="133.5" width="219" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -67,6 +74,7 @@
                             <constraint firstItem="eJx-1n-VzE" firstAttribute="top" secondItem="eyQ-3x-Xod" secondAttribute="bottom" constant="8" symbolic="YES" id="6RF-ea-Hld"/>
                             <constraint firstItem="vLs-ZV-Df9" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="6XH-p9-BOX"/>
                             <constraint firstItem="2WJ-D7-6aP" firstAttribute="top" secondItem="eJx-1n-VzE" secondAttribute="bottom" constant="20" id="7zN-I7-oa2"/>
+                            <constraint firstItem="wzW-AC-aO6" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="8Ly-qr-6qB"/>
                             <constraint firstItem="eyQ-3x-Xod" firstAttribute="top" secondItem="A5U-83-L8t" secondAttribute="top" constant="20" id="Al3-kw-yE7"/>
                             <constraint firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" constant="20" symbolic="YES" id="FTy-EV-0Ya"/>
                             <constraint firstItem="eyQ-3x-Xod" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="G1b-sP-HB1"/>
@@ -74,12 +82,13 @@
                             <constraint firstItem="est-VX-FkZ" firstAttribute="top" secondItem="2WJ-D7-6aP" secondAttribute="bottom" constant="20" id="QTW-yh-wKx"/>
                             <constraint firstItem="eJx-1n-VzE" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="SOX-il-ThX"/>
                             <constraint firstItem="eyQ-3x-Xod" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="Sqz-Jy-HNS"/>
+                            <constraint firstItem="VHo-Ii-E05" firstAttribute="leading" secondItem="wzW-AC-aO6" secondAttribute="leading" id="UJV-UY-jxg"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vLs-ZV-Df9" secondAttribute="bottom" constant="20" symbolic="YES" id="VnP-kL-KAi"/>
-                            <constraint firstItem="CZa-5V-N5l" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="Z9Q-Mo-lZQ"/>
-                            <constraint firstItem="est-VX-FkZ" firstAttribute="leading" secondItem="CZa-5V-N5l" secondAttribute="trailing" constant="8" symbolic="YES" id="bpU-ZZ-zFd"/>
+                            <constraint firstItem="wzW-AC-aO6" firstAttribute="centerY" secondItem="est-VX-FkZ" secondAttribute="centerY" id="Y9Y-YS-vwe"/>
+                            <constraint firstItem="vLs-ZV-Df9" firstAttribute="leading" secondItem="VHo-Ii-E05" secondAttribute="trailing" constant="8" symbolic="YES" id="Z60-fb-hPy"/>
+                            <constraint firstItem="est-VX-FkZ" firstAttribute="leading" secondItem="wzW-AC-aO6" secondAttribute="trailing" constant="8" symbolic="YES" id="b2A-gl-Z37"/>
                             <constraint firstItem="est-VX-FkZ" firstAttribute="trailing" secondItem="2WJ-D7-6aP" secondAttribute="trailing" id="gE5-PL-P4Q"/>
-                            <constraint firstItem="CZa-5V-N5l" firstAttribute="centerY" secondItem="est-VX-FkZ" secondAttribute="centerY" id="rn3-46-4Cn"/>
-                            <constraint firstItem="vLs-ZV-Df9" firstAttribute="leading" secondItem="2WJ-D7-6aP" secondAttribute="leading" id="zLO-Oz-zex"/>
+                            <constraint firstItem="VHo-Ii-E05" firstAttribute="centerY" secondItem="vLs-ZV-Df9" secondAttribute="centerY" id="mbp-NU-5vT"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -96,13 +105,15 @@
                 <outlet property="containerView" destination="A5U-83-L8t" id="J7r-9V-sMm"/>
                 <outlet property="descriptionLabel" destination="eJx-1n-VzE" id="gm6-B4-fGq"/>
                 <outlet property="headerLabel" destination="eyQ-3x-Xod" id="rZ1-l4-cbq"/>
-                <outlet property="progressImageView" destination="CZa-5V-N5l" id="TN2-PC-Abu"/>
+                <outlet property="progressImageView" destination="VHo-Ii-E05" id="ePV-IB-oS0"/>
                 <outlet property="progressLabel" destination="vLs-ZV-Df9" id="qGo-lJ-HyX"/>
-                <outlet property="timeToCompleteLabel" destination="est-VX-FkZ" id="rZZ-YB-NRW"/>
+                <outlet property="timeToCompleteImageView" destination="wzW-AC-aO6" id="f8F-LY-jdB"/>
+                <outlet property="timeToCompleteLabel" destination="est-VX-FkZ" id="EEx-nr-pfS"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="clipboard-checklist" width="13" height="13"/>
         <image name="time" width="13" height="13"/>
     </resources>
 </document>
