@@ -49,41 +49,58 @@ class DeepLinkRouter {
         }
     }
 
-    static func routeFromDeepLink(url: URL, showAlertForUnsupported: Bool, presentFrom presentationSource: UIViewController? = nil) {
+    @objc
+    static func close() {
+        navigationToClose?.dismiss(animated: true, completion: {
+            DeepLinkRouter.navigationToClose = nil
+        })
+    }
+
+    private static var navigationToClose: UIViewController?
+
+    private static func open(modules: [UIViewController], from source: UIViewController?, isModal: Bool) {
+        guard let source = source else {
+            return
+        }
+        if isModal {
+            let navigation = StyledNavigationViewController()
+            navigation.setViewControllers(modules, animated: false)
+            let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(DeepLinkRouter.close))
+            navigationToClose = navigation
+            modules.last?.navigationItem.leftBarButtonItem = closeItem
+            source.present(navigation, animated: true, completion: nil)
+        } else {
+            for (index, vc) in modules.enumerated() {
+                source.navigationController?.pushViewController(vc, animated: index == modules.count - 1)
+            }
+        }
+    }
+
+    static func routeFromDeepLink(url: URL, presentFrom presentationSource: UIViewController? = nil, isModal: Bool = false, withDelay: Bool = true) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             controllers in
-            var navigation: UINavigationController?
-            navigation = presentationSource?.navigationController ?? currentNavigation
+            let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
             if controllers.count > 0 {
-                if let topController = navigation?.topViewController {
+                let openBlock = {
+                    DeepLinkRouter.open(
+                        modules: controllers,
+                        from: presentationSource ?? navigation?.topViewController,
+                        isModal: isModal
+                    )
+                }
+                if withDelay {
                     delay(0.5, closure: {
-                        for (index, vc) in controllers.enumerated() {
-                            if index == controllers.count - 1 {
-                                topController.navigationController?.pushViewController(vc, animated: true)
-                            } else {
-                                topController.navigationController?.pushViewController(vc, animated: false)
-                            }
-                        }
+                        openBlock()
                     })
+                } else {
+                    openBlock()
                 }
             } else {
-                guard showAlertForUnsupported else {
-                    if let topController = navigation?.topViewController {
-                        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: topController, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
-                    }
+                let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
+                guard let source = presentationSource ?? navigation?.topViewController else {
                     return
                 }
-                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
-                    _ in
-                    UIApplication.shared.openURL(url)
-                }))
-
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-
-                UIThread.performUI {
-                    window?.rootViewController?.present(alert, animated: true, completion: nil)
-                }
+                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: source, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
             }
         })
     }

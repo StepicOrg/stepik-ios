@@ -21,7 +21,7 @@ protocol CourseListViewControllerDelegate: class {
     func indexPathForIndex(index: Int) -> IndexPath
     func addElements(atIndexPaths: [IndexPath])
     func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath])
-    func widgetForCell(atIndex: Int) -> CourseWidgetView?
+    func widgetForCell(atIndex: Int) -> OldCourseWidgetView?
 
     func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)?
 }
