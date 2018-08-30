@@ -10,7 +10,11 @@ import Foundation
 @testable import ExamEGERussian
 
 final class TopicsAssemblyMock: TopicsAssembly {
-    func module(navigationController: UINavigationController) -> UIViewController {
+    func learning(navigationController: UINavigationController) -> UIViewController {
+        return MockAssemblyViewController()
+    }
+
+    func training(navigationController: UINavigationController) -> UIViewController {
         return MockAssemblyViewController()
     }
 }

@@ -18,7 +18,7 @@ extension LearningTableViewCell {
     }
 }
 
-final class LearningTableViewCell: UITableViewCell {
+final class LearningTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet var containerView: UIView!
     @IBOutlet var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet var containerBottomConstraint: NSLayoutConstraint!

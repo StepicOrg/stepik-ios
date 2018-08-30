@@ -1206,7 +1206,6 @@
 		2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */; };
 		2C130E9E2125A7260022E998 /* AuthSignUpAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */; };
 		2C130EA32125AD7D0022E998 /* AssemblyFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA22125AD7D0022E998 /* AssemblyFactoryTests.swift */; };
-		2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */; };
 		2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EA92125B71B0022E998 /* MockTableViewCell.swift */; };
 		2C130EAE2125B9170022E998 /* MockTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */; };
 		2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130EB22125BE770022E998 /* BaseRouterTests.swift */; };
@@ -2438,6 +2437,7 @@
 		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C80C829201A504700ABB312 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
+		2C829F142138A09B00DA7403 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA341212C3517002116C9 /* UITableViewExtensions.swift */; };
 		2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305E920F38880003D7F9B /* Vertex.swift */; };
 		2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EB20F388B9003D7F9B /* Edge.swift */; };
 		2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305F620F390F8003D7F9B /* GraphTests.swift */; };
@@ -4110,11 +4110,7 @@
 		2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994121077CB90054D098 /* BaseAssembly.swift */; };
 		2CD7995B21077CBA0054D098 /* AssemblyFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994221077CB90054D098 /* AssemblyFactoryImpl.swift */; };
 		2CD7995C21077CBA0054D098 /* AssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994321077CB90054D098 /* AssemblyFactory.swift */; };
-		2CD7995D21077CBA0054D098 /* UITableViewCell+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994621077CB90054D098 /* UITableViewCell+ReusableCell.swift */; };
 		2CD7995E21077CBA0054D098 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994821077CB90054D098 /* UIViewController+Alert.swift */; };
-		2CD7995F21077CBA0054D098 /* UITableView+Reuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994A21077CB90054D098 /* UITableView+Reuse.swift */; };
-		2CD7996021077CBA0054D098 /* UITableView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994B21077CB90054D098 /* UITableView+Registration.swift */; };
-		2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994D21077CB90054D098 /* UITableViewHeaderFooterView+ReusableCell.swift */; };
 		2CD7996321077CBA0054D098 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995021077CB90054D098 /* BorderedButton.swift */; };
 		2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
 		2CD7998B21077D010054D098 /* TopicsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7997921077D010054D098 /* TopicsPresenter.swift */; };
@@ -5667,7 +5663,6 @@
 		2C130E9B2125A7100022E998 /* AuthSignInAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInAssemblyMock.swift; sourceTree = "<group>"; };
 		2C130E9D2125A7260022E998 /* AuthSignUpAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssemblyMock.swift; sourceTree = "<group>"; };
 		2C130EA22125AD7D0022E998 /* AssemblyFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryTests.swift; sourceTree = "<group>"; };
-		2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensionsTests.swift; sourceTree = "<group>"; };
 		2C130EA92125B71B0022E998 /* MockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewCell.swift; sourceTree = "<group>"; };
 		2C130EAD2125B9170022E998 /* MockTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		2C130EB22125BE770022E998 /* BaseRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouterTests.swift; sourceTree = "<group>"; };
@@ -6050,11 +6045,7 @@
 		2CD7994121077CB90054D098 /* BaseAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAssembly.swift; sourceTree = "<group>"; };
 		2CD7994221077CB90054D098 /* AssemblyFactoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryImpl.swift; sourceTree = "<group>"; };
 		2CD7994321077CB90054D098 /* AssemblyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblyFactory.swift; sourceTree = "<group>"; };
-		2CD7994621077CB90054D098 /* UITableViewCell+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReusableCell.swift"; sourceTree = "<group>"; };
 		2CD7994821077CB90054D098 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
-		2CD7994A21077CB90054D098 /* UITableView+Reuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reuse.swift"; sourceTree = "<group>"; };
-		2CD7994B21077CB90054D098 /* UITableView+Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Registration.swift"; sourceTree = "<group>"; };
-		2CD7994D21077CB90054D098 /* UITableViewHeaderFooterView+ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+ReusableCell.swift"; sourceTree = "<group>"; };
 		2CD7995021077CB90054D098 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCredentialsGenerator.swift; sourceTree = "<group>"; };
 		2CD7997921077D010054D098 /* TopicsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsPresenter.swift; sourceTree = "<group>"; };
@@ -8653,14 +8644,6 @@
 			path = ServicesTests;
 			sourceTree = "<group>";
 		};
-		2C130EA42125B25B0022E998 /* ExtensionsTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C130EA62125B29F0022E998 /* UITableViewExtensionsTests.swift */,
-			);
-			path = ExtensionsTests;
-			sourceTree = "<group>";
-		};
 		2C130EA82125B7050022E998 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -9303,7 +9286,6 @@
 				2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C23FF16212303E900721E59 /* ModelTests */,
-				2C130EA42125B25B0022E998 /* ExtensionsTests */,
 				2CC995632105C77C0023EC0C /* Common */,
 				2C59F06020EB99C400666EE0 /* SupportingFiles */,
 			);
@@ -10312,20 +10294,9 @@
 		2CD7994421077CB90054D098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7994921077CB90054D098 /* UITableView */,
-				2CD7994521077CB90054D098 /* UITableViewCell */,
-				2CD7994C21077CB90054D098 /* UITableViewHeaderFooterView */,
 				2CD7994721077CB90054D098 /* UIViewController */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		2CD7994521077CB90054D098 /* UITableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				2CD7994621077CB90054D098 /* UITableViewCell+ReusableCell.swift */,
-			);
-			path = UITableViewCell;
 			sourceTree = "<group>";
 		};
 		2CD7994721077CB90054D098 /* UIViewController */ = {
@@ -10334,23 +10305,6 @@
 				2CD7994821077CB90054D098 /* UIViewController+Alert.swift */,
 			);
 			path = UIViewController;
-			sourceTree = "<group>";
-		};
-		2CD7994921077CB90054D098 /* UITableView */ = {
-			isa = PBXGroup;
-			children = (
-				2CD7994A21077CB90054D098 /* UITableView+Reuse.swift */,
-				2CD7994B21077CB90054D098 /* UITableView+Registration.swift */,
-			);
-			path = UITableView;
-			sourceTree = "<group>";
-		};
-		2CD7994C21077CB90054D098 /* UITableViewHeaderFooterView */ = {
-			isa = PBXGroup;
-			children = (
-				2CD7994D21077CB90054D098 /* UITableViewHeaderFooterView+ReusableCell.swift */,
-			);
-			path = UITableViewHeaderFooterView;
 			sourceTree = "<group>";
 		};
 		2CD7994F21077CB90054D098 /* View */ = {
@@ -15914,6 +15868,7 @@
 				2C9492C121130DB000552600 /* User+CoreDataProperties.swift in Sources */,
 				2C9492C221130DB000552600 /* User.swift in Sources */,
 				2C4F33FE2109EDF100E259FE /* TopicsRouter.swift in Sources */,
+				2C829F142138A09B00DA7403 /* UITableViewExtensions.swift in Sources */,
 				2C949A3920ECC7FE0049E9A8 /* LocalNotificationManager.swift in Sources */,
 				2C949A5A20ECCE840049E9A8 /* SettingsPresenter.swift in Sources */,
 				2C0107A1210F39CB009A53DF /* StepikLabel.swift in Sources */,
@@ -15950,7 +15905,6 @@
 				2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */,
 				2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */,
 				2C5FDC982111E2540077C15C /* StepTabView.swift in Sources */,
-				2CD7995F21077CBA0054D098 /* UITableView+Reuse.swift in Sources */,
 				2C770304210F29A3002E250D /* KnowledgeGraphPlainObject.swift in Sources */,
 				2C949A5520ECCE270049E9A8 /* UITableView+TableHeaderLayout.swift in Sources */,
 				2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */,
@@ -16090,7 +16044,6 @@
 				2C97902D21356CA800046625 /* TrainingTopicsCollectionSource.swift in Sources */,
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
-				2CD7996121077CBA0054D098 /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
 				2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */,
 				2C949A5720ECCE4F0049E9A8 /* AchievementPopupAlertManager.swift in Sources */,
 				2C949A5C20ECCE950049E9A8 /* ArtView.swift in Sources */,
@@ -16307,7 +16260,6 @@
 				2C770306210F29B0002E250D /* LessonPlainObject.swift in Sources */,
 				2C77030B210F2AD5002E250D /* BaseRouter.swift in Sources */,
 				2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */,
-				2CD7996021077CBA0054D098 /* UITableView+Registration.swift in Sources */,
 				2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */,
 				2C093F0A211B436D00162DD0 /* StreakNotificationsControlPresenter.swift in Sources */,
 				2C949A2520ECC5EF0049E9A8 /* ProfileAchievementsPresenter.swift in Sources */,
@@ -16341,7 +16293,6 @@
 				2C093F1D211B44C700162DD0 /* SettingsViewController.swift in Sources */,
 				2C9499A320ECB9590049E9A8 /* DataConvertable.swift in Sources */,
 				2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */,
-				2CD7995D21077CBA0054D098 /* UITableViewCell+ReusableCell.swift in Sources */,
 				2C093F23211B455100162DD0 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
 				2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */,
@@ -16406,7 +16357,6 @@
 				2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */,
 				2C130E9A2125A6F40022E998 /* AuthGreetingAssemblyMock.swift in Sources */,
 				2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */,
-				2C130EA72125B29F0022E998 /* UITableViewExtensionsTests.swift in Sources */,
 				2C905237212EB17D00354DFB /* ViewsServiceMock.swift in Sources */,
 				2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */,
 				2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */,

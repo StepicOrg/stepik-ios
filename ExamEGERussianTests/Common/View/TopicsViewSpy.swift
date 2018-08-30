@@ -10,14 +10,14 @@ import Foundation
 @testable import ExamEGERussian
 
 final class TopicsViewSpy: TopicsView {
-    var topics: [TopicsViewData]?
+    var topics: [TopicPlainObject]?
     var displayErrorTitle: String?
     var displayErrorMessage: String?
 
     var onSet: (() -> Void)?
     var onError: (() -> Void)?
 
-    func setTopics(_ topics: [TopicsViewData]) {
+    func setTopics(_ topics: [TopicPlainObject]) {
         self.topics = topics
         onSet?()
     }

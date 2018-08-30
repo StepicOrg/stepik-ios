@@ -13,7 +13,7 @@ final class LearningTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerNib(for: LearningTableViewCell.self)
+        tableView.register(cellClass: LearningTableViewCell.self)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 170
         tableView.backgroundColor = .white

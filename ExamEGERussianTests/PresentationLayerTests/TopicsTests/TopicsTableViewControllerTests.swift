@@ -11,7 +11,10 @@ import XCTest
 
 class TopicsTableViewControllerTests: XCTestCase {
     func testViewInstantiated() {
-        let vc = TopicsTableViewController()
+        let vc = TopicsViewController(
+            source: TrainingTopicsCollectionSource(),
+            layout: UICollectionViewFlowLayout()
+        )
         let presenter = TopicsPresenterImpl(
             view: vc,
             knowledgeGraph: KnowledgeGraph(),
