@@ -8,6 +8,9 @@
 
 import UIKit
 
+class Stub: UICollectionReusableView, Reusable {
+}
+
 extension CourseListView {
     struct Appearance {
         let layoutMinimumLineSpacing: CGFloat = 16.0
@@ -121,6 +124,16 @@ final class CourseListView: UIView {
         }
     }
 
+    func updateCollectionViewData(
+        delegate: UICollectionViewDelegate,
+        dataSource: UICollectionViewDataSource
+    ) {
+        self.storedCollectionViewDelegate = delegate
+        self.collectionView.dataSource = dataSource
+        self.collectionView.reloadData()
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+
     private func getLayoutForOrientation(
         _ orientation: Orientation
     ) -> UICollectionViewFlowLayout {
@@ -142,7 +155,7 @@ final class CourseListView: UIView {
             guard let strongSelf = self else {
                 return
             }
-            layout.isPaginationEnabled = !strongSelf.isPaginationViewHidden
+            layout.isPaginationHidden = strongSelf.isPaginationViewHidden
         })
     }
 
@@ -184,7 +197,9 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
     }
 
     private func setupCollectionView() {
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.collectionView.register(cellClass: CourseListCollectionViewCell.self)
+        self.collectionView.register(viewClass: Stub.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter)
 
         self.collectionView.isPagingEnabled = false
         self.collectionView.showsHorizontalScrollIndicator = false

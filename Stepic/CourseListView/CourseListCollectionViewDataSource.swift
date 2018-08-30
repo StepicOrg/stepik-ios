@@ -12,7 +12,7 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
     var viewModels: [CourseWidgetViewModel]
     private var colorMode: CourseWidgetColorMode
 
-    init(viewModels: [CourseWidgetViewModel] = [], colorMode: CourseWidgetColorMode) {
+    init(viewModels: [CourseWidgetViewModel] = [], colorMode: CourseWidgetColorMode = .default) {
         self.viewModels = viewModels
         self.colorMode = colorMode
     }
@@ -35,5 +35,15 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         cell.layer.rasterizationScale = UIScreen.main.scale
 
         return cell
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        let view: Stub = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, for: indexPath)
+        view.backgroundColor = .red
+        return view
     }
 }

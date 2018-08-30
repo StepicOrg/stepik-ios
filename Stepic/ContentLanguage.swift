@@ -11,10 +11,6 @@ import Foundation
 enum ContentLanguage {
     case english, russian
 
-    static var notSelected: ContentLanguage? {
-        return nil
-    }
-
     static let supportedLanguages: [ContentLanguage] = [.russian, .english]
 
     var languageString: String {
@@ -41,6 +37,16 @@ enum ContentLanguage {
             return "Русский"
         case .english:
             return "English"
+        }
+    }
+
+    var popularCoursesParameter: String? {
+        switch self {
+        case .russian:
+            // both - english & russian
+            return nil
+        case .english:
+            return "en"
         }
     }
 

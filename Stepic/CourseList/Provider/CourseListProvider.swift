@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol CourseListProviderProtocol: class {
-    func fetch(shouldFetchOnlyCached: Bool, page: Int) -> Promise<([Course], Meta)>
+    func fetchCached() -> Promise<([Course], Meta)>
+    func fetchRemote(page: Int) -> Promise<([Course], Meta)>
 }
 
 final class CourseListProvider: CourseListProviderProtocol {
@@ -29,28 +30,25 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.networkService = networkService
     }
 
-    func fetch(shouldFetchOnlyCached: Bool, page: Int) -> Promise<([Course], Meta)> {
-        // Check for state and if state == offline, just fetch cached courses
-        // if state == online, fetch from network and update cached courses
-        if shouldFetchOnlyCached {
-            guard let persistenceService = self.persistenceService else {
-                return Promise.value(([], Meta.oneAndOnlyPage))
-            }
-
-            return Promise { seal in
-                persistenceService.fetch().done { courses in
-                    seal.fulfill((courses, Meta.oneAndOnlyPage))
-                }.catch { error in
-                    print("course list provider: unable to fetch courses from cache, " +
-                        "error = \(error)")
-                    seal.reject(Error.persistenceFetchFailed)
-                }
-            }
+    func fetchCached() -> Promise<([Course], Meta)> {
+        guard let persistenceService = self.persistenceService else {
+            return Promise.value(([], Meta.oneAndOnlyPage))
         }
 
         return Promise { seal in
+            persistenceService.fetch().done { courses in
+                seal.fulfill((courses, Meta.oneAndOnlyPage))
+            }.catch { error in
+                print("course list provider: unable to fetch courses from cache, " +
+                    "error = \(error)")
+                seal.reject(Error.persistenceFetchFailed)
+            }
+        }
+    }
+
+    func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
+        return Promise { seal in
             self.networkService.fetch(page: page).done { (courses, meta) in
-                self.persistenceService?.update(newCachedList: courses)
                 seal.fulfill((courses, meta))
             }.catch { error in
                 print("course list provider: unable to fetch courses from api, " +

@@ -28,13 +28,13 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         if let type = self.type as? EnrolledCourseListType {
-            return self.fetchEnrolled(type)
+            return self.fetchEnrolled(type, page: page)
         } else if let type = self.type as? PopularCourseListType {
-            return self.fetchPopular(type)
+            return self.fetchPopular(type, page: page)
         } else if let type = self.type as? TagCourseListType {
-            return self.fetchTag(type)
+            return self.fetchTag(type, page: page)
         } else if let type = self.type as? CollectionCourseListType {
-            return self.fetchCollection(type)
+            return self.fetchCollection(type, page: page)
         } else {
             fatalError("Unsupported course list type")
         }
@@ -68,7 +68,7 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
                 excludeEnded: true,
                 isPublic: true,
                 order: "-activity",
-                language: type.language,
+                language: type.language.popularCoursesParameter,
                 page: page
             ).done { result in
                 seal.fulfill(result)
@@ -86,7 +86,7 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
             coursesAPI.retrieve(
                 tag: type.id,
                 order: "-activity",
-                language: type.language,
+                language: type.language.languageString,
                 page: page
             ).done { result in
                 seal.fulfill(result)

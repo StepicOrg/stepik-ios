@@ -7,26 +7,37 @@
 //
 
 enum CourseList {
+    // MARK: Common structs
+
+    struct ListData<T> {
+        var courses: [T]
+        var hasNextPage: Bool
+    }
 
     // MARK: Use cases
 
+    /// Load and show courses for given course list
     enum ShowCourses {
-        struct Request {
-            var shouldAppend: Bool = false
-        }
+        struct Request { }
 
         struct Response {
-            struct Data {
-                var courses: [Course]
-                var hasNextPage: Bool
-                var shouldAppend: Bool = false
-            }
-
-            var result: Result<Data>
+            var result: Result<ListData<Course>>
         }
 
         struct ViewModel {
             var state: ViewControllerState
+        }
+    }
+    /// Load and show next course page for given course list
+    enum LoadNextCourses {
+        struct Request { }
+
+        struct Response {
+            var result: Result<ListData<Course>>
+        }
+
+        struct ViewModel {
+            var state: PaginationState
         }
     }
 
@@ -34,8 +45,13 @@ enum CourseList {
 
     enum ViewControllerState {
         case loading
-        case result(courses: [CourseWidgetViewModel])
+        case result(data: ListData<CourseWidgetViewModel>)
         case emptyResult
+        case error(message: String)
+    }
+
+    enum PaginationState {
+        case result(data: ListData<CourseWidgetViewModel>)
         case error(message: String)
     }
 
@@ -46,5 +62,3 @@ enum CourseList {
         var paginationState: PaginationState = PaginationState(page: 1, hasNext: true)
     }
 }
-
-struct CourseWidgetViewModel { }

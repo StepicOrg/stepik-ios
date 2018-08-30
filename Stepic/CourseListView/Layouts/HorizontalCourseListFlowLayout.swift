@@ -10,7 +10,7 @@ import UIKit
 
 extension HorizontalCourseListFlowLayout {
     enum Paging {
-        let velocityThreshold: CGFloat = 0.6
+        static let velocityThreshold: CGFloat = 0.6
     }
 }
 
@@ -32,7 +32,6 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
     init(rowsCount: Int = 2, columnsCount: Int = 1) {
         self.rowsCount = rowsCount
         self.columnsCount = columnsCount
-        self.appearance = appearance
         super.init()
     }
 
@@ -73,7 +72,7 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
 
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = frame
-            cache.append(attributes)
+            self.cache.append(attributes)
 
             if rowIndex < self.rowsCount - 1 {
                 yOffset += self.itemSize.height + self.minimumLineSpacing

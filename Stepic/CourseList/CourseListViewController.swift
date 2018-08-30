@@ -9,16 +9,31 @@
 import UIKit
 
 protocol CourseListViewControllerProtocol: class {
-
+    func displayCourses(viewModel: CourseList.ShowCourses.ViewModel)
+    func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel)
 }
 
-class CourseListViewController: UIViewController {
+final class CourseListViewController: UIViewController {
     let interactor: CourseListInteractorProtocol
     var state: CourseList.ViewControllerState
 
-    init(interactor: CourseListInteractorProtocol, initialState: CourseList.ViewControllerState = .loading) {
+    private let listDelegate: CourseListCollectionViewDelegate
+    private let listDataSource: CourseListCollectionViewDataSource
+
+    lazy var courseListView = self.view as? CourseListView
+
+    private var canTriggerPagination = true
+
+    init(
+        interactor: CourseListInteractorProtocol,
+        initialState: CourseList.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
         self.state = initialState
+
+        self.listDelegate = CourseListCollectionViewDelegate()
+        self.listDataSource = CourseListCollectionViewDataSource()
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,27 +42,69 @@ class CourseListViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = UIView()
+        let view = CourseListView(
+            frame: UIScreen.main.bounds,
+            orientation: .vertical(columnsCount: 1),
+            delegate: self.listDelegate,
+            dataSource: self.listDataSource,
+            viewDelegate: self
+        )
         self.view = view
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.interactor.fetchCourses(request: CourseList.ShowCourses.Request())
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    private func updatePagination(hasNextPage: Bool) {
+        self.courseListView?.isPaginationViewHidden = !hasNextPage
+        self.canTriggerPagination = hasNextPage
     }
 }
 
 extension CourseListViewController: CourseListViewControllerProtocol {
-    func display(newState: CourseList.ViewControllerState) {
-        self.state = newState
-        switch state {
-        case .loading:
-            print("loading...")
-        case let .error(message):
-            print("error \(message)")
-        case let .result(items):
-            print("result: \(items)")
-        case .emptyResult:
-            print("empty result")
+    func displayCourses(viewModel: CourseList.ShowCourses.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.listDataSource.viewModels = data.courses
+            self.courseListView?.updateCollectionViewData(
+                delegate: self.listDelegate,
+                dataSource: self.listDataSource
+            )
+            self.updatePagination(hasNextPage: data.hasNextPage)
+        default:
+            break
         }
+    }
+
+    func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.listDataSource.viewModels.append(contentsOf: data.courses)
+            self.courseListView?.updateCollectionViewData(
+                delegate: self.listDelegate,
+                dataSource: self.listDataSource
+            )
+            self.updatePagination(hasNextPage: data.hasNextPage)
+        default:
+            break
+        }
+    }
+}
+
+extension CourseListViewController: CourseListViewDelegate {
+    func courseListViewDidPaginationRequesting(_ courseListView: CourseListView) {
+        guard self.canTriggerPagination else {
+            return
+        }
+        print("TRIGGER PAGINATION")
+
+        self.canTriggerPagination = false
+        self.interactor.fetchNextCourses(request: CourseList.LoadNextCourses.Request())
     }
 }

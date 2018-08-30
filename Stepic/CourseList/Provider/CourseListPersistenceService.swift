@@ -26,6 +26,7 @@ final class CourseListPersistenceService: CourseListPersistenceServiceProtocol {
 
         return Promise { seal in
             Course.fetchAsync(courseListIDs).done { courses in
+                let courses = Sorter.sort(courses, byIds: courseListIDs)
                 seal.fulfill(courses)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

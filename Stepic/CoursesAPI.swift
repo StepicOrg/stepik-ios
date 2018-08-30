@@ -23,7 +23,7 @@ class CoursesAPI: APIEndpoint {
         return getObjectsByIds(ids: ids, updating: Course.getCourses(ids))
     }
 
-    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
+    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
         var params = Parameters()
 
         if let isFeatured = featured {
@@ -47,7 +47,7 @@ class CoursesAPI: APIEndpoint {
         }
 
         if let language = language {
-            params["language"] = language.languageString
+            params["language"] = language
         }
 
         if let tag = tag {
@@ -68,7 +68,7 @@ class CoursesAPI: APIEndpoint {
 
 extension CoursesAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: ContentLanguage? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success successHandler: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
+    @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success successHandler: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
         retrieve(tag: tag, featured: featured, enrolled: enrolled, excludeEnded: excludeEnded, isPublic: isPublic, order: order, language: language, page: page).done { courses, meta in
             successHandler(courses, meta)
         }.catch {
