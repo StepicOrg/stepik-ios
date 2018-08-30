@@ -32,8 +32,12 @@ final class LearningTableViewController: UITableViewController {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         let cell: LearningTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.containerTopConstraint.constant = indexPath.row == 0 ? 20 : 10
-        cell.containerBottomConstraint.constant = indexPath.row == 4 ? 20 : 10
+        cell.containerTopConstraint.constant = indexPath.row == 0
+            ? cell.appearance.sectionInset
+            : cell.appearance.minimumItemSpacing
+        cell.containerBottomConstraint.constant = indexPath.row == 4
+            ? cell.appearance.sectionInset
+            : cell.appearance.minimumItemSpacing
 
         return cell
     }

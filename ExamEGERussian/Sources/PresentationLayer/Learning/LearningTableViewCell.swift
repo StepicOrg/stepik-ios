@@ -8,6 +8,16 @@
 
 import UIKit
 
+extension LearningTableViewCell {
+    struct Appearance {
+        let cornerRadius: CGFloat = 10.0
+        var gradientColors = [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)]
+        var gradientLocations = [0.0, 1.0]
+        let sectionInset: CGFloat = 20.0
+        let minimumItemSpacing: CGFloat = 10.0
+    }
+}
+
 final class LearningTableViewCell: UITableViewCell {
     @IBOutlet var containerView: UIView!
     @IBOutlet var containerTopConstraint: NSLayoutConstraint!
@@ -17,10 +27,16 @@ final class LearningTableViewCell: UITableViewCell {
     @IBOutlet var timeToCompleteLabel: UILabel!
     @IBOutlet var progressLabel: UILabel!
 
-    let gradientLayer: CAGradientLayer = {
+    var appearance = Appearance() {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    private lazy var gradientLayer: CAGradientLayer = {
         CAGradientLayer(
-            colors: [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)],
-            locations: [0.0, 1.0],
+            colors: appearance.gradientColors,
+            locations: appearance.gradientLocations,
             rotationAngle: 90.0
         )
     }()
@@ -29,11 +45,10 @@ final class LearningTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         selectionStyle = .none
-
         containerView.backgroundColor = .clear
-        containerView.layer.cornerRadius = 10
         containerView.layer.insertSublayer(gradientLayer, at: 0)
-        gradientLayer.cornerRadius = 10
+
+        updateAppearance()
     }
 
     override func layoutSubviews() {
@@ -50,7 +65,16 @@ final class LearningTableViewCell: UITableViewCell {
 //        progressLabel.text = nil
     }
 
+    private func updateAppearance() {
+        containerView.layer.cornerRadius = appearance.cornerRadius
+        gradientLayer.cornerRadius = appearance.cornerRadius
+        gradientLayer.colors = appearance.gradientColors.map { $0.cgColor }
+        gradientLayer.locations = appearance.gradientLocations as [NSNumber]
+    }
+
     private func layoutGradientLayer() {
+        // We dynamically change the size of the views, the subviews need to
+        // update their values accordingly.
         containerView.layoutIfNeeded()
         gradientLayer.frame = containerView.bounds
     }
