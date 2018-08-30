@@ -70,9 +70,11 @@ class TopologicalSortTests: XCTestCase {
         let zeroInDegrees = ["3", "7", "5"]
         XCTAssertTrue(zeroInDegrees.contains(firstId))
 
-        print(result.map { $0.id })
-        checkIsValidTopologicalSort(graph, result as! [KnowledgeGraph.Node])
-        XCTAssertTrue(possibleSolutions.contains(result.map { $0.id }))
+        let containsSolution = possibleSolutions.contains(result.map { $0.id })
+        let isValid = checkIsValidTopologicalSort(graph, result as! [KnowledgeGraph.Node])
+        if !containsSolution && !isValid {
+            XCTFail("\(result.map { $0.id }) is not a valid topological sort")
+        }
     }
 
     func testTopologicalSortEdgeLists() {
@@ -94,14 +96,19 @@ class TopologicalSortTests: XCTestCase {
 
     // The topological sort is valid if a node does not have any of its
     // predecessors in its adjacency list.
-    func checkIsValidTopologicalSort(_ graph: KnowledgeGraph, _ a: [KnowledgeGraph.Node]) {
+    @discardableResult
+    func checkIsValidTopologicalSort(_ graph: KnowledgeGraph, _ a: [KnowledgeGraph.Node]) -> Bool {
         for i in stride(from: (a.count - 1), to: 0, by: -1) {
             if let neighbors = graph.adjacency[a[i]] {
                 for j in stride(from: (i - 1), through: 0, by: -1) {
-                    XCTAssertFalse(neighbors.contains(a[j]), "\(a) is not a valid topological sort")
+                    if neighbors.contains(a[j]) {
+                        XCTFail("\(a) is not a valid topological sort")
+                        return false
+                    }
                 }
             }
         }
+        return true
     }
 }
 

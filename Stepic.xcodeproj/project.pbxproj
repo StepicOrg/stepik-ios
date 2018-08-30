@@ -1102,10 +1102,10 @@
 		2C0107A2210F3B22009A53DF /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		2C0107A5210F3E87009A53DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */; };
-		2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssembly.swift */; };
-		2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */; };
-		2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouter.swift */; };
-		2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */; };
+		2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */; };
+		2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107A9210F4214009A53DF /* LessonsAssembly.swift */; };
+		2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */; };
+		2C0107AF210F42B7009A53DF /* LessonsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107AE210F42B7009A53DF /* LessonsRouter.swift */; };
 		2C0107B1210F7220009A53DF /* ServiceFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */; };
 		2C0107B6210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
 		2C0107B8210F743D009A53DF /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
@@ -1986,13 +1986,12 @@
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7782107359E00609621 /* LessonsTableViewController.swift */; };
-		2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD7792107359E00609621 /* LessonsTableViewController.xib */; };
 		2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD77D210735E000609621 /* LessonTableViewCell.swift */; };
 		2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD77E210735E000609621 /* LessonTableViewCell.xib */; };
 		2C2FD7842107448F00609621 /* LessonsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7832107448F00609621 /* LessonsService.swift */; };
 		2C2FD7862107453800609621 /* LessonsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7852107453800609621 /* LessonsServiceImpl.swift */; };
-		2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenter.swift */; };
-		2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */; };
+		2C2FD78D210753AD00609621 /* LessonsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */; };
+		2C2FD78F210753CD00609621 /* LessonsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD78E210753CD00609621 /* LessonsPresenter.swift */; };
 		2C2FD7912107540500609621 /* LessonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7902107540500609621 /* LessonsView.swift */; };
 		2C302DC121303191006C2BD5 /* AuthGreetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C302DC321303191006C2BD5 /* AuthGreetingViewController.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
@@ -4169,6 +4168,8 @@
 		2CE84BDF20F4D2CC0069B869 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */; };
 		2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */; };
 		2CE84BE420F505980069B869 /* GraphPathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */; };
+		2CE8A69B2131DF5900E3916B /* LessonTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8A69A2131DF5900E3916B /* LessonTableHeaderView.xib */; };
+		2CE8A69D2131DF7E00E3916B /* LessonTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8A69C2131DF7E00E3916B /* LessonTableHeaderView.swift */; };
 		2CEBAB90211D82880014085E /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
@@ -5639,10 +5640,10 @@
 		2063E36B4EC96399AAB6ABC9 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		210D872D0B8EC9F0380D3EF9 /* Pods-Adaptive GMAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.debug.xcconfig"; sourceTree = "<group>"; };
 		22B314D76C612EF78CF9C87D /* Pods-ExamEGERussianTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C0107A7210F420C009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
-		2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyImpl.swift; sourceTree = "<group>"; };
-		2C0107AC210F42A6009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
-		2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterImpl.swift; sourceTree = "<group>"; };
+		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C0107A9210F4214009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
+		2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterProtocol.swift; sourceTree = "<group>"; };
+		2C0107AE210F42B7009A53DF /* LessonsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouter.swift; sourceTree = "<group>"; };
 		2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseTableViewCell.swift; sourceTree = "<group>"; };
 		2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdaptiveCourseTableViewCell.xib; sourceTree = "<group>"; };
 		2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
@@ -5751,13 +5752,13 @@
 		2C2EA361212C3555002116C9 /* CourseListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		2C2EA362212C3555002116C9 /* CourseListViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewDelegate.swift; sourceTree = "<group>"; };
 		2C2FD7782107359E00609621 /* LessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsTableViewController.swift; sourceTree = "<group>"; };
-		2C2FD7792107359E00609621 /* LessonsTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonsTableViewController.xib; sourceTree = "<group>"; };
 		2C2FD77D210735E000609621 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
 		2C2FD7832107448F00609621 /* LessonsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsService.swift; sourceTree = "<group>"; };
 		2C2FD7852107453800609621 /* LessonsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceImpl.swift; sourceTree = "<group>"; };
-		2C2FD78C210753AD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
-		2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterImpl.swift; sourceTree = "<group>"; };
+		2C2FD7892107507200609621 /* LessonPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
+		2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterProtocol.swift; sourceTree = "<group>"; };
+		2C2FD78E210753CD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
 		2C33606821342F41006EACF3 /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
@@ -6097,6 +6098,8 @@
 		2CE84BDE20F4D2CC0069B869 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
 		2CE84BE020F4FD030069B869 /* GraphPathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinder.swift; sourceTree = "<group>"; };
 		2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinderTests.swift; sourceTree = "<group>"; };
+		2CE8A69A2131DF5900E3916B /* LessonTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableHeaderView.xib; sourceTree = "<group>"; };
+		2CE8A69C2131DF7E00E3916B /* LessonTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableHeaderView.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -8536,8 +8539,8 @@
 		2C0107A6210F41F6009A53DF /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				2C0107A7210F420C009A53DF /* LessonsAssembly.swift */,
-				2C0107A9210F4214009A53DF /* LessonsAssemblyImpl.swift */,
+				2C0107A9210F4214009A53DF /* LessonsAssembly.swift */,
+				2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -8545,8 +8548,8 @@
 		2C0107AB210F428E009A53DF /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				2C0107AC210F42A6009A53DF /* LessonsRouter.swift */,
-				2C0107AE210F42B7009A53DF /* LessonsRouterImpl.swift */,
+				2C0107AE210F42B7009A53DF /* LessonsRouter.swift */,
+				2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -9002,20 +9005,12 @@
 		2C2FD7772107357800609621 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2C2FD77C210735AE00609621 /* LessonsTableViewController */,
+				2CF79D332131A96800DA6953 /* LessonTableHeaderView */,
 				2C2FD781210735EB00609621 /* LessonTableViewCell */,
+				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
 				2C2FD7902107540500609621 /* LessonsView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2C2FD77C210735AE00609621 /* LessonsTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2C2FD7782107359E00609621 /* LessonsTableViewController.swift */,
-				2C2FD7792107359E00609621 /* LessonsTableViewController.xib */,
-			);
-			path = LessonsTableViewController;
 			sourceTree = "<group>";
 		};
 		2C2FD781210735EB00609621 /* LessonTableViewCell */ = {
@@ -9039,8 +9034,8 @@
 		2C2FD78B2107539700609621 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2C2FD78C210753AD00609621 /* LessonsPresenter.swift */,
-				2C2FD78E210753CD00609621 /* LessonsPresenterImpl.swift */,
+				2C2FD78E210753CD00609621 /* LessonsPresenter.swift */,
+				2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -10576,6 +10571,15 @@
 			name = StepikPlaceholderView;
 			sourceTree = "<group>";
 		};
+		2CF79D332131A96800DA6953 /* LessonTableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				2CE8A69C2131DF7E00E3916B /* LessonTableHeaderView.swift */,
+				2CE8A69A2131DF5900E3916B /* LessonTableHeaderView.xib */,
+			);
+			path = LessonTableHeaderView;
+			sourceTree = "<group>";
+		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -12042,6 +12046,7 @@
 				2CFE247C20ECF7F700AF1E3D /* Config.plist in Resources */,
 				2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */,
 				2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */,
+				2CE8A69B2131DF5900E3916B /* LessonTableHeaderView.xib in Resources */,
 				2CE22D9A211C587F004D9D10 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C093F2B211B46F900162DD0 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C093F2D211B4AE900162DD0 /* QuizViewController.xib in Resources */,
@@ -12052,7 +12057,6 @@
 				2C4F34042109F5C900E259FE /* AuthSignInViewController.xib in Resources */,
 				2C33607E213433A3006EACF3 /* TopicsSectionView.xib in Resources */,
 				2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */,
-				2C2FD77B2107359E00609621 /* LessonsTableViewController.xib in Resources */,
 				2C093F2E211B4B4800162DD0 /* StepikPlaceholderView.xib in Resources */,
 				2C83E5F9211099D400A8322D /* wysiwyg.css in Resources */,
 				2C83E5FA211099F900A8322D /* plyr.js in Resources */,
@@ -15936,7 +15940,7 @@
 				2C093F07211B434100162DD0 /* ProfilePresenter.swift in Sources */,
 				2C9499D220ECBCDB0049E9A8 /* SortingReply.swift in Sources */,
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
-				2C2FD78D210753AD00609621 /* LessonsPresenter.swift in Sources */,
+				2C2FD78D210753AD00609621 /* LessonsPresenterProtocol.swift in Sources */,
 				2C94999620ECB86B0049E9A8 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C093F1A211B449E00162DD0 /* AchievementsListViewController.swift in Sources */,
@@ -15981,7 +15985,7 @@
 				2C33CBF520EC327F009956B0 /* UsersAPI.swift in Sources */,
 				2C33CBD720EC2BBD009956B0 /* AppDelegate.swift in Sources */,
 				2C33CBF220EC326A009956B0 /* CoursesAPI.swift in Sources */,
-				2C0107A8210F420C009A53DF /* LessonsAssembly.swift in Sources */,
+				2C0107A8210F420C009A53DF /* LessonsAssemblyProtocol.swift in Sources */,
 				2C949A1A20ECC5520049E9A8 /* StepikPlaceholder.swift in Sources */,
 				2C9499CC20ECBCB00049E9A8 /* Reply.swift in Sources */,
 				2C093EFD211B427A00162DD0 /* StreaksAlertPresentationManager.swift in Sources */,
@@ -16036,7 +16040,7 @@
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
 				2C949A0420ECC3000049E9A8 /* NotificationsMarkAsReadButton.swift in Sources */,
 				2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */,
-				2C2FD78F210753CD00609621 /* LessonsPresenterImpl.swift in Sources */,
+				2C2FD78F210753CD00609621 /* LessonsPresenter.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
@@ -16061,7 +16065,7 @@
 				2C905235212EADDB00354DFB /* ViewsService.swift in Sources */,
 				2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */,
 				2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */,
-				2C0107AD210F42A6009A53DF /* LessonsRouter.swift in Sources */,
+				2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */,
 				2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C4F34002109EDFD00E259FE /* TopicsRouterImpl.swift in Sources */,
 				2C97902D21356CA800046625 /* TrainingTopicsCollectionSource.swift in Sources */,
@@ -16253,6 +16257,7 @@
 				2C33CBEF20EC3251009956B0 /* UserActivitiesAPI.swift in Sources */,
 				2C9499DB20ECBD780049E9A8 /* UserActivity.swift in Sources */,
 				2C67B22120FF1A93005E699B /* AuthSignUpAssemblyImpl.swift in Sources */,
+				2CE8A69D2131DF7E00E3916B /* LessonTableHeaderView.swift in Sources */,
 				2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */,
 				2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */,
 				2C949A0820ECC3B80049E9A8 /* NotificationDataExtractor.swift in Sources */,
@@ -16329,10 +16334,10 @@
 				2C949A5E20ECCECC0049E9A8 /* AdaptiveStorageManager.swift in Sources */,
 				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
-				2C0107AF210F42B7009A53DF /* LessonsRouterImpl.swift in Sources */,
+				2C0107AF210F42B7009A53DF /* LessonsRouter.swift in Sources */,
 				2C6B2B992121A08300968C96 /* Command.swift in Sources */,
 				2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */,
-				2C0107AA210F4214009A53DF /* LessonsAssemblyImpl.swift in Sources */,
+				2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
 				2C093F1E211B44F000162DD0 /* VideoQualityTableViewController.swift in Sources */,
