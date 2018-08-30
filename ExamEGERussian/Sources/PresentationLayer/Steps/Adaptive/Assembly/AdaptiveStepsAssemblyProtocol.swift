@@ -10,4 +10,5 @@ import UIKit
 
 protocol AdaptiveStepsAssemblyProtocol: class {
     func module(topicId: String) -> UIViewController?
+    func module(courseId: Int) -> UIViewController
 }

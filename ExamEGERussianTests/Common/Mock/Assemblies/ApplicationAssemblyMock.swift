@@ -12,8 +12,9 @@ import Foundation
 final class ApplicationAssemblyMock: ApplicationAssembly {
     func module() -> ApplicationModule {
         let router = AppRouter(
-            assemblyFactory: AssemblyFactoryMock(),
-            navigationController: MockAssemblyNavigationController()
+            tabBarController: UITabBarController(),
+            navigationController: MockAssemblyNavigationController(),
+            assemblyFactory: AssemblyFactoryMock()
         )
 
         return ApplicationModule(router: router)

@@ -33,32 +33,8 @@ class TopicsPresenterTests: XCTestCase {
 
         let resultToBeReturned = KnowledgeGraphPlainObject.make()
         graphService.resultToBeReturned = .value(resultToBeReturned)
-        topicsViewSpy.onSet = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+        topicsViewSpy.onSet = {
             XCTAssertTrue(self.topicsViewSpy.topics!.count == resultToBeReturned.topics.count, "not equal count of topics")
-            exp.fulfill()
-        }
-
-        topicsPresenter.refresh()
-
-        wait(for: [exp], timeout: 1.0)
-    }
-
-    func testFailureResponseDisplayError() {
-        let exp = expectation(description: "Concrete error title and message")
-
-        let expectedErrorTitle = "Error"
-        let expectedErrorMessage = "Something went wrong. Try again later."
-        let errorToBeReturned = NSError.make(with: expectedErrorMessage)
-        graphService.resultToBeReturned = Promise(error: errorToBeReturned)
-        topicsViewSpy.onError = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            XCTAssertEqual(expectedErrorTitle, self.topicsViewSpy.displayErrorTitle, "Error title doesn't match")
-            XCTAssertEqual(expectedErrorMessage, self.topicsViewSpy.displayErrorMessage, "Error message doesn't match")
             exp.fulfill()
         }
 
