@@ -2425,6 +2425,9 @@
 		2C77030E210F2C7B002E250D /* AuthSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */; };
 		2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
 		2C770310210F2D1D002E250D /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		2C7CCE282138276200A3AEA8 /* LearningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */; };
+		2C7CCE2B213827B400A3AEA8 /* LearningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */; };
+		2C7CCE2C213827B400A3AEA8 /* LearningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */; };
 		2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */; };
 		2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */; };
 		2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */; };
@@ -5756,7 +5759,6 @@
 		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
 		2C2FD7832107448F00609621 /* LessonsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsService.swift; sourceTree = "<group>"; };
 		2C2FD7852107453800609621 /* LessonsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceImpl.swift; sourceTree = "<group>"; };
-		2C2FD7892107507200609621 /* LessonPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
 		2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterProtocol.swift; sourceTree = "<group>"; };
 		2C2FD78E210753CD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
@@ -5878,6 +5880,9 @@
 		2C770305210F29B0002E250D /* LessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
 		2C770308210F2AD5002E250D /* RouterDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterDismissable.swift; sourceTree = "<group>"; };
 		2C770309210F2AD5002E250D /* BaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTableViewController.swift; sourceTree = "<group>"; };
+		2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTableViewCell.swift; sourceTree = "<group>"; };
+		2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LearningTableViewCell.xib; sourceTree = "<group>"; };
 		2C7FEE6E1FDAF8F600B2B4F1 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		2C7FEE701FDAF9D500B2B4F1 /* onboardingAnimation4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation4.json; path = LottieFiles/onboardingAnimation4.json; sourceTree = "<group>"; };
 		2C7FEE711FDAF9D500B2B4F1 /* onboardingAnimation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = onboardingAnimation1.json; path = LottieFiles/onboardingAnimation1.json; sourceTree = "<group>"; };
@@ -9308,6 +9313,7 @@
 		2C59F05C20EB8F0D00666EE0 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				2C7CCE182138118500A3AEA8 /* Learning */,
 				2C6ABCD020F7568900E300D3 /* Auth */,
 				2CD7997721077D010054D098 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
@@ -9597,6 +9603,16 @@
 				62E98A35FCB795B26C083C91 /* RouterPoppable.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		2C7CCE182138118500A3AEA8 /* Learning */ = {
+			isa = PBXGroup;
+			children = (
+				2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */,
+				2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */,
+				2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */,
+			);
+			path = Learning;
 			sourceTree = "<group>";
 		};
 		2C7FEE781FDAF9E100B2B4F1 /* Animations files */ = {
@@ -12040,6 +12056,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */,
+				2C7CCE2C213827B400A3AEA8 /* LearningTableViewCell.xib in Resources */,
 				2C83E5FC21109C4300A8322D /* MathJax in Resources */,
 				2C681A08210B15C400C3DDCA /* AuthSignUpViewController.xib in Resources */,
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
@@ -15973,10 +15990,12 @@
 				2C33CBE520EC313A009956B0 /* DictionarySerializable.swift in Sources */,
 				2C949A2020ECC5B40049E9A8 /* ProfileMenuBlock.swift in Sources */,
 				2C34D68420FCE584001EF741 /* AuthSignUpRouter.swift in Sources */,
+				2C7CCE282138276200A3AEA8 /* LearningTableViewController.swift in Sources */,
 				2C83DFEC2135E24C00C5978C /* TopicPlainObject.swift in Sources */,
 				2C949A4D20ECCCD40049E9A8 /* RateAppManager.swift in Sources */,
 				2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,
+				2C7CCE2B213827B400A3AEA8 /* LearningTableViewCell.swift in Sources */,
 				2C6B2B9F2121A18E00968C96 /* AppLaunchingCommandsBuilder.swift in Sources */,
 				2C97903621358F3000046625 /* Reusable.swift in Sources */,
 				2C01079E210F37A2009A53DF /* AttemptsAPI.swift in Sources */,
