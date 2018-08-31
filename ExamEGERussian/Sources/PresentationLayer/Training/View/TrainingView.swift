@@ -8,7 +8,11 @@
 
 import Foundation
 
+struct TrainingViewData {
+
+}
+
 protocol TrainingView: class {
-    func setTopics(_ topics: [TopicPlainObject])
+    func setViewData(_ viewData: [TrainingViewData])
     func displayError(title: String, message: String)
 }

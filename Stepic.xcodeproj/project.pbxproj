@@ -1136,6 +1136,7 @@
 		2C0159DE213939BB0043DBFF /* LearningAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159DD213939BB0043DBFF /* LearningAssembly.swift */; };
 		2C0159E1213940850043DBFF /* LearningRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */; };
 		2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E2213940910043DBFF /* LearningRouter.swift */; };
+		2C0159E621394C9E0043DBFF /* TrainingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
@@ -2006,7 +2007,6 @@
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
-		2C33606A21342F41006EACF3 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33606821342F41006EACF3 /* TrainingViewController.swift */; };
 		2C33607321343059006EACF3 /* TrainingHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607121343059006EACF3 /* TrainingHorizontalCollectionCell.swift */; };
 		2C33607821343183006EACF3 /* TrainingCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33607621343183006EACF3 /* TrainingCardCollectionViewCell.swift */; };
 		2C33607921343183006EACF3 /* TrainingCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C33607721343183006EACF3 /* TrainingCardCollectionViewCell.xib */; };
@@ -3409,8 +3409,6 @@
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
-		2C97902B21356C4800046625 /* TrainingCollectionViewSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902A21356C4800046625 /* TrainingCollectionViewSourceProtocol.swift */; };
-		2C97902D21356CA800046625 /* TrainingTopicsCollectionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97902C21356CA800046625 /* TrainingTopicsCollectionSource.swift */; };
 		2C97903421358F0E00046625 /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA340212C3516002116C9 /* UICollectionViewExtensions.swift */; };
 		2C97903521358F2300046625 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA334212C350A002116C9 /* NibLoadable.swift */; };
 		2C97903621358F3000046625 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA336212C350B002116C9 /* Reusable.swift */; };
@@ -5660,6 +5658,7 @@
 		2C0159DD213939BB0043DBFF /* LearningAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssembly.swift; sourceTree = "<group>"; };
 		2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouterProtocol.swift; sourceTree = "<group>"; };
 		2C0159E2213940910043DBFF /* LearningRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouter.swift; sourceTree = "<group>"; };
+		2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewController.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -5771,7 +5770,6 @@
 		2C2FD78E210753CD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
 		2C302DC221303191006C2BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthGreetingViewController.xib; sourceTree = "<group>"; };
-		2C33606821342F41006EACF3 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		2C33607121343059006EACF3 /* TrainingHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingHorizontalCollectionCell.swift; sourceTree = "<group>"; };
 		2C33607621343183006EACF3 /* TrainingCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C33607721343183006EACF3 /* TrainingCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingCardCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -5948,8 +5946,6 @@
 		2C9732F61F4C391900AC9301 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3150/icon.png; sourceTree = "<group>"; };
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
-		2C97902A21356C4800046625 /* TrainingCollectionViewSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewSourceProtocol.swift; sourceTree = "<group>"; };
-		2C97902C21356CA800046625 /* TrainingTopicsCollectionSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTopicsCollectionSource.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
@@ -9863,8 +9859,6 @@
 		2C97902921356C0F00046625 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2C97902A21356C4800046625 /* TrainingCollectionViewSourceProtocol.swift */,
-				2C97902C21356CA800046625 /* TrainingTopicsCollectionSource.swift */,
 				2CBA9B87213693C00010819E /* TrainingHorizontalCollectionSource.swift */,
 			);
 			path = Model;
@@ -10394,7 +10388,7 @@
 				2C33607521343065006EACF3 /* TrainingHorizontalCollectionCell */,
 				2C33607F213433AE006EACF3 /* TrainingSectionView */,
 				2CD7997F21077D010054D098 /* TrainingView.swift */,
-				2C33606821342F41006EACF3 /* TrainingViewController.swift */,
+				2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -16087,7 +16081,6 @@
 				2C0107AD210F42A6009A53DF /* LessonsRouterProtocol.swift in Sources */,
 				2C0107A3210F3B45009A53DF /* DeleteDeviceExecutableTask.swift in Sources */,
 				2C4F34002109EDFD00E259FE /* TrainingRouter.swift in Sources */,
-				2C97902D21356CA800046625 /* TrainingTopicsCollectionSource.swift in Sources */,
 				2C33CBF120EC3263009956B0 /* LastStepsAPI.swift in Sources */,
 				2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */,
 				2C4EB2DE2124308800AF2331 /* ExamNumberQuizViewController.swift in Sources */,
@@ -16165,7 +16158,6 @@
 				2C093F21211B452400162DD0 /* CodeEditorSettingsPresenter.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */,
-				2C33606A21342F41006EACF3 /* TrainingViewController.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
 				2C33CC0520EC3377009956B0 /* ErrorEnums.swift in Sources */,
 				2C9499B420ECBAD00049E9A8 /* FreeAnswerDataset.swift in Sources */,
@@ -16181,6 +16173,7 @@
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
 				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
+				2C0159E621394C9E0043DBFF /* TrainingCollectionViewController.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
 				2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */,
@@ -16188,7 +16181,6 @@
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
 				2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
-				2C97902B21356C4800046625 /* TrainingCollectionViewSourceProtocol.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
 				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,
 				2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */,

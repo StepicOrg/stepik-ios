@@ -1,55 +1,52 @@
 //
-//  TrainingTopicsCollectionSource.swift
+//  TrainingCollectionViewController.swift
 //  ExamEGERussian
 //
-//  Created by Ivan Magda on 28/08/2018.
+//  Created by Ivan Magda on 31/08/2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-final class TrainingTopicsCollectionSource: NSObject, TrainingCollectionViewSourceProtocol {
-    var topics: [TopicPlainObject]
-    var didSelectTopic: ((_ topic: TopicPlainObject) -> Void)?
+final class TrainingCollectionViewController: UICollectionViewController, _TrainingView {
+    private var viewData = [TrainingViewData]()
 
-    init(topics: [TopicPlainObject] = []) {
-        self.topics = topics
-        super.init()
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
     }
 
-    func register(with collectionView: UICollectionView) {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(cellClass: TrainingHorizontalCollectionCell.self)
-        collectionView.register(
-            viewClass: TrainingSectionView.self,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-        )
-    }
+    // MARK: UICollectionViewDataSource
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Section.allCases.count
     }
 
-    func collectionView(
+    override func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
         return 1
     }
 
-    func collectionView(
+    override func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: TrainingHorizontalCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.source = TrainingHorizontalCollectionSource(topics: topics(for: indexPath))
-        cell.source?.didSelectItem = didSelectTopic
+//        cell.source = TrainingHorizontalCollectionSource(topics: topics(for: indexPath))
+//        cell.source?.didSelectItem = didSelectTopic
 
         return cell
     }
 
-    func collectionView(
+    override func collectionView(
         _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
@@ -68,14 +65,51 @@ final class TrainingTopicsCollectionSource: NSObject, TrainingCollectionViewSour
         return view
     }
 
-    private func topics(for indexPath: IndexPath) -> [TopicPlainObject] {
-        switch Section.from(indexPath: indexPath) {
-        case .theory:
-            return topics
-        case .practice:
-            return topics.filter { $0.type == .practice }
+    // MARK: - TrainingView -
+
+    func setViewData(_ viewData: [TrainingViewData]) {
+        self.viewData = viewData
+        collectionView?.reloadData()
+    }
+
+    func displayError(title: String, message: String) {
+        presentAlert(withTitle: title, message: message)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.refreshControl.endRefreshing()
         }
     }
+
+    // MARK: - Private API -
+
+    private func setup() {
+        collectionView?.register(cellClass: TrainingHorizontalCollectionCell.self)
+        collectionView?.register(
+            viewClass: TrainingSectionView.self,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+        )
+        collectionView?.backgroundColor = .white
+        collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.addSubview(refreshControl)
+    }
+
+    @objc
+    private func refreshData(_ sender: Any) {
+        //presenter.refresh()
+    }
+
+    private func topics(for indexPath: IndexPath) -> [TrainingViewData] {
+        switch Section.from(indexPath: indexPath) {
+        case .theory:
+            return []
+        case .practice:
+//            return topics.filter { $0.type == .practice }
+            return []
+        }
+    }
+
+    // MARK: - Inner Types -
 
     private enum Section: Int, CaseIterable {
         case theory
@@ -96,7 +130,7 @@ final class TrainingTopicsCollectionSource: NSObject, TrainingCollectionViewSour
     }
 }
 
-extension TrainingTopicsCollectionSource: UICollectionViewDelegateFlowLayout {
+extension TrainingCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
