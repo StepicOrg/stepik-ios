@@ -79,14 +79,11 @@ final class CourseWidgetView: UIView {
 
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.ratingLabelText = viewModel.ratingLabelText
-
-        if let progressViewModel = viewModel.progress {
-            self.statsView.updateProgress(viewModel: progressViewModel)
-        }
+        self.statsView.progress = viewModel.progress
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
-        self.statsView.updateProgress(viewModel: viewModel)
+        self.statsView.progress = viewModel
     }
 
     private func updateColors() {

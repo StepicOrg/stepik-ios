@@ -44,7 +44,19 @@ final class CourseWidgetStatsView: UIView {
 
     var ratingLabelText: String? {
         didSet {
+            self.ratingView.isHidden = self.ratingLabelText == nil
             self.ratingView.text = self.ratingLabelText
+        }
+    }
+
+    var progress: CourseWidgetProgressViewModel? {
+        didSet {
+            guard let progress = progress else {
+                progressView.isHidden = true
+                return
+            }
+
+            self.updateProgress(viewModel: progress)
         }
     }
 
@@ -84,6 +96,14 @@ final class CourseWidgetStatsView: UIView {
             appearance: appearance
         )
         return view
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = self.appearance.statItemsSpacing
+        return stackView
     }()
 
     init(
@@ -162,37 +182,22 @@ extension CourseWidgetStatsView {
 
 extension CourseWidgetStatsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
+        self.ratingView.isHidden = false
         self.progressView.isHidden = false
     }
 
     func addSubviews() {
-        self.addSubview(learnersView)
-        self.addSubview(ratingView)
-        self.addSubview(progressView)
+        self.addSubview(self.stackView)
+
+        self.stackView.addArrangedSubview(self.learnersView)
+        self.stackView.addArrangedSubview(self.ratingView)
+        self.stackView.addArrangedSubview(self.progressView)
     }
 
     func makeConstraints() {
-        self.learnersView.translatesAutoresizingMaskIntoConstraints = false
-        self.learnersView.snp.makeConstraints { make in
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.leftInset)
-            make.centerY.equalToSuperview()
-            make.top.bottom.greaterThanOrEqualToSuperview()
-        }
-
-        self.ratingView.translatesAutoresizingMaskIntoConstraints = false
-        self.ratingView.snp.makeConstraints { make in
-            make.leading
-                .equalTo(self.learnersView.snp.trailing)
-                .offset(self.appearance.statItemsSpacing)
-            make.centerY.equalToSuperview()
-            make.top.bottom.greaterThanOrEqualToSuperview()
-        }
-
-        self.progressView.translatesAutoresizingMaskIntoConstraints = false
-        self.progressView.snp.makeConstraints { make in
-            make.leading
-                .equalTo(self.ratingView.snp.trailing)
-                .offset(self.appearance.statItemsSpacing)
             make.centerY.equalToSuperview()
             make.top.bottom.trailing.greaterThanOrEqualToSuperview()
         }

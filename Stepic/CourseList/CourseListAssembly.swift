@@ -25,7 +25,9 @@ final class CourseListAssembly: Assembly {
                 type: self.type,
                 coursesAPI: CoursesAPI()
             ),
-            persistenceService: self.getPersistenceService()
+            persistenceService: self.getPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            reviewSummariesNetworkService: CourseReviewSummariesNetworkService(courseReviewSummariesAPI: CourseReviewSummariesAPI())
         )
         self.interactor = CourseListInteractor(presenter: presenter, provider: provider)
         let controller = CourseListViewController(interactor: self.interactor!)

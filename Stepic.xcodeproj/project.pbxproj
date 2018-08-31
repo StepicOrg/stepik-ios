@@ -4238,6 +4238,7 @@
 		62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E985A6228659D32EDE2231 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E985BDBC2985E15C3FB4F6 /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
+		62E985C5960758949AB4184E /* ProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9825EF592EEA44508CBDD /* ProgressesNetworkService.swift */; };
 		62E98622F3B03F7282DC06D8 /* AchievementDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */; };
 		62E9862FC6DD9EC1AC1647DA /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
 		62E9868BAC8E63E53A9BD0AE /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
@@ -4306,6 +4307,7 @@
 		62E98D686165FCA5E588FDD5 /* CustomNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9810DF187ACA3C26F5396 /* CustomNotificationBanner.swift */; };
 		62E98D7EC355992DB8889003 /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E98D9D4008CA06FC1E5446 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
+		62E98DBA62FE9F3E7457A39D /* CourseReviewSummariesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D8F113BBCCBDBCBB22A /* CourseReviewSummariesNetworkService.swift */; };
 		62E98DC371227AE0EDF94038 /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
 		62E98DE7FA0EE5EB23136B52 /* AchievementsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AE968B12714D825650A /* AchievementsListPresenter.swift */; };
@@ -6098,6 +6100,7 @@
 		62E9810DF187ACA3C26F5396 /* CustomNotificationBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNotificationBanner.swift; sourceTree = "<group>"; };
 		62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSource.swift; sourceTree = "<group>"; };
 		62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorPreferencesContainer.swift; sourceTree = "<group>"; };
+		62E9825EF592EEA44508CBDD /* ProgressesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesNetworkService.swift; sourceTree = "<group>"; };
 		62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoPresenter.swift; sourceTree = "<group>"; };
 		62E982889B820EAFCD2131BF /* CourseListTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTypes.swift; sourceTree = "<group>"; };
 		62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+fromNib.swift"; sourceTree = "<group>"; };
@@ -6136,6 +6139,7 @@
 		62E98D05D763C2858DCA9841 /* CourseWidgetViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetViewModelAdapter.swift; sourceTree = "<group>"; };
 		62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		62E98D63963986EFDF662226 /* StepAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepAssembly.swift; sourceTree = "<group>"; };
+		62E98D8F113BBCCBDBCBB22A /* CourseReviewSummariesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseReviewSummariesNetworkService.swift; sourceTree = "<group>"; };
 		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
 		62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableHeaderLayout.swift"; sourceTree = "<group>"; };
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
@@ -6479,6 +6483,8 @@
 				FAE2E830A227844A0D6C7DFD /* CourseListPersistenceService.swift */,
 				2F5808405CD61E61F436B3B8 /* CourseListNetworkService.swift */,
 				62E98C7C9CC6638B834E17CE /* CourseListPersistenceStorage.swift */,
+				62E9825EF592EEA44508CBDD /* ProgressesNetworkService.swift */,
+				62E98D8F113BBCCBDBCBB22A /* CourseReviewSummariesNetworkService.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -14667,6 +14673,8 @@
 				62E98BA5C02E9ADF575B5979 /* CourseWidgetViewModelAdapter.swift in Sources */,
 				62E98E33E09813F070A3126B /* CourseListPersistenceStorage.swift in Sources */,
 				08484F0A211AF4320006266F /* Story.swift in Sources */,
+				62E985C5960758949AB4184E /* ProgressesNetworkService.swift in Sources */,
+				62E98DBA62FE9F3E7457A39D /* CourseReviewSummariesNetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Progress: NSManagedObject, JSONSerializable {
+final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
 
     typealias IdType = String
 

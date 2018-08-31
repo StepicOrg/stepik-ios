@@ -9,11 +9,25 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class CourseReviewSummariesAPI: APIEndpoint {
     override var name: String { return "course-review-summaries" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [CourseReviewSummary], refreshMode: RefreshMode, success: @escaping (([CourseReviewSummary]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    }
+
+    @available(*, deprecated, message: "Legacy with update existing")
+    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[CourseReviewSummary]> {
+        return Promise { seal in
+            CourseReviewSummary.fetchAsync(ids: ids).then { summaries in
+                self.getObjectsByIds(ids: ids, updating: summaries)
+            }.done { summaries in
+                seal.fulfill(summaries)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
     }
 }

@@ -10,15 +10,36 @@ import Foundation
 
 extension CourseWidgetViewModel {
     init(course: Course) {
+        var progressViewModel: CourseWidgetProgressViewModel?
+        if let progress = course.progress {
+            progressViewModel = CourseWidgetProgressViewModel(progress: progress)
+        }
+
+        var ratingLabelText: String?
+        if let reviewsCount = course.reviewSummary?.count,
+           let averageRating = course.reviewSummary?.average,
+           reviewsCount > 0 {
+            ratingLabelText = FormatterHelper.averageRating(averageRating)
+        }
+
         self.init(
             title: course.title,
             coverImage: UIImage(),
-            primaryButtonDescription: ButtonDescription(title: "1", isCallToAction: false),
-            secondaryButtonDescription: ButtonDescription(title: "1", isCallToAction: false),
-            learnersLabelText: "10k",
-            ratingLabelText: "4.2",
+            primaryButtonDescription: ButtonDescription(title: "Join", isCallToAction: true),
+            secondaryButtonDescription: ButtonDescription(title: "Info", isCallToAction: false),
+            learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
+            ratingLabelText: ratingLabelText,
             isAdaptive: true,
-            progress: nil
+            progress: progressViewModel
         )
+    }
+}
+
+extension CourseWidgetProgressViewModel {
+    init(progress: Progress) {
+        var normalizedPercent = progress.percentPassed
+        normalizedPercent.round(.up)
+        self.progress = normalizedPercent / 100.0
+        self.progressLabelText = FormatterHelper.integerPercent(Int(normalizedPercent))
     }
 }

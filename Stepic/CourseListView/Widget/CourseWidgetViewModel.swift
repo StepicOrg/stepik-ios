@@ -21,7 +21,7 @@ struct CourseWidgetViewModel {
     var primaryButtonDescription: ButtonDescription
     var secondaryButtonDescription: ButtonDescription
     var learnersLabelText: String
-    var ratingLabelText: String
+    var ratingLabelText: String?
     var isAdaptive: Bool
     var progress: CourseWidgetProgressViewModel?
 }
