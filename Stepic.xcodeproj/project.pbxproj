@@ -1129,6 +1129,11 @@
 		2C0107D3210F76FD009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
 		2C0107D4210F76FE009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
 		2C0107D5210F7700009A53DF /* RandomCredentialsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */; };
+		2C0159D5213931FA0043DBFF /* LearningPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159D4213931FA0043DBFF /* LearningPresenterProtocol.swift */; };
+		2C0159D7213932050043DBFF /* LearningPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159D6213932050043DBFF /* LearningPresenter.swift */; };
+		2C0159D92139326D0043DBFF /* LearningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159D82139326D0043DBFF /* LearningView.swift */; };
+		2C0159DC213939AF0043DBFF /* LearningAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159DB213939AF0043DBFF /* LearningAssemblyProtocol.swift */; };
+		2C0159DE213939BB0043DBFF /* LearningAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159DD213939BB0043DBFF /* LearningAssembly.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
@@ -5647,6 +5652,11 @@
 		2C0107B5210F743D009A53DF /* AdaptiveCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdaptiveCourseTableViewCell.xib; sourceTree = "<group>"; };
 		2C0107C2210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectPresenter.swift; sourceTree = "<group>"; };
 		2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseSelectViewController.swift; sourceTree = "<group>"; };
+		2C0159D4213931FA0043DBFF /* LearningPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningPresenterProtocol.swift; sourceTree = "<group>"; };
+		2C0159D6213932050043DBFF /* LearningPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningPresenter.swift; sourceTree = "<group>"; };
+		2C0159D82139326D0043DBFF /* LearningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningView.swift; sourceTree = "<group>"; };
+		2C0159DB213939AF0043DBFF /* LearningAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssemblyProtocol.swift; sourceTree = "<group>"; };
+		2C0159DD213939BB0043DBFF /* LearningAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssembly.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -8569,6 +8579,43 @@
 			name = CourseCell;
 			sourceTree = "<group>";
 		};
+		2C0159D12139318E0043DBFF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C0159D22139319D0043DBFF /* LearningTableViewCell */,
+				2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */,
+				2C0159D82139326D0043DBFF /* LearningView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C0159D22139319D0043DBFF /* LearningTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */,
+				2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */,
+			);
+			path = LearningTableViewCell;
+			sourceTree = "<group>";
+		};
+		2C0159D3213931A70043DBFF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C0159D6213932050043DBFF /* LearningPresenter.swift */,
+				2C0159D4213931FA0043DBFF /* LearningPresenterProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2C0159DA213939900043DBFF /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2C0159DD213939BB0043DBFF /* LearningAssembly.swift */,
+				2C0159DB213939AF0043DBFF /* LearningAssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -9295,8 +9342,8 @@
 		2C59F05C20EB8F0D00666EE0 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				2C7CCE182138118500A3AEA8 /* Learning */,
 				2C6ABCD020F7568900E300D3 /* Auth */,
+				2C7CCE182138118500A3AEA8 /* Learning */,
 				2CD7997721077D010054D098 /* Topics */,
 				2C2FD7762107355D00609621 /* Lessons */,
 				2C83E5E52110600200A8322D /* Steps */,
@@ -9590,9 +9637,9 @@
 		2C7CCE182138118500A3AEA8 /* Learning */ = {
 			isa = PBXGroup;
 			children = (
-				2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */,
-				2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */,
-				2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */,
+				2C0159DA213939900043DBFF /* Assembly */,
+				2C0159D3213931A70043DBFF /* Presenter */,
+				2C0159D12139318E0043DBFF /* View */,
 			);
 			path = Learning;
 			sourceTree = "<group>";
@@ -15990,6 +16037,7 @@
 				2C949A0E20ECC4310049E9A8 /* NotificationRequestAlertViewController.swift in Sources */,
 				2CFE247D20ECFC1A00AF1E3D /* Model.xcdatamodeld in Sources */,
 				2C33CC0620EC3385009956B0 /* ApplicationInfo.swift in Sources */,
+				2C0159D92139326D0043DBFF /* LearningView.swift in Sources */,
 				2CD7996321077CBA0054D098 /* BorderedButton.swift in Sources */,
 				2C34D67A20FCE2B0001EF741 /* AuthSignInAssembly.swift in Sources */,
 				2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */,
@@ -16012,9 +16060,11 @@
 				2C9499F920ECC14F0049E9A8 /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */,
 				2C949A0420ECC3000049E9A8 /* NotificationsMarkAsReadButton.swift in Sources */,
+				2C0159D5213931FA0043DBFF /* LearningPresenterProtocol.swift in Sources */,
 				2C4EB2ED2124443500AF2331 /* StepRouter.swift in Sources */,
 				2C2FD78F210753CD00609621 /* LessonsPresenter.swift in Sources */,
 				2C093F05211B430200162DD0 /* NotificationTimePickerViewController.swift in Sources */,
+				2C0159DE213939BB0043DBFF /* LearningAssembly.swift in Sources */,
 				2C1351E0212C43D1009E7312 /* StepsAssembly.swift in Sources */,
 				2C33CBFD20EC331E009956B0 /* NotificationStatusesAPI.swift in Sources */,
 				2C33CBEE20EC3249009956B0 /* UnitsAPI.swift in Sources */,
@@ -16106,6 +16156,7 @@
 				2C9492CD2113119100552600 /* StandartStepsAssemblyProtocol.swift in Sources */,
 				2C9499D720ECBD080049E9A8 /* SQLReply.swift in Sources */,
 				2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */,
+				2C0159DC213939AF0043DBFF /* LearningAssemblyProtocol.swift in Sources */,
 				2C33607D213433A3006EACF3 /* TopicsSectionView.swift in Sources */,
 				2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */,
 				2C34D68220FCE545001EF741 /* AuthSignUpAssembly.swift in Sources */,
@@ -16294,6 +16345,7 @@
 				2C9499A320ECB9590049E9A8 /* DataConvertable.swift in Sources */,
 				2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */,
 				2C093F23211B455100162DD0 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
+				2C0159D7213932050043DBFF /* LearningPresenter.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
 				2C14DFD9212A9D05000D2765 /* FileStorage.swift in Sources */,
 				2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */,

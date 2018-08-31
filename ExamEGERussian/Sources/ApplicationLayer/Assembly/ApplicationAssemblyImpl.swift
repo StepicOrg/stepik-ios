@@ -41,7 +41,9 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
-        let controller = LearningTableViewController()
+        let controller = assemblyFactory.learningAssembly.makeModule(
+            navigationController: navigationController
+        )
         controller.title = NSLocalizedString("LearningTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
             title: controller.title,

@@ -12,6 +12,7 @@ import Foundation
 protocol AssemblyFactory: class {
     var applicationAssembly: ApplicationAssembly { get }
     var authAssembly: AuthAssembly { get }
+    var learningAssembly: LearningAssemblyProtocol { get }
     var topicsAssembly: TopicsAssembly { get }
     var lessonsAssembly: LessonsAssemblyProtocol { get }
     var stepsAssembly: StepsAssemblyProtocol { get }
