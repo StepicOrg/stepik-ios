@@ -11,6 +11,7 @@ import PromiseKit
 
 final class LearningPresenter: LearningPresenterProtocol {
     private weak var view: LearningView?
+    private let router: LearningRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
 
@@ -20,11 +21,13 @@ final class LearningPresenter: LearningPresenterProtocol {
     private var isFirstRefresh = true
 
     init(view: LearningView,
+         router: LearningRouterProtocol,
          knowledgeGraph: KnowledgeGraph,
          userRegistrationService: UserRegistrationService,
          graphService: GraphServiceProtocol
     ) {
         self.view = view
+        self.router = router
         self.knowledgeGraph = knowledgeGraph
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
@@ -42,7 +45,7 @@ final class LearningPresenter: LearningPresenterProtocol {
     }
 
     func selectViewData(_ viewData: LearningViewData) {
-        print(viewData)
+        router.showLessons(topicId: viewData.id)
     }
 
     // MARK: - Private API

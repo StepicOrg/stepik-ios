@@ -11,8 +11,13 @@ import UIKit
 final class LearningAssembly: BaseAssembly, LearningAssemblyProtocol {
     func makeModule(navigationController: UINavigationController) -> UIViewController {
         let controller = LearningTableViewController()
+        let router = LearningRouter(
+            assemblyFactory: assemblyFactory,
+            navigationController: navigationController
+        )
         let presenter = LearningPresenter(
             view: controller,
+            router: router,
             knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService

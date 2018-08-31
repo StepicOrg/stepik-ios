@@ -1134,6 +1134,8 @@
 		2C0159D92139326D0043DBFF /* LearningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159D82139326D0043DBFF /* LearningView.swift */; };
 		2C0159DC213939AF0043DBFF /* LearningAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159DB213939AF0043DBFF /* LearningAssemblyProtocol.swift */; };
 		2C0159DE213939BB0043DBFF /* LearningAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159DD213939BB0043DBFF /* LearningAssembly.swift */; };
+		2C0159E1213940850043DBFF /* LearningRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */; };
+		2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E2213940910043DBFF /* LearningRouter.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
@@ -5657,6 +5659,8 @@
 		2C0159D82139326D0043DBFF /* LearningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningView.swift; sourceTree = "<group>"; };
 		2C0159DB213939AF0043DBFF /* LearningAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2C0159DD213939BB0043DBFF /* LearningAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssembly.swift; sourceTree = "<group>"; };
+		2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouterProtocol.swift; sourceTree = "<group>"; };
+		2C0159E2213940910043DBFF /* LearningRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouter.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -8616,6 +8620,15 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		2C0159DF213940630043DBFF /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2C0159E2213940910043DBFF /* LearningRouter.swift */,
+				2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -9639,6 +9652,7 @@
 			children = (
 				2C0159DA213939900043DBFF /* Assembly */,
 				2C0159D3213931A70043DBFF /* Presenter */,
+				2C0159DF213940630043DBFF /* Router */,
 				2C0159D12139318E0043DBFF /* View */,
 			);
 			path = Learning;
@@ -15932,6 +15946,7 @@
 				2CA2C66820FA5D3C005EC191 /* AuthGreetingRouter.swift in Sources */,
 				2C949A4120ECC9870049E9A8 /* WKWebViewPanelManager.m in Sources */,
 				2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */,
+				2C0159E1213940850043DBFF /* LearningRouterProtocol.swift in Sources */,
 				2C9499B720ECBAF90049E9A8 /* StringDatasetExtension.swift in Sources */,
 				2C15BC45212AEC5C00AB1015 /* AdaptiveStepsPresenterProtocol.swift in Sources */,
 				2C093F1B211B44B000162DD0 /* AchievementsListPresenter.swift in Sources */,
@@ -16187,6 +16202,7 @@
 				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
 				2C33CBDC20EC2DB4009956B0 /* ApiRequest.swift in Sources */,
+				2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */,
 				2C9499DF20ECBDEC0049E9A8 /* StepikURLSessionConfiguration.swift in Sources */,
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
 				2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */,
