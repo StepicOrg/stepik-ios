@@ -17,7 +17,7 @@ struct CourseWidgetViewModel {
     typealias ButtonDescription = (title: String, isCallToAction: Bool)
 
     var title: String
-    var coverImage: UIImage
+    var coverImageURL: URL?
     var primaryButtonDescription: ButtonDescription
     var secondaryButtonDescription: ButtonDescription
     var learnersLabelText: String

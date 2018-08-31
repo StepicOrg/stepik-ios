@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Nuke
 
 extension CourseCoverImageView {
     class Appearance {
-        let placeholderImage: UIImage = #imageLiteral(resourceName: "art_customize_learning_process_ru")
+        let placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
         let cornerRadius: CGFloat = 0
+        let imageFadeInDuration: TimeInterval = 0.15
     }
 }
 
@@ -35,6 +37,24 @@ final class CourseCoverImageView: UIImageView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func loadImage(url: URL?) {
+        if let url = url {
+            Nuke.loadImage(
+                with: url,
+                options: ImageLoadingOptions(
+                    transition: ImageLoadingOptions.Transition.fadeIn(
+                        duration: self.appearance.imageFadeInDuration
+                    )
+                ),
+                into: self,
+                completion: nil
+            )
+
+        } else {
+            self.image = nil
+        }
     }
 }
 

@@ -58,7 +58,7 @@ final class CourseWidgetView: UIView {
 
     func configure(viewModel: CourseWidgetViewModel) {
         self.titleLabel.text = viewModel.title
-        self.coverView.coverImage = viewModel.coverImage
+        self.coverView.coverImageURL = viewModel.coverImageURL
         self.coverView.shouldShowAdaptiveMark = viewModel.isAdaptive
 
         self.primaryActionButton.setTitle(

@@ -24,7 +24,7 @@ extension CourseWidgetViewModel {
 
         self.init(
             title: course.title,
-            coverImage: UIImage(),
+            coverImageURL: URL(string: course.coverURLString),
             primaryButtonDescription: ButtonDescription(title: "Join", isCallToAction: true),
             secondaryButtonDescription: ButtonDescription(title: "Info", isCallToAction: false),
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
