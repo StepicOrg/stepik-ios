@@ -1,5 +1,5 @@
 //
-//  TopicsSectionView.swift
+//  TrainingSectionView.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 27/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicsSectionView: UICollectionViewCell, Reusable, NibLoadable {
+final class TrainingSectionView: UICollectionViewCell, Reusable, NibLoadable {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var actionButton: UIButton!
 

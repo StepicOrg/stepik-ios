@@ -1,5 +1,5 @@
 //
-//  TopicsRouterImpl.swift
+//  TrainingRouter.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 26/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class TopicsRouterImpl: BaseRouter, TopicsRouter {
+final class TrainingRouter: BaseRouter, TrainingRouterProtocol {
     func showAuth() {
         presentModalNavigationController(derivedFrom: { _ in
             assemblyFactory.authAssembly.greeting.module()

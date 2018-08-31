@@ -1,5 +1,5 @@
 //
-//  TopicsRouter.swift
+//  TrainingRouterProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 26/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsRouter: class {
+protocol TrainingRouterProtocol: class {
     func showAuth()
     func showLessonsForTopicWithId(_ id: String)
     func showAdaptiveForTopicWithId(_ id: String)

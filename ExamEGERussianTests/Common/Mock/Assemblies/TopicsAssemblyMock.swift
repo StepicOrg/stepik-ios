@@ -9,7 +9,7 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class TopicsAssemblyMock: TopicsAssembly {
+final class TopicsAssemblyMock: TrainingAssemblyProtocol {
     func learning(navigationController: UINavigationController) -> UIViewController {
         return MockAssemblyViewController()
     }

@@ -1,5 +1,5 @@
 //
-//  TopicsHorizontalCollectionCell.swift
+//  TrainingHorizontalCollectionCell.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 27/08/2018.
@@ -9,17 +9,17 @@
 import UIKit
 import SnapKit
 
-final class TopicsHorizontalCollectionCell: UICollectionViewCell, Reusable {
-    let collectionView: TopicsHorizontalCollectionView
+final class TrainingHorizontalCollectionCell: UICollectionViewCell, Reusable {
+    let collectionView: TrainingHorizontalCollectionView
 
-    var source: TopicsHorizontalCollectionSource? = nil {
+    var source: TrainingHorizontalCollectionSource? = nil {
         didSet {
             source?.register(for: collectionView)
         }
     }
 
     override init(frame: CGRect) {
-        self.collectionView = TopicsHorizontalCollectionView()
+        self.collectionView = TrainingHorizontalCollectionView()
         super.init(frame: frame)
 
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false

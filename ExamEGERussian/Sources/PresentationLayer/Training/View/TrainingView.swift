@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  TrainingView.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 19/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsView: class {
+protocol TrainingView: class {
     func setTopics(_ topics: [TopicPlainObject])
     func displayError(title: String, message: String)
 }

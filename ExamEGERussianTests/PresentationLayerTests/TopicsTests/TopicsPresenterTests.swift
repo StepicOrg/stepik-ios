@@ -14,12 +14,12 @@ class TopicsPresenterTests: XCTestCase {
     let userRegistrationService = UserRegistrationServiceMock()
     let graphService = GraphServiceMock()
     let topicsViewSpy = TopicsViewSpy()
-    var topicsPresenter: TopicsPresenterImpl!
+    var topicsPresenter: TrainingPresenter!
 
     override func setUp() {
         super.setUp()
 
-        topicsPresenter = TopicsPresenterImpl(
+        topicsPresenter = TrainingPresenter(
             view: topicsViewSpy,
             knowledgeGraph: KnowledgeGraph(),
             router: TopicsRouterMock(),

@@ -9,7 +9,7 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class TopicsRouterMock: TopicsRouter {
+final class TopicsRouterMock: TrainingRouterProtocol {
     func showAdaptiveForTopicWithId(_ id: String) {
     }
 

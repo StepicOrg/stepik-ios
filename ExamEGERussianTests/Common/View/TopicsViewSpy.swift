@@ -9,7 +9,7 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class TopicsViewSpy: TopicsView {
+final class TopicsViewSpy: TrainingView {
     var topics: [TopicPlainObject]?
     var displayErrorTitle: String?
     var displayErrorMessage: String?

@@ -1,5 +1,5 @@
 //
-//  TopicsCollectionViewSourceProtocol.swift
+//  TrainingCollectionViewSourceProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsCollectionViewSourceProtocol: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol TrainingCollectionViewSourceProtocol: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var topics: [TopicPlainObject] { get set }
 
     func register(with collectionView: UICollectionView)

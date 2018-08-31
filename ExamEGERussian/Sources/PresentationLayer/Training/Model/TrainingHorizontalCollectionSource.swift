@@ -1,5 +1,5 @@
 //
-//  TopicsHorizontalCollectionSource.swift
+//  TrainingHorizontalCollectionSource.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 28/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicsHorizontalCollectionSource: NSObject {
+final class TrainingHorizontalCollectionSource: NSObject {
     var topics: [TopicPlainObject]
     var didSelectItem: ((_ topic: TopicPlainObject) -> Void)?
 
@@ -20,11 +20,11 @@ final class TopicsHorizontalCollectionSource: NSObject {
     func register(for collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(cellClass: TopicCardCollectionViewCell.self)
+        collectionView.register(cellClass: TrainingCardCollectionViewCell.self)
     }
 }
 
-extension TopicsHorizontalCollectionSource: UICollectionViewDataSource {
+extension TrainingHorizontalCollectionSource: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -37,7 +37,7 @@ extension TopicsHorizontalCollectionSource: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let topic = topics[indexPath.row]
-        let cell: TopicCardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: TrainingCardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.titleLabel.text = topic.title
         cell.bodyLabel.text = topic.description
         cell.commentLabel.text = "\(topic.lessons.count) pages"
@@ -46,7 +46,7 @@ extension TopicsHorizontalCollectionSource: UICollectionViewDataSource {
     }
 }
 
-extension TopicsHorizontalCollectionSource: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension TrainingHorizontalCollectionSource: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

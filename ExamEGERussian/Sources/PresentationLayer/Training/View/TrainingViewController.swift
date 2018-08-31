@@ -1,5 +1,5 @@
 //
-//  TopicsViewController.swift
+//  TrainingViewController.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 27/08/2018.
@@ -9,11 +9,11 @@
 import UIKit
 import SnapKit
 
-final class TopicsViewController: UIViewController, TopicsView {
-    var presenter: TopicsPresenter!
+final class TrainingViewController: UIViewController, TrainingView {
+    var presenter: TrainingPresenterProtocol!
 
     private let collectionView: UICollectionView
-    private let collectionSource: TopicsCollectionViewSourceProtocol
+    private let collectionSource: TrainingCollectionViewSourceProtocol
 
     private var topics = [TopicPlainObject]() {
         didSet {
@@ -30,7 +30,7 @@ final class TopicsViewController: UIViewController, TopicsView {
         return refreshControl
     }()
 
-    init(source: TopicsCollectionViewSourceProtocol,
+    init(source: TrainingCollectionViewSourceProtocol,
          layout: UICollectionViewLayout = UICollectionViewFlowLayout()
     ) {
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -73,7 +73,7 @@ final class TopicsViewController: UIViewController, TopicsView {
 
 // MARK: - TopicsCollectionViewController: TopicsView -
 
-extension TopicsViewController {
+extension TrainingViewController {
     func setTopics(_ topics: [TopicPlainObject]) {
         self.topics = topics
     }

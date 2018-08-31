@@ -1,5 +1,5 @@
 //
-//  TopicsPresenterImpl.swift
+//  TrainingPresenter.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 19/07/2018.
@@ -9,9 +9,9 @@
 import Foundation
 import PromiseKit
 
-final class TopicsPresenterImpl: TopicsPresenter {
-    private weak var view: TopicsView?
-    private let router: TopicsRouter
+final class TrainingPresenter: TrainingPresenterProtocol {
+    private weak var view: TrainingView?
+    private let router: TrainingRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
 
@@ -20,9 +20,9 @@ final class TopicsPresenterImpl: TopicsPresenter {
 
     private var isFirstRefresh = true
 
-    init(view: TopicsView,
+    init(view: TrainingView,
          knowledgeGraph: KnowledgeGraph,
-         router: TopicsRouter,
+         router: TrainingRouterProtocol,
          userRegistrationService: UserRegistrationService,
          graphService: GraphServiceProtocol
     ) {

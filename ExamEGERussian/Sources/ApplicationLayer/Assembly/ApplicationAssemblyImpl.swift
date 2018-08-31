@@ -57,7 +57,7 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeTrainingController() -> UINavigationController {
         let navigationController = UINavigationController()
-        let controller = assemblyFactory.topicsAssembly.training(
+        let controller = assemblyFactory.trainingAssembly.makeModule(
             navigationController: navigationController
         )
         navigationController.setViewControllers([controller], animated: false)

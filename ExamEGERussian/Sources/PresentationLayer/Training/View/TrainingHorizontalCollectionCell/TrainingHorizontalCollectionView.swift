@@ -1,5 +1,5 @@
 //
-//  TopicsHorizontalCollectionView.swift
+//  TrainingHorizontalCollectionView.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 29/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicsHorizontalCollectionView: UICollectionView {
+final class TrainingHorizontalCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal

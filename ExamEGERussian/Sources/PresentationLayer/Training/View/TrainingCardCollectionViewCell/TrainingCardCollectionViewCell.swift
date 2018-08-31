@@ -1,5 +1,5 @@
 //
-//  TopicCardCollectionViewCell.swift
+//  TrainingCardCollectionViewCell.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 27/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TopicCardCollectionViewCell: UICollectionViewCell, Reusable, NibLoadable {
+final class TrainingCardCollectionViewCell: UICollectionViewCell, Reusable, NibLoadable {
     @IBOutlet var containerView: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!

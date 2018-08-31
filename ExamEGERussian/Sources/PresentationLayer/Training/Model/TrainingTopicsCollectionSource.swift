@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSourceProtocol {
+final class TrainingTopicsCollectionSource: NSObject, TrainingCollectionViewSourceProtocol {
     var topics: [TopicPlainObject]
     var didSelectTopic: ((_ topic: TopicPlainObject) -> Void)?
 
@@ -20,9 +20,9 @@ final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSource
     func register(with collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(cellClass: TopicsHorizontalCollectionCell.self)
+        collectionView.register(cellClass: TrainingHorizontalCollectionCell.self)
         collectionView.register(
-            viewClass: TopicsSectionView.self,
+            viewClass: TrainingSectionView.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
         )
     }
@@ -42,8 +42,8 @@ final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSource
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell: TopicsHorizontalCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.source = TopicsHorizontalCollectionSource(topics: topics(for: indexPath))
+        let cell: TrainingHorizontalCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.source = TrainingHorizontalCollectionSource(topics: topics(for: indexPath))
         cell.source?.didSelectItem = didSelectTopic
 
         return cell
@@ -58,7 +58,7 @@ final class TrainingTopicsCollectionSource: NSObject, TopicsCollectionViewSource
             return UICollectionReusableView()
         }
 
-        let view: TopicsSectionView = collectionView.dequeueReusableSupplementaryView(
+        let view: TrainingSectionView = collectionView.dequeueReusableSupplementaryView(
             ofKind: UICollectionElementKindSectionHeader,
             for: indexPath
         )

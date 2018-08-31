@@ -1,5 +1,5 @@
 //
-//  MainViewPresenter.swift
+//  TrainingPresenterProtocol.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 19/07/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopicsPresenter: class {
+protocol TrainingPresenterProtocol: class {
     func refresh()
     func selectTopic(_ topic: TopicPlainObject)
     func signIn()
