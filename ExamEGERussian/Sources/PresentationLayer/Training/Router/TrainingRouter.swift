@@ -15,19 +15,19 @@ final class TrainingRouter: BaseRouter, TrainingRouterProtocol {
         })
     }
 
-    func showLessonsForTopicWithId(_ id: String) {
+    func showTheory(lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.lessonsAssembly.module(
+            assemblyFactory.stepsAssembly.standart.module(
                 navigationController: navigationController,
-                topicId: id
+                lesson: lesson
             )
         })
     }
 
-    func showAdaptiveForTopicWithId(_ id: String) {
-        if let module = assemblyFactory.stepsAssembly.adaptive.module(topicId: id) {
+    func showPractice(courseId: String) {
+        if let id = Int(courseId) {
             pushViewController(derivedFrom: { _ in
-                module
+                assemblyFactory.stepsAssembly.adaptive.module(courseId: id)
             })
         } else {
             navigationController?.presentAlert(

@@ -9,7 +9,11 @@
 import Foundation
 
 struct TrainingViewData {
-
+    let id: Int
+    let title: String
+    let description: String
+    let countLessons: Int
+    let isPractice: Bool
 }
 
 protocol TrainingView: class {

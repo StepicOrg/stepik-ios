@@ -10,8 +10,7 @@ import Foundation
 
 final class TrainingAssembly: BaseAssembly, TrainingAssemblyProtocol {
     func makeModule(navigationController: UINavigationController) -> UIViewController {
-        let source = TrainingTopicsCollectionSource()
-        let controller = TrainingViewController(source: source)
+        let controller = TrainingCollectionViewController()
         let router = TrainingRouter(
             assemblyFactory: assemblyFactory,
             navigationController: navigationController
@@ -21,10 +20,10 @@ final class TrainingAssembly: BaseAssembly, TrainingAssemblyProtocol {
             knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             router: router,
             userRegistrationService: serviceFactory.userRegistrationService,
-            graphService: serviceFactory.graphService
+            graphService: serviceFactory.graphService,
+            lessonsService: serviceFactory.lessonsService
         )
         controller.presenter = presenter
-        source.didSelectTopic = presenter.selectTopic
 
         return controller
     }

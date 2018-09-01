@@ -12,7 +12,7 @@ final class LearningTableViewController: UITableViewController, LearningView {
     var presenter: LearningPresenterProtocol!
 
     private var viewData = [LearningViewData]()
-    private var isFirstTimeAppear = true
+    private var isFirstTimeWillAppear = true
 
     private lazy var dataRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -28,8 +28,8 @@ final class LearningTableViewController: UITableViewController, LearningView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if isFirstTimeAppear {
-            isFirstTimeAppear = false
+        if isFirstTimeWillAppear {
+            isFirstTimeWillAppear = false
             presenter.refresh()
         }
     }

@@ -10,6 +10,6 @@ import Foundation
 
 protocol TrainingRouterProtocol: class {
     func showAuth()
-    func showLessonsForTopicWithId(_ id: String)
-    func showAdaptiveForTopicWithId(_ id: String)
+    func showTheory(lesson: LessonPlainObject)
+    func showPractice(courseId: String)
 }

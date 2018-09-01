@@ -14,42 +14,60 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     private let router: TrainingRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
+    private var lessons = [LessonPlainObject]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
-
-    private var isFirstRefresh = true
+    private let lessonsService: LessonsService
 
     init(view: TrainingView,
          knowledgeGraph: KnowledgeGraph,
          router: TrainingRouterProtocol,
          userRegistrationService: UserRegistrationService,
-         graphService: GraphServiceProtocol
+         graphService: GraphServiceProtocol,
+         lessonsService: LessonsService
     ) {
         self.view = view
         self.knowledgeGraph = knowledgeGraph
         self.router = router
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
+        self.lessonsService = lessonsService
     }
 
     func refresh() {
-        checkAuthStatus()
-
-        if isFirstRefresh && !knowledgeGraph.isEmpty {
-            isFirstRefresh = false
-            reloadViewData()
-        } else {
-            fetchGraph()
+        checkAuthStatus().then { _ in
+            self.fetchGraph()
+        }.then { _ in
+            self.fetchLessons()
+        }.then { lessons -> Promise<Void> in
+            self.lessons = lessons
+            return .value(())
+        }.done {
+            self.reloadViewData()
+        }.catch { [weak self] error in
+            switch error {
+            case TrainingPresenterError.failedFetchKnowledgeGraph:
+                self?.displayError(
+                    title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
+                    message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
+                )
+            case TrainingPresenterError.failedRegisterUser:
+                self?.displayError(
+                    title: "Unable to register",
+                    message: "Please, try again later. Pull down to refresh screen."
+                )
+            default:
+                self?.displayError()
+            }
         }
     }
 
-    func selectTopic(_ topic: TopicPlainObject) {
-        switch topic.type {
-        case .theory:
-            router.showLessonsForTopicWithId(topic.id)
-        case .practice:
-            router.showAdaptiveForTopicWithId(topic.id)
+    func selectViewData(_ viewData: TrainingViewData) {
+        if viewData.isPractice {
+            router.showPractice(courseId: "courseId")
+        } else {
+            //router.showTheory(lesson: )
         }
     }
 
@@ -63,57 +81,63 @@ final class TrainingPresenter: TrainingPresenterProtocol {
 
     // MARK: - Private API
 
-    private func checkAuthStatus() {
-        if !AuthInfo.shared.isAuthorized {
+    private func checkAuthStatus() -> Promise<Void> {
+        if AuthInfo.shared.isAuthorized {
+            return .value(())
+        }
+
+        return Promise { seal in
             let params = RandomCredentialsGenerator().userRegistrationParams
             userRegistrationService.registerAndSignIn(with: params).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
-            }.catch { [weak self] _ in
-                self?.displayError()
+                seal.fulfill(())
+            }.catch { error in
+                print("Failed register user: \(error)")
+                seal.reject(TrainingPresenterError.failedRegisterUser)
             }
         }
     }
 
-    private func fetchGraph() {
-        graphService.fetchGraph().done { [weak self] responseModel in
-            guard let strongSelf = self,
-                  let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
-                return
-            }
+    private func fetchGraph() -> Promise<Void> {
+        return Promise { seal in
+            graphService.fetchGraph().done { [weak self] responseModel in
+                guard let strongSelf = self,
+                    let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
+                        return
+                }
 
-            // TODO: Write changes to cache.
-            strongSelf.knowledgeGraph.adjacency = graph.adjacency
-            strongSelf.reloadViewData()
-        }.catch { [weak self] _ in
-            self?.displayError(
-                title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
-                message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
-            )
+                strongSelf.knowledgeGraph.adjacency = graph.adjacency
+                strongSelf.reloadViewData()
+
+                seal.fulfill(())
+            }.catch { _ in
+                seal.reject(TrainingPresenterError.failedFetchKnowledgeGraph)
+            }
         }
+    }
+
+    private func fetchLessons() -> Promise<[LessonPlainObject]> {
+        let lessonsIds = knowledgeGraph.adjacencyLists.keys.reduce([]) { (result, vertex) in
+            result + vertex.lessons.map { $0.id }
+        }.prefix(20)
+
+        return lessonsService.fetchLessons(with: Array(lessonsIds))
     }
 
     private func reloadViewData() {
-        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
-            view?.setTopics(toPlainObjects(vertices))
-        } else {
-            displayError()
-        }
-    }
-
-    private func toPlainObjects(_ vertices: [KnowledgeGraphVertex<String>]) -> [TopicPlainObject] {
-        return vertices.map {
-            TopicPlainObject(
-                id: $0.id,
-                title: $0.title,
+        let viewData = lessons.map { lesson in
+            TrainingViewData(
+                id: lesson.id,
+                title: lesson.title,
                 description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                progress: 60.0,
-                type: $0.containsPractice ? .practice : .theory,
-                timeToComplete: 40,
-                lessons: $0.lessons.map { LessonPlainObject(lesson: $0) }
+                countLessons: lesson.steps.count,
+                isPractice: false
             )
         }
+
+        view?.setViewData(viewData)
     }
 
     private func displayError(
@@ -121,5 +145,10 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
+    }
+
+    private enum TrainingPresenterError: Error {
+        case failedRegisterUser
+        case failedFetchKnowledgeGraph
     }
 }

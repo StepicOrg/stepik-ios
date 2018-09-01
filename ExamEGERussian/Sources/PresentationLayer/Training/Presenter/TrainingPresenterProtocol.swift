@@ -10,7 +10,7 @@ import Foundation
 
 protocol TrainingPresenterProtocol: class {
     func refresh()
-    func selectTopic(_ topic: TopicPlainObject)
+    func selectViewData(_ viewData: TrainingViewData)
     func signIn()
     func logout()
 }

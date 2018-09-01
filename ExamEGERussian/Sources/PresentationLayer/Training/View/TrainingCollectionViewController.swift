@@ -8,7 +8,8 @@
 
 import UIKit
 
-final class TrainingCollectionViewController: UICollectionViewController, _TrainingView {
+final class TrainingCollectionViewController: UICollectionViewController, TrainingView {
+    var presenter: TrainingPresenterProtocol!
     private var viewData = [TrainingViewData]()
 
     private lazy var refreshControl: UIRefreshControl = {
@@ -17,9 +18,28 @@ final class TrainingCollectionViewController: UICollectionViewController, _Train
         return refreshControl
     }()
 
+    private var isFirstTimeWillAppear = true
+
+    override init(collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+        super.init(collectionViewLayout: collectionViewLayout)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if isFirstTimeWillAppear {
+            isFirstTimeWillAppear.toggle()
+            presenter.refresh()
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -69,6 +89,7 @@ final class TrainingCollectionViewController: UICollectionViewController, _Train
 
     func setViewData(_ viewData: [TrainingViewData]) {
         self.viewData = viewData
+        refreshControl.endRefreshing()
         collectionView?.reloadData()
     }
 
