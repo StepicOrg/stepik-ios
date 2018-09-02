@@ -16,6 +16,7 @@ class Story: JSONSerializable {
         self.title = json["title"].stringValue
         self.parts = json["parts"].arrayValue.map { StoryPart(json: $0) }
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
+        self.position = json["position"].intValue
     }
 
     var id: Int
@@ -23,6 +24,7 @@ class Story: JSONSerializable {
     var title: String
     var isViewed: CachedValue<Bool>
     var parts: [StoryPart]
+    var position: Int
 
     required init(json: JSON) {
         self.id = json["id"].intValue
@@ -32,6 +34,7 @@ class Story: JSONSerializable {
         self.parts = json["parts"].arrayValue.compactMap {
             Story.buildStoryPart(json: $0)
         }
+        self.position = json["position"].intValue
     }
 
     private static func buildStoryPart(json: JSON) -> StoryPart? {

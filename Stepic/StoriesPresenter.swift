@@ -72,6 +72,8 @@ class StoriesPresenter: StoriesPresenterProtocol {
             strongSelf.stories = stories.filter {
                 strongSelf.isSupported(story: $0)
             }.sorted(by: {
+                $0.position >= $1.position
+            }).sorted(by: {
                  !($0.isViewed.value) || ($1.isViewed.value)
             })
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)

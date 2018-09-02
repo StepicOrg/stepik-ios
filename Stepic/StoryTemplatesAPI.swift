@@ -16,9 +16,10 @@ class StoryTemplatesAPI: APIEndpoint {
     func retrieve(isPublished: Bool, language: ContentLanguage, page: Int = 1) -> Promise<([Story], Meta)> {
         return Promise { seal in
             let params: Parameters = [
-                "is_published": isPublished ? "true" : "false",
+                "is_published": /*isPublished ? "true" : */ "false",
                 "page": page,
-                "language": language.languageString
+                "language": language.languageString,
+                "max_version": 1
             ]
 
             retrieve.request(
