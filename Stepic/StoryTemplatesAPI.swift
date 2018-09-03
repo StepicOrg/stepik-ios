@@ -13,13 +13,13 @@ import Alamofire
 class StoryTemplatesAPI: APIEndpoint {
     override var name: String { return "story-templates" }
 
-    func retrieve(isPublished: Bool, language: ContentLanguage, page: Int = 1) -> Promise<([Story], Meta)> {
+    func retrieve(isPublished: Bool, language: ContentLanguage, maxVersion: Int, page: Int = 1) -> Promise<([Story], Meta)> {
         return Promise { seal in
             let params: Parameters = [
                 "is_published": /*isPublished ? "true" : */ "false",
                 "page": page,
                 "language": language.languageString,
-                "max_version": 1
+                "max_version": maxVersion
             ]
 
             retrieve.request(
