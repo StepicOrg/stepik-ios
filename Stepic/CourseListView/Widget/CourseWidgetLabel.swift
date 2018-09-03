@@ -10,7 +10,6 @@ import UIKit
 
 extension CourseWidgetLabel {
     struct Appearance {
-        let lineSpacing: CGFloat = 1.9
         let maxLinesCount = 3
 
         var font = UIFont.systemFont(ofSize: 16, weight: .regular)

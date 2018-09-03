@@ -196,11 +196,7 @@ enum TabController: String {
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
-            let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                print("trigger remote reload")
-                assembly.getModuleInput().reload()
-            }
+            let assembly = ExploreAssembly()
             return TabBarItemInfo(
                 title: NSLocalizedString("Profile", comment: ""),
                 controller: assembly.makeModule(),

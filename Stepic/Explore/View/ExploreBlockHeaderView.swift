@@ -1,0 +1,120 @@
+//
+//  ExploreBlockHeaderView.swift
+//  Stepic
+//
+//  Created by Vladislav Kiryukhin on 03.09.2018.
+//  Copyright © 2018 Alex Karpov. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+extension ExploreBlockHeaderView {
+    struct Appearance {
+        var titleLabelColor = UIColor(hex: 0x535366, alpha: 0.3)
+        let titleLabelFont = UIFont.systemFont(ofSize: 20)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+
+        let descriptionLabelFont = UIFont.systemFont(ofSize: 16)
+        let descriptionLabelColor = UIColor(hex: 0x535366, alpha: 0.3)
+
+        var showAllButtonColor = UIColor(hex: 0x535366, alpha: 0.3)
+        let showAllButtonFont = UIFont.systemFont(ofSize: 20)
+        let showAllButtonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    }
+}
+
+final class ExploreBlockHeaderView: UIView {
+    let appearance: Appearance
+
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.titleLabelFont
+        label.textColor = self.appearance.titleLabelColor
+        label.numberOfLines = 1
+        return label
+    }()
+
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.descriptionLabelFont
+        label.textColor = self.appearance.descriptionLabelColor
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private lazy var showAllButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("All", for: .normal)
+        button.tintColor = self.appearance.showAllButtonColor
+        button.titleLabel?.font = self.appearance.showAllButtonFont
+        button.contentHorizontalAlignment = .right
+        return button
+    }()
+
+    private lazy var labelsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.titleLabelInsets.bottom
+        return stackView
+    }()
+
+    var title: String? {
+        didSet {
+            self.titleLabel.isHidden = self.title == nil
+            self.titleLabel.text = self.title
+        }
+    }
+
+    var summary: String? {
+        didSet {
+            self.descriptionLabel.isHidden = self.summary == nil
+            self.descriptionLabel.text = self.summary
+        }
+    }
+
+    var shouldShowShowAllButton: Bool = true {
+        didSet {
+            self.showAllButton.isHidden = !self.shouldShowShowAllButton
+        }
+    }
+
+    init(frame: CGRect, appearance: Appearance = Appearance()) {
+        self.appearance = appearance
+        super.init(frame: frame)
+
+        self.addSubviews()
+        self.makeConstraints()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ExploreBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
+    func addSubviews() {
+        self.addSubview(self.labelsStackView)
+        self.labelsStackView.addArrangedSubview(self.titleLabel)
+        self.labelsStackView.addArrangedSubview(self.descriptionLabel)
+
+        self.addSubview(self.showAllButton)
+    }
+
+    func makeConstraints() {
+        self.labelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.labelsStackView.snp.makeConstraints { make in
+            make.left.top.bottom.equalToSuperview()
+        }
+
+        self.showAllButton.translatesAutoresizingMaskIntoConstraints = false
+        self.showAllButton.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.leading
+                .equalTo(self.labelsStackView.snp.trailing)
+                .offset(self.appearance.showAllButtonInsets.left)
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
+        }
+    }
+}
