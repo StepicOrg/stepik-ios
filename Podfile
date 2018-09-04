@@ -29,11 +29,10 @@ def all_pods
     pod 'SnapKit', '4.0.0'
     
     pod 'FirebaseCore', '5.1.0'
-    pod 'FirebaseAppIndexing', '1.2.0'
-    pod 'FirebaseMessaging', '3.1.0'
-    pod 'FirebaseAnalytics', '5.1.0'
+    pod 'FirebaseMessaging' , '3.1.0'
+    pod 'FirebaseAnalytics' , '5.1.0'
     pod 'FirebaseRemoteConfig', '3.0.1'
-    
+
     pod 'Amplitude-iOS', '4.3.0'
     
     pod 'AppsFlyerFramework', '4.8.8'

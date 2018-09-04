@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseRemoteConfig
+import FirebaseInstanceID
 
 enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
@@ -86,9 +87,10 @@ class RemoteConfig {
     }
 
     private func fetchCloudValues() {
-        let fetchDuration: TimeInterval = 43200
+        var fetchDuration: TimeInterval = 43200
         #if DEBUG
             activateDebugMode()
+            fetchDuration = 0
         #endif
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
             [weak self]
@@ -109,5 +111,9 @@ class RemoteConfig {
     private func activateDebugMode() {
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
+    }
+
+    func string(forKey key: String) -> String? {
+        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key).stringValue
     }
 }

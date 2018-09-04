@@ -10,7 +10,6 @@ import UIKit
 import MediaPlayer
 import FirebaseCore
 import FirebaseMessaging
-import FirebaseAppIndexing
 import FirebaseInstanceID
 import IQKeyboardManagerSwift
 import SVProgressHUD
@@ -46,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
 
-        FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
+//        FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 

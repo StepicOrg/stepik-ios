@@ -119,7 +119,7 @@ class SocialAuthViewController: UIViewController {
 
         localize()
 
-        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
+        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), abSocialAuthService: ABTestService(test: ABSocialAuthString()), view: self)
         presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
@@ -225,8 +225,10 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SocialAuthHeaderView.reuseId, for: indexPath)
-            return header
+            if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SocialAuthHeaderView.reuseId, for: indexPath) as? SocialAuthHeaderView {
+                header.setup(title: presenter?.socialAuthHeaderString ?? "")
+                return header
+            }
         }
         return UICollectionReusableView()
     }

@@ -313,6 +313,8 @@
 		085290CB1FB5C4550053F22D /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085290C51FB5C4550053F22D /* ExplorePresenter.swift */; };
 		085290CC1FB5C4550053F22D /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085290C51FB5C4550053F22D /* ExplorePresenter.swift */; };
 		085290CD1FB5C4550053F22D /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085290C51FB5C4550053F22D /* ExplorePresenter.swift */; };
+		0853A3E0213DC18F00931F72 /* ABTestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853A3DF213DC18F00931F72 /* ABTestService.swift */; };
+		0853A3E2213E829D00931F72 /* ABSocialAuthString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853A3E1213E829D00931F72 /* ABSocialAuthString.swift */; };
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		0856E2562039769F00575394 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
@@ -5260,6 +5262,8 @@
 		084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084F7AAC1E775A210088368A /* LastStepsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepsAPI.swift; sourceTree = "<group>"; };
 		085290C51FB5C4550053F22D /* ExplorePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePresenter.swift; sourceTree = "<group>"; };
+		0853A3DF213DC18F00931F72 /* ABTestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABTestService.swift; sourceTree = "<group>"; };
+		0853A3E1213E829D00931F72 /* ABSocialAuthString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABSocialAuthString.swift; sourceTree = "<group>"; };
 		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
 		0858B7081CFF271200459A6A /* TagDetectionUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetectionUtil.swift; sourceTree = "<group>"; };
 		0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewController.swift; sourceTree = "<group>"; };
@@ -5745,7 +5749,6 @@
 		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
 		2C2FD7832107448F00609621 /* LessonsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsService.swift; sourceTree = "<group>"; };
 		2C2FD7852107453800609621 /* LessonsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsServiceImpl.swift; sourceTree = "<group>"; };
-		2C2FD7892107507200609621 /* LessonPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
 		2C2FD78C210753AD00609621 /* LessonsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenterProtocol.swift; sourceTree = "<group>"; };
 		2C2FD78E210753CD00609621 /* LessonsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsPresenter.swift; sourceTree = "<group>"; };
 		2C2FD7902107540500609621 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
@@ -7177,6 +7180,15 @@
 			name = Explore;
 			sourceTree = "<group>";
 		};
+		0853A3DE213D8F6100931F72 /* AB tests */ = {
+			isa = PBXGroup;
+			children = (
+				0853A3DF213DC18F00931F72 /* ABTestService.swift */,
+				0853A3E1213E829D00931F72 /* ABSocialAuthString.swift */,
+			);
+			name = "AB tests";
+			sourceTree = "<group>";
+		};
 		085514E91CFB09170080CB88 /* WebViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -7909,6 +7921,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				0853A3DE213D8F6100931F72 /* AB tests */,
 				08484EDF211AF41A0006266F /* Stories */,
 				2CE664DE20F5204D0082F3FE /* Downloader */,
 				088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */,
@@ -14284,6 +14297,7 @@
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
+				0853A3E0213DC18F00931F72 /* ABTestService.swift in Sources */,
 				081A14FF20D963090016364E /* AmplitudeAnalyticsEvents.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
@@ -14543,6 +14557,7 @@
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C5DF14B1FED2C51003B1177 /* StepReversedCardView.swift in Sources */,
+				0853A3E2213E829D00931F72 /* ABSocialAuthString.swift in Sources */,
 				08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */,
 				2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,

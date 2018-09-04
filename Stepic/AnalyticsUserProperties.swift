@@ -14,7 +14,7 @@ class AnalyticsUserProperties {
 
     static let shared = AnalyticsUserProperties()
 
-    private func setAmplitudeProperty(key: String, value: Any?) {
+    func setAmplitudeProperty(key: String, value: Any?) {
         if let v = value {
             Amplitude.instance().setUserProperties([key: v])
         } else {
