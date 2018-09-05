@@ -10,7 +10,10 @@ import Foundation
 import PromiseKit
 
 protocol CourseReviewSummariesNetworkServiceProtocol: class {
-    func fetch(ids: [CourseReviewSummary.IdType], page: Int) -> Promise<([CourseReviewSummary], Meta)>
+    func fetch(
+        ids: [CourseReviewSummary.IdType],
+        page: Int
+    ) -> Promise<([CourseReviewSummary], Meta)>
     func fetch(id: CourseReviewSummary.IdType) -> Promise<CourseReviewSummary?>
 }
 
@@ -21,7 +24,10 @@ final class CourseReviewSummariesNetworkService: CourseReviewSummariesNetworkSer
         self.courseReviewSummariesAPI = courseReviewSummariesAPI
     }
 
-    func fetch(ids: [CourseReviewSummary.IdType], page: Int = 1) -> Promise<([CourseReviewSummary], Meta)> {
+    func fetch(
+        ids: [CourseReviewSummary.IdType],
+        page: Int = 1
+    ) -> Promise<([CourseReviewSummary], Meta)> {
         // FIXME: We have no pagination here but should support it
         return Promise { seal in
             self.courseReviewSummariesAPI.retrieve(ids: ids).done { summaries in

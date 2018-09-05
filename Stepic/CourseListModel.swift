@@ -80,4 +80,8 @@ final class CourseListModel: NSManagedObject, IDFetchable {
             return []
         }
     }
+
+    static func fetchAsync(ids: [CourseListModel.IdType]) -> Guarantee<[CourseListModel]> {
+        return DatabaseFetchService.fetchAsync(entityName: "CourseList", ids: ids)
+    }
 }

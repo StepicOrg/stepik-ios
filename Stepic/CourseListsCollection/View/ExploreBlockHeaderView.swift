@@ -60,17 +60,17 @@ final class ExploreBlockHeaderView: UIView {
         return stackView
     }()
 
-    var title: String? {
+    var titleText: String? {
         didSet {
-            self.titleLabel.isHidden = self.title == nil
-            self.titleLabel.text = self.title
+            self.titleLabel.isHidden = self.titleText == nil
+            self.titleLabel.text = self.titleText
         }
     }
 
-    var summary: String? {
+    var summaryText: String? {
         didSet {
-            self.descriptionLabel.isHidden = self.summary == nil
-            self.descriptionLabel.text = self.summary
+            self.descriptionLabel.isHidden = self.summaryText == nil
+            self.descriptionLabel.text = self.summaryText
         }
     }
 

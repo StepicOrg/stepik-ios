@@ -44,7 +44,7 @@ final class CourseListViewController: UIViewController {
     override func loadView() {
         let view = CourseListView(
             frame: UIScreen.main.bounds,
-            orientation: .vertical(columnsCount: 1),
+            orientation: .horizontal(rowsCount: 2, columnsCount: 1),
             delegate: self.listDelegate,
             dataSource: self.listDataSource,
             viewDelegate: self
