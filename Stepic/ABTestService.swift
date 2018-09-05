@@ -15,23 +15,21 @@ protocol ActiveABTest {
     var controlValue: ValueType { get }
 }
 
-class ABTestService<T: ActiveABTest> {
-
-    var test: T
+class ABTestService {
 
     private let defaults = UserDefaults.standard
 
-    init(test: T) {
-        self.test = test
-    }
+    init() {}
 
-    var value: T.ValueType {
+    func getValue<T: ActiveABTest>(test: T) -> T.ValueType {
+
         if let resultGroup = RemoteConfig.shared.string(forKey: test.ID + "_result") {
             if !resultGroup.isEmpty {
                 defaults.set(resultGroup, forKey: test.ID)
                 return test.value(group: resultGroup) ?? test.controlValue
             }
         }
+
         if let group = defaults.value(forKey: test.ID) as? String {
             return test.value(group: group) ?? test.controlValue
         } else {

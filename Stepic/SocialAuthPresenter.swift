@@ -39,15 +39,17 @@ class SocialAuthPresenter {
     var stepicsAPI: StepicsAPI
     var authAPI: AuthAPI
     var notificationStatusesAPI: NotificationStatusesAPI
-    var abSocialAuthService: ABTestService<ABSocialAuthString>
+    var abService: ABTestService
+    var socialAuthStringTest: ABSocialAuthString
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, abSocialAuthService: ABTestService<ABSocialAuthString>, view: SocialAuthView) {
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, abService: ABTestService, socialAuthStringTest: ABSocialAuthString, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
-        self.abSocialAuthService = abSocialAuthService
+        self.abService = abService
+        self.socialAuthStringTest = socialAuthStringTest
         self.view = view
 
         // TODO: create NSNotification.Name extension
@@ -128,7 +130,7 @@ class SocialAuthPresenter {
     }
 
     var socialAuthHeaderString: String {
-        return abSocialAuthService.value
+        return abService.getValue(test: socialAuthStringTest)
     }
 
     @objc private func didAuthCodeReceive(_ notification: NSNotification) {
