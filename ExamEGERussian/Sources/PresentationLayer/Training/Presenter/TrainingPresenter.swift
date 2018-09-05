@@ -22,6 +22,16 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     private let graphService: GraphServiceProtocol
     private let lessonsService: LessonsService
 
+    private var practiceLessons: [LessonPlainObject] {
+        var practice = [KnowledgeGraphLesson]()
+        knowledgeGraph.adjacencyLists.keys.forEach { vertex in
+            practice.append(contentsOf: vertex.lessons.filter { $0.type == .practice })
+        }
+        return lessons.filter { lesson in
+            practice.contains(where: { $0.id == lesson.id })
+        }
+    }
+
     init(view: TrainingView,
          knowledgeGraph: KnowledgeGraph,
          router: TrainingRouterProtocol,
@@ -111,8 +121,6 @@ final class TrainingPresenter: TrainingPresenterProtocol {
                 }
 
                 strongSelf.knowledgeGraph.adjacency = graph.adjacency
-                strongSelf.reloadViewData()
-
                 seal.fulfill(())
             }.catch { _ in
                 seal.reject(TrainingPresenterError.failedFetchKnowledgeGraph)
@@ -130,17 +138,29 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     }
 
     private func reloadViewData() {
-        let viewData = lessons.map { lesson in
-            TrainingViewData(
-                id: lesson.id,
-                title: lesson.title,
-                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                countLessons: lesson.steps.count,
-                isPractice: false
-            )
+        let practiceLessons = self.practiceLessons.map {
+            toViewData($0, isPractice: true)
+        }
+        let theoryLessons = lessons.filter { lesson in
+            !practiceLessons.contains { $0.id == lesson.id }
+        }.map {
+            toViewData($0)
         }
 
-        view?.setViewData(viewData)
+        view?.setViewData(theoryLessons + practiceLessons)
+    }
+
+    private func toViewData(
+        _ plainObject: LessonPlainObject,
+        isPractice: Bool = false
+    ) -> TrainingViewData {
+        return TrainingViewData(
+            id: plainObject.id,
+            title: plainObject.title,
+            description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+            countLessons: plainObject.steps.count,
+            isPractice: isPractice
+        )
     }
 
     private func displayError(
