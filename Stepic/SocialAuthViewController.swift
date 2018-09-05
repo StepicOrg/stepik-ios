@@ -119,7 +119,7 @@ class SocialAuthViewController: UIViewController {
 
         localize()
 
-        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), abService: ABTestService(), socialAuthStringTest: ABSocialAuthString(), view: self)
+        presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), splitTestingService: SplitTestingService(analyticsService: AnalyticsUserProperties.shared, storage: UserDefaults.standard), view: self)
         presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
