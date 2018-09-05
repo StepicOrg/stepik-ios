@@ -9,11 +9,11 @@
 import UIKit
 
 final class TrainingHorizontalCollectionSource: NSObject {
-    var topics: [TopicPlainObject]
-    var didSelectItem: ((_ topic: TopicPlainObject) -> Void)?
+    var viewData: [TrainingViewData]
+    var didSelectItem: ((_ topic: TrainingViewData) -> Void)?
 
-    init(topics: [TopicPlainObject] = []) {
-        self.topics = topics
+    init(viewData: [TrainingViewData] = []) {
+        self.viewData = viewData
         super.init()
     }
 
@@ -29,18 +29,18 @@ extension TrainingHorizontalCollectionSource: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return topics.count
+        return viewData.count
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let topic = topics[indexPath.row]
+        let viewData = self.viewData[indexPath.row]
         let cell: TrainingCardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.titleLabel.text = topic.title
-        cell.bodyLabel.text = topic.description
-        cell.commentLabel.text = "\(topic.lessons.count) pages"
+        cell.titleLabel.text = viewData.title
+        cell.bodyLabel.text = viewData.description
+        cell.commentLabel.text = viewData.description
 
         return cell
     }
@@ -56,7 +56,7 @@ extension TrainingHorizontalCollectionSource: UICollectionViewDelegate, UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectItem?(topics[indexPath.row])
+        didSelectItem?(viewData[indexPath.row])
     }
 
     func collectionView(

@@ -60,8 +60,8 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: TrainingHorizontalCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
-//        cell.source = TrainingHorizontalCollectionSource(topics: topics(for: indexPath))
-//        cell.source?.didSelectItem = didSelectTopic
+        cell.source = TrainingHorizontalCollectionSource(viewData: getViewData(for: indexPath))
+        cell.source?.didSelectItem = presenter.selectViewData
 
         return cell
     }
@@ -117,16 +117,15 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
 
     @objc
     private func refreshData(_ sender: Any) {
-        //presenter.refresh()
+        presenter.refresh()
     }
 
-    private func topics(for indexPath: IndexPath) -> [TrainingViewData] {
+    private func getViewData(for indexPath: IndexPath) -> [TrainingViewData] {
         switch Section.from(indexPath: indexPath) {
         case .theory:
-            return []
+            return viewData.filter { $0.isPractice == false }
         case .practice:
-//            return topics.filter { $0.type == .practice }
-            return []
+            return viewData.filter { $0.isPractice == true }
         }
     }
 
