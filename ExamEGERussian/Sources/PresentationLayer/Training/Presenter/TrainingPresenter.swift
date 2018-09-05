@@ -106,8 +106,8 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         return Promise { seal in
             graphService.fetchGraph().done { [weak self] responseModel in
                 guard let strongSelf = self,
-                    let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
-                        return
+                      let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
+                    return
                 }
 
                 strongSelf.knowledgeGraph.adjacency = graph.adjacency
