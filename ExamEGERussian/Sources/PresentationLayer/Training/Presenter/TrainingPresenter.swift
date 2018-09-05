@@ -123,7 +123,7 @@ final class TrainingPresenter: TrainingPresenterProtocol {
             result + vertex.lessons.map { $0.id }
         }.prefix(20)
 
-        return lessonsService.fetchLessons(with: Array(lessonsIds))
+        return lessonsService.fetchLessons(with: Array(Set(lessonsIds)))
     }
 
     private func reloadViewData() {
