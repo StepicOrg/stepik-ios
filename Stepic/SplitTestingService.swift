@@ -44,8 +44,8 @@ class SplitTestingService: SplitTestingServiceProtocol {
     }
 
     private func randomGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value.GroupType {
-        let count = Value.GroupType.testGroups.count
+        let count = Value.GroupType.groups.count
         let random = Int.random(lower: 0, count - 1)
-        return Value.GroupType.testGroups[random]
+        return Value.GroupType.groups[random]
     }
 }

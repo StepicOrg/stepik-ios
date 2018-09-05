@@ -26,7 +26,7 @@ final class SocialAuthStringSplitTest: SplitTestProtocol {
         case control = "control"
         case test = "test"
 
-        static var testGroups: [SocialAuthStringSplitTest.Group] = [.control, .test]
+        static var groups: [SocialAuthStringSplitTest.Group] = [.control, .test]
     }
 }
 

@@ -128,7 +128,9 @@ class SocialAuthPresenter {
     }
 
     var socialAuthHeaderString: String {
-        return splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self).currentGroup.authString
+        let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
+        test.hitSplitTest()
+        return test.currentGroup.authString
     }
 
     @objc private func didAuthCodeReceive(_ notification: NSNotification) {
