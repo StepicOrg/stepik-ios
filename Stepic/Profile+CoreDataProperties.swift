@@ -15,6 +15,9 @@ extension Profile {
     @NSManaged var managedFirstName: String?
     @NSManaged var managedLastName: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
+    @NSManaged var managedIsStaff: NSNumber?
+
+    @NSManaged var managedUser: User?
 
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Profile", in: CoreDataHelper.instance.context)!
@@ -57,6 +60,24 @@ extension Profile {
         }
         get {
             return managedSubscribedForMail?.boolValue ?? true
+        }
+    }
+
+    var isStaff: Bool {
+        set(value) {
+            managedIsStaff = value as NSNumber?
+        }
+        get {
+            return managedIsStaff?.boolValue ?? true
+        }
+    }
+
+    var user: User? {
+        get {
+            return managedUser
+        }
+        set(value) {
+            managedUser = value
         }
     }
 }
