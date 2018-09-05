@@ -10,6 +10,8 @@ import Foundation
 import PromiseKit
 
 final class TrainingPresenter: TrainingPresenterProtocol {
+    private static let lessonsLimit = 20
+
     private weak var view: TrainingView?
     private let router: TrainingRouterProtocol
 
@@ -121,9 +123,10 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     private func fetchLessons() -> Promise<[LessonPlainObject]> {
         let lessonsIds = knowledgeGraph.adjacencyLists.keys.reduce([]) { (result, vertex) in
             result + vertex.lessons.map { $0.id }
-        }.prefix(20)
+        }
+        let lessonsToFetch = Set(lessonsIds).prefix(TrainingPresenter.lessonsLimit)
 
-        return lessonsService.fetchLessons(with: Array(Set(lessonsIds)))
+        return lessonsService.fetchLessons(with: Array(lessonsToFetch))
     }
 
     private func reloadViewData() {
