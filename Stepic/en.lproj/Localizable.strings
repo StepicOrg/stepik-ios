@@ -555,7 +555,7 @@ DeadlineModeQuestion = "How much time would you like to spend studying on this c
 PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
 
 /* Sign in AB */
-SignInTitleSocialTest = "<b>Contunue</b> with";
+SignInTitleSocialTest = "<b>Continue</b> with";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
