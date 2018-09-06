@@ -68,7 +68,7 @@ extension Profile {
             managedIsStaff = value as NSNumber?
         }
         get {
-            return managedIsStaff?.boolValue ?? true
+            return managedIsStaff?.boolValue ?? false
         }
     }
 
