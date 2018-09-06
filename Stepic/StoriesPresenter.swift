@@ -64,8 +64,11 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     func refresh() {
         view?.set(state: .loading)
-
-        storyTemplatesAPI.retrieve(isPublished: true, language: ContentLanguage.sharedContentLanguage, maxVersion: StepicApplicationsInfo.Versions.stories ?? 0).done { [weak self] stories, _ in
+        var isPublished: Bool?
+        if AuthInfo.shared.user?.profileEntity?.isStaff != true {
+            isPublished = true
+        }
+        storyTemplatesAPI.retrieve(isPublished: isPublished, language: ContentLanguage.sharedContentLanguage, maxVersion: StepicApplicationsInfo.Versions.stories ?? 0).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return
             }
