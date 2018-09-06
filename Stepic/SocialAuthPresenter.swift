@@ -43,6 +43,12 @@ class SocialAuthPresenter {
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
+    var socialAuthHeaderString: String {
+        let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
+        test.hitSplitTest()
+        return test.currentGroup.authString
+    }
+    
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
@@ -125,12 +131,6 @@ class SocialAuthPresenter {
                 self.view?.update(with: .error)
             }
         }
-    }
-
-    var socialAuthHeaderString: String {
-        let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
-        test.hitSplitTest()
-        return test.currentGroup.authString
     }
 
     @objc private func didAuthCodeReceive(_ notification: NSNotification) {

@@ -22,6 +22,8 @@ class RemoteConfig {
 
     var loadingDoneCallback: (() -> Void)?
     var fetchComplete: Bool = false
+    
+    var fetchDuration: TimeInterval = 43200
 
     lazy var appDefaults: [String: NSObject] = [
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
@@ -87,10 +89,8 @@ class RemoteConfig {
     }
 
     private func fetchCloudValues() {
-        var fetchDuration: TimeInterval = 43200
         #if DEBUG
             activateDebugMode()
-            fetchDuration = 0
         #endif
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
             [weak self]
@@ -110,6 +110,7 @@ class RemoteConfig {
 
     private func activateDebugMode() {
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        fetchDuration = 0
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
