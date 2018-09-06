@@ -109,8 +109,8 @@ class RemoteConfig {
     }
 
     private func activateDebugMode() {
-        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         fetchDuration = 0
+        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
