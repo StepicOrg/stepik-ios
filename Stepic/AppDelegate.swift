@@ -45,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
 
-//        FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
