@@ -64,14 +64,19 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     func refresh() {
         view?.set(state: .loading)
-
-        storyTemplatesAPI.retrieve(isPublished: true, language: ContentLanguage.sharedContentLanguage).done { [weak self] stories, _ in
+        var isPublished: Bool?
+        if AuthInfo.shared.user?.profileEntity?.isStaff != true {
+            isPublished = true
+        }
+        storyTemplatesAPI.retrieve(isPublished: isPublished, language: ContentLanguage.sharedContentLanguage, maxVersion: StepicApplicationsInfo.Versions.stories ?? 0).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.stories = stories.filter {
                 strongSelf.isSupported(story: $0)
             }.sorted(by: {
+                $0.position >= $1.position
+            }).sorted(by: {
                  !($0.isViewed.value) || ($1.isViewed.value)
             })
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
