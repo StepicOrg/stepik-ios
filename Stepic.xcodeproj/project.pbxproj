@@ -589,6 +589,14 @@
 		0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
 		0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
 		0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */; };
+		089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779E214047640065DFA2 /* SplitTestProtocol.swift */; };
+		089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779F214047650065DFA2 /* SplitTestingService.swift */; };
+		089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
+		089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A8214047EC0065DFA2 /* Numbers+Random.swift */; };
+		089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */; };
+		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
+		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
 		089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
 		0899842F1ECDE19E005C0B27 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
@@ -5377,6 +5385,14 @@
 		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeepLinkRouter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueriesAPI.swift; sourceTree = "<group>"; };
 		089700951F6B2A820041C24E /* NibInitializableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializableView.swift; sourceTree = "<group>"; };
+		0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestGroupProtocol.swift; sourceTree = "<group>"; };
+		0898779E214047640065DFA2 /* SplitTestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestProtocol.swift; sourceTree = "<group>"; };
+		0898779F214047650065DFA2 /* SplitTestingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestingService.swift; sourceTree = "<group>"; };
+		089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUserPropertiesServiceProtocol.swift; sourceTree = "<group>"; };
+		089877A8214047EC0065DFA2 /* Numbers+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Random.swift"; sourceTree = "<group>"; };
+		089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthStringSplitTest.swift; sourceTree = "<group>"; };
+		089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+StorageServiceProtocol.swift"; sourceTree = "<group>"; };
+		089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStorageServiceProtocol.swift; sourceTree = "<group>"; };
 		089877B521407AB50065DFA2 /* Model_profile_staff_v24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_staff_v24.xcdatamodel; sourceTree = "<group>"; };
 		089984281ECDE188005C0B27 /* LessonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonViewController.swift; sourceTree = "<group>"; };
 		0899842B1ECDE194005C0B27 /* LessonPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPresenter.swift; sourceTree = "<group>"; };
@@ -6515,7 +6531,6 @@
 				08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */,
 				089611031D52250500561AC1 /* DeepLinkRouter.swift */,
 				0840707F1D64847000308FC1 /* SharingHelper.swift */,
-				08D035231D65B5C5003515C6 /* Analytics */,
 				083AA36B1E0842FE003E054E /* Watch Helpers */,
 				08B3B80520F3909400F64D20 /* HTMLProcessor.swift */,
 			);
@@ -7177,6 +7192,17 @@
 			name = Explore;
 			sourceTree = "<group>";
 		};
+		0853A3DE213D8F6100931F72 /* Split tests */ = {
+			isa = PBXGroup;
+			children = (
+				089877B4214061EC0065DFA2 /* Active Tests */,
+				0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */,
+				0898779F214047650065DFA2 /* SplitTestingService.swift */,
+				0898779E214047640065DFA2 /* SplitTestProtocol.swift */,
+			);
+			name = "Split tests";
+			sourceTree = "<group>";
+		};
 		085514E91CFB09170080CB88 /* WebViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -7597,6 +7623,22 @@
 			name = Step;
 			sourceTree = "<group>";
 		};
+		089877B3214061C90065DFA2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		089877B4214061EC0065DFA2 /* Active Tests */ = {
+			isa = PBXGroup;
+			children = (
+				089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */,
+			);
+			name = "Active Tests";
+			sourceTree = "<group>";
+		};
 		089F58871D22BD44000CD540 /* DiscussionCountView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7809,6 +7851,8 @@
 		08D035231D65B5C5003515C6 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */,
+				087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */,
 				08D035201D65A252003515C6 /* AnalyticsEvents.swift */,
 				08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */,
 				081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */,
@@ -7859,7 +7903,6 @@
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
-				087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */,
 				2CD12B911F4F3357001D3C82 /* UITests */,
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
@@ -7909,6 +7952,8 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				089877B3214061C90065DFA2 /* Services */,
+				0853A3DE213D8F6100931F72 /* Split tests */,
 				08484EDF211AF41A0006266F /* Stories */,
 				2CE664DE20F5204D0082F3FE /* Downloader */,
 				088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */,
@@ -7917,6 +7962,7 @@
 				08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */,
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
+				08D035231D65B5C5003515C6 /* Analytics */,
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				0858B7071CFF26F300459A6A /* Utils */,
 				0885F8491BA8374000F2A188 /* Model */,
@@ -8109,6 +8155,8 @@
 		08F204931BB0157F00D080C0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */,
+				089877A8214047EC0065DFA2 /* Numbers+Random.swift */,
 				08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */,
 				861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */,
 				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
@@ -14178,6 +14226,7 @@
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
+				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
 				2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
@@ -14252,6 +14301,7 @@
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
+				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* VideoLocationManager.swift in Sources */,
 				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */,
@@ -14273,6 +14323,7 @@
 				2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */,
 				2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
+				089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				087585B71FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */,
@@ -14334,6 +14385,7 @@
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
 				081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
+				089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */,
 				2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */,
 				081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */,
 				08CCAEC1204F0B2D002B4544 /* NotificationRequestAlertManager.swift in Sources */,
@@ -14409,6 +14461,7 @@
 				0899842F1ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
+				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */,
 				0885B8D21FB64452005A7B2E /* ContentLanguageCollectionViewCell.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
@@ -14442,6 +14495,7 @@
 				08195A181FA0AF1200E6D6CD /* HorizontalCoursesView.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,
+				089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
@@ -14523,6 +14577,7 @@
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
+				089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -14539,6 +14594,7 @@
 				083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
+				089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
