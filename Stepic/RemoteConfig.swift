@@ -22,7 +22,7 @@ class RemoteConfig {
 
     var loadingDoneCallback: (() -> Void)?
     var fetchComplete: Bool = false
-    
+
     var fetchDuration: TimeInterval = 43200
 
     lazy var appDefaults: [String: NSObject] = [

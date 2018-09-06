@@ -48,7 +48,7 @@ class SocialAuthPresenter {
         test.hitSplitTest()
         return test.currentGroup.authString
     }
-    
+
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
