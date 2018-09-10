@@ -18,30 +18,20 @@ final class AssemblyFactoryImpl: AssemblyFactory {
     }
 
     var topicsAssembly: TopicsAssembly {
-        return TopicsAssemblyImpl(
-            assemblyFactory: self,
-            serviceFactory: serviceFactory,
-            knowledgeGraph: knowledgeGraph
-        )
+        return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var lessonsAssembly: LessonsAssembly {
-        return LessonsAssemblyImpl(
-            assemblyFactory: self,
-            serviceFactory: serviceFactory,
-            knowledgeGraph: knowledgeGraph
-        )
+    var lessonsAssembly: LessonsAssemblyProtocol {
+        return LessonsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var stepsAssembly: StepsAssembly {
-        return StepsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    var stepsAssembly: StepsAssemblyProtocol {
+        return StepsAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     private let serviceFactory: ServiceFactory
-    private let knowledgeGraph: KnowledgeGraph
 
-    init(serviceFactory: ServiceFactory, knowledgeGraph: KnowledgeGraph) {
+    init(serviceFactory: ServiceFactory) {
         self.serviceFactory = serviceFactory
-        self.knowledgeGraph = knowledgeGraph
     }
 }

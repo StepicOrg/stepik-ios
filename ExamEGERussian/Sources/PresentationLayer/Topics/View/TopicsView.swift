@@ -15,5 +15,7 @@ struct TopicsViewData {
 
 protocol TopicsView: class {
     func setTopics(_ topics: [TopicsViewData])
+    func setSegments(_ segments: [String])
+    func selectSegment(at index: Int)
     func displayError(title: String, message: String)
 }

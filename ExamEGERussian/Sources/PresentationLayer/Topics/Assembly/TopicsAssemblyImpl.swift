@@ -9,15 +9,6 @@
 import Foundation
 
 final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
-    private let knowledgeGraph: KnowledgeGraph
-
-    init(assemblyFactory: AssemblyFactory,
-         serviceFactory: ServiceFactory,
-         knowledgeGraph: KnowledgeGraph) {
-        self.knowledgeGraph = knowledgeGraph
-        super.init(assemblyFactory: assemblyFactory, serviceFactory: serviceFactory)
-    }
-
     func module(navigationController: UINavigationController) -> UIViewController {
         let controller = TopicsTableViewController()
         let router = TopicsRouterImpl(
@@ -26,7 +17,7 @@ final class TopicsAssemblyImpl: BaseAssembly, TopicsAssembly {
         )
         controller.presenter = TopicsPresenterImpl(
             view: controller,
-            knowledgeGraph: knowledgeGraph,
+            knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             router: router,
             userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService

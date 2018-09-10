@@ -553,3 +553,44 @@ Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
 PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
+
+/* Sign in AB */
+SignInTitleSocialTest = "<b>Continue</b> with";
+
+/* ExamEGERussian */
+"ErrorMessage" = "Sorry, something went wrong: please try again later.";
+"Ok" = "Ok";
+
+"Practice" = "Practice";
+"Theory" = "Theory";
+"Topics" = "Topics";
+
+"AdaptiveHardReaction" = "Hard";
+"AdaptiveEasyReaction" = "Easy";
+"AdaptiveControlButtonSubmit" = "Submit";
+"AdaptiveControlButtonTryAgain" = "Try again";
+"AdaptiveControlButtonNextTask" = "Next task";
+
+"FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
+"FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
+"NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+
+"EmptyAuthViewTitle" = "It's You!";
+"EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
+"EmptyAuthViewDescription" = "Authorized account allows you to sync progress";
+
+"LearningTabTitle" = "Learning";
+"TrainingTabTitle" = "Training";
+
+"PracticeLessonTitle" = "Practical assignments";
+"PracticeLessonDescription" = "Consolidate the knowledge gained";
+
+"LessonsViewControllerTitle" = "Topic";
+
+"LessonsCountText1" = "%@ lesson";
+"LessonsCountText234" = "%@ lessons";
+"LessonsCountText567890" = "%@ lessons";
+
+"PagesCountText1" = "%@ page";
+"PagesCountText234" = "%@ pages";
+"PagesCountText567890" = "%@ pages";

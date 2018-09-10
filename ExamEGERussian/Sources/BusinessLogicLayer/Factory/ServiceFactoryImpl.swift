@@ -9,8 +9,7 @@
 import Foundation
 
 final class ServiceFactoryImpl: ServiceFactory {
-
-    // MARK: - ServiceFactory -
+    private static let knowledgeGraphDirectoryName = "knowledge-graph"
 
     let authAPI: AuthAPI
     let stepicsAPI: StepicsAPI
@@ -20,6 +19,9 @@ final class ServiceFactoryImpl: ServiceFactory {
     let lessonsAPI: LessonsAPI
     let stepsAPI: StepsAPI
     let progressesAPI: ProgressesAPI
+    let recommendationsAPI: RecommendationsAPI
+    let unitsAPI: UnitsAPI
+    let viewsAPI: ViewsAPI
 
     let defaultsStorageManager: DefaultsStorageManager
 
@@ -32,8 +34,9 @@ final class ServiceFactoryImpl: ServiceFactory {
         )
     }
 
-    var graphService: GraphService {
-        return GraphServiceImpl()
+    var graphService: GraphServiceProtocol {
+        let fileStorage = FileStorage(destination: .atFolder(name: ServiceFactoryImpl.knowledgeGraphDirectoryName))
+        return GraphService(fileStorage: fileStorage)
     }
 
     var lessonsService: LessonsService {
@@ -41,7 +44,11 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var courseService: CourseService {
-        return CourseServiceImpl(coursesAPI: coursesAPI, progressesService: self.progressService)
+        return CourseServiceImpl(
+            coursesAPI: coursesAPI,
+            progressesService: progressService,
+            enrollmentService: enrollmentService
+        )
     }
 
     var enrollmentService: EnrollmentService {
@@ -49,11 +56,27 @@ final class ServiceFactoryImpl: ServiceFactory {
     }
 
     var stepsService: StepsService {
-        return StepsServiceImpl(stepsAPI: stepsAPI, progressService: self.progressService)
+        return StepsServiceImpl(stepsAPI: stepsAPI, progressService: progressService)
     }
 
     var progressService: ProgressService {
         return ProgressServiceImpl(progressesAPI: progressesAPI)
+    }
+
+    var recommendationsService: RecommendationsServiceProtocol {
+        return RecommendationsService(recommendationsAPI: recommendationsAPI, lessonsService: lessonsService)
+    }
+
+    var reactionService: ReactionServiceProtocol {
+        return ReactionService(recommendationsAPI: recommendationsAPI)
+    }
+
+    var viewsService: ViewsServiceProtocol {
+        return ViewsService(unitsAPI: unitsAPI, viewsAPI: viewsAPI)
+    }
+
+    var knowledgeGraphProvider: KnowledgeGraphProviderProtocol {
+        return CachedKnowledgeGraphProvider(graphService: graphService)
     }
 
     // MARK: - Init -
@@ -66,6 +89,9 @@ final class ServiceFactoryImpl: ServiceFactory {
          lessonsAPI: LessonsAPI,
          stepsAPI: StepsAPI,
          progressesAPI: ProgressesAPI,
+         recommendationsAPI: RecommendationsAPI,
+         unitsAPI: UnitsAPI,
+         viewsAPI: ViewsAPI,
          defaultsStorageManager: DefaultsStorageManager
     ) {
         self.authAPI = authAPI
@@ -76,6 +102,9 @@ final class ServiceFactoryImpl: ServiceFactory {
         self.lessonsAPI = lessonsAPI
         self.stepsAPI = stepsAPI
         self.progressesAPI = progressesAPI
+        self.recommendationsAPI = recommendationsAPI
+        self.unitsAPI = unitsAPI
+        self.viewsAPI = viewsAPI
         self.defaultsStorageManager = defaultsStorageManager
     }
 }

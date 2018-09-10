@@ -44,7 +44,7 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
     private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.skeleton.viewBuilder = { return UIView.fromNib(named: "StorySkeletonPlaceholderView") }
+        collectionView.skeleton.viewBuilder = { UIView.fromNib(named: "StorySkeletonPlaceholderView") }
 
         collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {

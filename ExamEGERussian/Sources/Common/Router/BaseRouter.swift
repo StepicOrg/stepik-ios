@@ -14,7 +14,7 @@ class BaseRouter: RouterNavigational {
     typealias DeriveViewControllerClosure = (UINavigationController) -> UIViewController
 
     let assemblyFactory: AssemblyFactory
-    weak var navigationController: UINavigationController?
+    private(set) weak var navigationController: UINavigationController?
 
     // MARK: Init
 
@@ -49,12 +49,8 @@ class BaseRouter: RouterNavigational {
 // MARK: - BaseRouter: RouterDismissable -
 
 extension BaseRouter {
-    func dismiss(completion: (() -> Void)?) {
-        navigationController?.dismiss(animated: true, completion: completion)
-    }
-
-    func dismiss() {
-        dismiss(completion: nil)
+    func dismiss(animated: Bool, completion: (() -> Void)?) {
+        navigationController?.dismiss(animated: animated, completion: completion)
     }
 }
 

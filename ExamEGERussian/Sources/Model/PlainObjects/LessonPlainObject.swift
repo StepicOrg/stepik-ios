@@ -8,9 +8,18 @@
 
 import Foundation
 
-struct LessonPlainObject: Codable, Equatable {
+struct LessonPlainObject: Equatable {
     let id: Int
     let steps: [Int]
     let title: String
     let slug: String
+}
+
+extension LessonPlainObject {
+    init(lesson: Lesson) {
+        self.id = lesson.id
+        self.steps = lesson.stepsArray
+        self.title = lesson.title
+        self.slug = lesson.slug
+    }
 }

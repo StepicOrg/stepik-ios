@@ -8,6 +8,27 @@
 
 import Foundation
 
-protocol LessonsAssembly: class {
-    func module(navigationController: UINavigationController, topicId: String) -> UIViewController
+final class LessonsAssembly: BaseAssembly, LessonsAssemblyProtocol {
+    func module(navigationController: UINavigationController, topicId: String) -> UIViewController {
+        let controller = LessonsTableViewController()
+        let router = LessonsRouter(
+            assemblyFactory: assemblyFactory,
+            navigationController: navigationController
+        )
+
+        let knowledgeGraph = serviceFactory.knowledgeGraphProvider.knowledgeGraph
+        let presenter = LessonsPresenter(
+            view: controller,
+            router: router,
+            topicId: topicId,
+            knowledgeGraph: knowledgeGraph,
+            lessonsService: serviceFactory.lessonsService,
+            courseService: serviceFactory.courseService
+        )
+        controller.presenter = presenter
+        controller.hidesBottomBarWhenPushed = true
+        controller.title = NSLocalizedString("LessonsViewControllerTitle", comment: "")
+
+        return controller
+    }
 }

@@ -27,4 +27,14 @@ final class TopicsViewSpy: TopicsView {
         displayErrorMessage = message
         onError?()
     }
+
+    // TODO: Test this
+    func setSegments(_ segments: [String]) {
+
+    }
+
+    // TODO: Test this
+    func selectSegment(at index: Int) {
+
+    }
 }

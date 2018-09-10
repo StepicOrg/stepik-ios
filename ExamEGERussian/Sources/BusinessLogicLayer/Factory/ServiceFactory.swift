@@ -16,13 +16,21 @@ protocol ServiceFactory: class {
     var enrollmentsAPI: EnrollmentsAPI { get }
     var lessonsAPI: LessonsAPI { get }
     var progressesAPI: ProgressesAPI { get }
+    var recommendationsAPI: RecommendationsAPI { get }
+    var unitsAPI: UnitsAPI { get }
+    var viewsAPI: ViewsAPI { get }
     var defaultsStorageManager: DefaultsStorageManager { get }
 
     var userRegistrationService: UserRegistrationService { get }
-    var graphService: GraphService { get }
+    var graphService: GraphServiceProtocol { get }
     var lessonsService: LessonsService { get }
     var courseService: CourseService { get }
     var enrollmentService: EnrollmentService { get }
     var stepsService: StepsService { get }
     var progressService: ProgressService { get }
+    var recommendationsService: RecommendationsServiceProtocol { get }
+    var reactionService: ReactionServiceProtocol { get }
+    var viewsService: ViewsServiceProtocol { get }
+
+    var knowledgeGraphProvider: KnowledgeGraphProviderProtocol { get }
 }

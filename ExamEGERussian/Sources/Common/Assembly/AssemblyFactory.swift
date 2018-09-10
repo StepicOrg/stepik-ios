@@ -13,6 +13,6 @@ protocol AssemblyFactory: class {
     var applicationAssembly: ApplicationAssembly { get }
     var authAssembly: AuthAssembly { get }
     var topicsAssembly: TopicsAssembly { get }
-    var lessonsAssembly: LessonsAssembly { get }
-    var stepsAssembly: StepsAssembly { get }
+    var lessonsAssembly: LessonsAssemblyProtocol { get }
+    var stepsAssembly: StepsAssemblyProtocol { get }
 }
