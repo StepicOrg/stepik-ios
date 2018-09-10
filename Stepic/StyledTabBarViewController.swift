@@ -196,7 +196,7 @@ enum TabController: String {
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
-            let assembly = CourseListsCollectionAssembly()
+            let assembly = ExploreAssembly()
             return TabBarItemInfo(
                 title: NSLocalizedString("Profile", comment: ""),
                 controller: assembly.makeModule(),

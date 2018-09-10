@@ -1,0 +1,59 @@
+//
+//  ExploreExploreView.swift
+//  stepik-ios
+//
+//  Created by Stepik on 10/09/2018.
+//  Copyright 2018 Stepik. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+extension ExploreView {
+    struct Appearance {
+
+    }
+}
+
+final class ExploreView: UIView {
+    let appearance: Appearance
+
+    private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
+
+    init(
+        frame: CGRect,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
+        super.init(frame: frame)
+
+        self.setupView()
+        self.addSubviews()
+        self.makeConstraints()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func addBlockView(_ view: UIView) {
+        self.scrollableStackView.addArrangedView(view)
+    }
+}
+
+extension ExploreView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = .white
+    }
+
+    func addSubviews() {
+        self.addSubview(self.scrollableStackView)
+    }
+
+    func makeConstraints() {
+        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollableStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
