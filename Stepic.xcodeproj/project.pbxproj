@@ -4185,9 +4185,11 @@
 		2CFF9F2820FDD1010023B5D4 /* AuthSignInAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF9F2720FDD1010023B5D4 /* AuthSignInAssemblyImpl.swift */; };
 		2CFF9F2A20FDD1670023B5D4 /* AuthSignInRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF9F2920FDD1670023B5D4 /* AuthSignInRouterImpl.swift */; };
 		2F72C87C268BABCB7ED15F99 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0873EF2F06EC2C27A7C9255 /* ExploreViewController.swift */; };
+		31FAC028D12A7087A4CF8B38 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */; };
 		378925B23ABDD7215B756770 /* ExploreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */; };
 		3CF03F2244520AA001EEAE25 /* ExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF61DBC2C4F10361EEDB38 /* ExploreInteractor.swift */; };
 		452173E1842CC6913B58FD2F /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */; };
+		5114A9A546EE4DD425FF3E7B /* TagsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A135A38950824EE30E77014 /* TagsPresenter.swift */; };
 		62E98002F8F247D1CAC54767 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E980030A958F54CB76E92E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
@@ -4673,6 +4675,8 @@
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
+		8BAFF69A3ADF967ACA86619A /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE80CE7D8D8381143890852B /* TagsViewController.swift */; };
+		8E8C0B0773E8434A4B8B64BE /* TagsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14A9B5E75EAE724BF0A0A1 /* TagsAssembly.swift */; };
 		92688AAC4BD0741FF7F01BE8 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47CB98C00BEE01915CD88F5 /* Pods_Adaptive_3150.framework */; };
 		9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9300843D201663C100DBFC0E /* TVQuizViewController.xib */; };
 		930084402016717500DBFC0E /* BlurredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300843F2016717500DBFC0E /* BlurredViewController.swift */; };
@@ -4905,6 +4909,7 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
+		A2B80758C8DFFFD844FEA26B /* TagsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954951E36255DB68D5E582E /* TagsProvider.swift */; };
 		AC4F37341E20E04E78D92AE4 /* Pods_Adaptive_8290.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F44AEA6B4D3D4D0AEAAFE7E /* Pods_Adaptive_8290.framework */; };
 		B72F90FB1B23C3EF57ECFDF3 /* ExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A50ACE162DF211AE4DF35DC /* ExploreDataFlow.swift */; };
 		B774BA35064D0036D3775AF0 /* CourseListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D686447F3F417EF5CF0B07BE /* CourseListProvider.swift */; };
@@ -4916,11 +4921,13 @@
 		C9144FDA6B99F2DED2616956 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */; };
 		CB9CA8259C72BB8271AA5556 /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEB4DA2400A4871C30C4776 /* CourseListPresenter.swift */; };
 		D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */; };
+		D61088397B59DE7B20E38535 /* TagsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2302B140B77859617D9943 /* TagsDataFlow.swift */; };
 		DA44536FA7369C2A913661D8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */; };
 		DE18F80AE3677E4BCEE33397 /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED926AC5637608789BFE0B5 /* ExplorePresenter.swift */; };
 		E7A8ED83F7AE628BB311F658 /* CourseListPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2E830A227844A0D6C7DFD /* CourseListPersistenceService.swift */; };
 		EDC80E3A55CE95BDAE233005 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F878E39FF632E9059F6CCEB /* CourseListViewController.swift */; };
 		FA750F115C87044DAC9367C0 /* Pods_ExamEGERussianTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A043BD742DDA355FEA48FF39 /* Pods_ExamEGERussianTests.framework */; };
+		FB27A51C90A745DA179B4BFA /* TagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -5581,6 +5588,7 @@
 		1796CA0DBF2B8800A28DA3E9 /* Pods_ExamEGERussian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamEGERussian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A116DAAAF6FF9135E043C7 /* Pods_Adaptive_3067.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19956283569F1F9B77E95D90 /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A135A38950824EE30E77014 /* TagsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsPresenter.swift; sourceTree = "<group>"; };
 		1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseInfoCollectionViewController.swift; path = StepikTV/Controllers/CourseInfo/CourseInfoCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSplitViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuSplitViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = StepikTV/Controllers/SplitViewController/MenuTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -6107,6 +6115,7 @@
 		37627BD3700B1D7795D371AC /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3873CC770A93C9BD4A7F62AB /* Pods-ExamEGERussianTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A53D8E59267A93612403D59 /* Pods-Adaptive 8290.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 8290.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290.release.xcconfig"; sourceTree = "<group>"; };
+		3B2302B140B77859617D9943 /* TagsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsDataFlow.swift; sourceTree = "<group>"; };
 		3B3FD6B163F292403A536E4B /* Pods-Adaptive 8290.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 8290.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290.debug.xcconfig"; sourceTree = "<group>"; };
 		3C0BEF79D32646AF1AAA1044 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
 		3F44AEA6B4D3D4D0AEAAFE7E /* Pods_Adaptive_8290.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_8290.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6308,11 +6317,13 @@
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
 		A043BD742DDA355FEA48FF39 /* Pods_ExamEGERussianTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamEGERussianTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A25530AE3B343DABDD2B1579 /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
+		A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsInteractor.swift; sourceTree = "<group>"; };
 		A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A53D37FA4CD8A9B6D7AE2222 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		AE9D1A196EE102CE3116B172 /* Pods-ExamEGERussianUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianUITests/Pods-ExamEGERussianUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreAssembly.swift; sourceTree = "<group>"; };
 		BA90350120544A5D00191D0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BB035CD08BB7AB3FD3A64F49 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
@@ -6327,6 +6338,7 @@
 		D508E4A02170116945287545 /* Pods_ExamEGERussianUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamEGERussianUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D686447F3F417EF5CF0B07BE /* CourseListProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListProvider.swift; sourceTree = "<group>"; };
 		DDB4721C79C8860F955A54E7 /* Pods_Adaptive_3149_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E954951E36255DB68D5E582E /* TagsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsProvider.swift; sourceTree = "<group>"; };
 		EE14B4FF6B6070D800402D8D /* CourseListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListAssembly.swift; sourceTree = "<group>"; };
 		F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F47CB98C00BEE01915CD88F5 /* Pods_Adaptive_3150.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6334,6 +6346,8 @@
 		FAE2E830A227844A0D6C7DFD /* CourseListPersistenceService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListPersistenceService.swift; sourceTree = "<group>"; };
 		FCEEEBF607246F9661A706BE /* Pods-ExamEGERussian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian.debug.xcconfig"; sourceTree = "<group>"; };
 		FCF43FC15E3F7136F29091DE /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
+		FD14A9B5E75EAE724BF0A0A1 /* TagsAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsAssembly.swift; sourceTree = "<group>"; };
+		FE80CE7D8D8381143890852B /* TagsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -8373,6 +8387,7 @@
 			isa = PBXGroup;
 			children = (
 				58D4DD2E993574238E9882A7 /* Explore */,
+				DBA8A1094AD2004867D29D96 /* Tags */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -10842,6 +10857,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		75DB81A0E3407C0139BD1FD9 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				E954951E36255DB68D5E582E /* TagsProvider.swift */,
+			);
+			name = Provider;
+			path = Provider;
+			sourceTree = "<group>";
+		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -11115,6 +11139,30 @@
 			);
 			name = Shared;
 			path = StepicWatch;
+			sourceTree = "<group>";
+		};
+		CD087B06843913AB176F79F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */,
+			);
+			name = View;
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBA8A1094AD2004867D29D96 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				FD14A9B5E75EAE724BF0A0A1 /* TagsAssembly.swift */,
+				FE80CE7D8D8381143890852B /* TagsViewController.swift */,
+				A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */,
+				1A135A38950824EE30E77014 /* TagsPresenter.swift */,
+				3B2302B140B77859617D9943 /* TagsDataFlow.swift */,
+				75DB81A0E3407C0139BD1FD9 /* Provider */,
+				CD087B06843913AB176F79F4 /* View */,
+			);
+			name = Tags;
+			path = Tags;
 			sourceTree = "<group>";
 		};
 		F5DD84182601512E3B9E955E /* Provider */ = {
@@ -14823,6 +14871,13 @@
 				B72F90FB1B23C3EF57ECFDF3 /* ExploreDataFlow.swift in Sources */,
 				6942406A87177931CD6F6F3F /* ExploreProvider.swift in Sources */,
 				68DAA98D2E2F6E5BD63B051D /* ExploreView.swift in Sources */,
+				8E8C0B0773E8434A4B8B64BE /* TagsAssembly.swift in Sources */,
+				8BAFF69A3ADF967ACA86619A /* TagsViewController.swift in Sources */,
+				FB27A51C90A745DA179B4BFA /* TagsInteractor.swift in Sources */,
+				5114A9A546EE4DD425FF3E7B /* TagsPresenter.swift in Sources */,
+				D61088397B59DE7B20E38535 /* TagsDataFlow.swift in Sources */,
+				A2B80758C8DFFFD844FEA26B /* TagsProvider.swift in Sources */,
+				31FAC028D12A7087A4CF8B38 /* TagsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
