@@ -13,7 +13,7 @@ final class TagsAssembly: Assembly {
         let provider = TagsProvider()
         let presenter = TagsPresenter()
         let interactor = TagsInteractor(
-            presenter: presenter, 
+            presenter: presenter,
             provider: provider
         )
         let viewController = TagsViewController(

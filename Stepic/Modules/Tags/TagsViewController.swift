@@ -9,19 +9,27 @@
 import UIKit
 
 protocol TagsViewControllerProtocol: class {
-    func displaySomething(viewModel: Tags.Something.ViewModel)
+    func displayTags(viewModel: Tags.ShowTags.ViewModel)
 }
 
 final class TagsViewController: UIViewController {
     let interactor: TagsInteractorProtocol
     private var state: Tags.ViewControllerState
 
+    private let tagsDelegate: TagsCollectionViewDelegate
+    private let tagsDataSource: TagsCollectionViewDataSource
+
+    lazy var tagsView = self.view as? TagsView
+
     init(
-        interactor: TagsInteractorProtocol, 
+        interactor: TagsInteractorProtocol,
         initialState: Tags.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.state = initialState
+
+        self.tagsDelegate = TagsCollectionViewDelegate()
+        self.tagsDataSource = TagsCollectionViewDataSource()
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,32 +42,36 @@ final class TagsViewController: UIViewController {
 
     override func loadView() {
         let view = TagsView(
-            frame: UIScreen.main.bounds
+            frame: UIScreen.main.bounds,
+            delegate: self.tagsDelegate,
+            dataSource: self.tagsDataSource
         )
         self.view = view
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.someAction()
+        self.refreshTags()
     }
 
     // MARK: Requests logic
 
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: Tags.Something.Request()
-        )
+    private func refreshTags() {
+        self.interactor.fetchTags(request: Tags.ShowTags.Request())
     }
 }
 
 extension TagsViewController: TagsViewControllerProtocol {
-    func displaySomething(viewModel: Tags.Something.ViewModel) {
-        display(newState: viewModel.state)
-    }
-
-    func display(newState: Tags.ViewControllerState) {
-        self.state = newState
+    func displayTags(viewModel: Tags.ShowTags.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.tagsDataSource.viewModels = data
+            self.tagsView?.updateCollectionViewData(
+                delegate: self.tagsDelegate,
+                dataSource: self.tagsDataSource
+            )
+        default:
+            break
+        }
     }
 }

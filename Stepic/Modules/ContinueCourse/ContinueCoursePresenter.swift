@@ -17,7 +17,7 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
 
     func presentSomething(response: ContinueCourse.Something.Response) {
         var viewModel: ContinueCourse.Something.ViewModel
-        
+
         switch response.result {
         case let .failure(error):
             viewModel = ContinueCourse.Something.ViewModel(state: .error(message: error.localizedDescription))
@@ -28,7 +28,7 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
                 viewModel = ContinueCourse.Something.ViewModel(state: .result(data: result))
             }
         }
-        
+
         viewController?.displaySomething(viewModel: viewModel)
     }
 }

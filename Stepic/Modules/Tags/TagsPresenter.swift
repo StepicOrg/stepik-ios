@@ -9,26 +9,26 @@
 import UIKit
 
 protocol TagsPresenterProtocol {
-    func presentSomething(response: Tags.Something.Response)
+    func presentTags(response: Tags.ShowTags.Response)
 }
 
 final class TagsPresenter: TagsPresenterProtocol {
     weak var viewController: TagsViewControllerProtocol?
 
-    func presentSomething(response: Tags.Something.Response) {
-        var viewModel: Tags.Something.ViewModel
-        
-        switch response.result {
-        case let .failure(error):
-            viewModel = Tags.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = Tags.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = Tags.Something.ViewModel(state: .result(data: result))
+    func presentTags(response: Tags.ShowTags.Response) {
+        let state: Tags.ViewControllerState = {
+            switch response.result {
+            case .success(let tags):
+                return Tags.ViewControllerState.result(
+                    data: tags.map { TagViewModel(title: $0.title) }
+                )
+            case .failure:
+                return Tags.ViewControllerState.emptyResult
             }
-        }
-        
-        viewController?.displaySomething(viewModel: viewModel)
+        }()
+
+        let viewModel = Tags.ShowTags.ViewModel(state: state)
+
+        viewController?.displayTags(viewModel: viewModel)
     }
 }

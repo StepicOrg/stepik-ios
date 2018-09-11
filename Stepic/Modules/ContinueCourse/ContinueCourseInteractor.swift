@@ -18,13 +18,13 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     let provider: ContinueCourseProviderProtocol
 
     init(
-        presenter: ContinueCoursePresenterProtocol, 
+        presenter: ContinueCoursePresenterProtocol,
         provider: ContinueCourseProviderProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
     }
-    
+
     // MARK: Do some action
 
     func doSomeAction(request: ContinueCourse.Something.Request) {
@@ -32,7 +32,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             self.presenter.presentSomething(
                 response: ContinueCourse.Something.Response(result: .success(items))
             )
-        }.catch { error in
+        }.catch { _ in
             self.presenter.presentSomething(
                 response: ContinueCourse.Something.Response(result: .failure(Error.fetchFailed))
             )

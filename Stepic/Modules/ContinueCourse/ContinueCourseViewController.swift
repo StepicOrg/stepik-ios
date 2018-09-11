@@ -17,7 +17,7 @@ final class ContinueCourseViewController: UIViewController {
     private var state: ContinueCourse.ViewControllerState
 
     init(
-        interactor: ContinueCourseInteractorProtocol, 
+        interactor: ContinueCourseInteractorProtocol,
         initialState: ContinueCourse.ViewControllerState = .loading
     ) {
         self.interactor = interactor
@@ -41,7 +41,7 @@ final class ContinueCourseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.someAction()
     }
 

@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol TagsInteractorProtocol {
-    func doSomeAction(request: Tags.Something.Request)
+    func fetchTags(request: Tags.ShowTags.Request)
 }
 
 final class TagsInteractor: TagsInteractorProtocol {
@@ -18,28 +18,27 @@ final class TagsInteractor: TagsInteractorProtocol {
     let provider: TagsProviderProtocol
 
     init(
-        presenter: TagsPresenterProtocol, 
+        presenter: TagsPresenterProtocol,
         provider: TagsProviderProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
     }
-    
+
     // MARK: Do some action
 
-    func doSomeAction(request: Tags.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: Tags.Something.Response(result: .success(items))
-            )
-        }.catch { error in
-            self.presenter.presentSomething(
-                response: Tags.Something.Response(result: .failure(Error.fetchFailed))
+    func fetchTags(request: Tags.ShowTags.Request) {
+        self.provider.fetchTags().done { tags in
+            let newTags = tags.map { tag in
+                Tags.Tag(
+                    id: tag.ID,
+                    title: tag.titleForLanguage[ContentLanguage.russian] ?? "",
+                    summary: tag.summaryForLanguage[ContentLanguage.russian] ?? ""
+                )
+            }
+            self.presenter.presentTags(
+                response: Tags.ShowTags.Response(result: .success(newTags))
             )
         }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
     }
 }

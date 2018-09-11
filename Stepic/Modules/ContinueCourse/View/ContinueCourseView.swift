@@ -19,7 +19,7 @@ final class ContinueCourseView: UIView {
     let appearance: Appearance
 
     init(
-        frame: CGRect, 
+        frame: CGRect,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance

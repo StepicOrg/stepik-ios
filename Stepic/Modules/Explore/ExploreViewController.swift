@@ -33,9 +33,23 @@ final class ExploreViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let view = ExploreView(
-            frame: UIScreen.main.bounds
-        )
+        let view = ExploreView(frame: UIScreen.main.bounds)
+
+        let tagsAssembly = TagsAssembly()
+        let tagsViewController = tagsAssembly.makeModule()
+        self.addChildViewController(tagsViewController)
+        view.addBlockView(tagsViewController.view)
+
+        let collectionAssembly = CourseListsCollectionAssembly()
+        let collectionViewController = collectionAssembly.makeModule()
+        self.addChildViewController(collectionViewController)
+        view.addBlockView(collectionViewController.view)
+
+        let popularAssembly = CourseListAssembly(type: PopularCourseListType(language: .russian))
+        let popularViewController = popularAssembly.makeModule()
+        self.addChildViewController(popularViewController)
+        view.addBlockView(popularViewController.view)
+
         self.view = view
     }
 

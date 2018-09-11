@@ -10,13 +10,13 @@ import Foundation
 import PromiseKit
 
 protocol TagsProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]>
+    func fetchTags() -> Guarantee<[CourseTag]>
 }
 
 final class TagsProvider: TagsProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]> {
-        return Promise<[Any]> { seal in
-            seal.fulfill(["" as! Any])
+    func fetchTags() -> Guarantee<[CourseTag]> {
+        return Guarantee { seal in
+            seal(CourseTag.featuredTags)
         }
     }
 }

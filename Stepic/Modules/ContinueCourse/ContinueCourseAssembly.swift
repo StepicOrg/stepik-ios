@@ -13,7 +13,7 @@ final class ContinueCourseAssembly: Assembly {
         let provider = ContinueCourseProvider()
         let presenter = ContinueCoursePresenter()
         let interactor = ContinueCourseInteractor(
-            presenter: presenter, 
+            presenter: presenter,
             provider: provider
         )
         let viewController = ContinueCourseViewController(

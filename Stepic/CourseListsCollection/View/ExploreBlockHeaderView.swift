@@ -80,6 +80,15 @@ final class ExploreBlockHeaderView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        let labelsStackViewIntrinsicContentSize = self.labelsStackView
+            .systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        return CGSize(
+            width: UIViewNoIntrinsicMetric,
+            height: labelsStackViewIntrinsicContentSize.height
+        )
+    }
+
     init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)

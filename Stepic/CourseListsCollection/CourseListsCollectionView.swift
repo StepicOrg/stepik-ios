@@ -30,6 +30,19 @@ final class CourseListsCollectionView: UIView {
 
     private let contentView: UIView
 
+    override var intrinsicContentSize: CGSize {
+        let headerViewHeight = self.headerView.intrinsicContentSize.height
+        let headerViewPadding = Appearance.headerViewInsets.top
+            + Appearance.headerViewInsets.bottom
+        let contentStackViewHeight = self.contentStackView
+            .systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            .height
+        return CGSize(
+            width: UIViewNoIntrinsicMetric,
+            height: headerViewHeight + headerViewPadding + contentStackViewHeight
+        )
+    }
+
     init(frame: CGRect, contentView: UIView) {
         self.contentView = contentView
         super.init(frame: frame)

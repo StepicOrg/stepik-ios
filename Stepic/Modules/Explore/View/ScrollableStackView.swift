@@ -39,14 +39,18 @@ final class ScrollableStackView: UIView {
     // MARK: Public interface
 
     func addArrangedView(_ view: UIView) {
-        self.stackView.addArrangedSubview(view)
+        self.insertArrangedView(view, at: self.arrangedViewsCount)
     }
 
     func removeArrangedView(_ view: UIView) {
-        self.stackView.removeArrangedSubview(view)
+        for subview in self.stackView.subviews where subview == view {
+            self.stackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
     }
 
     func insertArrangedView(_ view: UIView, at index: Int) {
+        view.clipsToBounds = true
         self.stackView.insertArrangedSubview(view, at: index)
     }
 

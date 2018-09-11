@@ -196,21 +196,17 @@ enum TabController: String {
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
-            let assembly = ExploreAssembly()
-            return TabBarItemInfo(
-                title: NSLocalizedString("Profile", comment: ""),
-                controller: assembly.makeModule(),
-                clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"),
-                tag: self.tag
-            )
-//            return TabBarItemInfo(title: NSLocalizedString("Home", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "HomeNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-home"), tag: self.tag)
+            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .notifications:
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
-//        case .explore:
-//            return TabBarItemInfo(title: NSLocalizedString("Catalog", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ExploreNavigation", storyboardName: "Explore"), clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"), tag: self.tag)
-        default:
-            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
-//
+        case .explore:
+            let assembly = ExploreAssembly()
+            return TabBarItemInfo(
+                title: NSLocalizedString("Catalog", comment: ""),
+                controller: assembly.makeModule(),
+                clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"),
+                tag: self.tag
+            )
         }
     }
 }

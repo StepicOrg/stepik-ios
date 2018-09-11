@@ -10,16 +10,21 @@ import Foundation
 
 enum Tags {
     // MARK: Common structs
-    // Place here structs used in Requests/Responses
+    struct Tag {
+        // cause CourseTag sucks (we should have language in each layer)
+        var id: Int
+        var title: String
+        var summary: String
+    }
 
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
+    /// Show tag list
+    enum ShowTags {
         struct Request { }
 
         struct Response {
-            var result: Result<[Any]>
+            var result: Result<[Tag]>
         }
 
         struct ViewModel {
@@ -31,7 +36,7 @@ enum Tags {
 
     enum ViewControllerState {
         case loading
-        case result(data: [Any])
+        case result(data: [TagViewModel])
         case emptyResult
         case error(message: String)
     }
