@@ -201,7 +201,7 @@ enum TabController: String {
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .explore:
             let viewController = ExploreAssembly().makeModule()
-            let navigationViewController = UINavigationController(
+            let navigationViewController = StyledNavigationViewController(
                 rootViewController: viewController
             )
             return TabBarItemInfo(
