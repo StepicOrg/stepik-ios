@@ -35,6 +35,11 @@ final class ExploreViewController: UIViewController {
     override func loadView() {
         let view = ExploreView(frame: UIScreen.main.bounds)
 
+        let contentLanguageSwitchAssembly = ContentLanguageSwitchAssembly()
+        let clViewController = contentLanguageSwitchAssembly.makeModule()
+        self.addChildViewController(clViewController)
+        view.addBlockView(clViewController.view)
+
         let tagsAssembly = TagsAssembly()
         let tagsViewController = tagsAssembly.makeModule()
         self.addChildViewController(tagsViewController)
