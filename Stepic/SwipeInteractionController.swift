@@ -18,6 +18,7 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     init(viewController: UIViewController, onFinish: (() -> Void)?) {
         super.init()
         self.viewController = viewController
+        self.onFinish = onFinish
         prepareGestureRecognizer(in: viewController.view)
     }
 
