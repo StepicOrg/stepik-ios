@@ -14,7 +14,7 @@ class Story: JSONSerializable {
         self.id = json["id"].intValue
         self.coverPath = json["cover"].stringValue
         self.title = json["title"].stringValue
-        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0) }
+        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0, storyID: id) }
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
         self.position = json["position"].intValue
     }
@@ -27,24 +27,25 @@ class Story: JSONSerializable {
     var position: Int
 
     required init(json: JSON) {
+        let id = json["id"].intValue
         self.id = json["id"].intValue
         self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json["cover"].stringValue)
         self.title = json["title"].stringValue
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
         self.parts = json["parts"].arrayValue.compactMap {
-            Story.buildStoryPart(json: $0)
+            Story.buildStoryPart(json: $0, storyID: id)
         }
         self.position = json["position"].intValue
     }
 
-    private static func buildStoryPart(json: JSON) -> StoryPart? {
+    private static func buildStoryPart(json: JSON, storyID: Int) -> StoryPart? {
         guard let type = json["type"].string else {
             return nil
         }
 
         switch type {
         case "text":
-            return TextStoryPart(json: json)
+            return TextStoryPart(json: json, storyID: storyID)
         default:
             return nil
         }
@@ -55,18 +56,20 @@ class StoryPart {
     var type: PartType?
     var position: Int
     var duration: Double
+    var storyID: Int
 
-    init(json: JSON) {
+    init(json: JSON, storyID: Int) {
         self.type = PartType(rawValue: json["type"].stringValue)
         self.position = json["position"].intValue - 1
         self.duration = json["duration"].doubleValue
+        self.storyID = storyID
     }
 
-    init(type: String, position: Int, duration: Double) {
-        self.type = PartType(rawValue: type)
-        self.position = position - 1
-        self.duration = duration
-    }
+//    init(type: String, position: Int, duration: Double) {
+//        self.type = PartType(rawValue: type)
+//        self.position = position - 1
+//        self.duration = duration
+//    }
 
     enum PartType: String {
         case text
@@ -108,7 +111,7 @@ class TextStoryPart: StoryPart {
     }
     var button: Button?
 
-    override init(json: JSON) {
+    override init(json: JSON, storyID: Int) {
         imagePath = HTMLProcessor.addStepikURLIfNeeded(url: json["image"].stringValue)
 
         let textJSON = json["text"]
@@ -132,6 +135,6 @@ class TextStoryPart: StoryPart {
             self.button = Button(title: title, urlPath: urlPath, backgroundColor: backgroundColor, titleColor: titleColor)
         }
 
-        super.init(json: json)
+        super.init(json: json, storyID: storyID)
     }
 }
