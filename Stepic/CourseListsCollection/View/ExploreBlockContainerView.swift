@@ -14,7 +14,7 @@ extension ExploreBlockContainerView {
         let separatorColor = UIColor(hex: 0x535366, alpha: 0.1)
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        let contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         let separatorViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
 }
@@ -31,6 +31,18 @@ final class ExploreBlockContainerView: UIView {
         return view
     }()
 
+    override var intrinsicContentSize: CGSize {
+        let headerViewHeight = self.headerView.intrinsicContentSize.height
+        let paddingHeight = self.appearance.contentViewInsets.top
+            + self.appearance.contentViewInsets.bottom
+            + (self.shouldShowSeparator ? 1.0 : 0.0)
+        let contentViewHeight = self.contentView.intrinsicContentSize.height
+        return CGSize(
+            width: UIViewNoIntrinsicMetric,
+            height: headerViewHeight + paddingHeight + contentViewHeight
+        )
+    }
+
     init(
         frame: CGRect,
         headerView: UIView,
@@ -44,6 +56,7 @@ final class ExploreBlockContainerView: UIView {
         self.shouldShowSeparator = shouldShowSeparator
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -54,9 +67,13 @@ final class ExploreBlockContainerView: UIView {
 }
 
 extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.contentView.clipsToBounds = false
+    }
+
     func addSubviews() {
         self.addSubview(self.headerView)
-        self.addSubview(contentView)
+        self.addSubview(self.contentView)
         self.addSubview(self.separatorView)
     }
 
@@ -80,7 +97,7 @@ extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.headerView.snp.bottom)
                 .offset(self.appearance.contentViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.contentViewInsets.left)
-            make.trailing.equalToSuperview().offset(self.appearance.contentViewInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.contentViewInsets.right)
             make.bottom
                 .equalTo(self.separatorView.snp.top)
                 .offset(-self.appearance.contentViewInsets.bottom)

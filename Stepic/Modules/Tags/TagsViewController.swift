@@ -16,9 +16,6 @@ final class TagsViewController: UIViewController {
     let interactor: TagsInteractorProtocol
     private var state: Tags.ViewControllerState
 
-    private let tagsDelegate: TagsCollectionViewDelegate
-    private let tagsDataSource: TagsCollectionViewDataSource
-
     lazy var tagsView = self.view as? TagsView
 
     init(
@@ -27,9 +24,6 @@ final class TagsViewController: UIViewController {
     ) {
         self.interactor = interactor
         self.state = initialState
-
-        self.tagsDelegate = TagsCollectionViewDelegate()
-        self.tagsDataSource = TagsCollectionViewDataSource()
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,11 +35,7 @@ final class TagsViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let view = TagsView(
-            frame: UIScreen.main.bounds,
-            delegate: self.tagsDelegate,
-            dataSource: self.tagsDataSource
-        )
+        let view = TagsView(frame: UIScreen.main.bounds)
         self.view = view
     }
 
@@ -65,11 +55,7 @@ extension TagsViewController: TagsViewControllerProtocol {
     func displayTags(viewModel: Tags.ShowTags.ViewModel) {
         switch viewModel.state {
         case .result(let data):
-            self.tagsDataSource.viewModels = data
-            self.tagsView?.updateCollectionViewData(
-                delegate: self.tagsDelegate,
-                dataSource: self.tagsDataSource
-            )
+            self.tagsView?.updateData(viewModels: data)
         default:
             break
         }

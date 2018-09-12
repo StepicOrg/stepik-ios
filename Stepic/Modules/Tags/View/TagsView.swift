@@ -11,17 +11,32 @@ import SnapKit
 
 extension TagsView {
     struct Appearance {
-        let tagsEstimatedItemSize = CGSize(width: 80.0, height: 40.0)
-        /// On iPhone Plus with iOS 10 we cannot use estimatedSize and should set itemSize
-        let tagsPlusWorkaroundItemSize = CGSize(width: 205.0, height: 40.0)
+        let tagsHeight: CGFloat = 40
+        let tagsSpacing: CGFloat = 15
+        let tagsViewInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
 
-        let tagsMinimumInteritemSpacing: CGFloat = 20
-        let tagsMinimumLineSpacing: CGFloat = 20
+        let tagBackgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
+        let tagFont = UIFont.systemFont(ofSize: 16, weight: .light)
+        let tagTextColor = UIColor.mainText
+        let tagTitleInsets = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)
+        let tagCornerRadius: CGFloat = 20
     }
 }
 
 final class TagsView: UIView {
     let appearance: Appearance
+
+    private lazy var containerView: ExploreBlockContainerView = {
+        let appearance = ExploreBlockContainerView.Appearance(
+            contentViewInsets: self.appearance.tagsViewInsets
+        )
+        return ExploreBlockContainerView(
+            frame: .zero,
+            headerView: self.headerView,
+            contentView: self.tagsStackView,
+            appearance: appearance
+        )
+    }()
 
     private lazy var headerView: ExploreBlockHeaderView = {
         let headerView = ExploreBlockHeaderView(frame: .zero)
@@ -31,36 +46,18 @@ final class TagsView: UIView {
         return headerView
     }()
 
-    private lazy var tagsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.setEstimatedItemSize(
-            self.appearance.tagsEstimatedItemSize,
-            fallbackOnPlus: self.appearance.tagsPlusWorkaroundItemSize
-        )
-        layout.minimumLineSpacing = self.appearance.tagsMinimumLineSpacing
-        layout.minimumInteritemSpacing = self.appearance.tagsMinimumInteritemSpacing
-
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
-        )
-        collectionView.register(cellClass: TagsViewCollectionViewCell.self)
-        return collectionView
+    private lazy var tagsStackView: ScrollableStackView = {
+        let stackView = ScrollableStackView(frame: .zero, orientation: .horizontal)
+        stackView.showsHorizontalScrollIndicator = false
+        stackView.spacing = self.appearance.tagsSpacing
+        return stackView
     }()
 
-    init(
-        frame: CGRect,
-        delegate: UICollectionViewDelegate,
-        dataSource: UICollectionViewDataSource,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.tagsCollectionView.delegate = delegate
-        self.tagsCollectionView.dataSource = dataSource
-
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -69,34 +66,44 @@ final class TagsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateCollectionViewData(
-        delegate: UICollectionViewDelegate,
-        dataSource: UICollectionViewDataSource
-    ) {
-        self.tagsCollectionView.dataSource = dataSource
-        self.tagsCollectionView.reloadData()
-        self.tagsCollectionView.collectionViewLayout.invalidateLayout()
+    func updateData(viewModels: [TagViewModel]) {
+        self.tagsStackView.removeAllArrangedViews()
+        for viewModel in viewModels {
+            self.tagsStackView.addArrangedView(self.makeTagButton(title: viewModel.title))
+        }
+    }
+
+    private func makeTagButton(title: String) -> UIView {
+        let button = UIButton(type: .system)
+        button.backgroundColor = self.appearance.tagBackgroundColor
+        button.titleLabel?.font = self.appearance.tagFont
+        button.tintColor = self.appearance.tagTextColor
+        button.contentEdgeInsets = self.appearance.tagTitleInsets
+        button.layer.cornerRadius = self.appearance.tagCornerRadius
+
+        button.setTitle(title, for: .normal)
+        return button
     }
 }
 
 extension TagsView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = .white
+    }
+
     func addSubviews() {
-        self.addSubview(self.headerView)
-        self.addSubview(self.tagsCollectionView)
+        self.addSubview(self.containerView)
     }
 
     func makeConstraints() {
-        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-        self.headerView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+        self.tagsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.tagsStackView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.tagsHeight)
         }
 
-        self.tagsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.tagsCollectionView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom)
+        self.containerView.translatesAutoresizingMaskIntoConstraints = false
+        self.containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

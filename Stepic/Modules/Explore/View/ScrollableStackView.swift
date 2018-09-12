@@ -24,10 +24,38 @@ final class ScrollableStackView: UIView {
         return self.stackView.arrangedSubviews.count
     }
 
+    var showsHorizontalScrollIndicator: Bool {
+        get {
+            return self.scrollView.showsHorizontalScrollIndicator
+        }
+        set {
+            self.scrollView.showsHorizontalScrollIndicator = newValue
+        }
+    }
+
+    var showsVerticalScrollIndicator: Bool {
+        get {
+            return self.scrollView.showsVerticalScrollIndicator
+        }
+        set {
+            self.scrollView.showsVerticalScrollIndicator = newValue
+        }
+    }
+
+    var spacing: CGFloat {
+        get {
+            return self.stackView.spacing
+        }
+        set {
+            self.stackView.spacing = newValue
+        }
+    }
+
     init(frame: CGRect, orientation: Orientation = .vertical) {
         self.orientation = orientation
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -50,8 +78,13 @@ final class ScrollableStackView: UIView {
     }
 
     func insertArrangedView(_ view: UIView, at index: Int) {
-        view.clipsToBounds = true
         self.stackView.insertArrangedSubview(view, at: index)
+    }
+
+    func removeAllArrangedViews() {
+        for subview in self.stackView.subviews {
+            self.removeArrangedView(subview)
+        }
     }
 
     enum Orientation {
@@ -70,6 +103,11 @@ final class ScrollableStackView: UIView {
 }
 
 extension ScrollableStackView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.stackView.clipsToBounds = false
+        self.scrollView.clipsToBounds = false
+    }
+
     func addSubviews() {
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.stackView)
