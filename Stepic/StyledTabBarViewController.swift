@@ -200,10 +200,13 @@ enum TabController: String {
         case .notifications:
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .explore:
-            let assembly = ExploreAssembly()
+            let viewController = ExploreAssembly().makeModule()
+            let navigationViewController = UINavigationController(
+                rootViewController: viewController
+            )
             return TabBarItemInfo(
                 title: NSLocalizedString("Catalog", comment: ""),
-                controller: assembly.makeModule(),
+                controller: navigationViewController,
                 clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"),
                 tag: self.tag
             )
