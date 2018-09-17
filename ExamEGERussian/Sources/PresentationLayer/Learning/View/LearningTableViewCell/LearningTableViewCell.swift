@@ -63,10 +63,10 @@ final class LearningTableViewCell: UITableViewCell, Reusable, NibLoadable {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-//        headerLabel.text = nil
-//        descriptionLabel.text = nil
-//        timeToCompleteLabel.text = nil
-//        progressLabel.text = nil
+        headerLabel.text = nil
+        descriptionLabel.text = nil
+        timeToCompleteLabel.text = nil
+        progressLabel.text = nil
     }
 
     private func setupImageView(_ imageViews: UIImageView...) {
