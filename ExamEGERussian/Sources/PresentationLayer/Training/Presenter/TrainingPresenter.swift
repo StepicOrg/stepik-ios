@@ -67,9 +67,12 @@ final class TrainingPresenter: TrainingPresenterProtocol {
 
     func selectViewData(_ viewData: TrainingViewData) {
         if viewData.isPractice {
-            router.showPractice(courseId: "courseId")
-        } else {
-            //router.showTheory(lesson: )
+            guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == viewData.id }) else {
+                return
+            }
+            router.showPractice(courseId: lesson.courseId)
+        } else if let theoryLesson = theoryLessons.first(where: { $0.id == viewData.id }) {
+            router.showTheory(lesson: theoryLesson)
         }
     }
 
@@ -139,8 +142,7 @@ final class TrainingPresenter: TrainingPresenterProtocol {
                     countLessons: 1,
                     isPractice: true
                 )
-        }
-
+            }
         view?.setViewData(theory + practice)
     }
 

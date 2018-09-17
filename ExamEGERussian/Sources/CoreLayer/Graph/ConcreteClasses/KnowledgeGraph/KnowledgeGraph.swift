@@ -37,6 +37,14 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return getElement(by: id)
     }
 
+    func firstLesson(where predicate: (KnowledgeGraphLesson) -> Bool) -> KnowledgeGraphLesson? {
+        for vertex in adjacencyLists.keys {
+            return vertex.lessons.first(where: predicate)
+        }
+
+        return nil
+    }
+
     private func getElement(by id: String) -> Element? {
         guard let index = adjacency.index(forKey: Vertex(id: id)),
               let element = adjacency[index] as? Element else {
