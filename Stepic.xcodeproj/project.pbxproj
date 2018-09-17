@@ -993,6 +993,7 @@
 		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
+		0CAD53C8B6576D76DE23FE95 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */; };
 		0DD38F1F2CF8385C6D270649 /* ContentLanguageSwitchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606EBF103D5682D5B26FF35 /* ContentLanguageSwitchInteractor.swift */; };
 		0E2B1455D0480FA8DEDE5288 /* Pods_Adaptive_1838_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */; };
 		1014F6AC2EE5CCCC9A03A694 /* CourseListNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5808405CD61E61F436B3B8 /* CourseListNetworkService.swift */; };
@@ -4369,6 +4370,7 @@
 		6942406A87177931CD6F6F3F /* ExploreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3973D7925F48C2B32B629A /* ExploreProvider.swift */; };
 		6A7DBAB7DC854F473438F007 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B3E4DF00B221C0C4986BCE /* Pods_Adaptive_3124.framework */; };
 		6CE42CA60425E8BFDE0CC9C1 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */; };
+		71B8A5994CE4B0669E497244 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA72DE297649678489B71C /* HomePresenter.swift */; };
 		794F92AD7380AB42B491C8BA /* CourseListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14B4FF6B6070D800402D8D /* CourseListAssembly.swift */; };
 		79E683BEBAAD85873A38E144 /* ContinueCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639653894D37C79E966238F2 /* ContinueCourseViewController.swift */; };
 		7DA4D202535F52F5C0FDB28F /* ContentLanguageSwitchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1C8EA0972152E85046A15 /* ContentLanguageSwitchPresenter.swift */; };
@@ -4894,6 +4896,7 @@
 		93FF4B66200534760058B94D /* InstructorsCourseInfoSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B65200534760058B94D /* InstructorsCourseInfoSectionCell.xib */; };
 		93FF4B68200537330058B94D /* InstructorItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4B67200537330058B94D /* InstructorItemCell.xib */; };
 		93FF4B6A20053A170058B94D /* InstructorItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF4B6920053A170058B94D /* InstructorItemCell.swift */; };
+		96A1C493941AF863868DFAC2 /* HomeDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CFE338FB08142BEC048FE /* HomeDataFlow.swift */; };
 		9CB9D6D32EC372FAD6F9A9A2 /* Pods_ExamEGERussian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1796CA0DBF2B8800A28DA3E9 /* Pods_ExamEGERussian.framework */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
@@ -4931,6 +4934,7 @@
 		AD652FE2E73D17B9C0FD4722 /* ContinueCourseDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A455FB56179C3ED39ED8DD /* ContinueCourseDataFlow.swift */; };
 		B72F90FB1B23C3EF57ECFDF3 /* ExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A50ACE162DF211AE4DF35DC /* ExploreDataFlow.swift */; };
 		B774BA35064D0036D3775AF0 /* CourseListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D686447F3F417EF5CF0B07BE /* CourseListProvider.swift */; };
+		B7DF37F9B68DC3E911071944 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5635A450A38016A68AF7E25 /* HomeInteractor.swift */; };
 		BA02C8D13CE96D409F5D2178 /* ContinueCourseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE057CE11E5647EB02F0357 /* ContinueCourseInteractor.swift */; };
 		BA903500205449A000191D0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		BA90350220544A5D00191D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA90350120544A5D00191D0A /* Main.storyboard */; };
@@ -4940,6 +4944,8 @@
 		C8BC15F102D7754348A574AB /* ContentLanguageSwitchDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036440FB2A87AB97603A3A6 /* ContentLanguageSwitchDataFlow.swift */; };
 		C9144FDA6B99F2DED2616956 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */; };
 		CB9CA8259C72BB8271AA5556 /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEB4DA2400A4871C30C4776 /* CourseListPresenter.swift */; };
+		CCEA4157B12C2032214B5816 /* HomeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6470759599AC47AE3102F586 /* HomeProvider.swift */; };
+		CEB50B790D9185887A04442B /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300D50D89F06B6737857C45 /* HomeAssembly.swift */; };
 		D372242468DDC4178B37F188 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9895386718491CB7C8C870C8 /* Pods_StepikTVTests.framework */; };
 		D61088397B59DE7B20E38535 /* TagsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2302B140B77859617D9943 /* TagsDataFlow.swift */; };
 		D90A4F4D6941BD8D4E84C6CE /* ContinueCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A1329A66FB24F4B453053C /* ContinueCourseView.swift */; };
@@ -4949,6 +4955,7 @@
 		EDC80E3A55CE95BDAE233005 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F878E39FF632E9059F6CCEB /* CourseListViewController.swift */; };
 		FA750F115C87044DAC9367C0 /* Pods_ExamEGERussianTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A043BD742DDA355FEA48FF39 /* Pods_ExamEGERussianTests.framework */; };
 		FB27A51C90A745DA179B4BFA /* TagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */; };
+		FE0A777F6C6897CF9CCD0B98 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAB4B76E9610CAEE92FBA2B /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -5069,6 +5076,7 @@
 
 /* Begin PBXFileReference section */
 		024D65DCBD4F8631B97D461D /* ContentLanguageSwitchView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchView.swift; sourceTree = "<group>"; };
+		0300D50D89F06B6737857C45 /* HomeAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
 		036EE807FB73EE4A4A2B8999 /* Pods-Adaptive 3150.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.release.xcconfig"; sourceTree = "<group>"; };
 		05B36296A0FDE57BF277FB75 /* Pods-ExamEGERussian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussian.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian.release.xcconfig"; sourceTree = "<group>"; };
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
@@ -6148,6 +6156,7 @@
 		5003B355F9C103E512D8A2A2 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		50A455FB56179C3ED39ED8DD /* ContinueCourseDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseDataFlow.swift; sourceTree = "<group>"; };
 		523264B4C39A4383B77E3294 /* Pods_Adaptive_3067_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		573CFE338FB08142BEC048FE /* HomeDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeDataFlow.swift; sourceTree = "<group>"; };
 		57C07BF2FB73952C721088F6 /* ContentLanguageSwitchAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchAssembly.swift; sourceTree = "<group>"; };
 		5B3973D7925F48C2B32B629A /* ExploreProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreProvider.swift; sourceTree = "<group>"; };
 		5D480E6140E3FF44F2E720BF /* Pods_Adaptive_GMAT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_GMAT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6235,6 +6244,7 @@
 		62E98FCC083F426BA7B52AAD /* CourseListsCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionViewModel.swift; sourceTree = "<group>"; };
 		639653894D37C79E966238F2 /* ContinueCourseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseViewController.swift; sourceTree = "<group>"; };
 		6407CA973D1E0DD43D7D37A6 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		6470759599AC47AE3102F586 /* HomeProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeProvider.swift; sourceTree = "<group>"; };
 		659D078D6ECC6EAC850691ED /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC7277DBB1AB03A65BDB2C /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		6E380C5B32834C4523AC836F /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
@@ -6360,6 +6370,7 @@
 		A49A3B8636783E1189A58B58 /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A53D37FA4CD8A9B6D7AE2222 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		A8EEC4A66A79577FB0E482D1 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		A9BA72DE297649678489B71C /* HomePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		AE9D1A196EE102CE3116B172 /* Pods-ExamEGERussianUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianUITests/Pods-ExamEGERussianUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
@@ -6367,9 +6378,11 @@
 		B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreAssembly.swift; sourceTree = "<group>"; };
 		BA90350120544A5D00191D0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BB035CD08BB7AB3FD3A64F49 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
+		BEAB4B76E9610CAEE92FBA2B /* HomeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C0873EF2F06EC2C27A7C9255 /* ExploreViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3141665863D4EB5882EF1AC /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
+		C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C56E1AFEE69481800B794FE4 /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		C5CC7ADFCE6AA65DDEFF282C /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C606EBF103D5682D5B26FF35 /* ContentLanguageSwitchInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchInteractor.swift; sourceTree = "<group>"; };
@@ -6383,6 +6396,7 @@
 		EE14B4FF6B6070D800402D8D /* CourseListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListAssembly.swift; sourceTree = "<group>"; };
 		F3DF09ECDF8793A379E1BAFF /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F47CB98C00BEE01915CD88F5 /* Pods_Adaptive_3150.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5635A450A38016A68AF7E25 /* HomeInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		F668F0A50FF40D5B7417FBE1 /* Pods_Adaptive_3124_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE2E830A227844A0D6C7DFD /* CourseListPersistenceService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListPersistenceService.swift; sourceTree = "<group>"; };
 		FCEEEBF607246F9661A706BE /* Pods-ExamEGERussian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -8442,6 +8456,7 @@
 				DBA8A1094AD2004867D29D96 /* Tags */,
 				24FC00F459F731ED1F82F46F /* ContinueCourse */,
 				B4A0D8AF2F230818DD166DB8 /* ContentLanguageSwitch */,
+				1C42573B27E9F6F3C90F5A65 /* Home */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -8663,6 +8678,21 @@
 				1BAE13071F93F67700482251 /* Info.plist */,
 			);
 			path = StepikTVTests;
+			sourceTree = "<group>";
+		};
+		1C42573B27E9F6F3C90F5A65 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0300D50D89F06B6737857C45 /* HomeAssembly.swift */,
+				BEAB4B76E9610CAEE92FBA2B /* HomeViewController.swift */,
+				F5635A450A38016A68AF7E25 /* HomeInteractor.swift */,
+				A9BA72DE297649678489B71C /* HomePresenter.swift */,
+				573CFE338FB08142BEC048FE /* HomeDataFlow.swift */,
+				DA24A706D651B083DF81EB3E /* Provider */,
+				C3C33AB59C1C245E58A1459E /* View */,
+			);
+			name = Home;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		24FC00F459F731ED1F82F46F /* ContinueCourse */ = {
@@ -11264,12 +11294,30 @@
 			path = ContentLanguageSwitch;
 			sourceTree = "<group>";
 		};
+		C3C33AB59C1C245E58A1459E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */,
+			);
+			name = View;
+			path = View;
+			sourceTree = "<group>";
+		};
 		CD087B06843913AB176F79F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DA24A706D651B083DF81EB3E /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				6470759599AC47AE3102F586 /* HomeProvider.swift */,
+			);
+			name = Provider;
+			path = Provider;
 			sourceTree = "<group>";
 		};
 		DBA8A1094AD2004867D29D96 /* Tags */ = {
@@ -15021,6 +15069,13 @@
 				62E984CB92970A5DA765E454 /* CourseListColorMode.swift in Sources */,
 				62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */,
 				62E9886837CEF83D626D9536 /* StreakActivityView.swift in Sources */,
+				CEB50B790D9185887A04442B /* HomeAssembly.swift in Sources */,
+				FE0A777F6C6897CF9CCD0B98 /* HomeViewController.swift in Sources */,
+				B7DF37F9B68DC3E911071944 /* HomeInteractor.swift in Sources */,
+				71B8A5994CE4B0669E497244 /* HomePresenter.swift in Sources */,
+				96A1C493941AF863868DFAC2 /* HomeDataFlow.swift in Sources */,
+				CCEA4157B12C2032214B5816 /* HomeProvider.swift in Sources */,
+				0CAD53C8B6576D76DE23FE95 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

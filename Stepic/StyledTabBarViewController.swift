@@ -196,8 +196,18 @@ enum TabController: String {
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
-            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
-        case .notifications:
+            let viewController = HomeAssembly().makeModule()
+            let navigationViewController = StyledNavigationViewController(
+                rootViewController: viewController
+            )
+            return TabBarItemInfo(
+                title: NSLocalizedString("Home", comment: ""),
+                controller: navigationViewController,
+                clickEventName: AnalyticsEvents.Tabs.myCoursesClicked,
+                image: #imageLiteral(resourceName: "tab-home"),
+                tag: self.tag
+            )
+       case .notifications:
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .explore:
             let viewController = ExploreAssembly().makeModule()
@@ -207,7 +217,8 @@ enum TabController: String {
             return TabBarItemInfo(
                 title: NSLocalizedString("Catalog", comment: ""),
                 controller: navigationViewController,
-                clickEventName: AnalyticsEvents.Tabs.catalogClicked, image: #imageLiteral(resourceName: "tab-explore"),
+                clickEventName: AnalyticsEvents.Tabs.catalogClicked,
+                image: #imageLiteral(resourceName: "tab-explore"),
                 tag: self.tag
             )
         }
