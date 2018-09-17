@@ -1213,7 +1213,6 @@
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
 		2C130E8D2125A51A0022E998 /* AuthAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */; };
-		2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */; };
 		2C130E912125A5DC0022E998 /* MockAssemblyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */; };
 		2C130E932125A6090022E998 /* MockAssemblyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */; };
 		2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */; };
@@ -2342,6 +2341,8 @@
 		2C608B62204572A0006870BB /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
 		2C608B64204572A1006870BB /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
 		2C608B65204572A1006870BB /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
+		2C61BDBE215041AB0052EB6E /* LearningAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BDBD215041AB0052EB6E /* LearningAssemblyMock.swift */; };
+		2C61BDC0215041B40052EB6E /* TrainingAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BDBF215041B40052EB6E /* TrainingAssemblyMock.swift */; };
 		2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
@@ -4082,8 +4083,6 @@
 		2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BA07210B4AF40080BA05 /* TopicsPresenterTests.swift */; };
-		2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */; };
 		2CC8BA12210B4C4E0080BA05 /* TopicsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */; };
 		2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */; };
 		2CC995622105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift */; };
@@ -5684,7 +5683,6 @@
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
 		2C130E8C2125A51A0022E998 /* AuthAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssemblyMock.swift; sourceTree = "<group>"; };
-		2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsAssemblyMock.swift; sourceTree = "<group>"; };
 		2C130E902125A5DC0022E998 /* MockAssemblyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyViewController.swift; sourceTree = "<group>"; };
 		2C130E922125A6090022E998 /* MockAssemblyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAssemblyNavigationController.swift; sourceTree = "<group>"; };
 		2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyMock.swift; sourceTree = "<group>"; };
@@ -5866,6 +5864,8 @@
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
+		2C61BDBD215041AB0052EB6E /* LearningAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningAssemblyMock.swift; sourceTree = "<group>"; };
+		2C61BDBF215041B40052EB6E /* TrainingAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingAssemblyMock.swift; sourceTree = "<group>"; };
 		2C6640C91F2F35E60033A274 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2C6640CE1F2F47A90033A274 /* AchievementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
@@ -6039,8 +6039,6 @@
 		2CC351961F683140004255B6 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		2CC8BA07210B4AF40080BA05 /* TopicsPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsPresenterTests.swift; sourceTree = "<group>"; };
-		2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsTableViewControllerTests.swift; sourceTree = "<group>"; };
 		2CC8BA11210B4C4E0080BA05 /* TopicsRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRouterMock.swift; sourceTree = "<group>"; };
 		2CC9955F2105C1490023EC0C /* TopicsViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewSpy.swift; sourceTree = "<group>"; };
 		2CC995612105C3960023EC0C /* KnowledgeGraphPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KnowledgeGraphPlainObject+Make.swift"; sourceTree = "<group>"; };
@@ -8711,9 +8709,10 @@
 				2C130E9F2125A7E60022E998 /* ViewControllers */,
 				2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */,
 				2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */,
+				2C61BDBD215041AB0052EB6E /* LearningAssemblyMock.swift */,
 				2C130E942125A6400022E998 /* LessonsAssemblyMock.swift */,
 				2C130E962125A6890022E998 /* StepsAssemblyMock.swift */,
-				2C130E8E2125A5730022E998 /* TopicsAssemblyMock.swift */,
+				2C61BDBF215041B40052EB6E /* TrainingAssemblyMock.swift */,
 			);
 			path = Assemblies;
 			sourceTree = "<group>";
@@ -9386,7 +9385,6 @@
 			isa = PBXGroup;
 			children = (
 				2C130EB42125E2D50022E998 /* ApplicationLayerTests */,
-				2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */,
 				2C6841C120EE14AE0050155F /* BusinessLogicLayerTests */,
 				2C8305F420F38DCD003D7F9B /* CoreLayerTests */,
 				2C23FF16212303E900721E59 /* ModelTests */,
@@ -10185,23 +10183,6 @@
 				2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		2CC8BA05210B4AF40080BA05 /* PresentationLayerTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CC8BA06210B4AF40080BA05 /* TopicsTests */,
-			);
-			path = PresentationLayerTests;
-			sourceTree = "<group>";
-		};
-		2CC8BA06210B4AF40080BA05 /* TopicsTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CC8BA07210B4AF40080BA05 /* TopicsPresenterTests.swift */,
-				2CC8BA08210B4AF40080BA05 /* TopicsTableViewControllerTests.swift */,
-			);
-			path = TopicsTests;
 			sourceTree = "<group>";
 		};
 		2CC8BA13210B4CBF0080BA05 /* Routers */ = {
@@ -16462,7 +16443,6 @@
 				2C130EAA2125B71B0022E998 /* MockTableViewCell.swift in Sources */,
 				2C130E9C2125A7100022E998 /* AuthSignInAssemblyMock.swift in Sources */,
 				2CA9FDF6212594580046128C /* CourseServiceMock.swift in Sources */,
-				2CC8BA0D210B4AF50080BA05 /* TopicsPresenterTests.swift in Sources */,
 				2CDF46412126D30E00A803C5 /* LessonPlainObject+Make.swift in Sources */,
 				2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */,
 				2C6841C420EE14E00050155F /* UserRegistrationServiceTests.swift in Sources */,
@@ -16474,8 +16454,6 @@
 				2C1351E2212C47A2009E7312 /* RecommendationsServiceMock.swift in Sources */,
 				2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */,
 				2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */,
-				2CC8BA0E210B4AF50080BA05 /* TopicsTableViewControllerTests.swift in Sources */,
-				2C130E8F2125A5730022E998 /* TopicsAssemblyMock.swift in Sources */,
 				2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */,
 				2C130EB32125BE770022E998 /* BaseRouterTests.swift in Sources */,
 				2CCB5A642100A5D60091A605 /* GraphServiceMock.swift in Sources */,
@@ -16487,9 +16465,11 @@
 				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
 				2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */,
 				2C1351E6212C48D1009E7312 /* KnowledgeGraphProviderMock.swift in Sources */,
+				2C61BDC0215041B40052EB6E /* TrainingAssemblyMock.swift in Sources */,
 				2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */,
 				2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */,
 				2CDF464A2126E61100A803C5 /* ReactionsAPIMock.swift in Sources */,
+				2C61BDBE215041AB0052EB6E /* LearningAssemblyMock.swift in Sources */,
 				2CC995602105C1490023EC0C /* TopicsViewSpy.swift in Sources */,
 				2C23FF19212304CA00721E59 /* LessonPlainObjectTests.swift in Sources */,
 			);

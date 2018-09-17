@@ -10,15 +10,15 @@ import Foundation
 @testable import ExamEGERussian
 
 final class TopicsViewSpy: TrainingView {
-    var topics: [TopicPlainObject]?
+    var viewData: [TrainingViewData]?
     var displayErrorTitle: String?
     var displayErrorMessage: String?
 
     var onSet: (() -> Void)?
     var onError: (() -> Void)?
 
-    func setTopics(_ topics: [TopicPlainObject]) {
-        self.topics = topics
+    func setViewData(_ viewData: [TrainingViewData]) {
+        self.viewData = viewData
         onSet?()
     }
 
@@ -26,15 +26,5 @@ final class TopicsViewSpy: TrainingView {
         displayErrorTitle = title
         displayErrorMessage = message
         onError?()
-    }
-
-    // TODO: Test this
-    func setSegments(_ segments: [String]) {
-
-    }
-
-    // TODO: Test this
-    func selectSegment(at index: Int) {
-
     }
 }

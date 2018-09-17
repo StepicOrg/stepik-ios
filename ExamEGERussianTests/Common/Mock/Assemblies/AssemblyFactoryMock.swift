@@ -14,7 +14,9 @@ final class AssemblyFactoryMock: AssemblyFactory {
 
     var authAssembly: AuthAssembly = AuthAssemblyMock()
 
-    var topicsAssembly: TrainingAssemblyProtocol = TopicsAssemblyMock()
+    var learningAssembly: LearningAssemblyProtocol = LearningAssemblyMock()
+
+    var trainingAssembly: TrainingAssemblyProtocol = TrainingAssemblyMock()
 
     var lessonsAssembly: LessonsAssemblyProtocol = LessonsAssemblyMock()
 
