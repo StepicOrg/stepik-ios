@@ -10,27 +10,17 @@ import Foundation
 import PromiseKit
 
 final class TrainingPresenter: TrainingPresenterProtocol {
-    private static let lessonsLimit = 20
+    private static let lessonsLimit = 10
 
     private weak var view: TrainingView?
     private let router: TrainingRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
-    private var lessons = [LessonPlainObject]()
+    private var theoryLessons = [LessonPlainObject]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
     private let lessonsService: LessonsService
-
-    private var practiceLessons: [LessonPlainObject] {
-        var practice = [KnowledgeGraphLesson]()
-        knowledgeGraph.adjacencyLists.keys.forEach { vertex in
-            practice.append(contentsOf: vertex.lessons.filter { $0.type == .practice })
-        }
-        return lessons.filter { lesson in
-            practice.contains(where: { $0.id == lesson.id })
-        }
-    }
 
     init(view: TrainingView,
          knowledgeGraph: KnowledgeGraph,
@@ -48,12 +38,12 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     }
 
     func refresh() {
-        checkAuthStatus().then { _ in
-            self.fetchGraph()
-        }.then { _ in
-            self.fetchLessons()
+        checkAuthStatus().then {
+            self.fetchKnowledgeGraph()
+        }.then {
+            self.fetchTheoryLessons()
         }.then { lessons -> Promise<Void> in
-            self.lessons = lessons
+            self.theoryLessons = lessons
             return .value(())
         }.done {
             self.reloadViewData()
@@ -66,8 +56,8 @@ final class TrainingPresenter: TrainingPresenterProtocol {
                 )
             case TrainingPresenterError.failedRegisterUser:
                 self?.displayError(
-                    title: "Unable to register",
-                    message: "Please, try again later. Pull down to refresh screen."
+                    title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
+                    message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
                 )
             default:
                 self?.displayError()
@@ -112,7 +102,7 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
     }
 
-    private func fetchGraph() -> Promise<Void> {
+    private func fetchKnowledgeGraph() -> Promise<Void> {
         return Promise { seal in
             graphService.fetchGraph().done { [weak self] responseModel in
                 guard let strongSelf = self,
@@ -122,38 +112,45 @@ final class TrainingPresenter: TrainingPresenterProtocol {
 
                 strongSelf.knowledgeGraph.adjacency = graph.adjacency
                 seal.fulfill(())
-            }.catch { _ in
+            }.catch { error in
+                print("Failed fetch knowledge graph: \(error)")
                 seal.reject(TrainingPresenterError.failedFetchKnowledgeGraph)
             }
         }
     }
 
-    private func fetchLessons() -> Promise<[LessonPlainObject]> {
-        let lessonsIds = knowledgeGraph.adjacencyLists.keys.reduce([]) { (result, vertex) in
-            result + vertex.lessons.map { $0.id }
-        }
-        let lessonsToFetch = Set(lessonsIds).prefix(TrainingPresenter.lessonsLimit)
+    private func fetchTheoryLessons() -> Promise<[LessonPlainObject]> {
+        let ids = getKnowledgeGraphLessons(of: .theory)
+            .prefix(TrainingPresenter.lessonsLimit)
+            .map { $0.id }
+        return lessonsService.fetchLessons(with: ids)
+    }
 
-        return lessonsService.fetchLessons(with: Array(lessonsToFetch))
+    private func getKnowledgeGraphLessons(
+        of type: KnowledgeGraphLesson.LessonType
+    ) -> [KnowledgeGraphLesson] {
+        var result = [KnowledgeGraphLesson]()
+        knowledgeGraph.adjacencyLists.keys.forEach { topic in
+            let filteredLessons = topic.lessons.filter {
+                $0.type == type
+            }
+            result.append(contentsOf: filteredLessons)
+        }
+
+        return result
     }
 
     private func reloadViewData() {
-        let practiceLessons = self.practiceLessons.map {
-            toViewData($0, isPractice: true)
-        }
-        let theoryLessons = lessons.filter { lesson in
-            !practiceLessons.contains { $0.id == lesson.id }
-        }.map {
-            toViewData($0)
-        }
+        let theory = theoryLessons.map { toViewData($0, isPractice: false) }
+        let practice = getKnowledgeGraphLessons(of: .practice)
+            .prefix(TrainingPresenter.lessonsLimit)
+            .map { LessonPlainObject(lesson: $0) }
+            .map { toViewData($0, isPractice: true) }
 
-        view?.setViewData(theoryLessons + practiceLessons)
+        view?.setViewData(theory + practice)
     }
 
-    private func toViewData(
-        _ plainObject: LessonPlainObject,
-        isPractice: Bool = false
-    ) -> TrainingViewData {
+    private func toViewData(_ plainObject: LessonPlainObject, isPractice: Bool) -> TrainingViewData {
         return TrainingViewData(
             id: plainObject.id,
             title: plainObject.title,
