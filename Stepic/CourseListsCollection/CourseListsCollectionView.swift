@@ -31,8 +31,6 @@ final class CourseListsCollectionView: UIView {
         return stackView
     }()
 
-    private let contentView: UIView
-
     override var intrinsicContentSize: CGSize {
         let headerViewHeight = self.headerView.intrinsicContentSize.height
         let headerViewPadding = Appearance.headerViewInsets.top
@@ -46,11 +44,12 @@ final class CourseListsCollectionView: UIView {
         )
     }
 
-    init(frame: CGRect, contentView: UIView) {
-        self.contentView = contentView
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        initialize()
+
+        self.setupView()
+        self.addSubviews()
+        self.makeConstraints()
     }
 
     override func layoutSubviews() {
@@ -62,8 +61,22 @@ final class CourseListsCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func initialize() {
+    func addBlockView(_ view: UIView) {
+        self.contentStackView.addArrangedSubview(view)
+    }
+}
+
+extension CourseListsCollectionView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = .white
+    }
+
+    func addSubviews() {
         self.addSubview(self.headerView)
+        self.addSubview(self.contentStackView)
+    }
+
+    func makeConstraints() {
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -71,24 +84,10 @@ final class CourseListsCollectionView: UIView {
             make.trailing.equalToSuperview().offset(-Appearance.headerViewInsets.right)
         }
 
-        self.addSubview(self.contentStackView)
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in
             make.top.equalTo(self.headerView.snp.bottom)
             make.leading.trailing.equalToSuperview()
         }
-
-        let view = ExploreCoursesCollectionHeaderView(frame: .zero)
-        view.titleText = "Mobile friendly"
-        view.summaryText = "8 courses"
-        view.descriptionText = "Welcome to our Mobile Friendly List.\nIt’s fully completed in the App!"
-        let container = ExploreBlockContainerView(
-            frame: .zero,
-            headerView: view,
-            contentView: self.contentView,
-            shouldShowSeparator: false
-        )
-
-        self.contentStackView.addArrangedSubview(container)
     }
 }

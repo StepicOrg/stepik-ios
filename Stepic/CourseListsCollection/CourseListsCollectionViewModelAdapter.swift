@@ -11,7 +11,7 @@ import Foundation
 extension CourseListsCollectionViewModel {
     init(courseList: CourseListModel) {
         self.title = courseList.title
-        self.summary = courseList.description
+        self.summary = courseList.listDescription
         self.courseList = CollectionCourseListType(ids: courseList.coursesArray)
     }
 }

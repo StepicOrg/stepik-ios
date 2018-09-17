@@ -15,6 +15,8 @@ protocol CourseListsCollectionViewControllerProtocol: class {
 final class CourseListsCollectionViewController: UIViewController {
     let interactor: CourseListsCollectionInteractorProtocol
 
+    lazy var courseListsCollectionView = self.view as? CourseListsCollectionView
+
     init(interactor: CourseListsCollectionInteractorProtocol) {
         self.interactor = interactor
 
@@ -31,18 +33,36 @@ final class CourseListsCollectionViewController: UIViewController {
     }
 
     override func loadView() {
-        let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian), colorMode: .light)
-        let vc = assembly.makeModule()
-        assembly.getModuleInput().reload()
-        addChildViewController(vc)
-
-        let view = CourseListsCollectionView(frame: UIScreen.main.bounds, contentView: vc.view)
+        let view = CourseListsCollectionView(frame: UIScreen.main.bounds)
         self.view = view
     }
 }
 
 extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
     func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel) {
-        print(viewModel)
+        switch viewModel.state {
+        case .result(let data):
+            for courseListViewModel in data {
+                let view = ExploreCoursesCollectionHeaderView(frame: .zero)
+                view.titleText = courseListViewModel.title
+                view.summaryText = "\(courseListViewModel.courseList.ids.count) курсов"
+                view.descriptionText = "\(courseListViewModel.summary ?? "")"
+
+                let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian), colorMode: .light)
+                let vc = assembly.makeModule()
+                assembly.getModuleInput().reload()
+                self.addChildViewController(vc)
+                let container = ExploreBlockContainerView(
+                    frame: .zero,
+                    headerView: view,
+                    contentView: vc.view,
+                    shouldShowSeparator: false
+                )
+
+                courseListsCollectionView?.addBlockView(container)
+            }
+        default:
+            break
+        }
     }
 }
