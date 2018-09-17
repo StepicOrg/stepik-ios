@@ -40,9 +40,21 @@ extension TrainingHorizontalCollectionSource: UICollectionViewDataSource {
         let cell: TrainingCardCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.titleLabel.text = viewData.title
         cell.bodyLabel.text = viewData.description
-        cell.commentLabel.text = viewData.description
+        cell.commentLabel.text = viewData.isPractice
+            ? nil
+            : pagesPluralized(count: viewData.countLessons)
 
         return cell
+    }
+
+    private func pagesPluralized(count: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: count, forms: [
+            NSLocalizedString("PagesCountText1", comment: ""),
+            NSLocalizedString("PagesCountText234", comment: ""),
+            NSLocalizedString("PagesCountText567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(count)")
     }
 }
 

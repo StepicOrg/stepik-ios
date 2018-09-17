@@ -118,6 +118,32 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         return lessonsService.fetchLessons(with: ids)
     }
 
+    // TODO: Remove hardcoded lessons content.
+    private func reloadViewData() {
+        let theory = theoryLessons.map {
+            TrainingViewData(
+                id: $0.id,
+                title: $0.title,
+                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+                countLessons: $0.steps.count,
+                isPractice: false
+            )
+        }
+        let practice = getKnowledgeGraphLessons(of: .practice)
+            .prefix(TrainingPresenter.lessonsLimit)
+            .map {
+                TrainingViewData(
+                    id: $0.id,
+                    title: getTopicForLesson($0)?.title ?? "",
+                    description: "Краткое описание того, что происходит здесь",
+                    countLessons: 1,
+                    isPractice: true
+                )
+        }
+
+        view?.setViewData(theory + practice)
+    }
+
     private func getKnowledgeGraphLessons(
         of type: KnowledgeGraphLesson.LessonType
     ) -> [KnowledgeGraphLesson] {
@@ -132,24 +158,14 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         return result
     }
 
-    private func reloadViewData() {
-        let theory = theoryLessons.map { toViewData($0, isPractice: false) }
-        let practice = getKnowledgeGraphLessons(of: .practice)
-            .prefix(TrainingPresenter.lessonsLimit)
-            .map { LessonPlainObject(lesson: $0) }
-            .map { toViewData($0, isPractice: true) }
+    private func getTopicForLesson(_ lesson: KnowledgeGraphLesson) -> KnowledgeGraph.Node? {
+        for topic in knowledgeGraph.adjacencyLists.keys {
+            if topic.lessons.contains(where: { $0.id == lesson.id }) {
+                return topic
+            }
+        }
 
-        view?.setViewData(theory + practice)
-    }
-
-    private func toViewData(_ plainObject: LessonPlainObject, isPractice: Bool) -> TrainingViewData {
-        return TrainingViewData(
-            id: plainObject.id,
-            title: plainObject.title,
-            description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-            countLessons: plainObject.steps.count,
-            isPractice: isPractice
-        )
+        return nil
     }
 
     private func displayError(
@@ -158,6 +174,8 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     ) {
         view?.displayError(title: title, message: message)
     }
+
+    // MARK: - Types
 
     private enum TrainingPresenterError: Error {
         case failedRegisterUser
