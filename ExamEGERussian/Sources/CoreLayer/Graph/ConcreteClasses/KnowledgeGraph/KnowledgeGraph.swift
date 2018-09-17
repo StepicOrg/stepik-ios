@@ -39,7 +39,9 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
 
     func firstLesson(where predicate: (KnowledgeGraphLesson) -> Bool) -> KnowledgeGraphLesson? {
         for vertex in adjacencyLists.keys {
-            return vertex.lessons.first(where: predicate)
+            if let lesson = vertex.lessons.first(where: predicate) {
+                return lesson
+            }
         }
 
         return nil
