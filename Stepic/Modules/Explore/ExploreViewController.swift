@@ -50,10 +50,28 @@ final class ExploreViewController: UIViewController {
         self.addChildViewController(collectionViewController)
         view.addBlockView(collectionViewController.view)
 
-        let popularAssembly = CourseListAssembly(type: PopularCourseListType(language: .russian))
+        let popularAssembly = CourseListAssembly(type: PopularCourseListType(language: .english), colorMode: .dark)
         let popularViewController = popularAssembly.makeModule()
+        popularAssembly.getModuleInput().reload()
         self.addChildViewController(popularViewController)
-        view.addBlockView(popularViewController.view)
+
+        let hv = ExploreBlockHeaderView(
+            frame: .zero,
+            appearance: CourseListColorMode.dark.exploreBlockHeaderViewAppearance
+        )
+        hv.titleText = "Popular"
+
+        var appearance = CourseListColorMode.dark.exploreBlockContainerViewAppearance
+        appearance.contentViewInsets.top = 0
+        appearance.contentViewInsets.bottom = 16
+        let container = ExploreBlockContainerView(
+            frame: .zero,
+            headerView: hv,
+            contentView: popularViewController.view,
+            shouldShowSeparator: false,
+            appearance: appearance
+        )
+        view.addBlockView(container)
 
         self.view = view
     }

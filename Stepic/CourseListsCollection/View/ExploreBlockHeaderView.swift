@@ -11,7 +11,7 @@ import SnapKit
 
 extension ExploreBlockHeaderView {
     struct Appearance {
-        var titleLabelColor = UIColor(hex: 0x535366, alpha: 0.3)
+        var titleLabelColor = UIColor(hex: 0x535366)
         let titleLabelFont = UIFont.systemFont(ofSize: 20)
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
 

@@ -20,21 +20,16 @@ extension CourseWidgetStatsView {
 
         let imagesRenderingSize = CGSize(width: 30, height: 30)
         let imagesRenderingLineWidth: CGFloat = 6.0
-        let lightModeImagesRenderingBackgroundColor = UIColor(hex: 0x535366)
-        let lightModeImagesRenderingTintColor = UIColor(hex: 0x89cc89)
-        let darkModeImagesRenderingBackgroundColor = UIColor.white
-        let darkModeImagesRenderingTintColor = UIColor(hex: 0x89cc89)
+        var imagesRenderingBackgroundColor = UIColor(hex: 0x535366)
+        var imagesRenderingTintColor = UIColor(hex: 0x89cc89)
+
+        var itemTextColor = UIColor.white
+        var itemImageTintColor = UIColor.white
     }
 }
 
 final class CourseWidgetStatsView: UIView {
     let appearance: Appearance
-
-    var colorMode: CourseWidgetColorMode {
-        didSet {
-            self.updateColorMode()
-        }
-    }
 
     var learnersLabelText: String? {
         didSet {
@@ -62,11 +57,12 @@ final class CourseWidgetStatsView: UIView {
 
     private lazy var learnersView: CourseWidgetStatsItemView = {
         let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.learnersViewImageViewSize
+            imageViewSize: self.appearance.learnersViewImageViewSize,
+            imageTintColor: self.appearance.itemImageTintColor,
+            textColor: self.appearance.itemTextColor
         )
         let view = CourseWidgetStatsItemView(
             frame: .zero,
-            colorMode: self.colorMode,
             appearance: appearance
         )
         view.image = UIImage(named: "course-widget-user")!.withRenderingMode(.alwaysTemplate)
@@ -75,11 +71,12 @@ final class CourseWidgetStatsView: UIView {
 
     private lazy var ratingView: CourseWidgetStatsItemView = {
         let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.ratingViewImageViewSize
+            imageViewSize: self.appearance.ratingViewImageViewSize,
+            imageTintColor: self.appearance.itemImageTintColor,
+            textColor: self.appearance.itemTextColor
         )
         let view = CourseWidgetStatsItemView(
             frame: .zero,
-            colorMode: self.colorMode,
             appearance: appearance
         )
         view.image = UIImage(named: "course-widget-rating")!.withRenderingMode(.alwaysTemplate)
@@ -88,11 +85,12 @@ final class CourseWidgetStatsView: UIView {
 
     private lazy var progressView: CourseWidgetStatsItemView = {
         let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.progressViewImageViewSize
+            imageViewSize: self.appearance.progressViewImageViewSize,
+            imageTintColor: .clear,
+            textColor: self.appearance.itemTextColor
         )
         let view = CourseWidgetStatsItemView(
             frame: .zero,
-            colorMode: self.colorMode,
             appearance: appearance
         )
         return view
@@ -106,13 +104,8 @@ final class CourseWidgetStatsView: UIView {
         return stackView
     }()
 
-    init(
-        frame: CGRect,
-        colorMode: CourseWidgetColorMode = .default,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.colorMode = colorMode
         super.init(frame: frame)
 
         self.setupView()
@@ -129,53 +122,14 @@ final class CourseWidgetStatsView: UIView {
             progress: viewModel.progress,
             size: self.appearance.imagesRenderingSize,
             lineWidth: self.appearance.imagesRenderingLineWidth,
-            backgroundColor: self.getImagesRenderingBackgroundColor(for: self.colorMode),
-            progressColor: self.getImagesRenderingProgressColor(for: self.colorMode)
+            backgroundColor: self.appearance.imagesRenderingBackgroundColor,
+            progressColor: self.appearance.imagesRenderingTintColor
         )
 
         if let pieImage = progressPie.uiImage {
             progressView.image = pieImage
             progressView.text = viewModel.progressLabelText
             progressView.isHidden = false
-        }
-    }
-}
-
-// MARK: - Color mode
-
-extension CourseWidgetStatsView {
-    private func updateColorMode() {
-        self.learnersView.colorMode = self.colorMode
-        self.ratingView.colorMode = self.colorMode
-        self.progressView.colorMode = self.colorMode
-
-        self.learnersView.imageView.tintColor = self.getImagesRenderingBackgroundColor(
-            for: self.colorMode
-        )
-        self.ratingView.imageView.tintColor = self.getImagesRenderingBackgroundColor(
-            for: self.colorMode
-        )
-    }
-
-    private func getImagesRenderingBackgroundColor(
-        for colorMode: CourseWidgetColorMode
-    ) -> UIColor {
-        switch colorMode {
-        case .light:
-            return self.appearance.lightModeImagesRenderingBackgroundColor
-        case .dark:
-            return self.appearance.darkModeImagesRenderingBackgroundColor
-        }
-    }
-
-    private func getImagesRenderingProgressColor(
-        for colorMode: CourseWidgetColorMode
-    ) -> UIColor {
-        switch colorMode {
-        case .light:
-            return self.appearance.lightModeImagesRenderingTintColor
-        case .dark:
-            return self.appearance.darkModeImagesRenderingTintColor
         }
     }
 }

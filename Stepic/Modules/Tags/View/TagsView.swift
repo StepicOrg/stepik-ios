@@ -11,9 +11,11 @@ import SnapKit
 
 extension TagsView {
     struct Appearance {
+        let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
+
         let tagsHeight: CGFloat = 40
         let tagsSpacing: CGFloat = 15
-        let tagsViewInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        let tagsViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 27, right: 20)
 
         let tagBackgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
         let tagFont = UIFont.systemFont(ofSize: 16, weight: .light)
@@ -27,9 +29,9 @@ final class TagsView: UIView {
     let appearance: Appearance
 
     private lazy var containerView: ExploreBlockContainerView = {
-        let appearance = ExploreBlockContainerView.Appearance(
-            contentViewInsets: self.appearance.tagsViewInsets
-        )
+        var appearance = ExploreBlockContainerView.Appearance()
+        appearance.contentViewInsets = self.appearance.tagsViewInsets
+
         return ExploreBlockContainerView(
             frame: .zero,
             headerView: self.headerView,
@@ -39,7 +41,10 @@ final class TagsView: UIView {
     }()
 
     private lazy var headerView: ExploreBlockHeaderView = {
-        let headerView = ExploreBlockHeaderView(frame: .zero)
+        var appearance = ExploreBlockHeaderView.Appearance()
+        appearance.titleLabelColor = self.appearance.headerTitleColor
+
+        let headerView = ExploreBlockHeaderView(frame: .zero, appearance: appearance)
         headerView.titleText = NSLocalizedString("TrendingTopics", comment: "")
         headerView.summaryText = nil
         headerView.shouldShowShowAllButton = false

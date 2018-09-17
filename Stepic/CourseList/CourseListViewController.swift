@@ -22,14 +22,17 @@ final class CourseListViewController: UIViewController {
 
     lazy var courseListView = self.view as? CourseListView
 
+    private let colorMode: CourseListColorMode
     private var canTriggerPagination = true
 
     init(
         interactor: CourseListInteractorProtocol,
-        initialState: CourseList.ViewControllerState = .loading
+        initialState: CourseList.ViewControllerState = .loading,
+        colorMode: CourseListColorMode = .default
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.colorMode = colorMode
 
         self.listDelegate = CourseListCollectionViewDelegate()
         self.listDataSource = CourseListCollectionViewDataSource()
@@ -44,6 +47,7 @@ final class CourseListViewController: UIViewController {
     override func loadView() {
         let view = CourseListView(
             frame: UIScreen.main.bounds,
+            colorMode: self.colorMode,
             orientation: .horizontal(rowsCount: 2, columnsCount: 1),
             delegate: self.listDelegate,
             dataSource: self.listDataSource,

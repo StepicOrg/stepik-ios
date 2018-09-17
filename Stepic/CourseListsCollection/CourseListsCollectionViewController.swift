@@ -31,7 +31,7 @@ final class CourseListsCollectionViewController: UIViewController {
     }
 
     override func loadView() {
-        let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian))
+        let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian), colorMode: .light)
         let vc = assembly.makeModule()
         assembly.getModuleInput().reload()
         addChildViewController(vc)

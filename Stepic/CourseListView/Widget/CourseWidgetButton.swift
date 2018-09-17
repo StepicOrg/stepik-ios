@@ -14,28 +14,16 @@ extension CourseWidgetButton {
 
         let titleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
 
-        let lightModeTextColor = UIColor.mainText
-        let lightModeBackgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
+        var textColor = UIColor.mainText
+        var backgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
 
-        let lightModeCallToActionTextColor = UIColor.stepicGreen
-        let lightModeCallToActionBackgroundColor = UIColor.stepicGreen.withAlphaComponent(0.1)
-
-        let darkModeTextColor = UIColor.white
-        let darkModeBackgroundColor = UIColor(hex: 0xffffff, alpha: 0.1)
-
-        let darkModeCallToActionTextColor = UIColor.stepicGreen
-        let darkModeCallToActionBackgroundColor = UIColor.stepicGreen.withAlphaComponent(0.1)
+        var callToActionTextColor = UIColor.stepicGreen
+        var callToActionBackgroundColor = UIColor.stepicGreen.withAlphaComponent(0.1)
     }
 }
 
 final class CourseWidgetButton: BounceButton {
     let appearance: Appearance
-
-    var colorMode: CourseWidgetColorMode {
-        didSet {
-            self.updateColors()
-        }
-    }
 
     var isCallToAction: Bool {
         didSet {
@@ -44,12 +32,10 @@ final class CourseWidgetButton: BounceButton {
     }
 
     init(
-        colorMode: CourseWidgetColorMode = .default,
         isCallToAction: Bool = false,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
-        self.colorMode = colorMode
         self.isCallToAction = isCallToAction
         super.init(frame: .zero)
         self.setupView()
@@ -60,48 +46,13 @@ final class CourseWidgetButton: BounceButton {
     }
 
     private func updateColors() {
-        self.backgroundColor = self.getBackgroundColor(
-            for: self.colorMode,
-            isCallToAction: self.isCallToAction
-        )
+        self.backgroundColor = isCallToAction
+            ? self.appearance.callToActionBackgroundColor
+            : self.appearance.backgroundColor
         self.setTitleColor(
-            self.getTextColor(for: self.colorMode, isCallToAction: self.isCallToAction),
+            isCallToAction ? self.appearance.callToActionTextColor : self.appearance.textColor,
             for: .normal
         )
-    }
-
-    // MARK: - ColorMode
-
-    private func getTextColor(
-        for colorMode: CourseWidgetColorMode,
-        isCallToAction: Bool
-    ) -> UIColor {
-        switch colorMode {
-        case .light:
-            return isCallToAction
-                ? self.appearance.lightModeCallToActionTextColor
-                : self.appearance.lightModeTextColor
-        case .dark:
-            return isCallToAction
-                ? self.appearance.darkModeCallToActionTextColor
-                : self.appearance.darkModeTextColor
-        }
-    }
-
-    private func getBackgroundColor(
-        for colorMode: CourseWidgetColorMode,
-        isCallToAction: Bool
-    ) -> UIColor {
-        switch colorMode {
-        case .light:
-            return isCallToAction
-                ? self.appearance.lightModeCallToActionBackgroundColor
-                : self.appearance.lightModeBackgroundColor
-        case .dark:
-            return isCallToAction
-                ? self.appearance.darkModeCallToActionBackgroundColor
-                : self.appearance.darkModeBackgroundColor
-        }
     }
 }
 

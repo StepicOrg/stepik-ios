@@ -13,8 +13,10 @@ extension CourseWidgetStatsItemView {
     struct Appearance {
         let iconSpacing: CGFloat = 3.0
         var imageViewSize = CGSize(width: 12, height: 12)
+        var imageTintColor = UIColor.black
 
         let font = UIFont.systemFont(ofSize: 16, weight: .light)
+        var textColor = UIColor.white
     }
 }
 
@@ -24,7 +26,9 @@ final class CourseWidgetStatsItemView: UIView {
     lazy var imageView: UIImageView = UIImageView()
 
     private lazy var textLabel: CourseWidgetLabel = {
-        let appearance = CourseWidgetLabel.Appearance(font: self.appearance.font)
+        var appearance = CourseWidgetLabel.Appearance()
+        appearance.font = self.appearance.font
+        appearance.textColor = self.appearance.textColor
         let label = CourseWidgetLabel(frame: .zero, appearance: appearance)
         return label
     }()
@@ -41,19 +45,8 @@ final class CourseWidgetStatsItemView: UIView {
         }
     }
 
-    var colorMode: CourseWidgetColorMode {
-        didSet {
-            self.updateColorMode()
-        }
-    }
-
-    init(
-        frame: CGRect,
-        colorMode: CourseWidgetColorMode = .default,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.colorMode = colorMode
         super.init(frame: frame)
 
         self.setupView()
@@ -64,15 +57,12 @@ final class CourseWidgetStatsItemView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func updateColorMode() {
-        self.textLabel.colorMode = self.colorMode
-    }
 }
 
 extension CourseWidgetStatsItemView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.imageView.contentMode = .scaleAspectFit
+        self.imageView.tintColor = self.appearance.imageTintColor
     }
 
     func addSubviews() {

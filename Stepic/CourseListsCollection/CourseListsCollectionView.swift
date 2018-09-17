@@ -15,7 +15,10 @@ final class CourseListsCollectionView: UIView {
     }
 
     private lazy var headerView: ExploreBlockHeaderView = {
-        let view = ExploreBlockHeaderView(frame: .zero)
+        let view = ExploreBlockHeaderView(
+            frame: .zero,
+            appearance: CourseListColorMode.light.exploreBlockHeaderViewAppearance
+        )
         view.titleText = "Recommendations"
         view.summaryText = "Check out Stepik Categories Lists that matching your interests"
         view.shouldShowShowAllButton = false
@@ -48,6 +51,11 @@ final class CourseListsCollectionView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         initialize()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
     }
 
     required init?(coder aDecoder: NSCoder) {

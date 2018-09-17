@@ -12,6 +12,7 @@ import SnapKit
 extension ExploreBlockContainerView {
     struct Appearance {
         let separatorColor = UIColor(hex: 0x535366, alpha: 0.1)
+        var backgroundColor = UIColor.white
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
@@ -64,11 +65,17 @@ final class ExploreBlockContainerView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+    }
 }
 
 extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.contentView.clipsToBounds = false
+        self.backgroundColor = self.appearance.backgroundColor
     }
 
     func addSubviews() {

@@ -13,7 +13,7 @@ extension CourseWidgetView {
     struct Appearance {
         let coverViewWidthHeight: CGFloat = 80.0
 
-        let secondaryActionButtonInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 9)
+        let secondaryActionButtonInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 10)
         let secondaryActionButtonSize = CGSize(width: 80, height: 48)
 
         let mainActionButtonHeight: CGFloat = 48.0
@@ -25,29 +25,33 @@ extension CourseWidgetView {
 
 final class CourseWidgetView: UIView {
     let appearance: Appearance
+    let colorMode: CourseListColorMode
 
-    var colorMode: CourseWidgetColorMode {
-        didSet {
-            self.updateColors()
-        }
-    }
-
-    private lazy var coverView: CourseWidgetCoverView = CourseWidgetCoverView(frame: .zero)
-    private lazy var primaryActionButton: CourseWidgetButton = CourseWidgetButton()
-    private lazy var secondaryActionButton: CourseWidgetButton = CourseWidgetButton()
-    private lazy var titleLabel: CourseWidgetLabel = CourseWidgetLabel(frame: .zero)
-    private lazy var statsView: CourseWidgetStatsView = CourseWidgetStatsView(frame: .zero)
+    private lazy var coverView = CourseWidgetCoverView(frame: .zero)
+    private lazy var primaryActionButton = CourseWidgetButton(
+        appearance: self.colorMode.courseWidgetButtonAppearance
+    )
+    private lazy var secondaryActionButton = CourseWidgetButton(
+        appearance: self.colorMode.courseWidgetButtonAppearance
+    )
+    private lazy var titleLabel = CourseWidgetLabel(
+        frame: .zero,
+        appearance: self.colorMode.courseWidgetLabelAppearance
+    )
+    private lazy var statsView = CourseWidgetStatsView(
+        frame: .zero,
+        appearance: self.colorMode.courseWidgetStatsViewAppearance
+    )
 
     init(
         frame: CGRect,
-        colorMode: CourseWidgetColorMode = .default,
+        colorMode: CourseListColorMode = .default,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.colorMode = colorMode
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -85,20 +89,9 @@ final class CourseWidgetView: UIView {
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
         self.statsView.progress = viewModel
     }
-
-    private func updateColors() {
-        self.primaryActionButton.colorMode = self.colorMode
-        self.secondaryActionButton.colorMode = self.colorMode
-        self.titleLabel.colorMode = self.colorMode
-        self.statsView.colorMode = self.colorMode
-    }
 }
 
 extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.updateColors()
-    }
-
     func addSubviews() {
         self.addSubview(self.coverView)
         self.addSubview(self.primaryActionButton)

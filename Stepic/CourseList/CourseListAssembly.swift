@@ -11,10 +11,12 @@ import UIKit
 final class CourseListAssembly: Assembly {
     // TODO: replace methods by properties
     private let type: CourseListType
+    private let colorMode: CourseListColorMode
     private var interactor: CourseListInteractor?
 
-    init(type: CourseListType) {
+    init(type: CourseListType, colorMode: CourseListColorMode) {
         self.type = type
+        self.colorMode = colorMode
     }
 
     func makeModule() -> UIViewController {
@@ -30,7 +32,7 @@ final class CourseListAssembly: Assembly {
             reviewSummariesNetworkService: CourseReviewSummariesNetworkService(courseReviewSummariesAPI: CourseReviewSummariesAPI())
         )
         self.interactor = CourseListInteractor(presenter: presenter, provider: provider)
-        let controller = CourseListViewController(interactor: self.interactor!)
+        let controller = CourseListViewController(interactor: self.interactor!, colorMode: self.colorMode)
 
         presenter.viewController = controller
         return controller

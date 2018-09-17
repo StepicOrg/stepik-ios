@@ -26,7 +26,7 @@ extension CourseListView {
 
 final class CourseListView: UIView {
     let appearance: Appearance
-    let colorMode: CourseWidgetColorMode
+    let colorMode: CourseListColorMode
     let orientation: Orientation
 
     private var collectionView: UICollectionView!
@@ -62,9 +62,13 @@ final class CourseListView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        return self.collectionView.collectionViewLayout.collectionViewContentSize
+    }
+
     init(
         frame: CGRect,
-        colorMode: CourseWidgetColorMode = .default,
+        colorMode: CourseListColorMode = .default,
         orientation: Orientation,
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource,
@@ -98,8 +102,8 @@ final class CourseListView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         self.updateItemSize(self.calculateItemSize())
+        self.invalidateIntrinsicContentSize()
     }
 
     func calculateItemSize() -> CGSize {
@@ -165,7 +169,7 @@ final class CourseListView: UIView {
 
     // MARK: - ColorMode
 
-    private func getBackgroundColor(for colorMode: CourseWidgetColorMode) -> UIColor {
+    private func getBackgroundColor(for colorMode: CourseListColorMode) -> UIColor {
         switch colorMode {
         case .light:
             return self.appearance.lightModeBackgroundColor
@@ -198,7 +202,21 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 
     private func setupCollectionView() {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.collectionView.register(cellClass: CourseListCollectionViewCell.self)
+
+        switch self.colorMode {
+        case .light:
+            self.collectionView.register(
+                LightCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: LightCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case .dark:
+            self.collectionView.register(
+                DarkCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        default:
+            fatalError("Color mode is not supported")
+        }
         self.collectionView.register(viewClass: Stub.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter)
 
         self.collectionView.isPagingEnabled = false
@@ -231,5 +249,34 @@ extension CourseListView: UICollectionViewDelegate {
         if indexPath.row + 1 == itemsCount {
             self.delegate?.courseListViewDidPaginationRequesting(self)
         }
+    }
+}
+
+// Cause we can't init cell with custom initializer let's use custom classes
+private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .light)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        return String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .dark)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        return String(describing: CourseListCollectionViewCell.self)
     }
 }

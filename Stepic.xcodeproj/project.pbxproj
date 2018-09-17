@@ -4004,7 +4004,6 @@
 		2CBCD3B621359A5B005D10FF /* FormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA344212C351E002116C9 /* FormatterHelper.swift */; };
 		2CBCD3B721359A5F005D10FF /* CourseCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA34D212C3527002116C9 /* CourseCoverImageView.swift */; };
 		2CBCD3B821359A61005D10FF /* CourseWidgetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA348212C3526002116C9 /* CourseWidgetButton.swift */; };
-		2CBCD3BF21359A67005D10FF /* CourseWidgetColorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA346212C3525002116C9 /* CourseWidgetColorMode.swift */; };
 		2CBCD3C021359A67005D10FF /* CourseWidgetCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA34E212C3527002116C9 /* CourseWidgetCoverView.swift */; };
 		2CBCD3C121359A67005D10FF /* CourseWidgetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA34A212C3526002116C9 /* CourseWidgetLabel.swift */; };
 		2CBCD3C221359A67005D10FF /* CourseWidgetStatsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA34B212C3526002116C9 /* CourseWidgetStatsItemView.swift */; };
@@ -4245,6 +4244,7 @@
 		62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
 		62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E984CB92970A5DA765E454 /* CourseListColorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988CF3D76C556D362BD4E /* CourseListColorMode.swift */; };
 		62E984DD2249530A7BAC3048 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */; };
@@ -5752,7 +5752,6 @@
 		2C2EA340212C3516002116C9 /* UICollectionViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtensions.swift; sourceTree = "<group>"; };
 		2C2EA341212C3517002116C9 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		2C2EA344212C351E002116C9 /* FormatterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterHelper.swift; sourceTree = "<group>"; };
-		2C2EA346212C3525002116C9 /* CourseWidgetColorMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetColorMode.swift; sourceTree = "<group>"; };
 		2C2EA347212C3525002116C9 /* CourseWidgetStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetStatsView.swift; sourceTree = "<group>"; };
 		2C2EA348212C3526002116C9 /* CourseWidgetButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetButton.swift; sourceTree = "<group>"; };
 		2C2EA349212C3526002116C9 /* CourseWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetView.swift; sourceTree = "<group>"; };
@@ -6196,6 +6195,7 @@
 		62E98849F0870E88D6D8F2E7 /* StepsPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerViewController.swift; sourceTree = "<group>"; };
 		62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+StreakNotificationsControlView.swift"; sourceTree = "<group>"; };
 		62E988C4C129B4C7823472BB /* CourseListsCollectionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionProvider.swift; sourceTree = "<group>"; };
+		62E988CF3D76C556D362BD4E /* CourseListColorMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseListColorMode.swift; path = Widget/CourseListColorMode.swift; sourceTree = "<group>"; };
 		62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsPresenter.swift; sourceTree = "<group>"; };
 		62E9896ED2E13622584F2DB5 /* ExploreBlockHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreBlockHeaderView.swift; sourceTree = "<group>"; };
 		62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerRouter.swift; sourceTree = "<group>"; };
@@ -9061,6 +9061,7 @@
 				2C2EA330212C3416002116C9 /* Helpers */,
 				2C2EA32F212C33CD002116C9 /* Widget */,
 				2C2EA32E212C33B2002116C9 /* Layouts */,
+				62E988CF3D76C556D362BD4E /* CourseListColorMode.swift */,
 			);
 			path = CourseListView;
 			sourceTree = "<group>";
@@ -9080,7 +9081,6 @@
 			children = (
 				2C2EA34D212C3527002116C9 /* CourseCoverImageView.swift */,
 				2C2EA348212C3526002116C9 /* CourseWidgetButton.swift */,
-				2C2EA346212C3525002116C9 /* CourseWidgetColorMode.swift */,
 				2C2EA34E212C3527002116C9 /* CourseWidgetCoverView.swift */,
 				2C2EA34A212C3526002116C9 /* CourseWidgetLabel.swift */,
 				2C2EA34B212C3526002116C9 /* CourseWidgetStatsItemView.swift */,
@@ -10933,7 +10933,6 @@
 				024D65DCBD4F8631B97D461D /* ContentLanguageSwitchView.swift */,
 				62E984E654267333681BD459 /* ContentLanguageSwitchButton.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -11240,7 +11239,6 @@
 				62E98F8B42A28AC17DF11DD3 /* ContentLanguageSwitchViewModel.swift */,
 				62E989335B470E1299F1046B /* Provider */,
 			);
-			name = ContentLanguageSwitch;
 			path = ContentLanguageSwitch;
 			sourceTree = "<group>";
 		};
@@ -14860,7 +14858,6 @@
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				08AA11BB20BC549A00CA6698 /* PersonalDeadlineNotificationsManager.swift in Sources */,
-				2CBCD3BF21359A67005D10FF /* CourseWidgetColorMode.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
@@ -14999,6 +14996,7 @@
 				62E98831026E6C121D4C54D9 /* ContentLanguageSwitchViewModel.swift in Sources */,
 				62E98F602ED9E5CEA4E02D0A /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
 				62E981A332823B6CE16E4306 /* ContentLanguageSwitchProvider.swift in Sources */,
+				62E984CB92970A5DA765E454 /* CourseListColorMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19182,7 +19180,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 97;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -19213,7 +19211,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 97;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -20057,7 +20055,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
@@ -20085,7 +20083,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
@@ -20111,7 +20109,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
@@ -20137,7 +20135,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;

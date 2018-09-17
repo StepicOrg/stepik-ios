@@ -11,9 +11,11 @@ import SnapKit
 
 extension ContentLanguageSwitchView {
     struct Appearance {
+        let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
+
         let descriptionFont = UIFont.systemFont(ofSize: 14)
         let descriptionTextColor = UIColor.lightGray
-        let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 20, bottom: 8, right: 20)
+        let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 20, bottom: 16, right: 20)
 
         let buttonsInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let buttonSize = CGSize(width: 46, height: 40)
@@ -26,9 +28,8 @@ final class ContentLanguageSwitchView: UIView {
     let appearance: Appearance
 
     private lazy var containerView: ExploreBlockContainerView = {
-        let appearance = ExploreBlockContainerView.Appearance(
-            contentViewInsets: self.appearance.buttonsInsets
-        )
+        var appearance = ExploreBlockContainerView.Appearance()
+        appearance.contentViewInsets = self.appearance.buttonsInsets
         return ExploreBlockContainerView(
             frame: .zero,
             headerView: self.headerView,
@@ -39,7 +40,10 @@ final class ContentLanguageSwitchView: UIView {
     }()
 
     private lazy var headerView: ExploreBlockHeaderView = {
-        let headerView = ExploreBlockHeaderView(frame: .zero)
+        var appearance = ExploreBlockHeaderView.Appearance()
+        appearance.titleLabelColor = self.appearance.headerTitleColor
+
+        let headerView = ExploreBlockHeaderView(frame: .zero, appearance: appearance)
         headerView.titleText = NSLocalizedString("ChooseSearchLanguage", comment: "")
         headerView.summaryText = nil
         headerView.shouldShowShowAllButton = false

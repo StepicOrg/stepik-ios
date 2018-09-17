@@ -8,10 +8,21 @@
 
 import UIKit
 
-final class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
-    private lazy var widgetView: CourseWidgetView = CourseWidgetView(frame: .zero)
+class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
+    private let colorMode: CourseListColorMode
+
+    private lazy var widgetView: CourseWidgetView = CourseWidgetView(
+        frame: .zero,
+        colorMode: self.colorMode
+    )
 
     override init(frame: CGRect) {
+        self.colorMode = .default
+        super.init(frame: frame)
+    }
+
+    init(frame: CGRect, colorMode: CourseListColorMode) {
+        self.colorMode = colorMode
         super.init(frame: frame)
 
         self.addSubviews()
@@ -22,9 +33,8 @@ final class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: CourseWidgetViewModel, colorMode: CourseWidgetColorMode) {
+    func configure(viewModel: CourseWidgetViewModel) {
         self.widgetView.configure(viewModel: viewModel)
-        self.widgetView.colorMode = colorMode
     }
 }
 

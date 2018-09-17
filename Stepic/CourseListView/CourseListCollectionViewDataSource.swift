@@ -10,11 +10,9 @@ import UIKit
 
 final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     var viewModels: [CourseWidgetViewModel]
-    private var colorMode: CourseWidgetColorMode
 
-    init(viewModels: [CourseWidgetViewModel] = [], colorMode: CourseWidgetColorMode = .default) {
+    init(viewModels: [CourseWidgetViewModel] = []) {
         self.viewModels = viewModels
-        self.colorMode = colorMode
     }
 
     func collectionView(
@@ -29,7 +27,7 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: CourseListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.configure(viewModel: self.viewModels[indexPath.row], colorMode: self.colorMode)
+        cell.configure(viewModel: self.viewModels[indexPath.row])
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
