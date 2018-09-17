@@ -22,6 +22,8 @@ class StepicsAPI: APIEndpoint {
                     seal.reject(NetworkError(error: error))
                 case .success(let json):
                     let user = User(json: json["users"].arrayValue[0])
+                    let profile = Profile(json: json["profiles"].arrayValue[0])
+                    user.profileEntity = profile
                     seal.fulfill(user)
                 }
             }

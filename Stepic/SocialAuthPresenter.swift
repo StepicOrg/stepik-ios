@@ -39,13 +39,21 @@ class SocialAuthPresenter {
     var stepicsAPI: StepicsAPI
     var authAPI: AuthAPI
     var notificationStatusesAPI: NotificationStatusesAPI
+    var splitTestingService: SplitTestingServiceProtocol
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: SocialAuthView) {
+    var socialAuthHeaderString: String {
+        let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
+        test.hitSplitTest()
+        return test.currentGroup.authString
+    }
+
+    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
+        self.splitTestingService = splitTestingService
         self.view = view
 
         // TODO: create NSNotification.Name extension

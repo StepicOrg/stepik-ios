@@ -13,9 +13,7 @@ class SocialAuthHeaderView: UICollectionReusableView {
 
     @IBOutlet weak var titleLabel: StepikLabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        titleLabel.setTextWithHTMLString(NSLocalizedString("SignInTitleSocial", comment: ""))
+    func setup(title: String) {
+        titleLabel.setTextWithHTMLString(title)
     }
 }

@@ -10,11 +10,11 @@ import Foundation
 import Amplitude_iOS
 import Crashlytics
 
-class AnalyticsUserProperties {
+class AnalyticsUserProperties: AnalyticsUserPropertiesServiceProtocol {
 
     static let shared = AnalyticsUserProperties()
 
-    private func setAmplitudeProperty(key: String, value: Any?) {
+    func setProperty(key: String, value: Any?) {
         if let v = value {
             Amplitude.instance().setUserProperties([key: v])
         } else {
@@ -38,7 +38,7 @@ class AnalyticsUserProperties {
     }
 
     func setUserID(to id: Int?) {
-        setAmplitudeProperty(key: "stepik_id", value: id)
+        setProperty(key: "stepik_id", value: id)
         setCrashlyticsProperty(key: "stepik_id", value: id)
     }
 
@@ -55,24 +55,24 @@ class AnalyticsUserProperties {
     }
 
     func setCoursesCount(count: Int?) {
-        setAmplitudeProperty(key: "courses_count", value: count)
+        setProperty(key: "courses_count", value: count)
     }
 
     //Not supported yet, commented out
 //    func setPushPermission(isGranted: Bool) {
-//        setAmplitudeProperty(key: "push_permission", value: isGranted ? "granted" : "not_granted")
+//        setProperty(key: "push_permission", value: isGranted ? "granted" : "not_granted")
 //    }
 
 //    func setStreaksNotificationsEnabled(isEnabled: Bool) {
-//        setAmplitudeProperty(key: "streaks_notifications_enabled", value: isEnabled ? "enabled" : "disabled")
+//        setProperty(key: "streaks_notifications_enabled", value: isEnabled ? "enabled" : "disabled")
 //    }
 
     func setScreenOrientation(isPortrait: Bool) {
-        setAmplitudeProperty(key: "screen_orientation", value: isPortrait ? "portrait" : "landscape")
+        setProperty(key: "screen_orientation", value: isPortrait ? "portrait" : "landscape")
     }
 
     func setApplicationID(id: String) {
-        setAmplitudeProperty(key: "application_id", value: id)
+        setProperty(key: "application_id", value: id)
     }
 
     func updateUserID() {
