@@ -20,6 +20,8 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
 
     private var isFirstTimeWillAppear = true
 
+    // MARK: - Init
+
     override init(collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         super.init(collectionViewLayout: collectionViewLayout)
     }
@@ -27,6 +29,8 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +41,12 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         super.viewWillAppear(animated)
 
         if isFirstTimeWillAppear {
-            isFirstTimeWillAppear.toggle()
+            isFirstTimeWillAppear = false
             presenter.refresh()
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Section.allCases.count
@@ -85,7 +89,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         return view
     }
 
-    // MARK: - TrainingView -
+    // MARK: - TrainingView
 
     func setViewData(_ viewData: [TrainingViewData]) {
         self.viewData = viewData
@@ -100,7 +104,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         }
     }
 
-    // MARK: - Private API -
+    // MARK: - Private API
 
     private func setup() {
         collectionView?.register(cellClass: TrainingHorizontalCollectionCell.self)
@@ -129,7 +133,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         }
     }
 
-    // MARK: - Inner Types -
+    // MARK: - Types
 
     private enum Section: Int, CaseIterable {
         case theory
@@ -149,6 +153,8 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         }
     }
 }
+
+// MARK: - TrainingCollectionViewController: UICollectionViewDelegateFlowLayout -
 
 extension TrainingCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
