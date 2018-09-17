@@ -4239,6 +4239,7 @@
 		62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */; };
 		62E98438E8DCED37E1AC2A8D /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E984454A1486C5544028C3 /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
+		62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */; };
 		62E984481B3B912B8B397579 /* ContentLanguageSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E984E654267333681BD459 /* ContentLanguageSwitchButton.swift */; };
 		62E98453212412E864EDDDEF /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
@@ -6227,6 +6228,7 @@
 		62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementDescription.swift; sourceTree = "<group>"; };
 		62E98F8B42A28AC17DF11DD3 /* ContentLanguageSwitchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewModel.swift; sourceTree = "<group>"; };
 		62E98FB8A0DF3E0AA4A3704A /* CourseListsCollectionPersistenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionPersistenceService.swift; sourceTree = "<group>"; };
+		62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueLastStepView.swift; sourceTree = "<group>"; };
 		62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderInfoView.swift; sourceTree = "<group>"; };
 		62E98FCC083F426BA7B52AAD /* CourseListsCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionViewModel.swift; sourceTree = "<group>"; };
 		639653894D37C79E966238F2 /* ContinueCourseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseViewController.swift; sourceTree = "<group>"; };
@@ -7490,6 +7492,7 @@
 				2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */,
 				08DDF90E20A9B2D0004ECC11 /* PersonalDeadlinesSuggestionWidgetView */,
 				62E9851EC1CEC1B2694CEA00 /* NotificationBanner */,
+				62E9868685E02E73666BF589 /* ContinueLastStepView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10799,6 +10802,14 @@
 				2CA3F55C20FF79860041E893 /* GraphServiceProtocol.swift */,
 			);
 			path = GraphService;
+			sourceTree = "<group>";
+		};
+		62E9868685E02E73666BF589 /* ContinueLastStepView */ = {
+			isa = PBXGroup;
+			children = (
+				62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */,
+			);
+			name = ContinueLastStepView;
 			sourceTree = "<group>";
 		};
 		62E986ACC273EC4132588404 /* View */ = {
@@ -14997,6 +15008,7 @@
 				62E98F602ED9E5CEA4E02D0A /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
 				62E981A332823B6CE16E4306 /* ContentLanguageSwitchProvider.swift in Sources */,
 				62E984CB92970A5DA765E454 /* CourseListColorMode.swift in Sources */,
+				62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
