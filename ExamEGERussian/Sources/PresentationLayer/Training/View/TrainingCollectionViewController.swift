@@ -49,7 +49,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
     // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Section.allCases.count
+        return Section.count
     }
 
     override func collectionView(
@@ -135,7 +135,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
 
     // MARK: - Types
 
-    private enum Section: Int, CaseIterable {
+    private enum Section: Int {
         case theory
         case practice
 
@@ -147,6 +147,14 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
                 return NSLocalizedString("Practice", comment: "")
             }
         }
+
+        static let count: Int = {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }()
 
         static func from(indexPath: IndexPath) -> Section {
             return Section(rawValue: indexPath.section)!
