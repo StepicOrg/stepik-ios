@@ -18,6 +18,8 @@ extension HomeView {
 final class HomeView: UIView {
     let appearance: Appearance
 
+    private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
+
     init(
         frame: CGRect,
         appearance: Appearance = Appearance()
@@ -33,11 +35,15 @@ final class HomeView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func addBlockView(_ view: UIView) {
+        self.scrollableStackView.addArrangedView(view)
+    }
 }
 
 extension HomeView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-
+        self.backgroundColor = .white
     }
 
     func addSubviews() {
