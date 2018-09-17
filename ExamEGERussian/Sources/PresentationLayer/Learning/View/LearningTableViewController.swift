@@ -14,12 +14,6 @@ final class LearningTableViewController: UITableViewController, LearningView {
     private var viewData = [LearningViewData]()
     private var isFirstTimeWillAppear = true
 
-    private lazy var dataRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        return refreshControl
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -38,14 +32,14 @@ final class LearningTableViewController: UITableViewController, LearningView {
 
     func setViewData(_ viewData: [LearningViewData]) {
         self.viewData = viewData
-        dataRefreshControl.endRefreshing()
+        refreshControl?.endRefreshing()
         tableView.reloadData()
     }
 
     func displayError(title: String, message: String) {
         presentAlert(withTitle: title, message: message)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.dataRefreshControl.endRefreshing()
+            self.refreshControl?.endRefreshing()
         }
     }
 
@@ -95,15 +89,12 @@ final class LearningTableViewController: UITableViewController, LearningView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
 
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = dataRefreshControl
-        } else {
-            tableView.addSubview(dataRefreshControl)
-        }
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refreshContent), for: .valueChanged)
     }
 
     @objc
-    private func refreshData(_ sender: Any) {
+    private func refreshContent(_ sender: Any) {
         presenter.refresh()
     }
 }
