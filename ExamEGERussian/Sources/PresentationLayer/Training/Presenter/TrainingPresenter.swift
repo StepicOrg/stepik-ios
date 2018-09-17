@@ -73,14 +73,6 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
     }
 
-    func signIn() {
-        router.showAuth()
-    }
-
-    func logout() {
-        AuthInfo.shared.token = nil
-    }
-
     // MARK: - Private API
 
     private func checkAuthStatus() -> Promise<Void> {

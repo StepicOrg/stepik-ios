@@ -9,12 +9,6 @@
 import Foundation
 
 final class TrainingRouter: BaseRouter, TrainingRouterProtocol {
-    func showAuth() {
-        presentModalNavigationController(derivedFrom: { _ in
-            assemblyFactory.authAssembly.greeting.module()
-        })
-    }
-
     func showTheory(lesson: LessonPlainObject) {
         pushViewController(derivedFrom: { navigationController in
             assemblyFactory.stepsAssembly.standart.module(

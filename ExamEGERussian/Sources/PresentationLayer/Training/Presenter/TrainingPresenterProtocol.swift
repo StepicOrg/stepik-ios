@@ -11,6 +11,4 @@ import Foundation
 protocol TrainingPresenterProtocol: class {
     func refresh()
     func selectViewData(_ viewData: TrainingViewData)
-    func signIn()
-    func logout()
 }
