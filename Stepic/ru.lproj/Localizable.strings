@@ -597,3 +597,6 @@ SignInTitleSocialTest = "<b>Продолжить</b> с помощью";
 "PagesCountText1" = "%@ страница";
 "PagesCountText234" = "%@ страницы";
 "PagesCountText567890" = "%@ страниц";
+
+"FakeUserFailedSignInTitle" = "Что-то пошло не так";
+"FakeUserFailedSignInMessage" = "Проверьте ваше интернет соединение и повторите попытку.";

@@ -34,13 +34,30 @@ final class LearningPresenter: LearningPresenterProtocol {
     }
 
     func refresh() {
-        checkAuthStatus()
-
-        if isFirstRefresh && !knowledgeGraph.isEmpty {
-            isFirstRefresh = false
-            reloadViewData()
-        } else {
-            fetchGraph()
+        checkAuthStatus().then {
+            self.refreshContent()
+        }.done {
+            self.reloadViewData()
+        }.catch { [weak self] error in
+            switch error {
+            case is NetworkError:
+                self?.displayError(
+                    title: NSLocalizedString("ConnectionErrorTitle", comment: ""),
+                    message: NSLocalizedString("ConnectionErrorSubtitle", comment: "")
+                )
+            case LearningPresenterError.failedFetchKnowledgeGraph:
+                self?.displayError(
+                    title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
+                    message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
+                )
+            case LearningPresenterError.failedRegisterUser:
+                self?.displayError(
+                    title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
+                    message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
+                )
+            default:
+                self?.displayError()
+            }
         }
     }
 
@@ -50,45 +67,61 @@ final class LearningPresenter: LearningPresenterProtocol {
 
     // MARK: - Private API
 
-    private func checkAuthStatus() {
-        if !AuthInfo.shared.isAuthorized {
+    private func checkAuthStatus() -> Promise<Void> {
+        if AuthInfo.shared.isAuthorized {
+            return .value(())
+        }
+
+        return Promise { seal in
             let params = RandomCredentialsGenerator().userRegistrationParams
             userRegistrationService.registerAndSignIn(with: params).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
-            }.catch { [weak self] _ in
-                self?.displayError()
+                seal.fulfill(())
+            }.catch { error in
+                print("Failed to register user: \(error)")
+                seal.reject(LearningPresenterError.failedRegisterUser)
             }
         }
     }
 
-    private func fetchGraph() {
-        graphService.fetchGraph().done { [weak self] responseModel in
-            guard let strongSelf = self,
-                let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
-                    return
-            }
+    private func refreshContent() -> Promise<Void> {
+        if isFirstRefresh {
+            isFirstRefresh = false
+            return knowledgeGraph.isEmpty ? fetchKnowledgeGraph() : .value(())
+        } else {
+            return fetchKnowledgeGraph()
+        }
+    }
 
-            strongSelf.knowledgeGraph.adjacency = graph.adjacency
-            strongSelf.reloadViewData()
-        }.catch { [weak self] _ in
-            self?.displayError(
-                title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
-                message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
-            )
+    private func fetchKnowledgeGraph() -> Promise<Void> {
+        return Promise { seal in
+            graphService.fetchGraph().done { [weak self] responseModel in
+                guard let strongSelf = self,
+                      let graph = KnowledgeGraphBuilder(graphPlainObject: responseModel).build() as? KnowledgeGraph else {
+                    return
+                }
+
+                strongSelf.knowledgeGraph.adjacency = graph.adjacency
+                seal.fulfill(())
+            }.catch { error in
+                print("Failed fetch knowledge graph: \(error)")
+                seal.reject(LearningPresenterError.failedFetchKnowledgeGraph)
+            }
         }
     }
 
     private func reloadViewData() {
         if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
-            view?.setViewData(toViewData(vertices))
+            view?.setViewData(verticesToViewData(vertices))
         } else {
             displayError()
         }
     }
 
-    private func toViewData(_ vertices: [KnowledgeGraphVertex<String>]) -> [LearningViewData] {
+    // TODO: Replace with real topic content.
+    private func verticesToViewData(_ vertices: [KnowledgeGraphVertex<String>]) -> [LearningViewData] {
         return vertices.map { vertex in
             LearningViewData(
                 id: vertex.id,
@@ -105,5 +138,12 @@ final class LearningPresenter: LearningPresenterProtocol {
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
+    }
+
+    // MARK: - Types
+
+    private enum LearningPresenterError: Error {
+        case failedRegisterUser
+        case failedFetchKnowledgeGraph
     }
 }

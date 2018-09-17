@@ -596,3 +596,6 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "PagesCountText1" = "%@ page";
 "PagesCountText234" = "%@ pages";
 "PagesCountText567890" = "%@ pages";
+
+"FakeUserFailedSignInTitle" = "Something went wrong";
+"FakeUserFailedSignInMessage" = "Check​ ​your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
