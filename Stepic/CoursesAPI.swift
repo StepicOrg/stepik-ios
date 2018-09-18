@@ -30,7 +30,7 @@ class CoursesAPI: APIEndpoint {
         }
 
         if let excludeEnded = excludeEnded {
-            params["excludeEnded"] = excludeEnded ? "true" : "false"
+            params["exclude_ended"] = excludeEnded ? "true" : "false"
         }
 
         if let isPublic = isPublic {
