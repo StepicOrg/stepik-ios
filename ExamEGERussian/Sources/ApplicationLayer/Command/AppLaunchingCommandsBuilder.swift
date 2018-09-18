@@ -30,6 +30,7 @@ final class AppLaunchingCommandsBuilder {
 
         return [
             ConfigureThirdPartiesCommand(),
+            ConfigureAnalyticsCommand(),
             ConfigureKeyWindowCommand(keyWindow: window, assemblyFactory: assemblyFactory),
             InitializeWebViewCommand()
         ]
