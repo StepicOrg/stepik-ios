@@ -993,7 +993,6 @@
 		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
-		0CAD53C8B6576D76DE23FE95 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */; };
 		0DD38F1F2CF8385C6D270649 /* ContentLanguageSwitchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606EBF103D5682D5B26FF35 /* ContentLanguageSwitchInteractor.swift */; };
 		0E2B1455D0480FA8DEDE5288 /* Pods_Adaptive_1838_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7323D7E21164616CABECB50 /* Pods_Adaptive_1838_Screenshots.framework */; };
 		164D9DD4DC279527C17BDCF7 /* ContentLanguageSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024D65DCBD4F8631B97D461D /* ContentLanguageSwitchView.swift */; };
@@ -6397,7 +6396,6 @@
 		C0873EF2F06EC2C27A7C9255 /* ExploreViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		C1036E65ACA620A4DFFE3ACE /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3141665863D4EB5882EF1AC /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
-		C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C56E1AFEE69481800B794FE4 /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		C5CC7ADFCE6AA65DDEFF282C /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C606EBF103D5682D5B26FF35 /* ContentLanguageSwitchInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchInteractor.swift; sourceTree = "<group>"; };
@@ -8672,7 +8670,6 @@
 				A9BA72DE297649678489B71C /* HomePresenter.swift */,
 				573CFE338FB08142BEC048FE /* HomeDataFlow.swift */,
 				DA24A706D651B083DF81EB3E /* Provider */,
-				C3C33AB59C1C245E58A1459E /* View */,
 			);
 			name = Home;
 			path = Home;
@@ -11318,15 +11315,6 @@
 				62E989335B470E1299F1046B /* Provider */,
 			);
 			path = ContentLanguageSwitch;
-			sourceTree = "<group>";
-		};
-		C3C33AB59C1C245E58A1459E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C4D3D32D0EE3796D6779FFC0 /* HomeView.swift */,
-			);
-			name = View;
-			path = View;
 			sourceTree = "<group>";
 		};
 		CD087B06843913AB176F79F4 /* View */ = {
@@ -15071,7 +15059,6 @@
 				71B8A5994CE4B0669E497244 /* HomePresenter.swift in Sources */,
 				96A1C493941AF863868DFAC2 /* HomeDataFlow.swift in Sources */,
 				CCEA4157B12C2032214B5816 /* HomeProvider.swift in Sources */,
-				0CAD53C8B6576D76DE23FE95 /* HomeView.swift in Sources */,
 				62E98905245F33B16D020586 /* ContinueActionButton.swift in Sources */,
 				62E98736DE8178FA36A565B6 /* UserCoursesAPI.swift in Sources */,
 				62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */,

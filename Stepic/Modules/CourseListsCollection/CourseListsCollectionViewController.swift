@@ -50,13 +50,13 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                     type: courseListViewModel.courseList,
                     colorMode: .light
                 )
-                let vc = assembly.makeModule()
+                let viewController = assembly.makeModule()
                 assembly.moduleInput?.reload()
-                self.addChildViewController(vc)
+                self.addChildViewController(viewController)
 
                 let containerView = CourseListContainerViewFactory()
                     .makeHorizontalCoursesCollectionContainerView(
-                        for: vc.view,
+                        for: viewController.view,
                         headerDescription: .init(
                             title: courseListViewModel.title,
                             summary: "\(courseListViewModel.courseList.ids.count)",
