@@ -22,6 +22,8 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     private let graphService: GraphServiceProtocol
     private let lessonsService: LessonsService
 
+    private var isFirstRefresh = true
+
     init(view: TrainingView,
          knowledgeGraph: KnowledgeGraph,
          router: TrainingRouterProtocol,
@@ -37,14 +39,11 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         self.lessonsService = lessonsService
     }
 
+    // MARK: - Public API
+
     func refresh() {
         checkAuthStatus().then {
-            self.fetchKnowledgeGraph()
-        }.then {
-            self.fetchTheoryLessons()
-        }.then { lessons -> Promise<Void> in
-            self.theoryLessons = lessons
-            return .value(())
+            self.refreshContent()
         }.done {
             self.reloadViewData()
         }.catch { [weak self] error in
@@ -97,6 +96,26 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
     }
 
+    private func refreshContent() -> Promise<Void> {
+        if isFirstRefresh {
+            isFirstRefresh = false
+            return knowledgeGraph.isEmpty ? fetchContent() : obtainContentFromCache()
+        } else {
+            return fetchContent()
+        }
+    }
+
+    // MARK: Fetch Content
+
+    private func fetchContent() -> Promise<Void> {
+        return fetchKnowledgeGraph().then {
+            self.fetchTheoryLessons()
+        }.then { lessons -> Promise<Void> in
+            self.theoryLessons = lessons
+            return .value(())
+        }
+    }
+
     private func fetchKnowledgeGraph() -> Promise<Void> {
         return Promise { seal in
             graphService.fetchGraph().done { [weak self] responseModel in
@@ -115,12 +134,26 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     }
 
     private func fetchTheoryLessons() -> Promise<[LessonPlainObject]> {
-        let ids = getKnowledgeGraphLessons(of: .theory)
-            .prefix(TrainingPresenter.lessonsLimit)
-            .map { $0.id }
-        return lessonsService.fetchLessons(with: ids)
+        return lessonsService.fetchLessons(with: getTheoryLessonsIds())
     }
 
+    // MARK: Obtain Content from Cache
+
+    private func obtainContentFromCache() -> Promise<Void> {
+        return obtainTheoryLessons().then { lessons -> Promise<Void> in
+            self.theoryLessons = lessons
+            return .value(())
+        }
+    }
+
+    private func obtainTheoryLessons() -> Promise<[LessonPlainObject]> {
+        let ids = getTheoryLessonsIds()
+        return lessonsService.obtainLessons(with: ids).then { lessons -> Promise<[LessonPlainObject]> in
+            lessons.isEmpty ? self.fetchTheoryLessons() : .value(lessons)
+        }
+    }
+
+    // MARK: View Specific
     // TODO: Remove hardcoded lessons content.
     private func reloadViewData() {
         let theory = theoryLessons.map {
@@ -142,9 +175,19 @@ final class TrainingPresenter: TrainingPresenterProtocol {
                     countLessons: 1,
                     isPractice: true
                 )
-            }
+        }
+
         view?.setViewData(theory + practice)
     }
+
+    private func displayError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
+        view?.displayError(title: title, message: message)
+    }
+
+    // MARK: Helpers
 
     private func getKnowledgeGraphLessons(
         of type: KnowledgeGraphLesson.LessonType
@@ -170,11 +213,10 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         return nil
     }
 
-    private func displayError(
-        title: String = NSLocalizedString("Error", comment: ""),
-        message: String = NSLocalizedString("ErrorMessage", comment: "")
-    ) {
-        view?.displayError(title: title, message: message)
+    private func getTheoryLessonsIds() -> [Int] {
+        return getKnowledgeGraphLessons(of: .theory)
+            .prefix(TrainingPresenter.lessonsLimit)
+            .map { $0.id }
     }
 
     // MARK: - Types
