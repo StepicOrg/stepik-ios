@@ -2406,7 +2406,6 @@
 		2C6A76562045CF5C00C509A6 /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2C6A76572045CFDD00C509A6 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C6B2B992121A08300968C96 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2B982121A08300968C96 /* Command.swift */; };
-		2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */; };
 		2C6B2B9D2121A15900968C96 /* ConfigureThirdPartiesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */; };
 		2C6B2B9F2121A18E00968C96 /* AppLaunchingCommandsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2B9E2121A18E00968C96 /* AppLaunchingCommandsBuilder.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
@@ -5884,7 +5883,6 @@
 		2C6841BF20EE133E0050155F /* ServiceFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryTests.swift; sourceTree = "<group>"; };
 		2C6841C320EE14E00050155F /* UserRegistrationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationServiceTests.swift; sourceTree = "<group>"; };
 		2C6B2B982121A08300968C96 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureKeyWindowCommand.swift; sourceTree = "<group>"; };
 		2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureThirdPartiesCommand.swift; sourceTree = "<group>"; };
 		2C6B2B9E2121A18E00968C96 /* AppLaunchingCommandsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchingCommandsBuilder.swift; sourceTree = "<group>"; };
 		2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupViewController.swift; sourceTree = "<group>"; };
@@ -9637,7 +9635,6 @@
 			children = (
 				2C6B2B9E2121A18E00968C96 /* AppLaunchingCommandsBuilder.swift */,
 				2C6B2B982121A08300968C96 /* Command.swift */,
-				2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */,
 				2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */,
 				2C23488F2122DB7B00D8FB0B /* InitializeWebViewCommand.swift */,
 			);
@@ -16219,7 +16216,6 @@
 				2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */,
 				2C9499DF20ECBDEC0049E9A8 /* StepikURLSessionConfiguration.swift in Sources */,
 				2C33CC0C20EC33F7009956B0 /* DeleteRequestMaker.swift in Sources */,
-				2C6B2B9B2121A13900968C96 /* ConfigureKeyWindowCommand.swift in Sources */,
 				2C9499DE20ECBDE50049E9A8 /* AlamofireDefaultSessionManager.swift in Sources */,
 				2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */,
 				2CE84BE120F4FD030069B869 /* GraphPathFinder.swift in Sources */,

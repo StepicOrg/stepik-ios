@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
-    func module() -> ApplicationModule {
+    func makeModule(window: UIWindow) -> ApplicationModule {
         if let savedModule = ApplicationModuleHolder.instance.applicationModule {
             return savedModule
         }
@@ -27,13 +27,15 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         )
         tabBarController.selectedIndex = 0
 
+        window.rootViewController = tabBarController
+
         let router = AppRouter(
-            tabBarController: tabBarController,
+            window: window,
             navigationController: learningNavigationController,
             assemblyFactory: assemblyFactory
         )
-        let applicationModule = ApplicationModule(router: router)
 
+        let applicationModule = ApplicationModule(router: router)
         ApplicationModuleHolder.instance.applicationModule = applicationModule
 
         return applicationModule

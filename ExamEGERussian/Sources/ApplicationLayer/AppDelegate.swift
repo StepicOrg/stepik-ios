@@ -21,13 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceFactory = ServiceFactoryBuilder().build()
         let assemblyFactory = AssemblyFactoryBuilder(serviceFactory: serviceFactory).build()
 
+        guard let _ = assemblyFactory.applicationAssembly.makeModule(window: window).router else {
+            fatalError("Could't initialize router")
+        }
+
         AppLaunchingCommandsBuilder()
-            .setKeyWindow(window)
-            .setAssemblyFactory(assemblyFactory)
             .build()
             .forEach {
                 $0.execute()
             }
+
+        window.makeKeyAndVisible()
 
         return true
     }
