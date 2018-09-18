@@ -28,12 +28,23 @@ final class CourseWidgetView: UIView {
     let colorMode: CourseListColorMode
 
     private lazy var coverView = CourseWidgetCoverView(frame: .zero)
-    private lazy var primaryActionButton = CourseWidgetButton(
-        appearance: self.colorMode.courseWidgetButtonAppearance
-    )
-    private lazy var secondaryActionButton = CourseWidgetButton(
-        appearance: self.colorMode.courseWidgetButtonAppearance
-    )
+
+    private lazy var primaryActionButton: CourseWidgetButton = {
+        let button = CourseWidgetButton(
+            appearance: self.colorMode.courseWidgetButtonAppearance
+        )
+        button.addTarget(self, action: #selector(self.primaryActionButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var secondaryActionButton: CourseWidgetButton = {
+        let button = CourseWidgetButton(
+            appearance: self.colorMode.courseWidgetButtonAppearance
+        )
+        button.addTarget(self, action: #selector(self.secondaryActionButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var titleLabel = CourseWidgetLabel(
         frame: .zero,
         appearance: self.colorMode.courseWidgetLabelAppearance
@@ -42,6 +53,9 @@ final class CourseWidgetView: UIView {
         frame: .zero,
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
+
+    var onPrimaryButtonClick: (() -> Void)?
+    var onSecondaryButtonClick: (() -> Void)?
 
     init(
         frame: CGRect,
@@ -88,6 +102,18 @@ final class CourseWidgetView: UIView {
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
         self.statsView.progress = viewModel
+    }
+
+    // MARK: Button selectors
+
+    @objc
+    private func primaryActionButtonClicked() {
+        self.onPrimaryButtonClick?()
+    }
+
+    @objc
+    private func secondaryActionButtonClicked() {
+        self.onSecondaryButtonClick?()
     }
 }
 

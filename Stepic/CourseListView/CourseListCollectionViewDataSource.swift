@@ -9,6 +9,8 @@
 import UIKit
 
 final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+    weak var delegate: CourseListViewControllerDelegate?
+
     var viewModels: [CourseWidgetViewModel]
 
     init(viewModels: [CourseWidgetViewModel] = []) {
@@ -28,6 +30,7 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
     ) -> UICollectionViewCell {
         let cell: CourseListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.configure(viewModel: self.viewModels[indexPath.row])
+        cell.delegate = self
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
@@ -43,5 +46,23 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         let view: Stub = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, for: indexPath)
         view.backgroundColor = .red
         return view
+    }
+}
+
+extension CourseListCollectionViewDataSource: CourseListCollectionViewCellDelegate {
+    func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?) {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        self.delegate?.primaryButtonClicked(viewModel: viewModel)
+    }
+
+    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?) {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        self.delegate?.secondaryButtonClicked(viewModel: viewModel)
     }
 }

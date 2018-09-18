@@ -8,13 +8,38 @@
 
 import UIKit
 
-class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
-    private let colorMode: CourseListColorMode
+protocol CourseListCollectionViewCellDelegate: class {
+    func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?)
+    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?)
+}
 
-    private lazy var widgetView: CourseWidgetView = CourseWidgetView(
-        frame: .zero,
-        colorMode: self.colorMode
-    )
+class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
+    weak var delegate: CourseListCollectionViewCellDelegate?
+
+    private let colorMode: CourseListColorMode
+    private var configurationViewModel: CourseWidgetViewModel?
+
+    private lazy var widgetView: CourseWidgetView = {
+        let widget = CourseWidgetView(frame: .zero, colorMode: self.colorMode)
+        // Pass clicks from widget view to collection view delegate
+        widget.onPrimaryButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.widgetPrimaryButtonClicked(
+                viewModel: strongSelf.configurationViewModel
+            )
+        }
+        widget.onSecondaryButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.widgetSecondaryButtonClicked(
+                viewModel: strongSelf.configurationViewModel
+            )
+        }
+        return widget
+    }()
 
     override init(frame: CGRect) {
         self.colorMode = .default
@@ -35,6 +60,7 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
 
     func configure(viewModel: CourseWidgetViewModel) {
         self.widgetView.configure(viewModel: viewModel)
+        self.configurationViewModel = viewModel
     }
 }
 

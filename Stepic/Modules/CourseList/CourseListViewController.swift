@@ -15,6 +15,8 @@ protocol CourseListViewControllerProtocol: class {
 
 protocol CourseListViewControllerDelegate: class {
     func itemDidSelected(viewModel: CourseWidgetViewModel)
+    func primaryButtonClicked(viewModel: CourseWidgetViewModel)
+    func secondaryButtonClicked(viewModel: CourseWidgetViewModel)
 }
 
 final class CourseListViewController: UIViewController {
@@ -34,7 +36,7 @@ final class CourseListViewController: UIViewController {
     init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
-        colorMode: CourseListColorMode = .default,
+        colorMode: CourseListColorMode = .default
     ) {
         self.interactor = interactor
         self.state = initialState
@@ -46,6 +48,7 @@ final class CourseListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.listDelegate.delegate = self
+        self.listDataSource.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -67,10 +70,6 @@ final class CourseListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.interactor.fetchCourses(request: CourseList.ShowCourses.Request())
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
     private func updatePagination(hasNextPage: Bool) {
@@ -126,5 +125,13 @@ extension CourseListViewController: CourseListViewDelegate {
 extension CourseListViewController: CourseListViewControllerDelegate {
     func itemDidSelected(viewModel: CourseWidgetViewModel) {
 
+    }
+
+    func primaryButtonClicked(viewModel: CourseWidgetViewModel) {
+        print(viewModel)
+    }
+
+    func secondaryButtonClicked(viewModel: CourseWidgetViewModel) {
+        print(viewModel)
     }
 }
