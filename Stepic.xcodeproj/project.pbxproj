@@ -2462,6 +2462,7 @@
 		2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		2C8530F421512ACA001E6B55 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C8530F621512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F521512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift */; };
+		2C8530F921513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F821513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -5902,6 +5903,7 @@
 		2C8530EF215124E6001E6B55 /* ConfigureAnalyticsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAnalyticsCommand.swift; sourceTree = "<group>"; };
 		2C8530F12151264D001E6B55 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		2C8530F521512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportLaunchAnalyticsCommand.swift; sourceTree = "<group>"; };
+		2C8530F821513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmplitudeAnalyticsEvents+Exam.swift"; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -9710,6 +9712,14 @@
 			path = Steps;
 			sourceTree = "<group>";
 		};
+		2C8530F721513BB2001E6B55 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				2C8530F821513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		2C8652561F4B2C2300D51654 /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -10244,6 +10254,7 @@
 		2CD7993B21077CB90054D098 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2C8530F721513BB2001E6B55 /* Analytics */,
 				2CD7994021077CB90054D098 /* Assembly */,
 				2CD7994421077CB90054D098 /* Extensions */,
 				2CD7995121077CB90054D098 /* Helpers */,
@@ -16168,6 +16179,7 @@
 				2C94998E20ECB74D0049E9A8 /* APIDefaults.swift in Sources */,
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
+				2C8530F921513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
 				2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */,
 				2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */,
