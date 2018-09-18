@@ -14,6 +14,13 @@ enum CourseList {
         var hasNextPage: Bool
     }
 
+    // We should pass not only courses
+    // but also info about which of them can be opened in adaptive mode
+    struct AvailableCourses {
+        var fetchedCourses: ListData<Course>
+        var availableAdaptiveCourses: Set<Course>
+    }
+
     // MARK: Use cases
 
     /// Load and show courses for given course list
@@ -21,7 +28,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            var result: Result<ListData<Course>>
+            var result: Result<AvailableCourses>
         }
 
         struct ViewModel {
@@ -33,7 +40,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            var result: Result<ListData<Course>>
+            var result: Result<AvailableCourses>
         }
 
         struct ViewModel {

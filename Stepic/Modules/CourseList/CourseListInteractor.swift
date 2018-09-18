@@ -17,17 +17,20 @@ protocol CourseListInteractorProtocol: class {
 final class CourseListInteractor: CourseListInteractorProtocol {
     let presenter: CourseListPresenterProtocol
     let provider: CourseListProviderProtocol
+    let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
     private var state: CourseList.State
 
     init(
         state: CourseList.State = CourseList.State(),
         presenter: CourseListPresenterProtocol,
-        provider: CourseListProviderProtocol
+        provider: CourseListProviderProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.state = state
         self.presenter = presenter
         self.provider = provider
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
     func fetchCourses(request: CourseList.ShowCourses.Request) {
@@ -43,13 +46,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            let result = Result.success(
-                CourseList.ListData(courses: courses, hasNextPage: meta.hasNext)
+            let courses = CourseList.AvailableCourses(
+                fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
+                availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
-            let response = CourseList.ShowCourses.Response(result: result)
+            let response = CourseList.ShowCourses.Response(result: Result.success(courses))
             self.presenter.presentCourses(response: response)
         }.catch { _ in
-            let result = Result<CourseList.ListData<Course>>.failure(Error.fetchFailed)
+            let result = Result<CourseList.AvailableCourses>.failure(Error.fetchFailed)
             let response = CourseList.ShowCourses.Response(result: result)
             self.presenter.presentCourses(response: response)
         }
@@ -62,7 +66,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // then ignore request and pass empty list to presenter
         if !self.state.isOnline || !self.state.paginationState.hasNext {
             let result = Result.success(
-                CourseList.ListData<Course>(courses: [], hasNextPage: false)
+                CourseList.AvailableCourses(
+                    fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
+                    availableAdaptiveCourses: Set<Course>()
+                )
             )
             let response = CourseList.LoadNextCourses.Response(result: result)
             self.presenter.presentNextCourses(response: response)
@@ -76,16 +83,23 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            let result = Result.success(
-                CourseList.ListData(courses: courses, hasNextPage: meta.hasNext)
+            let courses = CourseList.AvailableCourses(
+                fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
+                availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
-            let response = CourseList.LoadNextCourses.Response(result: result)
+            let response = CourseList.LoadNextCourses.Response(result: Result.success(courses))
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
-            let result = Result<CourseList.ListData<Course>>.failure(Error.fetchFailed)
+            let result = Result<CourseList.AvailableCourses>.failure(Error.fetchFailed)
             let response = CourseList.LoadNextCourses.Response(result: result)
             self.presenter.presentNextCourses(response: response)
         }
+    }
+
+    private func getAvailableAdaptiveCourses(from courses: [Course]) -> Set<Course> {
+        let availableInAdaptiveMode = courses
+            .filter { self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId:  $0.id) }
+        return Set<Course>(availableInAdaptiveMode)
     }
 
     enum Error: Swift.Error {

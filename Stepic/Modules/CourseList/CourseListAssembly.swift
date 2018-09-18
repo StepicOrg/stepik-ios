@@ -45,7 +45,11 @@ final class CourseListAssembly: Assembly {
             )
         )
 
-        let interactor = CourseListInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseListInteractor(
+            presenter: presenter,
+            provider: provider,
+            adaptiveStorageManager: AdaptiveStorageManager()
+        )
         self.moduleInput = interactor
 
         let controller = CourseListViewController(

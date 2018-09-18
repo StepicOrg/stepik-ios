@@ -23,13 +23,16 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         case let .failure(error):
             viewModel = CourseList.ShowCourses.ViewModel(state: .emptyResult)
         case let .success(result):
-            let courses = result.courses.map { CourseWidgetViewModel(course: $0) }
+            let courses = self.makeWidgetViewModels(
+                courses: result.fetchedCourses.courses,
+                availableInAdaptive: result.availableAdaptiveCourses
+            )
             if courses.isEmpty {
                 viewModel = CourseList.ShowCourses.ViewModel(state: .emptyResult)
             } else {
                 let data = CourseList.ListData(
                     courses: courses,
-                    hasNextPage: result.hasNextPage
+                    hasNextPage: result.fetchedCourses.hasNextPage
                 )
                 viewModel = CourseList.ShowCourses.ViewModel(state: .result(data: data))
             }
@@ -45,14 +48,38 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         case let .failure(error):
             viewModel = CourseList.LoadNextCourses.ViewModel(state: .error(message: "Error"))
         case let .success(result):
-            let courses = result.courses.map { CourseWidgetViewModel(course: $0) }
+            let courses = self.makeWidgetViewModels(
+                courses: result.fetchedCourses.courses,
+                availableInAdaptive: result.availableAdaptiveCourses
+            )
             let data = CourseList.ListData(
                 courses: courses,
-                hasNextPage: result.hasNextPage
+                hasNextPage: result.fetchedCourses.hasNextPage
             )
             viewModel = CourseList.LoadNextCourses.ViewModel(state: .result(data: data))
         }
 
         self.viewController?.displayNextCourses(viewModel: viewModel)
+    }
+
+    private func makeWidgetViewModels(
+        courses: [Course],
+        availableInAdaptive: Set<Course>
+    ) -> [CourseWidgetViewModel] {
+        var viewModels: [CourseWidgetViewModel] = []
+        for course in courses {
+            var viewModel = CourseWidgetViewModel(course: course)
+            let isAdaptive = availableInAdaptive.contains(course)
+
+            let buttonDescriptionFactory = ButtonDescriptionFactory(course: course)
+            viewModel.primaryButtonDescription = buttonDescriptionFactory.makePrimary()
+            viewModel.secondaryButtonDescription = buttonDescriptionFactory.makeSecondary(
+                isAdaptive: isAdaptive
+            )
+
+            viewModel.isAdaptive = isAdaptive
+            viewModels.append(viewModel)
+        }
+        return viewModels
     }
 }
