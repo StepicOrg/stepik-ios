@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could't initialize window")
         }
 
+        ThirdPartiesConfigurator().configure()
+
         let serviceFactory = ServiceFactoryBuilder().build()
         let assemblyFactory = AssemblyFactoryBuilder(serviceFactory: serviceFactory).build()
 
@@ -28,11 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could't initialize router")
         }
 
-        AppLaunchingCommandsBuilder()
-            .build()
-            .forEach {
-                $0.execute()
-            }
+        // Initializes a webview at the start so webview startup later on isn't so slow.
+        _ = WKWebView()
+
+        let launchContainer = LaunchDefaultsContainer()
+        if !launchContainer.didLaunch {
+            launchContainer.didLaunch = true
+            AmplitudeAnalyticsEvents.Launch.firstTime.send()
+        }
+        AmplitudeAnalyticsEvents.Launch.sessionStart.send()
 
         window.makeKeyAndVisible()
 
