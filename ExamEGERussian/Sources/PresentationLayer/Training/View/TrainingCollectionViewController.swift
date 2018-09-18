@@ -49,7 +49,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
     // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Section.count
+        return viewData.isEmpty ? 0 : Section.count
     }
 
     override func collectionView(
