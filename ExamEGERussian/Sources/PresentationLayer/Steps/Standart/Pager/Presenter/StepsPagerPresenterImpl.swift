@@ -33,9 +33,17 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     }
 
     func selectStep(at index: Int) {
-        if steps[index].type == .text {
+        let step = steps[index]
+
+        if step.type == .text {
             markTextStepAsPassed(at: index)
         }
+
+        AmplitudeAnalyticsEvents.Step.opened(
+            id: step.id,
+            position: index,
+            lessonId: step.lessonId
+        ).send()
     }
 
     func selectShareStep(at index: Int) {

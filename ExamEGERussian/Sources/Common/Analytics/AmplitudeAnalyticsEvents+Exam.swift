@@ -39,4 +39,17 @@ extension AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    struct Step {
+        static func opened(id: Int, position: Int, lessonId: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Page opened",
+                parameters: [
+                    "position": position,
+                    "lesson": lessonId,
+                    "step": id
+                ]
+            )
+        }
+    }
 }
