@@ -2459,6 +2459,9 @@
 		2C8530EE215122FD001E6B55 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		2C8530F0215124E6001E6B55 /* ConfigureAnalyticsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530EF215124E6001E6B55 /* ConfigureAnalyticsCommand.swift */; };
 		2C8530F22151264D001E6B55 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F12151264D001E6B55 /* Tokens.swift */; };
+		2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
+		2C8530F421512ACA001E6B55 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
+		2C8530F621512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F521512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -2949,7 +2952,6 @@
 		2C9499E920ECBFB20049E9A8 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C9499EA20ECBFD90049E9A8 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		2C9499EC20ECBFED0049E9A8 /* NotificationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A88FD2046F0460079F038 /* NotificationPermissionManager.swift */; };
-		2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		2C9499EE20ECC02A0049E9A8 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C9499EF20ECC0580049E9A8 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1181EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift */; };
@@ -5899,6 +5901,7 @@
 		2C8530EB215121B2001E6B55 /* Tokens.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
 		2C8530EF215124E6001E6B55 /* ConfigureAnalyticsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAnalyticsCommand.swift; sourceTree = "<group>"; };
 		2C8530F12151264D001E6B55 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		2C8530F521512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportLaunchAnalyticsCommand.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -9562,6 +9565,7 @@
 				2C6B2B9A2121A13900968C96 /* ConfigureKeyWindowCommand.swift */,
 				2C6B2B9C2121A15900968C96 /* ConfigureThirdPartiesCommand.swift */,
 				2C23488F2122DB7B00D8FB0B /* InitializeWebViewCommand.swift */,
+				2C8530F521512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -15951,7 +15955,6 @@
 				2C9499F020ECC0720049E9A8 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				2C2FD78D210753AD00609621 /* LessonsPresenterProtocol.swift in Sources */,
 				2C94999620ECB86B0049E9A8 /* Assignment+CoreDataProperties.swift in Sources */,
-				2C9499ED20ECC00A0049E9A8 /* AnalyticsUserProperties.swift in Sources */,
 				2C093F1A211B449E00162DD0 /* AchievementsListViewController.swift in Sources */,
 				2CD7995E21077CBA0054D098 /* UIViewController+Alert.swift in Sources */,
 				2C8530F22151264D001E6B55 /* Tokens.swift in Sources */,
@@ -15971,6 +15974,7 @@
 				2C9499FD20ECC22D0049E9A8 /* Messages.swift in Sources */,
 				2C34D67420FCD6EC001EF741 /* AuthSignInPresenter.swift in Sources */,
 				2C33CBE920EC3216009956B0 /* DevicesAPI.swift in Sources */,
+				2C8530F421512ACA001E6B55 /* LaunchDefaultsContainer.swift in Sources */,
 				2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */,
 				2C33CC0F20EC340D009956B0 /* Assignment.swift in Sources */,
 				2C949A4420ECCA000049E9A8 /* TooltipDefaultsManager.swift in Sources */,
@@ -16148,6 +16152,8 @@
 				2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */,
 				2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */,
 				2C093F21211B452400162DD0 /* CodeEditorSettingsPresenter.swift in Sources */,
+				2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */,
+				2C8530F621512BEC001E6B55 /* ReportLaunchAnalyticsCommand.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2C681A04210B138600C3DDCA /* AuthSignUpPresenterImpl.swift in Sources */,
 				2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */,
