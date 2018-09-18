@@ -577,6 +577,7 @@ SignInTitleSocialTest = "<b>Продолжить</b> с помощью";
 "NoAdaptiveModuleError" = "В данном уроке нет практических заданий. Пожалуйста, выберите другой урок.";
 "FailedFetchKnowledgeGraphErrorTitle" = "Невозможно загрузить граф знаний";
 "FailedFetchKnowledgeGraphErrorMessage" = "Потяните вниз, чтобы обновить экран.";
+"FailedFetchLessonStepsContent" = "Невозможно получить данные об уроке в данный момент. Пожалуйста, попробуйте снова.";
 
 "EmptyAuthViewTitle" = "Это Вы!";
 "EmptyAuthViewSubtitle" = "Пройдите авторизацию для более удобного обучения";
