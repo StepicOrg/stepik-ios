@@ -61,6 +61,13 @@ final class LessonsPresenter: LessonsPresenterProtocol {
             return
         }
 
+        AmplitudeAnalyticsEvents.Lesson.opened(
+            id: lesson.id,
+            type: lesson.type.rawValue,
+            courseId: lesson.courseId,
+            topicId: getTopicForLessonWithId(lesson.id)
+        ).send()
+
         switch lesson.type {
         case .theory:
             if let lesson = lessons.first(where: { $0.id == viewData.id }) {
@@ -117,6 +124,16 @@ extension LessonsPresenter {
         }.catch { [weak self] _ in
             self?.displayError()
         }
+    }
+
+    private func getTopicForLessonWithId(_ id: Int) -> String {
+        for topic in knowledgeGraph.adjacencyLists.keys {
+            if topic.lessons.contains(where: { $0.id == id }) {
+                return topic.id
+            }
+        }
+
+        return "UNKNOWN_TOPIC_ID_FOR_LESSON_ID_\(id)"
     }
 }
 

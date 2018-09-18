@@ -20,7 +20,7 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return count == 0
     }
 
-    private var adjacencyLists: [Node: [Node]] {
+    var adjacencyLists: [Node: [Node]] {
         return adjacency as! [Node: [Node]]
     }
 
