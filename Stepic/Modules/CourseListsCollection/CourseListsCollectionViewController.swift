@@ -40,10 +40,16 @@ final class CourseListsCollectionViewController: UIViewController {
 
 extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
     func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel) {
+        self.childViewControllers.forEach { $0.removeFromParentViewController() }
+        self.courseListsCollectionView?.removeAllBlocks()
+
         switch viewModel.state {
         case .result(let data):
             for courseListViewModel in data {
-                let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian), colorMode: .light)
+                let assembly = CourseListAssembly(
+                    type: courseListViewModel.courseList,
+                    colorMode: .light
+                )
                 let vc = assembly.makeModule()
                 assembly.moduleInput?.reload()
                 self.addChildViewController(vc)
@@ -53,11 +59,11 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                         for: vc.view,
                         headerDescription: .init(
                             title: courseListViewModel.title,
-                            summary: "\(courseListViewModel.courseList.ids.count) курсов",
+                            summary: "\(courseListViewModel.courseList.ids.count)",
                             description: "\(courseListViewModel.summary ?? "")"
                         )
                     )
-                courseListsCollectionView?.addBlockView(containerView)
+                self.courseListsCollectionView?.addBlockView(containerView)
             }
         default:
             break

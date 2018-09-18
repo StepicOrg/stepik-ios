@@ -64,6 +64,10 @@ final class CourseListsCollectionView: UIView {
     func addBlockView(_ view: UIView) {
         self.contentStackView.addArrangedSubview(view)
     }
+
+    func removeAllBlocks() {
+        self.contentStackView.removeAllArrangedSubviews()
+    }
 }
 
 extension CourseListsCollectionView: ProgrammaticallyInitializableViewProtocol {

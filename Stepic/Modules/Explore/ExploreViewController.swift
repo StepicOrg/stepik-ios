@@ -58,7 +58,10 @@ final class ExploreViewController: UIViewController {
         let container = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
-                headerDescription: .init(title: "Popular", summary: nil)
+                headerDescription: .init(
+                    title: NSLocalizedString("Popular", comment: ""),
+                    summary: nil
+                )
             )
         container.onShowAllButtonClick = { }
         view.addBlockView(container)
