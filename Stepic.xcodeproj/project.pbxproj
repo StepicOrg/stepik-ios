@@ -2469,7 +2469,6 @@
 		2C83E5FC21109C4300A8322D /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E5FD2110B51900A8322D /* StepViewController.xib */; };
 		2C8530EC215121B2001E6B55 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8530EB215121B2001E6B55 /* Tokens.plist */; };
-		2C8530EE215122FD001E6B55 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		2C8530F22151264D001E6B55 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F12151264D001E6B55 /* Tokens.swift */; };
 		2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		2C8530F421512ACA001E6B55 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
@@ -4072,8 +4071,8 @@
 		2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */; };
 		2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */; };
 		2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
+		2CBE46C7215187D90052269A /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
-		2CC0A331214FC04A00134AA8 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		2CC0F29C210AF9EC00FDEAB5 /* AuthAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F29B210AF9EC00FDEAB5 /* AuthAssemblyImpl.swift */; };
 		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
 		2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */; };
@@ -15987,7 +15986,6 @@
 				2C093F28211B464700162DD0 /* StringQuizViewController.swift in Sources */,
 				2C681A0D210B38D800C3DDCA /* AuthSignUpRouterImpl.swift in Sources */,
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
-				2CC0A331214FC04A00134AA8 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */,
 				2C9492C321130DCE00552600 /* PagerController.swift in Sources */,
 				2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */,
 				2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */,
@@ -16348,7 +16346,6 @@
 				2C9499F420ECC0C40049E9A8 /* ExecutableTaskTypes.swift in Sources */,
 				2C093EF7211B41D500162DD0 /* StreaksNotificationSuggestionManager.swift in Sources */,
 				2C949A2820ECC6240049E9A8 /* PinsMapBlockContentView.swift in Sources */,
-				2C8530EE215122FD001E6B55 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */,
 				2C949A5D20ECCEA70049E9A8 /* LabelExtension.swift in Sources */,
 				2C9499A820ECB9FB0049E9A8 /* Dataset.swift in Sources */,
 				2C33CBE120EC3111009956B0 /* AuthInfo.swift in Sources */,
@@ -16393,6 +16390,7 @@
 				62E9820491170A9FF2E00442 /* StepsPagerDataSourceImpl.swift in Sources */,
 				62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */,
 				62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */,
+				2CBE46C7215187D90052269A /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */,
 				2C093F1F211B450000162DD0 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98B8BE1F22F2E05CA130D /* StepAssembly.swift in Sources */,
 				62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */,
