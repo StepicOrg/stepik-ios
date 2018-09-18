@@ -4251,6 +4251,7 @@
 		62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */; };
 		62E9851FBB1D8E51D5577726 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
+		62E9852285F0AECCAC8EE440 /* CourseListOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9837E015AA71E3DED7C7A /* CourseListOutputProtocol.swift */; };
 		62E9852AE720DF947F39C98C /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */; };
 		62E98544284A70FAA434FD51 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E98550E592C61C86FBE7FD /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
@@ -4324,6 +4325,7 @@
 		62E98C0BC0F2F1C04047799F /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E98C1F76B23AFDE100CF6B /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
+		62E98C3BA370F328680994B8 /* CourseListContainerViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9819456E7F199C837919A /* CourseListContainerViewFactory.swift */; };
 		62E98C6B6DE6E2BD98829A26 /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E98C73672CAA20DEB33CAC /* AchievementsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */; };
 		62E98C88FB132BCDFD88F8AE /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
@@ -6174,6 +6176,7 @@
 		62E981313F951DD19A6CF643 /* CourseListsCollectionAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionAssembly.swift; sourceTree = "<group>"; };
 		62E981476A50554ED5B93B30 /* StepsPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSource.swift; sourceTree = "<group>"; };
 		62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorPreferencesContainer.swift; sourceTree = "<group>"; };
+		62E9819456E7F199C837919A /* CourseListContainerViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListContainerViewFactory.swift; sourceTree = "<group>"; };
 		62E9825EF592EEA44508CBDD /* ProgressesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesNetworkService.swift; sourceTree = "<group>"; };
 		62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoPresenter.swift; sourceTree = "<group>"; };
 		62E982889B820EAFCD2131BF /* CourseListTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTypes.swift; sourceTree = "<group>"; };
@@ -6182,6 +6185,7 @@
 		62E9830545E2E72A276F308B /* ProgressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressService.swift; sourceTree = "<group>"; };
 		62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepAssemblyImpl.swift; sourceTree = "<group>"; };
 		62E98366860D3BBBCC872942 /* StepsPagerDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerDataSourceImpl.swift; sourceTree = "<group>"; };
+		62E9837E015AA71E3DED7C7A /* CourseListOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListOutputProtocol.swift; sourceTree = "<group>"; };
 		62E9839898AB7BABED0E4C28 /* TagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
 		62E983D055AB5E152BE1EAEA /* CourseListsCollectionViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionViewModelAdapter.swift; sourceTree = "<group>"; };
 		62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListViewController.swift; sourceTree = "<group>"; };
@@ -6593,6 +6597,7 @@
 				2C2EA37021300B6C002116C9 /* ContentLanguageService.swift */,
 				62E982889B820EAFCD2131BF /* CourseListTypes.swift */,
 				62E98D05D763C2858DCA9841 /* CourseWidgetViewModelAdapter.swift */,
+				62E9837E015AA71E3DED7C7A /* CourseListOutputProtocol.swift */,
 			);
 			path = CourseList;
 			sourceTree = "<group>";
@@ -10741,6 +10746,7 @@
 			children = (
 				73767DAB2B586BA9CDCE97B1 /* ExploreView.swift */,
 				86E1A9DD2146609A00302723 /* ScrollableStackView.swift */,
+				62E9819456E7F199C837919A /* CourseListContainerViewFactory.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -15088,6 +15094,8 @@
 				62E98905245F33B16D020586 /* ContinueActionButton.swift in Sources */,
 				62E98736DE8178FA36A565B6 /* UserCoursesAPI.swift in Sources */,
 				62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */,
+				62E9852285F0AECCAC8EE440 /* CourseListOutputProtocol.swift in Sources */,
+				62E98C3BA370F328680994B8 /* CourseListContainerViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

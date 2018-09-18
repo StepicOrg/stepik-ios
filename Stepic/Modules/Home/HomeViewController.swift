@@ -43,7 +43,7 @@ final class HomeViewController: UIViewController {
 
         let popularAssembly = CourseListAssembly(type: PopularCourseListType(language: .english), colorMode: .light)
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.getModuleInput().reload()
+        popularAssembly.moduleInput?.reload()
         self.addChildViewController(popularViewController)
         let hv = ExploreBlockHeaderView(
             frame: .zero,
@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController {
 
         let popularAssembly1 = CourseListAssembly(type: PopularCourseListType(language: .english), colorMode: .dark)
         let popularViewController1 = popularAssembly1.makeModule()
-        popularAssembly1.getModuleInput().reload()
+        popularAssembly1.moduleInput?.reload()
         self.addChildViewController(popularViewController1)
         let hv1 = ExploreBlockHeaderView(
             frame: .zero,

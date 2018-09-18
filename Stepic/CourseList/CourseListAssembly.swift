@@ -9,14 +9,23 @@
 import UIKit
 
 final class CourseListAssembly: Assembly {
-    // TODO: replace methods by properties
     private let type: CourseListType
     private let colorMode: CourseListColorMode
-    private var interactor: CourseListInteractor?
 
-    init(type: CourseListType, colorMode: CourseListColorMode) {
+    // Input
+    var moduleInput: CourseListInputProtocol?
+
+    // Output
+    private var moduleOutput: CourseListOutputProtocol?
+
+    init(
+        type: CourseListType,
+        colorMode: CourseListColorMode,
+        output: CourseListOutputProtocol? = nil
+    ) {
         self.type = type
         self.colorMode = colorMode
+        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -28,18 +37,24 @@ final class CourseListAssembly: Assembly {
                 coursesAPI: CoursesAPI()
             ),
             persistenceService: self.getPersistenceService(),
-            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
-            reviewSummariesNetworkService: CourseReviewSummariesNetworkService(courseReviewSummariesAPI: CourseReviewSummariesAPI())
+            progressesNetworkService: ProgressesNetworkService(
+                progressesAPI: ProgressesAPI()
+            ),
+            reviewSummariesNetworkService: CourseReviewSummariesNetworkService(
+                courseReviewSummariesAPI: CourseReviewSummariesAPI()
+            )
         )
-        self.interactor = CourseListInteractor(presenter: presenter, provider: provider)
-        let controller = CourseListViewController(interactor: self.interactor!, colorMode: self.colorMode)
+
+        let interactor = CourseListInteractor(presenter: presenter, provider: provider)
+        self.moduleInput = interactor
+
+        let controller = CourseListViewController(
+            interactor: interactor,
+            colorMode: self.colorMode
+        )
 
         presenter.viewController = controller
         return controller
-    }
-
-    func getModuleInput() -> CourseListInputProtocol {
-        return self.interactor!
     }
 
     private func getPersistenceService() -> CourseListPersistenceServiceProtocol? {

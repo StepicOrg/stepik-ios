@@ -43,23 +43,21 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
         switch viewModel.state {
         case .result(let data):
             for courseListViewModel in data {
-                let view = ExploreCoursesCollectionHeaderView(frame: .zero)
-                view.titleText = courseListViewModel.title
-                view.summaryText = "\(courseListViewModel.courseList.ids.count) курсов"
-                view.descriptionText = "\(courseListViewModel.summary ?? "")"
-
                 let assembly = CourseListAssembly(type: PopularCourseListType(language: .russian), colorMode: .light)
                 let vc = assembly.makeModule()
-                assembly.getModuleInput().reload()
+                assembly.moduleInput?.reload()
                 self.addChildViewController(vc)
-                let container = ExploreBlockContainerView(
-                    frame: .zero,
-                    headerView: view,
-                    contentView: vc.view,
-                    shouldShowSeparator: false
-                )
 
-                courseListsCollectionView?.addBlockView(container)
+                let containerView = CourseListContainerViewFactory()
+                    .makeHorizontalCoursesCollectionContainerView(
+                        for: vc.view,
+                        headerDescription: .init(
+                            title: courseListViewModel.title,
+                            summary: "\(courseListViewModel.courseList.ids.count) курсов",
+                            description: "\(courseListViewModel.summary ?? "")"
+                        )
+                    )
+                courseListsCollectionView?.addBlockView(containerView)
             }
         default:
             break
