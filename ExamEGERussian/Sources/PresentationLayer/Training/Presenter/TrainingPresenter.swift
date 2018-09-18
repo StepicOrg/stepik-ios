@@ -69,14 +69,22 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     }
 
     func selectViewData(_ viewData: TrainingViewData) {
-        if viewData.isPractice {
-            guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == viewData.id }) else {
-                return
-            }
-            router.showPractice(courseId: lesson.courseId)
-        } else if let theoryLesson = theoryLessons.first(where: { $0.id == viewData.id }) {
-            router.showTheory(lesson: theoryLesson)
+        guard let graphLesson = knowledgeGraph.firstLesson(where: { $0.id == viewData.id }) else {
+            return
         }
+
+        if viewData.isPractice {
+            router.showPractice(courseId: graphLesson.courseId)
+        } else if let plainObject = theoryLessons.first(where: { $0.id == viewData.id }) {
+            router.showTheory(lesson: plainObject)
+        }
+
+        AmplitudeAnalyticsEvents.Lesson.opened(
+            id: graphLesson.id,
+            type: graphLesson.type.rawValue,
+            courseId: graphLesson.courseId,
+            topicId: getTopicForLesson(graphLesson)?.id ?? "UNKNOWN_TOPIC_ID_FOR_LESSON_ID_\(graphLesson.id)"
+        ).send()
     }
 
     // MARK: - Private API

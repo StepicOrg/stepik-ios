@@ -66,6 +66,11 @@ final class LearningPresenter: LearningPresenterProtocol {
     }
 
     func selectViewData(_ viewData: LearningViewData) {
+        AmplitudeAnalyticsEvents.Topic.opened(
+            id: viewData.id,
+            title: viewData.title
+        ).send()
+
         router.showLessons(topicId: viewData.id)
     }
 
