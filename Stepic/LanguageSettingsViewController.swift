@@ -12,6 +12,8 @@ class LanguageSettingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    private var contentLanguageService = ContentLanguageService()
+
     var selectedIndex: Int?
 
     override func viewDidLoad() {
@@ -25,12 +27,12 @@ class LanguageSettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectedIndex = ContentLanguage.supportedLanguages.index(of: ContentLanguage.sharedContentLanguage)
-        selectLanguage(selectedLanguage: ContentLanguage.sharedContentLanguage)
+        selectedIndex = ContentLanguage.supportedLanguages.index(of: contentLanguageService.globalContentLanguage)
+        selectLanguage(selectedLanguage: contentLanguageService.globalContentLanguage)
     }
 
     func selectLanguage(selectedLanguage: ContentLanguage) {
-        ContentLanguage.sharedContentLanguage = selectedLanguage
+        contentLanguageService.globalContentLanguage = selectedLanguage
 
         if let selectedIndex = selectedIndex {
             let deselectIndexPath = IndexPath(row: selectedIndex, section: 0)

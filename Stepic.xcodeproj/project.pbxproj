@@ -4035,6 +4035,7 @@
 		2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FB2109BB4800564D45 /* EnrollmentService.swift */; };
 		2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FD2109BB9800564D45 /* EnrollmentServiceImpl.swift */; };
 		2CCD5D2F2029F1D4008ACBC7 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
+		2CCE6CCC215153D600DC4419 /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
 		2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12B981F4F33E2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
 		2CD12B9D1F4F348C001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
@@ -8671,7 +8672,6 @@
 				573CFE338FB08142BEC048FE /* HomeDataFlow.swift */,
 				DA24A706D651B083DF81EB3E /* Provider */,
 			);
-			name = Home;
 			path = Home;
 			sourceTree = "<group>";
 		};
@@ -11330,7 +11330,6 @@
 			children = (
 				6470759599AC47AE3102F586 /* HomeProvider.swift */,
 			);
-			name = Provider;
 			path = Provider;
 			sourceTree = "<group>";
 		};
@@ -15018,6 +15017,7 @@
 				62E98D686165FCA5E588FDD5 /* CustomNotificationBanner.swift in Sources */,
 				2CBCD3B421359A55005D10FF /* UICollectionViewExtensions.swift in Sources */,
 				08484F0A211AF4320006266F /* Story.swift in Sources */,
+				2CCE6CCC215153D600DC4419 /* LanguageSettingsViewController.swift in Sources */,
 				378925B23ABDD7215B756770 /* ExploreAssembly.swift in Sources */,
 				2F72C87C268BABCB7ED15F99 /* ExploreViewController.swift in Sources */,
 				3CF03F2244520AA001EEAE25 /* ExploreInteractor.swift in Sources */,

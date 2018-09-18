@@ -62,12 +62,12 @@ final class HomeViewController: UIViewController {
         // Popular
         let popularAssembly = CourseListAssembly(
             type: PopularCourseListType(language: .russian),
-            colorMode: .light
+            colorMode: .dark
         )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()
         self.addChildViewController(popularViewController)
-        let popularContainerView = CourseListContainerViewFactory(colorMode: .light)
+        let popularContainerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
                 headerDescription: .init(
