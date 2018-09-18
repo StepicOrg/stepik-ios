@@ -56,6 +56,7 @@ final class CourseListAssembly: Assembly {
             interactor: interactor,
             colorMode: self.colorMode
         )
+        controller.moduleOutput = self.moduleOutput
 
         presenter.viewController = controller
         return controller

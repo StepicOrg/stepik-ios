@@ -227,6 +227,13 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension CourseListView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.storedCollectionViewDelegate.collectionView?(
+            collectionView,
+            didSelectItemAt: indexPath
+        )
+    }
+
     func collectionView(
         _ collectionView: UICollectionView,
         willDisplay cell: UICollectionViewCell,

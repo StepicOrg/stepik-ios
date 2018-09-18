@@ -13,8 +13,14 @@ protocol CourseListViewControllerProtocol: class {
     func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel)
 }
 
+protocol CourseListViewControllerDelegate: class {
+    func itemDidSelected(viewModel: CourseWidgetViewModel)
+}
+
 final class CourseListViewController: UIViewController {
     let interactor: CourseListInteractorProtocol
+    weak var moduleOutput: CourseListOutputProtocol?
+
     var state: CourseList.ViewControllerState
 
     private let listDelegate: CourseListCollectionViewDelegate
@@ -28,7 +34,7 @@ final class CourseListViewController: UIViewController {
     init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
-        colorMode: CourseListColorMode = .default
+        colorMode: CourseListColorMode = .default,
     ) {
         self.interactor = interactor
         self.state = initialState
@@ -38,6 +44,8 @@ final class CourseListViewController: UIViewController {
         self.listDataSource = CourseListCollectionViewDataSource()
 
         super.init(nibName: nil, bundle: nil)
+
+        self.listDelegate.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -76,6 +84,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         switch viewModel.state {
         case .result(let data):
             self.listDataSource.viewModels = data.courses
+            self.listDelegate.viewModels = data.courses
             self.courseListView?.updateCollectionViewData(
                 delegate: self.listDelegate,
                 dataSource: self.listDataSource
@@ -90,6 +99,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         switch viewModel.state {
         case .result(let data):
             self.listDataSource.viewModels.append(contentsOf: data.courses)
+            self.listDelegate.viewModels.append(contentsOf: data.courses)
             self.courseListView?.updateCollectionViewData(
                 delegate: self.listDelegate,
                 dataSource: self.listDataSource
@@ -110,5 +120,11 @@ extension CourseListViewController: CourseListViewDelegate {
 
         self.canTriggerPagination = false
         self.interactor.fetchNextCourses(request: CourseList.LoadNextCourses.Request())
+    }
+}
+
+extension CourseListViewController: CourseListViewControllerDelegate {
+    func itemDidSelected(viewModel: CourseWidgetViewModel) {
+
     }
 }
