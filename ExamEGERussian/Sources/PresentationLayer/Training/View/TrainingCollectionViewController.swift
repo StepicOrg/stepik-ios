@@ -9,6 +9,17 @@
 import UIKit
 
 final class TrainingCollectionViewController: UICollectionViewController, TrainingView {
+    var state: TrainingViewState = .idle {
+        didSet {
+            switch state {
+            case .idle:
+                refreshControl.endRefreshing()
+            case .fetching:
+                refreshControl.beginRefreshing()
+            }
+        }
+    }
+
     var presenter: TrainingPresenterProtocol!
     private var viewData = [TrainingViewData]()
 

@@ -42,10 +42,14 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     // MARK: - Public API
 
     func refresh() {
+        view?.state = .fetching
+
         checkAuthStatus().then {
             self.refreshContent()
         }.done {
             self.reloadViewData()
+        }.ensure {
+            self.view?.state = .idle
         }.catch { [weak self] error in
             switch error {
             case TrainingPresenterError.failedFetchKnowledgeGraph:

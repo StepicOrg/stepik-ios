@@ -16,7 +16,14 @@ struct TrainingViewData {
     let isPractice: Bool
 }
 
+enum TrainingViewState {
+    case idle
+    case fetching
+}
+
 protocol TrainingView: class {
+    var state: TrainingViewState { get set }
+
     func setViewData(_ viewData: [TrainingViewData])
     func displayError(title: String, message: String)
 }

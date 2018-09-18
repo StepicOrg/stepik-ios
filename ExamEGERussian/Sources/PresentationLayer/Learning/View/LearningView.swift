@@ -16,7 +16,14 @@ struct LearningViewData {
     let progress: String
 }
 
+enum LearningViewState {
+    case idle
+    case fetching
+}
+
 protocol LearningView: class {
+    var state: LearningViewState { get set }
+
     func setViewData(_ viewData: [LearningViewData])
     func displayError(title: String, message: String)
 }

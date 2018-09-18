@@ -9,6 +9,19 @@
 import UIKit
 
 final class LearningTableViewController: UITableViewController, LearningView {
+    var state: LearningViewState = .idle {
+        didSet {
+            switch state {
+            case .idle:
+                refreshControl?.endRefreshing()
+            case .fetching:
+                // Programatically begin refreshing, table view specificity.
+                tableView.setContentOffset(CGPoint(x: 0, y: -(refreshControl?.bounds.height ?? 0)), animated: true)
+                refreshControl?.beginRefreshing()
+            }
+        }
+    }
+
     var presenter: LearningPresenterProtocol!
 
     private var viewData = [LearningViewData]()
