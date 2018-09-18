@@ -20,4 +20,23 @@ extension AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    struct Lesson {
+        static func opened(
+            id: Int,
+            type: String,
+            courseId: String,
+            topicId: String
+        ) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Lesson opened",
+                parameters: [
+                    "id": id,
+                    "type": type,
+                    "course": courseId,
+                    "topic": topicId
+                ]
+            )
+        }
+    }
 }
