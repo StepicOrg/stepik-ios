@@ -9,22 +9,10 @@
 import UIKit
 import SnapKit
 
-extension ExploreView {
-    struct Appearance {
-
-    }
-}
-
 final class ExploreView: UIView {
-    let appearance: Appearance
-
     private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
 
-    init(
-        frame: CGRect,
-        appearance: Appearance = Appearance()
-    ) {
-        self.appearance = appearance
+    override init(frame: CGRect) {
         super.init(frame: frame)
 
         self.setupView()

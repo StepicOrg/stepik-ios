@@ -17,11 +17,12 @@ extension ExploreCoursesCollectionHeaderView {
     }
 }
 
-final class ExploreCoursesCollectionHeaderView: UIView {
+final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
 
     private lazy var headerView: ExploreBlockHeaderView = {
         let view = ExploreBlockHeaderView(frame: .zero)
+        view.onShowAllButtonClick = self.onShowAllButtonClick
         return view
     }()
 
@@ -51,6 +52,8 @@ final class ExploreCoursesCollectionHeaderView: UIView {
             )
         }
     }
+
+    var onShowAllButtonClick: (() -> Void)?
 
     init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance

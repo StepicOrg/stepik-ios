@@ -60,6 +60,7 @@ final class ExploreViewController: UIViewController {
                 for: popularViewController.view,
                 headerDescription: .init(title: "Popular", summary: nil)
             )
+        container.onShowAllButtonClick = { }
         view.addBlockView(container)
 
         self.view = view

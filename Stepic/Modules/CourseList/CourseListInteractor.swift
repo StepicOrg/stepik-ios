@@ -98,7 +98,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
     private func getAvailableAdaptiveCourses(from courses: [Course]) -> Set<Course> {
         let availableInAdaptiveMode = courses
-            .filter { self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId:  $0.id) }
+            .filter { self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: $0.id) }
         return Set<Course>(availableInAdaptiveMode)
     }
 

@@ -22,7 +22,7 @@ extension ExploreBlockContainerView {
 
 final class ExploreBlockContainerView: UIView {
     let appearance: Appearance
-    private let headerView: UIView
+    private let headerView: UIView & ExploreBlockHeaderViewProtocol
     private let contentView: UIView
     private let shouldShowSeparator: Bool
 
@@ -31,6 +31,12 @@ final class ExploreBlockContainerView: UIView {
         view.backgroundColor = self.appearance.separatorColor
         return view
     }()
+
+    var onShowAllButtonClick: (() -> Void)? {
+        didSet {
+            self.headerView.onShowAllButtonClick = self.onShowAllButtonClick
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         let headerViewHeight = self.headerView.intrinsicContentSize.height
@@ -46,7 +52,7 @@ final class ExploreBlockContainerView: UIView {
 
     init(
         frame: CGRect,
-        headerView: UIView,
+        headerView: UIView & ExploreBlockHeaderViewProtocol,
         contentView: UIView,
         shouldShowSeparator: Bool = false,
         appearance: Appearance = Appearance()

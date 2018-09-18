@@ -9,6 +9,12 @@
 import UIKit
 import SnapKit
 
+protocol ExploreBlockHeaderViewProtocol: class {
+    var onShowAllButtonClick: (() -> Void)? { get set }
+    var titleText: String? { get set }
+    var summaryText: String? { get set }
+}
+
 extension ExploreBlockHeaderView {
     struct Appearance {
         var titleLabelColor = UIColor(hex: 0x535366)
@@ -24,7 +30,7 @@ extension ExploreBlockHeaderView {
     }
 }
 
-final class ExploreBlockHeaderView: UIView {
+final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
@@ -45,10 +51,11 @@ final class ExploreBlockHeaderView: UIView {
 
     private lazy var showAllButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("All", for: .normal)
+        button.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         button.tintColor = self.appearance.showAllButtonColor
         button.titleLabel?.font = self.appearance.showAllButtonFont
         button.contentHorizontalAlignment = .right
+        button.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -80,6 +87,8 @@ final class ExploreBlockHeaderView: UIView {
         }
     }
 
+    var onShowAllButtonClick: (() -> Void)?
+
     override var intrinsicContentSize: CGSize {
         let labelsStackViewIntrinsicContentSize = self.labelsStackView
             .systemLayoutSizeFitting(UILayoutFittingCompressedSize)
@@ -99,6 +108,13 @@ final class ExploreBlockHeaderView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Button selector
+
+    @objc
+    private func showAllButtonClicked() {
+        self.onShowAllButtonClick?()
     }
 }
 

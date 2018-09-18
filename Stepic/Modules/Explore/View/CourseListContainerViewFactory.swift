@@ -63,7 +63,7 @@ final class CourseListContainerViewFactory {
     }
 
     private func makeHorizontalContainerView(
-        headerView: UIView,
+        headerView: UIView & ExploreBlockHeaderViewProtocol,
         contentView: UIView
     ) -> ExploreBlockContainerView {
         var appearance = self.colorMode.exploreBlockContainerViewAppearance
