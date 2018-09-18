@@ -2455,6 +2455,7 @@
 		2C83E5FB21109A3700A8322D /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C83E5FC21109C4300A8322D /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E5FD2110B51900A8322D /* StepViewController.xib */; };
+		2C8530EC215121B2001E6B55 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8530EB215121B2001E6B55 /* Tokens.plist */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -5892,6 +5893,7 @@
 		2C83E5EC2110821700A8322D /* StepPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPresenter.swift; sourceTree = "<group>"; };
 		2C83E5EE2110839A00A8322D /* StepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
 		2C83E5FD2110B51900A8322D /* StepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepViewController.xib; sourceTree = "<group>"; };
+		2C8530EB215121B2001E6B55 /* Tokens.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -8925,6 +8927,7 @@
 				2CFE248020ED112100AF1E3D /* Auth.plist */,
 				2CFE247B20ECF7F700AF1E3D /* Config.plist */,
 				2C59F03520EB8AC900666EE0 /* Info.plist */,
+				2C8530EB215121B2001E6B55 /* Tokens.plist */,
 				2CA5568D2123397400A3B1AB /* ImageAsset.swift */,
 			);
 			path = Config;
@@ -12029,6 +12032,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C83E5FE2110B51A00A8322D /* StepViewController.xib in Resources */,
+				2C8530EC215121B2001E6B55 /* Tokens.plist in Resources */,
 				2C83E5FC21109C4300A8322D /* MathJax in Resources */,
 				2C681A08210B15C400C3DDCA /* AuthSignUpViewController.xib in Resources */,
 				2CFE248120ED112100AF1E3D /* Auth.plist in Resources */,
