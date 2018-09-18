@@ -1,8 +1,8 @@
 //
-//  ConfigureThirdPartiesCommand.swift
+//  ThirdPartiesConfigurator.swift
 //  ExamEGERussian
 //
-//  Created by Ivan Magda on 13/08/2018.
+//  Created by Ivan Magda on 18/09/2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
@@ -10,9 +10,10 @@ import Foundation
 import AlamofireNetworkActivityIndicator
 import IQKeyboardManagerSwift
 import SVProgressHUD
+import Amplitude_iOS
 
-struct ConfigureThirdPartiesCommand: Command {
-    func execute() {
+final class ThirdPartiesConfigurator {
+    func configure() {
         NetworkActivityIndicatorManager.shared.isEnabled = true
 
         IQKeyboardManager.sharedManager().enable = true
@@ -23,5 +24,7 @@ struct ConfigureThirdPartiesCommand: Command {
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setHapticsEnabled(true)
+
+        Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)
     }
 }

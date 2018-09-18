@@ -55,6 +55,8 @@ final class TopicsPresenterImpl: TopicsPresenter {
         } else {
             router.showAdaptiveForTopicWithId(topic.id)
         }
+
+        AmplitudeAnalyticsEvents.Topic.opened(id: topic.id, title: topic.title).send()
     }
 
     func selectSegment(at index: Int) {
