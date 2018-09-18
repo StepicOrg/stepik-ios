@@ -15,14 +15,14 @@ protocol CourseListPersistenceServiceProtocol: class {
 }
 
 final class CourseListPersistenceService: CourseListPersistenceServiceProtocol {
-    let type: PersistableCourseListTypeProtocol
+    let storage: CourseListPersistenceStorage
 
-    init(type: PersistableCourseListTypeProtocol) {
-        self.type = type
+    init(storage: CourseListPersistenceStorage) {
+        self.storage = storage
     }
 
     func fetch() -> Promise<[Course]> {
-        let courseListIDs = self.type.storage.getCoursesList()
+        let courseListIDs = self.storage.getCoursesList()
 
         return Promise { seal in
             Course.fetchAsync(courseListIDs).done { courses in
@@ -36,7 +36,7 @@ final class CourseListPersistenceService: CourseListPersistenceServiceProtocol {
 
     func update(newCachedList: [Course]) {
         let ids = newCachedList.map { $0.id }
-        self.type.storage.update(newCachedList: ids)
+        self.storage.update(newCachedList: ids)
     }
 
     enum Error: Swift.Error {

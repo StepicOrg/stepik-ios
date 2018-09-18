@@ -29,14 +29,13 @@ final class CourseListAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
+        let servicesFactory = CourseListServicesFactory(type: self.type, coursesAPI: CoursesAPI())
+
         let presenter = CourseListPresenter()
         let provider = CourseListProvider(
             type: self.type,
-            networkService: CourseListNetworkService(
-                type: self.type,
-                coursesAPI: CoursesAPI()
-            ),
-            persistenceService: self.getPersistenceService(),
+            networkService: servicesFactory.makeNetworkService(),
+            persistenceService: servicesFactory.makePersistenceService(),
             progressesNetworkService: ProgressesNetworkService(
                 progressesAPI: ProgressesAPI()
             ),
@@ -60,13 +59,5 @@ final class CourseListAssembly: Assembly {
 
         presenter.viewController = controller
         return controller
-    }
-
-    private func getPersistenceService() -> CourseListPersistenceServiceProtocol? {
-        if let type = self.type as? PersistableCourseListTypeProtocol {
-            return CourseListPersistenceService(type: type)
-        } else {
-            return nil
-        }
     }
 }

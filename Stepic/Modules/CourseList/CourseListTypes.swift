@@ -8,36 +8,18 @@
 
 import Foundation
 
+// MARK: - Course types
+
 protocol CourseListType {
     // It's just a marker
 }
 
-protocol PersistableCourseListTypeProtocol {
-    var storage: CourseListPersistenceStorage { get }
+struct PopularCourseListType: CourseListType {
+    let language: ContentLanguage
 }
 
-final class PopularCourseListType: CourseListType, PersistableCourseListTypeProtocol {
-    private lazy var _storage: CourseListPersistenceStorage = DefaultsCourseListPersistenceStorage(
-        cacheID: "PopularCoursesInfo_\(self.language.languageString)"
-    )
-    var storage: CourseListPersistenceStorage {
-        return self._storage
-    }
+final class EnrolledCourseListType: CourseListType {
 
-    var language: ContentLanguage
-
-    init(language: ContentLanguage) {
-        self.language = language
-    }
-}
-
-final class EnrolledCourseListType: CourseListType, PersistableCourseListTypeProtocol {
-    private lazy var _storage: CourseListPersistenceStorage = DefaultsCourseListPersistenceStorage(
-        cacheID: "MyCoursesInfo"
-    )
-    var storage: CourseListPersistenceStorage {
-        return self._storage
-    }
 }
 
 final class TagCourseListType: CourseListType {
@@ -50,17 +32,62 @@ final class TagCourseListType: CourseListType {
     }
 }
 
-final class CollectionCourseListType: CourseListType, PersistableCourseListTypeProtocol {
-    private lazy var _storage: CourseListPersistenceStorage = PassiveCourseListPersistenceStorage(
-        cachedList: self.ids
-    )
-    var storage: CourseListPersistenceStorage {
-        return self._storage
-    }
-
+final class CollectionCourseListType: CourseListType {
     var ids: [Course.IdType]
 
     init(ids: [Course.IdType]) {
         self.ids = ids
+    }
+}
+
+// MARK: - Services factory
+
+final class CourseListServicesFactory {
+    let type: CourseListType
+    private let coursesAPI: CoursesAPI
+
+    init(type: CourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        self.coursesAPI = coursesAPI
+    }
+
+    func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
+        if let _ = self.type as? EnrolledCourseListType {
+            return CourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "MyCoursesInfo"
+                )
+            )
+        } else if let type = self.type as? PopularCourseListType {
+            return CourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "PopularCoursesInfo_\(type.language.languageString)"
+                )
+            )
+        } else if let _ = self.type as? TagCourseListType {
+            return nil
+        } else if let type = self.type as? CollectionCourseListType {
+            return CourseListPersistenceService(
+                storage: PassiveCourseListPersistenceStorage(
+                    cachedList: type.ids
+                )
+            )
+        } else {
+            fatalError("Unsupported course list type")
+        }
+    }
+
+    func makeNetworkService() -> CourseListNetworkServiceProtocol {
+        if let type = self.type as? EnrolledCourseListType {
+            return EnrolledCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if let type = self.type as? PopularCourseListType {
+            return PopularCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if let type = self.type as? TagCourseListType {
+            return TagCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if let type = self.type as? CollectionCourseListType {
+            return CollectionCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else {
+            fatalError("Unsupported course list type")
+        }
     }
 }

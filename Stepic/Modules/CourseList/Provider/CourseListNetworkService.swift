@@ -13,41 +13,30 @@ protocol CourseListNetworkServiceProtocol: class {
     func fetch(page: Int) -> Promise<([Course], Meta)>
 }
 
-final class CourseListNetworkService: CourseListNetworkServiceProtocol {
-    let type: CourseListType
+class BaseCourseListNetworkService {
+    let coursesAPI: CoursesAPI
 
-    private let coursesAPI: CoursesAPI
-
-    init(
-        type: CourseListType,
-        coursesAPI: CoursesAPI
-    ) {
-        self.type = type
+    init(coursesAPI: CoursesAPI) {
         self.coursesAPI = coursesAPI
     }
 
-    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
-        if let type = self.type as? EnrolledCourseListType {
-            return self.fetchEnrolled(type, page: page)
-        } else if let type = self.type as? PopularCourseListType {
-            return self.fetchPopular(type, page: page)
-        } else if let type = self.type as? TagCourseListType {
-            return self.fetchTag(type, page: page)
-        } else if let type = self.type as? CollectionCourseListType {
-            return self.fetchCollection(type, page: page)
-        } else {
-            fatalError("Unsupported course list type")
-        }
+    enum Error: Swift.Error {
+        case fetchFailed
+    }
+}
+
+final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
+                                              CourseListNetworkServiceProtocol {
+    let type: EnrolledCourseListType
+
+    init(type: EnrolledCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
     }
 
-    // MARK: - Private fetching methods
-
-    private func fetchEnrolled(
-        _ type: EnrolledCourseListType,
-        page: Int = 1
-    ) -> Promise<([Course], Meta)> {
+    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         return Promise { seal in
-            coursesAPI.retrieve(
+            self.coursesAPI.retrieve(
                 enrolled: true,
                 order: "-activity",
                 page: page
@@ -58,17 +47,24 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
             }
         }
     }
+}
 
-    private func fetchPopular(
-        _ type: PopularCourseListType,
-        page: Int = 1
-    ) -> Promise<([Course], Meta)> {
+final class PopularCourseListNetworkService: BaseCourseListNetworkService,
+                                             CourseListNetworkServiceProtocol {
+    let type: PopularCourseListType
+
+    init(type: PopularCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         return Promise { seal in
-            coursesAPI.retrieve(
+            self.coursesAPI.retrieve(
                 excludeEnded: true,
                 isPublic: true,
                 order: "-activity",
-                language: type.language.popularCoursesParameter,
+                language: self.type.language.popularCoursesParameter,
                 page: page
             ).done { result in
                 seal.fulfill(result)
@@ -77,16 +73,23 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
             }
         }
     }
+}
 
-    private func fetchTag(
-        _ type: TagCourseListType,
-        page: Int = 1
-    ) -> Promise<([Course], Meta)> {
+final class TagCourseListNetworkService: BaseCourseListNetworkService,
+                                         CourseListNetworkServiceProtocol {
+    let type: TagCourseListType
+
+    init(type: TagCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         return Promise { seal in
-            coursesAPI.retrieve(
-                tag: type.id,
+            self.coursesAPI.retrieve(
+                tag: self.type.id,
                 order: "-activity",
-                language: type.language.languageString,
+                language: self.type.language.languageString,
                 page: page
             ).done { result in
                 seal.fulfill(result)
@@ -95,24 +98,27 @@ final class CourseListNetworkService: CourseListNetworkServiceProtocol {
             }
         }
     }
+}
 
-    private func fetchCollection(
-        _ type: CollectionCourseListType,
-        page: Int = 1
-    ) -> Promise<([Course], Meta)> {
+final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
+                                                CourseListNetworkServiceProtocol {
+    let type: CollectionCourseListType
+
+    init(type: CollectionCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         let finalMeta = Meta.oneAndOnlyPage
         return Promise { seal in
-            coursesAPI.retrieve(
-                ids: type.ids
+            self.coursesAPI.retrieve(
+                ids: self.type.ids
             ).done { courses in
                 seal.fulfill((courses, finalMeta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
         }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
     }
 }
