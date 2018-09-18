@@ -142,9 +142,9 @@ extension StepsPagerPresenterImpl {
             lhs.position < rhs.position
         })
     }
-    
+
     // MARK: Types
-    
+
     enum StepsPagerPresenterError: Error {
         case failedJoinCourse
     }
