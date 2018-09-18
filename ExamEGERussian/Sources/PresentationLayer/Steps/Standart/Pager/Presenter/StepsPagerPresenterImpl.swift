@@ -61,7 +61,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     private func joinCourse() -> Promise<Void> {
         guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == self.lesson.id }),
               let courseId = Int(lesson.courseId) else {
-            return .value(())
+            return Promise(error: StepsPagerPresenterError.failedJoinCourse)
         }
 
         return courseService.joinCourses(with: [courseId]).then { _ -> Promise<Void> in
@@ -141,6 +141,12 @@ extension StepsPagerPresenterImpl {
         return steps.sorted(by: { lhs, rhs in
             lhs.position < rhs.position
         })
+    }
+    
+    // MARK: Types
+    
+    enum StepsPagerPresenterError: Error {
+        case failedJoinCourse
     }
 }
 
