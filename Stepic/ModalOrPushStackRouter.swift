@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
 
@@ -26,6 +27,7 @@ class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
             return
         }
         self.source = source
+        self.fallbackPath = fallbackPath
         if destinationStack.count == 1 && source.navigationController == nil {
             router = ModalRouter(source: source, destination: destinationStack[0], embedInNavigation: embedInNavigation)
         }
@@ -54,6 +56,7 @@ class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
         guard let url = URL(string: path) else {
             return
         }
-        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: source, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+        let vc = SFSafariViewController(url: url)
+        source.present(vc, animated: true, completion: nil)
     }
 }
