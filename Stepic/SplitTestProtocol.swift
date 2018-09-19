@@ -14,13 +14,13 @@ protocol SplitTestProtocol {
 
     var currentGroup: GroupType { get }
 
-    var analytics: AnalyticsUserPropertiesServiceProtocol { get }
-    init(currentGroup: GroupType, analytics: AnalyticsUserPropertiesServiceProtocol)
+    var analytics: ABAnalyticsServiceProtocol { get }
+    init(currentGroup: GroupType, analytics: ABAnalyticsServiceProtocol)
 }
 
 extension SplitTestProtocol {
     func hitSplitTest() {
-        self.analytics.setProperty(key: Self.analyticsKey, value: self.currentGroup.rawValue)
+        self.analytics.reportOnce(test: Self.analyticsKey, group: self.currentGroup.rawValue)
     }
 
     static var analyticsKey: String {
