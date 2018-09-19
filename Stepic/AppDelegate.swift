@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func handleOpenedFromDeepLink(_ url: URL) {
         let deepLinkRoutingService = DeepLinkRoutingService()
-        delay(0.1) {
+        DispatchQueue.main.async {
             deepLinkRoutingService.route(path: url.absoluteString)
         }
     }
