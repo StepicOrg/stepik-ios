@@ -48,8 +48,7 @@ class StepViewController: UIViewController {
         return stepWebView
     }()
 
-    // For updates after rotation only when controller not presented
-    private var shouldRefreshOnAppear: Bool = false
+    private var htmlText = ""
 
     // MARK: - UIViewController Lifecycle
 
@@ -66,17 +65,7 @@ class StepViewController: UIViewController {
         super.viewWillAppear(animated)
 
         triggerViewLayoutUpdate()
-
-        if shouldRefreshOnAppear {
-            refreshWebView()
-        }
-
-        fadeIn()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        shouldRefreshOnAppear = false
+        loadHTML()
     }
 
     deinit {
@@ -109,27 +98,13 @@ class StepViewController: UIViewController {
             make.trailing.leading.bottom.equalToSuperview()
         }
     }
-
-    private func fadeIn(duration: TimeInterval = 0.75) {
-        let key = "alpha"
-
-        scrollView.layer.removeAnimation(forKey: key)
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 0.0
-        animation.toValue = 1.0
-        animation.duration = duration
-        scrollView.layer.add(animation, forKey: key)
-    }
 }
 
 // MARK: - StepViewController (StepView) -
 
 extension StepViewController: StepView {
     func update(with htmlText: String) {
-        let processor = HTMLProcessor(html: htmlText)
-        let html = processor.injectDefault().html
-        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        self.htmlText = htmlText
     }
 
     func updateQuiz(with controller: UIViewController) {
@@ -153,11 +128,9 @@ extension StepViewController: StepView {
 // MARK: - StepViewController (Actions) -
 
 extension StepViewController {
-    @objc private func didScreenRotate() {
+    @objc
+    private func didScreenRotate() {
         refreshWebView()
-        fadeIn()
-
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }
 
@@ -174,7 +147,7 @@ extension StepViewController {
             make.top.equalTo(scrollView).offset(Theme.StepWebView.topSpacing)
         }
 
-        stepWebView.didFinishNavigation = { [weak self] _ in
+        stepWebView.didFinishLoad = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -220,5 +193,11 @@ extension StepViewController {
         }.catch { error in
             print("Error while refreshing: \(error)")
         }
+    }
+
+    private func loadHTML() {
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor.injectDefault().html
+        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 }
