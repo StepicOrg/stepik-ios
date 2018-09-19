@@ -65,12 +65,6 @@ class StoryPart {
         self.storyID = storyID
     }
 
-//    init(type: String, position: Int, duration: Double) {
-//        self.type = PartType(rawValue: type)
-//        self.position = position - 1
-//        self.duration = duration
-//    }
-
     enum PartType: String {
         case text
     }
