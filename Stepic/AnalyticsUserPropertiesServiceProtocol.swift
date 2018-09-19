@@ -1,5 +1,5 @@
 //
-//  AnalyticsUserPropertiesServiceProtocol.swift
+//  ABAnalyticsServiceProtocol.swift
 //  SplitTests
 //
 //  Created by Alex Zimin on 15/06/2018.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AnalyticsUserPropertiesServiceProtocol {
-    func setProperty(key: String, value: Any?)
+protocol ABAnalyticsServiceProtocol {
+    func reportOnce(test: String, group: String)
 }
