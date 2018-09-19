@@ -141,37 +141,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         delay(0.1) {
             deepLinkRoutingService.route(path: url.absoluteString)
         }
-//        DeepLinkRouter.routeFromDeepLink(url, completion: {
-//            [weak self]
-//            controllers in
-//            if controllers.count > 0 {
-//                if let s = self {
-//                    if let topController = s.currentNavigation?.topViewController {
-//                        delay(0.5, closure: {
-//                            for (index, vc) in controllers.enumerated() {
-//                                if index == controllers.count - 1 {
-//                                    topController.navigationController?.pushViewController(vc, animated: true)
-//                                } else {
-//                                    topController.navigationController?.pushViewController(vc, animated: false)
-//                                }
-//                            }
-//                        })
-//                    }
-//                }
-//            } else {
-//                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
-//                    _ in
-//                    UIApplication.shared.openURL(url)
-//                }))
-//
-//                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-//
-//                UIThread.performUI {
-//                    self?.window?.rootViewController?.present(alert, animated: true, completion: nil)
-//                }
-//            }
-//        })
     }
 
     func updateNotificationRegistrationStatus(_ notification: Foundation.Notification) {
