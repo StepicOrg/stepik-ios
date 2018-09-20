@@ -11,20 +11,15 @@ import Agrume
 import PromiseKit
 import SnapKit
 
-class StepViewController: UIViewController {
-    // MARK: - Types
-
-    private struct Theme {
-        static let viewInitialHeight: CGFloat = 5.0
-
-        struct StepWebView {
-            static let horizontalSpacing: CGFloat = 2.0
-            static let topSpacing: CGFloat = 5.0
-        }
+extension StepViewController {
+    struct Appearance {
+        let viewInitialHeight: CGFloat = 5.0
+        let stepWebViewHorizontalSpacing: CGFloat = 5.0
+        let stepWebViewTopSpacing: CGFloat = 5.0
     }
+}
 
-    // MARK: - Instance Properties
-
+final class StepViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
@@ -39,17 +34,19 @@ class StepViewController: UIViewController {
     }()
 
     var presenter: StepPresenter?
+    var appearance = Appearance()
 
     private lazy var stepWebView: StepWebView = {
         let stepWebView = StepWebView()
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
-        stepWebView.scrollView.isScrollEnabled = false
+        stepWebView.scrollView.bounces = false
+        stepWebView.scrollView.showsVerticalScrollIndicator = false
+        stepWebView.scrollView.showsHorizontalScrollIndicator = false
 
         return stepWebView
     }()
 
-    // For updates after rotation only when controller not presented
-    private var shouldRefreshOnAppear: Bool = false
+    private var htmlText = ""
 
     // MARK: - UIViewController Lifecycle
 
@@ -66,17 +63,7 @@ class StepViewController: UIViewController {
         super.viewWillAppear(animated)
 
         triggerViewLayoutUpdate()
-
-        if shouldRefreshOnAppear {
-            refreshWebView()
-        }
-
-        fadeIn()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        shouldRefreshOnAppear = false
+        loadHTML()
     }
 
     deinit {
@@ -109,27 +96,13 @@ class StepViewController: UIViewController {
             make.trailing.leading.bottom.equalToSuperview()
         }
     }
-
-    private func fadeIn(duration: TimeInterval = 0.75) {
-        let key = "alpha"
-
-        scrollView.layer.removeAnimation(forKey: key)
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 0.0
-        animation.toValue = 1.0
-        animation.duration = duration
-        scrollView.layer.add(animation, forKey: key)
-    }
 }
 
 // MARK: - StepViewController (StepView) -
 
 extension StepViewController: StepView {
     func update(with htmlText: String) {
-        let processor = HTMLProcessor(html: htmlText)
-        let html = processor.injectDefault().html
-        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        self.htmlText = htmlText
     }
 
     func updateQuiz(with controller: UIViewController) {
@@ -153,11 +126,9 @@ extension StepViewController: StepView {
 // MARK: - StepViewController (Actions) -
 
 extension StepViewController {
-    @objc private func didScreenRotate() {
+    @objc
+    private func didScreenRotate() {
         refreshWebView()
-        fadeIn()
-
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
     }
 }
 
@@ -167,14 +138,14 @@ extension StepViewController {
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
-            stepWebViewHeight = make.height.equalTo(Theme.viewInitialHeight).constraint
+            stepWebViewHeight = make.height.equalTo(appearance.viewInitialHeight).constraint
             make.bottom.equalTo(quizPlaceholderView.snp.top)
-            make.leading.equalTo(scrollView).offset(Theme.StepWebView.horizontalSpacing)
-            make.trailing.equalTo(scrollView).offset(-Theme.StepWebView.horizontalSpacing)
-            make.top.equalTo(scrollView).offset(Theme.StepWebView.topSpacing)
+            make.leading.equalTo(scrollView).offset(appearance.stepWebViewHorizontalSpacing)
+            make.trailing.equalTo(scrollView).offset(-appearance.stepWebViewHorizontalSpacing)
+            make.top.equalTo(scrollView).offset(appearance.stepWebViewTopSpacing)
         }
 
-        stepWebView.didFinishNavigation = { [weak self] _ in
+        stepWebView.didFinishLoad = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -220,5 +191,11 @@ extension StepViewController {
         }.catch { error in
             print("Error while refreshing: \(error)")
         }
+    }
+
+    private func loadHTML() {
+        let processor = HTMLProcessor(html: htmlText)
+        let html = processor.injectDefault().html
+        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 }
