@@ -89,7 +89,7 @@ class StoryViewController: UIViewController {
     func didTap(recognizer: UITapGestureRecognizer) {
         let closeLocation = recognizer.location(in: closeView)
         if closeView.bounds.contains(closeLocation) {
-            close()
+            presenter?.onClosePressed()
             return
         }
 

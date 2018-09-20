@@ -17,6 +17,7 @@ protocol OpenedStoriesPresenterProtocol: class {
     var nextModule: UIViewController? { get }
     var prevModule: UIViewController? { get }
     var currentModule: UIViewController { get }
+    func onSwipeDismiss()
     func refresh()
 }
 
@@ -57,6 +58,10 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     func refresh() {
         view?.set(module: currentModule, direction: .forward, animated: false)
+    }
+
+    func onSwipeDismiss() {
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: stories[currentPosition].id, type: .swipe).send()
     }
 
     private func getModule(story: Story) -> UIViewController {
