@@ -10,35 +10,25 @@ import UIKit
 
 final class AppRouter: BaseRouter {
     private(set) weak var window: UIWindow?
-    private(set) weak var tabBarController: UITabBarController?
+    var tabBarController: UITabBarController? {
+        return window?.rootViewController as? UITabBarController
+    }
 
     override var navigationController: UINavigationController? {
         return tabBarController?.selectedViewController as? UINavigationController
     }
 
-    init(tabBarController: UITabBarController,
+    init(window: UIWindow,
          navigationController: UINavigationController,
          assemblyFactory: AssemblyFactory
     ) {
-        self.tabBarController = tabBarController
-        super.init(assemblyFactory: assemblyFactory, navigationController: navigationController)
-    }
-
-    func start(_ window: UIWindow) {
         self.window = window
-        window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
+        super.init(assemblyFactory: assemblyFactory, navigationController: navigationController)
     }
 
     func showAuthorization(animated: Bool = true) {
         presentModalNavigationController(derivedFrom: { _ in
             assemblyFactory.authAssembly.greeting.module()
-        }, animated: animated)
-    }
-
-    func showTopics(animated: Bool = true) {
-        pushViewController(derivedFrom: { navigationController in
-            assemblyFactory.topicsAssembly.module(navigationController: navigationController)
         }, animated: animated)
     }
 }

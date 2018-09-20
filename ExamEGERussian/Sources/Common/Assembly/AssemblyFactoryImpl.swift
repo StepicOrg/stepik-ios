@@ -17,8 +17,12 @@ final class AssemblyFactoryImpl: AssemblyFactory {
         return AuthAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
-    var topicsAssembly: TopicsAssembly {
-        return TopicsAssemblyImpl(assemblyFactory: self, serviceFactory: serviceFactory)
+    var learningAssembly: LearningAssemblyProtocol {
+        return LearningAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
+    }
+
+    var trainingAssembly: TrainingAssemblyProtocol {
+        return TrainingAssembly(assemblyFactory: self, serviceFactory: serviceFactory)
     }
 
     var lessonsAssembly: LessonsAssemblyProtocol {

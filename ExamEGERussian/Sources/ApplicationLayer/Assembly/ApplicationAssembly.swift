@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit.UIViewController
+import UIKit
 
 struct ApplicationModule {
     var router: AppRouter?
-    weak var rootViewController: UIViewController? {
+    var rootViewController: UIViewController? {
         return router?.window?.rootViewController
     }
 
@@ -20,5 +20,5 @@ struct ApplicationModule {
 }
 
 protocol ApplicationAssembly: class {
-    func module() -> ApplicationModule
+    func makeModule(window: UIWindow) -> ApplicationModule
 }
