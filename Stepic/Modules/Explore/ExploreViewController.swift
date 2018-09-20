@@ -75,14 +75,6 @@ final class ExploreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let vc = FullscreenCourseListAssembly(
-                presentationDescription: .init(title: "Sample text", subtitle: "100 courses")
-            ).makeModule()
-
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
     }
 
     // MARK: Requests logic
