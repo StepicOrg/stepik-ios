@@ -13,9 +13,9 @@ final class SocialAuthStringSplitTest: SplitTestProtocol {
     static var identifier: String = "social_auth_string"
 
     var currentGroup: SocialAuthStringSplitTest.Group
-    var analytics: AnalyticsUserPropertiesServiceProtocol
+    var analytics: ABAnalyticsServiceProtocol
 
-    init(currentGroup: SocialAuthStringSplitTest.Group, analytics: AnalyticsUserPropertiesServiceProtocol) {
+    init(currentGroup: SocialAuthStringSplitTest.Group, analytics: ABAnalyticsServiceProtocol) {
         self.currentGroup = currentGroup
         self.analytics = analytics
     }
