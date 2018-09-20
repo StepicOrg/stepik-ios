@@ -11,20 +11,15 @@ import Agrume
 import PromiseKit
 import SnapKit
 
-class StepViewController: UIViewController {
-    // MARK: - Types
-
-    private struct Theme {
-        static let viewInitialHeight: CGFloat = 5.0
-
-        struct StepWebView {
-            static let horizontalSpacing: CGFloat = 2.0
-            static let topSpacing: CGFloat = 5.0
-        }
+extension StepViewController {
+    struct Appearance {
+        let viewInitialHeight: CGFloat = 5.0
+        let stepWebViewHorizontalSpacing: CGFloat = 5.0
+        let stepWebViewTopSpacing: CGFloat = 5.0
     }
+}
 
-    // MARK: - Instance Properties
-
+final class StepViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
@@ -39,11 +34,14 @@ class StepViewController: UIViewController {
     }()
 
     var presenter: StepPresenter?
+    var appearance = Appearance()
 
     private lazy var stepWebView: StepWebView = {
         let stepWebView = StepWebView()
         stepWebView.translatesAutoresizingMaskIntoConstraints = false
-        stepWebView.scrollView.isScrollEnabled = false
+        stepWebView.scrollView.bounces = false
+        stepWebView.scrollView.showsVerticalScrollIndicator = false
+        stepWebView.scrollView.showsHorizontalScrollIndicator = false
 
         return stepWebView
     }()
@@ -140,11 +138,11 @@ extension StepViewController {
     private func setupWebView() {
         scrollView.insertSubview(stepWebView, at: 0)
         stepWebView.snp.makeConstraints { make in
-            stepWebViewHeight = make.height.equalTo(Theme.viewInitialHeight).constraint
+            stepWebViewHeight = make.height.equalTo(appearance.viewInitialHeight).constraint
             make.bottom.equalTo(quizPlaceholderView.snp.top)
-            make.leading.equalTo(scrollView).offset(Theme.StepWebView.horizontalSpacing)
-            make.trailing.equalTo(scrollView).offset(-Theme.StepWebView.horizontalSpacing)
-            make.top.equalTo(scrollView).offset(Theme.StepWebView.topSpacing)
+            make.leading.equalTo(scrollView).offset(appearance.stepWebViewHorizontalSpacing)
+            make.trailing.equalTo(scrollView).offset(-appearance.stepWebViewHorizontalSpacing)
+            make.top.equalTo(scrollView).offset(appearance.stepWebViewTopSpacing)
         }
 
         stepWebView.didFinishLoad = { [weak self] in
