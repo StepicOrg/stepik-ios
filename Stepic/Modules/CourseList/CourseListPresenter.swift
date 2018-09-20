@@ -11,6 +11,7 @@ import UIKit
 protocol CourseListPresenterProtocol: class {
     func presentCourses(response: CourseList.ShowCourses.Response)
     func presentNextCourses(response: CourseList.LoadNextCourses.Response)
+    func presentJoinCourseReaction(response: CourseList.JoinCourse.Response)
 }
 
 final class CourseListPresenter: CourseListPresenterProtocol {
@@ -60,6 +61,10 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         }
 
         self.viewController?.displayNextCourses(viewModel: viewModel)
+    }
+
+    func presentJoinCourseReaction(response: CourseList.JoinCourse.Response) {
+        self.viewController?.displayJoinCourseCompletion(viewModel: .init())
     }
 
     private func makeWidgetViewModels(

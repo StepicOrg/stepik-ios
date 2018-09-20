@@ -47,6 +47,16 @@ enum CourseList {
             var state: PaginationState
         }
     }
+    /// Course join
+    enum JoinCourse {
+        struct Request {
+            var id: Course.IdType
+        }
+
+        struct Response { }
+
+        struct ViewModel { }
+    }
 
     // MARK: States
 
@@ -66,6 +76,7 @@ enum CourseList {
         typealias PaginationState = (page: Int, hasNext: Bool)
 
         var isOnline: Bool = false
-        var paginationState: PaginationState = PaginationState(page: 1, hasNext: true)
+        var paginationState = PaginationState(page: 1, hasNext: true)
+        var courses: [Course] = []
     }
 }

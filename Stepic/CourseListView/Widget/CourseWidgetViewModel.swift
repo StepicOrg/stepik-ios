@@ -24,4 +24,5 @@ struct CourseWidgetViewModel {
     var ratingLabelText: String?
     var isAdaptive: Bool
     var progress: CourseWidgetProgressViewModel?
+    var courseId: Int
 }

@@ -12,12 +12,15 @@ import PromiseKit
 protocol CourseListInteractorProtocol: class {
     func fetchCourses(request: CourseList.ShowCourses.Request)
     func fetchNextCourses(request: CourseList.LoadNextCourses.Request)
+
+    func joinCourse(request: CourseList.JoinCourse.Request)
 }
 
 final class CourseListInteractor: CourseListInteractorProtocol {
     let presenter: CourseListPresenterProtocol
     let provider: CourseListProviderProtocol
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    let courseSubscriber: CourseSubscriberProtocol
 
     private var state: CourseList.State
 
@@ -25,13 +28,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         state: CourseList.State = CourseList.State(),
         presenter: CourseListPresenterProtocol,
         provider: CourseListProviderProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        courseSubscriber: CourseSubscriberProtocol
     ) {
         self.state = state
         self.presenter = presenter
         self.provider = provider
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.courseSubscriber = courseSubscriber
     }
+
+    // MARK: - Public methods
 
     func fetchCourses(request: CourseList.ShowCourses.Request) {
         // Check for state and if state == offline, just fetch cached courses
@@ -46,6 +53,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
+            self.state.courses = courses
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
@@ -83,6 +91,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
+            self.state.courses.append(contentsOf: courses)
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
@@ -96,11 +105,29 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
+    func joinCourse(request: CourseList.JoinCourse.Request) {
+        guard let targetCourse = self.state.courses.filter({ $0.id == request.id }).first,
+              let indexOfTargetCourse = self.state.courses.index(of: targetCourse) else {
+            return self.presenter.presentJoinCourseReaction(response: .init())
+        }
+
+        self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
+            self.state.courses[indexOfTargetCourse] = course
+            self.presenter.presentJoinCourseReaction(response: .init())
+        }.catch { _ in
+            self.presenter.presentJoinCourseReaction(response: .init())
+        }
+    }
+
+    // MARK: - Private methods
+
     private func getAvailableAdaptiveCourses(from courses: [Course]) -> Set<Course> {
         let availableInAdaptiveMode = courses
             .filter { self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: $0.id) }
         return Set<Course>(availableInAdaptiveMode)
     }
+
+    // MARK: - Enums
 
     enum Error: Swift.Error {
         case fetchFailed

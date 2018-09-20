@@ -30,7 +30,8 @@ extension CourseWidgetViewModel {
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             ratingLabelText: ratingLabelText,
             isAdaptive: true,
-            progress: progressViewModel
+            progress: progressViewModel,
+            courseId: course.id
         )
     }
 }

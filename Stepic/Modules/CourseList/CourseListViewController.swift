@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 protocol CourseListViewControllerProtocol: class {
     func displayCourses(viewModel: CourseList.ShowCourses.ViewModel)
     func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel)
+    func displayJoinCourseCompletion(viewModel: CourseList.JoinCourse.ViewModel)
 }
 
 protocol CourseListViewControllerDelegate: class {
@@ -132,6 +134,11 @@ extension CourseListViewController: CourseListViewControllerProtocol {
             break
         }
     }
+
+    func displayJoinCourseCompletion(viewModel: CourseList.JoinCourse.ViewModel) {
+        SVProgressHUD.dismiss()
+
+    }
 }
 
 extension CourseListViewController: CourseListViewDelegate {
@@ -151,7 +158,8 @@ extension CourseListViewController: CourseListViewControllerDelegate {
     }
 
     func primaryButtonClicked(viewModel: CourseWidgetViewModel) {
-        print(viewModel)
+        self.interactor.joinCourse(request: .init(id: viewModel.courseId))
+        SVProgressHUD.show()
     }
 
     func secondaryButtonClicked(viewModel: CourseWidgetViewModel) {

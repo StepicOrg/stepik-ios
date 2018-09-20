@@ -50,7 +50,8 @@ final class CourseListAssembly: Assembly {
         let interactor = CourseListInteractor(
             presenter: presenter,
             provider: provider,
-            adaptiveStorageManager: AdaptiveStorageManager()
+            adaptiveStorageManager: AdaptiveStorageManager(),
+            courseSubscriber: CourseSubscriber()
         )
         self.moduleInput = interactor
 
