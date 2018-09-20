@@ -10,7 +10,7 @@ import Foundation
 import Amplitude_iOS
 import Crashlytics
 
-class AnalyticsUserProperties: AnalyticsUserPropertiesServiceProtocol {
+class AnalyticsUserProperties {
 
     static let shared = AnalyticsUserProperties()
 

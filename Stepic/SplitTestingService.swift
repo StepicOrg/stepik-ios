@@ -14,10 +14,10 @@ protocol SplitTestingServiceProtocol {
 }
 
 class SplitTestingService: SplitTestingServiceProtocol {
-    private let analyticsService: AnalyticsUserPropertiesServiceProtocol
+    private let analyticsService: ABAnalyticsServiceProtocol
     private let storage: StringStorageServiceProtocol
 
-    init(analyticsService: AnalyticsUserPropertiesServiceProtocol, storage: StringStorageServiceProtocol) {
+    init(analyticsService: ABAnalyticsServiceProtocol, storage: StringStorageServiceProtocol) {
         self.analyticsService = analyticsService
         self.storage = storage
     }
