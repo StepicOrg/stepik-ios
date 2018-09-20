@@ -8,9 +8,6 @@
 
 import UIKit
 
-class Stub: UICollectionReusableView, Reusable {
-}
-
 extension CourseListView {
     struct Appearance {
         let layoutMinimumLineSpacing: CGFloat = 16.0
@@ -24,42 +21,15 @@ extension CourseListView {
     }
 }
 
-final class CourseListView: UIView {
+class CourseListView: UIView {
     let appearance: Appearance
     let colorMode: CourseListColorMode
-    let orientation: Orientation
 
-    private var collectionView: UICollectionView!
-    // We should use proxy cause we are using willDisplay method for pagination
-    private var storedCollectionViewDelegate: UICollectionViewDelegate
-    private weak var delegate: CourseListViewDelegate?
+    fileprivate var collectionView: UICollectionView!
+    fileprivate weak var delegate: CourseListViewDelegate?
 
-    private lazy var horizontalCourseFlowLayout: UICollectionViewFlowLayout = {
-        guard case .horizontal(let rows, let columns) = self.orientation else {
-            fatalError()
-        }
-
-        let layout = HorizontalCourseListFlowLayout(rowsCount: rows, columnsCount: columns)
-        layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
-        layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
-        return layout
-    }()
-
-    private lazy var verticalCourseFlowLayout: UICollectionViewFlowLayout = {
-        guard case .vertical(let columns) = self.orientation else {
-            fatalError()
-        }
-
-        let layout = VerticalCourseListFlowLayout(columnsCount: columns)
-        layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
-        layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
-        return layout
-    }()
-
-    var isPaginationViewHidden: Bool = true {
-        didSet {
-            self.updatePagination()
-        }
+    var flowLayout: UICollectionViewFlowLayout {
+        fatalError("Use subclass of CourseListView with concrete layout")
     }
 
     override var intrinsicContentSize: CGSize {
@@ -69,27 +39,20 @@ final class CourseListView: UIView {
     init(
         frame: CGRect,
         colorMode: CourseListColorMode = .default,
-        orientation: Orientation,
-        delegate: UICollectionViewDelegate,
-        dataSource: UICollectionViewDataSource,
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.colorMode = colorMode
-        self.orientation = orientation
 
         self.delegate = viewDelegate
-        self.storedCollectionViewDelegate = delegate
 
         super.init(frame: frame)
 
         self.collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: self.getLayoutForOrientation(self.orientation)
+            collectionViewLayout: self.flowLayout
         )
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = dataSource
 
         self.setupView()
         self.addSubviews()
@@ -107,17 +70,7 @@ final class CourseListView: UIView {
     }
 
     func calculateItemSize() -> CGSize {
-        switch self.orientation {
-        case .vertical(let columns):
-            let width = self.bounds.width
-                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(columns + 1)
-            return CGSize(width: width / CGFloat(columns), height: self.appearance.layoutItemHeight)
-        case .horizontal(_, let columns):
-            let width = self.bounds.width
-                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(columns + 1)
-                - self.appearance.horizontalLayoutNextPageWidth
-            return CGSize(width: width / CGFloat(columns), height: self.appearance.layoutItemHeight)
-        }
+        fatalError("Use subclass of CourseListView with concrete layout")
     }
 
     func updateItemSize(_ itemSize: CGSize) {
@@ -132,35 +85,9 @@ final class CourseListView: UIView {
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource
     ) {
-        self.storedCollectionViewDelegate = delegate
         self.collectionView.dataSource = dataSource
         self.collectionView.reloadData()
         self.collectionView.collectionViewLayout.invalidateLayout()
-    }
-
-    private func getLayoutForOrientation(
-        _ orientation: Orientation
-    ) -> UICollectionViewFlowLayout {
-        switch self.orientation {
-        case .horizontal:
-            return self.horizontalCourseFlowLayout
-        case .vertical:
-            return self.verticalCourseFlowLayout
-        }
-    }
-
-    private func updatePagination() {
-        let collectionViewLayout = self.collectionView.collectionViewLayout
-        guard let layout = collectionViewLayout as? VerticalCourseListFlowLayout else {
-            return
-        }
-
-        collectionView.performBatchUpdates({ [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            layout.isPaginationHidden = strongSelf.isPaginationViewHidden
-        })
     }
 
     private func updateViewColor() {
@@ -176,11 +103,6 @@ final class CourseListView: UIView {
         case .dark:
             return self.appearance.darkModeBackgroundColor
         }
-    }
-
-    enum Orientation {
-        case horizontal(rowsCount: Int, columnsCount: Int)
-        case vertical(columnsCount: Int)
     }
 }
 
@@ -217,45 +139,20 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
         default:
             fatalError("Color mode is not supported")
         }
-        self.collectionView.register(viewClass: Stub.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter)
+
+        self.collectionView.register(
+            viewClass: CollectionViewFooterReusableView.self,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+        )
+        self.collectionView.register(
+            viewClass: CollectionViewHeaderReusableView.self,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+        )
 
         self.collectionView.isPagingEnabled = false
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.contentInset = .zero
         self.collectionView.backgroundColor = .clear
-    }
-}
-
-extension CourseListView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.storedCollectionViewDelegate.collectionView?(
-            collectionView,
-            didSelectItemAt: indexPath
-        )
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        willDisplay cell: UICollectionViewCell,
-        forItemAt indexPath: IndexPath
-    ) {
-        self.storedCollectionViewDelegate.collectionView?(
-            collectionView,
-            willDisplay: cell,
-            forItemAt: indexPath
-        )
-
-        // Pagination working only when collection has one section and VerticalCourseListFlowLayout
-        guard indexPath.section == 0,
-              collectionView.collectionViewLayout is VerticalCourseListFlowLayout else {
-            return
-        }
-
-        // Handle pagination
-        let itemsCount = collectionView.numberOfItems(inSection: indexPath.section)
-        if indexPath.row + 1 == itemsCount {
-            self.delegate?.courseListViewDidPaginationRequesting(self)
-        }
     }
 }
 
@@ -286,4 +183,232 @@ private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     static var defaultReuseIdentifier: String {
         return String(describing: CourseListCollectionViewCell.self)
     }
+}
+
+// Subclasses for two orientations
+
+final class VerticalCourseListView: CourseListView,
+                                    UICollectionViewDelegate,
+                                    UICollectionViewDataSource {
+    private let columnsCount: Int
+    // We should use proxy cause we are using willDisplay method in delegate for pagination
+    // and some methods to show footer/header in data source
+    private var storedCollectionViewDelegate: UICollectionViewDelegate
+    private var storedCollectionViewDataSource: UICollectionViewDataSource
+
+    private lazy var verticalCourseFlowLayout: VerticalCourseListFlowLayout = {
+        let layout = VerticalCourseListFlowLayout(columnsCount: self.columnsCount)
+        layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
+        layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
+        return layout
+    }()
+
+    override var flowLayout: UICollectionViewFlowLayout {
+        return self.verticalCourseFlowLayout
+    }
+
+    var isPaginationViewHidden: Bool = true {
+        didSet {
+            self.updatePagination()
+        }
+    }
+
+    init(
+        frame: CGRect,
+        columnsCount: Int,
+        colorMode: CourseListColorMode,
+        delegate: UICollectionViewDelegate,
+        dataSource: UICollectionViewDataSource,
+        viewDelegate: CourseListViewDelegate,
+        appearance: Appearance = CourseListView.Appearance()
+    ) {
+        self.columnsCount = columnsCount
+        self.storedCollectionViewDelegate = delegate
+        self.storedCollectionViewDataSource = dataSource
+        super.init(
+            frame: frame,
+            colorMode: colorMode,
+            viewDelegate: viewDelegate,
+            appearance: appearance
+        )
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func updateCollectionViewData(
+        delegate: UICollectionViewDelegate,
+        dataSource: UICollectionViewDataSource
+    ) {
+        self.storedCollectionViewDelegate = delegate
+        self.storedCollectionViewDataSource = dataSource
+        super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
+    }
+
+    override func calculateItemSize() -> CGSize {
+        let width = self.bounds.width
+            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+        return CGSize(
+            width: width / CGFloat(self.columnsCount),
+            height: self.appearance.layoutItemHeight
+        )
+    }
+
+    private func updatePagination() {
+        self.collectionView.performBatchUpdates({ [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.verticalCourseFlowLayout.isPaginationHidden = strongSelf
+                .isPaginationViewHidden
+        })
+    }
+
+    // MARK: UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.storedCollectionViewDelegate.collectionView?(
+            collectionView,
+            didSelectItemAt: indexPath
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        self.storedCollectionViewDelegate.collectionView?(
+            collectionView,
+            willDisplay: cell,
+            forItemAt: indexPath
+        )
+
+        // Pagination working only when collection has one section
+        guard indexPath.section == 0 else {
+            return
+        }
+
+        // Handle pagination
+        let itemsCount = collectionView.numberOfItems(inSection: indexPath.section)
+        if indexPath.row + 1 == itemsCount {
+            self.delegate?.courseListViewDidPaginationRequesting(self)
+        }
+    }
+
+    // MARK: UICollectionViewDataSource
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return self.storedCollectionViewDataSource.collectionView(
+            collectionView,
+            numberOfItemsInSection: section
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        return self.storedCollectionViewDataSource.collectionView(
+            collectionView,
+            cellForItemAt: indexPath
+        )
+    }
+
+    // Crash if present here
+//    func collectionView(
+//        _ collectionView: UICollectionView,
+//        viewForSupplementaryElementOfKind kind: String,
+//        at indexPath: IndexPath
+//    ) -> UICollectionReusableView {
+//        if kind == UICollectionElementKindSectionFooter {
+//            let view: CollectionViewFooterReusableView = collectionView
+//                .dequeueReusableSupplementaryView(
+//                    ofKind: UICollectionElementKindSectionFooter,
+//                    for: indexPath
+//                )
+//            view.backgroundColor = .red
+//            return view
+//        } else if kind == UICollectionElementKindSectionHeader {
+//            let view: CollectionViewHeaderReusableView = collectionView
+//                .dequeueReusableSupplementaryView(
+//                    ofKind: UICollectionElementKindSectionHeader,
+//                    for: indexPath
+//                )
+//            view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+//            return view
+//        }
+//
+//        fatalError("Kind is not supported")
+//    }
+}
+
+final class HorizontalCourseListView: CourseListView {
+    private let columnsCount: Int
+    private let rowsCount: Int
+
+    private lazy var horizontalCourseFlowLayout: HorizontalCourseListFlowLayout = {
+        let layout = HorizontalCourseListFlowLayout(
+            rowsCount: self.rowsCount,
+            columnsCount: self.columnsCount
+        )
+        layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
+        layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
+        return layout
+    }()
+
+    override var flowLayout: UICollectionViewFlowLayout {
+        return self.horizontalCourseFlowLayout
+    }
+
+    init(
+        frame: CGRect,
+        columnsCount: Int,
+        rowsCount: Int,
+        colorMode: CourseListColorMode,
+        delegate: UICollectionViewDelegate,
+        dataSource: UICollectionViewDataSource,
+        viewDelegate: CourseListViewDelegate,
+        appearance: Appearance = CourseListView.Appearance()
+    ) {
+        self.columnsCount = columnsCount
+        self.rowsCount = rowsCount
+        super.init(
+            frame: frame,
+            colorMode: colorMode,
+            viewDelegate: viewDelegate,
+            appearance: appearance
+        )
+        self.collectionView.delegate = delegate
+        self.collectionView.dataSource = dataSource
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func calculateItemSize() -> CGSize {
+        let width = self.bounds.width
+            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+            - self.appearance.horizontalLayoutNextPageWidth
+        return CGSize(
+            width: width / CGFloat(self.columnsCount),
+            height: self.appearance.layoutItemHeight
+        )
+    }
+}
+
+// Wrappers for reusable views
+
+class CollectionViewHeaderReusableView: UICollectionReusableView, Reusable {
+}
+
+class CollectionViewFooterReusableView: UICollectionReusableView, Reusable {
 }

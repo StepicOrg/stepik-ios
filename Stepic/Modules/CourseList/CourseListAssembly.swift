@@ -11,6 +11,7 @@ import UIKit
 final class CourseListAssembly: Assembly {
     private let type: CourseListType
     private let colorMode: CourseListColorMode
+    private let orientation: CourseListViewController.PresentationOrientation
 
     // Input
     var moduleInput: CourseListInputProtocol?
@@ -21,10 +22,12 @@ final class CourseListAssembly: Assembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        presentationOrientation: CourseListViewController.PresentationOrientation,
         output: CourseListOutputProtocol? = nil
     ) {
         self.type = type
         self.colorMode = colorMode
+        self.orientation = presentationOrientation
         self.moduleOutput = output
     }
 
@@ -53,7 +56,8 @@ final class CourseListAssembly: Assembly {
 
         let controller = CourseListViewController(
             interactor: interactor,
-            colorMode: self.colorMode
+            colorMode: self.colorMode,
+            orientation: self.orientation
         )
         controller.moduleOutput = self.moduleOutput
 

@@ -50,7 +50,11 @@ final class ExploreViewController: UIViewController {
         self.addChildViewController(collectionViewController)
         view.addBlockView(collectionViewController.view)
 
-        let popularAssembly = CourseListAssembly(type: PopularCourseListType(language: .english), colorMode: .dark)
+        let popularAssembly = CourseListAssembly(
+            type: PopularCourseListType(language: .english),
+            colorMode: .dark,
+            presentationOrientation: .horizontal
+        )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()
         self.addChildViewController(popularViewController)
@@ -72,7 +76,13 @@ final class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.someAction()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let vc = FullscreenCourseListAssembly(
+                presentationDescription: .init(title: "Sample text", subtitle: "100 courses")
+            ).makeModule()
+
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     // MARK: Requests logic

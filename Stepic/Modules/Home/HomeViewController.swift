@@ -44,7 +44,8 @@ final class HomeViewController: UIViewController {
         // Enrolled
         let enrolledAssembly = CourseListAssembly(
             type: EnrolledCourseListType(),
-            colorMode: .light
+            colorMode: .light,
+            presentationOrientation: .horizontal
         )
         let enrolledViewController = enrolledAssembly.makeModule()
         enrolledAssembly.moduleInput?.reload()
@@ -62,7 +63,8 @@ final class HomeViewController: UIViewController {
         // Popular
         let popularAssembly = CourseListAssembly(
             type: PopularCourseListType(language: .russian),
-            colorMode: .dark
+            colorMode: .dark,
+            presentationOrientation: .horizontal
         )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()

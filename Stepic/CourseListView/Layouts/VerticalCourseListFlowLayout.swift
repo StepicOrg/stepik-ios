@@ -10,6 +10,7 @@ import UIKit
 
 extension VerticalCourseListFlowLayout {
     struct Appearance {
+        let headerViewHeight: CGFloat = 140
         let paginationViewHeight: CGFloat = 65
     }
 }
@@ -68,8 +69,27 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
             return
         }
 
+        // Header
+        let headerSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            with: IndexPath(
+                item: 0,
+                section: collectionView.numberOfSections - 1
+            )
+        )
+
+        headerSupplementaryViewAttributes.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: collectionView.bounds.width,
+            height: self.appearance.headerViewHeight
+        )
+
+        self.cache.append(headerSupplementaryViewAttributes)
+
+        // Items
         var xOffset = self.minimumInteritemSpacing
-        var yOffset = self.minimumLineSpacing
+        var yOffset = self.appearance.headerViewHeight + self.minimumLineSpacing
         var columnIndex = 0
 
         // Convert multiple sections into one
@@ -106,6 +126,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
             yOffset += self.itemSize.height + self.minimumLineSpacing
         }
 
+        // Footer
         let paginationSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
             forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
             with: IndexPath(

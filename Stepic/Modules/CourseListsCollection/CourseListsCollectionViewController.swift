@@ -48,7 +48,8 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
             for courseListViewModel in data {
                 let assembly = CourseListAssembly(
                     type: courseListViewModel.courseList,
-                    colorMode: .light
+                    colorMode: .light,
+                    presentationOrientation: .horizontal
                 )
                 let viewController = assembly.makeModule()
                 assembly.moduleInput?.reload()

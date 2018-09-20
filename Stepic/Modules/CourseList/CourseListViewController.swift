@@ -31,16 +31,19 @@ final class CourseListViewController: UIViewController {
     lazy var courseListView = self.view as? CourseListView
 
     private let colorMode: CourseListColorMode
+    private let orientation: PresentationOrientation
     private var canTriggerPagination = true
 
     init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
-        colorMode: CourseListColorMode = .default
+        colorMode: CourseListColorMode = .default,
+        orientation: PresentationOrientation
     ) {
         self.interactor = interactor
         self.state = initialState
         self.colorMode = colorMode
+        self.orientation = orientation
 
         self.listDelegate = CourseListCollectionViewDelegate()
         self.listDataSource = CourseListCollectionViewDataSource()
@@ -56,14 +59,28 @@ final class CourseListViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = CourseListView(
-            frame: UIScreen.main.bounds,
-            colorMode: self.colorMode,
-            orientation: .horizontal(rowsCount: 2, columnsCount: 1),
-            delegate: self.listDelegate,
-            dataSource: self.listDataSource,
-            viewDelegate: self
-        )
+        var view: UIView
+        switch self.orientation {
+        case .horizontal:
+            view = HorizontalCourseListView(
+                frame: UIScreen.main.bounds,
+                columnsCount: 1,
+                rowsCount: 2,
+                colorMode: self.colorMode,
+                delegate: self.listDelegate,
+                dataSource: self.listDataSource,
+                viewDelegate: self
+            )
+        case .vertical:
+            view = VerticalCourseListView(
+                frame: UIScreen.main.bounds,
+                columnsCount: 1,
+                colorMode: self.colorMode,
+                delegate: self.listDelegate,
+                dataSource: self.listDataSource,
+                viewDelegate: self
+            )
+        }
         self.view = view
     }
 
@@ -73,8 +90,15 @@ final class CourseListViewController: UIViewController {
     }
 
     private func updatePagination(hasNextPage: Bool) {
-        self.courseListView?.isPaginationViewHidden = !hasNextPage
+        if let verticalCourseListView = self.courseListView as? VerticalCourseListView {
+            verticalCourseListView.isPaginationViewHidden = !hasNextPage
+        }
         self.canTriggerPagination = hasNextPage
+    }
+
+    enum PresentationOrientation {
+        case horizontal
+        case vertical
     }
 }
 
@@ -124,7 +148,6 @@ extension CourseListViewController: CourseListViewDelegate {
 
 extension CourseListViewController: CourseListViewControllerDelegate {
     func itemDidSelected(viewModel: CourseWidgetViewModel) {
-
     }
 
     func primaryButtonClicked(viewModel: CourseWidgetViewModel) {
