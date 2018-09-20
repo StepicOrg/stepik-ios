@@ -27,10 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceFactory = ServiceFactoryBuilder().build()
         let assemblyFactory = AssemblyFactoryBuilder(serviceFactory: serviceFactory).build()
 
-        guard let router = assemblyFactory.applicationAssembly.module().router else {
+        guard let _ = assemblyFactory.applicationAssembly.makeModule(window: window).router else {
             fatalError("Could't initialize router")
         }
-        router.start(window)
 
         // Initializes a webview at the start so webview startup later on isn't so slow.
         _ = WKWebView()
@@ -41,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
         AmplitudeAnalyticsEvents.Launch.sessionStart.send()
+
+        window.makeKeyAndVisible()
 
         return true
     }
