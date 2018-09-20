@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
-    func module() -> ApplicationModule {
+    func makeModule(window: UIWindow) -> ApplicationModule {
         if let savedModule = ApplicationModuleHolder.instance.applicationModule {
             return savedModule
         }
@@ -27,13 +27,15 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
         )
         tabBarController.selectedIndex = 0
 
+        window.rootViewController = tabBarController
+
         let router = AppRouter(
-            tabBarController: tabBarController,
+            window: window,
             navigationController: learningNavigationController,
             assemblyFactory: assemblyFactory
         )
-        let applicationModule = ApplicationModule(router: router)
 
+        let applicationModule = ApplicationModule(router: router)
         ApplicationModuleHolder.instance.applicationModule = applicationModule
 
         return applicationModule
@@ -41,19 +43,15 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeLearningController() -> UINavigationController {
         let navigationController = UINavigationController()
-        guard let controller = assemblyFactory.topicsAssembly.module(
+        let controller = assemblyFactory.learningAssembly.makeModule(
             navigationController: navigationController
-        ) as? TopicsTableViewController else {
-            fatalError("TopicsTableViewController expected")
-        }
-
+        )
         controller.title = NSLocalizedString("LearningTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
             title: controller.title,
             image: UIImage(named: "learning-tab-bar"),
             tag: 0
         )
-        controller.presenter.selectSegment(at: 0)
         navigationController.setViewControllers([controller], animated: false)
 
         return navigationController
@@ -61,11 +59,10 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
 
     private func makeTrainingController() -> UINavigationController {
         let navigationController = UINavigationController()
-        guard let controller = assemblyFactory.topicsAssembly.module(
+        let controller = assemblyFactory.trainingAssembly.makeModule(
             navigationController: navigationController
-        ) as? TopicsTableViewController else {
-            fatalError("TopicsTableViewController expected")
-        }
+        )
+        navigationController.setViewControllers([controller], animated: false)
 
         controller.title = NSLocalizedString("TrainingTabTitle", comment: "")
         controller.tabBarItem = UITabBarItem(
@@ -73,7 +70,6 @@ final class ApplicationAssemblyImpl: BaseAssembly, ApplicationAssembly {
             image: UIImage(named: "training-tab-bar"),
             tag: 1
         )
-        controller.presenter.selectSegment(at: 1)
         navigationController.setViewControllers([controller], animated: false)
 
         return navigationController

@@ -23,8 +23,10 @@ final class StandartStepsAssembly: BaseAssembly, StandartStepsAssemblyProtocol {
         let presenter = StepsPagerPresenterImpl(
             view: controller,
             lesson: lesson,
+            knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             router: router,
-            stepsService: serviceFactory.stepsService
+            stepsService: serviceFactory.stepsService,
+            courseService: serviceFactory.courseService
         )
         controller.presenter = presenter
         controller.hidesBottomBarWhenPushed = true

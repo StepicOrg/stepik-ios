@@ -16,8 +16,9 @@ extension StepPlainObject {
     ]
 
     static func make(type: StepPlainObject.StepType? = nil) -> StepPlainObject {
+        let randomIndex = Int(arc4random_uniform(UInt32(allTypes.count)))
         let stepType = type == nil
-            ? StepPlainObject.allTypes.randomElement()!
+            ? allTypes[randomIndex]
             : type!
 
         return StepPlainObject(
@@ -32,6 +33,6 @@ extension StepPlainObject {
     }
 
     private static func randomNumber() -> Int {
-        return Int.random(in: 1...100)
+        return Int(arc4random_uniform(UInt32(100))) + 1
     }
 }

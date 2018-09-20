@@ -264,4 +264,49 @@ struct AmplitudeAnalyticsEvents {
     struct Discussions {
         static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }
+
+    struct Stories {
+        static func storyOpened(id: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Story opened",
+                parameters: [
+                    "id": id
+                ]
+            )
+        }
+
+        static func storyPartOpened(id: Int, position: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Story part opened",
+                parameters: [
+                    "id": id,
+                    "position": position
+                ]
+            )
+        }
+
+        static func buttonPressed(id: Int, position: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Button pressed",
+                parameters: [
+                    "id": id,
+                    "position": position
+                ]
+            )
+        }
+
+        enum StoryCloseType: String {
+            case cross, swipe, automatic
+        }
+
+        static func storyClosed(id: Int, type: StoryCloseType) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Story closed",
+                parameters: [
+                    "id": id,
+                    "type": type.rawValue
+                ]
+            )
+        }
+    }
 }

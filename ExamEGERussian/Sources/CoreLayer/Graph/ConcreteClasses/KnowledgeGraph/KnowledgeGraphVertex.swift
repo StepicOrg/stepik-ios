@@ -12,6 +12,10 @@ public final class KnowledgeGraphVertex<T: Hashable>: Vertex<T> {
     public var title: String
     public var lessons = [KnowledgeGraphLesson]()
 
+    var containsPractice: Bool {
+        return lessons.contains(where: { $0.type == .practice })
+    }
+
     init(id: T, title: String = "") {
         self.title = title
         super.init(id: id)

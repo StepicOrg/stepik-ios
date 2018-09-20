@@ -9,13 +9,10 @@
 import Foundation
 @testable import ExamEGERussian
 
-final class TopicsRouterMock: TopicsRouter {
-    func showAdaptiveForTopicWithId(_ id: String) {
+final class TopicsRouterMock: TrainingRouterProtocol {
+    func showTheory(lesson: LessonPlainObject) {
     }
 
-    func showAuth() {
-    }
-
-    func showLessonsForTopicWithId(_ id: String) {
+    func showPractice(courseId: String) {
     }
 }
