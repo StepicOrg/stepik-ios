@@ -10,33 +10,25 @@ import Foundation
 import PromiseKit
 
 protocol ExploreInteractorProtocol {
-    func doSomeAction(request: Explore.Something.Request)
+    func loadContent(request: Explore.LoadContent.Request)
 }
 
 final class ExploreInteractor: ExploreInteractorProtocol {
     let presenter: ExplorePresenterProtocol
-    let provider: ExploreProviderProtocol
+    let contentLanguageService: ContentLanguageServiceProtocol
 
     init(
         presenter: ExplorePresenterProtocol,
-        provider: ExploreProviderProtocol
+        contentLanguageService: ContentLanguageServiceProtocol
     ) {
         self.presenter = presenter
-        self.provider = provider
+        self.contentLanguageService = contentLanguageService
     }
 
-    // MARK: Do some action
-
-    func doSomeAction(request: Explore.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: Explore.Something.Response(result: .success(items))
-            )
-        }.catch { _ in
-            self.presenter.presentSomething(
-                response: Explore.Something.Response(result: .failure(Error.fetchFailed))
-            )
-        }
+    func loadContent(request: Explore.LoadContent.Request) {
+        self.presenter.presentContent(
+            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+        )
     }
 
     enum Error: Swift.Error {

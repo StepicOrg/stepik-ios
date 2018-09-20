@@ -9,26 +9,15 @@
 import UIKit
 
 protocol ExplorePresenterProtocol {
-    func presentSomething(response: Explore.Something.Response)
+    func presentContent(response: Explore.LoadContent.Response)
 }
 
 final class ExplorePresenter: ExplorePresenterProtocol {
     weak var viewController: ExploreViewControllerProtocol?
 
-    func presentSomething(response: Explore.Something.Response) {
-        var viewModel: Explore.Something.ViewModel
-
-        switch response.result {
-        case let .failure(error):
-            viewModel = Explore.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = Explore.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = Explore.Something.ViewModel(state: .result(data: result))
-            }
-        }
-
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentContent(response: Explore.LoadContent.Response) {
+        self.viewController?.displayContent(
+            viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
+        )
     }
 }

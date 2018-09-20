@@ -9,21 +9,18 @@
 import Foundation
 
 enum Explore {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
-
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
+    /// Language update
+    enum LoadContent {
         struct Request { }
 
         struct Response {
-            var result: Result<[Any]>
+            let contentLanguage: ContentLanguage
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
         }
     }
 
@@ -31,8 +28,6 @@ enum Explore {
 
     enum ViewControllerState {
         case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
+        case normal(contentLanguage: ContentLanguage)
     }
 }

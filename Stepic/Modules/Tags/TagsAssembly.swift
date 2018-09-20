@@ -9,12 +9,19 @@
 import UIKit
 
 final class TagsAssembly: Assembly {
+    let contentLanguage: ContentLanguage
+
+    init(contentLanguage: ContentLanguage) {
+        self.contentLanguage = contentLanguage
+    }
+
     func makeModule() -> UIViewController {
         let provider = TagsProvider()
         let presenter = TagsPresenter()
         let interactor = TagsInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            contentLanguage: self.contentLanguage
         )
         let viewController = TagsViewController(
             interactor: interactor

@@ -16,13 +16,16 @@ protocol TagsInteractorProtocol {
 final class TagsInteractor: TagsInteractorProtocol {
     let presenter: TagsPresenterProtocol
     let provider: TagsProviderProtocol
+    let contentLanguage: ContentLanguage
 
     init(
         presenter: TagsPresenterProtocol,
-        provider: TagsProviderProtocol
+        provider: TagsProviderProtocol,
+        contentLanguage: ContentLanguage
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.contentLanguage = contentLanguage
     }
 
     // MARK: Do some action
@@ -32,8 +35,8 @@ final class TagsInteractor: TagsInteractorProtocol {
             let newTags = tags.map { tag in
                 Tags.Tag(
                     id: tag.ID,
-                    title: tag.titleForLanguage[ContentLanguage.russian] ?? "",
-                    summary: tag.summaryForLanguage[ContentLanguage.russian] ?? ""
+                    title: tag.titleForLanguage[self.contentLanguage] ?? "",
+                    summary: tag.summaryForLanguage[self.contentLanguage] ?? ""
                 )
             }
             self.presenter.presentTags(

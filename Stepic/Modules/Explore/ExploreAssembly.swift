@@ -10,11 +10,10 @@ import UIKit
 
 final class ExploreAssembly: Assembly {
     func makeModule() -> UIViewController {
-        let provider = ExploreProvider()
         let presenter = ExplorePresenter()
         let interactor = ExploreInteractor(
             presenter: presenter,
-            provider: provider
+            contentLanguageService: ContentLanguageService()
         )
         let viewController = ExploreViewController(
             interactor: interactor

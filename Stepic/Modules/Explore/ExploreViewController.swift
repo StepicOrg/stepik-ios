@@ -9,12 +9,14 @@
 import UIKit
 
 protocol ExploreViewControllerProtocol: class {
-    func displaySomething(viewModel: Explore.Something.ViewModel)
+    func displayContent(viewModel: Explore.LoadContent.ViewModel)
 }
 
 final class ExploreViewController: UIViewController {
     let interactor: ExploreInteractorProtocol
     private var state: Explore.ViewControllerState
+
+    lazy var exploreView = self.view as? ExploreView
 
     init(
         interactor: ExploreInteractorProtocol,
@@ -35,23 +37,40 @@ final class ExploreViewController: UIViewController {
     override func loadView() {
         let view = ExploreView(frame: UIScreen.main.bounds)
 
+        // Add content switch module at start
+        // cause it does not depend on content
         let contentLanguageSwitchAssembly = ContentLanguageSwitchAssembly()
         let clViewController = contentLanguageSwitchAssembly.makeModule()
         self.addChildViewController(clViewController)
         view.addBlockView(clViewController.view)
 
-        let tagsAssembly = TagsAssembly()
+        self.view = view
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactor.loadContent(request: .init())
+    }
+
+    // MARK: Private methods
+
+    private func removeLanguageDependentSubmodules() {
+
+    }
+
+    private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+        let tagsAssembly = TagsAssembly(contentLanguage: contentLanguage)
         let tagsViewController = tagsAssembly.makeModule()
         self.addChildViewController(tagsViewController)
-        view.addBlockView(tagsViewController.view)
+        self.exploreView?.addBlockView(tagsViewController.view)
 
-        let collectionAssembly = CourseListsCollectionAssembly()
+        let collectionAssembly = CourseListsCollectionAssembly(contentLanguage: contentLanguage)
         let collectionViewController = collectionAssembly.makeModule()
         self.addChildViewController(collectionViewController)
-        view.addBlockView(collectionViewController.view)
+        self.exploreView?.addBlockView(collectionViewController.view)
 
         let popularAssembly = CourseListAssembly(
-            type: PopularCourseListType(language: .english),
+            type: PopularCourseListType(language: contentLanguage),
             colorMode: .dark,
             presentationOrientation: .horizontal
         )
@@ -68,30 +87,19 @@ final class ExploreViewController: UIViewController {
                 )
             )
         container.onShowAllButtonClick = { }
-        view.addBlockView(container)
-
-        self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    // MARK: Requests logic
-
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: Explore.Something.Request()
-        )
+        self.exploreView?.addBlockView(container)
     }
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
-    func displaySomething(viewModel: Explore.Something.ViewModel) {
-        display(newState: viewModel.state)
-    }
+    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
+        switch viewModel.state {
+        case .normal(let language):
+            //self.removeLanguageDependentSubmodules()
+            self.initLanguageDependentSubmodules(contentLanguage: language)
+        case .loading:
+            break
+        }
 
-    func display(newState: Explore.ViewControllerState) {
-        self.state = newState
     }
 }

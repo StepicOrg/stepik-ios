@@ -9,9 +9,15 @@
 import Foundation
 
 final class CourseListsCollectionAssembly: Assembly {
+    let contentLanguage: ContentLanguage
+
+    init(contentLanguage: ContentLanguage) {
+        self.contentLanguage = contentLanguage
+    }
+
     func makeModule() -> UIViewController {
         let provider = CourseListsCollectionProvider(
-            language: .russian,
+            language: self.contentLanguage,
             courseListsCollectionsPersistenceService: CourseListsCollectionPersistenceService(),
             collectionsNetworkService: CourseListsCollectionNetworkService(
                 courseListsAPI: CourseListsAPI()
