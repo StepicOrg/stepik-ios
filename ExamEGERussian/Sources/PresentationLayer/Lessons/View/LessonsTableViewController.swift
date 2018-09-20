@@ -105,7 +105,7 @@ final class LessonsTableViewController: UITableViewController {
     // MARK: - Private API -
 
     private func setup() {
-        tableView.registerNib(for: LessonTableViewCell.self)
+        tableView.register(cellClass: LessonTableViewCell.self)
 
         if #available(iOS 10.0, *) {
             tableView.refreshControl = lessonsRefreshControl
