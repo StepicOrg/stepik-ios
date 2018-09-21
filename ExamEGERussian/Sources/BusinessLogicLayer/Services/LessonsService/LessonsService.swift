@@ -34,4 +34,18 @@ protocol LessonsService: class {
     ///   - stepsService: StepsService implementation for getting progress.
     /// - Returns: Guarantee with an array of the values between 0 to 1.
     func fetchProgresses(ids: [Int], stepsService: StepsService) -> Guarantee<[Double]>
+    /// Method is used to obtain progress of the lesson from cache.
+    ///
+    /// - Parameters:
+    ///   - id: Lesson id.
+    ///   - stepsService: StepsService implementation for getting progress.
+    /// - Returns: Guarantee with the value between 0 to 1.
+    func obtainProgress(id: Int, stepsService: StepsService) -> Guarantee<Double>
+    /// Method is used to obtain progresses of the lessons from cache.
+    ///
+    /// - Parameters:
+    ///   - ids: An array of the lessons ids.
+    ///   - stepsService: StepsService implementation for getting progress.
+    /// - Returns: Guarantee with an array of the values between 0 to 1.
+    func obtainProgresses(ids: [Int], stepsService: StepsService) -> Guarantee<[Double]>
 }
