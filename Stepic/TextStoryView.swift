@@ -132,11 +132,13 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
     @objc
     func buttonClicked() {
         guard
-            let path = storyPart?.button?.urlPath,
+            let part = storyPart,
+            let path = part.button?.urlPath,
             let url = URL(string: path)
         else {
             return
         }
+        AmplitudeAnalyticsEvents.Stories.buttonPressed(id: part.storyID, position: part.position).send()
         urlNavigationDelegate?.open(url: url)
     }
 }

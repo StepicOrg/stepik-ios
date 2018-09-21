@@ -28,6 +28,7 @@ protocol StoryPresenterProtocol: class {
     func pause()
     func resume()
     func didAppear()
+    func onClosePressed()
 }
 
 extension NSNotification.Name {
@@ -96,17 +97,21 @@ class StoryPresenter: StoryPresenterProtocol {
             }
             view?.animate(view: viewToAnimate)
         }
+        AmplitudeAnalyticsEvents.Stories.storyPartOpened(id: storyID, position: animatingStoryPart.position).send()
     }
 
     func didAppear() {
+        AmplitudeAnalyticsEvents.Stories.storyOpened(id: storyID).send()
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": storyID])
     }
 
     private func showPreviousStory() {
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
         navigationDelegate?.didFinishBack()
     }
 
     private func showNextStory() {
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
         navigationDelegate?.didFinishForward()
     }
 
@@ -128,5 +133,10 @@ class StoryPresenter: StoryPresenterProtocol {
 
     func resume() {
         view?.resume(segment: partToAnimate)
+    }
+
+    func onClosePressed() {
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .cross).send()
+        view?.close()
     }
 }

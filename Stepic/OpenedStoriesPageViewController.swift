@@ -32,7 +32,9 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         presenter?.refresh()
         let scrollView = view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView
         scrollView?.delegate = self
-        swipeInteractionController = SwipeInteractionController(viewController: self)
+        swipeInteractionController = SwipeInteractionController(viewController: self, onFinish: { [weak self] in
+            self?.presenter?.onSwipeDismiss()
+        })
         view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
     }
 
