@@ -31,6 +31,10 @@ final class ExploreView: UIView {
     func removeBlockView(_ view: UIView) {
         self.scrollableStackView.removeArrangedView(view)
     }
+
+    func insertBlockView(_ view: UIView, at position: Int) {
+        self.scrollableStackView.insertArrangedView(view, at: position)
+    }
 }
 
 extension ExploreView: ProgrammaticallyInitializableViewProtocol {

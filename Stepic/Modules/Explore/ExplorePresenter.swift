@@ -10,6 +10,7 @@ import UIKit
 
 protocol ExplorePresenterProtocol {
     func presentContent(response: Explore.LoadContent.Response)
+    func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response)
 }
 
 final class ExplorePresenter: ExplorePresenterProtocol {
@@ -18,6 +19,12 @@ final class ExplorePresenter: ExplorePresenterProtocol {
     func presentContent(response: Explore.LoadContent.Response) {
         self.viewController?.displayContent(
             viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
+        )
+    }
+
+    func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response) {
+        self.viewController?.displayLanguageSwitchBlock(
+            viewModel: .init(isHidden: response.isHidden)
         )
     }
 }

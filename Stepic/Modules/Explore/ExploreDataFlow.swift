@@ -11,7 +11,7 @@ import Foundation
 enum Explore {
     // MARK: Use cases
 
-    /// Language update
+    /// Content refresh
     enum LoadContent {
         struct Request { }
 
@@ -21,6 +21,18 @@ enum Explore {
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+    /// Check for language switch visibility
+    enum CheckLanguageSwitchAvailability {
+        struct Request { }
+
+        struct Response {
+            let isHidden: Bool
+        }
+
+        struct ViewModel {
+            let isHidden: Bool
         }
     }
 

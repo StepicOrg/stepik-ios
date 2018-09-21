@@ -13,7 +13,8 @@ final class ExploreAssembly: Assembly {
         let presenter = ExplorePresenter()
         let interactor = ExploreInteractor(
             presenter: presenter,
-            contentLanguageService: ContentLanguageService()
+            contentLanguageService: ContentLanguageService(),
+            languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
         )
         let viewController = ExploreViewController(
             interactor: interactor

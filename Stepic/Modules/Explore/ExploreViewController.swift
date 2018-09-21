@@ -10,6 +10,7 @@ import UIKit
 
 protocol ExploreViewControllerProtocol: class {
     func displayContent(viewModel: Explore.LoadContent.ViewModel)
+    func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
 }
 
 final class ExploreViewController: UIViewController {
@@ -43,33 +44,23 @@ final class ExploreViewController: UIViewController {
     override func loadView() {
         let view = ExploreView(frame: UIScreen.main.bounds)
         self.view = view
-
-        // Add content switch module at start
-        // cause it does not depend on content
-        let contentLanguageSwitchAssembly = ContentLanguageSwitchAssembly()
-        let viewController = contentLanguageSwitchAssembly.makeModule()
-        self.registerSubmodule(
-            .init(
-                viewController: viewController,
-                view: viewController.view,
-                isLanguageDependent: false
-            )
-        )
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.interactor.loadLanguageSwitchBlock(request: .init())
         self.interactor.loadContent(request: .init())
     }
 
     // MARK: Private methods
 
-    private func registerSubmodule(_ submodule: Submodule) {
+    private func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
         self.submodules.append(submodule)
         self.addChildViewController(submodule.viewController)
 
+        let position = insertionPosition ?? self.submodules.count - 1
         if let view = submodule.view {
-            self.exploreView?.addBlockView(view)
+            self.exploreView?.insertBlockView(view, at: position)
         }
     }
 
@@ -158,6 +149,22 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         case .loading:
             break
         }
+    }
 
+    func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
+        if viewModel.isHidden {
+            return
+        }
+
+        let contentLanguageSwitchAssembly = ContentLanguageSwitchAssembly()
+        let viewController = contentLanguageSwitchAssembly.makeModule()
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: viewController.view,
+                isLanguageDependent: false
+            ),
+            insertionPosition: 0
+        )
     }
 }

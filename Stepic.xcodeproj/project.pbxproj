@@ -4251,6 +4251,7 @@
 		62E984CB92970A5DA765E454 /* CourseListColorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988CF3D76C556D362BD4E /* CourseListColorMode.swift */; };
 		62E984DD2249530A7BAC3048 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
+		62E9850F9C459CC122A416F3 /* ContentLanguageSwitchAvailabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AC6AB07FD2BFE014C5B /* ContentLanguageSwitchAvailabilityService.swift */; };
 		62E9851C545EDC78F122EC99 /* StepAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9830C9521F4FE18D1E8C3 /* StepAssemblyImpl.swift */; };
 		62E9851FBB1D8E51D5577726 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E9852AE720DF947F39C98C /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D4DC8AC1F0994375EBD /* ServiceFactory.swift */; };
@@ -6233,6 +6234,7 @@
 		62E9897F76726E9D4EF78C1A /* StepsPagerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerRouter.swift; sourceTree = "<group>"; };
 		62E98983307F56A1872DCBA1 /* CourseListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListPresenter.swift; sourceTree = "<group>"; };
 		62E98A35FCB795B26C083C91 /* RouterPoppable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterPoppable.swift; sourceTree = "<group>"; };
+		62E98AC6AB07FD2BFE014C5B /* ContentLanguageSwitchAvailabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchAvailabilityService.swift; sourceTree = "<group>"; };
 		62E98AE968B12714D825650A /* AchievementsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListPresenter.swift; sourceTree = "<group>"; };
 		62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionPresenter.swift; sourceTree = "<group>"; };
 		62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementProgressesAPI.swift; sourceTree = "<group>"; };
@@ -10752,6 +10754,7 @@
 				7ED926AC5637608789BFE0B5 /* ExplorePresenter.swift */,
 				7A50ACE162DF211AE4DF35DC /* ExploreDataFlow.swift */,
 				38150F5E6E14E554C6A91A14 /* View */,
+				62E98AC6AB07FD2BFE014C5B /* ContentLanguageSwitchAvailabilityService.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -15142,6 +15145,7 @@
 				0DF657360C28A5D39EF4F9C9 /* FullscreenCourseListProvider.swift in Sources */,
 				73DB05040F3345F6568DCCBB /* FullscreenCourseListView.swift in Sources */,
 				62E983594B255BB6BE92AD8A /* UniqueIdentifierType.swift in Sources */,
+				62E9850F9C459CC122A416F3 /* ContentLanguageSwitchAvailabilityService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
