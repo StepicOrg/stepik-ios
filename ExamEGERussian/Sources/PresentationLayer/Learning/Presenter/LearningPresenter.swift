@@ -257,7 +257,7 @@ extension LearningPresenter {
                 id: vertex.id,
                 title: vertex.title,
                 description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                timeToComplete: "40 минут на прохождение",
+                timeToComplete: getPluralizedTimeToComplete(Int(vertex.timeToComplete.rounded())),
                 progress: getProgress(for: vertex)
             )
         }
@@ -271,6 +271,16 @@ extension LearningPresenter {
         ])
 
         return String(format: pluralizedString, "\(progress)")
+    }
+
+    private func getPluralizedTimeToComplete(_ timeToComplete: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: timeToComplete, forms: [
+            NSLocalizedString("TopicTimeToCompleteText1", comment: ""),
+            NSLocalizedString("TopicTimeToCompleteText234", comment: ""),
+            NSLocalizedString("TopicTimeToComplete567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(timeToComplete)")
     }
 
     private func displayError(
