@@ -14,7 +14,6 @@ final class LearningPresenter: LearningPresenterProtocol {
     private let router: LearningRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
-    private var progressesMap = [KnowledgeGraph.Node: Double]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
@@ -220,7 +219,7 @@ extension LearningPresenter {
 
     private func updateProgressesMap(progresses: [[Double]]) {
         for (index, lessonsProgresses) in progresses.enumerated() {
-            self.progressesMap[topics[index]] = self.computeTopicProgress(
+            topics[index].progress = self.computeTopicProgress(
                 lessonsProgresses: lessonsProgresses
             )
         }
@@ -248,7 +247,7 @@ extension LearningPresenter {
     // TODO: Replace `timeToComplete` with real value.
     private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
         func getProgress(for vertex: KnowledgeGraph.Node) -> String {
-            var progress = Int(progressesMap[vertex, default: 0].rounded())
+            var progress = Int(vertex.progress.rounded())
             progress = min(progress, 100)
             return getPluralizedProgress(progress)
         }
