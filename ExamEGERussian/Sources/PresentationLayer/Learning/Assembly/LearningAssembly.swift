@@ -20,7 +20,9 @@ final class LearningAssembly: BaseAssembly, LearningAssemblyProtocol {
             router: router,
             knowledgeGraph: serviceFactory.knowledgeGraphProvider.knowledgeGraph,
             userRegistrationService: serviceFactory.userRegistrationService,
-            graphService: serviceFactory.graphService
+            graphService: serviceFactory.graphService,
+            lessonsService: serviceFactory.lessonsService,
+            stepsService: serviceFactory.stepsService
         )
         controller.presenter = presenter
 

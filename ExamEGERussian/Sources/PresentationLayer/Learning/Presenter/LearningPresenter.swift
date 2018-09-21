@@ -14,9 +14,12 @@ final class LearningPresenter: LearningPresenterProtocol {
     private let router: LearningRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
+    private var progressMap = [KnowledgeGraph.Node: Double]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
+    private let lessonsService: LessonsService
+    private let stepsService: StepsService
 
     private var isFirstRefresh = true
 
@@ -24,13 +27,17 @@ final class LearningPresenter: LearningPresenterProtocol {
          router: LearningRouterProtocol,
          knowledgeGraph: KnowledgeGraph,
          userRegistrationService: UserRegistrationService,
-         graphService: GraphServiceProtocol
+         graphService: GraphServiceProtocol,
+         lessonsService: LessonsService,
+         stepsService: StepsService
     ) {
         self.view = view
         self.router = router
         self.knowledgeGraph = knowledgeGraph
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
+        self.lessonsService = lessonsService
+        self.stepsService = stepsService
     }
 
     func refresh() {
@@ -40,6 +47,9 @@ final class LearningPresenter: LearningPresenterProtocol {
             self.refreshContent()
         }.done {
             self.reloadViewData()
+            self.fetchProgresses().done {
+                self.reloadViewData()
+            }
         }.ensure {
             self.view?.state = .idle
         }.catch { [weak self] error in
@@ -121,23 +131,59 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
     }
 
+    private func fetchProgresses() -> Guarantee<Void> {
+        let topics = Array(knowledgeGraph.adjacencyLists.keys)
+        let lessonsIds = topics.map { $0.lessons.map { $0.id } }
+        let progressesToFetch = lessonsIds.map {
+            lessonsService.fetchProgresses(ids: $0, stepsService: stepsService)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: progressesToFetch).done { progresses in
+                for (index, lessonsProgresses) in progresses.enumerated() {
+                    self.progressMap[topics[index]] = self.computeTopicProgress(
+                        lessonsProgresses: lessonsProgresses
+                    )
+                }
+
+                seal(())
+            }.catch { error in
+                print("Failed fetch progresses for topics with error: \(error)")
+                seal(())
+            }
+        }
+    }
+
+    private func computeTopicProgress(lessonsProgresses: [Double]) -> Double {
+        let maxPercentForEachLesson = 100.0 / Double(lessonsProgresses.count)
+        return lessonsProgresses.reduce(0.0) { (result, lessonProgress) in
+            result + (maxPercentForEachLesson * lessonProgress)
+        }
+    }
+
     private func reloadViewData() {
-        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
+        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraph.Node] {
             view?.setViewData(verticesToViewData(vertices))
         } else {
             displayError()
         }
     }
 
-    // TODO: Replace with real topic content.
-    private func verticesToViewData(_ vertices: [KnowledgeGraphVertex<String>]) -> [LearningViewData] {
+    // TODO: Replace `timeToComplete` with real value.
+    private func verticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
+        func getProgress(for vertex: KnowledgeGraph.Node) -> String {
+            var progress = Int(progressMap[vertex, default: 0].rounded())
+            progress = min(progress, 100)
+            return "\(progress)% пройдено"
+        }
+
         return vertices.map { vertex in
             LearningViewData(
                 id: vertex.id,
                 title: vertex.title,
                 description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
                 timeToComplete: "40 минут на прохождение",
-                progress: "60% пройдено"
+                progress: getProgress(for: vertex)
             )
         }
     }
