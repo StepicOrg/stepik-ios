@@ -63,6 +63,7 @@ def all_pods
     pod 'ActionSheetPicker-3.0', '2.3.0'
     pod 'NotificationBannerSwift', '1.6.3'
     pod 'Nuke', '7.3.2'
+    pod 'STRegex', '1.1.0'
 end
 
 def testing_pods

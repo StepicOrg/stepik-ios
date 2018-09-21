@@ -503,6 +503,8 @@
 		0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
+		08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08883AC1214C52EC00898BBE /* ModalOrPushStackRouter.swift */; };
+		08883AC4214C6AF200898BBE /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08883AC3214C6AF200898BBE /* ProfileAssembly.swift */; };
 		0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
@@ -917,6 +919,17 @@
 		08E3A3BD1E93C40800E9C2EF /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
 		08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		08E3B9691EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
+		08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */; };
+		08E43E98214C279700E3CB50 /* PushRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E96214C279600E3CB50 /* PushRouter.swift */; };
+		08E43E99214C279700E3CB50 /* PushRouterSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E97214C279600E3CB50 /* PushRouterSourceProtocol.swift */; };
+		08E43E9D214C27B200E3CB50 /* ModalRouterSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E9B214C27B100E3CB50 /* ModalRouterSourceProtocol.swift */; };
+		08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E9C214C27B100E3CB50 /* ModalRouter.swift */; };
+		08E43EA1214C27F400E3CB50 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EA0214C27F300E3CB50 /* RouterProtocol.swift */; };
+		08E43EA3214C2C5800E3CB50 /* ModalStackRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EA2214C2C5800E3CB50 /* ModalStackRouter.swift */; };
+		08E43EA5214C2D1A00E3CB50 /* PushStackRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EA4214C2D1A00E3CB50 /* PushStackRouter.swift */; };
+		08E43EA7214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */; };
+		08E43EA9214C2F7F00E3CB50 /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EA8214C2F7F00E3CB50 /* TabBarRouter.swift */; };
+		08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43EAA214C307500E3CB50 /* SourcelessRouter.swift */; };
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		08E542091C6CD65500DEC38E /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */; };
@@ -5354,6 +5367,8 @@
 		0885F8531BA9DB5C00F2A188 /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthInfo.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08883AC1214C52EC00898BBE /* ModalOrPushStackRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOrPushStackRouter.swift; sourceTree = "<group>"; };
+		08883AC3214C6AF200898BBE /* ProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
 		0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryView.xib; sourceTree = "<group>"; };
 		0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryView.swift; sourceTree = "<group>"; };
 		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -5536,6 +5551,17 @@
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		08E3B9661EEA16DC0072995B /* CodeReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeReply.swift; sourceTree = "<group>"; };
+		08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRoutingService.swift; sourceTree = "<group>"; };
+		08E43E96214C279600E3CB50 /* PushRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRouter.swift; sourceTree = "<group>"; };
+		08E43E97214C279600E3CB50 /* PushRouterSourceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRouterSourceProtocol.swift; sourceTree = "<group>"; };
+		08E43E9B214C27B100E3CB50 /* ModalRouterSourceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalRouterSourceProtocol.swift; sourceTree = "<group>"; };
+		08E43E9C214C27B100E3CB50 /* ModalRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalRouter.swift; sourceTree = "<group>"; };
+		08E43EA0214C27F300E3CB50 /* RouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
+		08E43EA2214C2C5800E3CB50 /* ModalStackRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStackRouter.swift; sourceTree = "<group>"; };
+		08E43EA4214C2D1A00E3CB50 /* PushStackRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushStackRouter.swift; sourceTree = "<group>"; };
+		08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+ActionClosure.swift"; sourceTree = "<group>"; };
+		08E43EA8214C2F7F00E3CB50 /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
+		08E43EAA214C307500E3CB50 /* SourcelessRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcelessRouter.swift; sourceTree = "<group>"; };
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
 		08E542081C6CD65500DEC38E /* CourseSubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSubscriptionManager.swift; sourceTree = "<group>"; };
@@ -7647,6 +7673,7 @@
 			isa = PBXGroup;
 			children = (
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
+				08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -7704,6 +7731,7 @@
 				62E98E1032DDB6DD34A6D5D6 /* ProfileDescription */,
 				62E982A1EDB07B5DD63EC36C /* PinsMap */,
 				2CE8390A20C8088F00FE3672 /* Achievements */,
+				08883AC3214C6AF200898BBE /* ProfileAssembly.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -7972,6 +8000,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				08E43E95214C277600E3CB50 /* Transition Routers */,
 				089877B3214061C90065DFA2 /* Services */,
 				0853A3DE213D8F6100931F72 /* Split tests */,
 				08484EDF211AF41A0006266F /* Stories */,
@@ -8080,6 +8109,39 @@
 				08E16F221BDBA4AF004822E1 /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		08E43E95214C277600E3CB50 /* Transition Routers */ = {
+			isa = PBXGroup;
+			children = (
+				08E43EA0214C27F300E3CB50 /* RouterProtocol.swift */,
+				08E43E9F214C27B600E3CB50 /* Modal */,
+				08E43E9A214C27A300E3CB50 /* Push */,
+				08E43EA8214C2F7F00E3CB50 /* TabBarRouter.swift */,
+				08E43EAA214C307500E3CB50 /* SourcelessRouter.swift */,
+				08883AC1214C52EC00898BBE /* ModalOrPushStackRouter.swift */,
+			);
+			name = "Transition Routers";
+			sourceTree = "<group>";
+		};
+		08E43E9A214C27A300E3CB50 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				08E43E96214C279600E3CB50 /* PushRouter.swift */,
+				08E43E97214C279600E3CB50 /* PushRouterSourceProtocol.swift */,
+				08E43EA4214C2D1A00E3CB50 /* PushStackRouter.swift */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
+		08E43E9F214C27B600E3CB50 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				08E43E9C214C27B100E3CB50 /* ModalRouter.swift */,
+				08E43E9B214C27B100E3CB50 /* ModalRouterSourceProtocol.swift */,
+				08E43EA2214C2C5800E3CB50 /* ModalStackRouter.swift */,
+			);
+			name = Modal;
 			sourceTree = "<group>";
 		};
 		08E542041C6C760C00DEC38E /* Enums */ = {
@@ -8193,6 +8255,7 @@
 				62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */,
 				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
 				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
+				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -12643,6 +12706,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -12688,6 +12752,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -12835,6 +12900,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -12880,6 +12946,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13152,6 +13219,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13197,6 +13265,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13304,6 +13373,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13349,6 +13419,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13542,6 +13613,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13587,6 +13659,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13660,6 +13733,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13705,6 +13779,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13796,6 +13871,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13841,6 +13917,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -13950,6 +14027,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -13994,6 +14072,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -14084,6 +14163,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -14132,6 +14212,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -14201,6 +14282,7 @@
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08CB0D4D1FB63F83001A1E02 /* ContentLanguagesView.swift in Sources */,
+				08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */,
 				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
@@ -14213,6 +14295,7 @@
 				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				0846B10C1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */,
+				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
@@ -14243,6 +14326,7 @@
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */,
+				08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
@@ -14265,6 +14349,7 @@
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
+				08E43EA5214C2D1A00E3CB50 /* PushStackRouter.swift in Sources */,
 				2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08A500501F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
@@ -14355,6 +14440,7 @@
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */,
+				08E43EA1214C27F400E3CB50 /* RouterProtocol.swift in Sources */,
 				2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */,
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */,
@@ -14445,6 +14531,7 @@
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				087585A31FB50D640047A269 /* CourseListsAPI.swift in Sources */,
 				08A9F70D1FC3837800640F1F /* CourseTagCollectionViewCell.swift in Sources */,
+				08E43E98214C279700E3CB50 /* PushRouter.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				080C5E841EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
@@ -14486,6 +14573,7 @@
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
+				08E43EA3214C2C5800E3CB50 /* ModalStackRouter.swift in Sources */,
 				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */,
@@ -14520,6 +14608,7 @@
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
+				08E43E99214C279700E3CB50 /* PushRouterSourceProtocol.swift in Sources */,
 				082B54D520AA290800144817 /* PersonalDeadlinesDefaultsContainer.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				089C88DE1FCF494300003B63 /* CourseListType.swift in Sources */,
@@ -14534,6 +14623,7 @@
 				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,
 				089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
+				08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
 				2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */,
@@ -14593,6 +14683,7 @@
 				08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
+				08E43E9D214C27B200E3CB50 /* ModalRouterSourceProtocol.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
@@ -14641,6 +14732,7 @@
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
+				08E43EA7214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */,
 				0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
@@ -14649,6 +14741,7 @@
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
+				08883AC4214C6AF200898BBE /* ProfileAssembly.swift in Sources */,
 				2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */,
 				088EDB591F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
@@ -14694,6 +14787,7 @@
 				088EDCB11F949B0F0098DEC7 /* CourseWidgetCollectionViewCell.swift in Sources */,
 				8622056B2055561F00F14255 /* PinsMapView.swift in Sources */,
 				088EDCA61F9496DE0098DEC7 /* CourseListHorizontalViewController.swift in Sources */,
+				08E43EA9214C2F7F00E3CB50 /* TabBarRouter.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */,
