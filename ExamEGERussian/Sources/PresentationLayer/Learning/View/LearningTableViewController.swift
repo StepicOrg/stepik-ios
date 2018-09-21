@@ -38,6 +38,8 @@ final class LearningTableViewController: UITableViewController, LearningView {
         if isFirstTimeWillAppear {
             isFirstTimeWillAppear = false
             presenter.refresh()
+        } else {
+            presenter.refreshProgresses()
         }
     }
 

@@ -24,6 +24,10 @@ final class LearningPresenter: LearningPresenterProtocol {
 
     private var isFirstRefresh = true
 
+    private var topics: [KnowledgeGraph.Node] {
+        return Array(knowledgeGraph.adjacencyLists.keys)
+    }
+
     init(view: LearningView,
          router: LearningRouterProtocol,
          knowledgeGraph: KnowledgeGraph,
@@ -157,29 +161,55 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
     }
 
-    private func fetchProgresses() -> Guarantee<Void> {
-        let topics = Array(knowledgeGraph.adjacencyLists.keys)
-        let lessonsIds = topics.map { topic in
-            topic.lessons.filter { $0.type == .theory }.map { $0.id }
+    // MARK: - Types
+
+    private enum LearningPresenterError: Error {
+        case failedRegisterUser
+        case failedFetchKnowledgeGraph
+    }
+}
+
+// MARK: - LearningPresenter (Progresses) -
+
+extension LearningPresenter {
+    func refreshProgresses() {
+        let progressesToObtain = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.obtainProgresses(ids: $0, stepsService: stepsService)
         }
-        let progressesToFetch = lessonsIds.map {
+
+        when(fulfilled: progressesToObtain).done {
+            self.updateProgressesMap(progresses: $0)
+            self.reloadViewData()
+        }.cauterize()
+    }
+
+    private func fetchProgresses() -> Guarantee<Void> {
+        let progressesToFetch = getTheoryLessonsIdsGroupedByTopic().map {
             lessonsService.fetchProgresses(ids: $0, stepsService: stepsService)
         }
 
         return Guarantee { seal in
             when(fulfilled: progressesToFetch).done { progresses in
-                for (index, lessonsProgresses) in progresses.enumerated() {
-                    self.progressMap[topics[index]] = self.computeTopicProgress(
-                        lessonsProgresses: lessonsProgresses
-                    )
-                }
-
-                print("Successfully fetched progresses for topics")
+                self.updateProgressesMap(progresses: progresses)
                 seal(())
             }.catch { error in
                 print("Failed fetch progresses for topics with error: \(error)")
                 seal(())
             }
+        }
+    }
+
+    private func getTheoryLessonsIdsGroupedByTopic() -> [[Int]] {
+        return topics.map { topic in
+            topic.lessons.filter { $0.type == .theory }.map { $0.id }
+        }
+    }
+
+    private func updateProgressesMap(progresses: [[Double]]) {
+        for (index, lessonsProgresses) in progresses.enumerated() {
+            self.progressMap[topics[index]] = self.computeTopicProgress(
+                lessonsProgresses: lessonsProgresses
+            )
         }
     }
 
@@ -189,16 +219,9 @@ final class LearningPresenter: LearningPresenterProtocol {
             result + (maxPercentForEachLesson * lessonProgress)
         }
     }
-
-    // MARK: - Types
-
-    private enum LearningPresenterError: Error {
-        case failedRegisterUser
-        case failedFetchKnowledgeGraph
-    }
 }
 
-// MARK: - LearningPresenter (View Specific) -
+// MARK: - LearningPresenter (ViewData) -
 
 extension LearningPresenter {
     private func reloadViewData() {
