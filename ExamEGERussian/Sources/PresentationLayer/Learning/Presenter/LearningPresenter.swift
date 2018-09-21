@@ -55,7 +55,9 @@ final class LearningPresenter: LearningPresenterProtocol {
             self.joinCoursesIfNeeded()
         }.done {
             self.reloadViewData()
-            self.fetchProgresses().done {
+            self.fetchProgresses().then {
+                self.updateTimeToComplete()
+            }.done {
                 self.reloadViewData()
             }
         }.ensure {
@@ -229,6 +231,27 @@ extension LearningPresenter {
         let maxPercentForEachLesson = 100.0 / Double(lessonsProgresses.count)
         return lessonsProgresses.reduce(0.0) { (result, lessonProgress) in
             result + (maxPercentForEachLesson * lessonProgress)
+        }
+    }
+
+    private func updateTimeToComplete() -> Guarantee<Void> {
+        let lessonsToObtain = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.obtainLessons(with: $0)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: lessonsToObtain).done {
+                for (index, lessons) in $0.enumerated() {
+                    self.topics[index].timeToComplete = lessons.reduce(0) { (result, lesson) in
+                        result + (lesson.timeToComplete / 60.0)
+                    }
+                }
+
+                seal(())
+            }.catch { _ in
+                print("Failed update time to complete for topics")
+                seal(())
+            }
         }
     }
 }
