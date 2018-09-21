@@ -10,6 +10,7 @@ import UIKit
 
 protocol ContentLanguageSwitchViewControllerProtocol: class {
     func displayLanguages(viewModel: ContentLanguageSwitch.ShowLanguages.ViewModel)
+    func displayLanguageChange(viewModel: ContentLanguageSwitch.SelectLanguage.ViewModel)
 }
 
 final class ContentLanguageSwitchViewController: UIViewController {
@@ -38,18 +39,13 @@ final class ContentLanguageSwitchViewController: UIViewController {
         let view = ContentLanguageSwitchView(
             frame: UIScreen.main.bounds
         )
+        view.delegate = self
         self.view = view
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadLanguagesList()
-    }
-
-    // MARK: Requests logic
-
-    private func loadLanguagesList() {
-        self.interactor.showLanguages(request: ContentLanguageSwitch.ShowLanguages.Request())
+        self.interactor.showLanguages(request: .init())
     }
 }
 
@@ -58,5 +54,18 @@ extension ContentLanguageSwitchViewController: ContentLanguageSwitchViewControll
         if case let ContentLanguageSwitch.ViewControllerState.result(data) = viewModel.state {
             self.contentLanguageSwitchView?.configure(viewModels: data)
         }
+    }
+
+    func displayLanguageChange(viewModel: ContentLanguageSwitch.SelectLanguage.ViewModel) {
+        // We shouldn't do anything
+    }
+}
+
+extension ContentLanguageSwitchViewController: ContentLanguageSwitchViewDelegate {
+    func contentLanguageSwitchViewDiDLanguageSelected(
+        _ contentLanguageSwitchView: ContentLanguageSwitchView,
+        selectedViewModel: ContentLanguageSwitchViewModel
+    ) {
+        self.interactor.selectLanguage(request: .init(selectedViewModel: selectedViewModel))
     }
 }

@@ -4230,6 +4230,7 @@
 		62E982F7B4EDC6C94D1283FE /* ProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982F6B023E2C827407B1B /* ProgressesNetworkService.swift */; };
 		62E983397736699787D8DD35 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E9834EF86EA5676FD4686E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
+		62E983594B255BB6BE92AD8A /* UniqueIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E01E2DDDEEEB0CDFE47 /* UniqueIdentifierType.swift */; };
 		62E98381EC6AD8DD7613C32D /* AchievementsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */; };
 		62E9839060309CC98517D0FB /* ProfileDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AFF3B8AC3CB8374445B /* ProfileDescriptionPresenter.swift */; };
 		62E983B11CD5947FF234C550 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
@@ -6254,6 +6255,7 @@
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
 		62E98DCC38D9285A8734B0BB /* CourseListsCollectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionPresenter.swift; sourceTree = "<group>"; };
 		62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressServiceImpl.swift; sourceTree = "<group>"; };
+		62E98E01E2DDDEEEB0CDFE47 /* UniqueIdentifierType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniqueIdentifierType.swift; sourceTree = "<group>"; };
 		62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
 		62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingNavigationViewController.swift; sourceTree = "<group>"; };
 		62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerPresenter.swift; sourceTree = "<group>"; };
@@ -8067,6 +8069,7 @@
 				62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */,
 				2C2EA36A212D5FEF002116C9 /* Result.swift */,
 				100D33CD3AAC03A84EA5B18A /* Modules */,
+				62E98E01E2DDDEEEB0CDFE47 /* UniqueIdentifierType.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -15138,6 +15141,7 @@
 				26853117DCED6F1EE4406779 /* FullscreenCourseListDataFlow.swift in Sources */,
 				0DF657360C28A5D39EF4F9C9 /* FullscreenCourseListProvider.swift in Sources */,
 				73DB05040F3345F6568DCCBB /* FullscreenCourseListView.swift in Sources */,
+				62E983594B255BB6BE92AD8A /* UniqueIdentifierType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@ final class TagsInteractor: TagsInteractorProtocol {
         self.contentLanguage = contentLanguage
     }
 
-    // MARK: Do some action
+    // MARK: Actions
 
     func fetchTags(request: Tags.ShowTags.Request) {
         self.provider.fetchTags().done { tags in

@@ -26,6 +26,7 @@ final class ExploreInteractor: ExploreInteractorProtocol {
     }
 
     func loadContent(request: Explore.LoadContent.Request) {
+        print("AAA", self.contentLanguageService.globalContentLanguage)
         self.presenter.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )

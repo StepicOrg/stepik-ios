@@ -9,7 +9,9 @@
 import Foundation
 
 enum ContentLanguageSwitch {
+
     // MARK: Common structs
+
     struct ContentLanguageInfo {
         var availableContentLanguages: [ContentLanguage]
         var activeContentLanguage: ContentLanguage
@@ -20,6 +22,20 @@ enum ContentLanguageSwitch {
     /// Show languages
     enum ShowLanguages {
         struct Request { }
+
+        struct Response {
+            var result: ContentLanguageInfo
+        }
+
+        struct ViewModel {
+            var state: ViewControllerState
+        }
+    }
+    /// Change languages
+    enum SelectLanguage {
+        struct Request {
+            var selectedViewModel: ContentLanguageSwitchViewModel
+        }
 
         struct Response {
             var result: ContentLanguageInfo

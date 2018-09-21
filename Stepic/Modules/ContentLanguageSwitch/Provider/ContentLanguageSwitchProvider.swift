@@ -12,6 +12,8 @@ import PromiseKit
 protocol ContentLanguageSwitchProviderProtocol {
     func fetchAvailableLanguages() -> Guarantee<[ContentLanguage]>
     func fetchCurrentLanguage() -> Guarantee<ContentLanguage>
+
+    func setGlobalContentLanguage(_ contentLanguage: ContentLanguage)
 }
 
 final class ContentLanguageSwitchProvider: ContentLanguageSwitchProviderProtocol {
@@ -31,5 +33,9 @@ final class ContentLanguageSwitchProvider: ContentLanguageSwitchProviderProtocol
         return Guarantee { seal in
             seal(self.contentLanguageService.globalContentLanguage)
         }
+    }
+
+    func setGlobalContentLanguage(_ contentLanguage: ContentLanguage) {
+        self.contentLanguageService.globalContentLanguage = contentLanguage
     }
 }

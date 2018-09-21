@@ -9,6 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol ContentLanguageSwitchViewDelegate: class {
+    func contentLanguageSwitchViewDiDLanguageSelected(
+        _ contentLanguageSwitchView: ContentLanguageSwitchView,
+        selectedViewModel: ContentLanguageSwitchViewModel
+    )
+}
+
 extension ContentLanguageSwitchView {
     struct Appearance {
         let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
@@ -26,6 +33,7 @@ extension ContentLanguageSwitchView {
 
 final class ContentLanguageSwitchView: UIView {
     let appearance: Appearance
+    weak var delegate: ContentLanguageSwitchViewDelegate?
 
     private lazy var containerView: ExploreBlockContainerView = {
         var appearance = ExploreBlockContainerView.Appearance()
@@ -72,6 +80,7 @@ final class ContentLanguageSwitchView: UIView {
 
     private lazy var switchButtons = self.buttonsStackView.arrangedSubviews
         as? [ContentLanguageSwitchButton]
+    private var viewModels: [ContentLanguageSwitchViewModel] = []
 
     init(
         frame: CGRect,
@@ -92,6 +101,7 @@ final class ContentLanguageSwitchView: UIView {
     func configure(viewModels: [ContentLanguageSwitchViewModel]) {
         self.buttonsStackView.removeAllArrangedSubviews()
 
+        self.viewModels = viewModels
         for (i, viewModel) in viewModels.enumerated() {
             let button = self.makeLanguageButton(title: viewModel.title, tag: i)
             button.isSelected = viewModel.isSelected
@@ -111,20 +121,27 @@ final class ContentLanguageSwitchView: UIView {
         button.tag = tag
         button.addTarget(
             self,
-            action: #selector(self.onLanguageButtonClick(_:)),
+            action: #selector(self.languageButtonClicked(_:)),
             for: .touchUpInside
         )
         return button
     }
 
     @objc
-    private func onLanguageButtonClick(_ sender: ContentLanguageSwitchButton) {
+    private func languageButtonClicked(_ sender: ContentLanguageSwitchButton) {
         guard let switchButtons = self.switchButtons else {
             return
         }
 
         switchButtons.filter { $0.tag == sender.tag }.forEach { $0.isSelected = true }
         switchButtons.filter { $0.tag != sender.tag }.forEach { $0.isSelected = false }
+
+        if let viewModel = self.viewModels[safe: sender.tag] {
+            self.delegate?.contentLanguageSwitchViewDiDLanguageSelected(
+                self,
+                selectedViewModel: viewModel
+            )
+        }
     }
 }
 

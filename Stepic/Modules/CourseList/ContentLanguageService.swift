@@ -18,10 +18,16 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
     // TODO: Replace with cache driver
     var globalContentLanguage: ContentLanguage {
         set {
+            let oldValue = self.globalContentLanguage
             UserDefaults.standard.setValue(
                 newValue.languageString,
                 forKey: ContentLanguageService.sharedContentLanguageKey
             )
+            if newValue != oldValue {
+                NotificationCenter.default.post(name: .contentLanguageDidChange, object: [
+                    "newContentLanguage": newValue
+                ])
+            }
         }
         get {
             guard let cachedValue = UserDefaults.standard.value(
@@ -39,4 +45,8 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
         let currentLanguageString = Bundle.main.preferredLocalizations.first ?? "en"
         return ContentLanguage(languageString: currentLanguageString)
     }
+}
+
+extension NSNotification.Name {
+    static let contentLanguageDidChange = NSNotification.Name("contentLanguageDidChange")
 }

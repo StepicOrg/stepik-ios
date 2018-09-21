@@ -11,11 +11,14 @@ import PromiseKit
 
 protocol ContentLanguageSwitchInteractorProtocol {
     func showLanguages(request: ContentLanguageSwitch.ShowLanguages.Request)
+    func selectLanguage(request: ContentLanguageSwitch.SelectLanguage.Request)
 }
 
 final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProtocol {
     let presenter: ContentLanguageSwitchPresenterProtocol
     let provider: ContentLanguageSwitchProviderProtocol
+
+    private var currentAvailableContentLanguages: [ContentLanguage] = []
 
     init(
         presenter: ContentLanguageSwitchPresenterProtocol,
@@ -30,6 +33,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
             fulfilled: self.provider.fetchAvailableLanguages(),
             self.provider.fetchCurrentLanguage()
         ).done { (availableContentLanguages, currentContentLanguage) in
+            self.currentAvailableContentLanguages = availableContentLanguages
             self.presenter.presentLanguages(
                 response: ContentLanguageSwitch.ShowLanguages.Response(
                     result: ContentLanguageSwitch.ContentLanguageInfo(
@@ -41,5 +45,24 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         }.catch { _ in
             fatalError("Unexpected error while extracting info about languages")
         }
+    }
+
+    func selectLanguage(request: ContentLanguageSwitch.SelectLanguage.Request) {
+        guard let selectedIndex = Int(request.selectedViewModel.uniqueIdentifier),
+              let selectedLanguage = self
+            .currentAvailableContentLanguages[safe: selectedIndex] else {
+            fatalError("Request contains invalid data")
+        }
+
+        self.provider.setGlobalContentLanguage(selectedLanguage)
+
+        self.presenter.presentLanguageChange(
+            response: ContentLanguageSwitch.SelectLanguage.Response(
+                result: ContentLanguageSwitch.ContentLanguageInfo(
+                    availableContentLanguages: self.currentAvailableContentLanguages,
+                    activeContentLanguage: selectedLanguage
+                )
+            )
+        )
     }
 }
