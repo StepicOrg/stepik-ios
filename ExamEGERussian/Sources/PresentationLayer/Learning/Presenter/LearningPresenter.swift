@@ -143,7 +143,7 @@ final class LearningPresenter: LearningPresenterProtocol {
     private func joinCoursesIfNeeded() -> Promise<Void> {
         var coursesIds = Set<Int>()
 
-        knowledgeGraph.adjacencyLists.keys.forEach { topic in
+        topics.forEach { topic in
             topic.lessons.compactMap {
                 Int($0.courseId)
             }.forEach {
