@@ -159,7 +159,9 @@ final class LearningPresenter: LearningPresenterProtocol {
 
     private func fetchProgresses() -> Guarantee<Void> {
         let topics = Array(knowledgeGraph.adjacencyLists.keys)
-        let lessonsIds = topics.map { $0.lessons.map { $0.id } }
+        let lessonsIds = topics.map { topic in
+            topic.lessons.filter { $0.type == .theory }.map { $0.id }
+        }
         let progressesToFetch = lessonsIds.map {
             lessonsService.fetchProgresses(ids: $0, stepsService: stepsService)
         }
@@ -172,6 +174,7 @@ final class LearningPresenter: LearningPresenterProtocol {
                     )
                 }
 
+                print("Successfully fetched progresses for topics")
                 seal(())
             }.catch { error in
                 print("Failed fetch progresses for topics with error: \(error)")
