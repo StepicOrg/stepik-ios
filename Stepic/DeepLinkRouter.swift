@@ -10,11 +10,11 @@ import Foundation
 
 class DeepLinkRouter {
 
-    private class var window: UIWindow? {
+    static var window: UIWindow? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
-    private class var currentNavigation: UINavigationController? {
+    static var currentNavigation: UINavigationController? {
         guard let tabController = currentTabBarController else {
             return nil
         }
@@ -27,7 +27,7 @@ class DeepLinkRouter {
         }
     }
 
-    private class var currentTabBarController: UITabBarController? {
+    static var currentTabBarController: UITabBarController? {
         return window?.rootViewController as? UITabBarController
     }
 
@@ -228,7 +228,7 @@ class DeepLinkRouter {
         completion([vc])
     }
 
-    fileprivate static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
+    static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
         if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
             do {
                 let courses = Course.getCourses([courseId])
@@ -272,7 +272,7 @@ class DeepLinkRouter {
         completion([])
     }
 
-    fileprivate static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
+    static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
         do {
             let courses = Course.getCourses([courseId])
             if courses.count == 0 {

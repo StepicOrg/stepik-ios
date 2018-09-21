@@ -751,6 +751,7 @@ extension DiscussionsViewController : WriteCommentDelegate {
 
 extension DiscussionsViewController: DiscussionTableViewCellDelegate {
     func didOpenProfile(for userWithId: Int) {
+        //TODO: Add Assembly and remove DeepLinks from here. It is not a correct DeepLink use case.
         DeepLinkRouter.routeToProfileWithId(userWithId) { [weak self] viewControllers in
             if var stack = self?.navigationController?.viewControllers {
                 stack.append(contentsOf: viewControllers)
