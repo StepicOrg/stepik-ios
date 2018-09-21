@@ -135,7 +135,7 @@ final class LearningPresenter: LearningPresenterProtocol {
             LearningViewData(
                 id: vertex.id,
                 title: vertex.title,
-                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+                description: vertex.topicDescription,
                 timeToComplete: "40 минут на прохождение",
                 progress: "60% пройдено"
             )
