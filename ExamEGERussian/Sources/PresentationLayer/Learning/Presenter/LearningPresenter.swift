@@ -190,20 +190,31 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
     }
 
+    // MARK: - Types
+
+    private enum LearningPresenterError: Error {
+        case failedRegisterUser
+        case failedFetchKnowledgeGraph
+    }
+}
+
+// MARK: - LearningPresenter (View Specific) -
+
+extension LearningPresenter {
     private func reloadViewData() {
         if let vertices = knowledgeGraph.vertices as? [KnowledgeGraph.Node] {
-            view?.setViewData(verticesToViewData(vertices))
+            view?.setViewData(mapVerticesToViewData(vertices))
         } else {
             displayError()
         }
     }
 
     // TODO: Replace `timeToComplete` with real value.
-    private func verticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
+    private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
         func getProgress(for vertex: KnowledgeGraph.Node) -> String {
             var progress = Int(progressMap[vertex, default: 0].rounded())
             progress = min(progress, 100)
-            return "\(progress)% пройдено"
+            return getPluralizedProgress(progress)
         }
 
         return vertices.map { vertex in
@@ -217,17 +228,20 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
     }
 
+    private func getPluralizedProgress(_ progress: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: progress, forms: [
+            NSLocalizedString("TopicProgressInPercentsText1", comment: ""),
+            NSLocalizedString("TopicProgressInPercentsText234", comment: ""),
+            NSLocalizedString("TopicProgressInPercentsText567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(progress)")
+    }
+
     private func displayError(
         title: String = NSLocalizedString("Error", comment: ""),
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
-    }
-
-    // MARK: - Types
-
-    private enum LearningPresenterError: Error {
-        case failedRegisterUser
-        case failedFetchKnowledgeGraph
     }
 }
