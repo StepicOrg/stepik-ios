@@ -22,7 +22,8 @@ final class LearningAssembly: BaseAssembly, LearningAssemblyProtocol {
             userRegistrationService: serviceFactory.userRegistrationService,
             graphService: serviceFactory.graphService,
             lessonsService: serviceFactory.lessonsService,
-            stepsService: serviceFactory.stepsService
+            stepsService: serviceFactory.stepsService,
+            courseService: serviceFactory.courseService
         )
         controller.presenter = presenter
 

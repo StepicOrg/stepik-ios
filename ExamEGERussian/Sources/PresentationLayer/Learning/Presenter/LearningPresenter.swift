@@ -20,6 +20,7 @@ final class LearningPresenter: LearningPresenterProtocol {
     private let graphService: GraphServiceProtocol
     private let lessonsService: LessonsService
     private let stepsService: StepsService
+    private let courseService: CourseService
 
     private var isFirstRefresh = true
 
@@ -29,7 +30,8 @@ final class LearningPresenter: LearningPresenterProtocol {
          userRegistrationService: UserRegistrationService,
          graphService: GraphServiceProtocol,
          lessonsService: LessonsService,
-         stepsService: StepsService
+         stepsService: StepsService,
+         courseService: CourseService
     ) {
         self.view = view
         self.router = router
@@ -38,6 +40,7 @@ final class LearningPresenter: LearningPresenterProtocol {
         self.graphService = graphService
         self.lessonsService = lessonsService
         self.stepsService = stepsService
+        self.courseService = courseService
     }
 
     func refresh() {
@@ -45,6 +48,8 @@ final class LearningPresenter: LearningPresenterProtocol {
 
         checkAuthStatus().then {
             self.refreshContent()
+        }.then {
+            self.joinCoursesIfNeeded()
         }.done {
             self.reloadViewData()
             self.fetchProgresses().done {
@@ -127,6 +132,27 @@ final class LearningPresenter: LearningPresenterProtocol {
             }.catch { error in
                 print("Failed fetch knowledge graph: \(error)")
                 seal.reject(LearningPresenterError.failedFetchKnowledgeGraph)
+            }
+        }
+    }
+
+    private func joinCoursesIfNeeded() -> Promise<Void> {
+        var coursesIds = Set<Int>()
+
+        knowledgeGraph.adjacencyLists.keys.forEach { topic in
+            topic.lessons.compactMap {
+                Int($0.courseId)
+            }.forEach {
+                coursesIds.insert($0)
+            }
+        }
+
+        return Promise { seal in
+            courseService.joinCourses(with: Array(coursesIds)).done { courses in
+                print("Successfully joined courses with ids: \(courses.map { $0.id })")
+                seal.fulfill(())
+            }.catch {
+                seal.reject($0)
             }
         }
     }
