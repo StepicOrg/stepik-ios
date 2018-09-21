@@ -14,7 +14,7 @@ final class LearningPresenter: LearningPresenterProtocol {
     private let router: LearningRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
-    private var progressMap = [KnowledgeGraph.Node: Double]()
+    private var progressesMap = [KnowledgeGraph.Node: Double]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
@@ -81,6 +81,12 @@ final class LearningPresenter: LearningPresenterProtocol {
             default:
                 self?.displayError()
             }
+        }
+    }
+
+    func refreshProgresses() {
+        obtainProgressesFromCache().done {
+            self.reloadViewData()
         }
     }
 
@@ -172,15 +178,20 @@ final class LearningPresenter: LearningPresenterProtocol {
 // MARK: - LearningPresenter (Progresses) -
 
 extension LearningPresenter {
-    func refreshProgresses() {
+    private func obtainProgressesFromCache() -> Guarantee<Void> {
         let progressesToObtain = getTheoryLessonsIdsGroupedByTopic().map {
             lessonsService.obtainProgresses(ids: $0, stepsService: stepsService)
         }
 
-        when(fulfilled: progressesToObtain).done {
-            self.updateProgressesMap(progresses: $0)
-            self.reloadViewData()
-        }.cauterize()
+        return Guarantee { seal in
+            when(fulfilled: progressesToObtain).done {
+                self.updateProgressesMap(progresses: $0)
+                seal(())
+            }.catch { error in
+                print("Failed obtain progresses for topics with error: \(error)")
+                seal(())
+            }
+        }
     }
 
     private func fetchProgresses() -> Guarantee<Void> {
@@ -194,7 +205,9 @@ extension LearningPresenter {
                 seal(())
             }.catch { error in
                 print("Failed fetch progresses for topics with error: \(error)")
-                seal(())
+                self.obtainProgressesFromCache().done {
+                    seal(())
+                }
             }
         }
     }
@@ -207,7 +220,7 @@ extension LearningPresenter {
 
     private func updateProgressesMap(progresses: [[Double]]) {
         for (index, lessonsProgresses) in progresses.enumerated() {
-            self.progressMap[topics[index]] = self.computeTopicProgress(
+            self.progressesMap[topics[index]] = self.computeTopicProgress(
                 lessonsProgresses: lessonsProgresses
             )
         }
@@ -235,7 +248,7 @@ extension LearningPresenter {
     // TODO: Replace `timeToComplete` with real value.
     private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
         func getProgress(for vertex: KnowledgeGraph.Node) -> String {
-            var progress = Int(progressMap[vertex, default: 0].rounded())
+            var progress = Int(progressesMap[vertex, default: 0].rounded())
             progress = min(progress, 100)
             return getPluralizedProgress(progress)
         }

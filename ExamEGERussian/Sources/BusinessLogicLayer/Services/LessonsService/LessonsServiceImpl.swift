@@ -29,28 +29,18 @@ final class LessonsServiceImpl: LessonsService {
         }
     }
 
-    func fetchProgress(id: Int, stepsService: StepsService) -> Guarantee<Double> {
-        return Guarantee { seal in
-            fetchLessons(ids: [id]).firstValue.then { lesson in
-                stepsService.fetchProgresses(stepsIds: lesson.stepsArray)
-            }.done { steps in
-                seal(self.computeProgress(steps: steps))
-            }.catch { error in
-                print("Failed fetch progress for lesson with id: \(id), error: \(error)")
-                seal(0)
-            }
+    func fetchProgress(id: Int, stepsService: StepsService) -> Promise<Double> {
+        return fetchLessons(ids: [id]).firstValue.then { lesson in
+            stepsService.fetchProgresses(stepsIds: lesson.stepsArray)
+        }.then { steps -> Promise<Double> in
+            .value(self.computeProgress(steps: steps))
         }
     }
 
-    func fetchProgresses(ids: [Int], stepsService: StepsService) -> Guarantee<[Double]> {
-        return Guarantee { seal in
-            let progressesToFetch = ids.map { fetchProgress(id: $0, stepsService: stepsService) }
-            when(fulfilled: progressesToFetch).done { progresses in
-                seal(progresses)
-            }.catch { error in
-                print("Failed fetch progresses with error: \(error)")
-                seal(Array(repeating: 0, count: ids.count))
-            }
+    func fetchProgresses(ids: [Int], stepsService: StepsService) -> Promise<[Double]> {
+        let progressesToFetch = ids.map { fetchProgress(id: $0, stepsService: stepsService) }
+        return when(fulfilled: progressesToFetch).then { progresses -> Promise<[Double]> in
+            .value(progresses)
         }
     }
 
