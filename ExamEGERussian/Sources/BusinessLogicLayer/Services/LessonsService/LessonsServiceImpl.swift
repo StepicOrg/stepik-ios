@@ -18,16 +18,55 @@ final class LessonsServiceImpl: LessonsService {
     }
 
     func fetchLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
-        return executeFetchRequest(ids: ids)
-            .then { self.lessonsAPI.retrieve(ids: ids, existing: $0) }
-            .mapValues { LessonPlainObject(lesson: $0) }
+        return fetchLessons(ids: ids).mapValues {
+            LessonPlainObject(lesson: $0)
+        }
     }
 
     func obtainLessons(with ids: [Int]) -> Promise<[LessonPlainObject]> {
-        return executeFetchRequest(ids: ids).mapValues { LessonPlainObject(lesson: $0) }
+        return executeFetchRequest(ids: ids).mapValues {
+            LessonPlainObject(lesson: $0)
+        }
+    }
+
+    func fetchProgress(id: Int, stepsService: StepsService) -> Guarantee<Double> {
+        return Guarantee { seal in
+            fetchLessons(ids: [id]).firstValue.then { lesson in
+                stepsService.fetchProgresses(stepsIds: lesson.stepsArray)
+            }.done { steps in
+                guard steps.count > 0 else {
+                    return seal(0)
+                }
+
+                let countPassed = steps.filter { $0.isPassed }.count
+
+                seal(Double(countPassed) / Double(steps.count))
+            }.catch { error in
+                print("Failed fetch progress for lesson with id: \(id), error: \(error)")
+                seal(0)
+            }
+        }
+    }
+
+    func fetchProgresses(ids: [Int], stepsService: StepsService) -> Guarantee<[Double]> {
+        return Guarantee { seal in
+            let progressesToFetch = ids.map { fetchProgress(id: $0, stepsService: stepsService) }
+            when(fulfilled: progressesToFetch).done { progresses in
+                seal(progresses)
+            }.catch { error in
+                print("Failed fetch progresses with error: \(error)")
+                seal(Array(repeating: 0, count: ids.count))
+            }
+        }
     }
 
     // MARK: - Private API
+
+    private func fetchLessons(ids: [Int]) -> Promise<[Lesson]> {
+        return executeFetchRequest(ids: ids).then {
+            self.lessonsAPI.retrieve(ids: ids, existing: $0)
+        }
+    }
 
     private func executeFetchRequest(ids: [Int]) -> Promise<[Lesson]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Lesson.self))
