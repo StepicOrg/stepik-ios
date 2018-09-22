@@ -35,7 +35,10 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
             self.getSteps()
         }.catch { [weak self] error in
             print("\(#function): \(error)")
-            self?.view?.state = .error(message: NSLocalizedString("FailedFetchLessonStepsContent", comment: ""))
+            self?.view?.state = .error(
+                title: NSLocalizedString("FailedFetchStepsForLessonTitle", comment: ""),
+                message: NSLocalizedString("FailedFetchStepsForLessonMessage", comment: "")
+            )
         }
     }
 
