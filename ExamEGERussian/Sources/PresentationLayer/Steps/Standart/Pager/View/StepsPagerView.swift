@@ -9,7 +9,7 @@ enum StepsPagerViewState {
     case idle
     case fetching
     case fetched(steps: [StepPlainObject])
-    case error(message: String)
+    case error(title: String?, message: String)
 }
 
 protocol StepsPagerView: class {

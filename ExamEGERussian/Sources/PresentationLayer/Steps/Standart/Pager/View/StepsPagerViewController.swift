@@ -21,9 +21,9 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             case .fetched(let steps):
                 SVProgressHUD.dismiss()
                 setSteps(steps)
-            case .error(let message):
+            case .error(let title, let message):
                 SVProgressHUD.dismiss()
-                displayError(with: message)
+                displayError(title: title, message: message)
             }
         }
     }
@@ -167,15 +167,16 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
         pageControl.currentPage = activeTabIndex
     }
 
-    private func displayError(with message: String) {
+    private func displayError(
+        title: String?,
+        message: String
+    ) {
         presentConfirmationAlert(
-            withTitle: NSLocalizedString("Error", comment: ""),
+            withTitle: title ?? NSLocalizedString("Error", comment: ""),
             message: message,
             buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
             buttonSecondTitle: NSLocalizedString("TryAgain", comment: ""),
-            firstAction: { [weak self] in
-                self?.presenter?.cancel()
-            },
+            firstAction: {},
             secondAction: { [weak self] in
                 self?.presenter?.refresh()
             }
