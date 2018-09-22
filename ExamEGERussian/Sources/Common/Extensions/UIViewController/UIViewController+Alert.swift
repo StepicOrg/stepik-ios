@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIViewController {
+    private var isVisible: Bool {
+        return isViewLoaded && view.window != nil
+    }
+
     func presentAlert(
         withTitle title: String?,
         message: String? = nil,
@@ -16,6 +20,10 @@ extension UIViewController {
         action actionCallback: (() -> Void)? = nil,
         presentCompletion completion: (() -> Void)? = nil
     ) {
+        guard isVisible else {
+            return
+        }
+
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .cancel) { _ in
             actionCallback?()
@@ -32,6 +40,10 @@ extension UIViewController {
         secondAction: (() -> Void)? = nil,
         presentCompletion completion: (() -> Void)? = nil
     ) {
+        guard isVisible else {
+            return
+        }
+
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonFirstTitle, style: .default) { _ in
             firstAction?()
