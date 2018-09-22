@@ -130,7 +130,9 @@ extension StepsPagerPresenterImpl {
     }
 
     private func fetchSteps() {
-        self.view?.state = .fetching
+        if steps.isEmpty {
+            view?.state = .fetching
+        }
 
         stepsService.fetchSteps(for: lesson).mapValues {
             $0.id
