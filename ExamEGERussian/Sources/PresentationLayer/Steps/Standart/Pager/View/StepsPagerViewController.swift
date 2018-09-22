@@ -176,7 +176,11 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             message: message,
             buttonFirstTitle: NSLocalizedString("Cancel", comment: ""),
             buttonSecondTitle: NSLocalizedString("TryAgain", comment: ""),
-            firstAction: {},
+            firstAction: { [weak self] in
+                if self?.tabCount == 0 {
+                    self?.presenter?.cancel()
+                }
+            },
             secondAction: { [weak self] in
                 self?.presenter?.refresh()
             }
