@@ -11,6 +11,8 @@ import AlamofireNetworkActivityIndicator
 import IQKeyboardManagerSwift
 import SVProgressHUD
 import Amplitude_iOS
+import Fabric
+import Crashlytics
 
 final class ThirdPartiesConfigurator {
     func configure() {
@@ -24,6 +26,8 @@ final class ThirdPartiesConfigurator {
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setHapticsEnabled(true)
+
+        Fabric.with([Crashlytics.self])
 
         Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)
     }
