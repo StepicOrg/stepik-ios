@@ -12,9 +12,9 @@ enum Tags {
     // MARK: Common structs
     struct Tag {
         // cause CourseTag sucks (we should have language in each layer)
-        var id: Int
-        var title: String
-        var summary: String
+        let id: Int
+        let title: String
+        let summary: String
     }
 
     // MARK: Use cases
@@ -24,11 +24,17 @@ enum Tags {
         struct Request { }
 
         struct Response {
-            var result: Result<[Tag]>
+            let result: Result<[Tag]>
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
+        }
+    }
+    /// Present collection of tag
+    enum PresentCollection {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
         }
     }
 

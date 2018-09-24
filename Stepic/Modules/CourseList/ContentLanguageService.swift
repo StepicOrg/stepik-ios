@@ -47,6 +47,6 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
     }
 }
 
-extension NSNotification.Name {
-    static let contentLanguageDidChange = NSNotification.Name("contentLanguageDidChange")
+extension Foundation.Notification.Name {
+    static let contentLanguageDidChange = Foundation.Notification.Name("contentLanguageDidChange")
 }

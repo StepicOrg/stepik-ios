@@ -35,6 +35,20 @@ enum Explore {
             let isHidden: Bool
         }
     }
+    /// Present fullscreen module
+    enum PresentFullscreenCourseListModule {
+        struct Request {
+            let courseListType: CourseListType
+        }
+
+        struct Response {
+            let courseListType: CourseListType
+        }
+
+        struct ViewModel {
+            let courseListType: CourseListType
+        }
+    }
 
     // MARK: States
 

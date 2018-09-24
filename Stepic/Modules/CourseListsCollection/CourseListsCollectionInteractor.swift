@@ -11,9 +11,14 @@ import PromiseKit
 
 protocol CourseListsCollectionInteractorProtocol: class {
     func fetchCourseLists(request: CourseListsCollection.ShowCourseLists.Request)
+    func loadFullscreenCourseList(
+        request: CourseListsCollection.PresentFullscreenCourseListModule.Request
+    )
 }
 
 final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProtocol {
+    weak var moduleOutput: CourseListCollectionOutputProtocol?
+
     let presenter: CourseListsCollectionPresenterProtocol
     let provider: CourseListsCollectionProviderProtocol
 
@@ -47,5 +52,16 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
 
     enum Error: Swift.Error {
         case fetchFailed
+    }
+
+    func loadFullscreenCourseList(
+        request: CourseListsCollection.PresentFullscreenCourseListModule.Request
+    ) {
+        guard let collectionCourseListType = request.courseListType
+            as? CollectionCourseListType else {
+            return
+        }
+
+        self.moduleOutput?.presentCourseList(type: collectionCourseListType)
     }
 }

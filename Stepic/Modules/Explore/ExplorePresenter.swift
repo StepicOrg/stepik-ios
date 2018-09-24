@@ -11,6 +11,7 @@ import UIKit
 protocol ExplorePresenterProtocol {
     func presentContent(response: Explore.LoadContent.Response)
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response)
+    func presentFullscreenCourseList(response: Explore.PresentFullscreenCourseListModule.Response)
 }
 
 final class ExplorePresenter: ExplorePresenterProtocol {
@@ -25,6 +26,12 @@ final class ExplorePresenter: ExplorePresenterProtocol {
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response) {
         self.viewController?.displayLanguageSwitchBlock(
             viewModel: .init(isHidden: response.isHidden)
+        )
+    }
+
+    func presentFullscreenCourseList(response: Explore.PresentFullscreenCourseListModule.Response) {
+        self.viewController?.displayFullscreenCourseList(
+            viewModel: .init(courseListType: response.courseListType)
         )
     }
 }

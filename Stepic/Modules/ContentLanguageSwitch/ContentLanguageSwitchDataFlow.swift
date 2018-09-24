@@ -13,8 +13,8 @@ enum ContentLanguageSwitch {
     // MARK: Common structs
 
     struct ContentLanguageInfo {
-        var availableContentLanguages: [ContentLanguage]
-        var activeContentLanguage: ContentLanguage
+        let availableContentLanguages: [ContentLanguage]
+        let activeContentLanguage: ContentLanguage
     }
 
     // MARK: Use cases
@@ -24,25 +24,25 @@ enum ContentLanguageSwitch {
         struct Request { }
 
         struct Response {
-            var result: ContentLanguageInfo
+            let result: ContentLanguageInfo
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
         }
     }
     /// Change languages
     enum SelectLanguage {
         struct Request {
-            var selectedViewModel: ContentLanguageSwitchViewModel
+            let viewModelUniqueIdentifier: UniqueIdentifierType
         }
 
         struct Response {
-            var result: ContentLanguageInfo
+            let result: ContentLanguageInfo
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
         }
     }
 

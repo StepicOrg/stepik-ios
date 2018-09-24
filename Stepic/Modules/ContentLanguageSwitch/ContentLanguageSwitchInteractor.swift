@@ -48,7 +48,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
     }
 
     func selectLanguage(request: ContentLanguageSwitch.SelectLanguage.Request) {
-        guard let selectedIndex = Int(request.selectedViewModel.uniqueIdentifier),
+        guard let selectedIndex = Int(request.viewModelUniqueIdentifier),
               let selectedLanguage = self
             .currentAvailableContentLanguages[safe: selectedIndex] else {
             fatalError("Request contains invalid data")

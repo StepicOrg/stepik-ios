@@ -64,6 +64,11 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                             description: "\(courseListViewModel.summary ?? "")"
                         )
                     )
+                containerView.onShowAllButtonClick = { [weak self] in
+                    self?.interactor.loadFullscreenCourseList(
+                        request: .init(courseListType: courseListViewModel.courseList)
+                    )
+                }
                 self.courseListsCollectionView?.addBlockView(containerView)
             }
         default:

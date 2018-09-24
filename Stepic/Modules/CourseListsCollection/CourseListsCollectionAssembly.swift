@@ -11,8 +11,14 @@ import Foundation
 final class CourseListsCollectionAssembly: Assembly {
     let contentLanguage: ContentLanguage
 
-    init(contentLanguage: ContentLanguage) {
+    private weak var moduleOutput: CourseListCollectionOutputProtocol?
+
+    init(
+        contentLanguage: ContentLanguage,
+        output: CourseListCollectionOutputProtocol? = nil
+    ) {
         self.contentLanguage = contentLanguage
+        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -27,6 +33,7 @@ final class CourseListsCollectionAssembly: Assembly {
         let interactor = CourseListsCollectionInteractor(presenter: presenter, provider: provider)
         let viewController = CourseListsCollectionViewController(interactor: interactor)
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

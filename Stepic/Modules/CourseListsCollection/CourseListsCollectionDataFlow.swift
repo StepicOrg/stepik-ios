@@ -23,6 +23,12 @@ enum CourseListsCollection {
             var state: ViewControllerState
         }
     }
+    /// Present collection in fullscreen
+    enum PresentFullscreenCourseListModule {
+        struct Request {
+            let courseListType: CourseListType
+        }
+    }
 
     // MARK: States
 

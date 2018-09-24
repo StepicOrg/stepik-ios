@@ -11,8 +11,14 @@ import UIKit
 final class TagsAssembly: Assembly {
     let contentLanguage: ContentLanguage
 
-    init(contentLanguage: ContentLanguage) {
+    private weak var moduleOutput: TagsOutputProtocol?
+
+    init(
+        contentLanguage: ContentLanguage,
+        output: TagsOutputProtocol? = nil
+    ) {
         self.contentLanguage = contentLanguage
+        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -26,6 +32,7 @@ final class TagsAssembly: Assembly {
         let viewController = TagsViewController(
             interactor: interactor
         )
+        interactor.moduleOutput = self.moduleOutput
 
         presenter.viewController = viewController
         return viewController

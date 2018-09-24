@@ -15,13 +15,16 @@ protocol FullscreenCourseListViewControllerProtocol: class {
 final class FullscreenCourseListViewController: UIViewController {
     let interactor: FullscreenCourseListInteractorProtocol
     private var state: FullscreenCourseList.ViewControllerState
+    private let courseListType: CourseListType
 
     init(
         interactor: FullscreenCourseListInteractorProtocol,
+        courseListType: CourseListType,
         initialState: FullscreenCourseList.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.courseListType = courseListType
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +37,7 @@ final class FullscreenCourseListViewController: UIViewController {
 
     override func loadView() {
         let courseListAssembly = CourseListAssembly(
-            type: PopularCourseListType(language: .russian),
+            type: self.courseListType,
             colorMode: .light,
             presentationOrientation: .vertical
         )

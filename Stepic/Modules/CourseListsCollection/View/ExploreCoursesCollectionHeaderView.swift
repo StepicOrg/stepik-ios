@@ -53,7 +53,11 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
         }
     }
 
-    var onShowAllButtonClick: (() -> Void)?
+    var onShowAllButtonClick: (() -> Void)? {
+        didSet {
+            self.headerView.onShowAllButtonClick = self.onShowAllButtonClick
+        }
+    }
 
     init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance

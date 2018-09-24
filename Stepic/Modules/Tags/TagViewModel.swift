@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct TagViewModel {
-    var title: String
+struct TagViewModel: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
+    let title: String
 }

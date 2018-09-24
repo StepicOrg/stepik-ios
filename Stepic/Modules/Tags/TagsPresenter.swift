@@ -19,8 +19,14 @@ final class TagsPresenter: TagsPresenterProtocol {
         let state: Tags.ViewControllerState = {
             switch response.result {
             case .success(let tags):
+                var viewModels: [TagViewModel] = []
+                for (index, tag) in tags.enumerated() {
+                    viewModels.append(
+                        TagViewModel(uniqueIdentifier: "\(index)", title: tag.title)
+                    )
+                }
                 return Tags.ViewControllerState.result(
-                    data: tags.map { TagViewModel(title: $0.title) }
+                    data: viewModels
                 )
             case .failure:
                 return Tags.ViewControllerState.emptyResult

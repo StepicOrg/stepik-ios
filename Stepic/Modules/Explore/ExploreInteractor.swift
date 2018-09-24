@@ -12,6 +12,8 @@ import PromiseKit
 protocol ExploreInteractorProtocol {
     func loadContent(request: Explore.LoadContent.Request)
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request)
+
+    func loadFullscreenCourseList(request: Explore.PresentFullscreenCourseListModule.Request)
 }
 
 final class ExploreInteractor: ExploreInteractorProtocol {
@@ -45,7 +47,25 @@ final class ExploreInteractor: ExploreInteractorProtocol {
         self.contentLanguageSwitchAvailabilityService.shouldShowLanguageSwitchOnExplore = false
     }
 
+    func loadFullscreenCourseList(request: Explore.PresentFullscreenCourseListModule.Request) {
+        self.presenter.presentFullscreenCourseList(
+            response: .init(courseListType: request.courseListType)
+        )
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
+    }
+}
+
+extension ExploreInteractor: TagsOutputProtocol {
+    func presentCourseList(type: TagCourseListType) {
+        self.loadFullscreenCourseList(request: .init(courseListType: type))
+    }
+}
+
+extension ExploreInteractor: CourseListCollectionOutputProtocol {
+    func presentCourseList(type: CollectionCourseListType) {
+        self.loadFullscreenCourseList(request: .init(courseListType: type))
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 protocol ExploreViewControllerProtocol: class {
     func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
+    func displayFullscreenCourseList(viewModel: Explore.PresentFullscreenCourseListModule.ViewModel)
 }
 
 final class ExploreViewController: UIViewController {
@@ -76,7 +77,10 @@ final class ExploreViewController: UIViewController {
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Tags
-        let tagsAssembly = TagsAssembly(contentLanguage: contentLanguage)
+        let tagsAssembly = TagsAssembly(
+            contentLanguage: contentLanguage,
+            output: self.interactor as? TagsOutputProtocol
+        )
         let tagsViewController = tagsAssembly.makeModule()
         self.registerSubmodule(
             .init(
@@ -87,7 +91,10 @@ final class ExploreViewController: UIViewController {
         )
 
         // Collection
-        let collectionAssembly = CourseListsCollectionAssembly(contentLanguage: contentLanguage)
+        let collectionAssembly = CourseListsCollectionAssembly(
+            contentLanguage: contentLanguage,
+            output: self.interactor as? CourseListCollectionOutputProtocol
+        )
         let collectionViewController = collectionAssembly.makeModule()
         self.registerSubmodule(
             .init(
@@ -98,8 +105,9 @@ final class ExploreViewController: UIViewController {
         )
 
         // Popular courses
+        let courseListType = PopularCourseListType(language: contentLanguage)
         let popularAssembly = CourseListAssembly(
-            type: PopularCourseListType(language: contentLanguage),
+            type: courseListType,
             colorMode: .dark,
             presentationOrientation: .horizontal
         )
@@ -113,11 +121,15 @@ final class ExploreViewController: UIViewController {
                     summary: nil
                 )
             )
-        containerView.onShowAllButtonClick = { }
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.loadFullscreenCourseList(
+                request: .init(courseListType: courseListType)
+            )
+        }
         self.registerSubmodule(
             .init(
                 viewController: popularViewController,
-                view: popularViewController.view,
+                view: containerView,
                 isLanguageDependent: true
             )
         )
@@ -166,5 +178,13 @@ extension ExploreViewController: ExploreViewControllerProtocol {
             ),
             insertionPosition: 0
         )
+    }
+
+    func displayFullscreenCourseList(
+        viewModel: Explore.PresentFullscreenCourseListModule.ViewModel
+    ) {
+        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

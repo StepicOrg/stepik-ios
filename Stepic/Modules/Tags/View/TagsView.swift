@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+protocol TagsViewDelegate: class {
+    func tagsViewDidTagSelect(_ tagsView: TagsView, viewModel: TagViewModel)
+}
+
 extension TagsView {
     struct Appearance {
         let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
@@ -27,6 +31,9 @@ extension TagsView {
 
 final class TagsView: UIView {
     let appearance: Appearance
+    weak var delegate: TagsViewDelegate?
+
+    private var viewModels: [TagViewModel] = []
 
     private lazy var containerView: ExploreBlockContainerView = {
         var appearance = ExploreBlockContainerView.Appearance()
@@ -72,9 +79,12 @@ final class TagsView: UIView {
     }
 
     func updateData(viewModels: [TagViewModel]) {
+        self.viewModels = viewModels
         self.tagsStackView.removeAllArrangedViews()
-        for viewModel in viewModels {
-            self.tagsStackView.addArrangedView(self.makeTagButton(title: viewModel.title))
+        for (index, viewModel) in viewModels.enumerated() {
+            let button = self.makeTagButton(title: viewModel.title)
+            button.tag = index
+            self.tagsStackView.addArrangedView(button)
         }
     }
 
@@ -87,7 +97,21 @@ final class TagsView: UIView {
         button.layer.cornerRadius = self.appearance.tagCornerRadius
 
         button.setTitle(title, for: .normal)
+        button.addTarget(
+            self,
+            action: #selector(self.tagButtonClicked(sender:)),
+            for: .touchUpInside
+        )
         return button
+    }
+
+    @objc
+    private func tagButtonClicked(sender: UIButton) {
+        guard let viewModel = self.viewModels[safe: sender.tag] else {
+            return
+        }
+
+        self.delegate?.tagsViewDidTagSelect(self, viewModel: viewModel)
     }
 }
 

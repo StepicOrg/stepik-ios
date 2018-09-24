@@ -36,6 +36,7 @@ final class TagsViewController: UIViewController {
 
     override func loadView() {
         let view = TagsView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 
@@ -59,5 +60,13 @@ extension TagsViewController: TagsViewControllerProtocol {
         default:
             break
         }
+    }
+}
+
+extension TagsViewController: TagsViewDelegate {
+    func tagsViewDidTagSelect(_ tagsView: TagsView, viewModel: TagViewModel) {
+        self.interactor.presentTagCollection(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
+        )
     }
 }

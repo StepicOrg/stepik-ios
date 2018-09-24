@@ -66,6 +66,8 @@ extension ContentLanguageSwitchViewController: ContentLanguageSwitchViewDelegate
         _ contentLanguageSwitchView: ContentLanguageSwitchView,
         selectedViewModel: ContentLanguageSwitchViewModel
     ) {
-        self.interactor.selectLanguage(request: .init(selectedViewModel: selectedViewModel))
+        self.interactor.selectLanguage(
+            request: .init(viewModelUniqueIdentifier: selectedViewModel.uniqueIdentifier)
+        )
     }
 }
