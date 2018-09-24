@@ -40,7 +40,7 @@ final class ExploreInteractor: ExploreInteractorProtocol {
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request) {
         self.presenter.presentLanguageSwitchBlock(
             response: .init(
-                isHidden: self.contentLanguageSwitchAvailabilityService
+                isHidden: !self.contentLanguageSwitchAvailabilityService
                     .shouldShowLanguageSwitchOnExplore
             )
         )

@@ -17,7 +17,7 @@ final class CourseListAssembly: Assembly {
     var moduleInput: CourseListInputProtocol?
 
     // Output
-    private var moduleOutput: CourseListOutputProtocol?
+    private weak var moduleOutput: CourseListOutputProtocol?
 
     init(
         type: CourseListType,
@@ -32,7 +32,11 @@ final class CourseListAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let servicesFactory = CourseListServicesFactory(type: self.type, coursesAPI: CoursesAPI())
+        let servicesFactory = CourseListServicesFactory(
+            type: self.type,
+            coursesAPI: CoursesAPI(),
+            userCoursesAPI: UserCoursesAPI()
+        )
 
         let presenter = CourseListPresenter()
         let provider = CourseListProvider(

@@ -45,10 +45,12 @@ final class CollectionCourseListType: CourseListType {
 final class CourseListServicesFactory {
     let type: CourseListType
     private let coursesAPI: CoursesAPI
+    private let userCoursesAPI: UserCoursesAPI
 
-    init(type: CourseListType, coursesAPI: CoursesAPI) {
+    init(type: CourseListType, coursesAPI: CoursesAPI, userCoursesAPI: UserCoursesAPI) {
         self.type = type
         self.coursesAPI = coursesAPI
+        self.userCoursesAPI = userCoursesAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -79,7 +81,11 @@ final class CourseListServicesFactory {
 
     func makeNetworkService() -> CourseListNetworkServiceProtocol {
         if let type = self.type as? EnrolledCourseListType {
-            return EnrolledCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+            return EnrolledCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                userCoursesAPI: self.userCoursesAPI
+            )
         } else if let type = self.type as? PopularCourseListType {
             return PopularCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
         } else if let type = self.type as? TagCourseListType {

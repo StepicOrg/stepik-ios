@@ -28,20 +28,31 @@ class BaseCourseListNetworkService {
 final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
                                               CourseListNetworkServiceProtocol {
     let type: EnrolledCourseListType
+    private let userCoursesAPI: UserCoursesAPI
 
-    init(type: EnrolledCourseListType, coursesAPI: CoursesAPI) {
+    init(
+        type: EnrolledCourseListType,
+        coursesAPI: CoursesAPI,
+        userCoursesAPI: UserCoursesAPI
+    ) {
         self.type = type
+        self.userCoursesAPI = userCoursesAPI
         super.init(coursesAPI: coursesAPI)
     }
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         return Promise { seal in
-            self.coursesAPI.retrieve(
-                enrolled: true,
-                order: "-activity",
-                page: page
-            ).done { result in
-                seal.fulfill(result)
+            self.userCoursesAPI.retrieve(page: page).then {
+                userCoursesInfo -> Promise<([Course], [UserCourse], Meta)> in
+                self.coursesAPI.retrieve(
+                    ids: userCoursesInfo.0.map { $0.courseId }
+                ).map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
+            }.done { courses, info, meta in
+                let orderedCourses = courses.reordered(
+                    order: info.map { $0.courseId },
+                    transform: { $0.id }
+                )
+                seal.fulfill((orderedCourses, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
