@@ -13,25 +13,31 @@ protocol CourseListInteractorProtocol: class {
     func fetchCourses(request: CourseList.ShowCourses.Request)
     func fetchNextCourses(request: CourseList.LoadNextCourses.Request)
 
-    func joinCourse(request: CourseList.JoinCourse.Request)
+    func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
+    func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request)
+    func doMainAction(request: CourseList.MainCourseAction.Request)
 }
 
 final class CourseListInteractor: CourseListInteractorProtocol {
+    typealias PaginationState = (page: Int, hasNext: Bool)
+
+    weak var moduleOutput: CourseListOutputProtocol?
+
     let presenter: CourseListPresenterProtocol
     let provider: CourseListProviderProtocol
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     let courseSubscriber: CourseSubscriberProtocol
 
-    private var state: CourseList.State
+    private var isOnline: Bool = false
+    private var paginationState = PaginationState(page: 1, hasNext: true)
+    private var currentCourses: [Course] = []
 
     init(
-        state: CourseList.State = CourseList.State(),
         presenter: CourseListPresenterProtocol,
         provider: CourseListProviderProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         courseSubscriber: CourseSubscriberProtocol
     ) {
-        self.state = state
         self.presenter = presenter
         self.provider = provider
         self.adaptiveStorageManager = adaptiveStorageManager
@@ -44,16 +50,16 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // Check for state and if state == offline, just fetch cached courses
         // if state == online, fetch from network and show
         firstly {
-            self.state.isOnline
+            self.isOnline
                 ? self.provider.fetchRemote(page: 1)
                 : self.provider.fetchCached()
-        }.done { (courses, meta) in
-            self.state.paginationState = CourseList.State.PaginationState(
+        }.done { courses, meta in
+            self.paginationState = PaginationState(
                 page: meta.page,
                 hasNext: meta.hasNext
             )
 
-            self.state.courses = courses
+            self.currentCourses = courses
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
@@ -72,7 +78,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // - in offline mode
         // - have no more courses
         // then ignore request and pass empty list to presenter
-        if !self.state.isOnline || !self.state.paginationState.hasNext {
+        if !self.isOnline || !self.paginationState.hasNext {
             let result = Result.success(
                 CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
@@ -84,14 +90,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             return
         }
 
-        let nextPageNumber = self.state.paginationState.page + 1
-        self.provider.fetchRemote(page: nextPageNumber).done { (courses, meta) in
-            self.state.paginationState = CourseList.State.PaginationState(
+        let nextPageNumber = self.paginationState.page + 1
+        self.provider.fetchRemote(page: nextPageNumber).done { courses, meta in
+            self.paginationState = PaginationState(
                 page: meta.page,
                 hasNext: meta.hasNext
             )
 
-            self.state.courses.append(contentsOf: courses)
+            self.currentCourses.append(contentsOf: courses)
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
@@ -105,17 +111,77 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    func joinCourse(request: CourseList.JoinCourse.Request) {
-        guard let targetCourse = self.state.courses.filter({ $0.id == request.id }).first,
-              let indexOfTargetCourse = self.state.courses.index(of: targetCourse) else {
-            return self.presenter.presentJoinCourseReaction(response: .init())
+    func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request) {
+        self.presenter.presentWaitingState()
+
+        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
+              let targetCourse = self.currentCourses[safe: targetIndex] else {
+            fatalError("Invalid module state")
         }
 
-        self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
-            self.state.courses[indexOfTargetCourse] = course
-            self.presenter.presentJoinCourseReaction(response: .init())
-        }.catch { _ in
-            self.presenter.presentJoinCourseReaction(response: .init())
+        if targetCourse.enrolled {
+            // Enrolled course -> open last step
+            self.moduleOutput?.presentLastStep()
+            self.presenter.dismissWaitingState()
+        } else {
+            // Unenrolled course -> join, open last step
+            self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
+                self.currentCourses[targetIndex] = course
+                self.moduleOutput?.presentLastStep()
+                self.presenter.dismissWaitingState()
+            }.catch { _ in
+
+            }
+        }
+    }
+
+    func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request) {
+        self.presenter.presentWaitingState()
+
+        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
+              let targetCourse = self.currentCourses[safe: targetIndex] else {
+            fatalError("Invalid module state")
+        }
+
+        defer {
+            self.presenter.dismissWaitingState()
+        }
+
+        if targetCourse.enrolled {
+            // Enrolled course
+            // - adaptive -> info
+            // - normal -> syllabus
+            if self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: targetCourse.id) {
+                self.moduleOutput?.presentCourseInfo(course: targetCourse)
+            } else {
+                self.moduleOutput?.presentCourseSyllabus(course: targetCourse)
+            }
+        } else {
+            // Unenrolled course
+            // - adaptive -> info
+            // - normal -> info
+            self.moduleOutput?.presentCourseInfo(course: targetCourse)
+        }
+    }
+
+    func doMainAction(request: CourseList.MainCourseAction.Request) {
+        self.presenter.presentWaitingState()
+
+        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
+              let targetCourse = self.currentCourses[safe: targetIndex] else {
+            fatalError("Invalid module state")
+        }
+
+        defer {
+            self.presenter.dismissWaitingState()
+        }
+
+        if targetCourse.enrolled {
+            // Enrolled course -> open last step
+            self.moduleOutput?.presentLastStep()
+        } else {
+            // Unenrolled course -> info
+            self.moduleOutput?.presentCourseInfo(course: targetCourse)
         }
     }
 
@@ -136,7 +202,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
 extension CourseListInteractor: CourseListInputProtocol {
     func reload() {
-        self.state.isOnline = true
+        self.isOnline = true
 
         let fakeRequest = CourseList.ShowCourses.Request()
         self.fetchCourses(request: fakeRequest)

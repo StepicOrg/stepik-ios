@@ -12,6 +12,10 @@ protocol ExplorePresenterProtocol {
     func presentContent(response: Explore.LoadContent.Response)
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response)
     func presentFullscreenCourseList(response: Explore.PresentFullscreenCourseListModule.Response)
+
+    func presentCourseInfo(response: Explore.PresentCourseInfo.Response)
+    func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response)
+    func presentLastStep()
 }
 
 final class ExplorePresenter: ExplorePresenterProtocol {
@@ -33,5 +37,16 @@ final class ExplorePresenter: ExplorePresenterProtocol {
         self.viewController?.displayFullscreenCourseList(
             viewModel: .init(courseListType: response.courseListType)
         )
+    }
+
+    func presentCourseInfo(response: Explore.PresentCourseInfo.Response) {
+        self.viewController?.displayCourseInfo(response: .init(course: response.course))
+    }
+
+    func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response) {
+        self.viewController?.displayCourseSyllabus(response: .init(course: response.course))
+    }
+
+    func presentLastStep() {
     }
 }

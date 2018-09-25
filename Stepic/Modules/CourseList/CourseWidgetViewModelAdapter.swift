@@ -9,7 +9,7 @@
 import Foundation
 
 extension CourseWidgetViewModel {
-    init(course: Course) {
+    init(uniqueIdentifier: UniqueIdentifierType, course: Course) {
         var progressViewModel: CourseWidgetProgressViewModel?
         if let progress = course.progress {
             progressViewModel = CourseWidgetProgressViewModel(progress: progress)
@@ -31,7 +31,7 @@ extension CourseWidgetViewModel {
             ratingLabelText: ratingLabelText,
             isAdaptive: true,
             progress: progressViewModel,
-            courseId: course.id
+            uniqueIdentifier: uniqueIdentifier
         )
     }
 }

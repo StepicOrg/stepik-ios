@@ -17,18 +17,22 @@ protocol CourseListsCollectionInteractorProtocol: class {
 }
 
 final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProtocol {
-    weak var moduleOutput: CourseListCollectionOutputProtocol?
+    weak var moduleOutput: (CourseListCollectionOutputProtocol & CourseListOutputProtocol)?
 
     let presenter: CourseListsCollectionPresenterProtocol
     let provider: CourseListsCollectionProviderProtocol
 
-    init(presenter: CourseListsCollectionPresenterProtocol, provider: CourseListsCollectionProviderProtocol) {
+    init(
+        presenter: CourseListsCollectionPresenterProtocol,
+        provider: CourseListsCollectionProviderProtocol
+    ) {
         self.presenter = presenter
         self.provider = provider
     }
 
     func fetchCourseLists(request: CourseListsCollection.ShowCourseLists.Request) {
-        self.provider.fetchCachedCourseLists().then { cachedCourseLists -> Promise<[CourseListModel]> in
+        self.provider.fetchCachedCourseLists().then {
+            cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
             let response = Result<[CourseListModel]>.success(cachedCourseLists)
             self.presenter.presentCourses(
@@ -50,10 +54,6 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         }
     }
 
-    enum Error: Swift.Error {
-        case fetchFailed
-    }
-
     func loadFullscreenCourseList(
         request: CourseListsCollection.PresentFullscreenCourseListModule.Request
     ) {
@@ -63,5 +63,23 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         }
 
         self.moduleOutput?.presentCourseList(type: collectionCourseListType)
+    }
+
+    enum Error: Swift.Error {
+        case fetchFailed
+    }
+}
+
+extension CourseListsCollectionInteractor: CourseListOutputProtocol {
+    func presentCourseInfo(course: Course) {
+        self.moduleOutput?.presentCourseInfo(course: course)
+    }
+
+    func presentCourseSyllabus(course: Course) {
+        self.moduleOutput?.presentCourseSyllabus(course: course)
+    }
+
+    func presentLastStep() {
+        self.moduleOutput?.presentLastStep()
     }
 }

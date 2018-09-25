@@ -9,6 +9,7 @@
 import Foundation
 
 protocol CourseListOutputProtocol: class {
-    func openCourseList(_ courseList: CourseListType)
-    func openCourseInfo(_ course: CourseWidgetViewModel)
+    func presentCourseInfo(course: Course)
+    func presentCourseSyllabus(course: Course)
+    func presentLastStep()
 }

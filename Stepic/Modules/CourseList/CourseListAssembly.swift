@@ -64,9 +64,9 @@ final class CourseListAssembly: Assembly {
             colorMode: self.colorMode,
             orientation: self.orientation
         )
-        controller.moduleOutput = self.moduleOutput
 
         presenter.viewController = controller
+        interactor.moduleOutput = self.moduleOutput
         return controller
     }
 }

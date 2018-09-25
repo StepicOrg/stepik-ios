@@ -11,11 +11,11 @@ import Foundation
 final class CourseListsCollectionAssembly: Assembly {
     let contentLanguage: ContentLanguage
 
-    private weak var moduleOutput: CourseListCollectionOutputProtocol?
+    private weak var moduleOutput: (CourseListCollectionOutputProtocol & CourseListOutputProtocol)?
 
     init(
         contentLanguage: ContentLanguage,
-        output: CourseListCollectionOutputProtocol? = nil
+        output: (CourseListCollectionOutputProtocol & CourseListOutputProtocol)? = nil
     ) {
         self.contentLanguage = contentLanguage
         self.moduleOutput = output

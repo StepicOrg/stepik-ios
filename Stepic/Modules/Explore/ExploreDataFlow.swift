@@ -49,6 +49,32 @@ enum Explore {
             let courseListType: CourseListType
         }
     }
+    /// Present course syllabus
+    enum PresentCourseSyllabus {
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+        }
+    }
+    /// Present course info
+    enum PresentCourseInfo {
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+        }
+    }
+    /// Present last step in course
+    enum PresentLastStep {
+
+    }
 
     // MARK: States
 

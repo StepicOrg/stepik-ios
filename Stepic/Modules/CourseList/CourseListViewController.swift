@@ -12,7 +12,9 @@ import SVProgressHUD
 protocol CourseListViewControllerProtocol: class {
     func displayCourses(viewModel: CourseList.ShowCourses.ViewModel)
     func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel)
-    func displayJoinCourseCompletion(viewModel: CourseList.JoinCourse.ViewModel)
+
+    func hideBlockingLoadingIndicator()
+    func showBlockingLoadingIndicator()
 }
 
 protocol CourseListViewControllerDelegate: class {
@@ -23,7 +25,6 @@ protocol CourseListViewControllerDelegate: class {
 
 final class CourseListViewController: UIViewController {
     let interactor: CourseListInteractorProtocol
-    weak var moduleOutput: CourseListOutputProtocol?
 
     var state: CourseList.ViewControllerState
 
@@ -135,9 +136,12 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         }
     }
 
-    func displayJoinCourseCompletion(viewModel: CourseList.JoinCourse.ViewModel) {
+    func hideBlockingLoadingIndicator() {
         SVProgressHUD.dismiss()
+    }
 
+    func showBlockingLoadingIndicator() {
+        SVProgressHUD.show()
     }
 }
 
@@ -155,14 +159,20 @@ extension CourseListViewController: CourseListViewDelegate {
 
 extension CourseListViewController: CourseListViewControllerDelegate {
     func itemDidSelected(viewModel: CourseWidgetViewModel) {
+        self.interactor.doMainAction(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
+        )
     }
 
     func primaryButtonClicked(viewModel: CourseWidgetViewModel) {
-        self.interactor.joinCourse(request: .init(id: viewModel.courseId))
-        SVProgressHUD.show()
+        self.interactor.doPrimaryAction(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
+        )
     }
 
     func secondaryButtonClicked(viewModel: CourseWidgetViewModel) {
-        print(viewModel)
+        self.interactor.doSecondaryAction(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
+        )
     }
 }

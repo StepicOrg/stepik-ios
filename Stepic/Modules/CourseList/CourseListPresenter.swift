@@ -11,7 +11,9 @@ import UIKit
 protocol CourseListPresenterProtocol: class {
     func presentCourses(response: CourseList.ShowCourses.Response)
     func presentNextCourses(response: CourseList.LoadNextCourses.Response)
-    func presentJoinCourseReaction(response: CourseList.JoinCourse.Response)
+
+    func presentWaitingState()
+    func dismissWaitingState()
 }
 
 final class CourseListPresenter: CourseListPresenterProtocol {
@@ -63,8 +65,12 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         self.viewController?.displayNextCourses(viewModel: viewModel)
     }
 
-    func presentJoinCourseReaction(response: CourseList.JoinCourse.Response) {
-        self.viewController?.displayJoinCourseCompletion(viewModel: .init())
+    func presentWaitingState() {
+        self.viewController?.showBlockingLoadingIndicator()
+    }
+
+    func dismissWaitingState() {
+        self.viewController?.hideBlockingLoadingIndicator()
     }
 
     private func makeWidgetViewModels(
@@ -72,8 +78,11 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         availableInAdaptive: Set<Course>
     ) -> [CourseWidgetViewModel] {
         var viewModels: [CourseWidgetViewModel] = []
-        for course in courses {
-            var viewModel = CourseWidgetViewModel(course: course)
+        for (index, course) in courses.enumerated() {
+            var viewModel = CourseWidgetViewModel(
+                uniqueIdentifier: "\(index)",
+                course: course
+            )
             let isAdaptive = availableInAdaptive.contains(course)
 
             let buttonDescriptionFactory = ButtonDescriptionFactory(course: course)

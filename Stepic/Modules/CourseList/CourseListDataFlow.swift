@@ -28,11 +28,11 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            var result: Result<AvailableCourses>
+            let result: Result<AvailableCourses>
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
         }
     }
     /// Load and show next course page for given course list
@@ -40,22 +40,30 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            var result: Result<AvailableCourses>
+            let result: Result<AvailableCourses>
         }
 
         struct ViewModel {
-            var state: PaginationState
+            let state: PaginationState
         }
     }
-    /// Course join
-    enum JoinCourse {
+    /// Click on primary button
+    enum PrimaryCourseAction {
         struct Request {
-            var id: Course.IdType
+            let viewModelUniqueIdentifier: UniqueIdentifierType
         }
-
-        struct Response { }
-
-        struct ViewModel { }
+    }
+    /// Click on secondary button
+    enum SecondaryCourseAction {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+    }
+    /// Click on course
+    enum MainCourseAction {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
     }
 
     // MARK: States
@@ -70,13 +78,5 @@ enum CourseList {
     enum PaginationState {
         case result(data: ListData<CourseWidgetViewModel>)
         case error(message: String)
-    }
-
-    struct State {
-        typealias PaginationState = (page: Int, hasNext: Bool)
-
-        var isOnline: Bool = false
-        var paginationState = PaginationState(page: 1, hasNext: true)
-        var courses: [Course] = []
     }
 }

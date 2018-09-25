@@ -12,6 +12,8 @@ protocol ExploreViewControllerProtocol: class {
     func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
     func displayFullscreenCourseList(viewModel: Explore.PresentFullscreenCourseListModule.ViewModel)
+    func displayCourseInfo(response: Explore.PresentCourseInfo.ViewModel)
+    func displayCourseSyllabus(response: Explore.PresentCourseSyllabus.ViewModel)
 }
 
 final class ExploreViewController: UIViewController {
@@ -93,7 +95,8 @@ final class ExploreViewController: UIViewController {
         // Collection
         let collectionAssembly = CourseListsCollectionAssembly(
             contentLanguage: contentLanguage,
-            output: self.interactor as? CourseListCollectionOutputProtocol
+            output: self.interactor
+                as? (CourseListCollectionOutputProtocol & CourseListOutputProtocol)
         )
         let collectionViewController = collectionAssembly.makeModule()
         self.registerSubmodule(
@@ -109,7 +112,8 @@ final class ExploreViewController: UIViewController {
         let popularAssembly = CourseListAssembly(
             type: courseListType,
             colorMode: .dark,
-            presentationOrientation: .horizontal
+            presentationOrientation: .horizontal,
+            output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()
@@ -186,5 +190,53 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayCourseInfo(response: Explore.PresentCourseInfo.ViewModel) {
+        let assembly = CourseInfoLegacyAssembly(course: response.course)
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayCourseSyllabus(response: Explore.PresentCourseSyllabus.ViewModel) {
+        let assembly = SyllabusLegacyAssembly(course: response.course)
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+@available(*, deprecated, message: "Class for backward compatibility")
+fileprivate final class SyllabusLegacyAssembly: Assembly {
+    private let course: Course
+
+    init(course: Course) {
+        self.course = course
+    }
+
+    func makeModule() -> UIViewController {
+        let viewController = ControllerHelper.instantiateViewController(
+            identifier: "SectionsViewController"
+        ) as! SectionsViewController
+        viewController.course = course
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+}
+
+@available(*, deprecated, message: "Class for backward compatibility")
+fileprivate final class CourseInfoLegacyAssembly: Assembly {
+    private let course: Course
+
+    init(course: Course) {
+        self.course = course
+    }
+
+    func makeModule() -> UIViewController {
+        let viewController = ControllerHelper.instantiateViewController(
+            identifier: "CoursePreviewViewController"
+        ) as! CoursePreviewViewController
+        viewController.course = course
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
 }

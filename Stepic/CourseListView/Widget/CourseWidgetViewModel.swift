@@ -13,7 +13,7 @@ struct CourseWidgetProgressViewModel {
     var progressLabelText: String
 }
 
-struct CourseWidgetViewModel {
+struct CourseWidgetViewModel: UniqueIdentifiable {
     typealias ButtonDescription = (title: String, isCallToAction: Bool)
 
     var title: String
@@ -24,5 +24,5 @@ struct CourseWidgetViewModel {
     var ratingLabelText: String?
     var isAdaptive: Bool
     var progress: CourseWidgetProgressViewModel?
-    var courseId: Int
+    var uniqueIdentifier: UniqueIdentifierType
 }

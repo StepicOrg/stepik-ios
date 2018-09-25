@@ -69,3 +69,17 @@ extension ExploreInteractor: CourseListCollectionOutputProtocol {
         self.loadFullscreenCourseList(request: .init(courseListType: type))
     }
 }
+
+extension ExploreInteractor: CourseListOutputProtocol {
+    func presentCourseInfo(course: Course) {
+        self.presenter.presentCourseInfo(response: .init(course: course))
+    }
+
+    func presentCourseSyllabus(course: Course) {
+        self.presenter.presentCourseSyllabus(response: .init(course: course))
+    }
+
+    func presentLastStep() {
+        self.presenter.presentLastStep()
+    }
+}
