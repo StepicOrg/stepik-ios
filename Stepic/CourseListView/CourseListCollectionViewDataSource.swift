@@ -11,16 +11,24 @@ import UIKit
 final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     weak var delegate: CourseListViewControllerDelegate?
 
+    private var maxNumberOfDisplayedCourses: Int?
     var viewModels: [CourseWidgetViewModel]
 
-    init(viewModels: [CourseWidgetViewModel] = []) {
+    init(
+        viewModels: [CourseWidgetViewModel] = [],
+        maxNumberOfDisplayedCourses: Int? = nil
+    ) {
         self.viewModels = viewModels
+        self.maxNumberOfDisplayedCourses = maxNumberOfDisplayedCourses
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
+        if let maxNumberOfDisplayedCourses = self.maxNumberOfDisplayedCourses {
+            return min(maxNumberOfDisplayedCourses, self.viewModels.count)
+        }
         return self.viewModels.count
     }
 

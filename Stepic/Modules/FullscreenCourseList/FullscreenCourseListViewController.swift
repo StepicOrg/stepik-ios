@@ -39,7 +39,8 @@ final class FullscreenCourseListViewController: UIViewController {
         let courseListAssembly = CourseListAssembly(
             type: self.courseListType,
             colorMode: .light,
-            presentationOrientation: .vertical
+            presentationOrientation: .vertical,
+            maxNumberOfDisplayedCourses: nil
         )
         let courseListViewController = courseListAssembly.makeModule()
         courseListAssembly.moduleInput?.reload()

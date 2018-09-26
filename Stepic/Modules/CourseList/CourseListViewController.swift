@@ -41,7 +41,8 @@ final class CourseListViewController: UIViewController {
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
-        orientation: PresentationOrientation
+        orientation: PresentationOrientation,
+        maxNumberOfDisplayedCourses: Int? = nil
     ) {
         self.interactor = interactor
         self.state = initialState
@@ -49,7 +50,9 @@ final class CourseListViewController: UIViewController {
         self.orientation = orientation
 
         self.listDelegate = CourseListCollectionViewDelegate()
-        self.listDataSource = CourseListCollectionViewDataSource()
+        self.listDataSource = CourseListCollectionViewDataSource(
+            maxNumberOfDisplayedCourses: maxNumberOfDisplayedCourses
+        )
 
         super.init(nibName: nil, bundle: nil)
 

@@ -9,9 +9,12 @@
 import UIKit
 
 final class CourseListAssembly: Assembly {
+    static let defaultMaxNumberOfDisplayedCourses = 14
+
     private let type: CourseListType
     private let colorMode: CourseListColorMode
     private let orientation: CourseListViewController.PresentationOrientation
+    private let maxNumberOfDisplayedCourses: Int?
 
     // Input
     var moduleInput: CourseListInputProtocol?
@@ -23,12 +26,14 @@ final class CourseListAssembly: Assembly {
         type: CourseListType,
         colorMode: CourseListColorMode,
         presentationOrientation: CourseListViewController.PresentationOrientation,
+        maxNumberOfDisplayedCourses: Int? = CourseListAssembly.defaultMaxNumberOfDisplayedCourses,
         output: CourseListOutputProtocol? = nil
     ) {
         self.type = type
         self.colorMode = colorMode
         self.orientation = presentationOrientation
         self.moduleOutput = output
+        self.maxNumberOfDisplayedCourses = maxNumberOfDisplayedCourses
     }
 
     func makeModule() -> UIViewController {
@@ -62,7 +67,8 @@ final class CourseListAssembly: Assembly {
         let controller = CourseListViewController(
             interactor: interactor,
             colorMode: self.colorMode,
-            orientation: self.orientation
+            orientation: self.orientation,
+            maxNumberOfDisplayedCourses: self.maxNumberOfDisplayedCourses
         )
 
         presenter.viewController = controller
