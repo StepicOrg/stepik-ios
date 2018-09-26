@@ -9,20 +9,29 @@
 import UIKit
 
 extension UIViewController {
-    func presentAlert(withTitle title: String?, message: String? = nil,
-                      actionTitle: String? = NSLocalizedString("Ок", comment: ""),
-                      action actionCallback: (() -> Void)? = nil) {
+    func presentAlert(
+        withTitle title: String?,
+        message: String? = nil,
+        actionTitle: String? = NSLocalizedString("Ок", comment: ""),
+        action actionCallback: (() -> Void)? = nil,
+        presentCompletion completion: (() -> Void)? = nil
+    ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .cancel) { _ in
             actionCallback?()
         })
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: completion)
     }
 
-    func presentConfirmationAlert(withTitle title: String?, message: String? = nil,
-                                  buttonFirstTitle: String? = NSLocalizedString("Ок", comment: ""),
-                                  buttonSecondTitle: String? = NSLocalizedString("Cancel", comment: ""),
-                                  firstAction: (() -> Void)? = nil, secondAction: (() -> Void)? = nil) {
+    func presentConfirmationAlert(
+        withTitle title: String?,
+        message: String? = nil,
+        buttonFirstTitle: String? = NSLocalizedString("Ок", comment: ""),
+        buttonSecondTitle: String? = NSLocalizedString("Cancel", comment: ""),
+        firstAction: (() -> Void)? = nil,
+        secondAction: (() -> Void)? = nil,
+        presentCompletion completion: (() -> Void)? = nil
+    ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonFirstTitle, style: .default) { _ in
             firstAction?()
@@ -30,6 +39,6 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: buttonSecondTitle, style: .default) { _ in
             secondAction?()
         })
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: completion)
     }
 }

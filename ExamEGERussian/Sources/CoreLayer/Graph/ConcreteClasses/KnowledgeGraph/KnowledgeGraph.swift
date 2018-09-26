@@ -20,7 +20,7 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return count == 0
     }
 
-    private var adjacencyLists: [Node: [Node]] {
+    var adjacencyLists: [Node: [Node]] {
         return adjacency as! [Node: [Node]]
     }
 
@@ -35,6 +35,16 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
 
     subscript(id: String) -> Element? {
         return getElement(by: id)
+    }
+
+    func firstLesson(where predicate: (KnowledgeGraphLesson) -> Bool) -> KnowledgeGraphLesson? {
+        for vertex in adjacencyLists.keys {
+            if let lesson = vertex.lessons.first(where: predicate) {
+                return lesson
+            }
+        }
+
+        return nil
     }
 
     private func getElement(by id: String) -> Element? {

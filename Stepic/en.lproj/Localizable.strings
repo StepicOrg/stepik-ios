@@ -574,6 +574,9 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
 "FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+"FailedFetchKnowledgeGraphErrorTitle" = "Unable to load knowledge graph";
+"FailedFetchKnowledgeGraphErrorMessage" = "Pull down to refresh screen.";
+"FailedFetchLessonStepsContent" = "Unable​ ​to​ ​load​ ​lesson content. Please try again later.";
 
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
@@ -594,3 +597,6 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "PagesCountText1" = "%@ page";
 "PagesCountText234" = "%@ pages";
 "PagesCountText567890" = "%@ pages";
+
+"FakeUserFailedSignInTitle" = "Something went wrong";
+"FakeUserFailedSignInMessage" = "Check​ ​your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";

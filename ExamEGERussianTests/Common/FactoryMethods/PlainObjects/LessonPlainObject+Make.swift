@@ -20,6 +20,6 @@ extension LessonPlainObject {
     }
 
     private static func randomNumber() -> Int {
-        return Int.random(in: 1...100)
+        return Int(arc4random_uniform(UInt32(100))) + 1
     }
 }

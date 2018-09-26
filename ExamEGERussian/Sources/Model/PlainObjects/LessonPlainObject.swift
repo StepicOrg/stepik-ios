@@ -22,4 +22,11 @@ extension LessonPlainObject {
         self.title = lesson.title
         self.slug = lesson.slug
     }
+
+    init(lesson: KnowledgeGraphLesson) {
+        self.id = lesson.id
+        self.steps = []
+        self.title = ""
+        self.slug = ""
+    }
 }
