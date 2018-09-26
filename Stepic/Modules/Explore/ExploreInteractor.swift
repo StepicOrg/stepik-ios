@@ -79,7 +79,7 @@ extension ExploreInteractor: CourseListOutputProtocol {
         self.presenter.presentCourseSyllabus(response: .init(course: course))
     }
 
-    func presentLastStep() {
-        self.presenter.presentLastStep()
+    func presentLastStep(course: Course, isAdaptive: Bool) {
+        self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
     }
 }

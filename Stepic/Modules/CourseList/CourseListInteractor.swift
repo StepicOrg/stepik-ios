@@ -121,13 +121,23 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
         if targetCourse.enrolled {
             // Enrolled course -> open last step
-            self.moduleOutput?.presentLastStep()
+            self.moduleOutput?.presentLastStep(
+                course: targetCourse,
+                isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
+                    courseId: targetCourse.id
+                )
+            )
             self.presenter.dismissWaitingState()
         } else {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex] = course
-                self.moduleOutput?.presentLastStep()
+                self.moduleOutput?.presentLastStep(
+                    course: targetCourse,
+                    isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
+                        courseId: targetCourse.id
+                    )
+                )
                 self.presenter.dismissWaitingState()
             }.catch { _ in
 
@@ -178,7 +188,12 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
         if targetCourse.enrolled {
             // Enrolled course -> open last step
-            self.moduleOutput?.presentLastStep()
+            self.moduleOutput?.presentLastStep(
+                course: targetCourse,
+                isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
+                    courseId: targetCourse.id
+                )
+            )
         } else {
             // Unenrolled course -> info
             self.moduleOutput?.presentCourseInfo(course: targetCourse)

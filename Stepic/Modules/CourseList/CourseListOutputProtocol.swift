@@ -11,5 +11,5 @@ import Foundation
 protocol CourseListOutputProtocol: class {
     func presentCourseInfo(course: Course)
     func presentCourseSyllabus(course: Course)
-    func presentLastStep()
+    func presentLastStep(course: Course, isAdaptive: Bool)
 }

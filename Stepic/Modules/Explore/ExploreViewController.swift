@@ -14,6 +14,7 @@ protocol ExploreViewControllerProtocol: class {
     func displayFullscreenCourseList(viewModel: Explore.PresentFullscreenCourseListModule.ViewModel)
     func displayCourseInfo(response: Explore.PresentCourseInfo.ViewModel)
     func displayCourseSyllabus(response: Explore.PresentCourseSyllabus.ViewModel)
+    func displayLastStep(response: Explore.PresentLastStep.ViewModel)
 }
 
 final class ExploreViewController: UIViewController {
@@ -202,6 +203,18 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         let assembly = SyllabusLegacyAssembly(course: response.course)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayLastStep(response: Explore.PresentLastStep.ViewModel) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: response.course,
+            isAdaptive: response.isAdaptive,
+            using: navigationController
+        )
     }
 }
 

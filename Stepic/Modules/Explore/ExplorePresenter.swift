@@ -15,7 +15,7 @@ protocol ExplorePresenterProtocol {
 
     func presentCourseInfo(response: Explore.PresentCourseInfo.Response)
     func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response)
-    func presentLastStep()
+    func presentLastStep(response: Explore.PresentLastStep.Response)
 }
 
 final class ExplorePresenter: ExplorePresenterProtocol {
@@ -47,6 +47,12 @@ final class ExplorePresenter: ExplorePresenterProtocol {
         self.viewController?.displayCourseSyllabus(response: .init(course: response.course))
     }
 
-    func presentLastStep() {
+    func presentLastStep(response: Explore.PresentLastStep.Response) {
+        self.viewController?.displayLastStep(
+            response: .init(
+                course: response.course,
+                isAdaptive: response.isAdaptive
+            )
+        )
     }
 }

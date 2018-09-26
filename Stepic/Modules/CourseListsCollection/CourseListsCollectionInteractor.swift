@@ -79,7 +79,7 @@ extension CourseListsCollectionInteractor: CourseListOutputProtocol {
         self.moduleOutput?.presentCourseSyllabus(course: course)
     }
 
-    func presentLastStep() {
-        self.moduleOutput?.presentLastStep()
+    func presentLastStep(course: Course, isAdaptive: Bool) {
+        self.moduleOutput?.presentLastStep(course: course, isAdaptive: isAdaptive)
     }
 }
