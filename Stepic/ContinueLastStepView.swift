@@ -41,7 +41,7 @@ final class ContinueLastStepView: UIView {
 
     private lazy var continueButton: UIButton = {
         let button = ContinueActionButton(frame: .zero)
-        button.setTitle("Continue Learning", for: .normal)
+        button.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
         return button
     }()
 
@@ -75,7 +75,6 @@ final class ContinueLastStepView: UIView {
         let label = UILabel()
         label.textColor = self.appearance.courseLabelTextColor
         label.font = self.appearance.courseLabelFont
-        label.text = "Architectural details in the mode"
         return label
     }()
 
@@ -83,7 +82,6 @@ final class ContinueLastStepView: UIView {
         let label = UILabel()
         label.textColor = self.appearance.progressLabelTextColor
         label.font = self.appearance.progressLabelFont
-        label.text = "Your progress now 68%"
         return label
     }()
 
@@ -98,7 +96,7 @@ final class ContinueLastStepView: UIView {
         let view = UIProgressView()
         view.progressTintColor = self.appearance.progressFillColor
         view.trackTintColor = self.appearance.progressBackgroundColor
-        view.progress = 0.7
+        view.progress = 0
         return view
     }()
 
@@ -120,6 +118,30 @@ final class ContinueLastStepView: UIView {
         imageView.layer.cornerRadius = self.appearance.cornerRadius
         return imageView
     }()
+
+    var courseTitle: String? {
+        didSet {
+            self.courseNameLabel.text = self.courseTitle
+        }
+    }
+
+    var progressText: String? {
+        didSet {
+            self.progressLabel.text = self.progressText
+        }
+    }
+
+    var progress: Float = 0 {
+        didSet {
+            self.progressView.progress = self.progress
+        }
+    }
+
+    var coverImageURL: URL? {
+        didSet {
+            self.coverImageView.loadImage(url: self.coverImageURL)
+        }
+    }
 
     init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance

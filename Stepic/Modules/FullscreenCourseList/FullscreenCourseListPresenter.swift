@@ -19,9 +19,9 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
         var viewModel: FullscreenCourseList.Something.ViewModel
 
         switch response.result {
-        case let .failure(error):
+        case .failure(let error):
             viewModel = FullscreenCourseList.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
+        case .success(let result):
             if result.isEmpty {
                 viewModel = FullscreenCourseList.Something.ViewModel(state: .emptyResult)
             } else {

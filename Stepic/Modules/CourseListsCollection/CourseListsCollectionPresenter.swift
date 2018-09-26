@@ -19,9 +19,9 @@ final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtoc
         var viewModel: CourseListsCollection.ShowCourseLists.ViewModel
 
         switch response.result {
-        case let .failure(error):
+        case .failure(let error):
             viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .emptyResult)
-        case let .success(result):
+        case .success(let result):
             let courses = result.map { CourseListsCollectionViewModel(courseList: $0) }
             if courses.isEmpty {
                 viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .emptyResult)

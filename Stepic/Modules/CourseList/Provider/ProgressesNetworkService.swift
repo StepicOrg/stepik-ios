@@ -25,7 +25,7 @@ final class ProgressesNetworkService: ProgressesNetworkServiceProtocol {
         // FIXME: We have no pagination here but should support it
         return Promise { seal in
             self.progressesAPI.retrieve(ids: ids).done { progresses in
-                let progresses = Sorter.sort(progresses, byIds: ids)
+                let progresses = progresses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((progresses, Meta.oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

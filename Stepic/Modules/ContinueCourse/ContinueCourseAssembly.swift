@@ -10,7 +10,13 @@ import UIKit
 
 final class ContinueCourseAssembly: Assembly {
     func makeModule() -> UIViewController {
-        let provider = ContinueCourseProvider()
+        let provider = ContinueCourseProvider(
+            userCoursesAPI: UserCoursesAPI(),
+            coursesAPI: CoursesAPI(),
+            progressesNetworkService: ProgressesNetworkService(
+                progressesAPI: ProgressesAPI()
+            )
+        )
         let presenter = ContinueCoursePresenter()
         let interactor = ContinueCourseInteractor(
             presenter: presenter,

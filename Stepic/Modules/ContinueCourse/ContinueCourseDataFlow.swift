@@ -9,21 +9,18 @@
 import Foundation
 
 enum ContinueCourse {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
-
     // MARK: Use cases
 
     /// Sample use case
-    enum Something {
+    enum LoadLastCourse {
         struct Request { }
 
         struct Response {
-            var result: Result<[Any]>
+            let result: Course
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            let state: ViewControllerState
         }
     }
 
@@ -31,8 +28,6 @@ enum ContinueCourse {
 
     enum ViewControllerState {
         case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
+        case result(data: ContinueCourseViewModel)
     }
 }

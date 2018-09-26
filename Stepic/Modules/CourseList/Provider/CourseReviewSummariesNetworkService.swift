@@ -31,7 +31,7 @@ final class CourseReviewSummariesNetworkService: CourseReviewSummariesNetworkSer
         // FIXME: We have no pagination here but should support it
         return Promise { seal in
             self.courseReviewSummariesAPI.retrieve(ids: ids).done { summaries in
-                let summaries = Sorter.sort(summaries, byIds: ids)
+                let summaries = summaries.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((summaries, Meta.oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

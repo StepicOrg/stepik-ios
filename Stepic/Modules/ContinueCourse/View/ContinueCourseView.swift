@@ -9,23 +9,12 @@
 import UIKit
 import SnapKit
 
-extension ContinueCourseView {
-    struct Appearance {
-
-    }
-}
-
 final class ContinueCourseView: UIView {
-    let appearance: Appearance
+    private lazy var lastStepView = ContinueLastStepView(frame: .zero)
 
-    init(
-        frame: CGRect,
-        appearance: Appearance = Appearance()
-    ) {
-        self.appearance = appearance
+    override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -33,18 +22,29 @@ final class ContinueCourseView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configure(with viewModel: ContinueCourseViewModel) {
+        self.lastStepView.courseTitle = viewModel.title
+
+        if let progressDescription = viewModel.progress?.description,
+           let progressValue = viewModel.progress?.value {
+            self.lastStepView.progressText = "\(NSLocalizedString("YourCurrentProgressIs", comment: "")) "
+                + "\(progressDescription)"
+            self.lastStepView.progress = progressValue
+        }
+        self.lastStepView.coverImageURL = viewModel.coverImageURL
+    }
 }
 
 extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-
-    }
-
     func addSubviews() {
-
+        self.addSubview(self.lastStepView)
     }
 
     func makeConstraints() {
-
+        self.lastStepView.translatesAutoresizingMaskIntoConstraints = false
+        self.lastStepView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }

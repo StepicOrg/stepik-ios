@@ -23,9 +23,9 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         var viewModel: CourseList.ShowCourses.ViewModel
 
         switch response.result {
-        case let .failure(error):
+        case .failure(let error):
             viewModel = CourseList.ShowCourses.ViewModel(state: .emptyResult)
-        case let .success(result):
+        case .success(let result):
             let courses = self.makeWidgetViewModels(
                 courses: result.fetchedCourses.courses,
                 availableInAdaptive: result.availableAdaptiveCourses
@@ -48,9 +48,9 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         var viewModel: CourseList.LoadNextCourses.ViewModel
 
         switch response.result {
-        case let .failure(error):
+        case .failure(let error):
             viewModel = CourseList.LoadNextCourses.ViewModel(state: .error(message: "Error"))
-        case let .success(result):
+        case .success(let result):
             let courses = self.makeWidgetViewModels(
                 courses: result.fetchedCourses.courses,
                 availableInAdaptive: result.availableAdaptiveCourses

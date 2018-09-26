@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol ContinueCourseInteractorProtocol {
-    func doSomeAction(request: ContinueCourse.Something.Request)
+    func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request)
 }
 
 final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
@@ -25,21 +25,19 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         self.provider = provider
     }
 
-    // MARK: Do some action
-
-    func doSomeAction(request: ContinueCourse.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: ContinueCourse.Something.Response(result: .success(items))
-            )
+    func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request) {
+        self.provider.fetchLastCourse().done { course in
+            if let course = course {
+                self.presenter.presentLastCourse(response: .init(result: course))
+            } else {
+                // TODO: module output
+            }
         }.catch { _ in
-            self.presenter.presentSomething(
-                response: ContinueCourse.Something.Response(result: .failure(Error.fetchFailed))
-            )
+            // TODO: error handling
         }
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
+        case loadLastCourseFailed
     }
 }

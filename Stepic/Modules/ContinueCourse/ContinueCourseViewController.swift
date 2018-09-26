@@ -9,12 +9,14 @@
 import UIKit
 
 protocol ContinueCourseViewControllerProtocol: class {
-    func displaySomething(viewModel: ContinueCourse.Something.ViewModel)
+    func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel)
 }
 
 final class ContinueCourseViewController: UIViewController {
     let interactor: ContinueCourseInteractorProtocol
     private var state: ContinueCourse.ViewControllerState
+
+    lazy var continueCourseView = self.view as? ContinueCourseView
 
     init(
         interactor: ContinueCourseInteractorProtocol,
@@ -42,24 +44,17 @@ final class ContinueCourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.someAction()
-    }
-
-    // MARK: Requests logic
-
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: ContinueCourse.Something.Request()
-        )
+        self.interactor.loadLastCourse(request: .init())
     }
 }
 
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
-    func displaySomething(viewModel: ContinueCourse.Something.ViewModel) {
-        display(newState: viewModel.state)
-    }
-
-    func display(newState: ContinueCourse.ViewControllerState) {
-        self.state = newState
+    func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
+        switch viewModel.state {
+        case .result(let result):
+            self.continueCourseView?.configure(with: result)
+        case .loading:
+            break
+        }
     }
 }

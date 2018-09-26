@@ -38,8 +38,9 @@ final class HomeViewController: UIViewController {
         let view1 = StreakActivityView(frame: .zero)
         view.addBlockView(view1)
 
-        let view2 = ContinueLastStepView(frame: .zero)
-        view.addBlockView(view2)
+        let vc2 = ContinueCourseAssembly().makeModule()
+        addChildViewController(vc2)
+        view.addBlockView(vc2.view)
 
         // Enrolled
         let enrolledAssembly = CourseListAssembly(

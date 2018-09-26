@@ -9,26 +9,19 @@
 import UIKit
 
 protocol ContinueCoursePresenterProtocol {
-    func presentSomething(response: ContinueCourse.Something.Response)
+    func presentLastCourse(response: ContinueCourse.LoadLastCourse.Response)
 }
 
 final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
     weak var viewController: ContinueCourseViewControllerProtocol?
 
-    func presentSomething(response: ContinueCourse.Something.Response) {
-        var viewModel: ContinueCourse.Something.ViewModel
+    func presentLastCourse(response: ContinueCourse.LoadLastCourse.Response) {
+        var viewModel: ContinueCourse.LoadLastCourse.ViewModel
 
-        switch response.result {
-        case let .failure(error):
-            viewModel = ContinueCourse.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = ContinueCourse.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = ContinueCourse.Something.ViewModel(state: .result(data: result))
-            }
-        }
+        viewModel = ContinueCourse.LoadLastCourse.ViewModel(
+            state: .result(data: .init(course: response.result))
+        )
 
-        viewController?.displaySomething(viewModel: viewModel)
+        self.viewController?.displayLastCourse(viewModel: viewModel)
     }
 }
