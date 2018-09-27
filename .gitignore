@@ -31,7 +31,6 @@ fastlane/test_output/
 fastlane/report.xml
 fastlane/Readme.md
 Preview.html
-*.lock
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
