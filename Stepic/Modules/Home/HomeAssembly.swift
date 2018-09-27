@@ -10,11 +10,14 @@ import UIKit
 
 final class HomeAssembly: Assembly {
     func makeModule() -> UIViewController {
-        let provider = HomeProvider()
+        let provider = HomeProvider(userActivitiesAPI: UserActivitiesAPI())
         let presenter = HomePresenter()
         let interactor = HomeInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            userAccountService: UserAccountService(),
+            contentLanguageService: ContentLanguageService(),
+            languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
         )
         let viewController = HomeViewController(
             interactor: interactor

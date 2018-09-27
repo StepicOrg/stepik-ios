@@ -12,14 +12,14 @@ protocol ExploreViewControllerProtocol: class {
     func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
     func displayFullscreenCourseList(viewModel: Explore.PresentFullscreenCourseListModule.ViewModel)
-    func displayCourseInfo(response: Explore.PresentCourseInfo.ViewModel)
-    func displayCourseSyllabus(response: Explore.PresentCourseSyllabus.ViewModel)
-    func displayLastStep(response: Explore.PresentLastStep.ViewModel)
+    func displayCourseInfo(viewModel: Explore.PresentCourseInfo.ViewModel)
+    func displayCourseSyllabus(viewModel: Explore.PresentCourseSyllabus.ViewModel)
+    func displayLastStep(viewModel: Explore.PresentLastStep.ViewModel)
 }
 
-final class ExploreViewController: UIViewController {
+class ExploreViewController: UIViewController {
     let interactor: ExploreInteractorProtocol
-    private var state: Explore.ViewControllerState
+    var state: Explore.ViewControllerState
     private var submodules: [Submodule] = []
 
     lazy var exploreView = self.view as? ExploreView
@@ -52,13 +52,15 @@ final class ExploreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initLanguageIndependentSubmodules()
+
         self.interactor.loadLanguageSwitchBlock(request: .init())
         self.interactor.loadContent(request: .init())
     }
 
     // MARK: Private methods
 
-    private func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
+    func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
         self.submodules.append(submodule)
         self.addChildViewController(submodule.viewController)
 
@@ -68,7 +70,7 @@ final class ExploreViewController: UIViewController {
         }
     }
 
-    private func removeLanguageDependentSubmodules() {
+    func removeLanguageDependentSubmodules() {
         for submodule in self.submodules where submodule.isLanguageDependent {
             if let view = submodule.view {
                 self.exploreView?.removeBlockView(view)
@@ -78,7 +80,11 @@ final class ExploreViewController: UIViewController {
         self.submodules = self.submodules.filter { !$0.isLanguageDependent }
     }
 
-    private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    func initLanguageIndependentSubmodules() {
+        // There is no language independent submodules
+    }
+
+    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Tags
         let tagsAssembly = TagsAssembly(
             contentLanguage: contentLanguage,
@@ -193,26 +199,26 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayCourseInfo(response: Explore.PresentCourseInfo.ViewModel) {
-        let assembly = CourseInfoLegacyAssembly(course: response.course)
+    func displayCourseInfo(viewModel: Explore.PresentCourseInfo.ViewModel) {
+        let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayCourseSyllabus(response: Explore.PresentCourseSyllabus.ViewModel) {
-        let assembly = SyllabusLegacyAssembly(course: response.course)
+    func displayCourseSyllabus(viewModel: Explore.PresentCourseSyllabus.ViewModel) {
+        let assembly = SyllabusLegacyAssembly(course: viewModel.course)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayLastStep(response: Explore.PresentLastStep.ViewModel) {
+    func displayLastStep(viewModel: Explore.PresentLastStep.ViewModel) {
         guard let navigationController = self.navigationController else {
             return
         }
 
         LastStepRouter.continueLearning(
-            for: response.course,
-            isAdaptive: response.isAdaptive,
+            for: viewModel.course,
+            isAdaptive: viewModel.isAdaptive,
             using: navigationController
         )
     }

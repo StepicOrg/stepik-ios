@@ -18,7 +18,7 @@ protocol ExplorePresenterProtocol {
     func presentLastStep(response: Explore.PresentLastStep.Response)
 }
 
-final class ExplorePresenter: ExplorePresenterProtocol {
+class ExplorePresenter: ExplorePresenterProtocol {
     weak var viewController: ExploreViewControllerProtocol?
 
     func presentContent(response: Explore.LoadContent.Response) {
@@ -40,16 +40,16 @@ final class ExplorePresenter: ExplorePresenterProtocol {
     }
 
     func presentCourseInfo(response: Explore.PresentCourseInfo.Response) {
-        self.viewController?.displayCourseInfo(response: .init(course: response.course))
+        self.viewController?.displayCourseInfo(viewModel: .init(course: response.course))
     }
 
     func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response) {
-        self.viewController?.displayCourseSyllabus(response: .init(course: response.course))
+        self.viewController?.displayCourseSyllabus(viewModel: .init(course: response.course))
     }
 
     func presentLastStep(response: Explore.PresentLastStep.Response) {
         self.viewController?.displayLastStep(
-            response: .init(
+            viewModel: .init(
                 course: response.course,
                 isAdaptive: response.isAdaptive
             )

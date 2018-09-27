@@ -9,30 +9,28 @@
 import Foundation
 
 enum Home {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
-
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
+    /// Show streak activity
+    enum LoadStreak {
         struct Request { }
 
         struct Response {
-            var result: Result<[Any]>
+            enum Result {
+                case hidden
+                case success(currentStreak: Int, needsToSolveToday: Bool)
+            }
+
+            let result: Result
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            enum Result {
+                case hidden
+                case visible(message: String, streak: Int)
+            }
+
+            let result: Result
         }
-    }
-
-    // MARK: States
-
-    enum ViewControllerState {
-        case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
     }
 }

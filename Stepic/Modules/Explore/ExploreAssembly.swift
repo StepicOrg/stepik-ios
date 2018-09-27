@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ExploreAssembly: Assembly {
+class ExploreAssembly: Assembly {
     func makeModule() -> UIViewController {
         let presenter = ExplorePresenter()
         let interactor = ExploreInteractor(

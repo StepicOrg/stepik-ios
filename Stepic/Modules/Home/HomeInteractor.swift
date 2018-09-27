@@ -9,37 +9,49 @@
 import Foundation
 import PromiseKit
 
-protocol HomeInteractorProtocol {
-    func doSomeAction(request: Home.Something.Request)
+protocol HomeInteractorProtocol: ExploreInteractorProtocol {
+    func loadStreakActivity(request: Home.LoadStreak.Request)
 }
 
-final class HomeInteractor: HomeInteractorProtocol {
-    let presenter: HomePresenterProtocol
+final class HomeInteractor: ExploreInteractor, HomeInteractorProtocol {
     let provider: HomeProviderProtocol
+    private let userAccountService: UserAccountServiceProtocol
+
+    lazy var homePresenter = self.presenter as? HomePresenterProtocol
 
     init(
         presenter: HomePresenterProtocol,
-        provider: HomeProviderProtocol
+        provider: HomeProviderProtocol,
+        userAccountService: UserAccountServiceProtocol,
+        contentLanguageService: ContentLanguageServiceProtocol,
+        languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
-        self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
+        super.init(
+            presenter: presenter,
+            contentLanguageService: contentLanguageService,
+            languageSwitchAvailabilityService: languageSwitchAvailabilityService
+        )
     }
 
-    // MARK: Do some action
+    func loadStreakActivity(request: Home.LoadStreak.Request) {
+        guard let user = self.userAccountService.currentUser else {
+            self.homePresenter?.presentStreakActivity(response: .init(result: .hidden))
+            return
+        }
 
-    func doSomeAction(request: Home.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: Home.Something.Response(result: .success(items))
+        self.provider.fetchUserActivity(user: user).done { activity in
+            self.homePresenter?.presentStreakActivity(
+                response: .init(
+                    result: .success(
+                        currentStreak: activity.currentStreak,
+                        needsToSolveToday: activity.needsToSolveToday
+                    )
+                )
             )
         }.catch { _ in
-            self.presenter.presentSomething(
-                response: Home.Something.Response(result: .failure(Error.fetchFailed))
-            )
+            self.homePresenter?.presentStreakActivity(response: .init(result: .hidden))
         }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
     }
 }

@@ -16,7 +16,7 @@ protocol ExploreInteractorProtocol {
     func loadFullscreenCourseList(request: Explore.PresentFullscreenCourseListModule.Request)
 }
 
-final class ExploreInteractor: ExploreInteractorProtocol {
+class ExploreInteractor: ExploreInteractorProtocol {
     let presenter: ExplorePresenterProtocol
     let contentLanguageService: ContentLanguageServiceProtocol
     let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol

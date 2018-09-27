@@ -46,7 +46,6 @@ final class StreakActivityView: UIView {
 
     private lazy var streakDaysLabel: UILabel = {
         let label = UILabel()
-        label.text = "4"
         label.font = self.appearance.streakDaysFont
         label.textColor = self.appearance.textColor
         return label
@@ -54,7 +53,6 @@ final class StreakActivityView: UIView {
 
     private lazy var streakDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Test test Test test Test test Test test"
         label.numberOfLines = 0
         label.font = self.appearance.streakDescriptionFont
         label.textColor = self.appearance.textColor
@@ -67,6 +65,18 @@ final class StreakActivityView: UIView {
         stackView.axis = .horizontal
         return stackView
     }()
+
+    var message: String? {
+        didSet {
+            self.streakDescriptionLabel.text = self.message
+        }
+    }
+
+    var streak: Int? {
+        didSet {
+            self.streakDaysLabel.text = "\(self.streak ?? 0)"
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         let padding = self.appearance.mainInsets.top

@@ -8,69 +8,85 @@
 
 import UIKit
 
-protocol HomeViewControllerProtocol: class {
-    func displaySomething(viewModel: Home.Something.ViewModel)
+protocol HomeViewControllerProtocol: ExploreViewControllerProtocol {
+    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
 }
 
-final class HomeViewController: UIViewController {
-    let interactor: HomeInteractorProtocol
-    private var state: Home.ViewControllerState
+final class HomeViewController: ExploreViewController {
+    private lazy var streakView = StreakActivityView(frame: .zero)
+    lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
     init(
         interactor: HomeInteractorProtocol,
-        initialState: Home.ViewControllerState = .loading
+        initialState: Explore.ViewControllerState = .loading
     ) {
-        self.interactor = interactor
-        self.state = initialState
-
-        super.init(nibName: nil, bundle: nil)
+        super.init(interactor: interactor, initialState: initialState)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: ViewController lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.homeInteractor?.loadStreakActivity(request: .init())
+    }
 
-    override func loadView() {
-        let view = ExploreView(frame: UIScreen.main.bounds)
+    override func initLanguageIndependentSubmodules() {
+        // Continue course
+        let continueCourseAssembly = ContinueCourseAssembly()
+        let continueCourseViewController = continueCourseAssembly.makeModule()
+        self.registerSubmodule(
+            .init(
+                viewController: continueCourseViewController,
+                view: continueCourseViewController.view,
+                isLanguageDependent: false
+            )
+        )
 
-        let view1 = StreakActivityView(frame: .zero)
-        view.addBlockView(view1)
-
-        let vc2 = ContinueCourseAssembly().makeModule()
-        addChildViewController(vc2)
-        view.addBlockView(vc2.view)
-
-        // Enrolled
-        let enrolledAssembly = CourseListAssembly(
-            type: EnrolledCourseListType(),
+        // Enrolled courses
+        let courseListType = EnrolledCourseListType()
+        let enrolledCourseListAssembly = CourseListAssembly(
+            type: courseListType,
             colorMode: .light,
             presentationOrientation: .horizontal
         )
-        let enrolledViewController = enrolledAssembly.makeModule()
-        enrolledAssembly.moduleInput?.reload()
-        self.addChildViewController(enrolledViewController)
-        let enrolledContainerView = CourseListContainerViewFactory(colorMode: .light)
+        let enrolledCourseViewController = enrolledCourseListAssembly.makeModule()
+        enrolledCourseListAssembly.moduleInput?.reload()
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
-                for: enrolledViewController.view,
+                for: enrolledCourseViewController.view,
                 headerDescription: .init(
-                    title: NSLocalizedString("MyCourses", comment: ""),
-                    summary: "???"
+                    title: NSLocalizedString("Enrolled", comment: ""),
+                    summary: nil
                 )
             )
-        view.addBlockView(enrolledContainerView)
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.loadFullscreenCourseList(
+                request: .init(courseListType: courseListType)
+            )
+        }
+        self.registerSubmodule(
+            .init(
+                viewController: enrolledCourseViewController,
+                view: containerView,
+                isLanguageDependent: false
+            )
+        )
+    }
 
-        // Popular
+    override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+        // Popular courses
+        let courseListType = PopularCourseListType(language: contentLanguage)
         let popularAssembly = CourseListAssembly(
-            type: PopularCourseListType(language: .russian),
+            type: courseListType,
             colorMode: .dark,
-            presentationOrientation: .horizontal
+            presentationOrientation: .horizontal,
+            output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()
-        self.addChildViewController(popularViewController)
-        let popularContainerView = CourseListContainerViewFactory(colorMode: .dark)
+        let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
                 headerDescription: .init(
@@ -78,32 +94,30 @@ final class HomeViewController: UIViewController {
                     summary: nil
                 )
             )
-        view.addBlockView(popularContainerView)
-
-        self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.someAction()
-    }
-
-    // MARK: Requests logic
-
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: Home.Something.Request()
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.loadFullscreenCourseList(
+                request: .init(courseListType: courseListType)
+            )
+        }
+        self.registerSubmodule(
+            .init(
+                viewController: popularViewController,
+                view: containerView,
+                isLanguageDependent: true
+            )
         )
     }
 }
 
 extension HomeViewController: HomeViewControllerProtocol {
-    func displaySomething(viewModel: Home.Something.ViewModel) {
-        display(newState: viewModel.state)
-    }
-
-    func display(newState: Home.ViewControllerState) {
-        self.state = newState
+    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
+        switch viewModel.result {
+        case .hidden:
+            self.exploreView?.removeBlockView(self.streakView)
+        case .visible(let message, let streak):
+            streakView.message = message
+            streakView.streak = streak
+            self.exploreView?.insertBlockView(self.streakView, at: 0)
+        }
     }
 }

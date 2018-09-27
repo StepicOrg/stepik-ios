@@ -4321,6 +4321,7 @@
 		62E98AF3317A502192C7F571 /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
 		62E98B156817573B07E42A7F /* CourseWidgetViewModelAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985E77CD63F5564E0D042 /* CourseWidgetViewModelAdapter.swift */; };
 		62E98B32992A1D02DA26B51B /* ContinueCourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B29C9DE0ACE4A4CDF93 /* ContinueCourseViewModel.swift */; };
+		62E98B3BF3BDF17C9D1CFC5B /* UserAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988812480E677AA60672F /* UserAccountService.swift */; };
 		62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
 		62E98B4F07F2A40F3D385F5A /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E98B5E460D5DE32B411BB3 /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9839898AB7BABED0E4C28 /* TagViewModel.swift */; };
@@ -6234,6 +6235,7 @@
 		62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
 		62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderInfoView.xib; sourceTree = "<group>"; };
 		62E98849F0870E88D6D8F2E7 /* StepsPagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerViewController.swift; sourceTree = "<group>"; };
+		62E988812480E677AA60672F /* UserAccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountService.swift; sourceTree = "<group>"; };
 		62E9888A338CA4289A954A20 /* ButtonDescriptionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDescriptionFactory.swift; sourceTree = "<group>"; };
 		62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+StreakNotificationsControlView.swift"; sourceTree = "<group>"; };
 		62E988CF3D76C556D362BD4E /* CourseListColorMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseListColorMode.swift; path = Widget/CourseListColorMode.swift; sourceTree = "<group>"; };
@@ -11379,6 +11381,7 @@
 			isa = PBXGroup;
 			children = (
 				6470759599AC47AE3102F586 /* HomeProvider.swift */,
+				62E988812480E677AA60672F /* UserAccountService.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -15166,6 +15169,7 @@
 				62E98236342BF7C367FB6F36 /* Array+reordering.swift in Sources */,
 				62E98B32992A1D02DA26B51B /* ContinueCourseViewModel.swift in Sources */,
 				62E9884C9367CC5EAE512A94 /* ContinueCourseViewModelAdapter.swift in Sources */,
+				62E98B3BF3BDF17C9D1CFC5B /* UserAccountService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
