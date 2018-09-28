@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ExploreViewControllerProtocol: class {
     func displayContent(viewModel: Explore.LoadContent.ViewModel)
@@ -24,6 +25,8 @@ class ExploreViewController: UIViewController {
 
     lazy var exploreView = self.view as? ExploreView
 
+    private lazy var searchBar = ExploreSearchBar(frame: .zero)
+
     init(
         interactor: ExploreInteractorProtocol,
         initialState: Explore.ViewControllerState = .loading
@@ -32,6 +35,7 @@ class ExploreViewController: UIViewController {
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
+        self.searchBar.searchBarDelegate = self
         self.registerForNotifications()
     }
 
@@ -48,6 +52,7 @@ class ExploreViewController: UIViewController {
     override func loadView() {
         let view = ExploreView(frame: UIScreen.main.bounds)
         self.view = view
+        self.navigationItem.titleView = self.searchBar
     }
 
     override func viewDidLoad() {
@@ -221,6 +226,12 @@ extension ExploreViewController: ExploreViewControllerProtocol {
             isAdaptive: viewModel.isAdaptive,
             using: navigationController
         )
+    }
+}
+
+extension ExploreViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
     }
 }
 

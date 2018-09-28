@@ -11,7 +11,7 @@ import SnapKit
 
 extension ContinueLastStepView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let mainInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
         let contentInsets = UIEdgeInsets(top: 35, left: 19, bottom: 17, right: 19)
         let cornerRadius: CGFloat = 8.0
 
