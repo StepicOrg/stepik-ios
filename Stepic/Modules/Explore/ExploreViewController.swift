@@ -25,6 +25,8 @@ class ExploreViewController: UIViewController {
 
     lazy var exploreView = self.view as? ExploreView
 
+    private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
+    private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar(frame: .zero)
 
     init(
@@ -63,7 +65,7 @@ class ExploreViewController: UIViewController {
         self.interactor.loadContent(request: .init())
     }
 
-    // MARK: Private methods
+    // MARK: Modules
 
     func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
         self.submodules.append(submodule)
@@ -86,7 +88,7 @@ class ExploreViewController: UIViewController {
     }
 
     func initLanguageIndependentSubmodules() {
-        // There is no language independent submodules
+        self.initSearchResults()
     }
 
     func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -161,6 +163,41 @@ class ExploreViewController: UIViewController {
         }
     }
 
+    // MARK: - Search
+
+    private func initSearchResults() {
+        // Search result controller
+        let searchResultAssembly = SearchResultsAssembly(
+            hideKeyboardBlock: { [weak self] in
+                self?.searchBar.resignFirstResponder()
+            },
+            updateQueryBlock: { [weak self] newQuery in
+                self?.searchBar.text = newQuery
+            }
+        )
+
+        let viewController = searchResultAssembly.makeModule()
+        self.addChildViewController(viewController)
+        self.view.addSubview(viewController.view)
+        viewController.view.snp.makeConstraints { make -> Void in
+            make.edges.equalToSuperview()
+        }
+        self.searchResultsModuleInput = searchResultAssembly.moduleInput
+        self.searchResultsController = viewController
+
+        self.hideSearchResults()
+    }
+
+    private func hideSearchResults() {
+        self.searchResultsController?.view.isHidden = true
+    }
+
+    private func showSearchResults() {
+        self.searchResultsController?.view.isHidden = false
+    }
+
+    // MARK: - Structs
+
     struct Submodule {
         let viewController: UIViewController
         let view: UIView?
@@ -230,8 +267,16 @@ extension ExploreViewController: ExploreViewControllerProtocol {
 }
 
 extension ExploreViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.showSearchResults()
+    }
 
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.hideSearchResults()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchResultsModuleInput?.queryChanged(to: searchText)
     }
 }
 
