@@ -23,8 +23,8 @@ final class EnrolledCourseListType: CourseListType {
 }
 
 final class TagCourseListType: CourseListType {
-    var id: Int
-    var language: ContentLanguage
+    let id: Int
+    let language: ContentLanguage
 
     init(id: Int, language: ContentLanguage) {
         self.id = id
@@ -33,10 +33,20 @@ final class TagCourseListType: CourseListType {
 }
 
 final class CollectionCourseListType: CourseListType {
-    var ids: [Course.IdType]
+    let ids: [Course.IdType]
 
     init(ids: [Course.IdType]) {
         self.ids = ids
+    }
+}
+
+final class SearchResultCourseListType: CourseListType {
+    let query: String
+    let language: ContentLanguage
+
+    init(query: String, language: ContentLanguage) {
+        self.query = query
+        self.language = language
     }
 }
 
@@ -46,11 +56,18 @@ final class CourseListServicesFactory {
     let type: CourseListType
     private let coursesAPI: CoursesAPI
     private let userCoursesAPI: UserCoursesAPI
+    private let searchResultsAPI: SearchResultsAPI
 
-    init(type: CourseListType, coursesAPI: CoursesAPI, userCoursesAPI: UserCoursesAPI) {
+    init(
+        type: CourseListType,
+        coursesAPI: CoursesAPI,
+        userCoursesAPI: UserCoursesAPI,
+        searchResultsAPI: SearchResultsAPI
+    ) {
         self.type = type
         self.coursesAPI = coursesAPI
         self.userCoursesAPI = userCoursesAPI
+        self.searchResultsAPI = searchResultsAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -74,6 +91,8 @@ final class CourseListServicesFactory {
                     cachedList: type.ids
                 )
             )
+        } else if let _ = self.type as? SearchResultCourseListType {
+            return nil
         } else {
             fatalError("Unsupported course list type")
         }
@@ -92,6 +111,12 @@ final class CourseListServicesFactory {
             return TagCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
         } else if let type = self.type as? CollectionCourseListType {
             return CollectionCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if let type = self.type as? SearchResultCourseListType {
+            return SearchResultCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                searchResultsAPI: self.searchResultsAPI
+            )
         } else {
             fatalError("Unsupported course list type")
         }

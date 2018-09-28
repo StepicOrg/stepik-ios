@@ -133,3 +133,26 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
         }
     }
 }
+
+final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
+                                                  CourseListNetworkServiceProtocol {
+    let type: SearchResultCourseListType
+    private let searchResultsAPI: SearchResultsAPI
+
+    init(
+        type: SearchResultCourseListType,
+        coursesAPI: CoursesAPI,
+        searchResultsAPI: SearchResultsAPI
+    ) {
+        self.type = type
+        self.searchResultsAPI = searchResultsAPI
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int) -> Promise<([Course], Meta)> {
+        return Promise { seal in
+            seal.fulfill(([], Meta.oneAndOnlyPage))
+            // FIXME: empty body
+        }
+    }
+}

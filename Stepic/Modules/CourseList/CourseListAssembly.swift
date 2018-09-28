@@ -40,7 +40,8 @@ final class CourseListAssembly: Assembly {
         let servicesFactory = CourseListServicesFactory(
             type: self.type,
             coursesAPI: CoursesAPI(),
-            userCoursesAPI: UserCoursesAPI()
+            userCoursesAPI: UserCoursesAPI(),
+            searchResultsAPI: SearchResultsAPI()
         )
 
         let presenter = CourseListPresenter()

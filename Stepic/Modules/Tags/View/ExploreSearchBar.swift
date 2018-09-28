@@ -83,7 +83,9 @@ extension ExploreSearchBar: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        searchBar.text?.removeAll()
         searchBar.endEditing(true)
+
         searchBar.setShowsCancelButton(false, animated: true)
         self.searchBarDelegate?.searchBarCancelButtonClicked?(searchBar)
     }
