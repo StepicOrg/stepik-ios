@@ -15,7 +15,7 @@ class SearchResultsAPI: APIEndpoint {
     override var name: String { return "search-results" }
 
     @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
-    @discardableResult func search(query: String, type: String?, language: ContentLanguage? = nil, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
+    @discardableResult func search(query: String, type: String?, language: ContentLanguage, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
         var params: Parameters = [:]
 
         params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
@@ -27,9 +27,7 @@ class SearchResultsAPI: APIEndpoint {
         if let t = type {
             params["type"] = t
         }
-        if let l = language {
-            params["language"] = l.languageString
-        }
+        params["language"] = language.searchCoursesParameter
 
         return manager.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
@@ -60,7 +58,7 @@ class SearchResultsAPI: APIEndpoint {
         })
     }
 
-    func searchCourse(query: String, language: ContentLanguage?, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
+    func searchCourse(query: String, language: ContentLanguage, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
         return Promise<([SearchResult], Meta)> { seal in
             search(query: query, type: "course", language: language, page: page, headers: headers, success: {
                 searchResults, meta in

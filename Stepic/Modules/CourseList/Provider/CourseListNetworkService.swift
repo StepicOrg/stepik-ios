@@ -151,8 +151,21 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
 
     func fetch(page: Int) -> Promise<([Course], Meta)> {
         return Promise { seal in
-            seal.fulfill(([], Meta.oneAndOnlyPage))
-            // FIXME: empty body
+            self.searchResultsAPI.searchCourse(
+                query: self.type.query,
+                language: self.type.language,
+                page: page
+            ).then { result, meta -> Promise<([Int], Meta, [Course])> in
+                let ids = result.compactMap { $0.courseId }
+                return self.coursesAPI.retrieve(
+                    ids: ids
+                ).map { (ids, meta, $0) }
+            }.done { ids, meta, courses in
+                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((resultCourses, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
         }
     }
 }

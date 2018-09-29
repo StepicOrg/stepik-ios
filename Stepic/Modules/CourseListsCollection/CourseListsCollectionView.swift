@@ -19,6 +19,7 @@ final class CourseListsCollectionView: UIView {
             frame: .zero,
             appearance: CourseListColorMode.light.exploreBlockHeaderViewAppearance
         )
+        // REVIEW: l10n
         view.titleText = "Recommendations"
         view.summaryText = "Check out Stepik Categories Lists that matching your interests"
         view.shouldShowShowAllButton = false

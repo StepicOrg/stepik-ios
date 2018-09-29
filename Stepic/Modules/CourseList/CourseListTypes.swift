@@ -18,6 +18,7 @@ struct PopularCourseListType: CourseListType {
     let language: ContentLanguage
 }
 
+// REVIEW: class?
 final class EnrolledCourseListType: CourseListType {
 
 }

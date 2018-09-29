@@ -85,6 +85,7 @@ class CourseListView: UIView {
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource
     ) {
+        // REVIEW: fix dataSource
         self.collectionView.dataSource = dataSource
         self.collectionView.reloadData()
         self.collectionView.collectionViewLayout.invalidateLayout()

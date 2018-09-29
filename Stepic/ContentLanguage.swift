@@ -50,6 +50,16 @@ enum ContentLanguage {
         }
     }
 
+    var searchCoursesParameter: String? {
+        switch self {
+        case .russian:
+            // both - english & russian
+            return nil
+        case .english:
+            return "en"
+        }
+    }
+
     init(languageString: String) {
         switch languageString {
         case "ru":

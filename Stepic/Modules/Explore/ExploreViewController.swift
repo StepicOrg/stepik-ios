@@ -67,6 +67,7 @@ class ExploreViewController: UIViewController {
 
     // MARK: Modules
 
+    // REVIEW: position
     func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
         self.submodules.append(submodule)
         self.addChildViewController(submodule.viewController)
@@ -269,6 +270,8 @@ extension ExploreViewController: ExploreViewControllerProtocol {
 extension ExploreViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.showSearchResults()
+        // Strange hack to hide search results (courses)
+        self.searchResultsModuleInput?.queryChanged(to: "")
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
