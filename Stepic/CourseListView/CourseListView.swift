@@ -85,7 +85,7 @@ class CourseListView: UIView {
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource
     ) {
-        // REVIEW: fix dataSource
+        self.collectionView.delegate = delegate
         self.collectionView.dataSource = dataSource
         self.collectionView.reloadData()
         self.collectionView.collectionViewLayout.invalidateLayout()
@@ -104,6 +104,19 @@ class CourseListView: UIView {
         case .dark:
             return self.appearance.darkModeBackgroundColor
         }
+    }
+
+    // MARK: - Loading state
+
+    func showLoading() {
+        self.collectionView.skeleton.viewBuilder = {
+            return CourseWidgetSkeletonView(frame: .zero)
+        }
+        self.collectionView.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.collectionView.skeleton.hide()
     }
 }
 
@@ -246,7 +259,7 @@ final class VerticalCourseListView: CourseListView,
     ) {
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
-        super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
+        super.updateCollectionViewData(delegate: self, dataSource: self)
     }
 
     override func calculateItemSize() -> CGSize {
@@ -324,31 +337,31 @@ final class VerticalCourseListView: CourseListView,
     }
 
     // Crash if present here
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        viewForSupplementaryElementOfKind kind: String,
-//        at indexPath: IndexPath
-//    ) -> UICollectionReusableView {
-//        if kind == UICollectionElementKindSectionFooter {
-//            let view: CollectionViewFooterReusableView = collectionView
-//                .dequeueReusableSupplementaryView(
-//                    ofKind: UICollectionElementKindSectionFooter,
-//                    for: indexPath
-//                )
-//            view.backgroundColor = .red
-//            return view
-//        } else if kind == UICollectionElementKindSectionHeader {
-//            let view: CollectionViewHeaderReusableView = collectionView
-//                .dequeueReusableSupplementaryView(
-//                    ofKind: UICollectionElementKindSectionHeader,
-//                    for: indexPath
-//                )
-//            view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-//            return view
-//        }
-//
-//        fatalError("Kind is not supported")
-//    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionFooter {
+            let view: CollectionViewFooterReusableView = collectionView
+                .dequeueReusableSupplementaryView(
+                    ofKind: UICollectionElementKindSectionFooter,
+                    for: indexPath
+                )
+            view.backgroundColor = .red
+            return view
+        } else if kind == UICollectionElementKindSectionHeader {
+            let view: CollectionViewHeaderReusableView = collectionView
+                .dequeueReusableSupplementaryView(
+                    ofKind: UICollectionElementKindSectionHeader,
+                    for: indexPath
+                )
+            view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+            return view
+        }
+
+        fatalError("Kind is not supported")
+    }
 }
 
 final class HorizontalCourseListView: CourseListView {

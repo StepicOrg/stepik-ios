@@ -14,7 +14,11 @@ protocol ContinueCourseViewControllerProtocol: class {
 
 final class ContinueCourseViewController: UIViewController {
     let interactor: ContinueCourseInteractorProtocol
-    private var state: ContinueCourse.ViewControllerState
+    private var state: ContinueCourse.ViewControllerState {
+        didSet {
+            self.updateState()
+        }
+    }
 
     lazy var continueCourseView = self.view as? ContinueCourseView
 
@@ -44,17 +48,25 @@ final class ContinueCourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.updateState()
         self.interactor.loadLastCourse(request: .init())
+    }
+
+    private func updateState() {
+        if case .loading = self.state {
+            self.continueCourseView?.showLoading()
+        } else {
+            self.continueCourseView?.hideLoading()
+        }
     }
 }
 
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
-        switch viewModel.state {
-        case .result(let result):
+        if case .result(let result) = viewModel.state {
             self.continueCourseView?.configure(with: result)
-        case .loading:
-            break
         }
+
+        self.state = viewModel.state
     }
 }

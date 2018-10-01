@@ -28,7 +28,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            let result: Result<AvailableCourses>
+            let result: AvailableCourses
         }
 
         struct ViewModel {
@@ -40,7 +40,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
-            let result: Result<AvailableCourses>
+            let result: AvailableCourses
         }
 
         struct ViewModel {
@@ -71,8 +71,6 @@ enum CourseList {
     enum ViewControllerState {
         case loading
         case result(data: ListData<CourseWidgetViewModel>)
-        case emptyResult
-        case error(message: String)
     }
 
     enum PaginationState {

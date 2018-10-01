@@ -45,32 +45,6 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
 
         return cell
     }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionFooter {
-            let view: CollectionViewFooterReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionElementKindSectionFooter,
-                    for: indexPath
-                )
-            view.backgroundColor = .red
-            return view
-        } else if kind == UICollectionElementKindSectionHeader {
-            let view: CollectionViewHeaderReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionElementKindSectionHeader,
-                    for: indexPath
-                )
-            view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-            return view
-        }
-
-        fatalError("Kind is not supported")
-    }
 }
 
 extension CourseListCollectionViewDataSource: CourseListCollectionViewCellDelegate {

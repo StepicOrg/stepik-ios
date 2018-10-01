@@ -82,4 +82,11 @@ extension CourseListsCollectionInteractor: CourseListOutputProtocol {
     func presentLastStep(course: Course, isAdaptive: Bool) {
         self.moduleOutput?.presentLastStep(course: course, isAdaptive: isAdaptive)
     }
+
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+
+    }
+
+    func presentError(sourceModule: CourseListInputProtocol) {
+    }
 }

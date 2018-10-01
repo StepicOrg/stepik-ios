@@ -33,6 +33,18 @@ final class ContinueCourseView: UIView {
             self.lastStepView.progress = progressValue
         }
         self.lastStepView.coverImageURL = viewModel.coverImageURL
+
+    }
+
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            return ContinueCourseSkeletonView(frame: .zero)
+        }
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.skeleton.hide()
     }
 }
 

@@ -82,4 +82,11 @@ extension ExploreInteractor: CourseListOutputProtocol {
     func presentLastStep(course: Course, isAdaptive: Bool) {
         self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
     }
+
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+
+    }
+
+    func presentError(sourceModule: CourseListInputProtocol) {
+    }
 }

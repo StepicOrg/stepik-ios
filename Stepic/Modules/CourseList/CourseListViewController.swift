@@ -26,7 +26,7 @@ protocol CourseListViewControllerDelegate: class {
 final class CourseListViewController: UIViewController {
     let interactor: CourseListInteractorProtocol
 
-    var state: CourseList.ViewControllerState
+    private var state: CourseList.ViewControllerState
 
     private let listDelegate: CourseListCollectionViewDelegate
     private let listDataSource: CourseListCollectionViewDataSource
@@ -92,7 +92,8 @@ final class CourseListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.interactor.fetchCourses(request: CourseList.ShowCourses.Request())
+        self.updateState(newState: self.state)
+        self.interactor.fetchCourses(request: .init())
     }
 
     private func updatePagination(hasNextPage: Bool) {
@@ -100,6 +101,20 @@ final class CourseListViewController: UIViewController {
             verticalCourseListView.isPaginationViewHidden = !hasNextPage
         }
         self.canTriggerPagination = hasNextPage
+    }
+
+    private func updateState(newState: CourseList.ViewControllerState) {
+        if case .result(let data) = newState {
+            self.courseListView?.hideLoading()
+            self.courseListView?.updateCollectionViewData(
+                delegate: self.listDelegate,
+                dataSource: self.listDataSource
+            )
+            self.updatePagination(hasNextPage: data.hasNextPage)
+        } else {
+            self.courseListView?.showLoading()
+        }
+        self.state = newState
     }
 
     enum PresentationOrientation {
@@ -110,33 +125,19 @@ final class CourseListViewController: UIViewController {
 
 extension CourseListViewController: CourseListViewControllerProtocol {
     func displayCourses(viewModel: CourseList.ShowCourses.ViewModel) {
-        switch viewModel.state {
-        case .result(let data):
+        if case .result(let data) = viewModel.state {
             self.listDataSource.viewModels = data.courses
             self.listDelegate.viewModels = data.courses
-            self.courseListView?.updateCollectionViewData(
-                delegate: self.listDelegate,
-                dataSource: self.listDataSource
-            )
-            self.updatePagination(hasNextPage: data.hasNextPage)
-        default:
-            break
         }
+        self.updateState(newState: viewModel.state)
     }
 
     func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel) {
-        switch viewModel.state {
-        case .result(let data):
+        if case .result(let data) = viewModel.state {
             self.listDataSource.viewModels.append(contentsOf: data.courses)
             self.listDelegate.viewModels.append(contentsOf: data.courses)
-            self.courseListView?.updateCollectionViewData(
-                delegate: self.listDelegate,
-                dataSource: self.listDataSource
-            )
-            self.updatePagination(hasNextPage: data.hasNextPage)
-        default:
-            break
         }
+        self.updateState(newState: self.state)
     }
 
     func hideBlockingLoadingIndicator() {

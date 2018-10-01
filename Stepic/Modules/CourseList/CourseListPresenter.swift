@@ -22,24 +22,17 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     func presentCourses(response: CourseList.ShowCourses.Response) {
         var viewModel: CourseList.ShowCourses.ViewModel
 
-        switch response.result {
-        case .failure(let error):
-            viewModel = CourseList.ShowCourses.ViewModel(state: .emptyResult)
-        case .success(let result):
-            let courses = self.makeWidgetViewModels(
-                courses: result.fetchedCourses.courses,
-                availableInAdaptive: result.availableAdaptiveCourses
-            )
-            if courses.isEmpty {
-                viewModel = CourseList.ShowCourses.ViewModel(state: .emptyResult)
-            } else {
-                let data = CourseList.ListData(
-                    courses: courses,
-                    hasNextPage: result.fetchedCourses.hasNextPage
-                )
-                viewModel = CourseList.ShowCourses.ViewModel(state: .result(data: data))
-            }
-        }
+        let result = response.result
+        let courses = self.makeWidgetViewModels(
+            courses: result.fetchedCourses.courses,
+            availableInAdaptive: result.availableAdaptiveCourses
+        )
+
+        let data = CourseList.ListData(
+            courses: courses,
+            hasNextPage: result.fetchedCourses.hasNextPage
+        )
+        viewModel = CourseList.ShowCourses.ViewModel(state: .result(data: data))
 
         self.viewController?.displayCourses(viewModel: viewModel)
     }
@@ -47,20 +40,16 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     func presentNextCourses(response: CourseList.LoadNextCourses.Response) {
         var viewModel: CourseList.LoadNextCourses.ViewModel
 
-        switch response.result {
-        case .failure(let error):
-            viewModel = CourseList.LoadNextCourses.ViewModel(state: .error(message: "Error"))
-        case .success(let result):
-            let courses = self.makeWidgetViewModels(
-                courses: result.fetchedCourses.courses,
-                availableInAdaptive: result.availableAdaptiveCourses
-            )
-            let data = CourseList.ListData(
-                courses: courses,
-                hasNextPage: result.fetchedCourses.hasNextPage
-            )
-            viewModel = CourseList.LoadNextCourses.ViewModel(state: .result(data: data))
-        }
+        let result = response.result
+        let courses = self.makeWidgetViewModels(
+            courses: result.fetchedCourses.courses,
+            availableInAdaptive: result.availableAdaptiveCourses
+        )
+        let data = CourseList.ListData(
+            courses: courses,
+            hasNextPage: result.fetchedCourses.hasNextPage
+        )
+        viewModel = CourseList.LoadNextCourses.ViewModel(state: .result(data: data))
 
         self.viewController?.displayNextCourses(viewModel: viewModel)
     }

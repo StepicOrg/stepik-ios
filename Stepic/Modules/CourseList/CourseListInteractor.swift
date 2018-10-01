@@ -60,16 +60,18 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
 
             self.currentCourses = courses
-            let courses = CourseList.AvailableCourses(
-                fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
-                availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
-            )
-            let response = CourseList.ShowCourses.Response(result: Result.success(courses))
-            self.presenter.presentCourses(response: response)
+            if self.currentCourses.isEmpty {
+                self.moduleOutput?.presentEmptyState(sourceModule: self)
+            } else {
+                let courses = CourseList.AvailableCourses(
+                    fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
+                    availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
+                )
+                let response = CourseList.ShowCourses.Response(result: courses)
+                self.presenter.presentCourses(response: response)
+            }
         }.catch { _ in
-            let result = Result<CourseList.AvailableCourses>.failure(Error.fetchFailed)
-            let response = CourseList.ShowCourses.Response(result: result)
-            self.presenter.presentCourses(response: response)
+            self.moduleOutput?.presentError(sourceModule: self)
         }
     }
 
@@ -79,11 +81,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // - have no more courses
         // then ignore request and pass empty list to presenter
         if !self.isOnline || !self.paginationState.hasNext {
-            let result = Result.success(
-                CourseList.AvailableCourses(
-                    fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
-                    availableAdaptiveCourses: Set<Course>()
-                )
+            let result = CourseList.AvailableCourses(
+                fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
+                availableAdaptiveCourses: Set<Course>()
             )
             let response = CourseList.LoadNextCourses.Response(result: result)
             self.presenter.presentNextCourses(response: response)
@@ -102,12 +102,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
-            let response = CourseList.LoadNextCourses.Response(result: Result.success(courses))
+            let response = CourseList.LoadNextCourses.Response(result: courses)
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
-            let result = Result<CourseList.AvailableCourses>.failure(Error.fetchFailed)
-            let response = CourseList.LoadNextCourses.Response(result: result)
-            self.presenter.presentNextCourses(response: response)
+            self.moduleOutput?.presentError(sourceModule: self)
         }
     }
 
@@ -177,6 +175,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     func doMainAction(request: CourseList.MainCourseAction.Request) {
         self.presenter.presentWaitingState()
 
+        // REVIEW: use id here
         guard let targetIndex = Int(request.viewModelUniqueIdentifier),
               let targetCourse = self.currentCourses[safe: targetIndex] else {
             fatalError("Invalid module state")
