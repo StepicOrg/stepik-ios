@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension CourseListView {
     struct Appearance {
@@ -155,11 +156,11 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
         }
 
         self.collectionView.register(
-            viewClass: CollectionViewFooterReusableView.self,
+            viewClass: CollectionViewReusableView.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
         )
         self.collectionView.register(
-            viewClass: CollectionViewHeaderReusableView.self,
+            viewClass: CollectionViewReusableView.self,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
         )
 
@@ -167,35 +168,6 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.contentInset = .zero
         self.collectionView.backgroundColor = .clear
-    }
-}
-
-// Cause we can't init cell with custom initializer let's use custom classes
-private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .light)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    static var defaultReuseIdentifier: String {
-        return String(describing: CourseListCollectionViewCell.self)
-    }
-}
-
-private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .dark)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    static var defaultReuseIdentifier: String {
-        return String(describing: CourseListCollectionViewCell.self)
     }
 }
 
@@ -211,7 +183,10 @@ final class VerticalCourseListView: CourseListView,
     private var storedCollectionViewDataSource: UICollectionViewDataSource
 
     private lazy var verticalCourseFlowLayout: VerticalCourseListFlowLayout = {
-        let layout = VerticalCourseListFlowLayout(columnsCount: self.columnsCount)
+        let layout = VerticalCourseListFlowLayout(
+            columnsCount: self.columnsCount,
+            isHeaderHidden: self.isHeaderViewHidden
+        )
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
         return layout
@@ -221,11 +196,15 @@ final class VerticalCourseListView: CourseListView,
         return self.verticalCourseFlowLayout
     }
 
-    var isPaginationViewHidden: Bool = true {
+    private let isHeaderViewHidden: Bool
+    var isPaginationViewHidden = true {
         didSet {
             self.updatePagination()
         }
     }
+
+    var headerView: UIView?
+    var paginationView: UIView?
 
     init(
         frame: CGRect,
@@ -234,11 +213,13 @@ final class VerticalCourseListView: CourseListView,
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource,
         viewDelegate: CourseListViewDelegate,
+        isHeaderViewHidden: Bool,
         appearance: Appearance = CourseListView.Appearance()
     ) {
         self.columnsCount = columnsCount
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
+        self.isHeaderViewHidden = isHeaderViewHidden
         super.init(
             frame: frame,
             colorMode: colorMode,
@@ -343,20 +324,24 @@ final class VerticalCourseListView: CourseListView,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionFooter {
-            let view: CollectionViewFooterReusableView = collectionView
+            let view: CollectionViewReusableView = collectionView
                 .dequeueReusableSupplementaryView(
                     ofKind: UICollectionElementKindSectionFooter,
                     for: indexPath
                 )
-            view.backgroundColor = .red
+            if let footerView = self.paginationView {
+                view.attachView(footerView)
+            }
             return view
         } else if kind == UICollectionElementKindSectionHeader {
-            let view: CollectionViewHeaderReusableView = collectionView
+            let view: CollectionViewReusableView = collectionView
                 .dequeueReusableSupplementaryView(
                     ofKind: UICollectionElementKindSectionHeader,
                     for: indexPath
                 )
-            view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+            if let headerView = self.headerView {
+                view.attachView(headerView)
+            }
             return view
         }
 
@@ -419,10 +404,53 @@ final class HorizontalCourseListView: CourseListView {
     }
 }
 
-// Wrappers for reusable views
+// Wrapper for reusable views
 
-class CollectionViewHeaderReusableView: UICollectionReusableView, Reusable {
+final class CollectionViewReusableView: UICollectionReusableView, Reusable {
+    private var subview: UIView?
+
+    func attachView(_ view: UIView) {
+        self.clipsToBounds = true
+        self.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        self.subview = view
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.subview?.removeFromSuperview()
+    }
 }
 
-class CollectionViewFooterReusableView: UICollectionReusableView, Reusable {
+// Cause we can't init cell with custom initializer let's use custom classes
+
+private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .light)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        return String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .dark)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        return String(describing: CourseListCollectionViewCell.self)
+    }
 }

@@ -11,7 +11,7 @@ import UIKit
 extension VerticalCourseListFlowLayout {
     struct Appearance {
         let headerViewHeight: CGFloat = 140
-        let paginationViewHeight: CGFloat = 65
+        let paginationViewHeight: CGFloat = 52
     }
 }
 
@@ -39,6 +39,8 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         }
     }
 
+    let isHeaderHidden: Bool
+
     private var paginationSize: CGSize {
         let viewSize = CGSize(
             width: self.collectionView?.bounds.width ?? 0,
@@ -47,8 +49,21 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         return self.isPaginationHidden ? .zero : viewSize
     }
 
-    init(columnsCount: Int = 1, appearance: Appearance = Appearance()) {
+    private var headerSize: CGSize {
+        let viewSize = CGSize(
+            width: self.collectionView?.bounds.width ?? 0,
+            height: self.appearance.headerViewHeight
+        )
+        return self.isHeaderHidden ? .zero : viewSize
+    }
+
+    init(
+        columnsCount: Int = 1,
+        isHeaderHidden: Bool = true,
+        appearance: Appearance = Appearance()
+    ) {
         self.columnsCount = columnsCount
+        self.isHeaderHidden = isHeaderHidden
         self.appearance = appearance
         super.init()
         self.scrollDirection = .vertical
@@ -81,15 +96,15 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         headerSupplementaryViewAttributes.frame = CGRect(
             x: 0,
             y: 0,
-            width: collectionView.bounds.width,
-            height: self.appearance.headerViewHeight
+            width: self.headerSize.width,
+            height: self.headerSize.height
         )
 
         self.cache.append(headerSupplementaryViewAttributes)
 
         // Items
         var xOffset = self.minimumInteritemSpacing
-        var yOffset = self.appearance.headerViewHeight + self.minimumLineSpacing
+        var yOffset = self.headerSize.height + self.minimumLineSpacing
         var columnIndex = 0
 
         // Convert multiple sections into one

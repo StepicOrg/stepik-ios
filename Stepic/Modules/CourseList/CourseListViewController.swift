@@ -65,10 +65,9 @@ final class CourseListViewController: UIViewController {
     }
 
     override func loadView() {
-        var view: UIView
         switch self.orientation {
         case .horizontal:
-            view = HorizontalCourseListView(
+            let view = HorizontalCourseListView(
                 frame: UIScreen.main.bounds,
                 columnsCount: 1,
                 rowsCount: 2,
@@ -77,17 +76,31 @@ final class CourseListViewController: UIViewController {
                 dataSource: self.listDataSource,
                 viewDelegate: self
             )
+            self.view = view
         case .vertical:
-            view = VerticalCourseListView(
+            let view = VerticalCourseListView(
                 frame: UIScreen.main.bounds,
                 columnsCount: 1,
                 colorMode: self.colorMode,
                 delegate: self.listDelegate,
                 dataSource: self.listDataSource,
-                viewDelegate: self
+                viewDelegate: self,
+                isHeaderViewHidden: false
             )
+
+            let headerView = GradientCoursesPlaceholderView(frame: .zero, color: .blue)
+            headerView.titleText = NSAttributedString(string: "Текст какой-то")
+            headerView.subtitleText = NSAttributedString(string: "Подтекст")
+            view.headerView = headerView
+
+            let paginationView = PaginationView(frame: .zero)
+            paginationView.onRefreshButtonClick = { [weak self] in
+                self?.interactor.fetchNextCourses(request: .init())
+            }
+            view.paginationView = paginationView
+
+            self.view = view
         }
-        self.view = view
     }
 
     override func viewDidLoad() {
@@ -96,21 +109,34 @@ final class CourseListViewController: UIViewController {
         self.interactor.fetchCourses(request: .init())
     }
 
-    private func updatePagination(hasNextPage: Bool) {
-        if let verticalCourseListView = self.courseListView as? VerticalCourseListView {
-            verticalCourseListView.isPaginationViewHidden = !hasNextPage
+    private func updatePagination(hasNextPage: Bool, hasError: Bool) {
+        defer {
+            self.canTriggerPagination = hasNextPage
         }
-        self.canTriggerPagination = hasNextPage
+        guard let verticalCourseListView = self.courseListView as? VerticalCourseListView else {
+            return
+        }
+
+        verticalCourseListView.isPaginationViewHidden = !hasNextPage
+
+        guard let paginationView = verticalCourseListView.paginationView as? PaginationView else {
+            return
+        }
+
+        if hasError {
+            paginationView.setError()
+        } else {
+            paginationView.setLoading()
+        }
     }
 
     private func updateState(newState: CourseList.ViewControllerState) {
-        if case .result(let data) = newState {
+        if case .result(_) = newState {
             self.courseListView?.hideLoading()
             self.courseListView?.updateCollectionViewData(
                 delegate: self.listDelegate,
                 dataSource: self.listDataSource
             )
-            self.updatePagination(hasNextPage: data.hasNextPage)
         } else {
             self.courseListView?.showLoading()
         }
@@ -128,16 +154,22 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         if case .result(let data) = viewModel.state {
             self.listDataSource.viewModels = data.courses
             self.listDelegate.viewModels = data.courses
+            self.updateState(newState: viewModel.state)
+            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         }
-        self.updateState(newState: viewModel.state)
     }
 
     func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel) {
-        if case .result(let data) = viewModel.state {
+        switch viewModel.state {
+        case .result(let data):
             self.listDataSource.viewModels.append(contentsOf: data.courses)
             self.listDelegate.viewModels.append(contentsOf: data.courses)
+            self.updateState(newState: self.state)
+            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
+        case .error:
+            self.updateState(newState: self.state)
+            self.updatePagination(hasNextPage: false, hasError: true)
         }
-        self.updateState(newState: self.state)
     }
 
     func hideBlockingLoadingIndicator() {
@@ -154,7 +186,6 @@ extension CourseListViewController: CourseListViewDelegate {
         guard self.canTriggerPagination else {
             return
         }
-        print("TRIGGER PAGINATION")
 
         self.canTriggerPagination = false
         self.interactor.fetchNextCourses(request: CourseList.LoadNextCourses.Request())
