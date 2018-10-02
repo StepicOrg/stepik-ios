@@ -15,8 +15,8 @@ extension KnowledgeGraphPlainObject {
             KnowledgeGraphGoalPlainObject(title: "Морфология", id: "morph", requiredTopics: ["slitno-razdelno"])
         ]
         let topics = [
-            KnowledgeGraphTopicPlainObject(id: "slitno-razdelno", title: "B13 Слитное раздельное написание", requiredFor: nil),
-            KnowledgeGraphTopicPlainObject(id: "pristavki", title: "B9 Приставки", requiredFor: "slitno-razdelno")
+            KnowledgeGraphTopicPlainObject(id: "slitno-razdelno", title: "B13 Слитное раздельное написание", description: "Тут что-то будет", requiredFor: nil),
+            KnowledgeGraphTopicPlainObject(id: "pristavki", title: "B9 Приставки", description: "А тут что-то другое", requiredFor: "slitno-razdelno")
         ]
         let lessons = [
             KnowledgeGraphLessonPlainObject(id: 82810, type: "theory", course: "7798"),

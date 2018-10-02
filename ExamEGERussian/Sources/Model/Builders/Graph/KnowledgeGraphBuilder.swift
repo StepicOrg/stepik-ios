@@ -19,7 +19,13 @@ final class KnowledgeGraphBuilder: AbstractGraphBuilder {
         let graph = KnowledgeGraph()
 
         graphPlainObject.topics.forEach {
-            graph.addVertex(KnowledgeGraphVertex(id: $0.id, title: $0.title))
+            graph.addVertex(
+                KnowledgeGraphVertex(
+                    id: $0.id,
+                    title: $0.title,
+                    topicDescription: $0.description
+                )
+            )
         }
         graphPlainObject.topics.filter {
             $0.requiredFor != nil
