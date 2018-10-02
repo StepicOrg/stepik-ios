@@ -72,7 +72,7 @@ class RecommendationsServiceTests: XCTestCase {
 
         let expectedResult = LessonPlainObject.make()
         recommendationsAPIMock.resultToBeReturned = .value([])
-        lessonsServiceMock.resultToBeReturned = .value([expectedResult])
+        lessonsServiceMock.lessonsResult = .value([expectedResult])
 
         recommendationsService.fetchLessonsForCourseWithId(1).done { lessons in
             XCTAssertTrue(lessons.count == 1)
