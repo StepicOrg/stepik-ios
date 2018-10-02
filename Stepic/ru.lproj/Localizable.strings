@@ -606,3 +606,7 @@ SignInTitleSocialTest = "<b>Продолжить</b> с помощью";
 "TopicProgressInPercentsText1" = "%@%% пройден";
 "TopicProgressInPercentsText234" = "%@%% пройдено";
 "TopicProgressInPercentsText567890" = "%@%% пройдено";
+
+"TopicTimeToCompleteText1" = "%@ минута на выполнение";
+"TopicTimeToCompleteText234" = "%@ минуты на выполнение";
+"TopicTimeToComplete567890" = "%@ минут на выполнение";

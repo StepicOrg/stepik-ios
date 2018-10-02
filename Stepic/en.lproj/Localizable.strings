@@ -605,3 +605,7 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "TopicProgressInPercentsText1" = "%@%% completed";
 "TopicProgressInPercentsText234" = "%@%% completed";
 "TopicProgressInPercentsText567890" = "%@%% completed";
+
+"TopicTimeToCompleteText1" = "%@ minute to complete";
+"TopicTimeToCompleteText234" = "%@ minutes to complete";
+"TopicTimeToComplete567890" = "%@ minutes to complete";

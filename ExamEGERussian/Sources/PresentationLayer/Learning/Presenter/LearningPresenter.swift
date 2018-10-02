@@ -14,7 +14,6 @@ final class LearningPresenter: LearningPresenterProtocol {
     private let router: LearningRouterProtocol
 
     private let knowledgeGraph: KnowledgeGraph
-    private var progressesMap = [KnowledgeGraph.Node: Double]()
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
@@ -56,7 +55,9 @@ final class LearningPresenter: LearningPresenterProtocol {
             self.joinCoursesIfNeeded()
         }.done {
             self.reloadViewData()
-            self.fetchProgresses().done {
+            self.fetchProgresses().then {
+                self.updateTimeToComplete()
+            }.done {
                 self.reloadViewData()
             }
         }.ensure {
@@ -220,7 +221,7 @@ extension LearningPresenter {
 
     private func updateProgressesMap(progresses: [[Double]]) {
         for (index, lessonsProgresses) in progresses.enumerated() {
-            self.progressesMap[topics[index]] = self.computeTopicProgress(
+            topics[index].progress = self.computeTopicProgress(
                 lessonsProgresses: lessonsProgresses
             )
         }
@@ -230,6 +231,27 @@ extension LearningPresenter {
         let maxPercentForEachLesson = 100.0 / Double(lessonsProgresses.count)
         return lessonsProgresses.reduce(0.0) { (result, lessonProgress) in
             result + (maxPercentForEachLesson * lessonProgress)
+        }
+    }
+
+    private func updateTimeToComplete() -> Guarantee<Void> {
+        let lessonsToObtain = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.obtainLessons(with: $0)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: lessonsToObtain).done {
+                for (index, lessons) in $0.enumerated() {
+                    self.topics[index].timeToComplete = lessons.reduce(0) { (result, lesson) in
+                        result + (lesson.timeToComplete / 60.0)
+                    }
+                }
+
+                seal(())
+            }.catch { _ in
+                print("Failed update time to complete for topics")
+                seal(())
+            }
         }
     }
 }
@@ -248,7 +270,7 @@ extension LearningPresenter {
     // TODO: Replace `timeToComplete` with real value.
     private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
         func getProgress(for vertex: KnowledgeGraph.Node) -> String {
-            var progress = Int(progressesMap[vertex, default: 0].rounded())
+            var progress = Int(vertex.progress.rounded())
             progress = min(progress, 100)
             return getPluralizedProgress(progress)
         }
@@ -258,7 +280,7 @@ extension LearningPresenter {
                 id: vertex.id,
                 title: vertex.title,
                 description: vertex.topicDescription,
-                timeToComplete: "40 минут на прохождение",
+                timeToComplete: getPluralizedTimeToComplete(Int(vertex.timeToComplete.rounded())),
                 progress: getProgress(for: vertex)
             )
         }
@@ -272,6 +294,16 @@ extension LearningPresenter {
         ])
 
         return String(format: pluralizedString, "\(progress)")
+    }
+
+    private func getPluralizedTimeToComplete(_ timeToComplete: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: timeToComplete, forms: [
+            NSLocalizedString("TopicTimeToCompleteText1", comment: ""),
+            NSLocalizedString("TopicTimeToCompleteText234", comment: ""),
+            NSLocalizedString("TopicTimeToComplete567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(timeToComplete)")
     }
 
     private func displayError(
