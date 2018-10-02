@@ -30,7 +30,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
     private var isOnline: Bool = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
-    private var currentCourses: [Course] = []
+    private var currentCourses: [(UniqueIdentifierType, Course)] = []
 
     init(
         presenter: CourseListPresenterProtocol,
@@ -59,12 +59,15 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            self.currentCourses = courses
+            self.currentCourses = courses.map { ("\($0.id)", $0) }
             if self.currentCourses.isEmpty {
                 self.moduleOutput?.presentEmptyState(sourceModule: self)
             } else {
                 let courses = CourseList.AvailableCourses(
-                    fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
+                    fetchedCourses: CourseList.ListData(
+                        courses: self.currentCourses,
+                        hasNextPage: meta.hasNext
+                    ),
                     availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
                 )
                 let response = CourseList.ShowCourses.Response(result: courses)
@@ -97,9 +100,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            self.currentCourses.append(contentsOf: courses)
+            let appendedCourses = courses.map { ("\($0.id)", $0) }
+            self.currentCourses.append(contentsOf: appendedCourses)
             let courses = CourseList.AvailableCourses(
-                fetchedCourses: CourseList.ListData(courses: courses, hasNextPage: meta.hasNext),
+                fetchedCourses: CourseList.ListData(
+                    courses: appendedCourses,
+                    hasNextPage: meta.hasNext
+                ),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
             let response = CourseList.LoadNextCourses.Response(result: courses)
@@ -112,8 +119,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request) {
         self.presenter.presentWaitingState()
 
-        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
-              let targetCourse = self.currentCourses[safe: targetIndex] else {
+        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+              let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
 
@@ -129,7 +136,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         } else {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
-                self.currentCourses[targetIndex] = course
+                self.currentCourses[targetIndex].1 = course
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -146,8 +153,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request) {
         self.presenter.presentWaitingState()
 
-        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
-              let targetCourse = self.currentCourses[safe: targetIndex] else {
+        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+              let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
 
@@ -175,9 +182,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     func doMainAction(request: CourseList.MainCourseAction.Request) {
         self.presenter.presentWaitingState()
 
-        // REVIEW: use id here
-        guard let targetIndex = Int(request.viewModelUniqueIdentifier),
-              let targetCourse = self.currentCourses[safe: targetIndex] else {
+        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+              let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
 

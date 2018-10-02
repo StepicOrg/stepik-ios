@@ -24,7 +24,7 @@ enum Tags {
         struct Request { }
 
         struct Response {
-            let result: Result<[Tag]>
+            let result: Result<[(UniqueIdentifierType, Tag)]>
         }
 
         struct ViewModel {

@@ -13,7 +13,7 @@ enum ContentLanguageSwitch {
     // MARK: Common structs
 
     struct ContentLanguageInfo {
-        let availableContentLanguages: [ContentLanguage]
+        let availableContentLanguages: [(UniqueIdentifierType, ContentLanguage)]
         let activeContentLanguage: ContentLanguage
     }
 

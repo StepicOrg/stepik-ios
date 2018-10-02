@@ -1,5 +1,5 @@
 //
-//  ContentLanguageSwitchContentLanguageSwitchInteractor.swift
+//  ContentLanguageSwitchContentLanguageSwitchInterac?tor.swift
 //  stepik-ios
 //
 //  Created by Vladislav Kiryukhin on 12/09/2018.
@@ -18,7 +18,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
     let presenter: ContentLanguageSwitchPresenterProtocol
     let provider: ContentLanguageSwitchProviderProtocol
 
-    private var currentAvailableContentLanguages: [ContentLanguage] = []
+    private var currentAvailableContentLanguages: [(UniqueIdentifierType, ContentLanguage)] = []
 
     init(
         presenter: ContentLanguageSwitchPresenterProtocol,
@@ -33,11 +33,16 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
             fulfilled: self.provider.fetchAvailableLanguages(),
             self.provider.fetchCurrentLanguage()
         ).done { (availableContentLanguages, currentContentLanguage) in
-            self.currentAvailableContentLanguages = availableContentLanguages
+            let languages = availableContentLanguages.map {
+                language -> (UniqueIdentifierType, ContentLanguage) in
+                (language.languageString, language)
+            }
+
+            self.currentAvailableContentLanguages = languages
             self.presenter.presentLanguages(
                 response: ContentLanguageSwitch.ShowLanguages.Response(
                     result: ContentLanguageSwitch.ContentLanguageInfo(
-                        availableContentLanguages: availableContentLanguages,
+                        availableContentLanguages: languages,
                         activeContentLanguage: currentContentLanguage
                     )
                 )
@@ -48,13 +53,10 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
     }
 
     func selectLanguage(request: ContentLanguageSwitch.SelectLanguage.Request) {
-        guard let selectedIndex = Int(request.viewModelUniqueIdentifier),
-              let selectedLanguage = self
-            .currentAvailableContentLanguages[safe: selectedIndex] else {
+        guard let selectedLanguage = self.currentAvailableContentLanguages
+            .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
             fatalError("Request contains invalid data")
         }
-
-        self.provider.setGlobalContentLanguage(selectedLanguage)
 
         self.presenter.presentLanguageChange(
             response: ContentLanguageSwitch.SelectLanguage.Response(

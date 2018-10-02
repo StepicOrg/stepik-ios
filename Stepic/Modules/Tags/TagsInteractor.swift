@@ -21,7 +21,7 @@ final class TagsInteractor: TagsInteractorProtocol {
     let provider: TagsProviderProtocol
     let contentLanguage: ContentLanguage
 
-    private var currentTags: [Tags.Tag] = []
+    private var currentTags: [(UniqueIdentifierType, Tags.Tag)] = []
 
     init(
         presenter: TagsPresenterProtocol,
@@ -44,16 +44,16 @@ final class TagsInteractor: TagsInteractorProtocol {
                     summary: tag.summaryForLanguage[self.contentLanguage] ?? ""
                 )
             }
-            self.currentTags = newTags
+            self.currentTags = newTags.map { ("\($0.id)", $0) }
             self.presenter.presentTags(
-                response: Tags.ShowTags.Response(result: .success(newTags))
+                response: Tags.ShowTags.Response(result: .success(self.currentTags))
             )
         }
     }
 
     func presentTagCollection(request: Tags.PresentCollection.Request) {
-        guard let selectedIndex = Int(request.viewModelUniqueIdentifier),
-              let tag = self.currentTags[safe: selectedIndex] else {
+        guard let tag = self.currentTags
+            .first(where: { $0.0 == request.viewModelUniqueIdentifier})?.1 else {
             return
         }
 

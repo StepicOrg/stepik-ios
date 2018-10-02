@@ -17,7 +17,7 @@ enum CourseList {
     // We should pass not only courses
     // but also info about which of them can be opened in adaptive mode
     struct AvailableCourses {
-        var fetchedCourses: ListData<Course>
+        var fetchedCourses: ListData<(UniqueIdentifierType, Course)>
         var availableAdaptiveCourses: Set<Course>
     }
 

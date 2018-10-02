@@ -18,11 +18,11 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
 
     func presentLanguages(response: ContentLanguageSwitch.ShowLanguages.Response) {
         var viewModels: [ContentLanguageSwitchViewModel] = []
-        for (index, language) in response.result.availableContentLanguages.enumerated() {
+        for (uid, language) in response.result.availableContentLanguages {
             let viewModel = ContentLanguageSwitchViewModel(
                 title: language.displayingString,
                 isSelected: language == response.result.activeContentLanguage,
-                uniqueIdentifier: "\(index)"
+                uniqueIdentifier: uid
             )
             viewModels.append(viewModel)
         }
@@ -35,11 +35,11 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
 
     func presentLanguageChange(response: ContentLanguageSwitch.SelectLanguage.Response) {
         var viewModels: [ContentLanguageSwitchViewModel] = []
-        for (index, language) in response.result.availableContentLanguages.enumerated() {
+        for (uid, language) in response.result.availableContentLanguages {
             let viewModel = ContentLanguageSwitchViewModel(
                 title: language.displayingString,
                 isSelected: language == response.result.activeContentLanguage,
-                uniqueIdentifier: "\(index)"
+                uniqueIdentifier: uid
             )
             viewModels.append(viewModel)
         }

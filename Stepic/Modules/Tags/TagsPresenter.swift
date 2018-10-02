@@ -20,9 +20,9 @@ final class TagsPresenter: TagsPresenterProtocol {
             switch response.result {
             case .success(let tags):
                 var viewModels: [TagViewModel] = []
-                for (index, tag) in tags.enumerated() {
+                for (uid, tag) in tags {
                     viewModels.append(
-                        TagViewModel(uniqueIdentifier: "\(index)", title: tag.title)
+                        TagViewModel(uniqueIdentifier: uid, title: tag.title)
                     )
                 }
                 return Tags.ViewControllerState.result(

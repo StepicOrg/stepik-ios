@@ -63,13 +63,13 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     }
 
     private func makeWidgetViewModels(
-        courses: [Course],
+        courses: [(UniqueIdentifierType, Course)],
         availableInAdaptive: Set<Course>
     ) -> [CourseWidgetViewModel] {
         var viewModels: [CourseWidgetViewModel] = []
-        for (index, course) in courses.enumerated() {
+        for (uid, course) in courses {
             var viewModel = CourseWidgetViewModel(
-                uniqueIdentifier: "\(index)",
+                uniqueIdentifier: uid,
                 course: course
             )
             let isAdaptive = availableInAdaptive.contains(course)
