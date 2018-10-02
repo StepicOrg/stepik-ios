@@ -14,6 +14,14 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class ExploreViewController: BaseExploreViewController {
+    private static let submodulesOrder: [ExploreSubmoduleType] = [
+        .stories,
+        .languageSwitch,
+        .tags,
+        .collection,
+        .popularCourses
+    ]
+
     lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -56,7 +64,8 @@ final class ExploreViewController: BaseExploreViewController {
             .init(
                 viewController: tagsViewController,
                 view: tagsViewController.view,
-                isLanguageDependent: true
+                isLanguageDependent: true,
+                type: ExploreSubmoduleType.tags
             )
         )
 
@@ -71,7 +80,8 @@ final class ExploreViewController: BaseExploreViewController {
             .init(
                 viewController: collectionViewController,
                 view: collectionViewController.view,
-                isLanguageDependent: true
+                isLanguageDependent: true,
+                type: ExploreSubmoduleType.collection
             )
         )
 
@@ -102,7 +112,8 @@ final class ExploreViewController: BaseExploreViewController {
             .init(
                 viewController: popularViewController,
                 view: containerView,
-                isLanguageDependent: true
+                isLanguageDependent: true,
+                type: ExploreSubmoduleType.popularCourses
             )
         )
     }
@@ -139,6 +150,25 @@ final class ExploreViewController: BaseExploreViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
+
+    private enum ExploreSubmoduleType: Int, SubmoduleType {
+        case stories
+        case languageSwitch
+        case tags
+        case collection
+        case popularCourses
+
+        var id: Int {
+            return self.rawValue
+        }
+
+        var position: Int {
+            guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+                fatalError("Given submodule type has unknown position")
+            }
+            return position
+        }
+    }
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
@@ -153,9 +183,9 @@ extension ExploreViewController: ExploreViewControllerProtocol {
             .init(
                 viewController: viewController,
                 view: viewController.view,
-                isLanguageDependent: false
-            ),
-            insertionPosition: 0
+                isLanguageDependent: false,
+                type: ExploreSubmoduleType.languageSwitch
+            )
         )
     }
 }

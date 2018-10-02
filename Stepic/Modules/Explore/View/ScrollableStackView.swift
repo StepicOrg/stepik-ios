@@ -20,8 +20,8 @@ final class ScrollableStackView: UIView {
 
     private lazy var scrollView = UIScrollView()
 
-    var arrangedViewsCount: Int {
-        return self.stackView.arrangedSubviews.count
+    var arrangedSubviews: [UIView] {
+        return self.stackView.arrangedSubviews
     }
 
     var showsHorizontalScrollIndicator: Bool {
@@ -67,7 +67,7 @@ final class ScrollableStackView: UIView {
     // MARK: Public interface
 
     func addArrangedView(_ view: UIView) {
-        self.insertArrangedView(view, at: self.arrangedViewsCount)
+        self.stackView.addArrangedSubview(view)
     }
 
     func removeArrangedView(_ view: UIView) {

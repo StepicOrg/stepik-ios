@@ -13,6 +13,13 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class HomeViewController: BaseExploreViewController {
+    private static let submodulesOrder: [HomeSubmoduleType] = [
+        .streakActivity,
+        .continueCourse,
+        .enrolledCourses,
+        .popularCourses
+    ]
+
     private lazy var streakView = StreakActivityView(frame: .zero)
     lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
@@ -37,7 +44,8 @@ final class HomeViewController: BaseExploreViewController {
             .init(
                 viewController: continueCourseViewController,
                 view: continueCourseViewController.view,
-                isLanguageDependent: false
+                isLanguageDependent: false,
+                type: HomeSubmoduleType.continueCourse
             )
         )
 
@@ -67,7 +75,8 @@ final class HomeViewController: BaseExploreViewController {
             .init(
                 viewController: enrolledCourseViewController,
                 view: containerView,
-                isLanguageDependent: false
+                isLanguageDependent: false,
+                type: HomeSubmoduleType.enrolledCourses
             )
         )
     }
@@ -100,9 +109,28 @@ final class HomeViewController: BaseExploreViewController {
             .init(
                 viewController: popularViewController,
                 view: containerView,
-                isLanguageDependent: true
+                isLanguageDependent: true,
+                type: HomeSubmoduleType.popularCourses
             )
         )
+    }
+
+    private enum HomeSubmoduleType: Int, SubmoduleType {
+        case streakActivity
+        case continueCourse
+        case enrolledCourses
+        case popularCourses
+
+        var id: Int {
+            return self.rawValue
+        }
+
+        var position: Int {
+            guard let position = HomeViewController.submodulesOrder.index(of: self) else {
+                fatalError("Given submodule type has unknown position")
+            }
+            return position
+        }
     }
 }
 
@@ -110,11 +138,20 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
         switch viewModel.result {
         case .hidden:
-            self.exploreView?.removeBlockView(self.streakView)
+            if let submodule = self.getSubmodule(type: HomeSubmoduleType.streakActivity) {
+                self.removeSubmodule(submodule)
+            }
         case .visible(let message, let streak):
             streakView.message = message
             streakView.streak = streak
-            self.exploreView?.insertBlockView(self.streakView, at: 0)
+            self.registerSubmodule(
+                .init(
+                    viewController: nil,
+                    view: self.streakView,
+                    isLanguageDependent: false,
+                    type: HomeSubmoduleType.streakActivity
+                )
+            )
         }
     }
 }

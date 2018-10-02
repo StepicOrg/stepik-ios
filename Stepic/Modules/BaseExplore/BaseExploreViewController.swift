@@ -1,5 +1,5 @@
 //
-//  BaseExploreBaseExploreViewController.swift
+//  BaseExploreBas?eExploreViewController.swift
 //  stepik-ios
 //
 //  Created by Vladislav Kiryukhin on 02/10/2018.
@@ -16,6 +16,12 @@ protocol BaseExploreViewControllerProtocol: class {
     func displayCourseInfo(viewModel: BaseExplore.PresentCourseInfo.ViewModel)
     func displayCourseSyllabus(viewModel: BaseExplore.PresentCourseSyllabus.ViewModel)
     func displayLastStep(viewModel: BaseExplore.PresentLastStep.ViewModel)
+}
+
+protocol SubmoduleType {
+    // to be able to get submodule
+    var id: Int { get }
+    var position: Int { get }
 }
 
 class BaseExploreViewController: UIViewController {
@@ -61,25 +67,40 @@ class BaseExploreViewController: UIViewController {
 
     // MARK: Modules
 
-    // REVIEW: position
-    func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
+    func registerSubmodule(_ submodule: Submodule) {
         self.submodules.append(submodule)
-        self.addChildViewController(submodule.viewController)
 
-        let position = insertionPosition ?? self.submodules.count - 1
-        if let view = submodule.view {
-            self.exploreView?.insertBlockView(view, at: position)
+        if let viewController = submodule.viewController {
+            self.addChildViewController(viewController)
+        }
+
+        // We have contract here:
+        // - subviews in exploreView have same position as in corresponding Submodule object
+        for module in self.submodules {
+            if module.type.position >= submodule.type.position {
+                self.exploreView?.insertBlockView(
+                    submodule.view,
+                    before: module.view
+                )
+                return
+            }
         }
     }
 
     func removeLanguageDependentSubmodules() {
         for submodule in self.submodules where submodule.isLanguageDependent {
-            if let view = submodule.view {
-                self.exploreView?.removeBlockView(view)
-            }
-            submodule.viewController.removeFromParentViewController()
+            self.removeSubmodule(submodule)
         }
         self.submodules = self.submodules.filter { !$0.isLanguageDependent }
+    }
+
+    func removeSubmodule(_ submodule: Submodule) {
+        self.exploreView?.removeBlockView(submodule.view)
+        submodule.viewController?.removeFromParentViewController()
+    }
+
+    func getSubmodule(type: SubmoduleType) -> Submodule? {
+        return self.submodules.first(where: { $0.type.id == type.id })
     }
 
     func initLanguageIndependentSubmodules() {
@@ -112,9 +133,10 @@ class BaseExploreViewController: UIViewController {
     // MARK: - Structs
 
     struct Submodule {
-        let viewController: UIViewController
-        let view: UIView?
+        let viewController: UIViewController?
+        let view: UIView
         let isLanguageDependent: Bool
+        let type: SubmoduleType
     }
 }
 
