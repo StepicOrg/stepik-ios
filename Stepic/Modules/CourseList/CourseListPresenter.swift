@@ -22,15 +22,15 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     func presentCourses(response: CourseList.ShowCourses.Response) {
         var viewModel: CourseList.ShowCourses.ViewModel
 
-        let result = response.result
         let courses = self.makeWidgetViewModels(
-            courses: result.fetchedCourses.courses,
-            availableInAdaptive: result.availableAdaptiveCourses
+            courses: response.result.fetchedCourses.courses,
+            availableInAdaptive: response.result.availableAdaptiveCourses,
+            isAuthorized: response.isAuthorized
         )
 
         let data = CourseList.ListData(
             courses: courses,
-            hasNextPage: result.fetchedCourses.hasNextPage
+            hasNextPage: response.result.fetchedCourses.hasNextPage
         )
         viewModel = CourseList.ShowCourses.ViewModel(state: .result(data: data))
 
@@ -40,14 +40,14 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     func presentNextCourses(response: CourseList.LoadNextCourses.Response) {
         var viewModel: CourseList.LoadNextCourses.ViewModel
 
-        let result = response.result
         let courses = self.makeWidgetViewModels(
-            courses: result.fetchedCourses.courses,
-            availableInAdaptive: result.availableAdaptiveCourses
+            courses: response.result.fetchedCourses.courses,
+            availableInAdaptive: response.result.availableAdaptiveCourses,
+            isAuthorized: response.isAuthorized
         )
         let data = CourseList.ListData(
             courses: courses,
-            hasNextPage: result.fetchedCourses.hasNextPage
+            hasNextPage: response.result.fetchedCourses.hasNextPage
         )
         viewModel = CourseList.LoadNextCourses.ViewModel(state: .result(data: data))
 
@@ -64,7 +64,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
     private func makeWidgetViewModels(
         courses: [(UniqueIdentifierType, Course)],
-        availableInAdaptive: Set<Course>
+        availableInAdaptive: Set<Course>,
+        isAuthorized: Bool
     ) -> [CourseWidgetViewModel] {
         var viewModels: [CourseWidgetViewModel] = []
         for (uid, course) in courses {
@@ -74,7 +75,10 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             )
             let isAdaptive = availableInAdaptive.contains(course)
 
-            let buttonDescriptionFactory = ButtonDescriptionFactory(course: course)
+            let buttonDescriptionFactory = ButtonDescriptionFactory(
+                course: course,
+                isAuthorized: isAuthorized
+            )
             viewModel.primaryButtonDescription = buttonDescriptionFactory.makePrimary()
             viewModel.secondaryButtonDescription = buttonDescriptionFactory.makeSecondary(
                 isAdaptive: isAdaptive

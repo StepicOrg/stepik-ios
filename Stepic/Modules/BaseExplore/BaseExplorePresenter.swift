@@ -15,6 +15,7 @@ protocol BaseExplorePresenterProtocol {
     func presentCourseInfo(response: BaseExplore.PresentCourseInfo.Response)
     func presentCourseSyllabus(response: BaseExplore.PresentCourseSyllabus.Response)
     func presentLastStep(response: BaseExplore.PresentLastStep.Response)
+    func presentAuthorization()
 }
 
 class BaseExplorePresenter: BaseExplorePresenterProtocol {
@@ -47,5 +48,9 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
                 isAdaptive: response.isAdaptive
             )
         )
+    }
+
+    func presentAuthorization() {
+        self.viewController?.displayAuthorization()
     }
 }

@@ -27,6 +27,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     let provider: CourseListProviderProtocol
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     let courseSubscriber: CourseSubscriberProtocol
+    let userAccountService: UserAccountServiceProtocol
 
     private var isOnline: Bool = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
@@ -36,12 +37,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         presenter: CourseListPresenterProtocol,
         provider: CourseListProviderProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
-        courseSubscriber: CourseSubscriberProtocol
+        courseSubscriber: CourseSubscriberProtocol,
+        userAccountService: UserAccountServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.adaptiveStorageManager = adaptiveStorageManager
         self.courseSubscriber = courseSubscriber
+        self.userAccountService = userAccountService
     }
 
     // MARK: - Public methods
@@ -70,7 +73,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     ),
                     availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
                 )
-                let response = CourseList.ShowCourses.Response(result: courses)
+                let response = CourseList.ShowCourses.Response(
+                    isAuthorized: self.userAccountService.isAuthorized,
+                    result: courses
+                )
                 self.presenter.presentCourses(response: response)
             }
         }.catch { _ in
@@ -88,7 +94,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
                 availableAdaptiveCourses: Set<Course>()
             )
-            let response = CourseList.LoadNextCourses.Response(result: result)
+            let response = CourseList.LoadNextCourses.Response(
+                isAuthorized: self.userAccountService.isAuthorized,
+                result: result
+            )
             self.presenter.presentNextCourses(response: response)
             return
         }
@@ -109,7 +118,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 ),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
-            let response = CourseList.LoadNextCourses.Response(result: courses)
+            let response = CourseList.LoadNextCourses.Response(
+                isAuthorized: self.userAccountService.isAuthorized,
+                result: courses
+            )
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
             self.moduleOutput?.presentError(sourceModule: self)
@@ -122,6 +134,12 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
+        }
+
+        if !self.userAccountService.isAuthorized {
+            self.presenter.dismissWaitingState()
+            self.moduleOutput?.presentAuthorization()
+            return
         }
 
         if targetCourse.enrolled {
@@ -191,7 +209,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.presenter.dismissWaitingState()
         }
 
-        if targetCourse.enrolled {
+        if targetCourse.enrolled && self.userAccountService.isAuthorized {
             // Enrolled course -> open last step
             self.moduleOutput?.presentLastStep(
                 course: targetCourse,

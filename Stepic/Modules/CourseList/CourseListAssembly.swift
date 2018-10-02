@@ -59,7 +59,8 @@ class CourseListAssembly: Assembly {
             presenter: presenter,
             provider: provider,
             adaptiveStorageManager: AdaptiveStorageManager(),
-            courseSubscriber: CourseSubscriber()
+            courseSubscriber: CourseSubscriber(),
+            userAccountService: UserAccountService()
         )
         self.moduleInput = interactor
 

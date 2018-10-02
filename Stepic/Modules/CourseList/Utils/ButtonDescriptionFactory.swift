@@ -10,14 +10,15 @@ import Foundation
 
 struct ButtonDescriptionFactory {
     let course: Course
+    let isAuthorized: Bool
 
     func makePrimary() -> CourseWidgetViewModel.ButtonDescription {
-        let title = self.course.enrolled
+        let title = self.course.enrolled && isAuthorized
             ? NSLocalizedString("WidgetButtonLearn", comment: "")
             : NSLocalizedString("WidgetButtonJoin", comment: "")
         return CourseWidgetViewModel.ButtonDescription(
             title: title,
-            isCallToAction: !self.course.enrolled
+            isCallToAction: !self.course.enrolled || !isAuthorized
         )
     }
 

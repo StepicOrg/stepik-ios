@@ -16,6 +16,7 @@ protocol BaseExploreViewControllerProtocol: class {
     func displayCourseInfo(viewModel: BaseExplore.PresentCourseInfo.ViewModel)
     func displayCourseSyllabus(viewModel: BaseExplore.PresentCourseSyllabus.ViewModel)
     func displayLastStep(viewModel: BaseExplore.PresentLastStep.ViewModel)
+    func displayAuthorization()
 }
 
 protocol SubmoduleType {
@@ -175,5 +176,9 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
             isAdaptive: viewModel.isAdaptive,
             using: navigationController
         )
+    }
+
+    func displayAuthorization() {
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

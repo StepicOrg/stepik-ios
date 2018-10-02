@@ -28,6 +28,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
+            let isAuthorized: Bool
             let result: AvailableCourses
         }
 
@@ -40,6 +41,7 @@ enum CourseList {
         struct Request { }
 
         struct Response {
+            let isAuthorized: Bool
             let result: AvailableCourses
         }
 

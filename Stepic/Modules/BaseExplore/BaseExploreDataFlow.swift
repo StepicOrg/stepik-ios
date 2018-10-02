@@ -13,7 +13,8 @@ enum BaseExplore {
 
     /// Content refresh
     enum LoadContent {
-        struct Request { }
+        struct Request {
+        }
 
         struct Response {
             let contentLanguage: ContentLanguage
@@ -23,6 +24,7 @@ enum BaseExplore {
             let state: ViewControllerState
         }
     }
+
     /// Present fullscreen module
     enum PresentFullscreenCourseListModule {
         struct Request {
@@ -37,6 +39,7 @@ enum BaseExplore {
             let courseListType: CourseListType
         }
     }
+
     /// Present course syllabus
     enum PresentCourseSyllabus {
         struct Response {
@@ -48,6 +51,7 @@ enum BaseExplore {
             let course: Course
         }
     }
+
     /// Present course info
     enum PresentCourseInfo {
         struct Response {
@@ -59,6 +63,7 @@ enum BaseExplore {
             let course: Course
         }
     }
+
     /// Present last step in course
     enum PresentLastStep {
         struct Response {

@@ -12,6 +12,7 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response)
     func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response)
     func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response)
+    func presentAuthorization()
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -32,5 +33,9 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
                 isAdaptive: response.isAdaptive
             )
         )
+    }
+
+    func presentAuthorization() {
+        self.viewController?.displayAuthorization()
     }
 }

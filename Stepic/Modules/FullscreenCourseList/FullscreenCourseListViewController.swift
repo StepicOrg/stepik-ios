@@ -12,6 +12,7 @@ protocol FullscreenCourseListViewControllerProtocol: class {
     func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel)
     func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel)
     func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel)
+    func displayAuthorization()
 }
 
 final class FullscreenCourseListViewController: UIViewController {
@@ -79,5 +80,9 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             isAdaptive: viewModel.isAdaptive,
             using: navigationController
         )
+    }
+
+    func displayAuthorization() {
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

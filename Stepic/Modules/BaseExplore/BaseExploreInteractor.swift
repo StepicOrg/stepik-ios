@@ -64,6 +64,10 @@ extension BaseExploreInteractor: CourseListOutputProtocol {
         self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
     }
 
+    func presentAuthorization() {
+        self.presenter.presentAuthorization()
+    }
+
     func presentEmptyState(sourceModule: CourseListInputProtocol) {
 
     }

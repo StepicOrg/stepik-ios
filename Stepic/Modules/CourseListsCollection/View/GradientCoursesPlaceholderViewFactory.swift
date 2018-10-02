@@ -57,6 +57,21 @@ final class GradientCoursesPlaceholderViewFactory {
         )
     }
 
+    private func makeInfoPlaceholder(
+        message: InfoPlaceholderMessage
+    ) -> GradientCoursesPlaceholderView {
+        var appearance = GradientCoursesPlaceholderView.Appearance()
+        appearance.titleTextAlignment = .natural
+        appearance.titleFont = Appearance.defaultTitleFont
+        appearance.labelsInsets = Appearance.defaultLabelsInsets
+        return self.makeView(
+            title: message.message,
+            subtitle: nil,
+            boldStyle: .useTags,
+            appearance: appearance
+        )
+    }
+
     private func makeView(
         title: String,
         subtitle: String?,
@@ -97,10 +112,23 @@ final class GradientCoursesPlaceholderViewFactory {
             ).attributedString
     }
 
+    static func makeWordsBoldAndLightWithTags(
+        text: String,
+        fontSize: CGFloat
+    ) -> NSAttributedString {
+        let b = Style("b").font(.systemFont(ofSize: fontSize, weight: .medium))
+        let all = Style.font(.systemFont(ofSize: fontSize, weight: .light))
+        return text
+            .style(tags: b)
+            .styleAll(all)
+            .attributedString
+    }
+
     enum BoldStyle {
         case firstWord
         case allWords
         case noWords
+        case useTags
 
         func makeBold(string: String, fontSize: CGFloat) -> NSAttributedString {
             switch self {
@@ -118,6 +146,25 @@ final class GradientCoursesPlaceholderViewFactory {
                     firstSpaceIndex: string.index(of: " "),
                     fontSize: fontSize
                 )
+            case .useTags:
+                return GradientCoursesPlaceholderViewFactory.makeWordsBoldAndLightWithTags(
+                    text: string,
+                    fontSize: fontSize
+                )
+            }
+        }
+    }
+
+    enum InfoPlaceholderMessage {
+        case enrolled
+        case login
+
+        var message: String {
+            switch self {
+            case .enrolled:
+                return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
+            case .login:
+                return NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
             }
         }
     }
