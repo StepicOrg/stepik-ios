@@ -24,21 +24,20 @@ protocol StoriesPresenterProtocol: class {
     func refresh()
 }
 
-protocol StoriesRefreshDelegate: class {
-    func refreshedEmpty()
+protocol StoriesOutputProtocol: class {
+    func hideStories()
 }
 
 class StoriesPresenter: StoriesPresenterProtocol {
 
     var stories: [Story] = []
     weak var view: StoriesViewProtocol?
-    weak var refreshDelegate: StoriesRefreshDelegate?
+    weak var moduleOutput: StoriesOutputProtocol?
     var storyTemplatesAPI: StoryTemplatesAPI
 
-    init(view: StoriesViewProtocol, storyTemplatesAPI: StoryTemplatesAPI, refreshDelegate: StoriesRefreshDelegate?) {
+    init(view: StoriesViewProtocol, storyTemplatesAPI: StoryTemplatesAPI) {
         self.view = view
         self.storyTemplatesAPI = storyTemplatesAPI
-        self.refreshDelegate = refreshDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(StoriesPresenter.storyDidAppear(_:)), name: .storyDidAppear, object: nil)
     }
 
@@ -65,7 +64,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     func refresh() {
         view?.set(state: .loading)
 
-        storyTemplatesAPI.retrieve(isPublished: true, language: ContentLanguage.sharedContentLanguage).done { [weak self] stories, _ in
+        storyTemplatesAPI.retrieve(isPublished: true, language: ContentLanguageService().globalContentLanguage).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return
             }
@@ -77,7 +76,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
             strongSelf.view?.set(stories: strongSelf.stories)
             if strongSelf.stories.isEmpty {
-                strongSelf.refreshDelegate?.refreshedEmpty()
+                strongSelf.moduleOutput?.hideStories()
             }
         }.catch { [weak self] _ in
             guard let strongSelf = self else {

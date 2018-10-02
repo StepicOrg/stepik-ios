@@ -23,4 +23,16 @@ enum Explore {
             let isHidden: Bool
         }
     }
+    /// Update stories visibility
+    enum UpdateStoriesVisibility {
+        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
+        struct Response {
+            let isHidden: Bool
+        }
+
+        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
+        struct ViewModel {
+            let isHidden: Bool
+        }
+    }
 }

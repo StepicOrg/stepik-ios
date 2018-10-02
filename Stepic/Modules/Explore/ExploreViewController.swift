@@ -11,6 +11,7 @@ import SnapKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
+    func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -27,6 +28,8 @@ final class ExploreViewController: BaseExploreViewController {
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar(frame: .zero)
+
+    private var isStoriesHidden: Bool = false
 
     init(interactor: ExploreInteractorProtocol) {
         super.init(interactor: interactor)
@@ -54,6 +57,26 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+        // Stories
+        if !isStoriesHidden {
+            let storiesAssembly = StoriesAssembly(
+                output: self.exploreInteractor as? StoriesOutputProtocol
+            )
+            let storiesViewController = storiesAssembly.makeModule()
+            let storiesContainerView = ExploreStoriesContainerView(
+                frame: .zero,
+                contentView: storiesViewController.view
+            )
+            self.registerSubmodule(
+                .init(
+                    viewController: storiesViewController,
+                    view: storiesContainerView,
+                    isLanguageDependent: true,
+                    type: ExploreSubmoduleType.stories
+                )
+            )
+        }
+
         // Tags
         let tagsAssembly = TagsAssembly(
             contentLanguage: contentLanguage,
@@ -187,6 +210,13 @@ extension ExploreViewController: ExploreViewControllerProtocol {
                 type: ExploreSubmoduleType.languageSwitch
             )
         )
+    }
+
+    func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel) {
+        self.isStoriesHidden = true
+        if let storiesBlock = self.getSubmodule(type: ExploreSubmoduleType.stories) {
+            self.removeSubmodule(storiesBlock)
+        }
     }
 }
 

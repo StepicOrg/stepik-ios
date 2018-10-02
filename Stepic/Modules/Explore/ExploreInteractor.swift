@@ -36,3 +36,9 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         self.contentLanguageSwitchAvailabilityService.shouldShowLanguageSwitchOnExplore = false
     }
 }
+
+extension ExploreInteractor: StoriesOutputProtocol {
+    func hideStories() {
+        self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
+    }
+}

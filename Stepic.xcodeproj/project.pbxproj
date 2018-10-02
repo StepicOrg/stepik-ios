@@ -4121,6 +4121,9 @@
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08863205BEEB900FCB9C0 /* StepikPlaceholderView.swift */; };
+		2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
+		2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
+		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
 		2CF2246720EF6D900093D844 /* UserRegistrationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF2246620EF6D900093D844 /* UserRegistrationServiceMock.swift */; };
 		2CF2246E20EF9D400093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
 		2CF2246F20EF9D400093D844 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */; };
@@ -4180,6 +4183,7 @@
 		62E98002F8F247D1CAC54767 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E980030A958F54CB76E92E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E980204101C3A3CEA147B7 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98025DA775B0C902CB6D6 /* ExploreStoriesContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9805D78A599B2B48A3B9D /* ExploreStoriesContainerView.swift */; };
 		62E9803969577BBA3997FF9D /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E9803CECA6AA67AF1DECFB /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
@@ -6182,6 +6186,7 @@
 		62E9803B15F1155BEDF36837 /* PaginationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationView.swift; sourceTree = "<group>"; };
 		62E98059417D9BC0015460B7 /* CourseListsCollectionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionProvider.swift; sourceTree = "<group>"; };
 		62E9805D13FEE3F2DD22B977 /* CourseListsCollectionViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionViewModelAdapter.swift; sourceTree = "<group>"; };
+		62E9805D78A599B2B48A3B9D /* ExploreStoriesContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreStoriesContainerView.swift; sourceTree = "<group>"; };
 		62E9807E3506DAF40179593F /* ContinueActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueActionButton.swift; sourceTree = "<group>"; };
 		62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuBlock.swift; sourceTree = "<group>"; };
 		62E98100445A2042DE023DE9 /* ContinueCourseViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueCourseViewModelAdapter.swift; sourceTree = "<group>"; };
@@ -8755,7 +8760,6 @@
 				14692EFFC3DC1466AA55B1DD /* BaseExplorePresenter.swift */,
 				21C1E58134D6F7CABDA84B89 /* BaseExploreDataFlow.swift */,
 			);
-			name = BaseExplore;
 			path = BaseExplore;
 			sourceTree = "<group>";
 		};
@@ -10735,6 +10739,7 @@
 				7A50ACE162DF211AE4DF35DC /* ExploreDataFlow.swift */,
 				38150F5E6E14E554C6A91A14 /* View */,
 				62E98AC6AB07FD2BFE014C5B /* ContentLanguageSwitchAvailabilityService.swift */,
+				62E9805D78A599B2B48A3B9D /* ExploreStoriesContainerView.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -14717,6 +14722,7 @@
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
+				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */,
 				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
@@ -14729,6 +14735,7 @@
 				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* VideoLocationManager.swift in Sources */,
+				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
 				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
@@ -15116,6 +15123,7 @@
 				68DAA98D2E2F6E5BD63B051D /* BaseExploreView.swift in Sources */,
 				8E8C0B0773E8434A4B8B64BE /* TagsAssembly.swift in Sources */,
 				8BAFF69A3ADF967ACA86619A /* TagsViewController.swift in Sources */,
+				2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */,
 				FB27A51C90A745DA179B4BFA /* TagsInteractor.swift in Sources */,
 				5114A9A546EE4DD425FF3E7B /* TagsPresenter.swift in Sources */,
 				D61088397B59DE7B20E38535 /* TagsDataFlow.swift in Sources */,
@@ -15234,6 +15242,7 @@
 				8D923C63FD0C095D6C8B5EB7 /* BaseExploreInteractor.swift in Sources */,
 				A0552DD91CB81DACFADE1DF7 /* BaseExplorePresenter.swift in Sources */,
 				646950FCCCF16E1BF8869EC3 /* BaseExploreDataFlow.swift in Sources */,
+				62E98025DA775B0C902CB6D6 /* ExploreStoriesContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
