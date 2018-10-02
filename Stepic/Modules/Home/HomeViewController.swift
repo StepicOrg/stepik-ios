@@ -142,16 +142,19 @@ extension HomeViewController: HomeViewControllerProtocol {
                 self.removeSubmodule(submodule)
             }
         case .visible(let message, let streak):
+            if self.getSubmodule(type: HomeSubmoduleType.streakActivity) == nil {
+                self.registerSubmodule(
+                    .init(
+                        viewController: nil,
+                        view: self.streakView,
+                        isLanguageDependent: false,
+                        type: HomeSubmoduleType.streakActivity
+                    )
+                )
+            }
+
             streakView.message = message
             streakView.streak = streak
-            self.registerSubmodule(
-                .init(
-                    viewController: nil,
-                    view: self.streakView,
-                    isLanguageDependent: false,
-                    type: HomeSubmoduleType.streakActivity
-                )
-            )
         }
     }
 }
