@@ -576,7 +576,8 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
 "FailedFetchKnowledgeGraphErrorTitle" = "Unable to load knowledge graph";
 "FailedFetchKnowledgeGraphErrorMessage" = "Pull down to refresh screen.";
-"FailedFetchLessonStepsContent" = "Unable​ ​to​ ​load​ ​lesson content. Please try again later.";
+"FailedFetchStepsForLessonTitle" = "Unable to load lesson content";
+"FailedFetchStepsForLessonMessage" = "Please try again later.";
 
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
