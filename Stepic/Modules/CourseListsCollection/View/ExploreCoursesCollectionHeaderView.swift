@@ -27,7 +27,9 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
     }()
 
     private lazy var summaryPlaceholder: GradientCoursesPlaceholderView = {
-        let view = GradientCoursesPlaceholderView(frame: .zero, color: .pink)
+        let view = GradientCoursesPlaceholderViewFactory(
+            color: .pink
+        ).makeCourseCollectionView(title: self.descriptionText)
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.summaryPlaceholderCornerRadius
         return view
@@ -45,13 +47,7 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
         }
     }
 
-    var descriptionText: String? {
-        didSet {
-            self.summaryPlaceholder.titleText = NSAttributedString(
-                string: self.descriptionText ?? ""
-            )
-        }
-    }
+    private var descriptionText: String
 
     var onShowAllButtonClick: (() -> Void)? {
         didSet {
@@ -59,8 +55,13 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
         }
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(
+        frame: CGRect,
+        description: String,
+        appearance: Appearance = Appearance()
+    ) {
         self.appearance = appearance
+        self.descriptionText = description
         super.init(frame: frame)
 
         self.addSubviews()

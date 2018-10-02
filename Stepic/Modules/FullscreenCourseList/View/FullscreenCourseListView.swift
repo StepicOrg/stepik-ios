@@ -9,38 +9,13 @@
 import UIKit
 import SnapKit
 
-extension FullscreenCourseListView {
-    struct Appearance {
-        let headerHeight: CGFloat = 140.0
-    }
-}
-
 final class FullscreenCourseListView: UIView {
-    let appearance: Appearance
-
     private let contentView: UIView
-    private lazy var headerView: GradientCoursesPlaceholderView = {
-        let appearance = GradientCoursesPlaceholderView.Appearance(
-            titleFont: UIFont.systemFont(ofSize: 20),
-            subtitleFont: UIFont.systemFont(ofSize: 16)
-        )
-        return GradientCoursesPlaceholderView(
-            frame: .zero,
-            color: .blue,
-            appearance: appearance
-        )
-    }()
 
-    init(
-        frame: CGRect,
-        contentView: UIView,
-        appearance: Appearance = Appearance()
-    ) {
-        self.appearance = appearance
+    init(frame: CGRect, contentView: UIView) {
         self.contentView = contentView
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -51,38 +26,15 @@ final class FullscreenCourseListView: UIView {
 }
 
 extension FullscreenCourseListView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = .white
-
-        guard let contentView = contentView as? CourseListView else {
-            fatalError()
-        }
-
-        //contentView.
-    }
-
     func addSubviews() {
         self.addSubview(self.contentView)
     }
 
     func makeConstraints() {
-//        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-//        self.headerView.snp.makeConstraints { make in
-//            //make.width.equalTo(self.snp.width)
-//            //make.top.leading.trailing.equalToSuperview()
-//            make.height.equalTo(self.appearance.headerHeight)
-//        }
-
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.snp.makeConstraints { make in
             make.width.equalTo(self.snp.width)
             make.top.leading.bottom.trailing.equalToSuperview()
         }
-    }
-}
-
-extension FullscreenCourseListView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
     }
 }

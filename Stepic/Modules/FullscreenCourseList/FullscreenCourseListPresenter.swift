@@ -9,26 +9,28 @@
 import UIKit
 
 protocol FullscreenCourseListPresenterProtocol {
-    func presentSomething(response: FullscreenCourseList.Something.Response)
+    func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response)
+    func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response)
+    func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response)
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
     weak var viewController: FullscreenCourseListViewControllerProtocol?
 
-    func presentSomething(response: FullscreenCourseList.Something.Response) {
-        var viewModel: FullscreenCourseList.Something.ViewModel
+    func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response) {
+        self.viewController?.displayCourseInfo(viewModel: .init(course: response.course))
+    }
 
-        switch response.result {
-        case .failure(let error):
-            viewModel = FullscreenCourseList.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case .success(let result):
-            if result.isEmpty {
-                viewModel = FullscreenCourseList.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = FullscreenCourseList.Something.ViewModel(state: .result(data: result))
-            }
-        }
+    func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response) {
+        self.viewController?.displayCourseSyllabus(viewModel: .init(course: response.course))
+    }
 
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response) {
+        self.viewController?.displayLastStep(
+            viewModel: .init(
+                course: response.course,
+                isAdaptive: response.isAdaptive
+            )
+        )
     }
 }

@@ -23,31 +23,28 @@ protocol CourseListViewControllerDelegate: class {
     func secondaryButtonClicked(viewModel: CourseWidgetViewModel)
 }
 
-final class CourseListViewController: UIViewController {
+class CourseListViewController: UIViewController {
     let interactor: CourseListInteractorProtocol
 
     private var state: CourseList.ViewControllerState
 
-    private let listDelegate: CourseListCollectionViewDelegate
-    private let listDataSource: CourseListCollectionViewDataSource
+    let listDelegate: CourseListCollectionViewDelegate
+    let listDataSource: CourseListCollectionViewDataSource
 
     lazy var courseListView = self.view as? CourseListView
 
-    private let colorMode: CourseListColorMode
-    private let orientation: PresentationOrientation
+    let colorMode: CourseListColorMode
     private var canTriggerPagination = true
 
-    init(
+    fileprivate init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
-        orientation: PresentationOrientation,
         maxNumberOfDisplayedCourses: Int? = nil
     ) {
         self.interactor = interactor
         self.state = initialState
         self.colorMode = colorMode
-        self.orientation = orientation
 
         self.listDelegate = CourseListCollectionViewDelegate()
         self.listDataSource = CourseListCollectionViewDataSource(
@@ -64,70 +61,14 @@ final class CourseListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
-        switch self.orientation {
-        case .horizontal:
-            let view = HorizontalCourseListView(
-                frame: UIScreen.main.bounds,
-                columnsCount: 1,
-                rowsCount: 2,
-                colorMode: self.colorMode,
-                delegate: self.listDelegate,
-                dataSource: self.listDataSource,
-                viewDelegate: self
-            )
-            self.view = view
-        case .vertical:
-            let view = VerticalCourseListView(
-                frame: UIScreen.main.bounds,
-                columnsCount: 1,
-                colorMode: self.colorMode,
-                delegate: self.listDelegate,
-                dataSource: self.listDataSource,
-                viewDelegate: self,
-                isHeaderViewHidden: false
-            )
-
-            let headerView = GradientCoursesPlaceholderView(frame: .zero, color: .blue)
-            headerView.titleText = NSAttributedString(string: "Текст какой-то")
-            headerView.subtitleText = NSAttributedString(string: "Подтекст")
-            view.headerView = headerView
-
-            let paginationView = PaginationView(frame: .zero)
-            paginationView.onRefreshButtonClick = { [weak self] in
-                self?.interactor.fetchNextCourses(request: .init())
-            }
-            view.paginationView = paginationView
-
-            self.view = view
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateState(newState: self.state)
         self.interactor.fetchCourses(request: .init())
     }
 
-    private func updatePagination(hasNextPage: Bool, hasError: Bool) {
-        defer {
-            self.canTriggerPagination = hasNextPage
-        }
-        guard let verticalCourseListView = self.courseListView as? VerticalCourseListView else {
-            return
-        }
-
-        verticalCourseListView.isPaginationViewHidden = !hasNextPage
-
-        guard let paginationView = verticalCourseListView.paginationView as? PaginationView else {
-            return
-        }
-
-        if hasError {
-            paginationView.setError()
-        } else {
-            paginationView.setLoading()
-        }
+    func updatePagination(hasNextPage: Bool, hasError: Bool) {
+        self.canTriggerPagination = hasNextPage
     }
 
     private func updateState(newState: CourseList.ViewControllerState) {
@@ -141,11 +82,6 @@ final class CourseListViewController: UIViewController {
             self.courseListView?.showLoading()
         }
         self.state = newState
-    }
-
-    enum PresentationOrientation {
-        case horizontal
-        case vertical
     }
 }
 
@@ -209,5 +145,113 @@ extension CourseListViewController: CourseListViewControllerDelegate {
         self.interactor.doSecondaryAction(
             request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
         )
+    }
+}
+
+final class HorizontalCourseListViewController: CourseListViewController {
+    override init(
+        interactor: CourseListInteractorProtocol,
+        initialState: CourseList.ViewControllerState = .loading,
+        colorMode: CourseListColorMode = .default,
+        maxNumberOfDisplayedCourses: Int? = nil
+    ) {
+        super.init(
+            interactor: interactor,
+            initialState: initialState,
+            colorMode: colorMode,
+            maxNumberOfDisplayedCourses: maxNumberOfDisplayedCourses
+        )
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        let view = HorizontalCourseListView(
+            frame: UIScreen.main.bounds,
+            columnsCount: 1,
+            rowsCount: 2,
+            colorMode: self.colorMode,
+            delegate: self.listDelegate,
+            dataSource: self.listDataSource,
+            viewDelegate: self
+        )
+        self.view = view
+    }
+}
+
+final class VerticalCourseListViewController: CourseListViewController {
+    private let presentationDescription: PresentationDescription?
+    lazy var verticalCourseListView = self.courseListView as? VerticalCourseListView
+
+    init(
+        interactor: CourseListInteractorProtocol,
+        initialState: CourseList.ViewControllerState = .loading,
+        colorMode: CourseListColorMode = .default,
+        presentationDescription: PresentationDescription?
+    ) {
+        self.presentationDescription = presentationDescription
+        super.init(
+            interactor: interactor,
+            initialState: initialState,
+            colorMode: colorMode,
+            maxNumberOfDisplayedCourses: nil
+        )
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        let view = VerticalCourseListView(
+            frame: UIScreen.main.bounds,
+            columnsCount: 1,
+            colorMode: self.colorMode,
+            delegate: self.listDelegate,
+            dataSource: self.listDataSource,
+            viewDelegate: self,
+            isHeaderViewHidden: self.presentationDescription == nil
+        )
+
+        if let presentationDescription = self.presentationDescription {
+            let headerView = GradientCoursesPlaceholderViewFactory(
+                color: .pink
+            ).makeFullscreenView(
+                title: presentationDescription.title,
+                subtitle: presentationDescription.subtitle
+            )
+            view.headerView = headerView
+        }
+
+        let paginationView = PaginationView(frame: .zero)
+        paginationView.onRefreshButtonClick = { [weak self] in
+            self?.interactor.fetchNextCourses(request: .init())
+        }
+        view.paginationView = paginationView
+
+        self.view = view
+    }
+
+    override func updatePagination(hasNextPage: Bool, hasError: Bool) {
+        super.updatePagination(hasNextPage: hasNextPage, hasError: hasError)
+
+        verticalCourseListView?.isPaginationViewHidden = !hasNextPage
+
+        guard let paginationView = verticalCourseListView?.paginationView as? PaginationView else {
+            return
+        }
+
+        if hasError {
+            paginationView.setError()
+        } else {
+            paginationView.setLoading()
+        }
+    }
+
+    struct PresentationDescription {
+        var title: String
+        var subtitle: String?
     }
 }

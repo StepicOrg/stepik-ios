@@ -10,7 +10,7 @@ import UIKit
 
 extension VerticalCourseListFlowLayout {
     struct Appearance {
-        let headerViewHeight: CGFloat = 140
+        let headerViewHeight: CGFloat = 104
         let paginationViewHeight: CGFloat = 52
     }
 }

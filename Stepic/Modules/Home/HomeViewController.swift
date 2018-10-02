@@ -51,10 +51,9 @@ final class HomeViewController: BaseExploreViewController {
 
         // Enrolled courses
         let courseListType = EnrolledCourseListType()
-        let enrolledCourseListAssembly = CourseListAssembly(
+        let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light,
-            presentationOrientation: .horizontal
+            colorMode: .light
         )
         let enrolledCourseViewController = enrolledCourseListAssembly.makeModule()
         enrolledCourseListAssembly.moduleInput?.reload()
@@ -84,10 +83,9 @@ final class HomeViewController: BaseExploreViewController {
     override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Popular courses
         let courseListType = PopularCourseListType(language: contentLanguage)
-        let popularAssembly = CourseListAssembly(
+        let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
             colorMode: .dark,
-            presentationOrientation: .horizontal,
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()

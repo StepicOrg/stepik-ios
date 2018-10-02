@@ -14,7 +14,12 @@ extension GradientCoursesPlaceholderView {
         var titleFont = UIFont.systemFont(ofSize: 16)
         var subtitleFont = UIFont.systemFont(ofSize: 16)
 
-        let labelsInsets = UIEdgeInsets(top: 30, left: 28, bottom: 28, right: 30)
+        var titleTextAlignment = NSTextAlignment.natural
+        var subtitleTextAlignment = NSTextAlignment.center
+
+        var labelsInsets = UIEdgeInsets(top: 30, left: 28, bottom: 28, right: 30)
+
+        init() { }
     }
 }
 
@@ -32,6 +37,7 @@ final class GradientCoursesPlaceholderView: UIView {
         let label = UILabel()
         label.font = self.appearance.titleFont
         label.numberOfLines = 0
+        label.textAlignment = self.appearance.titleTextAlignment
         label.textColor = self.color.titleTextColor
         return label
     }()
@@ -39,7 +45,7 @@ final class GradientCoursesPlaceholderView: UIView {
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.subtitleFont
-        label.textAlignment = .center
+        label.textAlignment = self.appearance.subtitleTextAlignment
         label.numberOfLines = 2
         label.textColor = self.color.subtitleTextColor
         return label
@@ -125,7 +131,11 @@ extension GradientCoursesPlaceholderView: ProgrammaticallyInitializableViewProto
 
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.edges.equalTo(self.appearance.labelsInsets)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.labelsInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.labelsInsets.right)
+            make.top.greaterThanOrEqualToSuperview().offset(self.appearance.labelsInsets.top)
+            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.labelsInsets.bottom)
         }
     }
 }

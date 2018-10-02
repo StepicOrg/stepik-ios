@@ -9,11 +9,11 @@
 import UIKit
 
 final class FullscreenCourseListAssembly: Assembly {
-    let presentationDescription: FullscreenCourseListViewController.PresentationDescription?
+    let presentationDescription: VerticalCourseListViewController.PresentationDescription?
     let courseListType: CourseListType
 
     init(
-        presentationDescription: FullscreenCourseListViewController.PresentationDescription? = nil,
+        presentationDescription: VerticalCourseListViewController.PresentationDescription? = nil,
         courseListType: CourseListType
     ) {
         self.presentationDescription = presentationDescription
@@ -21,15 +21,12 @@ final class FullscreenCourseListAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = FullscreenCourseListProvider()
         let presenter = FullscreenCourseListPresenter()
-        let interactor = FullscreenCourseListInteractor(
-            presenter: presenter,
-            provider: provider
-        )
+        let interactor = FullscreenCourseListInteractor(presenter: presenter)
         let viewController = FullscreenCourseListViewController(
             interactor: interactor,
-            courseListType: self.courseListType
+            courseListType: self.courseListType,
+            presentationDescription: self.presentationDescription
         )
 
         presenter.viewController = viewController

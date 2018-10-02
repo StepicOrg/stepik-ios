@@ -9,37 +9,32 @@
 import Foundation
 import PromiseKit
 
-protocol FullscreenCourseListInteractorProtocol {
-    func doSomeAction(request: FullscreenCourseList.Something.Request)
-}
+protocol FullscreenCourseListInteractorProtocol: CourseListOutputProtocol { }
 
 final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtocol {
     let presenter: FullscreenCourseListPresenterProtocol
-    let provider: FullscreenCourseListProviderProtocol
 
-    init(
-        presenter: FullscreenCourseListPresenterProtocol,
-        provider: FullscreenCourseListProviderProtocol
-    ) {
+    init(presenter: FullscreenCourseListPresenterProtocol) {
         self.presenter = presenter
-        self.provider = provider
     }
 
-    // MARK: Do some action
-
-    func doSomeAction(request: FullscreenCourseList.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: FullscreenCourseList.Something.Response(result: .success(items))
-            )
-        }.catch { _ in
-            self.presenter.presentSomething(
-                response: FullscreenCourseList.Something.Response(result: .failure(Error.fetchFailed))
-            )
-        }
+    func presentCourseInfo(course: Course) {
+        self.presenter.presentCourseInfo(response: .init(course: course))
     }
 
-    enum Error: Swift.Error {
-        case fetchFailed
+    func presentCourseSyllabus(course: Course) {
+        self.presenter.presentCourseSyllabus(response: .init(course: course))
+    }
+
+    func presentLastStep(course: Course, isAdaptive: Bool) {
+        self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
+    }
+
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+
+    }
+
+    func presentError(sourceModule: CourseListInputProtocol) {
+
     }
 }

@@ -9,21 +9,23 @@
 import UIKit
 
 protocol FullscreenCourseListViewControllerProtocol: class {
-    func displaySomething(viewModel: FullscreenCourseList.Something.ViewModel)
+    func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel)
+    func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel)
+    func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel)
 }
 
 final class FullscreenCourseListViewController: UIViewController {
     let interactor: FullscreenCourseListInteractorProtocol
-    private var state: FullscreenCourseList.ViewControllerState
     private let courseListType: CourseListType
+    private let presentationDescription: VerticalCourseListViewController.PresentationDescription?
 
     init(
         interactor: FullscreenCourseListInteractorProtocol,
         courseListType: CourseListType,
-        initialState: FullscreenCourseList.ViewControllerState = .loading
+        presentationDescription: VerticalCourseListViewController.PresentationDescription?
     ) {
         self.interactor = interactor
-        self.state = initialState
+        self.presentationDescription = presentationDescription
         self.courseListType = courseListType
 
         super.init(nibName: nil, bundle: nil)
@@ -36,11 +38,11 @@ final class FullscreenCourseListViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let courseListAssembly = CourseListAssembly(
+        let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
             colorMode: .light,
-            presentationOrientation: .vertical,
-            maxNumberOfDisplayedCourses: nil
+            presentationDescription: self.presentationDescription,
+            output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
         courseListAssembly.moduleInput?.reload()
@@ -52,35 +54,30 @@ final class FullscreenCourseListViewController: UIViewController {
         )
         self.view = view
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.someAction()
-    }
-
-    // MARK: Requests logic
-
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: FullscreenCourseList.Something.Request()
-        )
-    }
-
-    // MARK: Presentation description
-
-    struct PresentationDescription {
-        var title: String
-        var subtitle: String?
-    }
 }
 
 extension FullscreenCourseListViewController: FullscreenCourseListViewControllerProtocol {
-    func displaySomething(viewModel: FullscreenCourseList.Something.ViewModel) {
-        display(newState: viewModel.state)
+    func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel) {
+        let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func display(newState: FullscreenCourseList.ViewControllerState) {
-        self.state = newState
+    func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel) {
+        let assembly = SyllabusLegacyAssembly(course: viewModel.course)
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: viewModel.course,
+            isAdaptive: viewModel.isAdaptive,
+            using: navigationController
+        )
     }
 }

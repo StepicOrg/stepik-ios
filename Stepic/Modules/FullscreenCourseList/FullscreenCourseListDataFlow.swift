@@ -9,30 +9,43 @@
 import Foundation
 
 enum FullscreenCourseList {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
 
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
-        struct Request { }
-
+    /// Present course syllabus
+    enum PresentCourseSyllabus {
         struct Response {
-            var result: Result<[Any]>
+            let course: Course
         }
 
         struct ViewModel {
-            var state: ViewControllerState
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
         }
     }
+    /// Present course info
+    enum PresentCourseInfo {
+        struct Response {
+            let course: Course
+        }
 
-    // MARK: States
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+        }
+    }
+    /// Present last step in course
+    enum PresentLastStep {
+        struct Response {
+            let course: Course
+            let isAdaptive: Bool
+        }
 
-    enum ViewControllerState {
-        case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let isAdaptive: Bool
+        }
     }
 }

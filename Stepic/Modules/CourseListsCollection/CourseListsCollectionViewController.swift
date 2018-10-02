@@ -46,10 +46,9 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
         switch viewModel.state {
         case .result(let data):
             for courseListViewModel in data {
-                let assembly = CourseListAssembly(
+                let assembly = HorizontalCourseListAssembly(
                     type: courseListViewModel.courseList,
                     colorMode: .light,
-                    presentationOrientation: .horizontal,
                     output: self.interactor as? CourseListOutputProtocol
                 )
                 let viewController = assembly.makeModule()

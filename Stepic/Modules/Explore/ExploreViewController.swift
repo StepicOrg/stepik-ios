@@ -110,10 +110,9 @@ final class ExploreViewController: BaseExploreViewController {
 
         // Popular courses
         let courseListType = PopularCourseListType(language: contentLanguage)
-        let popularAssembly = CourseListAssembly(
+        let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
             colorMode: .dark,
-            presentationOrientation: .horizontal,
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()

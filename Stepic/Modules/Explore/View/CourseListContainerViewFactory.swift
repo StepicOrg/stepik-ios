@@ -17,7 +17,7 @@ final class CourseListContainerViewFactory {
     struct HorizontalCoursesCollectionHeaderDescription {
         var title: String?
         var summary: String?
-        var description: String?
+        var description: String
     }
 
     enum Appearance {
@@ -54,10 +54,12 @@ final class CourseListContainerViewFactory {
         for contentView: UIView,
         headerDescription: HorizontalCoursesCollectionHeaderDescription
     ) -> ExploreBlockContainerView {
-        let headerView = ExploreCoursesCollectionHeaderView(frame: .zero)
+        let headerView = ExploreCoursesCollectionHeaderView(
+            frame: .zero,
+            description: headerDescription.description
+        )
         headerView.titleText = headerDescription.title
         headerView.summaryText = headerDescription.summary
-        headerView.descriptionText = headerDescription.description
 
         return self.makeHorizontalContainerView(headerView: headerView, contentView: contentView)
     }
