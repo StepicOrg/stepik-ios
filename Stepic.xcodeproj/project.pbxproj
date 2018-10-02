@@ -11272,6 +11272,7 @@
 				2C59F02320EB8AC800666EE0 /* Sources */,
 				2C59F02420EB8AC800666EE0 /* Frameworks */,
 				2C59F02520EB8AC800666EE0 /* Resources */,
+				08B40CBF215901D900327F50 /* Fabric script */,
 				2C0D584C20F3C0F400A28252 /* SwiftLint Script */,
 				A75C902C92CF5BD34425B2FD /* [CP] Embed Pods Frameworks */,
 			);
@@ -11609,7 +11610,7 @@
 					};
 					2C59F02620EB8AC800666EE0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = 6UNHY8UY6E;
+						DevelopmentTeam = E9KER42773;
 						ProvisioningStyle = Automatic;
 					};
 					2C59F03920EB8ACA00666EE0 = {
@@ -12784,7 +12785,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8\n";
 		};
 		08983F241F3E4112008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12827,6 +12828,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+		};
+		08B40CBF215901D900327F50 /* Fabric script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8\n";
 		};
 		08DB2D6354939DE948ED5639 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -19049,7 +19068,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -19080,7 +19099,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -19345,7 +19364,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				DEVELOPMENT_TEAM = E9KER42773;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -19375,7 +19394,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UNHY8UY6E;
+				DEVELOPMENT_TEAM = E9KER42773;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/ExamEGERussian/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
