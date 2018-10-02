@@ -279,7 +279,7 @@ extension LearningPresenter {
             LearningViewData(
                 id: vertex.id,
                 title: vertex.title,
-                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+                description: vertex.topicDescription,
                 timeToComplete: getPluralizedTimeToComplete(Int(vertex.timeToComplete.rounded())),
                 progress: getProgress(for: vertex)
             )

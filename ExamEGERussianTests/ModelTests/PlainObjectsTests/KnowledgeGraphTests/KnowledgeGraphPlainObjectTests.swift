@@ -34,5 +34,6 @@ class KnowledgeGraphPlainObjectTests: XCTestCase {
         XCTAssertEqual(graph!.goals.count, 1)
         XCTAssertEqual(graph!.topics.count, 2)
         XCTAssertEqual(graph!.topicsMap.count, 2)
+        XCTAssertTrue(graph!.topics.contains(where: { $0.description == "Тут что-то будет" }))
     }
 }
