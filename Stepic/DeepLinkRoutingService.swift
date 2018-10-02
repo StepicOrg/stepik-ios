@@ -113,7 +113,7 @@ extension DeepLinkRoutingService {
         case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
         case profile = "https:\\/\\/stepik.org\\/users\\/(\\d+)\\/?"
         case notifications = "https:\\/\\/stepik.org\\/notifications\\/?"
-        case syllabus = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+)(\\d+)\\/syllabus\\/?"
+        case syllabus = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+)(\\d+)\\/syllabus\\/?[a-zа-я0-9=?&]*"
         case lesson = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?unit=(\\d+))?\\/?"
         case discussions = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?discussion=(\\d+))(?:\\&unit=(\\d+))?\\/?"
 
