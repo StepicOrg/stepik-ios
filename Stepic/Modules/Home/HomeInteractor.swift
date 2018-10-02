@@ -9,11 +9,11 @@
 import Foundation
 import PromiseKit
 
-protocol HomeInteractorProtocol: ExploreInteractorProtocol {
+protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
     func loadStreakActivity(request: Home.LoadStreak.Request)
 }
 
-final class HomeInteractor: ExploreInteractor, HomeInteractorProtocol {
+final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     let provider: HomeProviderProtocol
     private let userAccountService: UserAccountServiceProtocol
 
@@ -23,16 +23,11 @@ final class HomeInteractor: ExploreInteractor, HomeInteractorProtocol {
         presenter: HomePresenterProtocol,
         provider: HomeProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
-        contentLanguageService: ContentLanguageServiceProtocol,
-        languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
+        contentLanguageService: ContentLanguageServiceProtocol
     ) {
         self.provider = provider
         self.userAccountService = userAccountService
-        super.init(
-            presenter: presenter,
-            contentLanguageService: contentLanguageService,
-            languageSwitchAvailabilityService: languageSwitchAvailabilityService
-        )
+        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
     }
 
     func loadStreakActivity(request: Home.LoadStreak.Request) {

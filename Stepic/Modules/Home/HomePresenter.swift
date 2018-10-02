@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol HomePresenterProtocol: ExplorePresenterProtocol {
+protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStreakActivity(response: Home.LoadStreak.Response)
 }
 
-final class HomePresenter: ExplorePresenter, HomePresenterProtocol {
+final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
     lazy var homeViewController = self.viewController as? HomeViewControllerProtocol
 
     func presentStreakActivity(response: Home.LoadStreak.Response) {
@@ -61,14 +61,4 @@ final class HomePresenter: ExplorePresenter, HomePresenterProtocol {
 
         return countText
     }
-
-    // MARK: - ExplorePresenter
-
-    override func presentLanguageSwitchBlock(
-        response: Explore.CheckLanguageSwitchAvailability.Response
-    ) {
-        // Always hide language switch for Home
-        self.viewController?.displayLanguageSwitchBlock(viewModel: .init(isHidden: true))
-    }
-
 }

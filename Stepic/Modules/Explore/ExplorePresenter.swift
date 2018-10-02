@@ -8,51 +8,16 @@
 
 import UIKit
 
-protocol ExplorePresenterProtocol {
-    func presentContent(response: Explore.LoadContent.Response)
+protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response)
-    func presentFullscreenCourseList(response: Explore.PresentFullscreenCourseListModule.Response)
-
-    func presentCourseInfo(response: Explore.PresentCourseInfo.Response)
-    func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response)
-    func presentLastStep(response: Explore.PresentLastStep.Response)
 }
 
-class ExplorePresenter: ExplorePresenterProtocol {
-    weak var viewController: ExploreViewControllerProtocol?
-
-    func presentContent(response: Explore.LoadContent.Response) {
-        self.viewController?.displayContent(
-            viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
-        )
-    }
+final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
+    lazy var exploreViewController = self.viewController as? ExploreViewControllerProtocol
 
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response) {
-        self.viewController?.displayLanguageSwitchBlock(
+        self.exploreViewController?.displayLanguageSwitchBlock(
             viewModel: .init(isHidden: response.isHidden)
-        )
-    }
-
-    func presentFullscreenCourseList(response: Explore.PresentFullscreenCourseListModule.Response) {
-        self.viewController?.displayFullscreenCourseList(
-            viewModel: .init(courseListType: response.courseListType)
-        )
-    }
-
-    func presentCourseInfo(response: Explore.PresentCourseInfo.Response) {
-        self.viewController?.displayCourseInfo(viewModel: .init(course: response.course))
-    }
-
-    func presentCourseSyllabus(response: Explore.PresentCourseSyllabus.Response) {
-        self.viewController?.displayCourseSyllabus(viewModel: .init(course: response.course))
-    }
-
-    func presentLastStep(response: Explore.PresentLastStep.Response) {
-        self.viewController?.displayLastStep(
-            viewModel: .init(
-                course: response.course,
-                isAdaptive: response.isAdaptive
-            )
         )
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-final class ExploreView: UIView {
+final class BaseExploreView: UIView {
     private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
 
     override init(frame: CGRect) {
@@ -37,7 +37,7 @@ final class ExploreView: UIView {
     }
 }
 
-extension ExploreView: ProgrammaticallyInitializableViewProtocol {
+extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }

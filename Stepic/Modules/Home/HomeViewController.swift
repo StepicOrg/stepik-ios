@@ -8,19 +8,16 @@
 
 import UIKit
 
-protocol HomeViewControllerProtocol: ExploreViewControllerProtocol {
+protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
 }
 
-final class HomeViewController: ExploreViewController {
+final class HomeViewController: BaseExploreViewController {
     private lazy var streakView = StreakActivityView(frame: .zero)
     lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
-    init(
-        interactor: HomeInteractorProtocol,
-        initialState: Explore.ViewControllerState = .loading
-    ) {
-        super.init(interactor: interactor, initialState: initialState)
+    init(interactor: HomeInteractorProtocol) {
+        super.init(interactor: interactor)
     }
 
     required init?(coder aDecoder: NSCoder) {

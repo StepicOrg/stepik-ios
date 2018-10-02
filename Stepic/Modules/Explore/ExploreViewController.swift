@@ -9,40 +9,20 @@
 import UIKit
 import SnapKit
 
-protocol ExploreViewControllerProtocol: class {
-    func displayContent(viewModel: Explore.LoadContent.ViewModel)
+protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
-    func displayFullscreenCourseList(viewModel: Explore.PresentFullscreenCourseListModule.ViewModel)
-    func displayCourseInfo(viewModel: Explore.PresentCourseInfo.ViewModel)
-    func displayCourseSyllabus(viewModel: Explore.PresentCourseSyllabus.ViewModel)
-    func displayLastStep(viewModel: Explore.PresentLastStep.ViewModel)
 }
 
-class ExploreViewController: UIViewController {
-    let interactor: ExploreInteractorProtocol
-    var state: Explore.ViewControllerState
-    private var submodules: [Submodule] = []
-
-    lazy var exploreView = self.view as? ExploreView
+final class ExploreViewController: BaseExploreViewController {
+    lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar(frame: .zero)
 
-    init(
-        interactor: ExploreInteractorProtocol,
-        initialState: Explore.ViewControllerState = .loading
-    ) {
-        self.interactor = interactor
-        self.state = initialState
-
-        super.init(nibName: nil, bundle: nil)
+    init(interactor: ExploreInteractorProtocol) {
+        super.init(interactor: interactor)
         self.searchBar.searchBarDelegate = self
-        self.registerForNotifications()
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,47 +32,20 @@ class ExploreViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let view = ExploreView(frame: UIScreen.main.bounds)
-        self.view = view
+        super.loadView()
         self.navigationItem.titleView = self.searchBar
     }
 
     override func viewDidLoad() {
+        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
         super.viewDidLoad()
-        self.initLanguageIndependentSubmodules()
-
-        self.interactor.loadLanguageSwitchBlock(request: .init())
-        self.interactor.loadContent(request: .init())
     }
 
-    // MARK: Modules
-
-    // REVIEW: position
-    func registerSubmodule(_ submodule: Submodule, insertionPosition: Int? = nil) {
-        self.submodules.append(submodule)
-        self.addChildViewController(submodule.viewController)
-
-        let position = insertionPosition ?? self.submodules.count - 1
-        if let view = submodule.view {
-            self.exploreView?.insertBlockView(view, at: position)
-        }
-    }
-
-    func removeLanguageDependentSubmodules() {
-        for submodule in self.submodules where submodule.isLanguageDependent {
-            if let view = submodule.view {
-                self.exploreView?.removeBlockView(view)
-            }
-            submodule.viewController.removeFromParentViewController()
-        }
-        self.submodules = self.submodules.filter { !$0.isLanguageDependent }
-    }
-
-    func initLanguageIndependentSubmodules() {
+    override func initLanguageIndependentSubmodules() {
         self.initSearchResults()
     }
 
-    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Tags
         let tagsAssembly = TagsAssembly(
             contentLanguage: contentLanguage,
@@ -154,16 +107,6 @@ class ExploreViewController: UIViewController {
         )
     }
 
-    private func registerForNotifications() {
-        NotificationCenter.default.addObserver(
-            forName: .contentLanguageDidChange,
-            object: nil,
-            queue: nil
-        ) { _ in
-            self.interactor.loadContent(request: .init())
-        }
-    }
-
     // MARK: - Search
 
     private func initSearchResults() {
@@ -196,27 +139,9 @@ class ExploreViewController: UIViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
-
-    // MARK: - Structs
-
-    struct Submodule {
-        let viewController: UIViewController
-        let view: UIView?
-        let isLanguageDependent: Bool
-    }
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
-    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
-        switch viewModel.state {
-        case .normal(let language):
-            self.removeLanguageDependentSubmodules()
-            self.initLanguageDependentSubmodules(contentLanguage: language)
-        case .loading:
-            break
-        }
-    }
-
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
         if viewModel.isHidden {
             return
@@ -231,38 +156,6 @@ extension ExploreViewController: ExploreViewControllerProtocol {
                 isLanguageDependent: false
             ),
             insertionPosition: 0
-        )
-    }
-
-    func displayFullscreenCourseList(
-        viewModel: Explore.PresentFullscreenCourseListModule.ViewModel
-    ) {
-        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    func displayCourseInfo(viewModel: Explore.PresentCourseInfo.ViewModel) {
-        let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    func displayCourseSyllabus(viewModel: Explore.PresentCourseSyllabus.ViewModel) {
-        let assembly = SyllabusLegacyAssembly(course: viewModel.course)
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    func displayLastStep(viewModel: Explore.PresentLastStep.ViewModel) {
-        guard let navigationController = self.navigationController else {
-            return
-        }
-
-        LastStepRouter.continueLearning(
-            for: viewModel.course,
-            isAdaptive: viewModel.isAdaptive,
-            using: navigationController
         )
     }
 }
@@ -280,41 +173,5 @@ extension ExploreViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchResultsModuleInput?.queryChanged(to: searchText)
-    }
-}
-
-@available(*, deprecated, message: "Class for backward compatibility")
-fileprivate final class SyllabusLegacyAssembly: Assembly {
-    private let course: Course
-
-    init(course: Course) {
-        self.course = course
-    }
-
-    func makeModule() -> UIViewController {
-        let viewController = ControllerHelper.instantiateViewController(
-            identifier: "SectionsViewController"
-        ) as! SectionsViewController
-        viewController.course = course
-        viewController.hidesBottomBarWhenPushed = true
-        return viewController
-    }
-}
-
-@available(*, deprecated, message: "Class for backward compatibility")
-fileprivate final class CourseInfoLegacyAssembly: Assembly {
-    private let course: Course
-
-    init(course: Course) {
-        self.course = course
-    }
-
-    func makeModule() -> UIViewController {
-        let viewController = ControllerHelper.instantiateViewController(
-            identifier: "CoursePreviewViewController"
-        ) as! CoursePreviewViewController
-        viewController.course = course
-        viewController.hidesBottomBarWhenPushed = true
-        return viewController
     }
 }

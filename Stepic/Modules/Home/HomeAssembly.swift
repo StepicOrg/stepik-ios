@@ -16,8 +16,7 @@ final class HomeAssembly: Assembly {
             presenter: presenter,
             provider: provider,
             userAccountService: UserAccountService(),
-            contentLanguageService: ContentLanguageService(),
-            languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
+            contentLanguageService: ContentLanguageService()
         )
         let viewController = HomeViewController(
             interactor: interactor

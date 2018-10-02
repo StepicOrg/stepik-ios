@@ -9,16 +9,12 @@
 import Foundation
 import PromiseKit
 
-protocol ExploreInteractorProtocol {
-    func loadContent(request: Explore.LoadContent.Request)
+protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request)
-
-    func loadFullscreenCourseList(request: Explore.PresentFullscreenCourseListModule.Request)
 }
 
-class ExploreInteractor: ExploreInteractorProtocol {
-    let presenter: ExplorePresenterProtocol
-    let contentLanguageService: ContentLanguageServiceProtocol
+final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
+    lazy var explorePresenter = self.presenter as? ExplorePresenterProtocol
     let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
 
     init(
@@ -26,67 +22,17 @@ class ExploreInteractor: ExploreInteractorProtocol {
         contentLanguageService: ContentLanguageServiceProtocol,
         languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
-        self.presenter = presenter
-        self.contentLanguageService = contentLanguageService
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
-    }
-
-    func loadContent(request: Explore.LoadContent.Request) {
-        self.presenter.presentContent(
-            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
-        )
+        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
     }
 
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request) {
-        self.presenter.presentLanguageSwitchBlock(
+        self.explorePresenter?.presentLanguageSwitchBlock(
             response: .init(
                 isHidden: !self.contentLanguageSwitchAvailabilityService
                     .shouldShowLanguageSwitchOnExplore
             )
         )
         self.contentLanguageSwitchAvailabilityService.shouldShowLanguageSwitchOnExplore = false
-    }
-
-    func loadFullscreenCourseList(request: Explore.PresentFullscreenCourseListModule.Request) {
-        self.presenter.presentFullscreenCourseList(
-            response: .init(courseListType: request.courseListType)
-        )
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
-    }
-}
-
-extension ExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
-
-extension ExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(type: CollectionCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
-
-extension ExploreInteractor: CourseListOutputProtocol {
-    func presentCourseInfo(course: Course) {
-        self.presenter.presentCourseInfo(response: .init(course: course))
-    }
-
-    func presentCourseSyllabus(course: Course) {
-        self.presenter.presentCourseSyllabus(response: .init(course: course))
-    }
-
-    func presentLastStep(course: Course, isAdaptive: Bool) {
-        self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
-    }
-
-    func presentEmptyState(sourceModule: CourseListInputProtocol) {
-
-    }
-
-    func presentError(sourceModule: CourseListInputProtocol) {
     }
 }
