@@ -600,3 +600,7 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 
 "FakeUserFailedSignInTitle" = "Something went wrong";
 "FakeUserFailedSignInMessage" = "Check​ ​your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
+
+"TopicProgressInPercentsText1" = "%@%% completed";
+"TopicProgressInPercentsText234" = "%@%% completed";
+"TopicProgressInPercentsText567890" = "%@%% completed";

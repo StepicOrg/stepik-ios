@@ -601,3 +601,7 @@ SignInTitleSocialTest = "<b>Продолжить</b> с помощью";
 
 "FakeUserFailedSignInTitle" = "Что-то пошло не так";
 "FakeUserFailedSignInMessage" = "Проверьте ваше интернет соединение и повторите попытку.";
+
+"TopicProgressInPercentsText1" = "%@%% пройден";
+"TopicProgressInPercentsText234" = "%@%% пройдено";
+"TopicProgressInPercentsText567890" = "%@%% пройдено";
