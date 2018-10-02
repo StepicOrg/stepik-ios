@@ -11,12 +11,14 @@
     "topics": [
         {
             "id": "slitno-razdelno",
-            "title": "B13 Слитное раздельное написание"
+            "title": "B13 Слитное раздельное написание",
+            "description": "Тут что-то будет"
         },
         {
             "id": "pristavki",
             "title": "B9 Приставки",
-            "required-for": "slitno-razdelno"
+            "required-for": "slitno-razdelno",
+            "description": "А тут что-то другое"
         }
     ],
     "topics-map": [
@@ -46,7 +48,7 @@
                 {
                     "id": 6000,
                     "type": "practice",
-                    "course": "7798"
+                    "course": "1838"
                 },
                 {
                     "id": 66286,
