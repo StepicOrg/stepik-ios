@@ -11,33 +11,51 @@ import PromiseKit
 
 protocol ContinueCourseInteractorProtocol {
     func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request)
+    func continueLastCourse(request: ContinueCourse.ContinueCourse.Request)
 }
 
 final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     let presenter: ContinueCoursePresenterProtocol
     let provider: ContinueCourseProviderProtocol
+    let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    weak var moduleOutput: ContinueCourseOutputProtocol?
+
+    private var currentCourse: Course?
 
     init(
         presenter: ContinueCoursePresenterProtocol,
-        provider: ContinueCourseProviderProtocol
+        provider: ContinueCourseProviderProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
     func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request) {
         self.provider.fetchLastCourse().done { course in
             if let course = course {
+                self.currentCourse = course
                 self.presenter.presentLastCourse(response: .init(result: course))
             } else {
-                // TODO: module output
+                self.moduleOutput?.hideContinueCourse()
             }
         }.catch { _ in
-            // TODO: error handling
+            self.moduleOutput?.hideContinueCourse()
         }
     }
 
-    enum Error: Swift.Error {
-        case loadLastCourseFailed
+    func continueLastCourse(request: ContinueCourse.ContinueCourse.Request) {
+        guard let currentCourse = self.currentCourse else {
+            return
+        }
+
+        let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(
+            courseId: currentCourse.id
+        )
+        self.moduleOutput?.presentLastStep(
+            course: currentCourse,
+            isAdaptive: isAdaptive
+        )
     }
 }

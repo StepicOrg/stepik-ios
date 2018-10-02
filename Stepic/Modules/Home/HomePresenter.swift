@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStreakActivity(response: Home.LoadStreak.Response)
+    func hideContinueCourse()
 }
 
 final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
@@ -38,6 +39,10 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         }
 
         self.homeViewController?.displayStreakInfo(viewModel: viewModel)
+    }
+
+    func hideContinueCourse() {
+        self.homeViewController?.hideContinueCourse()
     }
 
     private func makeStreakActivityMessage(days: Int, needsToSolveToday: Bool) -> String {

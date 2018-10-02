@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
+    func hideContinueCourse()
 }
 
 final class HomeViewController: BaseExploreViewController {
@@ -38,7 +39,9 @@ final class HomeViewController: BaseExploreViewController {
 
     override func initLanguageIndependentSubmodules() {
         // Continue course
-        let continueCourseAssembly = ContinueCourseAssembly()
+        let continueCourseAssembly = ContinueCourseAssembly(
+            output: self.interactor as? ContinueCourseOutputProtocol
+        )
         let continueCourseViewController = continueCourseAssembly.makeModule()
         self.registerSubmodule(
             .init(
@@ -53,7 +56,8 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light
+            colorMode: .light,
+            output: self.interactor as? CourseListOutputProtocol
         )
         let enrolledCourseViewController = enrolledCourseListAssembly.makeModule()
         enrolledCourseListAssembly.moduleInput?.reload()
@@ -153,6 +157,12 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             streakView.message = message
             streakView.streak = streak
+        }
+    }
+
+    func hideContinueCourse() {
+        if let submodule = self.getSubmodule(type: HomeSubmoduleType.continueCourse) {
+            self.removeSubmodule(submodule)
         }
     }
 }

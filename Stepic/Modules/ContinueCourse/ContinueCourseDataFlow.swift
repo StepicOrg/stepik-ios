@@ -11,7 +11,7 @@ import Foundation
 enum ContinueCourse {
     // MARK: Use cases
 
-    /// Sample use case
+    /// Load last course
     enum LoadLastCourse {
         struct Request { }
 
@@ -22,6 +22,10 @@ enum ContinueCourse {
         struct ViewModel {
             let state: ViewControllerState
         }
+    }
+    /// Go to last step
+    enum ContinueCourse {
+        struct Request { }
     }
 
     // MARK: States

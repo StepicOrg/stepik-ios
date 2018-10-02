@@ -9,12 +9,18 @@
 import UIKit
 import SnapKit
 
+protocol ContinueCourseViewDelegate: class {
+    func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
+}
+
 final class ContinueCourseView: UIView {
     private lazy var lastStepView = ContinueLastStepView(frame: .zero)
+    weak var delegate: ContinueCourseViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -49,6 +55,15 @@ final class ContinueCourseView: UIView {
 }
 
 extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.lastStepView.onContinueButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.continueCourseContinueButtonDidClick(strongSelf)
+        }
+    }
+
     func addSubviews() {
         self.addSubview(self.lastStepView)
     }

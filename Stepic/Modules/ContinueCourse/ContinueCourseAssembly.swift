@@ -9,6 +9,12 @@
 import UIKit
 
 final class ContinueCourseAssembly: Assembly {
+    private weak var moduleOutput: ContinueCourseOutputProtocol?
+
+    init(output: ContinueCourseOutputProtocol? = nil) {
+        self.moduleOutput = output
+    }
+
     func makeModule() -> UIViewController {
         let provider = ContinueCourseProvider(
             userCoursesAPI: UserCoursesAPI(),
@@ -20,13 +26,15 @@ final class ContinueCourseAssembly: Assembly {
         let presenter = ContinueCoursePresenter()
         let interactor = ContinueCourseInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            adaptiveStorageManager: AdaptiveStorageManager()
         )
         let viewController = ContinueCourseViewController(
             interactor: interactor
         )
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
         return viewController
     }
 }

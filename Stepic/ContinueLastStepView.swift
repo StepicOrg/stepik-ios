@@ -42,6 +42,7 @@ final class ContinueLastStepView: UIView {
     private lazy var continueButton: UIButton = {
         let button = ContinueActionButton(frame: .zero)
         button.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+        button.addTarget(self, action: #selector(self.continueButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -143,6 +144,8 @@ final class ContinueLastStepView: UIView {
         }
     }
 
+    var onContinueButtonClick: (() -> Void)?
+
     init(frame: CGRect, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -153,6 +156,11 @@ final class ContinueLastStepView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc
+    private func continueButtonClicked() {
+        self.onContinueButtonClick?()
     }
 }
 

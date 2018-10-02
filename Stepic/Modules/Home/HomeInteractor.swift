@@ -50,3 +50,9 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         }
     }
 }
+
+extension HomeInteractor: ContinueCourseOutputProtocol {
+    func hideContinueCourse() {
+        self.homePresenter?.hideContinueCourse()
+    }
+}

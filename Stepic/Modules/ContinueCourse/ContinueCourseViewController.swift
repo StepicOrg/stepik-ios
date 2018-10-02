@@ -42,6 +42,7 @@ final class ContinueCourseViewController: UIViewController {
         let view = ContinueCourseView(
             frame: UIScreen.main.bounds
         )
+        view.delegate = self
         self.view = view
     }
 
@@ -68,5 +69,11 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
         }
 
         self.state = viewModel.state
+    }
+}
+
+extension ContinueCourseViewController: ContinueCourseViewDelegate {
+    func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView) {
+        self.interactor.continueLastCourse(request: .init())
     }
 }
