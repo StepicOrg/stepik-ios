@@ -337,6 +337,8 @@ EnterSQLQuery = "Enter SQL query:";
 SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
 SolveSomethingToday = "Solve anything today to increase your streak.";
 Close = "Close";
+RecommendationsExplore = "Recommendations";
+RecommendationsExploreDescription = "Check out categories that matching your interests";
 
 /* Onboarding */
 OnboardingTitle1 = "Choose";

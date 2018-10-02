@@ -340,6 +340,8 @@ SolveSomethingToday = "Решите что-нибудь сегодня, чтоб
 
 StreakAlertMessageNoStreak = "Решайте задачи каждый день и улучшайте личный рекорд! Хотели бы Вы получать уведомления, чтобы не забывать учиться каждый день? Эту опцию можно изменить в настройках.";
 Close = "Закрыть";
+RecommendationsExplore = "Рекомендации";
+RecommendationsExploreDescription = "Выбери курс из подборок по интересам";
 
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
