@@ -18,37 +18,22 @@ struct PopularCourseListType: CourseListType {
     let language: ContentLanguage
 }
 
-// REVIEW: class?
-final class EnrolledCourseListType: CourseListType {
+struct EnrolledCourseListType: CourseListType {
 
 }
 
-final class TagCourseListType: CourseListType {
+struct TagCourseListType: CourseListType {
     let id: Int
     let language: ContentLanguage
-
-    init(id: Int, language: ContentLanguage) {
-        self.id = id
-        self.language = language
-    }
 }
 
-final class CollectionCourseListType: CourseListType {
+struct CollectionCourseListType: CourseListType {
     let ids: [Course.IdType]
-
-    init(ids: [Course.IdType]) {
-        self.ids = ids
-    }
 }
 
-final class SearchResultCourseListType: CourseListType {
+struct SearchResultCourseListType: CourseListType {
     let query: String
     let language: ContentLanguage
-
-    init(query: String, language: ContentLanguage) {
-        self.query = query
-        self.language = language
-    }
 }
 
 // MARK: - Services factory
