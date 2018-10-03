@@ -14,4 +14,16 @@ enum FormatterHelper {
             ? "\(String(format: "%.1f", Double(number) / 1000.0))K"
             : "\(number)"
     }
+
+    static func integerPercent(_ number: Int) -> String {
+        return "\(number)%"
+    }
+
+    static func integerPercent(_ float: Float) -> String {
+        return FormatterHelper.integerPercent(Int(float * 100))
+    }
+
+    static func averageRating(_ number: Float) -> String {
+        return String(format: "%.2f", number)
+    }
 }

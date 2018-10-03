@@ -16,7 +16,7 @@ class CourseListsAPI: APIEndpoint {
         return "course-lists"
     }
 
-    func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CourseList], Meta)> {
+    func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
         let params : Parameters = [
             "platform": "mobile",
             "language": language.languageString,

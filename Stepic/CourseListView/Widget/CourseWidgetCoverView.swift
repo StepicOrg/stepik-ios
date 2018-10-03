@@ -44,9 +44,9 @@ final class CourseWidgetCoverView: UIView {
         return label
     }()
 
-    var coverImage: UIImage? {
+    var coverImageURL: URL? {
         didSet {
-            self.coverImageView.image = self.coverImage
+            self.coverImageView.loadImage(url: self.coverImageURL)
         }
     }
 

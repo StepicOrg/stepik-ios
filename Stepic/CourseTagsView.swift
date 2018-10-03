@@ -16,11 +16,20 @@ class CourseTagsView: NibInitializableView {
     var tags: [CourseTag] = []
 
     var tagSelectedAction: ((CourseTag) -> Void)?
+    let contentLanguageService = ContentLanguageService()
 
-    var language: ContentLanguage = ContentLanguage.sharedContentLanguage {
-        didSet {
+    private var _language: ContentLanguage!
+    var language: ContentLanguage! {
+        set {
             //TODO: check if selection needs to be updated here
+            self._language = newValue
             collectionView.reloadData()
+        }
+        get {
+            if self._language == nil {
+                self._language = self.contentLanguageService.globalContentLanguage
+            }
+            return self._language
         }
     }
 

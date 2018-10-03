@@ -33,7 +33,7 @@ extension UICollectionView {
     }
 
     override func showSkeleton() {
-        self.register(SkeletonCollectionViewCell.self, forCellWithReuseIdentifier: SkeletonCollectionViewCell.reuseId)
+        self.register(cellClass: SkeletonCollectionViewCell.self)
 
         savedDataSource = self.dataSource
         skeletonDataSource = SkeletonCollectionViewDataSource()
@@ -53,9 +53,7 @@ extension UICollectionView {
     }
 }
 
-class SkeletonCollectionViewCell: UICollectionViewCell {
-    static let reuseId = "SkeletonCollectionViewCell"
-
+class SkeletonCollectionViewCell: UICollectionViewCell, Reusable {
     func attach(view: SkeletonView) {
         view.show(in: contentView)
     }
@@ -67,14 +65,22 @@ class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //TODO: Think how to customize this without hardcode
-        return 3
+        guard let flowLayout = collectionView.collectionViewLayout
+            as? UICollectionViewFlowLayout else {
+            return 20
+        }
+
+        var verticalCount = collectionView.bounds.height / (flowLayout.itemSize.height + flowLayout.minimumLineSpacing)
+        var horizontalCount = collectionView.bounds.width / (flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing)
+
+        verticalCount.round(.up)
+        horizontalCount.round(.up)
+
+        return Int(verticalCount) + Int(horizontalCount)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkeletonCollectionViewCell.reuseId, for: indexPath) as? SkeletonCollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        let cell: SkeletonCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
         guard let placeholderCellView = collectionView.skeleton.viewBuilder() else {
             return UICollectionViewCell()

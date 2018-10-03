@@ -8,10 +8,46 @@
 
 import UIKit
 
-final class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
-    private lazy var widgetView: CourseWidgetView = CourseWidgetView(frame: .zero)
+protocol CourseListCollectionViewCellDelegate: class {
+    func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?)
+    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?)
+}
+
+class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
+    weak var delegate: CourseListCollectionViewCellDelegate?
+
+    private let colorMode: CourseListColorMode
+    private var configurationViewModel: CourseWidgetViewModel?
+
+    private lazy var widgetView: CourseWidgetView = {
+        let widget = CourseWidgetView(frame: .zero, colorMode: self.colorMode)
+        // Pass clicks from widget view to collection view delegate
+        widget.onPrimaryButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.widgetPrimaryButtonClicked(
+                viewModel: strongSelf.configurationViewModel
+            )
+        }
+        widget.onSecondaryButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.widgetSecondaryButtonClicked(
+                viewModel: strongSelf.configurationViewModel
+            )
+        }
+        return widget
+    }()
 
     override init(frame: CGRect) {
+        self.colorMode = .default
+        super.init(frame: frame)
+    }
+
+    init(frame: CGRect, colorMode: CourseListColorMode) {
+        self.colorMode = colorMode
         super.init(frame: frame)
 
         self.addSubviews()
@@ -22,9 +58,9 @@ final class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: CourseWidgetViewModel, colorMode: CourseWidgetColorMode) {
+    func configure(viewModel: CourseWidgetViewModel) {
         self.widgetView.configure(viewModel: viewModel)
-        self.widgetView.colorMode = colorMode
+        self.configurationViewModel = viewModel
     }
 }
 

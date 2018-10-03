@@ -1,0 +1,97 @@
+//
+//  ExploreCoursesCollectionHeaderView.swift
+//  Stepic
+//
+//  Created by Vladislav Kiryukhin on 04.09.2018.
+//  Copyright © 2018 Alex Karpov. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+extension ExploreCoursesCollectionHeaderView {
+    struct Appearance {
+        let summaryPlaceholderCornerRadius: CGFloat = 8
+        let summaryPlaceholderHeight: CGFloat = 104
+        let viewsSpacing: CGFloat = 20
+    }
+}
+
+final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewProtocol {
+    let appearance: Appearance
+
+    private lazy var headerView: ExploreBlockHeaderView = {
+        let view = ExploreBlockHeaderView(frame: .zero)
+        view.onShowAllButtonClick = self.onShowAllButtonClick
+        return view
+    }()
+
+    private lazy var summaryPlaceholder: GradientCoursesPlaceholderView = {
+        let view = GradientCoursesPlaceholderViewFactory(
+            color: .pink
+        ).makeCourseCollectionView(title: self.descriptionText)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.summaryPlaceholderCornerRadius
+        return view
+    }()
+
+    var titleText: String? {
+        didSet {
+            self.headerView.titleText = self.titleText
+        }
+    }
+
+    var summaryText: String? {
+        didSet {
+            self.headerView.summaryText = self.summaryText
+        }
+    }
+
+    private var descriptionText: String
+
+    var onShowAllButtonClick: (() -> Void)? {
+        didSet {
+            self.headerView.onShowAllButtonClick = self.onShowAllButtonClick
+        }
+    }
+
+    init(
+        frame: CGRect,
+        description: String,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
+        self.descriptionText = description
+        super.init(frame: frame)
+
+        self.addSubviews()
+        self.makeConstraints()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ExploreCoursesCollectionHeaderView: ProgrammaticallyInitializableViewProtocol {
+    func addSubviews() {
+        self.addSubview(self.summaryPlaceholder)
+        self.addSubview(self.headerView)
+    }
+
+    func makeConstraints() {
+        self.summaryPlaceholder.translatesAutoresizingMaskIntoConstraints = false
+        self.summaryPlaceholder.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(self.appearance.summaryPlaceholderHeight)
+        }
+
+        self.headerView.translatesAutoresizingMaskIntoConstraints = false
+        self.headerView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top
+                .equalTo(self.summaryPlaceholder.snp.bottom)
+                .offset(self.appearance.viewsSpacing)
+        }
+    }
+}

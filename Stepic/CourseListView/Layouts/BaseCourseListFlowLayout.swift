@@ -10,14 +10,27 @@ import UIKit
 
 class BaseListFlowLayout: UICollectionViewFlowLayout {
     private var previousSize: CGSize?
+    private var previousItemsCount = 0
     var cache: [UICollectionViewLayoutAttributes] = []
 
     var shouldInvalidateAttributesCache: Bool {
-        if self.previousSize != self.collectionView?.bounds.size {
-            self.previousSize = self.collectionView?.bounds.size
+        guard let collectionView = collectionView else {
             return true
         }
-        return false
+
+        var count = 0
+        for section in 0..<collectionView.numberOfSections {
+            for item in 0..<collectionView.numberOfItems(inSection: section) {
+                count += 1
+            }
+        }
+
+        defer {
+            self.previousItemsCount = count
+            self.previousSize = self.collectionView?.bounds.size
+        }
+        return self.previousItemsCount != count
+            || self.previousSize != self.collectionView?.bounds.size
     }
 
     var contentWidth: CGFloat {
