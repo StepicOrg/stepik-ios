@@ -11,7 +11,7 @@ import SnapKit
 
 final class CourseListsCollectionView: UIView {
     enum Appearance {
-        static let headerViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        static let headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     }
 
     private lazy var headerView: ExploreBlockHeaderView = {

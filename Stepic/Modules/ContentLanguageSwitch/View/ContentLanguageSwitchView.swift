@@ -22,9 +22,9 @@ extension ContentLanguageSwitchView {
 
         let descriptionFont = UIFont.systemFont(ofSize: 14)
         let descriptionTextColor = UIColor.lightGray
-        let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 16, bottom: 16, right: 16)
+        let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 20, bottom: 16, right: 20)
 
-        let buttonsInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
+        let buttonsInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let buttonSize = CGSize(width: 46, height: 40)
         let buttonsSpacing: CGFloat = 13
         let buttonCornerRadius: CGFloat = 4

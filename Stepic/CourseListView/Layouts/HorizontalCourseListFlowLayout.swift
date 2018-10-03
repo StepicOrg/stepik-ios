@@ -12,11 +12,16 @@ extension HorizontalCourseListFlowLayout {
     enum Paging {
         static let velocityThreshold: CGFloat = 0.6
     }
+
+    struct Appearance {
+        let insets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
 }
 
 final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
-    var rowsCount: Int
-    var columnsCount: Int
+    let appearance: Appearance
+    let rowsCount: Int
+    let columnsCount: Int
 
     private var _contentWidth: CGFloat = 0
     override var contentWidth: CGFloat {
@@ -29,7 +34,12 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         return allItemsHeight + allSpacing
     }
 
-    init(rowsCount: Int = 2, columnsCount: Int = 1) {
+    init(
+        rowsCount: Int = 2,
+        columnsCount: Int = 1,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
         self.rowsCount = rowsCount
         self.columnsCount = columnsCount
         super.init()
@@ -59,7 +69,7 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         }
 
         var yOffset: CGFloat = self.minimumLineSpacing
-        var xOffset: CGFloat = self.minimumInteritemSpacing
+        var xOffset: CGFloat = self.appearance.insets.left
         var rowIndex = 0
 
         for indexPath in flatIndexPaths {
@@ -85,8 +95,10 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         }
 
         if rowIndex > 0 {
-            xOffset += self.itemSize.width + 2 * self.minimumInteritemSpacing
+            xOffset += self.itemSize.width + self.minimumInteritemSpacing
         }
+
+        xOffset += self.appearance.insets.right - self.minimumInteritemSpacing
 
         self._contentWidth = xOffset
     }

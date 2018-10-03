@@ -60,7 +60,7 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                         for: viewController.view,
                         headerDescription: .init(
                             title: courseListViewModel.title,
-                            summary: "\(courseListViewModel.courseList.ids.count)",
+                            summary: courseListViewModel.description,
                             description: "\(courseListViewModel.summary ?? "")"
                         )
                     )
