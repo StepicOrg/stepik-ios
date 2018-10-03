@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStreakActivity(response: Home.LoadStreak.Response)
+    func presentEnrolledCourses(response: Home.LoadEnrolledCourses.Response)
     func hideContinueCourse()
 }
 
@@ -39,6 +40,12 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         }
 
         self.homeViewController?.displayStreakInfo(viewModel: viewModel)
+    }
+
+    func presentEnrolledCourses(response: Home.LoadEnrolledCourses.Response) {
+        self.homeViewController?.displayEnrolledCourses(
+            viewModel: .init(isAuthorized: response.isAuthorized)
+        )
     }
 
     func hideContinueCourse() {

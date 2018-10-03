@@ -57,7 +57,7 @@ final class GradientCoursesPlaceholderViewFactory {
         )
     }
 
-    private func makeInfoPlaceholder(
+    func makeInfoPlaceholder(
         message: InfoPlaceholderMessage
     ) -> GradientCoursesPlaceholderView {
         var appearance = GradientCoursesPlaceholderView.Appearance()

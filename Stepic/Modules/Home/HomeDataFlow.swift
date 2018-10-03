@@ -33,4 +33,16 @@ enum Home {
             let result: Result
         }
     }
+    // Show enrolled courses
+    enum LoadEnrolledCourses {
+        struct Request { }
+
+        struct Response {
+            let isAuthorized: Bool
+        }
+
+        struct ViewModel {
+            let isAuthorized: Bool
+        }
+    }
 }

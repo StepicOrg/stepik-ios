@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
     func loadStreakActivity(request: Home.LoadStreak.Request)
+    func loadEnrolledCourses(request: Home.LoadEnrolledCourses.Request)
 }
 
 final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
@@ -48,6 +49,12 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         }.catch { _ in
             self.homePresenter?.presentStreakActivity(response: .init(result: .hidden))
         }
+    }
+
+    func loadEnrolledCourses(request: Home.LoadEnrolledCourses.Request) {
+        self.homePresenter?.presentEnrolledCourses(
+            response: .init(isAuthorized: self.userAccountService.isAuthorized)
+        )
     }
 }
 

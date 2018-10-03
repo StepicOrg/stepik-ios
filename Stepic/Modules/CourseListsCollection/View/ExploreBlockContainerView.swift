@@ -14,7 +14,7 @@ extension ExploreBlockContainerView {
         let separatorColor = UIColor(hex: 0x535366, alpha: 0.1)
         var backgroundColor = UIColor.white
 
-        let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        let headerViewInsets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
         var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         let separatorViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }

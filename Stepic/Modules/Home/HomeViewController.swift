@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
+    func displayEnrolledCourses(viewModel: Home.LoadEnrolledCourses.ViewModel)
     func hideContinueCourse()
 }
 
@@ -53,35 +54,7 @@ final class HomeViewController: BaseExploreViewController {
         )
 
         // Enrolled courses
-        let courseListType = EnrolledCourseListType()
-        let enrolledCourseListAssembly = HorizontalCourseListAssembly(
-            type: courseListType,
-            colorMode: .light,
-            output: self.interactor as? CourseListOutputProtocol
-        )
-        let enrolledCourseViewController = enrolledCourseListAssembly.makeModule()
-        enrolledCourseListAssembly.moduleInput?.reload()
-        let containerView = CourseListContainerViewFactory(colorMode: .light)
-            .makeHorizontalContainerView(
-                for: enrolledCourseViewController.view,
-                headerDescription: .init(
-                    title: NSLocalizedString("Enrolled", comment: ""),
-                    summary: nil
-                )
-            )
-        containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
-            )
-        }
-        self.registerSubmodule(
-            .init(
-                viewController: enrolledCourseViewController,
-                view: containerView,
-                isLanguageDependent: false,
-                type: HomeSubmoduleType.enrolledCourses
-            )
-        )
+        self.homeInteractor?.loadEnrolledCourses(request: .init())
     }
 
     override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -160,9 +133,55 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
 
+    func displayEnrolledCourses(viewModel: Home.LoadEnrolledCourses.ViewModel) {
+        if !viewModel.isAuthorized {
+            return self.displayEnrolledPlaceholder()
+        } else {
+            return self.displayEnrolledCourseList()
+        }
+    }
+
     func hideContinueCourse() {
         if let submodule = self.getSubmodule(type: HomeSubmoduleType.continueCourse) {
             self.removeSubmodule(submodule)
         }
+    }
+
+    private func displayEnrolledPlaceholder() {
+        let contentView = GradientCoursesPlaceholderViewFactory(color: .purple)
+            .makeInfoPlaceholder(message: .login)
+    }
+
+    private func displayEnrolledCourseList() {
+        let courseListType = EnrolledCourseListType()
+        let enrolledCourseListAssembly = HorizontalCourseListAssembly(
+            type: courseListType,
+            colorMode: .light,
+            output: self.interactor as? CourseListOutputProtocol
+        )
+        let enrolledViewController = enrolledCourseListAssembly.makeModule()
+        enrolledCourseListAssembly.moduleInput?.reload()
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: enrolledViewController.view,
+                headerDescription: .init(
+                    title: NSLocalizedString("Enrolled", comment: ""),
+                    summary: nil
+                )
+            )
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.loadFullscreenCourseList(
+                request: .init(courseListType: courseListType)
+            )
+        }
+        self.registerSubmodule(
+            .init(
+                viewController: enrolledViewController,
+                view: containerView,
+                isLanguageDependent: false,
+                type: HomeSubmoduleType.enrolledCourses
+            )
+        )
     }
 }
