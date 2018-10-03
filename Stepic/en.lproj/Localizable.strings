@@ -556,6 +556,9 @@ PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
 PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
 
+/* Sign in AB */
+SignInTitleSocialTest = "<b>Continue</b> with";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";
@@ -573,6 +576,10 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "FailedFetchStepsError" = "Unable​ ​to​ ​load​ ​steps. Please try again later.";
 "FailedMarkStepAsSolved" = "We​ ​couldn’t​ ​mark​ step as solved. Please try again later.";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
+"FailedFetchKnowledgeGraphErrorTitle" = "Unable to load knowledge graph";
+"FailedFetchKnowledgeGraphErrorMessage" = "Pull down to refresh screen.";
+"FailedFetchStepsForLessonTitle" = "Unable to load lesson content";
+"FailedFetchStepsForLessonMessage" = "Please try again later.";
 
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
@@ -580,3 +587,27 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 
 "LearningTabTitle" = "Learning";
 "TrainingTabTitle" = "Training";
+
+"PracticeLessonTitle" = "Practical assignments";
+"PracticeLessonDescription" = "Consolidate the knowledge gained";
+
+"LessonsViewControllerTitle" = "Topic";
+
+"LessonsCountText1" = "%@ lesson";
+"LessonsCountText234" = "%@ lessons";
+"LessonsCountText567890" = "%@ lessons";
+
+"PagesCountText1" = "%@ page";
+"PagesCountText234" = "%@ pages";
+"PagesCountText567890" = "%@ pages";
+
+"FakeUserFailedSignInTitle" = "Something went wrong";
+"FakeUserFailedSignInMessage" = "Check​ ​your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
+
+"TopicProgressInPercentsText1" = "%@%% completed";
+"TopicProgressInPercentsText234" = "%@%% completed";
+"TopicProgressInPercentsText567890" = "%@%% completed";
+
+"TopicTimeToCompleteText1" = "%@ minute to complete";
+"TopicTimeToCompleteText234" = "%@ minutes to complete";
+"TopicTimeToComplete567890" = "%@ minutes to complete";

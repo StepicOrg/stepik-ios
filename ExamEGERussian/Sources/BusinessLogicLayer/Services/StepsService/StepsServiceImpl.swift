@@ -47,7 +47,10 @@ final class StepsServiceImpl: StepsService {
         var steps = [Step]()
         var solvedMap = [Int: Bool]()
 
-        return executeFetchRequest(ids: ids).then { cachedSteps -> Promise<[Progress]> in
+        return executeFetchRequest(ids: ids).then { cachedSteps -> Promise<[Step]> in
+            let needToFetch = cachedSteps.isEmpty || cachedSteps.count != ids.count
+            return needToFetch ? self.fetchSteps(ids: ids) : .value(cachedSteps)
+        }.then { cachedSteps -> Promise<[Progress]> in
             steps = cachedSteps
             let progressesIds = steps.compactMap {
                 $0.progressId

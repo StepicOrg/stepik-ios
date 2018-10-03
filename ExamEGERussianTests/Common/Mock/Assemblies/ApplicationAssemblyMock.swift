@@ -10,10 +10,11 @@ import Foundation
 @testable import ExamEGERussian
 
 final class ApplicationAssemblyMock: ApplicationAssembly {
-    func module() -> ApplicationModule {
+    func makeModule(window: UIWindow) -> ApplicationModule {
         let router = AppRouter(
-            assemblyFactory: AssemblyFactoryMock(),
-            navigationController: MockAssemblyNavigationController()
+            window: window,
+            navigationController: MockAssemblyNavigationController(),
+            assemblyFactory: AssemblyFactoryMock()
         )
 
         return ApplicationModule(router: router)

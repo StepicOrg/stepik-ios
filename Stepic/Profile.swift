@@ -23,6 +23,7 @@ class Profile: NSManagedObject, JSONSerializable {
         firstName = json["first_name"].stringValue
         lastName = json["last_name"].stringValue
         subscribedForMail = json["subscribed_for_mail"].boolValue
+        isStaff = json["is_staff"].boolValue
     }
 
     func update(json: JSON) {

@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct LessonPlainObject: Codable, Equatable {
+struct LessonPlainObject: Equatable {
     let id: Int
     let steps: [Int]
     let title: String
     let slug: String
+    let timeToComplete: Double
 }
 
 extension LessonPlainObject {
@@ -21,5 +22,14 @@ extension LessonPlainObject {
         self.steps = lesson.stepsArray
         self.title = lesson.title
         self.slug = lesson.slug
+        self.timeToComplete = lesson.timeToComplete
+    }
+
+    init(lesson: KnowledgeGraphLesson) {
+        self.id = lesson.id
+        self.steps = []
+        self.title = ""
+        self.slug = ""
+        self.timeToComplete = 0
     }
 }

@@ -16,10 +16,10 @@ extension LessonPlainObject {
             steps.append(randomNumber())
         }
 
-        return LessonPlainObject(id: randomNumber(), steps: steps, title: "title", slug: "slug")
+        return LessonPlainObject(id: randomNumber(), steps: steps, title: "title", slug: "slug", timeToComplete: 100)
     }
 
     private static func randomNumber() -> Int {
-        return Int.random(in: 1...100)
+        return Int(arc4random_uniform(UInt32(100))) + 1
     }
 }

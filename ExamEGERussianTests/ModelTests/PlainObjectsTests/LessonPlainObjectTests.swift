@@ -16,8 +16,8 @@ class LessonPlainObjectTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        mathLesson = LessonPlainObject(id: 1, steps: [22, 23, 24], title: "Math", slug: "https://stepik.org")
-        frenchLesson = LessonPlainObject(id: 2, steps: [11, 12, 14], title: "French", slug: "https://stepik.org")
+        mathLesson = LessonPlainObject(id: 1, steps: [22, 23, 24], title: "Math", slug: "https://stepik.org", timeToComplete: 100)
+        frenchLesson = LessonPlainObject(id: 2, steps: [11, 12, 14], title: "French", slug: "https://stepik.org", timeToComplete: 100)
     }
 
     override func tearDown() {
@@ -30,12 +30,14 @@ class LessonPlainObjectTests: XCTestCase {
         lesson.title = "title"
         lesson.slug = "slug"
         lesson.stepsArray = [1, 2, 3, 4]
+        lesson.timeToComplete = 10
 
         let plainObject = LessonPlainObject(lesson: lesson)
         XCTAssertEqual(plainObject.id, lesson.id)
         XCTAssertEqual(plainObject.steps, lesson.stepsArray)
         XCTAssertEqual(plainObject.title, lesson.title)
         XCTAssertEqual(plainObject.slug, lesson.slug)
+        XCTAssertEqual(plainObject.timeToComplete, lesson.timeToComplete)
     }
 
     func testLesson() {
@@ -43,6 +45,7 @@ class LessonPlainObjectTests: XCTestCase {
         XCTAssertEqual(mathLesson.steps, [22, 23, 24])
         XCTAssertEqual(mathLesson.title, "Math")
         XCTAssertEqual(mathLesson.slug, "https://stepik.org")
+        XCTAssertEqual(mathLesson.timeToComplete, 100)
     }
 
     func testEqualLessonsEquality() {

@@ -8,6 +8,12 @@
 
 import UIKit
 
-final class LessonTableViewCell: UITableViewCell {
-    @IBOutlet var descriptionTitleLabel: UILabel!
+final class LessonTableViewCell: UITableViewCell, Reusable, NibLoadable {
+
+    @IBOutlet var numberLabel: UILabel!
+
+    @IBOutlet var titleLabel: UILabel!
+
+    @IBOutlet var subtitleLabel: UILabel!
+
 }

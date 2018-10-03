@@ -557,6 +557,9 @@ PersonalDeadline = "Персональный дедлайн";
 DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";
 PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - путь к успеху. Мы можем создать для вас персональное умное расписание - так вы никогда не забудете получить порцию новых знаний!";
 
+/* Sign in AB */
+SignInTitleSocialTest = "<b>Продолжить</b> с помощью";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";
@@ -574,6 +577,10 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 "FailedFetchStepsError" = "Невозможно получить данные об уроке в данный момент. Пожалуйста, попробуйте снова.";
 "FailedMarkStepAsSolved" = "Мы не можем завершить урок. Пожалуйста, попробуйте снова.";
 "NoAdaptiveModuleError" = "В данном уроке нет практических заданий. Пожалуйста, выберите другой урок.";
+"FailedFetchKnowledgeGraphErrorTitle" = "Невозможно загрузить граф знаний";
+"FailedFetchKnowledgeGraphErrorMessage" = "Потяните вниз, чтобы обновить экран.";
+"FailedFetchStepsForLessonTitle" = "Невозможно получить данные урока";
+"FailedFetchStepsForLessonMessage" = "Пожалуйста, попробуйте снова.";
 
 "EmptyAuthViewTitle" = "Это Вы!";
 "EmptyAuthViewSubtitle" = "Пройдите авторизацию для более удобного обучения";
@@ -581,3 +588,27 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 
 "LearningTabTitle" = "Обучение";
 "TrainingTabTitle" = "Тренировка";
+
+"PracticeLessonTitle" = "Практические задания";
+"PracticeLessonDescription" = "Закрепите полученные знания";
+
+"LessonsViewControllerTitle" = "Тема";
+
+"LessonsCountText1" = "%@ урок";
+"LessonsCountText234" = "%@ урока";
+"LessonsCountText567890" = "%@ уроков";
+
+"PagesCountText1" = "%@ страница";
+"PagesCountText234" = "%@ страницы";
+"PagesCountText567890" = "%@ страниц";
+
+"FakeUserFailedSignInTitle" = "Что-то пошло не так";
+"FakeUserFailedSignInMessage" = "Проверьте ваше интернет соединение и повторите попытку.";
+
+"TopicProgressInPercentsText1" = "%@%% пройден";
+"TopicProgressInPercentsText234" = "%@%% пройдено";
+"TopicProgressInPercentsText567890" = "%@%% пройдено";
+
+"TopicTimeToCompleteText1" = "%@ минута на выполнение";
+"TopicTimeToCompleteText234" = "%@ минуты на выполнение";
+"TopicTimeToComplete567890" = "%@ минут на выполнение";

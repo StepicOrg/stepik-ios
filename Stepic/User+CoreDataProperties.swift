@@ -27,6 +27,8 @@ extension User {
 
     @NSManaged var managedInstructedCourses: NSSet?
 
+    @NSManaged var managedProfileEntity: Profile?
+
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
     }
@@ -128,6 +130,15 @@ extension User {
     var instructedCourses: [Course] {
         get {
             return managedInstructedCourses?.allObjects as! [Course]
+        }
+    }
+
+    var profileEntity: Profile? {
+        get {
+            return managedProfileEntity
+        }
+        set(value) {
+            managedProfileEntity = value
         }
     }
 

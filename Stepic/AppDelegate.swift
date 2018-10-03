@@ -10,7 +10,6 @@ import UIKit
 import MediaPlayer
 import FirebaseCore
 import FirebaseMessaging
-import FirebaseAppIndexing
 import FirebaseInstanceID
 import IQKeyboardManagerSwift
 import SVProgressHUD
@@ -45,8 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
         }
-
-        FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
@@ -140,37 +137,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     fileprivate func handleOpenedFromDeepLink(_ url: URL) {
-        DeepLinkRouter.routeFromDeepLink(url, completion: {
-            [weak self]
-            controllers in
-            if controllers.count > 0 {
-                if let s = self {
-                    if let topController = s.currentNavigation?.topViewController {
-                        delay(0.5, closure: {
-                            for (index, vc) in controllers.enumerated() {
-                                if index == controllers.count - 1 {
-                                    topController.navigationController?.pushViewController(vc, animated: true)
-                                } else {
-                                    topController.navigationController?.pushViewController(vc, animated: false)
-                                }
-                            }
-                        })
-                    }
-                }
-            } else {
-                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
-                    _ in
-                    UIApplication.shared.openURL(url)
-                }))
-
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-
-                UIThread.performUI {
-                    self?.window?.rootViewController?.present(alert, animated: true, completion: nil)
-                }
-            }
-        })
+        let deepLinkRoutingService = DeepLinkRoutingService()
+        DispatchQueue.main.async {
+            deepLinkRoutingService.route(path: url.absoluteString)
+        }
     }
 
     func updateNotificationRegistrationStatus(_ notification: Foundation.Notification) {

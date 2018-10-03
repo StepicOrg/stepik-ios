@@ -26,4 +26,8 @@ final class AdaptiveStepsAssemblyMock: AdaptiveStepsAssemblyProtocol {
     func module(topicId: String) -> UIViewController? {
         return viewControllerToReturn
     }
+
+    func module(courseId: Int) -> UIViewController {
+        return viewControllerToReturn ?? MockAssemblyViewController()
+    }
 }

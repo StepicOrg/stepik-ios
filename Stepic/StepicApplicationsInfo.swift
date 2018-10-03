@@ -87,4 +87,9 @@ struct StepicApplicationsInfo {
     struct Modules {
         static let tabs = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Modules.tabs) as? [String]
     }
+
+    // Section: Versions
+    struct Versions {
+        static let stories = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Versions.stories) as? Int
+    }
 }

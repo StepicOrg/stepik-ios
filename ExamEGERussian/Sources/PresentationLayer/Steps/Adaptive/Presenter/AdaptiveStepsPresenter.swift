@@ -254,6 +254,12 @@ extension AdaptiveStepsPresenter {
 
         view?.addContentController(stepViewController)
         view?.updateTitle(lesson.title)
+
+        AmplitudeAnalyticsEvents.Step.opened(
+            id: step.id,
+            position: step.position,
+            lessonId: step.lessonId
+        ).send()
     }
 
     private func buildStepViewController(for step: StepPlainObject, lesson: LessonPlainObject) -> StepViewController {

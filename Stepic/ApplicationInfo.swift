@@ -65,6 +65,9 @@ class ApplicationInfo {
         struct Modules {
             static let tabs = "modules.tabs"
         }
+        struct Versions {
+            static let stories = "versions.stories"
+        }
     }
 
     private var settings: NSDictionary?

@@ -10,10 +10,26 @@ import Foundation
 
 public final class KnowledgeGraphVertex<T: Hashable>: Vertex<T> {
     public var title: String
+    public var topicDescription: String
     public var lessons = [KnowledgeGraphLesson]()
+    public var progress: Double
+    public var timeToComplete: Double
 
-    init(id: T, title: String = "") {
+    var containsPractice: Bool {
+        return lessons.contains(where: { $0.type == .practice })
+    }
+
+    init(id: T,
+         title: String = "",
+         topicDescription: String = "",
+         progress: Double = 0,
+         timeToComplete: Double = 0
+    ) {
         self.title = title
+        self.topicDescription = topicDescription
+        self.progress = progress
+        self.timeToComplete = timeToComplete
+
         super.init(id: id)
     }
 }
