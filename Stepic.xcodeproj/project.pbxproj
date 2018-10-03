@@ -2409,7 +2409,6 @@
 		2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */; };
 		2C80C829201A504700ABB312 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
-		2C829F142138A09B00DA7403 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8305EA20F38880003D7F9B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305E920F38880003D7F9B /* Vertex.swift */; };
 		2C8305EC20F388B9003D7F9B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305EB20F388B9003D7F9B /* Edge.swift */; };
 		2C8305F720F390F8003D7F9B /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8305F620F390F8003D7F9B /* GraphTests.swift */; };
@@ -2441,6 +2440,11 @@
 		2C8652631F4B2F7D00D51654 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525D1F4B2F7D00D51654 /* icon.png */; };
 		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
 		2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525F1F4B2F7D00D51654 /* Tokens.plist */; };
+		2C8715202164E22C00847A39 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9842C04E29BCAAE9FAB20 /* Reusable.swift */; };
+		2C8715212164E23200847A39 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BB44346C9AD2F93EECC /* NibLoadable.swift */; };
+		2C8715222164E29400847A39 /* ContentLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C116ED420A46A8D2642 /* ContentLanguageService.swift */; };
+		2C8715242164E3A300847A39 /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981D7FD7BD900738BB677 /* UICollectionViewExtensions.swift */; };
+		2C8715252164E3A900847A39 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98480E472319CCB60BE83 /* UITableViewExtensions.swift */; };
 		2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C89A9561F4C289900227C3B /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -3378,9 +3382,6 @@
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
-		2C97903421358F0E00046625 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		2C97903521358F2300046625 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		2C97903621358F3000046625 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
 		2C97E009215E47E7005684A1 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
@@ -16627,7 +16628,6 @@
 				2C9492C121130DB000552600 /* User+CoreDataProperties.swift in Sources */,
 				2C9492C221130DB000552600 /* User.swift in Sources */,
 				2C4F33FE2109EDF100E259FE /* TrainingRouterProtocol.swift in Sources */,
-				2C829F142138A09B00DA7403 /* (null) in Sources */,
 				2C949A3920ECC7FE0049E9A8 /* LocalNotificationManager.swift in Sources */,
 				2C949A5A20ECCE840049E9A8 /* SettingsPresenter.swift in Sources */,
 				2C0107A1210F39CB009A53DF /* StepikLabel.swift in Sources */,
@@ -16664,6 +16664,7 @@
 				2C949A0920ECC3BE0049E9A8 /* HTMLParsingUtil.swift in Sources */,
 				2C681A00210B00C600C3DDCA /* AuthSignInView.swift in Sources */,
 				2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */,
+				2C8715252164E3A900847A39 /* UITableViewExtensions.swift in Sources */,
 				2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */,
 				2C5FDC982111E2540077C15C /* StepTabView.swift in Sources */,
 				2C770304210F29A3002E250D /* KnowledgeGraphPlainObject.swift in Sources */,
@@ -16712,7 +16713,6 @@
 				2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */,
 				2C949A6320ECCF490049E9A8 /* CAGradientLayer+Init.swift in Sources */,
 				2C7CCE2B213827B400A3AEA8 /* LearningTableViewCell.swift in Sources */,
-				2C97903621358F3000046625 /* (null) in Sources */,
 				2C01079E210F37A2009A53DF /* AttemptsAPI.swift in Sources */,
 				2C949A3520ECC7440049E9A8 /* Achievement.swift in Sources */,
 				2C093F24211B455E00162DD0 /* EmailAuthViewController.swift in Sources */,
@@ -16736,7 +16736,6 @@
 				2C4A1ED021087D2800A1D68C /* TrainingAssembly.swift in Sources */,
 				2CA6F5EE21219A6500EE337E /* ServiceFactoryBuilder.swift in Sources */,
 				2C2FD7912107540500609621 /* LessonsView.swift in Sources */,
-				2C97903421358F0E00046625 /* (null) in Sources */,
 				2C9499CB20ECBCA90049E9A8 /* Submission.swift in Sources */,
 				2C949A3120ECC6FE0049E9A8 /* AchievementsRetriever.swift in Sources */,
 				2C093F16211B444A00162DD0 /* ProfileHeaderInfoView.swift in Sources */,
@@ -16847,6 +16846,7 @@
 				2C093F03211B42EB00162DD0 /* AuthNavigationViewController.swift in Sources */,
 				2C33607821343183006EACF3 /* TrainingCardCollectionViewCell.swift in Sources */,
 				2CFE247720ECD9A500AF1E3D /* UIImageView+SVGDownload.swift in Sources */,
+				2C8715242164E3A300847A39 /* UICollectionViewExtensions.swift in Sources */,
 				2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */,
 				2C4EB2EB212443AD00AF2331 /* StepRouterProtocol.swift in Sources */,
 				2C94998D20ECB7350049E9A8 /* Alamofire-SwiftyJSON.swift in Sources */,
@@ -16893,7 +16893,6 @@
 				2C093F15211B444200162DD0 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				2C94998E20ECB74D0049E9A8 /* APIDefaults.swift in Sources */,
 				2C9499BE20ECBB560049E9A8 /* VideosInfo.swift in Sources */,
-				2C97903521358F2300046625 /* (null) in Sources */,
 				2C949A5B20ECCE890049E9A8 /* SettingsMenuBlock.swift in Sources */,
 				2C8530F921513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift in Sources */,
 				2C33CBFB20EC32B7009956B0 /* CertificatesAPI.swift in Sources */,
@@ -17021,8 +17020,10 @@
 				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,
 				2C770306210F29B0002E250D /* LessonPlainObject.swift in Sources */,
+				2C8715212164E23200847A39 /* NibLoadable.swift in Sources */,
 				2C77030B210F2AD5002E250D /* BaseRouter.swift in Sources */,
 				2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */,
+				2C8715222164E29400847A39 /* ContentLanguageService.swift in Sources */,
 				2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */,
 				2C093F0A211B436D00162DD0 /* StreakNotificationsControlPresenter.swift in Sources */,
 				2C949A2520ECC5EF0049E9A8 /* ProfileAchievementsPresenter.swift in Sources */,
@@ -17082,6 +17083,7 @@
 				62E9822D92CA621E09BA5995 /* StepsPagerViewController.swift in Sources */,
 				2CBA9B8621368CCF0010819E /* TrainingHorizontalCollectionView.swift in Sources */,
 				62E98E5A0A94A3955427B3D4 /* StepsPagerView.swift in Sources */,
+				2C8715202164E22C00847A39 /* Reusable.swift in Sources */,
 				62E988866D3362A65DC7BFD1 /* StepsPagerDataSource.swift in Sources */,
 				62E9820491170A9FF2E00442 /* StepsPagerDataSourceImpl.swift in Sources */,
 				62E98423FB0D93C3534C9520 /* StepsPagerRouter.swift in Sources */,
