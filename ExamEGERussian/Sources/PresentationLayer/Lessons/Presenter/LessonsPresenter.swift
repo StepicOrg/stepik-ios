@@ -152,7 +152,7 @@ extension LessonsPresenter {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
-                subtitle: lessonsPluralized(count: $0.steps.count)
+                subtitle: pagesPluralized(count: $0.steps.count)
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
@@ -166,7 +166,7 @@ extension LessonsPresenter {
         view?.setLessons(theory + practice)
         view?.updateHeader(
             title: topic.title,
-            subtitle: topicsPluralized()
+            subtitle: lessonsPluralized(count: topic.lessons.count)
         )
     }
 
@@ -180,8 +180,7 @@ extension LessonsPresenter {
         return String(format: pluralizedString, "\(count)")
     }
 
-    private func topicsPluralized() -> String {
-        let count = topic.lessons.count
+    private func pagesPluralized(count: Int) -> String {
         let pluralizedString = StringHelper.pluralize(number: count, forms: [
             NSLocalizedString("PagesCountText1", comment: ""),
             NSLocalizedString("PagesCountText234", comment: ""),
