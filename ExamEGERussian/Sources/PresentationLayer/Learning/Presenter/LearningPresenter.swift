@@ -267,7 +267,6 @@ extension LearningPresenter {
         }
     }
 
-    // TODO: Replace `timeToComplete` with real value.
     private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
         func getProgress(for vertex: KnowledgeGraph.Node) -> String {
             var progress = Int(vertex.progress.rounded())
@@ -281,7 +280,8 @@ extension LearningPresenter {
                 title: vertex.title,
                 description: vertex.topicDescription,
                 timeToComplete: getPluralizedTimeToComplete(Int(vertex.timeToComplete.rounded())),
-                progress: getProgress(for: vertex)
+                progress: getProgress(for: vertex),
+                colors: GradientColorsResolver.resolve(vertex.id)
             )
         }
     }

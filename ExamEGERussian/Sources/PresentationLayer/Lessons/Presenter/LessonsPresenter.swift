@@ -167,7 +167,8 @@ extension LessonsPresenter {
         view?.setLessons(theory + practice)
         view?.updateHeader(
             title: topic.title,
-            subtitle: lessonsPluralized(count: topic.lessons.count)
+            subtitle: lessonsPluralized(count: topic.lessons.count),
+            colors: GradientColorsResolver.resolve(topicId)
         )
     }
 

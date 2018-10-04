@@ -16,6 +16,6 @@ struct LessonsViewData {
 
 protocol LessonsView: class {
     func setLessons(_ lessons: [LessonsViewData])
-    func updateHeader(title: String, subtitle: String)
+    func updateHeader(title: String, subtitle: String, colors: [UIColor])
     func displayError(title: String, message: String)
 }

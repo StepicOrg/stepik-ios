@@ -43,6 +43,8 @@ extension TrainingHorizontalCollectionSource: UICollectionViewDataSource {
         cell.commentLabel.text = viewData.isPractice
             ? nil
             : pagesPluralized(count: viewData.countLessons)
+        // TODO: Use topic id instead of lesson id.
+        cell.appearance = .init(gradientColors: GradientColorsResolver.resolve(viewData.id))
 
         return cell
     }
