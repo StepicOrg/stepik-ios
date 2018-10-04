@@ -9,7 +9,7 @@
 import UIKit
 import Presentr
 
-class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder, ShareableController {
+class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
 
@@ -135,13 +135,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     func manageBarItemControls(settingsIsHidden: Bool, shareId: Int?) {
         var items: [UIBarButtonItem] = []
-        if !settingsIsHidden {
-            items += [settingsButton!]
+        if let settingsButton = settingsButton, !settingsIsHidden {
+            items += [settingsButton]
         }
 
-        if let id = shareId {
+        if let shareButton = shareButton, let id = shareId {
             sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(id)"
-            items += [shareButton!]
+            items += [shareButton]
         } else {
             sharingURL = nil
         }
@@ -192,23 +192,16 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     @objc func shareButtonPressed() {
-        share(popoverSourceItem: shareButton, popoverView: nil, fromParent: false)
+        share(popoverSourceItem: shareButton)
     }
 
-    func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
-        if let sharingURL = self.sharingURL {
-            DispatchQueue.global(qos: .default).async {
-                [weak self] in
-                let shareVC = SharingHelper.getSharingController(sharingURL)
-                shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
-                shareVC.popoverPresentationController?.sourceView = popoverView
-                DispatchQueue.main.async {
-                    [weak self] in
-                    self?.present(shareVC, animated: true, completion: nil)
-                }
-            }
+    func share(popoverSourceItem: UIBarButtonItem?) {
+        guard let sharingURL = self.sharingURL else {
+            return
         }
-
+        let shareVC = SharingHelper.getSharingController(sharingURL)
+        shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
+        present(shareVC, animated: true, completion: nil)
     }
 
     private func buildLoadingMenu() -> Menu {
