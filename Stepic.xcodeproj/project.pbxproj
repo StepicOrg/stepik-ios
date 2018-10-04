@@ -1932,6 +1932,7 @@
 		2C1B64E01F4C596500236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CE1F4C595F00236804 /* Config.plist */; };
 		2C1B64E31F4C597F00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D31F4C595F00236804 /* icon.png */; };
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
+		2C1ED43A21662F5B000D7D52 /* GradientColorsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */; };
 		2C21624220F901DD0063DD57 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21624120F901DD0063DD57 /* AppRouter.swift */; };
 		2C21624C20F906CD0063DD57 /* AuthGreetingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21624B20F906CD0063DD57 /* AuthGreetingAssembly.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
@@ -5840,6 +5841,7 @@
 		2C1B64D31F4C595F00236804 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3124/icon.png; sourceTree = "<group>"; };
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
 		2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColorsResolver.swift; sourceTree = "<group>"; };
 		2C21624120F901DD0063DD57 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		2C21624B20F906CD0063DD57 /* AuthGreetingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingAssembly.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
@@ -10639,6 +10641,7 @@
 			children = (
 				2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */,
 				2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */,
+				2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -16773,6 +16776,7 @@
 				2C093F27211B462B00162DD0 /* ChoiceQuizViewController.swift in Sources */,
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,
 				2C1351DE212C43C8009E7312 /* StepsAssemblyProtocol.swift in Sources */,
+				2C1ED43A21662F5B000D7D52 /* GradientColorsResolver.swift in Sources */,
 				2C9499E220ECBE650049E9A8 /* NSDateExtensions.swift in Sources */,
 				2C0107A0210F39A0009A53DF /* CreateRequestMaker.swift in Sources */,
 				2CDF46462126DE2500A803C5 /* ReactionService.swift in Sources */,
