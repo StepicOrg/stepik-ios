@@ -96,6 +96,7 @@ final class TrainingCollectionViewController: UICollectionViewController, Traini
         )
         view.titleLabel.text = Section(rawValue: indexPath.section)?.title.uppercased()
         view.actionButton.setTitle(NSLocalizedString("See All", comment: ""), for: .normal)
+        view.actionButton.isHidden = true
 
         return view
     }
