@@ -4353,6 +4353,7 @@
 		62E98997447430EA3F2459EE /* StepWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9863AAABC06CDEE98110E /* StepWebView.swift */; };
 		62E989BDE0A04F5A099CE905 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E989D0D1B162A9AE12DFD6 /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98719354649AAFC238BDA /* StepsServiceImpl.swift */; };
+		62E989D5A545A5CD3C44DB8B /* CAGradientLayer+Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BB58C18BE0D002B4D91 /* CAGradientLayer+Locations.swift */; };
 		62E989ECB9DBC0175BF93E0A /* CourseListPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C34A909E11B470E5A79 /* CourseListPersistenceStorage.swift */; };
 		62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98696D8F1FF253E8BF1D3 /* ClearNavigationViewController.swift */; };
 		62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A35FCB795B26C083C91 /* RouterPoppable.swift */; };
@@ -6344,6 +6345,7 @@
 		62E98B7A4296E04D057D679A /* SearchResultsLegacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsLegacy.swift; sourceTree = "<group>"; };
 		62E98B98A07DF176019D6089 /* CourseListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		62E98BB44346C9AD2F93EECC /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		62E98BB58C18BE0D002B4D91 /* CAGradientLayer+Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Locations.swift"; sourceTree = "<group>"; };
 		62E98BB94C146AA2D8A9C2FF /* UserCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCourse.swift; sourceTree = "<group>"; };
 		62E98BC02EC89CF78E0FC7A6 /* Array+reordering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+reordering.swift"; sourceTree = "<group>"; };
 		62E98BDB8017C32090769B72 /* ExploreCoursesCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreCoursesCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -10616,6 +10618,7 @@
 			children = (
 				2C67AFB021661022001D8A58 /* UIColor */,
 				2CD7994721077CB90054D098 /* UIViewController */,
+				62E98B7A1369E540D0BB2325 /* CAGradientLayer */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -11148,6 +11151,14 @@
 				62E98672561A64F1223F9A03 /* StepsPagerRouterImpl.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		62E98B7A1369E540D0BB2325 /* CAGradientLayer */ = {
+			isa = PBXGroup;
+			children = (
+				62E98BB58C18BE0D002B4D91 /* CAGradientLayer+Locations.swift */,
+			);
+			path = CAGradientLayer;
 			sourceTree = "<group>";
 		};
 		62E98BC1A22DC7724AB6434B /* Widget */ = {
@@ -17114,6 +17125,7 @@
 				2C093F04211B42F500162DD0 /* ProfileViewController.swift in Sources */,
 				2C093F10211B43FE00162DD0 /* StreaksStepikAlertManager.swift in Sources */,
 				62E98D2289B2FF8307945FAA /* StepsPagerRouterImpl.swift in Sources */,
+				62E989D5A545A5CD3C44DB8B /* CAGradientLayer+Locations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
