@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LessonPlainObject: Equatable {
+struct LessonPlainObject: Hashable {
     let id: Int
     let steps: [Int]
     let title: String

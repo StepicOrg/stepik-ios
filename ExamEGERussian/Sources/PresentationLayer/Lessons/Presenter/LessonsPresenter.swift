@@ -18,6 +18,7 @@ final class LessonsPresenter: LessonsPresenterProtocol {
 
     private var lessons = [LessonPlainObject]() {
         didSet {
+            lessons = Array(Set(lessons))
             updateView()
         }
     }
