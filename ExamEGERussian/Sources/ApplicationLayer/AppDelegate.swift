@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could't initialize window")
         }
 
+        window.tintColor = UIColor.defaultTint
+
         ThirdPartiesConfigurator().configure()
 
         let serviceFactory = ServiceFactoryBuilder().build()

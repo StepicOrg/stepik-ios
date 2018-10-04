@@ -2308,6 +2308,7 @@
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
 		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
 		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
+		2C67AFB22166104D001D8A58 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67AFB12166104D001D8A58 /* UIColor+Palette.swift */; };
 		2C67B22120FF1A93005E699B /* AuthSignUpAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B22020FF1A93005E699B /* AuthSignUpAssemblyImpl.swift */; };
 		2C681A00210B00C600C3DDCA /* AuthSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6819FF210B00C600C3DDCA /* AuthSignInView.swift */; };
 		2C681A02210B028B00C3DDCA /* AuthSignInPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C681A01210B028B00C3DDCA /* AuthSignInPresenterImpl.swift */; };
@@ -5960,6 +5961,7 @@
 		2C6640D81F30BC4D0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640DA1F30BC4E0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
+		2C67AFB12166104D001D8A58 /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
 		2C67B22020FF1A93005E699B /* AuthSignUpAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUpAssemblyImpl.swift; sourceTree = "<group>"; };
 		2C6819FF210B00C600C3DDCA /* AuthSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInView.swift; sourceTree = "<group>"; };
 		2C681A01210B028B00C3DDCA /* AuthSignInPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignInPresenterImpl.swift; sourceTree = "<group>"; };
@@ -9847,6 +9849,14 @@
 			name = AchievementTableViewCell;
 			sourceTree = "<group>";
 		};
+		2C67AFB021661022001D8A58 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				2C67AFB12166104D001D8A58 /* UIColor+Palette.swift */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
 		2C67B22320FF2DCD005E699B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -10602,6 +10612,7 @@
 		2CD7994421077CB90054D098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C67AFB021661022001D8A58 /* UIColor */,
 				2CD7994721077CB90054D098 /* UIViewController */,
 			);
 			path = Extensions;
@@ -16684,6 +16695,7 @@
 				2C681A0D210B38D800C3DDCA /* AuthSignUpRouterImpl.swift in Sources */,
 				2C33CBED20EC323F009956B0 /* StepicsAPI.swift in Sources */,
 				2C9492C321130DCE00552600 /* PagerController.swift in Sources */,
+				2C67AFB22166104D001D8A58 /* UIColor+Palette.swift in Sources */,
 				2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */,
 				2C14DFE5212AC9D8000D2765 /* KnowledgeGraphProviderProtocol.swift in Sources */,
 				2C9499F120ECC09C0049E9A8 /* DeviceDefaults.swift in Sources */,
