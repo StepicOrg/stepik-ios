@@ -162,9 +162,9 @@ final class GradientCoursesPlaceholderViewFactory {
         var message: String {
             switch self {
             case .enrolled:
-                return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
-            case .login:
                 return NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
+            case .login:
+                return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             }
         }
     }

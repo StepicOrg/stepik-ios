@@ -4328,6 +4328,7 @@
 		62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9851360F1490A8311EC41 /* AchievementPopupAlertManager.swift */; };
 		62E987E79C773F8C291F49F3 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E987EE86AB48E30FF5EC79 /* ProgressServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */; };
+		62E987FD412017016C6AD457 /* HighlightFakeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D8F640B8F40930878C2 /* HighlightFakeButton.swift */; };
 		62E9881A67F099D10FA513EC /* CourseListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9802CD3F12D947122235A /* CourseListProvider.swift */; };
 		62E98831026E6C121D4C54D9 /* ContentLanguageSwitchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F8B42A28AC17DF11DD3 /* ContentLanguageSwitchViewModel.swift */; };
 		62E9883EB54C3849E60F905B /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
@@ -4353,6 +4354,7 @@
 		62E989D0D1B162A9AE12DFD6 /* StepsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98719354649AAFC238BDA /* StepsServiceImpl.swift */; };
 		62E989ECB9DBC0175BF93E0A /* CourseListPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C34A909E11B470E5A79 /* CourseListPersistenceStorage.swift */; };
 		62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98696D8F1FF253E8BF1D3 /* ClearNavigationViewController.swift */; };
+		62E989FCFC8AE5E55920EDAC /* ExploreBlockPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980ADD37451FFE6C89788 /* ExploreBlockPlaceholderView.swift */; };
 		62E98A00AD93EC1151D8C158 /* RouterPoppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A35FCB795B26C083C91 /* RouterPoppable.swift */; };
 		62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
 		62E98A5A35832390917C34CF /* CourseWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9816CE0B5030624365711 /* CourseWidgetViewModel.swift */; };
@@ -6254,6 +6256,7 @@
 		62E98059417D9BC0015460B7 /* CourseListsCollectionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionProvider.swift; sourceTree = "<group>"; };
 		62E9805D78A599B2B48A3B9D /* ExploreStoriesContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreStoriesContainerView.swift; sourceTree = "<group>"; };
 		62E9807E3506DAF40179593F /* ContinueActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueActionButton.swift; sourceTree = "<group>"; };
+		62E980ADD37451FFE6C89788 /* ExploreBlockPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreBlockPlaceholderView.swift; sourceTree = "<group>"; };
 		62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuBlock.swift; sourceTree = "<group>"; };
 		62E98100445A2042DE023DE9 /* ContinueCourseViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueCourseViewModelAdapter.swift; sourceTree = "<group>"; };
 		62E9810DF187ACA3C26F5396 /* CustomNotificationBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNotificationBanner.swift; sourceTree = "<group>"; };
@@ -6359,6 +6362,7 @@
 		62E98D59D1E3CF3A3827D1D3 /* ProgrammaticallyInitializableViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammaticallyInitializableViewProtocol.swift; sourceTree = "<group>"; };
 		62E98D608B22AEA86B37F5CF /* CourseWidgetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetLabel.swift; sourceTree = "<group>"; };
 		62E98D63963986EFDF662226 /* StepAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepAssembly.swift; sourceTree = "<group>"; };
+		62E98D8F640B8F40930878C2 /* HighlightFakeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightFakeButton.swift; sourceTree = "<group>"; };
 		62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDefaultSessionManager.swift; sourceTree = "<group>"; };
 		62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableHeaderLayout.swift"; sourceTree = "<group>"; };
 		62E98DAF4A2F53B7051705A9 /* CourseListsCollectionPersistenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionPersistenceService.swift; sourceTree = "<group>"; };
@@ -8897,6 +8901,8 @@
 				14692EFFC3DC1466AA55B1DD /* BaseExplorePresenter.swift */,
 				21C1E58134D6F7CABDA84B89 /* BaseExploreDataFlow.swift */,
 				62E98E120FBE6E7B7C30BCB0 /* LegacyAssemblies.swift */,
+				62E980ADD37451FFE6C89788 /* ExploreBlockPlaceholderView.swift */,
+				62E98D8F640B8F40930878C2 /* HighlightFakeButton.swift */,
 			);
 			path = BaseExplore;
 			sourceTree = "<group>";
@@ -15446,6 +15452,8 @@
 				62E981579A553C3D791E1842 /* GradientCoursesPlaceholderViewFactory.swift in Sources */,
 				62E98881AEF0EC80AAF1D41D /* LegacyAssemblies.swift in Sources */,
 				62E986566068E65CC210DC46 /* ContinueCourseOutputProtocol.swift in Sources */,
+				62E989FCFC8AE5E55920EDAC /* ExploreBlockPlaceholderView.swift in Sources */,
+				62E987FD412017016C6AD457 /* HighlightFakeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

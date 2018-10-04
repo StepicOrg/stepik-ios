@@ -134,10 +134,16 @@ extension HomeViewController: HomeViewControllerProtocol {
     }
 
     func displayEnrolledCourses(viewModel: Home.LoadEnrolledCourses.ViewModel) {
+        let headerDescription = CourseListContainerViewFactory.HorizontalHeaderDescription(
+            title: NSLocalizedString("Enrolled", comment: ""),
+            summary: nil,
+            shouldShowShowAllButton: viewModel.isAuthorized
+        )
+
         if !viewModel.isAuthorized {
-            return self.displayEnrolledPlaceholder()
+            return self.displayEnrolledPlaceholder(headerDescription: headerDescription)
         } else {
-            return self.displayEnrolledCourseList()
+            return self.displayEnrolledCourseList(headerDescription: headerDescription)
         }
     }
 
@@ -147,12 +153,32 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
 
-    private func displayEnrolledPlaceholder() {
-        let contentView = GradientCoursesPlaceholderViewFactory(color: .purple)
-            .makeInfoPlaceholder(message: .login)
+    private func displayEnrolledPlaceholder(
+        headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription
+    ) {
+        let contentView = ExploreBlockPlaceholderView(frame: .zero, message: .login)
+        contentView.onPlaceholderClick = { [weak self] in
+            self?.displayAuthorization()
+        }
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: contentView,
+                headerDescription: headerDescription
+            )
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: false,
+                type: HomeSubmoduleType.enrolledCourses
+            )
+        )
     }
 
-    private func displayEnrolledCourseList() {
+    private func displayEnrolledCourseList(
+        headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription
+    ) {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
@@ -165,11 +191,9 @@ extension HomeViewController: HomeViewControllerProtocol {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: enrolledViewController.view,
-                headerDescription: .init(
-                    title: NSLocalizedString("Enrolled", comment: ""),
-                    summary: nil
-                )
+                headerDescription: headerDescription
             )
+
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
                 request: .init(courseListType: courseListType)
