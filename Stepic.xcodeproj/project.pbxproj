@@ -4153,6 +4153,7 @@
 		2CE8A69D2131DF7E00E3916B /* LessonTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8A69C2131DF7E00E3916B /* LessonTableHeaderView.swift */; };
 		2CEBAB90211D82880014085E /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2CEBAB91211D82A50014085E /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
+		2CEC17C221680C95004B7070 /* GradientColorsResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC17C121680C95004B7070 /* GradientColorsResolverTests.swift */; };
 		2CEDA3601F336FEC005F4A5D /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -6212,6 +6213,7 @@
 		2CE84BE320F505980069B869 /* GraphPathFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathFinderTests.swift; sourceTree = "<group>"; };
 		2CE8A69A2131DF5900E3916B /* LessonTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableHeaderView.xib; sourceTree = "<group>"; };
 		2CE8A69C2131DF7E00E3916B /* LessonTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableHeaderView.swift; sourceTree = "<group>"; };
+		2CEC17C121680C95004B7070 /* GradientColorsResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColorsResolverTests.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -10461,6 +10463,7 @@
 			children = (
 				2CC995642105C78C0023EC0C /* FactoryMethods */,
 				2CC995662105C8020023EC0C /* Mock */,
+				2CEC17C121680C95004B7070 /* GradientColorsResolverTests.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -17176,6 +17179,7 @@
 				2C130E952125A6400022E998 /* LessonsAssemblyMock.swift in Sources */,
 				2CDF46482126E50F00A803C5 /* ReactionServiceTests.swift in Sources */,
 				2C4EB2D3212421B300AF2331 /* KnowledgeGraphPlainObjectTests.swift in Sources */,
+				2CEC17C221680C95004B7070 /* GradientColorsResolverTests.swift in Sources */,
 				2CA5568B2123204B00A3B1AB /* StepPlainObject+Make.swift in Sources */,
 				2C1351E6212C48D1009E7312 /* KnowledgeGraphProviderMock.swift in Sources */,
 				2C61BDC0215041B40052EB6E /* TrainingAssemblyMock.swift in Sources */,
