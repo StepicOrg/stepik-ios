@@ -69,21 +69,21 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     }
 
     func selectViewData(_ viewData: TrainingViewData) {
-        guard let graphLesson = knowledgeGraph.firstLesson(where: { $0.id == viewData.id }) else {
+        guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == viewData.id }) else {
             return
         }
 
         if viewData.isPractice {
-            router.showPractice(courseId: graphLesson.courseId)
+            router.showPractice(courseId: lesson.courseId)
         } else if let plainObject = theoryLessons.first(where: { $0.id == viewData.id }) {
             router.showTheory(lesson: plainObject)
         }
 
         AmplitudeAnalyticsEvents.Lesson.opened(
-            id: graphLesson.id,
-            type: graphLesson.type.rawValue,
-            courseId: graphLesson.courseId,
-            topicId: getTopicForLesson(graphLesson)?.id ?? "UNKNOWN_TOPIC_ID_FOR_LESSON_ID_\(graphLesson.id)"
+            id: lesson.id,
+            type: lesson.type.rawValue,
+            courseId: lesson.courseId,
+            topicId: getTopicForLessonId(lesson.id)?.id ?? "UNKNOWN_TOPIC_ID_FOR_LESSON_ID_\(lesson.id)"
         ).send()
     }
 
@@ -108,6 +108,17 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
     }
 
+    // MARK: - Types
+
+    private enum TrainingPresenterError: Error {
+        case failedRegisterUser
+        case failedFetchKnowledgeGraph
+    }
+}
+
+// MARK: - TrainingPresenter (Content) -
+
+extension TrainingPresenter {
     private func refreshContent() -> Promise<Void> {
         if isFirstRefresh {
             isFirstRefresh = false
@@ -117,7 +128,7 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
     }
 
-    // MARK: Fetch Content
+    // MARK: Fetch
 
     private func fetchContent() -> Promise<Void> {
         return fetchKnowledgeGraph().then {
@@ -149,7 +160,7 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         return lessonsService.fetchLessons(with: getTheoryLessonsIds())
     }
 
-    // MARK: Obtain Content from Cache
+    // MARK: Cache
 
     private func obtainContentFromCache() -> Promise<Void> {
         return obtainTheoryLessons().then { lessons -> Promise<Void> in
@@ -160,32 +171,63 @@ final class TrainingPresenter: TrainingPresenterProtocol {
 
     private func obtainTheoryLessons() -> Promise<[LessonPlainObject]> {
         let ids = getTheoryLessonsIds()
-        return lessonsService.obtainLessons(with: ids).then { lessons -> Promise<[LessonPlainObject]> in
+        return lessonsService.obtainLessons(with: ids).then { lessons in
             lessons.isEmpty ? self.fetchTheoryLessons() : .value(lessons)
         }
     }
 
-    // MARK: View Specific
-    // TODO: Remove hardcoded lessons content.
+    // MARK: Helpers
+
+    private func getTopicForLessonId(_ id: Int) -> KnowledgeGraph.Node? {
+        return knowledgeGraph.firstVertex { vertex in
+            vertex.lessons.contains(where: { $0.id == id })
+        }
+    }
+
+    private func getTheoryLessonsIds() -> [Int] {
+        return knowledgeGraph
+            .filterLessons({ $0.type == .theory })
+            .prefix(TrainingPresenter.lessonsLimit)
+            .map { $0.id }
+    }
+}
+
+// MARK: - TrainingPresenter (View) -
+
+extension TrainingPresenter {
     private func reloadViewData() {
+        func resolveColorsForLessonId(_ id: Int) -> [UIColor] {
+            guard let topic = getTopicForLessonId(id) else {
+                return GradientColorsResolver.resolve(id)
+            }
+
+            return GradientColorsResolver.resolve(topic.id)
+        }
+
         let theory = theoryLessons.map {
             TrainingViewData(
                 id: $0.id,
                 title: $0.title,
+                // TODO: Remove hardcoded lessons content.
                 description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
                 countLessons: $0.steps.count,
-                isPractice: false
+                isPractice: false,
+                colors: resolveColorsForLessonId($0.id)
             )
         }
-        let practice = getKnowledgeGraphLessons(of: .practice)
+
+        let practice = knowledgeGraph
+            .filterLessons({ $0.type == .practice })
             .prefix(TrainingPresenter.lessonsLimit)
             .map {
                 TrainingViewData(
                     id: $0.id,
-                    title: getTopicForLesson($0)?.title ?? "",
+                    title: getTopicForLessonId($0.id)?.title ?? "",
+                    // TODO: Remove hardcoded lessons content.
                     description: "Краткое описание того, что происходит здесь",
                     countLessons: 1,
-                    isPractice: true
+                    isPractice: true,
+                    colors: resolveColorsForLessonId($0.id)
                 )
         }
 
@@ -197,44 +239,5 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         message: String = NSLocalizedString("ErrorMessage", comment: "")
     ) {
         view?.displayError(title: title, message: message)
-    }
-
-    // MARK: Helpers
-
-    private func getKnowledgeGraphLessons(
-        of type: KnowledgeGraphLesson.LessonType
-    ) -> [KnowledgeGraphLesson] {
-        var result = [KnowledgeGraphLesson]()
-        knowledgeGraph.adjacencyLists.keys.forEach { topic in
-            let filteredLessons = topic.lessons.filter {
-                $0.type == type
-            }
-            result.append(contentsOf: filteredLessons)
-        }
-
-        return result
-    }
-
-    private func getTopicForLesson(_ lesson: KnowledgeGraphLesson) -> KnowledgeGraph.Node? {
-        for topic in knowledgeGraph.adjacencyLists.keys {
-            if topic.lessons.contains(where: { $0.id == lesson.id }) {
-                return topic
-            }
-        }
-
-        return nil
-    }
-
-    private func getTheoryLessonsIds() -> [Int] {
-        return getKnowledgeGraphLessons(of: .theory)
-            .prefix(TrainingPresenter.lessonsLimit)
-            .map { $0.id }
-    }
-
-    // MARK: - Types
-
-    private enum TrainingPresenterError: Error {
-        case failedRegisterUser
-        case failedFetchKnowledgeGraph
     }
 }

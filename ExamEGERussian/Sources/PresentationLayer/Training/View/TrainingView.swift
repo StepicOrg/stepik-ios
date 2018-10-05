@@ -14,6 +14,7 @@ struct TrainingViewData {
     let description: String
     let countLessons: Int
     let isPractice: Bool
+    let colors: [UIColor]
 }
 
 enum TrainingViewState {
