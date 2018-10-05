@@ -14,6 +14,12 @@ struct LessonPlainObject: Hashable {
     let title: String
     let slug: String
     let timeToComplete: Double
+
+    var hashValue: Int {
+        // TODO: Written for Swift 4.1 compatibility, replace with `Hasher` Swift 4.2.
+        return id.hashValue ^ title.hashValue ^ slug.hashValue
+            ^ timeToComplete.hashValue &* 16777619
+    }
 }
 
 extension LessonPlainObject {
