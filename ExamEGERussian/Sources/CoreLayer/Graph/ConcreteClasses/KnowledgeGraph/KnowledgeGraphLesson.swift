@@ -1,5 +1,5 @@
 //
-//  KGraphLesson.swift
+//  KnowledgeGraphLesson.swift
 //  ExamEGERussian
 //
 //  Created by Ivan Magda on 20/07/2018.
@@ -11,7 +11,8 @@ import Foundation
 public struct KnowledgeGraphLesson {
     let id: Int
     let type: LessonType
-    let courseId: String
+    let courseId: Int
+    let description: String
 
     public enum LessonType: String {
         case theory
@@ -35,9 +36,10 @@ public struct KnowledgeGraphLesson {
 }
 
 extension KnowledgeGraphLesson {
-    init(id: Int, type: String, courseId: String) {
+    init(id: Int, type: String, courseId: Int, description: String) {
         self.id = id
         self.type = LessonType(rawValue: type)
         self.courseId = courseId
+        self.description = description
     }
 }

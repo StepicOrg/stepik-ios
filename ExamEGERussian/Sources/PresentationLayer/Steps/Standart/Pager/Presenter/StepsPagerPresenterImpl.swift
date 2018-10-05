@@ -70,12 +70,11 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     // MARK: - Private API
 
     private func joinCourse() -> Promise<Void> {
-        guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == self.lesson.id }),
-              let courseId = Int(lesson.courseId) else {
+        guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == self.lesson.id }) else {
             return Promise(error: StepsPagerPresenterError.failedJoinCourse)
         }
 
-        return courseService.joinCourses(with: [courseId]).then { _ -> Promise<Void> in
+        return courseService.joinCourses(with: [lesson.courseId]).then { _ -> Promise<Void> in
             .value(())
         }
     }

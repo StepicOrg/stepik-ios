@@ -10,5 +10,5 @@ import Foundation
 
 protocol TrainingRouterProtocol: class {
     func showTheory(lesson: LessonPlainObject)
-    func showPractice(courseId: String)
+    func showPractice(courseId: Int)
 }

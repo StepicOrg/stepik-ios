@@ -18,16 +18,9 @@ final class LessonsRouter: BaseRouter, LessonsRouterProtocol {
         })
 	}
 
-    func showPractice(courseId: String) {
-        if let id = Int(courseId) {
-            pushViewController(derivedFrom: { _ in
-                assemblyFactory.stepsAssembly.adaptive.module(courseId: id)
-            })
-        } else {
-            navigationController?.presentAlert(
-                withTitle: NSLocalizedString("Error", comment: ""),
-                message: NSLocalizedString("NoAdaptiveModuleError", comment: "")
-            )
-        }
+    func showPractice(courseId: Int) {
+        pushViewController(derivedFrom: { _ in
+            assemblyFactory.stepsAssembly.adaptive.module(courseId: courseId)
+        })
     }
 }

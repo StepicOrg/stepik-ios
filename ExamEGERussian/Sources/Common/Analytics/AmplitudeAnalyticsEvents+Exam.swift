@@ -25,7 +25,7 @@ extension AmplitudeAnalyticsEvents {
         static func opened(
             id: Int,
             type: String,
-            courseId: String,
+            courseId: Int,
             topicId: String
         ) -> AnalyticsEvent {
             return AnalyticsEvent(
