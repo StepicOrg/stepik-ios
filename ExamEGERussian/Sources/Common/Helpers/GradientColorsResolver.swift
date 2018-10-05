@@ -24,6 +24,16 @@ final class GradientColorsResolver {
     }
 
     private static func index<T: Hashable>(for key: T) -> Int {
-        return abs(key.hashValue) % colors.count
+        return hash(of: abs(key.hashValue)) % colors.count
+    }
+
+    private static func hash(of x: Int) -> Int {
+        var h = x
+
+        h = (h >> 16 ^ h) &* 0x45d9f3b
+        h = (h >> 16 ^ h) &* 0x45d9f3b
+        h = h >> 16 ^ h
+
+        return h
     }
 }
