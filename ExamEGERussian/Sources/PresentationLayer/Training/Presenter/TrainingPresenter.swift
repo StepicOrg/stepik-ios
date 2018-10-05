@@ -186,7 +186,7 @@ extension TrainingPresenter {
 
     private func getTheoryLessonsIds() -> [Int] {
         return knowledgeGraph
-            .filterLessons({ $0.type == .theory })
+            .filterLessons { $0.type == .theory }
             .prefix(TrainingPresenter.lessonsLimit)
             .map { $0.id }
     }
@@ -196,47 +196,52 @@ extension TrainingPresenter {
 
 extension TrainingPresenter {
     private func reloadViewData() {
-        func resolveColorsForLessonId(_ id: Int) -> [UIColor] {
-            guard let topic = getTopicForLessonId(id) else {
-                return GradientColorsResolver.resolve(id)
-            }
+        view?.setViewData(theoryViewData() + practiceViewData())
+    }
 
-            return GradientColorsResolver.resolve(topic.id)
+    private func theoryViewData() -> [TrainingViewData] {
+        let ids = Set(theoryLessons.map { $0.id })
+        let idToDescription = knowledgeGraph.filterLessons {
+            ids.contains($0.id)
+        }.reduce(into: [:], { result, lesson in
+            result[lesson.id] = lesson.description
+        })
+
+        return theoryLessons.sorted { $0.id < $1.id }.map {
+            TrainingViewData(
+                id: $0.id,
+                title: $0.title,
+                description: idToDescription[$0.id] ?? "",
+                countLessons: $0.steps.count,
+                isPractice: false,
+                colors: resolveColorsForLessonId($0.id)
+            )
         }
+    }
 
-        let theory = theoryLessons
-            .sorted(by: { $0.id < $1.id })
-            .map({
-                TrainingViewData(
-                    id: $0.id,
-                    title: $0.title,
-                    // TODO: Remove hardcoded lessons content.
-                    description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                    countLessons: $0.steps.count,
-                    isPractice: false,
-                    colors: resolveColorsForLessonId($0.id)
-                )
-            })
-
-        let practice = knowledgeGraph
-            .filterLessons({ $0.type == .practice })
+    private func practiceViewData() -> [TrainingViewData] {
+        return knowledgeGraph
+            .filterLessons { $0.type == .practice }
             .prefix(TrainingPresenter.lessonsLimit)
-            .sorted(by: { (lhs: KnowledgeGraphLesson, rhs: KnowledgeGraphLesson) in
-                lhs.id < rhs.id
-            })
-            .map({
+            .sorted { $0.id < $1.id }
+            .map {
                 TrainingViewData(
                     id: $0.id,
                     title: getTopicForLessonId($0.id)?.title ?? "",
-                    // TODO: Remove hardcoded lessons content.
-                    description: "Краткое описание того, что происходит здесь",
+                    description: $0.description,
                     countLessons: 1,
                     isPractice: true,
                     colors: resolveColorsForLessonId($0.id)
                 )
-            })
+            }
+    }
 
-        view?.setViewData(theory + practice)
+    private func resolveColorsForLessonId(_ id: Int) -> [UIColor] {
+        guard let topic = getTopicForLessonId(id) else {
+            return GradientColorsResolver.resolve(id)
+        }
+
+        return GradientColorsResolver.resolve(topic.id)
     }
 
     private func displayError(
