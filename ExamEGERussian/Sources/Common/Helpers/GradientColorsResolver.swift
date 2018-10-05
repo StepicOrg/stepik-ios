@@ -13,7 +13,7 @@ final class GradientColorsResolver {
         [UIColor(hex: 0x42275A), UIColor(hex: 0x734B6D)],
         [UIColor(hex: 0x516395), UIColor(hex: 0x4CA1AF)],
         [UIColor(hex: 0x2B5876), UIColor(hex: 0x4E4376)],
-        [UIColor(hex: 0x2A6587), UIColor(hex: 0x66A69F)]
+        [UIColor(hex: 0xB12A5B), UIColor(hex: 0x9E206B)]
     ]
 
     private init() {

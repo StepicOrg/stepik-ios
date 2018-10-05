@@ -10616,9 +10616,9 @@
 		2CD7994421077CB90054D098 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				62E98B7A1369E540D0BB2325 /* CAGradientLayer */,
 				2C67AFB021661022001D8A58 /* UIColor */,
 				2CD7994721077CB90054D098 /* UIViewController */,
-				62E98B7A1369E540D0BB2325 /* CAGradientLayer */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -10642,9 +10642,9 @@
 		2CD7995121077CB90054D098 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */,
 				2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */,
 				2CD7995321077CB90054D098 /* RandomCredentialsGenerator.swift */,
-				2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
