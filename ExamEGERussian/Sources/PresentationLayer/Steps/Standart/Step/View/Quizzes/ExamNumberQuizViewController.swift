@@ -22,4 +22,12 @@ final class ExamNumberQuizViewController: NumberQuizViewController {
             self?.presenter?.refreshAttempt()
         }
     }
+
+    override func getReply() -> Reply? {
+        guard let text = textField.text, !text.isEmpty else {
+            return nil
+        }
+
+        return NumberReply(number: text)
+    }
 }

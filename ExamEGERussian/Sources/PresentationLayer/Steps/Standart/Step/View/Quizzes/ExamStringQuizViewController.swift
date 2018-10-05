@@ -22,4 +22,7 @@ final class ExamStringQuizViewController: StringQuizViewController {
             self?.presenter?.refreshAttempt()
         }
     }
-}
+
+    override func getReply() -> Reply? {
+        return textView.text.isEmpty ? nil : TextReply(text: textView.text)
+    }
