@@ -17,6 +17,7 @@ struct LessonPlainObject: Hashable {
 
     var hashValue: Int {
         // TODO: Written for Swift 4.1 compatibility, replace with `Hasher` Swift 4.2.
+        // https://github.com/apple/swift-evolution/blob/master/proposals/0206-hashable-enhancements.md
         return id.hashValue ^ title.hashValue ^ slug.hashValue
             ^ timeToComplete.hashValue &* 16777619
     }
