@@ -204,22 +204,27 @@ extension TrainingPresenter {
             return GradientColorsResolver.resolve(topic.id)
         }
 
-        let theory = theoryLessons.map {
-            TrainingViewData(
-                id: $0.id,
-                title: $0.title,
-                // TODO: Remove hardcoded lessons content.
-                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                countLessons: $0.steps.count,
-                isPractice: false,
-                colors: resolveColorsForLessonId($0.id)
-            )
-        }
+        let theory = theoryLessons
+            .sorted(by: { $0.id < $1.id })
+            .map({
+                TrainingViewData(
+                    id: $0.id,
+                    title: $0.title,
+                    // TODO: Remove hardcoded lessons content.
+                    description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
+                    countLessons: $0.steps.count,
+                    isPractice: false,
+                    colors: resolveColorsForLessonId($0.id)
+                )
+            })
 
         let practice = knowledgeGraph
             .filterLessons({ $0.type == .practice })
             .prefix(TrainingPresenter.lessonsLimit)
-            .map {
+            .sorted(by: { (lhs: KnowledgeGraphLesson, rhs: KnowledgeGraphLesson) in
+                lhs.id < rhs.id
+            })
+            .map({
                 TrainingViewData(
                     id: $0.id,
                     title: getTopicForLessonId($0.id)?.title ?? "",
@@ -229,7 +234,7 @@ extension TrainingPresenter {
                     isPractice: true,
                     colors: resolveColorsForLessonId($0.id)
                 )
-        }
+            })
 
         view?.setViewData(theory + practice)
     }
