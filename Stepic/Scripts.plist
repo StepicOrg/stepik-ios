@@ -9,7 +9,7 @@
 	<key>wysiwygCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;wysiwyg.css&quot;&gt;</string>
 	<key>KotlinRunnableSamples</key>
-	<string>&lt;script src=&quot;https://unpkg.com/kotlin-playground@1&quot; data-selector=&quot;kotlin-runnable&quot;&gt;&lt;/script&gt;</string>
+	<string>&lt;script src=&quot;https://unpkg.com/kotlin-playground@1.10.0/dist/playground.min.js&quot; data-selector=&quot;kotlin-runnable&quot;&gt;&lt;/script&gt;</string>
 	<key>AudioTagWrapperInit</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
 	<key>AudioTagWrapper</key>
