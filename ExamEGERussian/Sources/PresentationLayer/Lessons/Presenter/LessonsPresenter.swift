@@ -18,7 +18,6 @@ final class LessonsPresenter: LessonsPresenterProtocol {
 
     private var lessons = [LessonPlainObject]() {
         didSet {
-            lessons = Array(Set(lessons))
             updateView()
         }
     }
@@ -98,9 +97,7 @@ extension LessonsPresenter {
     }
 
     private func getLessons() {
-        obtainLessonsFromCache().done {
-            self.fetchLessons()
-        }
+        fetchLessons()
     }
 
     private func obtainLessonsFromCache() -> Guarantee<Void> {

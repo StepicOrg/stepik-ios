@@ -53,6 +53,9 @@ final class LessonTableHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        titleLabel.text = nil
+        subtitleLabel.text = nil
+
         layer.insertSublayer(gradientLayer, at: 0)
         updateAppearance()
     }
