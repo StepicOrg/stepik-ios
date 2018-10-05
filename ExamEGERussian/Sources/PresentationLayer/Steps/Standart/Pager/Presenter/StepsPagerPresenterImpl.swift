@@ -105,9 +105,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
 
 extension StepsPagerPresenterImpl {
     private func getSteps() {
-        obtainStepsFromCache().done {
-            self.fetchSteps()
-        }
+        fetchSteps()
     }
 
     private func obtainStepsFromCache() -> Guarantee<Void> {
