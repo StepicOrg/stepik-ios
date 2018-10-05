@@ -14,7 +14,14 @@ struct LessonsViewData {
     let subtitle: String
 }
 
+enum LessonsViewState {
+    case idle
+    case fetching
+}
+
 protocol LessonsView: class {
+    var state: LessonsViewState { get set }
+
     func setLessons(_ lessons: [LessonsViewData])
     func updateHeader(title: String, subtitle: String, colors: [UIColor])
     func displayError(title: String, message: String)

@@ -117,8 +117,12 @@ extension LessonsPresenter {
             return
         }
 
+        view?.state = .fetching
+
         lessonsService.fetchLessons(with: lessonsIds).done { [weak self] lessons in
             self?.lessons = lessons
+        }.ensure { [weak view] in
+            view?.state = .idle
         }.catch { [weak self] _ in
             self?.displayError()
         }

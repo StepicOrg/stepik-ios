@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 extension LessonsTableViewController {
     struct Appearance {
@@ -16,6 +17,18 @@ extension LessonsTableViewController {
 
 final class LessonsTableViewController: UITableViewController {
     var presenter: LessonsPresenterProtocol!
+
+    var state: LessonsViewState = .idle {
+        didSet {
+            switch state {
+            case .idle:
+                SVProgressHUD.dismiss()
+            case .fetching:
+                SVProgressHUD.show()
+            }
+        }
+    }
+
     private let appearance: Appearance
 
     private var lessons = [LessonsViewData]() {
