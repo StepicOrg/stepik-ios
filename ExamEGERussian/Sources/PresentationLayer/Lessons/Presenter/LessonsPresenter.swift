@@ -150,7 +150,9 @@ extension LessonsPresenter {
     }
 
     private func updateView() {
-        let theory = lessons.map {
+        let theory = lessonsIds.compactMap { id in
+            lessons.first(where: { $0.id == id })
+        }.map {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
