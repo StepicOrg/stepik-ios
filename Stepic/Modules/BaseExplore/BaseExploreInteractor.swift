@@ -14,7 +14,7 @@ protocol BaseExploreInteractorProtocol {
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request)
 }
 
-class BaseExploreInteractor: BaseExploreInteractorProtocol {
+class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
     let presenter: BaseExplorePresenterProtocol
     let contentLanguageService: ContentLanguageServiceProtocol
 
@@ -37,21 +37,9 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol {
             response: .init(courseListType: request.courseListType)
         )
     }
-}
 
-extension BaseExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
+    // MARK: - CourseListOutputProtocol
 
-extension BaseExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(type: CollectionCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
-
-extension BaseExploreInteractor: CourseListOutputProtocol {
     func presentCourseInfo(course: Course) {
         self.presenter.presentCourseInfo(response: .init(course: course))
     }
@@ -68,10 +56,19 @@ extension BaseExploreInteractor: CourseListOutputProtocol {
         self.presenter.presentAuthorization()
     }
 
-    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+    func presentError(sourceModule: CourseListInputProtocol) { }
 
+    func presentEmptyState(sourceModule: CourseListInputProtocol) { }
+}
+
+extension BaseExploreInteractor: TagsOutputProtocol {
+    func presentCourseList(type: TagCourseListType) {
+        self.loadFullscreenCourseList(request: .init(courseListType: type))
     }
+}
 
-    func presentError(sourceModule: CourseListInputProtocol) {
+extension BaseExploreInteractor: CourseListCollectionOutputProtocol {
+    func presentCourseList(type: CollectionCourseListType) {
+        self.loadFullscreenCourseList(request: .init(courseListType: type))
     }
 }

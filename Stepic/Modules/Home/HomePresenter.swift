@@ -44,7 +44,7 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
 
     func presentEnrolledCourses(response: Home.LoadEnrolledCourses.Response) {
         self.homeViewController?.displayEnrolledCourses(
-            viewModel: .init(isAuthorized: response.isAuthorized)
+            viewModel: .init(result: response.result)
         )
     }
 

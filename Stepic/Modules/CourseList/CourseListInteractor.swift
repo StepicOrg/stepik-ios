@@ -21,6 +21,10 @@ protocol CourseListInteractorProtocol: class {
 final class CourseListInteractor: CourseListInteractorProtocol {
     typealias PaginationState = (page: Int, hasNext: Bool)
 
+    // We should be able to set uid cause we want to manage
+    // which course list module called module output methods
+    var moduleIdentifier: UniqueIdentifierType?
+
     weak var moduleOutput: CourseListOutputProtocol?
 
     let presenter: CourseListPresenterProtocol
@@ -124,7 +128,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
-            self.moduleOutput?.presentError(sourceModule: self)
+
         }
     }
 

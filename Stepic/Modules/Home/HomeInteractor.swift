@@ -53,8 +53,22 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
 
     func loadEnrolledCourses(request: Home.LoadEnrolledCourses.Request) {
         self.homePresenter?.presentEnrolledCourses(
-            response: .init(isAuthorized: self.userAccountService.isAuthorized)
+            response: .init(
+                result: self.userAccountService.isAuthorized ? .normal : .anonymous
+            )
         )
+    }
+
+    override func presentEmptyState(sourceModule: CourseListInputProtocol) {
+        if sourceModule.moduleIdentifier == Home.Submodule.enrolledCourses.uniqueIdentifier {
+            self.homePresenter?.presentEnrolledCourses(response: .init(result: .empty))
+        }
+    }
+
+    override func presentError(sourceModule: CourseListInputProtocol) {
+        if sourceModule.moduleIdentifier == Home.Submodule.enrolledCourses.uniqueIdentifier {
+            self.homePresenter?.presentEnrolledCourses(response: .init(result: .error))
+        }
     }
 }
 

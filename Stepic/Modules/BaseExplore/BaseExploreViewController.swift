@@ -19,9 +19,7 @@ protocol BaseExploreViewControllerProtocol: class {
     func displayAuthorization()
 }
 
-protocol SubmoduleType {
-    // to be able to get submodule
-    var id: Int { get }
+protocol SubmoduleType: UniqueIdentifiable {
     var position: Int { get }
 }
 
@@ -101,7 +99,7 @@ class BaseExploreViewController: UIViewController {
     }
 
     func getSubmodule(type: SubmoduleType) -> Submodule? {
-        return self.submodules.first(where: { $0.type.id == type.id })
+        return self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
     func initLanguageIndependentSubmodules() {

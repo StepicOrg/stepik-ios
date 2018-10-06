@@ -15,7 +15,7 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class ExploreViewController: BaseExploreViewController {
-    private static let submodulesOrder: [ExploreSubmoduleType] = [
+    static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
         .tags,
@@ -72,7 +72,7 @@ final class ExploreViewController: BaseExploreViewController {
                     viewController: storiesViewController,
                     view: storiesContainerView,
                     isLanguageDependent: true,
-                    type: ExploreSubmoduleType.stories
+                    type: Explore.Submodule.stories
                 )
             )
         }
@@ -88,7 +88,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: tagsViewController,
                 view: tagsViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.tags
+                type: Explore.Submodule.tags
             )
         )
 
@@ -104,7 +104,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: collectionViewController,
                 view: collectionViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.collection
+                type: Explore.Submodule.collection
             )
         )
 
@@ -135,7 +135,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: popularViewController,
                 view: containerView,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.popularCourses
+                type: Explore.Submodule.popularCourses
             )
         )
     }
@@ -172,24 +172,14 @@ final class ExploreViewController: BaseExploreViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
+}
 
-    private enum ExploreSubmoduleType: Int, SubmoduleType {
-        case stories
-        case languageSwitch
-        case tags
-        case collection
-        case popularCourses
-
-        var id: Int {
-            return self.rawValue
+extension Explore.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
         }
-
-        var position: Int {
-            guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
-                fatalError("Given submodule type has unknown position")
-            }
-            return position
-        }
+        return position
     }
 }
 
@@ -206,14 +196,14 @@ extension ExploreViewController: ExploreViewControllerProtocol {
                 viewController: viewController,
                 view: viewController.view,
                 isLanguageDependent: false,
-                type: ExploreSubmoduleType.languageSwitch
+                type: Explore.Submodule.languageSwitch
             )
         )
     }
 
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel) {
         self.isStoriesHidden = true
-        if let storiesBlock = self.getSubmodule(type: ExploreSubmoduleType.stories) {
+        if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
             self.removeSubmodule(storiesBlock)
         }
     }

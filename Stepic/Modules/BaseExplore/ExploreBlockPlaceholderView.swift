@@ -31,11 +31,16 @@ final class ExploreBlockPlaceholderView: UIView {
 
     private lazy var overlayButton: UIButton = {
         let button = HighlightFakeButton()
+        button.isEnabled = false
         button.addTarget(self, action: #selector(self.overlayButtonClicked), for: .touchUpInside)
         return button
     }()
 
-    var onPlaceholderClick: (() -> Void)?
+    var onPlaceholderClick: (() -> Void)? {
+        didSet {
+            self.overlayButton.isEnabled = self.onPlaceholderClick != nil
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         let insets = self.appearance.insets.top + self.appearance.insets.bottom

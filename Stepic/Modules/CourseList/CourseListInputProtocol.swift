@@ -8,10 +8,7 @@
 
 import Foundation
 
-protocol Reloadable: class {
+protocol CourseListInputProtocol: class {
+    var moduleIdentifier: UniqueIdentifierType? { get set }
     func reload()
-}
-
-protocol CourseListInputProtocol: Reloadable {
-
 }

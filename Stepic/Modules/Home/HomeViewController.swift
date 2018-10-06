@@ -15,7 +15,7 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class HomeViewController: BaseExploreViewController {
-    private static let submodulesOrder: [HomeSubmoduleType] = [
+    fileprivate static let submodulesOrder: [Home.Submodule] = [
         .streakActivity,
         .continueCourse,
         .enrolledCourses,
@@ -49,7 +49,7 @@ final class HomeViewController: BaseExploreViewController {
                 viewController: continueCourseViewController,
                 view: continueCourseViewController.view,
                 isLanguageDependent: false,
-                type: HomeSubmoduleType.continueCourse
+                type: Home.Submodule.continueCourse
             )
         )
 
@@ -67,6 +67,9 @@ final class HomeViewController: BaseExploreViewController {
         )
         let popularViewController = popularAssembly.makeModule()
         popularAssembly.moduleInput?.reload()
+        popularAssembly.moduleInput?.moduleIdentifier = Home.Submodule.popularCourses
+            .uniqueIdentifier
+
         let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
@@ -85,27 +88,18 @@ final class HomeViewController: BaseExploreViewController {
                 viewController: popularViewController,
                 view: containerView,
                 isLanguageDependent: true,
-                type: HomeSubmoduleType.popularCourses
+                type: Home.Submodule.popularCourses
             )
         )
     }
+}
 
-    private enum HomeSubmoduleType: Int, SubmoduleType {
-        case streakActivity
-        case continueCourse
-        case enrolledCourses
-        case popularCourses
-
-        var id: Int {
-            return self.rawValue
+extension Home.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = HomeViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
         }
-
-        var position: Int {
-            guard let position = HomeViewController.submodulesOrder.index(of: self) else {
-                fatalError("Given submodule type has unknown position")
-            }
-            return position
-        }
+        return position
     }
 }
 
@@ -113,17 +107,17 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
         switch viewModel.result {
         case .hidden:
-            if let submodule = self.getSubmodule(type: HomeSubmoduleType.streakActivity) {
+            if let submodule = self.getSubmodule(type: Home.Submodule.streakActivity) {
                 self.removeSubmodule(submodule)
             }
         case .visible(let message, let streak):
-            if self.getSubmodule(type: HomeSubmoduleType.streakActivity) == nil {
+            if self.getSubmodule(type: Home.Submodule.streakActivity) == nil {
                 self.registerSubmodule(
                     .init(
                         viewController: nil,
                         view: self.streakView,
                         isLanguageDependent: false,
-                        type: HomeSubmoduleType.streakActivity
+                        type: Home.Submodule.streakActivity
                     )
                 )
             }
@@ -137,18 +131,23 @@ extension HomeViewController: HomeViewControllerProtocol {
         let headerDescription = CourseListContainerViewFactory.HorizontalHeaderDescription(
             title: NSLocalizedString("Enrolled", comment: ""),
             summary: nil,
-            shouldShowShowAllButton: viewModel.isAuthorized
+            shouldShowShowAllButton: viewModel.result != .anonymous
         )
 
-        if !viewModel.isAuthorized {
+        switch viewModel.result {
+        case .anonymous:
             return self.displayEnrolledPlaceholder(headerDescription: headerDescription)
-        } else {
+        case .empty:
+            return self.displayEnrolledEmptyPlaceholder(headerDescription: headerDescription)
+        case .normal:
             return self.displayEnrolledCourseList(headerDescription: headerDescription)
+        case .error:
+            return self.displayEnrolledErrorPlaceholder(headerDescription: headerDescription)
         }
     }
 
     func hideContinueCourse() {
-        if let submodule = self.getSubmodule(type: HomeSubmoduleType.continueCourse) {
+        if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
             self.removeSubmodule(submodule)
         }
     }
@@ -171,7 +170,45 @@ extension HomeViewController: HomeViewControllerProtocol {
                 viewController: nil,
                 view: containerView,
                 isLanguageDependent: false,
-                type: HomeSubmoduleType.enrolledCourses
+                type: Home.Submodule.enrolledCourses
+            )
+        )
+    }
+
+    private func displayEnrolledEmptyPlaceholder(
+        headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription
+    ) {
+        let contentView = ExploreBlockPlaceholderView(frame: .zero, message: .enrolledEmpty)
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: contentView,
+                headerDescription: headerDescription
+            )
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: false,
+                type: Home.Submodule.enrolledCourses
+            )
+        )
+    }
+
+    private func displayEnrolledErrorPlaceholder(
+        headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription
+    ) {
+        let contentView = ExploreBlockPlaceholderView(frame: .zero, message: .enrolledError)
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: contentView,
+                headerDescription: headerDescription
+            )
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: false,
+                type: Home.Submodule.enrolledCourses
             )
         )
     }
@@ -187,6 +224,8 @@ extension HomeViewController: HomeViewControllerProtocol {
         )
         let enrolledViewController = enrolledCourseListAssembly.makeModule()
         enrolledCourseListAssembly.moduleInput?.reload()
+        enrolledCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule.enrolledCourses
+            .uniqueIdentifier
 
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
@@ -204,7 +243,7 @@ extension HomeViewController: HomeViewControllerProtocol {
                 viewController: enrolledViewController,
                 view: containerView,
                 isLanguageDependent: false,
-                type: HomeSubmoduleType.enrolledCourses
+                type: Home.Submodule.enrolledCourses
             )
         )
     }

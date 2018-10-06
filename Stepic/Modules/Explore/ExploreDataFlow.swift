@@ -9,6 +9,20 @@
 import Foundation
 
 enum Explore {
+    // MARK: Submodules identifiers
+
+    enum Submodule: String, UniqueIdentifiable {
+        case stories
+        case languageSwitch
+        case tags
+        case collection
+        case popularCourses
+
+        var uniqueIdentifier: UniqueIdentifierType {
+            return self.rawValue
+        }
+    }
+
     // MARK: Use cases
 
     /// Check for language switch visibility

@@ -156,13 +156,16 @@ final class GradientCoursesPlaceholderViewFactory {
     }
 
     enum InfoPlaceholderMessage {
-        case enrolled
+        case enrolledEmpty
+        case enrolledError
         case login
 
         var message: String {
             switch self {
-            case .enrolled:
+            case .enrolledEmpty:
                 return NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
+            case .enrolledError:
+                return NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
             case .login:
                 return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             }
