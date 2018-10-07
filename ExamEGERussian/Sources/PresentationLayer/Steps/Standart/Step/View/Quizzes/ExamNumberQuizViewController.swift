@@ -30,4 +30,8 @@ final class ExamNumberQuizViewController: NumberQuizViewController {
 
         return NumberReply(number: text)
     }
+
+    override func initActivityView(color: UIColor) -> UIView {
+        return super.initActivityView(color: .black)
+    }
 }

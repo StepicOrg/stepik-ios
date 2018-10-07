@@ -26,4 +26,8 @@ final class ExamStringQuizViewController: StringQuizViewController {
     override func getReply() -> Reply? {
         return textView.text.isEmpty ? nil : TextReply(text: textView.text)
     }
+
+    override func initActivityView(color: UIColor) -> UIView {
+        return super.initActivityView(color: .black)
+    }
 }

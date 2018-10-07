@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could't initialize window")
         }
 
-        window.tintColor = UIColor.defaultTint
+        window.tintColor = UIColor(hex: 0x007AFF)
 
         ThirdPartiesConfigurator().configure()
 
