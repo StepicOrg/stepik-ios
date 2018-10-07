@@ -47,41 +47,50 @@ final class LearningPresenter: LearningPresenterProtocol {
     }
 
     func refresh() {
-        view?.state = .fetching
-
-        checkAuthStatus().then {
-            self.refreshContent()
-        }.then {
-            self.joinCoursesIfNeeded()
-        }.done {
-            self.reloadViewData()
-            self.fetchProgresses().then {
-                self.updateTimeToComplete()
-            }.done {
-                self.reloadViewData()
-            }
-        }.ensure {
-            self.view?.state = .idle
-        }.catch { [weak self] error in
+        func catchError(_ error: Error) {
             switch error {
             case is NetworkError:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("ConnectionErrorTitle", comment: ""),
                     message: NSLocalizedString("ConnectionErrorSubtitle", comment: "")
                 )
             case LearningPresenterError.failedFetchKnowledgeGraph:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
                     message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
                 )
             case LearningPresenterError.failedRegisterUser:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
                     message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
                 )
             default:
-                self?.displayError()
+                displayError()
             }
+        }
+
+        view?.state = .fetching
+
+        checkAuthStatus().then {
+            self.joinCoursesIfNeeded()
+        }.then {
+            self.fetchProgresses()
+        }.then {
+            self.updateTimeToComplete()
+        }.done {
+            self.reloadViewData()
+        }.ensure {
+            self.view?.state = .idle
+        }.catch {
+            catchError($0)
+        }
+
+        refreshContent().done {
+            self.reloadViewData()
+        }.ensure {
+            self.view?.state = .idle
+        }.catch {
+            catchError($0)
         }
     }
 
@@ -108,8 +117,9 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
 
         return Promise { seal in
-            let params = RandomCredentialsGenerator().userRegistrationParams
-            userRegistrationService.registerAndSignIn(with: params).then { user in
+            userRegistrationService.registerAndSignIn(
+                with: RandomCredentialsGenerator().userRegistrationParams
+            ).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
@@ -151,7 +161,7 @@ final class LearningPresenter: LearningPresenterProtocol {
         var coursesIds = Set<Int>()
 
         topics.forEach { topic in
-            topic.lessons.compactMap {
+            topic.lessons.map {
                 Int($0.courseId)
             }.forEach {
                 coursesIds.insert($0)
