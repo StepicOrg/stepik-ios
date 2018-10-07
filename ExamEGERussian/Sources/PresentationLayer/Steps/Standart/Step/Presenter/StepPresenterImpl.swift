@@ -20,6 +20,10 @@ final class StepPresenterImpl: StepPresenter {
 
     private let stepsService: StepsService
 
+    var isInputEmpty: Bool {
+        return quizViewController?.getReply() == nil
+    }
+
     init(view: StepView,
          step: StepPlainObject,
          lesson: LessonPlainObject,
