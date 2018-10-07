@@ -44,9 +44,14 @@ final class TrainingPresenter: TrainingPresenterProtocol {
     func refresh() {
         view?.state = .fetching
 
-        checkAuthStatus().then {
-            self.refreshContent()
-        }.done {
+        checkAuthStatus().catch { [weak self] _ in
+            self?.displayError(
+                title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
+                message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
+            )
+        }
+
+        refreshContent().done {
             self.reloadViewData()
         }.ensure {
             self.view?.state = .idle
@@ -56,11 +61,6 @@ final class TrainingPresenter: TrainingPresenterProtocol {
                 self?.displayError(
                     title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
                     message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
-                )
-            case TrainingPresenterError.failedRegisterUser:
-                self?.displayError(
-                    title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
-                    message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
                 )
             default:
                 self?.displayError()
@@ -95,8 +95,9 @@ final class TrainingPresenter: TrainingPresenterProtocol {
         }
 
         return Promise { seal in
-            let params = RandomCredentialsGenerator().userRegistrationParams
-            userRegistrationService.registerAndSignIn(with: params).then { user in
+            userRegistrationService.registerAndSignIn(
+                with: RandomCredentialsGenerator().userRegistrationParams
+            ).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
