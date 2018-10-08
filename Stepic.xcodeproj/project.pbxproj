@@ -4104,6 +4104,7 @@
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
+		2CDE2ADD216B3F61008AF0D1 /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */; };
 		2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */; };
 		2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B5212472AA00898A70 /* LogoutableMock.swift */; };
 		2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */; };
@@ -6170,6 +6171,7 @@
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
+		2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
 		2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		2CDE34B5212472AA00898A70 /* LogoutableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutableMock.swift; sourceTree = "<group>"; };
 		2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -10690,6 +10692,7 @@
 				2CD7999621077E540054D098 /* KnowledgeGraph */,
 				2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */,
 				2C770305210F29B0002E250D /* LessonPlainObject.swift */,
+				2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */,
 				2C9492C521130E6600552600 /* StepPlainObject.swift */,
 				2C83DFEB2135E24C00C5978C /* TopicPlainObject.swift */,
 			);
@@ -16774,6 +16777,7 @@
 				2C4EB2DC2124304000AF2331 /* ExamStringQuizViewController.swift in Sources */,
 				2C093EFC211B427200162DD0 /* CellWebViewHelper.swift in Sources */,
 				2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */,
+				2CDE2ADD216B3F61008AF0D1 /* ProgressPlainObject.swift in Sources */,
 				2C093F0F211B43DB00162DD0 /* Alerts.swift in Sources */,
 				2C093F27211B462B00162DD0 /* ChoiceQuizViewController.swift in Sources */,
 				2C9499C820ECBC6D0049E9A8 /* StepikModelView.swift in Sources */,

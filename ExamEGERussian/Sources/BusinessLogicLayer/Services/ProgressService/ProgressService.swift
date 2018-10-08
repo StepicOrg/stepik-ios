@@ -12,17 +12,20 @@ protocol ProgressService {
     /// - Parameters:
     ///   - ids: Ids to fetch.
     ///   - refreshMode: Request refresh mode: `update` or `delete`.
-    /// - Returns: Promise with an array of `Progress` objects.
-    func fetchProgresses(with ids: [String], refreshMode: RefreshMode) -> Promise<[Progress]>
+    /// - Returns: Promise with an array of `ProgressPlainObject` objects.
+    func fetchProgresses(
+        with ids: [String],
+        refreshMode: RefreshMode
+    ) -> Promise<[ProgressPlainObject]>
     /// Method is used to obtain progresses from cache.
     ///
     /// - Parameter ids: Ids to fetch.
     /// - Returns: Promise with an array of `Progress` objects from cache.
-    func obtainProgresses(with ids: [String]) -> Promise<[Progress]>
+    func obtainProgresses(with ids: [String]) -> Promise<[ProgressPlainObject]>
 }
 
 extension ProgressService {
-    func fetchProgresses(with ids: [String]) -> Promise<[Progress]> {
+    func fetchProgresses(with ids: [String]) -> Promise<[ProgressPlainObject]> {
         return fetchProgresses(with: ids, refreshMode: .update)
     }
 }

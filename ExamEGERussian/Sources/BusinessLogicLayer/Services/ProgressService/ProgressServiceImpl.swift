@@ -14,19 +14,26 @@ final class ProgressServiceImpl: ProgressService {
         self.progressesAPI = progressesAPI
     }
 
-    func fetchProgresses(with ids: [String], refreshMode: RefreshMode) -> Promise<[Progress]> {
-        return executeFetchRequest(ids: ids).then { cachedProgresses in
-            self.fetchProgresses(with: ids, existing: cachedProgresses, refreshMode: refreshMode)
+    func fetchProgresses(
+        with ids: [String],
+        refreshMode: RefreshMode
+    ) -> Promise<[ProgressPlainObject]> {
+        return ProgressServiceImpl.executeFetchRequest(ids: ids).then { cached in
+            self.fetchProgresses(with: ids, existing: cached, refreshMode: refreshMode)
+        }.mapValues {
+            ProgressPlainObject($0)
         }
     }
 
-    func obtainProgresses(with ids: [String]) -> Promise<[Progress]> {
-        return executeFetchRequest(ids: ids)
+    func obtainProgresses(with ids: [String]) -> Promise<[ProgressPlainObject]> {
+        return ProgressServiceImpl.executeFetchRequest(ids: ids).mapValues {
+            ProgressPlainObject($0)
+        }
     }
 
     // MARK: - Private API
 
-    private func executeFetchRequest(ids: [String]) -> Promise<[Progress]> {
+    fileprivate static func executeFetchRequest(ids: [String]) -> Promise<[Progress]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Progress.self))
         let descriptor = NSSortDescriptor(key: "managedId", ascending: true)
 
@@ -49,7 +56,11 @@ final class ProgressServiceImpl: ProgressService {
         }
     }
 
-    private func fetchProgresses(with ids: [String], existing: [Progress], refreshMode: RefreshMode) -> Promise<[Progress]> {
+    private func fetchProgresses(
+        with ids: [String],
+        existing: [Progress],
+        refreshMode: RefreshMode
+    ) -> Promise<[Progress]> {
         return Promise { seal in
             progressesAPI.retrieve(
                 ids: ids,
@@ -63,5 +74,22 @@ final class ProgressServiceImpl: ProgressService {
                 }
             )
         }
+    }
+}
+
+extension Progress {
+    static func getProgress(_ id: String) -> Guarantee<Progress?> {
+        return Guarantee { seal in
+            ProgressServiceImpl.executeFetchRequest(ids: [id]).done {
+                seal($0.first)
+            }.catch {
+                print("Failed execute fetch request for progress: \($0)")
+                seal(nil)
+            }
+        }
+    }
+
+    static func getProgresses(_ ids: [String]) -> Promise<[Progress]> {
+        return ProgressServiceImpl.executeFetchRequest(ids: ids)
     }
 }

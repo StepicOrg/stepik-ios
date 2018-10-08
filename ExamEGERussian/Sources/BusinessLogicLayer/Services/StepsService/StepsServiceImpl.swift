@@ -50,7 +50,7 @@ final class StepsServiceImpl: StepsService {
         return executeFetchRequest(ids: ids).then { cachedSteps -> Promise<[Step]> in
             let needToFetch = cachedSteps.isEmpty || cachedSteps.count != ids.count
             return needToFetch ? self.fetchSteps(ids: ids) : .value(cachedSteps)
-        }.then { cachedSteps -> Promise<[Progress]> in
+        }.then { cachedSteps -> Promise<[ProgressPlainObject]> in
             steps = cachedSteps
             let progressesIds = steps.compactMap {
                 $0.progressId
@@ -60,6 +60,8 @@ final class StepsServiceImpl: StepsService {
             }
 
             return self.progressService.fetchProgresses(with: progressesIds)
+        }.then { plainProgresses -> Promise<[Progress]> in
+            Progress.getProgresses(plainProgresses.map { $0.id })
         }.then { progresses -> Promise<[Step]> in
             progresses.forEach { progress in
                 guard let step = steps.filter({ $0.progressId == progress.id }).first else {
