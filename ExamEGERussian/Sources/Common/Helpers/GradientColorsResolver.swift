@@ -19,6 +19,7 @@ final class GradientColorsResolver {
     private init() {
     }
 
+    /// Maps `Hashable` to the array of `UIColor`'s.
     static func resolve<T: Hashable>(_ hash: T) -> [UIColor] {
         return colors[index(for: hash)]
     }
