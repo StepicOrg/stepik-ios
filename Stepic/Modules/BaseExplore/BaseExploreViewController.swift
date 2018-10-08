@@ -9,7 +9,6 @@
 import UIKit
 
 protocol BaseExploreViewControllerProtocol: class {
-    func displayContent(viewModel: BaseExplore.LoadContent.ViewModel)
     func displayFullscreenCourseList(
         viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
     )
@@ -26,16 +25,10 @@ protocol SubmoduleType: UniqueIdentifiable {
 class BaseExploreViewController: UIViewController {
     let interactor: BaseExploreInteractorProtocol
     private var submodules: [Submodule] = []
-    private var state: BaseExplore.ViewControllerState
-
     lazy var exploreView = self.view as? BaseExploreView
 
-    init(
-        interactor: BaseExploreInteractorProtocol,
-        state: BaseExplore.ViewControllerState = .loading
-    ) {
+    init(interactor: BaseExploreInteractorProtocol) {
         self.interactor = interactor
-        self.state = state
 
         super.init(nibName: nil, bundle: nil)
         self.registerForNotifications()
@@ -54,14 +47,6 @@ class BaseExploreViewController: UIViewController {
     override func loadView() {
         let view = BaseExploreView(frame: UIScreen.main.bounds)
         self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.initLanguageIndependentSubmodules()
-
-        self.updateState(newState: self.state)
-        self.interactor.loadContent(request: .init())
     }
 
     // MARK: Modules
@@ -102,31 +87,18 @@ class BaseExploreViewController: UIViewController {
         return self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
-    func initLanguageIndependentSubmodules() {
-    }
-
-    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
-    }
-
     private func registerForNotifications() {
         NotificationCenter.default.addObserver(
             forName: .contentLanguageDidChange,
             object: nil,
             queue: nil
         ) { [weak self] _ in
-            self?.interactor.loadContent(request: .init())
+            self?.refreshContentAfterLanguageChange()
         }
     }
 
-    private func updateState(newState: BaseExplore.ViewControllerState) {
-        switch newState {
-        case .normal(let language):
-            self.removeLanguageDependentSubmodules()
-            self.initLanguageDependentSubmodules(contentLanguage: language)
-        case .loading:
-            break
-        }
-        self.state = newState
+    func refreshContentAfterLanguageChange() {
+
     }
 
     // MARK: - Structs
@@ -140,10 +112,6 @@ class BaseExploreViewController: UIViewController {
 }
 
 extension BaseExploreViewController: BaseExploreViewControllerProtocol {
-    func displayContent(viewModel: BaseExplore.LoadContent.ViewModel) {
-        self.updateState(newState: viewModel.state)
-    }
-
     func displayFullscreenCourseList(
         viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
     ) {

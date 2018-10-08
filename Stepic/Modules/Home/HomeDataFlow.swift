@@ -24,6 +24,20 @@ enum Home {
 
     // MARK: Use cases
 
+    /// Content refresh (we should get language and authorization state)
+    enum LoadContent {
+        struct Request { }
+
+        struct Response {
+            let isAuthorized: Bool
+            let contentLanguage: ContentLanguage
+        }
+
+        struct ViewModel {
+            let isAuthorized: Bool
+            let contentLanguage: ContentLanguage
+        }
+    }
     /// Show streak activity
     enum LoadStreak {
         struct Request { }
@@ -46,27 +60,8 @@ enum Home {
             let result: Result
         }
     }
-    // Show enrolled courses
-    enum LoadEnrolledCourses {
-        enum State {
-            case empty
-            case error
-            case anonymous
-            case normal
-        }
-
-        struct Request { }
-
-        struct Response {
-            let result: State
-        }
-
-        struct ViewModel {
-            let result: State
-        }
-    }
-    // Show popular courses
-    enum LoadPopularCourses {
+    // Refresh course block
+    enum RefreshCourseList {
         enum State {
             case empty
             case error
@@ -76,10 +71,12 @@ enum Home {
         struct Request { }
 
         struct Response {
+            let module: Home.Submodule
             let result: State
         }
 
         struct ViewModel {
+            let module: Home.Submodule
             let result: State
         }
     }

@@ -158,6 +158,8 @@ final class GradientCoursesPlaceholderViewFactory {
     enum InfoPlaceholderMessage {
         case enrolledEmpty
         case enrolledError
+        case popularError
+        case popularEmpty
         case login
 
         var message: String {
@@ -166,6 +168,10 @@ final class GradientCoursesPlaceholderViewFactory {
                 return NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
             case .enrolledError:
                 return NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
+            case .popularError:
+                return NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+            case .popularEmpty:
+                return NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
             case .login:
                 return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             }

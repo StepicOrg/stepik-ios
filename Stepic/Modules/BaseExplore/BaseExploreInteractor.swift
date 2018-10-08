@@ -10,7 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol BaseExploreInteractorProtocol {
-    func loadContent(request: BaseExplore.LoadContent.Request)
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request)
 }
 
@@ -24,12 +23,6 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
     ) {
         self.presenter = presenter
         self.contentLanguageService = contentLanguageService
-    }
-
-    func loadContent(request: BaseExplore.LoadContent.Request) {
-        self.presenter.presentContent(
-            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
-        )
     }
 
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request) {

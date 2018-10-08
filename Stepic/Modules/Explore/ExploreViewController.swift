@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel)
 }
@@ -23,6 +24,7 @@ final class ExploreViewController: BaseExploreViewController {
         .popularCourses
     ]
 
+    private var state: Explore.ViewControllerState
     lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -31,7 +33,11 @@ final class ExploreViewController: BaseExploreViewController {
 
     private var isStoriesHidden: Bool = false
 
-    init(interactor: ExploreInteractorProtocol) {
+    init(
+        interactor: ExploreInteractorProtocol,
+        initialState: Explore.ViewControllerState = .loading
+    ) {
+        self.state = initialState
         super.init(interactor: interactor)
         self.searchBar.searchBarDelegate = self
     }
@@ -48,15 +54,35 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     override func viewDidLoad() {
-        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
         super.viewDidLoad()
+        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
+
+        self.initLanguageIndependentSubmodules()
+
+        self.updateState(newState: self.state)
+        self.exploreInteractor?.loadContent(request: .init())
     }
 
-    override func initLanguageIndependentSubmodules() {
+    private func updateState(newState: Explore.ViewControllerState) {
+        switch newState {
+        case .normal(let language):
+            self.removeLanguageDependentSubmodules()
+            self.initLanguageDependentSubmodules(contentLanguage: language)
+        case .loading:
+            break
+        }
+        self.state = newState
+    }
+
+    override func refreshContentAfterLanguageChange() {
+        self.exploreInteractor?.loadContent(request: .init())
+    }
+
+    func initLanguageIndependentSubmodules() {
         self.initSearchResults()
     }
 
-    override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
         if !isStoriesHidden {
             let storiesAssembly = StoriesAssembly(
@@ -184,6 +210,10 @@ extension Explore.Submodule: SubmoduleType {
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
         if viewModel.isHidden {
             return

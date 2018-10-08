@@ -11,20 +11,6 @@ import Foundation
 enum BaseExplore {
     // MARK: Use cases
 
-    /// Content refresh
-    enum LoadContent {
-        struct Request {
-        }
-
-        struct Response {
-            let contentLanguage: ContentLanguage
-        }
-
-        struct ViewModel {
-            let state: ViewControllerState
-        }
-    }
-
     /// Present fullscreen module
     enum PresentFullscreenCourseListModule {
         struct Request {
@@ -77,12 +63,5 @@ enum BaseExplore {
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
         }
-    }
-
-    // MARK: States
-
-    enum ViewControllerState {
-        case loading
-        case normal(contentLanguage: ContentLanguage)
     }
 }

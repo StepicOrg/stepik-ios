@@ -25,6 +25,19 @@ enum Explore {
 
     // MARK: Use cases
 
+    /// Content refresh
+    enum LoadContent {
+        struct Request {
+        }
+
+        struct Response {
+            let contentLanguage: ContentLanguage
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
     /// Check for language switch visibility
     enum CheckLanguageSwitchAvailability {
         struct Request { }
@@ -48,5 +61,12 @@ enum Explore {
         struct ViewModel {
             let isHidden: Bool
         }
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case loading
+        case normal(contentLanguage: ContentLanguage)
     }
 }

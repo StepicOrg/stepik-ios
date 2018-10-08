@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
+    func loadContent(request: Explore.LoadContent.Request)
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request)
 }
 
@@ -24,6 +25,12 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
     ) {
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
         super.init(presenter: presenter, contentLanguageService: contentLanguageService)
+    }
+
+    func loadContent(request: Explore.LoadContent.Request) {
+        self.explorePresenter?.presentContent(
+            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+        )
     }
 
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request) {
