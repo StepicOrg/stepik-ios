@@ -14,6 +14,7 @@ struct LearningViewData {
     let description: String
     let timeToComplete: String
     let progress: String
+    let colors: [UIColor]
 }
 
 enum LearningViewState {

@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import SVProgressHUD
 
 final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikPlaceholder {
     var presenter: AdaptiveStepsPresenterProtocol?
@@ -17,19 +16,15 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
         didSet {
             switch state {
             case .idle:
-                SVProgressHUD.dismiss()
                 isPlaceholderShown = false
                 setToolbarItemsEnabled(true)
             case .fetching:
-                SVProgressHUD.show()
                 isPlaceholderShown = false
                 setToolbarItemsEnabled(false)
             case .coursePassed:
-                SVProgressHUD.dismiss()
                 showPlaceholder(for: .adaptiveCoursePassed)
                 setToolbarItemsEnabled(false)
             case .connectionError:
-                SVProgressHUD.dismiss()
                 showPlaceholder(for: .connectionError)
                 setToolbarItemsEnabled(false)
             }

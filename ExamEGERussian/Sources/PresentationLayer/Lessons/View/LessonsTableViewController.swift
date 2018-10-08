@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 extension LessonsTableViewController {
     struct Appearance {
-        let headerGradientColors = [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)]
-        let headerGradientLocations = [0.0, 1.0]
-        let headerGradientRotationAngle: CGFloat = 90.0
         let tableViewEstimatedRowHeight: CGFloat = 60.0
     }
 }
 
 final class LessonsTableViewController: UITableViewController {
     var presenter: LessonsPresenterProtocol!
+
+    var state: LessonsViewState = .idle {
+        didSet {
+            switch state {
+            case .idle:
+                SVProgressHUD.dismiss()
+            case .fetching:
+                SVProgressHUD.show()
+            }
+        }
+    }
+
     private let appearance: Appearance
 
     private var lessons = [LessonsViewData]() {
@@ -31,13 +41,6 @@ final class LessonsTableViewController: UITableViewController {
     private var headerView: LessonTableHeaderView? {
         return tableView.tableHeaderView as? LessonTableHeaderView
     }
-    private lazy var headerViewGradient: CAGradientLayer = {
-        CAGradientLayer(
-            colors: appearance.headerGradientColors,
-            locations: appearance.headerGradientLocations,
-            rotationAngle: appearance.headerGradientRotationAngle
-        )
-    }()
 
     private lazy var lessonsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -117,7 +120,6 @@ final class LessonsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = appearance.tableViewEstimatedRowHeight
 
         let headerView: LessonTableHeaderView = .fromNib()
-        headerView.layer.insertSublayer(headerViewGradient, at: 0)
         tableView.tableHeaderView = headerView
     }
 
@@ -134,9 +136,10 @@ extension LessonsTableViewController: LessonsView {
         self.lessons = lessons
     }
 
-    func updateHeader(title: String, subtitle: String) {
+    func updateHeader(title: String, subtitle: String, colors: [UIColor]) {
         headerView?.titleLabel.text = title
         headerView?.subtitleLabel.text = subtitle
+        headerView?.appearance = .init(gradientColors: colors)
         triggerHeaderViewLayoutUpdate()
     }
 
@@ -160,7 +163,6 @@ extension LessonsTableViewController {
             headerFrame.size.height = height
             headerView.frame = headerFrame
             tableView.tableHeaderView = headerView
-            headerViewGradient.frame = headerView.bounds
         }
     }
 

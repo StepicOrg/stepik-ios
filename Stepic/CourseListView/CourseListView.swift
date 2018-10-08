@@ -111,7 +111,7 @@ class CourseListView: UIView {
 
     func showLoading() {
         self.collectionView.skeleton.viewBuilder = {
-            return CourseWidgetSkeletonView(frame: .zero)
+            CourseWidgetSkeletonView(frame: .zero)
         }
         self.collectionView.skeleton.show()
     }

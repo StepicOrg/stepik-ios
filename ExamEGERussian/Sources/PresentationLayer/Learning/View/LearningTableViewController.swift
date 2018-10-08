@@ -92,6 +92,7 @@ final class LearningTableViewController: UITableViewController, LearningView {
         cell.descriptionLabel.text = data.description
         cell.timeToCompleteLabel.text = data.timeToComplete
         cell.progressLabel.text = data.progress
+        cell.appearance = .init(gradientColors: data.colors)
     }
 
     // MARK: - Private API -

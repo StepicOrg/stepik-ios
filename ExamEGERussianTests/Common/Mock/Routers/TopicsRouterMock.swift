@@ -13,6 +13,6 @@ final class TopicsRouterMock: TrainingRouterProtocol {
     func showTheory(lesson: LessonPlainObject) {
     }
 
-    func showPractice(courseId: String) {
+    func showPractice(courseId: Int) {
     }
 }

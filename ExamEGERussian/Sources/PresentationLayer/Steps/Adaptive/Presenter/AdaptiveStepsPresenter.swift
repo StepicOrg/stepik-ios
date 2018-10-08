@@ -61,13 +61,18 @@ final class AdaptiveStepsPresenter: AdaptiveStepsPresenterProtocol {
     }
 
     func submit() {
+        guard let currentStepPresenter = currentStepPresenter,
+              !currentStepPresenter.isInputEmpty else {
+            return
+        }
+
         view?.state = .fetching
 
         switch currentStepProgress {
         case .unsolved:
-            currentStepPresenter?.submit()
+            currentStepPresenter.submit()
         case .wrong:
-            currentStepPresenter?.retry()
+            currentStepPresenter.retry()
         case .successful:
             showNextTask()
         }

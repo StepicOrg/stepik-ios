@@ -11,8 +11,9 @@ import UIKit
 extension LearningTableViewCell {
     struct Appearance {
         let cornerRadius: CGFloat = 10.0
-        var gradientColors = [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)]
-        var gradientLocations = [0.0, 1.0]
+        var gradientColors: [UIColor] = []
+        let gradientLocations: [Double]? = nil
+        let gradientRotationAngle: CGFloat = 90.0
         let sectionInset: CGFloat = 20.0
         let minimumItemSpacing: CGFloat = 10.0
     }
@@ -40,7 +41,7 @@ final class LearningTableViewCell: UITableViewCell, Reusable, NibLoadable {
         CAGradientLayer(
             colors: appearance.gradientColors,
             locations: appearance.gradientLocations,
-            rotationAngle: 90.0
+            rotationAngle: appearance.gradientRotationAngle
         )
     }()
 
@@ -80,7 +81,7 @@ final class LearningTableViewCell: UITableViewCell, Reusable, NibLoadable {
         containerView.layer.cornerRadius = appearance.cornerRadius
         gradientLayer.cornerRadius = appearance.cornerRadius
         gradientLayer.colors = appearance.gradientColors.map { $0.cgColor }
-        gradientLayer.locations = appearance.gradientLocations as [NSNumber]
+        gradientLayer.applyDefaultLocations()
     }
 
     private func layoutGradientLayer() {
