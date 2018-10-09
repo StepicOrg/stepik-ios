@@ -10,5 +10,9 @@ import Foundation
 
 protocol CourseListInputProtocol: class {
     var moduleIdentifier: UniqueIdentifierType? { get set }
-    func reload()
+
+    /// Course list will be use data from network
+    func setOnlineStatus()
+    /// Course list will be use data from persistence storage
+    func setOfflineStatus()
 }

@@ -49,6 +49,12 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.adaptiveStorageManager = adaptiveStorageManager
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
+
+        self.registerForNotifications()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Public methods
@@ -66,7 +72,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            self.currentCourses = courses.map { ("\($0.id)", $0) }
+            self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             if self.currentCourses.isEmpty {
                 self.moduleOutput?.presentEmptyState(sourceModule: self)
             } else {
@@ -113,7 +119,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            let appendedCourses = courses.map { ("\($0.id)", $0) }
+            let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             self.currentCourses.append(contentsOf: appendedCourses)
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(
@@ -235,6 +241,68 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         return Set<Course>(availableInAdaptiveMode)
     }
 
+    private func getUniqueIdentifierForCourse(_ course: Course) -> UniqueIdentifierType {
+        return "\(course.id)"
+    }
+
+    // MARK: - Notifications
+
+    private func registerForNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleCourseSubscription(_:)),
+            name: .courseSubscribedNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleCourseUnsubscription(_:)),
+            name: .courseUnsubscribedNotification,
+            object: nil
+        )
+    }
+
+    @objc
+    private func handleCourseSubscription(_ notification: Foundation.Notification) {
+        if let course = notification.userInfo?["course"] as? Course {
+            self.updateCourseInCurrentCourses(course)
+            self.refreshCourseList()
+        }
+    }
+
+    @objc
+    private func handleCourseUnsubscription(_ notification: Foundation.Notification) {
+        if let course = notification.userInfo?["course"] as? Course {
+            self.updateCourseInCurrentCourses(course)
+            self.refreshCourseList()
+        }
+    }
+
+    private func updateCourseInCurrentCourses(_ course: Course) {
+        guard let targetIndex = self.currentCourses.index(where: { $0.1 == course }) else {
+            return
+        }
+        self.currentCourses[targetIndex] = (self.getUniqueIdentifierForCourse(course), course)
+    }
+
+    /// Just present current data again
+    private func refreshCourseList() {
+        let courses = CourseList.AvailableCourses(
+            fetchedCourses: CourseList.ListData(
+                courses: self.currentCourses,
+                hasNextPage: self.paginationState.hasNext
+            ),
+            availableAdaptiveCourses: self.getAvailableAdaptiveCourses(
+                from: self.currentCourses.map { $0.1 }
+            )
+        )
+        let response = CourseList.ShowCourses.Response(
+            isAuthorized: self.userAccountService.isAuthorized,
+            result: courses
+        )
+        self.presenter.presentCourses(response: response)
+    }
+
     // MARK: - Enums
 
     enum Error: Swift.Error {
@@ -243,8 +311,15 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 }
 
 extension CourseListInteractor: CourseListInputProtocol {
-    func reload() {
+    func setOnlineStatus() {
         self.isOnline = true
+
+        let fakeRequest = CourseList.ShowCourses.Request()
+        self.fetchCourses(request: fakeRequest)
+    }
+
+    func setOfflineStatus() {
+        self.isOnline = false
 
         let fakeRequest = CourseList.ShowCourses.Request()
         self.fetchCourses(request: fakeRequest)
