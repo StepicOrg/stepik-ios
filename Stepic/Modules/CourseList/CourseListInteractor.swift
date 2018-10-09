@@ -16,6 +16,8 @@ protocol CourseListInteractorProtocol: class {
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request)
     func doMainAction(request: CourseList.MainCourseAction.Request)
+
+    func requestCourseListStateRefresh(request: CourseList.RequestCourseListStateRefresh.Request)
 }
 
 final class CourseListInteractor: CourseListInteractorProtocol {
@@ -231,6 +233,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course -> info
             self.moduleOutput?.presentCourseInfo(course: targetCourse)
         }
+    }
+
+    func requestCourseListStateRefresh(request: CourseList.RequestCourseListStateRefresh.Request) {
+        
     }
 
     // MARK: - Private methods

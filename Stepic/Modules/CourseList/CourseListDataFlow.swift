@@ -67,6 +67,10 @@ enum CourseList {
             let viewModelUniqueIdentifier: UniqueIdentifierType
         }
     }
+    /// Try to update module state
+    enum RequestCourseListStateRefresh {
+        struct Request { }
+    }
 
     // MARK: States
 

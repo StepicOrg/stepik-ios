@@ -72,6 +72,7 @@ final class CourseListProvider: CourseListProviderProtocol {
                     reviewSummaries: reviewSummaries
                 )
             }.done { courses in
+                self.persistenceService?.update(newCachedList: courses)
                 seal.fulfill((courses, meta))
             }.catch { error in
                 print("course list provider: unable to fetch courses from api, " +
