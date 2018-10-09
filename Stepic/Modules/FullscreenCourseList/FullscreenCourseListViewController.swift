@@ -46,7 +46,7 @@ final class FullscreenCourseListViewController: UIViewController {
             output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
-        courseListAssembly.moduleInput?.reload()
+        courseListAssembly.moduleInput?.setOnlineStatus()
         self.addChildViewController(courseListViewController)
 
         let view = FullscreenCourseListView(

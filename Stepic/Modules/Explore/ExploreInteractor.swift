@@ -21,10 +21,15 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
     init(
         presenter: ExplorePresenterProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
         languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
-        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
+        super.init(
+            presenter: presenter,
+            contentLanguageService: contentLanguageService,
+            networkReachabilityService: networkReachabilityService
+        )
     }
 
     func loadContent(request: Explore.LoadContent.Request) {

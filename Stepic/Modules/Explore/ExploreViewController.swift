@@ -142,7 +142,7 @@ final class ExploreViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.reload()
+        popularAssembly.moduleInput?.setOnlineStatus()
         let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,

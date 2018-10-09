@@ -24,11 +24,16 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         presenter: HomePresenterProtocol,
         provider: HomeProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
         contentLanguageService: ContentLanguageServiceProtocol
     ) {
         self.provider = provider
         self.userAccountService = userAccountService
-        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
+        super.init(
+            presenter: presenter,
+            contentLanguageService: contentLanguageService,
+            networkReachabilityService: networkReachabilityService
+        )
     }
 
     func loadStreakActivity(request: Home.LoadStreak.Request) {

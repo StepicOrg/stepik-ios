@@ -4452,7 +4452,6 @@
 		73DB05040F3345F6568DCCBB /* FullscreenCourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57036F31351460A240D4DD1 /* FullscreenCourseListView.swift */; };
 		79E683BEBAAD85873A38E144 /* ContinueCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639653894D37C79E966238F2 /* ContinueCourseViewController.swift */; };
 		7DA4D202535F52F5C0FDB28F /* ContentLanguageSwitchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1C8EA0972152E85046A15 /* ContentLanguageSwitchPresenter.swift */; };
-		7E2D9CFD4FE8195280AC5A21 /* BaseExploreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C6F85DA0FECDD0AFE6732 /* BaseExploreAssembly.swift */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
 		860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
@@ -4475,6 +4474,7 @@
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
 		863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
+		86410F7B216CF355006F7EFD /* NetworkReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86410F7A216CF354006F7EFD /* NetworkReachabilityService.swift */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
 		864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
@@ -6397,6 +6397,7 @@
 		86226CBE1EBE2FDD0076C82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		86226CC01EBE2FE10076C82E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		863262F81ECFC5AE007A20B3 /* loading_robot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_robot.gif; sourceTree = "<group>"; };
+		86410F7A216CF354006F7EFD /* NetworkReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityService.swift; sourceTree = "<group>"; };
 		86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusesAPI.swift; sourceTree = "<group>"; };
 		86624A741FC76682008E7E6C /* NotificationsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsStatus.swift; sourceTree = "<group>"; };
 		866AD0D3206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepikPlaceholderStyle+Placeholders.swift"; sourceTree = "<group>"; };
@@ -6511,7 +6512,6 @@
 		B21551CCE23AF6A05B85DCD6 /* FullscreenCourseListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListViewController.swift; sourceTree = "<group>"; };
 		B240B85867063390E1904C9A /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		B772ACD8C3CCF7C4CCB750AF /* TagsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
-		B77C6F85DA0FECDD0AFE6732 /* BaseExploreAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseExploreAssembly.swift; sourceTree = "<group>"; };
 		B8580965E28EE48743974433 /* ContentLanguageSwitchViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewController.swift; sourceTree = "<group>"; };
 		B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreAssembly.swift; sourceTree = "<group>"; };
 		BA3A8FA9D474D13EEA8CEEB8 /* Pods-Adaptive GMAT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.release.xcconfig"; sourceTree = "<group>"; };
@@ -8836,7 +8836,7 @@
 		24AFD764029A4489583D88DF /* BaseExplore */ = {
 			isa = PBXGroup;
 			children = (
-				B77C6F85DA0FECDD0AFE6732 /* BaseExploreAssembly.swift */,
+				86410F7A216CF354006F7EFD /* NetworkReachabilityService.swift */,
 				2291302940E77D75D4FBC553 /* BaseExploreViewController.swift */,
 				8CC0B4BF5CCE4834F539CFA1 /* BaseExploreInteractor.swift */,
 				14692EFFC3DC1466AA55B1DD /* BaseExplorePresenter.swift */,
@@ -15404,7 +15404,7 @@
 				62E9843FA64C2BC50526FD5F /* VerticalCourseListFlowLayout.swift in Sources */,
 				62E984C2A9BD099A9CF5682D /* CourseListColorMode.swift in Sources */,
 				62E98880A7BEE7F43E48325B /* PaginationView.swift in Sources */,
-				7E2D9CFD4FE8195280AC5A21 /* BaseExploreAssembly.swift in Sources */,
+				86410F7B216CF355006F7EFD /* NetworkReachabilityService.swift in Sources */,
 				B2DCAACFAD394CBAEAC9CF22 /* BaseExploreViewController.swift in Sources */,
 				8D923C63FD0C095D6C8B5EB7 /* BaseExploreInteractor.swift in Sources */,
 				A0552DD91CB81DACFADE1DF7 /* BaseExplorePresenter.swift in Sources */,

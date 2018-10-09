@@ -52,7 +52,7 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                     output: self.interactor as? CourseListOutputProtocol
                 )
                 let viewController = assembly.makeModule()
-                assembly.moduleInput?.reload()
+                assembly.moduleInput?.setOnlineStatus()
                 self.addChildViewController(viewController)
 
                 let containerView = CourseListContainerViewFactory()

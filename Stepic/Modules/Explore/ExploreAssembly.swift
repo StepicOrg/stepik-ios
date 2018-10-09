@@ -14,6 +14,7 @@ class ExploreAssembly: Assembly {
         let interactor = ExploreInteractor(
             presenter: presenter,
             contentLanguageService: ContentLanguageService(),
+            networkReachabilityService: NetworkReachabilityService(),
             languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
         )
         let viewController = ExploreViewController(

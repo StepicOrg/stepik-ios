@@ -41,7 +41,7 @@ final class ContinueLastStepView: UIView {
 
     private lazy var continueButton: UIButton = {
         let button = ContinueActionButton(frame: .zero)
-        button.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("ContinueLearningWidgetButtonTitle", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(self.continueButtonClicked), for: .touchUpInside)
         return button
     }()

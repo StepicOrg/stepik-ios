@@ -16,13 +16,18 @@ protocol BaseExploreInteractorProtocol {
 class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
     let presenter: BaseExplorePresenterProtocol
     let contentLanguageService: ContentLanguageServiceProtocol
+    let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     init(
         presenter: BaseExplorePresenterProtocol,
-        contentLanguageService: ContentLanguageServiceProtocol
+        contentLanguageService: ContentLanguageServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol
     ) {
         self.presenter = presenter
         self.contentLanguageService = contentLanguageService
+        self.networkReachabilityService = networkReachabilityService
+
+        self.networkReachabilityService.delegate = self
     }
 
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
@@ -63,5 +68,11 @@ extension BaseExploreInteractor: TagsOutputProtocol {
 extension BaseExploreInteractor: CourseListCollectionOutputProtocol {
     func presentCourseList(type: CollectionCourseListType) {
         self.loadFullscreenCourseList(request: .init(courseListType: type))
+    }
+}
+
+extension BaseExploreInteractor: NetworkReachabilityServiceDelegate {
+    func networkReachabilityStatusDidChange(newStatus: NetworkReachabilityStatus) {
+        print("changed")
     }
 }

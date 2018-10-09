@@ -54,7 +54,7 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.reload()
+        popularAssembly.moduleInput?.setOnlineStatus()
         popularAssembly.moduleInput?.moduleIdentifier = Home.Submodule.popularCourses
             .uniqueIdentifier
 
@@ -199,7 +199,7 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let enrolledViewController = enrolledCourseListAssembly.makeModule()
-        enrolledCourseListAssembly.moduleInput?.reload()
+        enrolledCourseListAssembly.moduleInput?.setOnlineStatus()
         enrolledCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule.enrolledCourses
             .uniqueIdentifier
 

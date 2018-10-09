@@ -16,8 +16,6 @@ protocol CourseListInteractorProtocol: class {
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request)
     func doMainAction(request: CourseList.MainCourseAction.Request)
-
-    func requestCourseListStateRefresh(request: CourseList.RequestCourseListStateRefresh.Request)
 }
 
 final class CourseListInteractor: CourseListInteractorProtocol {
@@ -235,10 +233,6 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    func requestCourseListStateRefresh(request: CourseList.RequestCourseListStateRefresh.Request) {
-        
-    }
-
     // MARK: - Private methods
 
     private func getAvailableAdaptiveCourses(from courses: [Course]) -> Set<Course> {
@@ -254,6 +248,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     // MARK: - Notifications
 
     private func registerForNotifications() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .courseSubscribedNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .courseUnsubscribedNotification,
+            object: nil
+        )
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.handleCourseSubscription(_:)),
