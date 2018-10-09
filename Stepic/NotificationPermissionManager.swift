@@ -13,6 +13,10 @@ import PromiseKit
 enum NotificationPermissionStatus {
     case notDetermined, denied, authorized
 
+    // TODO: notification
+    //The application is authorized to post non-interruptive user notifications.
+    //@available(iOS 12.0, *)
+    //case provisional
     @available(iOS 10.0, *)
     init(userNotificationAuthStatus: UNAuthorizationStatus) {
         switch userNotificationAuthStatus {

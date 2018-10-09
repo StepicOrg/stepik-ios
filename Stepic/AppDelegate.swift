@@ -69,18 +69,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             checkForUpdates()
         }
 
+        // TODO: notification
         if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
+        // TODO: notification
         if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {
             handleLocalNotification()
         }
 
+        // TODO: notification
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: Any] {
             handleNotification(notificationDict: notificationDict)
         }
 
+        // TODO: notification
         checkNotificationsCount()
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
