@@ -46,13 +46,15 @@ final class CourseServiceImpl: CourseService {
 
         var courses = [Course]()
 
-        return Course.fetchAsync(ids).then { cachedCourses -> Promise<[Progress]> in
+        return Course.fetchAsync(ids).then { cachedCourses -> Promise<[ProgressPlainObject]> in
             courses = cachedCourses
             let progressesIds = courses.compactMap {
                 $0.progressId
             }
 
             return self.progressService.fetchProgresses(with: progressesIds)
+        }.then { plainProgresses -> Promise<[Progress]> in
+            Progress.getProgresses(plainProgresses.map { $0.id })
         }.then { progresses -> Promise<[CoursePlainObject]> in
             progresses.forEach { progress in
                 guard let course = courses.filter({ $0.progressId == progress.id }).first else {

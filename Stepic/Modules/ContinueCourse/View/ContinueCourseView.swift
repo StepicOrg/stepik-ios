@@ -49,7 +49,7 @@ final class ContinueCourseView: UIView {
 
     func showLoading() {
         self.skeleton.viewBuilder = {
-            return ContinueCourseSkeletonView(frame: .zero)
+            ContinueCourseSkeletonView(frame: .zero)
         }
         self.skeleton.show()
     }

@@ -54,12 +54,12 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     private let peerReviewText: String = NSLocalizedString("PeerReviewText", comment: "")
 
     private var activityView: UIView?
-    private func initActivityView() -> UIView {
+    func initActivityView(color: UIColor = .mainDark) -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.snp.makeConstraints { $0.width.height.equalTo(50) }
-        ai.color = UIColor.mainDark
+        ai.color = color
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.snp.makeConstraints { $0.center.equalTo(v) }

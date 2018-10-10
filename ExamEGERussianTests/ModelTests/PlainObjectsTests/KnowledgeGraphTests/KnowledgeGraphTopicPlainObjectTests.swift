@@ -35,7 +35,9 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
     "id": "pristavki",
     "title": "B9 Приставки",
     "description": "Тут что-то будет",
-    "required-for": "slitno-razdelno"
+    "required-for": [
+        "slitno-razdelno"
+    ]
 }
 """
         let jsonData = jsonString.data(using: .utf8)!
@@ -48,7 +50,7 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
         XCTAssertEqual(decodedTopic!.title, "B9 Приставки")
         XCTAssertEqual(decodedTopic!.description, "Тут что-то будет")
         XCTAssertNotNil(decodedTopic!.requiredFor)
-        XCTAssertEqual(decodedTopic!.requiredFor, "slitno-razdelno")
+        XCTAssertEqual(decodedTopic!.requiredFor, ["slitno-razdelno"])
     }
 
     func testTopicCodingKeys() {
@@ -62,13 +64,15 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
             id: "pristavki",
             title: "B9 Приставки",
             description: "Описание",
-            requiredFor: "slitno-razdelno"
+            requiredFor: [
+                "slitno-razdelno"
+            ]
         )
 
         XCTAssertEqual(topic.id, "pristavki")
         XCTAssertEqual(topic.title, "B9 Приставки")
         XCTAssertEqual(topic.description, "Описание")
         XCTAssertNotNil(topic.requiredFor)
-        XCTAssertEqual(topic.requiredFor!, "slitno-razdelno")
+        XCTAssertEqual(topic.requiredFor!, ["slitno-razdelno"])
     }
 }
