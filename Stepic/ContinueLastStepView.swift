@@ -40,7 +40,7 @@ extension ContinueLastStepView {
 final class ContinueLastStepView: UIView {
     let appearance: Appearance
 
-    private lazy var continueButton: UIButton = {
+    lazy var continueButton: UIButton = {
         let button = ContinueActionButton(frame: .zero)
         button.setTitle(NSLocalizedString("ContinueLearningWidgetButtonTitle", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(self.continueButtonClicked), for: .touchUpInside)
