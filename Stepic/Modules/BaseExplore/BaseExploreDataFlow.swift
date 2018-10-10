@@ -11,31 +11,20 @@ import Foundation
 enum BaseExplore {
     // MARK: Use cases
 
-    /// Content refresh
-    enum LoadContent {
-        struct Request {
-        }
-
-        struct Response {
-            let contentLanguage: ContentLanguage
-        }
-
-        struct ViewModel {
-            let state: ViewControllerState
-        }
-    }
-
     /// Present fullscreen module
     enum PresentFullscreenCourseListModule {
         struct Request {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
 
         struct Response {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
 
         struct ViewModel {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
     }
@@ -79,10 +68,10 @@ enum BaseExplore {
         }
     }
 
-    // MARK: States
-
-    enum ViewControllerState {
-        case loading
-        case normal(contentLanguage: ContentLanguage)
+    /// Try to set online status for submodules
+    enum TryToSetOnline {
+        struct Request {
+            let modules: [CourseListInputProtocol]
+        }
     }
 }

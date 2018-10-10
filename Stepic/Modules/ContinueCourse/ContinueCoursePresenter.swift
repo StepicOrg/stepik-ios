@@ -10,6 +10,7 @@ import UIKit
 
 protocol ContinueCoursePresenterProtocol {
     func presentLastCourse(response: ContinueCourse.LoadLastCourse.Response)
+    func presentTooltip(response: ContinueCourse.CheckTooltipAvailability.Response)
 }
 
 final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
@@ -23,5 +24,11 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
         )
 
         self.viewController?.displayLastCourse(viewModel: viewModel)
+    }
+
+    func presentTooltip(response: ContinueCourse.CheckTooltipAvailability.Response) {
+        self.viewController?.displayTooltip(
+            viewModel: .init(shouldShowTooltip: response.shouldShowTooltip)
+        )
     }
 }

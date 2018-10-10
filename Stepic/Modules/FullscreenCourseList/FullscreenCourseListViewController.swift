@@ -18,18 +18,24 @@ protocol FullscreenCourseListViewControllerProtocol: class {
 final class FullscreenCourseListViewController: UIViewController {
     let interactor: FullscreenCourseListInteractorProtocol
     private let courseListType: CourseListType
-    private let presentationDescription: VerticalCourseListViewController.PresentationDescription?
+    private let presentationDescription: CourseList.PresentationDescription?
 
     init(
         interactor: FullscreenCourseListInteractorProtocol,
         courseListType: CourseListType,
-        presentationDescription: VerticalCourseListViewController.PresentationDescription?
+        presentationDescription: CourseList.PresentationDescription?
     ) {
         self.interactor = interactor
         self.presentationDescription = presentationDescription
         self.courseListType = courseListType
 
         super.init(nibName: nil, bundle: nil)
+
+        if let presentationDescription = self.presentationDescription {
+            self.title = NSLocalizedString("RecommendedCategory", comment: "")
+        } else {
+            self.title = NSLocalizedString("AllCourses", comment: "")
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,7 +52,6 @@ final class FullscreenCourseListViewController: UIViewController {
             output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
-        courseListAssembly.moduleInput?.reload()
         self.addChildViewController(courseListViewController)
 
         let view = FullscreenCourseListView(
@@ -54,6 +59,10 @@ final class FullscreenCourseListViewController: UIViewController {
             contentView: courseListViewController.view
         )
         self.view = view
+
+        if let moduleInput = courseListAssembly.moduleInput {
+            self.interactor.tryToSetOnlineMode(request: .init(module: moduleInput))
+        }
     }
 }
 

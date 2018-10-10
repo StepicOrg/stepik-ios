@@ -182,14 +182,14 @@ final class HorizontalCourseListViewController: CourseListViewController {
 }
 
 final class VerticalCourseListViewController: CourseListViewController {
-    private let presentationDescription: PresentationDescription?
+    private let presentationDescription: CourseList.PresentationDescription?
     lazy var verticalCourseListView = self.courseListView as? VerticalCourseListView
 
     init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
-        presentationDescription: PresentationDescription?
+        presentationDescription: CourseList.PresentationDescription?
     ) {
         self.presentationDescription = presentationDescription
         super.init(
@@ -216,11 +216,10 @@ final class VerticalCourseListViewController: CourseListViewController {
         )
 
         if let presentationDescription = self.presentationDescription {
-            let headerView = GradientCoursesPlaceholderViewFactory(
-                color: .pink
-            ).makeFullscreenView(
+            let headerView = GradientCoursesPlaceholderViewFactory().makeFullscreenView(
                 title: presentationDescription.title,
-                subtitle: presentationDescription.subtitle
+                subtitle: presentationDescription.subtitle,
+                color: presentationDescription.color
             )
             view.headerView = headerView
         }
@@ -248,10 +247,5 @@ final class VerticalCourseListViewController: CourseListViewController {
         } else {
             paginationView.setLoading()
         }
-    }
-
-    struct PresentationDescription {
-        var title: String
-        var subtitle: String?
     }
 }

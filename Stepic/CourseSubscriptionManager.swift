@@ -8,19 +8,21 @@
 
 import UIKit
 
+extension Foundation.Notification.Name {
+    static let courseSubscribedNotification = Foundation.Notification.Name("CourseSubscribedNotification")
+    static let courseUnsubscribedNotification = Foundation.Notification.Name("CourseUnsubscribedNotification")
+}
+
 class CourseSubscriptionManager: NSObject {
 
     static let sharedManager = CourseSubscriptionManager()
-
-    let courseSubscribedNotificationName = NSNotification.Name(rawValue: "CourseSubscribedNotification")
-    let courseUnsubscribedNotificationName = NSNotification.Name(rawValue: "CourseUnsubscribedNotification")
 
     var handleUpdatesBlock: (() -> Void)?
     override init() {}
 
     func startObservingOtherSubscriptionManagers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseSubscribed(_:)), name: courseSubscribedNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseUnsubscribed(_:)), name: courseUnsubscribedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseSubscribed(_:)), name: .courseSubscribedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CourseSubscriptionManager.courseUnsubscribed(_:)), name: .courseUnsubscribedNotification, object: nil)
     }
 
     fileprivate var dCourses = [Course]()
@@ -67,7 +69,7 @@ class CourseSubscriptionManager: NSObject {
         handleUpdatesBlock?()
         if notifyOthers {
             // FIXME: Replace two different notifications with one from NSNotification.Name extension
-            NotificationCenter.default.post(name: courseUnsubscribedNotificationName, object: nil, userInfo: ["course": course])
+            NotificationCenter.default.post(name: .courseUnsubscribedNotification, object: nil, userInfo: ["course": course])
             #if os(tvOS)
             NotificationCenter.default.post(name: .courseUnsubscribed, object: nil, userInfo: ["id": course.id])
             #endif
@@ -79,7 +81,7 @@ class CourseSubscriptionManager: NSObject {
         handleUpdatesBlock?()
         if notifyOthers {
             // FIXME: Replace two different notifications with one from NSNotification.Name extension
-            NotificationCenter.default.post(name: courseSubscribedNotificationName, object: nil, userInfo: ["course": course])
+            NotificationCenter.default.post(name: .courseSubscribedNotification, object: nil, userInfo: ["course": course])
             #if os(tvOS)
                 NotificationCenter.default.post(name: .courseSubscribed, object: nil, userInfo: ["course": course])
             #endif

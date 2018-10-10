@@ -16,6 +16,7 @@ final class HomeAssembly: Assembly {
             presenter: presenter,
             provider: provider,
             userAccountService: UserAccountService(),
+            networkReachabilityService: NetworkReachabilityService(),
             contentLanguageService: ContentLanguageService()
         )
         let viewController = HomeViewController(

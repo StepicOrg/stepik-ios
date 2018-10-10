@@ -26,7 +26,14 @@ final class CourseListPersistenceService: CourseListPersistenceServiceProtocol {
 
         return Promise { seal in
             Course.fetchAsync(courseListIDs).done { courses in
-                let courses = courses.reordered(order: courseListIDs, transform: { $0.id })
+                var uniqueCourses: [Course] = []
+                for course in courses {
+                    if !uniqueCourses.contains(where: { $0.id == course.id }) {
+                        uniqueCourses.append(course)
+                    }
+                }
+
+                let courses = uniqueCourses.reordered(order: courseListIDs, transform: { $0.id })
                 seal.fulfill(courses)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

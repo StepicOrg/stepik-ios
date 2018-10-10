@@ -10,12 +10,13 @@ import UIKit
 import SnapKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
-    private static let submodulesOrder: [ExploreSubmoduleType] = [
+    static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
         .tags,
@@ -23,6 +24,7 @@ final class ExploreViewController: BaseExploreViewController {
         .popularCourses
     ]
 
+    private var state: Explore.ViewControllerState
     lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -31,7 +33,11 @@ final class ExploreViewController: BaseExploreViewController {
 
     private var isStoriesHidden: Bool = false
 
-    init(interactor: ExploreInteractorProtocol) {
+    init(
+        interactor: ExploreInteractorProtocol,
+        initialState: Explore.ViewControllerState = .loading
+    ) {
+        self.state = initialState
         super.init(interactor: interactor)
         self.searchBar.searchBarDelegate = self
     }
@@ -48,15 +54,35 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     override func viewDidLoad() {
-        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
         super.viewDidLoad()
-    }
+        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
 
-    override func initLanguageIndependentSubmodules() {
         self.initSearchResults()
+
+        self.updateState(newState: self.state)
+        self.exploreInteractor?.loadContent(request: .init())
     }
 
-    override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    private func updateState(newState: Explore.ViewControllerState) {
+        switch newState {
+        case .normal(let language):
+            self.removeLanguageDependentSubmodules()
+            self.initLanguageDependentSubmodules(contentLanguage: language)
+        case .loading:
+            break
+        }
+        self.state = newState
+    }
+
+    override func refreshContentAfterLanguageChange() {
+        self.exploreInteractor?.loadContent(request: .init())
+    }
+
+    override func refreshContentAfterLoginAndLogout() {
+        self.exploreInteractor?.loadContent(request: .init())
+    }
+
+    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
         if !isStoriesHidden {
             let storiesAssembly = StoriesAssembly(
@@ -72,7 +98,7 @@ final class ExploreViewController: BaseExploreViewController {
                     viewController: storiesViewController,
                     view: storiesContainerView,
                     isLanguageDependent: true,
-                    type: ExploreSubmoduleType.stories
+                    type: Explore.Submodule.stories
                 )
             )
         }
@@ -88,7 +114,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: tagsViewController,
                 view: tagsViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.tags
+                type: Explore.Submodule.tags
             )
         )
 
@@ -104,7 +130,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: collectionViewController,
                 view: collectionViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.collection
+                type: Explore.Submodule.collection
             )
         )
 
@@ -116,7 +142,6 @@ final class ExploreViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.reload()
         let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
@@ -127,7 +152,7 @@ final class ExploreViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
+                request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
         self.registerSubmodule(
@@ -135,9 +160,13 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: popularViewController,
                 view: containerView,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.popularCourses
+                type: Explore.Submodule.popularCourses
             )
         )
+
+        if let moduleInput = popularAssembly.moduleInput {
+            self.tryToSetOnlineState(moduleInput: moduleInput)
+        }
     }
 
     // MARK: - Search
@@ -172,28 +201,22 @@ final class ExploreViewController: BaseExploreViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
+}
 
-    private enum ExploreSubmoduleType: Int, SubmoduleType {
-        case stories
-        case languageSwitch
-        case tags
-        case collection
-        case popularCourses
-
-        var id: Int {
-            return self.rawValue
+extension Explore.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
         }
-
-        var position: Int {
-            guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
-                fatalError("Given submodule type has unknown position")
-            }
-            return position
-        }
+        return position
     }
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
         if viewModel.isHidden {
             return
@@ -206,14 +229,14 @@ extension ExploreViewController: ExploreViewControllerProtocol {
                 viewController: viewController,
                 view: viewController.view,
                 isLanguageDependent: false,
-                type: ExploreSubmoduleType.languageSwitch
+                type: Explore.Submodule.languageSwitch
             )
         )
     }
 
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel) {
         self.isStoriesHidden = true
-        if let storiesBlock = self.getSubmodule(type: ExploreSubmoduleType.stories) {
+        if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
             self.removeSubmodule(storiesBlock)
         }
     }

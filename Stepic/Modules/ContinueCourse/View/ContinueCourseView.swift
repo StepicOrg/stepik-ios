@@ -17,6 +17,11 @@ final class ContinueCourseView: UIView {
     private lazy var lastStepView = ContinueLastStepView(frame: .zero)
     weak var delegate: ContinueCourseViewDelegate?
 
+    // View for tooltip
+    var tooltipAnchorView: UIView {
+        return self.lastStepView.continueButton
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 

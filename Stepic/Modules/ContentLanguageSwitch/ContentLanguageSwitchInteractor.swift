@@ -58,6 +58,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
             fatalError("Request contains invalid data")
         }
 
+        self.provider.setGlobalContentLanguage(selectedLanguage)
         self.presenter.presentLanguageChange(
             response: ContentLanguageSwitch.SelectLanguage.Response(
                 result: ContentLanguageSwitch.ContentLanguageInfo(

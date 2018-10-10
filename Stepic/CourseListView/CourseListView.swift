@@ -387,6 +387,9 @@ final class HorizontalCourseListView: CourseListView {
         )
         self.collectionView.delegate = delegate
         self.collectionView.dataSource = dataSource
+
+        // Make scroll faster
+        self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
     required init?(coder aDecoder: NSCoder) {
