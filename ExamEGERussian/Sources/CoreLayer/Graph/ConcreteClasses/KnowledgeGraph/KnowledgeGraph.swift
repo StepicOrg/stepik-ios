@@ -37,6 +37,23 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return getElement(by: id)
     }
 
+    private func getElement(by id: String) -> Element? {
+        guard let index = adjacency.index(forKey: Vertex(id: id)),
+              let element = adjacency[index] as? Element else {
+            return nil
+        }
+
+        return element
+    }
+}
+
+// MARK: - Convenient API -
+
+extension KnowledgeGraph {
+    func firstVertex(where predicate: (Node) -> Bool) -> Node? {
+        return adjacencyLists.keys.first(where: predicate)
+    }
+
     func firstLesson(where predicate: (KnowledgeGraphLesson) -> Bool) -> KnowledgeGraphLesson? {
         for vertex in adjacencyLists.keys {
             if let lesson = vertex.lessons.first(where: predicate) {
@@ -47,12 +64,20 @@ final class KnowledgeGraph: AdjacencyListGraph<String> {
         return nil
     }
 
-    private func getElement(by id: String) -> Element? {
-        guard let index = adjacency.index(forKey: Vertex(id: id)),
-              let element = adjacency[index] as? Element else {
-            return nil
+    func filterLessons(_ isIncluded: (KnowledgeGraphLesson) -> Bool) -> [Node: [KnowledgeGraphLesson]] {
+        var resultMap = [Node: [KnowledgeGraphLesson]]()
+
+        adjacencyLists.keys.forEach { vertex in
+            let filtered = vertex.lessons.filter(isIncluded)
+            resultMap[vertex] = filtered
         }
 
-        return element
+        return resultMap
+    }
+
+    func filterLessons(_ isIncluded: (KnowledgeGraphLesson) -> Bool) -> [KnowledgeGraphLesson] {
+        return filterLessons(isIncluded).reduce([]) { (result, element) in
+            result + element.value
+        }
     }
 }

@@ -17,6 +17,11 @@ final class ContinueCourseView: UIView {
     private lazy var lastStepView = ContinueLastStepView(frame: .zero)
     weak var delegate: ContinueCourseViewDelegate?
 
+    // View for tooltip
+    var tooltipAnchorView: UIView {
+        return self.lastStepView.continueButton
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -44,7 +49,7 @@ final class ContinueCourseView: UIView {
 
     func showLoading() {
         self.skeleton.viewBuilder = {
-            return ContinueCourseSkeletonView(frame: .zero)
+            ContinueCourseSkeletonView(frame: .zero)
         }
         self.skeleton.show()
     }

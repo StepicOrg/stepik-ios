@@ -11,7 +11,7 @@ import SnapKit
 
 extension StreakActivityView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let iconInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 5)
         let descriptionInsets = UIEdgeInsets(top: 12, left: 22, bottom: 12, right: 10)
 

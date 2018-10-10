@@ -8,10 +8,11 @@
 
 import Foundation
 
-protocol Reloadable: class {
-    func reload()
-}
+protocol CourseListInputProtocol: class {
+    var moduleIdentifier: UniqueIdentifierType? { get set }
 
-protocol CourseListInputProtocol: Reloadable {
-
+    /// Course list will be use data from network
+    func setOnlineStatus()
+    /// Course list will be use data from persistence storage
+    func setOfflineStatus()
 }

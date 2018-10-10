@@ -8,8 +8,9 @@
 
 import UIKit
 
-extension NSNotification.Name {
-    static let didLogout = NSNotification.Name("didLogout")
+extension Foundation.Notification.Name {
+    static let didLogout = Foundation.Notification.Name("didLogout")
+    static let didLogin = Foundation.Notification.Name("didLogin")
 }
 
 class AuthInfo: NSObject {
@@ -86,6 +87,10 @@ class AuthInfo: NSObject {
                     })
                 #endif
             } else {
+                if token == nil {
+                    // first set
+                    NotificationCenter.default.post(name: .didLogin, object: nil)
+                }
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
                 setTokenValue(newToken)

@@ -22,9 +22,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     var presenterNotifications: StreakNotificationsControlPresenter?
 
     var streaksTooltip: Tooltip?
+
     var settingsButton: UIBarButtonItem?
+    var shareButton: UIBarButtonItem?
 
     var otherUserId: Int?
+
+    private var sharingURL: String?
 
     private var state: ProfileState = .normal {
         didSet {
@@ -61,6 +65,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         }), for: .connectionError)
 
         settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
@@ -128,12 +133,20 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
-    func manageSettingsTransitionControl(isHidden: Bool) {
-        if isHidden {
-            navigationItem.rightBarButtonItem = nil
-        } else {
-            navigationItem.rightBarButtonItem = settingsButton!
+    func manageBarItemControls(settingsIsHidden: Bool, shareId: Int?) {
+        var items: [UIBarButtonItem] = []
+        if let settingsButton = settingsButton, !settingsIsHidden {
+            items += [settingsButton]
         }
+
+        if let shareButton = shareButton, let id = shareId {
+            sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(id)"
+            items += [shareButton]
+        } else {
+            sharingURL = nil
+        }
+
+        navigationItem.rightBarButtonItems = items
     }
 
     func getView(for block: ProfileMenuBlock) -> Any? {
@@ -176,6 +189,19 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             vc.presenter = presenter
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+
+    @objc func shareButtonPressed() {
+        share(popoverSourceItem: shareButton)
+    }
+
+    func share(popoverSourceItem: UIBarButtonItem?) {
+        guard let sharingURL = self.sharingURL else {
+            return
+        }
+        let shareVC = SharingHelper.getSharingController(sharingURL)
+        shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
+        present(shareVC, animated: true, completion: nil)
     }
 
     private func buildLoadingMenu() -> Menu {

@@ -19,6 +19,7 @@ extension ExploreCoursesCollectionHeaderView {
 
 final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
+    private let color: GradientCoursesPlaceholderView.Color
 
     private lazy var headerView: ExploreBlockHeaderView = {
         let view = ExploreBlockHeaderView(frame: .zero)
@@ -27,9 +28,10 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
     }()
 
     private lazy var summaryPlaceholder: GradientCoursesPlaceholderView = {
-        let view = GradientCoursesPlaceholderViewFactory(
-            color: .pink
-        ).makeCourseCollectionView(title: self.descriptionText)
+        let view = GradientCoursesPlaceholderViewFactory().makeCourseCollectionView(
+            title: self.descriptionText,
+            color: self.color
+        )
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.summaryPlaceholderCornerRadius
         return view
@@ -58,10 +60,12 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
     init(
         frame: CGRect,
         description: String,
+        color: GradientCoursesPlaceholderView.Color,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.descriptionText = description
+        self.color = color
         super.init(frame: frame)
 
         self.addSubviews()

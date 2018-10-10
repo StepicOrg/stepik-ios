@@ -17,6 +17,7 @@ protocol StepPresenterDelegate: class {
 protocol StepPresenter: class {
     var step: StepPlainObject { get }
     var delegate: StepPresenterDelegate? { get set }
+    var isInputEmpty: Bool { get }
 
     func refreshStep()
     func submit()

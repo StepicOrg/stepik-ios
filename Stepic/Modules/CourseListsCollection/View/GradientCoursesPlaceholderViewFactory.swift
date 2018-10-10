@@ -19,14 +19,11 @@ final class GradientCoursesPlaceholderViewFactory {
         static let defaultLabelsInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 
-    private let color: GradientCoursesPlaceholderView.Color
-
-    init(color: GradientCoursesPlaceholderView.Color) {
-        self.color = color
-    }
+    init() { }
 
     func makeCourseCollectionView(
-        title: String
+        title: String,
+        color: GradientCoursesPlaceholderView.Color
     ) -> GradientCoursesPlaceholderView {
         var appearance = GradientCoursesPlaceholderView.Appearance()
         appearance.titleTextAlignment = .natural
@@ -36,13 +33,15 @@ final class GradientCoursesPlaceholderViewFactory {
             title: title,
             subtitle: nil,
             boldStyle: .firstWord,
+            color: color,
             appearance: appearance
         )
     }
 
     func makeFullscreenView(
         title: String,
-        subtitle: String?
+        subtitle: String?,
+        color: GradientCoursesPlaceholderView.Color
     ) -> GradientCoursesPlaceholderView {
         var appearance = GradientCoursesPlaceholderView.Appearance()
         appearance.titleTextAlignment = .center
@@ -53,6 +52,7 @@ final class GradientCoursesPlaceholderViewFactory {
             title: title,
             subtitle: subtitle,
             boldStyle: .allWords,
+            color: color,
             appearance: appearance
         )
     }
@@ -68,6 +68,7 @@ final class GradientCoursesPlaceholderViewFactory {
             title: message.message,
             subtitle: nil,
             boldStyle: .useTags,
+            color: .purple,
             appearance: appearance
         )
     }
@@ -76,11 +77,12 @@ final class GradientCoursesPlaceholderViewFactory {
         title: String,
         subtitle: String?,
         boldStyle: BoldStyle,
+        color: GradientCoursesPlaceholderView.Color,
         appearance: GradientCoursesPlaceholderView.Appearance
     ) -> GradientCoursesPlaceholderView {
         let view = GradientCoursesPlaceholderView(
             frame: .zero,
-            color: self.color,
+            color: color,
             appearance: appearance
         )
 
@@ -156,15 +158,24 @@ final class GradientCoursesPlaceholderViewFactory {
     }
 
     enum InfoPlaceholderMessage {
-        case enrolled
+        case enrolledEmpty
+        case enrolledError
+        case popularError
+        case popularEmpty
         case login
 
         var message: String {
             switch self {
-            case .enrolled:
-                return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
-            case .login:
+            case .enrolledEmpty:
                 return NSLocalizedString("HomePlaceholderEmptyEnrolled", comment: "")
+            case .enrolledError:
+                return NSLocalizedString("HomePlaceHolderErrorEnrolled", comment: "")
+            case .popularError:
+                return NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+            case .popularEmpty:
+                return NSLocalizedString("HomePlaceholderErrorPopular", comment: "")
+            case .login:
+                return NSLocalizedString("HomePlaceholderAnonymous", comment: "")
             }
         }
     }

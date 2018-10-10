@@ -27,6 +27,18 @@ enum ContinueCourse {
     enum ContinueCourse {
         struct Request { }
     }
+    /// Check for tooltip
+    enum CheckTooltipAvailability {
+        struct Request { }
+
+        struct Response {
+            let shouldShowTooltip: Bool
+        }
+
+        struct ViewModel {
+            let shouldShowTooltip: Bool
+        }
+    }
 
     // MARK: States
 

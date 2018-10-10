@@ -151,9 +151,9 @@ extension CourseWidgetStatsView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.leftInset)
-            make.centerY.equalToSuperview()
-            make.top.bottom.trailing.greaterThanOrEqualToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.leftInset).priority(999)
+            make.centerY.equalToSuperview().priority(999)
+            make.top.bottom.trailing.greaterThanOrEqualToSuperview().priority(999)
         }
     }
 }

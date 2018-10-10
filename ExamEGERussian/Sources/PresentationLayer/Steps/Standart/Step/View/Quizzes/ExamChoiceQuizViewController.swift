@@ -22,4 +22,8 @@ final class ExamChoiceQuizViewController: ChoiceQuizViewController {
             self?.presenter?.refreshAttempt()
         }
     }
+
+    override func initActivityView(color: UIColor) -> UIView {
+        return super.initActivityView(color: .black)
+    }
 }

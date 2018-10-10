@@ -12,7 +12,7 @@ struct KnowledgeGraphTopicPlainObject: Codable {
     let id: String
     let title: String
     let description: String
-    let requiredFor: String?
+    let requiredFor: [String]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -21,7 +21,7 @@ struct KnowledgeGraphTopicPlainObject: Codable {
         case requiredFor = "required-for"
     }
 
-    init(id: String, title: String, description: String, requiredFor: String?) {
+    init(id: String, title: String, description: String, requiredFor: [String]?) {
         self.id = id
         self.title = title
         self.description = description
@@ -33,6 +33,6 @@ struct KnowledgeGraphTopicPlainObject: Codable {
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         description = try container.decode(String.self, forKey: .description)
-        requiredFor = try container.decodeIfPresent(String.self, forKey: .requiredFor)
+        requiredFor = try container.decodeIfPresent([String].self, forKey: .requiredFor)
     }
 }

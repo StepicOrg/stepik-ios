@@ -10,12 +10,12 @@ import Foundation
 import PromiseKit
 @testable import ExamEGERussian
 
-final class ProgressServiceMock: BaseServiceMock<[ExamEGERussian.Progress]>, ProgressService {
-    func fetchProgresses(with ids: [String], refreshMode: RefreshMode) -> Promise<[ExamEGERussian.Progress]> {
+final class ProgressServiceMock: BaseServiceMock<[ProgressPlainObject]>, ProgressService {
+    func fetchProgresses(with ids: [String], refreshMode: RefreshMode) -> Promise<[ProgressPlainObject]> {
         return resultToBeReturned
     }
 
-    func obtainProgresses(with ids: [String]) -> Promise<[ExamEGERussian.Progress]> {
+    func obtainProgresses(with ids: [String]) -> Promise<[ProgressPlainObject]> {
         return resultToBeReturned
     }
 }

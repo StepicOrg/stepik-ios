@@ -97,9 +97,7 @@ extension LessonsPresenter {
     }
 
     private func getLessons() {
-        obtainLessonsFromCache().done {
-            self.fetchLessons()
-        }
+        fetchLessons()
     }
 
     private func obtainLessonsFromCache() -> Guarantee<Void> {
@@ -119,8 +117,12 @@ extension LessonsPresenter {
             return
         }
 
+        view?.state = .fetching
+
         lessonsService.fetchLessons(with: lessonsIds).done { [weak self] lessons in
             self?.lessons = lessons
+        }.ensure { [weak view] in
+            view?.state = .idle
         }.catch { [weak self] _ in
             self?.displayError()
         }
@@ -148,11 +150,13 @@ extension LessonsPresenter {
     }
 
     private func updateView() {
-        let theory = lessons.map {
+        let theory = lessonsIds.compactMap { id in
+            lessons.first(where: { $0.id == id })
+        }.map {
             LessonsViewData(
                 id: $0.id,
                 title: $0.title,
-                subtitle: lessonsPluralized(count: $0.steps.count)
+                subtitle: pagesPluralized(count: $0.steps.count)
             )
         }
         let practice = topic.lessons.filter { $0.type == .practice }.map {
@@ -166,7 +170,8 @@ extension LessonsPresenter {
         view?.setLessons(theory + practice)
         view?.updateHeader(
             title: topic.title,
-            subtitle: topicsPluralized()
+            subtitle: lessonsPluralized(count: topic.lessons.count),
+            colors: GradientColorsResolver.resolve(topicId)
         )
     }
 
@@ -180,8 +185,7 @@ extension LessonsPresenter {
         return String(format: pluralizedString, "\(count)")
     }
 
-    private func topicsPluralized() -> String {
-        let count = topic.lessons.count
+    private func pagesPluralized(count: Int) -> String {
         let pluralizedString = StringHelper.pluralize(number: count, forms: [
             NSLocalizedString("PagesCountText1", comment: ""),
             NSLocalizedString("PagesCountText234", comment: ""),

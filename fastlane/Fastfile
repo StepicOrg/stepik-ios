@@ -40,6 +40,9 @@ platform :ios do
         ],
         "Adaptive 8290" => [
             "Adaptive 8290"
+        ],
+        "ExamEGERussian" => [
+            "ExamEGERussian"
         ]
     }
 

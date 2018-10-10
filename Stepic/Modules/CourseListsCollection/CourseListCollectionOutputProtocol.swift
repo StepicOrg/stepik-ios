@@ -9,5 +9,8 @@
 import Foundation
 
 protocol CourseListCollectionOutputProtocol: class {
-    func presentCourseList(type: CollectionCourseListType)
+    func presentCourseList(
+        presentationDescription: CourseList.PresentationDescription,
+        type: CollectionCourseListType
+    )
 }
