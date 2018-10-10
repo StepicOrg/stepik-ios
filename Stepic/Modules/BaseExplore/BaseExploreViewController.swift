@@ -81,6 +81,7 @@ class BaseExploreViewController: UIViewController {
     func removeSubmodule(_ submodule: Submodule) {
         self.exploreView?.removeBlockView(submodule.view)
         submodule.viewController?.removeFromParentViewController()
+        self.submodules = self.submodules.filter { submodule.view != $0.view }
     }
 
     func getSubmodule(type: SubmoduleType) -> Submodule? {

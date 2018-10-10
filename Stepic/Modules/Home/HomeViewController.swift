@@ -114,7 +114,7 @@ final class HomeViewController: BaseExploreViewController {
 
         let contentView = ExploreBlockPlaceholderView(frame: .zero, message: message)
 
-        if !shouldOpenAuthorization {
+        if shouldOpenAuthorization {
             contentView.onPlaceholderClick = { [weak self] in
                 self?.displayAuthorization()
             }
@@ -306,7 +306,11 @@ extension HomeViewController: HomeViewControllerProtocol {
             Home.Submodule.continueCourse,
             Home.Submodule.enrolledCourses,
             Home.Submodule.popularCourses
-        ].compactMap { self.getSubmodule(type: $0) }.forEach { self.removeSubmodule($0 )}
+        ].compactMap { module in
+            self.getSubmodule(type: module)
+        }.forEach { module in
+            self.removeSubmodule(module)
+        }
 
         let shouldDisplayContinueCourse = viewModel.isAuthorized
         let shouldDisplayEnrolledAnonymousPlaceholder = !viewModel.isAuthorized
