@@ -16,11 +16,7 @@ final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtoc
     weak var viewController: CourseListsCollectionViewControllerProtocol?
 
     func presentCourses(response: CourseListsCollection.ShowCourseLists.Response) {
-        var viewModel: CourseListsCollection.ShowCourseLists.ViewModel
-
         switch response.result {
-        case .failure(let error):
-            viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .emptyResult)
         case .success(let result):
             let courses = result.map { courseList in
                 CourseListsCollectionViewModel(
@@ -31,14 +27,11 @@ final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtoc
                     color: self.getColorForCourseList(courseList)
                 )
             }
-            if courses.isEmpty {
-                viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .result(data: courses))
-            }
+            let viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .result(data: courses))
+            self.viewController?.displayCourseLists(viewModel: viewModel)
+        default:
+            break
         }
-
-        self.viewController?.displayCourseLists(viewModel: viewModel)
     }
 
     private func getColorForCourseList(

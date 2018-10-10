@@ -14,11 +14,16 @@ protocol CourseListsCollectionViewControllerProtocol: class {
 
 final class CourseListsCollectionViewController: UIViewController {
     let interactor: CourseListsCollectionInteractorProtocol
+    private var state: CourseListsCollection.ViewControllerState
 
     lazy var courseListsCollectionView = self.view as? CourseListsCollectionView
 
-    init(interactor: CourseListsCollectionInteractorProtocol) {
+    init(
+        interactor: CourseListsCollectionInteractorProtocol,
+        initialState: CourseListsCollection.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
+        self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,6 +34,8 @@ final class CourseListsCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.updateState(newState: self.state)
         self.interactor.fetchCourseLists(request: CourseListsCollection.ShowCourseLists.Request())
     }
 
@@ -36,15 +43,16 @@ final class CourseListsCollectionViewController: UIViewController {
         let view = CourseListsCollectionView(frame: UIScreen.main.bounds)
         self.view = view
     }
-}
 
-extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
-    func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel) {
-        self.childViewControllers.forEach { $0.removeFromParentViewController() }
-        self.courseListsCollectionView?.removeAllBlocks()
+    private func updateState(newState: CourseListsCollection.ViewControllerState) {
+        self.state = newState
 
-        switch viewModel.state {
+        switch self.state {
+        case .loading:
+            self.courseListsCollectionView?.showLoading()
         case .result(let data):
+            self.courseListsCollectionView?.hideLoading()
+
             for courseListViewModel in data {
                 let assembly = HorizontalCourseListAssembly(
                     type: courseListViewModel.courseList,
@@ -79,8 +87,14 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                 }
                 self.courseListsCollectionView?.addBlockView(containerView)
             }
-        default:
-            break
         }
+    }
+}
+
+extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
+    func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel) {
+        self.childViewControllers.forEach { $0.removeFromParentViewController() }
+        self.courseListsCollectionView?.removeAllBlocks()
+        self.updateState(newState: viewModel.state)
     }
 }

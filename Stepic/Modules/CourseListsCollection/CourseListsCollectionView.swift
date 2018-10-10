@@ -12,6 +12,7 @@ import SnapKit
 final class CourseListsCollectionView: UIView {
     enum Appearance {
         static let headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        static let skeletonViewHeight: CGFloat = 149
     }
 
     private lazy var headerView: ExploreBlockHeaderView = {
@@ -68,6 +69,25 @@ final class CourseListsCollectionView: UIView {
 
     func removeAllBlocks() {
         self.contentStackView.removeAllArrangedSubviews()
+    }
+
+    func showLoading() {
+        let fakeView = UIView()
+        fakeView.translatesAutoresizingMaskIntoConstraints = false
+        fakeView.snp.makeConstraints { make in
+            make.height.equalTo(Appearance.skeletonViewHeight)
+        }
+        self.contentStackView.addArrangedSubview(fakeView)
+
+        fakeView.skeleton.viewBuilder = {
+            return CourseListsCollectionSkeletonView(frame: .zero)
+        }
+        fakeView.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.contentStackView.removeAllArrangedSubviews()
+        self.contentStackView.skeleton.hide()
     }
 }
 

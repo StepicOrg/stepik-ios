@@ -36,7 +36,5 @@ enum CourseListsCollection {
     enum ViewControllerState {
         case loading
         case result(data: [CourseListsCollectionViewModel])
-        case emptyResult
-        case error(message: String)
     }
 }
