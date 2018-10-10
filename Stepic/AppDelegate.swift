@@ -267,18 +267,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
         _ app: UIApplication,
         open url: URL,
-        options: [UIApplicationOpenURLOptionsKey : Any] = [:]
+        options: [UIApplicationOpenURLOptionsKey: Any] = [:]
     ) -> Bool {
         print("opened app via url \(url.absoluteString)")
 
         if let sourceApplication = options[.sourceApplication] as? String,
-            VKSdk.processOpen(url, fromApplication: sourceApplication) {
+           VKSdk.processOpen(url, fromApplication: sourceApplication) {
             return true
         }
         if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
             return true
         }
-        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
+           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -289,7 +290,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 object: self,
                 userInfo: ["code": code]
             )
-        } else if let queryDict = url.getKeyVals(), let error = queryDict["error"], error == "social_signup_with_existing_email" {
+        } else if let queryDict = url.getKeyVals(),
+                  let error = queryDict["error"], error == "social_signup_with_existing_email" {
             // Auth redirect with registered email
             let email = (queryDict["email"] ?? "").removingPercentEncoding
             if let topViewController = ControllerHelper.getTopViewController() as? AuthNavigationViewController {
@@ -320,11 +322,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
 
-            let alert = VersionUpdateAlertConstructor.sharedConstructor
-                .getUpdateAlertController(
-                    updateUrl: newVersion.url,
-                    addNeverAskAction: true
-                )
+            let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(
+                updateUrl: newVersion.url,
+                addNeverAskAction: true
+            )
+
             UIThread.performUI {
                 self?.window?.rootViewController?.present(alert, animated: true)
             }
