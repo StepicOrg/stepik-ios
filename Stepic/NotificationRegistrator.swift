@@ -38,12 +38,8 @@ extension NotificationRegistrator {
         }
     }
 
-    func registerForRemoteNotifications() {
-        return registerForRemoteNotifications(UIApplication.shared)
-    }
-
     // TODO: Remove UIApplication usage
-    func registerForRemoteNotifications(_ application: UIApplication) {
+    func registerForRemoteNotifications(application: UIApplication = UIApplication.shared) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
             if #available(iOS 10.0, *) {
                 UNUserNotificationCenter.current().requestAuthorization(
@@ -150,14 +146,15 @@ extension NotificationRegistrator {
                 case DeviceError.notFound:
                     print("notification registrator: device not found on deletion, id = \(deviceId)")
                 default:
-                    guard let userId = AuthInfo.shared.userId,
-                          let token = AuthInfo.shared.token else {
+                    if let userId = AuthInfo.shared.userId,
+                       let token = AuthInfo.shared.token {
+                        self?.deleteDevice(deviceId: deviceId, userId: userId, token: token)
+                    } else {
                         print("notification registrator: could not get current user ID or token to delete device")
-                        return AnalyticsReporter.reportEvent(
+                        AnalyticsReporter.reportEvent(
                             AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials
                         )
                     }
-                    self?.deleteDevice(deviceId: deviceId, userId: userId, token: token)
                 }
                 seal(())
             }
