@@ -73,15 +73,24 @@ extension CourseWidgetStatsItemView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.snp.makeConstraints { make in
-            make.top.bottom.trailing.equalToSuperview()
+            make.top.bottom.trailing.equalToSuperview().priority(999)
         }
 
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.centerY.equalTo(self.textLabel.snp.centerY)
-            make.size.equalTo(self.appearance.imageViewSize)
-            make.trailing.equalTo(self.textLabel.snp.leading).offset(-self.appearance.iconSpacing)
+            make.leading
+                .equalToSuperview()
+                .priority(999)
+            make.centerY
+                .equalTo(self.textLabel.snp.centerY)
+                .priority(999)
+            make.size
+                .equalTo(self.appearance.imageViewSize)
+                .priority(999)
+            make.trailing
+                .equalTo(self.textLabel.snp.leading)
+                .offset(-self.appearance.iconSpacing)
+                .priority(999)
         }
     }
 }
