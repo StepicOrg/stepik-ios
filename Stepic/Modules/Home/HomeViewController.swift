@@ -28,6 +28,8 @@ final class HomeViewController: BaseExploreViewController {
 
     init(interactor: HomeInteractorProtocol) {
         super.init(interactor: interactor)
+
+        self.title = NSLocalizedString("Home", comment: "")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +48,14 @@ final class HomeViewController: BaseExploreViewController {
 
     // MARK: - Display submodules
 
+    override func refreshContentAfterLanguageChange() {
+        self.homeInteractor?.loadContent(request: .init())
+    }
+
+    override func refreshContentAfterLoginAndLogout() {
+        self.homeInteractor?.loadContent(request: .init())
+    }
+
     private func displayPopularCourseList(contentLanguage: ContentLanguage) {
         let courseListType = PopularCourseListType(language: contentLanguage)
         let popularAssembly = HorizontalCourseListAssembly(
@@ -54,7 +64,6 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.setOnlineStatus()
         popularAssembly.moduleInput?.moduleIdentifier = Home.Submodule.popularCourses
             .uniqueIdentifier
 
@@ -68,7 +77,7 @@ final class HomeViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
+                request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
         self.registerSubmodule(
@@ -79,6 +88,10 @@ final class HomeViewController: BaseExploreViewController {
                 type: Home.Submodule.popularCourses
             )
         )
+
+        if let moduleInput = popularAssembly.moduleInput {
+            self.tryToSetOnlineState(moduleInput: moduleInput)
+        }
     }
 
     private func refreshContinueCourse() {
@@ -199,7 +212,6 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let enrolledViewController = enrolledCourseListAssembly.makeModule()
-        enrolledCourseListAssembly.moduleInput?.setOnlineStatus()
         enrolledCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule.enrolledCourses
             .uniqueIdentifier
 
@@ -211,7 +223,7 @@ final class HomeViewController: BaseExploreViewController {
 
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
+                request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
         self.registerSubmodule(
@@ -222,6 +234,9 @@ final class HomeViewController: BaseExploreViewController {
                 type: Home.Submodule.enrolledCourses
             )
         )
+        if let moduleInput = enrolledCourseListAssembly.moduleInput {
+            self.tryToSetOnlineState(moduleInput: moduleInput)
+        }
     }
 }
 

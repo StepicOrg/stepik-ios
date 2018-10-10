@@ -14,14 +14,17 @@ enum BaseExplore {
     /// Present fullscreen module
     enum PresentFullscreenCourseListModule {
         struct Request {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
 
         struct Response {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
 
         struct ViewModel {
+            let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
         }
     }
@@ -62,6 +65,13 @@ enum BaseExplore {
             let course: Course
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
+        }
+    }
+
+    /// Try to set online status for submodules
+    enum TryToSetOnline {
+        struct Request {
+            let modules: [CourseListInputProtocol]
         }
     }
 }

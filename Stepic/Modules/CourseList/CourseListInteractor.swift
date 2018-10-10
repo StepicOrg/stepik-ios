@@ -261,28 +261,20 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.handleCourseSubscription(_:)),
+            selector: #selector(self.handleCourseUpdate(_:)),
             name: .courseSubscribedNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.handleCourseUnsubscription(_:)),
+            selector: #selector(self.handleCourseUpdate(_:)),
             name: .courseUnsubscribedNotification,
             object: nil
         )
     }
 
     @objc
-    private func handleCourseSubscription(_ notification: Foundation.Notification) {
-        if let course = notification.userInfo?["course"] as? Course {
-            self.updateCourseInCurrentCourses(course)
-            self.refreshCourseList()
-        }
-    }
-
-    @objc
-    private func handleCourseUnsubscription(_ notification: Foundation.Notification) {
+    private func handleCourseUpdate(_ notification: Foundation.Notification) {
         if let course = notification.userInfo?["course"] as? Course {
             self.updateCourseInCurrentCourses(course)
             self.refreshCourseList()
@@ -323,6 +315,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
 extension CourseListInteractor: CourseListInputProtocol {
     func setOnlineStatus() {
+        guard !self.isOnline else {
+            return
+        }
+
         self.isOnline = true
 
         let fakeRequest = CourseList.ShowCourses.Request()
@@ -330,6 +326,10 @@ extension CourseListInteractor: CourseListInputProtocol {
     }
 
     func setOfflineStatus() {
+        guard self.isOnline else {
+            return
+        }
+
         self.isOnline = false
 
         let fakeRequest = CourseList.ShowCourses.Request()

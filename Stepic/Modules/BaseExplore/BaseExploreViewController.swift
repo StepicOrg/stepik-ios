@@ -75,7 +75,6 @@ class BaseExploreViewController: UIViewController {
         for submodule in self.submodules where submodule.isLanguageDependent {
             self.removeSubmodule(submodule)
         }
-        self.submodules = self.submodules.filter { !$0.isLanguageDependent }
     }
 
     func removeSubmodule(_ submodule: Submodule) {
@@ -88,6 +87,10 @@ class BaseExploreViewController: UIViewController {
         return self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
+    final func tryToSetOnlineState(moduleInput: CourseListInputProtocol) {
+        self.interactor.tryToSetOnlineMode(request: .init(modules: [moduleInput]))
+    }
+
     private func registerForNotifications() {
         NotificationCenter.default.addObserver(
             forName: .contentLanguageDidChange,
@@ -96,9 +99,21 @@ class BaseExploreViewController: UIViewController {
         ) { [weak self] _ in
             self?.refreshContentAfterLanguageChange()
         }
+        NotificationCenter.default.addObserver(forName: .didLogin, object: nil, queue: nil) {
+            [weak self] _ in
+            self?.refreshContentAfterLoginAndLogout()
+        }
+        NotificationCenter.default.addObserver(forName: .didLogout, object: nil, queue: nil) {
+            [weak self] _ in
+            self?.refreshContentAfterLoginAndLogout()
+        }
     }
 
     func refreshContentAfterLanguageChange() {
+
+    }
+
+    func refreshContentAfterLoginAndLogout() {
 
     }
 
@@ -116,7 +131,10 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
     func displayFullscreenCourseList(
         viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
     ) {
-        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: viewModel.presentationDescription,
+            courseListType: viewModel.courseListType
+        )
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

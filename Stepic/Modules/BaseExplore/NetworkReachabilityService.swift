@@ -10,50 +10,34 @@ import Foundation
 import Alamofire
 
 protocol NetworkReachabilityServiceProtocol: class {
-    var delegate: NetworkReachabilityServiceDelegate? { get set }
-}
-
-protocol NetworkReachabilityServiceDelegate: class {
-    func networkReachabilityStatusDidChange(newStatus: NetworkReachabilityStatus)
+    var networkStatus: NetworkReachabilityStatus { get }
+    var isReachable: Bool { get }
 }
 
 final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
-    weak var delegate: NetworkReachabilityServiceDelegate? {
-        didSet {
-            self.reachabilityManager?.startListening()
-        }
-    }
-
     private lazy var reachabilityManager: Alamofire.NetworkReachabilityManager? = {
         let reachabilityManager = Alamofire.NetworkReachabilityManager(
             host: StepicApplicationsInfo.stepicURL
         )
-        reachabilityManager?.listener = { [weak self] status in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.delegate?.networkReachabilityStatusDidChange(
-                newStatus: strongSelf.resolveNetworkStatus(status)
-            )
-        }
         return reachabilityManager
     }()
 
-    init() { }
-
-    private func resolveNetworkStatus(
-        _ status: NetworkReachabilityManager.NetworkReachabilityStatus
-    ) -> NetworkReachabilityStatus {
-        switch status {
-        case .notReachable:
-            return .unreachable
-        case .reachable(_):
+    var networkStatus: NetworkReachabilityStatus {
+        switch self.reachabilityManager?.isReachable {
+        case .some(true):
             return .reachable
-        default:
+        case .some(false):
+            return .unreachable
+        case .none:
             return .unknown
         }
     }
+
+    var isReachable: Bool {
+        return self.networkStatus == .reachable
+    }
+
+    init() { }
 }
 
 enum NetworkReachabilityStatus {

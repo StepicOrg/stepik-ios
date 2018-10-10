@@ -102,7 +102,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
 }
 
 final class VerticalCourseListAssembly: CourseListAssembly {
-    private let presentationDescription: VerticalCourseListViewController.PresentationDescription?
+    private let presentationDescription: CourseList.PresentationDescription?
 
     fileprivate override func makeViewController(
         interactor: CourseListInteractorProtocol
@@ -117,7 +117,7 @@ final class VerticalCourseListAssembly: CourseListAssembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
-        presentationDescription: VerticalCourseListViewController.PresentationDescription?,
+        presentationDescription: CourseList.PresentationDescription?,
         output: CourseListOutputProtocol? = nil
     ) {
         self.presentationDescription = presentationDescription

@@ -21,6 +21,13 @@ enum CourseList {
         var availableAdaptiveCourses: Set<Course>
     }
 
+    // Use it for module initializing
+    struct PresentationDescription {
+        var title: String
+        var subtitle: String?
+        var color: GradientCoursesPlaceholderView.Color
+    }
+
     // MARK: Use cases
 
     /// Load and show courses for given course list

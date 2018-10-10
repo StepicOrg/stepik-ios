@@ -21,7 +21,10 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
 
     func presentFullscreenCourseList(response: BaseExplore.PresentFullscreenCourseListModule.Response) {
         self.viewController?.displayFullscreenCourseList(
-            viewModel: .init(courseListType: response.courseListType)
+            viewModel: .init(
+                presentationDescription: response.presentationDescription,
+                courseListType: response.courseListType
+            )
         )
     }
 

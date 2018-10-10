@@ -26,4 +26,16 @@ enum FormatterHelper {
     static func averageRating(_ number: Float) -> String {
         return String(format: "%.2f", number)
     }
+
+    static func coursesCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("courses1", comment: ""),
+                NSLocalizedString("courses234", comment: ""),
+                NSLocalizedString("courses567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
 }

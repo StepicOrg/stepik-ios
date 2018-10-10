@@ -26,6 +26,7 @@ enum CourseListsCollection {
     /// Present collection in fullscreen
     enum PresentFullscreenCourseListModule {
         struct Request {
+            let presentationDescription: CourseList.PresentationDescription
             let courseListType: CourseListType
         }
     }

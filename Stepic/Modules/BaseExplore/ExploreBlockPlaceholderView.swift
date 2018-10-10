@@ -22,8 +22,7 @@ final class ExploreBlockPlaceholderView: UIView {
     private let message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage
 
     private lazy var placeholderView: UIView = {
-        let view = GradientCoursesPlaceholderViewFactory(color: .purple)
-            .makeInfoPlaceholder(message: self.message)
+        let view = GradientCoursesPlaceholderViewFactory().makeInfoPlaceholder(message: self.message)
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.cornerRadius
         return view

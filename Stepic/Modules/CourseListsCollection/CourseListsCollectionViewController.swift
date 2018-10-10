@@ -61,12 +61,20 @@ extension CourseListsCollectionViewController: CourseListsCollectionViewControll
                         headerDescription: .init(
                             title: courseListViewModel.title,
                             summary: courseListViewModel.description,
-                            description: "\(courseListViewModel.summary ?? "")"
+                            description: "\(courseListViewModel.summary ?? "")",
+                            color: courseListViewModel.color
                         )
                     )
                 containerView.onShowAllButtonClick = { [weak self] in
                     self?.interactor.loadFullscreenCourseList(
-                        request: .init(courseListType: courseListViewModel.courseList)
+                        request: .init(
+                            presentationDescription: .init(
+                                title: courseListViewModel.title,
+                                subtitle: courseListViewModel.description,
+                                color: courseListViewModel.color
+                            ),
+                            courseListType: courseListViewModel.courseList
+                        )
                     )
                 }
                 self.courseListsCollectionView?.addBlockView(containerView)

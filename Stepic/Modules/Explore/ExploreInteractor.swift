@@ -54,3 +54,28 @@ extension ExploreInteractor: StoriesOutputProtocol {
         self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
     }
 }
+
+extension ExploreInteractor: TagsOutputProtocol {
+    func presentCourseList(type: TagCourseListType) {
+        self.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: nil,
+                courseListType: type
+            )
+        )
+    }
+}
+
+extension ExploreInteractor: CourseListCollectionOutputProtocol {
+    func presentCourseList(
+        presentationDescription: CourseList.PresentationDescription,
+        type: CollectionCourseListType
+    ) {
+        self.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: presentationDescription,
+                courseListType: type
+            )
+        )
+    }
+}

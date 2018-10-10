@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol BaseExploreInteractorProtocol {
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request)
+    func tryToSetOnlineMode(request: BaseExplore.TryToSetOnline.Request)
 }
 
 class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
@@ -26,14 +27,23 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         self.presenter = presenter
         self.contentLanguageService = contentLanguageService
         self.networkReachabilityService = networkReachabilityService
-
-        self.networkReachabilityService.delegate = self
     }
 
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
         self.presenter.presentFullscreenCourseList(
-            response: .init(courseListType: request.courseListType)
+            response: .init(
+                presentationDescription: request.presentationDescription,
+                courseListType: request.courseListType
+            )
         )
+    }
+
+    func tryToSetOnlineMode(request: BaseExplore.TryToSetOnline.Request) {
+        if self.networkReachabilityService.isReachable {
+            for module in request.modules {
+                module.setOnlineStatus()
+            }
+        }
     }
 
     // MARK: - CourseListOutputProtocol
@@ -57,22 +67,4 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
     func presentError(sourceModule: CourseListInputProtocol) { }
 
     func presentEmptyState(sourceModule: CourseListInputProtocol) { }
-}
-
-extension BaseExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
-
-extension BaseExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(type: CollectionCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
-
-extension BaseExploreInteractor: NetworkReachabilityServiceDelegate {
-    func networkReachabilityStatusDidChange(newStatus: NetworkReachabilityStatus) {
-        print("changed")
-    }
 }

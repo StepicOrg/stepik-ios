@@ -57,7 +57,7 @@ final class ExploreViewController: BaseExploreViewController {
         super.viewDidLoad()
         self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
 
-        self.initLanguageIndependentSubmodules()
+        self.initSearchResults()
 
         self.updateState(newState: self.state)
         self.exploreInteractor?.loadContent(request: .init())
@@ -78,8 +78,8 @@ final class ExploreViewController: BaseExploreViewController {
         self.exploreInteractor?.loadContent(request: .init())
     }
 
-    func initLanguageIndependentSubmodules() {
-        self.initSearchResults()
+    override func refreshContentAfterLoginAndLogout() {
+        self.exploreInteractor?.loadContent(request: .init())
     }
 
     func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -142,7 +142,6 @@ final class ExploreViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.setOnlineStatus()
         let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
@@ -153,7 +152,7 @@ final class ExploreViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
+                request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
         self.registerSubmodule(
@@ -164,6 +163,10 @@ final class ExploreViewController: BaseExploreViewController {
                 type: Explore.Submodule.popularCourses
             )
         )
+
+        if let moduleInput = popularAssembly.moduleInput {
+            self.tryToSetOnlineState(moduleInput: moduleInput)
+        }
     }
 
     // MARK: - Search
