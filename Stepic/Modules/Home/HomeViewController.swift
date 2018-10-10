@@ -114,7 +114,7 @@ final class HomeViewController: BaseExploreViewController {
 
         let contentView = ExploreBlockPlaceholderView(frame: .zero, message: message)
 
-        if shouldOpenAuthorization {
+        if !shouldOpenAuthorization {
             contentView.onPlaceholderClick = { [weak self] in
                 self?.displayAuthorization()
             }

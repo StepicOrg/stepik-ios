@@ -32,7 +32,8 @@ extension ContinueLastStepView {
         let infoSpacing: CGFloat = 10.0
         let contentSpacing: CGFloat = 30.0
 
-        let continueButtonHeight = 42
+        let continueButtonHeight: CGFloat = 42.0
+        let continueButtonWidthRatio: CGFloat = 0.65
     }
 }
 
@@ -226,7 +227,7 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
         self.continueButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.top.bottom.equalToSuperview()
-            make.width.equalTo(self.snp.width).multipliedBy(0.55)
+            make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
         }
     }
 }

@@ -20,6 +20,8 @@ extension ContinueActionButton {
         let shadowOffset = CGSize(width: 0, height: 1.3)
         let shadowOpacity: Float = 1.0
         let shadowRadius: CGFloat = 6.7
+
+        let titleInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }
 
@@ -44,6 +46,7 @@ final class ContinueActionButton: BounceButton {
 
         self.titleLabel?.font = self.appearance.titleFont
         self.setTitleColor(self.appearance.titleColor, for: .normal)
+        self.titleEdgeInsets = self.appearance.titleInsets
         self.layer.insertSublayer(self.shadowLayer, at: 0)
     }
 
