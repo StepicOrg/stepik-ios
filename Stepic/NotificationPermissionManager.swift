@@ -10,16 +10,19 @@ import Foundation
 import UserNotifications
 import PromiseKit
 
+/// Defines whether the app is allowed to schedule notifications.
 enum NotificationPermissionStatus {
-    case notDetermined, denied, authorized
+    /// The user hasn't yet made a choice about whether is allowed the app to schedule notifications.
+    case notDetermined
+    /// The user not allowed the app to schedule or receive notifications.
+    case denied
+    /// The user allowed the app to schedule or receive notifications.
+    case authorized
 
-    // TODO: notification
-    //The application is authorized to post non-interruptive user notifications.
-    //@available(iOS 12.0, *)
-    //case provisional
+    // TODO: Test `Deliver Quietly` notifications on iOS 12.0 `case provisional`
     @available(iOS 10.0, *)
-    init(userNotificationAuthStatus: UNAuthorizationStatus) {
-        switch userNotificationAuthStatus {
+    init(_ authorizationStatus: UNAuthorizationStatus) {
+        switch authorizationStatus {
         case .authorized:
             self = .authorized
         case .denied:
@@ -32,14 +35,13 @@ enum NotificationPermissionStatus {
     }
 }
 
-class NotificationPermissionManager {
+final class NotificationPermissionManager {
     func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
         return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
-                let current = UNUserNotificationCenter.current()
-                current.getNotificationSettings(completionHandler: { (settings) in
-                    seal(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
-                })
+                UNUserNotificationCenter.current().getNotificationSettings { settings in
+                    seal(NotificationPermissionStatus(settings.authorizationStatus))
+                }
             } else {
                 // Fallback on earlier versions, we can not determine if we denied push notifications or not
                 if UIApplication.shared.isRegisteredForRemoteNotifications {
@@ -48,7 +50,6 @@ class NotificationPermissionManager {
                     seal(.notDetermined)
                 }
             }
-
         }
     }
 }
