@@ -110,15 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
-        // TODO: notification
-        if (launchOptions?[.localNotification]) != nil {
-            handleLocalNotification()
-        }
-
-        // TODO: notification
-        if let notification = launchOptions?[.remoteNotification] as? [String: Any] {
-            handleRemoteNotification(notification)
-        }
+        NotificationService.shared.handleApplicationLaunchOptions(launchOptions)
 
         checkNotificationsCount()
 
@@ -151,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
 
-    // MARK: - Handling Remote Notifications -
+    // MARK: - Handling Notifications -
 
     func application(
         _ application: UIApplication,
@@ -204,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CoreDataHelper.instance.save()
 
                 NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: {
-                    self.handleRemoteNotification(notificationDict)
+                    NotificationService.shared.handleRemoteNotification(notificationDict)
                 })
             }
         case "notification-statuses":
@@ -216,19 +208,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        // TODO: Show alert for iOS 9.0 and below.
+        NotificationService.shared.handleLocalNotification()
+    }
+
     // MARK: Private Helpers
-
-    private func handleLocalNotification() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened)
-    }
-
-    private func handleRemoteNotification(_ notificationDict: [String: Any]) {
-        guard let reaction = NotificationReactionHandler.handle(with: notificationDict),
-              let topController = self.currentNavigationController?.topViewController else {
-            return
-        }
-        reaction(topController)
-    }
 
     @objc
     private func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
