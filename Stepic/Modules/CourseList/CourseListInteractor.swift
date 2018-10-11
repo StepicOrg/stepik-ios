@@ -74,7 +74,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             if self.currentCourses.isEmpty {
-                self.moduleOutput?.presentEmptyState(sourceModule: self)
+                if self.isOnline {
+                    self.moduleOutput?.presentEmptyState(sourceModule: self)
+                }
             } else {
                 let courses = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(

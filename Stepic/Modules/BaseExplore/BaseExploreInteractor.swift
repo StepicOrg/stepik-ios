@@ -43,6 +43,9 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
             for module in request.modules {
                 module.setOnlineStatus()
             }
+            print("set online for \(request.modules.map { $0.moduleIdentifier })")
+        } else {
+            print("UNABLE to set online for \(request.modules.map { $0.moduleIdentifier })")
         }
     }
 
