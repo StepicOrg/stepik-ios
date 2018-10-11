@@ -2446,6 +2446,7 @@
 		2C8715222164E29400847A39 /* ContentLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C116ED420A46A8D2642 /* ContentLanguageService.swift */; };
 		2C8715242164E3A300847A39 /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981D7FD7BD900738BB677 /* UICollectionViewExtensions.swift */; };
 		2C8715252164E3A900847A39 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98480E472319CCB60BE83 /* UITableViewExtensions.swift */; };
+		2C8908A0216F465200083341 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationService.swift */; };
 		2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C89A9561F4C289900227C3B /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -6024,6 +6025,7 @@
 		2C86525F1F4B2F7D00D51654 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/1838/Tokens.plist; sourceTree = "<group>"; };
 		2C8652671F4B2FA500D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/1838/ru.lproj/step0.html; sourceTree = "<group>"; };
 		2C8652691F4B2FAA00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1838/en.lproj/step0.html; sourceTree = "<group>"; };
+		2C89089F216F465200083341 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		2C89A93E1F4C285B00227C3B /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/GMAT/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C89A93F1F4C285B00227C3B /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/GMAT/Auth.plist; sourceTree = "<group>"; };
 		2C89A9401F4C285B00227C3B /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/GMAT/Config.plist; sourceTree = "<group>"; };
@@ -7866,15 +7868,6 @@
 			name = Step;
 			sourceTree = "<group>";
 		};
-		089877B3214061C90065DFA2 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
-				08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */,
-			);
-			name = Services;
-			sourceTree = "<group>";
-		};
 		089877B4214061EC0065DFA2 /* Active Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -8198,7 +8191,7 @@
 			isa = PBXGroup;
 			children = (
 				08E43E95214C277600E3CB50 /* Transition Routers */,
-				089877B3214061C90065DFA2 /* Services */,
+				2C89089E216F460F00083341 /* Services */,
 				0853A3DE213D8F6100931F72 /* Split tests */,
 				08484EDF211AF41A0006266F /* Stories */,
 				2CE664DE20F5204D0082F3FE /* Downloader */,
@@ -10086,6 +10079,16 @@
 				2C86525D1F4B2F7D00D51654 /* icon.png */,
 			);
 			name = "Onboarding first step";
+			sourceTree = "<group>";
+		};
+		2C89089E216F460F00083341 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
+				08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */,
+				2C89089F216F465200083341 /* NotificationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		2C89A93D1F4C284800227C3B /* GMAT */ = {
@@ -15084,6 +15087,7 @@
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
+				2C8908A0216F465200083341 /* NotificationService.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				08E43EA3214C2C5800E3CB50 /* ModalStackRouter.swift in Sources */,
