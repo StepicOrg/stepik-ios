@@ -53,16 +53,41 @@ class PersonalDeadlineNotificationsManager {
 
     @available(iOS 10.0, *)
     private func scheduleNotificationWith(course: Course, section: Section, fireDate: Date, hoursBeforeDeadline: Int) {
+        guard let timeZone = TimeZone(identifier: "UTC") else {
+            return print("Unable to create TimeZone with UTC identifier")
+        }
+
         let content = UNMutableNotificationContent()
         content.title = "\(course.title)"
-        content.body = String(format: NSLocalizedString("PersonalDeadlineNotificationBody", comment: ""), "\(section.title)", "\(hoursBeforeDeadline)")
+        content.body = NSString.localizedUserNotificationString(
+            forKey: "PersonalDeadlineNotificationBody",
+            arguments: ["\(section.title)", "\(hoursBeforeDeadline)"]
+        )
         content.sound = UNNotificationSound.default()
-        let donorComponents = Calendar.current.dateComponents(in: TimeZone(identifier: "UTC")!, from: fireDate)
-        let components = DateComponents(calendar: Calendar.current, timeZone: TimeZone(identifier: "UTC")!, year: donorComponents.year, month: donorComponents.month, day: donorComponents.day, hour: donorComponents.hour, minute: donorComponents.minute, second: donorComponents.minute)
+
+        let dateComponents = Calendar.current.dateComponents(
+            in: timeZone,
+            from: fireDate
+        )
+        let components = DateComponents(
+            calendar: Calendar.current,
+            timeZone: timeZone,
+            year: dateComponents.year,
+            month: dateComponents.month,
+            day: dateComponents.day,
+            hour: dateComponents.hour,
+            minute: dateComponents.minute,
+            second: dateComponents.minute
+        )
+
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(identifier: notificationIdentifier(section: section.id, hoursBeforeDeadline: hoursBeforeDeadline), content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: {
-            error in
+        let request = UNNotificationRequest(
+            identifier: notificationIdentifier(section: section.id, hoursBeforeDeadline: hoursBeforeDeadline),
+            content: content,
+            trigger: trigger
+        )
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if let error = error {
                 print("error while registering notification \(error.localizedDescription)")
             }
