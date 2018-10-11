@@ -65,19 +65,19 @@ class PersonalDeadlineNotificationsManager {
         )
         content.sound = UNNotificationSound.default()
 
-        let dateComponents = Calendar.current.dateComponents(
+        let donorComponents = Calendar.current.dateComponents(
             in: timeZone,
             from: fireDate
         )
         let components = DateComponents(
             calendar: Calendar.current,
             timeZone: timeZone,
-            year: dateComponents.year,
-            month: dateComponents.month,
-            day: dateComponents.day,
-            hour: dateComponents.hour,
-            minute: dateComponents.minute,
-            second: dateComponents.minute
+            year: donorComponents.year,
+            month: donorComponents.month,
+            day: donorComponents.day,
+            hour: donorComponents.hour,
+            minute: donorComponents.minute,
+            second: donorComponents.minute
         )
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
