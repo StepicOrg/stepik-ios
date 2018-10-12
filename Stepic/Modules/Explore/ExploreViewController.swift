@@ -17,7 +17,8 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
 
 final class ExploreViewController: BaseExploreViewController {
     enum Animation {
-        static let refreshDelay: TimeInterval = 1.0
+        static let startRefreshDelay: TimeInterval = 1.0
+        static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
     static let submodulesOrder: [Explore.Submodule] = [
@@ -71,9 +72,11 @@ final class ExploreViewController: BaseExploreViewController {
     private func updateState(newState: Explore.ViewControllerState) {
         switch newState {
         case .normal(let language):
-            self.removeLanguageDependentSubmodules()
-            self.initLanguageDependentSubmodules(contentLanguage: language)
             self.exploreView?.endRefreshing()
+            DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+                self?.removeLanguageDependentSubmodules()
+                self?.initLanguageDependentSubmodules(contentLanguage: language)
+            }
         case .loading:
             break
         }
@@ -276,7 +279,7 @@ extension ExploreViewController: UISearchBarDelegate {
 extension ExploreViewController: BaseExploreViewDelegate {
     func refreshControlDidRefresh() {
         // Small delay for pretty refresh
-        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
             self?.exploreInteractor?.loadContent(request: .init())
         }
     }

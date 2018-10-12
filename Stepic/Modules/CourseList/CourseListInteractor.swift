@@ -105,7 +105,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 self.fetchCourses(request: request)
             }
         }.catch { error in
-            if case CourseListProvider.Error.networkFetchFailed = error, self.didLoadFromCache {
+            if case CourseListProvider.Error.networkFetchFailed = error,
+               self.didLoadFromCache,
+               !self.currentCourses.isEmpty {
                 // Offline mode: we already presented cached courses, but network request failed
                 // so let's ignore it and show only cached
             } else {
@@ -341,7 +343,10 @@ extension CourseListInteractor: CourseListInputProtocol {
 
         self.isOnline = true
 
-        let fakeRequest = CourseList.ShowCourses.Request()
-        self.fetchCourses(request: fakeRequest)
+        // Cached courses already loaded, now refresh with new state
+        if self.didLoadFromCache {
+            let fakeRequest = CourseList.ShowCourses.Request()
+            self.fetchCourses(request: fakeRequest)
+        }
     }
 }

@@ -131,6 +131,7 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
             self.coursesAPI.retrieve(
                 ids: self.type.ids
             ).done { courses in
+                let courses = courses.reordered(order: self.type.ids, transform: { $0.id })
                 seal.fulfill((courses, finalMeta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
