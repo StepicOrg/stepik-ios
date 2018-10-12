@@ -10,7 +10,6 @@ import Foundation
 import UserNotifications
 
 final class NotificationService: NSObject {
-
     static let shared = NotificationService()
 
     private override init() {
@@ -46,6 +45,11 @@ final class NotificationService: NSObject {
 //        }
 //        reaction(topController)
         print(notification)
+    }
+
+    enum NotificationTypes: String {
+        case personalDeadline
+        case streak
     }
 }
 
