@@ -69,6 +69,13 @@ final class ExploreViewController: BaseExploreViewController {
         self.exploreInteractor?.loadContent(request: .init())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Catalog.opened.send()
+    }
+
     private func updateState(newState: Explore.ViewControllerState) {
         switch newState {
         case .normal(let language):
@@ -256,10 +263,16 @@ extension ExploreViewController: UISearchBarDelegate {
         self.showSearchResults()
         // Strange hack to hide search results (courses)
         self.searchResultsModuleInput?.queryChanged(to: "")
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Search.started.send()
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.hideSearchResults()
+
+        // FIXME: analytics dependency
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

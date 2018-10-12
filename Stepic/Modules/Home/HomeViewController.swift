@@ -56,6 +56,9 @@ final class HomeViewController: BaseExploreViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.homeInteractor?.loadStreakActivity(request: .init())
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Home.opened.send()
     }
 
     // MARK: - Display submodules

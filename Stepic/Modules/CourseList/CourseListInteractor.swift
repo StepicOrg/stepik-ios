@@ -187,6 +187,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
+
+                // FIXME: analytics dependency
+                AmplitudeAnalyticsEvents.Course.continuePressed(
+                    source: "course_widget",
+                    courseID: course.id,
+                    courseTitle: course.title
+                ).send()
+
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(

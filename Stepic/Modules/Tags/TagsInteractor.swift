@@ -41,7 +41,8 @@ final class TagsInteractor: TagsInteractorProtocol {
                 Tags.Tag(
                     id: tag.ID,
                     title: tag.titleForLanguage[self.contentLanguage] ?? "",
-                    summary: tag.summaryForLanguage[self.contentLanguage] ?? ""
+                    summary: tag.summaryForLanguage[self.contentLanguage] ?? "",
+                    analyticsTitle: tag.titleForLanguage[.english] ?? ""
                 )
             }
             self.currentTags = newTags.map { ("\($0.id)", $0) }
@@ -56,6 +57,12 @@ final class TagsInteractor: TagsInteractorProtocol {
             .first(where: { $0.0 == request.viewModelUniqueIdentifier})?.1 else {
             return
         }
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Catalog.Category.opened(
+            categoryID: tag.id,
+            categoryNameEn: tag.analyticsTitle
+        ).send()
 
         self.moduleOutput?.presentCourseList(
             type: TagCourseListType(id: tag.id, language: self.contentLanguage)
