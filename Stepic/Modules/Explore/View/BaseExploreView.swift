@@ -9,8 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol BaseExploreViewDelegate: class {
+    func refreshControlDidRefresh()
+}
+
 final class BaseExploreView: UIView {
     private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
+    weak var delegate: BaseExploreViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +28,8 @@ final class BaseExploreView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Blocks
 
     func addBlockView(_ view: UIView) {
         self.scrollableStackView.addArrangedView(view)
@@ -44,11 +51,20 @@ final class BaseExploreView: UIView {
         }
         self.scrollableStackView.addArrangedView(view)
     }
+
+    // MARK: - Refresh control
+
+    func endRefreshing() {
+        self.scrollableStackView.endRefreshing()
+    }
 }
 
 extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
+
+        self.scrollableStackView.delegate = self
+        self.scrollableStackView.isRefreshControlEnabled = true
     }
 
     func addSubviews() {
@@ -60,5 +76,11 @@ extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+}
+
+extension BaseExploreView: ScrollableStackViewDelegate {
+    func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView) {
+        self.delegate?.refreshControlDidRefresh()
     }
 }

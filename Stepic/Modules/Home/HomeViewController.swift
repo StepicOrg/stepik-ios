@@ -15,6 +15,10 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class HomeViewController: BaseExploreViewController {
+    enum Animation {
+        static let refreshDelay: TimeInterval = 1.0
+    }
+
     fileprivate static let submodulesOrder: [Home.Submodule] = [
         .streakActivity,
         .continueCourse,
@@ -38,6 +42,11 @@ final class HomeViewController: BaseExploreViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func loadView() {
+        super.loadView()
+        self.exploreView?.delegate = self
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homeInteractor?.loadContent(request: .init())
@@ -56,6 +65,36 @@ final class HomeViewController: BaseExploreViewController {
 
     override func refreshContentAfterLoginAndLogout() {
         self.homeInteractor?.loadContent(request: .init())
+    }
+
+    // MARK: - Streak activity
+
+    private enum StreakActivityState {
+        case shown(message: String, streak: Int)
+        case hidden
+    }
+
+    private func refreshStreakActivity(state: StreakActivityState) {
+        switch state {
+        case .hidden:
+            if let submodule = self.getSubmodule(type: Home.Submodule.streakActivity) {
+                self.removeSubmodule(submodule)
+            }
+        case .shown(let message, let streak):
+            if self.getSubmodule(type: Home.Submodule.streakActivity) == nil {
+                self.registerSubmodule(
+                    .init(
+                        viewController: nil,
+                        view: self.streakView,
+                        isLanguageDependent: false,
+                        type: Home.Submodule.streakActivity
+                    )
+                )
+            }
+
+            streakView.message = message
+            streakView.streak = streak
+        }
     }
 
     // MARK: - Continue course
@@ -297,15 +336,6 @@ final class HomeViewController: BaseExploreViewController {
     }
 }
 
-extension Home.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = HomeViewController.submodulesOrder.index(of: self) else {
-            fatalError("Given submodule type has unknown position")
-        }
-        return position
-    }
-}
-
 extension HomeViewController: HomeViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.SetErrorStateForCourseList.ViewModel) {
         switch viewModel.module {
@@ -336,27 +366,15 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
         switch viewModel.result {
         case .hidden:
-            if let submodule = self.getSubmodule(type: Home.Submodule.streakActivity) {
-                self.removeSubmodule(submodule)
-            }
+            self.refreshStreakActivity(state: .hidden)
         case .visible(let message, let streak):
-            if self.getSubmodule(type: Home.Submodule.streakActivity) == nil {
-                self.registerSubmodule(
-                    .init(
-                        viewController: nil,
-                        view: self.streakView,
-                        isLanguageDependent: false,
-                        type: Home.Submodule.streakActivity
-                    )
-                )
-            }
-
-            streakView.message = message
-            streakView.streak = streak
+            self.refreshStreakActivity(state: .shown(message: message, streak: streak))
         }
     }
 
     func displayContent(viewModel: Home.LoadContent.ViewModel) {
+        self.exploreView?.endRefreshing()
+
         self.lastContentLanguage = viewModel.contentLanguage
         self.lastIsAuthorizedFlag = viewModel.isAuthorized
 
@@ -368,5 +386,23 @@ extension HomeViewController: HomeViewControllerProtocol {
             state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal
         )
         self.refreshStateForPopularCourses(state: .normal)
+    }
+}
+
+extension HomeViewController: BaseExploreViewDelegate {
+    func refreshControlDidRefresh() {
+        // Small delay for pretty refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) { [weak self] in
+            self?.homeInteractor?.loadContent(request: .init())
+        }
+    }
+}
+
+extension Home.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = HomeViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
+        }
+        return position
     }
 }
