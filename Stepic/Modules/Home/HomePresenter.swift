@@ -11,7 +11,7 @@ import UIKit
 protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStreakActivity(response: Home.LoadStreak.Response)
     func presentContent(response: Home.LoadContent.Response)
-    func presentCourseListState(response: Home.RefreshCourseList.Response)
+    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response)
 }
 
 final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
@@ -51,8 +51,8 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         )
     }
 
-    func presentCourseListState(response: Home.RefreshCourseList.Response) {
-        self.homeViewController?.displayCourseListState(
+    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response) {
+        self.homeViewController?.displayModuleErrorState(
             viewModel: .init(
                 module: response.module,
                 result: response.result

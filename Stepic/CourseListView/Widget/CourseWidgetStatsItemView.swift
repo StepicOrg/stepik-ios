@@ -29,6 +29,7 @@ final class CourseWidgetStatsItemView: UIView {
         var appearance = CourseWidgetLabel.Appearance()
         appearance.font = self.appearance.font
         appearance.textColor = self.appearance.textColor
+        appearance.maxLinesCount = 1
         let label = CourseWidgetLabel(frame: .zero, appearance: appearance)
         return label
     }()

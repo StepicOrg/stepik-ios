@@ -63,6 +63,7 @@ final class StreakActivityView: UIView {
         let stackView = UIStackView()
         stackView.spacing = self.appearance.iconInsets.right
         stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
         return stackView
     }()
 
@@ -143,6 +144,8 @@ extension StreakActivityView: ProgrammaticallyInitializableViewProtocol {
         self.streakIconImageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.streakIconSize)
         }
+
+        self.streakDaysLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         self.streakDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.streakDescriptionLabel.snp.makeConstraints { make in

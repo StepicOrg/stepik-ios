@@ -27,6 +27,16 @@ class BaseExploreViewController: UIViewController {
     private var submodules: [Submodule] = []
     lazy var exploreView = self.view as? BaseExploreView
 
+    // Disable landscape for iPhones cause it doesn't work with safe area (for X/XS)
+    // and navbar in landscape in bugged (black line)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return DeviceInfo.current.isPad ? .all : .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return DeviceInfo.current.isPad
+    }
+
     init(interactor: BaseExploreInteractorProtocol) {
         self.interactor = interactor
 

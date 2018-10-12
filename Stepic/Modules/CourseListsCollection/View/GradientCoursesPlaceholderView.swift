@@ -19,7 +19,7 @@ extension GradientCoursesPlaceholderView {
 
         var labelsSpacing: CGFloat = 9.0
 
-        var labelsInsets = UIEdgeInsets(top: 30, left: 28, bottom: 28, right: 30)
+        var labelsInsets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 30)
 
         init() { }
     }

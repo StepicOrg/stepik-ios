@@ -99,7 +99,6 @@ final class CourseWidgetStatsView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.spacing = self.appearance.statItemsSpacing
         return stackView
     }()
@@ -153,7 +152,8 @@ extension CourseWidgetStatsView: ProgrammaticallyInitializableViewProtocol {
         self.stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.leftInset).priority(999)
             make.centerY.equalToSuperview().priority(999)
-            make.top.bottom.trailing.greaterThanOrEqualToSuperview().priority(999)
+            make.top.bottom.greaterThanOrEqualToSuperview().priority(999)
+            make.trailing.lessThanOrEqualToSuperview().priority(999)
         }
     }
 }
