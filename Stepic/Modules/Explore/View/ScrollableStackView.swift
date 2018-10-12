@@ -169,6 +169,9 @@ extension ScrollableStackView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.stackView.clipsToBounds = false
         self.scrollView.clipsToBounds = false
+
+        self.scrollView.alwaysBounceVertical = true
+        self.scrollView.bounces = true
     }
 
     func addSubviews() {

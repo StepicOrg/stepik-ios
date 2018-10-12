@@ -57,6 +57,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(
             courseId: currentCourse.id
         )
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Course.continuePressed(
+            source: "home_widget",
+            courseID: currentCourse.id,
+            courseTitle: currentCourse.title
+        ).send()
+
         self.moduleOutput?.presentLastStep(
             course: currentCourse,
             isAdaptive: isAdaptive

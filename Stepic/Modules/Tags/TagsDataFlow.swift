@@ -15,6 +15,7 @@ enum Tags {
         let id: Int
         let title: String
         let summary: String
+        let analyticsTitle: String
     }
 
     // MARK: Use cases
