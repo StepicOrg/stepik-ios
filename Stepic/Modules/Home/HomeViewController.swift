@@ -16,7 +16,8 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
 
 final class HomeViewController: BaseExploreViewController {
     enum Animation {
-        static let refreshDelay: TimeInterval = 1.0
+        static let startRefreshDelay: TimeInterval = 1.0
+        static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
     fileprivate static let submodulesOrder: [Home.Submodule] = [
@@ -55,6 +56,9 @@ final class HomeViewController: BaseExploreViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.homeInteractor?.loadStreakActivity(request: .init())
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Home.opened.send()
     }
 
     // MARK: - Display submodules
@@ -375,24 +379,30 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayContent(viewModel: Home.LoadContent.ViewModel) {
         self.exploreView?.endRefreshing()
 
-        self.lastContentLanguage = viewModel.contentLanguage
-        self.lastIsAuthorizedFlag = viewModel.isAuthorized
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
 
-        let shouldDisplayContinueCourse = viewModel.isAuthorized
-        let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
+            strongSelf.lastContentLanguage = viewModel.contentLanguage
+            strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
 
-        self.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
-        self.refreshStateForEnrolledCourses(
-            state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal
-        )
-        self.refreshStateForPopularCourses(state: .normal)
+            let shouldDisplayContinueCourse = viewModel.isAuthorized
+            let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
+
+            strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
+            strongSelf.refreshStateForEnrolledCourses(
+                state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal
+            )
+            strongSelf.refreshStateForPopularCourses(state: .normal)
+        }
     }
 }
 
 extension HomeViewController: BaseExploreViewDelegate {
     func refreshControlDidRefresh() {
         // Small delay for pretty refresh
-        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
             self?.homeInteractor?.loadContent(request: .init())
         }
     }

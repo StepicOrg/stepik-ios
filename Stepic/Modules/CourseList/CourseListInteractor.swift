@@ -105,7 +105,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 self.fetchCourses(request: request)
             }
         }.catch { error in
-            if case CourseListProvider.Error.networkFetchFailed = error, self.didLoadFromCache {
+            if case CourseListProvider.Error.networkFetchFailed = error,
+               self.didLoadFromCache,
+               !self.currentCourses.isEmpty {
                 // Offline mode: we already presented cached courses, but network request failed
                 // so let's ignore it and show only cached
             } else {
@@ -185,6 +187,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
+
+                // FIXME: analytics dependency
+                AmplitudeAnalyticsEvents.Course.continuePressed(
+                    source: "course_widget",
+                    courseID: course.id,
+                    courseTitle: course.title
+                ).send()
+
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -341,7 +351,10 @@ extension CourseListInteractor: CourseListInputProtocol {
 
         self.isOnline = true
 
-        let fakeRequest = CourseList.ShowCourses.Request()
-        self.fetchCourses(request: fakeRequest)
+        // Cached courses already loaded, now refresh with new state
+        if self.didLoadFromCache {
+            let fakeRequest = CourseList.ShowCourses.Request()
+            self.fetchCourses(request: fakeRequest)
+        }
     }
 }
