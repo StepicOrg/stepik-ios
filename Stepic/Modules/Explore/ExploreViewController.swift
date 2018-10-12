@@ -16,6 +16,10 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class ExploreViewController: BaseExploreViewController {
+    enum Animation {
+        static let refreshDelay: TimeInterval = 1.0
+    }
+
     static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
@@ -50,6 +54,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func loadView() {
         super.loadView()
+        self.exploreView?.delegate = self
         self.navigationItem.titleView = self.searchBar
     }
 
@@ -68,6 +73,7 @@ final class ExploreViewController: BaseExploreViewController {
         case .normal(let language):
             self.removeLanguageDependentSubmodules()
             self.initLanguageDependentSubmodules(contentLanguage: language)
+            self.exploreView?.endRefreshing()
         case .loading:
             break
         }
@@ -255,5 +261,23 @@ extension ExploreViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchResultsModuleInput?.queryChanged(to: searchText)
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // FIXME: should be incapsulated
+        if let text = searchBar.text, !text.isEmpty {
+            self.searchResultsModuleInput?.search(query: text)
+        } else {
+            self.searchResultsModuleInput?.queryChanged(to: "")
+        }
+    }
+}
+
+extension ExploreViewController: BaseExploreViewDelegate {
+    func refreshControlDidRefresh() {
+        // Small delay for pretty refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) { [weak self] in
+            self?.exploreInteractor?.loadContent(request: .init())
+        }
     }
 }

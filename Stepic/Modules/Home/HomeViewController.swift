@@ -11,10 +11,14 @@ import UIKit
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
     func displayContent(viewModel: Home.LoadContent.ViewModel)
-    func displayCourseListState(viewModel: Home.RefreshCourseList.ViewModel)
+    func displayModuleErrorState(viewModel: Home.SetErrorStateForCourseList.ViewModel)
 }
 
 final class HomeViewController: BaseExploreViewController {
+    enum Animation {
+        static let refreshDelay: TimeInterval = 1.0
+    }
+
     fileprivate static let submodulesOrder: [Home.Submodule] = [
         .streakActivity,
         .continueCourse,
@@ -23,6 +27,8 @@ final class HomeViewController: BaseExploreViewController {
     ]
 
     private var lastContentLanguage: ContentLanguage?
+    private var lastIsAuthorizedFlag: Bool = false
+
     private lazy var streakView = StreakActivityView(frame: .zero)
     lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
@@ -34,6 +40,11 @@ final class HomeViewController: BaseExploreViewController {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        super.loadView()
+        self.exploreView?.delegate = self
     }
 
     override func viewDidLoad() {
@@ -56,247 +67,20 @@ final class HomeViewController: BaseExploreViewController {
         self.homeInteractor?.loadContent(request: .init())
     }
 
-    private func displayPopularCourseList(contentLanguage: ContentLanguage) {
-        let courseListType = PopularCourseListType(language: contentLanguage)
-        let popularAssembly = HorizontalCourseListAssembly(
-            type: courseListType,
-            colorMode: .dark,
-            output: self.interactor as? CourseListOutputProtocol
-        )
-        let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.moduleIdentifier = Home.Submodule.popularCourses
-            .uniqueIdentifier
+    // MARK: - Streak activity
 
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
-            .makeHorizontalContainerView(
-                for: popularViewController.view,
-                headerDescription: .init(
-                    title: NSLocalizedString("Popular", comment: ""),
-                    summary: nil
-                )
-            )
-        containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.loadFullscreenCourseList(
-                request: .init(presentationDescription: nil, courseListType: courseListType)
-            )
-        }
-        self.registerSubmodule(
-            .init(
-                viewController: popularViewController,
-                view: containerView,
-                isLanguageDependent: true,
-                type: Home.Submodule.popularCourses
-            )
-        )
-
-        if let moduleInput = popularAssembly.moduleInput {
-            self.tryToSetOnlineState(moduleInput: moduleInput)
-        }
+    private enum StreakActivityState {
+        case shown(message: String, streak: Int)
+        case hidden
     }
 
-    private func refreshContinueCourse() {
-        let continueCourseAssembly = ContinueCourseAssembly(
-            output: self.interactor as? ContinueCourseOutputProtocol
-        )
-        let continueCourseViewController = continueCourseAssembly.makeModule()
-        self.registerSubmodule(
-            .init(
-                viewController: continueCourseViewController,
-                view: continueCourseViewController.view,
-                isLanguageDependent: false,
-                type: Home.Submodule.continueCourse
-            )
-        )
-    }
-
-    private func hideContinueCourse() {
-        if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
-            self.removeSubmodule(submodule)
-        }
-    }
-
-    private func displayEnrolledPlaceholder(
-        message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage,
-        shouldOpenAuthorization: Bool = false
-    ) {
-        let headerDescription = CourseListContainerViewFactory.HorizontalHeaderDescription(
-            title: NSLocalizedString("Enrolled", comment: ""),
-            summary: nil,
-            shouldShowShowAllButton: false
-        )
-
-        let contentView = ExploreBlockPlaceholderView(frame: .zero, message: message)
-
-        if shouldOpenAuthorization {
-            contentView.onPlaceholderClick = { [weak self] in
-                self?.displayAuthorization()
-            }
-        } else {
-            contentView.onPlaceholderClick = { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                if let module = strongSelf.getSubmodule(type: Home.Submodule.enrolledCourses) {
-                    strongSelf.removeSubmodule(module)
-                }
-
-                strongSelf.displayEnrolledCourseList()
-            }
-        }
-
-        let containerView = CourseListContainerViewFactory(colorMode: .light)
-            .makeHorizontalContainerView(
-                for: contentView,
-                headerDescription: headerDescription
-        )
-        self.registerSubmodule(
-            .init(
-                viewController: nil,
-                view: containerView,
-                isLanguageDependent: false,
-                type: Home.Submodule.enrolledCourses
-            )
-        )
-    }
-
-    private func displayPopularPlaceholder(
-        message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage
-    ) {
-        let headerDescription = CourseListContainerViewFactory.HorizontalHeaderDescription(
-            title: NSLocalizedString("Popular", comment: ""),
-            summary: nil,
-            shouldShowShowAllButton: false
-        )
-
-        let contentView = ExploreBlockPlaceholderView(frame: .zero, message: message)
-        contentView.onPlaceholderClick = { [weak self] in
-            guard let strongSelf = self,
-                  let contentLanguage = strongSelf.lastContentLanguage else {
-                return
-            }
-
-            if let module = strongSelf.getSubmodule(type: Home.Submodule.popularCourses) {
-                strongSelf.removeSubmodule(module)
-            }
-
-            strongSelf.displayPopularCourseList(contentLanguage: contentLanguage)
-        }
-
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
-            .makeHorizontalContainerView(
-                for: contentView,
-                headerDescription: headerDescription
-        )
-        self.registerSubmodule(
-            .init(
-                viewController: nil,
-                view: containerView,
-                isLanguageDependent: false,
-                type: Home.Submodule.popularCourses
-            )
-        )
-    }
-
-    private func displayEnrolledCourseList() {
-        let headerDescription = CourseListContainerViewFactory.HorizontalHeaderDescription(
-            title: NSLocalizedString("Enrolled", comment: ""),
-            summary: nil,
-            shouldShowShowAllButton: true
-        )
-
-        let courseListType = EnrolledCourseListType()
-        let enrolledCourseListAssembly = HorizontalCourseListAssembly(
-            type: courseListType,
-            colorMode: .light,
-            output: self.interactor as? CourseListOutputProtocol
-        )
-        let enrolledViewController = enrolledCourseListAssembly.makeModule()
-        enrolledCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule.enrolledCourses
-            .uniqueIdentifier
-
-        let containerView = CourseListContainerViewFactory(colorMode: .light)
-            .makeHorizontalContainerView(
-                for: enrolledViewController.view,
-                headerDescription: headerDescription
-        )
-
-        containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.loadFullscreenCourseList(
-                request: .init(presentationDescription: nil, courseListType: courseListType)
-            )
-        }
-        self.registerSubmodule(
-            .init(
-                viewController: enrolledViewController,
-                view: containerView,
-                isLanguageDependent: false,
-                type: Home.Submodule.enrolledCourses
-            )
-        )
-        if let moduleInput = enrolledCourseListAssembly.moduleInput {
-            self.tryToSetOnlineState(moduleInput: moduleInput)
-        }
-    }
-}
-
-extension Home.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = HomeViewController.submodulesOrder.index(of: self) else {
-            fatalError("Given submodule type has unknown position")
-        }
-        return position
-    }
-}
-
-extension HomeViewController: HomeViewControllerProtocol {
-    func displayCourseListState(viewModel: Home.RefreshCourseList.ViewModel) {
-        if let module = self.getSubmodule(type: viewModel.module) {
-            self.removeSubmodule(module)
-        }
-
-        switch viewModel.module {
-        case .enrolledCourses:
-            switch viewModel.result {
-            case .normal:
-                self.displayEnrolledCourseList()
-            case .empty:
-                self.displayEnrolledPlaceholder(message: .enrolledEmpty)
-            case .error:
-                self.displayEnrolledPlaceholder(message: .enrolledError)
-            }
-        case .popularCourses:
-            guard let contentLanguage = self.lastContentLanguage else {
-                return
-            }
-
-            switch viewModel.result {
-            case .normal:
-                self.displayPopularCourseList(contentLanguage: contentLanguage)
-            case .empty:
-                self.displayPopularPlaceholder(message: .popularEmpty)
-            case .error:
-                self.displayPopularPlaceholder(message: .popularError)
-            }
-        case .continueCourse:
-            switch viewModel.result {
-            case .normal:
-                self.refreshContinueCourse()
-            default:
-                self.hideContinueCourse()
-            }
-        default:
-            break
-        }
-    }
-
-    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
-        switch viewModel.result {
+    private func refreshStreakActivity(state: StreakActivityState) {
+        switch state {
         case .hidden:
             if let submodule = self.getSubmodule(type: Home.Submodule.streakActivity) {
                 self.removeSubmodule(submodule)
             }
-        case .visible(let message, let streak):
+        case .shown(let message, let streak):
             if self.getSubmodule(type: Home.Submodule.streakActivity) == nil {
                 self.registerSubmodule(
                     .init(
@@ -313,43 +97,312 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
 
-    func displayContent(viewModel: Home.LoadContent.ViewModel) {
-        self.lastContentLanguage = viewModel.contentLanguage
+    // MARK: - Continue course
 
-        // Remove all current content
-        [
-            Home.Submodule.continueCourse,
-            Home.Submodule.enrolledCourses,
-            Home.Submodule.popularCourses
-        ].compactMap { module in
-            self.getSubmodule(type: module)
-        }.forEach { module in
-            self.removeSubmodule(module)
+    private enum ContinueCourseState {
+        case shown
+        case hidden
+    }
+
+    private func refreshContinueCourse(state: ContinueCourseState) {
+        if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
+            self.removeSubmodule(submodule)
         }
 
-        let shouldDisplayContinueCourse = viewModel.isAuthorized
-        let shouldDisplayEnrolledAnonymousPlaceholder = !viewModel.isAuthorized
-        let shouldDisplayEnrolledCourses = viewModel.isAuthorized
-
-        if shouldDisplayEnrolledAnonymousPlaceholder == shouldDisplayEnrolledCourses {
-            fatalError("Attempt to display both placeholder & courses simultaneously")
+        guard case .shown = state else {
+            return
         }
 
-        if shouldDisplayContinueCourse {
-            self.refreshContinueCourse()
-        }
+        let continueCourseAssembly = ContinueCourseAssembly(
+            output: self.interactor as? ContinueCourseOutputProtocol
+        )
+        let continueCourseViewController = continueCourseAssembly.makeModule()
+        self.registerSubmodule(
+            .init(
+                viewController: continueCourseViewController,
+                view: continueCourseViewController.view,
+                isLanguageDependent: false,
+                type: Home.Submodule.continueCourse
+            )
+        )
+    }
 
-        if shouldDisplayEnrolledAnonymousPlaceholder {
-            self.displayEnrolledPlaceholder(
-                message: .login,
-                shouldOpenAuthorization: true
+    // MARK: - Fullscreen displaying
+
+    private func displayFullscreenEnrolledCourseList() {
+        self.interactor.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: nil,
+                courseListType: EnrolledCourseListType()
+            )
+        )
+    }
+
+    private func displayFullscreenPopularCourseList(contentLanguage: ContentLanguage) {
+        self.interactor.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: nil,
+                courseListType: PopularCourseListType(language: contentLanguage)
+            )
+        )
+    }
+
+    // MARK: - Enrolled courses submodule
+
+    private enum EnrolledCourseListState {
+        case anonymous
+        case normal
+        case error
+        case empty
+
+        var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
+            return CourseListContainerViewFactory.HorizontalHeaderDescription(
+                title: NSLocalizedString("Enrolled", comment: ""),
+                summary: nil,
+                shouldShowShowAllButton: self == .normal
             )
         }
 
-        if shouldDisplayEnrolledCourses {
-            self.displayEnrolledCourseList()
+        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+            switch self {
+            case .anonymous:
+                return .login
+            case .error:
+                return .enrolledError
+            case .empty:
+                return .enrolledEmpty
+            default:
+                fatalError("State not supported placeholder")
+            }
+        }
+    }
+
+    private func makeEnrolledCourseListSubmodule() -> (UIView, UIViewController?) {
+        let courseListType = EnrolledCourseListType()
+        let enrolledCourseListAssembly = HorizontalCourseListAssembly(
+            type: courseListType,
+            colorMode: .light,
+            output: self.interactor as? CourseListOutputProtocol
+        )
+        let enrolledViewController = enrolledCourseListAssembly.makeModule()
+        enrolledCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule
+            .enrolledCourses
+            .uniqueIdentifier
+        enrolledCourseListAssembly.moduleInput?.setOnlineStatus()
+        return (enrolledViewController.view, enrolledViewController)
+    }
+
+    private func refreshStateForEnrolledCourses(state: EnrolledCourseListState) {
+        // Remove previous module. It's easiest way to refresh module
+        if let module = self.getSubmodule(type: Home.Submodule.enrolledCourses) {
+            self.removeSubmodule(module)
         }
 
-        self.displayPopularCourseList(contentLanguage: viewModel.contentLanguage)
+        // Build new module
+        // Each module should has view and attached view controller (if module is active submodule)
+        var viewController: UIViewController?
+        var view: UIView
+
+        if case .normal = state {
+            // Build course list submodule
+            (view, viewController) = self.makeEnrolledCourseListSubmodule()
+        } else {
+            // Build placeholder
+            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            switch state {
+            case .anonymous:
+                placeholderView.onPlaceholderClick = { [weak self] in
+                    self?.displayAuthorization()
+                }
+            case .error:
+                placeholderView.onPlaceholderClick = { [weak self] in
+                    self?.refreshStateForEnrolledCourses(state: .normal)
+                }
+            default:
+                break
+            }
+            (view, viewController) = (placeholderView, nil)
+        }
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: state.headerDescription
+            )
+
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.displayFullscreenEnrolledCourseList()
+        }
+
+        // Register module
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: containerView,
+                isLanguageDependent: false,
+                type: Home.Submodule.enrolledCourses
+            )
+        )
+    }
+
+    // MARK: - Popular courses module
+
+    private enum PopularCourseListState {
+        case normal
+        case error
+        case empty
+
+        var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
+            return CourseListContainerViewFactory.HorizontalHeaderDescription(
+                title: NSLocalizedString("Popular", comment: ""),
+                summary: nil,
+                shouldShowShowAllButton: self == .normal
+            )
+        }
+
+        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+            switch self {
+            case .error:
+                return .popularError
+            case .empty:
+                return .popularEmpty
+            default:
+                fatalError("State not supported placeholder")
+            }
+        }
+    }
+
+    private func makePopularCourseListSubmodule(contentLanguage: ContentLanguage) -> (UIView, UIViewController?) {
+        let courseListType = PopularCourseListType(language: contentLanguage)
+        let popularAssembly = HorizontalCourseListAssembly(
+            type: courseListType,
+            colorMode: .dark,
+            output: self.interactor as? CourseListOutputProtocol
+        )
+        let popularViewController = popularAssembly.makeModule()
+        popularAssembly.moduleInput?.moduleIdentifier = Home.Submodule.popularCourses
+            .uniqueIdentifier
+        popularAssembly.moduleInput?.setOnlineStatus()
+        return (popularViewController.view, popularViewController)
+    }
+
+    private func refreshStateForPopularCourses(state: PopularCourseListState) {
+        guard let language = self.lastContentLanguage else {
+            // Cause we can't try to init module w/o language
+            return
+        }
+
+        // Remove previous module. It's easiest way to refresh module
+        if let module = self.getSubmodule(type: Home.Submodule.popularCourses) {
+            self.removeSubmodule(module)
+        }
+
+        // Build new module
+        // Each module should has view and attached view controller (if module is active submodule)
+        var viewController: UIViewController?
+        var view: UIView
+
+        if case .normal = state {
+            // Build course list submodule
+            (view, viewController) = self.makePopularCourseListSubmodule(contentLanguage: language)
+        } else {
+            // Build placeholder
+            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            placeholderView.onPlaceholderClick = { [weak self] in
+                self?.refreshStateForPopularCourses(state: .normal)
+            }
+            (view, viewController) = (placeholderView, nil)
+        }
+
+        let containerView = CourseListContainerViewFactory(colorMode: .dark)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: state.headerDescription
+            )
+
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.displayFullscreenPopularCourseList(contentLanguage: language)
+        }
+
+        // Register module
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: containerView,
+                isLanguageDependent: true,
+                type: Home.Submodule.popularCourses
+            )
+        )
+    }
+}
+
+extension HomeViewController: HomeViewControllerProtocol {
+    func displayModuleErrorState(viewModel: Home.SetErrorStateForCourseList.ViewModel) {
+        switch viewModel.module {
+        case .enrolledCourses:
+            switch viewModel.result {
+            case .empty:
+                self.refreshStateForEnrolledCourses(state: .empty)
+            case .error:
+                self.refreshStateForEnrolledCourses(state: .error)
+            }
+        case .popularCourses:
+            switch viewModel.result {
+            case .empty:
+                self.refreshStateForPopularCourses(state: .empty)
+            case .error:
+                self.refreshStateForPopularCourses(state: .error)
+            }
+        case .continueCourse:
+            switch viewModel.result {
+            default:
+                self.refreshContinueCourse(state: .hidden)
+            }
+        default:
+            break
+        }
+    }
+
+    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
+        switch viewModel.result {
+        case .hidden:
+            self.refreshStreakActivity(state: .hidden)
+        case .visible(let message, let streak):
+            self.refreshStreakActivity(state: .shown(message: message, streak: streak))
+        }
+    }
+
+    func displayContent(viewModel: Home.LoadContent.ViewModel) {
+        self.exploreView?.endRefreshing()
+
+        self.lastContentLanguage = viewModel.contentLanguage
+        self.lastIsAuthorizedFlag = viewModel.isAuthorized
+
+        let shouldDisplayContinueCourse = viewModel.isAuthorized
+        let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
+
+        self.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
+        self.refreshStateForEnrolledCourses(
+            state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal
+        )
+        self.refreshStateForPopularCourses(state: .normal)
+    }
+}
+
+extension HomeViewController: BaseExploreViewDelegate {
+    func refreshControlDidRefresh() {
+        // Small delay for pretty refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) { [weak self] in
+            self?.homeInteractor?.loadContent(request: .init())
+        }
+    }
+}
+
+extension Home.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = HomeViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
+        }
+        return position
     }
 }

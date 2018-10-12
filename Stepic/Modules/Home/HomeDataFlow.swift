@@ -61,11 +61,10 @@ enum Home {
         }
     }
     // Refresh course block
-    enum RefreshCourseList {
+    enum SetErrorStateForCourseList {
         enum State {
             case empty
             case error
-            case normal
         }
 
         struct Request { }
