@@ -33,7 +33,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
 
-    private var isOnline: Bool = false
+    private var isOnline = false
+    private var didLoadFromCache = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var currentCourses: [(UniqueIdentifierType, Course)] = []
 
@@ -60,10 +61,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     // MARK: - Public methods
 
     func fetchCourses(request: CourseList.ShowCourses.Request) {
-        // Check for state and if state == offline, just fetch cached courses
-        // if state == online, fetch from network and show
+        // Check for state and
+        // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
+        // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
+        // - isOnline && !didLoadFromCache: we should load cached courses and then load from network (recursive execute fetchCourses)
+        // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
+        let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
         firstly {
-            self.isOnline
+            self.didLoadFromCache
                 ? self.provider.fetchRemote(page: 1)
                 : self.provider.fetchCached()
         }.done { courses, meta in
@@ -74,7 +79,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             if self.currentCourses.isEmpty {
-                if self.isOnline {
+                // Offline mode: present empty state only if get empty courses from network
+                if self.isOnline && self.didLoadFromCache {
                     self.moduleOutput?.presentEmptyState(sourceModule: self)
                 }
             } else {
@@ -91,8 +97,20 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
                 self.presenter.presentCourses(response: response)
             }
-        }.catch { _ in
-            self.moduleOutput?.presentError(sourceModule: self)
+
+            // Retry if successfuly
+            if shouldRetryAfterFetching {
+                // End of recursion cause shouldRetryAfterFetching will be false on next call
+                self.didLoadFromCache = true
+                self.fetchCourses(request: request)
+            }
+        }.catch { error in
+            if case CourseListProvider.Error.networkFetchFailed = error, self.didLoadFromCache {
+                // Offline mode: we already presented cached courses, but network request failed
+                // so let's ignore it and show only cached
+            } else {
+                self.moduleOutput?.presentError(sourceModule: self)
+            }
         }
     }
 
@@ -136,7 +154,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
-
+            // TODO: catch pagination error
         }
     }
 
@@ -322,17 +340,6 @@ extension CourseListInteractor: CourseListInputProtocol {
         }
 
         self.isOnline = true
-
-        let fakeRequest = CourseList.ShowCourses.Request()
-        self.fetchCourses(request: fakeRequest)
-    }
-
-    func setOfflineStatus() {
-        guard self.isOnline else {
-            return
-        }
-
-        self.isOnline = false
 
         let fakeRequest = CourseList.ShowCourses.Request()
         self.fetchCourses(request: fakeRequest)

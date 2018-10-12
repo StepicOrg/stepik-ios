@@ -13,6 +13,4 @@ protocol CourseListInputProtocol: class {
 
     /// Course list will be use data from network
     func setOnlineStatus()
-    /// Course list will be use data from persistence storage
-    func setOfflineStatus()
 }
