@@ -262,6 +262,15 @@ extension ExploreViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchResultsModuleInput?.queryChanged(to: searchText)
     }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // FIXME: should be incapsulated
+        if let text = searchBar.text, !text.isEmpty {
+            self.searchResultsModuleInput?.search(query: text)
+        } else {
+            self.searchResultsModuleInput?.queryChanged(to: "")
+        }
+    }
 }
 
 extension ExploreViewController: BaseExploreViewDelegate {

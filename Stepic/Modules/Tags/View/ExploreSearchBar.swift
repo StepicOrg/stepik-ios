@@ -93,4 +93,9 @@ extension ExploreSearchBar: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchBarDelegate?.searchBar?(searchBar, textDidChange: searchText)
     }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        self.searchBarDelegate?.searchBarSearchButtonClicked?(searchBar)
+    }
 }
