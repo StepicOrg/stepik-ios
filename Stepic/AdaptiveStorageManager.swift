@@ -8,7 +8,14 @@
 
 import Foundation
 
-class AdaptiveStorageManager {
+protocol AdaptiveStorageManagerProtocol: class {
+    var isAdaptiveModeEnabled: Bool { get set }
+    var isAdaptiveOnboardingPassed: Bool { get set }
+    func canOpenInAdaptiveMode(courseId: Int) -> Bool
+}
+
+@available(*, deprecated, message: "Legacy class")
+class AdaptiveStorageManager: AdaptiveStorageManagerProtocol {
     static let shared = AdaptiveStorageManager()
 
     let defaults = UserDefaults.standard

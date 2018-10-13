@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class CourseReviewSummary: NSManagedObject, JSONSerializable {
+final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable {
 
     typealias IdType = Int
 

@@ -71,7 +71,7 @@ extension Request {
         response: HTTPURLResponse?,
         data: Data?,
         error: Error?)
-        -> Result<JSON> {
+        -> Alamofire.Result<JSON> {
             guard error == nil else { return .failure(error!) }
 
             if let response = response, emptyDataStatusCodes.contains(response.statusCode) {

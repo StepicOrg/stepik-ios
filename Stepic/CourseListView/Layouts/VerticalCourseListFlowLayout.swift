@@ -10,16 +10,14 @@ import UIKit
 
 extension VerticalCourseListFlowLayout {
     struct Appearance {
-        let paginationViewHeight: CGFloat = 65
+        let headerViewHeight: CGFloat = 104
+        let paginationViewHeight: CGFloat = 52
     }
 }
 
 final class VerticalCourseListFlowLayout: BaseListFlowLayout {
     let appearance: Appearance
     var columnsCount: Int
-
-    private var previousPaginationViewSize: CGSize?
-    private var previousAllItemsOffset: CGFloat?
 
     override var contentWidth: CGFloat {
         let allItemsWidth = self.itemSize.width * CGFloat(self.columnsCount)
@@ -32,27 +30,43 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         return _contentHeight
     }
 
-    var isPaginationEnabled = false {
+    var isPaginationHidden = true {
         didSet {
-            if oldValue != self.isPaginationEnabled {
-                self.updatePaginationViewSizeInCache()
+            if oldValue != self.isPaginationHidden {
+                self.cache.removeAll(keepingCapacity: true)
                 self.invalidateLayout()
             }
         }
     }
+
+    let isHeaderHidden: Bool
 
     private var paginationSize: CGSize {
         let viewSize = CGSize(
             width: self.collectionView?.bounds.width ?? 0,
             height: self.appearance.paginationViewHeight
         )
-        return self.isPaginationEnabled ? viewSize : .zero
+        return self.isPaginationHidden ? .zero : viewSize
     }
 
-    init(columnsCount: Int = 1, appearance: Appearance = Appearance()) {
+    private var headerSize: CGSize {
+        let viewSize = CGSize(
+            width: self.collectionView?.bounds.width ?? 0,
+            height: self.appearance.headerViewHeight
+        )
+        return self.isHeaderHidden ? .zero : viewSize
+    }
+
+    init(
+        columnsCount: Int = 1,
+        isHeaderHidden: Bool = true,
+        appearance: Appearance = Appearance()
+    ) {
         self.columnsCount = columnsCount
+        self.isHeaderHidden = isHeaderHidden
         self.appearance = appearance
         super.init()
+        self.scrollDirection = .vertical
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,8 +84,27 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
             return
         }
 
+        // Header
+        let headerSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            with: IndexPath(
+                item: 0,
+                section: collectionView.numberOfSections - 1
+            )
+        )
+
+        headerSupplementaryViewAttributes.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.headerSize.width,
+            height: self.headerSize.height
+        )
+
+        self.cache.append(headerSupplementaryViewAttributes)
+
+        // Items
         var xOffset = self.minimumInteritemSpacing
-        var yOffset = self.minimumLineSpacing
+        var yOffset = self.headerSize.height + self.minimumLineSpacing
         var columnIndex = 0
 
         // Convert multiple sections into one
@@ -92,7 +125,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
 
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = frame
-            cache.append(attributes)
+            self.cache.append(attributes)
 
             if columnIndex < self.columnsCount - 1 {
                 xOffset += self.itemSize.width + self.minimumInteritemSpacing
@@ -108,31 +141,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
             yOffset += self.itemSize.height + self.minimumLineSpacing
         }
 
-        self.previousAllItemsOffset = yOffset
-        self._contentHeight = yOffset
-
-        self.updatePaginationViewSizeInCache()
-    }
-
-    private func updatePaginationViewSizeInCache() {
-        guard let collectionView = self.collectionView,
-              let contentOffset = self.previousAllItemsOffset else {
-            return
-        }
-
-        // Remove old attributes
-        for i in 0..<self.cache.count {
-            if self.cache[i].representedElementKind == UICollectionElementKindSectionFooter {
-                self.cache.remove(at: i)
-                break
-            }
-        }
-
-        guard self.isPaginationEnabled else {
-            self._contentHeight = contentOffset
-            return
-        }
-
+        // Footer
         let paginationSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
             forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
             with: IndexPath(
@@ -143,14 +152,15 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
 
         paginationSupplementaryViewAttributes.frame = CGRect(
             x: 0,
-            y: contentOffset,
+            y: yOffset,
             width: self.paginationSize.width,
             height: self.paginationSize.height
         )
 
         self.cache.append(paginationSupplementaryViewAttributes)
-        self._contentHeight = contentOffset
-            + self.minimumLineSpacing
+
+        self._contentHeight = yOffset
             + self.paginationSize.height
+            + (self.paginationSize.height > 0 ? self.minimumLineSpacing : 0)
     }
 }

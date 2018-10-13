@@ -11,15 +11,17 @@ import UIKit
 
 class StoriesAssembly: Assembly {
 
-    weak var refreshDelegate: StoriesRefreshDelegate?
+    weak var moduleOutput: StoriesOutputProtocol?
 
-    init(refreshDelegate: StoriesRefreshDelegate?) {
-        self.refreshDelegate = refreshDelegate
+    init(output: StoriesOutputProtocol?) {
+        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
         let vc = StoriesViewController()
-        vc.presenter = StoriesPresenter(view: vc, storyTemplatesAPI: StoryTemplatesAPI(), refreshDelegate: refreshDelegate)
+        let presenter = StoriesPresenter(view: vc, storyTemplatesAPI: StoryTemplatesAPI())
+        presenter.moduleOutput = self.moduleOutput
+        vc.presenter = presenter
         return vc
     }
 }

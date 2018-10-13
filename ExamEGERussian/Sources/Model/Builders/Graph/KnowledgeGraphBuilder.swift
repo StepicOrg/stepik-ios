@@ -19,16 +19,29 @@ final class KnowledgeGraphBuilder: AbstractGraphBuilder {
         let graph = KnowledgeGraph()
 
         graphPlainObject.topics.forEach {
-            graph.addVertex(KnowledgeGraphVertex(id: $0.id, title: $0.title))
+            graph.addVertex(
+                KnowledgeGraphVertex(
+                    id: $0.id,
+                    title: $0.title,
+                    topicDescription: $0.description
+                )
+            )
         }
         graphPlainObject.topics.filter {
             $0.requiredFor != nil
         }.forEach { topic in
             guard let (source, _) = graph[topic.id],
-                  let (destination, _) = graph[topic.requiredFor!] else {
+                  let requiredFor = topic.requiredFor else {
                 return
             }
-            graph.add(from: source, to: destination)
+
+            requiredFor.forEach {
+                guard let (destination, _) = graph[$0] else {
+                    return
+                }
+
+                graph.add(from: source, to: destination)
+            }
         }
         graphPlainObject.topicsMap.forEach { topicMap in
             guard let (vertex, _) = graph[topicMap.id] else {
@@ -36,7 +49,12 @@ final class KnowledgeGraphBuilder: AbstractGraphBuilder {
             }
 
             let graphLessons = topicMap.lessons.map {
-                KnowledgeGraphLesson(id: $0.id, type: $0.type, courseId: $0.course)
+                KnowledgeGraphLesson(
+                    id: $0.id,
+                    type: $0.type,
+                    courseId: $0.course,
+                    description: $0.description
+                )
             }
             vertex.lessons.append(contentsOf: graphLessons)
         }

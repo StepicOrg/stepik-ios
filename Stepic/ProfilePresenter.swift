@@ -19,7 +19,7 @@ protocol ProfileView: class {
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
 
-    func manageSettingsTransitionControl(isHidden: Bool)
+    func manageBarItemControls(settingsIsHidden: Bool, shareId: Int?)
 }
 
 class ProfilePresenter {
@@ -164,7 +164,7 @@ class ProfilePresenter {
                 userSeed = UserSeed.`self`(id: userId)
                 return refresh(shouldReload: true)
             } else {
-                view?.manageSettingsTransitionControl(isHidden: true)
+                view?.manageBarItemControls(settingsIsHidden: true, shareId: nil)
                 view?.set(state: .anonymous)
                 return
             }
@@ -180,7 +180,7 @@ class ProfilePresenter {
             return refresh()
         }
 
-        view?.manageSettingsTransitionControl(isHidden: !isMe)
+        view?.manageBarItemControls(settingsIsHidden: !isMe, shareId: userId)
 
         guard shouldReload else {
             return

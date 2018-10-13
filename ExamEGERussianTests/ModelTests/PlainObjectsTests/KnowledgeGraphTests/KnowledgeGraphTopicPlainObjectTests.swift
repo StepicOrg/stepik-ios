@@ -14,7 +14,8 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
         let jsonString = """
 {
     "id": "slitno-razdelno",
-    "title": "B13 Слитное раздельное написание"
+    "title": "B13 Слитное раздельное написание",
+    "description": "Тут что-то будет"
 }
 """
         let jsonData = jsonString.data(using: .utf8)!
@@ -25,6 +26,7 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
         XCTAssertNotNil(decodedTopic, "Could't decode KnowledgeGraphTopicPlainObject")
         XCTAssertEqual(decodedTopic!.id, "slitno-razdelno")
         XCTAssertEqual(decodedTopic!.title, "B13 Слитное раздельное написание")
+        XCTAssertEqual(decodedTopic!.description, "Тут что-то будет")
     }
 
     func testTopicJsonDecodingFully() {
@@ -32,7 +34,10 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
 {
     "id": "pristavki",
     "title": "B9 Приставки",
-    "required-for": "slitno-razdelno"
+    "description": "Тут что-то будет",
+    "required-for": [
+        "slitno-razdelno"
+    ]
 }
 """
         let jsonData = jsonString.data(using: .utf8)!
@@ -43,8 +48,9 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
         XCTAssertNotNil(decodedTopic, "Could't decode KnowledgeGraphTopicPlainObject)")
         XCTAssertEqual(decodedTopic!.id, "pristavki")
         XCTAssertEqual(decodedTopic!.title, "B9 Приставки")
+        XCTAssertEqual(decodedTopic!.description, "Тут что-то будет")
         XCTAssertNotNil(decodedTopic!.requiredFor)
-        XCTAssertEqual(decodedTopic!.requiredFor, "slitno-razdelno")
+        XCTAssertEqual(decodedTopic!.requiredFor, ["slitno-razdelno"])
     }
 
     func testTopicCodingKeys() {
@@ -54,11 +60,19 @@ class KnowledgeGraphTopicPlainObjectTests: XCTestCase {
     }
 
     func testTopicAllValues() {
-        let topic = KnowledgeGraphTopicPlainObject(id: "pristavki", title: "B9 Приставки",
-                                                   requiredFor: "slitno-razdelno")
+        let topic = KnowledgeGraphTopicPlainObject(
+            id: "pristavki",
+            title: "B9 Приставки",
+            description: "Описание",
+            requiredFor: [
+                "slitno-razdelno"
+            ]
+        )
+
         XCTAssertEqual(topic.id, "pristavki")
         XCTAssertEqual(topic.title, "B9 Приставки")
+        XCTAssertEqual(topic.description, "Описание")
         XCTAssertNotNil(topic.requiredFor)
-        XCTAssertEqual(topic.requiredFor!, "slitno-razdelno")
+        XCTAssertEqual(topic.requiredFor!, ["slitno-razdelno"])
     }
 }

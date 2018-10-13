@@ -1,72 +1,345 @@
 {
     "goals": [
         {
-            "title": "Морфология",
-            "id": "morph",
+            "id": "numeral-systems",
+            "title": "Системы счисления",
             "required-topics": [
-                "slitno-razdelno"
+                "a-numeral-systems"
+            ]
+        },
+        {
+            "id": "information-coding",
+            "title": "Информация и её кодирование",
+            "required-topics": [
+                "data-encoding-decoding",
+                "work-with-information"
+            ]
+        },
+        {
+            "id": "logic-algorithms",
+            "title": "Логика и алгоритмы",
+            "required-topics": [
+                "logic",
+                "elements-theory-algorithms"
+            ]
+        },
+        {
+            "id": "modeling-computer-experiment",
+            "title": "Моделирование и компьютерный эксперимент",
+            "required-topics": [
+                "modeling-computer-experiment"
+            ]
+        },
+        {
+            "id": "user-course",
+            "title": "Пользовательский курс",
+            "required-topics": [
+                "information-retrieval-storage-technologies",
+                "process-numerical-information",
+                "architecture-computers-computer-networks"
+            ]
+        },
+        {
+            "id": "programming",
+            "title": "Программирование",
+            "required-topics": [
+                "elements-theory-algorithms",
+                "programming"
             ]
         }
     ],
     "topics": [
         {
-            "id": "slitno-razdelno",
-            "title": "B13 Слитное раздельное написание"
+            "id": "a-numeral-systems",
+            "title": "Системы счисления",
+            "description": "Изучение систем счисления и двоичного представления информации в памяти компьютера",
+            "required-for": [
+                "data-encoding-decoding"
+            ]
         },
         {
-            "id": "pristavki",
-            "title": "B9 Приставки",
-            "required-for": "slitno-razdelno"
+            "id": "data-encoding-decoding",
+            "title": "Кодирование и декодирование данных",
+            "description": "Умение кодировать и декодировать информацию, определять скорость передачи информации и объем памяти необходимый для хранения звуковой и графической информации",
+            "required-for": [
+                "work-with-information"
+            ]
+        },
+        {
+            "id": "work-with-information",
+            "title": "Методы работы с информацией",
+            "description": "Знания о методах измерения количества информации и подсчёте информационного объёма сообщения"
+        },
+        {
+            "id": "logic",
+            "title": "Логика",
+            "description": "Основные понятия и законы математической логики, таблицы истинности и логические схемы, логические выражения",
+            "required-for": [
+                "information-retrieval-storage-technologies"
+            ]
+        },
+        {
+            "id": "modeling-computer-experiment",
+            "title": "Моделирование и компьютерный эксперимент",
+            "description": "Анализ информационных моделей и поиск путей в графе"
+        },
+        {
+            "id": "information-retrieval-storage-technologies",
+            "title": "Технологии поиска и хранения информации",
+            "description": "Технологии хранения, поиска и сортировки информации в базах данных, поиск информации в сети Интернет"
+        },
+        {
+            "id": "process-numerical-information",
+            "title": "Обработка числовой информации",
+            "description": "Технологии обработки информации в электронных таблицах и методов визуализации данных с помощью диаграмм и графиков"
+        },
+        {
+            "id": "architecture-computers-computer-networks",
+            "title": "Архитектура компьютеров и компьютерных сетей",
+            "description": "Базовые принципы организации и функционирования компьютерных сетей, адресации в сети"
+        },
+        {
+            "id": "elements-theory-algorithms",
+            "title": "Элементы теории алгоритмов",
+            "description": "Формальное исполнение алгоритма, записанного на естественном языке, анализ результата исполнения алгоритма",
+            "required-for": [
+                "programming"
+            ]
+        },
+        {
+            "id": "programming",
+            "title": "Программирование",
+            "description": "Изучение основных конструкций языка программирования, понятия переменной, оператора присваивания, работа с массивами, рекурсия"
         }
     ],
     "topics-map": [
         {
-            "id": "slitno-razdelno",
+            "id": "a-numeral-systems",
             "lessons": [
                 {
-                    "id": 82810,
+                    "id": 172994,
                     "type": "theory",
-                    "course": "7798"
+                    "description": "Описание",
+                    "course": 45883
                 },
                 {
-                    "id": 82809,
+                    "id": 172988,
                     "type": "theory",
-                    "course": "7798"
-                },
-                {
-                    "id": 86295,
-                    "type": "theory",
-                    "course": "7798"
-                },
-                {
-                    "id": 86297,
-                    "type": "theory",
-                    "course": "7798"
+                    "description": "Описание",
+                    "course": 45883
                 },
                 {
                     "id": 6000,
                     "type": "practice",
-                    "course": "7798"
-                },
-                {
-                    "id": 66286,
-                    "type": "theory",
-                    "course": "5448"
+                    "description": "Описание",
+                    "course": 46736
                 }
             ]
         },
         {
-            "id": "pristavki",
+            "id": "data-encoding-decoding",
             "lessons": [
                 {
-                    "id": 42158,
+                    "id": 173033,
                     "type": "theory",
-                    "course": "1891"
+                    "description": "Описание",
+                    "course": 45883
                 },
                 {
-                    "id": 42171,
+                    "id": 173046,
                     "type": "theory",
-                    "course": "1891"
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6001,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46740
+                }
+            ]
+        },
+        {
+            "id": "work-with-information",
+            "lessons": [
+                {
+                    "id": 173047,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173048,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6002,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46740
+                }
+            ]
+        },
+        {
+            "id": "logic",
+            "lessons": [
+                {
+                    "id": 173051,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173053,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173055,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6003,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46778
+                }
+            ]
+        },
+        {
+            "id": "modeling-computer-experiment",
+            "lessons": [
+                {
+                    "id": 173057,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173135,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6004,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46789
+                }
+            ]
+        },
+        {
+            "id": "information-retrieval-storage-technologies",
+            "lessons": [
+                {
+                    "id": 173136,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173137,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                }
+            ]
+        },
+        {
+            "id": "process-numerical-information",
+            "lessons": [
+                {
+                    "id": 173139,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                }
+            ]
+        },
+        {
+            "id": "architecture-computers-computer-networks",
+            "lessons": [
+                {
+                    "id": 173140,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                }
+            ]
+        },
+        {
+            "id": "elements-theory-algorithms",
+            "lessons": [
+                {
+                    "id": 173142,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173147,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173151,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6005,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46792
+                }
+            ]
+        },
+        {
+            "id": "programming",
+            "lessons": [
+                {
+                    "id": 173152,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173153,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173154,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173181,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 173185,
+                    "type": "theory",
+                    "description": "Описание",
+                    "course": 45883
+                },
+                {
+                    "id": 6006,
+                    "type": "practice",
+                    "description": "Описание",
+                    "course": 46793
                 }
             ]
         }

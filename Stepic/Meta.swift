@@ -25,4 +25,8 @@ struct Meta {
         hasPrev = json["has_previous"].boolValue
         page = json["page"].intValue
     }
+
+    static var oneAndOnlyPage: Meta {
+        return Meta(hasNext: false, hasPrev: false, page: 1)
+    }
 }

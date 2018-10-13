@@ -14,7 +14,6 @@ struct TopicPlainObject {
     let description: String
     let progress: Float
     var type: TopicType
-    /// In minutes
     let timeToComplete: TimeInterval
     let lessons: [LessonPlainObject]
 

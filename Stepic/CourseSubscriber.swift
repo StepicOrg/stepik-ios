@@ -9,11 +9,17 @@
 import Foundation
 import PromiseKit
 
-class CourseSubscriber {
+enum CourseSubscriptionSource: String {
+    case widget, preview
+}
 
-    enum CourseSubscriptionSource: String {
-        case widget, preview
-    }
+protocol CourseSubscriberProtocol {
+    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
+    func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
+}
+
+@available(*, deprecated, message: "Legacy code")
+class CourseSubscriber: CourseSubscriberProtocol {
 
     enum CourseSubscriptionError: Error {
         case error(status: String)

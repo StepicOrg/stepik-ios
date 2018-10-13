@@ -31,8 +31,19 @@ class KnowledgeGraphPlainObjectTests: XCTestCase {
         let graph = try? jsonDecoder.decode(KnowledgeGraphPlainObject.self, from: jsonData)
 
         XCTAssertNotNil(graph)
-        XCTAssertEqual(graph!.goals.count, 1)
-        XCTAssertEqual(graph!.topics.count, 2)
-        XCTAssertEqual(graph!.topicsMap.count, 2)
+        XCTAssertEqual(graph!.goals.count, 6)
+        XCTAssertEqual(graph!.topics.count, 10)
+        XCTAssertEqual(graph!.topicsMap.count, graph!.topics.count)
+
+        XCTAssertTrue(
+            graph!.goals.contains(where: {
+                $0.title == "Системы счисления"
+            })
+        )
+        XCTAssertTrue(
+            graph!.topics.contains(where: {
+                $0.description == "Анализ информационных моделей и поиск путей в графе"
+            })
+        )
     }
 }

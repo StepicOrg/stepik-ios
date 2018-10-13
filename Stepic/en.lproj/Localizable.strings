@@ -307,12 +307,13 @@ ShowAll = "All";
 Enrolled = "Enrolled";
 Popular = "Popular";
 Home = "Home";
+RecommendedCategory = "Recommended courses";
 YourCurrentProgressIs = "Current progress:";
 HomePlaceholderAnonymous = "<b>Sign in</b> and start learning right now";
 HomePlaceholderEmptyEnrolled = "<b>Enroll</b> for free courses and they will be here";
 HomePlaceholderEmptyPopular = "<b>Open courses</b> are on vacation. Please, see later";
 HomePlaceHolderErrorEnrolled = "Error while loading your courses. <b>Press</b> to try again";
-HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>Press</b>to try again";
+HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>Press</b> to try again";
 courses1 = "course";
 courses234 = "courses";
 courses567890 = "courses";
@@ -337,6 +338,8 @@ EnterSQLQuery = "Enter SQL query:";
 SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
 SolveSomethingToday = "Solve anything today to increase your streak.";
 Close = "Close";
+RecommendationsExplore = "Recommendations";
+RecommendationsExploreDescription = "Check out categories that matching your interests";
 
 /* Onboarding */
 OnboardingTitle1 = "Choose";
@@ -576,7 +579,8 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 "NoAdaptiveModuleError" = "This lesson does not has practice steps.";
 "FailedFetchKnowledgeGraphErrorTitle" = "Unable to load knowledge graph";
 "FailedFetchKnowledgeGraphErrorMessage" = "Pull down to refresh screen.";
-"FailedFetchLessonStepsContent" = "Unable​ ​to​ ​load​ ​lesson content. Please try again later.";
+"FailedFetchStepsForLessonTitle" = "Unable to load lesson content";
+"FailedFetchStepsForLessonMessage" = "Please try again later.";
 
 "EmptyAuthViewTitle" = "It's You!";
 "EmptyAuthViewSubtitle" = "Complete auth to study with comfort";
@@ -600,3 +604,11 @@ SignInTitleSocialTest = "<b>Continue</b> with";
 
 "FakeUserFailedSignInTitle" = "Something went wrong";
 "FakeUserFailedSignInMessage" = "Check​ ​your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
+
+"TopicProgressInPercentsText1" = "%@%% completed";
+"TopicProgressInPercentsText234" = "%@%% completed";
+"TopicProgressInPercentsText567890" = "%@%% completed";
+
+"TopicTimeToCompleteText1" = "%@ minute to complete";
+"TopicTimeToCompleteText234" = "%@ minutes to complete";
+"TopicTimeToComplete567890" = "%@ minutes to complete";

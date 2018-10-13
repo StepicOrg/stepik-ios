@@ -16,7 +16,7 @@ extension LessonPlainObject {
             steps.append(randomNumber())
         }
 
-        return LessonPlainObject(id: randomNumber(), steps: steps, title: "title", slug: "slug")
+        return LessonPlainObject(id: randomNumber(), steps: steps, title: "title", slug: "slug", timeToComplete: 100)
     }
 
     private static func randomNumber() -> Int {

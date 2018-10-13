@@ -38,6 +38,8 @@ final class LearningTableViewController: UITableViewController, LearningView {
         if isFirstTimeWillAppear {
             isFirstTimeWillAppear = false
             presenter.refresh()
+        } else {
+            presenter.refreshProgresses()
         }
     }
 
@@ -90,6 +92,7 @@ final class LearningTableViewController: UITableViewController, LearningView {
         cell.descriptionLabel.text = data.description
         cell.timeToCompleteLabel.text = data.timeToComplete
         cell.progressLabel.text = data.progress
+        cell.appearance = .init(gradientColors: data.colors)
     }
 
     // MARK: - Private API -

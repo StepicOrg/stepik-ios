@@ -10,5 +10,6 @@ import Foundation
 
 protocol LearningPresenterProtocol: class {
     func refresh()
+    func refreshProgresses()
     func selectViewData(_ viewData: LearningViewData)
 }

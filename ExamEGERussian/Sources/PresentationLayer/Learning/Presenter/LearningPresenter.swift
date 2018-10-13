@@ -17,51 +17,86 @@ final class LearningPresenter: LearningPresenterProtocol {
 
     private let userRegistrationService: UserRegistrationService
     private let graphService: GraphServiceProtocol
+    private let lessonsService: LessonsService
+    private let stepsService: StepsService
+    private let courseService: CourseService
 
     private var isFirstRefresh = true
+
+    private var topics: [KnowledgeGraph.Node] {
+        return Array(knowledgeGraph.adjacencyLists.keys)
+    }
 
     init(view: LearningView,
          router: LearningRouterProtocol,
          knowledgeGraph: KnowledgeGraph,
          userRegistrationService: UserRegistrationService,
-         graphService: GraphServiceProtocol
+         graphService: GraphServiceProtocol,
+         lessonsService: LessonsService,
+         stepsService: StepsService,
+         courseService: CourseService
     ) {
         self.view = view
         self.router = router
         self.knowledgeGraph = knowledgeGraph
         self.userRegistrationService = userRegistrationService
         self.graphService = graphService
+        self.lessonsService = lessonsService
+        self.stepsService = stepsService
+        self.courseService = courseService
     }
 
     func refresh() {
-        view?.state = .fetching
-
-        checkAuthStatus().then {
-            self.refreshContent()
-        }.done {
-            self.reloadViewData()
-        }.ensure {
-            self.view?.state = .idle
-        }.catch { [weak self] error in
+        func catchError(_ error: Error) {
             switch error {
             case is NetworkError:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("ConnectionErrorTitle", comment: ""),
                     message: NSLocalizedString("ConnectionErrorSubtitle", comment: "")
                 )
             case LearningPresenterError.failedFetchKnowledgeGraph:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("FailedFetchKnowledgeGraphErrorTitle", comment: ""),
                     message: NSLocalizedString("FailedFetchKnowledgeGraphErrorMessage", comment: "")
                 )
             case LearningPresenterError.failedRegisterUser:
-                self?.displayError(
+                displayError(
                     title: NSLocalizedString("FakeUserFailedSignInTitle", comment: ""),
                     message: NSLocalizedString("FakeUserFailedSignInMessage", comment: "")
                 )
             default:
-                self?.displayError()
+                displayError()
             }
+        }
+
+        view?.state = .fetching
+
+        checkAuthStatus().then {
+            self.joinCoursesIfNeeded()
+        }.then {
+            self.fetchProgresses()
+        }.then {
+            self.updateTimeToComplete()
+        }.done {
+            self.reloadViewData()
+        }.ensure {
+            self.view?.state = .idle
+        }.catch {
+            catchError($0)
+        }
+
+        refreshContent().done {
+            self.reloadViewData()
+        }.ensure {
+            self.view?.state = .idle
+        }.catch {
+            catchError($0)
+        }
+    }
+
+    func refreshProgresses() {
+        obtainProgressesFromCache().done {
+            self.reloadViewData()
         }
     }
 
@@ -82,8 +117,9 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
 
         return Promise { seal in
-            let params = RandomCredentialsGenerator().userRegistrationParams
-            userRegistrationService.registerAndSignIn(with: params).then { user in
+            userRegistrationService.registerAndSignIn(
+                with: RandomCredentialsGenerator().userRegistrationParams
+            ).then { user in
                 self.userRegistrationService.unregisterFromEmail(user: user)
             }.done { user in
                 print("Successfully register fake user with id: \(user.id)")
@@ -121,32 +157,25 @@ final class LearningPresenter: LearningPresenterProtocol {
         }
     }
 
-    private func reloadViewData() {
-        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraphVertex<String>] {
-            view?.setViewData(verticesToViewData(vertices))
-        } else {
-            displayError()
-        }
-    }
+    private func joinCoursesIfNeeded() -> Promise<Void> {
+        var coursesIds = Set<Int>()
 
-    // TODO: Replace with real topic content.
-    private func verticesToViewData(_ vertices: [KnowledgeGraphVertex<String>]) -> [LearningViewData] {
-        return vertices.map { vertex in
-            LearningViewData(
-                id: vertex.id,
-                title: vertex.title,
-                description: "Описание того, что можем изучить и обязательно изучим в этой теме.",
-                timeToComplete: "40 минут на прохождение",
-                progress: "60% пройдено"
-            )
+        topics.forEach { topic in
+            topic.lessons.map {
+                Int($0.courseId)
+            }.forEach {
+                coursesIds.insert($0)
+            }
         }
-    }
 
-    private func displayError(
-        title: String = NSLocalizedString("Error", comment: ""),
-        message: String = NSLocalizedString("ErrorMessage", comment: "")
-    ) {
-        view?.displayError(title: title, message: message)
+        return Promise { seal in
+            courseService.joinCourses(with: Array(coursesIds)).done { courses in
+                print("Successfully joined courses with ids: \(courses.map { $0.id })")
+                seal.fulfill(())
+            }.catch {
+                seal.reject($0)
+            }
+        }
     }
 
     // MARK: - Types
@@ -154,5 +183,143 @@ final class LearningPresenter: LearningPresenterProtocol {
     private enum LearningPresenterError: Error {
         case failedRegisterUser
         case failedFetchKnowledgeGraph
+    }
+}
+
+// MARK: - LearningPresenter (Progresses) -
+
+extension LearningPresenter {
+    private func obtainProgressesFromCache() -> Guarantee<Void> {
+        let progressesToObtain = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.obtainProgresses(ids: $0, stepsService: stepsService)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: progressesToObtain).done {
+                self.updateProgressesMap(progresses: $0)
+                seal(())
+            }.catch { error in
+                print("Failed obtain progresses for topics with error: \(error)")
+                seal(())
+            }
+        }
+    }
+
+    private func fetchProgresses() -> Guarantee<Void> {
+        let progressesToFetch = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.fetchProgresses(ids: $0, stepsService: stepsService)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: progressesToFetch).done { progresses in
+                self.updateProgressesMap(progresses: progresses)
+                seal(())
+            }.catch { error in
+                print("Failed fetch progresses for topics with error: \(error)")
+                self.obtainProgressesFromCache().done {
+                    seal(())
+                }
+            }
+        }
+    }
+
+    private func getTheoryLessonsIdsGroupedByTopic() -> [[Int]] {
+        return topics.map { topic in
+            topic.lessons.filter { $0.type == .theory }.map { $0.id }
+        }
+    }
+
+    private func updateProgressesMap(progresses: [[Double]]) {
+        for (index, lessonsProgresses) in progresses.enumerated() {
+            topics[index].progress = self.computeTopicProgress(
+                lessonsProgresses: lessonsProgresses
+            )
+        }
+    }
+
+    private func computeTopicProgress(lessonsProgresses: [Double]) -> Double {
+        let maxPercentForEachLesson = 100.0 / Double(lessonsProgresses.count)
+        return lessonsProgresses.reduce(0.0) { (result, lessonProgress) in
+            result + (maxPercentForEachLesson * lessonProgress)
+        }
+    }
+
+    private func updateTimeToComplete() -> Guarantee<Void> {
+        let lessonsToObtain = getTheoryLessonsIdsGroupedByTopic().map {
+            lessonsService.obtainLessons(with: $0)
+        }
+
+        return Guarantee { seal in
+            when(fulfilled: lessonsToObtain).done {
+                for (index, lessons) in $0.enumerated() {
+                    self.topics[index].timeToComplete = lessons.reduce(0) { (result, lesson) in
+                        result + (lesson.timeToComplete / 60.0)
+                    }
+                }
+
+                seal(())
+            }.catch { _ in
+                print("Failed update time to complete for topics")
+                seal(())
+            }
+        }
+    }
+}
+
+// MARK: - LearningPresenter (ViewData) -
+
+extension LearningPresenter {
+    private func reloadViewData() {
+        if let vertices = knowledgeGraph.vertices as? [KnowledgeGraph.Node] {
+            view?.setViewData(mapVerticesToViewData(vertices))
+        } else {
+            displayError()
+        }
+    }
+
+    private func mapVerticesToViewData(_ vertices: [KnowledgeGraph.Node]) -> [LearningViewData] {
+        func getProgress(for vertex: KnowledgeGraph.Node) -> String {
+            var progress = Int(vertex.progress.rounded())
+            progress = min(progress, 100)
+            return getPluralizedProgress(progress)
+        }
+
+        return vertices.map { vertex in
+            LearningViewData(
+                id: vertex.id,
+                title: vertex.title,
+                description: vertex.topicDescription,
+                timeToComplete: getPluralizedTimeToComplete(Int(vertex.timeToComplete.rounded())),
+                progress: getProgress(for: vertex),
+                colors: GradientColorsResolver.resolve(vertex.id)
+            )
+        }
+    }
+
+    private func getPluralizedProgress(_ progress: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: progress, forms: [
+            NSLocalizedString("TopicProgressInPercentsText1", comment: ""),
+            NSLocalizedString("TopicProgressInPercentsText234", comment: ""),
+            NSLocalizedString("TopicProgressInPercentsText567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(progress)")
+    }
+
+    private func getPluralizedTimeToComplete(_ timeToComplete: Int) -> String {
+        let pluralizedString = StringHelper.pluralize(number: timeToComplete, forms: [
+            NSLocalizedString("TopicTimeToCompleteText1", comment: ""),
+            NSLocalizedString("TopicTimeToCompleteText234", comment: ""),
+            NSLocalizedString("TopicTimeToComplete567890", comment: "")
+        ])
+
+        return String(format: pluralizedString, "\(timeToComplete)")
+    }
+
+    private func displayError(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
+        view?.displayError(title: title, message: message)
     }
 }

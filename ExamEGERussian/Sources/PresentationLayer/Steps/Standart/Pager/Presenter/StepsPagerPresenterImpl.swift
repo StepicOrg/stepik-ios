@@ -35,7 +35,10 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
             self.getSteps()
         }.catch { [weak self] error in
             print("\(#function): \(error)")
-            self?.view?.state = .error(message: NSLocalizedString("FailedFetchLessonStepsContent", comment: ""))
+            self?.view?.state = .error(
+                title: NSLocalizedString("FailedFetchStepsForLessonTitle", comment: ""),
+                message: NSLocalizedString("FailedFetchStepsForLessonMessage", comment: "")
+            )
         }
     }
 
@@ -67,12 +70,11 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
     // MARK: - Private API
 
     private func joinCourse() -> Promise<Void> {
-        guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == self.lesson.id }),
-              let courseId = Int(lesson.courseId) else {
+        guard let lesson = knowledgeGraph.firstLesson(where: { $0.id == self.lesson.id }) else {
             return Promise(error: StepsPagerPresenterError.failedJoinCourse)
         }
 
-        return courseService.joinCourses(with: [courseId]).then { _ -> Promise<Void> in
+        return courseService.joinCourses(with: [lesson.courseId]).then { _ -> Promise<Void> in
             .value(())
         }
     }
@@ -91,7 +93,10 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
             strongSelf.updateStepProgress(at: index, passed: true)
         }.catch { [weak self] error in
             print("\(#file) \(#function): \(error)")
-            self?.view?.state = .error(message: NSLocalizedString("FailedMarkStepAsSolved", comment: ""))
+            self?.view?.state = .error(
+                title: nil,
+                message: NSLocalizedString("FailedMarkStepAsSolved", comment: "")
+            )
         }
     }
 }
@@ -100,9 +105,7 @@ final class StepsPagerPresenterImpl: StepsPagerPresenter {
 
 extension StepsPagerPresenterImpl {
     private func getSteps() {
-        obtainStepsFromCache().done {
-            self.fetchSteps()
-        }
+        fetchSteps()
     }
 
     private func obtainStepsFromCache() -> Guarantee<Void> {
@@ -124,7 +127,9 @@ extension StepsPagerPresenterImpl {
     }
 
     private func fetchSteps() {
-        self.view?.state = .fetching
+        if steps.isEmpty {
+            view?.state = .fetching
+        }
 
         stepsService.fetchSteps(for: lesson).mapValues {
             $0.id
@@ -138,10 +143,18 @@ extension StepsPagerPresenterImpl {
             strongSelf.steps = strongSelf.preparedSteps(steps)
             strongSelf.view?.state = .fetched(steps: strongSelf.steps)
         }.catch { [weak self] error in
-            let message = error is NetworkError
-                ? NSLocalizedString("ConnectionErrorText", comment: "")
-                : NSLocalizedString("FailedFetchStepsError", comment: "")
-            self?.view?.state = .error(message: message)
+            switch error {
+            case is NetworkError:
+                self?.view?.state = .error(
+                    title: NSLocalizedString("ConnectionErrorTitle", comment: ""),
+                    message: NSLocalizedString("ConnectionErrorSubtitle", comment: "")
+                )
+            default:
+                self?.view?.state = .error(
+                    title: NSLocalizedString("SomethingWrongSubtitle", comment: ""),
+                    message: NSLocalizedString("FailedFetchStepsError", comment: "")
+                )
+            }
         }
     }
 

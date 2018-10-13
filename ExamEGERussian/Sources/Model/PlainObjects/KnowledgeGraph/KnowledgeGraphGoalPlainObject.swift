@@ -9,8 +9,8 @@
 import Foundation
 
 struct KnowledgeGraphGoalPlainObject: Codable {
-    let title: String
     let id: String
+    let title: String
     let requiredTopics: [String]
 
     enum CodingKeys: String, CodingKey {

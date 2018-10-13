@@ -8,6 +8,14 @@
 
 import Foundation
 
+extension LessonTableHeaderView {
+    struct Appearance {
+        var gradientColors: [UIColor] = []
+        let gradientLocations: [Double]? = nil
+        let gradientRotationAngle: CGFloat = 90.0
+    }
+}
+
 final class LessonTableHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
@@ -15,6 +23,12 @@ final class LessonTableHeaderView: UIView {
     @IBOutlet var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet var subtitleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet var subtitleLabelBottomConstraint: NSLayoutConstraint!
+
+    var appearance = Appearance() {
+        didSet {
+            updateAppearance()
+        }
+    }
 
     var layoutHeight: CGFloat {
         let titleHeight = titleLabel.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
@@ -26,5 +40,33 @@ final class LessonTableHeaderView: UIView {
             + subtitleLabelTopConstraint.constant
             + subtitleLabelBottomConstraint.constant
         )
+    }
+
+    private lazy var gradientLayer: CAGradientLayer = {
+        CAGradientLayer(
+            colors: appearance.gradientColors,
+            locations: appearance.gradientLocations,
+            rotationAngle: appearance.gradientRotationAngle
+        )
+    }()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        titleLabel.text = nil
+        subtitleLabel.text = nil
+
+        layer.insertSublayer(gradientLayer, at: 0)
+        updateAppearance()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+    }
+
+    private func updateAppearance() {
+        gradientLayer.colors = appearance.gradientColors.map { $0.cgColor }
+        gradientLayer.applyDefaultLocations()
     }
 }

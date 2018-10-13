@@ -14,8 +14,13 @@ enum LastStepError: Error {
     case multipleLastSteps
 }
 
+@available(*, deprecated, message: "Legacy class, should be refactored")
 class LastStepRouter {
-    static func continueLearning(for course: Course, using navigationController: UINavigationController) {
+    static func continueLearning(
+        for course: Course,
+        isAdaptive: Bool? = nil,
+        using navigationController: UINavigationController
+    ) {
         guard let lastStepId = course.lastStepId else {
             return
         }
@@ -29,15 +34,20 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.ensure {
-            navigate(for: course, using: navigationController)
+            navigate(for: course, isAdaptive: isAdaptive, using: navigationController)
         }.catch {
             _ in
             print("error while updating lastStep")
         }
     }
 
-    private static func navigate(for course: Course, using navigationController: UINavigationController) {
-        if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id) {
+    private static func navigate(
+        for course: Course,
+        isAdaptive: Bool? = nil,
+        using navigationController: UINavigationController
+    ) {
+        let shouldOpenInAdaptiveOMode = isAdaptive ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
+        if shouldOpenInAdaptiveOMode {
             guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                 return
             }

@@ -9,18 +9,26 @@
 import UIKit
 
 final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    var viewModels: [CourseWidgetViewModel]
-    private var colorMode: CourseWidgetColorMode
+    weak var delegate: CourseListViewControllerDelegate?
 
-    init(viewModels: [CourseWidgetViewModel] = [], colorMode: CourseWidgetColorMode) {
+    private var maxNumberOfDisplayedCourses: Int?
+    var viewModels: [CourseWidgetViewModel]
+
+    init(
+        viewModels: [CourseWidgetViewModel] = [],
+        maxNumberOfDisplayedCourses: Int? = nil
+    ) {
         self.viewModels = viewModels
-        self.colorMode = colorMode
+        self.maxNumberOfDisplayedCourses = maxNumberOfDisplayedCourses
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
+        if let maxNumberOfDisplayedCourses = self.maxNumberOfDisplayedCourses {
+            return min(maxNumberOfDisplayedCourses, self.viewModels.count)
+        }
         return self.viewModels.count
     }
 
@@ -29,11 +37,30 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: CourseListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.configure(viewModel: self.viewModels[indexPath.row], colorMode: self.colorMode)
+        cell.configure(viewModel: self.viewModels[indexPath.row])
+        cell.delegate = self
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
 
         return cell
+    }
+}
+
+extension CourseListCollectionViewDataSource: CourseListCollectionViewCellDelegate {
+    func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?) {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        self.delegate?.primaryButtonClicked(viewModel: viewModel)
+    }
+
+    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?) {
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        self.delegate?.secondaryButtonClicked(viewModel: viewModel)
     }
 }

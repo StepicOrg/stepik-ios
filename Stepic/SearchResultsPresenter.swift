@@ -13,7 +13,7 @@ protocol SearchResultsView: class {
     func set(controller: UIViewController, forState: CoursesSearchResultsState)
 }
 
-class SearchResultsPresenter {
+class SearchResultsPresenter: SearchResultsModuleInputProtocol {
     weak var view: SearchResultsView?
 
     var updateQueryBlock: ((String) -> Void)?
@@ -21,7 +21,7 @@ class SearchResultsPresenter {
 
     //TODO: Somehow refactor this
     private var suggestionsVC: SearchQueriesViewController?
-    private var resultsVC: CourseListVerticalViewController?
+    private var resultsVC: UIViewController?
 
     var query: String = ""
 
@@ -51,16 +51,15 @@ class SearchResultsPresenter {
     func search(query: String) {
         self.query = query
         if resultsVC == nil {
-            resultsVC = ControllerHelper.instantiateViewController(identifier: "CourseListVerticalViewController", storyboardName: "CourseLists") as? CourseListVerticalViewController
-            if let resultsVC = resultsVC {
-                resultsVC.colorMode = .light
-                resultsVC.presenter = CourseListPresenter(view: resultsVC, id: "SearchCourses", limit: nil, listType: .search(query: query), onlyLocal: false, subscriptionManager: CourseSubscriptionManager(), coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI(), searchResultsAPI: SearchResultsAPI(), subscriber: CourseSubscriber(), adaptiveStorageManager: AdaptiveStorageManager())
-                self.view?.set(controller: resultsVC, forState: .courses)
-            }
-        } else {
-            //Don't actually know if this code is ever being executed
-            resultsVC?.presenter?.listType = .search(query: query)
-            resultsVC?.presenter?.refresh()
+            let resultsVC = FullscreenCourseListAssembly(
+                presentationDescription: nil,
+                courseListType: SearchResultCourseListType(
+                    query: query,
+                    language: ContentLanguageService().globalContentLanguage
+                )
+            ).makeModule()
+            self.resultsVC = resultsVC
+            self.view?.set(controller: resultsVC, forState: .courses)
         }
         view?.set(state: .courses)
         suggestionsVC = nil
