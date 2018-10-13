@@ -170,7 +170,12 @@ extension ScrollableStackView: ProgrammaticallyInitializableViewProtocol {
         self.stackView.clipsToBounds = false
         self.scrollView.clipsToBounds = false
 
-        self.scrollView.alwaysBounceVertical = true
+        // For pull-to-refresh when contentSize is too small for scrolling
+        if self.orientation == .horizontal {
+            self.scrollView.alwaysBounceHorizontal = true
+        } else {
+            self.scrollView.alwaysBounceVertical = true
+        }
         self.scrollView.bounces = true
     }
 

@@ -66,7 +66,6 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
         // - isOnline && !didLoadFromCache: we should load cached courses and then load from network (recursive execute fetchCourses)
         // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
-        let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
         firstly {
             self.didLoadFromCache
                 ? self.provider.fetchRemote(page: 1)
@@ -99,6 +98,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             }
 
             // Retry if successfuly
+            let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
             if shouldRetryAfterFetching {
                 // End of recursion cause shouldRetryAfterFetching will be false on next call
                 self.didLoadFromCache = true
