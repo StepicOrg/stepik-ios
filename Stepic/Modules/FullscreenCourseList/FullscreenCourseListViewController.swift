@@ -13,12 +13,20 @@ protocol FullscreenCourseListViewControllerProtocol: class {
     func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel)
     func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel)
     func displayAuthorization()
+    func displayEmptyState()
+    func displayErrorState()
 }
 
-final class FullscreenCourseListViewController: UIViewController {
+final class FullscreenCourseListViewController: UIViewController,
+                                                ControllerWithStepikPlaceholder {
     let interactor: FullscreenCourseListInteractorProtocol
     private let courseListType: CourseListType
     private let presentationDescription: CourseList.PresentationDescription?
+
+    lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
+    private var submoduleViewController: UIViewController?
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     init(
         interactor: FullscreenCourseListInteractorProtocol,
@@ -31,7 +39,7 @@ final class FullscreenCourseListViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        if let presentationDescription = self.presentationDescription {
+        if self.presentationDescription != nil {
             self.title = NSLocalizedString("RecommendedCategory", comment: "")
         } else {
             self.title = NSLocalizedString("AllCourses", comment: "")
@@ -45,6 +53,37 @@ final class FullscreenCourseListViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
+        let view = FullscreenCourseListView(frame: UIScreen.main.bounds)
+        self.view = view
+        self.refreshSubmodule()
+
+        // Register placeholders
+        // Error
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    self?.refreshSubmodule()
+                }
+            ),
+            for: .connectionError
+        )
+
+        // Empty
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .emptySearch,
+                action: { [weak self] in
+                    self?.refreshSubmodule()
+                }
+            ),
+            for: .empty
+        )
+    }
+
+    private func refreshSubmodule() {
+        self.submoduleViewController?.removeFromParentViewController()
+
         let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
             colorMode: .light,
@@ -54,11 +93,11 @@ final class FullscreenCourseListViewController: UIViewController {
         let courseListViewController = courseListAssembly.makeModule()
         self.addChildViewController(courseListViewController)
 
-        let view = FullscreenCourseListView(
-            frame: UIScreen.main.bounds,
-            contentView: courseListViewController.view
+        self.submoduleViewController = courseListViewController
+
+        self.fullscreenCourseListView?.attachContentView(
+            courseListViewController.view
         )
-        self.view = view
 
         if let moduleInput = courseListAssembly.moduleInput {
             self.interactor.tryToSetOnlineMode(request: .init(module: moduleInput))
@@ -67,6 +106,14 @@ final class FullscreenCourseListViewController: UIViewController {
 }
 
 extension FullscreenCourseListViewController: FullscreenCourseListViewControllerProtocol {
+    func displayEmptyState() {
+        self.showPlaceholder(for: .empty)
+    }
+
+    func displayErrorState() {
+        self.showPlaceholder(for: .connectionError)
+    }
+
     func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel) {
         let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
         let viewController = assembly.makeModule()
@@ -94,4 +141,8 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     func displayAuthorization() {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
+}
+
+private extension StepikPlaceholderControllerContainer.PlaceholderState {
+    static let empty = StepikPlaceholderControllerContainer.PlaceholderState(id: "empty")
 }

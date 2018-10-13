@@ -50,10 +50,10 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
     }
 
     func presentEmptyState(sourceModule: CourseListInputProtocol) {
-
+        self.presenter.presentEmptyState()
     }
 
     func presentError(sourceModule: CourseListInputProtocol) {
-
+        self.presenter.presentErrorState()
     }
 }

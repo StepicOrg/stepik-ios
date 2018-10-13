@@ -80,11 +80,14 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
         }
 
         if viewModel.shouldShowTooltip {
-            self.continueLearningTooltip.show(
-                direction: .up,
-                in: continueCourseView,
-                from: continueCourseView.tooltipAnchorView
-            )
+            // Cause anchor should be in true position
+            DispatchQueue.main.async { [weak self] in
+                self?.continueLearningTooltip.show(
+                    direction: .up,
+                    in: continueCourseView,
+                    from: continueCourseView.tooltipAnchorView
+                )
+            }
         }
     }
 }
