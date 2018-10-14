@@ -18,8 +18,18 @@ enum NotificationPermissionStatus {
     case denied
     /// The user allowed the app to schedule or receive notifications.
     case authorized
+    /// The user allowed to post non-interruptive notifications.
+    case provisional
 
-    // TODO: Test `Deliver Quietly` notifications on iOS 12.0 `case provisional`
+    var isRegistered: Bool {
+        switch self {
+        case .authorized, .provisional:
+            return true
+        case .notDetermined, .denied:
+            return false
+        }
+    }
+
     @available(iOS 10.0, *)
     init(_ authorizationStatus: UNAuthorizationStatus) {
         switch authorizationStatus {
@@ -29,8 +39,8 @@ enum NotificationPermissionStatus {
             self = .denied
         case .notDetermined:
             self = .notDetermined
-        default:
-            self = .notDetermined
+        case .provisional:
+            self = .provisional
         }
     }
 }

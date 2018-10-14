@@ -38,7 +38,6 @@ extension NotificationRegistrator {
         }
     }
 
-    // TODO: Remove UIApplication usage
     func registerForRemoteNotifications(application: UIApplication = UIApplication.shared) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
             if #available(iOS 10.0, *) {

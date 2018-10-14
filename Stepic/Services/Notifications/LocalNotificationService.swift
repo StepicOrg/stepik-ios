@@ -11,12 +11,7 @@ import UserNotifications
 import PromiseKit
 
 final class LocalNotificationService {
-    static let shared = LocalNotificationService()
-
     private static let notificationKeyName = "LocalNotificationServiceKey"
-
-    private init() {
-    }
 
     // MARK: - Getting Notifications -
 
@@ -112,22 +107,14 @@ final class LocalNotificationService {
     // MARK: - Scheduling Notifications -
 
     func scheduleNotification(contentProvider: LocalNotificationContentProvider) -> Promise<Void> {
-        return NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
-            if status.isAbleSchedule {
-                return .value(())
-            } else {
-                throw LocalNotificationServiceError.notAuthorized
-            }
-        }.then { _ -> Promise<Void> in
-            if #available(iOS 10.0, *) {
-                return self.un_scheduleNotification(contentProvider: contentProvider)
-            } else {
-                return self.ui_scheduleNotification(contentProvider: contentProvider)
-            }
+        if #available(iOS 10.0, *) {
+            return self.userNotificationsScheduleNotification(contentProvider: contentProvider)
+        } else {
+            return self.localNotificationScheduleNotification(contentProvider: contentProvider)
         }
     }
 
-    private func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
+    func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
         if #available(iOS 10.0, *) {
             return Guarantee { seal in
                 getAllNotifications().done { (pending, delivered) in
@@ -174,45 +161,27 @@ final class LocalNotificationService {
         return userInfo
     }
 
-    // MARK: UserNotifications
-
     @available(iOS 10.0, *)
-    private func un_scheduleNotification(
+    private func userNotificationsScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
-        return isNotificationExists(withIdentifier: contentProvider.identifier).then { exists -> Promise<UNNotificationRequest> in
-            guard !exists else {
-                throw LocalNotificationServiceError.notificationAlreadyExists
-            }
-
+        return Promise { seal in
             guard let notificationTrigger = contentProvider.trigger else {
-                throw LocalNotificationServiceError.badContentProvider
+                throw Error.badContentProvider
             }
 
-            let content = self.makeNotificationContent(for: contentProvider)
             let request = UNNotificationRequest(
                 identifier: contentProvider.identifier,
-                content: content,
+                content: self.makeNotificationContent(for: contentProvider),
                 trigger: notificationTrigger
             )
 
-            return .value(request)
-        }.then { notificationRequest -> Guarantee<Error?> in
-            Guarantee { seal in
-                UNUserNotificationCenter.current().add(
-                    notificationRequest,
-                    withCompletionHandler: { (error) in
-                        seal(error)
-                    }
-                )
-            }
-        }.then { requestError -> Promise<Void> in
-            if let error = requestError {
-                throw error
-            } else {
-                print("Successfully schedule local notification with identifier: \(contentProvider.identifier)")
-                return .value(())
-            }
+            UNUserNotificationCenter.current().add(
+                request,
+                withCompletionHandler: { (error) in
+                    seal.resolve(error)
+                }
+            )
         }
     }
 
@@ -229,40 +198,29 @@ final class LocalNotificationService {
         return content
     }
 
-    // MARK: UILocalNotification
-
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use un_scheduleNotification(contentProvider:")
-    private func ui_scheduleNotification(
+    private func localNotificationScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
-        return isNotificationExists(withIdentifier: contentProvider.identifier).then { exists -> Promise<UILocalNotification> in
-            guard !exists else {
-                throw LocalNotificationServiceError.notificationAlreadyExists
-            }
+        let notification = UILocalNotification()
+        notification.alertTitle = contentProvider.title
+        notification.alertBody = contentProvider.body
+        notification.fireDate = contentProvider.fireDate
+        notification.soundName = contentProvider.soundName
+        notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
 
-            let notification = UILocalNotification()
-            notification.alertTitle = contentProvider.title
-            notification.alertBody = contentProvider.body
-            notification.fireDate = contentProvider.fireDate
-            notification.soundName = contentProvider.soundName
-            notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
-
-            if let repeatInterval = contentProvider.repeatInterval {
-                notification.repeatInterval = repeatInterval
-            }
-
-            return .value(notification)
-        }.then { notification -> Promise<Void> in
-            UIApplication.shared.scheduleLocalNotification(notification)
-            return .value(())
+        if let repeatInterval = contentProvider.repeatInterval {
+            notification.repeatInterval = repeatInterval
         }
+
+        UIApplication.shared.scheduleLocalNotification(notification)
+
+        return .value(())
     }
 
     // MARK: - Types -
 
-    enum LocalNotificationServiceError: Error {
-        case notAuthorized
-        case notificationAlreadyExists
+    enum Error: Swift.Error {
         case badContentProvider
     }
 }

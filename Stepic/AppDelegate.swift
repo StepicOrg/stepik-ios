@@ -17,7 +17,6 @@ import VK_ios_sdk
 import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
-import SwiftyJSON
 import PromiseKit
 import AppsFlyerLib
 
@@ -25,20 +24,6 @@ import AppsFlyerLib
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    var currentNavigationController: UINavigationController? {
-        guard let tabController = window?.rootViewController as? UITabBarController else {
-            return nil
-        }
-
-        let countViewControllers = tabController.viewControllers?.count ?? 0
-
-        if tabController.selectedIndex < countViewControllers {
-            return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
-        } else {
-            return tabController.viewControllers?[0] as? UINavigationController
-        }
-    }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -110,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
-        NotificationService.shared.handleApplicationLaunchOptions(launchOptions)
+        NotificationService.shared.appDidFinishLaunching(with: launchOptions)
 
         checkNotificationsCount()
 
@@ -156,61 +141,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("error while registering to remote notifications")
+        print("error while registering to remote notifications: \(error)")
     }
 
-    // TODO: Notification
     func application(
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        print("remote notification received: DEBUG = \(userInfo)")
-
-        guard let notificationDict = userInfo as? [String: Any] else {
-            print("remote notification received: unable to parse userInfo")
-            return
-        }
-
-        guard let type = notificationDict["type"] as? String else {
-            print("remote notification received: unable to parse notification type")
-            return
-        }
-
-        switch type {
-        case "notifications":
-            if let text = ((notificationDict["aps"] as? [String: Any])?["alert"] as? [String: Any])?["body"] as? String {
-                // FIXME: incapsulate this logic
-                var notification: Notification?
-                guard let object = notificationDict["object"] as? String else {
-                    return
-                }
-                let json = JSON(parseJSON: object)
-                if let notificationId = json["id"].int,
-                   let notification = Notification.fetch(id: notificationId) {
-                    notification.update(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification.id, "new": false])
-                } else {
-                    notification = Notification(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification!.id, "new": true])
-                }
-                CoreDataHelper.instance.save()
-
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: {
-                    NotificationService.shared.handleRemoteNotification(notificationDict)
-                })
-            }
-        case "notification-statuses":
-            if let badgeCount = (notificationDict["aps"] as? [String: Any])?["badge"] as? Int {
-                NotificationsBadgesManager.shared.set(number: badgeCount)
-            }
-        default:
-            break
-        }
+        NotificationService.shared.didReceiveRemoteNotification(with: userInfo)
     }
 
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        // TODO: Show alert for iOS 9.0 and below.
-        NotificationService.shared.handleLocalNotification()
+        NotificationService.shared.didReceiveLocalNotification(with: notification.userInfo)
     }
 
     // MARK: Private Helpers
