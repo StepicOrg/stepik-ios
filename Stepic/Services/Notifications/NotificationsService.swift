@@ -89,6 +89,10 @@ extension NotificationsService {
         }
     }
 
+    func removeAllLocalNotifications() {
+        localNotificationsService.removeAllNotifications()
+    }
+
     func removeLocalNotifications(withIdentifiers identifiers: [String]) {
         guard !identifiers.isEmpty else {
             return

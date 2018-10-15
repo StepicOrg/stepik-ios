@@ -95,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
+        LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService.shared.appDidFinishLaunching(with: launchOptions)
 
         checkNotificationsCount()
