@@ -76,6 +76,17 @@ final class ExploreViewController: BaseExploreViewController {
         AmplitudeAnalyticsEvents.Catalog.opened.send()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Workaround for bug with black space under navigation bar due to different nav bar height
+        // FIXME: see APPS-2093
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.view.setNeedsLayout()
+            self?.navigationController?.view.layoutIfNeeded()
+        }
+    }
+
     private func updateState(newState: Explore.ViewControllerState) {
         switch newState {
         case .normal(let language):
