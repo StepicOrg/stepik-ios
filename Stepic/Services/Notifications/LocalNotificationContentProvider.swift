@@ -14,7 +14,7 @@ protocol LocalNotificationContentProvider {
 
     var body: String { get }
 
-    var userInfo: [AnyHashable: Any]? { get }
+    var userInfo: [AnyHashable: Any] { get }
 
     var identifier: String { get }
 
@@ -32,4 +32,25 @@ protocol LocalNotificationContentProvider {
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? { get }
+}
+
+extension LocalNotificationContentProvider {
+    var userInfo: [AnyHashable: Any] {
+        return [:]
+    }
+
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationSound.default()`")
+    var soundName: String {
+        return UILocalNotificationDefaultSoundName
+    }
+
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
+    var repeatInterval: NSCalendar.Unit? {
+        return nil
+    }
+
+    @available(iOS 10.0, *)
+    var sound: UNNotificationSound {
+        return .default()
+    }
 }

@@ -20,8 +20,6 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         }
     }
 
-    var userInfo: [AnyHashable : Any]?
-
     var identifier: String {
         return "\(NotificationsService.NotificationTypes.streak.rawValue)_local_notification"
     }

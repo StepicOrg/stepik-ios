@@ -28,7 +28,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         }
     }
 
-    var userInfo: [AnyHashable : Any]? {
+    var userInfo: [AnyHashable : Any] {
         return [
             Keys.course.rawValue: course.id,
             Keys.section.rawValue: section.id,
@@ -40,24 +40,9 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")
-    var soundName: String {
-        return UILocalNotificationDefaultSoundName
-    }
-
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var fireDate: Date? {
         return Calendar.current.date(from: dateComponents)
-    }
-
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
-    var repeatInterval: NSCalendar.Unit? {
-        return nil
-    }
-
-    @available(iOS 10.0, *)
-    var sound: UNNotificationSound {
-        return .default()
     }
 
     @available(iOS 10.0, *)

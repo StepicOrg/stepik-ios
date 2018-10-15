@@ -156,7 +156,7 @@ final class LocalNotificationsService {
     private func getMergedUserInfo(
         contentProvider: LocalNotificationContentProvider
     ) -> [AnyHashable: Any] {
-        var userInfo = contentProvider.userInfo ?? [:]
+        var userInfo = contentProvider.userInfo
         userInfo.merge([LocalNotificationsService.notificationKeyName: contentProvider.identifier])
         return userInfo
     }
