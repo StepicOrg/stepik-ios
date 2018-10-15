@@ -85,7 +85,7 @@ class DeepLinkRoutingService {
             }
 
             switch route {
-            case .catalog, .notifications:
+            case .catalog, .notifications, .home:
                 seal.fulfill([])
             case .profile(userID: let userID):
                 seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
@@ -113,6 +113,7 @@ class DeepLinkRoutingService {
 extension DeepLinkRoutingService {
     enum Pattern: String {
         case catalog = "https:\\/\\/stepik.org\\/catalog\\/?"
+        case home = "https:\\/\\/stepik.org\\/home\\/?"
         case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
         case profile = "https:\\/\\/stepik.org\\/users\\/(\\d+)\\/?"
         case notifications = "https:\\/\\/stepik.org\\/notifications\\/?"
@@ -132,6 +133,7 @@ extension DeepLinkRoutingService {
         case profile(userID: Int)
         case syllabus(courseID: Int)
         case catalog
+        case home
         case course(courseID: Int)
 
         init?(path: String) {
