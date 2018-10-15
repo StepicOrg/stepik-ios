@@ -14,20 +14,20 @@ extension NotificationService {
         let contentProvider = StreakLocalNotificationContentProvider(UTCStartHour: UTCStartHour)
 
         if cancelPrevious {
-            localNotificationService.removeNotifications(withIdentifiers: [contentProvider.identifier])
+            removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
         }
 
-        self.scheduleLocalNotification(with: contentProvider)
+        scheduleLocalNotification(with: contentProvider)
     }
 
     func cancelStreakLocalNotifications() {
         let contentProvider = StreakLocalNotificationContentProvider(UTCStartHour: 0)
-        localNotificationService.removeNotifications(withIdentifiers: [contentProvider.identifier])
+        removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
     }
 }
 
 final class StreakLocalNotificationContentProvider: LocalNotificationContentProvider {
-    var title: String = ""
+    var title = ""
 
     var body: String {
         if #available(iOS 10.0, *) {
@@ -37,11 +37,11 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         }
     }
 
-    var identifier: String = "streak_local_notification"
+    var identifier = "\(NotificationService.NotificationTypes.streak.rawValue)_local_notification"
 
     var userInfo: [AnyHashable : Any]?
 
-    var soundName: String = "default_sound.wav"
+    var soundName = "default_sound.wav"
 
     @available(iOS 10.0, *)
     var sound: UNNotificationSound {

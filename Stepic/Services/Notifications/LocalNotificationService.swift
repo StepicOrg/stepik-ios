@@ -11,7 +11,7 @@ import UserNotifications
 import PromiseKit
 
 final class LocalNotificationService {
-    private static let notificationKeyName = "LocalNotificationServiceKey"
+    static let notificationKeyName = "LocalNotificationServiceKey"
 
     // MARK: - Getting Notifications -
 
@@ -207,7 +207,7 @@ final class LocalNotificationService {
         notification.alertBody = contentProvider.body
         notification.fireDate = contentProvider.fireDate
         notification.soundName = contentProvider.soundName
-        notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
+        notification.userInfo = getMergedUserInfo(contentProvider: contentProvider)
 
         if let repeatInterval = contentProvider.repeatInterval {
             notification.repeatInterval = repeatInterval

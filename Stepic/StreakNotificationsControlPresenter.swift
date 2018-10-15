@@ -56,7 +56,7 @@ class StreakNotificationsControlPresenter {
 
     func setStreakNotifications(on allowNotifications: Bool, completion: ((Bool) -> Void)? = nil) {
         if !allowNotifications {
-            LocalNotificationManager.cancelStreakLocalNotifications()
+            NotificationService.shared.cancelStreakLocalNotifications()
             PreferencesContainer.notifications.allowStreaksNotifications = false
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOff, parameters: nil)
             completion?(false)
@@ -71,7 +71,7 @@ class StreakNotificationsControlPresenter {
 
         PreferencesContainer.notifications.allowStreaksNotifications = true
         NotificationRegistrator.shared.registerForRemoteNotifications()
-        LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
+        NotificationService.shared.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         completion?(true)
     }

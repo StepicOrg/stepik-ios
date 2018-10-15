@@ -95,7 +95,7 @@ class StreaksAlertPresentationManager {
             case .notDetermined:
                 NotificationRegistrator.shared.registerForRemoteNotifications()
                 self?.selectStreakNotificationTime()
-            case .authorized:
+            case .authorized, .provisional:
                 self?.selectStreakNotificationTime()
             case .denied:
                 self?.showStreaksSettingsNotificationAlert()
@@ -110,7 +110,7 @@ class StreaksAlertPresentationManager {
             case .notDetermined:
                 // Actually, it should never come here, but just in case
                 NotificationRegistrator.shared.registerForRemoteNotifications()
-            case .authorized:
+            case .authorized, .provisional:
                 self?.selectStreakNotificationTime()
             case .denied:
                 //TODO: Add dialog to tell user he should have permitteed the notifications

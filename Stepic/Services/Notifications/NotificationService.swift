@@ -16,7 +16,8 @@ final class NotificationService: NSObject {
 
     static let shared = NotificationService()
 
-    let localNotificationService: LocalNotificationService
+    private let localNotificationService: LocalNotificationService
+    private let routingService: DeepLinkRoutingService
 
     private var currentNavigationController: UINavigationController? {
         guard let window = UIApplication.shared.delegate?.window,
@@ -35,6 +36,8 @@ final class NotificationService: NSObject {
 
     private override init() {
         self.localNotificationService = LocalNotificationService()
+        self.routingService = DeepLinkRoutingService()
+
         super.init()
 
         if #available(iOS 10.0, *) {
@@ -42,30 +45,28 @@ final class NotificationService: NSObject {
         }
     }
 
-    // MARK: Public API
-
     func appDidFinishLaunching(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         guard let launchOptions = launchOptions else {
             return
         }
 
-        let localNotification = launchOptions[.localNotification] as? UILocalNotification
-        let localNotification2 = launchOptions[.localNotification] as? NotificationUserInfo
-        let localNotification3 = launchOptions[.localNotification] as? NSDictionary
-        let localNotification4 = launchOptions[.localNotification]
-
         if launchOptions[.localNotification] != nil {
-            didReceiveLocalNotification(with: nil)
+            let notification = launchOptions[.localNotification] as? UILocalNotification
+            didReceiveLocalNotification(with: notification?.userInfo)
         } else if let userInfo = launchOptions[.remoteNotification] as? NotificationUserInfo {
             didReceiveRemoteNotification(with: userInfo)
         }
     }
 
-    func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
-        print("Did receive local notification with info: \(userInfo ?? [:])")
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened)
+    enum NotificationTypes: String {
+        case streak
+        case personalDeadline
     }
+}
 
+// MARK: - NotificationService (LocalNotifications) -
+
+extension NotificationService {
     func scheduleLocalNotification(with contentProvider: LocalNotificationContentProvider) {
         NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
             if !status.isRegistered {
@@ -76,9 +77,7 @@ final class NotificationService: NSObject {
             self.localNotificationService.isNotificationExists(withIdentifier: contentProvider.identifier)
         }.then { isExists -> Promise<Void> in
             if isExists {
-                self.localNotificationService.removeNotifications(
-                    withIdentifiers: [contentProvider.identifier]
-                )
+                self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
             }
             return .value(())
         }.then {
@@ -88,6 +87,43 @@ final class NotificationService: NSObject {
         }
     }
 
+    func removeLocalNotifications(withIdentifiers identifiers: [String]) {
+        guard !identifiers.isEmpty else {
+            return
+        }
+
+        localNotificationService.removeNotifications(withIdentifiers: identifiers)
+    }
+
+    func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
+        print("Did receive local notification with info: \(userInfo ?? [:])")
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened)
+        routeLocalNotification(with: userInfo)
+    }
+
+    private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
+        func routeToHome() {
+            routingService.route(.home)
+        }
+
+        guard let userInfo = userInfo as? [String: Any],
+              let key = userInfo[LocalNotificationService.notificationKeyName] as? String else {
+            return routeToHome()
+        }
+
+        if key.localizedCaseInsensitiveContains(NotificationTypes.streak.rawValue) {
+            routeToHome()
+        } else if key.localizedCaseInsensitiveContains(NotificationTypes.personalDeadline.rawValue) {
+
+        } else {
+            routeToHome()
+        }
+    }
+}
+
+// MARK: - NotificationService (RemoteNotifications) -
+
+extension NotificationService {
     func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
         print("remote notification received: DEBUG = \(userInfo)")
 
