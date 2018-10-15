@@ -32,7 +32,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return [
             Keys.course.rawValue: course.id,
             Keys.section.rawValue: section.id,
-            Keys.hoursBeforeDeadline: hoursBeforeDeadline
+            Keys.hoursBeforeDeadline.rawValue: hoursBeforeDeadline
         ]
     }
 
@@ -47,7 +47,8 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        return UNTimeIntervalNotificationTrigger(timeInterval: 5.0 + Double(Int.random() % 5), repeats: false)
+        //return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     }
 
     private var dateComponents: DateComponents {
