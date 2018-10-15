@@ -3218,6 +3218,13 @@
 		2C9E3F451F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
 		2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */; };
 		2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */; };
+		2CA100172174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA100182174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA100192174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA1001A2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA1001B2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA1001C2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA1001D2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
 		2CA2C66820FA5D3C005EC191 /* AuthGreetingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66720FA5D3C005EC191 /* AuthGreetingRouter.swift */; };
 		2CA2E705202338D8001DC410 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
@@ -9900,7 +9907,6 @@
 			isa = PBXGroup;
 			children = (
 				2C89089F216F465200083341 /* NotificationsService.swift */,
-				2C331C5621734764007B0D01 /* NotificationService+Streak.swift */,
 				2CAD8B9A217096AB003F420B /* LocalNotificationService.swift */,
 				2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */,
 			);
@@ -10663,6 +10669,7 @@
 			children = (
 				62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */,
 				62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */,
+				2C331C5621734764007B0D01 /* NotificationService+Streak.swift */,
 			);
 			name = StreakNotificationsControl;
 			sourceTree = "<group>";
@@ -15341,6 +15348,7 @@
 				2C608AC9204568CE006870BB /* CongratsView.swift in Sources */,
 				2C608ADC204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
 				2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */,
+				2CA1001A2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF371FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -15786,6 +15794,7 @@
 				2C608ACA204568CE006870BB /* CongratsView.swift in Sources */,
 				2C608ADD204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
 				2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */,
+				2CA1001B2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF381FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
@@ -16179,6 +16188,7 @@
 				2C093EF9211B423E00162DD0 /* AmplitudeAnalyticsEvents.swift in Sources */,
 				2C949A0A20ECC3E00049E9A8 /* NotificationsSection.swift in Sources */,
 				2C949A0920ECC3BE0049E9A8 /* HTMLParsingUtil.swift in Sources */,
+				2CA100172174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C681A00210B00C600C3DDCA /* AuthSignInView.swift in Sources */,
 				2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */,
 				2C8715252164E3A900847A39 /* UITableViewExtensions.swift in Sources */,
@@ -17063,6 +17073,7 @@
 				2C89AAB51F4C289900227C3B /* TabsInfo.swift in Sources */,
 				0844900D1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
 				2C89AAB61F4C289900227C3B /* VideosInfo.swift in Sources */,
+				2CA100182174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C47A166206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C89AAB81F4C289900227C3B /* SearchResult.swift in Sources */,
 				2C89AAB91F4C289900227C3B /* Device.swift in Sources */,
@@ -17507,6 +17518,7 @@
 				2C9732681F4C38F600AC9301 /* JSONSerializable.swift in Sources */,
 				2C9732691F4C38F600AC9301 /* TabsInfo.swift in Sources */,
 				0844900E1F5D67E300D01940 /* SettingsViewController.swift in Sources */,
+				2CA1001D2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C97326A1F4C38F600AC9301 /* VideosInfo.swift in Sources */,
 				08EA89BF200E53CE00BCAF44 /* NotificationsStatus.swift in Sources */,
 				2C97326C1F4C38F600AC9301 /* SearchResult.swift in Sources */,
@@ -17979,6 +17991,7 @@
 				2CA8D2EE2088D9C000E105E9 /* StreaksStepikAlertManager.swift in Sources */,
 				2CA8D2EF2088D9C000E105E9 /* InputAccessoryBuilder.swift in Sources */,
 				2CA8D2F02088D9C000E105E9 /* TooltipFactory.swift in Sources */,
+				2CA1001C2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2CA8D2F12088D9C000E105E9 /* AlertManager.swift in Sources */,
 				2CA8D2F22088D9C000E105E9 /* CourseReviewSummary.swift in Sources */,
 				2CA8D2F32088D9C000E105E9 /* Menu.swift in Sources */,
@@ -18487,6 +18500,7 @@
 				864D67201E83DE03001E8D9E /* StreaksAlertManager.swift in Sources */,
 				2CE527C82029E1600047EC5F /* AdaptiveAchievementsViewController.swift in Sources */,
 				08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */,
+				2CA100192174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2CA2E72420237E4D001DC410 /* AdaptiveStatsViewController.swift in Sources */,
 				864D67211E83DE03001E8D9E /* StreaksStepikAlertManager.swift in Sources */,
 				085E9E6C1F138C1D00D6A4BC /* InputAccessoryBuilder.swift in Sources */,
