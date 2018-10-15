@@ -6754,6 +6754,7 @@
 				08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */,
 				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
 				083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */,
+				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
 				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
 				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
 				0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */,
@@ -9897,7 +9898,6 @@
 			children = (
 				2C89089F216F465200083341 /* NotificationsService.swift */,
 				2C331C5621734764007B0D01 /* NotificationService+Streak.swift */,
-				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
 				2CAD8B9A217096AB003F420B /* LocalNotificationService.swift */,
 				2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */,
 			);
