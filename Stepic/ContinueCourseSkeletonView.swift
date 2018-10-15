@@ -11,7 +11,7 @@ import SnapKit
 
 extension ContinueCourseSkeletonView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let cornerRadius: CGFloat = 8.0
     }
 }

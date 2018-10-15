@@ -10,12 +10,18 @@ import UIKit
 import SnapKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
-    private static let submodulesOrder: [ExploreSubmoduleType] = [
+    enum Animation {
+        static let startRefreshDelay: TimeInterval = 1.0
+        static let modulesRefreshDelay: TimeInterval = 0.3
+    }
+
+    static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
         .tags,
@@ -23,6 +29,7 @@ final class ExploreViewController: BaseExploreViewController {
         .popularCourses
     ]
 
+    private var state: Explore.ViewControllerState
     lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -31,7 +38,11 @@ final class ExploreViewController: BaseExploreViewController {
 
     private var isStoriesHidden: Bool = false
 
-    init(interactor: ExploreInteractorProtocol) {
+    init(
+        interactor: ExploreInteractorProtocol,
+        initialState: Explore.ViewControllerState = .loading
+    ) {
+        self.state = initialState
         super.init(interactor: interactor)
         self.searchBar.searchBarDelegate = self
     }
@@ -44,19 +55,50 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func loadView() {
         super.loadView()
+        self.exploreView?.delegate = self
         self.navigationItem.titleView = self.searchBar
     }
 
     override func viewDidLoad() {
-        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
         super.viewDidLoad()
-    }
+        self.exploreInteractor?.loadLanguageSwitchBlock(request: .init())
 
-    override func initLanguageIndependentSubmodules() {
         self.initSearchResults()
+
+        self.updateState(newState: self.state)
+        self.exploreInteractor?.loadContent(request: .init())
     }
 
-    override func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Catalog.opened.send()
+    }
+
+    private func updateState(newState: Explore.ViewControllerState) {
+        switch newState {
+        case .normal(let language):
+            self.exploreView?.endRefreshing()
+            DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+                self?.removeLanguageDependentSubmodules()
+                self?.initLanguageDependentSubmodules(contentLanguage: language)
+            }
+        case .loading:
+            break
+        }
+        self.state = newState
+    }
+
+    override func refreshContentAfterLanguageChange() {
+        self.exploreInteractor?.loadContent(request: .init())
+    }
+
+    override func refreshContentAfterLoginAndLogout() {
+        self.exploreInteractor?.loadContent(request: .init())
+    }
+
+    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
         if !isStoriesHidden {
             let storiesAssembly = StoriesAssembly(
@@ -72,7 +114,7 @@ final class ExploreViewController: BaseExploreViewController {
                     viewController: storiesViewController,
                     view: storiesContainerView,
                     isLanguageDependent: true,
-                    type: ExploreSubmoduleType.stories
+                    type: Explore.Submodule.stories
                 )
             )
         }
@@ -88,7 +130,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: tagsViewController,
                 view: tagsViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.tags
+                type: Explore.Submodule.tags
             )
         )
 
@@ -104,7 +146,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: collectionViewController,
                 view: collectionViewController.view,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.collection
+                type: Explore.Submodule.collection
             )
         )
 
@@ -116,7 +158,6 @@ final class ExploreViewController: BaseExploreViewController {
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()
-        popularAssembly.moduleInput?.reload()
         let containerView = CourseListContainerViewFactory(colorMode: .dark)
             .makeHorizontalContainerView(
                 for: popularViewController.view,
@@ -127,7 +168,7 @@ final class ExploreViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.loadFullscreenCourseList(
-                request: .init(courseListType: courseListType)
+                request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
         self.registerSubmodule(
@@ -135,9 +176,13 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: popularViewController,
                 view: containerView,
                 isLanguageDependent: true,
-                type: ExploreSubmoduleType.popularCourses
+                type: Explore.Submodule.popularCourses
             )
         )
+
+        if let moduleInput = popularAssembly.moduleInput {
+            self.tryToSetOnlineState(moduleInput: moduleInput)
+        }
     }
 
     // MARK: - Search
@@ -172,28 +217,22 @@ final class ExploreViewController: BaseExploreViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
+}
 
-    private enum ExploreSubmoduleType: Int, SubmoduleType {
-        case stories
-        case languageSwitch
-        case tags
-        case collection
-        case popularCourses
-
-        var id: Int {
-            return self.rawValue
+extension Explore.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+            fatalError("Given submodule type has unknown position")
         }
-
-        var position: Int {
-            guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
-                fatalError("Given submodule type has unknown position")
-            }
-            return position
-        }
+        return position
     }
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
+    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
     func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
         if viewModel.isHidden {
             return
@@ -206,14 +245,14 @@ extension ExploreViewController: ExploreViewControllerProtocol {
                 viewController: viewController,
                 view: viewController.view,
                 isLanguageDependent: false,
-                type: ExploreSubmoduleType.languageSwitch
+                type: Explore.Submodule.languageSwitch
             )
         )
     }
 
     func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel) {
         self.isStoriesHidden = true
-        if let storiesBlock = self.getSubmodule(type: ExploreSubmoduleType.stories) {
+        if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
             self.removeSubmodule(storiesBlock)
         }
     }
@@ -224,13 +263,37 @@ extension ExploreViewController: UISearchBarDelegate {
         self.showSearchResults()
         // Strange hack to hide search results (courses)
         self.searchResultsModuleInput?.queryChanged(to: "")
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Search.started.send()
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.hideSearchResults()
+
+        // FIXME: analytics dependency
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchResultsModuleInput?.queryChanged(to: searchText)
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // FIXME: should be incapsulated
+        if let text = searchBar.text, !text.isEmpty {
+            self.searchResultsModuleInput?.search(query: text)
+        } else {
+            self.searchResultsModuleInput?.queryChanged(to: "")
+        }
+    }
+}
+
+extension ExploreViewController: BaseExploreViewDelegate {
+    func refreshControlDidRefresh() {
+        // Small delay for pretty refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
+            self?.exploreInteractor?.loadContent(request: .init())
+        }
     }
 }

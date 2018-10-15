@@ -10,8 +10,6 @@ import UIKit
 
 protocol BaseExplorePresenterProtocol {
     func presentFullscreenCourseList(response: BaseExplore.PresentFullscreenCourseListModule.Response)
-
-    func presentContent(response: BaseExplore.LoadContent.Response)
     func presentCourseInfo(response: BaseExplore.PresentCourseInfo.Response)
     func presentCourseSyllabus(response: BaseExplore.PresentCourseSyllabus.Response)
     func presentLastStep(response: BaseExplore.PresentLastStep.Response)
@@ -21,15 +19,12 @@ protocol BaseExplorePresenterProtocol {
 class BaseExplorePresenter: BaseExplorePresenterProtocol {
     weak var viewController: BaseExploreViewControllerProtocol?
 
-    func presentContent(response: BaseExplore.LoadContent.Response) {
-        self.viewController?.displayContent(
-            viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
-        )
-    }
-
     func presentFullscreenCourseList(response: BaseExplore.PresentFullscreenCourseListModule.Response) {
         self.viewController?.displayFullscreenCourseList(
-            viewModel: .init(courseListType: response.courseListType)
+            viewModel: .init(
+                presentationDescription: response.presentationDescription,
+                courseListType: response.courseListType
+            )
         )
     }
 

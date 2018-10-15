@@ -44,7 +44,12 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
         return Promise { seal in
             self.userCoursesAPI.retrieve(page: page).then {
                 userCoursesInfo -> Promise<([Course], [UserCourse], Meta)> in
-                self.coursesAPI.retrieve(
+                // Cause we can't pass empty ids list to courses endpoint
+                if userCoursesInfo.0.isEmpty {
+                    return Promise.value(([], [], Meta.oneAndOnlyPage))
+                }
+
+                return self.coursesAPI.retrieve(
                     ids: userCoursesInfo.0.map { $0.courseId }
                 ).map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
             }.done { courses, info, meta in
@@ -126,6 +131,7 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
             self.coursesAPI.retrieve(
                 ids: self.type.ids
             ).done { courses in
+                let courses = courses.reordered(order: self.type.ids, transform: { $0.id })
                 seal.fulfill((courses, finalMeta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

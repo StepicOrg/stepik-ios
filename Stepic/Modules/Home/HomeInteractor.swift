@@ -11,7 +11,7 @@ import PromiseKit
 
 protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
     func loadStreakActivity(request: Home.LoadStreak.Request)
-    func loadEnrolledCourses(request: Home.LoadEnrolledCourses.Request)
+    func loadContent(request: Home.LoadContent.Request)
 }
 
 final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
@@ -24,11 +24,16 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         presenter: HomePresenterProtocol,
         provider: HomeProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
         contentLanguageService: ContentLanguageServiceProtocol
     ) {
         self.provider = provider
         self.userAccountService = userAccountService
-        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
+        super.init(
+            presenter: presenter,
+            contentLanguageService: contentLanguageService,
+            networkReachabilityService: networkReachabilityService
+        )
     }
 
     func loadStreakActivity(request: Home.LoadStreak.Request) {
@@ -51,15 +56,51 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         }
     }
 
-    func loadEnrolledCourses(request: Home.LoadEnrolledCourses.Request) {
-        self.homePresenter?.presentEnrolledCourses(
-            response: .init(isAuthorized: self.userAccountService.isAuthorized)
+    func loadContent(request: Home.LoadContent.Request) {
+        self.homePresenter?.presentContent(
+            response: .init(
+                isAuthorized: self.userAccountService.isAuthorized,
+                contentLanguage: self.contentLanguageService.globalContentLanguage
+            )
         )
+    }
+
+    override func presentEmptyState(sourceModule: CourseListInputProtocol) {
+        self.homePresenter?.presentCourseListState(
+            response: .init(
+                module: self.determineModule(sourceModule: sourceModule),
+                result: .empty
+            )
+        )
+    }
+
+    override func presentError(sourceModule: CourseListInputProtocol) {
+        self.homePresenter?.presentCourseListState(
+            response: .init(
+                module: self.determineModule(sourceModule: sourceModule),
+                result: .error
+            )
+        )
+    }
+
+    private func determineModule(sourceModule: CourseListInputProtocol) -> Home.Submodule {
+        if sourceModule.moduleIdentifier == Home.Submodule.enrolledCourses.uniqueIdentifier {
+            return .enrolledCourses
+        } else if sourceModule.moduleIdentifier == Home.Submodule.popularCourses.uniqueIdentifier {
+            return .popularCourses
+        } else {
+            fatalError("Unrecognized submodule")
+        }
     }
 }
 
 extension HomeInteractor: ContinueCourseOutputProtocol {
     func hideContinueCourse() {
-        self.homePresenter?.hideContinueCourse()
+        self.homePresenter?.presentCourseListState(
+            response: .init(
+                module: Home.Submodule.continueCourse,
+                result: .empty
+            )
+        )
     }
 }

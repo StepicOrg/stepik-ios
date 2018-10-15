@@ -83,7 +83,15 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     var shouldShowShowAllButton: Bool = true {
         didSet {
-            self.showAllButton.isHidden = !self.shouldShowShowAllButton
+            // We should not only hiden button but resize cause there is no space
+            if self.shouldShowShowAllButton {
+                self.showAllButton.isHidden = false
+            } else {
+                self.showAllButton.isHidden = true
+                self.showAllButton.snp.makeConstraints { make in
+                    make.width.equalTo(0)
+                }
+            }
         }
     }
 

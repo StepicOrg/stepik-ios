@@ -8,17 +8,33 @@
 
 import UIKit
 
+extension TrainingCardCollectionViewCell {
+    struct Appearance {
+        let cornerRadius: CGFloat = 10.0
+        let textColor = UIColor.white
+        var gradientColors: [UIColor] = []
+        let gradientLocations: [Double]? = nil
+        let gradientRotationAngle: CGFloat = 90.0
+    }
+}
+
 final class TrainingCardCollectionViewCell: UICollectionViewCell, Reusable, NibLoadable {
     @IBOutlet var containerView: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!
     @IBOutlet var commentLabel: UILabel!
 
-    let gradientLayer: CAGradientLayer = {
+    var appearance = Appearance() {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    private lazy var gradientLayer: CAGradientLayer = {
         CAGradientLayer(
-            colors: [UIColor(hex: 0x516395), UIColor(hex: 0x4CA0AE)],
-            locations: [0.0, 1.0],
-            rotationAngle: 90.0
+            colors: appearance.gradientColors,
+            locations: appearance.gradientLocations,
+            rotationAngle: appearance.gradientRotationAngle
         )
     }()
 
@@ -26,14 +42,14 @@ final class TrainingCardCollectionViewCell: UICollectionViewCell, Reusable, NibL
         super.awakeFromNib()
 
         containerView.backgroundColor = .clear
-        containerView.layer.cornerRadius = 10
+        containerView.layer.cornerRadius = appearance.cornerRadius
 
         layer.insertSublayer(gradientLayer, at: 0)
-        gradientLayer.cornerRadius = 10
+        gradientLayer.cornerRadius = appearance.cornerRadius
 
-        titleLabel.textColor = .white
-        bodyLabel.textColor = .white
-        commentLabel.textColor = .white
+        titleLabel.textColor = appearance.textColor
+        bodyLabel.textColor = appearance.textColor
+        commentLabel.textColor = appearance.textColor
     }
 
     override func layoutSubviews() {
@@ -47,5 +63,10 @@ final class TrainingCardCollectionViewCell: UICollectionViewCell, Reusable, NibL
         titleLabel.text = nil
         bodyLabel.text = nil
         commentLabel.text = nil
+    }
+
+    private func updateAppearance() {
+        gradientLayer.colors = appearance.gradientColors.map { $0.cgColor }
+        gradientLayer.applyDefaultLocations()
     }
 }

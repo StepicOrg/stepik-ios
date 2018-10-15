@@ -10,6 +10,7 @@ import UIKit
 
 protocol ContinueCourseViewControllerProtocol: class {
     func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel)
+    func displayTooltip(viewModel: ContinueCourse.CheckTooltipAvailability.ViewModel)
 }
 
 final class ContinueCourseViewController: UIViewController {
@@ -21,6 +22,7 @@ final class ContinueCourseViewController: UIViewController {
     }
 
     lazy var continueCourseView = self.view as? ContinueCourseView
+    private lazy var continueLearningTooltip = TooltipFactory.continueLearningWidget
 
     init(
         interactor: ContinueCourseInteractorProtocol,
@@ -66,9 +68,27 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
         if case .result(let result) = viewModel.state {
             self.continueCourseView?.configure(with: result)
+            self.interactor.checkForTooltip(request: .init())
         }
 
         self.state = viewModel.state
+    }
+
+    func displayTooltip(viewModel: ContinueCourse.CheckTooltipAvailability.ViewModel) {
+        guard let continueCourseView = self.continueCourseView else {
+            return
+        }
+
+        if viewModel.shouldShowTooltip {
+            // Cause anchor should be in true position
+            DispatchQueue.main.async { [weak self] in
+                self?.continueLearningTooltip.show(
+                    direction: .up,
+                    in: continueCourseView,
+                    from: continueCourseView.tooltipAnchorView
+                )
+            }
+        }
     }
 }
 

@@ -70,13 +70,13 @@ class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             return 20
         }
 
-        var verticalCount = collectionView.bounds.height / (flowLayout.itemSize.height + flowLayout.minimumLineSpacing)
-        var horizontalCount = collectionView.bounds.width / (flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing)
+        var verticalCount = collectionView.bounds.height / flowLayout.itemSize.height
+        var horizontalCount = collectionView.bounds.width / flowLayout.itemSize.width
 
         verticalCount.round(.up)
         horizontalCount.round(.up)
 
-        return Int(verticalCount) + Int(horizontalCount)
+        return Int(verticalCount) * Int(horizontalCount)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

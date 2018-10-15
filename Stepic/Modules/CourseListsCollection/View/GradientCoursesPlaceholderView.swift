@@ -17,7 +17,9 @@ extension GradientCoursesPlaceholderView {
         var titleTextAlignment = NSTextAlignment.natural
         var subtitleTextAlignment = NSTextAlignment.center
 
-        var labelsInsets = UIEdgeInsets(top: 30, left: 28, bottom: 28, right: 30)
+        var labelsSpacing: CGFloat = 9.0
+
+        var labelsInsets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 30)
 
         init() { }
     }
@@ -64,8 +66,14 @@ final class GradientCoursesPlaceholderView: UIView {
 
     var subtitleText: NSAttributedString? {
         didSet {
-            self.subtitleLabel.isHidden = self.subtitleText == nil
-            self.subtitleLabel.attributedText = self.subtitleText
+            if (self.subtitleText?.length ?? 0) == 0 {
+                self.stackView.spacing = 0
+                self.subtitleLabel.isHidden = true
+            } else {
+                self.stackView.spacing = self.appearance.labelsSpacing
+                self.subtitleLabel.isHidden = false
+                self.subtitleLabel.attributedText = self.subtitleText
+            }
         }
     }
 

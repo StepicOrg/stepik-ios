@@ -10,48 +10,44 @@ import Foundation
 import PromiseKit
 
 protocol BaseExploreInteractorProtocol {
-    func loadContent(request: BaseExplore.LoadContent.Request)
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request)
+    func tryToSetOnlineMode(request: BaseExplore.TryToSetOnline.Request)
 }
 
-class BaseExploreInteractor: BaseExploreInteractorProtocol {
+class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
     let presenter: BaseExplorePresenterProtocol
     let contentLanguageService: ContentLanguageServiceProtocol
+    let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     init(
         presenter: BaseExplorePresenterProtocol,
-        contentLanguageService: ContentLanguageServiceProtocol
+        contentLanguageService: ContentLanguageServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol
     ) {
         self.presenter = presenter
         self.contentLanguageService = contentLanguageService
-    }
-
-    func loadContent(request: BaseExplore.LoadContent.Request) {
-        self.presenter.presentContent(
-            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
-        )
+        self.networkReachabilityService = networkReachabilityService
     }
 
     func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
         self.presenter.presentFullscreenCourseList(
-            response: .init(courseListType: request.courseListType)
+            response: .init(
+                presentationDescription: request.presentationDescription,
+                courseListType: request.courseListType
+            )
         )
     }
-}
 
-extension BaseExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
+    func tryToSetOnlineMode(request: BaseExplore.TryToSetOnline.Request) {
+        if self.networkReachabilityService.isReachable {
+            for module in request.modules {
+                module.setOnlineStatus()
+            }
+        }
     }
-}
 
-extension BaseExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(type: CollectionCourseListType) {
-        self.loadFullscreenCourseList(request: .init(courseListType: type))
-    }
-}
+    // MARK: - CourseListOutputProtocol
 
-extension BaseExploreInteractor: CourseListOutputProtocol {
     func presentCourseInfo(course: Course) {
         self.presenter.presentCourseInfo(response: .init(course: course))
     }
@@ -68,10 +64,7 @@ extension BaseExploreInteractor: CourseListOutputProtocol {
         self.presenter.presentAuthorization()
     }
 
-    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+    func presentError(sourceModule: CourseListInputProtocol) { }
 
-    }
-
-    func presentError(sourceModule: CourseListInputProtocol) {
-    }
+    func presentEmptyState(sourceModule: CourseListInputProtocol) { }
 }

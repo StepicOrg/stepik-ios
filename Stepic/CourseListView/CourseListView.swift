@@ -111,7 +111,7 @@ class CourseListView: UIView {
 
     func showLoading() {
         self.collectionView.skeleton.viewBuilder = {
-            return CourseWidgetSkeletonView(frame: .zero)
+            CourseWidgetSkeletonView(frame: .zero)
         }
         self.collectionView.skeleton.show()
     }
@@ -387,6 +387,9 @@ final class HorizontalCourseListView: CourseListView {
         )
         self.collectionView.delegate = delegate
         self.collectionView.dataSource = dataSource
+
+        // Make scroll faster
+        self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -10,8 +10,8 @@ import UIKit
 
 protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStreakActivity(response: Home.LoadStreak.Response)
-    func presentEnrolledCourses(response: Home.LoadEnrolledCourses.Response)
-    func hideContinueCourse()
+    func presentContent(response: Home.LoadContent.Response)
+    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response)
 }
 
 final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
@@ -42,14 +42,22 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         self.homeViewController?.displayStreakInfo(viewModel: viewModel)
     }
 
-    func presentEnrolledCourses(response: Home.LoadEnrolledCourses.Response) {
-        self.homeViewController?.displayEnrolledCourses(
-            viewModel: .init(isAuthorized: response.isAuthorized)
+    func presentContent(response: Home.LoadContent.Response) {
+        self.homeViewController?.displayContent(
+            viewModel: .init(
+                isAuthorized: response.isAuthorized,
+                contentLanguage: response.contentLanguage
+            )
         )
     }
 
-    func hideContinueCourse() {
-        self.homeViewController?.hideContinueCourse()
+    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response) {
+        self.homeViewController?.displayModuleErrorState(
+            viewModel: .init(
+                module: response.module,
+                result: response.result
+            )
+        )
     }
 
     private func makeStreakActivityMessage(days: Int, needsToSolveToday: Bool) -> String {

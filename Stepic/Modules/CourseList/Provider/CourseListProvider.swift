@@ -72,12 +72,31 @@ final class CourseListProvider: CourseListProviderProtocol {
                     reviewSummaries: reviewSummaries
                 )
             }.done { courses in
+                self.persistenceService?.update(newCachedList: courses)
+
+                // FIXME: load deadlines
+                self.syncPersonalDeadlines(courses: courses)
+
                 seal.fulfill((courses, meta))
             }.catch { error in
                 print("course list provider: unable to fetch courses from api, " +
                     "error = \(error)")
                 seal.reject(Error.networkFetchFailed)
             }
+        }
+    }
+
+    @available(*, deprecated, message: "Legacy code for personal deadlines syncing. Should not be in this module")
+    private func syncPersonalDeadlines(courses: [Course]) {
+        guard let userID = AuthInfo.shared.userId else {
+            return
+        }
+
+        for course in courses {
+            _ = PersonalDeadlineManager.shared.syncDeadline(
+                for: course,
+                userID: userID
+            )
         }
     }
 

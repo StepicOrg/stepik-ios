@@ -13,4 +13,5 @@ struct CourseListsCollectionViewModel {
     var description: String
     var summary: String?
     var courseList: CollectionCourseListType
+    var color: GradientCoursesPlaceholderView.Color
 }

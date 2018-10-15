@@ -49,6 +49,11 @@ final class CourseListsCollectionProvider: CourseListsCollectionProviderProtocol
                 page: 1
             ).done { courseLists, _ in
                 let courseLists = courseLists.sorted { $0.position < $1.position }
+
+                self.collectionsPersistenceService.update(
+                    courseLists: courseLists,
+                    forLanguage: self.language
+                )
                 seal.fulfill(courseLists)
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)

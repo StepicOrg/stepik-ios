@@ -11,11 +11,13 @@ import Foundation
 struct KnowledgeGraphLessonPlainObject: Codable {
     let id: Int
     let type: String
-    let course: String
+    let course: Int
+    let description: String
 
-    init(id: Int, type: String, course: String) {
+    init(id: Int, type: String, course: Int, description: String) {
         self.id = id
         self.type = type
         self.course = course
+        self.description = description
     }
 }

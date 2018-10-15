@@ -48,4 +48,10 @@ enum FullscreenCourseList {
             let isAdaptive: Bool
         }
     }
+    /// Try to set online status
+    enum TryToSetOnline {
+        struct Request {
+            let module: CourseListInputProtocol
+        }
+    }
 }

@@ -21,6 +21,10 @@ protocol CourseListInteractorProtocol: class {
 final class CourseListInteractor: CourseListInteractorProtocol {
     typealias PaginationState = (page: Int, hasNext: Bool)
 
+    // We should be able to set uid cause we want to manage
+    // which course list module called module output methods
+    var moduleIdentifier: UniqueIdentifierType?
+
     weak var moduleOutput: CourseListOutputProtocol?
 
     let presenter: CourseListPresenterProtocol
@@ -29,7 +33,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
 
-    private var isOnline: Bool = false
+    private var isOnline = false
+    private var didLoadFromCache = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var currentCourses: [(UniqueIdentifierType, Course)] = []
 
@@ -45,15 +50,24 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.adaptiveStorageManager = adaptiveStorageManager
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
+
+        self.registerForNotifications()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Public methods
 
     func fetchCourses(request: CourseList.ShowCourses.Request) {
-        // Check for state and if state == offline, just fetch cached courses
-        // if state == online, fetch from network and show
+        // Check for state and
+        // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
+        // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
+        // - isOnline && !didLoadFromCache: we should load cached courses and then load from network (recursive execute fetchCourses)
+        // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
         firstly {
-            self.isOnline
+            self.didLoadFromCache
                 ? self.provider.fetchRemote(page: 1)
                 : self.provider.fetchCached()
         }.done { courses, meta in
@@ -62,9 +76,12 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            self.currentCourses = courses.map { ("\($0.id)", $0) }
+            self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             if self.currentCourses.isEmpty {
-                self.moduleOutput?.presentEmptyState(sourceModule: self)
+                // Offline mode: present empty state only if get empty courses from network
+                if self.isOnline && self.didLoadFromCache {
+                    self.moduleOutput?.presentEmptyState(sourceModule: self)
+                }
             } else {
                 let courses = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(
@@ -79,8 +96,23 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
                 self.presenter.presentCourses(response: response)
             }
-        }.catch { _ in
-            self.moduleOutput?.presentError(sourceModule: self)
+
+            // Retry if successfuly
+            let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
+            if shouldRetryAfterFetching {
+                // End of recursion cause shouldRetryAfterFetching will be false on next call
+                self.didLoadFromCache = true
+                self.fetchCourses(request: request)
+            }
+        }.catch { error in
+            if case CourseListProvider.Error.networkFetchFailed = error,
+               self.didLoadFromCache,
+               !self.currentCourses.isEmpty {
+                // Offline mode: we already presented cached courses, but network request failed
+                // so let's ignore it and show only cached
+            } else {
+                self.moduleOutput?.presentError(sourceModule: self)
+            }
         }
     }
 
@@ -109,7 +141,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 hasNext: meta.hasNext
             )
 
-            let appendedCourses = courses.map { ("\($0.id)", $0) }
+            let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
             self.currentCourses.append(contentsOf: appendedCourses)
             let courses = CourseList.AvailableCourses(
                 fetchedCourses: CourseList.ListData(
@@ -124,7 +156,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             self.presenter.presentNextCourses(response: response)
         }.catch { _ in
-            self.moduleOutput?.presentError(sourceModule: self)
+            // TODO: catch pagination error
         }
     }
 
@@ -155,6 +187,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
+
+                // FIXME: analytics dependency
+                AmplitudeAnalyticsEvents.Course.continuePressed(
+                    source: "course_widget",
+                    courseID: course.id,
+                    courseTitle: course.title
+                ).send()
+
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -231,6 +271,71 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         return Set<Course>(availableInAdaptiveMode)
     }
 
+    private func getUniqueIdentifierForCourse(_ course: Course) -> UniqueIdentifierType {
+        return "\(course.id)"
+    }
+
+    // MARK: - Notifications
+
+    private func registerForNotifications() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .courseSubscribedNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .courseUnsubscribedNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleCourseUpdate(_:)),
+            name: .courseSubscribedNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleCourseUpdate(_:)),
+            name: .courseUnsubscribedNotification,
+            object: nil
+        )
+    }
+
+    @objc
+    private func handleCourseUpdate(_ notification: Foundation.Notification) {
+        if let course = notification.userInfo?["course"] as? Course {
+            self.updateCourseInCurrentCourses(course)
+            self.refreshCourseList()
+        }
+    }
+
+    private func updateCourseInCurrentCourses(_ course: Course) {
+        guard let targetIndex = self.currentCourses.index(where: { $0.1 == course }) else {
+            return
+        }
+        self.currentCourses[targetIndex] = (self.getUniqueIdentifierForCourse(course), course)
+    }
+
+    /// Just present current data again
+    private func refreshCourseList() {
+        let courses = CourseList.AvailableCourses(
+            fetchedCourses: CourseList.ListData(
+                courses: self.currentCourses,
+                hasNextPage: self.paginationState.hasNext
+            ),
+            availableAdaptiveCourses: self.getAvailableAdaptiveCourses(
+                from: self.currentCourses.map { $0.1 }
+            )
+        )
+        let response = CourseList.ShowCourses.Response(
+            isAuthorized: self.userAccountService.isAuthorized,
+            result: courses
+        )
+        self.presenter.presentCourses(response: response)
+    }
+
     // MARK: - Enums
 
     enum Error: Swift.Error {
@@ -239,10 +344,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 }
 
 extension CourseListInteractor: CourseListInputProtocol {
-    func reload() {
+    func setOnlineStatus() {
+        guard !self.isOnline else {
+            return
+        }
+
         self.isOnline = true
 
-        let fakeRequest = CourseList.ShowCourses.Request()
-        self.fetchCourses(request: fakeRequest)
+        // Cached courses already loaded, now refresh with new state
+        if self.didLoadFromCache {
+            let fakeRequest = CourseList.ShowCourses.Request()
+            self.fetchCourses(request: fakeRequest)
+        }
     }
 }

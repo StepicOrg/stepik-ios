@@ -9,8 +9,35 @@
 import Foundation
 
 enum Home {
+    // MARK: Submodules identifiers
+
+    enum Submodule: String, UniqueIdentifiable {
+        case streakActivity
+        case continueCourse
+        case enrolledCourses
+        case popularCourses
+
+        var uniqueIdentifier: UniqueIdentifierType {
+            return self.rawValue
+        }
+    }
+
     // MARK: Use cases
 
+    /// Content refresh (we should get language and authorization state)
+    enum LoadContent {
+        struct Request { }
+
+        struct Response {
+            let isAuthorized: Bool
+            let contentLanguage: ContentLanguage
+        }
+
+        struct ViewModel {
+            let isAuthorized: Bool
+            let contentLanguage: ContentLanguage
+        }
+    }
     /// Show streak activity
     enum LoadStreak {
         struct Request { }
@@ -33,16 +60,23 @@ enum Home {
             let result: Result
         }
     }
-    // Show enrolled courses
-    enum LoadEnrolledCourses {
+    // Refresh course block
+    enum SetErrorStateForCourseList {
+        enum State {
+            case empty
+            case error
+        }
+
         struct Request { }
 
         struct Response {
-            let isAuthorized: Bool
+            let module: Home.Submodule
+            let result: State
         }
 
         struct ViewModel {
-            let isAuthorized: Bool
+            let module: Home.Submodule
+            let result: State
         }
     }
 }

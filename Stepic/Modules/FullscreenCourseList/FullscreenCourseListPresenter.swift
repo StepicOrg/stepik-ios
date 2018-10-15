@@ -13,6 +13,8 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response)
     func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response)
     func presentAuthorization()
+    func presentEmptyState()
+    func presentErrorState()
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -37,5 +39,13 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
 
     func presentAuthorization() {
         self.viewController?.displayAuthorization()
+    }
+
+    func presentEmptyState() {
+        self.viewController?.displayEmptyState()
+    }
+
+    func presentErrorState() {
+        self.viewController?.displayErrorState()
     }
 }
