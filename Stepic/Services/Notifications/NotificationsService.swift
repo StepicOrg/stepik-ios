@@ -61,6 +61,8 @@ final class NotificationsService: NSObject {
     enum NotificationTypes: String {
         case streak
         case personalDeadline = "personaldeadline"
+        case notifications
+        case notificationStatuses = "notification-statuses"
     }
 }
 
@@ -135,59 +137,104 @@ extension NotificationsService {
 
 extension NotificationsService {
     func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
-        print("remote notification received: DEBUG = \(userInfo)")
+        //print("remote notification received: DEBUG = \(userInfo)")
 
-        guard let notificationDict = userInfo as? [String: Any] else {
-            print("remote notification received: unable to parse userInfo")
-            return
+        logJSONString(userInfo: userInfo)
+
+        guard let notification = userInfo as? [String: Any] else {
+            return print("remote notification received: unable to parse userInfo")
         }
 
-        guard let type = notificationDict["type"] as? String else {
-            print("remote notification received: unable to parse notification type")
-            return
+        guard let type = notification[Keys.type.rawValue] as? String else {
+            return print("remote notification received: unable to parse notification type")
         }
 
         switch type {
-        case "notifications":
-            if let text = ((notificationDict["aps"] as? [String: Any])?["alert"] as? [String: Any])?["body"] as? String {
-                var notification: Notification?
-                guard let object = notificationDict["object"] as? String else {
-                    return
-                }
-
-                let json = JSON(parseJSON: object)
-
-                if let notificationId = json["id"].int,
-                   let notification = Notification.fetch(id: notificationId) {
-                    notification.update(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification.id, "new": false])
-                } else {
-                    notification = Notification(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification!.id, "new": true])
-                }
-
-                CoreDataHelper.instance.save()
-
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: { [weak self] in
-                    self?.performRemoteReaction(userInfo: userInfo)
-                })
-            }
-        case "notification-statuses":
-            if let badgeCount = (notificationDict["aps"] as? [String: Any])?["badge"] as? Int {
-                NotificationsBadgesManager.shared.set(number: badgeCount)
-            }
+        case NotificationTypes.notifications.rawValue:
+            resolveRemoteNotificationsNotification(notification)
+        case NotificationTypes.notificationStatuses.rawValue:
+            resolveRemoteNotificationStatusesNotification(notification)
         default:
-            break
+            print("remote notification received: unsopported notification type: \(type)")
         }
     }
 
-    private func performRemoteReaction(userInfo: NotificationUserInfo) {
-        guard let reaction = NotificationReactionHandler.handle(with: userInfo),
+    private func resolveRemoteNotificationsNotification(_ notificationDict: [String: Any]) {
+        func postNotification(id: Int, isNew: Bool) {
+            NotificationCenter.default.post(
+                name: .notificationAdded,
+                object: nil,
+                userInfo: [Keys.id.rawValue: id, Keys.new.rawValue: isNew]
+            )
+        }
+
+        guard let aps = notificationDict[Keys.aps.rawValue] as? [String: Any],
+              let alert = aps[Keys.alert.rawValue]  as? [String: Any],
+              let body = alert[Keys.body.rawValue] as? String,
+              let object = notificationDict[Keys.object.rawValue] as? String else {
+            return print("remote notification received: unable to parse notification: \(notificationDict)")
+        }
+
+        let json = JSON(parseJSON: object)
+
+        if let notificationId = json[Keys.id.rawValue].int,
+           let notification = Notification.fetch(id: notificationId) {
+            notification.update(json: json)
+            postNotification(id: notification.id, isNew: false)
+        } else {
+            let notification = Notification(json: json)
+            postNotification(id: notification.id, isNew: true)
+        }
+
+        CoreDataHelper.instance.save()
+
+        // Show alert for iOS 9.0 when the application is in foreground state.
+        if #available(iOS 10.0, *) {
+            routeRemoteNotification(notificationDict)
+        } else if UIApplication.shared.applicationState == .active {
+            NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: { [weak self] in
+                self?.routeRemoteNotification(notificationDict)
+            })
+        } else {
+            routeRemoteNotification(notificationDict)
+        }
+    }
+
+    private func resolveRemoteNotificationStatusesNotification(_ notificationDict: [String: Any]) {
+        guard let aps = notificationDict[Keys.aps.rawValue] as? [String: Any],
+              let badge = aps[Keys.badge.rawValue] as? Int else {
+            return print("remote notification received: unable to parse notification: \(notificationDict)")
+        }
+
+        NotificationsBadgesManager.shared.set(number: badge)
+    }
+
+    private func routeRemoteNotification(_ notification: NotificationUserInfo) {
+        guard let reaction = NotificationReactionHandler.handle(with: notification),
               let topController = self.currentNavigationController?.topViewController else {
             return
         }
 
         reaction(topController)
+    }
+
+    private func logJSONString(userInfo: NotificationUserInfo) {
+        let theJSONData = try! JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
+        let theJSONText = String(data: theJSONData, encoding: .ascii)!
+        print("\n\n")
+        print(theJSONText)
+        print("\n\n")
+    }
+
+    private enum Keys: String {
+        case type
+        case aps
+        case alert
+        case body
+        case object
+        case id
+        case new
+        case badge
     }
 }
 
