@@ -34,9 +34,12 @@ class DeepLinkRoutingService {
     }
 
     func route(path: String, from source: UIViewController? = nil) {
-        let route = Route(path: path)
-        self.getModuleStack(route: route).done { moduleStack in
-            let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: path)
+        route(Route(path: path), fallbackPath: path, from: source)
+    }
+
+    func route(_ route: Route?, fallbackPath: String = "", from source: UIViewController? = nil) {
+        getModuleStack(route: route).done { moduleStack in
+            let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: fallbackPath)
             router.route()
         }.catch { _ in
             //TODO: Handle this
