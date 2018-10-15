@@ -16,7 +16,7 @@ final class NotificationsService: NSObject {
 
     static let shared = NotificationsService()
 
-    private let localNotificationService: LocalNotificationService
+    private let localNotificationsService: LocalNotificationsService
     private let routingService: DeepLinkRoutingService
 
     private var currentNavigationController: UINavigationController? {
@@ -35,7 +35,7 @@ final class NotificationsService: NSObject {
     }
 
     private override init() {
-        self.localNotificationService = LocalNotificationService()
+        self.localNotificationsService = LocalNotificationsService()
         self.routingService = DeepLinkRoutingService()
 
         super.init()
@@ -83,7 +83,7 @@ extension NotificationsService {
 
             return .value(())
         }.then {
-            self.localNotificationService.scheduleNotification(contentProvider: contentProvider)
+            self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
         }.catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
@@ -94,7 +94,7 @@ extension NotificationsService {
             return
         }
 
-        localNotificationService.removeNotifications(withIdentifiers: identifiers)
+        localNotificationsService.removeNotifications(withIdentifiers: identifiers)
     }
 
     func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
@@ -109,7 +109,7 @@ extension NotificationsService {
         }
 
         guard let userInfo = userInfo as? [String: Any],
-              let key = userInfo[LocalNotificationService.notificationKeyName] as? String else {
+              let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
             return routeToHome()
         }
 

@@ -1,5 +1,5 @@
 //
-//  LocalNotificationService.swift
+//  LocalNotificationsService.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 12/10/2018.
@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import PromiseKit
 
-final class LocalNotificationService {
+final class LocalNotificationsService {
     static let notificationKeyName = "LocalNotificationServiceKey"
 
     // MARK: - Getting Notifications -
@@ -83,7 +83,7 @@ final class LocalNotificationService {
             let idsSet = Set(identifiers)
             getScheduledNotifications().forEach { notification in
                 guard let userInfo = notification.userInfo,
-                      let id = userInfo[LocalNotificationService.notificationKeyName] as? String else {
+                      let id = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
                     return
                 }
 
@@ -139,7 +139,7 @@ final class LocalNotificationService {
 
                 for notification in notifications {
                     guard let userInfo = notification.userInfo,
-                          let key = userInfo[LocalNotificationService.notificationKeyName] as? String else {
+                          let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
                         continue
                     }
 
@@ -157,7 +157,7 @@ final class LocalNotificationService {
         contentProvider: LocalNotificationContentProvider
     ) -> [AnyHashable: Any] {
         var userInfo = contentProvider.userInfo ?? [:]
-        userInfo.merge([LocalNotificationService.notificationKeyName: contentProvider.identifier])
+        userInfo.merge([LocalNotificationsService.notificationKeyName: contentProvider.identifier])
         return userInfo
     }
 
