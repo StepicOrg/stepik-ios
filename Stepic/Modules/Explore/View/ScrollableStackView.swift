@@ -9,8 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol ScrollableStackViewDelegate: class {
+    func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView)
+}
+
 final class ScrollableStackView: UIView {
     private let orientation: Orientation
+    weak var delegate: ScrollableStackViewDelegate?
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -20,9 +25,50 @@ final class ScrollableStackView: UIView {
 
     private lazy var scrollView = UIScrollView()
 
+    // MARK: - Refresh control
+
+    var isRefreshControlEnabled: Bool = false {
+        didSet {
+            guard oldValue != self.isRefreshControlEnabled else {
+                return
+            }
+
+            let refreshControl = self.isRefreshControlEnabled ? UIRefreshControl() : nil
+            if let refreshControl = refreshControl {
+                refreshControl.addTarget(
+                    self,
+                    action: #selector(self.onRefreshControlValueChanged),
+                    for: .valueChanged
+                )
+            }
+
+            if #available(iOS 10.0, *) {
+                self.scrollView.refreshControl = refreshControl
+            } else {
+                if let refreshControl = refreshControl {
+                    self.scrollView.insertSubview(refreshControl, at: 0)
+                } else {
+                    let oldRefreshControl = self.scrollView.subviews.first(where: { $0 is UIRefreshControl })
+                        as? UIRefreshControl
+                    oldRefreshControl?.removeFromSuperview()
+                }
+            }
+        }
+    }
+
+    private var refreshControl: UIRefreshControl? {
+        return self.scrollView
+            .subviews
+            .first(where: { $0 is UIRefreshControl }) as? UIRefreshControl
+    }
+
+    // MARK: - Blocks
+
     var arrangedSubviews: [UIView] {
         return self.stackView.arrangedSubviews
     }
+
+    // MARK: - Proxy properties
 
     var showsHorizontalScrollIndicator: Bool {
         get {
@@ -50,6 +96,8 @@ final class ScrollableStackView: UIView {
             self.stackView.spacing = newValue
         }
     }
+
+    // MARK: - Inits
 
     init(frame: CGRect, orientation: Orientation = .vertical) {
         self.orientation = orientation
@@ -87,6 +135,21 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    func startRefreshing() {
+        self.refreshControl?.beginRefreshing()
+    }
+
+    func endRefreshing() {
+        self.refreshControl?.endRefreshing()
+    }
+
+    // MARK: - Private methods
+
+    @objc
+    private func onRefreshControlValueChanged() {
+        self.delegate?.scrollableStackViewRefreshControlDidRefresh(self)
+    }
+
     enum Orientation {
         case vertical
         case horizontal
@@ -106,6 +169,14 @@ extension ScrollableStackView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.stackView.clipsToBounds = false
         self.scrollView.clipsToBounds = false
+
+        // For pull-to-refresh when contentSize is too small for scrolling
+        if self.orientation == .horizontal {
+            self.scrollView.alwaysBounceHorizontal = true
+        } else {
+            self.scrollView.alwaysBounceVertical = true
+        }
+        self.scrollView.bounces = true
     }
 
     func addSubviews() {

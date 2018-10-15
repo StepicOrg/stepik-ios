@@ -8,8 +8,9 @@
 
 import UIKit
 
-extension NSNotification.Name {
-    static let didLogout = NSNotification.Name("didLogout")
+extension Foundation.Notification.Name {
+    static let didLogout = Foundation.Notification.Name("didLogout")
+    static let didLogin = Foundation.Notification.Name("didLogin")
 }
 
 class AuthInfo: NSObject {
@@ -53,7 +54,6 @@ class AuthInfo: NSObject {
 
                     UIThread.performUI {
                         //Delete enrolled information
-                        NotificationCenter.default.post(name: .didLogout, object: nil)
                         TabsInfo.myCoursesIds = []
                         let c = Course.getAllCourses(enrolled: true)
                         for course in c {
@@ -73,6 +73,7 @@ class AuthInfo: NSObject {
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
                         strongSelf.setTokenValue(nil)
+                        NotificationCenter.default.post(name: .didLogout, object: nil)
                     }
                 }
 
@@ -86,10 +87,15 @@ class AuthInfo: NSObject {
                     })
                 #endif
             } else {
+                let oldToken = token
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
                 setTokenValue(newToken)
                 Session.delete()
+                if oldToken == nil {
+                    // first set, not refresh
+                    NotificationCenter.default.post(name: .didLogin, object: nil)
+                }
             }
         }
 

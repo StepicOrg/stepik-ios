@@ -11,7 +11,7 @@ import SnapKit
 
 extension ContinueLastStepView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         let contentInsets = UIEdgeInsets(top: 35, left: 19, bottom: 17, right: 19)
         let cornerRadius: CGFloat = 8.0
 
@@ -32,16 +32,17 @@ extension ContinueLastStepView {
         let infoSpacing: CGFloat = 10.0
         let contentSpacing: CGFloat = 30.0
 
-        let continueButtonHeight = 42
+        let continueButtonHeight: CGFloat = 42.0
+        let continueButtonWidthRatio: CGFloat = 0.65
     }
 }
 
 final class ContinueLastStepView: UIView {
     let appearance: Appearance
 
-    private lazy var continueButton: UIButton = {
+    lazy var continueButton: UIButton = {
         let button = ContinueActionButton(frame: .zero)
-        button.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("ContinueLearningWidgetButtonTitle", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(self.continueButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -226,7 +227,7 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
         self.continueButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.top.bottom.equalToSuperview()
-            make.width.equalTo(self.snp.width).multipliedBy(0.55)
+            make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
         }
     }
 }

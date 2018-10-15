@@ -12,12 +12,14 @@ import PromiseKit
 protocol ContinueCourseInteractorProtocol {
     func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request)
     func continueLastCourse(request: ContinueCourse.ContinueCourse.Request)
+    func checkForTooltip(request: ContinueCourse.CheckTooltipAvailability.Request)
 }
 
 final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     let presenter: ContinueCoursePresenterProtocol
     let provider: ContinueCourseProviderProtocol
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    let tooltipStorageManager: TooltipStorageManagerProtocol
     weak var moduleOutput: ContinueCourseOutputProtocol?
 
     private var currentCourse: Course?
@@ -25,11 +27,13 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     init(
         presenter: ContinueCoursePresenterProtocol,
         provider: ContinueCourseProviderProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        tooltipStorageManager: TooltipStorageManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.tooltipStorageManager = tooltipStorageManager
     }
 
     func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request) {
@@ -53,9 +57,26 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(
             courseId: currentCourse.id
         )
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Course.continuePressed(
+            source: "home_widget",
+            courseID: currentCourse.id,
+            courseTitle: currentCourse.title
+        ).send()
+
         self.moduleOutput?.presentLastStep(
             course: currentCourse,
             isAdaptive: isAdaptive
         )
+    }
+
+    func checkForTooltip(request: ContinueCourse.CheckTooltipAvailability.Request) {
+        self.presenter.presentTooltip(
+            response: .init(
+                shouldShowTooltip: !self.tooltipStorageManager.didShowOnHomeContinueLearning
+            )
+        )
+        self.tooltipStorageManager.didShowOnHomeContinueLearning = true
     }
 }

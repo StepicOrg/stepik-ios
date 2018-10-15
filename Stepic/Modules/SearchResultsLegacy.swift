@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchResultsModuleInputProtocol: class {
     func queryChanged(to query: String)
+    func search(query: String)
     func searchStarted()
     func searchCancelled()
 }

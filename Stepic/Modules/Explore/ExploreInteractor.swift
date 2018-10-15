@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
+    func loadContent(request: Explore.LoadContent.Request)
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request)
 }
 
@@ -20,10 +21,21 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
     init(
         presenter: ExplorePresenterProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
         languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
-        super.init(presenter: presenter, contentLanguageService: contentLanguageService)
+        super.init(
+            presenter: presenter,
+            contentLanguageService: contentLanguageService,
+            networkReachabilityService: networkReachabilityService
+        )
+    }
+
+    func loadContent(request: Explore.LoadContent.Request) {
+        self.explorePresenter?.presentContent(
+            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+        )
     }
 
     func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request) {
@@ -40,5 +52,30 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
 extension ExploreInteractor: StoriesOutputProtocol {
     func hideStories() {
         self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
+    }
+}
+
+extension ExploreInteractor: TagsOutputProtocol {
+    func presentCourseList(type: TagCourseListType) {
+        self.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: nil,
+                courseListType: type
+            )
+        )
+    }
+}
+
+extension ExploreInteractor: CourseListCollectionOutputProtocol {
+    func presentCourseList(
+        presentationDescription: CourseList.PresentationDescription,
+        type: CollectionCourseListType
+    ) {
+        self.loadFullscreenCourseList(
+            request: .init(
+                presentationDescription: presentationDescription,
+                courseListType: type
+            )
+        )
     }
 }

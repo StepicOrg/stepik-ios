@@ -9,12 +9,19 @@
 import UIKit
 
 protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
+    func presentContent(response: Explore.LoadContent.Response)
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response)
     func presentStoriesBlock(response: Explore.UpdateStoriesVisibility.Response)
 }
 
 final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
     lazy var exploreViewController = self.viewController as? ExploreViewControllerProtocol
+
+    func presentContent(response: Explore.LoadContent.Response) {
+        self.exploreViewController?.displayContent(
+            viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
+        )
+    }
 
     func presentLanguageSwitchBlock(response: Explore.CheckLanguageSwitchAvailability.Response) {
         self.exploreViewController?.displayLanguageSwitchBlock(

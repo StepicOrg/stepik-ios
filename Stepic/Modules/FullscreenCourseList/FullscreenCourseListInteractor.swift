@@ -9,14 +9,29 @@
 import Foundation
 import PromiseKit
 
-protocol FullscreenCourseListInteractorProtocol: CourseListOutputProtocol { }
+protocol FullscreenCourseListInteractorProtocol: CourseListOutputProtocol {
+    func tryToSetOnlineMode(request: FullscreenCourseList.TryToSetOnline.Request)
+}
 
 final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtocol {
     let presenter: FullscreenCourseListPresenterProtocol
+    let networkReachabilityService: NetworkReachabilityServiceProtocol
 
-    init(presenter: FullscreenCourseListPresenterProtocol) {
+    init(
+        presenter: FullscreenCourseListPresenterProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol
+    ) {
         self.presenter = presenter
+        self.networkReachabilityService = networkReachabilityService
     }
+
+    func tryToSetOnlineMode(request: FullscreenCourseList.TryToSetOnline.Request) {
+        if self.networkReachabilityService.isReachable {
+            request.module.setOnlineStatus()
+        }
+    }
+
+    // MARK: - CourseListOutputProtocol
 
     func presentCourseInfo(course: Course) {
         self.presenter.presentCourseInfo(response: .init(course: course))
@@ -35,10 +50,10 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
     }
 
     func presentEmptyState(sourceModule: CourseListInputProtocol) {
-
+        self.presenter.presentEmptyState()
     }
 
     func presentError(sourceModule: CourseListInputProtocol) {
-
+        self.presenter.presentErrorState()
     }
 }

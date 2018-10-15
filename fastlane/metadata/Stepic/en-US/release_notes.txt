@@ -1,6 +1,4 @@
-In the new version of Stepik we:
-• Added stories: discover interesting content and get last news
-• Fixed crash when downloading video on some devices
+In the new version of Stepik we updated home and explore screens.
 
 Enjoy learning!
 Stepik team

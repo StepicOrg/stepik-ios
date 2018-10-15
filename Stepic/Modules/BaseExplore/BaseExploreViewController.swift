@@ -9,7 +9,6 @@
 import UIKit
 
 protocol BaseExploreViewControllerProtocol: class {
-    func displayContent(viewModel: BaseExplore.LoadContent.ViewModel)
     func displayFullscreenCourseList(
         viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
     )
@@ -19,25 +18,27 @@ protocol BaseExploreViewControllerProtocol: class {
     func displayAuthorization()
 }
 
-protocol SubmoduleType {
-    // to be able to get submodule
-    var id: Int { get }
+protocol SubmoduleType: UniqueIdentifiable {
     var position: Int { get }
 }
 
 class BaseExploreViewController: UIViewController {
     let interactor: BaseExploreInteractorProtocol
     private var submodules: [Submodule] = []
-    private var state: BaseExplore.ViewControllerState
-
     lazy var exploreView = self.view as? BaseExploreView
 
-    init(
-        interactor: BaseExploreInteractorProtocol,
-        state: BaseExplore.ViewControllerState = .loading
-    ) {
+    // Disable landscape for iPhones cause it doesn't work with safe area (for X/XS)
+    // and navbar in landscape in bugged (black line)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return DeviceInfo.current.isPad ? .all : .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return DeviceInfo.current.isPad
+    }
+
+    init(interactor: BaseExploreInteractorProtocol) {
         self.interactor = interactor
-        self.state = state
 
         super.init(nibName: nil, bundle: nil)
         self.registerForNotifications()
@@ -56,14 +57,6 @@ class BaseExploreViewController: UIViewController {
     override func loadView() {
         let view = BaseExploreView(frame: UIScreen.main.bounds)
         self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.initLanguageIndependentSubmodules()
-
-        self.updateState(newState: self.state)
-        self.interactor.loadContent(request: .init())
     }
 
     // MARK: Modules
@@ -92,22 +85,20 @@ class BaseExploreViewController: UIViewController {
         for submodule in self.submodules where submodule.isLanguageDependent {
             self.removeSubmodule(submodule)
         }
-        self.submodules = self.submodules.filter { !$0.isLanguageDependent }
     }
 
     func removeSubmodule(_ submodule: Submodule) {
         self.exploreView?.removeBlockView(submodule.view)
         submodule.viewController?.removeFromParentViewController()
+        self.submodules = self.submodules.filter { submodule.view != $0.view }
     }
 
     func getSubmodule(type: SubmoduleType) -> Submodule? {
-        return self.submodules.first(where: { $0.type.id == type.id })
+        return self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
-    func initLanguageIndependentSubmodules() {
-    }
-
-    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    final func tryToSetOnlineState(moduleInput: CourseListInputProtocol) {
+        self.interactor.tryToSetOnlineMode(request: .init(modules: [moduleInput]))
     }
 
     private func registerForNotifications() {
@@ -116,19 +107,24 @@ class BaseExploreViewController: UIViewController {
             object: nil,
             queue: nil
         ) { [weak self] _ in
-            self?.interactor.loadContent(request: .init())
+            self?.refreshContentAfterLanguageChange()
+        }
+        NotificationCenter.default.addObserver(forName: .didLogin, object: nil, queue: nil) {
+            [weak self] _ in
+            self?.refreshContentAfterLoginAndLogout()
+        }
+        NotificationCenter.default.addObserver(forName: .didLogout, object: nil, queue: nil) {
+            [weak self] _ in
+            self?.refreshContentAfterLoginAndLogout()
         }
     }
 
-    private func updateState(newState: BaseExplore.ViewControllerState) {
-        switch newState {
-        case .normal(let language):
-            self.removeLanguageDependentSubmodules()
-            self.initLanguageDependentSubmodules(contentLanguage: language)
-        case .loading:
-            break
-        }
-        self.state = newState
+    func refreshContentAfterLanguageChange() {
+
+    }
+
+    func refreshContentAfterLoginAndLogout() {
+
     }
 
     // MARK: - Structs
@@ -142,14 +138,13 @@ class BaseExploreViewController: UIViewController {
 }
 
 extension BaseExploreViewController: BaseExploreViewControllerProtocol {
-    func displayContent(viewModel: BaseExplore.LoadContent.ViewModel) {
-        self.updateState(newState: viewModel.state)
-    }
-
     func displayFullscreenCourseList(
         viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
     ) {
-        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: viewModel.presentationDescription,
+            courseListType: viewModel.courseListType
+        )
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

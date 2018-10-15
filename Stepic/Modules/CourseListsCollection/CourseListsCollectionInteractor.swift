@@ -62,7 +62,10 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
             return
         }
 
-        self.moduleOutput?.presentCourseList(type: collectionCourseListType)
+        self.moduleOutput?.presentCourseList(
+            presentationDescription: request.presentationDescription,
+            type: collectionCourseListType
+        )
     }
 
     enum Error: Swift.Error {

@@ -27,7 +27,8 @@ final class ContinueCourseAssembly: Assembly {
         let interactor = ContinueCourseInteractor(
             presenter: presenter,
             provider: provider,
-            adaptiveStorageManager: AdaptiveStorageManager()
+            adaptiveStorageManager: AdaptiveStorageManager(),
+            tooltipStorageManager: TooltipStorageManager()
         )
         let viewController = ContinueCourseViewController(
             interactor: interactor

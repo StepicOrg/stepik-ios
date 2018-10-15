@@ -1,5 +1,5 @@
 //
-//  CourseWidgetLabel?.swift
+//  CourseWidgetLabel.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 14.08.2018.
@@ -10,7 +10,7 @@ import UIKit
 
 extension CourseWidgetLabel {
     struct Appearance {
-        let maxLinesCount = 3
+        var maxLinesCount = 3
         var font = UIFont.systemFont(ofSize: 16, weight: .regular)
         var textColor = UIColor.mainText
     }

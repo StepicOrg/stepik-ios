@@ -1,22 +1,21 @@
 //
-//  ContinueCourseSkeletonView.swift
+//  CourseListsCollectionSkeletonView.swift
 //  Stepic
 //
-//  Created by Vladislav Kiryukhin on 01.10.2018.
+//  Created by Vladislav Kiryukhin on 10.10.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import SnapKit
+import Foundation
 
-extension ContinueCourseSkeletonView {
+extension CourseListsCollectionSkeletonView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: -25, right: 20)
         let cornerRadius: CGFloat = 8.0
     }
 }
 
-final class ContinueCourseSkeletonView: UIView {
+final class CourseListsCollectionSkeletonView: UIView {
     let appearance: Appearance
 
     private lazy var largeView = UIView()
@@ -35,7 +34,7 @@ final class ContinueCourseSkeletonView: UIView {
     }
 }
 
-extension ContinueCourseSkeletonView: ProgrammaticallyInitializableViewProtocol {
+extension CourseListsCollectionSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .clear
 

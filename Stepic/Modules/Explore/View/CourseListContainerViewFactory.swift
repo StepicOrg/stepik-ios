@@ -29,6 +29,7 @@ final class CourseListContainerViewFactory {
         var title: String?
         var summary: String?
         var description: String
+        var color: GradientCoursesPlaceholderView.Color
     }
 
     enum Appearance {
@@ -68,7 +69,8 @@ final class CourseListContainerViewFactory {
     ) -> ExploreBlockContainerView {
         let headerView = ExploreCoursesCollectionHeaderView(
             frame: .zero,
-            description: headerDescription.description
+            description: headerDescription.description,
+            color: headerDescription.color
         )
         headerView.titleText = headerDescription.title
         headerView.summaryText = headerDescription.summary
