@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
-        NotificationService.shared.appDidFinishLaunching(with: launchOptions)
+        NotificationsService.shared.appDidFinishLaunching(with: launchOptions)
 
         checkNotificationsCount()
 
@@ -148,12 +148,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        NotificationService.shared.didReceiveRemoteNotification(with: userInfo)
+        NotificationsService.shared.didReceiveRemoteNotification(with: userInfo)
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        NotificationService.shared.didReceiveLocalNotification(with: notification.userInfo)
+        NotificationsService.shared.didReceiveLocalNotification(with: notification.userInfo)
     }
 
     // MARK: Private Helpers

@@ -13,20 +13,20 @@ final class PersonalDeadlineManager {
     var counter: PersonalDeadlineCounter
     var storageRecordsAPI: StorageRecordsAPI
     var localStorageManager: PersonalDeadlineLocalStorageManager
-    var notificationsService: NotificationService
+    var notificationsService: NotificationsService
 
     static let shared = PersonalDeadlineManager(
         counter: PersonalDeadlineCounter(),
         storageRecordsAPI: StorageRecordsAPI(),
         localStorageManager: PersonalDeadlineLocalStorageManager(),
-        notificationsService: NotificationService.shared
+        notificationsService: NotificationsService.shared
     )
 
     init(
         counter: PersonalDeadlineCounter,
         storageRecordsAPI: StorageRecordsAPI,
         localStorageManager: PersonalDeadlineLocalStorageManager,
-        notificationsService: NotificationService
+        notificationsService: NotificationsService
     ) {
         self.counter = counter
         self.storageRecordsAPI = storageRecordsAPI

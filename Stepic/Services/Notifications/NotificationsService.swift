@@ -1,5 +1,5 @@
 //
-//  NotificationService.swift
+//  NotificationsService.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 11/10/2018.
@@ -11,10 +11,10 @@ import UserNotifications
 import PromiseKit
 import SwiftyJSON
 
-final class NotificationService: NSObject {
+final class NotificationsService: NSObject {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
-    static let shared = NotificationService()
+    static let shared = NotificationsService()
 
     private let localNotificationService: LocalNotificationService
     private let routingService: DeepLinkRoutingService
@@ -64,9 +64,9 @@ final class NotificationService: NSObject {
     }
 }
 
-// MARK: - NotificationService (LocalNotifications) -
+// MARK: - NotificationsService (LocalNotifications) -
 
-extension NotificationService {
+extension NotificationsService {
     func scheduleLocalNotification(
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
@@ -123,9 +123,9 @@ extension NotificationService {
     }
 }
 
-// MARK: - NotificationService (RemoteNotifications) -
+// MARK: - NotificationsService (RemoteNotifications) -
 
-extension NotificationService {
+extension NotificationsService {
     func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
         print("remote notification received: DEBUG = \(userInfo)")
 
@@ -183,10 +183,10 @@ extension NotificationService {
     }
 }
 
-// MARK: - NotificationService: UNUserNotificationCenterDelegate -
+// MARK: - NotificationsService: UNUserNotificationCenterDelegate -
 
 @available(iOS 10.0, *)
-extension NotificationService: UNUserNotificationCenterDelegate {
+extension NotificationsService: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,

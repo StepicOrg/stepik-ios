@@ -1,5 +1,5 @@
 //
-//  NotificationService+PersonalDeadline.swift
+//  NotificationsService+PersonalDeadline.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 15/10/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UserNotifications
 
-extension NotificationService {
+extension NotificationsService {
     private static let hoursBeforePersonalDeadlineNotification = [12, 36]
 
     func updatePersonalDeadlineNotifications(for course: Course) {
@@ -21,7 +21,7 @@ extension NotificationService {
             guard let section = course.sections.first(where: { $0.id == deadline.section }) else {
                 continue
             }
-            for hoursBeforeDeadline in NotificationService.hoursBeforePersonalDeadlineNotification {
+            for hoursBeforeDeadline in NotificationsService.hoursBeforePersonalDeadlineNotification {
                 let fireDate = deadline.deadlineDate.addingTimeInterval(-Double(hoursBeforeDeadline) * 60 * 60)
                 schedulePersonalDeadlineNotification(course: course, section: section, fireDate: fireDate, hoursBeforeDeadline: hoursBeforeDeadline)
             }
@@ -72,7 +72,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     }
 
     var identifier: String {
-        return "\(NotificationService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
+        return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")

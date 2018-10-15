@@ -1,5 +1,5 @@
 //
-//  NotificationService+Streak.swift
+//  NotificationsService+Streak.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 14/10/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import UserNotifications
 
-extension NotificationService {
+extension NotificationsService {
     func scheduleStreakLocalNotification(UTCStartHour: Int, cancelPrevious: Bool = true) {
         let contentProvider = StreakLocalNotificationContentProvider(UTCStartHour: UTCStartHour)
 
@@ -40,7 +40,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     var userInfo: [AnyHashable : Any]?
 
     var identifier: String {
-        return "\(NotificationService.NotificationTypes.streak.rawValue)_local_notification"
+        return "\(NotificationsService.NotificationTypes.streak.rawValue)_local_notification"
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")

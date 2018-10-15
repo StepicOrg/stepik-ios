@@ -2263,7 +2263,7 @@
 		2C8715222164E29400847A39 /* ContentLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C116ED420A46A8D2642 /* ContentLanguageService.swift */; };
 		2C8715242164E3A300847A39 /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981D7FD7BD900738BB677 /* UICollectionViewExtensions.swift */; };
 		2C8715252164E3A900847A39 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98480E472319CCB60BE83 /* UITableViewExtensions.swift */; };
-		2C8908A0216F465200083341 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationService.swift */; };
+		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
 		2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C89A9561F4C289900227C3B /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -5762,7 +5762,7 @@
 		2C86525F1F4B2F7D00D51654 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/1838/Tokens.plist; sourceTree = "<group>"; };
 		2C8652671F4B2FA500D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/1838/ru.lproj/step0.html; sourceTree = "<group>"; };
 		2C8652691F4B2FAA00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1838/en.lproj/step0.html; sourceTree = "<group>"; };
-		2C89089F216F465200083341 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		2C89A93E1F4C285B00227C3B /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/GMAT/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C89A93F1F4C285B00227C3B /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/GMAT/Auth.plist; sourceTree = "<group>"; };
 		2C89A9401F4C285B00227C3B /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/GMAT/Config.plist; sourceTree = "<group>"; };
@@ -9895,7 +9895,7 @@
 		2CAD8B9E2170CDF7003F420B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				2C89089F216F465200083341 /* NotificationService.swift */,
+				2C89089F216F465200083341 /* NotificationsService.swift */,
 				2C331C5621734764007B0D01 /* NotificationService+Streak.swift */,
 				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
 				2CAD8B9A217096AB003F420B /* LocalNotificationService.swift */,
@@ -14616,7 +14616,7 @@
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
-				2C8908A0216F465200083341 /* NotificationService.swift in Sources */,
+				2C8908A0216F465200083341 /* NotificationsService.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				08E43EA3214C2C5800E3CB50 /* ModalStackRouter.swift in Sources */,
