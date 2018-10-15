@@ -37,21 +37,30 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         }
     }
 
-    var identifier = "\(NotificationService.NotificationTypes.streak.rawValue)_local_notification"
-
     var userInfo: [AnyHashable : Any]?
+    
+    var identifier: String {
+        return "\(NotificationService.NotificationTypes.streak.rawValue)_local_notification"
+    }
 
-    var soundName = "default_sound.wav"
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")
+    var soundName: String {
+        return "default_sound.wav"
+    }
 
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
+    var repeatInterval: NSCalendar.Unit? {
+        return .day
+    }
+    
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
+    var fireDate: Date? {
+        return calendar.date(from: dateComponents)
+    }
+    
     @available(iOS 10.0, *)
     var sound: UNNotificationSound {
         return UNNotificationSound(named: soundName)
-    }
-
-    var repeatInterval: NSCalendar.Unit? = NSCalendar.Unit.day
-
-    var fireDate: Date? {
-        return calendar.date(from: dateComponents)
     }
 
     @available(iOS 10.0, *)
@@ -60,8 +69,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     }
 
     let UTCStartHour: Int
-
-    private let calendar = Calendar(identifier: .gregorian)
+    let calendar: Calendar
 
     private var dateComponents: DateComponents {
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
@@ -87,7 +95,8 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         return components
     }
 
-    init(UTCStartHour: Int) {
+    init(UTCStartHour: Int, calendar: Calendar = Calendar(identifier: .gregorian)) {
         self.UTCStartHour = UTCStartHour
+        self.calendar = calendar
     }
 }
