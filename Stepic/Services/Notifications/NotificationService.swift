@@ -60,25 +60,27 @@ final class NotificationService: NSObject {
 
     enum NotificationTypes: String {
         case streak
-        case personalDeadline
+        case personalDeadline = "personaldeadline"
     }
 }
 
 // MARK: - NotificationService (LocalNotifications) -
 
 extension NotificationService {
-    func scheduleLocalNotification(with contentProvider: LocalNotificationContentProvider) {
+    func scheduleLocalNotification(
+        with contentProvider: LocalNotificationContentProvider,
+        removeIdentical: Bool = true
+    ) {
         NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
             if !status.isRegistered {
                 NotificationRegistrator.shared.registerForRemoteNotifications()
             }
             return .value(())
-        }.then {
-            self.localNotificationService.isNotificationExists(withIdentifier: contentProvider.identifier)
-        }.then { isExists -> Promise<Void> in
-            if isExists {
+        }.then { _ -> Promise<Void> in
+            if removeIdentical {
                 self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
             }
+            
             return .value(())
         }.then {
             self.localNotificationService.scheduleNotification(contentProvider: contentProvider)
