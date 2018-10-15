@@ -9,13 +9,21 @@
 import Foundation
 
 class TabBarRouter: SourcelessRouter, RouterProtocol {
-    var tab: Int
+    var tab: Tab
 
-    init(tab: Int) {
+    init(tab: Tab) {
         self.tab = tab
     }
 
     func route() {
-        currentTabBarController?.selectedIndex = tab
+        currentTabBarController?.selectedIndex = tab.rawValue
+    }
+
+    enum Tab: Int {
+        case home
+        case catalog
+        case profile
+        case certificates
+        case notifications
     }
 }

@@ -63,10 +63,12 @@ class DeepLinkRoutingService {
         }
 
         switch route {
+        case .home:
+            return TabBarRouter(tab: .home)
         case .catalog:
-            return TabBarRouter(tab: 1)
+            return TabBarRouter(tab: .catalog)
         case .notifications:
-            return TabBarRouter(tab: 4)
+            return TabBarRouter(tab: .notifications)
         case .course, .discussions, .lesson, .profile, .syllabus:
             return ModalOrPushStackRouter(
                 source: source,
