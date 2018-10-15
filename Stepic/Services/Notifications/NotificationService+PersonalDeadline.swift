@@ -11,12 +11,12 @@ import UserNotifications
 
 extension NotificationService {
     private static let hoursBeforePersonalDeadlineNotification = [12, 36]
-    
+
     func updatePersonalDeadlineNotifications(for course: Course) {
         guard let deadlines = course.sectionDeadlines else {
             return
         }
-        
+
         for deadline in deadlines {
             guard let section = course.sections.first(where: { $0.id == deadline.section }) else {
                 continue
@@ -27,7 +27,7 @@ extension NotificationService {
             }
         }
     }
-    
+
     private func schedulePersonalDeadlineNotification(
         course: Course,
         section: Section,
@@ -48,7 +48,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     var title: String {
         return "\(course.title)"
     }
-    
+
     var body: String {
         if #available(iOS 10.0, *) {
             return NSString.localizedUserNotificationString(
@@ -62,7 +62,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
             )
         }
     }
-    
+
     var userInfo: [AnyHashable : Any]? {
         return [
             Keys.course.rawValue: course.id,
@@ -70,21 +70,21 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
             Keys.hoursBeforeDeadline: hoursBeforeDeadline
         ]
     }
-    
+
     var identifier: String {
         return "\(NotificationService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
     }
-    
+
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")
     var soundName: String {
         return UILocalNotificationDefaultSoundName
     }
-    
+
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var fireDate: Date? {
         return Calendar.current.date(from: dateComponents)
     }
-    
+
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var repeatInterval: NSCalendar.Unit? {
         return nil
@@ -94,15 +94,15 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     var sound: UNNotificationSound {
         return .default()
     }
-    
+
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
         return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     }
-    
+
     private var dateComponents: DateComponents {
         let timeZone = TimeZone(identifier: "UTC") ?? .current
-        
+
         let donorComponents = Calendar.current.dateComponents(
             in: timeZone,
             from: deadlineDate
@@ -117,22 +117,22 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
             minute: donorComponents.minute,
             second: 0
         )
-        
+
         return components
     }
-    
+
     let course: Course
     let section: Section
     let deadlineDate: Date
     let hoursBeforeDeadline: Int
-    
+
     init(course: Course, section: Section, deadlineDate: Date, hoursBeforeDeadline: Int) {
         self.course = course
         self.section = section
         self.deadlineDate = deadlineDate
         self.hoursBeforeDeadline = hoursBeforeDeadline
     }
-    
+
     enum Keys: String {
         case course
         case section

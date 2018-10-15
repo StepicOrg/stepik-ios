@@ -80,7 +80,7 @@ extension NotificationService {
             if removeIdentical {
                 self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
             }
-            
+
             return .value(())
         }.then {
             self.localNotificationService.scheduleNotification(contentProvider: contentProvider)
