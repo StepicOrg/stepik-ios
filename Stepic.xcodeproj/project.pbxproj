@@ -3225,6 +3225,7 @@
 		2CA1001B2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2CA1001C2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2CA1001D2174BDEC003775CB /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
 		2CA2C66820FA5D3C005EC191 /* AuthGreetingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66720FA5D3C005EC191 /* AuthGreetingRouter.swift */; };
 		2CA2E705202338D8001DC410 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
@@ -5809,6 +5810,7 @@
 		2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
 		2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+PersonalDeadline.swift"; sourceTree = "<group>"; };
 		2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineLocalNotificationContentProvider.swift; sourceTree = "<group>"; };
+		2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakLocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		2CA2C66720FA5D3C005EC191 /* AuthGreetingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingRouter.swift; sourceTree = "<group>"; };
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
@@ -10668,8 +10670,9 @@
 			isa = PBXGroup;
 			children = (
 				62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */,
-				62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */,
+				2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */,
 				2C331C5621734764007B0D01 /* NotificationService+Streak.swift */,
+				62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */,
 			);
 			name = StreakNotificationsControl;
 			sourceTree = "<group>";
@@ -14562,6 +14565,7 @@
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
+				2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				089587F520A20C5D003BAFB3 /* Enrollment.swift in Sources */,
