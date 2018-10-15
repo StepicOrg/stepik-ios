@@ -47,8 +47,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        return UNTimeIntervalNotificationTrigger(timeInterval: 5.0 + Double(Int.random() % 5), repeats: false)
-        //return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     }
 
     private var dateComponents: DateComponents {

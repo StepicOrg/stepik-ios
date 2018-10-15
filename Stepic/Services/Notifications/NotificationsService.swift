@@ -116,7 +116,11 @@ extension NotificationsService {
         if key.localizedCaseInsensitiveContains(NotificationTypes.streak.rawValue) {
             routeToHome()
         } else if key.localizedCaseInsensitiveContains(NotificationTypes.personalDeadline.rawValue) {
+            guard let courseId = userInfo[PersonalDeadlineLocalNotificationContentProvider.Keys.course.rawValue] as? Int else {
+                return routeToHome()
+            }
 
+            routingService.route(DeepLinkRoutingService.Route.course(courseID: courseId))
         } else {
             routeToHome()
         }
