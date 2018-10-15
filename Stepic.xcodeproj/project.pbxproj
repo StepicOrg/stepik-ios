@@ -3217,6 +3217,7 @@
 		2C9E3F431F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
 		2C9E3F451F7A976D00DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
 		2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */; };
+		2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
 		2CA2C66820FA5D3C005EC191 /* AuthGreetingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2C66720FA5D3C005EC191 /* AuthGreetingRouter.swift */; };
 		2CA2E705202338D8001DC410 /* AdaptiveRatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */; };
@@ -5800,6 +5801,7 @@
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
 		2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+PersonalDeadline.swift"; sourceTree = "<group>"; };
+		2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineLocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		2CA2C66720FA5D3C005EC191 /* AuthGreetingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingRouter.swift; sourceTree = "<group>"; };
 		2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveCardsStepsPresenter.swift; sourceTree = "<group>"; };
@@ -6754,6 +6756,7 @@
 				08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */,
 				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
 				083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */,
+				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */,
 				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
 				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
 				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
@@ -14405,6 +14408,7 @@
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
+				2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				08FA62242121BF1200F00275 /* ShrinkDismissAnimationController.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
