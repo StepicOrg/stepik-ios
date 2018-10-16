@@ -11,10 +11,8 @@ import UserNotifications
 import PromiseKit
 import SwiftyJSON
 
-final class NotificationsService: NSObject {
+final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
-
-    static let shared = NotificationsService()
 
     private let localNotificationsService: LocalNotificationsService
     private let routingService: DeepLinkRoutingService
@@ -23,26 +21,23 @@ final class NotificationsService: NSObject {
         return UIApplication.shared.applicationState == .active
     }
 
-    private override init() {
-        self.localNotificationsService = LocalNotificationsService()
-        self.routingService = DeepLinkRoutingService()
-
-        super.init()
-
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
+    init(
+        localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
+    ) {
+        self.localNotificationsService = localNotificationsService
+        self.routingService = deepLinkRoutingService
     }
 
     func appDidFinishLaunching(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         if launchOptions?[.localNotification] != nil {
             let notification = launchOptions?[.localNotification] as? UILocalNotification
-            didReceiveLocalNotification(with: notification?.userInfo)
+            self.didReceiveLocalNotification(with: notification?.userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
                 notificationType: notification?.userInfo?.notificationType
             ).send()
         } else if let userInfo = launchOptions?[.remoteNotification] as? NotificationUserInfo {
-            didReceiveRemoteNotification(with: userInfo)
+            self.didReceiveRemoteNotification(with: userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
                 notificationType: userInfo.notificationType
             ).send()
@@ -71,45 +66,40 @@ extension NotificationsService {
             if !status.isRegistered {
                 NotificationRegistrator.shared.registerForRemoteNotifications()
             }
-            return .value(())
-        }.then { _ -> Promise<Void> in
+
             if removeIdentical {
                 self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
             }
 
-            return .value(())
-        }.then {
-            self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
+            return self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
         }.catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
 
     func removeAllLocalNotifications() {
-        localNotificationsService.removeAllNotifications()
+        self.localNotificationsService.removeAllNotifications()
     }
 
     func removeLocalNotifications(withIdentifiers identifiers: [String]) {
-        guard !identifiers.isEmpty else {
-            return
+        if !identifiers.isEmpty {
+            self.localNotificationsService.removeNotifications(withIdentifiers: identifiers)
         }
-
-        localNotificationsService.removeNotifications(withIdentifiers: identifiers)
     }
 
     func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
 
-        if isInForeground, let notificationType = userInfo?.notificationType {
+        if self.isInForeground, let notificationType = userInfo?.notificationType {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
-        routeLocalNotification(with: userInfo)
+        self.routeLocalNotification(with: userInfo)
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
         func routeToHome() {
-            routingService.route(.home)
+            self.routingService.route(.home)
         }
 
         guard let userInfo = userInfo as? [String: Any],
@@ -124,7 +114,7 @@ extension NotificationsService {
                 return routeToHome()
             }
 
-            routingService.route(.course(courseID: courseId))
+            self.routingService.route(.course(courseID: courseId))
         } else {
             routeToHome()
         }
@@ -141,7 +131,7 @@ extension NotificationsService {
             return print("remote notification received: unable to parse notification type")
         }
 
-        if isInForeground {
+        if self.isInForeground {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: type).send()
         }
 
@@ -195,7 +185,7 @@ extension NotificationsService {
         // Show alert for iOS 9.0 when the application is in foreground state.
         if #available(iOS 10.0, *) {
             NotificationReactionHandler().handle(with: notification)
-        } else if isInForeground {
+        } else if self.isInForeground {
             NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
                 NotificationReactionHandler().handle(with: notification)
             })
@@ -226,19 +216,6 @@ extension NotificationsService {
         case id
         case new
         case badge
-    }
-}
-
-// MARK: - NotificationsService: UNUserNotificationCenterDelegate -
-
-@available(iOS 10.0, *)
-extension NotificationsService: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        completionHandler([.alert, .sound])
     }
 }
 

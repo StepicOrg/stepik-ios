@@ -11,46 +11,77 @@ import Foundation
 final class LocalNotificationsMigrator {
     private let notificationsService: NotificationsService
     private let authInfo: AuthInfo
+    private let notificationPreferencesContainer: NotificationPreferencesContainer
+    private let personalDeadlineManager: PersonalDeadlineManager
 
-    init(notificationsService: NotificationsService = .shared, authInfo: AuthInfo = .shared) {
+    init(
+        notificationsService: NotificationsService = NotificationsService(),
+        authInfo: AuthInfo = .shared,
+        notificationPreferencesContainer: NotificationPreferencesContainer = NotificationPreferencesContainer(),
+        personalDeadlineManager: PersonalDeadlineManager = .shared
+    ) {
         self.notificationsService = notificationsService
         self.authInfo = authInfo
+        self.notificationPreferencesContainer = notificationPreferencesContainer
+        self.personalDeadlineManager = personalDeadlineManager
     }
 
     func migrateIfNeeded() {
-        guard !DefaultsContainer.notifications.didMigrateLocalNotifications else {
+        if self.didMigrateLocalNotifications {
             return
         }
 
-        notificationsService.removeAllLocalNotifications()
+        self.notificationsService.removeAllLocalNotifications()
 
-        migrateStreakNotifications()
-        migratePersonalDeadlinesNotifications()
+        self.migrateStreakNotifications()
+        self.migratePersonalDeadlinesNotifications()
 
-        DefaultsContainer.notifications.didMigrateLocalNotifications = true
-        DefaultsContainer.notifications.localNotificationsVersion = 2
+        self.didMigrateLocalNotifications = true
+        self.localNotificationsVersion = 2
     }
 
     private func migrateStreakNotifications() {
-        guard PreferencesContainer.notifications.allowStreaksNotifications else {
-            return
+        if self.notificationPreferencesContainer.allowStreaksNotifications {
+            self.notificationsService.scheduleStreakLocalNotification(
+                UTCStartHour: self.notificationPreferencesContainer.streaksNotificationStartHourUTC
+            )
         }
-
-        notificationsService.scheduleStreakLocalNotification(
-            UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC
-        )
     }
 
     private func migratePersonalDeadlinesNotifications() {
-        guard let userID = authInfo.userId else {
+        guard let userID = self.authInfo.userId else {
             return
         }
 
         for course in Course.getAllCourses(enrolled: true) {
-            _ = PersonalDeadlineManager.shared.syncDeadline(
-                for: course,
-                userID: userID
-            )
+            _ = self.personalDeadlineManager.syncDeadline(for: course, userID: userID)
+        }
+    }
+}
+
+extension LocalNotificationsMigrator {
+    private static let didMigrateLocalNotificationsKey = "didMigrateLocalNotificationsKey"
+    private static let localNotificationsVersionKey = "localNotificationsVersionKey"
+
+    private var didMigrateLocalNotifications: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
+        }
+    }
+
+    private var localNotificationsVersion: Int {
+        get {
+            if let version = UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int {
+                return version
+            } else {
+                return 1
+            }
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.localNotificationsVersionKey)
         }
     }
 }

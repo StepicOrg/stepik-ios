@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -95,7 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         LocalNotificationsMigrator().migrateIfNeeded()
-        NotificationsService.shared.appDidFinishLaunching(with: launchOptions)
+        NotificationsService().appDidFinishLaunching(with: launchOptions)
+        self.userNotificationsCenterDelegate.attachNotificationDelegate()
 
         checkNotificationsCount()
 
@@ -148,12 +151,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        NotificationsService.shared.didReceiveRemoteNotification(with: userInfo)
+        NotificationsService().didReceiveRemoteNotification(with: userInfo)
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        NotificationsService.shared.didReceiveLocalNotification(with: notification.userInfo)
+        NotificationsService().didReceiveLocalNotification(with: notification.userInfo)
     }
 
     // MARK: Private Helpers

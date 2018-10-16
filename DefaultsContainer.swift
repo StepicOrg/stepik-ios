@@ -16,5 +16,4 @@ class DefaultsContainer {
     static let launch = LaunchDefaultsContainer()
     static let personalDeadlines = PersonalDeadlinesDefaultsContainer()
     static let explore = ExploreDefaultsContainer()
-    static let notifications = NotificationsDefaultsContainer()
 }

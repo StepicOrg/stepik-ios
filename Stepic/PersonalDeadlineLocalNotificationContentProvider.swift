@@ -11,19 +11,19 @@ import UserNotifications
 
 final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationContentProvider {
     var title: String {
-        return "\(course.title)"
+        return "\(self.course.title)"
     }
 
     var body: String {
         if #available(iOS 10.0, *) {
             return NSString.localizedUserNotificationString(
                 forKey: "PersonalDeadlineNotificationBody",
-                arguments: ["\(section.title)", "\(hoursBeforeDeadline)"]
+                arguments: ["\(self.section.title)", "\(self.hoursBeforeDeadline)"]
             )
         } else {
             return String(
                 format: NSLocalizedString("PersonalDeadlineNotificationBody", comment: ""),
-                "\(section.title)", "\(hoursBeforeDeadline)"
+                "\(self.section.title)", "\(self.hoursBeforeDeadline)"
             )
         }
     }
@@ -32,22 +32,22 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return [
             Keys.course.rawValue: course.id,
             Keys.section.rawValue: section.id,
-            Keys.hoursBeforeDeadline.rawValue: hoursBeforeDeadline,
+            Keys.hoursBeforeDeadline.rawValue: self.hoursBeforeDeadline,
             NotificationsService.Keys.type.rawValue: NotificationsService.NotificationTypes.personalDeadline.rawValue
         ]
     }
 
     var identifier: String {
-        return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
+        return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
     }
 
     var fireDate: Date? {
-        return Calendar.current.date(from: dateComponents)
+        return Calendar.current.date(from: self.dateComponents)
     }
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: false)
     }
 
     private var dateComponents: DateComponents {
@@ -55,7 +55,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
 
         let donorComponents = Calendar.current.dateComponents(
             in: timeZone,
-            from: deadlineDate
+            from: self.deadlineDate
         )
         let components = DateComponents(
             calendar: Calendar.current,
@@ -71,10 +71,10 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return components
     }
 
-    let course: Course
-    let section: Section
-    let deadlineDate: Date
-    let hoursBeforeDeadline: Int
+    private let course: Course
+    private let section: Section
+    private let deadlineDate: Date
+    private let hoursBeforeDeadline: Int
 
     init(course: Course, section: Section, deadlineDate: Date, hoursBeforeDeadline: Int) {
         self.course = course

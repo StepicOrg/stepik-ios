@@ -16,7 +16,6 @@ final class LocalNotificationsService {
     // MARK: - Getting Notifications -
 
     /// Returns a list of all currently scheduled local notifications.
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use getAllNotifications()")
     func getScheduledNotifications() -> [UILocalNotification] {
         return UIApplication.shared.scheduledLocalNotifications ?? []
     }
@@ -38,7 +37,7 @@ final class LocalNotificationsService {
     }
 
     @available(iOS 10.0, *)
-    func getPendingNotificationRequests() -> Guarantee<[UNNotificationRequest]> {
+    private func getPendingNotificationRequests() -> Guarantee<[UNNotificationRequest]> {
         return Guarantee { seal in
             UNUserNotificationCenter.current().getPendingNotificationRequests {
                 seal($0)
@@ -47,7 +46,7 @@ final class LocalNotificationsService {
     }
 
     @available(iOS 10.0, *)
-    func getDeliveredNotifications() -> Guarantee<[UNNotification]> {
+    private func getDeliveredNotifications() -> Guarantee<[UNNotification]> {
         return Guarantee { seal in
             UNUserNotificationCenter.current().getDeliveredNotifications {
                 seal($0)
@@ -66,22 +65,17 @@ final class LocalNotificationsService {
         }
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use removeNotifications(withIdentifiers:)")
-    func removeNotification(_ notification: UILocalNotification) {
-        UIApplication.shared.cancelLocalNotification(notification)
-    }
-
     func removeNotifications(withIdentifiers identifiers: [String]) {
-        guard !identifiers.isEmpty else {
+        if identifiers.isEmpty {
             return
         }
 
         if #available(iOS 10.0, *) {
-            removePendingNotificationRequests(withIdentifiers: identifiers)
-            removeDeliveredNotifications(withIdentifiers: identifiers)
+            self.removePendingNotificationRequests(withIdentifiers: identifiers)
+            self.removeDeliveredNotifications(withIdentifiers: identifiers)
         } else {
             let idsSet = Set(identifiers)
-            getScheduledNotifications().forEach { notification in
+            self.getScheduledNotifications().forEach { notification in
                 guard let userInfo = notification.userInfo,
                       let id = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
                     return
@@ -95,12 +89,12 @@ final class LocalNotificationsService {
     }
 
     @available(iOS 10.0, *)
-    func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
+    private func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
 
     @available(iOS 10.0, *)
-    func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+    private func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 
@@ -117,17 +111,13 @@ final class LocalNotificationsService {
     func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
         if #available(iOS 10.0, *) {
             return Guarantee { seal in
-                getAllNotifications().done { (pending, delivered) in
-                    for request in pending {
-                        if request.identifier == identifier {
-                            return seal(true)
-                        }
+                self.getAllNotifications().done { (pending, delivered) in
+                    if pending.first(where: { $0.identifier == identifier }) != nil {
+                        return seal(true)
                     }
 
-                    for notification in delivered {
-                        if notification.request.identifier == identifier {
-                            return seal(true)
-                        }
+                    if delivered.first(where: { $0.request.identifier == identifier }) != nil {
+                        return seal(true)
                     }
 
                     seal(false)
@@ -135,9 +125,7 @@ final class LocalNotificationsService {
             }
         } else {
             return Guarantee { seal in
-                let notifications = getScheduledNotifications()
-
-                for notification in notifications {
+                for notification in self.getScheduledNotifications() {
                     guard let userInfo = notification.userInfo,
                           let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
                         continue
@@ -193,12 +181,11 @@ final class LocalNotificationsService {
         content.title = contentProvider.title
         content.body = contentProvider.body
         content.sound = contentProvider.sound
-        content.userInfo = getMergedUserInfo(contentProvider: contentProvider)
+        content.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
 
         return content
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use un_scheduleNotification(contentProvider:")
     private func localNotificationScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
@@ -207,7 +194,7 @@ final class LocalNotificationsService {
         notification.alertBody = contentProvider.body
         notification.fireDate = contentProvider.fireDate
         notification.soundName = contentProvider.soundName
-        notification.userInfo = getMergedUserInfo(contentProvider: contentProvider)
+        notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
 
         if let repeatInterval = contentProvider.repeatInterval {
             notification.repeatInterval = repeatInterval

@@ -72,7 +72,7 @@ class AuthInfo: NSObject {
                         AuthInfo.shared.user = nil
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
-                        NotificationsService.shared.removeAllLocalNotifications()
+                        NotificationsService().removeAllLocalNotifications()
 
                         strongSelf.setTokenValue(nil)
                         NotificationCenter.default.post(name: .didLogout, object: nil)
