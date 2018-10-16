@@ -123,9 +123,7 @@ extension NotificationsService {
 
 extension NotificationsService {
     func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
-        //print("remote notification received: DEBUG = \(userInfo)")
-
-        logJSONString(userInfo: userInfo)
+        print("remote notification received: DEBUG = \(userInfo)")
 
         guard let notification = userInfo as? [String: Any] else {
             return print("remote notification received: unable to parse userInfo")
@@ -201,14 +199,6 @@ extension NotificationsService {
 
     private func resolveRemoteAchievementNotification(_ notificationDict: [String: Any]) {
         TabBarRouter(tab: .profile).route()
-    }
-
-    private func logJSONString(userInfo: NotificationUserInfo) {
-        let theJSONData = try! JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
-        let theJSONText = String(data: theJSONData, encoding: .ascii)!
-        print("\n\n")
-        print(theJSONText)
-        print("\n\n")
     }
 
     private enum Keys: String {
