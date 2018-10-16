@@ -203,7 +203,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     )
                 )
             }.catch { _ in
-
+                // FIXME: use dismiss with error
+                self.presenter.dismissWaitingState()
             }
         }
     }
