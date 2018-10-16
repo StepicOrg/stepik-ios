@@ -24,7 +24,6 @@ final class NotificationsDefaultsContainer {
         }
         set {
             defaults.set(newValue, forKey: didMigrateLocalNotificationsKey)
-            defaults.synchronize()
         }
     }
 
@@ -38,7 +37,6 @@ final class NotificationsDefaultsContainer {
         }
         set {
             defaults.set(newValue, forKey: localNotificationsVersionKey)
-            defaults.synchronize()
         }
     }
 }
