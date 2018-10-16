@@ -13,14 +13,14 @@ extension NotificationsService {
         let contentProvider = StreakLocalNotificationContentProvider(UTCStartHour: UTCStartHour)
 
         if cancelPrevious {
-            removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
         }
 
-        scheduleLocalNotification(with: contentProvider)
+        self.scheduleLocalNotification(with: contentProvider)
     }
 
     func cancelStreakLocalNotifications() {
         let contentProvider = StreakLocalNotificationContentProvider(UTCStartHour: 0)
-        removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+        self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
     }
 }

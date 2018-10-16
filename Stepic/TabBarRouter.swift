@@ -23,10 +23,10 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
     }
 
     func route() {
-        currentTabBarController?.loadViewIfNeeded()
-        currentTabBarController?.selectedIndex = tab.rawValue
+        self.currentTabBarController?.loadViewIfNeeded()
+        self.currentTabBarController?.selectedIndex = tab.rawValue
 
-        if tab == .notifications {
+        if self.tab == .notifications {
             selectNotificationsSection()
         }
     }

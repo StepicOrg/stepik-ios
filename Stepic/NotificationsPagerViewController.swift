@@ -71,11 +71,9 @@ class NotificationsPagerViewController: PagerController, ControllerWithStepikPla
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
-        guard let index = sections.index(of: notificationSection) else {
-            return
+        if let index = self.sections.index(of: notificationSection) {
+            self.selectTabAtIndex(index)
         }
-
-        selectTabAtIndex(index)
     }
 }
 

@@ -39,12 +39,12 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     }
 
     var fireDate: Date? {
-        return calendar.date(from: dateComponents)
+        return self.calendar.date(from: self.dateComponents)
     }
 
     @available(iOS 10.0, *)
     var sound: UNNotificationSound {
-        return UNNotificationSound(named: soundName)
+        return UNNotificationSound(named: self.soundName)
     }
 
     @available(iOS 10.0, *)
@@ -52,12 +52,12 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
     }
 
-    let UTCStartHour: Int
-    let calendar: Calendar
+    private let UTCStartHour: Int
+    private let calendar: Calendar
 
     private var dateComponents: DateComponents {
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
-        var localStartHour = UTCStartHour + timeZoneDiff
+        var localStartHour = self.UTCStartHour + timeZoneDiff
 
         if localStartHour < 0 {
             localStartHour = 24 + localStartHour

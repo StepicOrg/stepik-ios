@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
-            checkForUpdates()
+            self.checkForUpdates()
         }
 
         if AuthInfo.shared.isAuthorized {
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsService().appDidFinishLaunching(with: launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
 
-        checkNotificationsCount()
+        self.checkNotificationsCount()
 
         NotificationCenter.default.addObserver(
             self,
@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             name: .UIDeviceOrientationDidChange,
             object: nil
         )
-        didChangeOrientation()
+        self.didChangeOrientation()
 
         return true
     }
@@ -186,7 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
-                handleOpenedFromDeepLink(url)
+                self.handleOpenedFromDeepLink(url)
                 return true
             }
         }
@@ -230,7 +230,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             // Other actions
-            handleOpenedFromDeepLink(url)
+            self.handleOpenedFromDeepLink(url)
         }
 
         return true
@@ -297,7 +297,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setVideoTestRootController() {
-        guard let window = window else {
+        guard let window = self.window else {
             return
         }
 

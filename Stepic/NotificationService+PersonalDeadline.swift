@@ -31,7 +31,7 @@ extension NotificationsService {
                     hoursBeforeDeadline: hoursBeforeDeadline
                 )
 
-                scheduleLocalNotification(with: contentProvider, removeIdentical: true)
+                self.scheduleLocalNotification(with: contentProvider, removeIdentical: true)
             }
         }
     }
