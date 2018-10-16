@@ -176,13 +176,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
         if targetCourse.enrolled {
             // Enrolled course -> open last step
+            self.presenter.dismissWaitingState()
             self.moduleOutput?.presentLastStep(
                 course: targetCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                     courseId: targetCourse.id
                 )
             )
-            self.presenter.dismissWaitingState()
         } else {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
@@ -195,13 +195,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     courseTitle: course.title
                 ).send()
 
+                self.presenter.dismissWaitingState()
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: targetCourse.id
                     )
                 )
-                self.presenter.dismissWaitingState()
             }.catch { _ in
 
             }
@@ -216,14 +216,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             fatalError("Invalid module state")
         }
 
-        defer {
-            self.presenter.dismissWaitingState()
-        }
-
         if targetCourse.enrolled {
             // Enrolled course
             // - adaptive -> info
             // - normal -> syllabus
+            self.presenter.dismissWaitingState()
             if self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: targetCourse.id) {
                 self.moduleOutput?.presentCourseInfo(course: targetCourse)
             } else {
@@ -233,6 +230,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course
             // - adaptive -> info
             // - normal -> info
+            self.presenter.dismissWaitingState()
             self.moduleOutput?.presentCourseInfo(course: targetCourse)
         }
     }
@@ -245,12 +243,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             fatalError("Invalid module state")
         }
 
-        defer {
-            self.presenter.dismissWaitingState()
-        }
-
         if targetCourse.enrolled && self.userAccountService.isAuthorized {
             // Enrolled course -> open last step
+            self.presenter.dismissWaitingState()
             self.moduleOutput?.presentLastStep(
                 course: targetCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -259,6 +254,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
         } else {
             // Unenrolled course -> info
+            self.presenter.dismissWaitingState()
             self.moduleOutput?.presentCourseInfo(course: targetCourse)
         }
     }
