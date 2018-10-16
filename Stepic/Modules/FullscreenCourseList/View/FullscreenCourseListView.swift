@@ -14,6 +14,7 @@ final class FullscreenCourseListView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
     }
 
     func attachContentView(_ view: UIView) {
@@ -22,8 +23,15 @@ final class FullscreenCourseListView: UIView {
         self.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.snp.makeConstraints { make in
-            make.width.equalTo(self.snp.width)
-            make.top.leading.bottom.trailing.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+
+            if #available(iOS 11.0, *) {
+                make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+                make.width.equalTo(self.safeAreaLayoutGuide.snp.width)
+            } else {
+                make.leading.trailing.equalToSuperview()
+                make.width.equalTo(self.snp.width)
+            }
         }
 
         self.contentView = view
