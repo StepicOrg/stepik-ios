@@ -13,43 +13,38 @@ import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
 
-final class NotificationRegistrator {
+class NotificationRegistrator {
     static let shared = NotificationRegistrator()
 
-    private let notificationPermissionManager = NotificationPermissionManager()
+    let notificationPermissionManager = NotificationPermissionManager()
 
-    private init () {
-    }
-}
+    private init () { }
 
-// MARK: - NotificationRegistrator (Register) -
-
-extension NotificationRegistrator {
     func registerForRemoteNotificationsIfAlreadyAsked() {
         if #available(iOS 10.0, *) {
             notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
-                guard status == .authorized else {
+                switch status {
+                case .authorized:
+                    self?.registerForRemoteNotifications()
+                default:
                     return
                 }
-                self?.registerForRemoteNotifications()
             }
         } else {
             registerForRemoteNotifications()
         }
     }
 
-    func registerForRemoteNotifications(application: UIApplication = UIApplication.shared) {
+    func registerForRemoteNotifications() {
+        return registerForRemoteNotifications(UIApplication.shared)
+    }
+
+    func registerForRemoteNotifications(_ application: UIApplication) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
             if #available(iOS 10.0, *) {
-                UNUserNotificationCenter.current().requestAuthorization(
-                    options: [.alert, .badge, .sound],
-                    completionHandler: { _, _  in }
-                )
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in})
             } else {
-                let settings = UIUserNotificationSettings(
-                    types: [.alert, .badge, .sound],
-                    categories: nil
-                )
+                let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
                 application.registerUserNotificationSettings(settings)
             }
             application.registerForRemoteNotifications()
@@ -70,13 +65,14 @@ extension NotificationRegistrator {
         Messaging.messaging().apnsToken = deviceToken
     }
 
+    var registrationOptions = [String: AnyObject]()
+
+    let registrationKey = "onRegistrationCompleted"
+
     func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
         print("Registration Token: \(registrationToken)")
 
-        let newDevice = Device(
-            registrationId: registrationToken,
-            deviceDescription: DeviceInfo.current.deviceInfoString
-        )
+        let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
         //TODO: Remove this after refactoring errors
         checkToken().then { _ -> Promise<Device> in
@@ -93,7 +89,7 @@ extension NotificationRegistrator {
                 remoteDevice.isBadgesEnabled = true
                 return ApiDataDownloader.devices.update(remoteDevice)
             }
-        }.done { device in
+        }.done { device -> Void in
             print("notification registrator: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
@@ -103,22 +99,55 @@ extension NotificationRegistrator {
                 self.registerDevice(registrationToken, forceCreation: true)
             case DeviceError.other(_, _, let message):
                 print("notification registrator: device registration error, error = \(String(describing: message))")
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Errors.registerDevice,
-                    parameters: ["message": "\(String(describing: message))"]
-                )
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(String(describing: message))"])
             default:
                 print("notification registrator: device registration error, error = \(error)")
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Errors.registerDevice,
-                    parameters: ["message": "\(error.localizedDescription)"]
-                )
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
+            }
+        }
+    }
+
+    func unregisterFromNotifications() -> Guarantee<Void> {
+        return Guarantee { seal in
+            UIApplication.shared.unregisterForRemoteNotifications()
+
+            if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
+                ApiDataDownloader.devices.delete(deviceId).done { () in
+                    print("notification registrator: successfully delete device, id = \(deviceId)")
+                    seal(())
+                }.catch { error in
+                    switch error {
+                    case DeviceError.notFound:
+                        print("notification registrator: device not found on deletion, id = \(deviceId)")
+                    default:
+                        if let userId = AuthInfo.shared.userId,
+                           let token = AuthInfo.shared.token {
+
+                            let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                            ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+
+                            let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                            userPersistencyManager.writeStepicToken(token, userId: userId)
+
+                            let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                            taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+
+                            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+                        } else {
+                            print("notification registrator: could not get current user ID or token to delete device")
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
+                        }
+                    }
+                    seal(())
+                }
+            } else {
+                print("notification registrator: no saved device")
+                seal(())
             }
         }
     }
 }
-
-// MARK: - NotificationRegistrator (Unregister) -
 
 extension NotificationRegistrator {
     @available(*, deprecated, message: "Legacy method with callbacks")
@@ -126,54 +155,5 @@ extension NotificationRegistrator {
         unregisterFromNotifications().done {
             completion()
         }.catch { _ in }
-    }
-
-    func unregisterFromNotifications() -> Guarantee<Void> {
-        return Guarantee { seal in
-            UIApplication.shared.unregisterForRemoteNotifications()
-
-            guard let deviceId = DeviceDefaults.sharedDefaults.deviceId else {
-                print("notification registrator: no saved device")
-                return seal(())
-            }
-
-            ApiDataDownloader.devices.delete(deviceId).done {
-                print("notification registrator: successfully delete device, id = \(deviceId)")
-                seal(())
-            }.catch { [weak self] error in
-                switch error {
-                case DeviceError.notFound:
-                    print("notification registrator: device not found on deletion, id = \(deviceId)")
-                default:
-                    if let userId = AuthInfo.shared.userId,
-                       let token = AuthInfo.shared.token {
-                        self?.deleteDevice(deviceId: deviceId, userId: userId, token: token)
-                    } else {
-                        print("notification registrator: could not get current user ID or token to delete device")
-                        AnalyticsReporter.reportEvent(
-                            AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials
-                        )
-                    }
-                }
-                seal(())
-            }
-        }
-    }
-
-    private func deleteDevice(deviceId: Int, userId: Int, token: StepicToken) {
-        let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
-        ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
-
-        let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
-        userPersistencyManager.writeStepicToken(token, userId: userId)
-
-        let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
-        taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
-
-        let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
-        queuePersistencyManager.writeQueue(
-            ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue,
-            key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
-        )
     }
 }

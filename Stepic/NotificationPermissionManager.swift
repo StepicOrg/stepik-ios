@@ -33,9 +33,9 @@ enum NotificationPermissionStatus {
 
     // FIXME: Support `.provisional` when our build server will use iOS 12.0 SDK.
     @available(iOS 10.0, *)
-    init(_ authorizationStatus: UNAuthorizationStatus) {
-        switch authorizationStatus {
-        case .authorized:
+    init(userNotificationAuthStatus: UNAuthorizationStatus) {
+        switch userNotificationAuthStatus {
+        case .authorized, .provisional:
             self = .authorized
         case .denied:
             self = .denied
@@ -45,13 +45,14 @@ enum NotificationPermissionStatus {
     }
 }
 
-final class NotificationPermissionManager {
+class NotificationPermissionManager {
     func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
         return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
-                UNUserNotificationCenter.current().getNotificationSettings { settings in
-                    seal(NotificationPermissionStatus(settings.authorizationStatus))
-                }
+                let current = UNUserNotificationCenter.current()
+                current.getNotificationSettings(completionHandler: { (settings) in
+                    seal(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
+                })
             } else {
                 // Fallback on earlier versions, we can not determine if we denied push notifications or not
                 if UIApplication.shared.isRegisteredForRemoteNotifications {
