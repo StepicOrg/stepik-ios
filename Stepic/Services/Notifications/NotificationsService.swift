@@ -48,6 +48,7 @@ final class NotificationsService: NSObject {
         case personalDeadline = "personaldeadline"
         case notifications
         case notificationStatuses = "notification-statuses"
+        case achievementProgresses = "achievement-progresses"
     }
 }
 
@@ -139,6 +140,8 @@ extension NotificationsService {
             resolveRemoteNotificationsNotification(notification)
         case NotificationTypes.notificationStatuses.rawValue:
             resolveRemoteNotificationStatusesNotification(notification)
+        case NotificationTypes.achievementProgresses.rawValue:
+            resolveRemoteAchievementNotification(notification)
         default:
             print("remote notification received: unsopported notification type: \(type)")
         }
@@ -194,6 +197,10 @@ extension NotificationsService {
         }
 
         NotificationsBadgesManager.shared.set(number: badge)
+    }
+
+    private func resolveRemoteAchievementNotification(_ notificationDict: [String: Any]) {
+        TabBarRouter(tab: .profile).route()
     }
 
     private func logJSONString(userInfo: NotificationUserInfo) {
