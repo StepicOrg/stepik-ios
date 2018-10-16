@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 final class AuthAfterOnboardingSplitTest: SplitTestProtocol {
-    static var identifier: String = "auth_after_onboarding"
-    static var minParticipatingStartVersion: String = "1.70"
+    typealias GroupType = Group
+    
+    static var identifier = "auth_after_onboarding"
+    static var minParticipatingStartVersion = "1.70"
 
     var currentGroup: AuthAfterOnboardingSplitTest.Group
     var analytics: ABAnalyticsServiceProtocol
@@ -20,8 +22,6 @@ final class AuthAfterOnboardingSplitTest: SplitTestProtocol {
         self.currentGroup = currentGroup
         self.analytics = analytics
     }
-
-    typealias GroupType = Group
 
     enum Group: String, SplitTestGroupProtocol {
         case control = "control"

@@ -203,6 +203,10 @@ class OnboardingViewController: UIViewController {
                         RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
                     }
                 }
+            } else {
+                if let authSource = authSource {
+                    RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
+                }
             }
         }
     }
