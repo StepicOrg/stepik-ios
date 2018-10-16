@@ -112,7 +112,7 @@ extension NotificationsService {
                 return routeToHome()
             }
 
-            routingService.route(DeepLinkRoutingService.Route.course(courseID: courseId))
+            routingService.route(.course(courseID: courseId))
         } else {
             routeToHome()
         }
