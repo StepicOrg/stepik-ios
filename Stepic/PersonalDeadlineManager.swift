@@ -9,25 +9,15 @@
 import Foundation
 import PromiseKit
 
-final class PersonalDeadlineManager {
+class PersonalDeadlineManager {
     var counter: PersonalDeadlineCounter
     var storageRecordsAPI: StorageRecordsAPI
     var localStorageManager: PersonalDeadlineLocalStorageManager
     var notificationsService: NotificationsService
 
-    static let shared = PersonalDeadlineManager(
-        counter: PersonalDeadlineCounter(),
-        storageRecordsAPI: StorageRecordsAPI(),
-        localStorageManager: PersonalDeadlineLocalStorageManager(),
-        notificationsService: NotificationsService.shared
-    )
+    static let shared = PersonalDeadlineManager(counter: PersonalDeadlineCounter(), storageRecordsAPI: StorageRecordsAPI(), localStorageManager: PersonalDeadlineLocalStorageManager(), notificationsService: NotificationsService.shared)
 
-    init(
-        counter: PersonalDeadlineCounter,
-        storageRecordsAPI: StorageRecordsAPI,
-        localStorageManager: PersonalDeadlineLocalStorageManager,
-        notificationsService: NotificationsService
-    ) {
+    init(counter: PersonalDeadlineCounter, storageRecordsAPI: StorageRecordsAPI, localStorageManager: PersonalDeadlineLocalStorageManager, notificationsService: NotificationsService) {
         self.counter = counter
         self.storageRecordsAPI = storageRecordsAPI
         self.localStorageManager = localStorageManager
@@ -70,6 +60,10 @@ final class PersonalDeadlineManager {
         }
     }
 
+    enum DeadlineChangeError: Error {
+        case noLocalRecord
+    }
+
     func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void> {
         return Promise { seal in
             guard let record = localStorageManager.getRecord(for: course) else {
@@ -107,9 +101,5 @@ final class PersonalDeadlineManager {
                 seal.reject(error)
             }
         }
-    }
-
-    enum DeadlineChangeError: Error {
-        case noLocalRecord
     }
 }
