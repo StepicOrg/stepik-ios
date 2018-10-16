@@ -11,6 +11,7 @@ import UIKit
 
 final class SocialAuthStringSplitTest: SplitTestProtocol {
     static var identifier: String = "social_auth_string"
+    static var minParticipatingStartVersion: String = "1.68"
 
     var currentGroup: SocialAuthStringSplitTest.Group
     var analytics: ABAnalyticsServiceProtocol

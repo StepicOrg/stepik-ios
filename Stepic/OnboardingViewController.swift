@@ -21,6 +21,8 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var rightParentViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightParentViewBottomConstraint: NSLayoutConstraint!
 
+    private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
+
     fileprivate var currentPageIndex = 0
 
     private var scrollView: UIScrollView!
@@ -193,8 +195,14 @@ class OnboardingViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
             AmplitudeAnalyticsEvents.Onboarding.completed.send()
             dismiss(animated: true, completion: nil)
-            if let authSource = authSource {
-                RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
+
+            if AuthAfterOnboardingSplitTest.shouldParticipate {
+                let authSplitTest = splitTestingService.fetchSplitTest(AuthAfterOnboardingSplitTest.self)
+                if authSplitTest.currentGroup.shouldShowAuth {
+                    if let authSource = authSource {
+                        RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
+                    }
+                }
             }
         }
     }

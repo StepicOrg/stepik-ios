@@ -27,4 +27,24 @@ class LaunchDefaultsContainer {
             defaults.synchronize()
         }
     }
+
+    fileprivate let startVersionKey = "startVersionKey"
+
+    var startVersion: String {
+        get {
+            if let startVersion = defaults.value(forKey: startVersionKey) as? String {
+                return startVersion
+            } else {
+                let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+                self.startVersion = version
+                return version
+            }
+        }
+
+        set(value) {
+            defaults.set(value, forKey: startVersionKey)
+            defaults.synchronize()
+        }
+    }
+
 }

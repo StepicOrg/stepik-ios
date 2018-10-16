@@ -10,7 +10,7 @@ import Foundation
 import Amplitude_iOS
 import Crashlytics
 
-class AnalyticsUserProperties {
+class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
 
     static let shared = AnalyticsUserProperties()
 
@@ -21,6 +21,10 @@ class AnalyticsUserProperties {
             let identify = AMPIdentify().unset(key)
             Amplitude.instance().identify(identify)
         }
+    }
+
+    func setGroup(test: String, group: String) {
+        self.setProperty(key: test, value: group)
     }
 
     private func setCrashlyticsProperty(key: String, value: Any?) {

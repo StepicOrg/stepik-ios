@@ -45,7 +45,7 @@ class SocialAuthPresenter {
 
     var socialAuthHeaderString: String {
         let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
-        test.hitSplitTest()
+        test.setSplitTestGroup()
         return test.currentGroup.authString
     }
 
