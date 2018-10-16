@@ -43,7 +43,6 @@ class LaunchDefaultsContainer {
 
         set(value) {
             defaults.set(value, forKey: startVersionKey)
-            defaults.synchronize()
         }
     }
 
