@@ -19,21 +19,6 @@ final class NotificationsService: NSObject {
     private let localNotificationsService: LocalNotificationsService
     private let routingService: DeepLinkRoutingService
 
-    private var currentNavigationController: UINavigationController? {
-        guard let window = UIApplication.shared.delegate?.window,
-              let tabController = window?.rootViewController as? UITabBarController else {
-            return nil
-        }
-
-        let countViewControllers = tabController.viewControllers?.count ?? 0
-
-        if tabController.selectedIndex < countViewControllers {
-            return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
-        } else {
-            return tabController.viewControllers?[0] as? UINavigationController
-        }
-    }
-
     private override init() {
         self.localNotificationsService = LocalNotificationsService()
         self.routingService = DeepLinkRoutingService()
@@ -175,14 +160,16 @@ extension NotificationsService {
             return print("remote notification received: unable to parse notification: \(notificationDict)")
         }
 
+        var notification: Notification
         let json = JSON(parseJSON: object)
 
         if let notificationId = json[Keys.id.rawValue].int,
-           let notification = Notification.fetch(id: notificationId) {
-            notification.update(json: json)
+           let fetchedNotification = Notification.fetch(id: notificationId) {
+            fetchedNotification.update(json: json)
+            notification = fetchedNotification
             postNotification(id: notification.id, isNew: false)
         } else {
-            let notification = Notification(json: json)
+            notification = Notification(json: json)
             postNotification(id: notification.id, isNew: true)
         }
 
@@ -190,13 +177,13 @@ extension NotificationsService {
 
         // Show alert for iOS 9.0 when the application is in foreground state.
         if #available(iOS 10.0, *) {
-            routeRemoteNotification(notificationDict)
+            NotificationReactionHandler().handle(with: notification)
         } else if UIApplication.shared.applicationState == .active {
-            NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: { [weak self] in
-                self?.routeRemoteNotification(notificationDict)
+            NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+                NotificationReactionHandler().handle(with: notification)
             })
         } else {
-            routeRemoteNotification(notificationDict)
+            NotificationReactionHandler().handle(with: notification)
         }
     }
 
@@ -207,15 +194,6 @@ extension NotificationsService {
         }
 
         NotificationsBadgesManager.shared.set(number: badge)
-    }
-
-    private func routeRemoteNotification(_ notification: NotificationUserInfo) {
-        guard let reaction = NotificationReactionHandler.handle(with: notification),
-              let topController = self.currentNavigationController?.topViewController else {
-            return
-        }
-
-        reaction(topController)
     }
 
     private func logJSONString(userInfo: NotificationUserInfo) {

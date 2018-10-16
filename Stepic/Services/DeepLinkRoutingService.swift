@@ -67,8 +67,8 @@ class DeepLinkRoutingService {
             return TabBarRouter(tab: .home)
         case .catalog:
             return TabBarRouter(tab: .catalog)
-        case .notifications:
-            return TabBarRouter(tab: .notifications)
+        case .notifications(let section):
+            return TabBarRouter(notificationsSection: section)
         case .course, .discussions, .lesson, .profile, .syllabus:
             return ModalOrPushStackRouter(
                 source: source,
@@ -130,7 +130,7 @@ extension DeepLinkRoutingService {
 
     enum Route {
         case lesson(lessonID: Int, stepID: Int, unitID: Int?)
-        case notifications
+        case notifications(section: NotificationsSection)
         case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
         case profile(userID: Int)
         case syllabus(courseID: Int)
@@ -162,7 +162,7 @@ extension DeepLinkRoutingService {
 
             if let match = Pattern.notifications.regex.firstMatch(in: path),
                match.matchedString == path {
-                self = .notifications
+                self = .notifications(section: .all)
                 return
             }
 
