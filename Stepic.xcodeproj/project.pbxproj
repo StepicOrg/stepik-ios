@@ -489,7 +489,6 @@
 		089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779F214047650065DFA2 /* SplitTestingService.swift */; };
 		089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A8214047EC0065DFA2 /* Numbers+Random.swift */; };
-		089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */; };
 		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
 		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
 		089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5275,7 +5274,6 @@
 		0898779F214047650065DFA2 /* SplitTestingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestingService.swift; sourceTree = "<group>"; };
 		089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUserPropertiesServiceProtocol.swift; sourceTree = "<group>"; };
 		089877A8214047EC0065DFA2 /* Numbers+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Random.swift"; sourceTree = "<group>"; };
-		089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthStringSplitTest.swift; sourceTree = "<group>"; };
 		089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+StorageServiceProtocol.swift"; sourceTree = "<group>"; };
 		089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStorageServiceProtocol.swift; sourceTree = "<group>"; };
 		089877B521407AB50065DFA2 /* Model_profile_staff_v24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_staff_v24.xcdatamodel; sourceTree = "<group>"; };
@@ -7569,7 +7567,6 @@
 		089877B4214061EC0065DFA2 /* Active Tests */ = {
 			isa = PBXGroup;
 			children = (
-				089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */,
 			);
 			name = "Active Tests";
 			sourceTree = "<group>";
@@ -14751,7 +14748,6 @@
 				083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
-				089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
