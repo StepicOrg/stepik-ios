@@ -18,9 +18,6 @@ enum NotificationPermissionStatus {
     case denied
     /// The user allowed the app to schedule or receive notifications.
     case authorized
-    // FIXME: Support `.provisional` on iOS 12.0 SDK.
-    /// The user allowed to post non-interruptive notifications.
-    //case provisional
 
     var isRegistered: Bool {
         switch self {
@@ -31,7 +28,6 @@ enum NotificationPermissionStatus {
         }
     }
 
-    // FIXME: Support `.provisional` when our build server will use iOS 12.0 SDK.
     @available(iOS 10.0, *)
     init(userNotificationAuthStatus: UNAuthorizationStatus) {
         switch userNotificationAuthStatus {

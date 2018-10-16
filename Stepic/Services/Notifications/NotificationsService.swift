@@ -19,6 +19,10 @@ final class NotificationsService: NSObject {
     private let localNotificationsService: LocalNotificationsService
     private let routingService: DeepLinkRoutingService
 
+    private var isInForeground: Bool {
+        return UIApplication.shared.applicationState == .active
+    }
+
     private override init() {
         self.localNotificationsService = LocalNotificationsService()
         self.routingService = DeepLinkRoutingService()
@@ -95,7 +99,11 @@ extension NotificationsService {
 
     func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened)
+
+        if isInForeground, let notificationType = userInfo?.notificationType {
+            AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
+        }
+
         routeLocalNotification(with: userInfo)
     }
 
@@ -129,12 +137,16 @@ extension NotificationsService {
     func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
         print("remote notification received: DEBUG = \(userInfo)")
 
-        guard let notification = userInfo as? [String: Any] else {
-            return print("remote notification received: unable to parse userInfo")
+        guard let type = userInfo.notificationType else {
+            return print("remote notification received: unable to parse notification type")
         }
 
-        guard let type = notification[Keys.type.rawValue] as? String else {
-            return print("remote notification received: unable to parse notification type")
+        if isInForeground {
+            AmplitudeAnalyticsEvents.Notifications.received(notificationType: type).send()
+        }
+
+        guard let notification = userInfo as? [String: Any] else {
+            return print("remote notification received: unable to parse userInfo")
         }
 
         switch type {
@@ -183,7 +195,7 @@ extension NotificationsService {
         // Show alert for iOS 9.0 when the application is in foreground state.
         if #available(iOS 10.0, *) {
             NotificationReactionHandler().handle(with: notification)
-        } else if UIApplication.shared.applicationState == .active {
+        } else if isInForeground {
             NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
                 NotificationReactionHandler().handle(with: notification)
             })

@@ -170,6 +170,15 @@ struct AmplitudeAnalyticsEvents {
 
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
+
+        static func received(notificationType: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Foreground notification received",
+                parameters: [
+                    "notification_type": notificationType
+                ]
+            )
+        }
     }
 
     struct Home {
