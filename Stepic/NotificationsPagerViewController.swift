@@ -71,7 +71,7 @@ class NotificationsPagerViewController: PagerController, ControllerWithStepikPla
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
-        guard let index = sections.firstIndex(of: notificationSection) else {
+        guard let index = sections.index(of: notificationSection) else {
             return
         }
 
