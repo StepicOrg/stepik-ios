@@ -41,7 +41,6 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(section.id)_hours_\(hoursBeforeDeadline)"
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var fireDate: Date? {
         return Calendar.current.date(from: dateComponents)
     }

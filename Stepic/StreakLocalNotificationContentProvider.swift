@@ -30,17 +30,14 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         return "\(NotificationsService.NotificationTypes.streak.rawValue)_local_notification"
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's UNNotificationSound.default()")
     var soundName: String {
         return "default_sound.wav"
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var repeatInterval: NSCalendar.Unit? {
         return .day
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var fireDate: Date? {
         return calendar.date(from: dateComponents)
     }

@@ -18,13 +18,10 @@ protocol LocalNotificationContentProvider {
 
     var identifier: String { get }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationSound.default()`")
     var soundName: String { get }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var fireDate: Date? { get }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var repeatInterval: NSCalendar.Unit? { get }
 
     @available(iOS 10.0, *)
@@ -39,12 +36,10 @@ extension LocalNotificationContentProvider {
         return [:]
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationSound.default()`")
     var soundName: String {
         return UILocalNotificationDefaultSoundName
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's `UNNotificationTrigger`")
     var repeatInterval: NSCalendar.Unit? {
         return nil
     }
