@@ -44,9 +44,7 @@ class SocialAuthPresenter {
     var pendingAuthProviderInfo: SocialProviderInfo?
 
     var socialAuthHeaderString: String {
-        let test = splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self)
-        test.setSplitTestGroup()
-        return test.currentGroup.authString
+        return NSLocalizedString("SignInTitleSocial", comment: "")
     }
 
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {

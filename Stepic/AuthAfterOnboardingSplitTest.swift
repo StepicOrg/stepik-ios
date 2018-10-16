@@ -11,7 +11,7 @@ import UIKit
 
 final class AuthAfterOnboardingSplitTest: SplitTestProtocol {
     typealias GroupType = Group
-    
+
     static var identifier = "auth_after_onboarding"
     static var minParticipatingStartVersion = "1.70"
 

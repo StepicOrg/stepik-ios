@@ -12,7 +12,6 @@ class ActiveSplitTestsContainer {
     private static let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
 
     static func setActiveTestsGroups() {
-        splitTestingService.fetchSplitTest(SocialAuthStringSplitTest.self).setSplitTestGroup()
         splitTestingService.fetchSplitTest(AuthAfterOnboardingSplitTest.self).setSplitTestGroup()
     }
 }
