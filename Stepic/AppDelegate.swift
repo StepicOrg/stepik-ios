@@ -85,7 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
-        AmplitudeAnalyticsEvents.Launch.sessionStart.send()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()

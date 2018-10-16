@@ -31,21 +31,25 @@ final class NotificationsService: NSObject {
     }
 
     func appDidFinishLaunching(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        guard let launchOptions = launchOptions else {
-            return
-        }
-
-        if launchOptions[.localNotification] != nil {
-            let notification = launchOptions[.localNotification] as? UILocalNotification
+        if launchOptions?[.localNotification] != nil {
+            let notification = launchOptions?[.localNotification] as? UILocalNotification
             didReceiveLocalNotification(with: notification?.userInfo)
-        } else if let userInfo = launchOptions[.remoteNotification] as? NotificationUserInfo {
+            AmplitudeAnalyticsEvents.Launch.sessionStart(
+                notificationType: notification?.userInfo?.notificationType
+            ).send()
+        } else if let userInfo = launchOptions?[.remoteNotification] as? NotificationUserInfo {
             didReceiveRemoteNotification(with: userInfo)
+            AmplitudeAnalyticsEvents.Launch.sessionStart(
+                notificationType: userInfo.notificationType
+            ).send()
+        } else {
+            AmplitudeAnalyticsEvents.Launch.sessionStart().send()
         }
     }
 
     enum NotificationTypes: String {
         case streak
-        case personalDeadline = "personaldeadline"
+        case personalDeadline = "personal-deadline"
         case notifications
         case notificationStatuses = "notification-statuses"
         case achievementProgresses = "achievement-progresses"
@@ -201,7 +205,7 @@ extension NotificationsService {
         TabBarRouter(tab: .profile).route()
     }
 
-    private enum Keys: String {
+    enum Keys: String {
         case type
         case aps
         case alert
@@ -223,5 +227,11 @@ extension NotificationsService: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
         completionHandler([.alert, .sound])
+    }
+}
+
+private extension Dictionary where Key == AnyHashable {
+    var notificationType: String? {
+        return self[NotificationsService.Keys.type.rawValue] as? String
     }
 }

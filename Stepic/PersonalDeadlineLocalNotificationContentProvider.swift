@@ -32,7 +32,8 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return [
             Keys.course.rawValue: course.id,
             Keys.section.rawValue: section.id,
-            Keys.hoursBeforeDeadline.rawValue: hoursBeforeDeadline
+            Keys.hoursBeforeDeadline.rawValue: hoursBeforeDeadline,
+            NotificationsService.Keys.type.rawValue: NotificationsService.NotificationTypes.personalDeadline.rawValue
         ]
     }
 

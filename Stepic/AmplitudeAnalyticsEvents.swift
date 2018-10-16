@@ -11,7 +11,13 @@ import Foundation
 struct AmplitudeAnalyticsEvents {
     struct Launch {
         static var firstTime = AnalyticsEvent(name: "Launch first time")
-        static var sessionStart = AnalyticsEvent(name: "Session start")
+
+        static func sessionStart(notificationType: String? = nil) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Session start",
+                parameters: notificationType == nil ? nil : ["notification_type": notificationType!]
+            )
+        }
     }
 
     struct Onboarding {
