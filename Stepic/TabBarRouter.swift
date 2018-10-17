@@ -23,9 +23,7 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
     }
 
     func route() {
-        // FIXME: Try DispatchQueue.main.async
-        self.currentTabBarController?.loadViewIfNeeded()
-        self.currentTabBarController?.selectedIndex = tab.rawValue
+        self.currentTabBarController?.selectedIndex = self.tab.rawValue
 
         if self.tab == .notifications {
             selectNotificationsSection()
@@ -38,21 +36,11 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
             return
         }
 
-        if pager.isViewLoaded {
-            return pager.selectSection(self.notificationsSection)
-        }
-
-        pager.loadViewIfNeeded()
-
-        // Avoid capture of `self`.
-        let notificationsSection = self.notificationsSection
-
-        // FIXME: Try to not use after
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak pager] in
-            guard let strongPager = pager else {
-                return
-            }
-            strongPager.selectSection(notificationsSection)
+        if !pager.isViewLoaded,
+           let sectionIndex = pager.sections.index(of: self.notificationsSection) {
+            pager.startTabIndex = sectionIndex
+        } else {
+            pager.selectSection(self.notificationsSection)
         }
     }
 

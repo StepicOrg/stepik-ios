@@ -15,7 +15,7 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
-    private let routingService: DeepLinkRoutingService
+    private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
         return UIApplication.shared.applicationState == .active
@@ -26,7 +26,7 @@ final class NotificationsService {
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
-        self.routingService = deepLinkRoutingService
+        self.deepLinkRoutingService = deepLinkRoutingService
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -101,25 +101,27 @@ extension NotificationsService {
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
-        func routeToHome() {
-            self.routingService.route(.home)
+        func route(to route: DeepLinkRoutingService.Route) {
+            DispatchQueue.main.async {
+                self.deepLinkRoutingService.route(route)
+            }
         }
 
         guard let userInfo = userInfo as? [String: Any],
               let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
-            return routeToHome()
+            return route(to: .home)
         }
 
         if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
-            routeToHome()
+            route(to: .home)
         } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
             guard let courseId = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int else {
-                return routeToHome()
+                return route(to: .home)
             }
 
-            self.routingService.route(.course(courseID: courseId))
+            route(to: .course(courseID: courseId))
         } else {
-            routeToHome()
+            route(to: .home)
         }
     }
 }
@@ -181,15 +183,16 @@ extension NotificationsService {
 
         CoreDataHelper.instance.save()
 
-        // Show alert for iOS 9.0 when the application is in foreground state.
-        if #available(iOS 10.0, *) {
-            NotificationReactionHandler().handle(with: notification)
-        } else if self.isInForeground {
-            NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+        DispatchQueue.main.async {
+            if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
-            })
-        } else {
-            NotificationReactionHandler().handle(with: notification)
+            } else if self.isInForeground {
+                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+                    NotificationReactionHandler().handle(with: notification)
+                })
+            } else {
+                NotificationReactionHandler().handle(with: notification)
+            }
         }
     }
 
@@ -202,8 +205,10 @@ extension NotificationsService {
         NotificationsBadgesManager.shared.set(number: badge)
     }
 
-    private func resolveRemoteAchievementNotification(_ notificationDict: NotificationUserInfo) {
-        TabBarRouter(tab: .profile).route()
+    private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
+        DispatchQueue.main.async {
+            TabBarRouter(tab: .profile).route()
+        }
     }
 
     enum Key: String {

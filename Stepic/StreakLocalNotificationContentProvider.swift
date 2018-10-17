@@ -49,7 +49,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: true)
     }
 
     private let UTCStartHour: Int
@@ -69,9 +69,9 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         let currentDate = Date()
 
         var components = DateComponents()
-        components.year = calendar.component(.year, from: currentDate)
-        components.month = calendar.component(.month, from: currentDate)
-        components.day = calendar.component(.day, from: currentDate)
+        components.year = self.calendar.component(.year, from: currentDate)
+        components.month = self.calendar.component(.month, from: currentDate)
+        components.day = self.calendar.component(.day, from: currentDate)
         components.hour = localStartHour
         components.minute = 0
         components.second = 0
