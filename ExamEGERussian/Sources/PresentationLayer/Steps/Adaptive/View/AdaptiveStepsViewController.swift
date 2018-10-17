@@ -80,6 +80,8 @@ final class AdaptiveStepsViewController: UIViewController, ControllerWithStepikP
             self?.presenter?.refresh()
         }), for: .connectionError)
         registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
+
+        self.edgesForExtendedLayout = [.bottom]
     }
 
     private func setToolbarItemsEnabled(_ enabled: Bool) {

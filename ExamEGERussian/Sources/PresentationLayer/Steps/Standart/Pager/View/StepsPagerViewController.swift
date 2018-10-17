@@ -85,7 +85,9 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        pageControlGradient.frame = pageControlContainer.bounds
+
+        self.pageControlGradient.frame = self.pageControlContainer.bounds
+        self.updateContentInsetsForViewControllerAtIndex(self.activeTabIndex)
     }
 
     override func makeConstraints() {
@@ -152,7 +154,7 @@ final class StepsPagerViewController: PagerController, StepsPagerView {
             object: nil
         )
 
-        updateContentInsetsForViewControllerAtIndex(activeTabIndex)
+        self.edgesForExtendedLayout = []
     }
 
     private func setSteps(_ steps: [StepPlainObject]) {
