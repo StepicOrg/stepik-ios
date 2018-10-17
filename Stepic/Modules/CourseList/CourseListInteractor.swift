@@ -176,13 +176,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
         if targetCourse.enrolled {
             // Enrolled course -> open last step
+            self.presenter.dismissWaitingState()
             self.moduleOutput?.presentLastStep(
                 course: targetCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                     courseId: targetCourse.id
                 )
             )
-            self.presenter.dismissWaitingState()
         } else {
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
@@ -195,35 +195,31 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     courseTitle: course.title
                 ).send()
 
+                self.presenter.dismissWaitingState()
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: targetCourse.id
                     )
                 )
-                self.presenter.dismissWaitingState()
             }.catch { _ in
-
+                // FIXME: use dismiss with error
+                self.presenter.dismissWaitingState()
             }
         }
     }
 
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request) {
-        self.presenter.presentWaitingState()
-
         guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
-        }
-
-        defer {
-            self.presenter.dismissWaitingState()
         }
 
         if targetCourse.enrolled {
             // Enrolled course
             // - adaptive -> info
             // - normal -> syllabus
+            self.presenter.dismissWaitingState()
             if self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: targetCourse.id) {
                 self.moduleOutput?.presentCourseInfo(course: targetCourse)
             } else {
@@ -238,15 +234,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     }
 
     func doMainAction(request: CourseList.MainCourseAction.Request) {
-        self.presenter.presentWaitingState()
-
         guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
-        }
-
-        defer {
-            self.presenter.dismissWaitingState()
         }
 
         if targetCourse.enrolled && self.userAccountService.isAuthorized {

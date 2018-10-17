@@ -25,7 +25,36 @@ enum AchievementKind: String {
     case courseReviewsCount = "course_reviews_count"
 
     func getBadge(for level: Int) -> UIImage {
-        return UIImage(named: "achievement-\(self.hashValue + 1)-\(level)") ?? #imageLiteral(resourceName: "achievement-0")
+        return UIImage(named: "achievement-\(imageID)-\(level)") ?? #imageLiteral(resourceName: "achievement-0")
+    }
+
+    var imageID: Int {
+        switch self {
+        case .stepsSolved:
+            return 1
+        case .stepsSolvedStreak:
+            return 2
+        case .stepsSolvedChoice:
+            return 3
+        case .stepsSolvedCode:
+            return 4
+        case .stepsSolvedNumber:
+            return 5
+        case .codeQuizzesSolvedPython:
+            return 6
+        case .codeQuizzesSolvedCPP:
+            return 7
+        case .codeQuizzesSolvedJava:
+            return 8
+        case .activeDaysStreak:
+            return 9
+        case .certificatesRegularCount:
+            return 10
+        case .certificatesDistinctionCount:
+            return 11
+        case .courseReviewsCount:
+            return 12
+        }
     }
 
     func getName() -> String {

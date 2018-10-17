@@ -209,6 +209,8 @@
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
+		08421BC921764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */; };
+		08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */; };
 		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
@@ -488,7 +490,6 @@
 		089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779F214047650065DFA2 /* SplitTestingService.swift */; };
 		089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
 		089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A8214047EC0065DFA2 /* Numbers+Random.swift */; };
-		089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */; };
 		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
 		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
 		089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5128,6 +5129,8 @@
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
+		08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAfterOnboardingSplitTest.swift; sourceTree = "<group>"; };
+		08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsContainer.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -5281,7 +5284,6 @@
 		0898779F214047650065DFA2 /* SplitTestingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestingService.swift; sourceTree = "<group>"; };
 		089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUserPropertiesServiceProtocol.swift; sourceTree = "<group>"; };
 		089877A8214047EC0065DFA2 /* Numbers+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Random.swift"; sourceTree = "<group>"; };
-		089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthStringSplitTest.swift; sourceTree = "<group>"; };
 		089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+StorageServiceProtocol.swift"; sourceTree = "<group>"; };
 		089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStorageServiceProtocol.swift; sourceTree = "<group>"; };
 		089877B521407AB50065DFA2 /* Model_profile_staff_v24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_staff_v24.xcdatamodel; sourceTree = "<group>"; };
@@ -7574,7 +7576,8 @@
 		089877B4214061EC0065DFA2 /* Active Tests */ = {
 			isa = PBXGroup;
 			children = (
-				089877AA214047ED0065DFA2 /* SocialAuthStringSplitTest.swift */,
+				08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */,
+				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 			);
 			name = "Active Tests";
 			sourceTree = "<group>";
@@ -14536,6 +14539,7 @@
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
+				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
@@ -14655,6 +14659,7 @@
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */,
+				08421BC921764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
@@ -14785,7 +14790,6 @@
 				083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
 				2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
-				089877AF214047EE0065DFA2 /* SocialAuthStringSplitTest.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */,
