@@ -28,16 +28,14 @@ final class AuthAfterOnboardingSplitTest: SplitTestProtocol {
         case test = "test"
 
         static var groups: [AuthAfterOnboardingSplitTest.Group] = [.control, .test]
-    }
-}
-
-extension AuthAfterOnboardingSplitTest.Group {
-    var shouldShowAuth: Bool {
-        switch self {
-        case .control:
-            return true
-        case .test:
-            return false
+        
+        var shouldShowAuth: Bool {
+            switch self {
+            case .control:
+                return true
+            case .test:
+                return false
+            }
         }
     }
 }
