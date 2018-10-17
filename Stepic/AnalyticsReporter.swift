@@ -11,15 +11,7 @@ import FirebaseAnalytics
 import YandexMobileMetrica
 import Amplitude_iOS
 
-class AnalyticsReporter: ABAnalyticsServiceProtocol {
-    func reportOnce(test: String, group: String) {
-        let didReportKey = "did-report-\(test)"
-        if (UserDefaults.standard.value(forKey: didReportKey) as? Bool) != true {
-            AnalyticsReporter.reportAmplitudeEvent(test, parameters: ["group": group])
-            UserDefaults.standard.set(true, forKey: didReportKey)
-        }
-    }
-
+class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
         let params = parameters as? [String: NSObject]
 

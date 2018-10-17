@@ -80,7 +80,7 @@ final class CourseListsCollectionView: UIView {
         self.contentStackView.addArrangedSubview(fakeView)
 
         fakeView.skeleton.viewBuilder = {
-            return CourseListsCollectionSkeletonView(frame: .zero)
+            CourseListsCollectionSkeletonView(frame: .zero)
         }
         fakeView.skeleton.show()
     }
