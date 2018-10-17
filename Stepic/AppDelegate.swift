@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         LocalNotificationsMigrator().migrateIfNeeded()
-        NotificationsService().appDidFinishLaunching(with: launchOptions)
+        NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
 
         self.checkNotificationsCount()
@@ -151,12 +151,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        NotificationsService().didReceiveRemoteNotification(with: userInfo)
+        NotificationsService().handleRemoteNotification(with: userInfo)
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        NotificationsService().didReceiveLocalNotification(with: notification.userInfo)
+        NotificationsService().handleLocalNotification(with: notification.userInfo)
     }
 
     // MARK: Private Helpers
@@ -294,18 +294,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsUserProperties.shared.setScreenOrientation(
             isPortrait: DeviceInfo.current.orientation.interface.isPortrait
         )
-    }
-
-    private func setVideoTestRootController() {
-        guard let window = self.window else {
-            return
-        }
-
-        let rootController = ControllerHelper.instantiateViewController(
-            identifier: "PlayerTestViewController",
-            storyboardName: "PlayerTestStoryboard"
-        )
-
-        window.rootViewController = rootController
     }
 }

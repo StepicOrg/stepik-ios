@@ -34,11 +34,11 @@ class DeepLinkRoutingService {
     }
 
     func route(path: String, from source: UIViewController? = nil) {
-        route(Route(path: path), fallbackPath: path, from: source)
+        self.route(Route(path: path), fallbackPath: path, from: source)
     }
 
     func route(_ route: Route?, fallbackPath: String = "", from source: UIViewController? = nil) {
-        getModuleStack(route: route).done { moduleStack in
+        self.getModuleStack(route: route).done { moduleStack in
             let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: fallbackPath)
             router.route()
         }.catch { _ in
@@ -115,7 +115,6 @@ class DeepLinkRoutingService {
 extension DeepLinkRoutingService {
     enum Pattern: String {
         case catalog = "https:\\/\\/stepik.org\\/catalog\\/?"
-        case home = "https:\\/\\/stepik.org\\/home\\/?"
         case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
         case profile = "https:\\/\\/stepik.org\\/users\\/(\\d+)\\/?"
         case notifications = "https:\\/\\/stepik.org\\/notifications\\/?"

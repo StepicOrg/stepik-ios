@@ -25,14 +25,9 @@ final class LocalNotificationsService {
     @available(iOS 10.0, *)
     func getAllNotifications() -> Guarantee<(pending: [UNNotificationRequest], delivered: [UNNotification])> {
         return Guarantee { seal in
-            var pendingRequests = [UNNotificationRequest]()
-
-            self.getPendingNotificationRequests().then { requests in
-                pendingRequests = requests
-                return self.getDeliveredNotifications()
-            }.done { deliveredNotifications in
-                seal((pending: pendingRequests, delivered: deliveredNotifications))
-            }
+            when(fulfilled: self.getPendingNotificationRequests(), self.getDeliveredNotifications()).done { result in
+                seal((pending: result.0, delivered: result.1))
+            }.cauterize()
         }
     }
 
@@ -166,7 +161,7 @@ final class LocalNotificationsService {
 
             UNUserNotificationCenter.current().add(
                 request,
-                withCompletionHandler: { (error) in
+                withCompletionHandler: { error in
                     seal.resolve(error)
                 }
             )

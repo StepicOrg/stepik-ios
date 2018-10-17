@@ -29,24 +29,27 @@ final class NotificationsService {
         self.routingService = deepLinkRoutingService
     }
 
-    func appDidFinishLaunching(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        if launchOptions?[.localNotification] != nil {
-            let notification = launchOptions?[.localNotification] as? UILocalNotification
-            self.didReceiveLocalNotification(with: notification?.userInfo)
+    func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        if let localNotification = launchOptions?[.localNotification] as? UILocalNotification {
+            self.handleLocalNotification(with: localNotification.userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
-                notificationType: notification?.userInfo?.notificationType
+                notificationType: self.extractNotificationType(from: localNotification.userInfo)
             ).send()
         } else if let userInfo = launchOptions?[.remoteNotification] as? NotificationUserInfo {
-            self.didReceiveRemoteNotification(with: userInfo)
+            self.handleRemoteNotification(with: userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
-                notificationType: userInfo.notificationType
+                notificationType: self.extractNotificationType(from: userInfo)
             ).send()
         } else {
             AmplitudeAnalyticsEvents.Launch.sessionStart().send()
         }
     }
 
-    enum NotificationTypes: String {
+    private func extractNotificationType(from userInfo: NotificationUserInfo?) -> String? {
+        return userInfo?[Key.type.rawValue] as? String
+    }
+
+    enum NotificationType: String {
         case streak
         case personalDeadline = "personal-deadline"
         case notifications
@@ -87,10 +90,10 @@ extension NotificationsService {
         }
     }
 
-    func didReceiveLocalNotification(with userInfo: NotificationUserInfo?) {
+    func handleLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
 
-        if self.isInForeground, let notificationType = userInfo?.notificationType {
+        if self.isInForeground, let notificationType = self.extractNotificationType(from: userInfo) {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
@@ -107,10 +110,10 @@ extension NotificationsService {
             return routeToHome()
         }
 
-        if key.localizedCaseInsensitiveContains(NotificationTypes.streak.rawValue) {
+        if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
             routeToHome()
-        } else if key.localizedCaseInsensitiveContains(NotificationTypes.personalDeadline.rawValue) {
-            guard let courseId = userInfo[PersonalDeadlineLocalNotificationContentProvider.Keys.course.rawValue] as? Int else {
+        } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
+            guard let courseId = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int else {
                 return routeToHome()
             }
 
@@ -124,53 +127,49 @@ extension NotificationsService {
 // MARK: - NotificationsService (RemoteNotifications) -
 
 extension NotificationsService {
-    func didReceiveRemoteNotification(with userInfo: NotificationUserInfo) {
+    func handleRemoteNotification(with userInfo: NotificationUserInfo) {
         print("remote notification received: DEBUG = \(userInfo)")
 
-        guard let type = userInfo.notificationType else {
+        guard let notificationType = self.extractNotificationType(from: userInfo) else {
             return print("remote notification received: unable to parse notification type")
         }
 
         if self.isInForeground {
-            AmplitudeAnalyticsEvents.Notifications.received(notificationType: type).send()
+            AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
-        guard let notification = userInfo as? [String: Any] else {
-            return print("remote notification received: unable to parse userInfo")
-        }
-
-        switch type {
-        case NotificationTypes.notifications.rawValue:
-            resolveRemoteNotificationsNotification(notification)
-        case NotificationTypes.notificationStatuses.rawValue:
-            resolveRemoteNotificationStatusesNotification(notification)
-        case NotificationTypes.achievementProgresses.rawValue:
-            resolveRemoteAchievementNotification(notification)
+        switch notificationType {
+        case NotificationType.notifications.rawValue:
+            resolveRemoteNotificationsNotification(userInfo)
+        case NotificationType.notificationStatuses.rawValue:
+            resolveRemoteNotificationStatusesNotification(userInfo)
+        case NotificationType.achievementProgresses.rawValue:
+            resolveRemoteAchievementNotification(userInfo)
         default:
-            print("remote notification received: unsopported notification type: \(type)")
+            print("remote notification received: unsopported notification type: \(notificationType)")
         }
     }
 
-    private func resolveRemoteNotificationsNotification(_ notificationDict: [String: Any]) {
+    private func resolveRemoteNotificationsNotification(_ userInfo: NotificationUserInfo) {
         func postNotification(id: Int, isNew: Bool) {
             NotificationCenter.default.post(
                 name: .notificationAdded,
                 object: nil,
-                userInfo: [Keys.id.rawValue: id, Keys.new.rawValue: isNew]
+                userInfo: [Key.id.rawValue: id, Key.new.rawValue: isNew]
             )
         }
 
-        guard let aps = notificationDict[Keys.aps.rawValue] as? [String: Any],
-              let alert = aps[Keys.alert.rawValue]  as? [String: Any],
-              let body = alert[Keys.body.rawValue] as? String,
-              let object = notificationDict[Keys.object.rawValue] as? String else {
-            return print("remote notification received: unable to parse notification: \(notificationDict)")
+        guard let aps = userInfo[Key.aps.rawValue] as? [String: Any],
+              let alert = aps[Key.alert.rawValue]  as? [String: Any],
+              let body = alert[Key.body.rawValue] as? String,
+              let object = userInfo[Key.object.rawValue] as? String else {
+            return print("remote notification received: unable to parse notification: \(userInfo)")
         }
 
         var notification: Notification
         let json = JSON(parseJSON: object)
 
-        if let notificationId = json[Keys.id.rawValue].int,
+        if let notificationId = json[Key.id.rawValue].int,
            let fetchedNotification = Notification.fetch(id: notificationId) {
             fetchedNotification.update(json: json)
             notification = fetchedNotification
@@ -194,20 +193,20 @@ extension NotificationsService {
         }
     }
 
-    private func resolveRemoteNotificationStatusesNotification(_ notificationDict: [String: Any]) {
-        guard let aps = notificationDict[Keys.aps.rawValue] as? [String: Any],
-              let badge = aps[Keys.badge.rawValue] as? Int else {
-            return print("remote notification received: unable to parse notification: \(notificationDict)")
+    private func resolveRemoteNotificationStatusesNotification(_ userInfo: NotificationUserInfo) {
+        guard let aps = userInfo[Key.aps.rawValue] as? [String: Any],
+              let badge = aps[Key.badge.rawValue] as? Int else {
+            return print("remote notification received: unable to parse notification: \(userInfo)")
         }
 
         NotificationsBadgesManager.shared.set(number: badge)
     }
 
-    private func resolveRemoteAchievementNotification(_ notificationDict: [String: Any]) {
+    private func resolveRemoteAchievementNotification(_ notificationDict: NotificationUserInfo) {
         TabBarRouter(tab: .profile).route()
     }
 
-    enum Keys: String {
+    enum Key: String {
         case type
         case aps
         case alert
@@ -216,11 +215,5 @@ extension NotificationsService {
         case id
         case new
         case badge
-    }
-}
-
-private extension Dictionary where Key == AnyHashable {
-    var notificationType: String? {
-        return self[NotificationsService.Keys.type.rawValue] as? String
     }
 }

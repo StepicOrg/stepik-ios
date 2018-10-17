@@ -59,6 +59,8 @@ final class LocalNotificationsMigrator {
     }
 }
 
+// MARK: - LocalNotificationsMigrator (UserDefaults) -
+
 extension LocalNotificationsMigrator {
     private static let didMigrateLocalNotificationsKey = "didMigrateLocalNotificationsKey"
     private static let localNotificationsVersionKey = "localNotificationsVersionKey"
@@ -74,11 +76,7 @@ extension LocalNotificationsMigrator {
 
     private var localNotificationsVersion: Int {
         get {
-            if let version = UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int {
-                return version
-            } else {
-                return 1
-            }
+            return UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int ?? 1
         }
         set {
             UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.localNotificationsVersionKey)

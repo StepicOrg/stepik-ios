@@ -10,6 +10,11 @@ import Foundation
 import UserNotifications
 
 final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationContentProvider {
+    private let course: Course
+    private let section: Section
+    private let deadlineDate: Date
+    private let hoursBeforeDeadline: Int
+
     var title: String {
         return "\(self.course.title)"
     }
@@ -30,15 +35,15 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
 
     var userInfo: [AnyHashable : Any] {
         return [
-            Keys.course.rawValue: course.id,
-            Keys.section.rawValue: section.id,
-            Keys.hoursBeforeDeadline.rawValue: self.hoursBeforeDeadline,
-            NotificationsService.Keys.type.rawValue: NotificationsService.NotificationTypes.personalDeadline.rawValue
+            Key.course.rawValue: course.id,
+            Key.section.rawValue: section.id,
+            Key.hoursBeforeDeadline.rawValue: self.hoursBeforeDeadline,
+            NotificationsService.Key.type.rawValue: NotificationsService.NotificationType.personalDeadline.rawValue
         ]
     }
 
     var identifier: String {
-        return "\(NotificationsService.NotificationTypes.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
+        return "\(NotificationsService.NotificationType.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
     }
 
     var fireDate: Date? {
@@ -71,11 +76,6 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return components
     }
 
-    private let course: Course
-    private let section: Section
-    private let deadlineDate: Date
-    private let hoursBeforeDeadline: Int
-
     init(course: Course, section: Section, deadlineDate: Date, hoursBeforeDeadline: Int) {
         self.course = course
         self.section = section
@@ -83,7 +83,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         self.hoursBeforeDeadline = hoursBeforeDeadline
     }
 
-    enum Keys: String {
+    enum Key: String {
         case course
         case section
         case hoursBeforeDeadline

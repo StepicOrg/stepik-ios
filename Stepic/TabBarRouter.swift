@@ -23,6 +23,7 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
     }
 
     func route() {
+        // FIXME: Try DispatchQueue.main.async
         self.currentTabBarController?.loadViewIfNeeded()
         self.currentTabBarController?.selectedIndex = tab.rawValue
 
@@ -46,6 +47,7 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
         // Avoid capture of `self`.
         let notificationsSection = self.notificationsSection
 
+        // FIXME: Try to not use after
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak pager] in
             guard let strongPager = pager else {
                 return
