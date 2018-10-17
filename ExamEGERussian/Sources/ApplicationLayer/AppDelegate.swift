@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             launchContainer.didLaunch = true
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
-        AmplitudeAnalyticsEvents.Launch.sessionStart.send()
+        AmplitudeAnalyticsEvents.Launch.sessionStart().send()
 
         window.makeKeyAndVisible()
 
