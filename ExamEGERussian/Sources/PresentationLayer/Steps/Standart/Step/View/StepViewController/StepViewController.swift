@@ -68,6 +68,7 @@ final class StepViewController: UIViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        self.stepWebView.scrollView.delegate = nil
     }
 
     // MARK: - Private API
