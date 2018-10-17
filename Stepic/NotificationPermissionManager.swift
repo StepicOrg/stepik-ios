@@ -10,8 +10,23 @@ import Foundation
 import UserNotifications
 import PromiseKit
 
+/// Defines whether the app is allowed to schedule notifications.
 enum NotificationPermissionStatus {
-    case notDetermined, denied, authorized
+    /// The user hasn't yet made a choice about whether is allowed the app to schedule notifications.
+    case notDetermined
+    /// The user not allowed the app to schedule or receive notifications.
+    case denied
+    /// The user allowed the app to schedule or receive notifications.
+    case authorized
+
+    var isRegistered: Bool {
+        switch self {
+        case .authorized:
+            return true
+        case .notDetermined, .denied:
+            return false
+        }
+    }
 
     @available(iOS 10.0, *)
     init(userNotificationAuthStatus: UNAuthorizationStatus) {
@@ -21,8 +36,6 @@ enum NotificationPermissionStatus {
         case .denied:
             self = .denied
         case .notDetermined:
-            self = .notDetermined
-        default:
             self = .notDetermined
         }
     }
@@ -44,7 +57,6 @@ class NotificationPermissionManager {
                     seal(.notDetermined)
                 }
             }
-
         }
     }
 }

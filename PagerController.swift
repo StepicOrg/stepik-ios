@@ -57,7 +57,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     open var indicatorHeight: CGFloat = 5.0
     open var tabLocation: PagerTabLocation = PagerTabLocation.top
     open var animation: PagerAnimation = PagerAnimation.during
-    open var startFromSecondTab: Bool = false
+    open var startTabIndex: Int = 0
     open var centerCurrentTab: Bool = false
     open var fixFormerTabsPositions: Bool = false
     open var fixLaterTabsPosition: Bool = false
@@ -268,8 +268,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         self.addChildViewController(self.pageViewController)
         self.view.insertSubview(self.contentView, at: 0)
         // Select starting tab
-        let index: Int = self.startFromSecondTab ? 1 : 0
-        self.selectTabAtIndex(index, swipe: true)
+        self.selectTabAtIndex(self.startTabIndex, swipe: true)
 
         if self.tabCount > 0 {
             // creates the indicator

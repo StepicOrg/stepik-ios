@@ -69,6 +69,12 @@ class NotificationsPagerViewController: PagerController, ControllerWithStepikPla
             navigationController?.delegate = nil
         }
     }
+
+    func selectSection(_ notificationSection: NotificationsSection) {
+        if let index = self.sections.index(of: notificationSection) {
+            self.selectTabAtIndex(index)
+        }
+    }
 }
 
 extension NotificationsPagerViewController: PagerDataSource {
