@@ -46,7 +46,7 @@ final class NotificationsService {
     }
 
     private func extractNotificationType(from userInfo: NotificationUserInfo?) -> String? {
-        return userInfo?[Key.type.rawValue] as? String
+        return userInfo?[PayloadKey.type.rawValue] as? String
     }
 
     enum NotificationType: String {
@@ -157,21 +157,21 @@ extension NotificationsService {
             NotificationCenter.default.post(
                 name: .notificationAdded,
                 object: nil,
-                userInfo: [Key.id.rawValue: id, Key.new.rawValue: isNew]
+                userInfo: [PayloadKey.id.rawValue: id, PayloadKey.new.rawValue: isNew]
             )
         }
 
-        guard let aps = userInfo[Key.aps.rawValue] as? [String: Any],
-              let alert = aps[Key.alert.rawValue]  as? [String: Any],
-              let body = alert[Key.body.rawValue] as? String,
-              let object = userInfo[Key.object.rawValue] as? String else {
+        guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+              let alert = aps[PayloadKey.alert.rawValue]  as? [String: Any],
+              let body = alert[PayloadKey.body.rawValue] as? String,
+              let object = userInfo[PayloadKey.object.rawValue] as? String else {
             return print("remote notification received: unable to parse notification: \(userInfo)")
         }
 
         var notification: Notification
         let json = JSON(parseJSON: object)
 
-        if let notificationId = json[Key.id.rawValue].int,
+        if let notificationId = json[PayloadKey.id.rawValue].int,
            let fetchedNotification = Notification.fetch(id: notificationId) {
             fetchedNotification.update(json: json)
             notification = fetchedNotification
@@ -197,8 +197,8 @@ extension NotificationsService {
     }
 
     private func resolveRemoteNotificationStatusesNotification(_ userInfo: NotificationUserInfo) {
-        guard let aps = userInfo[Key.aps.rawValue] as? [String: Any],
-              let badge = aps[Key.badge.rawValue] as? Int else {
+        guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+              let badge = aps[PayloadKey.badge.rawValue] as? Int else {
             return print("remote notification received: unable to parse notification: \(userInfo)")
         }
 
@@ -211,7 +211,7 @@ extension NotificationsService {
         }
     }
 
-    enum Key: String {
+    enum PayloadKey: String {
         case type
         case aps
         case alert

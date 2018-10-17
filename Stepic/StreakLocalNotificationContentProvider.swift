@@ -22,7 +22,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
 
     var userInfo: [AnyHashable: Any] {
         return [
-            NotificationsService.Key.type.rawValue: NotificationsService.NotificationType.streak.rawValue
+            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.streak.rawValue
         ]
     }
 
