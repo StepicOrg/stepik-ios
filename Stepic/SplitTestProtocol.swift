@@ -12,6 +12,9 @@ protocol SplitTestProtocol {
     associatedtype GroupType: SplitTestGroupProtocol
     static var identifier: String { get }
 
+    static var shouldParticipate: Bool { get }
+    static var minParticipatingStartVersion: String { get }
+
     var currentGroup: GroupType { get }
 
     var analytics: ABAnalyticsServiceProtocol { get }
@@ -19,8 +22,16 @@ protocol SplitTestProtocol {
 }
 
 extension SplitTestProtocol {
-    func hitSplitTest() {
-        self.analytics.reportOnce(test: Self.analyticsKey, group: self.currentGroup.rawValue)
+    static var shouldParticipate: Bool {
+        let startVersion = DefaultsContainer.launch.startVersion
+        return startVersion.compare(
+            minParticipatingStartVersion,
+            options: .numeric
+        ) != .orderedAscending
+    }
+
+    func setSplitTestGroup() {
+        self.analytics.setGroup(test: Self.analyticsKey, group: self.currentGroup.rawValue)
     }
 
     static var analyticsKey: String {

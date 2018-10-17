@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
+            ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }

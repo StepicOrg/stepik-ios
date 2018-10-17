@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ABAnalyticsServiceProtocol {
-    func reportOnce(test: String, group: String)
+    func setGroup(test: String, group: String)
 }
