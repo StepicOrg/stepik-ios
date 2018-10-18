@@ -55,6 +55,7 @@ final class NotificationsService {
         case notifications
         case notificationStatuses = "notification-statuses"
         case achievementProgresses = "achievement-progresses"
+        case certificate
     }
 }
 
@@ -140,13 +141,16 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
+        // FIXME: Use `NotificationType` instead of raw values.
         switch notificationType {
         case NotificationType.notifications.rawValue:
-            resolveRemoteNotificationsNotification(userInfo)
+            self.resolveRemoteNotificationsNotification(userInfo)
         case NotificationType.notificationStatuses.rawValue:
-            resolveRemoteNotificationStatusesNotification(userInfo)
+            self.resolveRemoteNotificationStatusesNotification(userInfo)
         case NotificationType.achievementProgresses.rawValue:
-            resolveRemoteAchievementNotification(userInfo)
+            self.resolveRemoteAchievementNotification(userInfo)
+        case NotificationType.certificate.rawValue:
+            self.resolveRemoteCertificateNotification(userInfo)
         default:
             print("remote notification received: unsopported notification type: \(notificationType)")
         }
@@ -206,8 +210,16 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
+        self.routeToTab(.profile)
+    }
+
+    private func resolveRemoteCertificateNotification(_ userInfo: NotificationUserInfo) {
+        self.routeToTab(.certificates)
+    }
+
+    private func routeToTab(_ tab: TabBarRouter.Tab) {
         DispatchQueue.main.async {
-            TabBarRouter(tab: .profile).route()
+            TabBarRouter(tab: tab).route()
         }
     }
 
