@@ -83,4 +83,5 @@ enum NotificationAction: String {
     case softDeadlineApproach = "soft_deadline_approach"
     case hardDeadlineApproach = "hard_deadline_approach"
     case unknown = "unknown"
+    case issuedCertificate = "issued_certificate"
 }
