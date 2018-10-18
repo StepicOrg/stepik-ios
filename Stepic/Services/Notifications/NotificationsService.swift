@@ -55,7 +55,6 @@ final class NotificationsService {
         case notifications
         case notificationStatuses = "notification-statuses"
         case achievementProgresses = "achievement-progresses"
-        case certificate
     }
 }
 
@@ -149,8 +148,6 @@ extension NotificationsService {
             self.resolveRemoteNotificationStatusesNotification(userInfo)
         case NotificationType.achievementProgresses.rawValue:
             self.resolveRemoteAchievementNotification(userInfo)
-        case NotificationType.certificate.rawValue:
-            self.resolveRemoteCertificateNotification(userInfo)
         default:
             print("remote notification received: unsopported notification type: \(notificationType)")
         }
@@ -210,16 +207,8 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
-        self.routeToTab(.profile)
-    }
-
-    private func resolveRemoteCertificateNotification(_ userInfo: NotificationUserInfo) {
-        self.routeToTab(.certificates)
-    }
-
-    private func routeToTab(_ tab: TabBarRouter.Tab) {
         DispatchQueue.main.async {
-            TabBarRouter(tab: tab).route()
+            TabBarRouter(tab: .profile).route()
         }
     }
 
