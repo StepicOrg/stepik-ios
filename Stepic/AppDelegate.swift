@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // Init notifications.
-        NotificationsRegistrationService().registerForNotifications()
+        NotificationsRegistrationService().register()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()

@@ -261,7 +261,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                         case .notDetermined:
                             let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
                             alert.yesAction = {
-                                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
+                                NotificationsRegistrationService().register(forceToRequestAuthorization: true)
                                 shareTooltipBlock()
                             }
                             Alerts.notificationRequest.present(alert: alert, inController: strongSelf)

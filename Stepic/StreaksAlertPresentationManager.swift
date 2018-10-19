@@ -93,7 +93,7 @@ class StreaksAlertPresentationManager {
         notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
             case .notDetermined:
-                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
+                NotificationsRegistrationService().register(forceToRequestAuthorization: true)
                 self?.selectStreakNotificationTime()
             case .authorized:
                 self?.selectStreakNotificationTime()
@@ -109,7 +109,7 @@ class StreaksAlertPresentationManager {
             switch status {
             case .notDetermined:
                 // Actually, it should never come here, but just in case
-                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
+                NotificationsRegistrationService().register(forceToRequestAuthorization: true)
             case .authorized:
                 self?.selectStreakNotificationTime()
             case .denied:

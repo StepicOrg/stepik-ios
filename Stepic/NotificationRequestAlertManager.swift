@@ -24,7 +24,7 @@ class NotificationRequestAlertManager: AlertManager {
         let alert = NotificationRequestAlertViewController(nibName: "NotificationRequestAlertViewController", bundle: nil)
         alert.context = context
         alert.yesAction = {
-            NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
+            NotificationsRegistrationService().register(forceToRequestAuthorization: true)
         }
         alert.noAction = {}
         return alert

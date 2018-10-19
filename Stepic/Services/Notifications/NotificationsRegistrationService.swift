@@ -32,13 +32,13 @@ final class NotificationsRegistrationService {
 
     // MARK: - Register -
 
-    func registerForNotifications(forceToRequestAuthorization: Bool = false) {
+    func register(forceToRequestAuthorization: Bool = false) {
         guard AuthInfo.shared.isAuthorized else {
             return
         }
 
         if forceToRequestAuthorization {
-            self.register()
+            self.registerForRemoteNotifications()
         } else {
             self.registerIfHasPreviouslyRegistered()
         }
@@ -48,15 +48,15 @@ final class NotificationsRegistrationService {
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status.isRegistered {
-                    self.register()
+                    self.registerForRemoteNotifications()
                 }
             }
         } else {
-            self.register()
+            self.registerForRemoteNotifications()
         }
     }
 
-    private func register() {
+    private func registerForRemoteNotifications() {
         defer {
             self.fetchFirebaseAppInstanceID()
         }

@@ -45,7 +45,7 @@ class EmailAuthPresenter {
             AuthInfo.shared.token = token
             AuthInfo.shared.authorizationType = authorizationType
 
-            NotificationsRegistrationService().registerForNotifications()
+            NotificationsRegistrationService().register()
 
             return self.stepicsAPI.retrieveCurrentUser()
         }.then { user -> Promise<NotificationsStatus> in
