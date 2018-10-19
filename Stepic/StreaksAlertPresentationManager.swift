@@ -89,6 +89,7 @@ class StreaksAlertPresentationManager {
         controller.present(alert, animated: true, completion: nil)
     }
 
+    // TODO: NotificationsRegistrationService
     func notifyPressed() {
         notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
@@ -104,6 +105,7 @@ class StreaksAlertPresentationManager {
         }
     }
 
+    // TODO: NotificationsRegistrationService
     func cameFromSettings() {
         notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
             switch status {

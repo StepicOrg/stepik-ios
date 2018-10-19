@@ -20,6 +20,7 @@ class NotificationRequestAlertManager: AlertManager {
         return presenter
     }()
 
+    // TODO: NotificationsRegistrationService
     func construct(context: NotificationRequestAlertContext) -> NotificationRequestAlertViewController {
         let alert = NotificationRequestAlertViewController(nibName: "NotificationRequestAlertViewController", bundle: nil)
         alert.context = context

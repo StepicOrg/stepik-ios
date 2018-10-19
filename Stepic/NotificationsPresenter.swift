@@ -129,6 +129,7 @@ class NotificationsPresenter {
         self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
+    // TODO: NotificationsRegistrationService
     func didAppear() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {

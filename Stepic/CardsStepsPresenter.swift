@@ -150,6 +150,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
+    // TODO: NotificationsRegistrationService
     func appearedAfterSubscription() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {

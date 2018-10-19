@@ -248,6 +248,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             strongSelf.didJustSubscribe = false
         }
 
+        // TODO: NotificationsRegistrationService
         if didJustSubscribe {
             if #available(iOS 10.0, *) {
                 if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {

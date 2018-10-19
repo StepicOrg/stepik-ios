@@ -38,6 +38,7 @@ class RegistrationPresenter {
         self.view = view
     }
 
+    // TODO: NotificationsRegistrationService
     func register(with name: String, email: String, password: String) {
         view?.state = .loading
 

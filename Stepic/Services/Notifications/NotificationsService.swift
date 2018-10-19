@@ -63,6 +63,7 @@ final class NotificationsService {
 
 // MARK: - NotificationsService (LocalNotifications) -
 
+// TODO: NotificationsRegistrationService
 extension NotificationsService {
     func scheduleLocalNotification(
         with contentProvider: LocalNotificationContentProvider,

@@ -54,6 +54,7 @@ class StreakNotificationsControlPresenter {
         view?.updateDisplayedStreakTime(startHour: hour)
     }
 
+    // TODO: NotificationsRegistrationService
     func setStreakNotifications(on allowNotifications: Bool, completion: ((Bool) -> Void)? = nil) {
         if !allowNotifications {
             NotificationsService().cancelStreakLocalNotifications()

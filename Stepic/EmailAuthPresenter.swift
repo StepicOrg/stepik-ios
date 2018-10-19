@@ -38,6 +38,7 @@ class EmailAuthPresenter {
         self.view = view
     }
 
+    // TODO: NotificationsRegistrationService
     func logIn(with email: String, password: String) {
         view?.state = .loading
 
